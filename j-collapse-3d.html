@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>The collapse inside — sphere, cube, and the 0D centre</title>
+<style>
+  :root {
+    --bg:#0d1117; --panel:#161b22; --line:#30363d; --text:#e6edf3;
+    --dim:#8b949e; --accent:#58a6ff; --warm:#f0883e; --cool:#3fb950; --violet:#bc8cff;
+  }
+  * { box-sizing:border-box; }
+  body {
+    margin:0; background:var(--bg); color:var(--text);
+    font:14px/1.5 ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+    display:flex; min-height:100vh;
+  }
+  #stage { flex:1; min-width:0; display:flex; align-items:center; justify-content:center; padding:20px; }
+  canvas {
+    border-radius:12px; background:#0a0e14; box-shadow:0 0 0 1px var(--line);
+    width:min(760px,100%); height:auto; cursor:grab; touch-action:none;
+  }
+  canvas:active { cursor:grabbing; }
+  aside {
+    width:370px; background:var(--panel); border-left:1px solid var(--line);
+    padding:22px; display:flex; flex-direction:column; gap:15px;
+  }
+  @media (max-width:1080px) {
+    body { flex-direction:column; min-height:0; }
+    #stage { flex:none; padding:12px; }
+    canvas { width:min(100%, 700px); }
+    aside { width:100%; border-left:none; border-top:1px solid var(--line); }
+  }
+  h1 { font-size:15px; margin:0; letter-spacing:.3px; }
+  .sub { color:var(--dim); font-size:12px; margin:-9px 0 0; }
+  label { display:block; font-size:12px; color:var(--dim); margin-bottom:6px; }
+  .row { display:flex; align-items:center; gap:10px; }
+  input[type=range] { flex:1; accent-color:var(--accent); }
+  .val { font-variant-numeric:tabular-nums; min-width:64px; text-align:right; }
+  .seg { display:flex; gap:6px; }
+  .seg button { flex:1; }
+  button {
+    background:#21262d; color:var(--text); border:1px solid var(--line);
+    border-radius:7px; padding:7px 10px; font-size:12px; cursor:pointer;
+  }
+  button:hover { border-color:var(--accent); color:var(--accent); }
+  button.on { border-color:var(--accent); color:var(--accent); background:#1b2733; }
+  table { width:100%; border-collapse:collapse; font-variant-numeric:tabular-nums; }
+  td { padding:5px 0; border-bottom:1px solid var(--line); font-size:13px; }
+  td:last-child { text-align:right; }
+  .k { color:var(--dim); }
+  .hint { color:var(--dim); font-size:12px; border-top:1px solid var(--line); padding-top:12px; margin:0; }
+  code { background:#0a0e14; padding:1px 5px; border-radius:4px; font-size:12px; }
+  .good { color:var(--cool); }
+  .bad { color:var(--warm); }
+</style>
+</head>
+<body>
+  <div id="stage"><canvas id="c" width="760" height="720"></canvas></div>
+  <aside>
+    <h1>The collapse inside</h1>
+    <p class="sub">apex P₀ = centre · P′ = P₀ + k(P − P₀)</p>
+
+    <div>
+      <label>body</label>
+      <div class="seg">
+        <button data-body="sphere" class="on">sphere</button>
+        <button data-body="cube">cube</button>
+      </div>
+    </div>
+
+    <div>
+      <label>k — radial position</label>
+      <div class="row">
+        <input id="k" type="range" min="0" max="2.2" step="0.01" value="1" />
+        <span class="val" id="kVal">1.00</span>
+      </div>
+      <div class="btns" style="margin-top:8px">
+        <button id="collapse">collapse to the point</button>
+        <button id="obsToggle" class="on">observer: on</button>
+        <button id="obsMode">Q: outside</button>
+      </div>
+    </div>
+
+    <div>
+      <label>θ — twist about the centre</label>
+      <div class="row">
+        <input id="th" type="range" min="0" max="360" step="1" value="0" />
+        <span class="val" id="thVal">0°</span>
+      </div>
+      <div class="btns" style="margin-top:8px">
+        <button data-phase="0">k = 1</button>
+        <button data-phase="90">k = i</button>
+        <button data-phase="180">k = −1</button>
+        <button data-phase="270">k = −i</button>
+      </div>
+    </div>
+
+    <table>
+      <tr><td class="k">radius r′</td><td id="r">—</td></tr>
+      <tr><td class="k">volume V′/V₀ = |k|³</td><td id="v">—</td></tr>
+      <tr><td class="k">area A′/A₀ = k²</td><td id="a">—</td></tr>
+      <tr><td class="k">height h′/h₀ = k</td><td id="h">—</td></tr>
+      <tr><td class="k">rank dg<sub>k</sub></td><td id="rank">—</td></tr>
+      <tr><td class="k">Ω/4π seen by a point</td><td id="omega">—</td></tr>
+      <tr><td class="k">distance to shell</td><td id="dist">—</td></tr>
+      <tr><td class="k">silhouette change</td><td id="s">—</td></tr>
+    </table>
+
+    <p class="hint">
+      With the apex <em>inside</em>, every ray is a diameter, the level sets are
+      spheres, and the cone degenerates into all of space — the tangent cone at an
+      interior point is ℝ³. A proper cone only appears when the apex sits on the
+      boundary. <code>k = 0</code> is the centre.
+    </p>
+  </aside>
+
+<script>
+(() => {
+  const c = document.getElementById('c');
+  const ctx = c.getContext('2d');
+  const W = c.width, H = c.height, CX = W / 2, CY = H / 2;
+  const SCALE = 150;
+
+  let yaw = 0.55, pitch = 0.34;
+  let body = 'sphere';
+  let theta = 0;
+
+  const R0 = 0.92;
+  const HALF0 = R0 * 0.806; // equal-volume cube half-edge
+
+  const rotY = (p, a) => {
+    const s = Math.sin(a), co = Math.cos(a);
+    return { x: p.x * co + p.z * s, y: p.y, z: -p.x * s + p.z * co };
+  };
+  const rotCam = (p) => {
+    const cy = Math.cos(yaw), sy = Math.sin(yaw);
+    let x = p.x * cy + p.z * sy;
+    let z = -p.x * sy + p.z * cy;
+    const cp = Math.cos(pitch), sp = Math.sin(pitch);
+    const y = p.y * cp - z * sp;
+    z = p.y * sp + z * cp;
+    return { x, y, z };
+  };
+  const proj = (p) => {
+    const r = rotCam(p);
+    return { x: CX + r.x * SCALE, y: CY - r.y * SCALE, d: r.z };
+  };
+
+  // ---- geometry -------------------------------------------------
+  const spherePoint = (lat, lon) => ({
+    x: Math.cos(lat) * Math.cos(lon),
+    y: Math.sin(lat),
+    z: Math.cos(lat) * Math.sin(lon),
+  });
+
+  const CUBE = [];
+  for (const sx of [-1, 1]) for (const sy of [-1, 1]) for (const sz of [-1, 1]) {
+    CUBE.push({ x: sx, y: sy, z: sz });
+  }
+  const cubeEdges = [];
+  for (let a = 0; a < 8; a++) for (let b = a + 1; b < 8; b++) {
+    const d = a ^ b;
+    if (d === 1 || d === 2 || d === 4) cubeEdges.push([a, b]);
+  }
+  const cubeFaces = [
+    [0, 1, 3, 2], [4, 6, 7, 5], [0, 2, 6, 4],
+    [1, 5, 7, 3], [0, 4, 5, 1], [2, 3, 7, 6],
+  ];
+
+  const place = (p, k, t) => {
+    const q = rotY(p, t);
+    return { x: q.x * k, y: q.y * k, z: q.z * k };
+  };
+
+  function line(a, b, color, width = 1) {
+    const A = proj(a), B = proj(b);
+    ctx.beginPath();
+    ctx.moveTo(A.x, A.y); ctx.lineTo(B.x, B.y);
+    ctx.strokeStyle = color; ctx.lineWidth = width; ctx.stroke();
+  }
+
+  function drawSphere(k, t) {
+    const r = R0 * k;
+    const O = proj({ x: 0, y: 0, z: 0 });
+    const px = r * SCALE;
+
+    if (px > 0.5) {
+      const g = ctx.createRadialGradient(O.x - px * 0.35, O.y - px * 0.35, px * 0.1, O.x, O.y, px);
+      g.addColorStop(0, 'rgba(88,166,255,0.30)');
+      g.addColorStop(1, 'rgba(88,166,255,0.07)');
+      ctx.beginPath(); ctx.arc(O.x, O.y, px, 0, Math.PI * 2);
+      ctx.fillStyle = g; ctx.fill();
+      ctx.strokeStyle = 'rgba(88,166,255,.85)'; ctx.lineWidth = 1.6; ctx.stroke();
+    }
+
+    // meridians + parallels
+    if (px > 6) {
+      for (let lon = 0; lon < 180; lon += 30) {
+        const a = (lon * Math.PI) / 180;
+        ctx.beginPath();
+        for (let i = 0; i <= 40; i++) {
+          const lat = -Math.PI / 2 + (i / 40) * Math.PI;
+          const p = proj(place(spherePoint(lat, a), k, t));
+          i ? ctx.lineTo(p.x, p.y) : ctx.moveTo(p.x, p.y);
+        }
+        ctx.strokeStyle = 'rgba(88,166,255,.22)'; ctx.lineWidth = 1; ctx.stroke();
+      }
+      for (let lat = -60; lat <= 60; lat += 30) {
+        const la = (lat * Math.PI) / 180;
+        ctx.beginPath();
+        for (let i = 0; i <= 60; i++) {
+          const lon = (i / 60) * Math.PI * 2;
+          const p = proj(place(spherePoint(la, lon), k, t));
+          i ? ctx.lineTo(p.x, p.y) : ctx.moveTo(p.x, p.y);
+        }
+        ctx.strokeStyle = lat === 0 ? 'rgba(63,185,80,.55)' : 'rgba(88,166,255,.22)';
+        ctx.lineWidth = lat === 0 ? 1.2 : 1; ctx.stroke();
+      }
+    }
+  }
+
+  function drawCube(k, t) {
+    const P = CUBE.map(v => place({ x: v.x * HALF0, y: v.y * HALF0, z: v.z * HALF0 }, k, t));
+    const faces = cubeFaces.map((ids, i) => ({
+      ids, i,
+      d: ids.reduce((s, id) => s + proj(P[id]).d, 0) / 4,
+    })).sort((a, b) => a.d - b.d);
+
+    for (const f of faces) {
+      const pts = f.ids.map(id => proj(P[id]));
+      ctx.beginPath();
+      pts.forEach((p, i) => i ? ctx.lineTo(p.x, p.y) : ctx.moveTo(p.x, p.y));
+      ctx.closePath();
+      ctx.fillStyle = 'rgba(88,166,255,0.14)';
+      ctx.fill();
+      ctx.strokeStyle = 'rgba(88,166,255,.85)';
+      ctx.lineWidth = 1.4;
+      ctx.stroke();
+    }
+  }
+
+  function silhouetteWidth(k, t) {
+    let min = Infinity, max = -Infinity;
+    if (body === 'sphere') {
+      for (let lat = -Math.PI / 2; lat <= Math.PI / 2; lat += Math.PI / 12) {
+        for (let lon = 0; lon < Math.PI * 2; lon += Math.PI / 12) {
+          const x = proj(place(spherePoint(lat, lon), k, t)).x;
+          if (x < min) min = x; if (x > max) max = x;
+        }
+      }
+    } else {
+      for (const v of CUBE) {
+        const x = proj(place({ x: v.x * HALF0, y: v.y * HALF0, z: v.z * HALF0 }, k, t)).x;
+        if (x < min) min = x; if (x > max) max = x;
+      }
+    }
+    return max - min;
+  }
+
+  let baseWidth = null;
+
+  // ---- visibility from a 0D observer ----------------------------
+  const OBS = { x: 1.55, y: 0.75, z: 1.20 };
+  let showObserver = true;
+  let obsMode = 'outside';
+  let omega0 = null;
+
+  function drawObserver(k, t) {
+    const r = k * (body === 'sphere' ? R0 : HALF0 * Math.sqrt(3));
+
+    if (obsMode === 'centre') {
+      const O = proj({ x: 0, y: 0, z: 0 });
+      ctx.beginPath(); ctx.arc(O.x, O.y, 13, 0, Math.PI * 2);
+      ctx.strokeStyle = 'rgba(240,136,62,.85)';
+      ctx.lineWidth = 1.4;
+      ctx.stroke();
+      ctx.beginPath(); ctx.arc(O.x, O.y, 3.5, 0, Math.PI * 2);
+      ctx.fillStyle = '#f0883e'; ctx.fill();
+      ctx.font = '12px ui-monospace, monospace';
+      ctx.fillStyle = '#f0883e';
+      ctx.textAlign = 'right';
+      ctx.fillText('Q · at the centre', O.x - 17, O.y + 26);
+      ctx.textAlign = 'left';
+
+      const el = document.getElementById('omega');
+      el.textContent = r > 0.002 ? '100.000%  ·  all 4π' : '—';
+      el.className = r > 0.002 ? 'good' : '';
+      document.getElementById('dist').textContent =
+        r > 0.002 ? 'r = ' + r.toFixed(3) + '  ·  1/r = ' + (1 / r).toFixed(2) : '0  ·  ∞';
+      return { solid: 4 * Math.PI, rel: 1 };
+    }
+
+    // observer marker
+    const qs = proj(OBS);
+    ctx.beginPath(); ctx.arc(qs.x, qs.y, 4, 0, Math.PI * 2);
+    ctx.fillStyle = '#f0883e'; ctx.fill();
+    ctx.fillStyle = '#f0883e';
+    ctx.font = '12px ui-monospace, monospace';
+    ctx.textAlign = 'right';
+    ctx.fillText('Q · 0D observer', qs.x - 9, qs.y - 6);
+    ctx.textAlign = 'left';
+
+    const d = Math.hypot(OBS.x, OBS.y, OBS.z);
+    const u = { x: OBS.x / d, y: OBS.y / d, z: OBS.z / d };
+    const helper = Math.abs(u.y) < 0.9 ? { x: 0, y: 1, z: 0 } : { x: 1, y: 0, z: 0 };
+    let e1 = {
+      x: u.y * helper.z - u.z * helper.y,
+      y: u.z * helper.x - u.x * helper.z,
+      z: u.x * helper.y - u.y * helper.x,
+    };
+    const l1 = Math.hypot(e1.x, e1.y, e1.z) || 1;
+    e1 = { x: e1.x / l1, y: e1.y / l1, z: e1.z / l1 };
+    const e2 = {
+      x: u.y * e1.z - u.z * e1.y,
+      y: u.z * e1.x - u.x * e1.z,
+      z: u.x * e1.y - u.y * e1.x,
+    };
+
+    const sinA = Math.min(0.9999, r / d);
+    const cosA = Math.sqrt(1 - sinA * sinA);
+    const solid = 2 * Math.PI * (1 - cosA);
+
+    if (r > 0.003) {
+      const cc = { x: u.x * (r * r / d), y: u.y * (r * r / d), z: u.z * (r * r / d) };
+      const rho = r * cosA;
+      const pts = [];
+      for (let i = 0; i < 48; i++) {
+        const a = (i / 48) * Math.PI * 2;
+        pts.push({
+          x: cc.x + rho * (Math.cos(a) * e1.x + Math.sin(a) * e2.x),
+          y: cc.y + rho * (Math.cos(a) * e1.y + Math.sin(a) * e2.y),
+          z: cc.z + rho * (Math.cos(a) * e1.z + Math.sin(a) * e2.z),
+        });
+      }
+      // tangent circle
+      ctx.beginPath();
+      pts.forEach((p, i) => {
+        const s = proj(p);
+        i ? ctx.lineTo(s.x, s.y) : ctx.moveTo(s.x, s.y);
+      });
+      ctx.closePath();
+      ctx.strokeStyle = 'rgba(240,136,62,.75)';
+      ctx.lineWidth = 1.2;
+      ctx.stroke();
+
+      // tangents from Q
+      for (let i = 0; i < 16; i++) {
+        const p = pts[i * 3];
+        line(OBS, p, 'rgba(240,136,62,.32)', 1);
+      }
+
+      // shadow cone behind the body
+      for (let i = 0; i < 16; i++) {
+        const p = pts[i * 3];
+        const far = {
+          x: p.x + (p.x - OBS.x) * 0.55,
+          y: p.y + (p.y - OBS.y) * 0.55,
+          z: p.z + (p.z - OBS.z) * 0.55,
+        };
+        line(p, far, 'rgba(240,136,62,.10)', 1);
+      }
+    }
+
+    if (k >= 0.999 && omega0 === null) omega0 = solid;
+    const rel = omega0 ? solid / omega0 : null;
+
+    const el = document.getElementById('omega');
+    el.textContent = (solid / (4 * Math.PI) * 100).toFixed(3) + '%' +
+      (rel ? '  ·  ' + rel.toFixed(3) + '×' : '');
+    el.className = k < 0.999 && rel !== null ? (Math.abs(rel - k * k) < 0.03 ? 'good' : 'bad') : '';
+    document.getElementById('dist').textContent =
+      'gap = ' + Math.max(0, d - r).toFixed(3);
+    return { solid, rel };
+  }
+
+  function draw(k, t) {
+    ctx.clearRect(0, 0, W, H);
+
+    // radial rays from the centre
+    if (k > 0.02) {
+      const N = 180;
+      for (let i = 0; i < N; i++) {
+        const y = 1 - (i / (N - 1)) * 2;
+        const rad = Math.sqrt(Math.max(0, 1 - y * y));
+        const phi = i * 2.399963;
+        const u = { x: Math.cos(phi) * rad, y, z: Math.sin(phi) * rad };
+        const end = place({ x: u.x * R0, y: u.y * R0, z: u.z * R0 }, k, t);
+        line({ x: 0, y: 0, z: 0 }, end, 'rgba(188,140,255,.10)', 1);
+      }
+    }
+
+    if (body === 'sphere') drawSphere(k, t);
+    else drawCube(k, t);
+
+    if (showObserver) drawObserver(k, t);
+
+    // the 0D centre
+    const O = proj({ x: 0, y: 0, z: 0 });
+    const pulse = 5 + Math.sin(performance.now() / 420) * 1.4;
+    ctx.beginPath(); ctx.arc(O.x, O.y, pulse + 7, 0, Math.PI * 2);
+    ctx.fillStyle = 'rgba(188,140,255,.13)'; ctx.fill();
+    ctx.beginPath(); ctx.arc(O.x, O.y, 4.5, 0, Math.PI * 2);
+    ctx.fillStyle = '#bc8cff'; ctx.fill();
+
+    ctx.fillStyle = '#bc8cff';
+    ctx.font = '12px ui-monospace, monospace';
+    ctx.fillText('P₀ · 0D centre', O.x + 12, O.y - 12);
+
+    ctx.fillStyle = '#8b949e';
+    ctx.font = '12px ui-monospace, monospace';
+    ctx.fillText(body + '  ·  k = ' + k.toFixed(2) + '  ·  θ = ' + Math.round(theta * 180 / Math.PI) + '°', 18, H - 46);
+    ctx.fillStyle = '#4b5563';
+    ctx.fillText('drag to orbit', 18, H - 26);
+
+    // readouts
+    const w = silhouetteWidth(k, t);
+    if (baseWidth === null || k === 1) baseWidth = silhouetteWidth(1, 0);
+    const change = baseWidth ? Math.abs(w - baseWidth) / baseWidth : 0;
+
+    document.getElementById('r').textContent = (k * R0).toFixed(3);
+    document.getElementById('v').textContent = (Math.abs(k) ** 3).toFixed(3);
+    document.getElementById('a').textContent = (k * k).toFixed(3);
+    document.getElementById('h').textContent = k.toFixed(3);
+    const sEl = document.getElementById('s');
+    sEl.textContent = (change * 100).toFixed(1) + '%';
+    sEl.className = change < 0.001 ? 'good' : 'bad';
+
+    const rk = document.getElementById('rank');
+    rk.textContent = k === 0 ? '0 · point' : '3 · body';
+    rk.className = k === 0 ? 'good' : '';
+    return { w, baseWidth, change };
+  }
+
+  const kEl = document.getElementById('k');
+  const thEl = document.getElementById('th');
+  const kVal = document.getElementById('kVal');
+  const thVal = document.getElementById('thVal');
+
+  function update() {
+    const k = parseFloat(kEl.value);
+    theta = (parseFloat(thEl.value) * Math.PI) / 180;
+    kVal.textContent = k.toFixed(2);
+    thVal.textContent = Math.round(parseFloat(thEl.value)) + '°';
+    draw(k, theta);
+  }
+
+  document.querySelectorAll('button[data-body]').forEach(b => {
+    b.addEventListener('click', () => {
+      body = b.dataset.body;
+      baseWidth = null;
+      document.querySelectorAll('button[data-body]').forEach(x => x.classList.toggle('on', x === b));
+      update();
+    });
+  });
+
+  kEl.addEventListener('input', update);
+  thEl.addEventListener('input', update);
+
+  document.querySelectorAll('button[data-phase]').forEach(b => {
+    b.addEventListener('click', () => {
+      thEl.value = b.dataset.phase;
+      update();
+    });
+  });
+
+  let drag = null;
+  c.addEventListener('pointerdown', e => {
+    drag = { x: e.clientX, y: e.clientY, yaw, pitch };
+    c.setPointerCapture(e.pointerId);
+  });
+  c.addEventListener('pointermove', e => {
+    if (!drag) return;
+    yaw = drag.yaw + (e.clientX - drag.x) * 0.008;
+    pitch = Math.max(-1.3, Math.min(1.3, drag.pitch + (e.clientY - drag.y) * 0.008));
+    update();
+  });
+  c.addEventListener('pointerup', () => { drag = null; });
+
+  let anim = 0;
+  document.getElementById('obsMode').addEventListener('click', (e) => {
+    obsMode = obsMode === 'outside' ? 'centre' : 'outside';
+    e.currentTarget.textContent = 'Q: ' + obsMode;
+    omega0 = null;
+    update();
+  });
+  document.getElementById('obsToggle').addEventListener('click', (e) => {
+    showObserver = !showObserver;
+    e.currentTarget.textContent = 'observer: ' + (showObserver ? 'on' : 'off');
+    e.currentTarget.classList.toggle('on', showObserver);
+    update();
+  });
+  document.getElementById('collapse').addEventListener('click', () => {
+    cancelAnimationFrame(anim);
+    const from = parseFloat(kEl.value);
+    const t0 = performance.now();
+    const dur = 1400;
+    const step = (now) => {
+      const p = Math.min(1, (now - t0) / dur);
+      const e = p * p * (3 - 2 * p); // smoothstep
+      const k = from * (1 - e);
+      kEl.value = k.toFixed(2);
+      kVal.textContent = k.toFixed(2);
+      draw(k, theta);
+      if (p < 1) anim = requestAnimationFrame(step);
+      else { kEl.value = 0; kVal.textContent = '0.00'; draw(0, theta); }
+    };
+    anim = requestAnimationFrame(step);
+  });
+
+  window.__probe = (k, thDeg, which) => {
+    body = which || body;
+    baseWidth = null;
+    const t = (thDeg * Math.PI) / 180;
+    return draw(k, t);
+  };
+
+  update();
+})();
+</script>
+</body>
+</html>

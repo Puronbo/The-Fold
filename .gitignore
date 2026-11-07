@@ -1,0 +1,15 @@
+# session archive / database backups — never commit
+opencode-archive/
+
+# LaTeX build artifacts
+*.aux
+*.log
+*.out
+*.toc
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+
+# OS
+Thumbs.db
+.DS_Store

@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>3D → 0D — the cone of the collapse</title>
+<style>
+  :root {
+    --bg:#0d1117; --panel:#161b22; --line:#30363d; --text:#e6edf3;
+    --dim:#8b949e; --accent:#58a6ff; --warm:#f0883e; --cool:#3fb950; --violet:#bc8cff;
+  }
+  * { box-sizing:border-box; }
+  body {
+    margin:0; background:var(--bg); color:var(--text);
+    font:14px/1.5 ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+    display:flex; min-height:100vh;
+  }
+  #stage { flex:1; min-width:0; display:flex; align-items:center; justify-content:center; padding:20px; }
+  canvas {
+    border-radius:12px; background:#0a0e14; box-shadow:0 0 0 1px var(--line);
+    width:min(780px,100%); height:auto; cursor:grab; touch-action:none;
+  }
+  canvas:active { cursor:grabbing; }
+  aside {
+    width:370px; background:var(--panel); border-left:1px solid var(--line);
+    padding:22px; display:flex; flex-direction:column; gap:16px;
+  }
+  @media (max-width:1100px) {
+    body { flex-direction: column; min-height: 0; }
+    #stage { flex: none; padding: 12px; }
+    canvas { width: min(100%, 700px); }
+    aside { width: 100%; border-left: none; border-top: 1px solid var(--line); }
+  }
+  h1 { font-size:15px; margin:0; letter-spacing:.3px; }
+  .sub { color:var(--dim); font-size:12px; margin:-10px 0 0; }
+  label { display:block; font-size:12px; color:var(--dim); margin-bottom:6px; }
+  .row { display:flex; align-items:center; gap:10px; }
+  input[type=range] { flex:1; accent-color:var(--accent); }
+  .val { font-variant-numeric:tabular-nums; min-width:64px; text-align:right; }
+  .btns { display:flex; flex-wrap:wrap; gap:8px; }
+  button {
+    background:#21262d; color:var(--text); border:1px solid var(--line);
+    border-radius:7px; padding:7px 11px; font-size:12px; cursor:pointer;
+  }
+  button:hover { border-color:var(--accent); color:var(--accent); }
+  table { width:100%; border-collapse:collapse; font-variant-numeric:tabular-nums; }
+  td { padding:6px 0; border-bottom:1px solid var(--line); font-size:13px; }
+  td:last-child { text-align:right; }
+  .k { color:var(--dim); }
+  .ladder { display:flex; flex-direction:column; gap:4px; font-size:12px; }
+  .ladder div { display:flex; justify-content:space-between; padding:4px 8px; border-radius:5px; background:#0a0e14; }
+  .hint { color:var(--dim); font-size:12px; border-top:1px solid var(--line); padding-top:12px; margin:0; }
+  code { background:#0a0e14; padding:1px 5px; border-radius:4px; font-size:12px; }
+</style>
+</head>
+<body>
+  <div id="stage"><canvas id="c" width="780" height="720"></canvas></div>
+  <aside>
+    <h1>3D → 0D: the cone of the collapse</h1>
+    <p class="sub">P′ = P₀ + k(P − P₀), apex P₀</p>
+
+    <div>
+      <label>k — position along the cone</label>
+      <div class="row">
+        <input id="k" type="range" min="-1.5" max="2.2" step="0.01" value="1" />
+        <span class="val" id="kVal">1.00</span>
+      </div>
+    </div>
+
+    <div class="btns">
+      <button data-preset="one">k = 1</button>
+      <button data-preset="half">k = 0.5</button>
+      <button data-preset="zero">k = 0 (collapse)</button>
+      <button data-preset="neg">k = −1</button>
+      <button data-preset="spin">spin</button>
+    </div>
+
+    <table>
+      <tr><td class="k">volume V′</td><td id="v">—</td></tr>
+      <tr><td class="k">cross-section A′</td><td id="a">—</td></tr>
+      <tr><td class="k">height h′</td><td id="h">—</td></tr>
+      <tr><td class="k">V′/V₀ = |k|³</td><td id="vr">—</td></tr>
+      <tr><td class="k">A′/A₀ = k²</td><td id="ar">—</td></tr>
+      <tr><td class="k">h′/h₀ = k</td><td id="hr">—</td></tr>
+    </table>
+
+    <div class="ladder">
+      <div><span>3D body</span><span class="v" style="color:#58a6ff">∝ k³</span></div>
+      <div><span>2D slice</span><span style="color:#3fb950">∝ k²</span></div>
+      <div><span>1D height</span><span style="color:#f0883e">∝ k</span></div>
+      <div><span>0D apex</span><span style="color:#bc8cff">k = 0</span></div>
+    </div>
+
+    <p class="hint">
+      Every ray from <code>P₀</code> through the body is an <em>orbit</em> of the
+      scaling. The cone is those rays; the body is a cross-section sliding along
+      it. <code>k &lt; 0</code> puts it on the opposite nappe, and the only point
+      common to all of them is the apex.
+    </p>
+  </aside>
+
+<script>
+(() => {
+  const c = document.getElementById('c');
+  const ctx = c.getContext('2d');
+  const W = c.width, H = c.height, CX = W / 2, CY = H / 2 + 20;
+  const SCALE = 145;
+
+  let yaw = 0.62, pitch = 0.34;
+
+  // apex (0D) at the origin; the 3D body sits off-origin
+  const OFFSET = { x: 1.15, y: 0.72, z: 0.62 };
+  const HALF = 0.44;
+  const V = [];
+  for (const sx of [-1, 1]) for (const sy of [-1, 1]) for (const sz of [-1, 1]) {
+    V.push({
+      x: OFFSET.x + sx * HALF,
+      y: OFFSET.y + sy * HALF,
+      z: OFFSET.z + sz * HALF,
+    });
+  }
+  // index bits: x,y,z -> 0/1
+  const idx = (x, y, z) => (x * 4) + (y * 2) + z;
+  const FACES = [
+    { ids: [idx(0,0,0), idx(0,1,0), idx(0,1,1), idx(0,0,1)], shade: 0.40 },
+    { ids: [idx(1,0,0), idx(1,0,1), idx(1,1,1), idx(1,1,0)], shade: 0.62 },
+    { ids: [idx(0,0,0), idx(0,0,1), idx(1,0,1), idx(1,0,0)], shade: 0.30 },
+    { ids: [idx(0,1,0), idx(1,1,0), idx(1,1,1), idx(0,1,1)], shade: 0.74 },
+    { ids: [idx(0,0,0), idx(1,0,0), idx(1,1,0), idx(0,1,0)], shade: 0.22 },
+    { ids: [idx(0,0,1), idx(0,1,1), idx(1,1,1), idx(1,0,1)], shade: 0.52 },
+  ];
+  const EDGES = [];
+  for (let a = 0; a < 8; a++) for (let b = a + 1; b < 8; b++) {
+    const d = (a ^ b);
+    if (d === 1 || d === 2 || d === 4) EDGES.push([a, b]);
+  }
+
+  const rot = (p) => {
+    const cy = Math.cos(yaw), sy = Math.sin(yaw);
+    let x = p.x * cy + p.z * sy;
+    let z = -p.x * sy + p.z * cy;
+    const cp = Math.cos(pitch), sp = Math.sin(pitch);
+    const y = p.y * cp - z * sp;
+    z = p.y * sp + z * cp;
+    return { x, y, z };
+  };
+  const proj = (p) => {
+    const r = rot(p);
+    return { x: CX + r.x * SCALE, y: CY - r.y * SCALE, d: r.z };
+  };
+
+  const scaleAbout = (p, k) => ({ x: p.x * k, y: p.y * k, z: p.z * k });
+
+  function line(a, b, color, width = 1, dash = []) {
+    const A = proj(a), B = proj(b);
+    ctx.beginPath();
+    ctx.moveTo(A.x, A.y); ctx.lineTo(B.x, B.y);
+    ctx.strokeStyle = color; ctx.lineWidth = width;
+    ctx.setLineDash(dash); ctx.stroke(); ctx.setLineDash([]);
+  }
+
+  function draw(k, t) {
+    ctx.clearRect(0, 0, W, H);
+
+    // floor grid for depth cue
+    ctx.strokeStyle = '#121821'; ctx.lineWidth = 1;
+    for (let i = -3; i <= 3; i++) {
+      line({ x: i, y: -0.9, z: -3 }, { x: i, y: -0.9, z: 3 }, '#121821', 1);
+      line({ x: -3, y: -0.9, z: i }, { x: 3, y: -0.9, z: i }, '#121821', 1);
+    }
+
+    // reference ghost at k = 1
+    if (Math.abs(k - 1) > 0.02) {
+      for (const [a, b] of EDGES) line(V[a], V[b], '#2b3442', 1, [4, 4]);
+    }
+
+    // cone generators: apex -> points sampled on the body's edges
+    if (Math.abs(k) > 1e-4) {
+      const P = V.map(v => scaleAbout(v, k));
+      const color = k > 0 ? 'rgba(188,140,255,.20)' : 'rgba(240,136,62,.20)';
+      for (const [a, b] of EDGES) {
+        for (const t of [0, 0.33, 0.66, 1]) {
+          const p = {
+            x: P[a].x + (P[b].x - P[a].x) * t,
+            y: P[a].y + (P[b].y - P[a].y) * t,
+            z: P[a].z + (P[b].z - P[a].z) * t,
+          };
+          line({ x: 0, y: 0, z: 0 }, p, color, 1);
+        }
+      }
+    }
+
+    // the body at scale k
+    if (Math.abs(k) > 1e-4) {
+      const P = V.map(v => scaleAbout(v, k));
+      const order = FACES.map((f, i) => {
+        const dc = f.ids.reduce((s, id) => s + proj(P[id]).d, 0) / 4;
+        return { f, i, dc };
+      }).sort((a, b) => a.dc - b.dc); // far first
+
+      for (const { f } of order) {
+        const pts = f.ids.map(id => proj(P[id]));
+        ctx.beginPath();
+        pts.forEach((p, i) => i ? ctx.lineTo(p.x, p.y) : ctx.moveTo(p.x, p.y));
+        ctx.closePath();
+        ctx.fillStyle = `rgba(88,166,255,${0.10 + f.shade * 0.22})`;
+        ctx.fill();
+        ctx.strokeStyle = 'rgba(88,166,255,.85)';
+        ctx.lineWidth = 1.4;
+        ctx.stroke();
+      }
+    }
+
+    // apex / 0D midpoint
+    const O = proj({ x: 0, y: 0, z: 0 });
+    const pulse = 5 + Math.sin(t / 400) * 1.6;
+    ctx.beginPath(); ctx.arc(O.x, O.y, pulse + 6, 0, Math.PI * 2);
+    ctx.fillStyle = 'rgba(188,140,255,.14)'; ctx.fill();
+    ctx.beginPath(); ctx.arc(O.x, O.y, 4.5, 0, Math.PI * 2);
+    ctx.fillStyle = '#bc8cff'; ctx.fill();
+    ctx.fillStyle = '#bc8cff';
+    ctx.font = '12px ui-monospace, monospace';
+    ctx.textAlign = 'right';
+    ctx.fillText('P₀ · 0D apex', O.x - 12, O.y + 4);
+    ctx.textAlign = 'left';
+
+    // labels
+    ctx.fillStyle = '#8b949e';
+    ctx.font = '12px ui-monospace, monospace';
+    ctx.fillText('k = ' + k.toFixed(2), 18, H - 46);
+    ctx.fillStyle = '#4b5563';
+    ctx.fillText('drag to orbit', 18, H - 26);
+
+    // readouts: cube V0 = 1, A0 = 1, h0 = 1
+    const absk = Math.abs(k);
+    document.getElementById('v').textContent = (absk ** 3).toFixed(3);
+    document.getElementById('a').textContent = (k * k).toFixed(3);
+    document.getElementById('h').textContent = k.toFixed(3);
+    document.getElementById('vr').textContent = (absk ** 3).toFixed(3);
+    document.getElementById('ar').textContent = (k * k).toFixed(3);
+    document.getElementById('hr').textContent = k.toFixed(3);
+  }
+
+  const kEl = document.getElementById('k');
+  const kVal = document.getElementById('kVal');
+  let spin = false, raf = 0, last = 0;
+
+  function update() {
+    const k = parseFloat(kEl.value);
+    kVal.textContent = k.toFixed(2);
+    draw(k, performance.now());
+  }
+
+  function loop(t) {
+    if (!spin) return;
+    const dt = last ? t - last : 16;
+    last = t;
+    yaw += dt * 0.00035;
+    draw(parseFloat(kEl.value), t);
+    raf = requestAnimationFrame(loop);
+  }
+
+  document.querySelectorAll('button[data-preset]').forEach(b => {
+    b.addEventListener('click', () => {
+      const p = b.dataset.preset;
+      if (p === 'spin') {
+        spin = !spin; last = 0;
+        if (spin) raf = requestAnimationFrame(loop);
+        else cancelAnimationFrame(raf);
+        b.style.borderColor = spin ? '#58a6ff' : '';
+        return;
+      }
+      const map = { one: 1, half: 0.5, zero: 0, neg: -1 };
+      kEl.value = map[p];
+      update();
+    });
+  });
+
+  kEl.addEventListener('input', update);
+
+  let drag = null;
+  c.addEventListener('pointerdown', e => {
+    drag = { x: e.clientX, y: e.clientY, yaw, pitch };
+    c.setPointerCapture(e.pointerId);
+  });
+  c.addEventListener('pointermove', e => {
+    if (!drag) return;
+    yaw = drag.yaw + (e.clientX - drag.x) * 0.008;
+    pitch = Math.max(-1.2, Math.min(1.2, drag.pitch + (e.clientY - drag.y) * 0.008));
+    draw(parseFloat(kEl.value), performance.now());
+  });
+  c.addEventListener('pointerup', () => { drag = null; });
+
+  update();
+})();
+</script>
+</body>
+</html>

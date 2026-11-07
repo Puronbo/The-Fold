@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>J as the twist — plane, area, height</title>
+<style>
+  :root {
+    --bg: #0d1117;
+    --panel: #161b22;
+    --line: #30363d;
+    --text: #e6edf3;
+    --dim: #8b949e;
+    --accent: #58a6ff;
+    --warm: #f0883e;
+    --cool: #3fb950;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font: 14px/1.5 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    display: flex;
+    min-height: 100vh;
+  }
+  #stage { flex: 1; min-width: 0; display: flex; align-items: center; justify-content: center; padding: 24px; }
+  canvas {
+    border-radius: 12px; background: #0a0e14; box-shadow: 0 0 0 1px var(--line);
+    width: min(720px, 100%); height: auto;
+  }
+  @media (max-width: 1080px) {
+    body { flex-direction: column; }
+    aside { width: 100%; border-left: none; border-top: 1px solid var(--line); }
+  }
+  aside {
+    width: 360px;
+    background: var(--panel);
+    border-left: 1px solid var(--line);
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+  h1 { font-size: 15px; margin: 0; letter-spacing: .3px; }
+  .sub { color: var(--dim); font-size: 12px; margin: -10px 0 0; }
+  label { display: block; font-size: 12px; color: var(--dim); margin-bottom: 6px; }
+  .row { display: flex; align-items: center; gap: 10px; }
+  input[type=range] { flex: 1; accent-color: var(--accent); }
+  .val { font-variant-numeric: tabular-nums; min-width: 62px; text-align: right; color: var(--text); }
+  .btns { display: flex; flex-wrap: wrap; gap: 8px; }
+  button {
+    background: #21262d; color: var(--text); border: 1px solid var(--line);
+    border-radius: 7px; padding: 7px 11px; font-size: 12px; cursor: pointer;
+  }
+  button:hover { border-color: var(--accent); color: var(--accent); }
+  table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+  td { padding: 6px 0; border-bottom: 1px solid var(--line); font-size: 13px; }
+  td:last-child { text-align: right; }
+  .k { color: var(--dim); }
+  .hint { color: var(--dim); font-size: 12px; border-top: 1px solid var(--line); padding-top: 14px; }
+  code { background: #0a0e14; padding: 1px 5px; border-radius: 4px; font-size: 12px; }
+  .ok { color: var(--cool); }
+  .warn { color: var(--warm); }
+</style>
+</head>
+<body>
+  <div id="stage"><canvas id="c" width="720" height="720"></canvas></div>
+  <aside>
+    <h1>J is the twist</h1>
+    <p class="sub">P′ = P₀ + ρ·e<sup>θJ</sup>(P − P₀)</p>
+
+    <div>
+      <label>ρ — magnitude (scale)</label>
+      <div class="row">
+        <input id="rho" type="range" min="0" max="2" step="0.01" value="1" />
+        <span class="val" id="rhoVal">1.00</span>
+      </div>
+    </div>
+
+    <div>
+      <label>θ — twist</label>
+      <div class="row">
+        <input id="theta" type="range" min="-180" max="180" step="1" value="0" />
+        <span class="val" id="thetaVal">0°</span>
+      </div>
+    </div>
+
+    <div class="btns">
+      <button data-preset="identity">identity</button>
+      <button data-preset="j">J (90°)</button>
+      <button data-preset="neg">k = −1</button>
+      <button data-preset="grow">k = 1.5</button>
+      <button data-preset="tiny">k = 0.5</button>
+      <button data-preset="zero">k = 0</button>
+    </div>
+
+    <table>
+      <tr><td class="k">height h</td><td id="h">—</td></tr>
+      <tr><td class="k">area A</td><td id="a">—</td></tr>
+      <tr><td class="k">h / h₀</td><td id="hr">—</td></tr>
+      <tr><td class="k">A / A₀</td><td id="ar">—</td></tr>
+      <tr><td class="k">ρ²</td><td id="rho2">—</td></tr>
+    </table>
+
+    <p class="hint">
+      <code>A′ = ρ²·A</code> always — the twist θ never changes area.<br />
+      <code>h′ = ρ·h</code> only at θ = 0. Rotating changes the vertical
+      extent while area stays fixed, which is exactly why height and area
+      cannot share one law.
+    </p>
+  </aside>
+
+<script>
+(() => {
+  const c = document.getElementById('c');
+  const ctx = c.getContext('2d');
+  const W = c.width, H = c.height;
+  const CX = W / 2, CY = H / 2;
+  const UNIT = 120; // px per unit
+  const P0 = { x: 0, y: 0 };
+
+  // shape in plane coordinates (y up)
+  const SHAPE = [
+    { x: -1.10, y: -0.70 },
+    { x:  1.30, y: -0.95 },
+    { x:  0.95, y:  0.75 },
+    { x: -0.85, y:  0.55 },
+  ];
+
+  const toScreen = (p) => ({ x: CX + p.x * UNIT, y: CY - p.y * UNIT });
+
+  const area = (pts) => {
+    let s = 0;
+    for (let i = 0; i < pts.length; i++) {
+      const a = pts[i], b = pts[(i + 1) % pts.length];
+      s += a.x * b.y - b.x * a.y;
+    }
+    return Math.abs(s) / 2;
+  };
+  const height = (pts) => {
+    const ys = pts.map(p => p.y);
+    return Math.max(...ys) - Math.min(...ys);
+  };
+
+  const transform = (pts, rho, theta) => {
+    const ct = Math.cos(theta), st = Math.sin(theta);
+    return pts.map(p => {
+      const dx = p.x - P0.x, dy = p.y - P0.y;
+      return {
+        x: P0.x + rho * (ct * dx - st * dy),
+        y: P0.y + rho * (st * dx + ct * dy),
+      };
+    });
+  };
+
+  const A0 = area(SHAPE);
+  const H0 = height(SHAPE);
+
+  function grid() {
+    ctx.strokeStyle = '#151b24';
+    ctx.lineWidth = 1;
+    for (let x = -6; x <= 6; x++) {
+      const s = toScreen({ x, y: 0 });
+      ctx.beginPath(); ctx.moveTo(s.x, 0); ctx.lineTo(s.x, H); ctx.stroke();
+    }
+    for (let y = -6; y <= 6; y++) {
+      const s = toScreen({ x: 0, y });
+      ctx.beginPath(); ctx.moveTo(0, s.y); ctx.lineTo(W, s.y); ctx.stroke();
+    }
+    ctx.strokeStyle = '#232b36';
+    ctx.beginPath();
+    ctx.moveTo(0, CY); ctx.lineTo(W, CY);
+    ctx.moveTo(CX, 0); ctx.lineTo(CX, H);
+    ctx.stroke();
+  }
+
+  function poly(pts, { fill, stroke, dash = [], width = 2 }) {
+    if (!pts.length) return;
+    ctx.beginPath();
+    pts.forEach((p, i) => {
+      const s = toScreen(p);
+      i ? ctx.lineTo(s.x, s.y) : ctx.moveTo(s.x, s.y);
+    });
+    ctx.closePath();
+    if (fill) { ctx.fillStyle = fill; ctx.fill(); }
+    if (stroke) {
+      ctx.setLineDash(dash);
+      ctx.strokeStyle = stroke;
+      ctx.lineWidth = width;
+      ctx.stroke();
+      ctx.setLineDash([]);
+    }
+  }
+
+  function label(text, p, color, dy = 0) {
+    const s = toScreen(p);
+    ctx.fillStyle = color;
+    ctx.font = '12px ui-monospace, monospace';
+    ctx.fillText(text, s.x + 8, s.y + dy - 8);
+  }
+
+  function draw(rho, theta) {
+    ctx.clearRect(0, 0, W, H);
+    grid();
+
+    // datum
+    const p0 = toScreen(P0);
+    ctx.beginPath();
+    ctx.arc(p0.x, p0.y, 5, 0, Math.PI * 2);
+    ctx.fillStyle = '#e6edf3';
+    ctx.fill();
+    label('P₀', P0, '#8b949e', 22);
+
+    // original
+    poly(SHAPE, { stroke: '#3d4654', dash: [6, 6], width: 1.5 });
+
+    // twist arc from a reference vertex
+    if (Math.abs(theta) > 0.01) {
+      const ref = { x: 1.6, y: 0 };
+      const steps = 60;
+      ctx.beginPath();
+      for (let i = 0; i <= steps; i++) {
+        const t = theta * i / steps;
+        const p = {
+          x: P0.x + rho * (Math.cos(t) * ref.x - Math.sin(t) * ref.y),
+          y: P0.y + rho * (Math.sin(t) * ref.x + Math.cos(t) * ref.y),
+        };
+        const s = toScreen(p);
+        i ? ctx.lineTo(s.x, s.y) : ctx.moveTo(s.x, s.y);
+      }
+      ctx.strokeStyle = 'rgba(88,166,255,.35)';
+      ctx.lineWidth = 1.5;
+      ctx.stroke();
+    }
+
+    const T = transform(SHAPE, rho, theta);
+    poly(T, { fill: 'rgba(88,166,255,.16)', stroke: '#58a6ff', width: 2 });
+
+    // basis vectors e1 and J e1
+    const e1 = { x: 1.5, y: 0 };
+    const je1 = { x: 0, y: 1.5 };
+    const drawVec = (v, color, text) => {
+      const s = toScreen(v);
+      ctx.beginPath();
+      ctx.moveTo(p0.x, p0.y);
+      ctx.lineTo(s.x, s.y);
+      ctx.strokeStyle = color;
+      ctx.lineWidth = 1.5;
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, 3, 0, Math.PI * 2);
+      ctx.fillStyle = color;
+      ctx.fill();
+      ctx.fillStyle = color;
+      ctx.font = '12px ui-monospace, monospace';
+      ctx.fillText(text, s.x + 8, s.y + 4);
+    };
+    drawVec(e1, '#3fb950', 'e₁');
+    drawVec(je1, '#f0883e', 'J e₁');
+
+    // height dims
+    const hLine = (pts, color, offset) => {
+      const ys = pts.map(p => p.y);
+      const yTop = Math.max(...ys), yBot = Math.min(...ys);
+      const xs = pts.map(p => p.x);
+      const xRight = Math.max(...xs) + offset;
+      const a = toScreen({ x: xRight, y: yTop });
+      const b = toScreen({ x: xRight, y: yBot });
+      ctx.beginPath();
+      ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y);
+      ctx.strokeStyle = color;
+      ctx.setLineDash([3, 4]);
+      ctx.lineWidth = 1;
+      ctx.stroke();
+      ctx.setLineDash([]);
+      return { xRight, yTop, yBot };
+    };
+    hLine(SHAPE, '#3d4654', 0.9);
+    const d = hLine(T, '#f0883e', 0.55);
+
+    ctx.fillStyle = '#f0883e';
+    ctx.font = '12px ui-monospace, monospace';
+    const mid = toScreen({ x: d.xRight + 0.15, y: (d.yTop + d.yBot) / 2 });
+    ctx.fillText('h′', mid.x, mid.y);
+
+    // readouts
+    const A = area(T), h = height(T);
+    document.getElementById('h').textContent = h.toFixed(3);
+    document.getElementById('a').textContent = A.toFixed(3);
+    document.getElementById('hr').textContent = (h / H0).toFixed(3);
+    document.getElementById('ar').textContent = (A / A0).toFixed(3);
+    document.getElementById('rho2').textContent = (rho * rho).toFixed(3);
+
+    const ok = Math.abs(A / A0 - rho * rho) < 1e-6;
+    document.getElementById('ar').className = ok ? 'ok' : 'warn';
+  }
+
+  const rhoEl = document.getElementById('rho');
+  const thEl = document.getElementById('theta');
+  const rhoVal = document.getElementById('rhoVal');
+  const thVal = document.getElementById('thetaVal');
+
+  function update() {
+    const rho = parseFloat(rhoEl.value);
+    const theta = parseFloat(thEl.value) * Math.PI / 180;
+    rhoVal.textContent = rho.toFixed(2);
+    thVal.textContent = Math.round(parseFloat(thEl.value)) + '°';
+    draw(rho, theta);
+  }
+
+  document.querySelectorAll('button[data-preset]').forEach(b => {
+    b.addEventListener('click', () => {
+      const p = b.dataset.preset;
+      const set = (r, t) => {
+        rhoEl.value = r; thEl.value = t; update();
+      };
+      if (p === 'identity') set(1, 0);
+      if (p === 'j') set(1, 90);
+      if (p === 'neg') set(1, 180);
+      if (p === 'grow') set(1.5, 0);
+      if (p === 'tiny') set(0.5, 0);
+      if (p === 'zero') set(0, 0);
+    });
+  });
+
+  rhoEl.addEventListener('input', update);
+  thEl.addEventListener('input', update);
+  update();
+})();
+</script>
+</body>
+</html>

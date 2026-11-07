@@ -1,0 +1,400 @@
+﻿\documentclass[11pt,fleqn]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amssymb,amsfonts,latexsym}
+\usepackage{geometry}
+\geometry{a4paper, margin=1in}
+\usepackage{hyperref}
+\usepackage{titlesec}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{float}
+
+\titleformat{\section}{\large\bfseries}{\thesection}{1em}{}
+
+\title{\textbf{The Fold:\\Scale, twist, collapse --- and what is left at the centre}}
+\author{}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\setcounter{section}{-1}
+
+\section{Summary}
+
+Scaling about a datum is a one-parameter family $g_k(P) = P_0 + k(P - P_0)$. The family is a
+group for $k \neq 0$; $k = 0$ is the boundary where it degenerates into a point. A real $k$ changes
+size, an imaginary one twists, and a fold is the reflection whose composition produces the twist.
+Everything that follows is the consequence of one determinant:
+\begin{equation}
+\det(g_k) = k^n, \qquad n = \text{dimension}.
+\end{equation}
+Heights scale like $k$, areas like $k^2$, volumes like $k^3$. That single fact separates every
+quantity in the construction.
+
+\section{The scale factor and the datum}
+
+For a datum point $P_0$ and a point $P$ on the object:
+\begin{equation}
+P' = P_0 + k(P - P_0).
+\end{equation}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{@{}ll@{}}
+\toprule
+$k$ & behaviour \\
+\midrule
+$k > 1$ & expansion away from the datum \\
+$0 < k < 1$ & contraction toward the datum \\
+$k = 0$ & collapse: every point maps to $P_0$ \\
+$k < 0$ & scaling composed with reflection through $P_0$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The map is a \textbf{homothety}. For $k \neq 0$ the family is a group isomorphic to
+$\mathbb{R}^{*}$; $g_0$ is the constant map with rank $0$ and is not a member. This distinction
+matters later: zero is not a small scaling, it is the end of the family.
+
+\subsection*{Area and height}
+
+\begin{align}
+\text{height}\quad h' &= k\,h, \\
+\text{area}\quad A' &= k^2\,A, \\
+\text{volume}\quad V' &= |k|^3\,V,
+\end{align}
+so that
+\begin{equation}
+\frac{A'}{A} = \left(\frac{h'}{h}\right)^{2}.
+\end{equation}
+Height and area cannot share a law. A sign survives in the height and dies in the area, because
+area is a determinant and the determinant of $kI$ is $k^2$. At $k = -1$ the height reverses and
+the area is unchanged.
+
+\section{Two regimes: the sphere and the cone}
+
+Where the datum sits decides the geometry, and there are exactly two cases.
+
+\textbf{Datum inside the body.} Every orbit of the scaling is a diameter. The level sets are
+spheres:
+\begin{equation}
+g_k(S_r) = S_{|k|r} \qquad (k \neq 0).
+\end{equation}
+The tangent cone at an interior point is the whole space $\mathbb{R}^3$ --- no proper cone exists.
+The flow is purely radial and the collapse is isotropic. The bulk-to-boundary ratio vanishes:
+\begin{equation}
+\frac{V}{A} = \frac{r}{3} \to 0.
+\end{equation}
+
+\textbf{Datum on the boundary.} The orbits are rays and their union is a proper cone with apex
+$P_0$. This is the case that produces the cone of rays, and the case a horizon belongs to.
+
+\textbf{Datum outside.} Same cone, seen from further away: the body subtends a cone and casts a
+shadow.
+
+The three named choices of datum are three positions of the same apex:
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabular}{@{}l>{\raggedright\arraybackslash}p{3.4cm}>{\raggedright\arraybackslash}p{2.8cm}>{\raggedright\arraybackslash}p{4.2cm}@{}}
+\toprule
+datum & apex & tangent cone & behaviour \\
+\midrule
+centroid & interior & $\mathbb{R}^3$ & uniform scaling in place \\
+vertex / base & boundary & proper cone & apex locked, body grows away \\
+origin & fixed frame point, interior or exterior & $\mathbb{R}^3$ or proper cone &
+scaling also translates the body when it is off-origin \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{The twist}
+
+The operator
+\begin{equation}
+J = \begin{pmatrix} 0 & -1 \\ 1 & 0 \end{pmatrix},
+\qquad J^2 = -I
+\end{equation}
+is the infinitesimal generator of rotation, and
+\begin{equation}
+e^{\theta J} = \cos\theta\, I + \sin\theta\, J = R(\theta).
+\end{equation}
+A general scale-with-twist is therefore the spiral similarity
+\begin{equation}
+k = \rho e^{i\theta}, \qquad
+P' = P_0 + \rho\left(\cos\theta\, I + \sin\theta\, J\right)(P - P_0).
+\end{equation}
+$J$ itself is the quarter turn. The four cardinal values are the fourth roots of unity and form a
+cycle:
+\begin{equation}
+1 \to i \to -1 \to -i \to 1.
+\end{equation}
+Two quarter turns equal one half turn: $i^2 = -1$. The twist squared is the flip.
+
+\subsection*{Which twists are observable}
+
+The twists that leave a body unchanged \emph{are} its rotation symmetry group. Written as a
+quotient, the body only responds to
+\begin{equation}
+U(1) / \operatorname{Sym}(B).
+\end{equation}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{@{}llp{6cm}@{}}
+\toprule
+body & symmetry & observable twist \\
+\midrule
+sphere & $S^1$ --- all $\theta$ & none: $i = 1$ exactly \\
+cube & $C_4 = \{1, i, -1, -i\}$ & only between the cardinal turns \\
+chiral body & $\{1\}$ & every angle \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Measured on the rendered model (silhouette change under $\theta$):
+
+\begin{table}[H]
+\centering
+\begin{tabular}{@{}lcccccc@{}}
+\toprule
+$\theta$ & $0^\circ$ & $30^\circ$ & $45^\circ$ & $90^\circ$ & $180^\circ$ & $270^\circ$ \\
+\midrule
+sphere & 0.0\% & 0.0\% & 0.0\% & 0.0\% & 0.0\% & 0.0\% \\
+cube & 0.0\% & 1.4\% & \textbf{12.3\%} & 0.0\% & 0.0\% & 0.0\% \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The peak at $45^\circ$ is the antipode of the fundamental domain: it is the point furthest from any
+symmetry.
+
+\subsection*{Orientation}
+
+Because $\det(kI) = k^n$, the sign of $k$ has different meaning in different dimensions:
+
+\begin{itemize}
+\item \textbf{2D}: $\det(-I) = +1$ --- $k = -1$ is a rotation by $180^\circ$, orientation
+preserved.
+\item \textbf{3D}: $\det(-I) = -1$ --- $k = -1$ is a point reflection, orientation reversed: the
+genuine ``inside out''.
+\end{itemize}
+
+The same formula, two different geometries.
+
+\section{The fold, completed}
+
+A \textbf{fold} is a reflection in a hyperplane $H$:
+\begin{equation}
+\sigma_H^2 = I, \qquad \sigma_H \text{ fixes } H, \qquad \det\sigma_H = -1.
+\end{equation}
+Its fixed set has dimension $n - 1$: a line in the plane, a plane in space. This is the piece the
+earlier account was missing --- the fold does not fix the datum, it fixes a \textbf{crease}.
+
+\textbf{Two folds make a twist.} Composing reflections in two hyperplanes meeting at angle
+$\alpha$ gives a rotation by $2\alpha$ about their intersection:
+\begin{equation}
+\sigma_{H_2} \circ \sigma_{H_1} = R(2\alpha).
+\end{equation}
+So:
+
+\begin{itemize}
+\item $J$ ($90^\circ$) is \textbf{two folds at $45^\circ$} --- never a single fold
+\item $-I$ in the plane ($180^\circ$) is two folds at $90^\circ$, or equivalently $J^2$
+\item $J$ is orientation-preserving because it is the product of an \textbf{even} number of folds
+\end{itemize}
+
+Orientation is the parity of the fold count. This is why a twist and a fold cannot be confused: one
+has determinant $+1$, the other $-1$, and any odd number of folds reverses orientation.
+
+\textbf{The hinge is the intersection.} The twist fixes the intersection of the two creases: a
+point in the plane, a line in space. The datum is that hinge.
+
+\textbf{The degeneration.} Send the two creases together and their intersection collapses to a
+point. The fold then has no crease left, and what remains is $k = -1$: a point reflection. That is
+the precise content of ``the datum becomes the hinge of the fold'' --- the crease has shrunk into
+the datum, and the fold has become the point reflection.
+
+\textbf{Completion.} The fold group closes when the creases have swept the full angle:
+\begin{equation}
+(\sigma_2\sigma_1)^4 = I \qquad \text{for } \alpha = 45^\circ.
+\end{equation}
+Four quarter turns return the body to itself; the two creases at $45^\circ$ produce the four
+reflection axes at multiples of $45^\circ$, and the dihedral group $D_4$ of order eight is generated
+by exactly two folds. The cycle
+$1 \to i \to -1 \to -i \to 1$ is that closure written multiplicatively.
+
+The only set fixed by the entire group is the hinge: a point in the plane, a line in space.
+
+\section{The horizon}
+
+A horizon is the boundary case of section 2: the apex sits on the surface, and the surface becomes
+null. It is where the cone reappears.
+
+Under $r \to kr$:
+
+\begin{table}[H]
+\centering
+\begin{tabular}{@{}ll@{}}
+\toprule
+quantity & scaling \\
+\midrule
+horizon radius $r_H$ & $\propto k$ \\
+horizon area $A_H$ & $\propto k^2$ \\
+entropy $S = A/4\ell_P^2$ & $\propto k^2$ \\
+temperature $T$ & $\propto 1/k$ \\
+mass $M$ & $\propto k$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+This is thermodynamically consistent: with $S = \alpha M^2$ and $T = \beta/M$, $T\,dS = dM$ holds
+identically, and $S \cdot T \propto k$ is the horizon's energy.
+
+The horizon arrives \textbf{before} zero. A body of radius $R$ reaches its own Schwarzschild radius
+at
+\begin{equation}
+k^{*} = \frac{r_s}{R} = \frac{2GM}{c^2R}.
+\end{equation}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{@{}ll@{}}
+\toprule
+body & $k^{*}$ \\
+\midrule
+Earth & $1.4 \times 10^{-9}$ \\
+Sun & $4.3 \times 10^{-6}$ \\
+70\,kg water sphere & $4 \times 10^{-25}$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Below $k^{*}$ the collapse has left the observable chart. The point remains in the mathematics and
+leaves the physics.
+
+Because $V \propto k^3$ while $A \propto k^2$, the bulk dies faster than its boundary, and
+$V/A \to 0$. That is the quantitative content of the holographic statement: information capacity
+tracks the area, and the area outlives the volume.
+
+\section{Zero as the point}
+
+$k = 0$ is not a scaling. It is:
+
+\begin{itemize}
+\item \textbf{outside the group} --- rank $0$, not invertible
+\item \textbf{the compactification of every orbit} --- each ray $(P_0, P]$ is open, and $k = 0$
+closes them all at once
+\item \textbf{without geometry} --- no tangent space, no normal; curvature $1/r$ is undefined, not
+infinite
+\end{itemize}
+
+The dimensional ladder is therefore not a path through intermediate objects:
+\begin{equation}
+V \propto k^3, \qquad A \propto k^2, \qquad h \propto k, \qquad \text{point} = k^0.
+\end{equation}
+These are four measurements of the same family, not four consecutive states. At $k = 0$ the rank
+drops from $n$ to $0$ in one step; the body never passes through a sheet or a line.
+
+\section{What an observer can see}
+
+A point has no aperture: it subtends zero solid angle and collects zero flux. What it \emph{can}
+measure is fixed by its dimension:
+
+\begin{table}[H]
+\centering
+\begin{tabular}{@{}ll@{}}
+\toprule
+observer dimension & observable \\
+\midrule
+\textbf{0D} & scalar --- curvature, potential, temperature \\
+1D & derivative, direction \\
+2D & flux (needs an oriented area) \\
+3D & density, integral \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+A point sees \textbf{values, not flows}. It has no tangent space, so it cannot host a vector.
+
+Two complementary views of the same sphere:
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabular}{@{}llp{5.2cm}@{}}
+\toprule
+observer & $\Omega/4\pi$ & behaviour \\
+\midrule
+outside & $5.06\%$ at $k=1$, falls as $k^2$ & body shrinks to a point \\
+at the centre & $100\%$ for every $k > 0$ & sky fixed, distance shrinks \\
+on the surface & $2\pi$ half-space & edge-on; the horizon case \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Measured exterior view:
+
+\begin{table}[H]
+\centering
+\begin{tabular}{@{}ccc@{}}
+\toprule
+$k$ & $\Omega/4\pi$ & ratio \\
+\midrule
+1.00 & 5.060\% & $1.000\times$ \\
+0.50 & 1.216\% & $0.240\times$ \\
+0.25 & 0.301\% & $0.060\times$ \\
+0 & 0.000\% & --- \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The interior view is constant because a homothety is \textbf{conformal}: it preserves angles, hence
+solid angle, exactly. Scaling preserves what you see, but not how far away it is. Let the interior
+sphere recede ($k \to \infty$) and the curvature $1/r \to 0$ while $\Omega = 4\pi$ stays fixed ---
+the boundary flattens into the celestial plane at infinity, still carrying everything the bulk can
+send.
+
+At $k = 0$ all three views coincide: the point, the shell, and the observer are the same place.
+
+\section{Devices that instantiate each step}
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabular}{@{}llp{5.4cm}@{}}
+\toprule
+idea & device & what it demonstrates \\
+\midrule
+scale invariance & pinhole camera & image scales as $k$, area as $k^2$ \\
+interior collapse & inertial confinement, sonoluminescence & compression $1/k^3$ \\
+radial flow & integrating sphere & $\Omega = 4\pi$ independent of radius \\
+twist $J$ & quarter-wave plate & Jones matrix $\operatorname{diag}(1, i)$ \\
+two folds make a twist & two mirrors at $45^\circ$ & rotation by twice the mirror angle \\
+symmetry quotient & square waveguide & invisible at 0/90/180/270, maximal at $45^\circ$ \\
+symmetry breaking & chiral medium (sugar solution) & every angle observable \\
+directional twist & Faraday rotator & non-reciprocal $90^\circ$ \\
+horizon & acoustic / optical analogue horizon & $r \propto k$, $T \propto 1/k$ \\
+conformal boundary & AdS/CFT, celestial sphere & physics at infinity, $\Omega$ fixed \\
+0D scalar probe & thermocouple, curvature scalar & value without direction \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{The one sentence}
+
+\textbf{Scaling preserves angles and curvature-free structure, changes lengths and curvatures, is
+generated by folds in pairs, and terminates in a point that has no geometry and can only be seen as
+a direction.}
+
+\medskip
+\begin{center}
+\emph{Companion models: \texttt{j-plane.html} (the plane, area and height),
+\texttt{j-cone-3d.html} (the external cone), \texttt{j-collapse-3d.html} (sphere, cube, horizon
+readouts, observers).}
+\end{center}
+
+\end{document}
