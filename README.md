@@ -17,6 +17,8 @@ two folds.
 | `j-plane.html` | 2D model: `A ∝ k²`, `h ∝ k`, the rotation `J` |
 | `j-cone-3d.html` | external apex: tangent cone, dimension ladder |
 | `j-collapse-3d.html` | sphere/cube collapse: rank, `Ω/4π`, observers at the centre and outside |
+| `fold-closure.html` | the closure law: drag `α`, watch `D_m` appear or the orbit go dense |
+| `the-fold-closure.md` | follow-up note: `closure m = π/α`, the crystallographic restriction |
 
 Open the HTML files directly in a browser — no build step, no dependencies.
 
