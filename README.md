@@ -19,6 +19,8 @@ two folds.
 | `j-collapse-3d.html` | sphere/cube collapse: rank, `Ω/4π`, observers at the centre and outside |
 | `fold-closure.html` | the closure law: drag `α`, watch `D_m` appear or the orbit go dense |
 | `the-fold-closure.md` | follow-up note: `closure m = π/α`, the crystallographic restriction |
+| `horizon-scaling.html` | log–log chart: homothetic family vs fixed-mass collapse |
+| `the-fold-horizon.md` | follow-up note: why the horizon table needs two columns |
 
 Open the HTML files directly in a browser — no build step, no dependencies.
 
@@ -47,7 +49,7 @@ Horizon formation, `k* = 2GM/(c²R)`: Earth `1.4 × 10⁻⁹`, Sun `4.3 × 10⁻
 2. Two regimes — sphere (interior apex) and cone (boundary apex)
 3. The twist — `J² = −I`, and `U(1)/Sym(B)` as the observable quotient
 4. The fold, completed — two folds at `α` give a rotation by `2α`; `(σ₂σ₁)⁴ = I`
-5. The horizon — the boundary case, and why zero is never reached
+5. The horizon — two laws: the homothetic family (`M ∝ k`) and the fixed-mass collapse
 6. Zero as the point — rank drops from `n` to 0 in one step
 7. What an observer can see — dimension fixes the observable
 8. Devices — one bench-top instance per step

@@ -234,25 +234,34 @@ The only set fixed by the entire group is the hinge: a point in the plane, a lin
 A horizon is the boundary case of section 2: the apex sits on the surface, and the surface becomes
 null. It is where the cone reappears.
 
-Under $r \to kr$:
+Under $r \to kr$ the mass scales too, because $r_s = 2GM/c^2$ is a length. That family is a set of
+solutions, not a process: every member has the same compactness, so the horizon is present in all
+of them or in none. A collapse is the opposite --- the mass is held fixed and only $R$ falls. The
+two give different laws and must not be read off one table:
 
 \begin{table}[H]
 \centering
-\begin{tabular}{@{}ll@{}}
+\small
+\begin{tabular}{@{}lcc@{}}
 \toprule
-quantity & scaling \\
+quantity & homothetic family, $M \propto k$ & collapse, $M$ fixed \\
 \midrule
-horizon radius $r_H$ & $\propto k$ \\
-horizon area $A_H$ & $\propto k^2$ \\
-entropy $S = A/4\ell_P^2$ & $\propto k^2$ \\
-temperature $T$ & $\propto 1/k$ \\
-mass $M$ & $\propto k$ \\
+horizon radius $r_H$ & $\propto k$ & $= r_s$, constant \\
+horizon area $A_H$ & $\propto k^2$ & constant \\
+entropy $S = A_H/4\ell_P^2$ & $\propto k^2$ & constant \\
+temperature $T$ & $\propto 1/k$ & constant \\
+mass $M$ & $\propto k$ & constant \\
+body radius $R$ & $\propto k$ & $\propto k$ \\
+compactness $r_H/R$ & constant & $\propto 1/k$ \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-This is thermodynamically consistent: with $S = \alpha M^2$ and $T = \beta/M$, $T\,dS = dM$ holds
-identically, and $S \cdot T \propto k$ is the horizon's energy.
+Only the right-hand column is a process. In the left-hand column $r_H/R$ is a label of the member,
+not a stage, and the first law is exact: with $S = \alpha M^2$ and $T = \beta/M$, $T\,dS = dM$
+holds identically, and $S \cdot T \propto k$ is the horizon's energy. In the right-hand column $M$
+is fixed, so both sides of $T\,dS = dM$ vanish once the horizon exists: the entropy is not
+accumulated during the fall, it appears with the horizon in one step.
 
 The horizon arrives \textbf{before} zero. A body of radius $R$ reaches its own Schwarzschild radius
 at
@@ -276,9 +285,10 @@ Sun & $4.3 \times 10^{-6}$ \\
 Below $k^{*}$ the collapse has left the observable chart. The point remains in the mathematics and
 leaves the physics.
 
-Because $V \propto k^3$ while $A \propto k^2$, the bulk dies faster than its boundary, and
-$V/A \to 0$. That is the quantitative content of the holographic statement: information capacity
-tracks the area, and the area outlives the volume.
+Because $V \propto k^3$ while the horizon area is constant, $V/A_H \propto k^3$ in the collapse,
+and at the moment of formation it is $r_s/3$; in the homothetic family both scale, so the ratio
+falls only as $k$. Either way $V/A \to 0$. That is the quantitative content of the holographic
+statement: information capacity tracks the area, and the area outlives the volume.
 
 \section{Zero as the point}
 

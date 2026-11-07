@@ -188,17 +188,19 @@ The only set fixed by the entire group is the hinge: a point in the plane, a lin
 
 A horizon is the boundary case of section 2: the apex sits on the surface, and the surface becomes null. It is where the cone reappears.
 
-Under `r → kr`:
+Under `r → kr` the mass scales too, because `r_s = 2GM/c²` is a length. That family is a set of solutions, not a process: every member has the same compactness, so the horizon is present in all of them or in none. A collapse is the opposite — the mass is held fixed and only `R` falls. The two give different laws and must not be read off one table:
 
-| quantity | scaling |
-|---|---|
-| horizon radius `r_H` | `∝ k` |
-| horizon area `A_H` | `∝ k²` |
-| entropy `S = A/4ℓ_P²` | `∝ k²` |
-| temperature `T` | `∝ 1/k` |
-| mass `M` | `∝ k` |
+| quantity | homothetic family, `M ∝ k` | collapse, `M` fixed |
+|---|---|---|
+| horizon radius `r_H` | `∝ k` | `= r_s`, constant |
+| horizon area `A_H` | `∝ k²` | constant |
+| entropy `S = A_H/4ℓ_P²` | `∝ k²` | constant |
+| temperature `T` | `∝ 1/k` | constant |
+| mass `M` | `∝ k` | constant |
+| body radius `R` | `∝ k` | `∝ k` |
+| compactness `r_H/R` | constant | `∝ 1/k` |
 
-This is thermodynamically consistent: with `S = αM²` and `T = β/M`, `T dS = dM` holds identically, and `S·T ∝ k` is the horizon's energy.
+Only the right-hand column is a process. In the left-hand column `r_H/R` is a label of the member, not a stage, and the first law is exact: with `S = αM²` and `T = β/M`, `T dS = dM` holds identically, and `S·T ∝ k` is the horizon's energy. In the right-hand column `M` is fixed, so both sides of `T dS = dM` vanish once the horizon exists: the entropy is not accumulated during the fall, it appears with the horizon in one step.
 
 The horizon arrives **before** zero. A body of radius `R` reaches its own Schwarzschild radius at
 
@@ -214,7 +216,7 @@ k* = r_s/R = 2GM/(c²R)
 
 Below `k*` the collapse has left the observable chart. The point remains in the mathematics and leaves the physics.
 
-Because `V ∝ k³` while `A ∝ k²`, the bulk dies faster than its boundary, and `V/A → 0`. That is the quantitative content of the holographic statement: information capacity tracks the area, and the area outlives the volume.
+Because `V ∝ k³` while the horizon area is constant, `V/A_H ∝ k³` in the collapse, and at the moment of formation it is `r_s/3`; in the homothetic family both scale, so the ratio falls only as `k`. Either way `V/A → 0`. That is the quantitative content of the holographic statement: information capacity tracks the area, and the area outlives the volume.
 
 ---
 
