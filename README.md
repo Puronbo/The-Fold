@@ -71,6 +71,15 @@ Range cone (a spherical sector, not a Euclidean cone): `Ω = 2π(1 − cos θ)`,
 antipode, the overlap with which is `max(0, −cos θ)` of the ball (`0.50113` measured at `θ = 120°`
 against `0.5`).
 
+The observer table is that formula at three apertures: `180°` at the centre, `90°` on the surface,
+`arcsin(r/d)` outside. Inverting the paper's `5.060%` gives `d = 2.281 r`, and that one ratio
+reproduces `1.216%` and `0.301%` at `k = 0.5, 0.25`. A cone's fold group is the planes through its
+axis (residual `0.0`), not the point reflection; a turn about that axis is the *identity* on the
+body, so the twist is exact `0.0%` at every angle for a cone as for a sphere — only the cube's
+finite symmetry shows it (`12.3%` at `45°`). Collapsing the family leaves the aperture intact as a
+limit of directions (`59.986°` at `k = 1`, `10⁻³`, `10⁻⁶` alike while the range falls six orders),
+and the cap alone yields `R = √(A_cap/Ω)`, `θ = 2 arcsin √(Ω/4π)` to `10⁻¹⁵`.
+
 ## Structure
 
 0. Summary — the one determinant

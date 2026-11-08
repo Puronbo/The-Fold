@@ -121,6 +121,7 @@ U(1) / Sym(B)
 | body | symmetry | observable twist |
 |---|---|---|
 | sphere | `S¹` — all θ | none: `i = 1` exactly |
+| cone | `O(2)` — all turns about its axis | none, at every aperture |
 | cube | `C₄` = {1, i, −1, −i} | only between the cardinal turns |
 | chiral body | {1} | every angle |
 
@@ -131,7 +132,7 @@ Measured on the rendered model (silhouette change under θ):
 | sphere | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
 | cube | 0.0% | 1.4% | **12.3%** | 0.0% | 0.0% | 0.0% |
 
-The peak at 45° is the antipode of the fundamental domain: it is the point furthest from any symmetry.
+The peak at 45° is the antipode of the fundamental domain: it is the point furthest from any symmetry. The cone sits with the sphere for a stronger reason: a turn about its axis is the *identity* on the body, so the twist needs a body with finite symmetry to be seen at all.
 
 ### Orientation
 
@@ -290,7 +291,7 @@ The interior view is constant because a homothety is **conformal**: it preserves
 
 That is the sphere's case, where the rim is at `90°` in every direction. A body whose range is a cone — apex at the centre, rim at the range, aperture `θ` — covers only `Ω/4π = sin²(θ/2)`, and the fraction is again independent of `k`: the same conformity, now with a rim. The sphere is the member with `θ = 180°`; it is also the only member the fold fixes, since `k = −1` carries every proper cone to its antipode — same aperture, opposite sky.
 
-At `k = 0` all three views coincide: the point, the shell, and the observer are the same place.
+Read backwards the same formula generates the three rows above — `180°` at the centre, `90°` on the surface, `arcsin(r/d)` outside — so `5.060%` is exactly `d = 2.281 r`. At `k = 0` all three views coincide: the point, the shell, and the observer are the same place.
 
 ---
 
