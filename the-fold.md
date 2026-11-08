@@ -180,6 +180,14 @@ m_k(P) = ½(P + g_k P) = g_((1+k)/2)(P),      det m_k = ((1+k)/2)ⁿ
 
 The midpoint map is itself a homothety about the same datum, and its determinant vanishes at `k = −1` and nowhere else, in every dimension. So of the whole family exactly one member puts every midpoint on the datum, and that member is the point reflection. For an honest fold `σ_H` the midpoint map is `P ↦ ½(P + σ_H P) = π_H`, the orthogonal projection onto the crease: rank `n − 1`, not rank `0`. The crease is therefore the fixed set of the midpoint map, and the datum is the crease of zero dimension. Two other members are worth naming: `k = ½` makes the image the midpoint of datum and point, and `k = 2` makes the point the midpoint of datum and image — the reciprocal pair, in which the halving is applied at either end of the same segment.
 
+Any division point obeys the same law. At fraction `t` of the way from `P` to `g_kP`,
+
+```
+q_t(P) = (1 − t + tk)·P
+```
+
+again a homothety, now collapsing at `k = (t − 1)/t`. Every `k ≠ 1` is therefore owned by exactly one division point, `t = 1/(1−k)`, and `t ↔ 1−t` pairs `k` with `1/k`; the midpoint is the self-paired case. The quarter point owns `k = −3`, and there `m_−3 = g_−1` — the fold itself.
+
 **Completion.** The fold group closes when the creases have swept the full angle:
 
 ```

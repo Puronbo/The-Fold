@@ -23,6 +23,8 @@ two folds.
 | `the-fold-horizon.md` | follow-up note: why the horizon table needs two columns |
 | `fold-midpoint.html` | the midpoint map: `m_k = g_((1+k)/2)`, constant at `k = −1` |
 | `the-fold-midpoint.md` | follow-up note: the crease is the midpoint locus |
+| `fold-division.html` | every division point's own collapse value, `k_t = (t−1)/t` |
+| `the-fold-division.md` | follow-up note: division points, two evolutions, the group law |
 
 Open the HTML files directly in a browser — no build step, no dependencies.
 
@@ -47,6 +49,11 @@ Horizon formation, `k* = 2GM/(c²R)`: Earth `1.4 × 10⁻⁹`, Sun `4.3 × 10⁻
 The midpoint map: `m_k(P) = ½(P + g_k P) = g_((1+k)/2)(P)` to `4.6 × 10⁻¹⁶`, with
 `det m_k = ((1+k)/2)ⁿ` exact and rank 0 only at `k = −1`. For a fold `σ_H`, `½(I + σ_H)` is the
 projection onto the crease (rank `n − 1`): the midpoint set lies in `H` to `2.2 × 10⁻¹⁶`.
+
+Division points: `q_t = (1 − t + tk)P`, collapsing at `k_t = (t − 1)/t` — ¼ ↦ −3, ⅓ ↦ −2, ½ ↦ −1,
+2 ↦ ½. Every `k ≠ 1` is owned by exactly one `t = 1/(1−k)` (round trip `1.8 × 10⁻¹⁵`), and
+`t ↔ 1−t` pairs `k` with `1/k` to `2.2 × 10⁻¹⁶`. Map iteration is `m^n = g_(f^n)` exactly; repeated
+bisection is `f_n = 1 + (k − 1)/2ⁿ`, converging to the identity for every `k`.
 
 ## Structure
 
