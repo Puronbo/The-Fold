@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>The range cone — apex at the centre, rim at the range</title>
+<style>
+  :root {
+    --bg: #0d1117;
+    --panel: #161b22;
+    --line: #30363d;
+    --text: #e6edf3;
+    --dim: #8b949e;
+    --accent: #58a6ff;
+    --warm: #f0883e;
+    --cool: #3fb950;
+    --violet: #bc8cff;
+    --red: #f85149;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font: 14px/1.5 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    display: flex;
+    min-height: 100vh;
+  }
+  #stage { flex: 1; min-width: 0; display: flex; align-items: center; justify-content: center; padding: 20px; }
+  canvas {
+    border-radius: 12px; background: #0a0e14; box-shadow: 0 0 0 1px var(--line);
+    width: min(760px, 100%); height: auto; cursor: grab;
+  }
+  canvas:active { cursor: grabbing; }
+  @media (max-width: 1140px) {
+    body { flex-direction: column; }
+    aside { width: 100%; border-left: none; border-top: 1px solid var(--line); }
+  }
+  aside {
+    width: 396px;
+    background: var(--panel);
+    border-left: 1px solid var(--line);
+    padding: 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    overflow-y: auto;
+    max-height: 100vh;
+  }
+  h1 { font-size: 15px; margin: 0; letter-spacing: .3px; }
+  .sub { color: var(--dim); font-size: 12px; margin: -4px 0 0; }
+  label { display: block; font-size: 12px; color: var(--dim); margin-bottom: 4px; }
+  .row { display: flex; align-items: center; gap: 10px; }
+  input[type=range] { flex: 1; accent-color: var(--accent); }
+  .val { font-variant-numeric: tabular-nums; min-width: 62px; text-align: right; color: var(--text); font-size: 13px; }
+  .btns { display: flex; flex-wrap: wrap; gap: 6px; }
+  button {
+    background: #21262d; color: var(--text); border: 1px solid var(--line);
+    border-radius: 7px; padding: 6px 10px; font-size: 12px; cursor: pointer;
+  }
+  button:hover { border-color: var(--accent); color: var(--accent); }
+  button.on { border-color: var(--accent); color: var(--accent); }
+  table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+  td { padding: 5px 0; border-bottom: 1px solid var(--line); font-size: 12.5px; }
+  td:last-child { text-align: right; }
+  .k { color: var(--dim); }
+  .hint { color: var(--dim); font-size: 12px; border-top: 1px solid var(--line); padding-top: 10px; margin: 0; }
+  code { background: #0a0e14; padding: 1px 5px; border-radius: 4px; font-size: 12px; }
+  .ok { color: var(--cool); }
+  .warn { color: var(--warm); }
+</style>
+</head>
+<body>
+  <div id="stage"><canvas id="c" width="760" height="620"></canvas></div>
+  <aside>
+    <h1>The range cone</h1>
+    <p class="sub">apex at the centre, rim at the range: a spherical sector</p>
+
+    <div>
+      <label>θ — aperture (half-angle at the apex)</label>
+      <div class="row">
+        <input id="t" type="range" min="5" max="180" step="1" value="60" />
+        <span class="val" id="tVal">60°</span>
+      </div>
+    </div>
+
+    <div class="btns">
+      <button data-t="30">30°</button>
+      <button data-t="60">60°</button>
+      <button data-t="90">90°</button>
+      <button data-t="180">180° · sphere</button>
+    </div>
+
+    <div>
+      <label>k — range multiplier, R = k·R₀</label>
+      <div class="row">
+        <input id="k" type="range" min="-2" max="2" step="0.02" value="1" />
+        <span class="val" id="kVal">1.00</span>
+      </div>
+    </div>
+
+    <div class="btns">
+      <button id="flip">fold · k = −1</button>
+      <button id="sweep">sweep k</button>
+      <button id="reset">reset</button>
+    </div>
+
+    <table>
+      <tr><td class="k">range R</td><td id="R">—</td></tr>
+      <tr><td class="k">rim radius a = R sin θ</td><td id="a">—</td></tr>
+      <tr><td class="k">cap height R(1 − cos θ)</td><td id="cap">—</td></tr>
+      <tr><td class="k">solid angle Ω = 2π(1 − cos θ)</td><td id="om">—</td></tr>
+      <tr><td class="k">Ω / 4π = sin²(θ/2)</td><td id="frac">—</td></tr>
+      <tr><td class="k">volume V = (R³/3)Ω</td><td id="V">—</td></tr>
+      <tr><td class="k">area A = R²(Ω + π sin θ)</td><td id="A">—</td></tr>
+      <tr><td class="k">V / A</td><td id="VA">—</td></tr>
+      <tr><td class="k">fixed by the fold?</td><td id="fix">—</td></tr>
+    </table>
+
+    <p class="hint">
+      The apex is the datum and the rim is the range, so the body is the set of directions within
+      <code>θ</code> reached out to <code>R</code>. Its shape is the aperture; its size is the range.
+      Scaling <code>k</code> moves only the second: <code>Ω</code> is invariant, <code>V ∝ k³</code>,
+      <code>A ∝ k²</code>, <code>V/A ∝ k</code>. The fold sends the cone to its antipode — same
+      aperture, opposite direction — and fixes it only at <code>θ = 180°</code>, where the body is a
+      ball and there is no direction left to flip.
+    </p>
+  </aside>
+
+<script>
+  const C = document.getElementById('c');
+  const ctx = C.getContext('2d');
+  const W = 760, H = 620;
+  const CX = 380, CY = 300, S = 165;
+  const R0 = 1;
+
+  let theta = 60 * Math.PI / 180;
+  let k = 1;
+  let yaw = 0.55, pitch = 1.30;
+  let anim = null;
+
+  const proj = (p) => {
+    const cy = Math.cos(yaw), sy = Math.sin(yaw);
+    const x1 = p[0]*cy - p[1]*sy;
+    const y1 = p[0]*sy + p[1]*cy;
+    const cp = Math.cos(pitch), sp = Math.sin(pitch);
+    const y2 = y1*cp + p[2]*sp;
+    const z2 = p[2]*cp - y1*sp;
+    return [CX + x1*S, CY - y2*S, z2];
+  };
+
+  const path = (pts, close) => {
+    ctx.beginPath();
+    pts.forEach((p, i) => { const q = proj(p); i ? ctx.lineTo(q[0], q[1]) : ctx.moveTo(q[0], q[1]); });
+    if (close) ctx.closePath();
+  };
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+
+    const R = Math.abs(k) * R0;
+    const s = k < 0 ? -1 : 1;
+    const c = Math.cos(theta), sn = Math.sin(theta);
+    const rimR = R * sn, rimZ = R * c * s;
+    const pole = [0, 0, R * s];
+
+    const rim = [];
+    for (let i = 0; i < 96; i++) {
+      const ph = i / 96 * Math.PI * 2;
+      rim.push([rimR*Math.cos(ph), rimR*Math.sin(ph), rimZ]);
+    }
+
+    // "range" sphere, faint
+    ctx.strokeStyle = 'rgba(139,148,158,.12)';
+    ctx.lineWidth = 1;
+    for (const [a1, a2] of [[1,0],[0,1],[0.7071,0.7071]]) {
+      ctx.beginPath();
+      for (let i = 0; i <= 120; i++) {
+        const ph = i/120*Math.PI*2;
+        const p = [R*Math.cos(ph)*a1, R*Math.cos(ph)*a2, R*Math.sin(ph)];
+        const q = proj(p);
+        i ? ctx.lineTo(q[0], q[1]) : ctx.moveTo(q[0], q[1]);
+      }
+      ctx.stroke();
+    }
+
+    // lateral surface: apex + rim
+    for (let i = 0; i < rim.length; i++) {
+      const p1 = rim[i], p2 = rim[(i+1) % rim.length];
+      path([[0,0,0], p1, p2], true);
+      ctx.fillStyle = 'rgba(188,140,255,.055)';
+      ctx.fill();
+    }
+    // rim circle
+    path(rim, true);
+    ctx.strokeStyle = 'rgba(240,136,62,.85)'; ctx.lineWidth = 1.8; ctx.stroke();
+
+    // generators: apex to rim, so the surface reads as a cone
+    ctx.strokeStyle = 'rgba(188,140,255,.14)';
+    ctx.lineWidth = 1;
+    for (let i = 0; i < rim.length; i += 2) {
+      const q0 = proj([0,0,0]), q1 = proj(rim[i]);
+      ctx.beginPath(); ctx.moveTo(q0[0], q0[1]); ctx.lineTo(q1[0], q1[1]); ctx.stroke();
+    }
+
+    // spherical cap: pole + rim
+    for (let i = 0; i < rim.length; i++) {
+      const p1 = rim[i], p2 = rim[(i+1) % rim.length];
+      path([pole, p1, p2], true);
+      ctx.fillStyle = 'rgba(88,166,255,.075)';
+      ctx.fill();
+    }
+    // cap meridians
+    ctx.strokeStyle = 'rgba(88,166,255,.20)';
+    ctx.lineWidth = 1;
+    for (let m = 0; m < 12; m++) {
+      const ph = m/12*Math.PI*2;
+      ctx.beginPath();
+      for (let i = 0; i <= 24; i++) {
+        const a = theta * i/24;
+        const p = [R*Math.sin(a)*Math.cos(ph), R*Math.sin(a)*Math.sin(ph), R*Math.cos(a)*s];
+        const q = proj(p);
+        i ? ctx.lineTo(q[0], q[1]) : ctx.moveTo(q[0], q[1]);
+      }
+      ctx.stroke();
+    }
+
+    // axis
+    const a0 = proj([0,0,0]), a1 = proj(pole);
+    ctx.beginPath();
+    ctx.moveTo(a0[0], a0[1]); ctx.lineTo(a1[0], a1[1]);
+    ctx.setLineDash([5,5]); ctx.strokeStyle = 'rgba(139,148,158,.45)'; ctx.stroke();
+    ctx.setLineDash([]);
+
+    // apex
+    ctx.beginPath(); ctx.arc(a0[0], a0[1], 5, 0, Math.PI*2);
+    ctx.fillStyle = '#f0883e'; ctx.fill();
+    ctx.beginPath(); ctx.arc(a0[0], a0[1], 11, 0, Math.PI*2);
+    ctx.strokeStyle = 'rgba(240,136,62,.45)'; ctx.lineWidth = 1.3; ctx.stroke();
+    ctx.font = '12px ui-monospace, monospace';
+    ctx.fillStyle = 'rgba(240,136,62,.95)';
+    ctx.fillText('P₀', a0[0] + 15, a0[1] - 10);
+
+    // labels
+    ctx.font = '12px ui-monospace, monospace';
+    ctx.fillStyle = 'rgba(139,148,158,.9)';
+    ctx.fillText('apex = centre · rim = range', 22, 30);
+    ctx.fillText('drag to orbit', W - 128, H - 18);
+
+    if (theta > Math.PI - 1e-6) {
+      ctx.fillStyle = 'rgba(63,185,150,.95)';
+      ctx.fillText('θ = 180°: the sector is a ball, and the fold fixes it', 22, H - 18);
+    }
+
+    report(R, rimR);
+  }
+
+  function report(R, rimR) {
+    const set = (id, v, cls) => {
+      const e = document.getElementById(id);
+      e.textContent = v; e.className = cls || '';
+    };
+    const Om = 2*Math.PI*(1 - Math.cos(theta));
+    const V = Math.pow(R,3)/3 * Om;
+    const A = R*R*(Om + Math.PI*Math.sin(theta));
+
+    document.getElementById('tVal').textContent = Math.round(theta*180/Math.PI) + '°';
+    document.getElementById('kVal').textContent = k.toFixed(2);
+
+    set('R', R.toFixed(3) + ' R₀');
+    set('a', rimR.toFixed(3) + ' R₀');
+    set('cap', (R*(1-Math.cos(theta))).toFixed(3) + ' R₀');
+    set('om', Om.toFixed(4) + ' sr');
+    set('frac', (Om/(4*Math.PI)).toFixed(4));
+    set('V', V.toFixed(4) + ' R₀³');
+    set('A', A.toFixed(4) + ' R₀²');
+    set('VA', (V/A).toFixed(4) + ' R₀');
+    set('fix', theta > Math.PI - 1e-6 ? 'yes — it is a ball' : 'no — it turns to its antipode',
+        theta > Math.PI - 1e-6 ? 'ok' : 'warn');
+  }
+
+  // controls
+  document.getElementById('t').addEventListener('input', e => {
+    cancelAnimationFrame(anim);
+    theta = parseFloat(e.target.value) * Math.PI/180;
+    draw();
+  });
+  document.getElementById('k').addEventListener('input', e => {
+    cancelAnimationFrame(anim);
+    k = parseFloat(e.target.value);
+    draw();
+  });
+  document.querySelectorAll('button[data-t]').forEach(b => {
+    b.addEventListener('click', () => {
+      cancelAnimationFrame(anim);
+      theta = parseFloat(b.dataset.t) * Math.PI/180;
+      document.getElementById('t').value = b.dataset.t;
+      draw();
+    });
+  });
+  document.getElementById('flip').addEventListener('click', () => {
+    cancelAnimationFrame(anim);
+    k = k < 0 ? 1 : -1;
+    document.getElementById('k').value = k;
+    draw();
+  });
+  document.getElementById('sweep').addEventListener('click', () => {
+    cancelAnimationFrame(anim);
+    const t0 = performance.now(), from = 2, to = 0.3;
+    const step = (now) => {
+      const u = Math.min(1, (now - t0)/2200);
+      k = from + (to - from)*u;
+      document.getElementById('k').value = k;
+      draw();
+      if (u < 1) anim = requestAnimationFrame(step);
+    };
+    anim = requestAnimationFrame(step);
+  });
+  document.getElementById('reset').addEventListener('click', () => {
+    cancelAnimationFrame(anim);
+    theta = Math.PI/3; k = 1; yaw = 0.55; pitch = 1.30;
+    document.getElementById('t').value = 60;
+    document.getElementById('k').value = 1;
+    draw();
+  });
+
+  // orbit
+  let drag = null;
+  C.addEventListener('pointerdown', e => {
+    drag = { x: e.clientX, y: e.clientY, yaw, pitch };
+    C.setPointerCapture(e.pointerId);
+  });
+  C.addEventListener('pointermove', e => {
+    if (!drag) return;
+    yaw = drag.yaw + (e.clientX - drag.x) * 0.008;
+    pitch = Math.max(1.0, Math.min(1.52, drag.pitch - (e.clientY - drag.y) * 0.006));
+    draw();
+  });
+  C.addEventListener('pointerup', () => { drag = null; });
+
+  const qs = new URLSearchParams(location.search);
+  if (qs.has('t')) { const v = parseFloat(qs.get('t')); if (isFinite(v)) theta = Math.max(5, Math.min(180, v))*Math.PI/180; }
+  if (qs.has('k')) { const v = parseFloat(qs.get('k')); if (isFinite(v)) k = Math.max(-2, Math.min(2, v)); }
+  document.getElementById('t').value = Math.round(theta*180/Math.PI);
+  document.getElementById('k').value = k;
+  draw();
+</script>
+</body>
+</html>

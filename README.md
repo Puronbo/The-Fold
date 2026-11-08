@@ -27,6 +27,8 @@ two folds.
 | `the-fold-division.md` | follow-up note: division points, two evolutions, the group law |
 | `fold-invariants.html` | live audit: what scaling keeps, what folding keeps, side by side |
 | `the-fold-invariants.md` | follow-up note: orbit spaces, invariant rings, `k = −1` as the meeting point |
+| `cone-range-3d.html` | 3D range cone: apex at the centre, rim at the range, `θ` and `k` sliders |
+| `the-fold-cone.md` | follow-up note: the range cone, its three formulas, and the fold's antipode |
 
 Open the HTML files directly in a browser — no build step, no dependencies.
 
@@ -61,6 +63,13 @@ Invariants: a scaling changes every distance by `|k|` (relative `0.850` at `k = 
 direction at `0°`; a fold holds distances at `0`, radius at `2.2 × 10⁻¹⁶`, and moves direction by
 `87°`. `k = −1` is both — an isometry that reverses direction by `180°`. The cross-ratio of four
 division points is `t(1−s)/(s(1−t))`, independent of `k` to `4.4 × 10⁻¹⁶`.
+
+Range cone (a spherical sector, not a Euclidean cone): `Ω = 2π(1 − cos θ)`, `V = (R³/3)Ω`,
+`A = R²(Ω + π sin θ)`. At `θ = 60°` and `R = 1`: `Ω = 3.1416`, `V = 1.0472`, `A = 5.8623`,
+`V/A = 0.1786`, and `(V/A)/k = 0.17863` constant across `k`. `Ω` agrees with Monte Carlo to
+`3.5 × 10⁻³` or better. The fold fixes the sector only at `θ = 180°`; otherwise it sends it to its
+antipode, the overlap with which is `max(0, −cos θ)` of the ball (`0.50113` measured at `θ = 120°`
+against `0.5`).
 
 ## Structure
 
