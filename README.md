@@ -25,6 +25,8 @@ two folds.
 | `the-fold-midpoint.md` | follow-up note: the crease is the midpoint locus |
 | `fold-division.html` | every division point's own collapse value, `k_t = (t−1)/t` |
 | `the-fold-division.md` | follow-up note: division points, two evolutions, the group law |
+| `fold-invariants.html` | live audit: what scaling keeps, what folding keeps, side by side |
+| `the-fold-invariants.md` | follow-up note: orbit spaces, invariant rings, `k = −1` as the meeting point |
 
 Open the HTML files directly in a browser — no build step, no dependencies.
 
@@ -54,6 +56,11 @@ Division points: `q_t = (1 − t + tk)P`, collapsing at `k_t = (t − 1)/t` — 
 2 ↦ ½. Every `k ≠ 1` is owned by exactly one `t = 1/(1−k)` (round trip `1.8 × 10⁻¹⁵`), and
 `t ↔ 1−t` pairs `k` with `1/k` to `2.2 × 10⁻¹⁶`. Map iteration is `m^n = g_(f^n)` exactly; repeated
 bisection is `f_n = 1 + (k − 1)/2ⁿ`, converging to the identity for every `k`.
+
+Invariants: a scaling changes every distance by `|k|` (relative `0.850` at `k = 1.85`) and holds
+direction at `0°`; a fold holds distances at `0`, radius at `2.2 × 10⁻¹⁶`, and moves direction by
+`87°`. `k = −1` is both — an isometry that reverses direction by `180°`. The cross-ratio of four
+division points is `t(1−s)/(s(1−t))`, independent of `k` to `4.4 × 10⁻¹⁶`.
 
 ## Structure
 

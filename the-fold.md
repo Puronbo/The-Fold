@@ -252,6 +252,8 @@ V ∝ k³        A ∝ k²        h ∝ k        point = k⁰
 
 These are four measurements of the same family, not four consecutive states. At `k = 0` the rank drops from `n` to 0 in one step; the body never passes through a sheet or a line.
 
+Seen through invariants the same statement has a sharper form. Scaling keeps direction and the cross-ratio and destroys length; folding keeps length and angle and destroys direction; the two groups meet only in `{I, −I}`, and `k = −1` is the one scaling that is also an isometry. Allow both and the action on `ℝⁿ ∖ {P₀}` is transitive: the invariant ring is the constants. That is the precise sense in which the point is what is left when everything is allowed.
+
 ---
 
 ## 7. What an observer can see
