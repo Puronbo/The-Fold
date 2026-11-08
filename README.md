@@ -21,6 +21,8 @@ two folds.
 | `the-fold-closure.md` | follow-up note: `closure m = π/α`, the crystallographic restriction |
 | `horizon-scaling.html` | log–log chart: homothetic family vs fixed-mass collapse |
 | `the-fold-horizon.md` | follow-up note: why the horizon table needs two columns |
+| `fold-midpoint.html` | the midpoint map: `m_k = g_((1+k)/2)`, constant at `k = −1` |
+| `the-fold-midpoint.md` | follow-up note: the crease is the midpoint locus |
 
 Open the HTML files directly in a browser — no build step, no dependencies.
 
@@ -41,6 +43,10 @@ Solid angle seen by an exterior point, `Ω/4π`: 5.060% at `k = 1`, 1.216% at `k
 
 Horizon formation, `k* = 2GM/(c²R)`: Earth `1.4 × 10⁻⁹`, Sun `4.3 × 10⁻⁶`, a 70 kg sphere of water
 `4 × 10⁻²⁵`.
+
+The midpoint map: `m_k(P) = ½(P + g_k P) = g_((1+k)/2)(P)` to `4.6 × 10⁻¹⁶`, with
+`det m_k = ((1+k)/2)ⁿ` exact and rank 0 only at `k = −1`. For a fold `σ_H`, `½(I + σ_H)` is the
+projection onto the crease (rank `n − 1`): the midpoint set lies in `H` to `2.2 × 10⁻¹⁶`.
 
 ## Structure
 

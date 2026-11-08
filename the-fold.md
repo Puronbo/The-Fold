@@ -172,6 +172,14 @@ Orientation is the parity of the fold count. This is why a twist and a fold cann
 
 **The degeneration.** Send the two creases together and their intersection collapses to a point. The fold then has no crease left, and what remains is `k = −1`: a point reflection. That is the precise content of "the datum becomes the hinge of the fold" — the crease has shrunk into the datum, and the fold has become the point reflection.
 
+**The crease is the midpoint locus.** Halve the segment from a point to its image. If `g_k(P) = P₀ + k(P − P₀)` then
+
+```
+m_k(P) = ½(P + g_k P) = g_((1+k)/2)(P),      det m_k = ((1+k)/2)ⁿ
+```
+
+The midpoint map is itself a homothety about the same datum, and its determinant vanishes at `k = −1` and nowhere else, in every dimension. So of the whole family exactly one member puts every midpoint on the datum, and that member is the point reflection. For an honest fold `σ_H` the midpoint map is `P ↦ ½(P + σ_H P) = π_H`, the orthogonal projection onto the crease: rank `n − 1`, not rank `0`. The crease is therefore the fixed set of the midpoint map, and the datum is the crease of zero dimension. Two other members are worth naming: `k = ½` makes the image the midpoint of datum and point, and `k = 2` makes the point the midpoint of datum and image — the reciprocal pair, in which the halving is applied at either end of the same segment.
+
 **Completion.** The fold group closes when the creases have swept the full angle:
 
 ```

@@ -218,6 +218,22 @@ point. The fold then has no crease left, and what remains is $k = -1$: a point r
 the precise content of ``the datum becomes the hinge of the fold'' --- the crease has shrunk into
 the datum, and the fold has become the point reflection.
 
+\textbf{The crease is the midpoint locus.} Halve the segment from a point to its image. If
+$g_k(P) = P_0 + k(P - P_0)$ then
+\begin{equation}
+m_k(P) = \tfrac{1}{2}\bigl(P + g_k P\bigr) = g_{(1+k)/2}(P),
+\qquad
+\det m_k = \left(\frac{1+k}{2}\right)^{n}.
+\end{equation}
+The midpoint map is itself a homothety about the same datum, and its determinant vanishes at
+$k = -1$ and nowhere else, in every dimension. So of the whole family exactly one member puts every
+midpoint on the datum, and that member is the point reflection. For an honest fold $\sigma_H$ the
+midpoint map is $P \mapsto \tfrac{1}{2}(P + \sigma_H P) = \pi_H$, the orthogonal projection onto the
+crease: rank $n - 1$, not rank $0$. The crease is therefore the fixed set of the midpoint map, and
+the datum is the crease of zero dimension. Two other members are worth naming: $k = \tfrac{1}{2}$
+makes the image the midpoint of datum and point, and $k = 2$ makes the point the midpoint of datum
+and image --- the reciprocal pair, in which the halving is applied at either end of the same segment.
+
 \textbf{Completion.} The fold group closes when the creases have swept the full angle:
 \begin{equation}
 (\sigma_2\sigma_1)^4 = I \qquad \text{for } \alpha = 45^\circ.
