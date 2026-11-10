@@ -190,6 +190,9 @@ unique identity; the zeros there are distinct — `k_t = 1 − 1/t` — but they
 not distinct split points. The two ledgers meet at `k = −1`, the point reflection whose fixed set
 shrinks to the datum; there the fold's zero becomes the scale's zero.
 
+Read as a facet, the crease is the zero of the supporting functional `f(P) = (P−P_H)·n`: codimension
+one, a face of the body. The scale's zero is a vertex, not a facet. See `the-fold-facets.md`.
+
 Read as a view, the same normal is the occlusion. The two sides are `f > 0` and `f < 0`; the crease
 is `f = 0`, where the surface is edge-on. A metric is quadratic and even in `f`, so it cannot tell the
 sides apart; only the linear coordinate `f` knows both. The back is not a region behind the surface;

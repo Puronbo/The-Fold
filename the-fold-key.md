@@ -318,6 +318,13 @@ equation pairs `ρ` with `1−ρ`, reality pairs it with `ρ̄`, and the composi
 pair can still sit off the crease. The primes are the multiplicative generators; the zeros are the
 additive frequencies; the explicit formula is the exchange. See `the-fold-zeta.md`.
 
+## Zeros as facets
+
+A facet is a zero of a supporting functional, codimension one. The fold's crease is a facet; the
+scale's zero is a vertex, codimension `n`; a zeta zero is a point, codimension `2`, a facet only of the
+critical line. The two ledgers say it plainly: fold zeros are facets, scale zeros are vertices. See
+`the-fold-facets.md`.
+
 ## Key by question
 
 | question | answer | source |
@@ -347,6 +354,8 @@ additive frequencies; the explicit formula is the exchange. See `the-fold-zeta.m
 | Is RH a change of scale? | the term `n^{-s}` is a scale+twist at height `ln n`; RH is the zeros lying on the crease, not a scale change | zeta |
 | Are the primes an illusion? | no; primes are the multiplicative generators, zeros the additive frequencies; the explicit formula is a duality | zeta |
 | Does the Fold prove RH? | no; the fold gives the crease and pairs the zeros, but does not force them onto it | zeta |
+| When is a zero a facet? | when it is codimension 1: a crease; a scale zero is a vertex, a zeta zero is a point | facets |
+| Are the zeta zeros facets? | in the plane they are points; on the critical line they are facets of the line | facets, zeta |
 | Why is a twist two folds? | `σ_{H₂} ∘ σ_{H₁} = R(2α)` | §4 |
 | Why does the twist repeat? | closure `m = π/α` | closure |
 | Why only 2-, 3-, 4-, 6-fold in a lattice? | `2 cos(2π/n)` must be an integer | closure |
@@ -398,6 +407,7 @@ No new measurements. These are the existing checks the key rests on:
 | the signature of nothing | `the-fold-signature.md` |
 | the occlusion and the back | `the-fold-occlusion.md` |
 | the critical line and the zeta zeros | `the-fold-zeta.md` |
+| which zeros are facets | `the-fold-facets.md` |
 
 ## The key in one sentence
 

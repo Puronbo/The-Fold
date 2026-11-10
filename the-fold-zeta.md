@@ -84,6 +84,8 @@ In the coordinate `s = 1/2 + z`, this is `z ↦ −z̄`: a reflection with creas
 `Re s = 1/2`. It is an involution, it reverses orientation, and it fixes the critical line pointwise —
 a fold in the exact sense of `σ_H`. The midpoint of `s` and `R(s)` is `1/2 + i Im s`, on the crease;
 the projection `π_H = ½(I + R)` is the critical-line projection, the same midpoint map as the Fold's.
+In the language of facets, the critical line is the facet and the zeros are points on it; relative to
+the line, each zero is a facet of the line. See `the-fold-facets.md`.
 
 The consequences are exact:
 

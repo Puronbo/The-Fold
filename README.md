@@ -38,6 +38,11 @@ the twist. See `the-fold-occlusion.md`.
 critical line is its crease. RH says the zeros lie on the crease — an exact reformulation, not a
 proof. The primes and the zeros are dual, not illusion. See `the-fold-zeta.md`.
 
+**Facets:** a facet is a zero of a supporting functional — codimension one. The fold's crease is a
+facet; the scale's zero is a vertex; a zeta zero is a point on the critical-line facet, a facet only of
+the line. The phrase "zeros as facets" is the fold ledger's sentence, not the scale's. See
+`the-fold-facets.md`.
+
 **Reading paths:**
 
 | if you want | read |
@@ -49,6 +54,7 @@ proof. The primes and the zeros are dual, not illusion. See `the-fold-zeta.md`.
 | the signature of nothing and the fold's split | `the-fold-signature.md` |
 | why the back cannot be seen | `the-fold-occlusion.md` |
 | the critical line as a crease | `the-fold-zeta.md` |
+| which zeros are facets | `the-fold-facets.md` |
 | the interactive models | the nine HTML files |
 
 ## Contents
@@ -79,6 +85,7 @@ proof. The primes and the zeros are dual, not illusion. See `the-fold-zeta.md`.
 | `the-fold-signature.md` | follow-up note: the signature of zero — inertia, the forced degeneracy, the fold's split, and the ladder by stage |
 | `the-fold-occlusion.md` | follow-up note: the back is not a place — side versus axis, the crease, and why the twist is not the ratchet |
 | `the-fold-zeta.md` | follow-up note: the critical line as a crease — the Dirichlet term as `k`, the functional equation as a fold, and RH as a location |
+| `the-fold-facets.md` | follow-up note: zeros as facets — codimension one versus vertex versus point, and the critical line as the facet |
 
 Open the HTML files directly in a browser — no build step, no dependencies.
 
