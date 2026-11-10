@@ -168,16 +168,16 @@ and the useful body is the one with the cube's discrete symmetry.
 ### 4. The collapse kills the range and keeps the aperture
 
 `C_k = k·C` for `k > 0`, so the set of *directions* of `C_k` is the same set for every `k ≠ 0`.
-Measured over 2 × 10⁵ sampled points:
+Measured over 5 × 10⁵ sampled points:
 
 | `k` | max range | max angle from the axis |
 |---|---|---|
-| 1 | 1.00 | 59.986° |
-| 10⁻³ | 9.99 × 10⁻⁴ | 59.986° |
-| 10⁻⁶ | 9.99 × 10⁻⁷ | 59.986° |
+| 1 | 1.000 | 60.0000° |
+| 10⁻³ | 1.000 × 10⁻³ | 60.0000° |
+| 10⁻⁶ | 1.000 × 10⁻⁶ | 60.0000° |
 
-Six orders of magnitude of size, and the aperture does not move (the `59.986°` against `60°` is the
-sampling floor, not drift). So at `k = 0` the range is gone and the aperture is not — but it is not
+Six orders of magnitude of size, and the aperture does not move to four decimals. So at `k = 0` the
+range is gone and the aperture is not — but it is not
 a subset of the point either: the point has no directions. It survives as a **limit of directions**,
 which is why section 6 can say "no tangent space" and still be precise. The point has no tangent
 space; the *family* has a tangent cone, and that cone is the aperture. Shape outlives size, all the
@@ -196,6 +196,39 @@ Exact to rounding in every case tried (`R = 1, θ = 60°` → `R = 1.00000000000
 `R = 0.4, θ = 150°` → `0.400000000000000`). The lateral surface `πR² sin θ` adds nothing: it is
 fixed once `(R, θ)` are. This is the holographic statement with no analogy left in it — the cap is
 not a stand-in for the bulk, it is a complete set of coordinates for it.
+
+### 6. The vertex is 0-dimensional, and it is the centre
+
+The centre of the sector is its apex, and the apex is a point — not a small ball. Three checks on
+`θ = 60°`, `R = 1`:
+
+**It is the only point the family leaves alone.** `g_k(P₀) = P₀` for every `k`, real or imaginary,
+to `0.0`. Every other point moves by `|k − 1|·|P − P₀|`; the closest non-centre test point moved
+`0.406`.
+
+**Every measure of it is zero.** A ball of radius `ε` about the vertex holds `ε³` of the sector's
+volume — `10⁻⁹` of it at `ε = 10⁻³` — and `1.7 × 10⁻⁷` of its area. The centre survives in every
+dimension and occupies nothing in any of them.
+
+**It is not a point of the surface.** Solid angle seen from a point, as `ε` shrinks (2 × 10⁶
+directions):
+
+| `ε` | interior point | smooth point of the cap | vertex |
+|---|---|---|---|
+| 5 × 10⁻² | 1.0000 | 0.4880 | 0.2503 |
+| 10⁻² | 1.0000 | 0.4975 | 0.2502 |
+| 2 × 10⁻³ | 1.0000 | 0.4994 | 0.2501 |
+
+A smooth point of the surface becomes a half-space, `0.5 = 2π/4π`. The vertex stays at
+`Ω/4π = 0.25` however far in you zoom, because the limit is a *cone*, not a plane. So the tangent
+space at the vertex does not exist — not because the limit is hard to take, but because the limit is
+the aperture.
+
+That is what "a 0-dimensional point at the vertex is the centre" means precisely: zero of every
+measure, all of the direction. And it explains why the collapse can lose the range and keep the
+aperture: the aperture was never a property of the bulk. It is a property of the vertex's
+neighbourhood, and the vertex is the centre before, during and after the collapse. Only the body
+around it changes.
 
 ### What this changes in the paper
 

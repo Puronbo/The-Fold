@@ -8,7 +8,7 @@ The midpoint is the case `t = ½`. Let `t` be any fraction of the way from `P` t
 q_t(P) = (1 − t)P + t·g_k(P) = φP,     φ = 1 − t + tk = 1 + t(k − 1)
 ```
 
-Again a homothety about the same datum, with `det q_t = φ²`. Measured over
+Again a homothety about the same datum, with `det q_t = φⁿ` (`φ²` in the plane). Measured over
 `t ∈ {−1, −½, 0, ¼, ⅓, ½, ⅔, ¾, 1, 1.5, 2, 3}`, `k ∈ {−3 … 3}` and five probe points:
 max deviation from `(1−t)P + t g_kP` is `2.512e−15`.
 
@@ -29,6 +29,11 @@ k_t = (t − 1)/t = 1 − 1/t
 | `¾` | `−⅓` | |
 | `2` | `½` | beyond the image |
 | `−1` | `2` | beyond the point |
+
+The signature of the division map is a step function at `k_t`. Since `φ = t(k − k_t)`, for
+`0 < t < 1` the inertia is `(n,0,0)` above `k_t`, `(0,n,0)` below, and `(0,0,n)` at `k_t`. So each
+division point is a sign-change threshold of the scale ledger; the zeros are distinct values but all
+carry the same null signature. See `the-fold-signature.md`.
 
 Three facts, all measured:
 

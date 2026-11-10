@@ -7,6 +7,38 @@ paper follows from one determinant, `det(g_k) = kⁿ`: heights scale like `k`, a
 volumes like `k³`. A real `k` changes size, an imaginary one twists, and a twist is the product of
 two folds.
 
+**Start here:** `the-fold-key.md` — the master key. Give it a value of `k`; it returns the stage,
+the operation, what appears, what survives, and the note that proves it.
+
+**Matter reading:** matter is the zero at a scale — stages 0–1 of the chain. In the homothetic
+family `h ∝ k`, `M ∝ h`, `A ∝ h²`, `V ∝ h³`, `S ∝ h²`, `T ∝ 1/h`, while the horizon ratio `k*`
+stays constant. Shape is the aperture `θ`; turn is `arg k`. A `d`-dimensional observer measures
+`h^{p−d}` — scalar, derivative, flux, density for `d = 0, 1, 2, 3`. See `the-fold-matter.md`.
+
+**Two nothings:** `k = 1` is the identity — nothing changed; `k = 0` is the collapse — nothing has
+size. The creation loop returns the second, not the first.
+
+**Two ledgers:** the fold ledger is additive — zero is a crease `H`, one is its unit normal `n`, and
+each fold has its own pair, so `0 → 1 → 0 → 1` can be a chain of distinct terms. The scale ledger is
+multiplicative — its zeros `k_t` are distinct but its one `k = 1` is unique. See `the-fold-key.md`.
+
+**Signature of nothing:** the zero is totally null, inertia `(0,0,n)` — `n` directions, none signed.
+Its scalar signature is `0`, but so is the planar fold's; the nullity is the fingerprint. A
+continuous sign change must cross a degenerate form, and `k = 0` is that crossing. By stage: point
+`(0,0,n)`, scale `(n,0,0)`, fold `(n−1,1,0)`, twist symplectic (`Pf=1`), horizon null. See
+`the-fold-signature.md`.
+
+**Reading paths:**
+
+| if you want | read |
+|---|---|
+| the whole argument in six pages | `the-fold.pdf` |
+| the lookup by value of `k` or by question | `the-fold-key.md` |
+| the order of creation and the plain-language version | `the-fold-creation.md` |
+| matter as the zero at a scale | `the-fold-matter.md` |
+| the signature of nothing and the fold's split | `the-fold-signature.md` |
+| the interactive models | the nine HTML files |
+
 ## Contents
 
 | file | what it is |
@@ -14,6 +46,7 @@ two folds.
 | `the-fold.pdf` | the paper, 6 pages |
 | `the-fold.tex` | LaTeX source (TeX Live, `pdflatex`) |
 | `the-fold.md` | Markdown source |
+| `the-fold-key.md` | master key: the `k`-plane, the chain, the four laws, and an index by question |
 | `j-plane.html` | 2D model: `A ∝ k²`, `h ∝ k`, the rotation `J` |
 | `j-cone-3d.html` | external apex: tangent cone, dimension ladder |
 | `j-collapse-3d.html` | sphere/cube collapse: rank, `Ω/4π`, observers at the centre and outside |
@@ -29,6 +62,9 @@ two folds.
 | `the-fold-invariants.md` | follow-up note: orbit spaces, invariant rings, `k = −1` as the meeting point |
 | `cone-range-3d.html` | 3D range cone: apex at the centre, rim at the range, `θ` and `k` sliders |
 | `the-fold-cone.md` | follow-up note: the range cone, its three formulas, and the fold's antipode |
+| `the-fold-creation.md` | follow-up note: the order of creation — point, scale, fold, twist, closure, horizon, observer, point; plain-language version and glossary |
+| `the-fold-matter.md` | follow-up note: matter as the zero at a scale; the height law, its exponents, and the mass reading |
+| `the-fold-signature.md` | follow-up note: the signature of zero — inertia, the forced degeneracy, the fold's split, and the ladder by stage |
 
 Open the HTML files directly in a browser — no build step, no dependencies.
 
@@ -77,7 +113,7 @@ reproduces `1.216%` and `0.301%` at `k = 0.5, 0.25`. A cone's fold group is the 
 axis (residual `0.0`), not the point reflection; a turn about that axis is the *identity* on the
 body, so the twist is exact `0.0%` at every angle for a cone as for a sphere — only the cube's
 finite symmetry shows it (`12.3%` at `45°`). Collapsing the family leaves the aperture intact as a
-limit of directions (`59.986°` at `k = 1`, `10⁻³`, `10⁻⁶` alike while the range falls six orders),
+limit of directions (`60.0000°` at `k = 1`, `10⁻³`, `10⁻⁶` alike while the range falls six orders),
 and the cap alone yields `R = √(A_cap/Ω)`, `θ = 2 arcsin √(Ω/4π)` to `10⁻¹⁵`.
 
 ## Structure

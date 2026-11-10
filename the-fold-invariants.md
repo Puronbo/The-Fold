@@ -109,6 +109,12 @@ audit becomes undefined rather than false. There is no distance to compare, no a
 cross-ratio: four points have become one. The invariant ring is the constants, and the orbit space is
 a single point — which is the invariant-theoretic reading of the paper's "zero as the point".
 
+## The signature at the zero
+
+The invariant ring is the constants, but the zero still has a signature: the null form `(0,0,n)`,
+`n` directions with no sign. Under the full similarity group only `n` survives; the fold is the first
+split, with inertia `(n−1,1,0)`. See `the-fold-signature.md`.
+
 ## The three sentences
 
 - **Scaling** keeps direction and cross-ratio, destroys length.

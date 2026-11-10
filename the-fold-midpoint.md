@@ -59,6 +59,71 @@ So the crease is the **fixed set of the midpoint map**, and the point reflection
 that family where the fixed set has shrunk to the datum. The paper's phrase — the datum becomes the
 hinge — is the `rank n − 1 → rank 0` degeneration, and `k = −1` is where it happens.
 
+## Everything is 0
+
+At that point the statement is stronger than "rank 0": every quantity the paper tracks vanishes
+together, because they are all the same quantity read at different degrees.
+
+```
+det m = 0        rank 0        V = k³V₀ = 0
+h = k·h₀ = 0     A = k²A₀ = 0  every distance = 0
+coordinate offset from P₀      = 0     (image is P₀, for every P)
+```
+
+And there is a reason it is *that* point and not another. The midpoint of the two isometries of the
+scaling group is
+
+```
+½ (I + (−I)) = 0,
+```
+
+and `0` is not a scaling — it is the boundary of the group. So **the midpoint of the group's two
+isometries is the one element the group does not contain.** That is why everything is zero there:
+`k = 0` is not a small motion, it is the compactification point, the place where the orbit closes.
+The paper already says this ("outside the group", "the compactification of every orbit"); the
+midpoint calculation is the third way to say it, and the one that shows it is forced by the group
+structure rather than added by hand.
+
+Two derivations, one map: the parameter midpoint of `{+1, −1}` is `0`; the zero locus of the
+midpoint map is `k = −1`, where `m = g_0`. Both land on the same constant map, and its image is the
+centre.
+
+What survives is the only thing that was never a measure. At `k = 10⁻⁹` the range is `10⁻⁹` and the
+aperture is still `60.0000°`, unmoved. So "everything is 0" is exact for every measure and false for
+shape, and the exception is precisely the 0-dimensional vertex: zero of every measure, all of the
+direction.
+
+## The imaginary diameter
+
+The real pair `±1` is not the only antipodal pair of isometries. Every `k` with `|k| = 1` is one — a
+rotation by `arg k` with no scaling — and the midpoint of *any* antipodal pair is the zero:
+
+```
+½ (g_k + g_(−k)) = 0        for every k, real or imaginary
+```
+
+| pair | `k` | midpoint | what it is |
+|---|---|---|---|
+| `{I, −I}` | `±1` | `0` | identity and point reflection |
+| `{J, −J}` | `±i` | `0` | the two quarter turns, opposite senses |
+| `{e^{iθ}, e^{−iθ}}` | any unit `k` | `0` | any diameter of the isometry circle |
+
+So the zero is not a fact about the real axis. It is the **centre of the circle**, and the imaginary
+diameter is the test that proves it: `(±i)² = −1`, so the twist squared *is* the fold, and the two
+diameters are one object seen through one equation.
+
+Two things to keep apart, since they are one letter away:
+
+- the midpoint **map** at `k = i` does not vanish: `½(1 + i)` is a 45° rotation at ratio `1/√2`
+  (`|m| = 0.7071`, `arg = 45.0°`);
+- the midpoint of the **pair** `{g_i, g_(−i)}` is exactly `0`, for the same reason the pair `{I, −I}`
+  is.
+
+And because `|k| = 1` everywhere on the circle, the distance from the zero to every isometry is the
+same: the centre is the **circumcentre** of the group of isometries. That is the geometric content of
+"the midpoint where everything is 0" — not the midpoint of one segment, but the one point that is
+equidistant from all of them.
+
 ## Three named members
 
 | `k` | factor `(1+k)/2` | what is at the midpoint |
@@ -97,6 +162,11 @@ Section 4 gains one paragraph after "The degeneration": the midpoint law, its de
 statement that `k = −1` is the unique member where the midpoint map is constant, and the comparison
 with the true fold, whose midpoint map is the projection onto the crease (rank `n − 1`). No other
 section is touched; the `k = ½` / `k = 2` pair is named in the same paragraph.
+
+Later, section 9's closing sentence changed from "terminates in a point" to "degenerates at `k = 0`
+onto the centre that was there all along": the point is not where the family ends, it is where it is
+centred. The two derivations above are why — the zero is a midpoint, and a midpoint is what the ends
+share, not where they stop.
 
 Files: `fold-midpoint.html` (interactive: `k` slider, the body, its image, and the midpoint polygon;
 readouts for `det g_k`, the midpoint factor, `det m_k`, rank, spread, and the special values

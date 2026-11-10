@@ -102,6 +102,13 @@ volume grows with the time elapsed since formation (Christodoulou–Rovelli), so
 a large interior by that measure. The paper's `V` is the matter sphere, and the claim should stay
 attached to it.
 
+## The signature reading
+
+Read as a signature, the horizon is a **null crease**: `n·n = 0`, so the induced form is degenerate,
+`(n−2,0,1)` inside a Lorentzian `(n−1,1,0)`. The Fold's `k*` is the scalar ratio at which the radial
+normal becomes null. This is a reading, not a derivation; the Fold supplies the ratio, not the
+metric. See `the-fold-signature.md`.
+
 ## What changed in the paper
 
 Section 5's single table is now two columns, with the sentence that only the fixed-mass column is a
