@@ -115,6 +115,10 @@ critical line is the image of the theta crease.
 What this does **not** say is where the zeros are. The theta fold fixes the axis; it does not fix the
 points on the axis. RH is still the statement that the zeros lie on the crease, and that remains open.
 
+The theta function is also the heat kernel, and the completed zeta function is a heat-flow family. That
+flow is the de Bruijn–Newman deformation: RH is equivalent to its constant `Λ ≤ 0`, and Rodgers–Tao
+prove `Λ ≥ 0`. The theta fold is the `t = 0` slice. See `the-fold-problems.md`.
+
 ## The crease and the facet
 
 The theta fold is the analytic origin of the critical-line facet. In the language of the facets note:

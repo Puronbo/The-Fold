@@ -53,6 +53,11 @@ a value, a vertex, a facet, a null, and an analytic point. The twist and the obs
 which is why their invariant is not an inertia. The only pipeline that composes is analytic: theta's
 fold becomes the critical line, and the zeros land on it. See `the-fold-pipeline.md`.
 
+**Problems:** the Fold reformulates RH exactly and rhymes with a dozen other problems, but the map is
+the point: positivity needs a surface, Hilbert–Pólya needs an operator, de Bruijn–Newman needs a bound,
+and the explicit formula needs a parity breaker — four known walls, one crease. See
+`the-fold-problems.md`.
+
 **Reading paths:**
 
 | if you want | read |
@@ -67,6 +72,7 @@ fold becomes the critical line, and the zeros land on it. See `the-fold-pipeline
 | which zeros are facets | `the-fold-facets.md` |
 | why the critical line is at 1/2 | `the-fold-theta.md` |
 | the zeros in pipeline order | `the-fold-pipeline.md` |
+| what the Fold does and does not reach | `the-fold-problems.md` |
 | the interactive models | the nine HTML files |
 
 ## Contents
@@ -100,6 +106,7 @@ fold becomes the critical line, and the zeros land on it. See `the-fold-pipeline
 | `the-fold-facets.md` | follow-up note: zeros as facets — codimension one versus vertex versus point, and the critical line as the facet |
 | `the-fold-theta.md` | follow-up note: the theta fold — the functional equation derived, and why the critical line is at `1/2` |
 | `the-fold-pipeline.md` | follow-up note: the zero pipeline — one zero equation per stage, five kinds of zero, and the two gaps |
+| `the-fold-problems.md` | follow-up note: the Fold and the open problems — exact, reformulation, rhyme, false friend, and the four walls |
 
 Open the HTML files directly in a browser — no build step, no dependencies.
 

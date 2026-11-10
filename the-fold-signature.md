@@ -235,6 +235,10 @@ at infinity is its partner. The creation loop's two ends are that pair. In the s
 is forced by the signature change; in the compactified ledger it is forced by the index sum. Both say
 the same thing: nothing is not an isolated event.
 
+The index sum is Poincaré–Hopf, the first case of Atiyah–Singer; the global analogue of the inertia is
+Hirzebruch's signature theorem. Which open problems the Fold reaches, and which it only rhymes with, is
+mapped in `the-fold-problems.md`.
+
 ## Checks
 
 The algebraic claims are exact; the numbers below are floating-point confirmations for `n = 2, 3, 4`

@@ -362,6 +362,21 @@ into a facet. The twist and the observer are the two gaps, and they are exactly 
 invariant is not an inertia (`Pf(ω) = 1`, `⋆²`). The only pipeline that composes is analytic: theta's
 fold becomes the critical line and the zeros land on it. See `the-fold-pipeline.md`.
 
+## The problems
+
+The dictionary reaches RH exactly and a dozen other problems by rhyme. The useful part is the map of
+what is missing, one item per known route to RH:
+
+| route | needs | the Fold supplies |
+|---|---|---|
+| positivity (function fields) | an arithmetic surface whose intersection form has signature `(ρ−1,1,0)` | the signature shape `(n−1,1,0)`; no surface |
+| Hilbert–Pólya | a self-adjoint `H` with `[H,R]=0`, spectrum `{γ_n}` | the crease and the commutation condition; no `H` |
+| de Bruijn–Newman | a bound `Λ ≤ 0` | the heat kernel (theta) and the crease; no bound |
+| explicit formula | a parity-breaking estimate at `1/2` | the prime–zero exchange; no estimate |
+
+The fold's inertia and the negative Hodge intersection form have the same shape at every rank; that is
+the closest link, and it is a link of shape, not of proof. See `the-fold-problems.md`.
+
 ## Key by question
 
 | question | answer | source |
@@ -397,6 +412,9 @@ fold becomes the critical line and the zeros land on it. See `the-fold-pipeline.
 | Where does the functional equation come from? | the theta fold in height, read through the Mellin transform | theta |
 | What is the zero pipeline? | the zero equation of each stage; the solution type changes: value, vertex, facet, null, point | pipeline |
 | Why is the twist off the pipeline? | `J` is invertible; `(J−I)v = 0` has only `v = 0`; its invariant is `Pf(ω)=1`, not an inertia | pipeline |
+| What is missing for RH? | one of: a surface (positivity), an operator (Hilbert–Pólya), a bound (`Λ≤0`), a parity breaker | problems |
+| Is the Fold's zero a zeta zero? | no; a zeta zero is a cancellation, codim 2, not the zero map | problems, zeta |
+| Do the zeros' statistics match the twist? | yes, one `J` gives `β=2` (GUE); the Pfaffian is not the quaternionic `β=4` class | problems |
 | Why is a twist two folds? | `σ_{H₂} ∘ σ_{H₁} = R(2α)` | §4 |
 | Why does the twist repeat? | closure `m = π/α` | closure |
 | Why only 2-, 3-, 4-, 6-fold in a lattice? | `2 cos(2π/n)` must be an integer | closure |
@@ -451,6 +469,7 @@ No new measurements. These are the existing checks the key rests on:
 | which zeros are facets | `the-fold-facets.md` |
 | why the critical line is at 1/2 | `the-fold-theta.md` |
 | the zeros in pipeline order | `the-fold-pipeline.md` |
+| what the Fold does and does not reach | `the-fold-problems.md` |
 
 ## The key in one sentence
 

@@ -68,6 +68,11 @@ The analytic fifth is a point. `ξ(ρ) = 0` is two real equations, `Re ξ = 0` a
 codimension two in the plane; it is a facet only of the critical line, which is one-dimensional. See
 `the-fold-facets.md` and `the-fold-zeta.md`.
 
+One axis the pipeline does not carry is **multiplicity**. A zero has a codimension (its geometry) and
+an order (its multiplicity); the pipeline reads the first and not the second. Birch–Swinnerton-Dyer
+asks for an order of vanishing, and Hilbert–Pólya for an eigenspace dimension, so both live on the
+axis the pipeline cannot see. See `the-fold-problems.md`.
+
 ## The two gaps
 
 Two stages produce no zero: the twist and the observer. This is structure, not omission.

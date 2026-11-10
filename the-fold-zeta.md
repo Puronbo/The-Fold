@@ -113,6 +113,9 @@ The zero of `ξ` is a point, not a vertex or a facet: `Re ξ = Im ξ = 0` is two
 codimension two. It is the analytic end of the zero pipeline, and it sits on the critical-line facet.
 See `the-fold-pipeline.md`.
 
+The three known ways to force the zeros onto the crease — positivity, a self-adjoint operator, a
+de Bruijn–Newman bound — are mapped, with what each is missing, in `the-fold-problems.md`.
+
 One warning about the phrase "the critical line is the fixed set of the functional equation." It is
 not: the fixed set of `s ↦ 1−s` is the single point `s = 1/2`. The critical line is the fixed set of
 the **composition** of the functional equation with reality, i.e. of `R`. That composition is the
