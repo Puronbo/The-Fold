@@ -124,7 +124,8 @@ The theta fold is the analytic origin of the critical-line facet. In the languag
 - the zeros of `ξ` are points on that line; relative to the line, each is a facet of the line.
 
 So the chain is: theta fold in height → Mellin transform → critical-line facet → zeros as points on the
-facet. The first arrow is exact; the last is the hypothesis.
+facet. The first arrow is exact; the last is the hypothesis. This chain is the analytic pipeline; the
+Fold's stage-by-stage zeros are the zero pipeline. See `the-fold-pipeline.md`.
 
 ## Checks
 

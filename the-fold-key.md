@@ -342,6 +342,26 @@ The `1/2` is not a convention. If a modular function satisfies `Φ(1/t) = t^α �
 gives `I(s) = I(2α − s)`, so the axis is `Re s = α`. For theta `α = 1/2`, which is exactly the
 critical line. The fold gives the axis; it does not give the zeros. See `the-fold-theta.md`.
 
+## The zero pipeline
+
+Every stage of the Fold solves a zero equation, and each solution is a different kind of zero:
+
+| stage | zero equation | zero type |
+|---|---|---|
+| point | `P − P₀ = 0` | value |
+| scale | `det g_k = kⁿ = 0` | vertex |
+| fold | `(σ_H − I)P = 0` | facet |
+| twist | `(J − I)v = 0` (only `v = 0`) | none |
+| closure | `cos(2π/m) = 0` | discrete angle |
+| horizon | `g(v,v) = 0`, `v ≠ 0` | null crease |
+| observer | none | none |
+| zeta | `ξ(ρ) = 0` | point |
+
+It is a list of roles, not a conveyor: the type changes at every stage, so a vertex cannot be piped
+into a facet. The twist and the observer are the two gaps, and they are exactly the stages whose
+invariant is not an inertia (`Pf(ω) = 1`, `⋆²`). The only pipeline that composes is analytic: theta's
+fold becomes the critical line and the zeros land on it. See `the-fold-pipeline.md`.
+
 ## Key by question
 
 | question | answer | source |
@@ -375,6 +395,8 @@ critical line. The fold gives the axis; it does not give the zeros. See `the-fol
 | Are the zeta zeros facets? | in the plane they are points; on the critical line they are facets of the line | facets, zeta |
 | Why is the critical line at `1/2`? | the theta modular factor is `t^{1/2}`; a general exponent `α` gives the axis `Re s = α` | theta |
 | Where does the functional equation come from? | the theta fold in height, read through the Mellin transform | theta |
+| What is the zero pipeline? | the zero equation of each stage; the solution type changes: value, vertex, facet, null, point | pipeline |
+| Why is the twist off the pipeline? | `J` is invertible; `(J−I)v = 0` has only `v = 0`; its invariant is `Pf(ω)=1`, not an inertia | pipeline |
 | Why is a twist two folds? | `σ_{H₂} ∘ σ_{H₁} = R(2α)` | §4 |
 | Why does the twist repeat? | closure `m = π/α` | closure |
 | Why only 2-, 3-, 4-, 6-fold in a lattice? | `2 cos(2π/n)` must be an integer | closure |
@@ -428,6 +450,7 @@ No new measurements. These are the existing checks the key rests on:
 | the critical line and the zeta zeros | `the-fold-zeta.md` |
 | which zeros are facets | `the-fold-facets.md` |
 | why the critical line is at 1/2 | `the-fold-theta.md` |
+| the zeros in pipeline order | `the-fold-pipeline.md` |
 
 ## The key in one sentence
 

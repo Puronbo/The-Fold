@@ -145,13 +145,14 @@ The signature is not only a property of the zero; it is a label on each stage. T
 | 7 return | `0` | `(0,0,n)` | null again |
 
 The exact content is the first five rows: the zero is null, the scale is definite, the fold is split,
-the twist is symplectic, and the closure is a cosine. The twist is the first stage that inertia cannot
-see: `J` is skew on its 2-plane, so its symmetric part is `0` there, and the inertia on that plane is
-`(0,0,2)` — the same as the zero on a plane. But `J` is not zero; its invariant is the Pfaffian
-`Pf(ω)=1`, where `ω(x,y)=⟨x,Jy⟩`. That is why the twist needs its own invariant: it is the one stage
-whose operator has no inertia at all. The closure restores a cosine, so the ladder has a single gap,
-and the twist occupies it. In higher dimensions the orthogonal complement of the plane contributes
-`(n−2,0,0)` and is fixed.
+the twist is symplectic, and the closure is a cosine. Read in order, the ladder's zeros are the zero
+pipeline: a value, a vertex, a facet, a null, a point. See `the-fold-pipeline.md`. The twist is the
+first stage that inertia cannot see: `J` is skew on its 2-plane, so its symmetric part is `0` there,
+and the inertia on that plane is `(0,0,2)` — the same as the zero on a plane. But `J` is not zero; its
+invariant is the Pfaffian `Pf(ω)=1`, where `ω(x,y)=⟨x,Jy⟩`. That is why the twist needs its own
+invariant: it is the one stage whose operator has no inertia at all. The closure restores a cosine, so
+the ladder has a single gap, and the twist occupies it. In higher dimensions the orthogonal complement
+of the plane contributes `(n−2,0,0)` and is fixed.
 
 The closure row has an exact cosine. A rotation by `2π/m` has symmetric part `cos(2π/m)` on its
 plane. The crystallographic cases give `m = 2: −1`, `m = 3: −½`, `m = 4: 0`, `m = 6: ½`. The 4-fold

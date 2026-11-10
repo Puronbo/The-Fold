@@ -77,6 +77,10 @@ one-dimensional, each zero is a point that cuts the line into intervals: a **fac
 the phrase is true one dimension down. In the plane, the zeros are points on the critical-line facet;
 on the line, they are its facets.
 
+Codimension alone does not classify a zero: a facet is the zero of a linear functional, a null crease
+is the zero of a quadratic form, and a zeta zero is the zero of an analytic function. The same
+codimension can carry a different degree. See `the-fold-pipeline.md`.
+
 The facet's position is not arbitrary: `Re s = 1/2` is the half-density exponent of the theta fold,
 and the functional equation is its Mellin shadow. See `the-fold-theta.md`.
 

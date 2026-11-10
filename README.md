@@ -48,6 +48,11 @@ fold in height `h = ln t`; its half-density exponent is `1/2`, and that is the r
 critical line. A general exponent `α` puts the axis at `Re s = α`. The fold gives the axis, not the
 zeros. See `the-fold-theta.md`.
 
+**Zero pipeline:** every stage solves a zero equation, and each solution is a different kind of zero —
+a value, a vertex, a facet, a null, and an analytic point. The twist and the observer produce no zero,
+which is why their invariant is not an inertia. The only pipeline that composes is analytic: theta's
+fold becomes the critical line, and the zeros land on it. See `the-fold-pipeline.md`.
+
 **Reading paths:**
 
 | if you want | read |
@@ -61,6 +66,7 @@ zeros. See `the-fold-theta.md`.
 | the critical line as a crease | `the-fold-zeta.md` |
 | which zeros are facets | `the-fold-facets.md` |
 | why the critical line is at 1/2 | `the-fold-theta.md` |
+| the zeros in pipeline order | `the-fold-pipeline.md` |
 | the interactive models | the nine HTML files |
 
 ## Contents
@@ -93,6 +99,7 @@ zeros. See `the-fold-theta.md`.
 | `the-fold-zeta.md` | follow-up note: the critical line as a crease — the Dirichlet term as `k`, the functional equation as a fold, and RH as a location |
 | `the-fold-facets.md` | follow-up note: zeros as facets — codimension one versus vertex versus point, and the critical line as the facet |
 | `the-fold-theta.md` | follow-up note: the theta fold — the functional equation derived, and why the critical line is at `1/2` |
+| `the-fold-pipeline.md` | follow-up note: the zero pipeline — one zero equation per stage, five kinds of zero, and the two gaps |
 
 Open the HTML files directly in a browser — no build step, no dependencies.
 
