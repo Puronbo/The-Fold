@@ -87,6 +87,10 @@ the projection `π_H = ½(I + R)` is the critical-line projection, the same midp
 In the language of facets, the critical line is the facet and the zeros are points on it; relative to
 the line, each zero is a facet of the line. See `the-fold-facets.md`.
 
+Where does the functional equation itself come from? Not from an assumption: it is the Mellin shadow
+of the theta fold `ϑ(1/t) = √t ϑ(t)`, whose half-density exponent `1/2` is the real part of the
+critical line. See `the-fold-theta.md`.
+
 The consequences are exact:
 
 ```

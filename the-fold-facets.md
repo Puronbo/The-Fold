@@ -77,6 +77,9 @@ one-dimensional, each zero is a point that cuts the line into intervals: a **fac
 the phrase is true one dimension down. In the plane, the zeros are points on the critical-line facet;
 on the line, they are its facets.
 
+The facet's position is not arbitrary: `Re s = 1/2` is the half-density exponent of the theta fold,
+and the functional equation is its Mellin shadow. See `the-fold-theta.md`.
+
 The explicit formula is the same picture in arithmetic:
 
 ```

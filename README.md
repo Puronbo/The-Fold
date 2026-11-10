@@ -43,6 +43,11 @@ facet; the scale's zero is a vertex; a zeta zero is a point on the critical-line
 the line. The phrase "zeros as facets" is the fold ledger's sentence, not the scale's. See
 `the-fold-facets.md`.
 
+**Theta fold:** the functional equation is not an axiom. The theta identity `ϑ(1/t) = √t ϑ(t)` is a
+fold in height `h = ln t`; its half-density exponent is `1/2`, and that is the real part of the
+critical line. A general exponent `α` puts the axis at `Re s = α`. The fold gives the axis, not the
+zeros. See `the-fold-theta.md`.
+
 **Reading paths:**
 
 | if you want | read |
@@ -55,6 +60,7 @@ the line. The phrase "zeros as facets" is the fold ledger's sentence, not the sc
 | why the back cannot be seen | `the-fold-occlusion.md` |
 | the critical line as a crease | `the-fold-zeta.md` |
 | which zeros are facets | `the-fold-facets.md` |
+| why the critical line is at 1/2 | `the-fold-theta.md` |
 | the interactive models | the nine HTML files |
 
 ## Contents
@@ -86,6 +92,7 @@ the line. The phrase "zeros as facets" is the fold ledger's sentence, not the sc
 | `the-fold-occlusion.md` | follow-up note: the back is not a place — side versus axis, the crease, and why the twist is not the ratchet |
 | `the-fold-zeta.md` | follow-up note: the critical line as a crease — the Dirichlet term as `k`, the functional equation as a fold, and RH as a location |
 | `the-fold-facets.md` | follow-up note: zeros as facets — codimension one versus vertex versus point, and the critical line as the facet |
+| `the-fold-theta.md` | follow-up note: the theta fold — the functional equation derived, and why the critical line is at `1/2` |
 
 Open the HTML files directly in a browser — no build step, no dependencies.
 

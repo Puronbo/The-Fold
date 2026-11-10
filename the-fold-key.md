@@ -325,6 +325,23 @@ scale's zero is a vertex, codimension `n`; a zeta zero is a point, codimension `
 critical line. The two ledgers say it plainly: fold zeros are facets, scale zeros are vertices. See
 `the-fold-facets.md`.
 
+## The theta fold
+
+The functional equation is not assumed. It is derived from the theta identity
+
+```
+ϑ(1/t) = √t ϑ(t)          ϑ(t) = Σ_{n∈ℤ} e^{−πn²t}
+```
+
+In the height `h = ln t`, this is a fold: `h ↦ −h`, with crease `h = 0`. The factor `e^{h/2}` is the
+half-density, the square root of the Jacobian of the inversion. The Mellin transform of `ϑ` is
+`π^{−s/2} Γ(s/2) ζ(s)`; splitting the integral at `t = 1` and using the theta identity gives
+`I(s) = I(1−s)`, hence `ξ(s) = ξ(1−s)`.
+
+The `1/2` is not a convention. If a modular function satisfies `Φ(1/t) = t^α Φ(t)`, the same split
+gives `I(s) = I(2α − s)`, so the axis is `Re s = α`. For theta `α = 1/2`, which is exactly the
+critical line. The fold gives the axis; it does not give the zeros. See `the-fold-theta.md`.
+
 ## Key by question
 
 | question | answer | source |
@@ -356,6 +373,8 @@ critical line. The two ledgers say it plainly: fold zeros are facets, scale zero
 | Does the Fold prove RH? | no; the fold gives the crease and pairs the zeros, but does not force them onto it | zeta |
 | When is a zero a facet? | when it is codimension 1: a crease; a scale zero is a vertex, a zeta zero is a point | facets |
 | Are the zeta zeros facets? | in the plane they are points; on the critical line they are facets of the line | facets, zeta |
+| Why is the critical line at `1/2`? | the theta modular factor is `t^{1/2}`; a general exponent `α` gives the axis `Re s = α` | theta |
+| Where does the functional equation come from? | the theta fold in height, read through the Mellin transform | theta |
 | Why is a twist two folds? | `σ_{H₂} ∘ σ_{H₁} = R(2α)` | §4 |
 | Why does the twist repeat? | closure `m = π/α` | closure |
 | Why only 2-, 3-, 4-, 6-fold in a lattice? | `2 cos(2π/n)` must be an integer | closure |
@@ -408,6 +427,7 @@ No new measurements. These are the existing checks the key rests on:
 | the occlusion and the back | `the-fold-occlusion.md` |
 | the critical line and the zeta zeros | `the-fold-zeta.md` |
 | which zeros are facets | `the-fold-facets.md` |
+| why the critical line is at 1/2 | `the-fold-theta.md` |
 
 ## The key in one sentence
 
