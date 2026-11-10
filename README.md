@@ -33,6 +33,11 @@ measurement forgets. The fold flips it, the projection drops it, and the crease 
 two sides meet. Mathematics can see the axis, not both faces; the one-way surface is the horizon, not
 the twist. See `the-fold-occlusion.md`.
 
+**Critical line:** the Dirichlet term `n^{-s}` is the Fold's complex `k` at height `ln n`: modulus
+`n^{-σ}`, angle `−t ln n`. The functional equation plus reality is a fold `R(s) = 1 − s̄`, and the
+critical line is its crease. RH says the zeros lie on the crease — an exact reformulation, not a
+proof. The primes and the zeros are dual, not illusion. See `the-fold-zeta.md`.
+
 **Reading paths:**
 
 | if you want | read |
@@ -43,6 +48,7 @@ the twist. See `the-fold-occlusion.md`.
 | matter as the zero at a scale | `the-fold-matter.md` |
 | the signature of nothing and the fold's split | `the-fold-signature.md` |
 | why the back cannot be seen | `the-fold-occlusion.md` |
+| the critical line as a crease | `the-fold-zeta.md` |
 | the interactive models | the nine HTML files |
 
 ## Contents
@@ -72,6 +78,7 @@ the twist. See `the-fold-occlusion.md`.
 | `the-fold-matter.md` | follow-up note: matter as the zero at a scale; the height law, its exponents, and the mass reading |
 | `the-fold-signature.md` | follow-up note: the signature of zero — inertia, the forced degeneracy, the fold's split, and the ladder by stage |
 | `the-fold-occlusion.md` | follow-up note: the back is not a place — side versus axis, the crease, and why the twist is not the ratchet |
+| `the-fold-zeta.md` | follow-up note: the critical line as a crease — the Dirichlet term as `k`, the functional equation as a fold, and RH as a location |
 
 Open the HTML files directly in a browser — no build step, no dependencies.
 

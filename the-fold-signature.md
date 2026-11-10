@@ -271,6 +271,9 @@ Two exact checks:
 - It **does not** confuse the signature with the side of a surface. The signature counts signed
   directions of a form; a side is the sign of one normal coordinate. The metric is even in that
   coordinate, so it is side-blind; the fold is linear and flips it. See `the-fold-occlusion.md`.
+- It **does not** apply to a zero of a function. The zeros of `ζ` are cancellation points, not the
+  zero map; `(0,0,n)` is the inertia of the collapsed scale, not of a zeta zero. See
+  `the-fold-zeta.md`.
 
 ## Files
 

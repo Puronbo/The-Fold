@@ -199,4 +199,5 @@ a look is a definite side.**
 
 `the-fold-occlusion.md` (this note). The algebra of the fold and the projection is in
 `the-fold-signature.md` and `the-fold-creation.md`; the one-way surface is in `the-fold-horizon.md`;
-the `d`-form observer is in `the-fold-matter.md`. The lookup is `the-fold-key.md`.
+the `d`-form observer is in `the-fold-matter.md`. The critical line of the zeta function is a crease
+of exactly this kind: see `the-fold-zeta.md`. The lookup is `the-fold-key.md`.

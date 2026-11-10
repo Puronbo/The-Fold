@@ -226,6 +226,10 @@ reflection, `J² = −I` — the fold at `k = −1`.
 This is the stage where frequency is born. A rotation has a period; a period has a frequency; a
 frequency is what a 1-dimensional observer will later measure as a rate.
 
+The same complex `k` appears in the zeta function: at height `h = ln n`, the Dirichlet term is
+`n^{-s} = e^{-σh} e^{-ith}`, a scale by `e^{-σh}` and a twist by `−th`. The sum over `n` is a sum over
+heights. See `the-fold-zeta.md`.
+
 The twist also leaves the signature ladder. `J` is skew on its 2-plane, so its symmetric part is zero
 there and inertia sees only `(0,0,2)` on that plane; but `J` is not zero. Its invariant is the
 Pfaffian `Pf(ω)=1` of `ω(x,y)=⟨x,Jy⟩`. The signature is the invariant of the symmetric stages; the

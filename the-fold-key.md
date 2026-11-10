@@ -300,6 +300,24 @@ a fold jumps. The one-way surface in the model is the horizon, not the twist: `J
 orientation-preserving and periodic. Mathematics can see the axis `s`, not both faces. See
 `the-fold-occlusion.md`.
 
+## The critical line is a crease
+
+The Dirichlet term is the Fold's complex `k` at height `h = ln n`:
+
+```
+n^{-s} = e^{-σh} e^{-ith}          |k| = n^{-σ}          arg k = −t ln n
+```
+
+The term is a scale by `n^{-σ}` and a twist by `−t ln n`. The Euler product is the multiplicative
+ledger; the Dirichlet series is the additive one.
+
+The functional equation `ξ(s) = ξ(1−s)` and reality `ξ(s̄) = conj ξ(s)` compose into the reflection
+`R(s) = 1 − s̄`, a fold whose crease is the critical line `Re s = 1/2`. The hypothesis is that every
+zero of `ξ` is fixed by `R`, i.e. lies on the crease. That is an exact reformulation, not a proof: the
+equation pairs `ρ` with `1−ρ`, reality pairs it with `ρ̄`, and the composition is `R`; a symmetric
+pair can still sit off the crease. The primes are the multiplicative generators; the zeros are the
+additive frequencies; the explicit formula is the exchange. See `the-fold-zeta.md`.
+
 ## Key by question
 
 | question | answer | source |
@@ -325,6 +343,10 @@ orientation-preserving and periodic. Mathematics can see the axis `s`, not both 
 | Why can't a sensor see the back? | the back is the sign of the normal; a symmetric form is quadratic and even in it, so the sensor is side-blind | occlusion |
 | Can both faces be seen at once? | not by a definite measurement; the crease `s=0` is the only meeting place, and it is edge-on | occlusion |
 | Is the twist a one-way lock? | no; `J` preserves orientation and is periodic; the one-way surface is the horizon (null crease) | occlusion, horizon |
+| What is the critical line? | the crease of `R(s) = 1−s̄`: the functional equation plus reality | zeta |
+| Is RH a change of scale? | the term `n^{-s}` is a scale+twist at height `ln n`; RH is the zeros lying on the crease, not a scale change | zeta |
+| Are the primes an illusion? | no; primes are the multiplicative generators, zeros the additive frequencies; the explicit formula is a duality | zeta |
+| Does the Fold prove RH? | no; the fold gives the crease and pairs the zeros, but does not force them onto it | zeta |
 | Why is a twist two folds? | `σ_{H₂} ∘ σ_{H₁} = R(2α)` | §4 |
 | Why does the twist repeat? | closure `m = π/α` | closure |
 | Why only 2-, 3-, 4-, 6-fold in a lattice? | `2 cos(2π/n)` must be an integer | closure |
@@ -375,6 +397,7 @@ No new measurements. These are the existing checks the key rests on:
 | matter as the zero at a scale | `the-fold-matter.md` |
 | the signature of nothing | `the-fold-signature.md` |
 | the occlusion and the back | `the-fold-occlusion.md` |
+| the critical line and the zeta zeros | `the-fold-zeta.md` |
 
 ## The key in one sentence
 
