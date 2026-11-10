@@ -268,6 +268,9 @@ Two exact checks:
   degeneracy.
 - It **does** explain why the fold ledger needs no zero before the one: a reflection is discrete.
 - It **does** give the zero a positive fingerprint: `(0,0,n)`, not "nothing at all."
+- It **does not** confuse the signature with the side of a surface. The signature counts signed
+  directions of a form; a side is the sign of one normal coordinate. The metric is even in that
+  coordinate, so it is side-blind; the fold is linear and flips it. See `the-fold-occlusion.md`.
 
 ## Files
 

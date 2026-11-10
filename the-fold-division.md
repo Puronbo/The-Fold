@@ -74,9 +74,9 @@ so the orbit of a point is driven by `f^n`:
 | `f` | limit of `f^n` | meaning |
 |---|---|---|
 | `f = 0` (`k = −1`) | `0` | absorbing: stays collapsed |
-| `0 < |f| < 1` | `0` | the whole plane is pulled into the datum |
+| `0 < \|f\| < 1` | `0` | the whole plane is pulled into the datum |
 | `f = 1` (`k = 1`) | `1` | identity, fixed |
-| `|f| > 1` | `∞` | the image escapes |
+| `\|f\| > 1` | `∞` | the image escapes |
 | `f = −1` (`k = −3`) | `1` after two steps | `m² = I` — period two |
 
 The last row is the quarter point again: `k = −3` has `f = −1`, so `m_{−3}` is an involution, and

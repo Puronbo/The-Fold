@@ -107,7 +107,9 @@ attached to it.
 Read as a signature, the horizon is a **null crease**: `n·n = 0`, so the induced form is degenerate,
 `(n−2,0,1)` inside a Lorentzian `(n−1,1,0)`. The Fold's `k*` is the scalar ratio at which the radial
 normal becomes null. This is a reading, not a derivation; the Fold supplies the ratio, not the
-metric. See `the-fold-signature.md`.
+metric. It is also the model's one-way surface: timelike curves cross a null crease one way, which is
+the exact ratchet the occlusion idea looks for. The twist is periodic and preserves orientation, so
+it is not one. See `the-fold-signature.md` and `the-fold-occlusion.md`.
 
 ## What changed in the paper
 

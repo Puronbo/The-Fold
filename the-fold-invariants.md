@@ -61,7 +61,7 @@ performs it. The fold's collapse is the generator of the projective quotient.
 Under `P ↦ kP` a monomial of degree `d` is multiplied by `k^d`. Invariance for every `k` therefore
 forces `d = 0`:
 
-| degree | `|m(kP) − m(P)|` at `k = 1.7` |
+| degree | `\|m(kP) − m(P)\|` at `k = 1.7` |
 |---|---|
 | 0 | `0.0` |
 | 1 | `0.770` |

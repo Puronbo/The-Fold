@@ -190,6 +190,12 @@ unique identity; the zeros there are distinct — `k_t = 1 − 1/t` — but they
 not distinct split points. The two ledgers meet at `k = −1`, the point reflection whose fixed set
 shrinks to the datum; there the fold's zero becomes the scale's zero.
 
+Read as a view, the same normal is the occlusion. The two sides are `f > 0` and `f < 0`; the crease
+is `f = 0`, where the surface is edge-on. A metric is quadratic and even in `f`, so it cannot tell the
+sides apart; only the linear coordinate `f` knows both. The back is not a region behind the surface;
+it is the sign the form forgets. `π_H` drops it, `σ_H` flips it, and `f = 0` is the only place they
+meet. See `the-fold-occlusion.md`.
+
 ## 3. The twist
 
 One reflection is not a rotation. Two folds at angle `α` are:

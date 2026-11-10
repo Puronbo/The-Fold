@@ -28,6 +28,11 @@ continuous sign change must cross a degenerate form, and `k = 0` is that crossin
 `(0,0,n)`, scale `(n,0,0)`, fold `(n−1,1,0)`, twist symplectic (`Pf=1`), horizon null. See
 `the-fold-signature.md`.
 
+**Occlusion:** the back of a surface is not a place; it is the sign of the normal that a quadratic
+measurement forgets. The fold flips it, the projection drops it, and the crease is the only place the
+two sides meet. Mathematics can see the axis, not both faces; the one-way surface is the horizon, not
+the twist. See `the-fold-occlusion.md`.
+
 **Reading paths:**
 
 | if you want | read |
@@ -37,6 +42,7 @@ continuous sign change must cross a degenerate form, and `k = 0` is that crossin
 | the order of creation and the plain-language version | `the-fold-creation.md` |
 | matter as the zero at a scale | `the-fold-matter.md` |
 | the signature of nothing and the fold's split | `the-fold-signature.md` |
+| why the back cannot be seen | `the-fold-occlusion.md` |
 | the interactive models | the nine HTML files |
 
 ## Contents
@@ -65,6 +71,7 @@ continuous sign change must cross a degenerate form, and `k = 0` is that crossin
 | `the-fold-creation.md` | follow-up note: the order of creation — point, scale, fold, twist, closure, horizon, observer, point; plain-language version and glossary |
 | `the-fold-matter.md` | follow-up note: matter as the zero at a scale; the height law, its exponents, and the mass reading |
 | `the-fold-signature.md` | follow-up note: the signature of zero — inertia, the forced degeneracy, the fold's split, and the ladder by stage |
+| `the-fold-occlusion.md` | follow-up note: the back is not a place — side versus axis, the crease, and why the twist is not the ratchet |
 
 Open the HTML files directly in a browser — no build step, no dependencies.
 

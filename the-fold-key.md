@@ -290,6 +290,16 @@ is zero on the rotation plane; the Pfaffian is its invariant.
 
 The full note is `the-fold-signature.md`.
 
+## The occlusion
+
+The front and back of a surface are the two signs of its normal `s = (P−P_H)·n`. The fold flips `s`;
+the projection `π_H` drops it; the metric `|·|²` squares it and cannot see the sign. That is why a
+sensor made of a form is side-blind: a form is quadratic, the side is linear. The crease `s = 0` is
+the only place the two sides meet, and there the surface is edge-on. A continuous turn must cross it;
+a fold jumps. The one-way surface in the model is the horizon, not the twist: `J` is
+orientation-preserving and periodic. Mathematics can see the axis `s`, not both faces. See
+`the-fold-occlusion.md`.
+
 ## Key by question
 
 | question | answer | source |
@@ -312,6 +322,9 @@ The full note is `the-fold-signature.md`.
 | Why does a 2-form flux square to `−1`? | `⋆² = (−1)^{d(n−d)+s}`; in 4D Lorentzian, `d=2`, `s=1` gives `−1` | signature, §7 |
 | What is the signature of a 4-fold closure? | `cos 90° = 0`: the unique signature-zero closure; 3-fold gives `−½`, 6-fold gives `+½` | signature, closure |
 | What is the horizon's signature? | a null normal, `n·n=0`: the induced form is `(n−2,0,1)` in Lorentzian `(n−1,1,0)` | signature, horizon |
+| Why can't a sensor see the back? | the back is the sign of the normal; a symmetric form is quadratic and even in it, so the sensor is side-blind | occlusion |
+| Can both faces be seen at once? | not by a definite measurement; the crease `s=0` is the only meeting place, and it is edge-on | occlusion |
+| Is the twist a one-way lock? | no; `J` preserves orientation and is periodic; the one-way surface is the horizon (null crease) | occlusion, horizon |
 | Why is a twist two folds? | `σ_{H₂} ∘ σ_{H₁} = R(2α)` | §4 |
 | Why does the twist repeat? | closure `m = π/α` | closure |
 | Why only 2-, 3-, 4-, 6-fold in a lattice? | `2 cos(2π/n)` must be an integer | closure |
@@ -361,6 +374,7 @@ No new measurements. These are the existing checks the key rests on:
 | the order of creation | `the-fold-creation.md` |
 | matter as the zero at a scale | `the-fold-matter.md` |
 | the signature of nothing | `the-fold-signature.md` |
+| the occlusion and the back | `the-fold-occlusion.md` |
 
 ## The key in one sentence
 
