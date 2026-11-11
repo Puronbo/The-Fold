@@ -66,6 +66,10 @@ distinction is the answer to the question, and the rest of this note is its cons
 of such axes through the datum is the projective sphere `ℝPⁿ⁻¹`, the Fold's fold parameter; see
 `the-fold-apex.md`.
 
+The coordinate that `π_H` drops is the transverse height `s = (P − P_H)·n`. Keeping the crease and that
+height is the affine pair of `the-fold-crease-height.md`; dropping the height is exactly why the shadow
+is side-blind.
+
 ## The crease is the only meeting place
 
 `π_H` has rank `n−1` and kernel the normal line. It sends `P` and `σ_H(P)` to the same point on the

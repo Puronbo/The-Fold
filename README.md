@@ -83,6 +83,13 @@ is the simplest instance, and it is always split, so the hardness is the cost of
 existence. The Fold has no computational model, and every invariant it can compute is polynomial-time —
 so it can map the wall but not cross it. See `the-fold-complexity.md`.
 
+**Crease and height:** the geometric crease is always codimension one, but "height" is three coordinates with one
+name: transverse in the affine fold (the offset `c` the fold flips; affine lines in the plane are a
+Möbius band), longitudinal in the zeta zero (the imaginary part `t` the crease leaves free), and a scale
+in matter and the Dirichlet term (`h = ln n`). The pair is a basis, not a generator: one crease and one
+height give one hyperplane; the twist needs two creases, the closure their angle. See
+`the-fold-crease-height.md`.
+
 **Reading paths:**
 
 | if you want | read |
@@ -103,6 +110,7 @@ so it can map the wall but not cross it. See `the-fold-complexity.md`.
 | why one plus one is two | `the-fold-composition.md` |
 | one point, both sides, all angles | `the-fold-apex.md` |
 | P vs NP and why the Fold cannot separate them | `the-fold-complexity.md` |
+| the crease and which height | `the-fold-crease-height.md` |
 | the interactive models | the nine HTML files |
 
 ## Contents
@@ -142,6 +150,7 @@ so it can map the wall but not cross it. See `the-fold-complexity.md`.
 | `the-fold-composition.md` | follow-up note: one plus one is two — folds add, parameters multiply, and the two conditional readings |
 | `the-fold-apex.md` | follow-up note: one point, both sides, all angles — the pencil, the cone family, and the tangent-cone correction |
 | `the-fold-complexity.md` | follow-up note: P and NP — the projection/section diagram, three rhymes, and the wall |
+| `the-fold-crease-height.md` | follow-up note: the crease and its height — transverse, longitudinal, and a basis not a generator |
 
 Open the HTML files directly in a browser — no build step, no dependencies.
 

@@ -87,6 +87,11 @@ the projection `π_H = ½(I + R)` is the critical-line projection, the same midp
 In the language of facets, the critical line is the facet and the zeros are points on it; relative to
 the line, each zero is a facet of the line. See `the-fold-facets.md`.
 
+The height is worth naming here. On the crease `ξ(1/2 + it)` is real, so the zero condition is one real
+equation in `t`; that `t` runs **along** the crease. The Dirichlet term's height `h = ln n` is a
+different coordinate — a scale, not a position. Same word, different register. See
+`the-fold-crease-height.md`.
+
 Where does the functional equation itself come from? Not from an assumption: it is the Mellin shadow
 of the theta fold `ϑ(1/t) = √t ϑ(t)`, whose half-density exponent `1/2` is the real part of the
 critical line. See `the-fold-theta.md`.

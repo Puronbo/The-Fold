@@ -64,6 +64,10 @@ projection is always split, so the geometry predicts no obstruction. If `P ≠ N
 **cost** of the section, not its existence. That is precisely what the Fold cannot see. The linear
 section is free; the combinatorial one is the search.
 
+In the height note's language, the witness is the transverse height over the crease and a solver is a
+height function `h ↦ s(h)`; the open question is the **cost** of that function. See
+`the-fold-crease-height.md`.
+
 This is why the problems note's "the Fold has no computational model" is right. The projection is a
 picture of the logic, not a model of the computation.
 

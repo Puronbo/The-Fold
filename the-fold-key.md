@@ -441,6 +441,16 @@ the one-way horizon. The Fold has no computational model, and every invariant it
 polynomial-time: a poly-time invariant that separated the classes would decide the NP language and
 collapse them, so the Fold can map the wall but not cross it. See `the-fold-complexity.md`.
 
+## The crease and its height
+
+In every geometric register the crease is codim 1. The height is whichever coordinate it leaves free, and
+that coordinate has three registers: **transverse** (the affine offset `c`, which the fold flips), **longitudinal** (the zeta
+zero's imaginary part `t = Im s`, which the crease leaves free), and **scale** (matter's `h` and the
+Dirichlet term's `ln n`). "What is left is the crease and its height" is exact only with the register
+named. The pair is a basis, not a generator: one crease plus one height is one affine hyperplane; the
+twist needs two creases, the closure their angle, the observer a dimension. See
+`the-fold-crease-height.md`.
+
 ## Key by question
 
 | question | answer | source |
@@ -462,6 +472,9 @@ collapse them, so the Fold can map the wall but not cross it. See `the-fold-comp
 | Can the Fold decide P vs NP? | no: no computational model, and every invariant is polynomial-time | complexity |
 | What is NP in the Fold's diagram? | an existential projection; a solver is a section | complexity |
 | Why can't a Fold invariant separate P from NP? | a poly-time invariant decides the NP language, so it proves equality, not inequality | complexity |
+| What is left after the wall? | a crease and a height — the instance and the witness, with the cost of the height function open | crease-height |
+| Is "height" one coordinate? | no: transverse (affine offset, witness), longitudinal (zeta `t`, theta `ln t`), or scale (`ln n`, matter) | crease-height |
+| Does one crease and one height generate the Fold? | no; they are a basis: the twist needs two creases, closure their angle, the observer `d` | crease-height |
 | What is the signature of zero? | `(0,0,n)`: `n` unsigned directions; scalar `0` but nullity `n` — not a balanced form | signature |
 | Why must nothing come first? | in the scale ledger a continuous sign change must cross a degenerate form; `k=0` is that crossing | signature |
 | What is the signature of a fold? | `(n−1,1,0)`: crease `+` of dimension `n−1`, normal `−` of dimension `1` | signature |
@@ -553,6 +566,7 @@ No new measurements. These are the existing checks the key rests on:
 | why one plus one is two | `the-fold-composition.md` |
 | one point, both sides, all angles | `the-fold-apex.md` |
 | P vs NP and the wall | `the-fold-complexity.md` |
+| the crease and which height | `the-fold-crease-height.md` |
 
 ## The key in one sentence
 

@@ -73,6 +73,9 @@ horizon law. Each is fixed by the one before it:
 | density | `ρ = M/V` | `−2` | `∝ 1/k²` |
 | horizon ratio | `k*` | `0` | constant |
 
+This is the **scale** height: it is the linear size `h ∝ k`, not the transverse offset of a crease or
+the longitudinal parameter of a zero. The three registers are named in `the-fold-crease-height.md`.
+
 The exponents obey a small arithmetic, which is why the table is consistent:
 
 ```

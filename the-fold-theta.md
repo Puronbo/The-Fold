@@ -39,6 +39,9 @@ So the height reflection `h ↦ −h` is a fold: it exchanges `t < 1` and `t > 1
 the inversion. The identity is Poisson summation — the sum over the lattice and the sum over the dual
 lattice are the same sum, and the Jacobian is the factor.
 
+This height is longitudinal: `h` runs along the line the fold fixes. It is not the zeta zero's height
+`t = Im s` (linear) and not the term's `ln n` (a scale). See `the-fold-crease-height.md`.
+
 ## The Mellin transform
 
 For `Re s > 1`,
