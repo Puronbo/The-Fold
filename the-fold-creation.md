@@ -216,7 +216,10 @@ J = [ 0  −1 ]        J² = −I        e^{θJ} = cos θ · I + sin θ · J = R
 [ 1   0 ]
 ```
 
-The quarter turn `J` is two folds at `45°`; the half turn `−I` is two folds at `90°`, or `J²`.
+The quarter turn `J` is two folds at `45°`; the half turn `−I` is two folds at `90°`, or `J²`. This is
+the mixed law `1_a + 1_b = 2_{ab}`: the folds add in number, the angle doubles, and the parameter
+composes. See `the-fold-composition.md`.
+
 The four cardinal values form the cycle
 
 ```

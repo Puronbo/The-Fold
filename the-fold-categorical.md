@@ -156,6 +156,14 @@ action is transitive (checked below), so the coequalizer is a point. The return 
 point is its vertex. The crease is a limit; the return is a colimit. **The Fold's loop is a
 limit–colimit pair**, and both ends are defined purely by morphisms.
 
+### Composition is the mixed law
+
+The endomorphism reading of `k` and the equalizer reading of the crease meet in the composition law
+`1_a + 1_b = 2_{ab}`: two folds are two morphisms, and their composite is a rotation. The count is
+additive (a sum of morphisms), the parameter is multiplicative (composition in the group), and the
+angle doubles. The categorical form of "one plus one is two" is therefore ordinary composition — with
+the subscripts carrying the two ledgers. See `the-fold-composition.md`.
+
 ### The point is a zero object
 
 From `the-fold-initial.md`: the collapsed image is initial and terminal among pointed spaces. A zero

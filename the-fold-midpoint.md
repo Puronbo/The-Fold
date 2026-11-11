@@ -86,7 +86,8 @@ structure rather than added by hand.
 
 Two derivations, one map: the parameter midpoint of `{+1, −1}` is `0`; the zero locus of the
 midpoint map is `k = −1`, where `m = g_0`. Both land on the same constant map, and its image is the
-centre.
+centre. This is also the reciprocal reading of `1_a + 1_b = 2_{ab}`, which holds exactly when
+`a + b = 2`: the pair is balanced about the identity. See `the-fold-composition.md`.
 
 What survives is the only thing that was never a measure. At `k = 10⁻⁹` the range is `10⁻⁹` and the
 aperture is still `60.0000°`, unmoved. So "everything is 0" is exact for every measure and false for

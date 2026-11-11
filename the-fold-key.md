@@ -97,7 +97,9 @@ dependency, not a clock — only the horizon is a process.
 ## The four laws
 
 1. **Size** — `det g_k = kⁿ`, so height `∝ k`, area `∝ k²`, volume `∝ k³`.
-2. **Fold → twist** — `σ_{H₂} ∘ σ_{H₁} = R(2α)`; the quarter turn is two folds at `45°`.
+2. **Fold → twist** — `σ_{H₂} ∘ σ_{H₁} = R(2α)`; the quarter turn is two folds at `45°`. In the
+   mixed law this is `1_a + 1_b = 2_{ab}`: the count adds, the angle doubles. See
+   `the-fold-composition.md`.
 3. **Closure** — `(σ₂σ₁)^m = I ⇔ m = π/α`; a lattice admits only `2 cos(2π/n) ∈ ℤ`, so
    `n ∈ {1, 2, 3, 4, 6}`.
 4. **Horizon** — `k* = 2GM/(c²R)`; `S = A_H/4ℓ_P²`; `T ∝ 1/k` in the homothetic family and constant
@@ -406,6 +408,14 @@ constructions:
 
 The zeta exchange rhymes with a duality but is not an adjunction. See `the-fold-categorical.md`.
 
+## The mixed law of composition
+
+`1_a + 1_b = 2_{ab}` is the Fold's composition law. It is **mixed**: the number of folds adds
+(`1 + 1 = 2`) while the parameter multiplies (`a` and `b` compose). Two folds compose to a rotation
+`R(2(ψ−φ))`, so the `2` is at once the fold count, the doubled angle, and the first nontrivial
+orientation-preserving composite. The two conditional readings are the crease (`1_a + 1_b = 2` exactly
+on `a ∩ b`) and the midpoint (`1/a + 1/b = 2/(ab)` iff `a + b = 2`). See `the-fold-composition.md`.
+
 ## Key by question
 
 | question | answer | source |
@@ -419,6 +429,8 @@ The zeta exchange rhymes with a duality but is not an adjunction. See `the-fold-
 | Did anything happen? | depends on the ledger: `k=1` identity, `k=0` collapse, and every dimensionless ratio invariant | key, matter |
 | Why is the loop not an inverse? | the inverse returns `k=1`; the loop returns `k=0` | key |
 | How can zeros and ones alternate? | fold ledger: distinct creases `H` and normals `n`; scale ledger: distinct zeros `k_t`, unique one `k=1` | key |
+| Why is one plus one two? | two folds compose to `R(2(ψ−φ))`: the count adds, the parameter multiplies, the angle doubles | composition |
+| Where do the two readings of `1_a+1_b=2_{ab}` hold? | indicators on the overlap `a ∩ b` (the crease); reciprocals iff `a+b=2` (the midpoint) | composition |
 | What is the signature of zero? | `(0,0,n)`: `n` unsigned directions; scalar `0` but nullity `n` — not a balanced form | signature |
 | Why must nothing come first? | in the scale ledger a continuous sign change must cross a degenerate form; `k=0` is that crossing | signature |
 | What is the signature of a fold? | `(n−1,1,0)`: crease `+` of dimension `n−1`, normal `−` of dimension `1` | signature |
@@ -507,6 +519,7 @@ No new measurements. These are the existing checks the key rests on:
 | what the Fold does and does not reach | `the-fold-problems.md` |
 | where the Fold starts | `the-fold-initial.md` |
 | objects as disguised morphisms | `the-fold-categorical.md` |
+| why one plus one is two | `the-fold-composition.md` |
 
 ## The key in one sentence
 

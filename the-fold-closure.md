@@ -30,7 +30,8 @@ with the last equality holding when `α/π` is rational. If `α = pπ/q` in lowe
 k = e^{iθ} = e^{2iα}
 ```
 
-is a `q`-th root of unity. Verified numerically to a residual of `2.4 × 10⁻¹⁶`:
+is a `q`-th root of unity. The `2` in `2q` is the `2` in `1_a + 1_b = 2_{ab}`: two folds per
+rotation, so the group order counts in pairs. See `the-fold-composition.md`. Verified numerically to a residual of `2.4 × 10⁻¹⁶`:
 
 | n | α = π/n | θ = 2α | k = e^{iθ} | closure m | \|G\| = 2m | creases |
 |---|---|---|---|---|---|---|

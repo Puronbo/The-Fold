@@ -82,6 +82,9 @@ The crease is also the only place the two faces meet, and there the surface is *
 `s = 0` neither face has area. So the continuous version of "the front disappears when the back
 appears" is stronger than the original: there is a moment of **neither**, and it is the crease.
 
+This is the indicator reading of `1_a + 1_b = 2_{ab}`: the two ones agree exactly on the overlap, and
+the overlap is the crease. See `the-fold-composition.md`.
+
 In the language of facets, the crease is a facet; the local front/back is the sign of its normal. See
 `the-fold-facets.md`.
 

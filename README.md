@@ -68,6 +68,11 @@ category makes it trivial, Yoneda makes it deep, duality makes it reverse. The F
 `k` is an endomorphism, the crease is an equalizer, the orbit space is a coequalizer, and the point is
 a zero object. See `the-fold-categorical.md`.
 
+**Composition:** `1_a + 1_b = 2_{ab}` reads three ways — folds add and the parameter
+multiplies (the mixed law); the indicators agree on the overlap (the crease); and the reciprocals balance
+when the midpoint is `1` (the identity). It is exact because it is mixed: additive in the fold ledger,
+multiplicative in the scale ledger. See `the-fold-composition.md`.
+
 **Reading paths:**
 
 | if you want | read |
@@ -85,6 +90,7 @@ a zero object. See `the-fold-categorical.md`.
 | what the Fold does and does not reach | `the-fold-problems.md` |
 | where the Fold starts | `the-fold-initial.md` |
 | objects as disguised morphisms | `the-fold-categorical.md` |
+| why one plus one is two | `the-fold-composition.md` |
 | the interactive models | the nine HTML files |
 
 ## Contents
@@ -121,6 +127,7 @@ a zero object. See `the-fold-categorical.md`.
 | `the-fold-problems.md` | follow-up note: the Fold and the open problems — exact, reformulation, rhyme, false friend, and the four walls |
 | `the-fold-initial.md` | follow-up note: the initial form — the common fixed point, the zero derivative, and the zero object |
 | `the-fold-categorical.md` | follow-up note: objects as disguised morphisms — arrow category, Yoneda, duality, looping, and the Fold's universal constructions |
+| `the-fold-composition.md` | follow-up note: one plus one is two — folds add, parameters multiply, and the two conditional readings |
 
 Open the HTML files directly in a browser — no build step, no dependencies.
 
