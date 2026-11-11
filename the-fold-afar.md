@@ -168,6 +168,228 @@ the crease; the unresolved singlet is the shadow. The same first/second moment s
 first moment, the splitting is the second. This is a rhyme, not the Fold's object: a spectral line is a
 frequency, not a geometric line, and the Fold models the splitting, not the spectrum.
 
+## Adjacent research
+
+Every object in this note has a standard name in a neighboring field, and the standard statement is
+sharper than the analogy. The table is the map; the subsections give the exact borrowing and the
+boundary.
+
+| field | here | there | what transfers |
+|---|---|---|---|
+| singularity theory | the V, the crease | Whitney fold; critical set and image | normal form, rank drop, critical set |
+| vision and geometry | the shadow | apparent contour of a surface | the silhouette is the image of a fold |
+| reflection groups | many creases | mirrors, chambers, quotient | the pleats are an affine reflection quotient |
+| geometric measure theory | the shadow is shorter | 1-Lipschitz projection; Besicovitch–Federer | `H¹(π_H E) ≤ H¹(E)`; rectifiability |
+| probability | mean and variance | law of total variance | the exact identity for a random phase |
+| catastrophe optics | height versus resolution | Airy diffraction catastrophe | the `2/3` fringe law |
+| spectroscopy | the unresolved doublet | Rayleigh and Sparrow criteria | the mean is exact, the singlet is an artifact |
+| origami | crease pattern, folded state | rigid foldability; NP-hardness | input/witness/verifier rhyme |
+| calculus of variations | the coarse-grained shadow | Γ-convergence, homogenization | limit density `√(1+s²)` and the excess |
+
+### Whitney's fold and the critical set
+
+A smooth map `f: ℝ² → ℝ²` whose differential has rank `1` at a point is, near that point, equivalent by
+diffeomorphisms of source and target to
+
+```
+f(x, y) = (x, y²)
+```
+
+provided the second derivative across the kernel is nonzero. This is Whitney's **fold** normal form. Its
+critical set is `{y = 0}`, a smooth curve; `f` restricted to the critical set is a diffeomorphism onto its
+image, the boundary of the half-plane `y ≥ 0`. If the second derivative also vanishes and the third does
+not, the normal form is the **cusp** `(x, y) ↦ (x, y³ + xy)`, whose image has a cusp point.
+
+The note's V is not the image of a line under `f`: that image is the parabola `(x, (mx+b)²)`. The V is the
+image under the quotient `F(x,y) = (x, |y|)`, and `f ∘ F = f`, `F ∘ F = F`. So `F` is the retraction onto
+the image of `f` along the fibers `{y, −y}`. The crease is the critical set of `f`; the V's vertex is
+where the line crosses it; the V is the square root of the parabola. The normal form supplies the rank
+drop and the critical set, not the straight rays: those are the quotient's.
+
+The cusp is the next singularity, and the boundary of the analogy: the V is a fold, not a cusp. A cusp
+needs the second derivative to vanish as well, which a line crossing a crease does not do.
+
+### Apparent contours
+
+For a surface `S ⊂ ℝ³` and a projection `π` along a view direction, the **contour generator** is the set
+of points of `S` where the view direction lies in the tangent plane; the **apparent contour** is its image
+under `π`. At a generic contour point the restriction `π|_S` is a fold, so the apparent contour is the
+image of the fold's critical set. This is the theorem behind "the silhouette is the image of a crease."
+
+The sphere is the exact check. View along `z`, so `π(x,y,z) = (x,y)`. Near the equator `z = 0`, write the
+sphere as `y = ±√(1 − u² − z²)` with `u = x`. Then
+
+```
+∂y/∂z = −z/y,   ∂²y/∂z²|₀ = −1/y₀
+```
+
+so the derivative vanishes on the equator and the second derivative does not: `π|_S` is a fold, the
+contour generator is the equator, and the apparent contour is the unit circle. The two signs are the two
+sides; the fold identifies them. Koenderink and van Doorn made this the basis of shape-from-contour;
+Bruce and Giblin's *Curves and Singularities* is the standard reference.
+
+The folded line from afar is the one-dimensional analogue: the "singular line" is the apparent contour of
+the pleated line under `π_H`, and the crease is its contour generator.
+
+### Reflection groups: the pleats as a quotient
+
+The creases of the pleated line are mirrors. The reflections
+
+```
+r_k(x) = 2kℓ − x
+```
+
+generate the infinite dihedral group; the creases `x = kℓ` are their fixed sets; the orbit of `x` is
+`{2kℓ ± x}`; a fundamental domain is `[0, ℓ]`. The triangle wave is exactly the quotient coordinate
+
+```
+tri(x) = a(2d/ℓ − 1),   d = dist(x, 2ℓℤ)
+```
+
+so the pleated line factors through the quotient, and the crease pattern is the mirror arrangement. In `n`
+dimensions a set of creases through a point generates a reflection group; the creases are the mirrors, the
+connected components of the complement are the chambers, and the quotient is a chamber. A finite
+reflection group's quotient is a cone; an affine reflection group's quotient is an alcove, and the pleated
+line is the affine `A₁` alcove, an interval. Humphreys is the standard reference.
+
+The boundary: the apex note's pencil is *all* creases through `P₀`, i.e. all of `ℝPⁿ⁻¹`; a reflection
+arrangement is a chosen finite or affine subset of them. The quotient statement is exact for the chosen
+arrangement, not for the full pencil. The one-mirror case is the Fold's `σ_H`: `ℝⁿ/ℤ₂ ≅ ℝⁿ₊`, the
+quotient map is `F`, and the crease is the branch locus.
+
+### Geometric measure theory: the shadow is 1-Lipschitz
+
+The projection `π_H` is orthogonal, hence 1-Lipschitz:
+
+```
+|π_H(x) − π_H(y)| ≤ |x − y|
+```
+
+so for every `H¹`-measurable set `E`, `H¹(π_H E) ≤ H¹(E)`. For the V, `H¹(V) = 2L√(1+m²)` and
+`H¹(π_H V) = 2L`, with equality only at `m = 0` (the line is the crease). The shadow is shorter, never
+longer; the difference is the quadratic excess.
+
+The Besicovitch–Federer projection theorem is the global statement: a purely unrectifiable set has
+zero-length projections in almost every direction, while a rectifiable set has positive-length
+projections in almost every direction. The folded line is rectifiable, so its shadow cannot be erased in
+almost every direction. "From afar" chooses the direction; the shadow's length is the projection of the
+fold's length. Mattila is the standard reference. This is measure theory, not a fold theorem: a fractal
+fold would have vanishing shadows in almost every direction.
+
+### The law of total variance
+
+If the pleat's phase is unresolved, model it as random: `X` is the shadow coordinate and `Φ` is uniform
+on `[0, 2ℓ)`, so `Y = a·tri((X+Φ)/ℓ)`. Then `E[Y|X] = 0` and `Var(Y|X) = a²/3`, and the law of total
+variance
+
+```
+Var(Y) = E[Var(Y|X)] + Var(E[Y|X])
+```
+
+gives `Var(Y) = a²/3`. The shadow is the conditional mean; the fold is the conditional variance; the
+first moment is the crease, the second is the fold. For a deterministic pleat the conditional variance is
+zero — the height is a function of the shadow — so the probabilistic reading requires the unresolved
+phase. The identity is exact; the randomness is the model of the observer's ignorance.
+
+### Catastrophe optics: the `2/3` law
+
+The fold diffraction integral is
+
+```
+I(k,u) = ∫ exp(ik(t³/3 + ut)) dt = 2π k^{−1/3} Ai(k^{2/3}u)
+```
+
+so the intensity is `|I|² ∝ k^{−2/3}|Ai(k^{2/3}u)|²`. The Airy zeros `a_n` give the fringe positions
+`u_n = a_n k^{−2/3}`: the fringe spacing in the scaled transverse variable scales as `k^{−2/3}`, i.e. as
+`λ^{2/3}` once the cubic coefficient is fixed. The geometric caustic is the `k → ∞` limit; the
+resolution threshold scales as `λ^{2/3}`. Berry and Upstill's "Catastrophe optics" is the standard
+reference.
+
+This is the sharpest rhyme in the note, and still a rhyme: in diffraction the transverse variable is an
+optical path, `k = 2π/λ` is the wave number, and `λ^{2/3}` is a physical resolution. The Fold's height is
+geometric; the `2/3` says how a wave of a given scale resolves a fold, not that the Fold's height is a
+wavelength. The check below is the exact scaling of the Airy zeros, not an optical measurement.
+
+### Resolution criteria: the doublet
+
+Two equal Gaussian profiles of width `σ` separated by `Δ` have
+
+```
+f(x) = exp(−(x−Δ/2)²/(2σ²)) + exp(−(x+Δ/2)²/(2σ²))
+```
+
+and at the midpoint `f''(0) = (2/σ²) e^{−Δ²/(8σ²)} (Δ²/(4σ²) − 1)`. The dip closes exactly at `Δ = 2σ`
+(the Sparrow criterion); for `Δ > 2σ` there are two peaks, for `Δ < 2σ` one. The Rayleigh criterion is
+profile-dependent: in angle, `Δθ = λ/D` for a slit and `1.22λ/D` for a circular aperture; in wavelength
+the analogous scale is `Δλ = λ/R`, and Robertson argues that neither is the right scale for Gaussian or
+Lorentzian lines. The unresolved doublet is the mean; the singlet is a resolution artifact, not a line.
+This is the rhyme of the note's last section, and the boundary is that a spectral line is a frequency
+profile, not a geometric crease.
+
+### Origami: pattern, state, and a rhyme
+
+A crease pattern is a planar graph with a mountain/valley label; a flat folding maps it to the plane,
+isometric on the facets and folding along the creases; rigid foldability asks whether the facets move as
+rigid plates. Akitaya, Demaine, Horiyama, Hull, Ku, and Tachi prove that deciding rigid foldability is
+weakly NP-hard with all creases (from Partition) and strongly NP-hard with optional creases (from 1-in-3
+SAT). Their abstract also notes the asymmetry: folding from a flat sheet is harder than unfolding a
+folded state, because the difficulty is the combinatorial behavior at each vertex, not layer ordering.
+
+The rhyme with the complexity note is exact at the level of shape: the crease pattern is the input, the
+folded state is the witness, and the isometric map is the verifier; folding is the quotient
+(many-to-one), unfolding is a section (a choice). It is a rhyme, not a reduction: rigid foldability is a
+different combinatorial model, and its NP-hardness gives no lower bound for the Fold or for any open
+problem.
+
+### Γ-convergence: the coarse-grained length
+
+Fix the slope `s` and let the half-period `ℓ → 0` with amplitude `a = sℓ/2`. The pleated graph
+`y_ℓ(x) = (sℓ/2)·tri(x/ℓ)` has `|y_ℓ'| = s`, so its length density is
+
+```
+√(1 + s²)
+```
+
+for every `ℓ`, and the excess over the straight line is `√(1 + s²) − 1 ≈ s²/2`. The homogenized density
+is the constant `√(1+s²)`; Γ-convergence is the theory that makes this a limit of variational problems:
+the oscillating functionals converge to the functional with that constant density, whose minimizer is the
+straight line. It makes "the shadow is the limit" a statement about energies rather than images.
+Braides's handbook is the standard reference.
+
+The boundary: the blur is an image-space limit; Γ-convergence is an energy-space limit. They give the
+same density but they are different theorems. The note uses "coarse-graining" for the blur and
+"homogenization" for the Γ-limit; they should not be identified.
+
+### What transfers, and what does not
+
+| element | exact in the literature | not claimed |
+|---|---|---|
+| the V and the crease | Whitney fold normal form; critical set and image | `σ_H` is a global involution, not a map-germ |
+| the shadow | apparent contour; 1-Lipschitz projection | it is not a physical shadow or a perception theorem |
+| many folds | quotient by a reflection group; chambers | not every pencil of creases is a finite arrangement |
+| mean and variance | law of total variance under a random phase | a deterministic pleat is not random |
+| the `2/3` law | Airy diffraction catastrophe | the Fold's height is not a wavelength |
+| the doublet | Rayleigh/Sparrow resolution criteria | not a spectral theorem |
+| the crease pattern | rigid foldability is NP-hard | no P vs NP or lower-bound claim |
+| the coarse-grained length | Γ-convergence and homogenization | not the same limit as the blur |
+
+### References
+
+| topic | reference | link |
+|---|---|---|
+| fold and cusp | Whitney, *On singularities of mappings of Euclidean spaces I*, Ann. of Math. 62 (1955), 374–410 | [overview](https://singsurf.org/parade/stable.php) |
+| curves and singularities | Bruce and Giblin, *Curves and Singularities*, 2nd ed., CUP 1992 | [frontmatter](https://assets.cambridge.org/97805214/19857/frontmatter/9780521419857_frontmatter.pdf) |
+| apparent contours | Koenderink and van Doorn, *The shape of smooth objects and the way contours end*, Perception 11 (1982), 129–137 | [DOI](https://doi.org/10.1068/p110129) |
+| reflection groups | Humphreys, *Reflection Groups and Coxeter Groups*, CUP 1990 | [PDF](https://sites.math.washington.edu/~billey/classes/reflection.groups/references/Humphreys.ReflectionGroupsAndCoxeterGroups.pdf) |
+| projections | Mattila, *Geometry of Sets and Measures in Euclidean Spaces*, CUP 1995 | [thesis](https://www.math.unipd.it/~monti/tesi/DallAlba.pdf) |
+| total variance | *Law of total variance* | [Wikipedia](https://en.wikipedia.org/wiki/Law_of_total_variance) |
+| catastrophe optics | Berry and Upstill, *Catastrophe optics*, Progress in Optics 18 (1980), 257–346 | [PDF](https://michaelberryphysics.wordpress.com/wp-content/uploads/2022/02/berry089-1.pdf) |
+| spectral resolution | Robertson, *Quantifying resolving power in astronomical spectra*, PASA 30 (2013), e048 | [arXiv](https://arxiv.org/abs/1308.0871) |
+| Rayleigh criterion | *The Rayleigh Criterion* | [HyperPhysics](http://hyperphysics.phy-astr.gsu.edu/hbase/phyopt/Raylei.html) |
+| rigid foldability | Akitaya, Demaine, Horiyama, Hull, Ku, Tachi, *Rigid foldability is NP-hard*, J. Comput. Geom. 11 (2020), 93–124 | [arXiv](https://arxiv.org/abs/1812.01160) |
+| geometric folding | Demaine and O'Rourke, *Geometric Folding Algorithms*, CUP 2007 | — |
+| Γ-convergence | Braides, *Γ-convergence for Beginners*, OUP 2002; *A handbook of Γ-convergence* | [handbook](https://cvgmt.sns.it/media/doc/paper/57/Handbook.pdf) |
+
 ## Checks
 
 | check | value |
@@ -190,9 +412,22 @@ frequency, not a geometric line, and the Fold models the splitting, not the spec
 | fold-catastrophe rank, `y = 0` / `y ≠ 0` | `1` / `2` |
 | scale invariance, `k = 0.01 … 1000` | angle `22.619865°`, path/chord `1.019804` |
 | first / second moment, `a = 1` | `0` / `0.333335` vs `1/3` |
+| Whitney fold rank, `y = 0` / `y ≠ 0` | `1` / `2` |
+| Whitney fold fibers, `y ≠ 0` | `y` and `−y` both map to `y²` |
+| sphere apparent contour, `u = 0 / 0.3 / 0.6` | `∂²y/∂z² = −1 / −1.048285 / −1.25` |
+| dihedral invariance residual | `≤ 1.8e−15` |
+| crease fixed by `r_k` | `0` |
+| quotient formula `tri(x) = a(2d/ℓ − 1)` | `0` |
+| projection Lipschitz, 200k pairs | worst `−4.8e−13` (`≤ 0`) |
+| random-phase `Var(Y)` vs `a²/3` | `0.333657` vs `0.333333` |
+| random-phase decomposition | `0.333574 + 7.4e−5 = 0.333648` |
+| Airy zero scaling, `k = 1 / 8 / 64` | `u₁ k^{2/3} = −2.3381074105` |
+| Gaussian doublet, `Δ = 2σ` | `f''(0) = 0`; two peaks for `Δ > 2σ` |
+| homogenized density, `s = 0.4` | `1.07703296` for `ℓ = 1 … 0.125`; excess `0.07703296` vs `s²/2 = 0.08` |
 
-The first block is the V; the second is the pleats; the third is the singular set and the scale check.
-The numbers are floating-point confirmations of the formulas, not new measurements.
+The first block is the V; the second is the pleats; the third is the singular set and the scale check;
+the fourth is the adjacent research. The numbers are floating-point confirmations of the formulas, not
+new measurements.
 
 ## What this does and does not say
 
@@ -208,14 +443,22 @@ The numbers are floating-point confirmations of the formulas, not new measuremen
   coarse-graining drop the transverse height.
 - It **does** place the fold's height in the second moment: the shadow sees the first, the length sees the
   second.
+- It **does** place the V in the Whitney fold normal form, the shadow in the apparent-contour theorem, the
+  pleats in the infinite dihedral quotient, and the length excess in the 1-Lipschitz and
+  Besicovitch–Federer framework.
+- It **does** give the exact probabilistic identity behind the moment reading and the exact variational
+  limit behind the coarse-graining.
 - It **does not** claim that a real physical fold, material, or perceived line behaves exactly this way;
   it is a model of the Fold's geometry.
-- It **does not** prove a theorem about singularities in algebraic geometry; "singular" here is the
-  non-smooth and critical locus of the sheet fold.
+- It **does not** prove a new theorem in singularity theory; Whitney's normal form and the
+  apparent-contour theorem are used, not extended.
 - It **does not** identify the crease with a zeta zero, a horizon, or a facet; those are different
   registers.
 - It **does not** make the global reflection `σ_H` a fold of a sheet; `σ_H` maps a line to a line, the
   quotient `F` makes the V.
+- It **does not** import the physical content of the adjacent fields: the `2/3` Airy law is a rhyme, the
+  doublet is a rhyme, rigid foldability is a different combinatorial model, and Γ-convergence is a
+  different limit from the blur.
 
 ## The one sentence
 
@@ -230,4 +473,5 @@ height.**
 transverse height and the crease are in `the-fold-crease-height.md`; the two sides as one fold and the
 pencil are in `the-fold-apex.md`; the equalizer/coequalizer reading is in `the-fold-categorical.md`; the
 length and angle invariants are in `the-fold-invariants.md`; the height law and the observer are in
-`the-fold-matter.md`; the lookup is `the-fold-key.md`.
+`the-fold-matter.md`; the lookup is `the-fold-key.md`. The complexity rhyme is in
+`the-fold-complexity.md`; the references are collected in the `## Adjacent research` section above.

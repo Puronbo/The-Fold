@@ -462,6 +462,11 @@ jumps by `2`), rank-deficient (the projection) — all at the crease. The scale 
 (the shape is scale-invariant); "from afar" is a projection or a coarse-graining, not `k → 0`. See
 `the-fold-afar.md`.
 
+Adjacent research: the V is the Whitney fold's normal form, the shadow is an apparent contour, the
+pleats are an infinite-dihedral quotient, the moments are the law of total variance, the resolution is
+the Airy `2/3` law and the Sparrow criterion, the crease pattern is rigid foldability (NP-hard), and the
+coarse-graining is Γ-convergence. The note states what transfers and what does not.
+
 ## Key by question
 
 | question | answer | source |
