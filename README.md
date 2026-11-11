@@ -78,6 +78,11 @@ multiplicative in the scale ledger. See `the-fold-composition.md`.
 cover the space while intersecting only at the point. The point does not extend; its tangent cone does.
 See `the-fold-apex.md`.
 
+**P and NP:** `NP` is an existential projection and a solver is a section; the Fold's linear projection
+is the simplest instance, and it is always split, so the hardness is the cost of the section, not its
+existence. The Fold has no computational model, and every invariant it can compute is polynomial-time —
+so it can map the wall but not cross it. See `the-fold-complexity.md`.
+
 **Reading paths:**
 
 | if you want | read |
@@ -97,6 +102,7 @@ See `the-fold-apex.md`.
 | objects as disguised morphisms | `the-fold-categorical.md` |
 | why one plus one is two | `the-fold-composition.md` |
 | one point, both sides, all angles | `the-fold-apex.md` |
+| P vs NP and why the Fold cannot separate them | `the-fold-complexity.md` |
 | the interactive models | the nine HTML files |
 
 ## Contents
@@ -135,6 +141,7 @@ See `the-fold-apex.md`.
 | `the-fold-categorical.md` | follow-up note: objects as disguised morphisms — arrow category, Yoneda, duality, looping, and the Fold's universal constructions |
 | `the-fold-composition.md` | follow-up note: one plus one is two — folds add, parameters multiply, and the two conditional readings |
 | `the-fold-apex.md` | follow-up note: one point, both sides, all angles — the pencil, the cone family, and the tangent-cone correction |
+| `the-fold-complexity.md` | follow-up note: P and NP — the projection/section diagram, three rhymes, and the wall |
 
 Open the HTML files directly in a browser — no build step, no dependencies.
 

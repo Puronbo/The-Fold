@@ -431,6 +431,16 @@ is `{P₀}`; the double cone (both nappes) is the orbit of one ray under `O(n−
 not extend: it has the tangent space `ℝⁿ` with the zero form `(0,0,n)`, the direction sphere `Sⁿ⁻¹`,
 and no metric, no selected aperture, and no tangent *plane*. See `the-fold-apex.md`.
 
+## P and NP
+
+`NP` is an existential projection: `x ∈ L ⇔ ∃w R(x,w)`, and a solver is a section of `π_X`. The Fold's
+linear projection `π_H = ½(I + σ_H)` is the simplest instance, and it is always split (`rank n−1`,
+kernel the normal line), so the hardness is the **cost** of the section, not its existence. P is the
+additive ledger (`1+1=2`), NP the multiplicative one (`ab`); verification is the outward crossing of
+the one-way horizon. The Fold has no computational model, and every invariant it computes is
+polynomial-time: a poly-time invariant that separated the classes would decide the NP language and
+collapse them, so the Fold can map the wall but not cross it. See `the-fold-complexity.md`.
+
 ## Key by question
 
 | question | answer | source |
@@ -449,6 +459,9 @@ and no metric, no selected aperture, and no tangent *plane*. See `the-fold-apex.
 | Why are the two sides one fold? | the crease is `H_n = H_{−n}`: the normal is unoriented, so folds through the point are `ℝPⁿ⁻¹` | apex |
 | Is the point on every crease? | yes, `P₀ ∈ H` for every `H` in its pencil; and only `P₀` is on all of them | apex |
 | Does the point extend? | no; its tangent cone does: `⋃ D(n,α) = ℝⁿ` and `⋂ D(n,α) = {P₀}` | apex |
+| Can the Fold decide P vs NP? | no: no computational model, and every invariant is polynomial-time | complexity |
+| What is NP in the Fold's diagram? | an existential projection; a solver is a section | complexity |
+| Why can't a Fold invariant separate P from NP? | a poly-time invariant decides the NP language, so it proves equality, not inequality | complexity |
 | What is the signature of zero? | `(0,0,n)`: `n` unsigned directions; scalar `0` but nullity `n` — not a balanced form | signature |
 | Why must nothing come first? | in the scale ledger a continuous sign change must cross a degenerate form; `k=0` is that crossing | signature |
 | What is the signature of a fold? | `(n−1,1,0)`: crease `+` of dimension `n−1`, normal `−` of dimension `1` | signature |
@@ -539,6 +552,7 @@ No new measurements. These are the existing checks the key rests on:
 | objects as disguised morphisms | `the-fold-categorical.md` |
 | why one plus one is two | `the-fold-composition.md` |
 | one point, both sides, all angles | `the-fold-apex.md` |
+| P vs NP and the wall | `the-fold-complexity.md` |
 
 ## The key in one sentence
 

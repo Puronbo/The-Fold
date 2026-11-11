@@ -42,7 +42,7 @@ that matters, and this note is written to avoid it.
 | Langlands | additive/multiplicative exchange | the same duality, different categories |
 | Yang–Mills mass gap | the horizon (null crease) | no operator, no quantum field |
 | Navier–Stokes | the collapse `g₀` | a fluid singularity is not the zero map |
-| P vs NP | none | the Fold has no computational model |
+| P vs NP | an existential projection; a solver is a section | no computational model; the linear projection is always split, so the hardness is cost, not existence |
 | Poincaré (solved) | the return to the point | the theorem is about `π₁`, not the orbit space |
 
 The rest of the note is the four zones, in order of how much they actually carry.
@@ -178,8 +178,11 @@ equals topological index — is the exact ancestor of "a zero is a conserved cha
   blow-up of a velocity field. The Fold has neither an operator nor a field equation. The horizon's
   entropy and temperature are a scaling reading in the homothetic family, not a derivation of
   thermodynamics. These are rhymes, and stating them as more would be the false-friend error.
-- **P vs NP.** No contact. The Fold has no notion of a computation, a certificate, or a circuit. The
-  additive/multiplicative duality is not a complexity separation.
+- **P vs NP.** No contact for a proof, but one exact diagram: `NP` is an existential projection and a
+  solver is a section; the Fold's linear projection is the simplest instance, and it is always split, so
+  the hardness is the cost of the section, not its existence. The two ledgers and the one-way horizon
+  are rhymes. Every Fold invariant is polynomial-time, so it can only collapse the classes, not separate
+  them. See `the-fold-complexity.md`.
 
 ## Zone 4: the false friends
 
