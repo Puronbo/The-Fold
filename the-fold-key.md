@@ -467,6 +467,18 @@ pleats are an infinite-dihedral quotient, the moments are the law of total varia
 the Airy `2/3` law and the Sparrow criterion, the crease pattern is rigid foldability (NP-hard), and the
 coarse-graining is Γ-convergence. The note states what transfers and what does not.
 
+## The observer: dimension and window
+
+The observer is the pair `(d, w)`. `d` is the form degree: a `d`-dimensional observer measures a
+`d`-form, so a homogeneous quantity of degree `p` becomes `h^{p−d}` — scalar, derivative, flux, density
+for `d = 0, 1, 2, 3`. The star's square is `⋆² = (−1)^{d(n−d)+s}`; the signature selects the sign. `w`
+is the window: the Gaussian `G_w`, with exact semigroup `G_{w1} * G_{w2} = G_{√(w1²+w2²)}`, attenuates a
+feature of half-period `ℓ` by `e^{−π²w²/(2ℓ²)}`. The paper's table is the `w → 0` slice; "from afar" is
+`w` larger than the fold's height. The parameters are independent: wrong `d` is degree blindness (no
+flux without an oriented area), wrong `w` is scale blindness (the fold is averaged away); neither fixes
+the other. The surface is `d = n−1`, edge-on; the horizon is its null limit. See
+`the-fold-observer.md`.
+
 ## Key by question
 
 | question | answer | source |
@@ -495,6 +507,10 @@ coarse-graining is Γ-convergence. The note states what transfers and what does 
 | Is "from afar" the same as `k → 0`? | no: the scale is shape-invariant; the projection or coarse-graining drops the height | afar |
 | Where does the fold's height survive? | in the length, at second order: `L m²` for a V, `2a²/ℓ²` for pleats | afar |
 | What does "singular" mean here? | one line (quotient), non-smooth (derivative jump), rank-deficient (projection) — all the crease | afar |
+| Why does an observer need two parameters? | `d` selects the form, `w` the scale; neither fixes the other | observer |
+| What is "from afar" in observer terms? | a window `w` larger than the fold's height; the ratio `h/D`, not `k → 0` | observer, afar |
+| Why can a 2D observer miss the fold? | it has the flux but its window `w > h` averages the fold away | observer |
+| What is the horizon as an observer? | `d = n−1` on the surface: `Ω = 2π`, edge-on; the null limit | observer, horizon |
 | What is the signature of zero? | `(0,0,n)`: `n` unsigned directions; scalar `0` but nullity `n` — not a balanced form | signature |
 | Why must nothing come first? | in the scale ledger a continuous sign change must cross a degenerate form; `k=0` is that crossing | signature |
 | What is the signature of a fold? | `(n−1,1,0)`: crease `+` of dimension `n−1`, normal `−` of dimension `1` | signature |
@@ -588,6 +604,7 @@ No new measurements. These are the existing checks the key rests on:
 | P vs NP and the wall | `the-fold-complexity.md` |
 | the crease and which height | `the-fold-crease-height.md` |
 | a folded line that looks like one line from afar | `the-fold-afar.md` |
+| the observer as dimension and window | `the-fold-observer.md` |
 
 ## The key in one sentence
 

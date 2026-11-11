@@ -15,6 +15,11 @@ family `h ∝ k`, `M ∝ h`, `A ∝ h²`, `V ∝ h³`, `S ∝ h²`, `T ∝ 1/h`,
 stays constant. Shape is the aperture `θ`; turn is `arg k`. A `d`-dimensional observer measures
 `h^{p−d}` — scalar, derivative, flux, density for `d = 0, 1, 2, 3`. See `the-fold-matter.md`.
 
+**Observer:** the observer is a pair `(d, w)` — dimension and window. `d` selects the form
+(`h^{p−d}`) and `w` selects the smallest resolvable feature (the Gaussian window, with semigroup
+`G_{w1} * G_{w2} = G_{√(w1²+w2²)}`). The paper's table is the `w → 0` slice; "from afar" is `w` larger
+than the fold's height. See `the-fold-observer.md`.
+
 **Two nothings:** `k = 1` is the identity — nothing changed; `k = 0` is the collapse — nothing has
 size. The creation loop returns the second, not the first.
 
@@ -119,6 +124,7 @@ a projection or a coarse-graining, not `k → 0`. See `the-fold-afar.md`.
 | P vs NP and why the Fold cannot separate them | `the-fold-complexity.md` |
 | the crease and which height | `the-fold-crease-height.md` |
 | a folded line that looks like one line from afar | `the-fold-afar.md` |
+| the observer as dimension and window | `the-fold-observer.md` |
 | the interactive models | the nine HTML files |
 
 ## Contents
@@ -160,6 +166,7 @@ a projection or a coarse-graining, not `k → 0`. See `the-fold-afar.md`.
 | `the-fold-complexity.md` | follow-up note: P and NP — the projection/section diagram, three rhymes, and the wall |
 | `the-fold-crease-height.md` | follow-up note: the crease and its height — transverse, longitudinal, and a basis not a generator |
 | `the-fold-afar.md` | follow-up note: the folded line from afar — the V, the pleats, the singular line, and projection rather than scale |
+| `the-fold-observer.md` | follow-up note: the observer as dimension and window — the form degree, the resolution, and two kinds of blindness |
 
 Open the HTML files directly in a browser — no build step, no dependencies.
 

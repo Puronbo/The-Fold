@@ -89,7 +89,8 @@ all. That is exactly why the twist's invariant is not an inertia but the Pfaffia
 occupies the gap in the signature ladder; it occupies the same gap in the zero pipeline.
 
 The observer measures; it does not vanish. A `d`-form has no zero of its own, and its sharpest
-invariant is the Hodge star's square `⋆² = (−1)^{d(n−d)+s}`, a sign rather than an inertia.
+invariant is the Hodge star's square `⋆² = (−1)^{d(n−d)+s}`, a sign rather than an inertia. The
+observer's two parameters — form degree and window — are in `the-fold-observer.md`.
 
 So the pipeline has two gaps, and they are the two stages where the invariant stops being the inertia
 of the stage operator. **A zero is what an inertia measures; where there is no zero, the invariant is

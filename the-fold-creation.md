@@ -362,7 +362,8 @@ The same table reads the sphere from three places:
 
 The exterior `5.060%` is exactly `d = 2.281 r`; the same ratio reproduces `1.216%` and `0.301%` at
 `k = 0.5, 0.25`. The observer stage is the first perspective: the universe becomes measurable only
-when a dimension is specified.
+when a dimension is specified. The dimension is one parameter; the resolution window is the other. See
+`the-fold-observer.md`.
 
 ## 7. The return
 

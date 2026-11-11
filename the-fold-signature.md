@@ -183,7 +183,8 @@ In the Lorentzian reading `s = 1`. In four dimensions the exponent `d(4−d)+1` 
 `d+1`, so `⋆² = (−1)^{d+1}` on `d`-forms: a 1-form (gradient) and a 3-form (density) square to `+1`,
 while a 0-form (scalar), a 2-form (flux) and a 4-form (volume) square to `−1`. The observer's
 dimension `d` selects the form; the signature selects the star's square. This is the footprint of the
-signature on measurement, and it is exact.
+signature on measurement, and it is exact. The dimension is one of two observer parameters; the other is
+the resolution window. See `the-fold-observer.md`.
 
 ## The division thresholds
 

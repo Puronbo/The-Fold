@@ -153,7 +153,8 @@ under `k`. What disappears is the **transverse height in the observer's projecti
 observer's resolution coarser than the height, i.e. the ratio `h/D`, not `k`. If the observer and the
 object scale together, the fold is invariant; if the observer's resolution is fixed and the object is
 far, the height falls below the resolution. The exact operation is the projection `π_H` (or the
-coarse-graining), not the scale.
+coarse-graining), not the scale. The observer's two parameters — form degree `d` and window `w` — are
+in `the-fold-observer.md`.
 
 This is the same split as the matter note: the height fixes the magnitudes, the shape is invariant. And
 the same split as the occlusion note: the projection drops the side, the metric squares it. The folded
