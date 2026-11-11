@@ -377,6 +377,18 @@ what is missing, one item per known route to RH:
 The fold's inertia and the negative Hodge intersection form have the same shape at every rank; that is
 the closest link, and it is a link of shape, not of proof. See `the-fold-problems.md`.
 
+## The initial form
+
+The initial state is the datum `P₀`, and it has an exact characterization: **the unique point fixed by
+every `g_k`** (`g_k(P₀)=P₀`; and `g_k(P)=P` with `k≠1` forces `P=P₀`). Its initial form is the
+derivative there, `Dg₀ = 0` — the null form `(0,0,n)`, rank 0, minimal polynomial `λ`. So the form is
+the derivative of the state, and at the initial state the derivative vanishes.
+
+The collapsed image is the **zero object**: a point is initial and terminal among pointed spaces. The
+initial data reduces to a dimension and a centre; `k` is the generator, and `k = 0` is its degenerate
+value, outside the group. The point is not the empty set, not the identity `k=1`, not one direction,
+not an aperture. See `the-fold-initial.md`.
+
 ## Key by question
 
 | question | answer | source |
@@ -415,6 +427,9 @@ the closest link, and it is a link of shape, not of proof. See `the-fold-problem
 | What is missing for RH? | one of: a surface (positivity), an operator (Hilbert–Pólya), a bound (`Λ≤0`), a parity breaker | problems |
 | Is the Fold's zero a zeta zero? | no; a zeta zero is a cancellation, codim 2, not the zero map | problems, zeta |
 | Do the zeros' statistics match the twist? | yes, one `J` gives `β=2` (GUE); the Pfaffian is not the quaternionic `β=4` class | problems |
+| What is the initial state? | the datum `P₀`: the unique point fixed by every non-identity `g_k` | initial |
+| What is the initial form? | `Dg₀ = 0`: the null form `(0,0,n)`, rank 0 | initial |
+| Is the point the empty set? | no; it has `n` unsigned directions and a zero object; the empty set has no tangent space | initial, signature |
 | Why is a twist two folds? | `σ_{H₂} ∘ σ_{H₁} = R(2α)` | §4 |
 | Why does the twist repeat? | closure `m = π/α` | closure |
 | Why only 2-, 3-, 4-, 6-fold in a lattice? | `2 cos(2π/n)` must be an integer | closure |
@@ -470,6 +485,7 @@ No new measurements. These are the existing checks the key rests on:
 | why the critical line is at 1/2 | `the-fold-theta.md` |
 | the zeros in pipeline order | `the-fold-pipeline.md` |
 | what the Fold does and does not reach | `the-fold-problems.md` |
+| where the Fold starts | `the-fold-initial.md` |
 
 ## The key in one sentence
 

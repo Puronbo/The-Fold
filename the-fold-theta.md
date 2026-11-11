@@ -10,6 +10,10 @@ The answer is exact: the theta modular factor is `t^{1/2}`, and that exponent is
 critical line. Change the exponent and the line moves. The theta fold gives the axis; it does not give
 the zeros.
 
+The analytic pipeline's initial state is the theta function itself, with the modular factor `t^{1/2}`
+as its initial form; the geometric register's initial state is the point. They are different initial
+objects, and they meet at the crease. See `the-fold-initial.md`.
+
 ## The theta fold
 
 Write `ϑ` for the theta function, to keep `θ` for the aperture:

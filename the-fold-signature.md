@@ -15,6 +15,9 @@ The zero is not "signature 0" in the sense of a balanced form. It is totally nul
 g₀ = 0          inertia (0, 0, n)          scalar signature 0          rank 0          nullity n
 ```
 
+This is the Fold's initial form: the linear part at the datum, `Dg₀ = 0`. The state is the unique point
+fixed by every scale; the form is its derivative. See `the-fold-initial.md`.
+
 The scalar signature is `0`, but the scalar signature of a planar fold is also `0`. The scalar cannot
 tell them apart. The full inertia can: the zero has **no signed directions at all**, while the planar
 fold has one of each. The signature of nothing is the **nullity `n`**, not the number `0`.

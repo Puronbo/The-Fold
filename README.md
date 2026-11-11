@@ -58,6 +58,11 @@ the point: positivity needs a surface, Hilbert–Pólya needs an operator, de Br
 and the explicit formula needs a parity breaker — four known walls, one crease. See
 `the-fold-problems.md`.
 
+**Initial form:** the initial state is the datum — the unique point fixed by every non-identity
+scale; its form is
+the derivative there, `Dg₀ = 0`, the null form `(0,0,n)`; and its object is the zero object, initial
+and terminal at once. The form is the derivative of the state. See `the-fold-initial.md`.
+
 **Reading paths:**
 
 | if you want | read |
@@ -73,6 +78,7 @@ and the explicit formula needs a parity breaker — four known walls, one crease
 | why the critical line is at 1/2 | `the-fold-theta.md` |
 | the zeros in pipeline order | `the-fold-pipeline.md` |
 | what the Fold does and does not reach | `the-fold-problems.md` |
+| where the Fold starts | `the-fold-initial.md` |
 | the interactive models | the nine HTML files |
 
 ## Contents
@@ -107,6 +113,7 @@ and the explicit formula needs a parity breaker — four known walls, one crease
 | `the-fold-theta.md` | follow-up note: the theta fold — the functional equation derived, and why the critical line is at `1/2` |
 | `the-fold-pipeline.md` | follow-up note: the zero pipeline — one zero equation per stage, five kinds of zero, and the two gaps |
 | `the-fold-problems.md` | follow-up note: the Fold and the open problems — exact, reformulation, rhyme, false friend, and the four walls |
+| `the-fold-initial.md` | follow-up note: the initial form — the common fixed point, the zero derivative, and the zero object |
 
 Open the HTML files directly in a browser — no build step, no dependencies.
 

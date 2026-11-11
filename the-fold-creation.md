@@ -80,7 +80,9 @@ measure:
 The cone note makes this quantitative. At the vertex of a range cone with aperture `θ = 60°`, the
 solid angle stays `Ω/4π = 0.25` however far in you zoom (`5 × 10⁻²`, `10⁻²`, `2 × 10⁻³`), while a
 smooth surface point goes to `0.5` and an interior point stays at `1`. The vertex is zero of every
-measure and all of the direction. That is the seed: a direction without distance.
+measure and all of the direction. That is the seed: a direction without distance. The state is exactly
+characterized as the unique point fixed by every non-identity `g_k`, and its form is the derivative `Dg₀ = 0`; see
+`the-fold-initial.md`.
 
 The signature of this stage is the **null signature**. The collapsed image is a point and has no
 tangent space; the ambient tangent space at the datum is `ℝⁿ`, and the linear part of `g₀` is `0`

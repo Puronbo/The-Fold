@@ -31,6 +31,11 @@ Each stage asks "where does this vanish?" and gets a different kind of answer:
 
 The table is the note. Three things to read from it.
 
+The first row is the pipeline's initial state: the datum, the unique point fixed by every non-identity
+scale, whose
+initial form is the zero derivative `Dg₀ = 0`. The pipeline's input is the initial form. See
+`the-fold-initial.md`.
+
 **The degree of the vanishing equation is not constant.** The fold's zero solves a *linear* system;
 the horizon's solves a *quadratic* equation; the zeta zero solves a *holomorphic* equation. A facet is
 the zero of a linear functional, a null crease is the zero of a quadratic form, a zeta zero is the
