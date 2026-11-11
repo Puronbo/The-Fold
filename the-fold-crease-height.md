@@ -125,6 +125,9 @@ coordinate system, not a single object. A point is `(h, s)` — a crease coordin
 height. A zero is `(1/2, t)` — a crease coordinate and a longitudinal height. In both cases the pair is
 the whole coordinate, and the crease alone is not.
 
+The folded line from afar is the simplest picture of the same pair: the V's shadow is the crease, and
+the length remembers the height at second order. See `the-fold-afar.md`.
+
 ## Complexity: the witness is the height
 
 The projection/section diagram is the same pair. The instance is the crease coordinate `h`; the witness

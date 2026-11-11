@@ -156,6 +156,9 @@ action is transitive (checked below), so the coequalizer is a point. The return 
 point is its vertex. The crease is a limit; the return is a colimit. **The Fold's loop is a
 limit–colimit pair**, and both ends are defined purely by morphisms.
 
+The folded line from afar is the coequalizer picture in one dimension: the V's shadow is the quotient,
+and the crease is its boundary. See `the-fold-afar.md`.
+
 ### Composition is the mixed law
 
 The endomorphism reading of `k` and the equalizer reading of the crease meet in the composition law

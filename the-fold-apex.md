@@ -48,6 +48,9 @@ This also explains the occlusion note's side-blindness in one line. The metric `
 sign of the normal; the fold **is** the sign change; the crease is the fixed set. "Both sides" is the
 orbit `{P, σ_H P}` of a point, not a pair of objects.
 
+The folded line from afar is the one-dimensional picture of the same identification: the V's two rays are
+the two signs of the height, and its shadow is one line. See `the-fold-afar.md`.
+
 ## All angles: the pencil
 
 The creases through `P₀` form the **pencil**

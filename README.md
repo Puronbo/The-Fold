@@ -90,6 +90,13 @@ in matter and the Dirichlet term (`h = ln n`). The pair is a basis, not a genera
 height give one hyperplane; the twist needs two creases, the closure their angle. See
 `the-fold-crease-height.md`.
 
+**Folded line from afar:** a sheet fold is a quotient, not the global reflection: it fixes one side and
+reflects the other, so a line crossing the crease becomes a V whose vertex is on the crease. The shadow
+`π_H` of the V is the crease — one line, the "singular line." The fold's height is dropped by the
+projection but survives in the length at second order (`L m²` for slope `m`; `2a²/ℓ²` for pleats of
+amplitude `a`). The scale `k` does not erase the fold — the shape is scale-invariant — so "from afar" is
+a projection or a coarse-graining, not `k → 0`. See `the-fold-afar.md`.
+
 **Reading paths:**
 
 | if you want | read |
@@ -111,6 +118,7 @@ height give one hyperplane; the twist needs two creases, the closure their angle
 | one point, both sides, all angles | `the-fold-apex.md` |
 | P vs NP and why the Fold cannot separate them | `the-fold-complexity.md` |
 | the crease and which height | `the-fold-crease-height.md` |
+| a folded line that looks like one line from afar | `the-fold-afar.md` |
 | the interactive models | the nine HTML files |
 
 ## Contents
@@ -151,6 +159,7 @@ height give one hyperplane; the twist needs two creases, the closure their angle
 | `the-fold-apex.md` | follow-up note: one point, both sides, all angles — the pencil, the cone family, and the tangent-cone correction |
 | `the-fold-complexity.md` | follow-up note: P and NP — the projection/section diagram, three rhymes, and the wall |
 | `the-fold-crease-height.md` | follow-up note: the crease and its height — transverse, longitudinal, and a basis not a generator |
+| `the-fold-afar.md` | follow-up note: the folded line from afar — the V, the pleats, the singular line, and projection rather than scale |
 
 Open the HTML files directly in a browser — no build step, no dependencies.
 

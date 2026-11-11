@@ -121,6 +121,9 @@ split, with inertia `(n−1,1,0)`. See `the-fold-signature.md`.
 - **Folding** keeps length and angle, destroys direction.
 - **Both** keep nothing but the datum and the dimension.
 
+The folded line from afar shows the split concretely: the shadow keeps the direction (the crease), the
+length keeps the fold's quadratic excess. See `the-fold-afar.md`.
+
 The fold sits at the hinge of that table because it is the only isometry in the scaling column, and
 `k = −1` is the only map that is both.
 

@@ -451,6 +451,17 @@ named. The pair is a basis, not a generator: one crease plus one height is one a
 twist needs two creases, the closure their angle, the observer a dimension. See
 `the-fold-crease-height.md`.
 
+## The folded line from afar
+
+A sheet fold is the quotient map `F(x, y) = (x, |y|)`, not the global reflection `σ_H` (which maps a line
+to a line). A line crossing the crease becomes a V with vertex on the crease; its shadow `π_H` is the
+crease — one line, the "singular line." The V's path exceeds its shadow by `L m²`, and a pleated line's
+by `2a²/ℓ²`: the fold's transverse height is invisible in the projection but survives in the length at
+second order. "Singular" has three readings — one line (quotient), non-smooth (the normal derivative
+jumps by `2`), rank-deficient (the projection) — all at the crease. The scale `k` does not erase the fold
+(the shape is scale-invariant); "from afar" is a projection or a coarse-graining, not `k → 0`. See
+`the-fold-afar.md`.
+
 ## Key by question
 
 | question | answer | source |
@@ -475,6 +486,10 @@ twist needs two creases, the closure their angle, the observer a dimension. See
 | What is left after the wall? | a crease and a height — the instance and the witness, with the cost of the height function open | crease-height |
 | Is "height" one coordinate? | no: transverse (affine offset, witness), longitudinal (zeta `t`, theta `ln t`), or scale (`ln n`, matter) | crease-height |
 | Does one crease and one height generate the Fold? | no; they are a basis: the twist needs two creases, closure their angle, the observer `d` | crease-height |
+| Why does a folded line look singular from afar? | the projection drops the transverse height; the shadow is the crease, one line | afar |
+| Is "from afar" the same as `k → 0`? | no: the scale is shape-invariant; the projection or coarse-graining drops the height | afar |
+| Where does the fold's height survive? | in the length, at second order: `L m²` for a V, `2a²/ℓ²` for pleats | afar |
+| What does "singular" mean here? | one line (quotient), non-smooth (derivative jump), rank-deficient (projection) — all the crease | afar |
 | What is the signature of zero? | `(0,0,n)`: `n` unsigned directions; scalar `0` but nullity `n` — not a balanced form | signature |
 | Why must nothing come first? | in the scale ledger a continuous sign change must cross a degenerate form; `k=0` is that crossing | signature |
 | What is the signature of a fold? | `(n−1,1,0)`: crease `+` of dimension `n−1`, normal `−` of dimension `1` | signature |
@@ -567,6 +582,7 @@ No new measurements. These are the existing checks the key rests on:
 | one point, both sides, all angles | `the-fold-apex.md` |
 | P vs NP and the wall | `the-fold-complexity.md` |
 | the crease and which height | `the-fold-crease-height.md` |
+| a folded line that looks like one line from afar | `the-fold-afar.md` |
 
 ## The key in one sentence
 

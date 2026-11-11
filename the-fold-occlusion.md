@@ -114,6 +114,9 @@ The shadow analogy is exact if the shadow is `π_H`. The kernel is the axis of t
 line. The projection drops the coordinate, and with it the sign; that is why the shadow is side-blind.
 But the kernel is not a hidden region; it is the direction the projection forgets.
 
+The folded line from afar is the simplest instance: a line crossing the crease becomes a V, `π_H` sends
+it to the crease, and the length remembers the fold at second order. See `the-fold-afar.md`.
+
 A `d`-dimensional observer measures a `d`-form. The measurement selects `d` directions, and the
 complement has `n−d`. The shadow is the case `d = n−1`: one forgotten direction. Raising `d` shrinks
 the kernel, but it does not abolish it until `d = n`; at `d = n` there is no kernel and no outside.
