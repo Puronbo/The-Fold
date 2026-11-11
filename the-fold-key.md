@@ -389,6 +389,23 @@ initial data reduces to a dimension and a centre; `k` is the generator, and `k =
 value, outside the group. The point is not the empty set, not the identity `k=1`, not one direction,
 not an aperture. See `the-fold-initial.md`.
 
+## The categorical reading
+
+"Objects are disguised morphisms" has three exact readings: the arrow category (trivial), Yoneda
+(substantive), and duality/looping (the direction reverses or drops a level). The content is always
+the **functor**, not the word "disguised." The Fold names one, and its objects are universal
+constructions:
+
+| Fold object | categorical construction |
+|---|---|
+| the key `k` | an endomorphism: `End_ℂ(ℂ) ≅ ℂ`, `k ↦ m_k` |
+| the crease | the equalizer of `σ_H` and `id`, `ker(σ_H − I)` |
+| the orbit space | the coequalizer of the action, a point |
+| the point | the zero object: initial and terminal |
+| the scale family | a representation `Bℂ* → Vect` |
+
+The zeta exchange rhymes with a duality but is not an adjunction. See `the-fold-categorical.md`.
+
 ## Key by question
 
 | question | answer | source |
@@ -430,6 +447,9 @@ not an aperture. See `the-fold-initial.md`.
 | What is the initial state? | the datum `P₀`: the unique point fixed by every non-identity `g_k` | initial |
 | What is the initial form? | `Dg₀ = 0`: the null form `(0,0,n)`, rank 0 | initial |
 | Is the point the empty set? | no; it has `n` unsigned directions and a zero object; the empty set has no tangent space | initial, signature |
+| Is the crease an object or a morphism? | both: it is the equalizer of `σ_H` and `id`, a limit defined by morphisms | categorical |
+| Is `k` a number or an operator? | both: `End_ℂ(ℂ) ≅ ℂ`; the scalar is multiplication | categorical |
+| Is the orbit space a limit or a colimit? | a colimit: the coequalizer of the action; the crease is the limit | categorical |
 | Why is a twist two folds? | `σ_{H₂} ∘ σ_{H₁} = R(2α)` | §4 |
 | Why does the twist repeat? | closure `m = π/α` | closure |
 | Why only 2-, 3-, 4-, 6-fold in a lattice? | `2 cos(2π/n)` must be an integer | closure |
@@ -486,6 +506,7 @@ No new measurements. These are the existing checks the key rests on:
 | the zeros in pipeline order | `the-fold-pipeline.md` |
 | what the Fold does and does not reach | `the-fold-problems.md` |
 | where the Fold starts | `the-fold-initial.md` |
+| objects as disguised morphisms | `the-fold-categorical.md` |
 
 ## The key in one sentence
 

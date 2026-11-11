@@ -63,6 +63,11 @@ scale; its form is
 the derivative there, `Dg₀ = 0`, the null form `(0,0,n)`; and its object is the zero object, initial
 and terminal at once. The form is the derivative of the state. See `the-fold-initial.md`.
 
+**Categorical:** every object is a morphism in disguise exactly when a functor is named — the arrow
+category makes it trivial, Yoneda makes it deep, duality makes it reverse. The Fold makes it concrete:
+`k` is an endomorphism, the crease is an equalizer, the orbit space is a coequalizer, and the point is
+a zero object. See `the-fold-categorical.md`.
+
 **Reading paths:**
 
 | if you want | read |
@@ -79,6 +84,7 @@ and terminal at once. The form is the derivative of the state. See `the-fold-ini
 | the zeros in pipeline order | `the-fold-pipeline.md` |
 | what the Fold does and does not reach | `the-fold-problems.md` |
 | where the Fold starts | `the-fold-initial.md` |
+| objects as disguised morphisms | `the-fold-categorical.md` |
 | the interactive models | the nine HTML files |
 
 ## Contents
@@ -114,6 +120,7 @@ and terminal at once. The form is the derivative of the state. See `the-fold-ini
 | `the-fold-pipeline.md` | follow-up note: the zero pipeline — one zero equation per stage, five kinds of zero, and the two gaps |
 | `the-fold-problems.md` | follow-up note: the Fold and the open problems — exact, reformulation, rhyme, false friend, and the four walls |
 | `the-fold-initial.md` | follow-up note: the initial form — the common fixed point, the zero derivative, and the zero object |
+| `the-fold-categorical.md` | follow-up note: objects as disguised morphisms — arrow category, Yoneda, duality, looping, and the Fold's universal constructions |
 
 Open the HTML files directly in a browser — no build step, no dependencies.
 

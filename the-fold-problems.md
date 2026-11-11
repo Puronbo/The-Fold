@@ -165,7 +165,8 @@ equals topological index — is the exact ancestor of "a zero is a conserved cha
 - **Langlands.** Automorphic forms and Galois representations are dual, like the Euler product and the
   zeros. The explicit formula is a trace formula, and the Langlands program is the general trace
   formula. The rhyme is real — the Fold's "exchange" is the shape of functoriality — but the
-  categories are different, and nothing transfers.
+  categories are different, and nothing transfers. In categorical terms the exchange is not an
+  adjunction; see `the-fold-categorical.md`.
 - **Goldbach and twin primes.** The explicit formula is additive in the zeros; Goldbach is additive in
   the primes. The Fold sees both ledgers, but it has no device that breaks parity, which is what the
   sieve obstacle is. A dictionary is not a sieve.

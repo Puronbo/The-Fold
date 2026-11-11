@@ -29,7 +29,9 @@ P = P_H + h + s n,     h ⊥ n
 
 The fold keeps `h` and flips `s`. The two sides of the surface are `s > 0` and `s < 0`; the crease is
 `s = 0`. The fold exchanges the sides and fixes the crease pointwise. Its two eigenspaces are the
-crease `+1` of dimension `n−1` and the normal `−1` of dimension `1`.
+crease `+1` of dimension `n−1` and the normal `−1` of dimension `1`. Categorically the crease is the
+equalizer of `σ_H` and the identity, `ker(σ_H − I)`: an object defined by the agreement of two
+morphisms. See `the-fold-categorical.md`.
 
 Globally, for an orthographic view direction `v`, the visible set of a surface is
 `{p : n(p)·v > 0}`, the hidden set is `{p : n(p)·v < 0}`, and the terminator is `{n(p)·v = 0}`.

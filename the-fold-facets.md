@@ -28,7 +28,8 @@ s_i(x) = b_i − a_i·x
 ```
 
 So a facet is a zero of a **supporting functional**: the functional is nonnegative on the body and
-vanishes exactly on the face. A vertex is a face of dimension `0`; it is the intersection of at least
+vanishes exactly on the face. In categorical form the facet is the equalizer `eq(f, 0) = ker f`, so it
+is defined purely by morphisms. See `the-fold-categorical.md`. A vertex is a face of dimension `0`; it is the intersection of at least
 `n` facets. The body is the intersection of the half-spaces, not the union of the facets; the facets
 are its boundary conditions.
 

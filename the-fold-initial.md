@@ -74,7 +74,8 @@ both initial and terminal.
 - terminal: from any pointed space there is exactly one map to the point — the collapse.
 
 This makes "initial" exact rather than poetic. The Fold's first object is the zero object, and the
-last object is the same zero object. The chain is a loop between them.
+last object is the same zero object. The chain is a loop between them. In the categorical reading this
+is the purest case of "an object is its morphisms"; see `the-fold-categorical.md`.
 
 ## What is not initial
 
