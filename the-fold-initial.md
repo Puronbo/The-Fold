@@ -91,7 +91,8 @@ Five near-misses, each of which the corpus has had to separate:
   no structure.
 - **Not one direction.** The point carries all `n` unsigned directions, the sphere `Sⁿ⁻¹` (or
   `ℝPⁿ⁻¹` if sign is quotiented). The single direction is the *normal of the first fold*, and it
-  arrives with the crease, not before it.
+  arrives with the crease, not before it. The pencil of those normals is the subject of
+  `the-fold-apex.md`.
 - **Not an aperture.** The aperture `θ` is a property of a cone, which is a stage-1 object. The point
   has the whole direction sphere; a cone is a later choice inside it.
 

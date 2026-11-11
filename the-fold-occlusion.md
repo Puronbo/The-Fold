@@ -62,7 +62,9 @@ the instrument.
 | linear coordinate | `s = (P−P_H)·n` | is the axis; both values, neither face |
 
 The last row is the only object that knows both sides, and it is not a face. It is the axis. That
-distinction is the answer to the question, and the rest of this note is its consequences.
+distinction is the answer to the question, and the rest of this note is its consequences. The pencil
+of such axes through the datum is the projective sphere `ℝPⁿ⁻¹`, the Fold's fold parameter; see
+`the-fold-apex.md`.
 
 ## The crease is the only meeting place
 

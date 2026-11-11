@@ -416,6 +416,21 @@ The zeta exchange rhymes with a duality but is not an adjunction. See `the-fold-
 orientation-preserving composite. The two conditional readings are the crease (`1_a + 1_b = 2` exactly
 on `a ∩ b`) and the midpoint (`1/a + 1/b = 2/(ab)` iff `a + b = 2`). See `the-fold-composition.md`.
 
+## The point's extensions
+
+A crease through `P₀` is indexed by an unoriented normal: `H_n = H_{−n}`, so the folds through the
+point are the projective sphere `ℝPⁿ⁻¹ = Sⁿ⁻¹/(±1)`. The two sides are one fold. The pencil of
+creases covers the space and intersects in the point:
+
+```
+⋂_{H ∋ P₀} H = {P₀}          ⋃_{H ∋ P₀} H = ℝⁿ
+```
+
+Cones with apex `P₀` and all proper apertures do the same: their union is `ℝⁿ` and their intersection
+is `{P₀}`; the double cone (both nappes) is the orbit of one ray under `O(n−1) × {±1}`. The point does
+not extend: it has the tangent space `ℝⁿ` with the zero form `(0,0,n)`, the direction sphere `Sⁿ⁻¹`,
+and no metric, no selected aperture, and no tangent *plane*. See `the-fold-apex.md`.
+
 ## Key by question
 
 | question | answer | source |
@@ -431,6 +446,9 @@ on `a ∩ b`) and the midpoint (`1/a + 1/b = 2/(ab)` iff `a + b = 2`). See `the-
 | How can zeros and ones alternate? | fold ledger: distinct creases `H` and normals `n`; scale ledger: distinct zeros `k_t`, unique one `k=1` | key |
 | Why is one plus one two? | two folds compose to `R(2(ψ−φ))`: the count adds, the parameter multiplies, the angle doubles | composition |
 | Where do the two readings of `1_a+1_b=2_{ab}` hold? | indicators on the overlap `a ∩ b` (the crease); reciprocals iff `a+b=2` (the midpoint) | composition |
+| Why are the two sides one fold? | the crease is `H_n = H_{−n}`: the normal is unoriented, so folds through the point are `ℝPⁿ⁻¹` | apex |
+| Is the point on every crease? | yes, `P₀ ∈ H` for every `H` in its pencil; and only `P₀` is on all of them | apex |
+| Does the point extend? | no; its tangent cone does: `⋃ D(n,α) = ℝⁿ` and `⋂ D(n,α) = {P₀}` | apex |
 | What is the signature of zero? | `(0,0,n)`: `n` unsigned directions; scalar `0` but nullity `n` — not a balanced form | signature |
 | Why must nothing come first? | in the scale ledger a continuous sign change must cross a degenerate form; `k=0` is that crossing | signature |
 | What is the signature of a fold? | `(n−1,1,0)`: crease `+` of dimension `n−1`, normal `−` of dimension `1` | signature |
@@ -520,6 +538,7 @@ No new measurements. These are the existing checks the key rests on:
 | where the Fold starts | `the-fold-initial.md` |
 | objects as disguised morphisms | `the-fold-categorical.md` |
 | why one plus one is two | `the-fold-composition.md` |
+| one point, both sides, all angles | `the-fold-apex.md` |
 
 ## The key in one sentence
 

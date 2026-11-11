@@ -178,10 +178,11 @@ Measured over 5 × 10⁵ sampled points:
 
 Six orders of magnitude of size, and the aperture does not move to four decimals. So at `k = 0` the
 range is gone and the aperture is not — but it is not
-a subset of the point either: the point has no directions. It survives as a **limit of directions**,
-which is why section 6 can say "no tangent space" and still be precise. The point has no tangent
-space; the *family* has a tangent cone, and that cone is the aperture. Shape outlives size, all the
-way down to `k = 0`.
+a subset of the point either: the point has no **selected** direction and no aperture. It carries the
+whole sphere `Sⁿ⁻¹` (or `ℝPⁿ⁻¹` if the two sides are identified) with no metric, and the aperture
+survives as a **limit of directions**. Section 6 says "no tangent space" in the precise sense of no
+tangent *plane*: the tangent space is the ambient `ℝⁿ` with the zero form. See `the-fold-apex.md`.
+Shape outlives size, all the way down to `k = 0`.
 
 ### 5. The cap alone is the whole data
 
@@ -221,11 +222,13 @@ directions):
 
 A smooth point of the surface becomes a half-space, `0.5 = 2π/4π`. The vertex stays at
 `Ω/4π = 0.25` however far in you zoom, because the limit is a *cone*, not a plane. So the tangent
-space at the vertex does not exist — not because the limit is hard to take, but because the limit is
-the aperture.
+**plane** at the vertex does not exist — not because the limit is hard to take, but because the limit
+is the cone of apertures. The tangent *space* does exist: it is `ℝⁿ` with the zero form, and its
+directions are the whole sphere `Sⁿ⁻¹` (or `ℝPⁿ⁻¹` when the two sides are identified). See
+`the-fold-apex.md`.
 
 That is what "a 0-dimensional point at the vertex is the centre" means precisely: zero of every
-measure, all of the direction. And it explains why the collapse can lose the range and keep the
+measure, all of the directions. And it explains why the collapse can lose the range and keep the
 aperture: the aperture was never a property of the bulk. It is a property of the vertex's
 neighbourhood, and the vertex is the centre before, during and after the collapse. Only the body
 around it changes.
