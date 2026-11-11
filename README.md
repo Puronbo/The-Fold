@@ -20,6 +20,12 @@ stays constant. Shape is the aperture `θ`; turn is `arg k`. A `d`-dimensional o
 `G_{w1} * G_{w2} = G_{√(w1²+w2²)}`). The paper's table is the `w → 0` slice; "from afar" is `w` larger
 than the fold's height. See `the-fold-observer.md`.
 
+**Sampling and closure:** the observer's window has a discrete dual. An `m`-fold closure has angular
+frequency `m`, and a probe with `N` samples per turn resolves it only when `N > 2m`; the Gaussian window
+and the sample spacing share the half-sector cutoff `πR/m`. The crystallographic restriction limits the
+object's periodic lattice, not the probe's. The horizon is the `d = n−1` observer whose window is the
+causal cone. See `the-fold-sampling.md`.
+
 **Two nothings:** `k = 1` is the identity — nothing changed; `k = 0` is the collapse — nothing has
 size. The creation loop returns the second, not the first.
 
@@ -125,6 +131,7 @@ a projection or a coarse-graining, not `k → 0`. See `the-fold-afar.md`.
 | the crease and which height | `the-fold-crease-height.md` |
 | a folded line that looks like one line from afar | `the-fold-afar.md` |
 | the observer as dimension and window | `the-fold-observer.md` |
+| closure as sampling and the horizon window | `the-fold-sampling.md` |
 | the interactive models | the nine HTML files |
 
 ## Contents
@@ -167,6 +174,7 @@ a projection or a coarse-graining, not `k → 0`. See `the-fold-afar.md`.
 | `the-fold-crease-height.md` | follow-up note: the crease and its height — transverse, longitudinal, and a basis not a generator |
 | `the-fold-afar.md` | follow-up note: the folded line from afar — the V, the pleats, the singular line, and projection rather than scale |
 | `the-fold-observer.md` | follow-up note: the observer as dimension and window — the form degree, the resolution, and two kinds of blindness |
+| `the-fold-sampling.md` | follow-up note: sampling, closure, and the horizon window — Nyquist for `m`-fold patterns, the object/probe lattices, and the causal window |
 
 Open the HTML files directly in a browser — no build step, no dependencies.
 

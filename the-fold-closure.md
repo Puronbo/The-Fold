@@ -120,3 +120,12 @@ closure m = π/α        group D_m        twist = m-th root of unity
 
 and the paper's `i` is the `m = 4` evaluation of it. The interactive companion is
 `fold-closure.html`: drag `α` and watch the orbit go from `m` points to a dense ring.
+
+## The closure as a frequency
+
+Seen through the observer, `m` is an angular frequency: the `m`-fold pattern's finest harmonic is
+`cos(mθ)`. A probe with `N` samples per turn resolves it only when `N > 2m`, and the Gaussian window and
+the sample spacing share the half-sector cutoff `πR/m`. The crystallographic restriction above is a
+statement about the object's periodic lattice, not about the probe's `N`: the fivefold and tenfold
+patterns have no periodic crystal, but a fine enough probe still samples them without aliasing. See
+`the-fold-sampling.md`.

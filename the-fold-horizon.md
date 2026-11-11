@@ -121,3 +121,7 @@ now states the exponent for each regime instead of quoting `k²` for `A` in both
 Files: `the-fold.md`, `the-fold.tex`, rebuilt `the-fold.pdf` (6 pages, no warnings), and
 `horizon-scaling.html` — the log–log chart where the two regimes draw a crossing pair or a parallel
 pair, with `R`, `r_H`, `R/r_H`, `S`, `T`, `V/A_H` and the active law.
+
+Read through the observer, the horizon is the `d = n−1` surface observer whose window is the causal cone;
+the Gaussian window is the non-causal idealization, and the null crease is the boundary of the retarded
+support. See `the-fold-sampling.md`.

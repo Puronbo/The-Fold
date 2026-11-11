@@ -479,6 +479,18 @@ flux without an oriented area), wrong `w` is scale blindness (the fold is averag
 the other. The surface is `d = n−1`, edge-on; the horizon is its null limit. See
 `the-fold-observer.md`.
 
+## Sampling, closure, and the horizon window
+
+The window has a discrete dual. An `m`-fold closure has angular frequency `m`; a probe with `N` samples
+per turn sees the alias `m_app = min(m mod N, N − m mod N)` and resolves the pattern only above Nyquist,
+`N > 2m`, equivalently sample spacing `a < πR/m`. The Gaussian window attenuates the `m`-th harmonic by
+`e^{−m²σ²/2}` with `σ = w/R`; at the half-sector width `σ = π/m` the attenuation is `e^{−π²/2} = 7.1919e−3`,
+the same cutoff as the folded-line note. There are two lattices: the object's (closure `m`; the
+crystallographic restriction gives `n ∈ {1,2,3,4,6}` for a periodic crystal) and the probe's (`N`, not so
+restricted). The horizon is the `d = n−1` observer whose window is the causal cone; the null crease is the
+boundary of its support. The Gaussian is the non-causal idealization; the retarded propagator is the
+causal window. The probe is `(d, w, a)`. See `the-fold-sampling.md`.
+
 ## Key by question
 
 | question | answer | source |
@@ -511,6 +523,10 @@ the other. The surface is `d = n−1`, edge-on; the horizon is its null limit. S
 | What is "from afar" in observer terms? | a window `w` larger than the fold's height; the ratio `h/D`, not `k → 0` | observer, afar |
 | Why can a 2D observer miss the fold? | it has the flux but its window `w > h` averages the fold away | observer |
 | What is the horizon as an observer? | `d = n−1` on the surface: `Ω = 2π`, edge-on; the null limit | observer, horizon |
+| When is an `m`-fold closure resolved? | `N > 2m` samples per turn; equivalently `a < πR/m` | sampling, closure |
+| Are the closure and the sampling lattice the same? | no: `m` is the object's symmetry, `N` the probe's discretization; they are dual | sampling |
+| Does the crystallographic restriction limit the observer? | no: it limits the object's periodic lattice (`n ∈ {1,2,3,4,6}`), not `N` | sampling, closure |
+| What is the horizon's window? | the causal cone: retarded support `\|x\| ≤ t`, null boundary `\|x\| = t`; not the Gaussian | sampling, horizon |
 | What is the signature of zero? | `(0,0,n)`: `n` unsigned directions; scalar `0` but nullity `n` — not a balanced form | signature |
 | Why must nothing come first? | in the scale ledger a continuous sign change must cross a degenerate form; `k=0` is that crossing | signature |
 | What is the signature of a fold? | `(n−1,1,0)`: crease `+` of dimension `n−1`, normal `−` of dimension `1` | signature |
@@ -605,6 +621,7 @@ No new measurements. These are the existing checks the key rests on:
 | the crease and which height | `the-fold-crease-height.md` |
 | a folded line that looks like one line from afar | `the-fold-afar.md` |
 | the observer as dimension and window | `the-fold-observer.md` |
+| closure as sampling and the horizon window | `the-fold-sampling.md` |
 
 ## The key in one sentence
 
