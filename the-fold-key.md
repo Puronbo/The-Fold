@@ -512,6 +512,17 @@ the Euclidean period `2πc/κ` gives `T = ħκ/(2πck_B) = ħc³/(8πGMk_B)`. Th
 `dM = κ dA/(8πG)`, `M = κA/(4πG)`; the period scales as `A^{1/(n−2)}` (`√A` in 4D). See
 `the-fold-clock.md`.
 
+## The observer's thermometer: acceleration and the Unruh period
+
+An accelerated observer in the Minkowski vacuum sees a thermal bath at `T = ħa/(2πck_B)`, with Euclidean
+period `2πc/a` and a Rindler horizon at proper distance `c²/a`. At one `g`: `T = 3.977e−20 K`, period
+`1.921e8 s` (`6.087 yr`), distance `9.165e15 m` (`0.969 ly`). The detector's detailed balance is
+`e^{−E/(k_B T)}`; at `E = k_B T` the ratio is `e^{−1} = 0.367879`. The local Unruh temperature is
+`T_U = T_H (r_s/r)²/√f`, while the Tolman-redshifted Hawking temperature is `T_H/√f`; they agree only
+near the horizon (`a√f/κ → 1`). The Fold's `k` is a homothety, not a boost: it is dimensionless and
+conformal, with no Killing vector. The shared objects are the null crease, the `2π`, and the causal
+window — rhymes, not a derivation. See `the-fold-unruh.md`.
+
 ## Key by question
 
 | question | answer | source |
@@ -559,6 +570,11 @@ the Euclidean period `2πc/κ` gives `T = ħκ/(2πck_B) = ħc³/(8πGMk_B)`. Th
 | Why is `T ∝ 1/k`? | `T ∝ 1/M`, and `M ∝ k` in the homothetic family; constant in collapse | clock, matter |
 | What closes the clock to the area? | the first law `dM = κ dA/(8πG)` and Smarr `M = κA/(4πG)` | clock, area |
 | Does the Fold derive Hawking radiation? | no: it gives the exponent; the coefficient `1/8π` is external | clock, problems |
+| What does an accelerated observer see? | a thermal bath at `T = ħa/(2πck_B)`, period `2πc/a` | unruh, observer |
+| What is the Unruh detector's detailed balance? | `e^{−E/(k_B T)}`; at `E = k_B T`, `e^{−1} = 0.367879` | unruh |
+| Is the local Unruh temperature the Hawking temperature? | only near the horizon: `T_U = T_H(r_s/r)²/√f` vs `T_H/√f` | unruh, clock |
+| Is the Fold's `k` an acceleration? | no: it is a homothety (dimensionless, conformal), not a boost | unruh, signature |
+| Does the Fold derive the Unruh effect? | no: the null crease and the `2π` are shared, but `k` is not `a` | unruh, problems |
 | What is the signature of zero? | `(0,0,n)`: `n` unsigned directions; scalar `0` but nullity `n` — not a balanced form | signature |
 | Why must nothing come first? | in the scale ledger a continuous sign change must cross a degenerate form; `k=0` is that crossing | signature |
 | What is the signature of a fold? | `(n−1,1,0)`: crease `+` of dimension `n−1`, normal `−` of dimension `1` | signature |
@@ -656,6 +672,7 @@ No new measurements. These are the existing checks the key rests on:
 | closure as sampling and the horizon window | `the-fold-sampling.md` |
 | the horizon's area and the mode count | `the-fold-area.md` |
 | the horizon's clock and the temperature law | `the-fold-clock.md` |
+| the accelerated observer and the Unruh period | `the-fold-unruh.md` |
 
 ## The key in one sentence
 

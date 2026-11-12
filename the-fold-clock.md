@@ -154,7 +154,8 @@ The black-hole laws are the exact ancestors: the zeroth law makes `κ` constant 
 the first law is `dM = κ dA/(8πG) + ΩJ + ΦQ`; the second law is the area increase; the third is the
 extremality limit. Hawking's calculation fixes the coefficient; the Euclidean period fixes it
 geometrically. Unruh's effect is the same period for an accelerated observer in flat space. This note
-borrows the clock/area distinction and the static arithmetic. It does not derive the radiation.
+borrows the clock/area distinction and the static arithmetic. It does not derive the radiation. The
+accelerated observer's version is in `the-fold-unruh.md`.
 
 | topic | reference | link |
 |---|---|---|

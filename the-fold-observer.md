@@ -133,6 +133,11 @@ height is `h/D`. The fold is resolved when `h > w`; the distance cancels. The ob
 and still resolve a tall fold; it can be close and still miss a shallow one. "From afar" is the second
 case.
 
+The surface observer is also a thermometer. An accelerated observer in the Minkowski vacuum sees a
+thermal bath at `T = ħa/(2πck_B)`, with a Rindler horizon at proper distance `c²/a`; the local Unruh
+temperature and the horizon's Tolman-redshifted temperature agree only near the horizon. See
+`the-fold-unruh.md`.
+
 ## The return
 
 The observer measures; it does not vanish. A `d`-form has no Fold zero of its own, and the observer stage

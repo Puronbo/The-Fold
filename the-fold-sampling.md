@@ -143,7 +143,8 @@ boundary. The Gaussian and the causal window agree in the interior and differ at
 Gaussian leaks, the retarded propagator does not.
 
 The causal window's Euclidean period is `2πc/κ`, and the surface gravity sets the temperature
-`T = ħκ/(2πck_B)`. See `the-fold-clock.md`.
+`T = ħκ/(2πck_B)`. See `the-fold-clock.md`. The accelerated observer's window is the Rindler wedge, with
+period `2πc/a`; see `the-fold-unruh.md`.
 
 ## The probe is `(d, w, a)`
 

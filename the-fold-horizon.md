@@ -131,4 +131,5 @@ and can be rescaled, so volume is gauge. The area exponent `n−2` is also the m
 static horizon saturates the Bekenstein bound. See `the-fold-area.md`.
 
 The other clock is the Killing one, normalized at infinity: its rate is the surface gravity `κ`, and its
-Euclidean period `2πc/κ` gives the temperature. See `the-fold-clock.md`.
+Euclidean period `2πc/κ` gives the temperature. See `the-fold-clock.md`. The accelerated observer's local
+version is the Unruh temperature; see `the-fold-unruh.md`.

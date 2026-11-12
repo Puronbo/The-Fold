@@ -131,7 +131,8 @@ version of the observer's `(d, w)`: `w` is a coordinate scale, `A` is the invari
 `N` is dual to the object's `m`; the area is dual to the mode count.
 
 The other clock is the Killing one, normalized at infinity. Its rate is the surface gravity `κ`, and its
-Euclidean period `2πc/κ` is the temperature. See `the-fold-clock.md`.
+Euclidean period `2πc/κ` is the temperature. See `the-fold-clock.md`. The accelerated observer's local
+thermometer is the Unruh temperature; see `the-fold-unruh.md`.
 
 ## The Bekenstein saturation
 

@@ -39,6 +39,13 @@ infinity, is not. Its rate is the surface gravity `κ = c⁴/(4GM)`, and the Euc
 static horizon closes the clock to the area: `M = κA/(4πG)` and `dM = κ dA/(8πG)`. See
 `the-fold-clock.md`.
 
+**Observer thermometer:** an accelerated observer in the Minkowski vacuum sees a thermal bath at
+`T = ħa/(2πck_B)`, with Euclidean period `2πc/a`. The detector's detailed balance is `e^{−E/(k_B T)}`,
+and at `E = k_B T` the ratio is `e^{−1} = 0.367879`. The local Unruh temperature and the Tolman-redshifted
+Hawking temperature agree only near the horizon: `T_U = T_H(r_s/r)²/√f` versus `T_H/√f`. The Fold's `k`
+is a homothety, not a boost, so the shared object is the null crease and the `2π`, not a derivation. See
+`the-fold-unruh.md`.
+
 **Two nothings:** `k = 1` is the identity — nothing changed; `k = 0` is the collapse — nothing has
 size. The creation loop returns the second, not the first.
 
@@ -147,6 +154,7 @@ a projection or a coarse-graining, not `k → 0`. See `the-fold-afar.md`.
 | closure as sampling and the horizon window | `the-fold-sampling.md` |
 | the horizon's area and the mode count | `the-fold-area.md` |
 | the horizon's clock and the temperature law | `the-fold-clock.md` |
+| the accelerated observer and the Unruh period | `the-fold-unruh.md` |
 | the interactive models | the nine HTML files |
 
 ## Contents
@@ -192,6 +200,7 @@ a projection or a coarse-graining, not `k → 0`. See `the-fold-afar.md`.
 | `the-fold-sampling.md` | follow-up note: sampling, closure, and the horizon window — Nyquist for `m`-fold patterns, the object/probe lattices, and the causal window |
 | `the-fold-area.md` | follow-up note: the horizon's measure — area not volume, the mode-count exponent, angle versus area, and Bekenstein saturation |
 | `the-fold-clock.md` | follow-up note: the horizon's clock — surface gravity, imaginary time, the `T ∝ 1/k` law, and Smarr |
+| `the-fold-unruh.md` | follow-up note: the observer's thermometer — Rindler acceleration, the Unruh period, detailed balance, and the homothety-versus-boost distinction |
 
 Open the HTML files directly in a browser — no build step, no dependencies.
 
