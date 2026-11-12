@@ -145,9 +145,11 @@ as the exact holographic case, not as a Fold result.
 Ryu and Takayanagi proposed the minimal-surface formula; Hubeny, Rangamani, and Takayanagi gave the
 covariant extremal-surface version; Lewkowycz and Maldacena derived the classical formula from the
 gravitational replica trick; Faulkner, Lewkowycz, and Maldacena gave the quantum corrections. Brown and
-Henneaux computed the AdS₃ central charge, which makes the AdS₃/CFT₂ log term exact. Maldacena's duality
-is the framework. This note borrows the RT formula, the dimension count, and the coefficient match. It
-does not derive holography, the RT formula, or the `1/4G_N`.
+Henneaux computed the AdS₃ central charge, which makes the AdS₃/CFT₂ log term exact. Myers and Sinha
+identified the universal log coefficient with the A-type anomaly in even dimensions; the coefficient and
+its table are in `the-fold-logarithm.md`. Maldacena's duality is the framework. This note borrows the RT
+formula, the dimension count, and the coefficient match. It does not derive holography, the RT formula,
+or the `1/4G_N`.
 
 | topic | reference | link |
 |---|---|---|
@@ -207,5 +209,5 @@ the bulk geometry and the coefficient are the holographic theory's, not the Fold
 `the-fold-entanglement.md`; the horizon's area and the Bekenstein–Hawking coefficient are in
 `the-fold-area.md`; the Rindler wedge and the modular period are in `the-fold-unruh.md`; the null crease
 is in `the-fold-horizon.md`; the general coefficient (Wald entropy) is in `the-fold-wald.md`; the
-open-problem boundaries are in `the-fold-problems.md`; the order is in `the-fold-creation.md`; the lookup
-is `the-fold-key.md`.
+universal log term and the A-type anomaly are in `the-fold-logarithm.md`; the open-problem boundaries are
+in `the-fold-problems.md`; the order is in `the-fold-creation.md`; the lookup is `the-fold-key.md`.

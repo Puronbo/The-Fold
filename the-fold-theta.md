@@ -113,7 +113,10 @@ Re s = α
 
 For the theta function, `α = 1/2`, so the critical line is `Re s = 1/2`. The `1/2` is the half-density
 exponent of the theta fold. It is not an arbitrary convention and not a dynamical equilibrium: it is
-the square root of the Jacobian of `t ↦ 1/t`, read through the Mellin transform.
+the square root of the Jacobian of `t ↦ 1/t`, read through the Mellin transform. It is also not the
+logarithmic coefficient of the entanglement entropy; that coefficient is the A-type anomaly (`c/3` in
+2D, `−4a` in 4D). The numbers can coincide in a special theory (`c = 3/2`), but the objects are
+different. See `the-fold-logarithm.md`.
 
 This is the exact content of "the critical line is the crease." The crease in height is `h = 0`; the
 Mellin transform turns the height reflection into `s ↦ 1−s`; the crease in `s` is `Re s = 1/2`. The
@@ -184,4 +187,5 @@ open problem.**
 
 `the-fold-theta.md` (this note). The functional equation and the zeta dictionary are in
 `the-fold-zeta.md`; the critical line as a facet is in `the-fold-facets.md`; the crease and the two
-sides are in `the-fold-occlusion.md`; the master key is `the-fold-key.md`.
+sides are in `the-fold-occlusion.md`; the universal log coefficient and its difference from the `1/2`
+are in `the-fold-logarithm.md`; the master key is `the-fold-key.md`.

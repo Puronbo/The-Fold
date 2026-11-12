@@ -174,7 +174,8 @@ capacity; the entanglement area law and the loop-quantum-gravity area spectrum a
 laws. This note borrows the area/gauge distinction and the saturation arithmetic. It does not borrow the
 dynamics. The wedge's modular Hamiltonian and the area law's coefficient caveat are in
 `the-fold-entanglement.md`. The one case where the coefficient is fixed is holographic; see
-`the-fold-holography.md`. The general coefficient is Wald entropy; see `the-fold-wald.md`.
+`the-fold-holography.md`. The general coefficient is Wald entropy; see `the-fold-wald.md`. The `n = 2`
+log case and its universal coefficient are in `the-fold-logarithm.md`.
 
 | topic | reference | link |
 |---|---|---|
@@ -232,5 +233,5 @@ number of modes scales the same way, and the horizon is where the static Bekenst
 `the-fold-area.md` (this note). The horizon's two laws are in `the-fold-horizon.md`; the causal window and
 sampling are in `the-fold-sampling.md`; the null signature is in `the-fold-signature.md`; the one
 forgotten direction is in `the-fold-occlusion.md`; the exponent shift is in `the-fold-matter.md`; the
-open-problem boundaries are in `the-fold-problems.md`; the order is in `the-fold-creation.md`; the lookup
-is `the-fold-key.md`.
+universal logarithm and the `n = 2` case are in `the-fold-logarithm.md`; the open-problem boundaries are
+in `the-fold-problems.md`; the order is in `the-fold-creation.md`; the lookup is `the-fold-key.md`.

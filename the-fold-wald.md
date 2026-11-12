@@ -250,7 +250,8 @@ an integral over a codimension-two cross-section of that locus. The `2π` in Wal
 Those are the rhymes. The Fold has no Lagrangian, no Riemann tensor, no binormal, no Killing field, and no
 `G`. It cannot distinguish `A/4G` from `f'(R)A/4G` or from the Gauss–Bonnet integral, because it has no
 action to differentiate. Its `S ∝ A` is the statement that the entropy scales with the codimension-two
-measure; the coefficient is the theory's.
+measure; the coefficient is the theory's. The universal log coefficient is a different kind of
+coefficient: it is the A-type anomaly, not the Wald charge; see `the-fold-logarithm.md`.
 
 | question | exact answer | Fold |
 |---|---|---|
@@ -338,6 +339,6 @@ locus and the exponent `n−2`, not the action or the coefficient.**
 `the-fold-area.md`; the wedge's entropy and the coefficient caveat are in `the-fold-entanglement.md`; the
 holographic coefficient and the minimal surface are in `the-fold-holography.md`; the surface gravity and
 the first law are in `the-fold-clock.md`; the null crease and the signature are in `the-fold-horizon.md`
-and `the-fold-signature.md`; the accelerated observer is in `the-fold-unruh.md`; the open-problem
-boundaries are in `the-fold-problems.md`; the order is in `the-fold-creation.md`; the lookup is
-`the-fold-key.md`.
+and `the-fold-signature.md`; the accelerated observer is in `the-fold-unruh.md`; the universal log term
+and the A-type anomaly are in `the-fold-logarithm.md`; the open-problem boundaries are in
+`the-fold-problems.md`; the order is in `the-fold-creation.md`; the lookup is `the-fold-key.md`.

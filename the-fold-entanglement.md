@@ -167,7 +167,8 @@ entropy of matter, but that is a model with a specific cutoff and field content,
 
 The Fold's contribution is the exponent: `S ∝ A`. The coefficient `1/4ℓ_P²` is external, exactly as in
 `the-fold-area.md`. The one case where the coefficient is fixed is holographic; see
-`the-fold-holography.md`. The general coefficient is the Wald entropy; see `the-fold-wald.md`.
+`the-fold-holography.md`. The general coefficient is the Wald entropy; see `the-fold-wald.md`. The one
+coefficient the cutoff does not set — the universal logarithm — is in `the-fold-logarithm.md`.
 
 ## Adjacent research
 
@@ -227,8 +228,8 @@ their `4π` limit.
 - It **does not** claim the Fold's `k` is the modular boost; `k` is a homothety.
 - It **does not** claim the wedge entropy is the black hole entropy; the coefficients differ.
 - It **does not** solve the species problem; it states it as the boundary of the identification.
-- It **does not** treat interacting fields, the universal log term, or the holographic case beyond the
-  citation.
+- It **does not** treat interacting fields or the holographic case beyond the citation; the universal
+  log term is the separate subject of `the-fold-logarithm.md`.
 
 ## The one sentence
 
@@ -242,6 +243,7 @@ the Fold's.**
 `the-fold-entanglement.md` (this note). The Rindler wedge and the Unruh period are in
 `the-fold-unruh.md`; the area measure and the mode count are in `the-fold-area.md`; the observer's
 `(d, w)` and the causal window are in `the-fold-observer.md` and `the-fold-sampling.md`; the horizon's
-clock is in `the-fold-clock.md`; the null crease is in `the-fold-horizon.md`; the open-problem boundaries
-are in `the-fold-problems.md`; the theta modular factor (a different "modular") is in
+clock is in `the-fold-clock.md`; the null crease is in `the-fold-horizon.md`; the universal log term is
+in `the-fold-logarithm.md`; the open-problem boundaries are in `the-fold-problems.md`; the theta modular
+factor (a different "modular") is in
 `the-fold-theta.md`; the order is in `the-fold-creation.md`; the lookup is `the-fold-key.md`.

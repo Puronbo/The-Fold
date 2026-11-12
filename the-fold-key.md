@@ -554,6 +554,16 @@ higher-derivative holography the entanglement entropy is the Wald functional plu
 corrections. The Fold supplies the codimension-two locus and the exponent `n−2`, not the action or the
 coefficient. See `the-fold-wald.md`.
 
+## The universal logarithm: the one coefficient the cutoff does not set
+
+For a smooth sphere in even spacetime dimension `n`, the entanglement entropy has a universal
+logarithmic term `g_0 ln(ε/R)` with `g_0 = (−1)^{n/2} 4a_n`, where `a_n` is the A-type conformal
+anomaly. One scalar gives `g_0 = −1/3, 1/90, −1/756, 23/113400` at `n = 2, 4, 6, 8`; the coefficient of
+`ln(R/ε)` is `c/3` in 2D and `−4a` in 4D. In odd dimensions the anomaly vanishes and there is no log.
+The log is universal in the sense that the cutoff does not set it; it is not theory-independent. The
+Fold's `ln` height is the additive rhyme, and the `1/2` of the theta critical line is the half-density
+exponent, not the log coefficient. See `the-fold-logarithm.md`.
+
 ## Key by question
 
 | question | answer | source |
@@ -621,6 +631,13 @@ coefficient. See `the-fold-wald.md`.
 | What does Gauss–Bonnet add? | an intrinsic-curvature integral `(α/2G)∫√h R̃` over the cross-section | wald |
 | Why is the entropy a Noether charge? | it is defined so the first law `dM = (κ/2π)dS + …` holds | wald, clock |
 | Is Wald entropy the entanglement entropy? | no: higher-derivative holography adds extrinsic-curvature corrections | wald, holography |
+| What is the universal log term? | `g_0 ln(ε/R)`, with `g_0 = (−1)^{n/2}4a_n` the A-type anomaly | logarithm, entanglement |
+| Is the log coefficient the cutoff's? | no: it is universal; the power terms are the cutoff's | logarithm, entanglement |
+| What is the 2D log coefficient? | `c/3`, so `S = (c/3) ln(L/ε)` | logarithm |
+| What is the 4D log coefficient? | `−4a`, fixed by the type-A anomaly alone | logarithm, wald |
+| Why is there no log in odd dimensions? | the trace anomaly vanishes; the universal term is a constant | logarithm |
+| Is the critical line's `1/2` the log coefficient? | no: it is the theta half-density exponent; `g_0` is the anomaly | logarithm, theta |
+| Does the Fold derive the log coefficient? | no: it supplies the `ln` height; the coefficient is external | logarithm, problems |
 | What is the signature of zero? | `(0,0,n)`: `n` unsigned directions; scalar `0` but nullity `n` — not a balanced form | signature |
 | Why must nothing come first? | in the scale ledger a continuous sign change must cross a degenerate form; `k=0` is that crossing | signature |
 | What is the signature of a fold? | `(n−1,1,0)`: crease `+` of dimension `n−1`, normal `−` of dimension `1` | signature |
@@ -722,6 +739,7 @@ No new measurements. These are the existing checks the key rests on:
 | the wedge's entropy and the area law | `the-fold-entanglement.md` |
 | the holographic coefficient and the minimal surface | `the-fold-holography.md` |
 | the general coefficient and the Noether charge | `the-fold-wald.md` |
+| the universal logarithm and the A-type anomaly | `the-fold-logarithm.md` |
 
 ## The key in one sentence
 

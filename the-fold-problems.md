@@ -205,6 +205,10 @@ equals topological index — is the exact ancestor of "a zero is a conserved cha
 - **"The critical line is the fixed set of the functional equation" is false.** The fixed set of
   `s ↦ 1−s` is the point `1/2`; the line is the fixed set of the composition with reality,
   `R(s) = 1 − s̄`.
+- **The critical line's `1/2` is not the entanglement log coefficient.** The theta half-density
+  exponent gives `Re s = 1/2`; the log coefficient is the A-type anomaly (`c/3` in 2D, `−4a` in 4D). A
+  theory with `c = 3/2` makes the numbers coincide, but the objects differ. See
+  `the-fold-logarithm.md`.
 
 ## What would count as progress
 
@@ -264,4 +268,5 @@ the explicit formula needs a parity breaker — four known walls, one crease.**
 `the-fold-zeta.md`; the theta fold and the heat kernel are in `the-fold-theta.md`; the zero types and
 the codimension/multiplicity distinction are in `the-fold-pipeline.md`; the signature and the
 Poincaré–Hopf index are in `the-fold-signature.md`; the facet classification is in
-`the-fold-facets.md`; the lookup is `the-fold-key.md`.
+`the-fold-facets.md`; the universal logarithm and the `1/2` distinction are in
+`the-fold-logarithm.md`; the lookup is `the-fold-key.md`.

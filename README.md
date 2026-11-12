@@ -67,6 +67,14 @@ integral, so the Fold's exponent survives; the coefficient is the action's. `A/4
 Einstein–Hilbert; `f(R)` gives `f'(R)A/4G`; Gauss–Bonnet and Lovelock add intrinsic-curvature integrals.
 See `the-fold-wald.md`.
 
+**Universal logarithm:** the one term in the entanglement entropy's UV expansion that is not a power of
+the cutoff is the logarithm. For a smooth sphere in even spacetime dimension `n`,
+`S_EE = … + g_0 ln(ε/R) + …` with `g_0 = (−1)^{n/2} 4a_n`, the A-type conformal anomaly. One scalar gives
+`g_0 = −1/3, 1/90, −1/756, 23/113400` at `n = 2, 4, 6, 8`; the coefficient of `ln(R/ε)` is `c/3` in 2D
+and `−4a` in 4D. In odd dimensions the log vanishes. The Fold's `ln` height is the additive rhyme; the
+coefficient is the anomaly's, not the Fold's, and the `1/2` of the critical line is a different object.
+See `the-fold-logarithm.md`.
+
 **Two nothings:** `k = 1` is the identity — nothing changed; `k = 0` is the collapse — nothing has
 size. The creation loop returns the second, not the first.
 
@@ -179,6 +187,7 @@ a projection or a coarse-graining, not `k → 0`. See `the-fold-afar.md`.
 | the wedge's entropy and the area law | `the-fold-entanglement.md` |
 | the holographic coefficient and the minimal surface | `the-fold-holography.md` |
 | the general coefficient and the Noether charge | `the-fold-wald.md` |
+| the universal logarithm and the A-type anomaly | `the-fold-logarithm.md` |
 | the interactive models | the nine HTML files |
 
 ## Contents
@@ -228,6 +237,7 @@ a projection or a coarse-graining, not `k → 0`. See `the-fold-afar.md`.
 | `the-fold-entanglement.md` | follow-up note: the wedge's entropy — the modular Hamiltonian, the area law, the mode-count exponent, and the coefficient caveat |
 | `the-fold-holography.md` | follow-up note: the holographic coefficient - Ryu-Takayanagi, the minimal surface, the coefficient match, and the species relation |
 | `the-fold-wald.md` | follow-up note: the general coefficient - Wald entropy, the Noether charge, the higher-curvature checks, and the first law |
+| `the-fold-logarithm.md` | follow-up note: the universal logarithm - the A-type anomaly, the coefficient table, the no-log in odd dimensions, and the height rhyme |
 
 Open the HTML files directly in a browser — no build step, no dependencies.
 
