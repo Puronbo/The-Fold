@@ -128,4 +128,5 @@ Seen through the observer, `m` is an angular frequency: the `m`-fold pattern's f
 the sample spacing share the half-sector cutoff `πR/m`. The crystallographic restriction above is a
 statement about the object's periodic lattice, not about the probe's `N`: the fivefold and tenfold
 patterns have no periodic crystal, but a fine enough probe still samples them without aliasing. See
-`the-fold-sampling.md`.
+`the-fold-sampling.md`. The engineering reading — closure as a loop-closure condition, with the
+developed-length penalty — is in `the-fold-engineering.md`.

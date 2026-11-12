@@ -477,3 +477,5 @@ pencil are in `the-fold-apex.md`; the equalizer/coequalizer reading is in `the-f
 length and angle invariants are in `the-fold-invariants.md`; the height law and the observer are in
 `the-fold-matter.md`; the lookup is `the-fold-key.md`. The complexity rhyme is in
 `the-fold-complexity.md`; the references are collected in the `## Adjacent research` section above.
+The engineering transfer — the V and pleat length penalties, rigid foldability, and the limits of the
+crease kinematics — is in `the-fold-engineering.md`.

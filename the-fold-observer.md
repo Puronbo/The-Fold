@@ -219,4 +219,5 @@ exponent shift is in `the-fold-matter.md`; the star is in `the-fold-signature.md
 fold are in `the-fold-afar.md`; the projection and side-blindness are in `the-fold-occlusion.md`; the
 horizon is in `the-fold-horizon.md`; the order is in `the-fold-creation.md`; "the observer produces no
 zero" is in `the-fold-pipeline.md`; the discrete dual of the window — sampling, Nyquist, and the causal
-window — is in `the-fold-sampling.md`; the lookup is `the-fold-key.md`.
+window — is in `the-fold-sampling.md`; the engineering boundary between the observer and a control
+estimator is in `the-fold-engineering.md`; the lookup is `the-fold-key.md`.

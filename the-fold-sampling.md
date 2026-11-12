@@ -230,4 +230,5 @@ crease is its boundary.**
 `m = π/α` and the crystallographic restriction are in `the-fold-closure.md`; the null crease and the
 horizon signature are in `the-fold-horizon.md` and `the-fold-signature.md`; the window attenuation is in
 `the-fold-afar.md`; the form degree is in `the-fold-matter.md`; the order is in `the-fold-creation.md`;
-the lookup is `the-fold-key.md`.
+the engineering use of the Nyquist bound, the two lattices, and the area-fair sampling is in
+`the-fold-engineering.md`; the lookup is `the-fold-key.md`.

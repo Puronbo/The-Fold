@@ -564,6 +564,22 @@ The log is universal in the sense that the cutoff does not set it; it is not the
 Fold's `ln` height is the additive rhyme, and the `1/2` of the theta critical line is the half-density
 exponent, not the log coefficient. See `the-fold-logarithm.md`.
 
+## Engineering: geometry and sampling, not material laws
+
+The Fold is an exponent engine and a compatibility checker, not a constitutive theory. Geometric
+similitude is exact: `g_k` maps lengths by `k`, areas by `k²`, volumes by `k³`, and leaves angles
+fixed. The square–cube law follows: at fixed density, mass and weight `∝ k³`, load-bearing area
+`∝ k²`, self-weight stress `∝ k`. The crease closure `m = π/α`, the Nyquist bound `N > 2m`, and the
+crystallographic restriction `n ∈ {1,2,3,4,6}` are exact. Dynamic similitude is not: one length ratio
+cannot match Reynolds, Froude, and Mach at once, and material laws, units, safety factors, and a
+computational model are external. See `the-fold-engineering.md`.
+
+| zone | engineering example |
+|---|---|
+| exact | similitude; square–cube; closure; Nyquist; lattice restriction; apparent contour |
+| rhyme | deployable structures; metamaterials; analogue horizons; finite-size scaling; polarization; control observers |
+| false friend | `J` vs polar second moment; observer vs estimator; horizon vs planning window; entropy vs area law |
+
 ## Key by question
 
 | question | answer | source |
@@ -638,6 +654,13 @@ exponent, not the log coefficient. See `the-fold-logarithm.md`.
 | Why is there no log in odd dimensions? | the trace anomaly vanishes; the universal term is a constant | logarithm |
 | Is the critical line's `1/2` the log coefficient? | no: it is the theta half-density exponent; `g_0` is the anomaly | logarithm, theta |
 | Does the Fold derive the log coefficient? | no: it supplies the `ln` height; the coefficient is external | logarithm, problems |
+| Is the Fold a design method? | no: it supplies exponents, closure, and sampling; material laws and safety factors are external | engineering |
+| What transfers exactly to engineering? | geometric similitude, square–cube exponents, loop closure, Nyquist, crystallographic restriction | engineering |
+| Why can't a ship model match both `Re` and `Fr`? | one length ratio `k` cannot satisfy both groups; dynamic similitude is external | engineering |
+| What is the square–cube law in the Fold? | `mass ∝ k³`, `section ∝ k²`, `stress ∝ k` | engineering |
+| Is the quarter-wave plate the Fold's `J`? | no: same group, different space; `diag(1,i)² = diag(1,−1)`, not `−I` | engineering |
+| Is the area law thermodynamic entropy? | no: `S_EE ∝ A ∝ k²` vs `S_th ∝ V ∝ k³` | engineering, entanglement |
+| Is a control observer the Fold's observer? | no: the Fold's is an aperture `(d,w)`; the control observer has state, gain, and stability | engineering, observer |
 | What is the signature of zero? | `(0,0,n)`: `n` unsigned directions; scalar `0` but nullity `n` — not a balanced form | signature |
 | Why must nothing come first? | in the scale ledger a continuous sign change must cross a degenerate form; `k=0` is that crossing | signature |
 | What is the signature of a fold? | `(n−1,1,0)`: crease `+` of dimension `n−1`, normal `−` of dimension `1` | signature |
@@ -740,6 +763,7 @@ No new measurements. These are the existing checks the key rests on:
 | the holographic coefficient and the minimal surface | `the-fold-holography.md` |
 | the general coefficient and the Noether charge | `the-fold-wald.md` |
 | the universal logarithm and the A-type anomaly | `the-fold-logarithm.md` |
+| engineering applications and the limits of transfer | `the-fold-engineering.md` |
 
 ## The key in one sentence
 

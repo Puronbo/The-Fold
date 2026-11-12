@@ -269,4 +269,5 @@ the explicit formula needs a parity breaker — four known walls, one crease.**
 the codimension/multiplicity distinction are in `the-fold-pipeline.md`; the signature and the
 Poincaré–Hopf index are in `the-fold-signature.md`; the facet classification is in
 `the-fold-facets.md`; the universal logarithm and the `1/2` distinction are in
-`the-fold-logarithm.md`; the lookup is `the-fold-key.md`.
+`the-fold-logarithm.md`; the engineering zone — similitude, crease kinematics, sampling, and the
+false friends — is in `the-fold-engineering.md`; the lookup is `the-fold-key.md`.

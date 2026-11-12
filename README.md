@@ -75,6 +75,12 @@ and `−4a` in 4D. In odd dimensions the log vanishes. The Fold's `ln` height is
 coefficient is the anomaly's, not the Fold's, and the `1/2` of the critical line is a different object.
 See `the-fold-logarithm.md`.
 
+**Engineering:** the Fold is an exponent engine and a compatibility checker, not a constitutive
+theory. Geometric similitude is exact (`k`, `k²`, `k³`, curvature `1/k`), and so is the square–cube
+law (`mass ∝ k³`, `section ∝ k²`, `stress ∝ k`). Crease closure `m = π/α`, Nyquist `N > 2m`, and the
+crystallographic restriction are exact; dynamic similitude, material laws, units, and safety factors
+are external. See `the-fold-engineering.md`.
+
 **Two nothings:** `k = 1` is the identity — nothing changed; `k = 0` is the collapse — nothing has
 size. The creation loop returns the second, not the first.
 
@@ -188,6 +194,7 @@ a projection or a coarse-graining, not `k → 0`. See `the-fold-afar.md`.
 | the holographic coefficient and the minimal surface | `the-fold-holography.md` |
 | the general coefficient and the Noether charge | `the-fold-wald.md` |
 | the universal logarithm and the A-type anomaly | `the-fold-logarithm.md` |
+| engineering applications and the limits of transfer | `the-fold-engineering.md` |
 | the interactive models | the nine HTML files |
 
 ## Contents
@@ -238,6 +245,7 @@ a projection or a coarse-graining, not `k → 0`. See `the-fold-afar.md`.
 | `the-fold-holography.md` | follow-up note: the holographic coefficient - Ryu-Takayanagi, the minimal surface, the coefficient match, and the species relation |
 | `the-fold-wald.md` | follow-up note: the general coefficient - Wald entropy, the Noether charge, the higher-curvature checks, and the first law |
 | `the-fold-logarithm.md` | follow-up note: the universal logarithm - the A-type anomaly, the coefficient table, the no-log in odd dimensions, and the height rhyme |
+| `the-fold-engineering.md` | follow-up note: engineering - geometric similitude, the square–cube law, crease kinematics, sampling, and the false friends |
 
 Open the HTML files directly in a browser — no build step, no dependencies.
 
