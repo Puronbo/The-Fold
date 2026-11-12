@@ -166,7 +166,8 @@ entropy but not Newton's constant. In induced gravity, `1/4G` can be generated b
 entropy of matter, but that is a model with a specific cutoff and field content, not a Fold theorem.
 
 The Fold's contribution is the exponent: `S ∝ A`. The coefficient `1/4ℓ_P²` is external, exactly as in
-`the-fold-area.md`.
+`the-fold-area.md`. The one case where the coefficient is fixed is holographic; see
+`the-fold-holography.md`.
 
 ## Adjacent research
 

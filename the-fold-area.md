@@ -173,7 +173,8 @@ Schwarzschild radius it is saturated. The holographic principle reads the area a
 capacity; the entanglement area law and the loop-quantum-gravity area spectrum are independent area
 laws. This note borrows the area/gauge distinction and the saturation arithmetic. It does not borrow the
 dynamics. The wedge's modular Hamiltonian and the area law's coefficient caveat are in
-`the-fold-entanglement.md`.
+`the-fold-entanglement.md`. The one case where the coefficient is fixed is holographic; see
+`the-fold-holography.md`.
 
 | topic | reference | link |
 |---|---|---|

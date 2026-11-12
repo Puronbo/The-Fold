@@ -53,6 +53,13 @@ horizon's area exponent and the mode-count exponent. The coefficient is the cuto
 content's, not the Fold's: the `1/4` in `S_BH = A/4ℓ_P²` and the wedge's `c` share the scaling but not
 the number, and the species problem is why. See `the-fold-entanglement.md`.
 
+**Holographic coefficient:** in the AdS/CFT correspondence, the wedge's entropy is
+`S_EE = A_min/(4G_N)`, the area of the minimal bulk surface divided by four times the bulk Newton
+constant. This is the one case in this thread where the coefficient is exactly the Bekenstein–Hawking
+`1/4G_N`; the boundary's species count `~N_c²` is tied to the bulk's `ℓ^{d−1}/G_N`. The Fold's `S ∝ A`
+supplies the exponent, but the bulk geometry and the coefficient are the holographic theory's. See
+`the-fold-holography.md`.
+
 **Two nothings:** `k = 1` is the identity — nothing changed; `k = 0` is the collapse — nothing has
 size. The creation loop returns the second, not the first.
 
@@ -163,6 +170,7 @@ a projection or a coarse-graining, not `k → 0`. See `the-fold-afar.md`.
 | the horizon's clock and the temperature law | `the-fold-clock.md` |
 | the accelerated observer and the Unruh period | `the-fold-unruh.md` |
 | the wedge's entropy and the area law | `the-fold-entanglement.md` |
+| the holographic coefficient and the minimal surface | `the-fold-holography.md` |
 | the interactive models | the nine HTML files |
 
 ## Contents
@@ -210,6 +218,7 @@ a projection or a coarse-graining, not `k → 0`. See `the-fold-afar.md`.
 | `the-fold-clock.md` | follow-up note: the horizon's clock — surface gravity, imaginary time, the `T ∝ 1/k` law, and Smarr |
 | `the-fold-unruh.md` | follow-up note: the observer's thermometer — Rindler acceleration, the Unruh period, detailed balance, and the homothety-versus-boost distinction |
 | `the-fold-entanglement.md` | follow-up note: the wedge's entropy — the modular Hamiltonian, the area law, the mode-count exponent, and the coefficient caveat |
+| `the-fold-holography.md` | follow-up note: the holographic coefficient — Ryu–Takayanagi, the minimal surface, the coefficient match, and the species relation |
 
 Open the HTML files directly in a browser — no build step, no dependencies.
 

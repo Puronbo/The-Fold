@@ -193,7 +193,7 @@ the field side; Bisognano and Wichmann proved the KMS property of the wedge; Jac
 Rindler horizon and the Unruh temperature to read the Einstein equation as an equation of state. This
 note borrows the Rindler geometry, the detailed-balance form, and the near-horizon bridge. It does not
 derive the Unruh effect, the KMS condition, or the Einstein equation. The wedge's entropy is in
-`the-fold-entanglement.md`.
+`the-fold-entanglement.md`; the holographic coefficient is in `the-fold-holography.md`.
 
 | topic | reference | link |
 |---|---|---|

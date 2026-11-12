@@ -533,6 +533,15 @@ coefficient is the cutoff's and the field content's, not the Fold's: the Bekenst
 wedge's `c` share the scaling, not the number, and the species problem is the boundary. The Fold's `k` is
 a homothety, not the modular boost. See `the-fold-entanglement.md`.
 
+## The holographic coefficient: Ryu–Takayanagi and the minimal surface
+
+In the AdS/CFT correspondence, the wedge's entropy is `S_EE = A_min/(4G_N)`, the area of the minimal bulk
+surface homologous to the boundary region divided by four times the bulk Newton constant. The coefficient
+is exactly the Bekenstein–Hawking `1/4G_N`; the dimensions close because `G_N` and `A_min` both have
+length `d−1`. For `N = 4` SYM with `SU(N_c)`, the boundary's `~N_c²` degrees of freedom are tied to the
+bulk's `ℓ^{d−1}/G_N ~ N_c²`. The Fold's `S ∝ A` supplies the exponent; the bulk geometry and the
+coefficient are the holographic theory's. See `the-fold-holography.md`.
+
 ## Key by question
 
 | question | answer | source |
@@ -591,6 +600,10 @@ a homothety, not the modular boost. See `the-fold-entanglement.md`.
 | Is the wedge entropy the black hole entropy? | no: same area scaling, different coefficients; `c` is the cutoff's | entanglement, area, problems |
 | Why is the wedge entropy not `A/4`? | the `1/4` is the gravitational coupling; the wedge's `c` is matter-sector | entanglement, area |
 | What is the species problem? | `c` scales with the number of fields; `1/4G` does not | entanglement, problems |
+| What is the holographic entanglement entropy? | `S_EE = A_min/(4G_N)`: the minimal bulk surface, divided by `4G_N` | holography, entanglement |
+| Does the RT coefficient match Bekenstein–Hawking? | yes: both are `1/4G_N` in the same bulk theory | holography, area |
+| Does holography solve the species problem? | no: it relates the boundary's `~N_c²` to the bulk's `ℓ^{d−1}/G_N` | holography, entanglement |
+| Does the Fold derive the RT formula? | no: it supplies the exponent; the bulk geometry and `1/4G_N` are external | holography, problems |
 | What is the signature of zero? | `(0,0,n)`: `n` unsigned directions; scalar `0` but nullity `n` — not a balanced form | signature |
 | Why must nothing come first? | in the scale ledger a continuous sign change must cross a degenerate form; `k=0` is that crossing | signature |
 | What is the signature of a fold? | `(n−1,1,0)`: crease `+` of dimension `n−1`, normal `−` of dimension `1` | signature |
@@ -690,6 +703,7 @@ No new measurements. These are the existing checks the key rests on:
 | the horizon's clock and the temperature law | `the-fold-clock.md` |
 | the accelerated observer and the Unruh period | `the-fold-unruh.md` |
 | the wedge's entropy and the area law | `the-fold-entanglement.md` |
+| the holographic coefficient and the minimal surface | `the-fold-holography.md` |
 
 ## The key in one sentence
 
