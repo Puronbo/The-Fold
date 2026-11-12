@@ -503,6 +503,15 @@ parameter is a gauge clock; the area is the invariant. The horizon saturates the
 `S = A/4ℓ_P² = 4πGM²/(ħc) = 2π r_s M c/ħ = S_B`. The Fold gives the exponent, not `1/4ℓ_P²`, and does not
 posit a Planck lattice. See `the-fold-area.md`.
 
+## The horizon's clock: surface gravity and imaginary time
+
+The affine clock is gauge; the Killing clock is normalized at infinity. Its rate is `κ = c⁴/(4GM)`, and
+the Euclidean period `2πc/κ` gives `T = ħκ/(2πck_B) = ħc³/(8πGMk_B)`. The product
+`T·M = 1.2269e23 K·kg` is constant across Earth, Sun, and 70 kg. In the homothetic family `M ∝ k`, so
+`T ∝ 1/k`; in the collapse `T` is constant. The first law and Smarr close the clock to the area:
+`dM = κ dA/(8πG)`, `M = κA/(4πG)`; the period scales as `A^{1/(n−2)}` (`√A` in 4D). See
+`the-fold-clock.md`.
+
 ## Key by question
 
 | question | answer | source |
@@ -545,6 +554,11 @@ posit a Planck lattice. See `the-fold-area.md`.
 | Is the area law a Fold theorem? | no: the Fold gives `S ∝ A`; the coefficient `1/4ℓ_P²` is external | area, problems |
 | Is the horizon a Planck lattice? | no: the pixel count needs an external `a₀`; the Fold has no Planck scale | area, occlusion |
 | What does the horizon saturate? | the static Bekenstein bound: `S = S_B = 4πGM²/(ħc)` at `R = r_s` | area, horizon |
+| Is the horizon's clock unique? | no: the affine parameter is gauge; the Killing clock is normalized at infinity | clock, area |
+| What sets the horizon's temperature? | the surface gravity: `T = ħκ/(2πck_B)`, `κ = c⁴/(4GM)` | clock, horizon |
+| Why is `T ∝ 1/k`? | `T ∝ 1/M`, and `M ∝ k` in the homothetic family; constant in collapse | clock, matter |
+| What closes the clock to the area? | the first law `dM = κ dA/(8πG)` and Smarr `M = κA/(4πG)` | clock, area |
+| Does the Fold derive Hawking radiation? | no: it gives the exponent; the coefficient `1/8π` is external | clock, problems |
 | What is the signature of zero? | `(0,0,n)`: `n` unsigned directions; scalar `0` but nullity `n` — not a balanced form | signature |
 | Why must nothing come first? | in the scale ledger a continuous sign change must cross a degenerate form; `k=0` is that crossing | signature |
 | What is the signature of a fold? | `(n−1,1,0)`: crease `+` of dimension `n−1`, normal `−` of dimension `1` | signature |
@@ -641,6 +655,7 @@ No new measurements. These are the existing checks the key rests on:
 | the observer as dimension and window | `the-fold-observer.md` |
 | closure as sampling and the horizon window | `the-fold-sampling.md` |
 | the horizon's area and the mode count | `the-fold-area.md` |
+| the horizon's clock and the temperature law | `the-fold-clock.md` |
 
 ## The key in one sentence
 

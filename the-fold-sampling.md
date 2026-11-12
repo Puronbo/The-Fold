@@ -142,6 +142,9 @@ So the horizon is the `d = n−1` observer whose window is the causal cone; the 
 boundary. The Gaussian and the causal window agree in the interior and differ at the boundary: the
 Gaussian leaks, the retarded propagator does not.
 
+The causal window's Euclidean period is `2πc/κ`, and the surface gravity sets the temperature
+`T = ħκ/(2πck_B)`. See `the-fold-clock.md`.
+
 ## The probe is `(d, w, a)`
 
 The observer is `(d, w)`; a discrete probe adds `a`, the sample spacing, or `N = 2πR/a`, the number of

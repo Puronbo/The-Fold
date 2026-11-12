@@ -33,6 +33,12 @@ count and the angular resolution are dual. Uniform angle is area-fair only on a 
 octants have ratio `1 + √2`, and the exterior projection adds a `cos α` Jacobian vanishing at the limb.
 The horizon saturates the static Bekenstein bound: `S = A/4ℓ_P² = 4πGM²/(ħc)`. See `the-fold-area.md`.
 
+**Horizon clock:** the affine parameter along a null generator is gauge; the Killing time, normalized at
+infinity, is not. Its rate is the surface gravity `κ = c⁴/(4GM)`, and the Euclidean period `2πc/κ` gives
+`T = ħκ/(2πck_B) = ħc³/(8πGMk_B)`. The Fold's `T ∝ 1/k` is the exponent; the coefficient is external. The
+static horizon closes the clock to the area: `M = κA/(4πG)` and `dM = κ dA/(8πG)`. See
+`the-fold-clock.md`.
+
 **Two nothings:** `k = 1` is the identity — nothing changed; `k = 0` is the collapse — nothing has
 size. The creation loop returns the second, not the first.
 
@@ -140,6 +146,7 @@ a projection or a coarse-graining, not `k → 0`. See `the-fold-afar.md`.
 | the observer as dimension and window | `the-fold-observer.md` |
 | closure as sampling and the horizon window | `the-fold-sampling.md` |
 | the horizon's area and the mode count | `the-fold-area.md` |
+| the horizon's clock and the temperature law | `the-fold-clock.md` |
 | the interactive models | the nine HTML files |
 
 ## Contents
@@ -184,6 +191,7 @@ a projection or a coarse-graining, not `k → 0`. See `the-fold-afar.md`.
 | `the-fold-observer.md` | follow-up note: the observer as dimension and window — the form degree, the resolution, and two kinds of blindness |
 | `the-fold-sampling.md` | follow-up note: sampling, closure, and the horizon window — Nyquist for `m`-fold patterns, the object/probe lattices, and the causal window |
 | `the-fold-area.md` | follow-up note: the horizon's measure — area not volume, the mode-count exponent, angle versus area, and Bekenstein saturation |
+| `the-fold-clock.md` | follow-up note: the horizon's clock — surface gravity, imaginary time, the `T ∝ 1/k` law, and Smarr |
 
 Open the HTML files directly in a browser — no build step, no dependencies.
 

@@ -200,8 +200,8 @@ observer measures a `d`-form: a scalar, a gradient, a flux, a density.
 The density row is the check: mass has `p = 1`, so a 3D density has `p = 1 − 3 = −2`, exactly the
 `1/h²` in the height table. The observer adds no new law; it selects how many powers of the height
 are divided out. A time rate is not in this table: it needs the twist period (stage 3) or the
-horizon clock (stage 5). The observer has a second parameter, the resolution window; the pair `(d, w)`
-is in `the-fold-observer.md`.
+horizon clock (stage 5). The horizon clock is `T = ħκ/(2πck_B)`; see `the-fold-clock.md`. The observer has
+a second parameter, the resolution window; the pair `(d, w)` is in `the-fold-observer.md`.
 
 ## The matter ladder
 

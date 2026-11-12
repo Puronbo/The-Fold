@@ -130,6 +130,9 @@ The horizon has a clock and a pixel count, and only the second is gauge-invarian
 version of the observer's `(d, w)`: `w` is a coordinate scale, `A` is the invariant. The sampling note's
 `N` is dual to the object's `m`; the area is dual to the mode count.
 
+The other clock is the Killing one, normalized at infinity. Its rate is the surface gravity `κ`, and its
+Euclidean period `2πc/κ` is the temperature. See `the-fold-clock.md`.
+
 ## The Bekenstein saturation
 
 In 4D Planck units (`G = c = ħ = k_B = 1`), the bound is `S_B = 2π R M`. At `R = r_s = 2M`,

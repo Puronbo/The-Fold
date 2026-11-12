@@ -59,8 +59,8 @@ Fixed-mass values at formation, computed from `M` alone:
 | Sun | 4.245e−6 | 2.953e3 m | 1.049e77 | 6.170e−8 K |
 | 70 kg water sphere | 4.067e−25 | 1.040e−25 m | 1.300e20 | 1.753e21 K |
 
-Note the ordering: the 70 kg sphere is the *hottest* horizon in the table by 29 orders of magnitude,
-because `T_H ∝ 1/M`. Horizon thermodynamics is anti-correlated with size.
+Note the ordering: the 70 kg sphere is the *hottest* horizon in the table by more than 28 orders of
+magnitude, because `T_H ∝ 1/M`. Horizon thermodynamics is anti-correlated with size.
 
 ## The entropy does not accumulate
 
@@ -129,3 +129,6 @@ support. See `the-fold-sampling.md`.
 The invariant measure is the cross-section area, not the horizon's 3-volume: the null normal is tangent
 and can be rescaled, so volume is gauge. The area exponent `n−2` is also the mode-count exponent, and the
 static horizon saturates the Bekenstein bound. See `the-fold-area.md`.
+
+The other clock is the Killing one, normalized at infinity: its rate is the surface gravity `κ`, and its
+Euclidean period `2πc/κ` gives the temperature. See `the-fold-clock.md`.
