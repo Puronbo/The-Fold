@@ -491,6 +491,18 @@ restricted). The horizon is the `d = n−1` observer whose window is the causal 
 boundary of its support. The Gaussian is the non-causal idealization; the retarded propagator is the
 causal window. The probe is `(d, w, a)`. See `the-fold-sampling.md`.
 
+## The horizon's measure: area, not volume
+
+A null surface has no invariant volume: the null normal is tangent and can be rescaled, the induced form
+is degenerate `(n−2,0,1)`, and any volume form scales under `n → e^f n`. The invariant is the
+cross-sectional area `A[S] = ∫_S √(det q_S)`. The area exponent is the mode-count exponent: `A ∝ r^{n−2}`
+and the modes on `S^{n−2}` of degree at most `m` grow as `~m^{n−2}`; in 4D, `A ∝ r²`, modes `(m+1)²`, so
+`N_A ~ m²`. Uniform angle is area-fair only on a circle; on `S²` equal `θ` octants have ratio
+`1 + √2 = 2.414214`, and the exterior projection has a `cos α` Jacobian vanishing at the limb. The affine
+parameter is a gauge clock; the area is the invariant. The horizon saturates the static Bekenstein bound:
+`S = A/4ℓ_P² = 4πGM²/(ħc) = 2π r_s M c/ħ = S_B`. The Fold gives the exponent, not `1/4ℓ_P²`, and does not
+posit a Planck lattice. See `the-fold-area.md`.
+
 ## Key by question
 
 | question | answer | source |
@@ -527,6 +539,12 @@ causal window. The probe is `(d, w, a)`. See `the-fold-sampling.md`.
 | Are the closure and the sampling lattice the same? | no: `m` is the object's symmetry, `N` the probe's discretization; they are dual | sampling |
 | Does the crystallographic restriction limit the observer? | no: it limits the object's periodic lattice (`n ∈ {1,2,3,4,6}`), not `N` | sampling, closure |
 | What is the horizon's window? | the causal cone: retarded support `\|x\| ≤ t`, null boundary `\|x\| = t`; not the Gaussian | sampling, horizon |
+| Does a horizon have a volume? | no: the null normal is tangent and rescalable, `det q = 0`; the volume is gauge | area, horizon |
+| Why is the horizon's pixel count an area? | the invariant measure is `A[S]`; the area exponent `n−2` is the mode-count exponent | area |
+| Is uniform angle uniform area? | only on a circle; on `S²` equal `θ` octants have ratio `1 + √2`; use uniform `cos θ` | area, sampling |
+| Is the area law a Fold theorem? | no: the Fold gives `S ∝ A`; the coefficient `1/4ℓ_P²` is external | area, problems |
+| Is the horizon a Planck lattice? | no: the pixel count needs an external `a₀`; the Fold has no Planck scale | area, occlusion |
+| What does the horizon saturate? | the static Bekenstein bound: `S = S_B = 4πGM²/(ħc)` at `R = r_s` | area, horizon |
 | What is the signature of zero? | `(0,0,n)`: `n` unsigned directions; scalar `0` but nullity `n` — not a balanced form | signature |
 | Why must nothing come first? | in the scale ledger a continuous sign change must cross a degenerate form; `k=0` is that crossing | signature |
 | What is the signature of a fold? | `(n−1,1,0)`: crease `+` of dimension `n−1`, normal `−` of dimension `1` | signature |
@@ -622,6 +640,7 @@ No new measurements. These are the existing checks the key rests on:
 | a folded line that looks like one line from afar | `the-fold-afar.md` |
 | the observer as dimension and window | `the-fold-observer.md` |
 | closure as sampling and the horizon window | `the-fold-sampling.md` |
+| the horizon's area and the mode count | `the-fold-area.md` |
 
 ## The key in one sentence
 

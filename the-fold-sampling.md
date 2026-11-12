@@ -93,6 +93,10 @@ The window and the sampling therefore share the same cutoff: both the window wid
 spacing `a` must be below the half-sector arc `πR/m`. The coarser of the two sets the resolution. This is
 the exact discrete dual of "the window resolves the fold."
 
+On a higher-dimensional cross-section, uniform angle is not uniform area: on `S²` the area element is
+`sin θ dθ dφ`, and equal `θ` octants have ratio `1 + √2`. The fair sampling is the area measure, not the
+coordinate angle. See `the-fold-area.md`.
+
 ## The two lattices
 
 There are two lattices in the sentence, and they must not be conflated:

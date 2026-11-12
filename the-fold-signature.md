@@ -168,7 +168,8 @@ The later rows are readings, not derivations. In a Lorentzian extension the ambi
 horizon is a null hypersurface, `n·n=0`, so the induced form is degenerate, `(n−2,0,1)`. The
 orthogonal fold requires `n·n=±1`; at the horizon the fold degenerates. The Fold's `k*` is the scalar
 ratio at which the radial normal becomes null. That is the signature reading of the paper's "the
-surface becomes null."
+surface becomes null." The null direction is the radical of the induced form; the invariant measure it
+leaves is the cross-section area. See `the-fold-area.md`.
 
 ## The observer's star
 

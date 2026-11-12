@@ -139,7 +139,8 @@ Its invariant is the Pfaffian `Pf(ω) = 1`, not an arrow. It makes the loop, not
 The one-way surface the idea is looking for does exist in the model, and it is not the twist. It is
 the **horizon**: a null crease, `n·n = 0`, where the fold degenerates and the induced form is
 `(n−2,0,1)` in a Lorentzian `n`-manifold. Timelike curves cross a null surface one way; that is a
-causal ratchet, and it is exact. The twist has no such direction.
+causal ratchet, and it is exact. The twist has no such direction. The one direction the surface cannot
+measure is the null radical; the invariant it leaves is the cross-section area. See `the-fold-area.md`.
 
 Chirality in the Fold is the sign of `k` (mirror) and the parity of the fold count (orientation), not
 a hidden back. "Information flows from the back to the front" is also not the fold: `σ_H` is an

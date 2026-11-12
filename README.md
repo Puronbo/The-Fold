@@ -26,6 +26,13 @@ and the sample spacing share the half-sector cutoff `πR/m`. The crystallographi
 object's periodic lattice, not the probe's. The horizon is the `d = n−1` observer whose window is the
 causal cone. See `the-fold-sampling.md`.
 
+**Horizon measure:** a null surface has no invariant volume — the null normal is tangent and can be
+rescaled, and the induced metric is degenerate — but each cross-section has an invariant area. The area
+exponent `n−2` is the mode-count exponent: in 4D, `A ∝ r²` and the modes grow as `m²`, so the pixel
+count and the angular resolution are dual. Uniform angle is area-fair only on a circle; on `S²` equal `θ`
+octants have ratio `1 + √2`, and the exterior projection adds a `cos α` Jacobian vanishing at the limb.
+The horizon saturates the static Bekenstein bound: `S = A/4ℓ_P² = 4πGM²/(ħc)`. See `the-fold-area.md`.
+
 **Two nothings:** `k = 1` is the identity — nothing changed; `k = 0` is the collapse — nothing has
 size. The creation loop returns the second, not the first.
 
@@ -132,6 +139,7 @@ a projection or a coarse-graining, not `k → 0`. See `the-fold-afar.md`.
 | a folded line that looks like one line from afar | `the-fold-afar.md` |
 | the observer as dimension and window | `the-fold-observer.md` |
 | closure as sampling and the horizon window | `the-fold-sampling.md` |
+| the horizon's area and the mode count | `the-fold-area.md` |
 | the interactive models | the nine HTML files |
 
 ## Contents
@@ -175,6 +183,7 @@ a projection or a coarse-graining, not `k → 0`. See `the-fold-afar.md`.
 | `the-fold-afar.md` | follow-up note: the folded line from afar — the V, the pleats, the singular line, and projection rather than scale |
 | `the-fold-observer.md` | follow-up note: the observer as dimension and window — the form degree, the resolution, and two kinds of blindness |
 | `the-fold-sampling.md` | follow-up note: sampling, closure, and the horizon window — Nyquist for `m`-fold patterns, the object/probe lattices, and the causal window |
+| `the-fold-area.md` | follow-up note: the horizon's measure — area not volume, the mode-count exponent, angle versus area, and Bekenstein saturation |
 
 Open the HTML files directly in a browser — no build step, no dependencies.
 

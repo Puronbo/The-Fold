@@ -125,3 +125,7 @@ pair, with `R`, `r_H`, `R/r_H`, `S`, `T`, `V/A_H` and the active law.
 Read through the observer, the horizon is the `d = n−1` surface observer whose window is the causal cone;
 the Gaussian window is the non-causal idealization, and the null crease is the boundary of the retarded
 support. See `the-fold-sampling.md`.
+
+The invariant measure is the cross-section area, not the horizon's 3-volume: the null normal is tangent
+and can be rescaled, so volume is gauge. The area exponent `n−2` is also the mode-count exponent, and the
+static horizon saturates the Bekenstein bound. See `the-fold-area.md`.
