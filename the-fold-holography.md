@@ -206,5 +206,6 @@ the bulk geometry and the coefficient are the holographic theory's, not the Fold
 `the-fold-holography.md` (this note). The wedge's entropy and the coefficient caveat are in
 `the-fold-entanglement.md`; the horizon's area and the Bekenstein–Hawking coefficient are in
 `the-fold-area.md`; the Rindler wedge and the modular period are in `the-fold-unruh.md`; the null crease
-is in `the-fold-horizon.md`; the open-problem boundaries are in `the-fold-problems.md`; the order is in
-`the-fold-creation.md`; the lookup is `the-fold-key.md`.
+is in `the-fold-horizon.md`; the general coefficient (Wald entropy) is in `the-fold-wald.md`; the
+open-problem boundaries are in `the-fold-problems.md`; the order is in `the-fold-creation.md`; the lookup
+is `the-fold-key.md`.

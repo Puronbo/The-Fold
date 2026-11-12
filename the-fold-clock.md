@@ -127,7 +127,8 @@ which is the identity the horizon note checked by finite differences. In SI the 
 
 The Smarr formula ties the clock to the pixel: the surface gravity and the area are not independent
 horizon data. For Kerr or Reissner–Nordström there are extra `ΩJ` and `ΦQ` terms, and the Fold's `k*` is
-the static spherical ratio.
+the static spherical ratio. The general-coefficient version replaces `A/(4G)` by the Wald entropy; see
+`the-fold-wald.md`.
 
 ## The clock and the pixel
 

@@ -542,6 +542,18 @@ length `d−1`. For `N = 4` SYM with `SU(N_c)`, the boundary's `~N_c²` degrees 
 bulk's `ℓ^{d−1}/G_N ~ N_c²`. The Fold's `S ∝ A` supplies the exponent; the bulk geometry and the
 coefficient are the holographic theory's. See `the-fold-holography.md`.
 
+## The general coefficient: Wald entropy and the Noether charge
+
+For an arbitrary diffeomorphism-invariant gravitational action, the horizon entropy is the Noether charge
+of the horizon Killing field, `S_Wald = (2π/κ)∫Q[ξ] = −2π∫(∂L/∂R_{abcd})ε_{ab}ε_{cd}√h`. It is still a
+codimension-two cross-section integral, so the Fold's exponent survives; the coefficient is the action's.
+`A/4G` is only Einstein–Hilbert; `f(R)` gives `f'(R)A/4G`; Gauss–Bonnet gives
+`A/(4G) + (α/2G)∫√h R̃`; Lovelock adds one intrinsic-curvature integral per term. The `2π` is the
+Euclidean/modular period, and the first law `dM = (κ/2π)dS + …` is why the entropy is the charge. In
+higher-derivative holography the entanglement entropy is the Wald functional plus extrinsic-curvature
+corrections. The Fold supplies the codimension-two locus and the exponent `n−2`, not the action or the
+coefficient. See `the-fold-wald.md`.
+
 ## Key by question
 
 | question | answer | source |
@@ -604,6 +616,11 @@ coefficient are the holographic theory's. See `the-fold-holography.md`.
 | Does the RT coefficient match Bekenstein–Hawking? | yes: both are `1/4G_N` in the same bulk theory | holography, area |
 | Does holography solve the species problem? | no: it relates the boundary's `~N_c²` to the bulk's `ℓ^{d−1}/G_N` | holography, entanglement |
 | Does the Fold derive the RT formula? | no: it supplies the exponent; the bulk geometry and `1/4G_N` are external | holography, problems |
+| What is the horizon entropy for a general action? | the Noether charge: `S_Wald = −2π∫(∂L/∂R_{abcd})ε_{ab}ε_{cd}` | wald, area |
+| Is `A/4G` universal? | no: only Einstein–Hilbert; `f(R)` gives `f'(R)A/4G` | wald, area |
+| What does Gauss–Bonnet add? | an intrinsic-curvature integral `(α/2G)∫√h R̃` over the cross-section | wald |
+| Why is the entropy a Noether charge? | it is defined so the first law `dM = (κ/2π)dS + …` holds | wald, clock |
+| Is Wald entropy the entanglement entropy? | no: higher-derivative holography adds extrinsic-curvature corrections | wald, holography |
 | What is the signature of zero? | `(0,0,n)`: `n` unsigned directions; scalar `0` but nullity `n` — not a balanced form | signature |
 | Why must nothing come first? | in the scale ledger a continuous sign change must cross a degenerate form; `k=0` is that crossing | signature |
 | What is the signature of a fold? | `(n−1,1,0)`: crease `+` of dimension `n−1`, normal `−` of dimension `1` | signature |
@@ -704,6 +721,7 @@ No new measurements. These are the existing checks the key rests on:
 | the accelerated observer and the Unruh period | `the-fold-unruh.md` |
 | the wedge's entropy and the area law | `the-fold-entanglement.md` |
 | the holographic coefficient and the minimal surface | `the-fold-holography.md` |
+| the general coefficient and the Noether charge | `the-fold-wald.md` |
 
 ## The key in one sentence
 

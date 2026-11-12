@@ -60,6 +60,13 @@ constant. This is the one case in this thread where the coefficient is exactly t
 supplies the exponent, but the bulk geometry and the coefficient are the holographic theory's. See
 `the-fold-holography.md`.
 
+**General coefficient:** for an arbitrary diffeomorphism-invariant gravitational action, the horizon
+entropy is the Noether charge of the horizon Killing field,
+`S_Wald = (2π/κ)∫Q[ξ] = −2π∫(∂L/∂R_{abcd})ε_{ab}ε_{cd}√h`. It is still a codimension-two cross-section
+integral, so the Fold's exponent survives; the coefficient is the action's. `A/4G` is only
+Einstein–Hilbert; `f(R)` gives `f'(R)A/4G`; Gauss–Bonnet and Lovelock add intrinsic-curvature integrals.
+See `the-fold-wald.md`.
+
 **Two nothings:** `k = 1` is the identity — nothing changed; `k = 0` is the collapse — nothing has
 size. The creation loop returns the second, not the first.
 
@@ -171,6 +178,7 @@ a projection or a coarse-graining, not `k → 0`. See `the-fold-afar.md`.
 | the accelerated observer and the Unruh period | `the-fold-unruh.md` |
 | the wedge's entropy and the area law | `the-fold-entanglement.md` |
 | the holographic coefficient and the minimal surface | `the-fold-holography.md` |
+| the general coefficient and the Noether charge | `the-fold-wald.md` |
 | the interactive models | the nine HTML files |
 
 ## Contents
@@ -218,7 +226,8 @@ a projection or a coarse-graining, not `k → 0`. See `the-fold-afar.md`.
 | `the-fold-clock.md` | follow-up note: the horizon's clock — surface gravity, imaginary time, the `T ∝ 1/k` law, and Smarr |
 | `the-fold-unruh.md` | follow-up note: the observer's thermometer — Rindler acceleration, the Unruh period, detailed balance, and the homothety-versus-boost distinction |
 | `the-fold-entanglement.md` | follow-up note: the wedge's entropy — the modular Hamiltonian, the area law, the mode-count exponent, and the coefficient caveat |
-| `the-fold-holography.md` | follow-up note: the holographic coefficient — Ryu–Takayanagi, the minimal surface, the coefficient match, and the species relation |
+| `the-fold-holography.md` | follow-up note: the holographic coefficient - Ryu-Takayanagi, the minimal surface, the coefficient match, and the species relation |
+| `the-fold-wald.md` | follow-up note: the general coefficient - Wald entropy, the Noether charge, the higher-curvature checks, and the first law |
 
 Open the HTML files directly in a browser — no build step, no dependencies.
 

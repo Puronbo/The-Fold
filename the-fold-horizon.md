@@ -133,4 +133,5 @@ static horizon saturates the Bekenstein bound. See `the-fold-area.md`.
 The other clock is the Killing one, normalized at infinity: its rate is the surface gravity `κ`, and its
 Euclidean period `2πc/κ` gives the temperature. See `the-fold-clock.md`. The accelerated observer's local
 version is the Unruh temperature; see `the-fold-unruh.md`. The wedge's entropy and the area law are in
-`the-fold-entanglement.md`; the holographic coefficient is in `the-fold-holography.md`.
+`the-fold-entanglement.md`; the holographic coefficient is in `the-fold-holography.md`; the general
+coefficient (Wald entropy) is in `the-fold-wald.md`.
