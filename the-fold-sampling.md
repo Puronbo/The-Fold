@@ -144,7 +144,8 @@ Gaussian leaks, the retarded propagator does not.
 
 The causal window's Euclidean period is `2πc/κ`, and the surface gravity sets the temperature
 `T = ħκ/(2πck_B)`. See `the-fold-clock.md`. The accelerated observer's window is the Rindler wedge, with
-period `2πc/a`; see `the-fold-unruh.md`.
+period `2πc/a`; see `the-fold-unruh.md`. The wedge's entanglement entropy is in
+`the-fold-entanglement.md`.
 
 ## The probe is `(d, w, a)`
 

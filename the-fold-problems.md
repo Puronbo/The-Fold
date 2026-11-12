@@ -181,7 +181,8 @@ equals topological index — is the exact ancestor of "a zero is a conserved cha
 - **Unruh and the thermal observer.** The horizon clock and the Unruh effect share a null crease and a
   `2π` period, but the Fold's `k` is a homothety, not a boost: it is dimensionless, conformal, and has no
   Killing vector. The Fold gives `T ∝ 1/k` through the surface gravity, not `T ∝ a`; the local Unruh
-  temperature is a rhyme, not a derivation. See `the-fold-unruh.md`.
+  temperature is a rhyme, not a derivation. See `the-fold-unruh.md`. The wedge's entanglement entropy and
+  the species problem are in `the-fold-entanglement.md`.
 - **P vs NP.** No contact for a proof, but one exact diagram: `NP` is an existential projection and a
   solver is a section; the Fold's linear projection is the simplest instance, and it is always split, so
   the hardness is the cost of the section, not its existence. The two ledgers and the one-way horizon

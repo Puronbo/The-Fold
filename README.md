@@ -46,6 +46,13 @@ Hawking temperature agree only near the horizon: `T_U = T_H(r_s/r)²/√f` versu
 is a homothety, not a boost, so the shared object is the null crease and the `2π`, not a derivation. See
 `the-fold-unruh.md`.
 
+**Wedge entropy:** the observer's causal window is a Rindler wedge. The Minkowski vacuum restricted to it
+is thermal, `ρ_W = e^{−2πK}/Z`, with `K` the unit-surface-gravity boost and modular period `2π`. The
+entanglement entropy is an area law, `S_EE ~ A/ε^{n−2}`; in 4D, `S_EE ~ R²/ε²`. The exponent `n−2` is the
+horizon's area exponent and the mode-count exponent. The coefficient is the cutoff's and the field
+content's, not the Fold's: the `1/4` in `S_BH = A/4ℓ_P²` and the wedge's `c` share the scaling but not
+the number, and the species problem is why. See `the-fold-entanglement.md`.
+
 **Two nothings:** `k = 1` is the identity — nothing changed; `k = 0` is the collapse — nothing has
 size. The creation loop returns the second, not the first.
 
@@ -155,6 +162,7 @@ a projection or a coarse-graining, not `k → 0`. See `the-fold-afar.md`.
 | the horizon's area and the mode count | `the-fold-area.md` |
 | the horizon's clock and the temperature law | `the-fold-clock.md` |
 | the accelerated observer and the Unruh period | `the-fold-unruh.md` |
+| the wedge's entropy and the area law | `the-fold-entanglement.md` |
 | the interactive models | the nine HTML files |
 
 ## Contents
@@ -201,6 +209,7 @@ a projection or a coarse-graining, not `k → 0`. See `the-fold-afar.md`.
 | `the-fold-area.md` | follow-up note: the horizon's measure — area not volume, the mode-count exponent, angle versus area, and Bekenstein saturation |
 | `the-fold-clock.md` | follow-up note: the horizon's clock — surface gravity, imaginary time, the `T ∝ 1/k` law, and Smarr |
 | `the-fold-unruh.md` | follow-up note: the observer's thermometer — Rindler acceleration, the Unruh period, detailed balance, and the homothety-versus-boost distinction |
+| `the-fold-entanglement.md` | follow-up note: the wedge's entropy — the modular Hamiltonian, the area law, the mode-count exponent, and the coefficient caveat |
 
 Open the HTML files directly in a browser — no build step, no dependencies.
 

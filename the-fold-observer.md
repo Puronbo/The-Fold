@@ -136,7 +136,7 @@ case.
 The surface observer is also a thermometer. An accelerated observer in the Minkowski vacuum sees a
 thermal bath at `T = ħa/(2πck_B)`, with a Rindler horizon at proper distance `c²/a`; the local Unruh
 temperature and the horizon's Tolman-redshifted temperature agree only near the horizon. See
-`the-fold-unruh.md`.
+`the-fold-unruh.md`. The entropy of tracing out the other wedge is in `the-fold-entanglement.md`.
 
 ## The return
 

@@ -523,6 +523,16 @@ near the horizon (`a√f/κ → 1`). The Fold's `k` is a homothety, not a boost:
 conformal, with no Killing vector. The shared objects are the null crease, the `2π`, and the causal
 window — rhymes, not a derivation. See `the-fold-unruh.md`.
 
+## The wedge's entropy: the observer's causal window and the area law
+
+The observer's causal window is a Rindler wedge. The Minkowski vacuum restricted to it is thermal,
+`ρ_W = e^{−2πK}/Z`, with `K` the unit-surface-gravity boost and modular period `2π`; the entropy identity
+is `S_EE = 2π⟨K⟩ + ln Z`. The entanglement entropy is an area law, `S_EE ~ A/ε^{n−2}`; in 4D,
+`S_EE ~ R²/ε²`, and the exponent `n−2` is the horizon's area exponent and the mode-count exponent. The
+coefficient is the cutoff's and the field content's, not the Fold's: the Bekenstein–Hawking `1/4` and the
+wedge's `c` share the scaling, not the number, and the species problem is the boundary. The Fold's `k` is
+a homothety, not the modular boost. See `the-fold-entanglement.md`.
+
 ## Key by question
 
 | question | answer | source |
@@ -575,6 +585,12 @@ window — rhymes, not a derivation. See `the-fold-unruh.md`.
 | Is the local Unruh temperature the Hawking temperature? | only near the horizon: `T_U = T_H(r_s/r)²/√f` vs `T_H/√f` | unruh, clock |
 | Is the Fold's `k` an acceleration? | no: it is a homothety (dimensionless, conformal), not a boost | unruh, signature |
 | Does the Fold derive the Unruh effect? | no: the null crease and the `2π` are shared, but `k` is not `a` | unruh, problems |
+| What is the observer's causal window? | a Rindler wedge: `x > \|t\|`, thermal at the Unruh temperature | unruh, entanglement |
+| What is the wedge's modular Hamiltonian? | `H_mod = 2πK`, with `K = ∫ x T_{00}` the unit boost; `ρ_W = e^{−2πK}/Z` | entanglement |
+| What is the wedge's entanglement entropy? | an area law `S_EE ~ A/ε^{n−2}`; in 4D `~ R²/ε²` | entanglement, area |
+| Is the wedge entropy the black hole entropy? | no: same area scaling, different coefficients; `c` is the cutoff's | entanglement, area, problems |
+| Why is the wedge entropy not `A/4`? | the `1/4` is the gravitational coupling; the wedge's `c` is matter-sector | entanglement, area |
+| What is the species problem? | `c` scales with the number of fields; `1/4G` does not | entanglement, problems |
 | What is the signature of zero? | `(0,0,n)`: `n` unsigned directions; scalar `0` but nullity `n` — not a balanced form | signature |
 | Why must nothing come first? | in the scale ledger a continuous sign change must cross a degenerate form; `k=0` is that crossing | signature |
 | What is the signature of a fold? | `(n−1,1,0)`: crease `+` of dimension `n−1`, normal `−` of dimension `1` | signature |
@@ -673,6 +689,7 @@ No new measurements. These are the existing checks the key rests on:
 | the horizon's area and the mode count | `the-fold-area.md` |
 | the horizon's clock and the temperature law | `the-fold-clock.md` |
 | the accelerated observer and the Unruh period | `the-fold-unruh.md` |
+| the wedge's entropy and the area law | `the-fold-entanglement.md` |
 
 ## The key in one sentence
 

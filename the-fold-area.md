@@ -172,7 +172,8 @@ of cross-sections is the invariant. The Bekenstein bound is the entropy-to-energ
 Schwarzschild radius it is saturated. The holographic principle reads the area as the information
 capacity; the entanglement area law and the loop-quantum-gravity area spectrum are independent area
 laws. This note borrows the area/gauge distinction and the saturation arithmetic. It does not borrow the
-dynamics.
+dynamics. The wedge's modular Hamiltonian and the area law's coefficient caveat are in
+`the-fold-entanglement.md`.
 
 | topic | reference | link |
 |---|---|---|

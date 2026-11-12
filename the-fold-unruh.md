@@ -192,7 +192,8 @@ Planck spectrum at `T = ħa/(2πck_B)`. Fulling and Davies found the same Bogoli
 the field side; Bisognano and Wichmann proved the KMS property of the wedge; Jacobson used the local
 Rindler horizon and the Unruh temperature to read the Einstein equation as an equation of state. This
 note borrows the Rindler geometry, the detailed-balance form, and the near-horizon bridge. It does not
-derive the Unruh effect, the KMS condition, or the Einstein equation.
+derive the Unruh effect, the KMS condition, or the Einstein equation. The wedge's entropy is in
+`the-fold-entanglement.md`.
 
 | topic | reference | link |
 |---|---|---|
