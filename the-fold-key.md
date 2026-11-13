@@ -590,6 +590,39 @@ computational model are external. See `the-fold-engineering.md`.
 | rhyme | deployable structures; metamaterials; analogue horizons; finite-size scaling; polarization; control observers |
 | false friend | `J` vs polar second moment; observer vs estimator; horizon vs planning window; entropy vs area law |
 
+## The loop from the first point to now
+
+The whole corpus, retold as one loop. It is a **closure of description**, not a claim that the universe
+is a literal time loop.
+
+The start has two faces, and they are not the same object. `P₀` is the point: the unique point fixed
+by every `g_k`, the datum, the zero object, `n` ambient directions. `k = 0` is the boundary of the
+group: outside it, `det g₀ = 0`, the total collapse. The hole field names the excluded point the
+puncture: `ω = dk/k`, `Res₀ ω = 1`, `∮_{|k|=r} ω = 2πi`. Neither face is the empty set.
+
+The first **operation** is the real scale `g_k(P) = P₀ + k(P − P₀)`, a homothety with no period. The
+first **split** is the fold `σ_H`, with crease `ker(σ_H − I)` of dimension `n−1` and signature
+`(n−1,1,0)`. The period arrives only when the scale is complexified: `k = e^{t+iθ}`, so that
+`Im ω = dθ` has period `2π` while `Re ω = d ln ρ` has none. The `2π` belongs to the twist, not to the
+homothety, and the closure `m = π/α` is conditional.
+
+The physical loop is standard cosmology and enters as a rhyme: inflation freezes the pattern at
+`k = aH`; the photon–baryon plasma oscillates with sound horizon `r_s`; recombination at `z ≈ 1100`
+freezes it into the CMB; the dark ages and reionization assemble the structure; the observer reads the
+bookmark. The CMB is the closing surface of the **first** acoustic loop, not the hole `k = 0` and not
+the end of the story.
+
+The loop then closes in description: the observer is a measurement aperture `(d,w)`, the zero's last
+witness rather than its author, and it reads the CMB with the same scale action that wrote the
+pattern. `∮ dk/k = 2πi` is the period of the description, not the age of the universe. See
+`the-fold-loop.md`.
+
+| the loop | closes at | status |
+|---|---|---|
+| twist | `θ → θ + 2π`; `∮ η = 2π` | exact on the complexified scale |
+| first cosmic loop | recombination; the CMB as bookmark | exact physics; Fold rhyme |
+| descriptive loop | the observer reads the CMB by the same scale | exact inference; not a physical cycle |
+
 ## Key by question
 
 | question | answer | source |
@@ -671,6 +704,10 @@ computational model are external. See `the-fold-engineering.md`.
 | Is the quarter-wave plate the Fold's `J`? | no: same group, different space; `diag(1,i)² = diag(1,−1)`, not `−I` | engineering |
 | Is the area law thermodynamic entropy? | no: `S_EE ∝ A ∝ k²` vs `S_th ∝ V ∝ k³` | engineering, entanglement |
 | Is a control observer the Fold's observer? | no: the Fold's is an aperture `(d,w)`; the control observer has state, gain, and stability | engineering, observer |
+| What is the loop from start to now? | point and boundary → scale → fold → twist → closure → horizon → observer → point | loop |
+| Does the universe run a literal Fold loop? | no: the cosmic loop is a rhyme; the descriptive loop closes, the physical one is not established | loop |
+| Is the real scale loop periodic? | no: `g_k` is a homothety; `2π` is the twist's period, not the scale's | loop, logarithm |
+| Is the CMB the hole `k = 0`? | no: the CMB is a horizon surface at `z ≈ 1100`; the hole is the puncture with a residue | loop, problems |
 | What is the signature of zero? | `(0,0,n)`: `n` unsigned directions; scalar `0` but nullity `n` — not a balanced form | signature |
 | Why must nothing come first? | in the scale ledger a continuous sign change must cross a degenerate form; `k=0` is that crossing | signature |
 | What is the signature of a fold? | `(n−1,1,0)`: crease `+` of dimension `n−1`, normal `−` of dimension `1` | signature |
@@ -778,6 +815,7 @@ No new measurements. These are the existing checks the key rests on:
 | the general coefficient and the Noether charge | `the-fold-wald.md` |
 | the universal logarithm and the A-type anomaly | `the-fold-logarithm.md` |
 | engineering applications and the limits of transfer | `the-fold-engineering.md` |
+| the whole corpus as one loop, from point to CMB to observer | `the-fold-loop.md` |
 
 ## The key in one sentence
 

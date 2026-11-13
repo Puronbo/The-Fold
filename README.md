@@ -165,6 +165,11 @@ projection but survives in the length at second order (`L m²` for slope `m`; `2
 amplitude `a`). The scale `k` does not erase the fold — the shape is scale-invariant — so "from afar" is
 a projection or a coarse-graining, not `k → 0`. See `the-fold-afar.md`.
 
+**The loop:** the corpus retold as one loop — the point and its boundary, the scale and the fold, the
+complexified twist, the cosmic history from inflation to the CMB, and the observer who reads the
+bookmark. The loop closes in description, not in time: the observer is the zero's last witness, not its
+author. The CMB enters as a rhyme; the exact physics is standard cosmology. See `the-fold-loop.md`.
+
 **Reading paths:**
 
 | if you want | read |
@@ -197,6 +202,7 @@ a projection or a coarse-graining, not `k → 0`. See `the-fold-afar.md`.
 | the general coefficient and the Noether charge | `the-fold-wald.md` |
 | the universal logarithm and the A-type anomaly | `the-fold-logarithm.md` |
 | engineering applications and the limits of transfer | `the-fold-engineering.md` |
+| the whole corpus as one loop | `the-fold-loop.md` |
 | the interactive models | the nine HTML files |
 
 ## Contents
@@ -248,6 +254,7 @@ a projection or a coarse-graining, not `k → 0`. See `the-fold-afar.md`.
 | `the-fold-wald.md` | follow-up note: the general coefficient - Wald entropy, the Noether charge, the higher-curvature checks, and the first law |
 | `the-fold-logarithm.md` | follow-up note: the universal logarithm - the A-type anomaly, the coefficient table, the no-log in odd dimensions, and the height rhyme |
 | `the-fold-engineering.md` | follow-up note: engineering - geometric similitude, the square–cube law, crease kinematics, sampling, and the false friends |
+| `the-fold-loop.md` | closing note: the corpus retold as one loop — point, boundary, scale, fold, twist, the cosmic history, the CMB, and the observer |
 
 Open the HTML files directly in a browser — no build step, no dependencies.
 
