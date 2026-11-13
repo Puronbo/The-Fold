@@ -121,7 +121,9 @@ fold becomes the critical line, and the zeros land on it. See `the-fold-pipeline
 
 **Problems:** the Fold reformulates RH exactly and rhymes with a dozen other problems, but the map is
 the point: positivity needs a surface, Hilbert–Pólya needs an operator, de Bruijn–Newman needs a bound,
-and the explicit formula needs a parity breaker — four known walls, one crease. See
+and the explicit formula needs a parity breaker — four known walls, one crease. The hole field adds one
+exact classifier — multiplicity as a residue of `d log` — and five limits: count vs placement,
+coefficient vs existence, period vs parity, puncture vs singularity, flow vs map. See
 `the-fold-problems.md`.
 
 **Initial form:** the initial state is the datum — the unique point fixed by every non-identity
@@ -228,7 +230,7 @@ a projection or a coarse-graining, not `k → 0`. See `the-fold-afar.md`.
 | `the-fold-facets.md` | follow-up note: zeros as facets — codimension one versus vertex versus point, and the critical line as the facet |
 | `the-fold-theta.md` | follow-up note: the theta fold — the functional equation derived, and why the critical line is at `1/2` |
 | `the-fold-pipeline.md` | follow-up note: the zero pipeline — one zero equation per stage, five kinds of zero, and the two gaps |
-| `the-fold-problems.md` | follow-up note: the Fold and the open problems — exact, reformulation, rhyme, false friend, and the four walls |
+| `the-fold-problems.md` | follow-up note: the Fold and the open problems — exact, reformulation, rhyme, false friend, the four walls, and the hole field's argument principle |
 | `the-fold-initial.md` | follow-up note: the initial form — the common fixed point, the zero derivative, and the zero object |
 | `the-fold-categorical.md` | follow-up note: objects as disguised morphisms — arrow category, Yoneda, duality, looping, and the Fold's universal constructions |
 | `the-fold-composition.md` | follow-up note: one plus one is two — folds add, parameters multiply, and the two conditional readings |

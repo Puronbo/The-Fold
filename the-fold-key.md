@@ -379,6 +379,16 @@ what is missing, one item per known route to RH:
 The fold's inertia and the negative Hodge intersection form have the same shape at every rank; that is
 the closest link, and it is a link of shape, not of proof. See `the-fold-problems.md`.
 
+## The hole field on the problem map
+
+On `ℂ*`, `ω = dk/k` is the unique invariant `1`-form; `Res_0 ω = 1`, `Res_∞ ω = −1`, and `η = dθ`
+has period `2π`. Its one exact transfer to the problem map is the argument principle,
+`(1/2πi)∮ d log f = Z − P`, with `Res_a d log f` the order at `a`. It reads multiplicity, which the
+codimension pipeline cannot: `ord_{s=1} L = Res d log L` (BSD) and
+`mult λ = Res d log det(z−H)` (Hilbert–Pólya). It counts zeros but does not place them, so it adds no
+route to RH. The five limits are count vs placement, coefficient vs existence, period vs parity,
+puncture vs singularity, and flow vs map. See `the-fold-problems.md`.
+
 ## The initial form
 
 The initial state is the datum `P₀`, and it has an exact characterization: **the unique point fixed by
@@ -686,6 +696,10 @@ computational model are external. See `the-fold-engineering.md`.
 | What is missing for RH? | one of: a surface (positivity), an operator (Hilbert–Pólya), a bound (`Λ≤0`), a parity breaker | problems |
 | Is the Fold's zero a zeta zero? | no; a zeta zero is a cancellation, codim 2, not the zero map | problems, zeta |
 | Do the zeros' statistics match the twist? | yes, one `J` gives `β=2` (GUE); the Pfaffian is not the quaternionic `β=4` class | problems |
+| What does the hole field add? | the argument principle: `ord = Res d log`; it reads multiplicity, counts zeros, and places none | problems |
+| Does the hole field prove RH? | no: a residue is a contour sum; placement needs positivity or an operator | problems |
+| Is the zeta form the hole field? | no: `d log ξ` has poles at the zeros; `ω = dk/k` is the unit-residue model | problems, zeta |
+| Why doesn't the hole field decide P vs NP? | its invariants are local and deformation-invariant; hardness is a global cost, not a residue | problems, complexity |
 | What is the initial state? | the datum `P₀`: the unique point fixed by every non-identity `g_k` | initial |
 | What is the initial form? | `Dg₀ = 0`: the null form `(0,0,n)`, rank 0 | initial |
 | Is the point the empty set? | no; it has `n` unsigned directions and a zero object; the empty set has no tangent space | initial, signature |

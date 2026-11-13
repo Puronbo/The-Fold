@@ -28,6 +28,7 @@ that matters, and this note is written to avoid it.
 | de Bruijn–Newman | theta is the heat kernel; crease `1/2` | the flow preserves the crease; `Λ ≤ 0` ⇔ RH | open; `Λ ≥ 0` is Rodgers–Tao |
 | Hilbert–Pólya | a self-adjoint `H` commuting with `R` | `[H,R]=0` and `H=H*` force real eigenvalues split by `R` | open; the operator is missing |
 | Atiyah–Singer / Poincaré–Hopf | the zero pipeline's conservation | `ind(0) + ind(∞) = χ(Sⁿ)` | exact in the simple case |
+| argument principle | the hole field `ω = dk/k` and its residues | `(1/2πi)∮ f'/f = Z − P`; multiplicity is a residue | exact; counts, does not locate |
 | Montgomery–Odlyzko | one `J` is a complex structure | a single `J` gives `β = 2`, the GUE class | statistics exact; no operator |
 
 ### Rhyme, or no contact
@@ -45,7 +46,8 @@ that matters, and this note is written to avoid it.
 | P vs NP | an existential projection; a solver is a section | no computational model; the linear projection is always split, so the hardness is cost, not existence |
 | Poincaré (solved) | the return to the point | the theorem is about `π₁`, not the orbit space |
 
-The rest of the note is the four zones, in order of how much they actually carry.
+The rest of the note is the four zones, in order of how much they actually carry, followed by one pass
+with the hole field — the smallest exact object — which adds a classifier and five limits but no route.
 
 ## Zone 1: the crease, and the three routes to RH
 
@@ -210,6 +212,166 @@ equals topological index — is the exact ancestor of "a zero is a conserved cha
   theory with `c = 3/2` makes the numbers coincide, but the objects differ. See
   `the-fold-logarithm.md`.
 
+## The hole field: what the smallest exact object adds
+
+The engineering note ended at the edge of transfer. This note's map has the same edge, and the hole
+field is the smallest object that shows where it is. On `ℂ*`,
+
+```
+ω = dk/k ,   Res_0 ω = 1 ,   Res_∞ ω = −1 ,   ∮_{|k|=r} ω = 2πi
+η = Im ω = dθ ,   ∮ η = 2π ,   H¹_dR(ℂ*) = ℝ[η]
+```
+
+`ω` is the unique `ℂ*`-invariant meromorphic `1`-form up to scale; `η` is the twist class. That is the
+whole object. It adds one exact theorem to the problem map — the argument principle — and five limits.
+It adds no route.
+
+### The argument principle is the exact transfer
+
+For meromorphic `f`, `d log f = f'/f` is a meromorphic `1`-form, and near a zero of order `n`,
+
+```
+f(z) = (z−a)^n g(z) ,  g(a) ≠ 0   ⟹   d log f = n dz/(z−a) + d log g
+```
+
+so the residue is the order. On a contour avoiding zeros and poles,
+
+```
+(1/2πi) ∮_γ d log f = Z − P
+```
+
+The Fold's `ω` is the unit case `f(k) = k`, `n = 1`, one zero at `0` and one pole at `∞`. Every problem
+that asks **how many** or **what order** is a coefficient of this form; every problem that asks
+**where** is not. That is the exact content and the exact limit in one line.
+
+| question | hole-field answer | exact? |
+|---|---|---|
+| how many zeros inside `γ`? | `(1/2πi)∮ d log f` | exact, argument principle |
+| what is the order at `a`? | `Res_a d log f` | exact |
+| where are the zeros? | — | no: the residue is a contour sum |
+| which contour? | any avoiding the divisor | exact, but arbitrary |
+
+### RH: the count is exact; the placement is the wall
+
+`ξ` is entire and `ξ(s) = ξ(1−s)`. `d log ξ = ξ'/ξ` has poles at the zeros of `ξ` — inside the
+strip, the nontrivial zeros — with residue the multiplicity. On a rectangle bounding `0 < Re s < 1`,
+`−T < Im s < T`,
+
+```
+N(T) = (1/2πi) ∮ ξ'/ξ
+```
+
+counts the zeros in the strip, with multiplicity. RH says every one of them has `Re s = 1/2`. The
+argument principle supplies `N(T)`; the Riemann–von Mangoldt formula evaluates it. Neither supplies the
+abscissa. The reason is structural: a residue is invariant under any change of contour that does not
+cross the divisor, so it is blind to motion *along* the contour. Placement needs a positive-definite
+quantity, which is Route A, or an operator, which is Route B. The hole field is neither.
+
+Note also: `d log ξ` is **not** `cω`. On any compact set it is a finite sum
+`Σ n_j dz/(z−ρ_j)` plus a regular term; the Fold's `ω` is the one-zero model. Saying "zeta is the hole
+field" is the false friend; saying "the hole field is the unit-residue model of the argument
+principle" is exact. The separation matters because `ω` has its pole at the *coordinate origin*, while
+`ξ'`/`ξ` has its poles at the zeros, wherever they are.
+
+### BSD and Hilbert–Pólya: the residue reads the axis the pipeline cannot
+
+Zone 2 said the pipeline classifies by codimension and is blind to multiplicity. The hole field
+repairs exactly that, and only that.
+
+- **BSD.** `L(E,s)` is entire, and `ord_{s=1} L = Res_{s=1} d log L`. The conjecture is
+  `ord_{s=1} L = rank E(ℚ)`. The hole field reads the left side exactly; it has no arithmetic input
+  that identifies it with the right. The classifier is supplied; the theorem is not.
+- **Hilbert–Pólya.** When the determinant is defined, `det(z−H)` is entire, and
+  `Res_{z=λ} d log det(z−H) = mult(λ) = dim ker(H−λ)`. The hole field reads multiplicity exactly —
+  once `H` exists. A residue of a determinant is not an operator.
+
+| problem | hole-field statement | it supplies | it still lacks |
+|---|---|---|---|
+| RH | `N = (1/2πi)∮ ξ'/ξ` | the count | placement on the crease |
+| BSD | `ord_{s=1} L = Res_{s=1} d log L` | the order | `ord = rank` |
+| Hilbert–Pólya | `mult λ = Res_λ d log det(z−H)` | the multiplicity | `H` |
+| function-field RH | residues of the explicit formula | the coefficient | positivity, the surface |
+
+The last row is the honest one for Route A: the explicit formula is a sum of residues at the zeros and
+at the pole, and the positivity that proves the function-field case is a polarization of the surface,
+not a residue of the form. The hole field counts; the surface forces.
+
+### P vs NP: point propagation has no cost metric
+
+The point-propagation theorem has three readings; each meets the P vs NP diagram at a different place,
+and none yields hardness.
+
+1. **The trivial orbit.** `g_k(P₀) = P₀` for every `k`: the basepoint is fixed by the whole scale
+   action. Read a witness as a basepoint — a rhyme, not an identification — and its orbit is
+   trivial; the *search* for the witness is not. The Fold's action is free on `ℂ*` and trivial only
+   at `P₀`; a discrete search has no continuous action at all. "The orbit does not move" is a
+   statement about the group, not about the algorithm.
+2. **The tangent cone.** The orbit's tangent cone at `P₀` is `{0}` — the derivative `Dg₀` vanishes,
+   and the orbit is a point. The ambient tangent space at `P₀` is `ℝⁿ`, with directions `S^{n−1}`,
+   but those are not directions of the orbit. A solution set's tangent cone is a cone cut out by the
+   linearized verification equations; at a smooth solution it is a linear subspace. Either way the
+   local model is linear and polynomial; hardness, if it exists, is a property of the global
+   arrangement of solutions, not of any tangent cone.
+3. **Hole propagation.** A residue is conserved under biholomorphic change of coordinates. Every
+   invariant the Fold computes is therefore deformation-invariant and cheap. P vs NP asks for a
+   **cost separation**, which is not a deformation invariant. A polynomial-time complete invariant
+   would decide the classes; the Fold has no complete invariant for computation, and its invariants
+   can only merge the classes, not separate them.
+
+The zero-parameter stratum is where the false friend lives. Model a unique-witness instance as a
+point, `(ℂ*)^0`: empty sum `0`, empty product `1`, trivial orbit. "Zero parameters" is the identity of
+the parameter action, not the identity of the search. A unique solution is a point, and a point is not
+free. The algebraic emptiness is exact; the computational inference is invalid.
+
+### The five limits
+
+| limit | the field gives | the problem needs | where |
+|---|---|---|---|
+| count vs placement | `∮ d log f` | an abscissa | RH |
+| coefficient vs existence | `Res d log f` | the object `f` or `H` | BSD, Hilbert–Pólya |
+| period vs parity | `2π` of `dθ` | `ℤ/2` | Goldbach, twins |
+| puncture vs singularity | a removed point | a blow-up | Navier–Stokes, Yang–Mills |
+| flow vs map | `k ↦ e^t k` | a discrete dynamics | Collatz |
+
+Each row is a different reason, not a different slogan:
+
+- **Count vs placement.** A residue is a contour sum; it is invariant under moving the contour. It
+  cannot localize a zero. RH is a placement problem.
+- **Coefficient vs existence.** `d log` presupposes `f` or `H`. BSD's rank and Hilbert–Pólya's
+  operator are existence problems; the residue reads the order once the object is given.
+- **Period vs parity.** `2π` is the period of `dθ`; parity is `ℤ/2`. A period is continuous and a
+  parity is discrete, and the sieve barrier is the discrete one. The `2π` in the Montgomery–Odlyzko
+  sine kernel is a normalization of the pair correlation, not the hole's period: same symbol,
+  different origin.
+- **Puncture vs singularity.** `ℂ*` is the plane with `0` removed; `ω` has a pole at the puncture, but
+  the puncture is not in the space. The Fold's hole is `k = 0`, not the horizon `k = k*`; the horizon
+  is regular in the scale field. A blow-up is a singularity *in* the space, not a point removed from
+  it. The Fold's hole is harmless precisely because it is a coordinate hole.
+- **Flow vs map.** `ω` integrates to the flow `k ↦ e^t k`. Collatz is a discrete map, not a
+  one-parameter group. The scale ledger's two signs rhyme with expansion and contraction; the theorem
+  is about a specific map on `ℤ`.
+
+### Several scales, one diagonal
+
+The stratified field is `Ω_r = Σ_{i=1}^r dk_i/k_i` on `(ℂ*)^r`; its residues are the sum of the
+coordinate residues, and `Re Ω_r` is the log-scale, `Im Ω_r` the twist. A problem with `r` independent
+scales would sit on the `r`-stratum, and the Fold controls the **diagonal** part only. BSD's regulator
+is a height-pairing determinant, not a sum of coordinate residues; the Fold's `Ω_r` is diagonal and
+cannot produce it. The same boundary was reached in the engineering note: shear, curvature, and the
+full connection are external. The hole field is the diagonal scale–twist datum, not a general
+geometry.
+
+### What the extension changes
+
+- It adds one exact classifier to Zone 2: multiplicity as `Res d log`, which the codimension pipeline
+  could not see.
+- It adds no route. The four walls are unchanged, and the new section explains why: the first is a
+  placement problem that needs a surface, the second and third are existence problems, and the fourth
+  is parity.
+- It sharpens the P vs NP entry: the Fold's invariants are local (derivatives) and
+  deformation-invariant (residues), hence polynomial; hardness is global and cost-theoretic.
+- It gives the correct form of the unique-solution false friend: zero parameters is not zero search.
+
 ## What would count as progress
 
 The map says exactly what is missing, one item per route:
@@ -225,6 +387,11 @@ The map says exactly what is missing, one item per route:
 Each of the four is a known open problem in its own right. The Fold's contribution is to show that
 these four are the same question seen from four sides, and that the crease is where all four must meet.
 It does not cross any of them.
+
+The hole field does not add a fifth item. It classifies the four: the first is placement, the second
+and third are existence, the fourth is parity. The one thing the Fold counts exactly — the number and
+the order of the zeros — is not the thing any of them asks for. Counting is not placing, a coefficient
+is not an object, a period is not a parity, a puncture is not a singularity, and a flow is not a map.
 
 ## Checks
 
@@ -256,6 +423,11 @@ The de Bruijn–Newman statements are definitions and literature (`Λ ≤ 0` ⇔
 they are not recomputed here. The GUE pair correlation is likewise numerical literature, not a
 computation in this note.
 
+The hole-field statements are identities, not estimates: the period of `dk/k` on the unit circle is
+`2πi`, its residues at `0` and `∞` are `1` and `−1`, and the residue of `d log det(z−H)` at an
+eigenvalue is its multiplicity. The last is the argument principle applied to a polynomial; it is the
+one new exact classifier, and it is a restatement, not a bound.
+
 ## The one sentence
 
 **The Fold reformulates RH exactly and rhymes with a dozen other problems, but its real value is a
@@ -270,4 +442,6 @@ the codimension/multiplicity distinction are in `the-fold-pipeline.md`; the sign
 Poincaré–Hopf index are in `the-fold-signature.md`; the facet classification is in
 `the-fold-facets.md`; the universal logarithm and the `1/2` distinction are in
 `the-fold-logarithm.md`; the engineering zone — similitude, crease kinematics, sampling, and the
-false friends — is in `the-fold-engineering.md`; the lookup is `the-fold-key.md`.
+false friends — is in `the-fold-engineering.md`; the projection/section diagram and the P vs NP wall
+are in `the-fold-complexity.md`; the closure restriction and the crystallographic `m` are in
+`the-fold-closure.md`; the lookup is `the-fold-key.md`.
