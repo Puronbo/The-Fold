@@ -7,6 +7,17 @@ paper follows from one determinant, `det(g_k) = kⁿ`: heights scale like `k`, a
 volumes like `k³`. A real `k` changes size, an imaginary one twists, and a twist is the product of
 two folds.
 
+**The four zones.** Every claim in this corpus is labelled by how it sits against the mathematics:
+
+- **exact** — the Fold's object is the problem's object, re-described; the statement can be checked.
+- **reformulation** — the problem becomes a statement about the Fold, with nothing proved.
+- **rhyme** — the same shape appears, but the objects are different.
+- **false friend** — the same symbol appears, and it means something else.
+
+A rhyme is a place to look, never a proof; a rhyme written as a proof is the one error that matters.
+The full statement is in `the-fold-problems.md`, and the engineering instance is in
+`the-fold-engineering.md`.
+
 **Start here:** `the-fold-key.md` — the master key. Give it a value of `k`; it returns the stage,
 the operation, what appears, what survives, and the note that proves it.
 
@@ -203,6 +214,7 @@ author. The CMB enters as a rhyme; the exact physics is standard cosmology. See 
 | the universal logarithm and the A-type anomaly | `the-fold-logarithm.md` |
 | engineering applications and the limits of transfer | `the-fold-engineering.md` |
 | the whole corpus as one loop | `the-fold-loop.md` |
+| the observer as a chart-maker, and why a calendar closes | `the-fold-chart.md` |
 | the interactive models | the nine HTML files |
 
 ## Contents
@@ -255,6 +267,7 @@ author. The CMB enters as a rhyme; the exact physics is standard cosmology. See 
 | `the-fold-logarithm.md` | follow-up note: the universal logarithm - the A-type anomaly, the coefficient table, the no-log in odd dimensions, and the height rhyme |
 | `the-fold-engineering.md` | follow-up note: engineering - geometric similitude, the square–cube law, crease kinematics, sampling, and the false friends |
 | `the-fold-loop.md` | closing note: the corpus retold as one loop — point, boundary, scale, fold, twist, the cosmic history, the CMB, and the observer |
+| `the-fold-chart.md` | follow-up note: the observer as chart-maker - the chart, the calendar as a quotient of periods, the revision loop, and the horizon detector |
 
 Open the HTML files directly in a browser — no build step, no dependencies.
 
@@ -318,3 +331,16 @@ and the cap alone yields `R = √(A_cap/Ω)`, `θ = 2 arcsin √(Ω/4π)` to `10
 7. What an observer can see — dimension fixes the observable
 8. Devices — one bench-top instance per step
 9. The one sentence
+
+## What the Fold is for
+
+The corpus says what it is not — not a proof engine, not a constitutive theory, not a computational
+model — but not what it is for. It is for this:
+
+> The Fold is a vocabulary for placing a zero, a crease, a scale, and an observer in one diagram, and
+> for saying which of those statements are exact and which are only shaped alike. It is a map of where
+> the walls are, not a key through them.
+
+Everything else is an entry in that map. The determinant gives the exponents, the fold gives the
+split, the twist gives the period, the closure gives the pattern, the horizon gives the edge, and the
+observer gives the reading. The four zones are the map's legend.
