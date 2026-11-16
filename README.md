@@ -21,6 +21,11 @@ The full statement is in `the-fold-problems.md`, and the engineering instance is
 **Start here:** `the-fold-key.md` — the master key. Give it a value of `k`; it returns the stage,
 the operation, what appears, what survives, and the note that proves it.
 
+**Formal core:** `lake build` compiles a dependency-free Lean 4 library in `Fold/` — the fold as an
+involution, its fixed set and quotient, the observer as a cut, the scale action, the cap/puncture
+ledger, the calendar arithmetic, the wheel's closure, and four finite counterexamples. The build
+proves the skeleton, not the rhymes; the map is `the-fold-lean.md`.
+
 **Matter reading:** matter is the zero at a scale — stages 0–1 of the chain. In the homothetic
 family `h ∝ k`, `M ∝ h`, `A ∝ h²`, `V ∝ h³`, `S ∝ h²`, `T ∝ 1/h`, while the horizon ratio `k*`
 stays constant. Shape is the aperture `θ`; turn is `arg k`. A `d`-dimensional observer measures
@@ -268,6 +273,7 @@ author. The CMB enters as a rhyme; the exact physics is standard cosmology. See 
 | `the-fold-engineering.md` | follow-up note: engineering - geometric similitude, the square–cube law, crease kinematics, sampling, and the false friends |
 | `the-fold-loop.md` | closing note: the corpus retold as one loop — point, boundary, scale, fold, twist, the cosmic history, the CMB, and the observer |
 | `the-fold-chart.md` | follow-up note: the observer as chart-maker - the chart, the calendar as a quotient of periods, the revision loop, and the horizon detector |
+| `the-fold-lean.md` | formal core: the Lean 4 project - involution, quotient, cut, scale, chi, the wheel, and the finite counterexamples |
 
 Open the HTML files directly in a browser — no build step, no dependencies.
 

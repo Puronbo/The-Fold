@@ -1,0 +1,297 @@
+# The Fold in Lean 4
+
+## What this is
+
+A dependency-free Lean 4 library at the repository root. It imports only `Init`, so it builds
+with the bare toolchain: no Mathlib, no network, no cache. The compiled statements are the exact
+skeleton of the corpus — an involution, its fixed set, its quotient, the observer as a cut, the
+scale action, the cap/puncture ledger, the calendar arithmetic, the wheel's closure, four finite
+counterexamples from the second problem map, a non-vacuous quotient instance, and the Euler
+characteristic of the `m = 2` dessin.
+
+It proves the skeleton. It does not prove the rhymes. The distinction is the same four-zone rule
+as the prose: a theorem is either exact, a model, or absent, and the file says which.
+
+## Build
+
+```
+lake build
+```
+
+Expected last line: `Build completed successfully`.
+
+The toolchain is pinned in `lean-toolchain` to `leanprover/lean4:v4.35.0`. The Lake package is
+`fold`; the default target is the library `Fold`.
+
+| file | contents |
+|---|---|
+| `Fold/Basic.lean` | the fold as an involution; fixed set, orbit, chart, cut |
+| `Fold/Scale.lean` | the scale action on `ℤ`; the datum, the collapse, the ray |
+| `Fold/Chi.lean` | capping, uncapping, puncturing, filling; the ledger and the space |
+| `Fold/Arithmetic.lean` | the four formats mod `99`, the Gregorian cycle, the Unix weeks |
+| `Fold/Wheel.lean` | the combinatorial wheel and its closure after `m` turns |
+| `Fold/Problems.lean` | Simpson, tolerance, contraposition, Monty Hall |
+| `Fold/Pressure.lean` | the linear hydrostatic law; monotone, unbounded, gauge |
+| `Fold/Examples.lean` | a non-vacuous descent on `Option Bool`; the `m = 2` dessin's Euler characteristic |
+| `Fold/Audit.lean` | the `#print axioms` audit |
+| `Fold.lean` | the root module and the `#check` inventory |
+
+## The exact core
+
+### The fold and its quotient
+
+A fold is an involution:
+
+    structure Fold (X : Type) where
+      f : X → X
+      invol : ∀ x : X, f (f x) = x
+
+The exact statements:
+
+| Lean name | statement | zone |
+|---|---|---|
+| `Fold.Fix` | the fixed set of a fold: the crease, scar, horizon, or critical line | exact |
+| `Fold.fix_iff` | `Fix F (F.f x) ↔ Fix F x` | exact |
+| `Fold.Orbit` | the two sides: `y = x ∨ y = F.f x` | exact |
+| `Fold.orbit_equivalence` | the orbit relation is an equivalence | exact |
+| `Fold.chart_eq_iff` | `chart x = chart y ↔ Orbit x y` | exact |
+| `Fold.chart_fold` | `chart (F.f x) = chart x`: the fold is invisible in the chart | exact |
+| `Fold.desc` | an invariant function factors through the chart | exact |
+| `Fold.desc_chart` | `desc g h (chart x) = g x` | exact |
+| `Fold.desc_injective` | a separating invariant has injective descent | exact |
+| `Fold.desc_bijective` | invariant, separating, surjective: the descent is a bijection | exact |
+
+The last line is the formal content of "a fold is a change of chart, not a change of the quotient".
+The quotient is the chart; the involution moves the representative and fixes the class.
+`desc_bijective` is the quotient universal property in the form an instance needs: if `g` is
+constant on orbits, separates them, and is surjective, then `g` *is* the quotient map. The
+Joukowski map `J(z) = z + 1/z` is the instance with `g = J`: `J(1/z) = J(z)`, `J(z) = J(w)`
+forces `w = z` or `w = 1/z`, and every value is attained.
+
+### The observer as a cut
+
+A cut is an idempotent retraction onto the fixed set that is constant on orbits:
+
+    structure Cut (F : Fold X) where
+      p : X → X
+      image_fix : ∀ x, Fix F (p x)
+      fix_eq : ∀ x, Fix F x → p x = x
+      orbit_eq : ∀ x, p (F.f x) = p x
+
+| Lean name | statement | zone |
+|---|---|---|
+| `Fold.Cut.idem` | `p (p x) = p x` | exact |
+| `Fold.Cut.invisible` | `p (F.f x) = p x` | exact |
+| `Fold.Cut.fix_iff` | `Fix F x ↔ p x = x`: the cut detects exactly the fixed set | exact |
+| `Fold.Cut.lift` | the cut factors through the chart | exact |
+| `Fold.Cut.lift_chart` | `lift (chart x) = p x` | exact |
+| `Fold.Cut.lift_fix` | the image of the lifted cut is fixed | exact |
+
+This is the one structure the file does not derive. A fold always has a quotient; it does not
+always have a cut. A cut exists when a retraction onto the fixed set exists, and that is an extra
+choice — the observer's. The formal asymmetry is the prose asymmetry: the quotient is canonical,
+the cut is supplied.
+
+### The scale action
+
+On `ℤ`, the scale action is `g_k(x) = k x`.
+
+| Lean name | statement | zone |
+|---|---|---|
+| `Fold.scale_one` | `g_1 = id` | exact |
+| `Fold.scale_comp` | `g_{k l} = g_k ∘ g_l` | exact |
+| `Fold.datum_fixed` | `g_k(0) = 0` for every `k` | exact |
+| `Fold.scale_collapse` | `g_0` is the constant map to the datum | exact |
+| `Fold.scale_fix_iff` | for `k ≠ 1`, `g_k(x) = x ↔ x = 0` | exact |
+| `Fold.scale_moves` | for `k ≠ 1` and `x ≠ 0`, `g_k(x) ≠ x` | exact |
+
+The integral model is deliberate: it makes `0` the unique fixed point and the collapse exact. The
+reciprocal `k ↦ 1/k` needs a field, and is the completion `0 ~ ∞`; it is not in the integral slice.
+
+### Capping and puncturing
+
+A surface summary is `(χ, boundary, punctures)`. A cap raises `χ` by one and consumes a boundary
+component; a puncture lowers `χ` by one and creates a puncture.
+
+| Lean name | statement | zone |
+|---|---|---|
+| `Fold.uncap_cap` | `uncap (cap S) = S` when `S.boundary > 0` | exact |
+| `Fold.fill_puncture` | `fill (puncture S) = S` | exact |
+| `Fold.chi_puncture_cap` | `χ(puncture (cap S)) = χ(S)` | exact |
+| `Fold.puncture_cap_ne` | `puncture (cap S) ≠ S` | exact |
+| `Fold.cap_puncture_ne` | `cap (puncture S) ≠ S` | exact |
+
+The first three are the ledger; the last two are the space. Capping and puncturing cancel on `χ`
+and do not cancel on the space. That is the exact form of "cap and puncture are not inverses": they
+are inverse on the ledger, not on the object. What is inverse to capping is uncapping; what is
+inverse to puncturing is filling.
+
+### The calendar
+
+| Lean name | statement | zone |
+|---|---|---|
+| `Fold.formats_mod_99` | the four formats are all `56` mod `99` | exact |
+| `Fold.formats_distinct` | the four formats are distinct labels | exact |
+| `Fold.gregorian_cycle` | `146097 = 3³ · 7 · 773` | exact |
+| `Fold.unix_weeks` | `972518400 = 1608 · 604800` | exact |
+| `Fold.unix_week_residue` | `1608 ≡ 5 (mod 7)` | exact |
+| `Fold.jdn_residue` | `2451844 ≡ 3 (mod 7)` | exact |
+
+### The wheel
+
+| Lean name | statement | zone |
+|---|---|---|
+| `Fold.rot` | one turn: `n ↦ (n + 1) % m` | exact |
+| `Fold.rotIter_eq` | `k` turns from residue `n % m` give `(n + k) % m` | exact |
+| `Fold.rot_period` | after `m` turns the mark returns | exact |
+
+The analytic closure law `m = π/α` is not in this file; it needs `Real.cos`. What is in the file is
+the combinatorial content: the wheel's period is the spoke count.
+
+### The finite counterexamples
+
+| Lean name | statement | zone |
+|---|---|---|
+| `Fold.simpson_reversal` | treatment wins both strata and loses the pool | exact |
+| `Fold.simpson_totals` | the pool is the sum of the strata | exact |
+| `Fold.tolerance_not_trans` | tolerance is reflexive and symmetric, not transitive | exact |
+| `Fold.tolerance_structure` | the three properties in one statement | exact |
+| `Fold.contraposition` | `(P → Q) = (¬Q → ¬P)` on `Bool` | exact |
+| `Fold.contraposition_invol` | the pair map `(a,b) ↦ (¬b,¬a)` is an involution | exact |
+| `Fold.monty_two_of_three` | switching wins two of the three configurations | exact |
+
+Simpson is the quotient that does not preserve order; tolerance is the relation that has no
+quotient; contraposition is the involution that is logical and not evidential; Monty Hall is the
+section that the host's action revises. Each is a finite computation, and each is a place where the
+prose note says what the computation is allowed to touch.
+
+### A non-vacuous descent
+
+| Lean name | statement | zone |
+|---|---|---|
+| `Fold.swapFold` | the involution on `Option Bool` fixing `none` and swapping `some true`/`some false` | exact |
+| `Fold.swapInv` | `false` on `none`, `true` on the two `some` values | exact |
+| `Fold.swapInv_sep` | equal invariants force the same orbit | exact |
+| `Fold.swapFold_desc_bijective` | `desc_bijective` at `swapFold`: the quotient is `Bool` | exact |
+
+`swapFold` is the smallest non-free involution: one fixed point and one two-point orbit. The
+quotient is therefore a two-point type, and `swapFold_desc_bijective` is an inhabited application of
+`desc_bijective` — not a vacuous instance with one orbit. The descent is a bijection
+`Chart swapFold → Bool`, and the witness `some true` shows the invariant is surjective.
+
+### The `m = 2` dessin
+
+| Lean name | statement | zone |
+|---|---|---|
+| `Fold.Dessin` | a spherical dessin: `V + F = E + 2` | exact |
+| `Fold.Dessin.euler_eq_two` | `V + F - E = 2` | exact |
+| `Fold.dessin2` | two vertices, two edges, two faces | exact |
+| `Fold.dessin2_euler` | the `m = 2` dessin has Euler characteristic `2` | exact |
+
+The `m = 2` dessin is the unit circle with the two marks `±1`: two vertices, two semicircle edges,
+and two faces (inside and outside). The identity is `2 + 2 - 2 = 2`. It is the finite shadow of the
+Belyi map `B(z) = (z+1)²/(4z)`, whose critical values `0` and `1` are the two vertices.
+
+### The hydrostatic chart
+
+| Lean name | statement | zone |
+|---|---|---|
+| `Fold.pressure` | `p(h) = p0 + c h` | exact as a model |
+| `Fold.pressure_strict` | pressure is strictly increasing with depth | exact |
+| `Fold.pressure_unbounded` | every target pressure is exceeded at some finite depth | exact |
+| `Fold.pressure_finite` | at a finite depth the value is the finite linear law | exact |
+| `Fold.pressure_gauge` | shifting the datum shifts every pressure by the same constant | exact |
+
+The pair `pressure_unbounded` and `pressure_finite` is the exact form of the pressure triad:
+"increases until infinity" is true as an unboundedness statement over finite depths, and false as a
+claim that a finite depth has infinite pressure. The real-valued law is `p(h) = p0 + ρ g h`; the
+integer model normalizes `ρg` to a positive integer `c`.
+
+## What the file does not prove
+
+| missing statement | why it is missing | where it lives |
+|---|---|---|
+| `I_C(z) = ρ²/z̄` is an involution of `ℂ*` | needs `ℂ` and conjugation | `the-fold-loop.md` |
+| `m = π/α` | needs `Real.cos` and the twist angle | `the-fold-closure.md` |
+| `m ∈ {1,2,3,4,6}` (crystallographic restriction) | needs lattices and `2cos(2π/m)` | `the-fold-closure.md` |
+| `S¹ ∖ {p} ≅ ℝ` | needs topology | `the-fold-chart.md` |
+| amenability, `F₂`, Banach–Tarski | needs choice and measure theory | `the-fold-problems.md` |
+| `p(z) = p0 e^{-z/H}` for the atmosphere | needs `Real.exp` and the ideal-gas law | the hydrostatic chart above |
+| the actual pressures at Challenger Deep and Earth's centre | unit conversions and a density model | the hydrostatic chart above |
+| RH, BSD, Hodge, Yang–Mills, Navier–Stokes, P vs NP | the four walls; no formal proof exists here | `the-fold-problems.md` |
+| the hard problem of consciousness | not a mathematical object | the absence named in the prose |
+
+The `negFold` in `Fold/Scale.lean` is the real slice of the reflection `σ_H`: `x ↦ −x` on `ℤ`. It
+is the fold with crease `0`, not the navel inversion. The navel inversion's real slice is
+`x ↦ ρ²/x` on `ℝ*`; that involution is not in the file, and saying `negFold` is `I_C` would be the
+false friend.
+
+## Why this is the right core
+
+The corpus's five roles are exactly the five Lean structures:
+
+| role | Lean |
+|---|---|
+| datum | the type `X` and the fixed point |
+| operation | `Fold.f` |
+| fixed set | `Fold.Fix` |
+| quotient | `Fold.Chart` |
+| observer / return | `Fold.Cut` |
+
+The roles are not decoration. `Fix` is a predicate, `Chart` is a quotient type, `Cut` is a
+structure with a law, and `Fold` is an involution. A claim that does not fit one of these is either
+a reformulation, a rhyme, or a false friend — which is the zone rule in formal dress.
+
+## The four zones in the build
+
+| zone | in the build |
+|---|---|
+| exact | every theorem in `Fold/` compiles with no `sorry`; the only axioms are Lean's core |
+| reformulation | `Cut` models the observer; it is not a theory of consciousness |
+| rhyme | `rot_period` is the combinatorial closure; `m = π/α` is the analytic statement left out |
+| false friend | "the Lean project proves the Fold" — it proves the skeleton, not the flesh |
+
+The axiom audit is reproducible with `#print axioms` in `Fold/Audit.lean`:
+
+| theorem | axioms |
+|---|---|
+| `Fold.Cut.fix_iff` | none |
+| `Fold.formats_mod_99` | none |
+| `Fold.simpson_reversal` | none |
+| `Fold.chart_eq_iff` | `propext`, `Quot.sound` |
+| `Fold.desc_bijective` | `Quot.sound` |
+| `Fold.swapFold_desc_bijective` | `Quot.sound` |
+| `Fold.Dessin.euler_eq_two` | `propext` |
+| `Fold.scale_fix_iff` | `propext`, `Quot.sound` |
+| `Fold.chi_puncture_cap` | `propext` |
+| `Fold.rot_period` | `propext` |
+| `Fold.tolerance_not_trans` | `propext`, `Classical.choice`, `Quot.sound` |
+
+`propext`, `Quot.sound`, and `Classical.choice` are Lean's core axioms, not `sorryAx`. No theorem in
+the library depends on a hole. `desc_bijective` is the sharpest entry: it uses only `Quot.sound` —
+the descent is constructive up to the quotient's own computation rule, with no classical choice.
+
+## How to extend
+
+The dependency-free core is the audit. Put Mathlib results in a separate library, so the core
+still builds on a bare toolchain.
+
+1. **Complex analysis.** `ℂ*`, the inversion `z ↦ ρ²/z̄`, the fixed circle, the cap/puncture
+   transition. This is the local model, and it is the first target.
+2. **Topology.** `S¹`, the one-point compactification, `χ` as a homotopy invariant, the classification
+   of 1-manifolds. This turns the ledger in `Fold/Chi.lean` into a theorem about spaces.
+3. **Groups.** `D_m`, the crystallographic restriction, the orbit-stabilizer theorem for the
+   observer's position. This turns the wheel into the exact symmetry statement.
+4. **Measure.** Amenability, invariant means, Haar measure, the `dk/k` divergence. This is the
+   second map's exact content.
+5. **Arithmetic.** `ZMod 99`, the calendar theorem, the weekday as a group coordinate.
+
+The order matters: complex analysis and topology first, because the navel and the chart are their
+statements; measure after, because the second map's exact additions are measure statements; groups
+and arithmetic alongside.
+
+## The one sentence
+
+**The Lean file proves the skeleton — an involution, its fixed set, its quotient, its cut, and the
+exact arithmetic — and it leaves the flesh to the prose: the analytic closure, the measure, and the
+consciousness.**

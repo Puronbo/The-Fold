@@ -393,6 +393,226 @@ and third are existence, the fourth is parity. The one thing the Fold counts exa
 the order of the zeros — is not the thing any of them asks for. Counting is not placing, a coefficient
 is not an object, a period is not a parity, a puncture is not a singularity, and a flow is not a map.
 
+## The second map: problems of description
+
+The first map is about problems with an arithmetic or geometric object: RH, BSD, Hodge, Yang–Mills,
+Navier–Stokes, P vs NP. The second map is about problems whose object is a **description**: a measure,
+a section, a coarse-graining, or a self-reference. The Fold's machinery — an involution, a quotient, a
+cut, a completion — is the right size for these, and the zones are sharper because the obstruction is
+often a single missing object rather than a missing theory.
+
+The rule is unchanged: exact means the Fold's object is the problem's object; reformulation means the
+problem is renamed; rhyme means the shape matches and the objects do not; false friend means the symbol
+matches and the object does not.
+
+| problem | the Fold's object | zone | what stops it |
+|---|---|---|---|
+| Banach–Tarski | an invariant mean fixed by the group | exact | `F₂` is not amenable; the equivalence is exact, the theorem is not proved here |
+| Simpson's paradox | aggregation is a quotient | exact | a quotient need not preserve order |
+| Sorites / vagueness | tolerance is not an equivalence | exact | no quotient exists |
+| improper priors, two envelopes, St. Petersburg | `dk/k` is an infinite invariant measure | exact | no scale-invariant probability on the line |
+| raven paradox | contraposition is an involution | exact | the involution is logical, not evidential |
+| Hilbert hotel | a bijection is not an isomorphism | exact as a model | cardinality is invariant, structure is not |
+| Monty Hall | the host's action revises the section | exact as a model | the probability is a count, not a property of the doors |
+| axiom of choice / sections | a cut is a section of the chart | exact as a model | the quotient is canonical; the section is a choice |
+| natural kinds / universals | a kind is an orbit of a group action | exact as a model | the group is chosen; the orbit is not an essence |
+| problem of time (Wheeler–DeWitt) | the clock is a section of the constraint surface | reformulation | no dynamics, no quantization |
+| arrow of time | the involution is time-symmetric | reformulation | the arrow needs a coarse-graining and a measure |
+| anthropic / measure problem | the observer's cut is a conditioning event | reformulation | no canonical measure on the space of charts |
+| Ship of Theseus | identity is a quotient by a coarse-graining | reformulation | the quotient is chosen, not given |
+| measurement problem | collapse is not an equivariant section | rhyme | the cut is equivariant; collapse is not |
+| black-hole information | the horizon is a scar; information is a quotient invariant | rhyme | no quantum state, no unitarity, no Page curve |
+| hierarchy problem, cosmological constant | the Fold's scale invariance is exact | rhyme | the Fold has no mechanism to break it; calling it a solution is the false friend |
+| Gödel, Russell | the chart excludes the observer | rhyme | `S¹ ∖ {p} ≅ ℝ` is topology, not semantics |
+| hard problem of consciousness | the observer is `(d,w)` | the absence | the map names the edge; it does not cross it |
+
+The four rows marked *exact as a model* are the Fold's own structures applied to philosophy: a cut is
+a section of the chart, a kind is an orbit of a group action, cardinality is what a bijection
+preserves, and a probability is a count over the observer's section. They are exact as models and not
+as metaphysics: the model says which object is which, and the group or the cut remains a choice.
+
+Not every problem belongs on the map. Proton decay, dark matter, baryogenesis, the origin of life,
+and the Fermi paradox supply no Fold object: no involution, quotient, cut, or measure is given by the
+problem, and naming one would be decoration. They are not rows; they are the blank space around the
+table. The same rule excludes a "theory of everything": the Fold has a diagram, not a dynamics, and
+the diagram does not predict a particle.
+
+### The exact additions
+
+Five rows of the table are exact in the strict sense, and four more are exact as models. Every strict
+one is a statement about measure, quotient, or logic, not about arithmetic geometry. That is why they
+can be checked in the Lean file.
+
+**Amenability.** Let a group `G` act on a set `X`. A `G`-invariant mean is a fixed point of the action
+on the dual of `ℓ^∞(X)`. For a discrete `G`, such a mean on all subsets exists if and only if `G` is
+amenable (von Neumann). The free group `F₂` is not amenable; its paradoxical decomposition is the
+algebraic heart of Hausdorff's paradox and, with choice, of Banach–Tarski. The Fold's `Fix(G)` language
+is exact here: the invariant is a fixed point, and the theorem is that the fixed point does not exist.
+What the Fold adds is the question "fixed by which group?"; what it does not add is the proof.
+
+**Quotients and order.** Simpson's reversal is the statement that the quotient map from strata to the
+pool does not preserve an order:
+
+```
+stratum 1:  81/87  vs  234/270       treatment better
+stratum 2:  192/263 vs  55/80        treatment better
+pool:       273/350 vs  289/350      control better
+```
+
+The finite table is exact. The Fold's `X → X/F` is the same kind of map: it forgets the side, and
+forgetting can reverse a comparison. This is the exact content of "the quotient is not the object." The
+Lean lemma `simpson_reversal` checks the three cross-multiplied inequalities.
+
+**Tolerance.** A tolerance relation is reflexive and symmetric but not transitive. The equivalence
+closure of `0 ~ 1 ~ 2` identifies `0` and `2`, so the quotient by tolerance is not a set of heaps and
+non-heaps; it is one class. This is the exact obstruction behind the sorites. The Fold's quotient
+requires an equivalence relation; a tolerance supplies none. The Lean lemma `tolerance_not_trans` is the
+finite counterexample.
+
+**Improper measure.** On `ℝ_{>0}`, the invariant measure is `dk/k`, and
+
+```
+∫_0^∞ dk/k = ∞ .
+```
+
+The completion `0 ~ ∞` turns the line into a circle, where `dθ/2π` is a finite invariant probability.
+The observer's cut `S¹ ∖ {p} ≅ ℝ` turns the finite measure back into the infinite one. This is the exact
+measure-theoretic version of the cut: the circle has a canonical probability; the line does not. Two
+envelopes and St. Petersburg are the same obstruction in a discrete dress — a uniform prior on `ℕ` does
+not exist.
+
+**Contraposition.** `(P → Q) ↔ (¬Q → ¬P)` is an involution on the pair of truth values. The raven
+paradox's inference — a white shoe confirms all ravens — is not a consequence: the involution preserves
+truth, not confirmation. The Lean lemma `contraposition` checks the Boolean identity; the evidential
+step is the false friend.
+
+### The reformulations
+
+**Time.** The Wheeler–DeWitt equation is `HΨ = 0`: there is no external time. A clock is a field `T`
+with `dT ≠ 0` along the flow, i.e. a section of the constraint surface; different clocks are different
+sections. The Fold's observer's cut is a section. This is a reformulation: it names the object (a
+section) and the invariance (the quotient), and it supplies neither the quantization nor the dynamics.
+
+**Arrow.** The fold is an involution; it is time-symmetric. An arrow requires a dynamics `φ_t`, a
+coarse-graining `q`, and a measure `μ` such that `S = −log μ` increases under `φ_t`. The Fold has `q`
+but no `φ_t` and no `μ`. The second law is therefore a rhyme, not a theorem of the Fold; and the
+involution is the opposite of an arrow.
+
+**Anthropic.** The observer's cut is a conditioning event. A probability requires a measure on the
+space of charts; the Fold has no canonical measure there. The `0 ~ ∞` completion gives a measure on the
+parameter circle, not on the space of charts. This is the precise gap, and it is why the measure problem
+is not solved by naming the observer.
+
+### The false friends
+
+- **Collapse is the cut.** The cut is equivariant (`p(F x) = p x`); collapse is not
+  (`collapse(U_t ψ) ≠ U_t collapse(ψ)` in general). Same shape, different object.
+- **The second law is the fold.** The fold is reversible. The second law is a statement about a
+  coarse-grained quotient with a measure; the fold supplies the quotient and not the measure.
+- **The hierarchy is the Fold's scale invariance.** The Fold's scale invariance is exact and
+  unbroken; the hierarchy problem is its breaking. The Fold has no mechanism for the breaking.
+- **The cosmological constant is the Fold's zero.** The Fold's zero is the zero map, not a
+  cancellation of vacuum energy. Same symbol, different object.
+- **Fine-tuning is a chart choice.** A chart choice is a section; a probability over charts needs a
+  measure. Without the measure, "the chart is fine-tuned" has no content.
+- **The simulation argument is a chart inside a chart.** The regress is a regress of charts, not a
+  probability; the Fold can draw the nesting and cannot weight it.
+- **Free will is the two sides of the fold.** The two sides are the orbit of a deterministic
+  involution. A choice is not an involution.
+- **The Fold solves the hard problem.** The observer is `(d,w)`. The pattern places the cut and names
+  the absence; it does not fill it.
+
+### Two boundary cases: astigmatism and `0/0`
+
+Neither is an open problem, and neither is a row of the table. They are the two ways a symbol can
+look like the Fold and fail to be it: a tensor that looks like a crease, and a quotient that looks
+like freedom.
+
+**Astigmatism: exact optics, false friend as a fold.** A spherical wavefront has one principal
+curvature, `κ₁ = κ₂ = κ`; its caustic is a point at `1/κ`. A regular astigmatic wavefront has two,
+`κ₁ ≠ κ₂`; its caustic is the pair of focal lines at `1/κ₁` and `1/κ₂`, separated by the Sturm
+interval. The exact object is the shape operator, a symmetric `2×2` matrix: the spherical equivalent
+is its trace, the astigmatism its traceless part. This is exact optics, and it is not a fold. A fold
+is a reflection or a rank drop; the power matrix is invertible and symmetric. The Fold's scale-twist
+`k e^{iθ}` is conformal — two equal singular values — so it carries the scalar part and the rotation,
+not the traceless shear. The crease and the cylinder axis are both eigenvectors of an orthogonal pair,
+but the fold's eigenvalues are `(+1,−1)` and the lens's are `(κ₁,κ₂)`: a sign split, not a magnitude
+split. The axis is a spin-2 angle; a traceless symmetric matrix rotates by `2α`, while the Fold's
+twist rotates vectors by `α`. "Astigmatism is the Fold's twist" is therefore exact only after the
+double cover `θ = 2α`, and "astigmatism is the crease" is a false friend. The circle of least
+confusion is a second false friend: a circular blur at the dioptric midpoint is not a spherical
+wavefront. Regular (toric) astigmatism is the quadratic model; irregular astigmatism needs
+higher-order aberrations and has no single axis, so it lies outside the model. The word is a rhyme —
+*a-stigma* is the loss of the point image, and the Fold's `P₀` is a point — but the Fold's point is
+a fixed point, not an image point.
+
+**`0/0`: exact arithmetic, false friend as freedom.** In a field, `0/0` is not an element: division
+requires a nonzero denominator, and `0x = 0` is solved by every `x`. The exact statement is a
+solution set, not a value: the preimage of `0` under the zero map is the whole space, and the zero
+map has inertia `(0,0,n)`. As a limit the form is indeterminate: `x/x → 1`, `x²/x → 0`, `x/x²`
+diverges, and `x sin(1/x)/x` has no limit. A rate is needed, and the Fold's scale supplies one:
+`k^p/k^q = k^{p−q}` tends to `0`, `1`, or `∞` as `k → 0⁺`, according to the sign of `p−q`. The
+indeterminacy is a weight difference, not a freedom. Totalized systems choose a convention — Lean's
+`Rat` evaluates `0/0` to `0`, IEEE gives `NaN`, and `NaN ≠ NaN` — which is the false friend in its
+purest form: the symbol survives and the object does not. The philosophical step fails twice.
+"Undefined" is not "free": a partial function has no value at the point, and the zero map collapses
+every input to one value without distinguishing among them. And freedom requires a selection among
+alternatives; `0/0` is the absence of a selection. The Fold can name the place — the cut, the zero
+map, the missing section — but it cannot fill it. The claim that free will is equal to `0/0` is
+therefore, at best, a rhyme with the observer's cut, not an identity; as an equation it is the false
+friend. The existing entry "free will is the two sides of the fold" fails for the same reason: an
+orbit of a deterministic involution is not a choice.
+
+**Flatness.** The hole is flat in the exact sense: `ω = dk/k` is closed, `dω = 0`, but
+`∮_{|k|=1} ω = 2πi`, so it has no single-valued primitive. A flat hole is not a cavity; it is a
+period. Flatness removes the local obstruction — curvature — and leaves the global one, a loop. The
+developing map makes the local statement exact: on the universal cover of `ℂ*` any branch of `log`
+is a chart, and the deck transformation `z ↦ z + 2πi` is the period. "Any application" is therefore
+true on the cover and false on the quotient; the applications differ by the holonomy. One can add
+the point topologically, but the class dies in the cohomology of the filled space and the form
+acquires a pole; the completion `0 ~ ∞` is a compactification, not a filling. The zero map has
+`Dg_0 = 0` and inertia `(0,0,n)`, so there is no tangent direction in which to fill the puncture.
+This is why the Fold's hole is harmless as a coordinate hole. If "flat" is offered as the reason the
+hole is free, that is the false friend: a flat hole is a period and a constraint, not a freedom.
+
+**The integer exponent.** `z^{e^{iπ}}` is `z^{-1}` because `e^{iπ} = -1`. A complex power is
+multi-valued for a non-integer exponent, but at an integer every branch of `log` gives the same
+value: `e^{-2πin} = 1`. This is the cleanest exact case of "many developments, one answer." The map
+`ι(z) = 1/z` is an involution on `ℂ*`: its fixed points are `±1`, it swaps `0` and `∞`, and its
+quotient is the Joukowski map `J(z) = z + 1/z`, branched at `±1` with critical values `±2`. The
+fiber is exactly the orbit: `J(z) = J(w)` gives `(z−w)(zw−1) = 0`, so `w = z` or `w = 1/z`. On the
+log cover it is the half-turn `w ↦ -w`; the deck translation makes the fixed points `w = πi n`.
+This is not the real reflection `σ_H`: both are `ℤ/2`, but `σ_H` has a codimension-one fixed
+hyperplane and reverses orientation, while `ι` has two fixed points and preserves orientation; the
+quotient of `σ_H` is a half-space with boundary, the quotient of `ι` is a branched cover. The shared
+group is exact; the shared geometry is a rhyme. This is a canonical Fold — involution, orbit, crease,
+quotient, branch locus — and it is exactly what `0/0` is not: an integer exponent collapses the
+branches; a zero denominator has no value to collapse to. The Weyl reading names the quotient: on
+`T = {diag(z, z⁻¹)}` the group `W ≅ ℤ/2` swaps the eigenvalues, and `J` is the trace, so the orbit
+space is `T/W ≅ ℂ` and the branch points `±2` are the traces of the central elements `±I`. Normalizing
+the critical values gives the Belyi coordinate `B(z) = (J(z)+2)/4 = (z+1)²/(4z) = det(A+I)/4`, with
+`1−B = det(I−A)/4`; its dessin is the unit circle with the two marks `±1`, i.e. the `m = 2` wheel.
+With `z = λ`, `B = (λ + 1/λ + 2)/4` is an affine function of the Hauptmodul `λ + 1/λ` of
+`Γ₀(2)`, and `j = 64(4B−3)³/(B−1)` is the degree-three map to the `j`-line, so the `m = 2` dessin
+is the quotient of the λ-dessin by `λ ↦ 1/λ`, not a degeneration of `X(2)`. That is a rhyme with the closure, not a new route.
+
+### What the second map changes
+
+- It adds five exact statements, all about measure, quotient, or logic: amenability, order under a
+  quotient, tolerance versus equivalence, the finite/infinite measure of the completed parameter, and
+  contraposition.
+- It adds no route to the open problems of the first map. The exact additions are about descriptions,
+  not about arithmetic surfaces, operators, bounds, or parity.
+- It sharpens the Fold's edge: the missing object is a **canonical measure** or a **canonical
+  section**. The Fold can name both; it can supply neither.
+- It records two boundary cases without adding rows: astigmatism is the shear sector the conformal
+  scale does not carry, and `0/0` is the zero map's total kernel, not a value.
+- It gives the honest form of the hard problem: not a problem the Fold can solve, but the one absence
+  the map is built around.
+
+The formal core of the five exact rows is in the Lean library; `the-fold-lean.md` lists which theorem
+checks which row and which rows are left to the prose.
+
 ## Checks
 
 The signature shape match and the Hilbert–Pólya commutation are exact; the numbers below confirm them
@@ -433,6 +653,11 @@ one new exact classifier, and it is a restatement, not a bound.
 **The Fold reformulates RH exactly and rhymes with a dozen other problems, but its real value is a
 map: positivity needs a surface, Hilbert–Pólya needs an operator, de Bruijn–Newman needs a bound, and
 the explicit formula needs a parity breaker — four known walls, one crease.**
+
+**The second map has the same shape: amenability needs a group, Simpson needs a non-order-preserving
+quotient, the sorites needs an equivalence, the improper prior needs a finite measure, and
+contraposition needs a logic that is not an epistemology — five exact statements about descriptions,
+and one absence the Fold names but does not fill.**
 
 ## Files
 

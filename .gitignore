@@ -13,3 +13,6 @@ opencode-archive/
 # OS
 Thumbs.db
 .DS_Store
+
+# Lean build artifacts
+.lake/
