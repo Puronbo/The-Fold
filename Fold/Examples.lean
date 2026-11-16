@@ -177,4 +177,87 @@ theorem dessinMonodromy_group :
     dessinSigma0 ∘ dessinSigma0 = id ∧ dessinSigma0 ≠ id :=
   ⟨dessinSigma0_invol, dessinSigma0_ne_id⟩
 
+/-! ### The A1 node as a fold quotient -/
+
+/-- The involution of the tangent plane at the Markoff node:
+`(u, v) ↦ (−u, −v)`.  Its only fixed point is the origin. -/
+def nodeInv (p : Int × Int) : Int × Int := (-p.1, -p.2)
+
+/-- `nodeInv` is an involution. -/
+theorem nodeInv_invol (p : Int × Int) : nodeInv (nodeInv p) = p := by
+  cases p with
+  | mk u v => simp [nodeInv]
+
+/-- The node fold. -/
+def nodeFold : Fold (Int × Int) where
+  f := nodeInv
+  invol := nodeInv_invol
+
+/-- The three quadratic invariants, `(u², v², uv)`: the quotient map of
+the `A1` cone `X Y = Z²`. -/
+def a1 (p : Int × Int) : Int × Int × Int :=
+  (p.1 * p.1, p.2 * p.2, p.1 * p.2)
+
+/-- The `A1` map is invariant under the node involution. -/
+theorem a1_invariant (p : Int × Int) :
+    a1 (nodeFold.f p) = a1 p := by
+  cases p with
+  | mk u v =>
+    show (-u * -u, -v * -v, -u * -v) = (u * u, v * v, u * v)
+    rw [Int.neg_mul_neg, Int.neg_mul_neg, Int.neg_mul_neg]
+
+/-- The image lies on the `A1` cone `X Y = Z²`. -/
+theorem a1_cone (p : Int × Int) :
+    (a1 p).1 * (a1 p).2.1 = (a1 p).2.2 * (a1 p).2.2 := by
+  cases p with
+  | mk u v =>
+    show (u * u) * (v * v) = (u * v) * (u * v)
+    ac_rfl
+
+/-- The only fixed point of the node involution is the origin. -/
+theorem nodeFold_fixed (p : Int × Int) :
+    nodeFold.f p = p ↔ p = (0, 0) := by
+  cases p with
+  | mk u v =>
+    constructor
+    · intro h
+      have h1 : -u = u := congrArg Prod.fst h
+      have h2 : -v = v := congrArg Prod.snd h
+      have hu : u = 0 := by omega
+      have hv : v = 0 := by omega
+      simp [hu, hv]
+    · intro h
+      cases h
+      rfl
+
+/-- The `A1` map vanishes exactly at the node. -/
+theorem a1_fixed (p : Int × Int) :
+    a1 p = (0, 0, 0) ↔ p = (0, 0) := by
+  cases p with
+  | mk u v =>
+    constructor
+    · intro h
+      have h1 : u * u = 0 := by
+        have := congrArg Prod.fst h
+        simpa [a1] using this
+      have h2 : v * v = 0 := by
+        have := congrArg (fun t => t.2.1) h
+        simpa [a1] using this
+      have hu : u = 0 := by
+        rcases Int.mul_eq_zero.mp h1 with h | h <;> exact h
+      have hv : v = 0 := by
+        rcases Int.mul_eq_zero.mp h2 with h | h <;> exact h
+      simp [hu, hv]
+    · intro h
+      cases h
+      simp [a1]
+
+/-- The descent of the `A1` map to the chart of the node fold. -/
+def a1Chart : Chart nodeFold → Int × Int × Int :=
+  desc nodeFold a1 a1_invariant
+
+/-- The descent evaluates to the three invariants. -/
+theorem a1Chart_chart (p : Int × Int) :
+    a1Chart (chart nodeFold p) = a1 p := rfl
+
 end Fold

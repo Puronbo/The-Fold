@@ -65,6 +65,13 @@ import Fold.Examples
 #check Fold.dessin_passport
 #check Fold.dessinMonodromy_group
 
+#check Fold.nodeInv_invol
+#check Fold.a1_invariant
+#check Fold.a1_cone
+#check Fold.nodeFold_fixed
+#check Fold.a1_fixed
+#check Fold.a1Chart_chart
+
 #check Fold.pressure_strict
 #check Fold.pressure_unbounded
 #check Fold.pressure_finite

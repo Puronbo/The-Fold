@@ -7,7 +7,7 @@ with the bare toolchain: no Mathlib, no network, no cache. The compiled statemen
 skeleton of the corpus — an involution, its fixed set, its quotient, the observer as a cut, the
 scale action, the cap/puncture ledger, the calendar arithmetic, the wheel's closure, four finite
 counterexamples from the second problem map, a non-vacuous quotient instance, the Euler
-characteristic of the `m = 2` dessin, and that dessin's monodromy.
+characteristic of the `m = 2` dessin, that dessin's monodromy, and the `A1` node as a quotient.
 
 It proves the skeleton. It does not prove the rhymes. The distinction is the same four-zone rule
 as the prose: a theorem is either exact, a model, or absent, and the file says which.
@@ -32,7 +32,7 @@ The toolchain is pinned in `lean-toolchain` to `leanprover/lean4:v4.35.0`. The L
 | `Fold/Wheel.lean` | the combinatorial wheel and its closure after `m` turns |
 | `Fold/Problems.lean` | Simpson, tolerance, contraposition, Monty Hall |
 | `Fold/Pressure.lean` | the linear hydrostatic law; monotone, unbounded, gauge |
-| `Fold/Examples.lean` | a non-vacuous descent on `Option Bool`; the `m = 2` dessin's Euler characteristic and monodromy |
+| `Fold/Examples.lean` | a non-vacuous descent on `Option Bool`; the `m = 2` dessin's Euler characteristic and monodromy; the `A1` node quotient |
 | `Fold/Audit.lean` | the `#print axioms` audit |
 | `Fold.lean` | the root module and the `#check` inventory |
 
@@ -228,6 +228,34 @@ radius `1.0` about both fixes them (residual `1e−15`); that is the passport nu
 in the file is the identification of these permutations with paths in the base; that needs the
 topology of `ℂ ∖ {0,1}`.
 
+### The `A1` node as a fold quotient
+
+| Lean name | statement | zone |
+|---|---|---|
+| `Fold.nodeInv` | `(u, v) ↦ (−u, −v)` on `Int × Int` | exact |
+| `Fold.nodeInv_invol` | the node map is an involution | exact |
+| `Fold.nodeFold` | the node involution as a `Fold` | exact |
+| `Fold.a1` | the three invariants `(u², v², uv)` | exact |
+| `Fold.a1_invariant` | the invariants are constant on the node orbits | exact |
+| `Fold.a1_cone` | `X Y = Z²` for `X = u²`, `Y = v²`, `Z = uv` | exact |
+| `Fold.nodeFold_fixed` | the only fixed point is the origin | exact |
+| `Fold.a1_fixed` | the invariants vanish exactly at the origin | exact |
+| `Fold.a1Chart` | the descent of `a1` to the chart | exact |
+| `Fold.a1Chart_chart` | the descent evaluates to the invariants | exact |
+
+The Markoff surface is singular at `(0,0,0)`: the gradient vanishes and the Hessian is `2I`, so the
+tangent cone is `x² + y² + z² = 0`. After `z ↦ i z` this is the `A1` cone `X Y = Z²`, and the map
+`(u, v) ↦ (u², v², uv)` exhibits it as `ℂ² / (ℤ/2)`. The Lean section is the integer skeleton of
+that quotient: the involution, its unique fixed point, the three invariants, and the descent. It does
+not prove that the Markoff surface is locally biholomorphic to the cone — that is the holomorphic
+Morse lemma — and it does not prove that the link is `SO(3) ≅ ℝP³`. Those two are recorded as
+standard facts, not as compiled rows.
+
+The point `(0,0,0)` is the quaternion point: `A = iσ₁`, `B = iσ₂`, `AB = −iσ₃`, so all three traces
+vanish, `A² = B² = (AB)² = −I`, and the commutator is `−I` with trace `−2`. The Fricke identity
+`x² + y² + z² − xyz = 2 + tr(ABA⁻¹B⁻¹)` holds exactly there. The node is not a defect of the
+coordinate: it is the Fold's own `ℤ/2`, seen on the tangent plane.
+
 ### The hydrostatic chart
 
 | Lean name | statement | zone |
@@ -300,6 +328,9 @@ The axiom audit is reproducible with `#print axioms` in `Fold/Audit.lean`:
 | `Fold.Dessin.euler_eq_two` | `propext` |
 | `Fold.dessin_passport` | `Quot.sound` |
 | `Fold.dessinMonodromy_group` | `Quot.sound` |
+| `Fold.a1_cone` | `propext`, `Quot.sound` |
+| `Fold.a1_fixed` | `propext` |
+| `Fold.a1Chart_chart` | `propext` |
 | `Fold.scale_fix_iff` | `propext`, `Quot.sound` |
 | `Fold.chi_puncture_cap` | `propext` |
 | `Fold.rot_period` | `propext` |

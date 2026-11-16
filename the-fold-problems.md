@@ -672,6 +672,40 @@ the classical Markoff tree — `(3,3,6)`, `(3,6,15)`, `(6,15,39)`, … — which
 group, not a new route. The trace is exact as a coordinate; “the trace proves the Markoff conjecture”
 is the false friend.
 
+**The node is a fold.** At `(0,0,0)` the gradient vanishes and the Hessian is `2I`, so the tangent
+cone is the isotropic cone `x² + y² + z² = 0`. After `z ↦ iz` it is the `A1` cone `X Y = Z²`, and
+
+```
+(X, Y, Z) = (u², v², uv),    X Y − Z² = 0,    (u, v) ∼ (−u, −v)
+```
+
+exhibits the cone as `ℂ²/(ℤ/2)`, with the origin the unique fixed point. So the singular point of the
+Markoff surface is the Fold in algebraic form: the same `ℤ/2`, now acting on the tangent plane. The
+three trace coordinates vanish there at the quaternion point `A = iσ₁`, `B = iσ₂`, `AB = −iσ₃` (up to
+sign), where `A² = B² = (AB)² = −I` and the commutator is `−I` with trace `−2`; the Fricke identity
+reads `0 = 2 + (−2)`. The integer skeleton of this quotient is compiled in `Fold/Examples.lean`:
+`nodeInv`, `nodeFold`, `a1`, `a1_cone`, `a1_fixed`. That the whole surface is locally biholomorphic
+to the cone is the holomorphic Morse lemma, and that the link is `SO(3) ≅ ℝP³` is a standard
+computation; both are cited, not proved here. The Fold supplies the exact local quotient; the
+topology is the rhyme.
+
+**The Cohn matrices.** The triple `(3, 3, 6)` is realized by
+
+```
+A = [[1, 1], [1, 2]],   B = [[2, 1], [1, 1]],
+tr A = tr B = 3,   tr AB = 6,   det A = det B = 1,   tr(ABA⁻¹B⁻¹) = −2.
+```
+
+The Vieta move `(x, y, z) ↦ (x, xz − y, z)` is right multiplication: replacing `v` by `uv` sends the
+triple `(tr u, tr v, tr uv)` to `(tr u, tr(uv), tr(u²v))`, and the trace identity
+`tr(u) tr(uv) = tr(u²v) + tr(v)` gives `tr(u²v) = xz − y`. The other move `(u, v) ↦ (uv, v)` gives
+`(z, y, zy − x)`. So the Markoff tree is the orbit of the pair `(A, B)` under right multiplication —
+the same fold group, now inside `SL₂(ℤ)`. The Markoff numbers `1, 2, 5, 13, 29, …` are the entries
+divided by `3`, and the values `√(9 − 4/m²)`, one for each Markoff number `m`, lie in the Lagrange
+spectrum below `3`. That each Markoff number appears in exactly one triple up to symmetry is the
+Markoff uniqueness conjecture, still open. The tree is exact; “the trace proves uniqueness” is the
+false friend.
+
 ### What the second map changes
 
 - It adds five exact statements, all about measure, quotient, or logic: amenability, order under a

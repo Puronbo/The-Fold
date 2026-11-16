@@ -15,6 +15,9 @@ import Fold
 #print axioms Fold.Dessin.euler_eq_two
 #print axioms Fold.dessin_passport
 #print axioms Fold.dessinMonodromy_group
+#print axioms Fold.a1_cone
+#print axioms Fold.a1_fixed
+#print axioms Fold.a1Chart_chart
 #print axioms Fold.Cut.fix_iff
 #print axioms Fold.Cut.lift_chart
 #print axioms Fold.scale_fix_iff
