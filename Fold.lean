@@ -58,6 +58,13 @@ import Fold.Examples
 #check Fold.Dessin.euler_eq_two
 #check Fold.dessin2_euler
 
+#check Fold.dessinSigma0_invol
+#check Fold.dessinSigma0_ne_id
+#check Fold.dessinSigma_product
+#check Fold.dessinMonodromy_transitive
+#check Fold.dessin_passport
+#check Fold.dessinMonodromy_group
+
 #check Fold.pressure_strict
 #check Fold.pressure_unbounded
 #check Fold.pressure_finite

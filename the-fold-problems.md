@@ -592,9 +592,85 @@ branches; a zero denominator has no value to collapse to. The Weyl reading names
 space is `T/W ≅ ℂ` and the branch points `±2` are the traces of the central elements `±I`. Normalizing
 the critical values gives the Belyi coordinate `B(z) = (J(z)+2)/4 = (z+1)²/(4z) = det(A+I)/4`, with
 `1−B = det(I−A)/4`; its dessin is the unit circle with the two marks `±1`, i.e. the `m = 2` wheel.
-With `z = λ`, `B = (λ + 1/λ + 2)/4` is an affine function of the Hauptmodul `λ + 1/λ` of
-`Γ₀(2)`, and `j = 64(4B−3)³/(B−1)` is the degree-three map to the `j`-line, so the `m = 2` dessin
-is the quotient of the λ-dessin by `λ ↦ 1/λ`, not a degeneration of `X(2)`. That is a rhyme with the closure, not a new route.
+With `z = λ`, `B = (λ + 1/λ + 2)/4` is an affine function of the Hauptmodul `λ + 1/λ` of the
+index-three group `Γ⁰(2)` (a conjugate of `Γ₀(2)`), and `j = 64(4B−3)³/(B−1)` is the degree-three
+map to the `j`-line, so the `m = 2` dessin is the quotient of the λ-dessin by `λ ↦ 1/λ`, not a
+degeneration of `X(2)`. That is a rhyme with the closure, not a new route.
+
+**Three folds, three creases.** The comparison sharpens when the navel inversion is put beside the
+real reflection and the holomorphic inversion:
+
+| fold | map | fixed set | codim | orientation | quotient |
+|---|---|---|---|---|---|
+| `σ_H` | `x ↦ x − 2(x·n)n` | hyperplane `H` | 1 | reversing | half-space, boundary `H` |
+| `I_ρ` | `z ↦ ρ²/z̄` | circle `\|z\| = ρ` | 1 | reversing (anti-holomorphic) | `\|w\| ≥ 2`, boundary circle |
+| `ι` | `z ↦ 1/z` | `±1` | 2 | preserving (holomorphic) | `ℂ`, branched at `±2` |
+
+The navel inversion is the Fold's original geometric fold: in polar form `I_ρ(r e^{iθ}) = (ρ²/r)
+e^{iθ}`, so it preserves the argument and inverts the radius. Its orbits are the reciprocal pairs on
+each ray, and its fixed set is the circle `|z| = ρ`. The quotient coordinate `w = z/ρ + ρ/z̄` is
+invariant, and `|w| = r/ρ + ρ/r ≥ 2`, with equality exactly on the fixed circle; the quotient is the
+closed exterior disk `|w| ≥ 2`, whose boundary is the crease. Because `I_ρ` is anti-holomorphic, the
+crease is a real curve, codimension 1. The holomorphic inversion drops the conjugation: its fixed set
+is two points, codimension 2, and its quotient is `ℂ`, branched at `±2`. The structural reason is
+exact: the fixed set of a holomorphic involution is a complex submanifold (real codimension 2), while
+the fixed set of an anti-holomorphic involution is a real submanifold (real codimension 1). Removing
+the bar collapses the circle to `±1` and turns the boundary into a branch locus. `σ_H` is the linear
+isometric model, `I_ρ` the conformal anti-holomorphic model, `ι` the conformal holomorphic model. On
+the unit circle `ρ = 1`, `I_1` fixes the circle pointwise while `ι` acts by `z ↦ z̄`; their agreement
+is only at `±1`. The shared `ℤ/2` is exact; "they are the same fold" is the false friend.
+
+**The Fricke involution.** The index-three curve `Γ⁰(2)\ℍ` carries a second `ℤ/2`, the Atkin–Lehner
+involution `τ ↦ -2/τ`. On the `B`-line it is the Möbius involution
+
+```
+f(B) = B/(B − 1),    f(f(B)) = B,
+```
+
+with fixed points `B = 0` and `B = 2`, swapping `B = 1` and `B = ∞`. This is not the deck involution
+`λ ↦ 1/λ` (which is trivial on `B`), and it is not the holomorphic inversion `z ↦ 1/z`. Applied to
+the Belyi map, it sends
+
+```
+B(z) ↦ B(z)/(B(z) − 1) = ((z + 1)/(z − 1))²,
+```
+
+which is the **dual** Belyi map: the double zero at `−1` stays, the double value `1` at `1` becomes a
+double pole, and the simple poles at `0, ∞` become simple value-`1` points. So the Fricke involution
+exchanges the `m = 2` dessin with its dual: the vertex `B = 1` becomes a face center, and the face
+centers `B = 0, ∞` become vertices. It is an exact `ℤ/2` on the modular curve, not on the dessin; the
+dessin is not invariant, it is dualized.
+
+**The character variety and the Markoff surface.** The trace coordinate of the Weyl section is the
+first case of a general statement. For a once-punctured torus the character variety is cut out by the
+Markoff equation
+
+```
+x² + y² + z² − xyz = 0,    x = tr A, y = tr B, z = tr AB,
+```
+
+with `A`, `B` in `SL₂` and the commutator parabolic. This is the Fricke identity at `tr(ABA⁻¹B⁻¹) = −2`
+in the classical normalization: for diagonal `A = diag(a, a⁻¹)`, `B = diag(b, b⁻¹)`, both sides are
+identically `4`. The surface is singular exactly where the two trace coordinates stop being independent:
+
+| fact | computation |
+|---|---|
+| gradient at the origin | `(0, 0, 0)` |
+| Hessian at the origin | `2I` |
+| tangent cone | the quadratic cone `x² + y² + z² = 0` |
+| Vieta involution `s_z` | `(x, y, z) ↦ (x, y, xy − z)` |
+| invariance | `F(x, y, xy − z) = F(x, y, z)` identically |
+| fixed curve of `s_z` | `z = xy/2`, i.e. `4x² + 4y² − x²y² = 0` |
+
+Each Vieta involution is a fold: an exact `ℤ/2` with a fixed curve, and the three of them generate
+the action of the mapping class group on the character variety. The origin is not a point of the
+surface to be resolved away — it is where `0/0` lives, the same zero-map kernel the Fold already
+records, now with coordinates. The classical Markoff surface `x² + y² + z² = 3xyz` is this one
+rescaled by `3`: `F(3X, 3Y, 3Z) = 9(X² + Y² + Z² − 3XYZ)`, so the same singular point and the same
+Vieta folds appear in both normalizations. The orbit of `(3, 3, 3)` under the three involutions is
+the classical Markoff tree — `(3,3,6)`, `(3,6,15)`, `(6,15,39)`, … — which is the orbit of a fold
+group, not a new route. The trace is exact as a coordinate; “the trace proves the Markoff conjecture”
+is the false friend.
 
 ### What the second map changes
 

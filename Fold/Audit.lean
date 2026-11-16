@@ -13,6 +13,8 @@ import Fold
 #print axioms Fold.desc_bijective
 #print axioms Fold.swapFold_desc_bijective
 #print axioms Fold.Dessin.euler_eq_two
+#print axioms Fold.dessin_passport
+#print axioms Fold.dessinMonodromy_group
 #print axioms Fold.Cut.fix_iff
 #print axioms Fold.Cut.lift_chart
 #print axioms Fold.scale_fix_iff

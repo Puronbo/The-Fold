@@ -6,8 +6,8 @@ A dependency-free Lean 4 library at the repository root. It imports only `Init`,
 with the bare toolchain: no Mathlib, no network, no cache. The compiled statements are the exact
 skeleton of the corpus — an involution, its fixed set, its quotient, the observer as a cut, the
 scale action, the cap/puncture ledger, the calendar arithmetic, the wheel's closure, four finite
-counterexamples from the second problem map, a non-vacuous quotient instance, and the Euler
-characteristic of the `m = 2` dessin.
+counterexamples from the second problem map, a non-vacuous quotient instance, the Euler
+characteristic of the `m = 2` dessin, and that dessin's monodromy.
 
 It proves the skeleton. It does not prove the rhymes. The distinction is the same four-zone rule
 as the prose: a theorem is either exact, a model, or absent, and the file says which.
@@ -32,7 +32,7 @@ The toolchain is pinned in `lean-toolchain` to `leanprover/lean4:v4.35.0`. The L
 | `Fold/Wheel.lean` | the combinatorial wheel and its closure after `m` turns |
 | `Fold/Problems.lean` | Simpson, tolerance, contraposition, Monty Hall |
 | `Fold/Pressure.lean` | the linear hydrostatic law; monotone, unbounded, gauge |
-| `Fold/Examples.lean` | a non-vacuous descent on `Option Bool`; the `m = 2` dessin's Euler characteristic |
+| `Fold/Examples.lean` | a non-vacuous descent on `Option Bool`; the `m = 2` dessin's Euler characteristic and monodromy |
 | `Fold/Audit.lean` | the `#print axioms` audit |
 | `Fold.lean` | the root module and the `#check` inventory |
 
@@ -192,6 +192,42 @@ The `m = 2` dessin is the unit circle with the two marks `±1`: two vertices, tw
 and two faces (inside and outside). The identity is `2 + 2 - 2 = 2`. It is the finite shadow of the
 Belyi map `B(z) = (z+1)²/(4z)`, whose critical values `0` and `1` are the two vertices.
 
+### The monodromy of the `m = 2` dessin
+
+| Lean name | statement | zone |
+|---|---|---|
+| `Fold.dessinSheet` | the two sheets, labelled by `Bool` | exact |
+| `Fold.dessinSigma0` | monodromy around `0`: the transposition `Bool.not` | exact |
+| `Fold.dessinSigma1` | monodromy around `1`: the same transposition | exact |
+| `Fold.dessinSigma0_invol` | `sigma0 ∘ sigma0 = id` | exact |
+| `Fold.dessinSigma0_ne_id` | `sigma0 ≠ id` | exact |
+| `Fold.dessinSigma_product` | `sigma0 ∘ sigma1 = id`: the loop around `∞` is unramified | exact |
+| `Fold.dessinMonodromy_transitive` | one transposition already moves between the two sheets | exact |
+| `Fold.dessin_passport` | the full passport in one conjunction | exact |
+| `Fold.dessinMonodromy_group` | the generated group is `ℤ/2`, of order two | exact |
+
+The degree-two cover `B : ℂ* → ℂ` has two ramification points: `z = −1` over `0` and `z = 1` over
+`1`. With only two sheets, every ramification is a transposition, so the two monodromies coincide.
+The third loop, around `∞`, is trivial because `B` is unramified there: `0` and `∞` are simple
+poles. Riemann–Hurwitz checks the count,
+
+```
+2g − 2 = d(2h − 2) + R,   −2 = 2(−2) + 2,   R = (2−1) + (2−1) = 2,
+```
+
+so the cover is again a sphere. The Lean statements are the finite skeleton of that geometry: the
+group is `ℤ/2`, the same abstract group as `rot 2`, and the passport is
+`(2)(1,1)(1,1)`. Tracking the two roots of `B(z) = w`,
+
+```
+z = 2w − 1 ± 2√(w(w−1)),
+```
+
+along loops of radius `0.2` about `0` and about `1` swaps them (residual `3e−16`), and a loop of
+radius `1.0` about both fixes them (residual `1e−15`); that is the passport numerically. What is not
+in the file is the identification of these permutations with paths in the base; that needs the
+topology of `ℂ ∖ {0,1}`.
+
 ### The hydrostatic chart
 
 | Lean name | statement | zone |
@@ -262,6 +298,8 @@ The axiom audit is reproducible with `#print axioms` in `Fold/Audit.lean`:
 | `Fold.desc_bijective` | `Quot.sound` |
 | `Fold.swapFold_desc_bijective` | `Quot.sound` |
 | `Fold.Dessin.euler_eq_two` | `propext` |
+| `Fold.dessin_passport` | `Quot.sound` |
+| `Fold.dessinMonodromy_group` | `Quot.sound` |
 | `Fold.scale_fix_iff` | `propext`, `Quot.sound` |
 | `Fold.chi_puncture_cap` | `propext` |
 | `Fold.rot_period` | `propext` |
