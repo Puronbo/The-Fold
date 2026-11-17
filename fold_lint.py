@@ -354,6 +354,32 @@ def status_markers(text: str) -> list[tuple[int, str]]:
     return hits
 
 
+MARK_OBJECT_RE = re.compile(r",\s*not\s+(?:an?\s+|the\s+)?([a-zA-Z']+)\b", re.I)
+
+
+def mark_object(sentence: str) -> str:
+    """What the contrast denies: 'not a derivation' -> 'derivation'."""
+    if re.search(r",\s*not\s+about\b", sentence, re.I):
+        return "about"
+    match = MARK_OBJECT_RE.search(sentence)
+    return match.group(1).lower() if match else "other"
+
+
+def marker_objects(paths: list[Path]) -> Counter[str]:
+    """Count what the contrast markers deny, across the corpus.
+
+    The object is the finding: 'not a derivation' and 'not a proof' say that
+    nothing was proved, which is the definition of the reformulation zone;
+    'not an identity' and 'not about' say that a word is being used in two
+    senses, which is false-friend work.
+    """
+    counts: Counter[str] = Counter()
+    for path in paths:
+        for _lineno, shown in status_markers(path.read_text(encoding="utf-8")):
+            counts[mark_object(shown)] += 1
+    return counts
+
+
 def legend_runs(items: list[tuple[int, str]]) -> set[int]:
     """Line numbers that belong to a legend.
 
@@ -721,6 +747,16 @@ def selftest() -> int:
     if legend_file.marks != 0:
         print(f"  FAIL selftest: legend fixture gave {legend_file.marks} marks")
         return 1
+    picks = {
+        "a reading, not a derivation": "derivation",
+        "a statement about the lattice, not about the probe": "about",
+        "a rhyme, not a proof": "proof",
+    }
+    for sentence, expected_obj in picks.items():
+        got = mark_object(sentence)
+        if got != expected_obj:
+            print(f"  FAIL selftest: mark_object({sentence!r}) gave {got!r}")
+            return 1
     print(f"  ok   selftest: {len(expected) + 1} fixtures, 9 rules")
     return 0
 
@@ -804,6 +840,13 @@ def main(argv: list[str]) -> int:
                 f"{mark_files} files of {len(docs)}"
             )
             print(f"       {'total':<{width}}  {mark_total:4d}")
+            objects = marker_objects(docs)
+            named = [(obj, n) for obj, n in objects.items() if n >= 2]
+            for obj, n in sorted(named, key=lambda pair: (-pair[1], pair[0])):
+                print(f"       {obj:<{width}}  {n:4d}")
+            other = mark_total - sum(n for _, n in named)
+            if other:
+                print(f"       {'other':<{width}}  {other:4d}")
 
         silent = [
             name

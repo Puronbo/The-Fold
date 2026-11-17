@@ -220,6 +220,7 @@ ZONE_ROW_RE = re.compile(
     r"^\s*(exact|reformulation|rhyme|false friend|the absence|"
     r"without tables|no zone language|total|legend[^\d]*)\s+(\d+)"
 )
+MARK_ROW_RE = re.compile(r"^\s*([a-zA-Z']+)\s+(\d+)")
 
 
 def quoted_zone_map() -> tuple[dict[str, int], dict[str, int], dict[str, int]]:
@@ -227,11 +228,12 @@ def quoted_zone_map() -> tuple[dict[str, int], dict[str, int], dict[str, int]]:
     table: dict[str, int] = {}
     prose: dict[str, int] = {}
     marks: dict[str, int] = {}
-    bucket = table
+    bucket: dict[str, int] | None = None
     inside = False
     for line in read_text(readme).splitlines():
         if line.lstrip().startswith("```"):
             inside = not inside
+            bucket = None  # each fenced block starts with no bucket
             continue
         if not inside:
             continue
@@ -241,11 +243,23 @@ def quoted_zone_map() -> tuple[dict[str, int], dict[str, int], dict[str, int]]:
         if "status markers" in line:
             bucket = marks
             continue
-        match = ZONE_ROW_RE.match(line)
-        if not match:
+        if bucket is None:
+            if line.lstrip().startswith("zone map"):
+                bucket = table
             continue
-        key = "legend" if match.group(1).startswith("legend") else match.group(1).strip()
-        bucket[key] = int(match.group(2))
+        match = ZONE_ROW_RE.match(line)
+        if match:
+            key = (
+                "legend"
+                if match.group(1).startswith("legend")
+                else match.group(1).strip()
+            )
+            bucket[key] = int(match.group(2))
+            continue
+        if bucket is marks:
+            match = MARK_ROW_RE.match(line)
+            if match:
+                bucket[match.group(1).strip()] = int(match.group(2))
     return table, prose, marks
 
 
@@ -272,7 +286,15 @@ try:
     expected_prose = dict(prose_totals)
     expected_prose["total"] = sum(prose_totals.values())
     mark_files = sum(1 for zmap in maps.values() if zmap.marks)
-    expected_marks = {"total": sum(zmap.marks for zmap in maps.values())}
+    mark_total = sum(zmap.marks for zmap in maps.values())
+    expected_marks = {"total": mark_total}
+    objects = _zones.marker_objects(docs)
+    named = [(obj, n) for obj, n in objects.items() if n >= 2]
+    for obj, n in named:
+        expected_marks[obj] = n
+    other = mark_total - sum(n for _, n in named)
+    if other:
+        expected_marks["other"] = other
     silent = sum(1 for zmap in maps.values() if not (zmap.claims or zmap.prose or zmap.marks))
     if silent:
         expected_marks["no zone language"] = silent

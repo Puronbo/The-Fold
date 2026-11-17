@@ -342,7 +342,26 @@ step short of a label — it says what the claim is *not* without saying which o
 ```
 status markers (marked by contrast, zone not named): 21 files of 38
      total            41
+     derivation       16
+     about             6
+     proof             5
+     identity          4
+     boost             2
+     theorem           2
+     other             6
 ```
+
+The objects are the finding. Sixteen say "not a derivation" and five "not a proof"; with the two "not
+a theorem" and the one "not a reduction", twenty-four point at proof. One of those is not a claim —
+"the Fold is a dictionary, not a proof engine" — and one "not the identity" is a list of what a point
+is not, so thirty-nine claims are marked and twenty-three of them say that nothing was proved. That
+is the corpus's own definition of **reformulation**, yet the word appears as a label seven times, five
+in tables and two in prose. The middle zone is not scarce; it is unnamed, and the corpus says it with
+a contrast instead of a noun.
+
+The remaining objects do different work. "Not an identity", "not about", "not a boost" use one word
+in two senses, which is false-friend work rather than a zone; "not a law", "not a model", "not a
+result" separate a description from a mechanism.
 
 With that count the map closes: every one of the thirty-eight files carries zone language. The three
 notes that looked silent in the first two counts — `the-fold-closure.md`, `the-fold-division.md`,
