@@ -59,6 +59,9 @@ Fixed-mass values at formation, computed from `M` alone:
 | Sun | 4.245e−6 | 2.953e3 m | 1.049e77 | 6.170e−8 K |
 | 70 kg water sphere | 4.067e−25 | 1.040e−25 m | 1.300e20 | 1.753e21 K |
 
+The paper's Sun value, `4.3e-6`, is the same law at the rounded `M_⊙ = 2.0e30` (`4.270e-6`); the row
+above uses `1.988e30` (`4.245e-6`), and the last digit records which value was used.
+
 Note the ordering: the 70 kg sphere is the *hottest* horizon in the table by more than 28 orders of
 magnitude, because `T_H ∝ 1/M`. Horizon thermodynamics is anti-correlated with size.
 

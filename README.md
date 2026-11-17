@@ -319,10 +319,10 @@ zone map: 6 files with zone tables of 38
 
 prose attributions: 35 files of 38
      exact            98
-     reformulation     2
+     reformulation     3
      rhyme            17
      false friend     11
-     total           128
+     total           129
 ```
 
 The tables are the formal layer and cover six files. The prose is where the corpus actually works:
@@ -415,10 +415,11 @@ Recomputed from the formulas, the list reproduces: Earth `1.392 × 10⁻⁹`, th
 `4.067 × 10⁻²⁵`; the three solid angles from `d = 2.281 r` (`1.2158%` and `0.3012%`); the cube
 silhouette from the model's own `rotY`/`rotCam` (`1.41%` at 30°, `12.33%` at 45°, `0.00%` at
 90°/180°/270°); the cone's `Ω = 3.1416`, `V = 1.0472`, `A = 5.8623`, `V/A = 0.17863`; and the exact
-overlap `−cos 120° = 0.5`. The Sun is the exception, and only in its last digit: the paper prints
-`4.3 × 10⁻⁶` where the constants the notes use give `4.245 × 10⁻⁶`, which is `4.2 × 10⁻⁶` at two
-figures. The line above quotes the paper as printed; `the-fold-horizon.md` and
-`the-fold-creation.md` carry `4.245e-6`.
+overlap `−cos 120° = 0.5`. The Sun's two values are the same law twice: the paper prints
+`4.3 × 10⁻⁶` and `the-fold-horizon.md` prints `4.245 × 10⁻⁶`, and each is right for its own input.
+The rounded `M_⊙ = 2.0 × 10³⁰ kg` gives `4.270 × 10⁻⁶`, which prints as `4.3`; the notes'
+`1.988 × 10³⁰ kg` gives `4.245 × 10⁻⁶`, which prints as `4.2`. That is a reformulation, not a
+disagreement: one law through two values of `M_⊙`, with the last digit recording which value was used.
 
 The midpoint map: `m_k(P) = ½(P + g_k P) = g_((1+k)/2)(P)` to `4.6 × 10⁻¹⁶`, with
 `det m_k = ((1+k)/2)ⁿ` exact and rank 0 only at `k = −1`. For a fold `σ_H`, `½(I + σ_H)` is the
