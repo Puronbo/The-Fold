@@ -218,16 +218,17 @@ except Exception as exc:  # a broken linter should still report
 
 ZONE_ROW_RE = re.compile(
     r"^\s*(exact|reformulation|rhyme|false friend|the absence|"
-    r"without tables|no prose label|total|legend[^\d]*)\s+(\d+)"
+    r"without tables|no zone language|total|legend[^\d]*)\s+(\d+)"
 )
 
 
-def quoted_zone_map() -> tuple[dict[str, int], dict[str, int]]:
-    """Read the two blocks quoted in the README's Checks section."""
+def quoted_zone_map() -> tuple[dict[str, int], dict[str, int], dict[str, int]]:
+    """Read the blocks quoted in the README's Checks section."""
     table: dict[str, int] = {}
     prose: dict[str, int] = {}
+    marks: dict[str, int] = {}
+    bucket = table
     inside = False
-    in_prose = False
     for line in read_text(readme).splitlines():
         if line.lstrip().startswith("```"):
             inside = not inside
@@ -235,14 +236,17 @@ def quoted_zone_map() -> tuple[dict[str, int], dict[str, int]]:
         if not inside:
             continue
         if "prose attributions" in line:
-            in_prose = True
+            bucket = prose
+            continue
+        if "status markers" in line:
+            bucket = marks
             continue
         match = ZONE_ROW_RE.match(line)
         if not match:
             continue
         key = "legend" if match.group(1).startswith("legend") else match.group(1).strip()
-        (prose if in_prose else table)[key] = int(match.group(2))
-    return table, prose
+        bucket[key] = int(match.group(2))
+    return table, prose, marks
 
 
 try:
@@ -254,10 +258,8 @@ try:
     prose_totals: dict[str, int] = {}
     legend_total = 0
     tagged = 0
-    prose_files = 0
     for zmap in maps.values():
         tagged += 1 if zmap.claims else 0
-        prose_files += 1 if zmap.prose else 0
         legend_total += sum(zmap.legend.values())
         for zone, count in zmap.claims.items():
             table_totals[zone] = table_totals.get(zone, 0) + count
@@ -269,16 +271,22 @@ try:
     expected_table["legend"] = legend_total
     expected_prose = dict(prose_totals)
     expected_prose["total"] = sum(prose_totals.values())
-    expected_prose["no prose label"] = len(docs) - prose_files
+    mark_files = sum(1 for zmap in maps.values() if zmap.marks)
+    expected_marks = {"total": sum(zmap.marks for zmap in maps.values())}
+    silent = sum(1 for zmap in maps.values() if not (zmap.claims or zmap.prose or zmap.marks))
+    if silent:
+        expected_marks["no zone language"] = silent
 
-    quoted_table, quoted_prose = quoted_zone_map()
+    quoted_table, quoted_prose, quoted_marks = quoted_zone_map()
     before = len(failures)
     for label, expected, quoted in (
         ("table", expected_table, quoted_table),
         ("prose", expected_prose, quoted_prose),
+        ("marks", expected_marks, quoted_marks),
     ):
         if not quoted:
-            fail(f"README zone map: no {label} block found in the Checks section")
+            if expected:
+                fail(f"README zone map: no {label} block found in the Checks section")
             continue
         for key in sorted(set(expected) | set(quoted)):
             if expected.get(key) != quoted.get(key):

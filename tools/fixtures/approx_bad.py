@@ -55,4 +55,9 @@ class OrderedApprox:
         return self.x < other.x
 
 
+def exact_by_default(a, b):
+    # abs_tol defaults to 0.0, so this is still ==.
+    return math.isclose(a, b, rel_tol=0)
+
+
 ordered = sorted([1.0, 2.0], key=cmp_to_key(by_tolerance))

@@ -335,11 +335,51 @@ the negation only inside the clause the verb sits in, and reads a whole paragrap
 wrapped across lines is not cut in two. `--show` prints every attribution, so the rule can be audited
 rather than trusted.
 
-The four silent notes are the interesting residue. `the-fold-closure.md`, `the-fold-division.md`, and
-`the-fold-horizon.md` state laws of the Fold and its own consequences; they name no foreign object, so
-there is nothing for a zone to distinguish. `the-fold-lean.md` labels in its table of theorems,
-seventy-six of them exact. That is the honest shape of the corpus: the zone vocabulary is a scale for
-comparisons, and a note that makes none has nothing to put on it.
+A third idiom marks a claim's status without naming a zone: "a reading, not a derivation", "an input,
+not a result", "a statement about the lattice, not about the probe". That is the same discipline, one
+step short of a label — it says what the claim is *not* without saying which of the four it is.
+
+```
+status markers (marked by contrast, zone not named): 21 files of 38
+     total            41
+```
+
+With that count the map closes: every one of the thirty-eight files carries zone language. The three
+notes that looked silent in the first two counts — `the-fold-closure.md`, `the-fold-division.md`,
+`the-fold-horizon.md` — mark exactly once each, and each mark is the one that matters:
+
+| note | the mark |
+|---|---|
+| closure | the crystallographic restriction is a statement about the lattice, not about the probe's `N` |
+| division | the crease stiffness `κ` is an input, not a result |
+| horizon | this is a reading, not a derivation; the Fold supplies the ratio, not the metric |
+
+An earlier version of this section said those three notes named no foreign object. That was wrong,
+and measuring it showed the error: all three name one — the crystallographic restriction, the crease
+stiffness, the metric — and each flags the borrow at the point it is made. The zone vocabulary is a
+scale for comparisons, so the note that compares once is labelled once.
+
+### The lint turned on code it was not written for
+
+The tolerance half was run over installed packages, none of them written for this corpus:
+
+```
+sympy   1532 files   0 findings
+numpy    407 files   0 findings
+scipy    973 files   1 warning
+```
+
+The one warning was scipy's `test_filter_design.py:3610`, and it was the linter's mistake, not
+scipy's: `abs_tol=5e-16 if not DEFAULT_F32 else 1e-7` is not a literal, and the check was reading an
+unreadable tolerance as the default `0.0`, then reporting an exact comparison the source never makes.
+That is the rule's own failure — a tolerance treated as a value when it is unknown. It now treats an
+unparseable argument as unknown, and `tools/fixtures/approx_good.py` pins the case. After the fix:
+2,912 files, 0 findings.
+
+The measured result is worth stating plainly: in three mature numerical libraries, `__eq__` with a
+tolerance plus a separate `__hash__` does not occur at the top level of the source, because the
+libraries that care have already made equality exact. The bug this rule looks for lives in
+application classes, not in the scientific stack.
 
 ## Measured values quoted in the paper
 

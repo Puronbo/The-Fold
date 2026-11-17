@@ -26,11 +26,13 @@ approx
 zones
     A map, not a gate.  It counts three different acts apart: a claim in
     a zone table, an inline label, and the legend that defines the
-    vocabulary (a definition is not a claim).  It also counts the prose
+    vocabulary (a definition is not a claim).  It counts the prose
     attributions -- "the quotient statement is exact", "that remains a
-    rhyme" -- because that is how most of the corpus actually labels.  A
-    file that names no foreign object has nothing to put on the scale, and
-    the map says so rather than inventing a label.
+    rhyme" -- because that is how most of the corpus labels, and it counts
+    the status markers that mark a claim by contrast without naming a zone
+    -- "a reading, not a derivation" -- because that is the same discipline
+    one step short of a label.  A file with none of the three has nothing
+    to put on the scale, and the map says so rather than inventing a label.
 
 Exit status is 1 if any error is found (or any warning under --strict).
 """
@@ -62,6 +64,19 @@ INLINE_ZONE_RE = re.compile(
 PROSE_ZONE_RE = re.compile(
     r"\b(?:is|are|was|were|remains?|stays?|becomes?|seems?)\s+(?:now\s+)?"
     r"(?:an?\s+)?(exact|reformulation|rhyme|false\s+friend)\b",
+    re.I,
+)
+# The corpus marks a claim's status without naming a zone, most often by
+# contrast: "a rhyme, not a proof", "a reading, not a derivation", "an input,
+# not a result", "a statement about the lattice, not about the probe".  These
+# are not labels -- they do not say which of the four the claim is in -- but
+# they are the same discipline, and a note that uses them is not unlabelled.
+STATUS_RE = re.compile(
+    r",\s*not\s+(?:an?\s+|the\s+)?"
+    r"(?:proof|derivation|reduction|theorem|route|identity|law|mechanism|"
+    r"result|input|definition|reading|model|prediction|same\s+fold|"
+    r"same\s+object|Fold's\s+object)\b"
+    r"|,\s*not\s+about\b",
     re.I,
 )
 PROOF_RE = re.compile(
@@ -239,6 +254,42 @@ class ZoneMap:
     claims: Counter[str]
     legend: Counter[str]
     prose: Counter[str]
+    marks: int = 0
+
+
+def paragraph_sentences(text: str) -> list[tuple[int, str, str]]:
+    """Yield (line, sentence, masked sentence) over prose, skipping code and headings.
+
+    The corpus wraps prose inside sentences, so a paragraph is read whole and
+    each sentence is mapped back to the line it starts on.  Scanning line by
+    line would split a quotation or a clause in two and misread both.
+    """
+    out: list[tuple[int, str, str]] = []
+    for kind, _start, block in blocks(text):
+        if kind != "prose":
+            continue
+        kept = [(n, line) for n, line in block if not line.lstrip().startswith("#")]
+        if not kept:
+            continue
+        paragraph = ""
+        starts: list[tuple[int, int]] = []
+        for lineno, line in kept:
+            starts.append((len(paragraph), lineno))
+            paragraph += line.strip() + " "
+        masked = mask_spans(paragraph)
+        bounds = list(re.finditer(r"(?<=[.!?])\s+", masked))
+        spans = [0, *(m.end() for m in bounds)]
+        ends = [*(m.start() for m in bounds), len(masked)]
+        for base, stop in zip(spans, ends):
+            sentence = masked[base:stop]
+            if not sentence.strip():
+                continue
+            lineno = kept[0][0]
+            for start, candidate in starts:
+                if start <= base:
+                    lineno = candidate
+            out.append((lineno, paragraph[base:stop].strip(), sentence))
+    return out
 
 
 def mask_spans(sentence: str) -> str:
@@ -264,42 +315,29 @@ def prose_attributions(text: str) -> list[tuple[int, str, str]]:
     rejection, not a label.  The negation is read in the clause the verb sits
     in, so "does not make it an adjunction; that remains a rhyme" still
     counts the rhyme.
-
-    The corpus wraps prose inside sentences, so a paragraph is scanned whole
-    and each hit is mapped back to the line it starts on.  Scanning line by
-    line would split a quotation or a clause in two and misread both.
     """
     hits: list[tuple[int, str, str]] = []
-    for kind, _start, block in blocks(text):
-        if kind != "prose":
-            continue
-        kept = [(n, line) for n, line in block if not line.lstrip().startswith("#")]
-        if not kept:
-            continue
-        paragraph = ""
-        starts: list[tuple[int, int]] = []
-        for lineno, line in kept:
-            starts.append((len(paragraph), lineno))
-            paragraph += line.strip() + " "
-        masked = mask_spans(paragraph)
-        bounds = list(re.finditer(r"(?<=[.!?])\s+", masked))
-        spans = [0, *(m.end() for m in bounds)]
-        ends = [*(m.start() for m in bounds), len(masked)]
-        for base, stop in zip(spans, ends):
-            sentence = masked[base:stop]
-            if not sentence.strip():
+    for lineno, shown, sentence in paragraph_sentences(text):
+        for match in PROSE_ZONE_RE.finditer(sentence):
+            clause = re.split(r"[;,]", sentence[: match.start()])[-1]
+            if re.search(r"\b(not|never|no longer|hardly|scarcely)\b|n't", clause, re.I):
                 continue
-            for match in PROSE_ZONE_RE.finditer(sentence):
-                clause = re.split(r"[;,]", sentence[: match.start()])[-1]
-                if re.search(r"\b(not|never|no longer|hardly|scarcely)\b|n't", clause, re.I):
-                    continue
-                offset = base + match.start()
-                lineno = kept[0][0]
-                for start, candidate in starts:
-                    if start <= offset:
-                        lineno = candidate
-                shown = paragraph[base:stop].strip()
-                hits.append((lineno, match.group(1).lower(), shown))
+            hits.append((lineno, match.group(1).lower(), shown))
+    return hits
+
+
+def status_markers(text: str) -> list[tuple[int, str]]:
+    """Find claims marked by contrast rather than by a zone name.
+
+    "a rhyme, not a proof" is a label; "a reading, not a derivation" and "a
+    statement about the lattice, not about the probe" are not, because they
+    do not say which of the four zones the claim sits in.  They are still the
+    same discipline, and a note that uses them is not silent.
+    """
+    hits: list[tuple[int, str]] = []
+    for lineno, shown, sentence in paragraph_sentences(text):
+        if STATUS_RE.search(sentence):
+            hits.append((lineno, shown))
     return hits
 
 
@@ -372,6 +410,7 @@ def zone_counts(paths: list[Path]) -> dict[str, ZoneMap]:
             claims=claims,
             legend=legend,
             prose=Counter(label for _, label, _ in prose_attributions(text)),
+            marks=len(status_markers(text)),
         )
     return result
 
@@ -396,7 +435,17 @@ def is_abs_sub(node: ast.AST) -> bool:
     )
 
 
+UNKNOWN = object()
+
+
 def isclose_zero_tolerance(node: ast.Call) -> bool:
+    """True only when both tolerances are known literals and both are zero.
+
+    An argument that is not a literal -- `abs_tol=5e-16 if f32 else 1e-7` --
+    is unknown, not absent.  Treating it as absent would read the default
+    (zero for abs_tol) and invent an exact comparison the source does not
+    make, which is the same mistake the rule exists to catch.
+    """
     if call_name(node.func) != "isclose":
         return False
     values: dict[str, object] = {}
@@ -406,8 +455,10 @@ def isclose_zero_tolerance(node: ast.Call) -> bool:
         try:
             values[keyword.arg] = ast.literal_eval(keyword.value)
         except (ValueError, SyntaxError):
-            continue
-    return values.get("rel_tol", 1e-9) == 0 and values.get("abs_tol", 0.0) == 0
+            values[keyword.arg] = UNKNOWN
+    rel = values.get("rel_tol", 1e-9)
+    absolute = values.get("abs_tol", 0.0)
+    return rel == 0 and absolute == 0
 
 
 def uses_tolerance(node: ast.AST) -> bool:
@@ -540,12 +591,13 @@ def check_approx_file(path: Path) -> list[Finding]:
 
 # -------------------------------------------------------------------------- CLI
 
-def collect(paths: list[str], suffix: str) -> list[Path]:
+def collect(paths: list[str], suffix: str, recursive: bool = False) -> list[Path]:
     found: list[Path] = []
     for raw in paths:
         path = Path(raw)
         if path.is_dir():
-            found.extend(sorted(path.glob(f"*{suffix}")))
+            pattern = f"**/*{suffix}" if recursive else f"*{suffix}"
+            found.extend(sorted(path.glob(pattern)))
         elif path.is_file():
             found.append(path)
         else:
@@ -635,6 +687,9 @@ def selftest() -> int:
     if zmap.prose.get("reformulation"):
         print(f"  FAIL selftest: legend line counted as prose: {dict(zmap.prose)}")
         return 1
+    if zmap.marks != 1:
+        print(f"  FAIL selftest: marker fixture gave {zmap.marks} marks")
+        return 1
     if sum(zmap.legend.values()) != 0:
         print(f"  FAIL selftest: one-line legend counted as legend: {dict(zmap.legend)}")
         return 1
@@ -649,6 +704,9 @@ def selftest() -> int:
         return 1
     if sum(legend_file.prose.values()) != 0:
         print(f"  FAIL selftest: legend fixture gave prose {dict(legend_file.prose)}")
+        return 1
+    if legend_file.marks != 0:
+        print(f"  FAIL selftest: legend fixture gave {legend_file.marks} marks")
         return 1
     print(f"  ok   selftest: {len(expected) + 1} fixtures, 9 rules")
     return 0
@@ -669,6 +727,9 @@ def main(argv: list[str]) -> int:
     parser.add_argument(
         "--show", action="store_true", help="zones: print each prose attribution"
     )
+    parser.add_argument(
+        "--recursive", action="store_true", help="walk directories for the suffix"
+    )
     args = parser.parse_args(argv)
 
     if args.command == "selftest":
@@ -685,6 +746,7 @@ def main(argv: list[str]) -> int:
                             "claims": dict(zmap.claims),
                             "legend": dict(zmap.legend),
                             "prose": dict(zmap.prose),
+                            "marks": zmap.marks,
                         }
                         for name, zmap in per_file.items()
                     },
@@ -720,37 +782,57 @@ def main(argv: list[str]) -> int:
                 if prose.get(zone):
                     print(f"       {zone:<{width}}  {prose.get(zone, 0):4d}")
             print(f"       {'total':<{width}}  {prose_total:4d}")
-        silent = [name for name, zmap in per_file.items() if not zmap.prose]
+
+        mark_files = sum(1 for zmap in per_file.values() if zmap.marks)
+        mark_total = sum(zmap.marks for zmap in per_file.values())
+        if mark_total:
+            print(
+                f"\n  status markers (marked by contrast, zone not named): "
+                f"{mark_files} files of {len(docs)}"
+            )
+            print(f"       {'total':<{width}}  {mark_total:4d}")
+
+        silent = [
+            name
+            for name, zmap in per_file.items()
+            if not (zmap.claims or zmap.prose or zmap.marks)
+        ]
         if silent and not args.show:
-            print(f"       {'no prose label':<{width}}  {len(silent):4d}  {', '.join(silent)}")
+            print(f"       {'no zone language':<{width}}  {len(silent):4d}  {', '.join(silent)}")
 
         if args.per_file:
             for name, zmap in per_file.items():
-                if not (zmap.claims or zmap.prose):
+                if not (zmap.claims or zmap.prose or zmap.marks):
                     continue
                 parts = [
                     f"table {sum(zmap.claims.values())}" if zmap.claims else "",
                     f"prose {sum(zmap.prose.values())}" if zmap.prose else "",
+                    f"marks {zmap.marks}" if zmap.marks else "",
                 ]
                 summary = ", ".join(part for part in parts if part)
                 print(f"       {name}: {summary}")
         if args.show:
             for path in docs:
-                for lineno, label, sentence in prose_attributions(
-                    path.read_text(encoding="utf-8")
-                ):
+                text = path.read_text(encoding="utf-8")
+                for lineno, label, sentence in prose_attributions(text):
                     print(f"       {path.name}:{lineno} [{label}] {safe(sentence, 96)}")
+                for lineno, sentence in status_markers(text):
+                    print(f"       {path.name}:{lineno} [mark] {safe(sentence, 96)}")
         return 0
 
     findings: list[Finding] = []
     if args.command in {"all", "docs"}:
-        docs = collect(args.paths, ".md") if args.paths else default_docs()
+        docs = (
+            collect(args.paths, ".md", args.recursive) if args.paths else default_docs()
+        )
         doc_findings = run_docs(docs)
         findings.extend(doc_findings)
         if not args.json:
             report("docs", len(docs), doc_findings)
     if args.command in {"all", "approx"}:
-        approx = collect(args.paths, ".py") if args.paths else default_approx()
+        approx = (
+            collect(args.paths, ".py", args.recursive) if args.paths else default_approx()
+        )
         approx_findings = run_approx(approx)
         findings.extend(approx_findings)
         if not args.json:

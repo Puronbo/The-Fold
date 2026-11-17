@@ -32,6 +32,13 @@ def canonical_key(x):
     return round(x, 6)
 
 
+def close_branched(a, b, single_precision):
+    """A tolerance chosen at run time is unknown, not zero."""
+    return math.isclose(
+        a, b, rel_tol=0, abs_tol=5e-16 if not single_precision else 1e-7
+    )
+
+
 class ExplicitlyUnhashable:
     """An approximate __eq__ with __hash__ = None is a deliberate non-quotient."""
 
