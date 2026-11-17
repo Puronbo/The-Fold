@@ -355,9 +355,9 @@ The objects are the finding. Sixteen say "not a derivation" and five "not a proo
 a theorem" and the one "not a reduction", twenty-four point at proof. One of those is not a claim —
 "the Fold is a dictionary, not a proof engine" — and one "not the identity" is a list of what a point
 is not, so thirty-nine claims are marked and twenty-three of them say that nothing was proved. That
-is the corpus's own definition of **reformulation**, yet the word appears as a label seven times, five
-in tables and two in prose. The middle zone is not scarce; it is unnamed, and the corpus says it with
-a contrast instead of a noun.
+is the corpus's own definition of **reformulation**, yet the word appears as a label eight times, five
+in tables and three in prose (the third is the Sun comparison below). The middle zone is not scarce;
+it is unnamed, and the corpus says it with a contrast instead of a noun.
 
 The remaining objects do different work. "Not an identity", "not about", "not a boost" use one word
 in two senses, which is false-friend work rather than a zone; "not a law", "not a model", "not a
