@@ -411,6 +411,15 @@ Solid angle seen by an exterior point, `Ω/4π`: 5.060% at `k = 1`, 1.216% at `k
 Horizon formation, `k* = 2GM/(c²R)`: Earth `1.4 × 10⁻⁹`, Sun `4.3 × 10⁻⁶`, a 70 kg sphere of water
 `4 × 10⁻²⁵`.
 
+Recomputed from the formulas, the list reproduces: Earth `1.392 × 10⁻⁹`, the water sphere
+`4.067 × 10⁻²⁵`; the three solid angles from `d = 2.281 r` (`1.2158%` and `0.3012%`); the cube
+silhouette from the model's own `rotY`/`rotCam` (`1.41%` at 30°, `12.33%` at 45°, `0.00%` at
+90°/180°/270°); the cone's `Ω = 3.1416`, `V = 1.0472`, `A = 5.8623`, `V/A = 0.17863`; and the exact
+overlap `−cos 120° = 0.5`. The Sun is the exception, and only in its last digit: the paper prints
+`4.3 × 10⁻⁶` where the constants the notes use give `4.245 × 10⁻⁶`, which is `4.2 × 10⁻⁶` at two
+figures. The line above quotes the paper as printed; `the-fold-horizon.md` and
+`the-fold-creation.md` carry `4.245e-6`.
+
 The midpoint map: `m_k(P) = ½(P + g_k P) = g_((1+k)/2)(P)` to `4.6 × 10⁻¹⁶`, with
 `det m_k = ((1+k)/2)ⁿ` exact and rank 0 only at `k = −1`. For a fold `σ_H`, `½(I + σ_H)` is the
 projection onto the crease (rank `n − 1`): the midpoint set lies in `H` to `2.2 × 10⁻¹⁶`.
