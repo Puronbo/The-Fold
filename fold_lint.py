@@ -66,6 +66,15 @@ PROSE_ZONE_RE = re.compile(
     r"(?:an?\s+)?(exact|reformulation|rhyme|false\s+friend)\b",
     re.I,
 )
+# The definite form names a false friend without an article: "… is the false
+# friend".  It is allowed only for false friend, because "is the exact
+# opposite" is a noun phrase and "is the absence of X" is ordinary English,
+# not a label.
+DEFINITE_ZONE_RE = re.compile(
+    r"\b(?:is|are|was|were|remains?|stays?)\s+(?:now\s+)?the\s+"
+    r"(false\s+friend)\b",
+    re.I,
+)
 # The corpus marks a claim's status without naming a zone, most often by
 # contrast: "a rhyme, not a proof", "a reading, not a derivation", "an input,
 # not a result", "a statement about the lattice, not about the probe".  These
@@ -318,11 +327,15 @@ def prose_attributions(text: str) -> list[tuple[int, str, str]]:
     """
     hits: list[tuple[int, str, str]] = []
     for lineno, shown, sentence in paragraph_sentences(text):
-        for match in PROSE_ZONE_RE.finditer(sentence):
-            clause = re.split(r"[;,]", sentence[: match.start()])[-1]
-            if re.search(r"\b(not|never|no longer|hardly|scarcely)\b|n't", clause, re.I):
-                continue
-            hits.append((lineno, match.group(1).lower(), shown))
+        for pattern in (PROSE_ZONE_RE, DEFINITE_ZONE_RE):
+            for match in pattern.finditer(sentence):
+                clause = re.split(r"[;,]", sentence[: match.start()])[-1]
+                if re.search(r"\b(not|never|no longer|hardly|scarcely)\b|n't", clause, re.I):
+                    continue
+                label = match.group(1).lower()
+                if "friend" in label:
+                    label = "false friend"
+                hits.append((lineno, label, shown))
     return hits
 
 

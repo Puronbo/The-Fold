@@ -317,23 +317,23 @@ zone map: 6 files with zone tables of 38
      without tables    32
      legend (definitions, not claims)    11
 
-prose attributions: 34 files of 38
-     exact            97
+prose attributions: 35 files of 38
+     exact            98
      reformulation     2
      rhyme            17
-     false friend      2
-     total           118
-     no prose label    4  closure, division, horizon, lean
+     false friend     11
+     total           128
 ```
 
 The tables are the formal layer and cover six files. The prose is where the corpus actually works:
-thirty-four of thirty-eight files label their comparisons in the predicative form — a noun phrase
+thirty-five of thirty-eight files label their comparisons in the predicative form — a noun phrase
 then `is exact`, `remains a rhyme`, `is a false friend` — as in "the quotient statement is exact" or
 "`height` is a false friend unless the register is named". The detector is deliberately narrow: it
 skips the maxims ("a rhyme written as a proof"), skips negated rejections ("this is not exact"), reads
 the negation only inside the clause the verb sits in, and reads a whole paragraph so a sentence
-wrapped across lines is not cut in two. `--show` prints every attribution, so the rule can be audited
-rather than trusted.
+wrapped across lines is not cut in two. It reads the definite form too — "… is the false friend" —
+but not "is the exact opposite", which is a noun phrase rather than a label. `--show` prints every
+attribution, so the rule can be audited rather than trusted.
 
 A third idiom marks a claim's status without naming a zone: "a reading, not a derivation", "an input,
 not a result", "a statement about the lattice, not about the probe". That is the same discipline, one

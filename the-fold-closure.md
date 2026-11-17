@@ -109,6 +109,32 @@ those five can be the symmetry of a periodic crystal. `D₄` — the paper's gro
 them that contains a quarter turn; `D₅`, `D₈`, `D₁₀`, `D₁₂` require quasicrystalline order, which is
 exactly why the fivefold case was discovered in diffraction and not in crystallography.
 
+## The condition is a trace
+
+The column `2 cos(2π/n)` is the trace of the twist. The rotation `σ₂σ₁ = R(θ)` has eigenvalue
+`k = e^{iθ}`, so `tr = k + k⁻¹ = 2 cos θ`, and that is the column. The whole lattice condition is then
+one line of linear algebra: a rotation is an integer matrix in a lattice basis exactly when its trace
+is an integer, its determinant being `1` by construction.
+
+```
+periodic lattice  ⇔  tr(k) = k + k⁻¹ ∈ ℤ
+```
+
+The five survivors are the five `n` whose twist has an integer trace. The crystallographic
+restriction does not arrive from outside: it is the integrality of the Fold's own coordinate. What is
+borrowed is the name of the condition, not the condition.
+
+Computed on the lattice spanned by `e₁` and `R e₁`, the three non-trivial twists are conjugate to
+integer matrices — `[[0, −1], [1, −1]]` at `n = 3`, `[[0, −1], [1, 0]]` at `n = 4`, `[[0, −1], [1, 1]]`
+at `n = 6` — each of determinant `1`, with trace `−1`, `0`, `1` as the table says.
+
+The Markoff section of `the-fold-problems.md` puts the same function on a different object. There
+`x = tr A`, `y = tr B`, `z = tr AB`, and the equation is `x² + y² + z² − xyz = 0`, not `tr ∈ ℤ`; the
+group is a surface group, not a rotation group. Same function, same invariance under conjugation,
+different equation. So "the trace is a coordinate" is exact in both places, while "the twist's trace
+is integral, therefore the Markoff conjecture follows" is the false friend — one symbol, `tr`, over
+two objects that share its invariance under conjugation and nothing else.
+
 ## What this does to the paper
 
 Nothing in section 4 has to be retracted: `(σ₂σ₁)⁴ = I` and `D₄` are correct. What has to be added
