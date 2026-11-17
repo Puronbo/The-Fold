@@ -16,3 +16,7 @@ Thumbs.db
 
 # Lean build artifacts
 .lake/
+
+# Python bytecode
+__pycache__/
+*.pyc

@@ -11,7 +11,9 @@ Checks, in order:
 2. the paper is six pages;
 3. every Markdown note is listed in the README contents;
 4. every relative link and backticked filename resolves;
-5. every Markdown table has a consistent column count.
+5. every Markdown table has a consistent column count;
+6. the docs and Python lints in `fold_lint.py`;
+7. the zone map quoted in the README matches the one computed from the notes.
 
 Exit status is 1 if any check fails.
 """
@@ -189,6 +191,105 @@ for path in [readme, *md_files]:
     check_tables(path)
 
 ok("tables: checked")
+
+
+# ---------------------------------------------------------------- lints
+
+try:
+    import fold_lint
+
+    lint_findings = fold_lint.run_docs(fold_lint.default_docs())
+    lint_findings += fold_lint.run_approx(fold_lint.default_approx())
+    lint_errors = [f for f in lint_findings if f.severity == "error"]
+    for finding in lint_errors:
+        fail(
+            f"lint {finding.path}:{finding.line}: "
+            f"[{finding.code}] {finding.message}"
+        )
+    ok(
+        f"lint: {len(lint_errors)} error(s), "
+        f"{len(lint_findings) - len(lint_errors)} warning(s)"
+    )
+except Exception as exc:  # a broken linter should still report
+    fail(f"lint: could not run fold_lint: {exc}")
+
+
+# ------------------------------------------------------- README zone map
+
+ZONE_ROW_RE = re.compile(
+    r"^\s*(exact|reformulation|rhyme|false friend|the absence|"
+    r"without tables|no prose label|total|legend[^\d]*)\s+(\d+)"
+)
+
+
+def quoted_zone_map() -> tuple[dict[str, int], dict[str, int]]:
+    """Read the two blocks quoted in the README's Checks section."""
+    table: dict[str, int] = {}
+    prose: dict[str, int] = {}
+    inside = False
+    in_prose = False
+    for line in read_text(readme).splitlines():
+        if line.lstrip().startswith("```"):
+            inside = not inside
+            continue
+        if not inside:
+            continue
+        if "prose attributions" in line:
+            in_prose = True
+            continue
+        match = ZONE_ROW_RE.match(line)
+        if not match:
+            continue
+        key = "legend" if match.group(1).startswith("legend") else match.group(1).strip()
+        (prose if in_prose else table)[key] = int(match.group(2))
+    return table, prose
+
+
+try:
+    import fold_lint as _zones
+
+    docs = _zones.default_docs()
+    maps = _zones.zone_counts(docs)
+    table_totals: dict[str, int] = {}
+    prose_totals: dict[str, int] = {}
+    legend_total = 0
+    tagged = 0
+    prose_files = 0
+    for zmap in maps.values():
+        tagged += 1 if zmap.claims else 0
+        prose_files += 1 if zmap.prose else 0
+        legend_total += sum(zmap.legend.values())
+        for zone, count in zmap.claims.items():
+            table_totals[zone] = table_totals.get(zone, 0) + count
+        for zone, count in zmap.prose.items():
+            prose_totals[zone] = prose_totals.get(zone, 0) + count
+
+    expected_table = dict(table_totals)
+    expected_table["without tables"] = len(docs) - tagged
+    expected_table["legend"] = legend_total
+    expected_prose = dict(prose_totals)
+    expected_prose["total"] = sum(prose_totals.values())
+    expected_prose["no prose label"] = len(docs) - prose_files
+
+    quoted_table, quoted_prose = quoted_zone_map()
+    before = len(failures)
+    for label, expected, quoted in (
+        ("table", expected_table, quoted_table),
+        ("prose", expected_prose, quoted_prose),
+    ):
+        if not quoted:
+            fail(f"README zone map: no {label} block found in the Checks section")
+            continue
+        for key in sorted(set(expected) | set(quoted)):
+            if expected.get(key) != quoted.get(key):
+                fail(
+                    f"README zone map: {label} '{key}' says {quoted.get(key)}, "
+                    f"computed {expected.get(key)}"
+                )
+    if len(failures) == before:
+        ok("README zone map: quoted counts match")
+except Exception as exc:
+    fail(f"README zone map: could not check: {exc}")
 
 
 # ---------------------------------------------------------------- report

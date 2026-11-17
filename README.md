@@ -284,6 +284,63 @@ pdflatex the-fold.tex
 pdflatex the-fold.tex
 ```
 
+## Checks
+
+```
+python check.py        # 9 HTML models, 6 pages, index, links, tables, lints
+python fold_lint.py    # docs: zone labels; approx: tolerance-as-equality
+python fold_lint.py zones
+python fold_lint.py selftest
+```
+
+`check.py` is the single gate: it runs the structural checks and then the linter. `fold_lint.py` can
+also be run alone. It is the corpus's two transferable habits, mechanized. It checks that every table
+with a `zone` column uses `exact`, `reformulation`, `rhyme`, or `false friend`; that a `rhyme` row or
+sentence carries no proof claim; and that a prose "false friend" names the claim. On the Python side
+it rejects a class with an approximate `__eq__` and an exact `__hash__`, a `cmp_to_key` comparator
+that uses a tolerance, and `@total_ordering` on an approximate `__eq__`, because each assumes a
+quotient that a tolerance does not have. The five fixtures in `tools/fixtures/` make the rules
+non-vacuous.
+
+`zones` is the map rather than the gate. It separates three things that look alike: a **claim** in a
+zone table, an **inline label** beside a claim, and the **legend** that defines the vocabulary. A
+definition is not a claim, so the legend is counted apart rather than inflating the map. It then
+counts the **prose attributions**, because that is how most of the corpus actually labels.
+
+```
+zone map: 6 files with zone tables of 38
+     exact            97
+     reformulation     5
+     rhyme            18
+     false friend      8
+     the absence       1
+     without tables    32
+     legend (definitions, not claims)    11
+
+prose attributions: 34 files of 38
+     exact            97
+     reformulation     2
+     rhyme            17
+     false friend      2
+     total           118
+     no prose label    4  closure, division, horizon, lean
+```
+
+The tables are the formal layer and cover six files. The prose is where the corpus actually works:
+thirty-four of thirty-eight files label their comparisons in the predicative form — a noun phrase
+then `is exact`, `remains a rhyme`, `is a false friend` — as in "the quotient statement is exact" or
+"`height` is a false friend unless the register is named". The detector is deliberately narrow: it
+skips the maxims ("a rhyme written as a proof"), skips negated rejections ("this is not exact"), reads
+the negation only inside the clause the verb sits in, and reads a whole paragraph so a sentence
+wrapped across lines is not cut in two. `--show` prints every attribution, so the rule can be audited
+rather than trusted.
+
+The four silent notes are the interesting residue. `the-fold-closure.md`, `the-fold-division.md`, and
+`the-fold-horizon.md` state laws of the Fold and its own consequences; they name no foreign object, so
+there is nothing for a zone to distinguish. `the-fold-lean.md` labels in its table of theorems,
+seventy-six of them exact. That is the honest shape of the corpus: the zone vocabulary is a scale for
+comparisons, and a note that makes none has nothing to put on it.
+
 ## Measured values quoted in the paper
 
 Silhouette change of a cube twisted about a face axis: 0.0% at 0°/90°/180°/270°, 1.4% at 30°,
