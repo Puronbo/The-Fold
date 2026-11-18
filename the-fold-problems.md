@@ -672,6 +672,13 @@ the classical Markoff tree — `(3,3,6)`, `(3,6,15)`, `(6,15,39)`, … — which
 group, not a new route. The trace is exact as a coordinate; “the trace proves the Markoff conjecture”
 is the false friend.
 
+A concrete realization of that tree, with every commutator parabolic: hold
+`A = [[−1, −5], [1, 4]]` and take `B = [[1, 1], [1, 2]]`, `[[0, −1], [1, 3]]`, `[[3, −4], [−2, 3]]`.
+The traces are `(3, 3, 3)`, `(3, 3, 6)`, `(3, 6, 15)`, each on `x² + y² + z² − xyz = 0`, and each
+commutator has trace `−2` — for the first two, `[[−7, −6], [6, 5]]`. The Fricke identity was checked
+with exact rational arithmetic over 200 random `SL₂` pairs: residual `0`, not `10⁻¹⁶`. The tree is the
+trace of a family of parabolic pairs, not a numerical coincidence.
+
 **The node is a fold.** At `(0,0,0)` the gradient vanishes and the Hessian is `2I`, so the tangent
 cone is the isotropic cone `x² + y² + z² = 0`. After `z ↦ iz` it is the `A1` cone `X Y = Z²`, and
 

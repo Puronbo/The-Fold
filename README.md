@@ -317,16 +317,16 @@ zone map: 6 files with zone tables of 38
      without tables    32
      legend (definitions, not claims)    11
 
-prose attributions: 35 files of 38
-     exact            98
+prose attributions: 36 files of 38
+     exact            99
      reformulation     3
      rhyme            17
      false friend     12
-     total           130
+     total           131
 ```
 
 The tables are the formal layer and cover six files. The prose is where the corpus actually works:
-thirty-five of thirty-eight files label their comparisons in the predicative form — a noun phrase
+thirty-six of thirty-eight files label their comparisons in the predicative form — a noun phrase
 then `is exact`, `remains a rhyme`, `is a false friend` — as in "the quotient statement is exact" or
 "`height` is a false friend unless the register is named". The detector is deliberately narrow: it
 skips the maxims ("a rhyme written as a proof"), skips negated rejections ("this is not exact"), reads

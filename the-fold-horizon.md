@@ -34,7 +34,15 @@ Measured for the Sun at three members of the family:
 | 0.5 | 9.942e29 | 3.479e8 | 1.477e3 | 4.245134e−6 | 2.622e76 | 1.234e−7 |
 | 0.1 | 1.988e29 | 6.957e7 | 2.953e2 | 4.245134e−6 | 1.049e75 | 6.170e−7 |
 
-The ratio is identical to thirteen digits. So in this family the horizon is **either present in
+The ratio is identical to thirteen digits. That is a check on unrounded members, not the reason.
+`r_H/R = 2G(kM₀)/(c²(kR₀)) = 2GM₀/(c²R₀)`: `k` cancels before any digit is computed, so the exact
+statement needs no digits. From the printed `M` and `R` the ratio is `4.2441e−6` at `k = 1` and
+`4.2444e−6` at `k = 0.5`; from the printed `r_H` and `R` it is `4.2446e−6` and `4.2455e−6`. The
+`4.245134e−6` in the table is what `M = 1.98847e30` gives with the standard constants, while the
+table shows `M = 1.988e30`: each column is rounded on its own, and no pair of displayed columns
+reproduces the ratio. The identity is exact; the thirteen digits are one rounded evaluation of it.
+
+So in this family the horizon is **either present in
 every member or in none** — for the Sun, none: `R/r_H = 2.36 × 10⁵` at every `k`. There is no
 `k*` inside the family. That is not a paradox; it is the same statement the paper already makes in
 section 6, that a purely geometric homothety descends to zero with nothing in the way.
