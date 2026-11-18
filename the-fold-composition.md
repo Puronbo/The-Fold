@@ -24,6 +24,13 @@ A fold is a reflection in a line at angle `φ`:
        [ sin 2φ  −cos 2φ ]          σ(φ)² = I          det σ(φ) = −1
 ```
 
+This `σ` is the global reflection. The physical sheet fold is a different map: the quotient
+`F(x, y) = (x, |y|)`, which is `2`-to-`1` off the crease, `1`-to-`1` on it, and satisfies `F² = F`.
+The two preimages are the two parallel layers, and the crease is their hinge: `σ` swaps the layers,
+`F` identifies them. That is the false friend: one word, two maps, and only the reflection composes
+into a turn. The composition below uses `σ`, because `F² = F` — iterating the sheet fold never
+rotates. See `the-fold-afar.md`.
+
 Two of them compose:
 
 ```
