@@ -27,7 +27,9 @@ A fold is a reflection in a line at angle `φ`:
 This `σ` is the global reflection. The physical sheet fold is a different map: the quotient
 `F(x, y) = (x, |y|)`, which is `2`-to-`1` off the crease, `1`-to-`1` on it, and satisfies `F² = F`.
 The two preimages are the two parallel layers, and the crease is their hinge: `σ` swaps the layers,
-`F` identifies them. That is the false friend: one word, two maps, and only the reflection composes
+`F` identifies them. Parallel here means *over the same base point*: the two layers are one fiber,
+not two pieces pushed apart. A split separates; a fold stacks. That is why the map is `2`-to-`1`
+rather than `1`-to-`2`. That is the false friend: one word, two maps, and only the reflection composes
 into a turn. The composition below uses `σ`, because `F² = F` — iterating the sheet fold never
 rotates. See `the-fold-afar.md`.
 
@@ -62,6 +64,12 @@ The closure then counts in units of two. For creases at angle `α`,
 so the group is the dihedral group `D_m` of order `2m`, and a lattice admits only the crystallographic
 `m ∈ {1, 2, 3, 4, 6}`. The `2` in `1 + 1 = 2` propagates into the `2m` of the group order. See
 `the-fold-closure.md`.
+
+The same equation is the stacking law. `(σ₂σ₁)^m = I` says the `m` sectors between the creases land on
+one another: the fan closes onto its first sector, so there are `m` layers over one base, not `m` sectors
+spread out. A twister is exactly this — the paper folded on itself, each turn parallel to the last,
+until the `m`-th face meets the first. `2m` counts the group order and the number of layer images at
+once, because they are the same count seen from the group and from the stack.
 
 ### The index `ab`
 

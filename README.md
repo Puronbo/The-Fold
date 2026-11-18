@@ -318,11 +318,11 @@ zone map: 6 files with zone tables of 38
      legend (definitions, not claims)    11
 
 prose attributions: 36 files of 38
-     exact            99
+     exact           100
      reformulation     3
      rhyme            17
-     false friend     13
-     total           132
+     false friend     14
+     total           134
 ```
 
 The tables are the formal layer and cover six files. The prose is where the corpus actually works:

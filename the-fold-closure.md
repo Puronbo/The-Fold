@@ -81,6 +81,13 @@ measured as `1.6` for `d₁ = 0.3`, `d₂ = 1.1`. This is the non-compact limit 
 point, no finite order, the datum pushed to infinity. Coincident creases are the identity instead —
 `m = 1`, `D₁`.
 
+The word **parallel** is doing two jobs here, and they must be kept apart. The two sheets of a fold
+are parallel because they lie over the same base point — one fiber, two preimages. The two *creases*
+are parallel when `α = 0`, and that is not a fold: the composite is a translation. So "the fold has
+two parallel layers" is exact; "the fold is a parallel fold" is a false friend unless it names the
+creases, and then it names the degenerate end of the family. `the-fold-composition.md` states the
+first sense; this paragraph is the second.
+
 **Irrational angles never close.** Take `α/π = 1/√2`. No `m ≤ 20000` returns the creases to
 themselves; the best residual is `1.1 × 10⁻⁴` and it keeps improving, because the orbit is dense.
 After 5000 turns the largest gap in the orbit is `1.6 × 10⁻³` rad, against `1.571` rad for `n = 4`
