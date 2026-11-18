@@ -55,6 +55,43 @@ Volume agrees to the same order (`θ = 90°`: `2.09361` measured, `2.09440` exac
 anchors: `θ = 90°` gives `3πR²` (half a ball: `2πR²` of dome plus `πR²` of disc), and `θ = 180°`
 gives `4πR²`. Both match.
 
+## The intrinsic angle
+
+`Ω` is extrinsic: the solid angle the sector subtends. The lateral surface also carries an intrinsic
+angle, the deficit at the apex. Its metric is
+
+```
+ds² = dℓ² + ℓ² sin²θ dφ² ,
+```
+
+so the circumference at slant `ℓ` is `2πℓ sin θ` instead of `2πℓ`, and
+
+```
+δ = 2π(1 − sin θ) .
+```
+
+The two angles are mirror images under `θ ↦ 90° − θ`:
+
+```
+δ(θ) = Ω(90° − θ) .
+```
+
+They coincide exactly at `θ = 45°` — the cone of slope `1` — and nowhere else in the aperture range;
+there both are `2π(1 − 1/√2) = 1.8403`. The anchors mirror too: `δ(30°) = Ω(60°) = π`,
+`δ(60°) = Ω(30°) = 0.8418`, `δ(90°) = Ω(0°) = 0`. Like the aperture, `δ` is unchanged by `k`: shape,
+not size.
+
+For a concentric corrugation the coarse-grained metric is `(1 + λ) dr² + r² dφ²`, with `λ` the squared
+slope, which is this cone with `sin θ = 1/√(1 + λ)`. All the curvature sits at the apex: `K = 0` on the
+lateral surface away from it and `∫ K dA = δ`, the one point `g_k` leaves alone. A general corrugation
+with a varying director spreads the curvature; the radial one concentrates it at the datum. See
+`the-fold-afar.md`.
+
+The `45°` here is the **aperture**, and it is a third numeral-45 in this note: the closure note's `45°`
+is the fold angle `α`, the silhouette table's `45°` is the twist, and this one is where the intrinsic and
+extrinsic angles agree. The letter `θ` is doing two jobs — aperture here, twist there — and that is the
+false friend to keep named.
+
 ## The fold
 
 `k = −1` keeps `R` and `θ` and reverses the axis, so the sector is carried to its **antipode**: same

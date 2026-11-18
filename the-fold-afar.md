@@ -120,6 +120,11 @@ the variance — and it is geometric, not spectral, because there is no operator
 to. Calling the corrugation a curvature of space is the false friend; calling it an anisotropic flat
 metric is exact.
 
+Read as a graph, the sheet's curvature is `K = det(Hess h)/(1 + |∇h|²)²`. A uniform slope gives
+`K = 0` — a tilted plane — and a radial slope gives the cone of `the-fold-cone.md`, zero away from the
+apex. Only a height with a nonzero Hessian is curved. So the slope sets the anisotropy; the *bending*
+of the height sets the curvature.
+
 ## The singular line
 
 "Singular" has three exact readings, and they meet at the crease:

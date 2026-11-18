@@ -321,8 +321,8 @@ prose attributions: 36 files of 38
      exact           104
      reformulation     3
      rhyme            18
-     false friend     19
-     total           144
+     false friend     20
+     total           145
 ```
 
 The tables are the formal layer and cover six files. The prose is where the corpus actually works:
