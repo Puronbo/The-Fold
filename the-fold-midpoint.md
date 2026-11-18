@@ -89,6 +89,15 @@ midpoint map is `k = −1`, where `m = g_0`. Both land on the same constant map,
 centre. This is also the reciprocal reading of `1_a + 1_b = 2_{ab}`, which holds exactly when
 `a + b = 2`: the pair is balanced about the identity. See `the-fold-composition.md`.
 
+**The point where both coordinates vanish** is `k = 0`, and it is one point, not a region. It is the
+only parameter whose real and imaginary parts are both zero, the centre of the isometry circle, and
+the one element the group does not contain. So "in between the real and the imaginary" is exact as a
+*place*, not as a medium: there is no third fabric there, only the degeneration `rank n − 1 → 0`
+where `g_0` maps everything to the datum. The distance that comes out is `1` — every isometry has
+`|k| = 1`, so the centre is one unit from all of them — and that is a radius, not a gap. `k = 0` is a
+point of the parameter plane; a mass gap is `inf spec H > 0`, a property of an operator's spectrum.
+The point is exact; calling it the gap is a false friend.
+
 What survives is the only thing that was never a measure. At `k = 10⁻⁹` the range is `10⁻⁹` and the
 aperture is still `60.0000°`, unmoved. So "everything is 0" is exact for every measure and false for
 shape, and the exception is precisely the 0-dimensional vertex: zero of every measure, all of the
