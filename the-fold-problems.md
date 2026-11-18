@@ -179,7 +179,14 @@ equals topological index — is the exact ancestor of "a zero is a conserved cha
   degenerates; a mass gap is a spectral gap of a Hamiltonian, and a Navier–Stokes singularity is a
   blow-up of a velocity field. The Fold has neither an operator nor a field equation. The horizon's
   entropy and temperature are a scaling reading in the homothetic family, not a derivation of
-  thermodynamics. These are rhymes, and stating them as more would be the false-friend error.
+  thermodynamics. These are rhymes, and stating them as more would be the false-friend error. One
+  phrasing to name: "the mass gap is the imaginary fabric connecting the real fabric." The exact kernel
+  is `i² = −1` — the twist squared is the fold, and one complex `k` carries scale in its modulus and
+  twist in its phase. That is one parameter with two coordinates, not two fabrics with a connector. And
+  a gap is `inf spec H > 0`, a statement about the real spectrum of an operator; the Fold's `k` is a
+  group parameter, and its only punctured point is `k = 0`, an absence rather than a gap. The complex
+  plane where a gap appears as a pole off the real axis is the momentum plane, not the `k` plane: same
+  picture, different object. Calling them the same is the false friend.
 - **Unruh and the thermal observer.** The horizon clock and the Unruh effect share a null crease and a
   `2π` period, but the Fold's `k` is a homothety, not a boost: it is dimensionless, conformal, and has no
   Killing vector. The Fold gives `T ∝ 1/k` through the surface gravity, not `T ∝ a`; the local Unruh
