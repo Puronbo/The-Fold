@@ -229,6 +229,37 @@ equals topological index — is the exact ancestor of "a zero is a conserved cha
   shared `2π` (the fan's closure, the twistor phase) is a rhyme, not an identity. Calling the two the
   same theory is the false friend.
 
+## The ladder of `J`s
+
+The Fold has one complex structure, `J² = −I`, on a real plane. The orthogonal complex structures on
+`ℝ^{2m}` form a symmetric space, and its dimension is the first place the dimension `2` of the Fold
+stops being enough:
+
+```
+SO(2m) / U(m) ,        dim = m(m − 1)
+```
+
+| `m` | `SO(2m)/U(m)` | dim | what it is |
+|---|---|---|---|
+| 1 | point | 0 | the Fold's `J`; nothing to vary |
+| 2 | `S² = ℂP¹` | 2 | the twistor line over a point of `ℝ⁴`; the unit imaginary quaternions |
+| 3 | `ℂP³` | 6 | the twistor space over `S⁴`; also the complex structures on `ℝ⁶` |
+| 4 | `SO(8)/U(4)` | 12 | no familiar name |
+
+The `m = 3` row is an exact homogeneous-space identity: `SO(6)/U(3) ≅ SU(4)/S(U(3) × U(1)) = ℂP³`,
+and the same `ℂP³` is the twistor fibration `S² → ℂP³ → S⁴`, i.e. `ℂP³ = SO(5)/U(2)`. So the twistor
+space is itself a moduli space of complex structures one dimension up. That is a statement about
+homogeneous spaces, not a derivation of twistor theory.
+
+At `m = 2` the sphere is the unit imaginary quaternions and the Fold's `J` is the point `i`. The GUE
+paragraph above says the rest: one `J` gives `β = 2`; the quaternionic `β = 4` needs the triple
+`I, J, K` with `IJ = K`, three orthogonal axes — three points of that same `S²`. The Fold has one
+point of the sphere, so it can see the unitary class and not the symplectic one. Twistor theory is the
+theory of the whole sphere; the Fold is the theory of one point on it.
+
+The letter `m` is a false friend across the two uses: in `D_m` it is the closure order `m = π/α` and
+the group has order `2m`; in `SO(2m)/U(m)` it is half the dimension. Same letter, different index.
+
 ## The hole field: what the smallest exact object adds
 
 The engineering note ended at the edge of transfer. This note's map has the same edge, and the hole
