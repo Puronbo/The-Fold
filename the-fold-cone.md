@@ -92,6 +92,21 @@ is the fold angle `α`, the silhouette table's `45°` is the twist, and this one
 extrinsic angles agree. The letter `θ` is doing two jobs — aperture here, twist there — and that is the
 false friend to keep named.
 
+## The doubling chart
+
+The sky fraction is `z = Ω/4π = sin²(θ/2)`. In that coordinate the aperture doubling `θ ↦ 2θ` reads
+
+```
+z ↦ 4z(1 − z) ,
+```
+
+which is the logistic map at `r = 4`. The identity is exact as a change of chart, not a coincidence of
+formulas: the tent map is the pleated profile, and `sin²(θ/2)` is the chart that bends the pleat into
+the parabola. The map's two preimages, `z` and `1 − z`, are the two caps `θ` and `π − θ` — the two
+sides the fold swaps. At `r ≠ 4` the same chart gives `z ↦ (r/4) sin²θ`, a damped doubling, not an
+angle doubling at all. The dynamics of the general logistic map — period doubling, the Feigenbaum
+constant, chaos — has no counterpart in the static cone; that is where the rhyme stops.
+
 ## The fold
 
 `k = −1` keeps `R` and `θ` and reverses the axis, so the sector is carried to its **antipode**: same
