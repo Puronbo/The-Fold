@@ -246,6 +246,9 @@ SO(2m) / U(m) ,        dim = m(m − 1)
 | 3 | `ℂP³` | 6 | the twistor space over `S⁴`; also the complex structures on `ℝ⁶` |
 | 4 | `SO(8)/U(4)` | 12 | no familiar name |
 
+In complex dimension the ladder is `m(m−1)/2` = `0, 1, 3, 6`: the triangular numbers. Only the first
+three rows are projective spaces; `SO(8)/U(4)` has rank two and cannot be `ℂP⁶`.
+
 The `m = 3` row is an exact homogeneous-space identity: `SO(6)/U(3) ≅ SU(4)/S(U(3) × U(1)) = ℂP³`,
 and the same `ℂP³` is the twistor fibration `S² → ℂP³ → S⁴`, i.e. `ℂP³ = SO(5)/U(2)`. So the twistor
 space is itself a moduli space of complex structures one dimension up. That is a statement about
