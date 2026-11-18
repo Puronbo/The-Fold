@@ -395,6 +395,10 @@ That is the rule's own failure — a tolerance treated as a value when it is unk
 unparseable argument as unknown, and `tools/fixtures/approx_good.py` pins the case. After the fix:
 2,912 files, 0 findings.
 
+A fourth corpus, the standard library's own equality machinery — `unittest`, `statistics`, `fractions`,
+`decimal`, `dataclasses`, `enum` — is 18 files and 0 findings. The rule looks for a tolerance where a
+quotient is assumed, and the code that defines equality most carefully does not make that assumption.
+
 The measured result is worth stating plainly: in three mature numerical libraries, `__eq__` with a
 tolerance plus a separate `__hash__` does not occur at the top level of the source, because the
 libraries that care have already made equality exact. The bug this rule looks for lives in
