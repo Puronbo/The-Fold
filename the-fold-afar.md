@@ -125,6 +125,13 @@ Read as a graph, the sheet's curvature is `K = det(Hess h)/(1 + |∇h|²)²`. A 
 apex. Only a height with a nonzero Hessian is curved. So the slope sets the anisotropy; the *bending*
 of the height sets the curvature.
 
+**The director is a line, not an arrow.** A corrugation has no preferred direction along itself: `n`
+and `−n` name the same pleat. Its order parameter is therefore `ℝP¹`, and the arrow that double-covers
+it has period `2π` where the pleat has period `π`. That `ℤ/2` is the same abstract group as the fold's
+two layers, but it is not the same bundle: the layers are the two sides of the sheet, along the normal
+line, while the director's double cover lives in the tangent plane. Same group, different bundle: that
+is the false friend.
+
 ## The singular line
 
 "Singular" has three exact readings, and they meet at the crease:
