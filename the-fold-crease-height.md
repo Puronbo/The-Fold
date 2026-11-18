@@ -53,6 +53,18 @@ height. This is the cleanest exact reading:
 
 > **the fold is the height's sign change; the crease is the height's zero.**
 
+**The line, not the arrow.** The identification `(n,c) ~ (−n,−c)` is the exact content of "left and
+right do not exist." The crease knows its *line* — up/down — and its signed height; it does not know
+which way along the normal is positive. The sign is not a spatial direction, it is the side: the two
+layers. In the hexagon the six reflection axes are permuted transitively by `D₆`, so no axis is "up"
+until a crease chooses one. The `30°` between adjacent creases is the fold angle `α`, not a lattice
+rotation; the smallest rotation is `60°`. After the choice, the reflection acts on the normal
+coordinate and fixes the tangent: the direction is the base, the height is the fiber.
+
+"Only height matters" is exact for the fold's action — the reflection changes only the normal sign —
+and false for the space: the tangent coordinate is the base, not nothing. The exact statement is that
+the fold acts on the height; the direction is the base.
+
 The linear part `I − 2nnᵀ` has determinant `−1`, `+1` eigenspace the crease of dimension `n−1`, and
 `−1` eigenspace the normal line.
 
