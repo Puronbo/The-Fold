@@ -209,6 +209,7 @@ author. The CMB enters as a rhyme; the exact physics is standard cosmology. See 
 | the crease and which height | `the-fold-crease-height.md` |
 | a folded line that looks like one line from afar | `the-fold-afar.md` |
 | a lattice that closes at six, and the gap it can host | `the-fold-hexagon.md` |
+| every two in one place: the sign | `the-fold-sign.md` |
 | the observer as dimension and window | `the-fold-observer.md` |
 | closure as sampling and the horizon window | `the-fold-sampling.md` |
 | the horizon's area and the mode count | `the-fold-area.md` |
@@ -247,6 +248,7 @@ author. The CMB enters as a rhyme; the exact physics is standard cosmology. See 
 | `cone-range-3d.html` | 3D range cone: apex at the centre, rim at the range, `θ` and `k` sliders |
 | `the-fold-cone.md` | follow-up note: the range cone, its three formulas, and the fold's antipode |
 | `the-fold-hexagon.md` | follow-up note: the hexagon - the last lattice closure, the honeycomb's two cosets, the Dirac mass gap, and corrugation as gauge rather than mass |
+| `the-fold-sign.md` | follow-up note: the sign - every two in the corpus, the gap as twice the height, `w₁` over a base, and the hexagon's two independent characters |
 | `the-fold-creation.md` | follow-up note: the order of creation — point, scale, fold, twist, closure, horizon, observer, point; plain-language version and glossary |
 | `the-fold-matter.md` | follow-up note: matter as the zero at a scale; the height law, its exponents, and the mass reading |
 | `the-fold-signature.md` | follow-up note: the signature of zero — inertia, the forced degeneracy, the fold's split, and the ladder by stage |
@@ -310,8 +312,8 @@ definition is not a claim, so the legend is counted apart rather than inflating 
 counts the **prose attributions**, because that is how most of the corpus actually labels.
 
 ```
-zone map: 6 files with zone tables of 39
-     exact            97
+zone map: 7 files with zone tables of 40
+     exact           105
      reformulation     5
      rhyme            18
      false friend      8
@@ -319,16 +321,16 @@ zone map: 6 files with zone tables of 39
      without tables    33
      legend (definitions, not claims)    11
 
-prose attributions: 37 files of 39
-     exact           110
-     reformulation     3
+prose attributions: 38 files of 40
+     exact           114
+     reformulation     4
      rhyme            19
-     false friend     26
-     total           158
+     false friend     29
+     total           166
 ```
 
-The tables are the formal layer and cover six files. The prose is where the corpus actually works:
-thirty-seven of thirty-nine files label their comparisons in the predicative form — a noun phrase
+The tables are the formal layer and cover seven files. The prose is where the corpus actually works:
+thirty-eight of forty files label their comparisons in the predicative form — a noun phrase
 then `is exact`, `remains a rhyme`, `is a false friend` — as in "the quotient statement is exact" or
 "`height` is a false friend unless the register is named". The detector is deliberately narrow: it
 skips the maxims ("a rhyme written as a proof"), skips negated rejections ("this is not exact"), reads
@@ -342,7 +344,7 @@ not a result", "a statement about the lattice, not about the probe". That is the
 step short of a label — it says what the claim is *not* without saying which of the four it is.
 
 ```
-status markers (marked by contrast, zone not named): 22 files of 39
+status markers (marked by contrast, zone not named): 22 files of 40
      total            44
      derivation       17
      about             6

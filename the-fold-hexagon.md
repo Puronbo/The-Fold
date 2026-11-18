@@ -60,6 +60,13 @@ rotation (`det = +1`), not a reflection: a single fold cannot exchange the subla
 product of two folds can. So "the two sublattices are the two layers" is a rhyme of the `ℤ/2`, not an
 identity of objects.
 
+One correction, developed in `the-fold-sign.md`: the hexagon carries **two** independent sign labels,
+not one. `Hom(D₆, ℤ/2) ≅ (ℤ/2)²`, with the fold's determinant `(0,1)` and the sublattice character
+`(1,0)` as separate bits, and their product `(1,1)` as a third index-2 subgroup `⟨r², rs⟩`. The
+sublattice sign exists precisely because `6` is even; on a `D₃` lattice the only character is the
+determinant. So the sublattice coset is not a rival reading of the fold's `ℤ/2` — it is an
+independent coordinate on the same group.
+
 ## The Dirac mass gap, hosted
 
 Take the nearest-neighbour tight-binding model,
