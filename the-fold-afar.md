@@ -106,6 +106,20 @@ shadow length) tends to `1`: `2.112` at `w = 0.05`, `1.126` at `w = 0.5`, `1.000
 `1.000000` at `w = 2`. The pleats disappear from the image exponentially in `w²`; the length excess
 disappears only when the blur resolves the pleats. The shadow is the mean; the fold is the variance.
 
+**The corrugated fabric.** A sheet pleated in one direction is corrugated, and the coarse-grained
+object is a flat plane with an anisotropic line element. Along the corrugation the same factor appears,
+
+```
+ds² = (1 + (2a/ℓ)²) dx² + dy² ,
+```
+
+so the metric changes by a constant and the Riemann tensor of the coarse-grained plane is zero. The
+curvature is not spread through the fabric: it sits on the creases as a distribution, which is the
+singular line. The amplitude `a` is the distance the shadow cannot see — the mean is zero, the fold is
+the variance — and it is geometric, not spectral, because there is no operator here for a gap to belong
+to. Calling the corrugation a curvature of space is the false friend; calling it an anisotropic flat
+metric is exact.
+
 ## The singular line
 
 "Singular" has three exact readings, and they meet at the crease:
