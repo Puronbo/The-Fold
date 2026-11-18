@@ -218,6 +218,16 @@ equals topological index — is the exact ancestor of "a zero is a conserved cha
   exponent gives `Re s = 1/2`; the log coefficient is the A-type anomaly (`c/3` in 2D, `−4a` in 4D). A
   theory with `c = 3/2` makes the numbers coincide, but the objects differ. See
   `the-fold-logarithm.md`.
+- **"Twister" is not "twistor".** The Fold's twist is a quarter turn, `J² = −I`, one orthogonal
+  complex structure on a real plane. In Euclidean four-space the orthogonal complex structures at a
+  point form `S² ≅ ℂP¹` — precisely the twistor line over that point — so the Fold's `J` is one
+  *point* of a twistor line, not the line, and not `ℂP³`. Twistor theory then adds what the Fold does
+  not have: the incidence relation `ω = i x π`, the conformal group `SU(2,2)`, spinors, and the
+  Penrose transform `H¹(PT, O(−2h−2))` ↔ massless fields of helicity `h`. The hole field's
+  `H¹_dR(ℂ*) = ℝ[η]` shares the *shape* — a cohomology class carries the content — but not the
+  manifold, the coefficients, or the dimension. Same square root of `−1`; different space. The
+  shared `2π` (the fan's closure, the twistor phase) is a rhyme, not an identity. Calling the two the
+  same theory is the false friend.
 
 ## The hole field: what the smallest exact object adds
 

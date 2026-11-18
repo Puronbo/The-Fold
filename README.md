@@ -320,9 +320,9 @@ zone map: 6 files with zone tables of 38
 prose attributions: 36 files of 38
      exact           102
      reformulation     3
-     rhyme            17
-     false friend     16
-     total           138
+     rhyme            18
+     false friend     17
+     total           140
 ```
 
 The tables are the formal layer and cover six files. The prose is where the corpus actually works:
@@ -341,11 +341,11 @@ step short of a label — it says what the claim is *not* without saying which o
 
 ```
 status markers (marked by contrast, zone not named): 21 files of 38
-     total            41
+     total            42
      derivation       16
      about             6
      proof             5
-     identity          4
+     identity          5
      boost             2
      theorem           2
      other             6
