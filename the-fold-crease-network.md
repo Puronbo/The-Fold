@@ -143,3 +143,8 @@ integer, or a deficit if the singularity is metric. Creases appear to meet, but 
 zero of higher order, and it conserves the charge when it splits. Everything else in the corpus
 interconnects by summing those charges over a boundary. Each zero has its own parameters; the sum is
 the same for all of them.
+
+Move the crease from the space of the unknown to the space of the parameter and it has another name:
+the **discriminant**, the set of parameter values where the number of zeros changes. Its local model is
+`x² = t`, its parameter count is the order minus one, and its strata are the collision types. See
+`the-fold-discriminant.md`.

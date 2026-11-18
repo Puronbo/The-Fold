@@ -213,6 +213,7 @@ author. The CMB enters as a rhyme; the exact physics is standard cosmology. See 
 | the integer line bent, where two numbers meet | `the-fold-integer-line.md` |
 | friction as the trade across the crease | `the-fold-friction.md` |
 | the creases as a network, one charge per zero | `the-fold-crease-network.md` |
+| the crease moved into the parameter: the discriminant | `the-fold-discriminant.md` |
 | the observer as dimension and window | `the-fold-observer.md` |
 | closure as sampling and the horizon window | `the-fold-sampling.md` |
 | the horizon's area and the mode count | `the-fold-area.md` |
@@ -255,6 +256,7 @@ author. The CMB enters as a rhyme; the exact physics is standard cosmology. See 
 | `the-fold-integer-line.md` | follow-up note: the integer line bent - crease on a number or in a gap, the two bends of the clock, and the second bit read as "two numbers on the crease" |
 | `the-fold-friction.md` | follow-up note: friction - the contact as the crease, the momentum ledger versus the energy ledger, and why turning lengthens the path rather than the patch |
 | `the-fold-crease-network.md` | follow-up note: the crease network - the modulus `M x Z`, six sum rules, vertices as sums, and the hexagon as the `k = 6` vertex |
+| `the-fold-discriminant.md` | follow-up note: the discriminant - `x² = t`, the crease moved into the parameter, `A_k`'s `k` parameters, and the strata by collision type |
 | `the-fold-creation.md` | follow-up note: the order of creation — point, scale, fold, twist, closure, horizon, observer, point; plain-language version and glossary |
 | `the-fold-matter.md` | follow-up note: matter as the zero at a scale; the height law, its exponents, and the mass reading |
 | `the-fold-signature.md` | follow-up note: the signature of zero — inertia, the forced degeneracy, the fold's split, and the ladder by stage |
@@ -318,25 +320,25 @@ definition is not a claim, so the legend is counted apart rather than inflating 
 counts the **prose attributions**, because that is how most of the corpus actually labels.
 
 ```
-zone map: 9 files with zone tables of 43
+zone map: 9 files with zone tables of 44
      exact           112
      reformulation     5
      rhyme            18
      false friend      9
      the absence       1
-     without tables    34
+     without tables    35
      legend (definitions, not claims)    11
 
-prose attributions: 41 files of 43
-     exact           127
+prose attributions: 42 files of 44
+     exact           129
      reformulation     4
      rhyme            19
-     false friend     34
-     total           184
+     false friend     36
+     total           188
 ```
 
 The tables are the formal layer and cover nine files. The prose is where the corpus actually works:
-forty-one of forty-three files label their comparisons in the predicative form — a noun phrase
+forty-two of forty-four files label their comparisons in the predicative form — a noun phrase
 then `is exact`, `remains a rhyme`, `is a false friend` — as in "the quotient statement is exact" or
 "`height` is a false friend unless the register is named". The detector is deliberately narrow: it
 skips the maxims ("a rhyme written as a proof"), skips negated rejections ("this is not exact"), reads
@@ -350,7 +352,7 @@ not a result", "a statement about the lattice, not about the probe". That is the
 step short of a label — it says what the claim is *not* without saying which of the four it is.
 
 ```
-status markers (marked by contrast, zone not named): 23 files of 43
+status markers (marked by contrast, zone not named): 23 files of 44
      total            45
      derivation       17
      about             7
