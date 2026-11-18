@@ -107,6 +107,12 @@ sides the fold swaps. At `r ≠ 4` the same chart gives `z ↦ (r/4) sin²θ`, a
 angle doubling at all. The dynamics of the general logistic map — period doubling, the Feigenbaum
 constant, chaos — has no counterpart in the static cone; that is where the rhyme stops.
 
+The involution `z ↦ 1 − z` is the fold: its fixed point `z = 1/2` is the crease, and
+`f₄(z) = f₄(1 − z)` says the map is well defined on the quotient. The two preimages `z` and `1 − z`
+are the two layers, and the product `z(1 − z)` is what the map actually sees. The crease `z = 1/2`
+maps to the critical value `1`, where the two preimages merge. So the logistic map, like the fold, acts
+on the height and is blind to which layer is which.
+
 ## The fold
 
 `k = −1` keeps `R` and `θ` and reverses the axis, so the sector is carried to its **antipode**: same

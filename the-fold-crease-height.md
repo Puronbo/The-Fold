@@ -65,6 +65,24 @@ coordinate and fixes the tangent: the direction is the base, the height is the f
 and false for the space: the tangent coordinate is the base, not nothing. The exact statement is that
 the fold acts on the height; the direction is the base.
 
+## Two double covers
+
+The space of affine creases is the open Möbius band
+
+```
+M = { (n, c) : |n| = 1, c ∈ ℝ } / (n, c) ~ (−n, −c) .
+```
+
+Its orientation double cover is the annulus `M̃ = {(n,c)}`, the space of *oriented* creases. The
+fold's two layers at a point are not the two sheets of `M̃`; they are the two signs of
+`s = n·x − c`. Both are `ℤ/2` double covers, but over different bases: the height's absolute value and
+the crease moduli. Same group, different bundle — that is the false friend.
+
+The monodromy is the link. Going once around the direction circle in `M` returns `c` with the opposite
+sign, so the holonomy is `−1`. In the twist's circle `k = e^{iθ}` that is `θ = π`: the point reflection.
+Two turns return the height, and two half-turns are one full turn — the fold's `2` again. So the sign of
+the height is a holonomy, not a left/right in space.
+
 The linear part `I − 2nnᵀ` has determinant `−1`, `+1` eigenspace the crease of dimension `n−1`, and
 `−1` eigenspace the normal line.
 
