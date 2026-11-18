@@ -165,6 +165,12 @@ twist needs a **finite** symmetry group to be observable at all; a solid of revo
 the cone changes nothing in section 3, and that is the result: the ladder is sphere = cone < cube,
 and the useful body is the one with the cube's discrete symmetry.
 
+The `45°` in this table is the twist `θ`. The closure note's `45°` is the fold angle `α`, and
+`θ = 2α` makes that a `90°` twist — the column where the cube's silhouette is `0.0%`. So the same
+numeral names the peak and the null: the silhouette is largest at `θ = 45°` (`α = 22.5°`) and zero at
+`θ = 90°` (`α = 45°`), which is the quarter turn `J` and the closure of `D₄`. That is the false
+friend: one numeral, two angles. The `45°` that names `D₄` is not the `45°` that names `12.3%`.
+
 ### 4. The collapse kills the range and keeps the aperture
 
 `C_k = k·C` for `k > 0`, so the set of *directions* of `C_k` is the same set for every `k ≠ 0`.
