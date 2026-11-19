@@ -145,6 +145,63 @@ theorem double_iter_eq_id_of_dvd (n k : Nat) (hn : 0 < n)
   rw [show n * q * x.val = (q * x.val) * n by ac_rfl]
   exact Nat.mul_add_mod_of_lt x.isLt
 
+/-- The periods of doubling are exactly the `k` with `n ∣ 2^k - 1`.
+
+For `n > 1`, the identity is the only map whose iterate can be tested at `1`,
+and that test reads `2^k ≡ 1`.  The least such `k` is the order of `2`; this
+theorem names the period set, not its least element. -/
+theorem double_iter_eq_id_iff_dvd (n k : Nat) (hn : 1 < n) :
+    iterate (double n (by omega)) k = id ↔ n ∣ 2 ^ k - 1 := by
+  constructor
+  · intro h
+    have h1 : iterate (double n (by omega)) k ⟨1, by omega⟩ = ⟨1, by omega⟩ := by
+      simpa using congrFun h ⟨1, by omega⟩
+    rw [double_iter] at h1
+    have hval : 2 ^ k % n = 1 := by
+      simpa using congrArg Fin.val h1
+    have hdiv := Nat.mod_add_div (2 ^ k) n
+    rw [hval] at hdiv
+    have hsub : 2 ^ k - 1 = n * (2 ^ k / n) := by
+      have hc : 2 ^ k - 1 = 2 ^ k / n * n := by
+        rw [Nat.sub_eq_iff_eq_add (Nat.one_le_two_pow (n := k))]
+        rw [Nat.add_comm] at hdiv
+        rw [Nat.mul_comm] at hdiv
+        exact hdiv.symm
+      rw [hc, Nat.mul_comm]
+    exact ⟨2 ^ k / n, hsub⟩
+  · intro h
+    exact double_iter_eq_id_of_dvd n k (by omega) h
+
+/-- When `n` is odd, the only preimage of `0` under doubling is `0`. -/
+theorem double_zero_fiber_odd (n m : Nat) (hn : n = 2 * m + 1) (x : Fin n) :
+    double n (by omega) x = ⟨0, by omega⟩ ↔ x = ⟨0, by omega⟩ := by
+  constructor
+  · intro h
+    have h0 : double n (by omega) (⟨0, by omega⟩ : Fin n) = ⟨0, by omega⟩ := by
+      apply Fin.ext
+      simp [double]
+    exact double_injective_of_odd n m hn (h.trans h0.symm)
+  · intro h
+    rw [h]
+    apply Fin.ext
+    simp [double]
+
+/-- When `n` is even, `0` and `n/2` both map to `0`: the fiber has at least two points,
+so the pushforward of the uniform counting measure is not uniform. -/
+theorem double_zero_fiber_even (n m : Nat) (hn : n = 2 * m) (hm : 0 < m) :
+    double n (by omega) (⟨0, by omega⟩ : Fin n) = ⟨0, by omega⟩ ∧
+    double n (by omega) (⟨m, by omega⟩ : Fin n) = ⟨0, by omega⟩ ∧
+    (⟨0, by omega⟩ : Fin n) ≠ ⟨m, by omega⟩ := by
+  refine ⟨?_, ?_, ?_⟩
+  · apply Fin.ext
+    simp [double]
+  · apply Fin.ext
+    simp [double, hn]
+  · intro h
+    have hval := congrArg Fin.val h
+    simp at hval
+    omega
+
 /-- The only fixed point of doubling is `0`: the crease is a point. -/
 theorem double_fixed (n : Nat) (hn : 0 < n) (x : Fin n) :
     double n hn x = x ↔ x.val = 0 := by

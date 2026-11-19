@@ -91,6 +91,9 @@ survive.** The survivors are the exact core of the physical theorem; the casualt
 physics. That is concept formation stated as a loop, and it is the only part of this note that could be
 run mechanically tomorrow.
 
+The measure row already has a finite shadow: `the-fold-lean.md` builds the `ℤ/n` host, its uniform
+weight, and the doubling map. What that host does not add is independent trials.
+
 The four are not the whole list. `the-fold-void.md` reads ten physical words and finds that they need six
 hosts: these four, plus a **bundle** (for charge and field) and an **inertia** (for mass). A gauge theory
 is not a measure, a flow, a bath, or an observer, so the four-stage programme is the first four nodes of a

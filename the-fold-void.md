@@ -23,7 +23,7 @@ different kind of thing, and the difference can be named.
 | entropy | the area `A` and the mode count (`the-fold-entanglement.md`) | a measure on states and the normalization `A/4` | the second law; the area-law coefficient |
 | charge | the degree, `∮ dk/k = 2πi` (`the-fold-key.md`) | a gauge field, a base, and a coupling | Gauss's law; charge quantization |
 | field | the `1`-form `ω = dk/k`, and `w₁` as a patching obstruction (`the-fold-sign.md`) | a bundle over a base spacetime, with a connection and a kinetic term | Maxwell; Yang–Mills |
-| probability | the quotient `z(1 − z)` and the counting measure on `ℤ/n` (`the-fold-agi.md`) | a `σ`-algebra, a normalized measure, and independent trials | the Born rule; the law of large numbers |
+| probability | the quotient `z(1 − z)`, the counting measure on `ℤ/n`, and the doubling action (`the-fold-agi.md`, `the-fold-lean.md`) | independent trials; the normalized measure and the state map are finite-exact | the Born rule; the law of large numbers |
 | vacuum | the zero object and the empty set (`the-fold-initial.md`) | a Hamiltonian and a lowest-energy state; the empty set is not a state | the cosmological constant; pair creation |
 | measurement | the cut and the observer's window (`the-fold-observer.md`) | an interaction Hamiltonian and a Born rule | the measurement problem; decoherence |
 
@@ -49,6 +49,9 @@ last two are not, and that is the finding: the four-stage programme is incomplet
 a measure, a flow, a bath, or an observer. It is a bundle over a base, and the Fold has the fiber and
 the form but not the base. Mass is not a flow either. It is a coupling, and the Fold has the scale but
 not the inertia.
+
+Probability's finite measure is now supplied, so its row moves below. The host row stays: entropy and
+vacuum still need it, and independent trials are not a single measure.
 
 So the ten words reduce to six hosts, and the AGI note's four adjunctions cover four of them. The void
 map is the argument for a fifth and sixth adjunction: adjoin a bundle, then an inertia.
@@ -106,6 +109,30 @@ missing is the interaction and the rule. A measurement is a coupling that leaves
 is a stable section. The Fold has the section and not the coupling. The measurement problem is blocked
 at the interaction, not at the cut.
 
+## The probability row moves
+
+The test said a row moves when a note supplies the missing structure. The first move is probability, and
+it is supplied by `the-fold-lean.md`.
+
+| piece of the host | Fold object | status |
+|---|---|---|
+| state space | `Fin n` | exact |
+| normalized measure | `1/n` on each state | exact |
+| state map | doubling, `x ↦ 2x` | exact |
+| pushforward | the fiber over `0` | computed |
+| independent trials | a product of hosts | missing |
+| Born rule | a map from amplitudes, not states | missing |
+
+The exact content is the fiber theorem. For odd `n`, doubling is a bijection, so every state has one
+preimage and the pushforward of the uniform measure is uniform. For even `n`, `0` and `n/2` both map to
+`0`, so the fiber over `0` carries at least `2/n`; the pushforward is not uniform. The failure is the
+non-injectivity of the map, not the measure. That is the exact form of the old sentence "the Born rule
+is blocked at the measure": the measure was never the obstacle.
+
+What is still missing is independent trials — a product of state spaces, not one `Fin n` — and the Born
+rule, which needs amplitudes rather than states. The row therefore moves from "measure missing" to
+"reformulation": the finite host is exact, the probabilistic law is not.
+
 ## The order of the hosts
 
 The six hosts are not independent, and the order is forced by what each one needs:
@@ -129,13 +156,17 @@ scale is a host. That is why mass is the last node, not the first.
 ## The test
 
 The void map is falsifiable in the same way the ledger was. A row moves when a note supplies the missing
-structure, and the move is visible in the table:
+structure, and the move is visible in the table. It has now been run once:
 
-- **charge** moves first. The degree is already exact; a note that writes a bundle over a base and a
-  coupling would move charge from "field missing" to the ledger. The field row moves with it.
-- **probability** moves second. `ℤ/n` with `1/n` is a finite probability space; a note that names the
-  map from states to it would move the Born rule from "measure missing" to "reformulation".
+- **probability** has moved. `the-fold-lean.md` names the state map and computes its pushforward, so the
+  row is now a reformulation; independent trials and the Born rule remain.
+- **charge** is the next candidate. The degree is already exact; a note that writes a bundle over a base
+  and a coupling would move charge from "field missing" to the ledger. The field row moves with it.
 - **mass** moves last. It needs a unit, and a unit is a comparison to a host, not a theorem.
+
+The first run also corrected the order: the prediction was that charge moves first. The observed move is
+probability, because a finite state map can be written today while a bundle over a base cannot. The map
+is still a test; it is not a forecast.
 
 If no row moves, the map is a description, not a test. If a row moves without a new structure, the row
 was mislabelled, and the map is the place to say so.
@@ -147,6 +178,8 @@ was mislabelled, and the map is the place to say so.
 - the reduction of ten words to six hosts is a reformulation: it regroups the absences, it does not
   supply them;
 - the order of the hosts is a reading of the dependency graph, not a theorem;
+- the probability host is exact in its finite parts, and the row's move is a reformulation: independence
+  and the Born rule are named absences;
 - "the nearest object is exact; the word is the absence" is the note's one sentence, and it is a
   definition of the void, not a claim about the world.
 

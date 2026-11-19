@@ -165,8 +165,11 @@ coincide only where the modulus divides `3`.
 | `Fold.double_bijective_iff_mod_two` | the same criterion as `n % 2 = 1` | exact |
 | `Fold.double_iter` | the `k`-th doubling is multiplication by `2^k` | exact |
 | `Fold.double_iter_eq_id_of_dvd` | `n ∣ 2^k − 1` implies `k` doublings are the identity | exact |
+| `Fold.double_iter_eq_id_iff_dvd` | for `n > 1`, the periods are exactly the `k` with `n ∣ 2^k − 1` | exact |
 | `Fold.double_fixed` | the only fixed point is `0` | exact |
 | `Fold.double_eq_neg_iff` | doubling equals the fold iff `n ∣ 3` | exact |
+| `Fold.double_zero_fiber_odd` | for odd `n` the fiber over `0` is `{0}` | exact |
+| `Fold.double_zero_fiber_even` | for even `n` the fiber over `0` contains `0` and `n/2` | exact |
 | `Fold.double7_orbits` | `0`, `1 → 2 → 4 → 1`, `3 → 6 → 5 → 3` | exact |
 | `Fold.double7_one_period` | the period of `1` is exactly `3` | exact |
 | `Fold.double7_iter_three` | three doublings return every residue mod `7` | exact |
@@ -175,8 +178,11 @@ The inverse is the reason parity matters: `(n+1)/2` is an integer exactly when `
 multiplies by `2` to `n+1 ≡ 1`. The fixed-point statement is the finite crease: doubling has a
 one-point fixed set for every modulus, so unlike the fold it has no line to quotient by. Doubling and
 the fold coincide exactly when `n ∣ 3`: trivially at `n = 1`, and at `n = 3` where `2 = −1`. The
-reading of `+2` as `−1` away from `n ∈ {1, 3}` is a false friend. On `ℤ/7` the orbits are the
-three cycles above, and `7 = 2³ − 1` is the arithmetic reason the third iterate is the identity.
+reading of `+2` as `−1` away from `n ∈ {1, 3}` is a false friend. The period set is now exact as well:
+for `n > 1`, `k` doublings are the identity exactly when `n ∣ 2^k − 1`. For odd `n` the least positive
+period is the multiplicative order of `2`; for even `n` there is none. The file names the set, not the
+least element. On `ℤ/7` the orbits are the three cycles above, and `7 = 2³ − 1` is the arithmetic reason
+the third iterate is the identity.
 
 ### The finite counterexamples
 
@@ -311,7 +317,7 @@ integer model normalizes `ρg` to a positive integer `c`.
 | `S¹ ∖ {p} ≅ ℝ` | needs topology | `the-fold-chart.md` |
 | amenability, `F₂`, Banach–Tarski | needs choice and measure theory | `the-fold-problems.md` |
 | `p(z) = p0 e^{-z/H}` for the atmosphere | needs `Real.exp` and the ideal-gas law | the hydrostatic chart above |
-| the order of doubling is the multiplicative order of `2` mod `n` | the file proves `n ∣ 2^k − 1 → double^k = id`, not that no smaller `k` works | the scale action above |
+| the order of doubling is the multiplicative order of `2` mod `n` | the file names the period set `{k : n ∣ 2^k − 1}`, not the least element or its divisibility | the scale action above |
 | the actual pressures at Challenger Deep and Earth's centre | unit conversions and a density model | the hydrostatic chart above |
 | RH, BSD, Hodge, Yang–Mills, Navier–Stokes, P vs NP | the four walls; no formal proof exists here | `the-fold-problems.md` |
 | the hard problem of consciousness | not a mathematical object | the absence named in the prose |

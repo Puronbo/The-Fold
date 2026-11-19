@@ -266,7 +266,7 @@ author. The CMB enters as a rhyme; the exact physics is standard cosmology. See 
 | `the-fold-agi.md` | follow-up note: the gate - premise closure as the criterion, the four-valued type, the stages, and the four adjunctions |
 | `the-fold-value.md` | follow-up note: value - physics as the model supply, seven meters, and the orphan test |
 | `the-fold-theorems.md` | follow-up note: the theorem ledger - twelve theorems read for premise closure, the six that close, and what the five earlier notes actually did |
-| `the-fold-void.md` | follow-up note: the void map - ten physical words, the nearest exact object, the six hosts, and the order of the gaps |
+| `the-fold-void.md` | follow-up note: the void map - ten physical words, the nearest exact object, the six hosts, the order of the gaps, and the probability row's first move |
 | `the-fold-creation.md` | follow-up note: the order of creation — point, scale, fold, twist, closure, horizon, observer, point; plain-language version and glossary |
 | `the-fold-matter.md` | follow-up note: matter as the zero at a scale; the height law, its exponents, and the mass reading |
 | `the-fold-signature.md` | follow-up note: the signature of zero — inertia, the forced degeneracy, the fold's split, and the ladder by stage |
@@ -332,7 +332,7 @@ counts the **prose attributions**, because that is how most of the corpus actual
 
 ```
 zone map: 11 files with zone tables of 49
-     exact           132
+     exact           135
      reformulation     9
      rhyme            22
      false friend     10
@@ -341,11 +341,11 @@ zone map: 11 files with zone tables of 49
      legend (definitions, not claims)    11
 
 prose attributions: 48 files of 49
-     exact           154
-     reformulation     7
+     exact           157
+     reformulation     9
      rhyme            21
      false friend     39
-     total           221
+     total           226
 ```
 
 The tables are the formal layer and cover eleven files. The prose is where the corpus actually works:
@@ -378,8 +378,8 @@ The objects are the finding. Nineteen say "not a derivation", five "not a proof"
 and one "not a reduction": thirty-one point at proof. One of those is not a claim — "the Fold is a
 dictionary, not a proof engine" — and one "not the identity" is a list of what a point is not, so the
 fifty-four marked sentences carry fifty-two claims, and thirty of them say that nothing was proved. That
-is the corpus's own definition of **reformulation**, yet the word appears as a label sixteen times, nine
-in tables and seven in prose. The middle zone is not scarce; it is unnamed, and the corpus says it with
+is the corpus's own definition of **reformulation**, yet the word appears as a label eighteen times, nine
+in tables and nine in prose. The middle zone is not scarce; it is unnamed, and the corpus says it with
 a contrast instead of a noun.
 
 The remaining objects do different work. "Not an identity", "not about", "not a boost" use one word

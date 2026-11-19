@@ -82,8 +82,11 @@ import Fold.Doubling
 #check Fold.double_bijective_iff_mod_two
 #check Fold.double_iter
 #check Fold.double_iter_eq_id_of_dvd
+#check Fold.double_iter_eq_id_iff_dvd
 #check Fold.double_fixed
 #check Fold.double_eq_neg_iff
+#check Fold.double_zero_fiber_odd
+#check Fold.double_zero_fiber_even
 #check Fold.double7_orbits
 #check Fold.double7_one_period
 #check Fold.double7_iter_three
