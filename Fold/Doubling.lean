@@ -6,8 +6,8 @@
   The fold is multiplication by `-1`; it is an involution for every
   modulus.  Doubling is multiplication by `+2`; it is a permutation
   exactly when the modulus is odd, and its cycles are longer than two
-  in general.  The two actions coincide only at `n = 3`, where
-  `2 = -1`.
+  in general.  The two actions coincide exactly when `n` divides `3`:
+  trivially at `n = 1`, and non-trivially at `n = 3`, where `2 = -1`.
 
   Everything here is finite and closed by `decide`, `omega`, or the
   inverse map `x ↦ (n+1)/2 · x`.  No Mathlib.
@@ -217,7 +217,7 @@ theorem double_fixed (n : Nat) (hn : 0 < n) (x : Fin n) :
     apply Fin.ext
     simp [double, h]
 
-/-- The fold and the scale action agree only at `n = 3`. -/
+/-- The fold and the scale action agree exactly when `n` divides `3`. -/
 theorem double_eq_neg_iff (n : Nat) (hn : 0 < n) :
     (∀ x : Fin n, double n hn x = neg n hn x) ↔ n ∣ 3 := by
   constructor

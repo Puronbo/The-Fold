@@ -491,6 +491,15 @@ and the cap alone yields `R = √(A_cap/Ω)`, `θ = 2 arcsin √(Ω/4π)` to `10
 8. Devices — one bench-top instance per step
 9. The one sentence
 
+## Related repository
+
+The executable counterpart of the descent in `Fold/Basic.lean` lives in a
+separate repository. `model/fold.py` implements the Joukowski quotient
+`q(x) = x + 1/x` and `fold_preimages`; `model/fold_corpus.py` makes the
+homothety, fold, cap/puncture ledger, solid angle, and closure checks runnable.
+The mapping, including the numerical audit of the theta and calendar notes, is
+in [FOLD_CORPUS.md](https://github.com/Puronbo/Universal-Theory-Informata/blob/main/FOLD_CORPUS.md).
+
 ## What the Fold is for
 
 The corpus says what it is not — not a proof engine, not a constitutive theory, not a computational

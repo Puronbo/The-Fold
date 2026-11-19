@@ -22,6 +22,7 @@ from __future__ import annotations
 
 import re
 import sys
+import zlib
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
@@ -72,8 +73,22 @@ def pdf_page_count(path: Path) -> int | None:
         raw = path.read_bytes()
     except OSError:
         return None
-    pages = len(re.findall(rb"/Type\s*/Page(?![s])", raw))
-    return pages or None
+    # Most PDFs store page dictionaries in compressed object streams, so a
+    # byte scan of the raw file finds nothing.  Inflate each FlateDecode
+    # stream and count the page objects there as well.
+    pattern = re.compile(rb"/Type\s*/Page(?![s])")
+    total = len(pattern.findall(raw))
+    for match in re.finditer(rb"stream\r?\n", raw):
+        start = match.end()
+        end = raw.find(b"endstream", start)
+        if end < 0:
+            continue
+        payload = raw[start:end].rstrip(b"\r\n")
+        try:
+            total += len(pattern.findall(zlib.decompress(payload)))
+        except zlib.error:
+            continue
+    return total or None
 
 
 pdf = ROOT / "the-fold.pdf"

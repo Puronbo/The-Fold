@@ -1,7 +1,7 @@
 /-
   Fold/Examples.lean
 
-  Two finite checks on the exact core.
+  Four finite checks on the exact core, all in one file.
 
   The first is a non-vacuous instance of `desc_bijective`: the
   involution on `Option Bool` that fixes `none` and swaps the two
@@ -10,6 +10,12 @@
 
   The second is the Euler characteristic of the `m = 2` dessin:
   two vertices, two edges, two faces, `V + F - E = 2`.
+
+  The third is the monodromy passport of that dessin, recording the
+  cycle type of each deck transformation.
+
+  The fourth is the `A1` node as a fold quotient, the smallest
+  non-trivial quotient in the list.
 -/
 import Fold.Basic
 
