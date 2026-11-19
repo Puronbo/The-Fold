@@ -666,6 +666,29 @@ def run_approx(paths: list[Path]) -> list[Finding]:
     return findings
 
 
+NOTE_REF_RE = re.compile(r"`(the-fold[a-z0-9-]*\.md)`")
+
+
+def reuse_map(paths: list[Path]) -> tuple[Counter[str], Counter[str], int]:
+    """Count note-to-note citations. The README is the index, not a use."""
+    sources: dict[str, set[str]] = {}
+    names = {path.name for path in paths}
+    for path in paths:
+        if path.name == "README.md":
+            continue
+        text = path.read_text(encoding="utf-8")
+        targets = {name for name in NOTE_REF_RE.findall(text) if name in names}
+        targets.discard(path.name)
+        sources[path.name] = targets
+    inbound: Counter[str] = Counter()
+    outbound: Counter[str] = Counter()
+    for name, targets in sources.items():
+        outbound[name] = len(targets)
+        inbound.update(targets)
+    edges = sum(outbound.values())
+    return inbound, outbound, edges
+
+
 def report(name: str, files: int, findings: list[Finding]) -> None:
     errors = sum(1 for f in findings if f.severity == "error")
     warnings = len(findings) - errors
@@ -767,7 +790,7 @@ def main(argv: list[str]) -> int:
         "command",
         nargs="?",
         default="all",
-        choices=["all", "docs", "approx", "zones", "selftest"],
+        choices=["all", "docs", "approx", "zones", "selftest", "reuse"],
     )
     parser.add_argument("paths", nargs="*", help="files or directories (default: repo root)")
     parser.add_argument("--json", action="store_true", help="machine-readable findings")
@@ -783,6 +806,44 @@ def main(argv: list[str]) -> int:
 
     if args.command == "selftest":
         return selftest()
+
+    if args.command == "reuse":
+        docs = [p for p in (collect(args.paths, ".md") if args.paths else default_docs())]
+        inbound, outbound, edges = reuse_map(docs)
+        notes = [p.name for p in docs if p.name != "README.md"]
+        print(f"  reuse: {len(notes)} notes, {edges} citation edges, {edges / max(len(notes), 1):.2f} per note")
+        if args.json:
+            print(
+                json.dumps(
+                    {
+                        "inbound": dict(inbound),
+                        "outbound": dict(outbound),
+                        "notes": notes,
+                        "edges": edges,
+                    },
+                    indent=2,
+                )
+            )
+            return 0
+        ranked = sorted(
+            ((name, inbound.get(name, 0)) for name in notes),
+            key=lambda pair: (-pair[1], pair[0]),
+        )
+        print("       most cited")
+        for name, count in ranked[:10]:
+            if count:
+                print(f"       {name:<34}  {count:3d}")
+        orphans = [name for name, count in ranked if count == 0]
+        print(f"       {'cited by nothing':<34}  {len(orphans):3d}")
+        for name in orphans[:12]:
+            print(f"       {name}")
+        if len(orphans) > 12:
+            print(f"       ... and {len(orphans) - 12} more")
+        sinks = sorted(((n, c) for n, c in outbound.items() if c), key=lambda p: (-p[1], p[0]))
+        print("       cites the most")
+        for name, count in sinks[:5]:
+            print(f"       {name:<34}  {count:3d}")
+        return 0
 
     if args.command == "zones":
         docs = collect(args.paths, ".md") if args.paths else default_docs()

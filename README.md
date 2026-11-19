@@ -216,6 +216,7 @@ author. The CMB enters as a rhyme; the exact physics is standard cosmology. See 
 | the crease moved into the parameter: the discriminant | `the-fold-discriminant.md` |
 | what "mathematics is physical" can mean | `the-fold-realization.md` |
 | the gate, and what a system would have to say | `the-fold-agi.md` |
+| what counts as value, and what the meters read | `the-fold-value.md` |
 | the observer as dimension and window | `the-fold-observer.md` |
 | closure as sampling and the horizon window | `the-fold-sampling.md` |
 | the horizon's area and the mode count | `the-fold-area.md` |
@@ -261,6 +262,7 @@ author. The CMB enters as a rhyme; the exact physics is standard cosmology. See 
 | `the-fold-discriminant.md` | follow-up note: the discriminant - `x² = t`, the crease moved into the parameter, `A_k`'s `k` parameters, and the strata by collision type |
 | `the-fold-realization.md` | follow-up note: realization - three readings of "mathematics is physical", the three classes, four ceilings, and the measured exact fraction |
 | `the-fold-agi.md` | follow-up note: the gate - premise closure as the criterion, the four-valued type, the stages, and the four adjunctions |
+| `the-fold-value.md` | follow-up note: value - physics as the model supply, seven meters, and the orphan test |
 | `the-fold-creation.md` | follow-up note: the order of creation — point, scale, fold, twist, closure, horizon, observer, point; plain-language version and glossary |
 | `the-fold-matter.md` | follow-up note: matter as the zero at a scale; the height law, its exponents, and the mass reading |
 | `the-fold-signature.md` | follow-up note: the signature of zero — inertia, the forced degeneracy, the fold's split, and the ladder by stage |
@@ -307,6 +309,7 @@ python check.py        # 9 HTML models, 6 pages, index, links, tables, lints
 python fold_lint.py    # docs: zone labels; approx: tolerance-as-equality
 python fold_lint.py zones
 python fold_lint.py selftest
+python fold_lint.py reuse   # note-to-note citations; the notes nothing cites
 ```
 
 `check.py` is the single gate: it runs the structural checks and then the linter. `fold_lint.py` can
@@ -324,25 +327,25 @@ definition is not a claim, so the legend is counted apart rather than inflating 
 counts the **prose attributions**, because that is how most of the corpus actually labels.
 
 ```
-zone map: 9 files with zone tables of 46
-     exact           112
-     reformulation     5
-     rhyme            18
-     false friend      9
+zone map: 10 files with zone tables of 47
+     exact           113
+     reformulation     6
+     rhyme            19
+     false friend     10
      the absence       1
      without tables    37
      legend (definitions, not claims)    11
 
-prose attributions: 44 files of 46
-     exact           134
+prose attributions: 45 files of 47
+     exact           136
      reformulation     5
      rhyme            21
      false friend     37
-     total           197
+     total           199
 ```
 
-The tables are the formal layer and cover nine files. The prose is where the corpus actually works:
-forty-four of forty-six files label their comparisons in the predicative form — a noun phrase
+The tables are the formal layer and cover ten files. The prose is where the corpus actually works:
+forty-five of forty-seven files label their comparisons in the predicative form — a noun phrase
 then `is exact`, `remains a rhyme`, `is a false friend` — as in "the quotient statement is exact" or
 "`height` is a false friend unless the register is named". The detector is deliberately narrow: it
 skips the maxims ("a rhyme written as a proof"), skips negated rejections ("this is not exact"), reads
@@ -356,15 +359,15 @@ not a result", "a statement about the lattice, not about the probe". That is the
 step short of a label — it says what the claim is *not* without saying which of the four it is.
 
 ```
-status markers (marked by contrast, zone not named): 25 files of 46
-     total            47
+status markers (marked by contrast, zone not named): 26 files of 47
+     total            48
      derivation       18
      about             7
      proof             5
      identity          6
      boost             2
      theorem           2
-     other             7
+     other             8
 ```
 
 The objects are the finding. Sixteen say "not a derivation" and five "not a proof"; with the two "not
