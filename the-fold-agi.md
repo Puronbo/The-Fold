@@ -64,15 +64,16 @@ Each stage has a deliverable that the existing gate can check.
 | stage | what is added | deliverable | state |
 |---|---|---|---|
 | 0 | the gate, the zones, the corpus | `check.py`, `fold_lint.py` | done |
-| 1 | the theorem ledger | a theorems note, still unwritten: premises → Fold objects → missing premise → verdict, for twelve theorems | not started |
-| 2 | the void map | a void note, still unwritten: ten words with no exact object, and the theorem each blocks | partial |
+| 1 | the theorem ledger | `the-fold-theorems.md`: premises → Fold objects → missing premise → zone, for twelve theorems | done |
+| 2 | the void map | `the-fold-void.md`: ten words with no exact object, the nearest object, and the six hosts | done |
 | 3 | the host builder | for one missing premise, the smallest exact model, and a distance measure | not started |
 | 4 | the adjunction loop | adjoin measure, flow, bath, observer in that order; record which invariants survive | not started |
 | 5 | measurement | one gate check tied to an instrument, with units and error bars | not started |
 | 6 | self-application | the system zones its own output, including this note | partial |
 
 Stage 1 is the load-bearing one. A ledger of twelve theorems is small enough to finish and large enough
-to show whether "premise closure" is a real capability or a phrase.
+to show whether "premise closure" is a real capability or a phrase. It is now written, and the answer is
+`6 exact / 3 reformulation / 3 rhyme`: the capability is real at the boundary, and it stops at the bulk.
 
 ## The four adjunctions
 
@@ -90,10 +91,15 @@ survive.** The survivors are the exact core of the physical theorem; the casualt
 physics. That is concept formation stated as a loop, and it is the only part of this note that could be
 run mechanically tomorrow.
 
+The four are not the whole list. `the-fold-void.md` reads ten physical words and finds that they need six
+hosts: these four, plus a **bundle** (for charge and field) and an **inertia** (for mass). A gauge theory
+is not a measure, a flow, a bath, or an observer, so the four-stage programme is the first four nodes of a
+six-node graph, not the graph.
+
 ## Failure modes
 
-- **Rhyme inflation.** The measured fraction is stable: `0.693 ± 0.010` exact, `31%` rhyme or false
-  friend, over seven readings (`the-fold-realization.md`). A system optimised on fluency will drift
+- **Rhyme inflation.** The measured fraction is flat: `0.692 ± 0.011` exact, `31%` rhyme or false
+  friend, over nine readings (`the-fold-realization.md`). A system optimised on fluency will drift
   toward the `31%`, because that is where the language is easiest. The countermeasure is to score the
   exact column, which the gate already counts.
 - **Gate overfitting.** `check.py` checks structure, not truth. A beautifully formed false theorem

@@ -217,6 +217,8 @@ author. The CMB enters as a rhyme; the exact physics is standard cosmology. See 
 | what "mathematics is physical" can mean | `the-fold-realization.md` |
 | the gate, and what a system would have to say | `the-fold-agi.md` |
 | what counts as value, and what the meters read | `the-fold-value.md` |
+| which theorems already have every premise | `the-fold-theorems.md` |
+| where the physical words have no object | `the-fold-void.md` |
 | the observer as dimension and window | `the-fold-observer.md` |
 | closure as sampling and the horizon window | `the-fold-sampling.md` |
 | the horizon's area and the mode count | `the-fold-area.md` |
@@ -263,6 +265,8 @@ author. The CMB enters as a rhyme; the exact physics is standard cosmology. See 
 | `the-fold-realization.md` | follow-up note: realization - three readings of "mathematics is physical", the three classes, four ceilings, and the measured exact fraction |
 | `the-fold-agi.md` | follow-up note: the gate - premise closure as the criterion, the four-valued type, the stages, and the four adjunctions |
 | `the-fold-value.md` | follow-up note: value - physics as the model supply, seven meters, and the orphan test |
+| `the-fold-theorems.md` | follow-up note: the theorem ledger - twelve theorems read for premise closure, the six that close, and what the five earlier notes actually did |
+| `the-fold-void.md` | follow-up note: the void map - ten physical words, the nearest exact object, the six hosts, and the order of the gaps |
 | `the-fold-creation.md` | follow-up note: the order of creation — point, scale, fold, twist, closure, horizon, observer, point; plain-language version and glossary |
 | `the-fold-matter.md` | follow-up note: matter as the zero at a scale; the height law, its exponents, and the mass reading |
 | `the-fold-signature.md` | follow-up note: the signature of zero — inertia, the forced degeneracy, the fold's split, and the ladder by stage |
@@ -327,25 +331,25 @@ definition is not a claim, so the legend is counted apart rather than inflating 
 counts the **prose attributions**, because that is how most of the corpus actually labels.
 
 ```
-zone map: 10 files with zone tables of 47
-     exact           113
-     reformulation     6
-     rhyme            19
+zone map: 11 files with zone tables of 49
+     exact           119
+     reformulation     9
+     rhyme            22
      false friend     10
      the absence       1
-     without tables    37
+     without tables    38
      legend (definitions, not claims)    11
 
-prose attributions: 45 files of 47
-     exact           136
-     reformulation     5
+prose attributions: 47 files of 49
+     exact           154
+     reformulation     7
      rhyme            21
-     false friend     37
-     total           199
+     false friend     38
+     total           220
 ```
 
-The tables are the formal layer and cover ten files. The prose is where the corpus actually works:
-forty-five of forty-seven files label their comparisons in the predicative form — a noun phrase
+The tables are the formal layer and cover eleven files. The prose is where the corpus actually works:
+forty-seven of forty-nine files label their comparisons in the predicative form — a noun phrase
 then `is exact`, `remains a rhyme`, `is a false friend` — as in "the quotient statement is exact" or
 "`height` is a false friend unless the register is named". The detector is deliberately narrow: it
 skips the maxims ("a rhyme written as a proof"), skips negated rejections ("this is not exact"), reads
@@ -359,30 +363,30 @@ not a result", "a statement about the lattice, not about the probe". That is the
 step short of a label — it says what the claim is *not* without saying which of the four it is.
 
 ```
-status markers (marked by contrast, zone not named): 26 files of 47
-     total            48
-     derivation       18
+status markers (marked by contrast, zone not named): 28 files of 49
+     total            54
+     derivation       19
      about             7
      proof             5
      identity          6
      boost             2
-     theorem           2
-     other             8
+     theorem           6
+     other             9
 ```
 
-The objects are the finding. Sixteen say "not a derivation" and five "not a proof"; with the two "not
-a theorem" and the one "not a reduction", twenty-four point at proof. One of those is not a claim —
-"the Fold is a dictionary, not a proof engine" — and one "not the identity" is a list of what a point
-is not, so thirty-nine claims are marked and twenty-three of them say that nothing was proved. That
-is the corpus's own definition of **reformulation**, yet the word appears as a label eight times, five
-in tables and three in prose (the third is the Sun comparison below). The middle zone is not scarce;
-it is unnamed, and the corpus says it with a contrast instead of a noun.
+The objects are the finding. Nineteen say "not a derivation", five "not a proof", six "not a theorem",
+and one "not a reduction": thirty-one point at proof. One of those is not a claim — "the Fold is a
+dictionary, not a proof engine" — and one "not the identity" is a list of what a point is not, so the
+fifty-four marked sentences carry fifty-two claims, and thirty of them say that nothing was proved. That
+is the corpus's own definition of **reformulation**, yet the word appears as a label sixteen times, nine
+in tables and seven in prose. The middle zone is not scarce; it is unnamed, and the corpus says it with
+a contrast instead of a noun.
 
 The remaining objects do different work. "Not an identity", "not about", "not a boost" use one word
 in two senses, which is false-friend work rather than a zone; "not a law", "not a model", "not a
 result" separate a description from a mechanism.
 
-With that count the map closes: every one of the thirty-eight files carries zone language. The three
+With that count the map closes: every one of the forty-nine files carries zone language. The three
 notes that looked silent in the first two counts — `the-fold-closure.md`, `the-fold-division.md`,
 `the-fold-horizon.md` — mark exactly once each, and each mark is the one that matters:
 

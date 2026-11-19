@@ -98,8 +98,7 @@ colour; an atlas is honest.
 
 ## The measured form
 
-The corpus is itself a finite object, and its growth is measurable. Over the last seven readings of the
-zone map:
+The corpus is itself a finite object, and its growth is measurable. Over nine readings of the zone map:
 
 | reading | exact | total | exact fraction |
 |---|---|---|---|
@@ -110,16 +109,20 @@ zone map:
 | 5 | 124 | 181 | 0.685 |
 | 6 | 127 | 184 | 0.690 |
 | 7 | 129 | 188 | 0.686 |
+| 8 | 136 | 201 | 0.677 |
+| 9 | 154 | 220 | 0.700 |
 
-The exact count rises monotonically — `24` new exact claims in six notes — but the **fraction** does
-not: `0.693 ± 0.010`, with a slope of `−0.004` per note, which is inside the noise. New work is as mixed
-as old work: the marginal note is `24/41 = 0.585` exact.
+The exact count rises monotonically — `49` new exact claims in eight notes — but the **fraction** does
+not: `0.692 ± 0.011`, with a slope of `−0.002` per note, which is inside the noise. The first seven
+readings gave `0.693 ± 0.010`; the theorem ledger added `7/13 = 0.538` and the void map `18/19 = 0.947`.
+So the mean is flat and the marginal note is not: a ledger that demotes a theorem to a reformulation and
+a map that names ten exact nearest objects pull in opposite directions.
 
 Two consequences, both exact about the process and not about the world:
 
 - progress is **absolute**, not proportional. Purity does not improve; the number of exact objects does;
 - the `31%` that is rhyme or false friend is not waste — it is the price of finding the `69%`, and it is
-  stable, so it can be budgeted.
+  flat, so it can be budgeted.
 
 "The entirety of mathematics explained physically" is therefore an asymptote with a measured slope, not
 a state to be reached. The honest restatement is: *a corpus whose exact column grows without bound, and

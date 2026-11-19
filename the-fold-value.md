@@ -49,7 +49,7 @@ counted. Seven definitions, strongest first, with today's readings.
 | prohibition | does it forbid something? | corrugation ≠ mass; a free twist ≠ an unworked twist; the integer line folds but does not double; the real fold is not a branched cover |
 | prompt closure | did a question produce an exact object? | `7` of `7` prompts since the hexagon |
 | redemption | were old rhymes retired? | `0` of `21`; the rhyme share is stable at `31%` |
-| discipline growth | did the gate learn a new kind of error? | `9` rules over `45` notes: `0` |
+| discipline growth | did the gate learn a new kind of error? | `9` rules over `48` notes: `0` |
 
 The citation meter is now runnable:
 
@@ -57,12 +57,13 @@ The citation meter is now runnable:
 python fold_lint.py reuse
 ```
 
-and it prints `354` edges over `46` notes — `7.70` per note — with the notes that nothing cites. Those
+and it prints `369` edges over `48` notes — `7.69` per note — with the notes that nothing cites. Those
 are the newest, so the orphan count is expected; what is not expected is that **no note has yet been
 written that needed them.**
 
-A citation is cheap, though, and this note proves it: the orphan count fell from three to one the moment
-this note was written, because it cites everything it mentions. So `reuse` measures **attention**, not
+A citation is cheap, though, and this note proved it once: when it was written the orphan count fell
+from three to one, because it cites everything it mentions. The ledger and the void map put the count at
+two, because this note and the integer line are still uncited. So `reuse` measures **attention**, not
 **dependence**. The stronger question is whether a citation could be deleted without breaking the citing
 note: remove `the-fold-sign.md` and the discriminant note loses `w₁`, remove
 `the-fold-discriminant.md` and the network note loses `A_k`. Those are dependencies. The count does not
@@ -85,14 +86,16 @@ The single strongest signal is the first row: a finding used *outside* the field
 has happened once, with the sign, and that is the only evidence so far that the corpus is producing
 objects rather than prose.
 
-## The test to run next
+## The test that was run
 
-The orphans are the experiment. If the next note — the theorem ledger — must cite `the-fold-sign.md`
-for `w₁`, `the-fold-discriminant.md` for `A_k`, `the-fold-crease-network.md` for the sum rules and
-`the-fold-friction.md` for the flux, then those four were structure. If it can be written without
-citing them, they were decoration, and the meter will say so on the next run.
+The orphans were the experiment. The ledger cited `the-fold-sign.md` for `w₁`,
+`the-fold-discriminant.md` for `A_k`, and `the-fold-crease-network.md` for the sum rules; it cited
+`the-fold-friction.md` only to say that the twelve theorems did not use it. Three of the four were
+structure, one was not, and the ledger is where that is written. The meter did not decide it alone — a
+citation is cheap — but the ledger had to name the premise each note supplied, and that is a dependence
+test a count cannot fake.
 
-That is a cheap, mechanical, falsifiable test of whether anything was taken. It is better than asking
+That was a cheap, mechanical, falsifiable test of whether anything was taken. It is better than asking
 whether the corpus "feels" valuable, because it cannot be argued with.
 
 ## The zones of this note
