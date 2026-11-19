@@ -214,6 +214,8 @@ author. The CMB enters as a rhyme; the exact physics is standard cosmology. See 
 | friction as the trade across the crease | `the-fold-friction.md` |
 | the creases as a network, one charge per zero | `the-fold-crease-network.md` |
 | the crease moved into the parameter: the discriminant | `the-fold-discriminant.md` |
+| what "mathematics is physical" can mean | `the-fold-realization.md` |
+| the gate, and what a system would have to say | `the-fold-agi.md` |
 | the observer as dimension and window | `the-fold-observer.md` |
 | closure as sampling and the horizon window | `the-fold-sampling.md` |
 | the horizon's area and the mode count | `the-fold-area.md` |
@@ -257,6 +259,8 @@ author. The CMB enters as a rhyme; the exact physics is standard cosmology. See 
 | `the-fold-friction.md` | follow-up note: friction - the contact as the crease, the momentum ledger versus the energy ledger, and why turning lengthens the path rather than the patch |
 | `the-fold-crease-network.md` | follow-up note: the crease network - the modulus `M x Z`, six sum rules, vertices as sums, and the hexagon as the `k = 6` vertex |
 | `the-fold-discriminant.md` | follow-up note: the discriminant - `x² = t`, the crease moved into the parameter, `A_k`'s `k` parameters, and the strata by collision type |
+| `the-fold-realization.md` | follow-up note: realization - three readings of "mathematics is physical", the three classes, four ceilings, and the measured exact fraction |
+| `the-fold-agi.md` | follow-up note: the gate - premise closure as the criterion, the four-valued type, the stages, and the four adjunctions |
 | `the-fold-creation.md` | follow-up note: the order of creation — point, scale, fold, twist, closure, horizon, observer, point; plain-language version and glossary |
 | `the-fold-matter.md` | follow-up note: matter as the zero at a scale; the height law, its exponents, and the mass reading |
 | `the-fold-signature.md` | follow-up note: the signature of zero — inertia, the forced degeneracy, the fold's split, and the ladder by stage |
@@ -320,25 +324,25 @@ definition is not a claim, so the legend is counted apart rather than inflating 
 counts the **prose attributions**, because that is how most of the corpus actually labels.
 
 ```
-zone map: 9 files with zone tables of 44
+zone map: 9 files with zone tables of 46
      exact           112
      reformulation     5
      rhyme            18
      false friend      9
      the absence       1
-     without tables    35
+     without tables    37
      legend (definitions, not claims)    11
 
-prose attributions: 42 files of 44
-     exact           129
-     reformulation     4
-     rhyme            19
-     false friend     36
-     total           188
+prose attributions: 44 files of 46
+     exact           134
+     reformulation     5
+     rhyme            21
+     false friend     37
+     total           197
 ```
 
 The tables are the formal layer and cover nine files. The prose is where the corpus actually works:
-forty-two of forty-four files label their comparisons in the predicative form — a noun phrase
+forty-four of forty-six files label their comparisons in the predicative form — a noun phrase
 then `is exact`, `remains a rhyme`, `is a false friend` — as in "the quotient statement is exact" or
 "`height` is a false friend unless the register is named". The detector is deliberately narrow: it
 skips the maxims ("a rhyme written as a proof"), skips negated rejections ("this is not exact"), reads
@@ -352,15 +356,15 @@ not a result", "a statement about the lattice, not about the probe". That is the
 step short of a label — it says what the claim is *not* without saying which of the four it is.
 
 ```
-status markers (marked by contrast, zone not named): 23 files of 44
-     total            45
-     derivation       17
+status markers (marked by contrast, zone not named): 25 files of 46
+     total            47
+     derivation       18
      about             7
      proof             5
      identity          6
      boost             2
      theorem           2
-     other             6
+     other             7
 ```
 
 The objects are the finding. Sixteen say "not a derivation" and five "not a proof"; with the two "not
