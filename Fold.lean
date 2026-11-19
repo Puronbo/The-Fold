@@ -12,6 +12,7 @@ import Fold.Wheel
 import Fold.Problems
 import Fold.Pressure
 import Fold.Examples
+import Fold.Doubling
 
 /-
   Inventory.  `#check` is a compile-time audit: if a name changes or a
@@ -76,3 +77,13 @@ import Fold.Examples
 #check Fold.pressure_unbounded
 #check Fold.pressure_finite
 #check Fold.pressure_gauge
+
+#check Fold.double_bijective_iff_odd
+#check Fold.double_bijective_iff_mod_two
+#check Fold.double_iter
+#check Fold.double_iter_eq_id_of_dvd
+#check Fold.double_fixed
+#check Fold.double_eq_neg_iff
+#check Fold.double7_orbits
+#check Fold.double7_one_period
+#check Fold.double7_iter_three

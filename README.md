@@ -295,7 +295,7 @@ author. The CMB enters as a rhyme; the exact physics is standard cosmology. See 
 | `the-fold-engineering.md` | follow-up note: engineering - geometric similitude, the square–cube law, crease kinematics, sampling, and the false friends |
 | `the-fold-loop.md` | closing note: the corpus retold as one loop — point, boundary, scale, fold, twist, the cosmic history, the CMB, and the observer |
 | `the-fold-chart.md` | follow-up note: the observer as chart-maker - the chart, the calendar as a quotient of periods, the revision loop, and the horizon detector |
-| `the-fold-lean.md` | formal core: the Lean 4 project - involution, quotient, cut, scale, chi, the wheel, and the finite counterexamples |
+| `the-fold-lean.md` | formal core: the Lean 4 project - involution, quotient, cut, scale, chi, the wheel, the doubling action, and the finite counterexamples |
 
 Open the HTML files directly in a browser — no build step, no dependencies.
 
@@ -332,7 +332,7 @@ counts the **prose attributions**, because that is how most of the corpus actual
 
 ```
 zone map: 11 files with zone tables of 49
-     exact           119
+     exact           132
      reformulation     9
      rhyme            22
      false friend     10
@@ -340,16 +340,16 @@ zone map: 11 files with zone tables of 49
      without tables    38
      legend (definitions, not claims)    11
 
-prose attributions: 47 files of 49
+prose attributions: 48 files of 49
      exact           154
      reformulation     7
      rhyme            21
-     false friend     38
-     total           220
+     false friend     39
+     total           221
 ```
 
 The tables are the formal layer and cover eleven files. The prose is where the corpus actually works:
-forty-seven of forty-nine files label their comparisons in the predicative form — a noun phrase
+forty-eight of forty-nine files label their comparisons in the predicative form — a noun phrase
 then `is exact`, `remains a rhyme`, `is a false friend` — as in "the quotient statement is exact" or
 "`height` is a false friend unless the register is named". The detector is deliberately narrow: it
 skips the maxims ("a rhyme written as a proof"), skips negated rejections ("this is not exact"), reads

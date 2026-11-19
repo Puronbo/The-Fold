@@ -7,7 +7,8 @@ with the bare toolchain: no Mathlib, no network, no cache. The compiled statemen
 skeleton of the corpus — an involution, its fixed set, its quotient, the observer as a cut, the
 scale action, the cap/puncture ledger, the calendar arithmetic, the wheel's closure, four finite
 counterexamples from the second problem map, a non-vacuous quotient instance, the Euler
-characteristic of the `m = 2` dessin, that dessin's monodromy, and the `A1` node as a quotient.
+characteristic of the `m = 2` dessin, that dessin's monodromy, the `A1` node as a quotient, and the
+scale action at `k = 2` on `ℤ/n`.
 
 It proves the skeleton. It does not prove the rhymes. The distinction is the same four-zone rule
 as the prose: a theorem is either exact, a model, or absent, and the file says which.
@@ -32,6 +33,7 @@ The toolchain is pinned in `lean-toolchain` to `leanprover/lean4:v4.35.0`. The L
 | `Fold/Wheel.lean` | the combinatorial wheel and its closure after `m` turns |
 | `Fold/Problems.lean` | Simpson, tolerance, contraposition, Monty Hall |
 | `Fold/Pressure.lean` | the linear hydrostatic law; monotone, unbounded, gauge |
+| `Fold/Doubling.lean` | the scale action at `k = 2`: doubling on `ℤ/n`, its inverse, cycles, and the `n = 3` coincidence |
 | `Fold/Examples.lean` | a non-vacuous descent on `Option Bool`; the `m = 2` dessin's Euler characteristic and monodromy; the `A1` node quotient |
 | `Fold/Audit.lean` | the `#print axioms` audit |
 | `Fold.lean` | the root module and the `#check` inventory |
@@ -147,6 +149,34 @@ inverse to puncturing is filling.
 
 The analytic closure law `m = π/α` is not in this file; it needs `Real.cos`. What is in the file is
 the combinatorial content: the wheel's period is the spoke count.
+
+### The scale action at `k = 2`
+
+The fold is multiplication by `−1`. The scale action at `k = 2` is multiplication by `+2`; the two
+coincide only where the modulus divides `3`.
+
+| Lean name | statement | zone |
+|---|---|---|
+| `Fold.double` | `x ↦ 2x` on `ℤ/n` | exact |
+| `Fold.half` | the inverse `x ↦ (n+1)/2 · x` when `n` is odd | exact |
+| `Fold.half_double` | `half ∘ double = id` for odd `n` | exact |
+| `Fold.double_half` | `double ∘ half = id` for odd `n` | exact |
+| `Fold.double_bijective_iff_odd` | doubling is bijective iff `n = 2m + 1` | exact |
+| `Fold.double_bijective_iff_mod_two` | the same criterion as `n % 2 = 1` | exact |
+| `Fold.double_iter` | the `k`-th doubling is multiplication by `2^k` | exact |
+| `Fold.double_iter_eq_id_of_dvd` | `n ∣ 2^k − 1` implies `k` doublings are the identity | exact |
+| `Fold.double_fixed` | the only fixed point is `0` | exact |
+| `Fold.double_eq_neg_iff` | doubling equals the fold iff `n ∣ 3` | exact |
+| `Fold.double7_orbits` | `0`, `1 → 2 → 4 → 1`, `3 → 6 → 5 → 3` | exact |
+| `Fold.double7_one_period` | the period of `1` is exactly `3` | exact |
+| `Fold.double7_iter_three` | three doublings return every residue mod `7` | exact |
+
+The inverse is the reason parity matters: `(n+1)/2` is an integer exactly when `n` is odd, and then it
+multiplies by `2` to `n+1 ≡ 1`. The fixed-point statement is the finite crease: doubling has a
+one-point fixed set for every modulus, so unlike the fold it has no line to quotient by. Doubling and
+the fold coincide exactly when `n ∣ 3`: trivially at `n = 1`, and at `n = 3` where `2 = −1`. The
+reading of `+2` as `−1` away from `n ∈ {1, 3}` is a false friend. On `ℤ/7` the orbits are the
+three cycles above, and `7 = 2³ − 1` is the arithmetic reason the third iterate is the identity.
 
 ### The finite counterexamples
 
@@ -281,6 +311,7 @@ integer model normalizes `ρg` to a positive integer `c`.
 | `S¹ ∖ {p} ≅ ℝ` | needs topology | `the-fold-chart.md` |
 | amenability, `F₂`, Banach–Tarski | needs choice and measure theory | `the-fold-problems.md` |
 | `p(z) = p0 e^{-z/H}` for the atmosphere | needs `Real.exp` and the ideal-gas law | the hydrostatic chart above |
+| the order of doubling is the multiplicative order of `2` mod `n` | the file proves `n ∣ 2^k − 1 → double^k = id`, not that no smaller `k` works | the scale action above |
 | the actual pressures at Challenger Deep and Earth's centre | unit conversions and a density model | the hydrostatic chart above |
 | RH, BSD, Hodge, Yang–Mills, Navier–Stokes, P vs NP | the four walls; no formal proof exists here | `the-fold-problems.md` |
 | the hard problem of consciousness | not a mathematical object | the absence named in the prose |
