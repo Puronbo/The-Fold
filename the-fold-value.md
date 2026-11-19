@@ -57,10 +57,16 @@ The citation meter is now runnable:
 python fold_lint.py reuse
 ```
 
-and it prints `348` edges over `45` notes — `7.73` per note — with the three notes that nothing cites:
-`the-fold-agi.md`, `the-fold-friction.md`, `the-fold-integer-line.md`. Those are the three newest, so
-the orphan count is expected; what is not expected is that **no note has yet been written that needed
-them.**
+and it prints `354` edges over `46` notes — `7.70` per note — with the notes that nothing cites. Those
+are the newest, so the orphan count is expected; what is not expected is that **no note has yet been
+written that needed them.**
+
+A citation is cheap, though, and this note proves it: the orphan count fell from three to one the moment
+this note was written, because it cites everything it mentions. So `reuse` measures **attention**, not
+**dependence**. The stronger question is whether a citation could be deleted without breaking the citing
+note: remove `the-fold-sign.md` and the discriminant note loses `w₁`, remove
+`the-fold-discriminant.md` and the network note loses `A_k`. Those are dependencies. The count does not
+yet distinguish them, and that is the honest limit of the meter.
 
 ## What the meters say together
 
