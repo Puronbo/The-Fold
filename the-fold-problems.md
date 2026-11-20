@@ -866,3 +866,24 @@ A single global operation family can realize the target if and only if (K\cap D=
 **Example.** Starting from orders (720=2^4 3^2 5) and (98=2\cdot7^2), retain targets (5) and (49). Then (K=\{5,7\}), (D=\{2,3\}); the allowed composite exponent type (6) is safe and achieves both terminal targets under repeated global application, whereas prime-only exponent types require (2) and (3). The one-generator minimum (6) takes four rounds; the one-step exponent (144) removes the complete primary components immediately.
 
 The exact theorem, reduction, turning-bit analysis, bounded verification, and standard-library reference solver are in [the-fold-minimal-operations.md](the-fold-minimal-operations.md) and [tools/fold_minimal_operations.py](tools/fold_minimal_operations.py).
+
+
+## UF-003 — Geometric Fold generator catalogue
+
+**Question.** What is the natural primitive operation catalogue when it is derived from the Fold geometry itself?
+
+**Repository-grounded answer.** The primitive geometric operation is a crease reflection \(\sigma_H\), an involution. A twist or rotation is the composition of two reflections, not an independent primitive when the creation order is respected. The sheet fold \(F(x,y)=(x,|y|)\) is idempotent and is not the reflection used to generate twists. The zero scale is an absorbing collapse, not an invertible group generator.
+
+**Finite geometric theorem.** For a closure order \(m\), index the available reflection axes by \(A\subseteq\mathbb Z/m\mathbb Z\). A nonempty selected set \(J\subseteq A\), anchored at \(a_0\), generates a dihedral subgroup whose rotation order is
+\[
+q_J=\frac{m}{\gcd(m,\{j-a_0:j\in J\})}.
+\]
+Thus the target subgroup \(D_q\), \(q\mid m\), is generated exactly when that gcd is \(m/q\).
+
+**Optimization.** For a fixed anchor and target \(q\), every other chosen axis must be congruent to the anchor modulo \(m/q\). Its normalized difference covers the prime divisor \(\ell\mid q\) exactly when it is nonzero modulo \(\ell\). The minimum crease set is therefore a finite Set Cover problem over the prime divisors of \(q\), minimized over anchors.
+
+**Example.** For \(m=30\) and available axes \(A=\{0,6,10,15\}\), no pair generates the full \(D_{30}\), but \(\{6,10,15\}\) does. It generates a group of order \(60\).
+
+**Important distinction.** The arithmetic UFSF transition \(a\mapsto a^r\) acts on a modular unit/Frobenius element. A geometric rotation \(z\mapsto\zeta_m^\delta z\) shifts root indices additively; Frobenius acts by multiplying them. They share an order-of-a-power formula but are not the same transformation.
+
+Full proofs, the minimum-axis set-cover reduction, and the standard-library solver are in [the-fold-geometric-generators.md](the-fold-geometric-generators.md) and [tools/fold_geometric_generators.py](tools/fold_geometric_generators.py).
