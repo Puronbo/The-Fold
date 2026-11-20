@@ -1,6 +1,8 @@
-# UF-002 — Minimal Fold Operation Families
+# UF-002 — Minimal Arithmetic Spectral Power-Operation Families
 
-**Research question.** Given a target spectral invariant, what is the smallest admissible family of Fold power operations that removes unwanted prime-order components while preserving requested components?
+**Research question.** Given a target arithmetic spectral invariant, what is the smallest admissible family of power maps on a modular unit/Frobenius element that removes unwanted prime-order components while preserving requested components?
+
+**Model boundary.** The maps Π_r act on an arithmetic residue/Frobenius element by a↦a^r. This is a valid finite cyclic-group spectral model, but it is not automatically a primitive geometric Fold operation. In the repository geometry, a primitive fold is a crease reflection and a twist is a composition of two reflections. The geometry-derived generator catalogue is UF-003 in the-fold-geometric-generators.md. Do not identify arithmetic power exponents with crease reflections without an explicit representation proving that identification.
 
 **Main result.** For a finite candidate catalogue, UF-002 is exactly a set-cover problem on prime supports. With unrestricted composite exponents, the minimum number of operations is trivial (one nontrivial product operation); a nontrivial optimization requires a specified primitive-operation catalogue or cost model.
 
@@ -270,6 +272,6 @@ Follow-on problems:
 
 ## Conclusion
 
-UF-002 has a precise answer. The prime supports of allowed exponents determine which primary components are erased. A target is feasible exactly when no prime is simultaneously protected and required to be erased, and the allowed safe exponents cover all required erasures. For a constrained catalogue, finding the smallest family is Set Cover; with unrestricted composite exponents it is trivial, because one product exponent covers every required prime.
+UF-002 has a precise answer within the arithmetic spectral power model. The prime supports of allowed exponent types determine which primary components are erased. A target is feasible exactly when no prime is simultaneously protected and required to be erased, and the allowed safe exponents cover all required erasures. For a constrained catalogue, finding the smallest family is Set Cover; with unrestricted composite exponents it is trivial, because one product exponent covers every required prime.
 
 The research task is therefore to justify a nontrivial primitive-operation catalogue or cost model from The Fold itself.
