@@ -18,7 +18,7 @@ For a finite operation family \(R\), put \(L=\operatorname{lcm}(R)\). After all 
 \operatorname{core}_L(d)=\prod_{q\nmid L}q^{v_q(d)},
 \]
 
-the largest divisor of \(d\) coprime to \(L\). Thus the family erases a prime-primary component exactly when that prime divides at least one selected exponent.
+the largest divisor of \(d\) coprime to \(L\). Thus the family eventually erases a prime-primary component exactly when that prime divides at least one selected exponent. This is a terminal-state statement under repeated use, not necessarily one application.
 
 The operation family acts globally on every spectral coordinate. This global coupling is essential to the feasibility theorem below.
 
