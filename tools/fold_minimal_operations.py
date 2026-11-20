@@ -247,6 +247,13 @@ def verify() -> dict[str, int]:
                     continue
                 ops = unrestricted_minimum(profile)
                 assert realized_targets((d1, d2), ops) == (c1, c2)
+                fast = fast_single_exponent((d1, d2), profile)
+                if profile.erase:
+                    assert fast is not None
+                    assert realized_targets((d1, d2), (fast,)) == (c1, c2)
+                    assert rounds_to_stable((d1, d2), (fast,)) == 1
+                else:
+                    assert fast is None
                 profile_checks += 1
 
     conflict = derive_target_profile((12, 15), (4, 3))
@@ -267,6 +274,7 @@ def verify() -> dict[str, int]:
     return {
         "DP_vs_bruteforce_checks": catalogue_checks,
         "global_target_reconstruction_checks": profile_checks,
+        "one_step_exponent_checks": profile_checks,
         "conflict_and_example_checks": 4,
     }
 
