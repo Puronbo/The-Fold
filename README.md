@@ -231,6 +231,7 @@ author. The CMB enters as a rhyme; the exact physics is standard cosmology. See 
 | engineering applications and the limits of transfer | `the-fold-engineering.md` |
 | the whole corpus as one loop | `the-fold-loop.md` |
 | the observer as a chart-maker, and why a calendar closes | `the-fold-chart.md` |
+| choosing the smallest allowed power-operation family | `the-fold-minimal-operations.md` |
 | the interactive models | the nine HTML files |
 
 ## Contents
@@ -296,6 +297,8 @@ author. The CMB enters as a rhyme; the exact physics is standard cosmology. See 
 | `the-fold-loop.md` | closing note: the corpus retold as one loop — point, boundary, scale, fold, twist, the cosmic history, the CMB, and the observer |
 | `the-fold-chart.md` | follow-up note: the observer as chart-maker - the chart, the calendar as a quotient of periods, the revision loop, and the horizon detector |
 | `the-fold-lean.md` | formal core: the Lean 4 project - involution, quotient, cut, scale, chi, the wheel, the doubling action, and the finite counterexamples |
+| `the-fold-universal-invariant.md` | UF-001: the universal invariant under a family of allowed operations, including finite spectral prime-core dynamics |
+| `the-fold-minimal-operations.md` | UF-002: feasibility, set-cover equivalence, NP-hardness, minimal global Fold operation families, and a reference solver |
 
 Open the HTML files directly in a browser — no build step, no dependencies.
 
