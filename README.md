@@ -512,3 +512,6 @@ model — but not what it is for. It is for this:
 Everything else is an entry in that map. The determinant gives the exponents, the fold gives the
 split, the twist gives the period, the closure gives the pattern, the horizon gives the edge, and the
 observer gives the reading. The four zones are the map's legend.
+
+
+**Universal invariant (UF-001):** the complete common invariant of a specified family of Fold operations is its orbit quotient. For a finite family of spectral power maps, the note derives a closed-form quotient representative, proves completeness on the abstract spectral-state graph, and records the total-collapse and all-powers no-go boundaries. See [the-fold-universal-invariant.md](the-fold-universal-invariant.md); the standard-library experiment is [tools/fold_universal_invariant.py](tools/fold_universal_invariant.py). The theorem is a specialization of standard quotient and cyclic-group results, not a new prime-distribution theorem.
