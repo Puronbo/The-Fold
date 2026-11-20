@@ -177,9 +177,9 @@ The companion standard-library program **tools/fold_hexagonal_lattice.py** check
 
 - all 144 products in \(D_6\);
 - all three characters as group homomorphisms (432 checks);
-- 150 checks of the six height-zero lines, reflection involutions, height signs, and 30°/60° rotation actions;
+- 182 checks of the six height-zero lines, reflection involutions, height signs, and 30°/60° rotation actions;
 - all 64 crease subsets against the gcd subgroup-order formula;
-- 36 vertex-colour, character-kernel, catalogue, and minimum-generator checks.
+- 41 checks: 36 vertex-colour cases plus 5 character-kernel/catalogue/minimality assertions.
 
 The checks establish the finite algebra implemented by the script. The symbolic derivations above establish the general statements.
 
