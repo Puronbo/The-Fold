@@ -148,6 +148,22 @@ def brute_force_cover(profile: TargetProfile, allowed_exponents: Iterable[int]) 
     return None
 
 
+
+
+def rounds_to_stable(original_orders: Iterable[int], operations: Iterable[int]) -> int:
+    """Rounds when each selected exponent type is applied once per round."""
+    orders, ops = tuple(original_orders), tuple(operations)
+    if any(r < 2 for r in ops):
+        raise ValueError("operation exponents must be at least 2")
+    rounds = 0
+    for d in orders:
+        for q in prime_support(d):
+            rate = sum(valuation(r, q) for r in ops)
+            if rate:
+                rounds = max(rounds, (valuation(d, q) + rate - 1) // rate)
+    return rounds
+
+
 def realized_targets(original_orders: Iterable[int], operations: Iterable[int]) -> tuple[int, ...]:
     ds = tuple(original_orders)
     L = 1
@@ -222,6 +238,8 @@ def verify() -> dict[str, int]:
     worked = derive_target_profile((720, 98), (5, 49))
     assert minimum_operation_family(worked, (2, 3, 6, 10, 15, 21, 35)) == (6,)
     assert realized_targets((720, 98), (6,)) == (5, 49)
+    assert rounds_to_stable((720, 98), (6,)) == 4
+    assert rounds_to_stable((720, 98), (2, 3)) == 4
     assert minimum_operation_family(worked, (2, 3, 5, 7)) == (2, 3)
 
     return {
