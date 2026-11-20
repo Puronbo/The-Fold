@@ -158,7 +158,7 @@ For the catalogue
 A=\{2,3,6,10,15,21,35\},
 \]
 
-the candidates 10, 15, 21, and 35 are unsafe because they contain protected primes 5 or 7. Candidate 6 covers both required primes, so the unique one-operation minimum is
+the candidates 10, 15, 21, and 35 are unsafe because they contain protected primes 5 or 7. Candidate 6 covers both required primes, so the unique one-generator minimum is
 
 \[
 R=\{6\}.
@@ -170,8 +170,9 @@ Indeed, \(L=6\) and
 \operatorname{core}_6(720)=5,\qquad
 \operatorname{core}_6(98)=49.
 \]
+The single exponent type is applied repeatedly: exponent 6 takes four applications on 720 (720 → 120 → 20 → 10 → 5) and one on 98 (98 → 49). Thus this is a one-generator minimum, not a one-step transition.
 
-If only prime exponents are permitted, the minimum is \(R=\{2,3\}\), requiring two primitive operations.
+If only prime exponents are permitted, the minimum is \(R=\{2,3\}\), requiring two primitive exponent types. Applying each type once per round reaches the same target after four rounds; the 2-primary block of 720 determines the maximum.
 
 ### Global conflict example
 
