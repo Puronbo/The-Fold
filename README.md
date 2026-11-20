@@ -231,7 +231,7 @@ author. The CMB enters as a rhyme; the exact physics is standard cosmology. See 
 | engineering applications and the limits of transfer | `the-fold-engineering.md` |
 | the whole corpus as one loop | `the-fold-loop.md` |
 | the observer as a chart-maker, and why a calendar closes | `the-fold-chart.md` |
-| choosing the smallest allowed power-operation family | `the-fold-minimal-operations.md` |
+| choosing the smallest arithmetic spectral power-exponent family | `the-fold-minimal-operations.md` |
 | choosing the smallest crease-reflection generator set | `the-fold-geometric-generators.md` |
 | deriving the hexagonal crease catalogue and its two sublattice signs | `the-fold-hexagonal-lattice.md` |
 | the interactive models | the nine HTML files |
@@ -302,7 +302,7 @@ author. The CMB enters as a rhyme; the exact physics is standard cosmology. See 
 | `the-fold-universal-invariant.md` | UF-001: the universal invariant under a family of allowed operations, including finite spectral prime-core dynamics |
 | `the-fold-geometric-generators.md` | UF-003: primitive crease reflections, dihedral subgroup generation, gcd criterion, and minimum-axis set-cover solver |
 | `the-fold-hexagonal-lattice.md` | UF-004: six zero-line crease axes of Re(z^6), D6 character kernels, and the A/B-preserving D3 catalogue |
-| `the-fold-minimal-operations.md` | UF-002: feasibility, set-cover equivalence, NP-hardness, minimal global Fold operation families, and a reference solver |
+| `the-fold-minimal-operations.md` | UF-002: feasibility, set-cover equivalence, NP-hardness, minimal arithmetic spectral power-exponent families, and a reference solver |
 
 Open the HTML files directly in a browser — no build step, no dependencies.
 
@@ -525,6 +525,8 @@ observer gives the reading. The four zones are the map's legend.
 
 
 **Geometric generator catalogue (UF-003):** the primitive planar Fold operations are available crease reflections; twists and rotations are their composites. For a finite closure D_m, the selected crease axes generate a subgroup determined by the gcd of their index differences. The minimum-axis solver reduces the catalogue problem to set cover. See `the-fold-geometric-generators.md` and `tools/fold_geometric_generators.py`.
+
+**Hexagonal lattice crease catalogue (UF-004):** the zero-lines of h(z)=Re(z^6) fix the six actual axes at 15°+30°j. The full unlabelled honeycomb uses all six; even-index creases preserve A/B, while odd-index creases exchange them. The determinant and sublattice signs are independent D6 characters. See `the-fold-hexagonal-lattice.md` and `tools/fold_hexagonal_lattice.py`.
 
 
 **Hexagonal lattice catalogue (UF-004):** the repository's height h(z)=Re(z^6) fixes the six crease axes at 15°+30°j. The six reflections generate D6; even-index creases preserve the honeycomb A/B labels, while odd-index creases exchange them. The two sign characters (determinant and sublattice) are independent. See the-fold-hexagonal-lattice.md and tools/fold_hexagonal_lattice.py.
