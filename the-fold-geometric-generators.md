@@ -25,13 +25,20 @@ Positive real scaling is continuous and commutes with planar rotations/reflectio
 
 ## 2. Encode the finite geometric closure
 
-Fix m≥2 and let ζ_m=e^(2πi/m). The m reflection axes are indexed by j in Z/mZ, with line angle φ_j=jπ/m. Reflection in that line is
+Fix \(m\ge2\) and let \(\zeta_m=e^{2\pi i/m}\). Choose a base crease with angle \(\phi_0\), and index the \(m\) reflection axes by
 
 \[
-\boxed{\sigma_j(z)=\zeta_m^j\,\overline z.}
+\phi_j=\phi_0+\frac{j\pi}{m},\qquad j\in\mathbb Z/m\mathbb Z.
 \]
 
-Every reflection is an involution, σ_j²=I. Composing two reflections gives
+Reflection in that line is
+
+\[
+\boxed{\sigma_j(z)=e^{2i\phi_j}\overline z
+=\zeta_m^j e^{2i\phi_0}\overline z.}
+\]
+
+Every reflection is an involution, \(\sigma_j^2=I\). For the repository's homogeneous crease height \(h_m(z)=\operatorname{Re}(z^m)\), the zero-line catalogue is the special offset \(\phi_0=\pi/(2m)\), so the axes are \(\pi/(2m)+j\pi/m\). In particular, the hexagonal case has axes at 15°, 45°, 75°, 105°, 135°, and 165°. The offset changes the geometric embedding but not the abstract subgroup calculation. Composing two reflections gives
 
 \[
 \boxed{\sigma_b\circ\sigma_a(z)=\zeta_m^{b-a}z=R^{b-a}(z),\quad R(z)=\zeta_m z.}
