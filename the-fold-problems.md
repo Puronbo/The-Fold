@@ -849,3 +849,20 @@ are in `the-fold-complexity.md`; the closure restriction and the crystallographi
 **Finite spectral answer.** For a finite family of spectral power transitions, the quotient on the abstract spectral-signature state graph has a closed-form representative: the prime-to-L core of each multiplicative order, with the turning flag retained exactly when L is odd.
 
 **Status.** The quotient statement is the standard universal-property theorem. The finite spectral result is a proved specialization of cyclic-group arithmetic. Neither is a new prime-generation method or a proof of RH. Full proofs and the executable reference experiment are in [the-fold-universal-invariant.md](the-fold-universal-invariant.md).
+
+
+## UF-002 — Minimal Fold operation families
+
+**Question.** Given a desired terminal spectral profile, what is the smallest family of allowed power operations that removes the unwanted prime-primary components while preserving the requested ones?
+
+**Exact feasibility result.** For initial spectral orders (d_1,\ldots,d_t) and target orders (c_1,\ldots,c_t), each target must retain or remove each whole prime-primary component. Let
+
+`K = union_j supp(c_j)` and `D = union_j (supp(d_j) \\ supp(c_j))`.
+
+A single global operation family can realize the target if and only if (K\cap D=\varnothing) and the safe allowed exponents cover every prime in (D). A prime that must be retained in one coordinate and erased in another is a genuine global-operation obstruction.
+
+**Optimization result.** A finite primitive-operation catalogue gives exactly weighted or unweighted Set Cover on the erased-prime universe (D); consequently the general catalogue problem is NP-hard (and the factored/support-encoded decision version is NP-complete). If arbitrary composite exponents are allowed, the problem becomes trivial: one exponent, the product of all primes in (D), removes all requested components. If only prime exponents are allowed, one operation is needed per erased prime.
+
+**Example.** Starting from orders (720=2^4 3^2 5) and (98=2\cdot7^2), retain targets (5) and (49). Then (K=\{5,7\}), (D=\{2,3\}); the allowed composite exponent (6) is safe and achieves both targets in one global operation, whereas prime-only operations require (2) and (3).
+
+The exact theorem, reduction, turning-bit analysis, bounded verification, and standard-library reference solver are in [the-fold-minimal-operations.md](the-fold-minimal-operations.md) and [tools/fold_minimal_operations.py](tools/fold_minimal_operations.py).
