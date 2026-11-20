@@ -106,6 +106,42 @@ Then \(\operatorname{supp}(r_i)\cap D\) corresponds exactly to \(B_i\). A collec
 
 The weighted version is likewise weighted Set Cover. A standard greedy weighted-cover algorithm gives the usual logarithmic approximation guarantee in \(|D|\).
 
+### Theorem 4 — Terminal equivalence and convergence speed
+
+For a finite family \(R\), write \(Q_R=\bigcup_{r\in R}\operatorname{supp}(r)\). Two families \(R,S\) induce the same terminal-core function on every positive integer if and only if
+
+\[
+Q_R=Q_S.
+\]
+
+**Proof.** If the supports agree, the prime-to-\(L\) core formula retains exactly the same prime powers. Conversely, if the supports differ, choose a prime \(q\) in their symmetric difference and evaluate both core functions at \(d=q\): one returns \(1\), the other returns \(q\). \(\square\)
+
+Thus prime-power multiplicities in the selected exponents do not change the terminal invariant; they change only how quickly it is reached. If each selected exponent is applied once per round, put
+
+\[
+a_q=\sum_{r\in R}v_q(r).
+\]
+
+For every erased prime \(q\in D\), the \(q\)-valuation in each coordinate drops by \(a_q\) per round until it reaches zero. The exact number of rounds is
+
+\[
+T(R)=\max_{\substack{j,\ q\in D\\q\mid d_j}}
+\left\lceil\frac{v_q(d_j)}{a_q}\right\rceil.
+\]
+
+The maximum is over erased prime components that actually occur in the starting coordinates. Hence support controls **what survives**, while valuations of the generators control **how fast it disappears**.
+
+### Corollary 2 — A one-step global exponent
+
+If arbitrary positive integer exponents are allowed and the target is globally feasible, define
+
+\[
+E_q=\max_j v_q(d_j),\qquad
+r_{\mathrm{fast}}=\prod_{q\in D}q^{E_q}.
+\]
+
+Then one application of \(\Pi_{r_{\mathrm{fast}}}\) sends every \(d_j\) directly to its requested target \(c_j\). This exponent is the \(D\)-supported part of \(\operatorname{lcm}(d_1,\ldots,d_t)\). It may be much larger than the smallest-support generator \(\prod_{q\in D}q\), but it achieves the terminal state in one step.
+
 ## 5. Important special cases
 
 ### 5.1 Unrestricted composite exponents
@@ -219,6 +255,8 @@ These are finite checks of the implementation; the general claims are proved abo
 | A global target is feasible iff keep/erase sets are disjoint and safe candidates cover all erased primes | Proved |
 | A finite catalogue's minimum family is Set Cover | Proved |
 | General finite-catalogue minimum is NP-hard | Proved by reduction |
+| Two families have the same terminal invariant iff their prime supports agree | Proved |
+| An unrestricted one-step exponent is the erased-prime part of the joint lcm | Proved |
 | Unrestricted composite exponents need one operation | Proved |
 | Prime-only exponents need one operation per erased prime | Proved |
 | Different coordinates can request conflicting treatment of the same prime under one global family | Impossibility proved |
