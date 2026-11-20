@@ -153,7 +153,11 @@ def verify() -> dict[str, int]:
     assert abs(height(rot60 * z) - height(z)) < 1e-10
     assert abs(height(rot30 * z) + height(z)) < 1e-10
     for j in range(M):
-        assert abs((crease_angle(j) + pi / 6) - crease_angle((j+1) % M)) < 1e-10
+        shifted = 2 * (crease_angle(j) + pi / 6)
+        next_angle = 2 * crease_angle((j + 1) % M)
+        shifted_axis = complex(cos(shifted), sin(shifted))
+        next_axis = complex(cos(next_angle), sin(next_angle))
+        assert abs(shifted_axis - next_axis) < 1e-10
         action_checks += 1
     action_checks += 2
 
@@ -187,7 +191,7 @@ def verify() -> dict[str, int]:
     minimum_exchange = min(len(J) for size in range(1, 4) for J in combinations(exchange, size)
                            if len(generated_by_axes(J)) == 6)
     assert (minimum_all, minimum_preserve, minimum_exchange) == (2, 2, 2)
-    lattice_checks += 10
+    lattice_checks += 5
 
     return {
         "D6_group_product_checks": composition_checks,
