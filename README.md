@@ -232,6 +232,7 @@ author. The CMB enters as a rhyme; the exact physics is standard cosmology. See 
 | the whole corpus as one loop | `the-fold-loop.md` |
 | the observer as a chart-maker, and why a calendar closes | `the-fold-chart.md` |
 | choosing the smallest allowed power-operation family | `the-fold-minimal-operations.md` |
+| choosing the smallest crease-reflection generator set | `the-fold-geometric-generators.md` |
 | the interactive models | the nine HTML files |
 
 ## Contents
@@ -298,6 +299,7 @@ author. The CMB enters as a rhyme; the exact physics is standard cosmology. See 
 | `the-fold-chart.md` | follow-up note: the observer as chart-maker - the chart, the calendar as a quotient of periods, the revision loop, and the horizon detector |
 | `the-fold-lean.md` | formal core: the Lean 4 project - involution, quotient, cut, scale, chi, the wheel, the doubling action, and the finite counterexamples |
 | `the-fold-universal-invariant.md` | UF-001: the universal invariant under a family of allowed operations, including finite spectral prime-core dynamics |
+| `the-fold-geometric-generators.md` | UF-003: primitive crease reflections, dihedral subgroup generation, gcd criterion, and minimum-axis set-cover solver |
 | `the-fold-minimal-operations.md` | UF-002: feasibility, set-cover equivalence, NP-hardness, minimal global Fold operation families, and a reference solver |
 
 Open the HTML files directly in a browser — no build step, no dependencies.
@@ -517,4 +519,7 @@ split, the twist gives the period, the closure gives the pattern, the horizon gi
 observer gives the reading. The four zones are the map's legend.
 
 
-**Universal invariant (UF-001):** the complete common invariant of a specified family of Fold operations is its orbit quotient. For a finite family of spectral power maps, the note derives a closed-form quotient representative, proves completeness on the abstract spectral-state graph, and records the total-collapse and all-powers no-go boundaries. See the root note `the-fold-universal-invariant.md` and its [full text](the-fold-universal-invariant.md); the standard-library experiment is [tools/fold_universal_invariant.py](tools/fold_universal_invariant.py). The theorem is a specialization of standard quotient and cyclic-group results, not a new prime-distribution theorem.
+**Universal invariant (UF-001):** the complete common invariant of a specified family of operations is its orbit quotient. The finite spectral-power specialization is arithmetic, not itself a geometric crease move. For a finite family of spectral power maps, the note derives a closed-form quotient representative, proves completeness on the abstract spectral-state graph, and records the total-collapse and all-powers no-go boundaries. See the root note `the-fold-universal-invariant.md` and its [full text](the-fold-universal-invariant.md); the standard-library experiment is [tools/fold_universal_invariant.py](tools/fold_universal_invariant.py). The theorem is a specialization of standard quotient and cyclic-group results, not a new prime-distribution theorem.
+
+
+**Geometric generator catalogue (UF-003):** the primitive planar Fold operations are available crease reflections; twists and rotations are their composites. For a finite closure D_m, the selected crease axes generate a subgroup determined by the gcd of their index differences. The minimum-axis solver reduces the catalogue problem to set cover. See `the-fold-geometric-generators.md` and `tools/fold_geometric_generators.py`.
