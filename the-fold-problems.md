@@ -887,3 +887,24 @@ Thus the target subgroup \(D_q\), \(q\mid m\), is generated exactly when that gc
 **Important distinction.** The arithmetic UFSF transition \(a\mapsto a^r\) acts on a modular unit/Frobenius element. A geometric rotation \(z\mapsto\zeta_m^\delta z\) shifts root indices additively; Frobenius acts by multiplying them. They share an order-of-a-power formula but are not the same transformation.
 
 Full proofs, the minimum-axis set-cover reduction, and the standard-library solver are in [the-fold-geometric-generators.md](the-fold-geometric-generators.md) and [tools/fold_geometric_generators.py](tools/fold_geometric_generators.py).
+
+
+## UF-004 — Hexagonal lattice crease catalogue and two sign characters
+
+**Question.** Derive the allowed crease axes from the hexagonal lattice and the repository's actual crease-height function, rather than choosing an abstract dihedral axis catalogue.
+
+**Height-derived crease set.** For \(h(z)=\operatorname{Re}(z^6)\), the zero-lines are
+\[
+\theta_j=\frac{\pi}{12}+j\frac{\pi}{6},\qquad j=0,\ldots,5,
+\]
+i.e. 15°, 45°, 75°, 105°, 135°, and 165°. Reflection across each line is an involution and sends \(h\) to \(-h\). Two crease reflections compose to a 60° rotation, and all six generate the unlabelled honeycomb point group \(D_6\) of order 12.
+
+**Sublattice split.** With alternating A/B labels on the six vertices of a hexagon, even crease indices preserve the sublattice label and odd indices exchange it. Thus the six physical creases split into \(A_{\mathrm{pres}}=\{0,2,4\}\) and \(A_{\mathrm{swap}}=\{1,3,5\}\).
+
+**Two independent characters.** For \(r\) the 60° rotation and \(s\) the 15° base reflection, write \(g=r^k s^\epsilon\). The determinant character is \(\chi_{\mathrm{det}}(g)=(-1)^\epsilon\); the sublattice character is \(\chi_{AB}(g)=(-1)^k\). Their product is a third character. The A/B-preserving subgroup is \(\ker\chi_{AB}=\langle r^2,s\rangle\cong D_3\); the odd-axis subgroup is the other D3 kernel \(\ker(\chi_{\mathrm{det}}\chi_{AB})=\langle r^2,rs\rangle\).
+
+**Minimum crease sets.** All six axes generate D6 with two adjacent crease generators. The three even axes generate the A/B-preserving D3 with two generators; the three odd axes generate the alternate D3 with two generators.
+
+**Boundary.** The 30° rotation permutes the zero-line arrangement and negates \(h\), but it has order 12 and is not a honeycomb lattice point symmetry. The lattice's rotational symmetry is 60°, consistent with the planar crystallographic restriction. The honeycomb is a triangular Bravais lattice with a two-site basis; making the two basis sites inequivalent reduces the point symmetry to D3.
+
+Full proofs, exact character kernels, examples, and the standard-library verification program are in [the-fold-hexagonal-lattice.md](the-fold-hexagonal-lattice.md) and tools/fold_hexagonal_lattice.py.
