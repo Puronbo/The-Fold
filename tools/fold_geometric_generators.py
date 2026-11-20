@@ -1,8 +1,11 @@
 #!/usr/bin/env python3
 """UF-003: minimal geometric Fold generators from crease-axis catalogues.
 
-A reflection axis j modulo m is sigma_j(z) = zeta_m**j * conjugate(z).
-Two reflections compose to a rotation. This geometric model is separate from
+A reflection family has a chosen base reflection s at angle phi_0; axis j is sigma_j=r**j*s,
+with angle phi_0+j*pi/m. For h_m(z)=Re(z**m), phi_0=pi/(2m), so the
+hexagonal crease lines are 15+30j degrees. The abstract group stores indices
+relative to s; the constant offset cancels in all differences. Two reflections
+compose to a rotation. This geometric model is separate from
 the arithmetic Frobenius-power transitions used by UFSF/UF-002.
 
 Standard library only.
@@ -39,7 +42,7 @@ def normalize_axes(m: int, axes: Iterable[int]) -> tuple[int, ...]:
 
 
 def compose(m: int, left: GroupElement, right: GroupElement) -> GroupElement:
-    """Return left after right for z -> zeta^b * (z or conjugate(z))."""
+    """Return left after right in abstract r^k s^epsilon coordinates."""
     e, b = left
     f, c = right
     return (e ^ f, (b + (-1 if e else 1) * c) % m)
