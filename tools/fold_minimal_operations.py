@@ -174,6 +174,24 @@ def realized_targets(original_orders: Iterable[int], operations: Iterable[int]) 
     return tuple(prime_core(d, L) for d in ds)
 
 
+
+def fast_single_exponent(original_orders: Iterable[int], profile: TargetProfile) -> Optional[int]:
+    """Smallest exponent type that reaches a compatible target in one application.
+
+    Returns None for an empty erasure target. The exponent is the D-supported
+    part of the lcm of all starting orders.
+    """
+    orders = tuple(original_orders)
+    if profile.keep & profile.erase:
+        raise ValueError("global keep/erase conflict")
+    if not profile.erase:
+        return None
+    exponent = 1
+    for q in sorted(profile.erase):
+        exponent *= q ** max(valuation(d, q) for d in orders)
+    return exponent
+
+
 def unrestricted_minimum(profile: TargetProfile) -> tuple[int, ...]:
     """Minimum reusable exponent types with arbitrary composites: zero or one."""
     if profile.keep & profile.erase:
@@ -240,6 +258,10 @@ def verify() -> dict[str, int]:
     assert realized_targets((720, 98), (6,)) == (5, 49)
     assert rounds_to_stable((720, 98), (6,)) == 4
     assert rounds_to_stable((720, 98), (2, 3)) == 4
+    fast = fast_single_exponent((720, 98), worked)
+    assert fast == 144
+    assert realized_targets((720, 98), (fast,)) == (5, 49)
+    assert rounds_to_stable((720, 98), (fast,)) == 1
     assert minimum_operation_family(worked, (2, 3, 5, 7)) == (2, 3)
 
     return {
