@@ -4,7 +4,7 @@
 
 **Model boundary.** The maps Π_r act on an arithmetic residue/Frobenius element by a↦a^r. This is a valid finite cyclic-group spectral model, but it is not automatically a primitive geometric Fold operation. In the repository geometry, a primitive fold is a crease reflection and a twist is a composition of two reflections. The geometry-derived generator catalogue is UF-003 in the-fold-geometric-generators.md. Do not identify arithmetic power exponents with crease reflections without an explicit representation proving that identification.
 
-**Main result.** For a finite candidate catalogue, UF-002 is exactly a set-cover problem on prime supports. With unrestricted composite exponents, the minimum number of operations is trivial (one nontrivial product operation); a nontrivial optimization requires a specified primitive-operation catalogue or cost model.
+**Main result.** For a finite candidate catalogue, UF-002 is exactly a set-cover problem on prime supports. With unrestricted composite exponents, the minimum number of distinct exponent types is trivial (one nontrivial product operation); a nontrivial optimization requires a specified arithmetic exponent catalogue or cost model.
 
 ## 1. State space and operation semantics
 
@@ -14,7 +14,7 @@ For each spectral coordinate \(j\), let its current multiplicative order be \(d_
 \Pi_r(d,\tau)=\left(\frac{d}{\gcd(d,r)},\ \tau\,\mathbf1_{d/\gcd(d,r)\ \mathrm{even}}\right).
 \]
 
-For a finite operation family \(R\), put \(L=\operatorname{lcm}(R)\). After all allowed operations may be repeated, the terminal order is
+For a finite exponent family \(R\), put \(L=\operatorname{lcm}(R)\). After all allowed operations may be repeated, the terminal order is
 
 \[
 \operatorname{core}_L(d)=\prod_{q\nmid L}q^{v_q(d)},
@@ -196,7 +196,7 @@ For the catalogue
 A=\{2,3,6,10,15,21,35\},
 \]
 
-the candidates 10, 15, 21, and 35 are unsafe because they contain protected primes 5 or 7. Candidate 6 covers both required primes, so the unique one-generator minimum is
+the candidates 10, 15, 21, and 35 are unsafe because they contain protected primes 5 or 7. Candidate 6 covers both required primes, so the unique one-exponent-type minimum is
 
 \[
 R=\{6\}.
@@ -208,9 +208,9 @@ Indeed, \(L=6\) and
 \operatorname{core}_6(720)=5,\qquad
 \operatorname{core}_6(98)=49.
 \]
-The single exponent type is applied repeatedly: exponent 6 takes four applications on 720 (720 → 120 → 20 → 10 → 5) and one on 98 (98 → 49). Thus this is a one-generator minimum, not a one-step transition.
+The single exponent type is applied repeatedly: exponent 6 takes four applications on 720 (720 → 120 → 20 → 10 → 5) and one on 98 (98 → 49). Thus this is a one-exponent-type minimum, not a one-step transition.
 
-If only prime exponents are permitted, the minimum is \(R=\{2,3\}\), requiring two primitive exponent types. Applying each type once per round reaches the same target after four rounds; the 2-primary block of 720 determines the maximum.
+If only prime exponents are permitted, the minimum is \(R=\{2,3\}\), requiring two arithmetic exponent types. Applying each type once per round reaches the same target after four rounds; the 2-primary block of 720 determines the maximum.
 
 ### Global conflict example
 
@@ -265,7 +265,7 @@ These are finite checks of the implementation; the general claims are proved abo
 
 Follow-on problems:
 
-- **UF-002a — Weighted primitive operations:** choose a principled cost model from the geometry or implementation of Fold operations.
+- **UF-002a — Weighted primitive operations:** choose a principled cost model from an independently specified cost model for arithmetic power maps.
 - **UF-002b — Structured catalogues:** solve the minimum family efficiently for natural catalogues such as prime powers, bounded exponents, or allowed rotation orders.
 - **UF-002c — Coordinate-specific folds:** compare the cost and invariant strength of global versus coordinate-specific operation families.
 - **UF-002d — Joint turning constraints:** optimize spectral erasure while preserving or deliberately removing orientation.
