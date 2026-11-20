@@ -1,5 +1,10 @@
 #!/usr/bin/env python3
-"""UF-002: minimum power-operation families for prescribed spectral cores."""
+"""UF-002: minimum sets of reusable power-exponent types for spectral cores.
+
+A selected exponent type may be applied repeatedly. The solver minimizes the
+number or weighted cost of distinct allowed exponents, not individual
+applications needed to reach the terminal prime core.
+"""
 from __future__ import annotations
 
 from dataclasses import dataclass
@@ -80,7 +85,7 @@ def minimum_operation_family(
     allowed_exponents: Iterable[int],
     costs: Optional[dict[int, float]] = None,
 ) -> Optional[tuple[int, ...]]:
-    """Exact minimum-cardinality or minimum-cost safe set cover."""
+    """Exact minimum-cardinality or minimum-cost safe set cover of exponent types."""
     D = tuple(sorted(profile.erase))
     K = profile.keep
     if K & profile.erase:
@@ -154,7 +159,7 @@ def realized_targets(original_orders: Iterable[int], operations: Iterable[int]) 
 
 
 def unrestricted_minimum(profile: TargetProfile) -> tuple[int, ...]:
-    """Minimum family size with arbitrary composite exponents: zero or one."""
+    """Minimum reusable exponent types with arbitrary composites: zero or one."""
     if profile.keep & profile.erase:
         raise ValueError("global keep/erase conflict")
     if not profile.erase:
@@ -234,7 +239,7 @@ def main() -> None:
     print("catalogue minimum:", minimum_operation_family(profile, catalogue))
     print("unrestricted minimum:", unrestricted_minimum(profile))
     print("prime-only minimum:", minimum_operation_family(profile, (2, 3, 5, 7)))
-    print("realized targets:", realized_targets((720, 98), (6,)))
+    print("terminal targets after repeated exponent-6 applications:", realized_targets((720, 98), (6,)))
     conflict = derive_target_profile((12, 15), (4, 3))
     print("global conflict K intersect D:", sorted(conflict.keep & conflict.erase))
     print("bounded verification:", verify())
