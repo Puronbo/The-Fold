@@ -2007,3 +2007,5 @@ The non-product central extensions have exact fppf torsor sequences:
 - `0 → k/k⁴ → H¹(k,G_D) → k/k² → 0`, from `0 → α₄ → G_D → α₂ → 0`.
 
 Both are short exact because the quotient has no nonidentity k-points and `H²(k,α₂)=H²(k,α₄)=0`. Since both groups are killed by two, the sequences split noncanonically as F₂-vector spaces. Thus their abstract H¹ groups agree with that of the product `α₄×α₂`, although the group schemes differ. Full proof: `the-fold-char2-nonproduct-torsor-classes.md`.
+
+The `G_lambda` automorphism proof now explicitly excludes a possible additive component in the image of `t` by comparing the mixed tensor summands. The composition convention is stated at the ring-map level, and the symbolic verifier checks the full substitutions and inverse, not only preservation of the defining equations.
