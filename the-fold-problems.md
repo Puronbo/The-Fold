@@ -1359,3 +1359,22 @@ so Aut(C)≅Aut₁(C)⋊G_gr. Since G_gr has one-dimensional scalar factor and f
 The coefficient constraints follow from expanding X²+Y² in the basis x³,x²y,x³y; X⁴ vanishes automatically once the linear part is x. Nakayama's lemma proves each such endomorphism is an automorphism. The symbolic verifier is `tools/fold_nonlinear_automorphisms.py`; the complete proof and characteristic-zero scope are in `the-fold-nonlinear-automorphism-group.md`.
 
 **Open problem UF-026-A:** compute the seven-parameter group law and lower central series, then study the modular characteristic-two automorphism group.
+
+
+## UF-027 — Explicit group law for the nonlinear kernel
+
+For θ=(a,b,c,d,e,f,g) and Θ=(A,B,C,D,E,F,G), composition Φθ∘ΦΘ has coordinates
+\[
+\begin{aligned}
+a'&=a+A,&b'&=b+B,\\
+c'&=c+C+2Aa-2Bb,&d'&=d+D+2Ab+2Ba,\\
+e'&=e+E+2Aa-2Bb,\\
+f'&=f+F+2Aab+2Ad+Ba²-Bb²+Bc+Be+3Cb+3Da,\\
+g'&=g+G+Aa²-Ab²+Ac+Ae-2Bab-2Bd-3Db+3Ea.
+\end{aligned}
+\]
+This is the exact polynomial group law on the seven-dimensional unipotent kernel from UF-026. The identity is the zero vector; inverse coordinates are obtained from the triangular equations. A symbolic verifier checks all coefficient identities.
+
+See `the-fold-unipotent-group-law.md` and `tools/fold_unipotent_group_law.py`.
+
+**Open problem UF-027-A:** compute inverse and commutator formulas, center, derived subgroup, and lower central series; compare with the m-adic filtration and the D16 action.
