@@ -2,7 +2,7 @@
 
 **Research question.** When does a periodic crease network admit a smooth or real-analytic signed height, and what does the local geometry of a crease vertex force about the height's vanishing order?
 
-**Main result.** Under a finite regular-branch hypothesis, the dual-graph bipartite criterion from UF-007 is sufficient not only for a continuous height but also for a global smooth height. Locally, a vertex where exactly q distinct smooth crease branches meet forces every smooth sign-changing height to vanish to order at least q; the bound is sharp, attained by the product of local branch-defining functions. For analytic branches this construction is real analytic locally. Global real-analytic realization is a separate global compatibility problem, but explicit periodic analytic examples exist on square and triangular tori.
+**Main result.** Under a finite regular-branch hypothesis, the dual-graph bipartite criterion from UF-007 is sufficient not only for a continuous height but also for a global smooth height. Locally, a vertex where exactly q distinct smooth crease branches meet forces every smooth sign-changing height to vanish to order at least q; the bound is sharp, attained by the product of local branch-defining functions. For analytic branches this construction is real analytic locally. Exact global analytic realization is now resolved under compact locally principal analytic-divisor hypotheses in UF-009: bipartite face duals yield global analytic defining functions, and finite-group averaging imposes the induced character without changing the exact zero set.
 
 ## 1. The local model and its assumptions
 
@@ -74,7 +74,7 @@ If the q branches have distinct tangent directions, the leading homogeneous Tayl
 
 For regular real-analytic branches, each branch has a local analytic defining function, and their product gives a real-analytic local height with exact zero set. Therefore the branch-count lower bound and its sharpness also hold in the analytic category locally.
 
-A global analytic function cannot in general be assembled with a smooth partition of unity: nontrivial smooth partitions of unity are not real analytic. Thus the bipartite condition alone is not asserted to produce a global analytic function with a *prescribed exact zero network*. There is, however, a separate general existence theorem for analytic semi-invariants of finite periodic symmetry groups.
+A global analytic function cannot in general be assembled with a smooth partition of unity: nontrivial smooth partitions of unity are not real analytic. The exact-zero problem therefore requires a different tool: the global principality theorem for real-analytic divisors. UF-009 applies that theorem to compact locally principal bipartite crease divisors and resolves exact analytic realization under those hypotheses.
 
 ### Theorem 3 — Fourier projection realizes every periodic sign character
 
@@ -190,3 +190,7 @@ This is a geometric count of regular branches, not a universal formula for arbit
 - É. Ghys and C.-L. Simon, *On the topology of a real analytic curve in the neighborhood of a singular point* (2018). The paper treats local real-analytic curve germs as products of irreducible branches and studies their local topology: [manuscript PDF](https://christopherlloyd.github.io/works/pre-publications/2017-04_TopoSingulaReAnalytiCurve_ghysimon.pdf).
 - Yuan Xu, *Harmonic Polynomials Associated With Reflection Groups*, Canadian Mathematical Bulletin (2000; online publication page updated 2018). This is background for polynomial and harmonic constructions associated with finite reflection groups: [Cambridge article](https://www.cambridge.org/core/journals/canadian-mathematical-bulletin/article/harmonic-polynomials-associated-with-reflection-groups/F59059792FA3486F0F9E1B4F43128D8F).
 - T. Beck, S. Becker-Kahn, and B. Hanin, *Nodal sets of smooth functions with finite vanishing order and p-sweepouts*, Calculus of Variations and Partial Differential Equations 57 (2018), 140: [DOI 10.1007/s00526-018-1406-y](https://doi.org/10.1007/s00526-018-1406-y).
+
+## UF-009 update: exact analytic zero-set realization
+
+The earlier global-analytic compatibility question is resolved for compact nonsingular global real-analytic surfaces and compact locally principal crease divisors: bipartiteness gives a separating complement and vanishing mod-2 divisor class, so the Acquistapace–Díaz-Cano principality theorem yields a global analytic function whose exact zero divisor is the network. A generic equation has multiplicity one along every irreducible component. For connected duals, character-weighted group averaging makes this exact defining function equivariant while preserving its zero set. See the-fold-exact-analytic-networks.md.
