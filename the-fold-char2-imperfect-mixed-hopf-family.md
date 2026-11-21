@@ -59,7 +59,7 @@ Over a perfect field every \(\lambda\) is a square, so this family contributes n
 
 ## 4. Cocycle classes in the fixed global-section model
 
-A normalized symmetric polynomial (mu_2)-valued cocycle on alpha_4 has the form (C=1+F), where F²=0. Write F in the symmetric monomial basis with exponents below four. The cocycle equations force
+A normalized symmetric polynomial (mu_2)-valued cocycle on alpha_4 has the form C=1+F, where F²=0. The complete normalized symmetric basis initially allows a coefficient rho of xy, in addition to alpha, beta, lambda, delta, eps for the other five symmetric monomials. The equation F²=0 gives rho²=0; since the base is a field, rho=0. Substituting rho=0 into the cocycle identity, the remaining coefficient equations force
 [
 F=alpha(x^2y+xy^2)+lambda x^2y^2+alpha^2x^3y^3.
 ]
