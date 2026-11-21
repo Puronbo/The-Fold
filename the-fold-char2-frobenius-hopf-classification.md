@@ -22,7 +22,7 @@ of dimension four. Also the second relative Frobenius is zero because x⁴=z⁴=
 
 Over an algebraically closed field, the connected commutative group schemes of rank two are alpha_2 and mu_2. Therefore the Frobenius image of any Hopf structure on A is one of these two group schemes.
 
-## 2. The six known examples in Frobenius terms
+## 2. Known examples and the imperfect-field family
 
 \[
 \begin{array}{c|c|c}
@@ -33,12 +33,13 @@ G & G[F] & F(G)\\
 \alpha_4\times\mu_2 & \alpha_2\times\mu_2 & \alpha_2\\
 \mu_4\times\mu_2 & \mu_2\times\mu_2 & \mu_2\\
 G_C & \alpha_2\times\alpha_2 & \alpha_2\\
-G_D & H_D & \alpha_2
+G_D & H_D & \alpha_2\\
+G_\lambda\ (\lambda\notin k^2) & \alpha_2\times\mu_2 & \alpha_2
 \end{array}
 \]
 Here G_C is the non-product cocycle group from G-3c. Its cross term x² tensor x² vanishes after restricting to the Frobenius kernel, so its kernel is alpha_2 x alpha_2; its Frobenius image is alpha_2.
 
-The six structures show that the Frobenius kernel and image do not determine the extension: alpha_4 x alpha_2 and G_C have the same Frobenius kernel and image but are non-isomorphic; G_D realizes a different height-one kernel H_D with nilpotent Jordan restricted 2-map.
+The known structures show that the Frobenius kernel and image do not determine the extension: alpha_4 x alpha_2 and G_C have the same Frobenius kernel and image but are non-isomorphic; G_D realizes a different height-one kernel H_D with nilpotent Jordan restricted 2-map. The nonsplit G_lambda family has the same Frobenius kernel and image as alpha_4 x mu_2 but a different extension class over imperfect fields.
 
 ## 3. A reduced classification problem
 
@@ -67,3 +68,8 @@ Delta(z) = z tensor 1 + 1 tensor z
 Its Frobenius kernel has coordinate algebra k[x,z]/(x²,z²) with this induced coproduct. Its invariant derivations satisfy D_z^[2]=D_x and D_x^[2]=0, so its two-dimensional restricted Lie algebra has a nonzero nilpotent Jordan 2-map. The Frobenius image is alpha_2.
 
 Thus the height-one kernel in the reduction need not be a product alpha_2 x alpha_2, alpha_2 x mu_2, or mu_2 x mu_2. The nilpotent-Jordan type is realized by an actual lift to the fixed rank-eight algebra.
+
+
+## 6. Imperfect-field extension family
+
+For lambda not in k², the mixed cocycle group G_lambda from the-fold-char2-imperfect-mixed-hopf-family.md has Frobenius kernel alpha_2 x mu_2 and image alpha_2. It is a nonsplit extension of alpha_4 by mu_2, unlike the product alpha_4 x mu_2. Over perfect fields this family splits and gives no new isomorphism class; over imperfect fields it supplies further forms on the same coordinate algebra.
