@@ -1569,3 +1569,11 @@ The normal closure is obtained by taking the largest Hopf ideal contained in thi
 **Theorem UF-050.1.** The full automorphism coordinate algebra decomposes as A ≅ A_red ⊗ T, where T=k[c,d₀,h]/(c⁴,d₀²,h²), because determinant localization is equivalent to inverting ai and the Frobenius-candidate equations are pulled back from the reduced quotient. The candidate quotient therefore retains the full nilpotent coefficient algebra. Its associated-graded ranks over its reduced support are 1,3,4,4,3,1 in degrees zero through five; the positive-degree ranks are 3,4,4,3,1. This determines the candidate's thickening but not the minimal normal closure.
 
 **Open UF-051:** compute the actual normal-closure Hopf ideal in degree two n²/n³ and test whether it imposes any additional relation beyond the second-Frobenius candidate. See `the-fold-char2-frobenius-candidate-associated-graded.md`.
+
+
+## UF-051 — Constant-term coproduct and quadratic nilradical layer
+
+**Exact calculation.** The full degree-two nilradical basis is c², cd₀, ch, d₀h. Under right-to-left composition, the constant-term coproducts are c∘c′ = c+ac′+bd₀′+α(c′)²+β(c′)³+γc′d₀′+δ(c′)²d₀′+ε(c′)³d₀′; d₀∘d₀′ = d₀+hc′+id₀′+φ(c′)²+ψ(c′)³+ηc′d₀′+θ(c′)²d₀′+κ(c′)³d₀′; and h∘h′ = ha′+ih′+η(c′h′+d₀′a′). These are exact coproduct formulas for c,d₀,h. The full conjugation coaction is not yet computed.
+
+**Open UF-052:** derive the conjugation coaction on all four degree-two classes and compare with the candidate.
+See `the-fold-char2-quadratic-nilradical-coproduct.md`.
