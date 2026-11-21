@@ -2,7 +2,9 @@
 
 **Research question.** Derive the allowed crease catalogue from the hexagonal honeycomb itself, rather than choosing an abstract subset of dihedral reflection axes.
 
-**Main result.** The height field \(h(z)=\operatorname{Re}(z^6)\) determines six zero-lines at \(15^\circ+30^\circ j\). These are exactly the six reflection axes of an appropriately oriented hexagon. Their reflections generate the full unlabelled honeycomb point group \(D_6\). Alternating the two honeycomb sublattices splits these six creases into two parity classes: three preserve the \(A/B\) label and three exchange it. The two parity classes each generate a different index-two \(D_3\) subgroup.
+**Main result.** The height field \(h(z)=\operatorname{Re}(z^6)\) determines six zero-lines at \(15^\circ+30^\circ j\). Their reflections generate a local dihedral crease-star group \(D_6\). When a compatible regular hexagon is supplied with alternating A/B vertex labels, the six axes split into two parity classes: three preserve the A/B label and three exchange it. Each parity class generates an index-two \(D_3\) subgroup.
+
+**Scope correction.** The polynomial \(\operatorname{Re}(z^6)\) has six straight zero-lines through the origin; it is not a periodic honeycomb height function. The honeycomb translation lattice and its two-site basis are additional global data. Thus the calculations below establish the local six-axis and decorated-hexagon symmetry, not a construction of the infinite periodic honeycomb from this polynomial alone. The periodic extension is UF-005 in the-fold-periodic-networks.md.
 
 ## 1. Start with the crease height, not an arbitrary axis origin
 
@@ -185,6 +187,6 @@ The checks establish the finite algebra implemented by the script. The symbolic 
 
 ## 8. Conclusion and next problem
 
-UF-004 derives the crease catalogue from the actual hexagonal height and honeycomb basis, rather than selecting axes abstractly. The six creases generate \(D_6\); their parity split records the independent sublattice sign; and the sublattice-preserving operations form \(D_3\).
+UF-004 derives the local crease catalogue from the height polynomial and a separately supplied hexagonal two-site motif. It does not identify the polynomial's six-line zero set with a global periodic honeycomb. The six creases generate \(D_6\); their parity split records the independent sublattice sign; and the sublattice-preserving operations form \(D_3\).
 
-The next question is to extend this construction from a single hexagonal cell to an arbitrary periodic crease network: characterize which zero-line arrangements are compatible with a lattice point group, which sign characters survive decorations, and how the local crease generators assemble into a global wallpaper-group action.
+The periodic generalization is developed in UF-005. The remaining question is to extend that framework from finite examples to arbitrary periodic crease networks: characterize which zero-line arrangements are compatible with a lattice point group, which sign characters survive decorations, and how the local crease generators assemble into a global wallpaper-group action.
