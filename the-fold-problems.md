@@ -1287,3 +1287,22 @@ In odd characteristic, the fiber is étale exactly when q(p²−4q)≠0. The two
 **Definition (project-local modular eigenprime).** For a specified integral G-module M, a prime ℓ is a modular eigenprime if reduction modulo ℓ changes its semisimple irreducible-character multiplicities from characteristic zero. For this D4 coinvariant module the only such prime is 2. This term is relative to the named action/module, not a claim that primes are eigenvalues.
 
 The paper and finite identity verifier are `the-fold-modular-d4-eigenprimes.md` and `tools/fold_modular_d4.py`.
+
+
+## UF-023 — Explicit D4 character projectors
+
+**Theorem UF-023.1.** For the signed-permutation generators r(x,y)=(-y,x), s(x,y)=(x,-y), the four one-dimensional projectors on the vertex algebra are
+\[
+P_{ε,δ}=\frac18(I+εR+R²+εR³)(I+δS),\qquad ε,δ=±1.
+\]
+Their images are four one-dimensional character lines.
+
+**Theorem UF-023.2.** The two-dimensional isotypic projector is
+\[
+P_E=\frac12(I-R²),
+\]
+of rank four. The five projectors are pairwise orthogonal and sum to identity in odd characteristic. Thus the vector-space decomposition has dimensions 1+1+1+1+4, with the final summand two copies of E.
+
+**Modular statement.** In characteristic two, r acts as coordinate swap and s acts trivially. The fixed space has dimension six; the effective C2-module consists of four trivial lines and two indecomposable 2D regular modules. The projectors cannot be reduced because their denominators are not units. These are representation summands, not necessarily algebra ideals.
+
+The paper and exact rational/F2 verifier are `the-fold-d4-character-projectors.md` and `tools/fold_d4_character_projectors.py`.
