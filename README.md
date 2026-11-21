@@ -241,6 +241,7 @@ author. The CMB enters as a rhyme; the exact physics is standard cosmology. See 
 | realizing prescribed analytic crease divisors as exact zero sets | `the-fold-exact-analytic-networks.md` |
 | classifying disconnected crease components and prescribed analytic multiplicities | `the-fold-divisor-parity-classification.md` |
 | testing local principality, normalization, and singularity resolution | `the-fold-local-principality-resolution.md` |
+| computing exceptional intersection lattices and local divisor-class obstructions | `the-fold-exceptional-lattices-class-groups.md` |
 | the interactive models | the nine HTML files |
 
 ## Contents
@@ -316,6 +317,7 @@ author. The CMB enters as a rhyme; the exact physics is standard cosmology. See 
 | `the-fold-exact-analytic-networks.md` | UF-009: global analytic principality from locally principal bipartite crease divisors, symmetry-preserving analytic averaging, and exact torus line products |
 | `the-fold-divisor-parity-classification.md` | UF-010: weighted-divisor principalness criterion, odd-support homology/separation tests, all-even positive equations, singular local orders, and disconnected torus crease examples |
 | `the-fold-local-principality-resolution.md` | UF-011: local generator-count test, normal-but-non-Cartier cone example, cusp/node normalization multiplicities, and weighted blow-up principalization |
+| `the-fold-exceptional-lattices-class-groups.md` | UF-012: integral exceptional-correction criterion, ADE discriminant groups, and the simple-elliptic UF-011 cone's numerical Z/2 obstruction with Pic0 caveat |
 | `the-fold-minimal-operations.md` | UF-002: feasibility, set-cover equivalence, NP-hardness, minimal arithmetic spectral power-exponent families, and a reference solver |
 
 Open the HTML files directly in a browser — no build step, no dependencies.
@@ -566,3 +568,6 @@ observer gives the reading. The four zones are the map's legend.
 
 
 **Local principality and normalization (UF-011):** the key local test is μ(I)=dim_k(I/mI). The source-paper cone X:z²=x⁴+y⁴ is normal but the divisor Y:x=0,z=y² has local ideal (x,z-y²) with two minimal generators, so normalization is the identity and does not repair it. A cusp's intrinsic point ideal (t²,t³) becomes (t²) after normalization, recording order two. A weighted blow-up chart makes the cone divisor's strict transform locally principal. See the-fold-local-principality-resolution.md and tools/fold_local_principality_resolution.py.
+
+
+**Exceptional intersection lattices (UF-012):** if D is principal downstairs, its strict transform has an integral exceptional valuation correction a satisfying Ma=-b, where M is the negative-definite exceptional intersection matrix and b_j=(D~.E_j). The cokernel gives the complete local class obstruction for rational singularities under standard hypotheses; for the UF-011 simple-elliptic E7-tilde cone it is only the finite numerical quotient Z/2, with a degree-zero Picard contribution remaining. See the-fold-exceptional-lattices-class-groups.md and tools/fold_exceptional_lattice_obstruction.py.
