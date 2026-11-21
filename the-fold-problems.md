@@ -2056,3 +2056,15 @@ the remaining kernel-classification problems.
 **Open arithmetic problem:** classify all a in F₂(s,t) satisfying
 `c²+a d²+d=s`, and extend the description to useful imperfect-field
 extensions and valuation settings.
+
+
+## G-4g — Full kernel parameterization over F₂(s,t)
+
+For k=F₂(s,t), lambda=s, the exact boundary kernel is
+`{[s r²+r] in k/k² : r in k×}`. Indeed, the splitting equation
+`c²+a d²+d=s` forces d nonzero and gives
+`a=s/d²+1/d+(c/d)²`; put r=1/d. Conversely choose d=1/r,c=0.
+This describes the entire kernel as the image of the additive polynomial
+`L_s(r)=s r²+r` modulo squares. The class [t] is outside this image by
+the valuation obstruction already recorded. A simpler intrinsic description
+of this image subspace remains open.
