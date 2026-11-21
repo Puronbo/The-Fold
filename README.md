@@ -238,6 +238,7 @@ author. The CMB enters as a rhyme; the exact physics is standard cosmology. See 
 | classifying periodic sign characters for all frieze and wallpaper groups | `the-fold-frieze-wallpaper-characters.md` |
 | proving forced zeros and topological realizability of crease networks | `the-fold-forced-zero-topology.md` |
 | constructing smooth and analytic periodic heights from crease networks | `the-fold-smooth-analytic-heights.md` |
+| realizing prescribed analytic crease divisors as exact zero sets | `the-fold-exact-analytic-networks.md` |
 | the interactive models | the nine HTML files |
 
 ## Contents
@@ -310,6 +311,7 @@ author. The CMB enters as a rhyme; the exact physics is standard cosmology. See 
 | `the-fold-frieze-wallpaper-characters.md` | UF-006: translation-kernel theorem, seven frieze presentations, and periodic character counts for all 17 wallpaper groups |
 | `the-fold-forced-zero-topology.md` | UF-007: fixed-point forced-zero theorem, bipartite face-dual realization criterion, and sharp minimal-degree D6 semi-invariants |
 | `the-fold-smooth-analytic-heights.md` | UF-008: smooth realization under regular-branch hypotheses, branch-count vanishing-order bounds, and Fourier construction of analytic periodic semi-invariants |
+| `the-fold-exact-analytic-networks.md` | UF-009: global analytic principality from locally principal bipartite crease divisors, symmetry-preserving analytic averaging, and exact torus line products |
 | `the-fold-minimal-operations.md` | UF-002: feasibility, set-cover equivalence, NP-hardness, minimal arithmetic spectral power-exponent families, and a reference solver |
 
 Open the HTML files directly in a browser — no build step, no dependencies.
@@ -550,3 +552,6 @@ observer gives the reading. The four zones are the map's legend.
 
 
 **Smooth and analytic Fold heights (UF-008):** for finite networks of regular smooth branches, bipartiteness of the face dual is equivalent to existence of a global smooth sign-changing height. A vertex with q smooth branches forces vanishing order at least q, sharply attained by the local product. Fourier projection realizes every real sign character of a finite periodic point group by a nonzero real-analytic periodic function. Exact realization of a preselected zero network remains a stronger problem. See the-fold-smooth-analytic-heights.md and tools/fold_smooth_analytic_heights.py.
+
+
+**Exact analytic crease networks (UF-009):** for compact nonsingular global real-analytic surfaces and locally principal analytic crease divisors, a bipartite face dual supplies the disconnection and vanishing mod-2 class hypotheses of the Acquistapace–Díaz-Cano global-principality theorem. Hence the network is the exact zero divisor of a global real-analytic function, with multiplicity one on each irreducible crease component. A finite character-weighted group average imposes the induced symmetry without changing zeros. Paired rational line families also have an explicit sine-product construction. See `the-fold-exact-analytic-networks.md` and `tools/fold_exact_analytic_networks.py`.
