@@ -1040,3 +1040,9 @@ The complete first-order c,d,h coefficient map in both conjugated coordinates is
 - Gives explicit nonzero minors proving generic associated-graded ranks 4, 3, and 1.
 - Completes the positive-layer rank profile as (3,4,4,3,1), matching the graded dimensions of the nilpotent parameter algebra.
 - Keeps the full coefficient module, scheme-theoretic orbit-image ideal, and largest Hopf ideal as distinct unresolved targets.
+
+
+### UF-067 — Generic full rank of the nilpotent coefficient matrix
+- Forms the complete 16-by-15 matrix for all nonconstant monomials in (c,d,h).
+- Proves generic rank 15 by an explicit maximal-minor specialization over F_256; the determinant is 4a after deleting the X' x^3 z row.
+- Establishes generic linear independence across nilpotent degrees, while keeping the orbit-image ideal and Hopf-core problem open.
