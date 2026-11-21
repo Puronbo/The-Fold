@@ -1821,7 +1821,7 @@ The corresponding group law is
 ```
 It is a nontrivial central extension of alpha_4 by alpha_2 and is not isomorphic to any of the four product structures: its primitive space has dimension two with basis x,x²; its relative-Frobenius image is alpha_2; and its restricted Lie 2-power map is zero.
 
-The standard-library verifier tools/fold_char2_cocycle_hopf.py checks the Hopf identities and primitive-space dimension exactly over F₂. This gives at least five pairwise non-isomorphic Hopf structures on the same algebra. The four product structures' torsor classes remain as in G-4; the fifth cocycle group's torsors are not yet classified.
+The standard-library verifier tools/fold_char2_cocycle_hopf.py checks the Hopf identities and primitive-space dimension exactly over F₂. Together with G_D, this gives at least six pairwise non-isomorphic base Hopf structures on the same algebra. The four product structures' torsor classes remain as in G-4; the fifth cocycle group's torsors are not yet classified.
 
 **Open G-3c:** determine the full automorphism group scheme and translation normalizer of the cocycle group; classify its fppf torsors; and search for further non-product Hopf structures.
 
