@@ -936,3 +936,5 @@ The note also establishes a concrete characteristic-two direction: C_k ≅ k[x,z
 - Therefore `δ_lambda([a] mod k⁴)=[Q(a,λ)]`; the equation `c²+a d²+d=λ` is its exact splitting criterion.
 
 - Describes all `G_lambda`-torsor classes as an extension of `k×/(k×)²` by the kernel of `[a] ↦ [Q(a,λ)]` on `k/k⁴`; it splits noncanonically as an F₂-vector-space sequence.
+
+- Adds `tools/fold_char2_mixed_quaternion_descent.py` to verify the matrix realization and quaternion descent identities.
