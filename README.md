@@ -862,3 +862,10 @@ The note also establishes a concrete characteristic-two direction: C_k ≅ k[x,z
 - Identifies Aut_grp(G_C)=Spec k[a,a⁻¹,b,c,d]/(c²), reduced dimension 3 and tangent dimension 4.
 - Proves the translation centralizer is G_C and the normalizer is G_C semidirect Aut_grp(G_C).
 - Adds the-fold-char2-cocycle-automorphism-normalizer.md. The cocycle group's fppf torsors and further Hopf structures remain open.
+
+
+### G-3e/G-4 — Fppf torsors of the fifth, non-product Hopf group
+- Uses the exact sequence 0 -> alpha_2 -> G_C -> alpha_4 -> 0.
+- Proves the short exact sequence 0 -> k/k² -> H¹_fppf(k,G_C) -> k/k⁴ -> 0; it splits noncanonically as F₂-vector spaces because G_C is killed by 2.
+- Constructs explicit rank-eight torsors B_(a,b)=k[u,v]/(u⁴-a,v²-b) with the cocycle coaction and gives an explicit inverse to the canonical map.
+- Adds the-fold-char2-cocycle-torsors.md. The cohomology group splitting is noncanonical; no canonical direct-product law on the parameters is claimed.
