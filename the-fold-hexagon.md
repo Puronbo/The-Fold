@@ -67,6 +67,8 @@ sublattice sign exists precisely because `6` is even; on a `D₃` lattice the on
 determinant. So the sublattice coset is not a rival reading of the fold's `ℤ/2` — it is an
 independent coordinate on the same group.
 
+The six zero-lines are also the actual crease-reflection axes: for \(h(z)=\operatorname{Re}(z^6)\), they occur at \(15^\circ+30^\circ j\). Even-index axes pass through opposite vertices and preserve the A/B label; odd-index axes pass through opposite edge midpoints and exchange it. The full unlabelled point group is \(D_6\), while the A/B-preserving subgroup is \(D_3\). See `the-fold-hexagonal-lattice.md` for the explicit two-character derivation and tested crease catalogues.
+
 ## The Dirac mass gap, hosted
 
 Take the nearest-neighbour tight-binding model,

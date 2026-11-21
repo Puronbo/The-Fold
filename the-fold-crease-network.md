@@ -109,6 +109,10 @@ a gap".
 The overall rotation of the pattern is the modulus `n`; the spacing, the split into two orbits, and the
 `30°` negation are the invariants. That is the whole difference between the parameters and the charge.
 
+The homogeneous function h=Re(z^6) gives a local six-line crease star, not a periodic honeycomb height field: its zero lines all pass through one point. A global periodic network needs separate translation-lattice data and, for the honeycomb, a two-site basis. The general wallpaper-group and sign-character treatment is now in the-fold-periodic-networks.md (UF-005).
+
+The physical reflections are offset by half a crease step: \(\theta_j=\pi/12+j\pi/6\). Their complex form is \(\sigma_j(z)=e^{i(2j+1)\pi/6}\overline z\); each fixes its own zero-line and sends \(h\) to \(-h\). The base reflection at 15° and the 60° rotation generate \(D_6\). Alternating A/B labels on the hexagon vertices split the six axes into three preserving and three exchanging creases. The detailed point-group and character calculation is in `the-fold-hexagonal-lattice.md`.
+
 ## The Dirac zero, and what its winding buys
 
 `f(k)` near `K` behaves as `q e^{iφ}` — a simple zero — and a zero of order `k` behaves as `q^k e^{ikφ}`.

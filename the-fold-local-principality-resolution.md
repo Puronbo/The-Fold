@@ -1,0 +1,193 @@
+# UF-011 — Local Principality, Normalization, and Singularity Resolution
+
+**Research question.** When does a singular crease component define a locally principal divisor? What can normalization or resolution repair, what multiplicities do they change, and what obstruction must still be checked before obtaining a global Fold height?
+
+**Main conclusion.** Singular support does not by itself prevent a scalar analytic height: a cusp or node in a smooth plane is already the zero set of one analytic equation. The real obstruction appears when the ambient analytic space is singular and the divisor ideal inside its local ring needs more than one generator. Normalization can repair some nonnormal curve ideals, but it does not repair a normal surface singularity that is already normal. Resolution makes strict transforms Cartier on a smooth surface, but exceptional divisors and multiplicities must be tracked, and the global parity/principality conditions from UF-010 must be reapplied.
+
+## 1. Local principality as a generator-count question
+
+Let (A,m,k) be the local analytic ring of the ambient space at p, and let I be the ideal of the crease component. Its minimal number of generators is
+
+\[
+\mu_A(I)=\dim_k(I/mI).
+\]
+
+By Nakayama's lemma, for a nonzero finitely generated divisor ideal, \(\mu_A(I)=1\) means locally principal; \(\mu_A(I)\ge2\) proves it is not locally principal.
+
+If the ambient surface is smooth, its local analytic rings are regular local rings; regular local rings are factorial, so codimension-one analytic divisors are locally principal. The local obstruction therefore arises from singular ambient spaces, not merely from a singular-looking curve drawn inside a smooth plane.
+
+For a normal singular surface, a height-one prime is a Weil divisor but need not be Cartier. The local divisor class group detects this: a height-one prime is locally principal precisely when its local divisor class is zero. Normality alone is not enough.
+
+## 2. The nonprincipal divisor from the UF-010 source paper
+
+Acquistapace and Díaz-Cano's Example 3.1 uses
+
+\[
+X=\{z^2=x^4+y^4\}\subset\mathbb R^3,\qquad
+Y=\{x=0,\ z\ge0\}\cap X.
+\]
+
+On Y, z=y², so Y is the analytic parabola parametrized by y ↦ (0,y,y²). Let
+
+\[
+A=\mathbb R\{x,y,z\}/(z^2-x^4-y^4),\qquad m=(x,y,z).
+\]
+
+The kernel of restriction to the parabola is
+
+\[
+I(Y)_0=(x,z-y^2)\subset A.
+\]
+
+The classes of x and z-y² in m/m² are the independent linear classes x and z. Since mI is contained in m², their images in I/mI are independent. Therefore
+
+\[
+\boxed{\mu_A(I(Y)_0)=2,}
+\]
+
+so the divisor is not locally principal at the origin. This is a direct local-algebra proof of the obstruction cited in Example 3.1. The paper also notes that this example has zero mod-2 divisor class and separating support, showing that topology cannot replace local principality.
+
+### The surface is already normal
+
+The complexified local hypersurface ring is a domain: over C, x⁴+y⁴ factors into four distinct linear factors, so it is not a square even in the fraction field of C{x,y}. Hence z²-(x⁴+y⁴) is irreducible. It is a hypersurface, hence Cohen–Macaulay and satisfies S2. Its Jacobian
+
+\[
+(-4x^3,-4y^3,2z)
+\]
+
+vanishes only at the origin. A two-dimensional surface is therefore regular in codimension one (R1). By Serre's criterion R1+S2, the complexification is normal; the real analytic local ring is normal as well.
+
+Its normalization is consequently the identity. **Normalization does not repair this non-Cartier divisor.** This is a counterexample to the idea that normalizing every singular ambient surface solves local principality.
+
+## 3. A weighted blow-up can repair the strict transform locally
+
+Use the weighted blow-up chart of weights (1,1,2):
+
+\[
+x=uv,\qquad y=u,\qquad z=u^2w.
+\]
+
+After removing the common exceptional factor, the strict transform of X is
+
+\[
+\widetilde X:\quad w^2=1+v^4.
+\]
+
+The strict transform of Y is
+
+\[
+\widetilde Y:\quad v=0,\quad w=1.
+\]
+
+Near (u,v,w)=(0,0,1), the derivative of w²-1-v⁴ with respect to w is 2, so the strict transform is smooth there. Also,
+
+\[
+(w-1)(w+1)=v^4,
+\]
+
+and w+1 is a unit near w=1. Thus
+
+\[
+\boxed{(v,w-1)=(v).}
+\]
+
+The strict transform of this divisor is locally principal in this chart. This is a local principalization calculation; it does not assert that this one weighted chart is a complete global resolution of X.
+
+A modification can remove the local generator obstruction on the transformed space, but it changes the geometric model and introduces an exceptional set. Exceptional divisor and total-transform multiplicities must be recorded. One cannot discard them and claim the original ideal downstairs became principal.
+
+## 4. Normalization of a cusp: principalization with multiplicity change
+
+There are two different divisor questions involving the same cusp.
+
+### The cusp as a curve in the plane
+
+The cusp C={y²=x³} in the smooth plane is already principal: its ideal is generated by y²-x³. A singular support does not itself obstruct a defining equation.
+
+### The cusp's origin as a divisor on the cusp itself
+
+As an intrinsic analytic curve, its local ring is
+
+\[
+A_c=\mathbb R\{t^2,t^3\}\cong
+\mathbb R\{x,y\}/(y^2-x^3).
+\]
+
+The ideal of its singular point is m_c=(t²,t³). Its two classes are independent modulo m_c², so the point divisor is not locally principal on the cusp. The normalization is
+
+\[
+\nu:\mathbb R\{t\}\longrightarrow A_c,\qquad x=t^2,\quad y=t^3.
+\]
+
+On the normalization the extended ideal becomes
+
+\[
+m_c\mathbb R\{t\}=(t^2,t^3)=(t^2).
+\]
+
+It is principal, but its order at the normalized point is 2. Thus normalization repairs this nonnormal curve example while recording a multiplicity change. It does not make the original cusp point ideal principal downstairs.
+
+This clarifies UF-010: y²-x³ has analytic order two at the cusp, although its real zero set has one irreducible branch. Analytic order, number of real branches, and divisor multiplicity are different data.
+
+## 5. A node gives the same ambient-versus-intrinsic distinction
+
+The nodal curve xy=0 in the plane is principal in its smooth ambient surface, with equation xy. Intrinsically,
+
+\[
+A_n=\mathbb R\{x,y\}/(xy),\qquad m_n=(x,y)
+\]
+
+has a two-generator maximal ideal at the node. Its normalization separates the two branches:
+
+\[
+\overline A_n=\mathbb R\{x\}\oplus\mathbb R\{y\}.
+\]
+
+The extended point ideal is (x)⊕(y), generated by the pair (x,y) in the product ring. Each branch contributes order one. Again, normalization separates branches and makes the transformed ideal principal componentwise, but the ambient plane and intrinsic nodal curve are different divisor problems.
+
+## 6. What normalization and resolution actually guarantee
+
+| Starting local space | Divisor problem | Effect |
+|---|---|---|
+| Smooth surface | Codimension-one analytic divisor | Already locally principal |
+| Normal singular surface | Non-Cartier height-one divisor | Normalization is identity; obstruction remains |
+| Nonnormal cusp curve | Intrinsic point ideal (t²,t³) | Normalization gives (t²), order 2 |
+| Nodal curve | Intrinsic node ideal (x,y) | Normalization separates branches and principalizes componentwise |
+| Singular surface after resolution | Strict transform of a curve divisor | Smooth surface makes strict transform locally Cartier; exceptional data must be tracked |
+
+For a normal surface, a resolution π:X̃→X has a smooth source. Every codimension-one analytic divisor on X̃ is Cartier there. However, strict transform, total transform, and push-forward divisor are not interchangeable. Exceptional components carry information about the original non-Cartier class. A principal divisor upstairs does not imply that the corresponding Weil divisor was Cartier downstairs.
+
+## 7. A practical local-to-global diagnostic for The Fold
+
+Given local equations for an ambient analytic surface X and a crease component C at p:
+
+1. Form the local ring A=O_{X,p}, with maximal ideal m.
+2. Compute the component ideal I_C in A, including relations inherited from X.
+3. Compute μ(I_C)=dim_k(I_C/mI_C). If it exceeds one, local principality fails.
+4. If X is normal, test the local divisor class of the height-one prime. Normality does not imply it is Cartier.
+5. If X is nonnormal, compute the extended ideal on the normalization and record branch valuations and conductor data. Principal upstairs does not imply principal downstairs.
+6. If resolving, calculate strict-transform and exceptional multiplicities separately.
+7. Only after every local component passes, apply UF-010's global odd-support mod-2 and complement-disconnection criterion.
+
+The generator-count test is exact for a finitely generated local ideal. Normality and class-group computations can be difficult symbolic problems, so the companion program verifies worked examples rather than pretending to decide arbitrary analytic germs.
+
+## 8. UF-011 conclusions and next questions
+
+1. A singular crease curve can be principal in a smooth ambient surface. Singularity of the support alone is not the obstruction.
+2. The source paper's cone is already normal, yet its selected divisor ideal needs two generators. Normalization cannot fix it.
+3. Normalization can repair nonnormal curve ideals, but may change the divisor multiplicity, as the cusp's order-two pullback demonstrates.
+4. A weighted blow-up can principalize a strict transform locally; exceptional data must be retained, and global parity conditions must be rechecked afterward.
+5. The operational test is the minimal number of local generators, followed by local divisor-class/normalization analysis and then the global UF-010 criterion.
+
+**Open UF-012 direction.** Determine when the local class-group obstruction of a normal surface singularity is generated by exceptional curves on a resolution, and characterize which exceptional multiplicity vectors permit a prescribed Fold divisor to descend as a principal analytic height.
+
+## References
+
+- F. Acquistapace and A. Díaz-Cano, “Divisors in global analytic sets,” JEMS 13 (2011), 297–307. Example 3.1 gives the normal-surface local-principality counterexample; Theorem 3.4 and Corollary 3.7 give the global criteria. [DOI 10.4171/JEMS/253](https://doi.org/10.4171/JEMS/253); [full text](https://ems.press/content/serial-article-files/31761?nt=1).
+- The Stacks Project, “Serre's criterion for normality,” Tag 031O. [Reference](https://stacks.math.columbia.edu/tag/031O).
+- R. Hartshorne and C. Polini, “Divisors class groups of singular surfaces,” for the relation between divisors, Cartier classes, and normalization. [arXiv:1301.3222](https://arxiv.org/abs/1301.3222).
+- For real-analytic resolution of hypersurfaces by admissible blow-ups, see the resolution statement in Appendix D.2 of this analytic-geometry manuscript. [PDF](https://math.univ-cotedazur.fr/u/rifford/Papiers_en_ligne/Sard_BFPR_Accepted.pdf).
+
+
+## UF-012 extension: exceptional lattice class of the cone divisor
+
+The surface z²=x⁴+y⁴ is the simple-elliptic E7-tilde singularity: its minimal resolution has one genus-one exceptional curve E with E²=-2. In the weighted chart x=uv, y=u, z=u²w, the strict transform of Y:x=0,z=y² is v=0,w=1 and meets E:u=0 transversely once. Thus M=[-2], b(Y)=[1], and the integral correction equation has solution a=1/2. The nonzero numerical residue in coker(M)=Z/2 independently detects non-Cartierness. Because E is elliptic, degree-zero Picard data remain; Z/2 is the finite numerical quotient, not automatically the full local class group. See the-fold-exceptional-lattices-class-groups.md (UF-012).

@@ -231,6 +231,24 @@ author. The CMB enters as a rhyme; the exact physics is standard cosmology. See 
 | engineering applications and the limits of transfer | `the-fold-engineering.md` |
 | the whole corpus as one loop | `the-fold-loop.md` |
 | the observer as a chart-maker, and why a calendar closes | `the-fold-chart.md` |
+| choosing the smallest arithmetic spectral power-exponent family | `the-fold-minimal-operations.md` |
+| choosing the smallest crease-reflection generator set | `the-fold-geometric-generators.md` |
+| deriving the hexagonal crease catalogue and its two sublattice signs | `the-fold-hexagonal-lattice.md` |
+| classifying periodic crease networks and surviving sign characters | `the-fold-periodic-networks.md` |
+| classifying periodic sign characters for all frieze and wallpaper groups | `the-fold-frieze-wallpaper-characters.md` |
+| proving forced zeros and topological realizability of crease networks | `the-fold-forced-zero-topology.md` |
+| constructing smooth and analytic periodic heights from crease networks | `the-fold-smooth-analytic-heights.md` |
+| realizing prescribed analytic crease divisors as exact zero sets | `the-fold-exact-analytic-networks.md` |
+| classifying disconnected crease components and prescribed analytic multiplicities | `the-fold-divisor-parity-classification.md` |
+| testing local principality, normalization, and singularity resolution | `the-fold-local-principality-resolution.md` |
+| computing exceptional intersection lattices and local divisor-class obstructions | `the-fold-exceptional-lattices-class-groups.md` |
+| lifting Fold symmetries to singularity resolutions and exceptional curves | `the-fold-equivariant-resolution-symmetry.md` |
+| classifying every analytic D4 semi-invariant on the quartic cone | `the-fold-d4-analytic-character-classification.md` |
+| decomposing the complete analytic D4 representation ring on the cone | `the-fold-d4-analytic-representation-decomposition.md` |
+| deriving the complete multiplication algebra of the Fold cone | `the-fold-multiplication-algebra.md` |
+| deriving the trace discriminant and spectral branch geometry | `the-fold-discriminant-spectral-geometry.md` |
+| classifying local algebras and Jordan strata of Fold fibers | `the-fold-local-algebra-jordan-strata.md` |
+| computing the vertex Hilbert function and socle structure | `the-fold-vertex-hilbert-function.md` |\n| modular stability of the D16 Lie algebra and its exceptional central prime | `the-fold-d16-modular-stability.md` |
 | the interactive models | the nine HTML files |
 
 ## Contents
@@ -296,6 +314,20 @@ author. The CMB enters as a rhyme; the exact physics is standard cosmology. See 
 | `the-fold-loop.md` | closing note: the corpus retold as one loop — point, boundary, scale, fold, twist, the cosmic history, the CMB, and the observer |
 | `the-fold-chart.md` | follow-up note: the observer as chart-maker - the chart, the calendar as a quotient of periods, the revision loop, and the horizon detector |
 | `the-fold-lean.md` | formal core: the Lean 4 project - involution, quotient, cut, scale, chi, the wheel, the doubling action, and the finite counterexamples |
+| `the-fold-universal-invariant.md` | UF-001: the universal invariant under a family of allowed operations, including finite spectral prime-core dynamics |
+| `the-fold-geometric-generators.md` | UF-003: primitive crease reflections, dihedral subgroup generation, gcd criterion, and minimum-axis set-cover solver |
+| `the-fold-hexagonal-lattice.md` | UF-004: six zero-line crease axes of Re(z^6), D6 character kernels, and the A/B-preserving D3 catalogue |
+| `the-fold-periodic-networks.md` | UF-005: wallpaper groups, finite-torus crease-network symmetries, sign-character maps, and common kernels |
+| `the-fold-frieze-wallpaper-characters.md` | UF-006: translation-kernel theorem, seven frieze presentations, and periodic character counts for all 17 wallpaper groups |
+| `the-fold-forced-zero-topology.md` | UF-007: fixed-point forced-zero theorem, bipartite face-dual realization criterion, and sharp minimal-degree D6 semi-invariants |
+| `the-fold-smooth-analytic-heights.md` | UF-008: smooth realization under regular-branch hypotheses, branch-count vanishing-order bounds, and Fourier construction of analytic periodic semi-invariants |
+| `the-fold-exact-analytic-networks.md` | UF-009: global analytic principality from locally principal bipartite crease divisors, symmetry-preserving analytic averaging, and exact torus line products |
+| `the-fold-divisor-parity-classification.md` | UF-010: weighted-divisor principalness criterion, odd-support homology/separation tests, all-even positive equations, singular local orders, and disconnected torus crease examples |
+| `the-fold-local-principality-resolution.md` | UF-011: local generator-count test, normal-but-non-Cartier cone example, cusp/node normalization multiplicities, and weighted blow-up principalization |
+| `the-fold-exceptional-lattices-class-groups.md` | UF-012: integral exceptional-correction criterion, ADE discriminant groups, and the simple-elliptic UF-011 cone's numerical Z/2 obstruction with Pic0 caveat |
+| `the-fold-equivariant-resolution-symmetry.md` | UF-013: D4 action on the UF-011 cone, elliptic exceptional-curve automorphisms, trivial lattice action with nontrivial height character, and unit-cocycle condition |
+| `the-fold-d4-analytic-character-classification.md` | UF-014: complete convergent analytic character modules, invariant quotient ring K{p,z}, and all odd multiplicity patterns on forced reflection branches |
+| `the-fold-minimal-operations.md` | UF-002: feasibility, set-cover equivalence, NP-hardness, minimal arithmetic spectral power-exponent families, and a reference solver |
 
 Open the HTML files directly in a browser — no build step, no dependencies.
 
@@ -512,3 +544,84 @@ model — but not what it is for. It is for this:
 Everything else is an entry in that map. The determinant gives the exponents, the fold gives the
 split, the twist gives the period, the closure gives the pattern, the horizon gives the edge, and the
 observer gives the reading. The four zones are the map's legend.
+
+
+**Universal invariant (UF-001):** the complete common invariant of a specified family of operations is its orbit quotient. The finite spectral-power specialization is arithmetic, not itself a geometric crease move. For a finite family of spectral power maps, the note derives a closed-form quotient representative, proves completeness on the abstract spectral-state graph, and records the total-collapse and all-powers no-go boundaries. See the root note `the-fold-universal-invariant.md` and its [full text](the-fold-universal-invariant.md); the standard-library experiment is [tools/fold_universal_invariant.py](tools/fold_universal_invariant.py). The theorem is a specialization of standard quotient and cyclic-group results, not a new prime-distribution theorem.
+
+
+**Geometric generator catalogue (UF-003):** the primitive planar Fold operations are available crease reflections; twists and rotations are their composites. For a finite closure D_m, the selected crease axes generate a subgroup determined by the gcd of their index differences. The minimum-axis solver reduces the catalogue problem to set cover. See `the-fold-geometric-generators.md` and `tools/fold_geometric_generators.py`.
+
+**Hexagonal lattice crease catalogue (UF-004):** the zero-lines of h(z)=Re(z^6) fix the six actual axes at 15°+30°j. The full unlabelled honeycomb uses all six; even-index creases preserve A/B, while odd-index creases exchange them. The determinant and sublattice signs are independent D6 characters. See `the-fold-hexagonal-lattice.md` and `tools/fold_hexagonal_lattice.py`.
+
+
+**Hexagonal lattice catalogue (UF-004):** the repository's height h(z)=Re(z^6) fixes the six crease axes at 15°+30°j. The six reflections generate D6; even-index creases preserve the honeycomb A/B labels, while odd-index creases exchange them. The two sign characters (determinant and sublattice) are independent. See the-fold-hexagonal-lattice.md and tools/fold_hexagonal_lattice.py.
+
+
+**Periodic network classification (UF-005):** a periodic crease graph has a wallpaper symmetry group with a rank-two translation subgroup and finite point quotient. Signed height and site decorations define characters when each is transformed globally by a sign; the subgroup preserving all decorations is the kernel of their combined character map. The finite-torus solver tests square, triangular, and generic oblique examples. See the-fold-periodic-networks.md and tools/fold_periodic_networks.py.
+
+
+**Frieze and wallpaper characters (UF-006):** when a signed height is periodic under the full translation subgroup T, its sign homomorphism factors through the finite point group P=W/T. This remains true for nonsplit wallpaper extensions. The seven frieze groups give 17 translation-trivial character maps; the 17 wallpaper types give 46. Glide reflections may reverse height once while their squares preserve it. See `the-fold-frieze-wallpaper-characters.md` and `tools/fold_frieze_wallpaper_characters.py`.
+
+
+**Forced zeros and crease topology (UF-007):** anti-symmetries force their fixed sets into the height zero set. A connected crease network supports a continuous scalar height that changes sign across every crease iff its face dual is bipartite; the network then determines its sign character. In the D6 model, the three nontrivial characters have sharp minimal polynomial degrees 6, 3, and 3. See the-fold-forced-zero-topology.md and tools/fold_forced_zero_topology.py.
+
+
+**Smooth and analytic Fold heights (UF-008):** for finite networks of regular smooth branches, bipartiteness of the face dual is equivalent to existence of a global smooth sign-changing height. A vertex with q smooth branches forces vanishing order at least q, sharply attained by the local product. Fourier projection realizes every real sign character of a finite periodic point group by a nonzero real-analytic periodic function. Exact realization of a preselected zero network remains a stronger problem. See the-fold-smooth-analytic-heights.md and tools/fold_smooth_analytic_heights.py.
+
+
+**Exact analytic crease networks (UF-009):** for compact nonsingular global real-analytic surfaces and locally principal analytic crease divisors, a bipartite face dual supplies the disconnection and vanishing mod-2 class hypotheses of the Acquistapace–Díaz-Cano global-principality theorem. Hence the network is the exact zero divisor of a global real-analytic function, with multiplicity one on each irreducible crease component. A finite character-weighted group average imposes the induced symmetry without changing zeros. Paired rational line families also have an explicit sine-product construction. See `the-fold-exact-analytic-networks.md` and `tools/fold_exact_analytic_networks.py`.
+
+
+
+**Weighted analytic crease divisors (UF-010):** for D=ΣmᵢCᵢ, only components with odd multiplicity control sign changes. Under the global-principality hypotheses, D is principal iff its mod-2 divisor class vanishes and removing its odd support disconnects X, with each component ideal locally principal. All-even divisors have positive analytic equations without a separation condition. Two disjoint nonseparating loops can separate collectively, while three parallel odd loops fail the mod-2 test. See `the-fold-divisor-parity-classification.md` and `tools/fold_divisor_parity_classification.py`.
+
+
+**Local principality and normalization (UF-011):** the key local test is μ(I)=dim_k(I/mI). The source-paper cone X:z²=x⁴+y⁴ is normal but the divisor Y:x=0,z=y² has local ideal (x,z-y²) with two minimal generators, so normalization is the identity and does not repair it. A cusp's intrinsic point ideal (t²,t³) becomes (t²) after normalization, recording order two. A weighted blow-up chart makes the cone divisor's strict transform locally principal. See the-fold-local-principality-resolution.md and tools/fold_local_principality_resolution.py.
+
+
+**Exceptional intersection lattices (UF-012):** if D is principal downstairs, its strict transform has an integral exceptional valuation correction a satisfying Ma=-b, where M is the negative-definite exceptional intersection matrix and b_j=(D~.E_j). The cokernel gives the complete local class obstruction for rational singularities under standard hypotheses; for the UF-011 simple-elliptic E7-tilde cone it is only the finite numerical quotient Z/2, with a degree-zero Picard contribution remaining. See the-fold-exceptional-lattices-class-groups.md and tools/fold_exceptional_lattice_obstruction.py.
+
+
+**Equivariant resolution and Fold characters (UF-013):** the cone X:z²=x⁴+y⁴ admits a natural D4 action by signed permutations of x,y. Its unique exceptional curve is fixed, so the rank-one lattice action is trivial, while the elliptic curve action is nontrivial. The exact principal height h=xy transforms by χ(r)=-1, χ(s)=+1, with four strict-transform intersections and exceptional correction a=2. A general invariant principal divisor admits a prescribed character generator only when its unit cocycle can be adjusted by a unit. See `the-fold-equivariant-resolution-symmetry.md` and `tools/fold_equivariant_resolution.py`.
+
+
+**Complete analytic D4 character classification (UF-014):** on X:z²=x⁴+y⁴, every convergent scalar semi-invariant has the unique form h=ΔχF(p,z), where p=x²+y², F is an arbitrary invariant analytic germ, and Δχ is 1, xy, x²−y², or xy(x²−y²) for the four one-dimensional D4 characters. The theorem covers all analytic germs, not just polynomials. On forced reflection supports, multiplicities are 1+2k independently on each D4 branch orbit. See the-fold-d4-analytic-character-classification.md and tools/fold_d4_analytic_character_classification.py.
+
+
+**Complete analytic D4 representation decomposition (UF-015):** the cone coordinate ring is free of rank eight over its invariant analytic ring A=K{p,z}. Its explicit A-basis consists of four scalar relative invariants and two E-covariant pairs V1=(x,y), V3=(xy²,x²y). Thus the two-dimensional irreducible occurs with multiplicity two, and every E-covariant is a unique A-linear combination of V1 and V3. See the-fold-d4-analytic-representation-decomposition.md and tools/fold_d4_analytic_representation_decomposition.py.
+
+
+**Complete multiplication algebra (UF-016):** over A=K{p,z}, with q=(p²−z²)/2, the cone algebra is generated by commuting multiplication operators Mx and My on an explicit rank-eight basis. They satisfy Mx²+My²=pI and Mx²My²=qI; their matrices determine every product. The generic joint spectrum reconstructs the D4 orbit fiber. See the-fold-multiplication-algebra.md and tools/fold_multiplication_algebra.py.
+
+
+**Fold trace discriminant (UF-017):** in the rank-eight basis, det(Tr(b_i b_j))=2^16 q^4(p²−4q)^4. The quotient Jacobian is J=4xy(x²−y²), so its pullback satisfies det(B)=J^8. The reduced branch components map from the four D4 reflection lines. See `the-fold-discriminant-spectral-geometry.md` and `tools/fold_discriminant_trace.py`.
+
+
+**Local algebra and Jordan strata (UF-018):** generic points on either discriminant branch have four geometric points of local length two and trace rank four. Their multiplication Jordan types differ: q=0 gives [2,2,1,1,1,1], while p²−4q=0 gives [2,2,2,2]. At the vertex there is one length-eight point, trace rank one, and Jordan type [4,4] for both coordinate operators. See `the-fold-local-algebra-jordan-strata.md` and `tools/fold_local_algebra.py`.
+
+
+**Vertex Hilbert function (UF-019):** the local algebra at p=q=0 has Hilbert function (1,2,2,2,1), embedding dimension two, Loewy length five, and one-dimensional socle generated by x³y. See `the-fold-vertex-hilbert-function.md` and `tools/fold_vertex_hilbert.py`.
+
+**Simultaneous multiplication and Frobenius arithmetic (UF-020):** the commuting multiplication pair (Mx,My) together with its cyclic unit vector is a complete invariant of the based algebra. The coefficient functional extracting x³y gives a perfect Frobenius pairing with Gram determinant 1 over every characteristic. Thus the local algebra itself has no exceptional prime in these invariants; characteristic 2 is exceptional for the D4 quotient differential, whose Jacobian vanishes there. The odd-characteristic fiber classification remains open. See `the-fold-simultaneous-frobenius-arithmetic.md` and `tools/fold_simultaneous_frobenius.py`.
+
+**Residue-characteristic classification (UF-021):** the monic presentation x⁴−px²+q=0 with y²=p−x² proves every fiber has length eight in every characteristic. In odd characteristic, the two discriminant branches and the three previously identified fiber strata persist without additional exceptional residue primes. In characteristic two, the quotient Jacobian vanishes identically and every fiber is non-étale, although the rank-eight algebra and its vertex Frobenius pairing survive. See `the-fold-residue-characteristics.md` and `tools/fold_residue_characteristics.py`.
+
+**Modular D4 symmetry and eigenprimes (UF-022):** in every odd characteristic, the vertex algebra is the D4 coinvariant algebra and carries the regular representation 1⊕χ₁⊕χ₂⊕χ₃⊕2E. In characteristic two, sign changes become trivial, the action factors through coordinate swap, and the four sign characters collapse. Thus 2 is the unique modular eigenprime for this specified integral D4 module. See `the-fold-modular-d4-eigenprimes.md` and `tools/fold_modular_d4.py`.
+
+**Explicit D4 character projectors (UF-023):** with r(x,y)=(-y,x), s(x,y)=(x,-y), the four one-dimensional projectors are Pε,δ=(1/8)(I+εR+R²+εR³)(I+δS), and the two-dimensional isotypic projector is PE=(1/2)(I−R²). In odd characteristic they have ranks 1,1,1,1,4 and sum to identity. In characteristic two, r becomes coordinate swap, s becomes trivial, and the fixed space has dimension six with two nontrivial 2D indecomposable blocks. The decomposition is representation-theoretic, not a product decomposition of the algebra. See `the-fold-d4-character-projectors.md` and `tools/fold_d4_character_projectors.py`.
+
+**D4-isotypic multiplication tensor (UF-024):** an explicit basis is 1, x², xy, x³y, x, y, x³, −x²y. The four character lines are represented by 1, x², xy, x³y, and the two E copies by (x,y) and (x³,−x²y). The complete multiplication table shows how these representation summands couple; in particular E₁E₂ maps by an alternating determinant pairing to the socle character line. The isotypic decomposition is not a product decomposition. See `the-fold-d4-multiplication-tensor.md` and `tools/fold_d4_multiplication_tensor.py`.
+
+**Graded automorphism group (UF-025):** the homogeneous presentation C=k[x,y]/(x²+y²,x⁴) yields a graded linear automorphism group whose orthogonal part is dihedral of order 16, up to scalar dilations. It strictly contains the original signed-permutation D4: the 45-degree change x↦x−y, y↦x+y preserves the ideal after rescaling the quadratic relation. This classifies graded linear automorphisms only, not all nonlinear automorphisms. See `the-fold-graded-automorphism-group.md` and `tools/fold_graded_automorphisms.py`.
+
+**Complete nonlinear automorphism group (UF-026):** the kernel of the linear-part map consists exactly of the seven-parameter substitutions
+`X=x+αx²+βxy+γx³+δx²y+ux³y`,
+`Y=y−βx²+αxy−δx³+ηx²y+vx³y`.
+It is a 7-dimensional unipotent group. The full automorphism group is its semidirect product with the graded linear group from UF-025, hence has algebraic-group dimension 8. See `the-fold-nonlinear-automorphism-group.md` and `tools/fold_nonlinear_automorphisms.py`.
+
+**Unipotent automorphism group law (UF-027):** the composition of the seven-parameter identity-linear automorphisms is now given by an explicit polynomial law on k⁷. The first two parameters add; higher coordinates acquire quadratic and cubic corrections. The SymPy verifier checks all ten coefficient identities. See `the-fold-unipotent-group-law.md` and `tools/fold_unipotent_group_law.py`.
+
+**Lie algebra and exact commutators (UF-028):** the seven-dimensional nonlinear kernel is two-step nilpotent. Its Lie-algebra center equals its derived algebra and is the two-dimensional socle-translation space. The same is true at group level: the exact group commutator has only its final two coordinates nonzero, and every socle translation is a commutator. See `the-fold-unipotent-lie-algebra.md` and `tools/fold_unipotent_commutators.py`.
+
+**D16 representation on the nonlinear Lie algebra (UF-029):** conjugation decomposes the seven-dimensional Lie algebra multiplicity-free as E1 ⊕ E2 ⊕ χ ⊕ E3. The five-dimensional quotient by the center is E1 ⊕ E2 ⊕ χ, while the two-dimensional center is E3. The commutator pairing is D16-equivariant. See `the-fold-d16-lie-representation.md` and `tools/fold_d16_lie_representation.py`.
+\n\n**Modular Lie algebra:** the D16 decomposition is geometrically stable in every odd characteristic, while the integral commutator radical acquires the cubic character line in characteristic three. The bracket remains surjective; its center grows from dimension two to three. Characteristic two requires a separately constructed integral D16 model. See `the-fold-d16-modular-stability.md`.\n
