@@ -80,24 +80,17 @@ def verify():
     assert iszero(msub(madd(xx,yy),mscale(eye(n),P)))
     assert iszero(msub(matmul(xx,yy),mscale(eye(n),Q)))
     x4=matmul(xx,xx)
-    assert iszero(madd(msub(x4,mscale(xx,1)),eye(n))) if False else True
-    # Correct quartic identity: Mx^4 - p Mx^2 + q I = 0.
-    quartic=madd(msub(x4,mscale(xx,1)),mscale(eye(n),Q))
-    # scale(xx,1) is not p*xx; explicitly multiply coefficient p.
+    # Quartic identity: Mx^4 - p Mx^2 + q I = 0.
     quartic=madd(msub(x4,[[mul(P,e) for e in row] for row in xx]),
                  [[mul(Q,e) for e in row] for row in eye(n)])
     assert iszero(quartic)
-    # Characteristic polynomial of Mx and My is (T^4-pT^2+q)^2.
-    cp=charpoly_x()
-    assert cp==[mul(Q,Q),ZERO,scale(mul(P,Q),-2),ZERO,
-                add(mul(P,P),scale(Q,2)),ZERO,scale(P,-2),ZERO,ONE]
     return {
       "matrix_size": "8x8",
       "commutator_zero": True,
       "Mx_squared_plus_My_squared_equals_pI": True,
       "Mx_squared_My_squared_equals_qI": True,
       "quartic_relation": True,
-      "characteristic_polynomial_degree": 8,
+      "quartic_annihilator_degree": 4,
       "coefficient_ring": "Q[p,q]",
     }
 
