@@ -1772,3 +1772,17 @@ The exact symbolic calculation is documented in the-fold-char2-affine-rank-drop-
 **Still open UF-062B:** determine the rank-drop ideal for the full determinant-open affine family with arbitrary reduced coefficients a,b,i.
 
 **Still open UF-062C:** stratify all lower-rank loci inside E=0 and compute the universal orbit-image kernel and its largest Hopf ideal. The coefficient-matrix determinantal ideal is not itself the orbit-image kernel.
+
+
+## G-3b — Scheme-theoretic normalizers for all four product Hopf laws
+
+**Correction.** A first mixed-case argument incorrectly inferred that cross-homomorphisms vanish from their geometric points. Over nonreduced coefficient algebras, infinitesimal cross-homomorphisms exist. The corrected calculation is in the-fold-char2-hopf-normalizers-all-four.md.
+
+For each group law G, the translation centralizer is exactly G and the normalizer is (G\rtimes\operatorname{Aut}_{\mathrm{grp}}(G)).
+
+- For alpha_4 x alpha_2, Aut_grp(G) has reduced/tangent dimensions (5,6).
+- For mu_4 x alpha_2, the infinitesimal cross-map t↦1+r z with r²=0 gives Aut_grp(G) with underlying scheme C2 x G_m x alpha_2, dimensions (1,2).
+- For alpha_4 x mu_2, the cross-map t↦1+p x+q x²+pq x³ with p²=q²=0 gives Aut_grp(G) with underlying scheme Aut(alpha_4) x Spec(k[p,q]/(p²,q²)), dimensions (2,4), with its semidirect composition law.
+- For mu_4 x mu_2, Aut_grp(G)=D8 as a constant finite étale group scheme, dimensions (0,0).
+
+The mixed automorphism group schemes are non-smooth; their infinitesimal cross terms are invisible on field-valued points. The initial no-cross-homomorphism claim is withdrawn.
