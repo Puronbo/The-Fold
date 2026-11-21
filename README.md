@@ -247,6 +247,7 @@ author. The CMB enters as a rhyme; the exact physics is standard cosmology. See 
 | decomposing the complete analytic D4 representation ring on the cone | `the-fold-d4-analytic-representation-decomposition.md` |
 | deriving the complete multiplication algebra of the Fold cone | `the-fold-multiplication-algebra.md` |
 | deriving the trace discriminant and spectral branch geometry | `the-fold-discriminant-spectral-geometry.md` |
+| classifying local algebras and Jordan strata of Fold fibers | `the-fold-local-algebra-jordan-strata.md` |
 | the interactive models | the nine HTML files |
 
 ## Contents
@@ -593,3 +594,6 @@ observer gives the reading. The four zones are the map's legend.
 
 
 **Fold trace discriminant (UF-017):** in the rank-eight basis, det(Tr(b_i b_j))=2^16 q^4(p²−4q)^4. The quotient Jacobian is J=4xy(x²−y²), so its pullback satisfies det(B)=J^8. The reduced branch components map from the four D4 reflection lines. See `the-fold-discriminant-spectral-geometry.md` and `tools/fold_discriminant_trace.py`.
+
+
+**Local algebra and Jordan strata (UF-018):** generic points on either discriminant branch have four geometric points of local length two and trace rank four. Their multiplication Jordan types differ: q=0 gives [2,2,1,1,1,1], while p²−4q=0 gives [2,2,2,2]. At the vertex there is one length-eight point, trace rank one, and Jordan type [4,4] for both coordinate operators. See `the-fold-local-algebra-jordan-strata.md` and `tools/fold_local_algebra.py`.
