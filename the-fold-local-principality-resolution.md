@@ -49,7 +49,7 @@ so the divisor is not locally principal at the origin. This is a direct local-al
 
 ### The surface is already normal
 
-The complexified local hypersurface ring is a domain: x⁴+y⁴ is not a square in C{x,y}, so z²-(x⁴+y⁴) is irreducible. It is a hypersurface, hence Cohen–Macaulay and satisfies S2. Its Jacobian
+The complexified local hypersurface ring is a domain: over C, x⁴+y⁴ factors into four distinct linear factors, so it is not a square even in the fraction field of C{x,y}. Hence z²-(x⁴+y⁴) is irreducible. It is a hypersurface, hence Cohen–Macaulay and satisfies S2. Its Jacobian
 
 \[
 (-4x^3,-4y^3,2z)
