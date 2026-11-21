@@ -56,3 +56,8 @@ Therefore this minor is not the zero polynomial on the reduced parameter space. 
 The proof is a specialization certificate: one admissible specialization with a nonzero maximal minor proves the generic-rank lower bound, and the number of columns gives the matching upper bound. The determinant calculation uses exact arithmetic in (mathbb F_2) and the truncated monomial relations. No numerical approximation is involved.
 
 **Open UF-062:** determine the determinantal rank-drop locus of the (16\times15) coefficient matrix over the reduced affine/U parameter space, identify the vanishing ideal of its maximal minors, and then compute the scheme-theoretic orbit-image kernel and its Hopf core.
+
+
+## 5. Reproducible exact verifier
+
+Added tools/fold_char2_affine_coefficient_matrix_rank.py. It reconstructs the specialization directly in the truncated polynomial ring F₂[x,z,c,d,h]/(x⁴,z²,c⁴,d²,h²), applies the correctly ordered conjugation, extracts the 16-by-15 coefficient matrix, omits the epsilon-prime row, and performs exact Gaussian elimination over F₂. The verifier asserts that the determinant is 1. It uses only the Python standard library.
