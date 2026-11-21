@@ -24,7 +24,7 @@ The zero-set network and its signed height are different objects. A transformati
 
 ## 2. The wallpaper group of the network
 
-Let \(W_C\) be the group of Euclidean isometries of the plane that preserve the full periodic lift of the embedded network and its incidence structure. Its pure translations form a rank-two lattice
+Assume the network is nondegenerate, so its full symmetry group is discrete. Let \(W_C\) be the group of Euclidean isometries of the plane that preserve the full periodic lift of the embedded network and its incidence structure. Its pure translations form a rank-two lattice
 
 \[
 T_C=W_C\cap\operatorname{Trans}(\mathbb R^2).
@@ -111,7 +111,7 @@ When \(c\) is nonzero, the sign is unique and the same proof shows that \(\chi_c
 \boxed{\chi=(\chi_h,\chi_c):G\to(\mathbb Z/2)^2.}
 \]
 
-For \(k\) independent binary decorations, the same construction gives
+Identify \(\{+1,-1\}\) with \(\mathbb Z/2\) by \(+1\mapsto0\) and \(-1\mapsto1\). Under this identification, the sign tuples become elements of \((\mathbb Z/2)^k\). For \(k\) independent binary decorations, the same construction gives
 
 \[
 \chi:G\to(\mathbb Z/2)^k.
