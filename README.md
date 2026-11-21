@@ -698,3 +698,6 @@ It is a 7-dimensional unipotent group. The full automorphism group is its semidi
 **UF-050 — Associated graded of the second-Frobenius candidate:** proves that the Frobenius candidate's coordinate algebra is the reduced candidate coordinate algebra tensored with T=k[c,d₀,h]/(c⁴,d₀²,h²). It therefore retains the full nilpotent thickening, with graded ranks 1,3,4,4,3,1. This does not prove that the minimal normal closure has the same thickening. See `the-fold-char2-frobenius-candidate-associated-graded.md`.
 
 **Open UF-051:** determine the degree-two nilradical relations imposed by the actual normal-closure Hopf ideal.
+
+
+**UF-051:** derives exact composition coproducts for c,d₀,h and corrects the degree-two nilradical basis to c², cd₀, ch, d₀h. The conjugation coaction remains open. See `the-fold-char2-quadratic-nilradical-coproduct.md`.
