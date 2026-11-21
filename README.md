@@ -710,3 +710,6 @@ It is a 7-dimensional unipotent group. The full automorphism group is its semidi
 
 
 **UF-052 second-order completion:** the inverse constant coefficient d₋ has a nonzero quadratic correction. The h-coordinate formula has been corrected modulo n³ in Section 8 of the conjugation-coaction paper; ch and d₀h are not independently detected by that coordinate at this order.
+
+
+**UF-052 inverse audit:** the explicit Section 8 h-coordinate formula was withdrawn because inverse coefficients a₋ and h₋ have first-order feedback from the nonlinear coproduct term S=c₋h₋+d₋a₋. Section 9 records the coupled recursion modulo n³. The degree-two coefficient-span conclusion remains open.
