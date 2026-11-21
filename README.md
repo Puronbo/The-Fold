@@ -713,3 +713,6 @@ It is a 7-dimensional unipotent group. The full automorphism group is its semidi
 
 
 **UF-052 inverse audit:** the explicit Section 8 h-coordinate formula was withdrawn because inverse coefficients a₋ and h₋ have first-order feedback from the nonlinear coproduct term S=c₋h₋+d₋a₋. Section 9 records the coupled recursion modulo n³. The degree-two coefficient-span conclusion remains open.
+
+
+**UF-053 partial result:** the corrected coupled inverse computation yields the rank-three coefficient module ⟨c², cd₀, d₀h⟩ from the conjugate's three nilpotent coordinate functions in gr². The remaining direction ch is not detected by those three outputs; the other target coordinates and Hopf core remain open. See Section 10 of `the-fold-char2-quadratic-conjugation-coaction.md`.
