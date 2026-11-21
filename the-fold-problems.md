@@ -2023,3 +2023,10 @@ Every G_C-torsor is represented by `u⁴=a, v²=b`, with action `(u,v)·(r,s)=(u
 Every G_D-torsor is represented by `u²=a, v⁴=b`, with action `(u,v)·(r,s)=(u+s,v+r+us)` and parameter relation `(a,b)~(a+q²,b+q⁴a²+p⁴)`. Its addition is `(a+a',b+b'+a²a'²)`. The models, canonical-map inverses, completeness, and equivalence proofs are in `the-fold-char2-nonproduct-torsor-models.md`.
 
 The explicit G_C/G_D torsor models are checked by `tools/fold_char2_nonproduct_torsor_models.py`; the exact symbolic identities were executed over F₂.
+
+
+## G-4e — Explicit mixed-family torsors
+
+When `c²+a d²+d=lambda`, the scheme `u⁴=a, v²=q` is a `G_lambda`-torsor under `(u,v)·(r,t)=(u+r, v t(1+(c+d u²)r²))`. The action law is exactly the quaternion splitting equation; the canonical action map has inverse `r=u'+u`, `t=(v'/v)(1+(c+d u²)r²)`. Varying `q` modulo squares gives the full fiber over the quotient torsor. See `the-fold-char2-mixed-torsor-models.md`.
+
+Verifier: `tools/fold_char2_mixed_torsor_models.py`.
