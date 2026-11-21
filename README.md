@@ -1023,3 +1023,7 @@ The note also establishes a concrete characteristic-two direction: C_k ≅ k[x,z
 ### UF-064 — First-order nilpotent coefficient map
 - Computes the complete linear c,d,h layer of the full-affine conjugation target coefficients.
 - Shows generic rank three via the explicit minor A²atC, while keeping higher nilpotent layers open.
+
+
+### UF-064 correction
+The complete first-order c,d,h coefficient map in both conjugated coordinates is recorded in the affine coefficient paper. The initial table was corrected: X' also has linear nilpotent terms. The generic rank-three minor A²atC remains valid.
