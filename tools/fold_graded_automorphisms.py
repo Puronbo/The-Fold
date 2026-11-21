@@ -35,16 +35,29 @@ xp = add(x, scale(y, -1))  # x-y
 yp = add(x, y)             # x+y
 
 
-def power(poly, n):
+def raw_mul(A, B):
+    out = {}
+    for (i, j), a in A.items():
+        for (k, ell), b in B.items():
+            mon = (i + k, j + ell)
+            out[mon] = out.get(mon, Fraction(0)) + a * b
+    return {m: c for m, c in out.items() if c}
+
+
+def raw_power(poly, n):
     out = {(0, 0): Fraction(1)}
     for _ in range(n):
-        out = mul(out, poly)
+        out = raw_mul(out, poly)
     return out
 
 
 def main():
-    # The additional 45-degree generator preserves q up to a unit.
-    assert add(power(xp, 2), power(yp, 2)) == scale(q, 2)
+    # Check the polynomial identity q(x-y,x+y)=2q before quotienting.
+    q_raw = add(raw_power(x, 2), raw_power(y, 2))
+    q_image = add(raw_power(xp, 2), raw_power(yp, 2))
+    assert q_image == scale(q_raw, 2)
+
+    # The fourth powers vanish after reduction by y^2=-x^2, x^4=0.
     assert power(xp, 4) == {}
     assert power(yp, 4) == {}
 
