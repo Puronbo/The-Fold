@@ -167,3 +167,50 @@ at(Bi+Gb)&at(Bb+Di+Gb)&C
 Since \(a,t\) are units, the first-order map has rank three on the open locus \(AC\ne0\).
 
 This computes exactly the \(\mathfrak n/\mathfrak n^2\) layer only. It does not determine the quadratic and higher nilpotent layers, the full coefficient module, the universal orbit-image kernel, or its Hopf core.
+
+
+## 8. UF-065 — Complete quadratic nilpotent layer
+
+For compactness put
+\[
+Q=Ab+Ci,\quad R=Di^2+Gb^2+Gbi,\quad
+S=Ei+Jb,\quad T=Bb+Di+Gb.
+\]
+The coefficient vectors of the four degree-two nilpotent monomials
+\(c^2,cd,ch,dh\), across all sixteen target coefficients, are as follows. Entries not shown are zero.
+
+\[
+\begin{array}{c|cccc}
+X'&[c^2]&[cd]&[ch]&[dh]\\ \hline
+c'&A/a&Q/(ai)&0&0\\
+a'&t(Bi+Gb)&0&Q/(ai)&bQ/(ai^2)\\
+b'&R/(ai)&0&bQ/(a^2i)&b^2Q/(a^2i^2)\\
+\alpha'&0&atS&bt^2(Bi+Gb)&bt^2T\\
+\beta'&0&0&atS&abt^2S\\
+\gamma'&S&0&0&0\\
+\delta'&0&0&btS&b^2t^2S\\
+\epsilon'&0&0&0&0
+\end{array}
+\]
+
+\[
+\begin{array}{c|cccc}
+Z'&[c^2]&[cd]&[ch]&[dh]\\ \hline
+d'&0&A t&0&0\\
+h'&Gat&0&At&Q t^2\\
+i'&B+G+Gbt&0&Q/(ai)&bQ/(ai^2)\\
+\phi'&0&Ja^2t&at^2(Bi+Gb)&at^2T\\
+\psi'&0&0&Ja^2t&a^2t^2S\\
+\eta'&Ja&0&0&0\\
+\theta'&0&0&atS&abt^2S\\
+\kappa'&0&0&0&Ea^2
+\end{array}
+\]
+
+The \([ch]\)-columns reproduce UF-060 exactly, providing an internal cross-check against the independently derived full mixed coefficient. The degree-two coefficient vectors are generically independent. Indeed, the minor using the four \(X'\)-rows \((c',a',b',\alpha')\), with columns \((c^2,cd,ch,dh)\), is
+\[
+\frac{bQ^2TR}{a^3i^5}
+\]
+in characteristic two. It is nonzero on the dense open locus \(bQTR\ne0\), so the quadratic associated-graded coefficient map has generic rank four.
+
+This result concerns the degree-two layer \(\mathfrak n^2/\mathfrak n^3\) only. It does not imply that the full coefficient module has rank seven: interactions with higher layers and relations among coefficient functions still require separate analysis.
