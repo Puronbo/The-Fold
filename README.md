@@ -798,3 +798,12 @@ Thus ch appears in twelve of the sixteen target coefficient functions and vanish
 Added `the-fold-automorphic-and-hopf-galois-applicability.md`, an applicability audit of the four-page RH/GRH research announcement at alpo.ge/remark.pdf. It distinguishes automorphic forms/representations from algebra automorphisms, concludes that theta lifts and adelic machinery do not directly apply to the finite Fold algebra without additional global arithmetic structure, and identifies determinant, representation, and integral-lattice methods as methodological parallels.
 
 The note also establishes a concrete characteristic-two direction: C_k ≅ k[x,z]/(x⁴,z²) admits the primitive Hopf structure of O(α₄×α₂), giving a rank-eight finite connected group scheme and a Hopf–Galois torsor structure via the regular coaction. This is characteristic-two-specific and does not identify the full automorphism group scheme with the translation subgroup. Suggested follow-ups cover exact verification, normalizers/centralizers, Hopf-structure classification, and descent/twists.
+
+
+### G-1/G-2 — Hopf–Galois structure and translation normalizer
+- Verifies the primitive Hopf algebra structure on (k[x,z]/(x^4,z^2)), identifying (G=alpha_4\times\alpha_2).
+- Gives the Hopf–Galois canonical map and its antipode inverse; an exact 64-by-64 matrix verifier over (mathbb F_2) confirms full rank.
+- Proves functorially that the translation subgroup's centralizer in the full automorphism scheme of (operatorname{Spec}(A)) is exactly (G), and its normalizer is (G\rtimes\operatorname{Aut}_{\mathrm{grp}}(G)).
+- Computes (operatorname{Aut}_{\mathrm{grp}}(G)=operatorname{Spec} k[a^{\pm1},f^{\pm1},b,c,d,e]/(d^2)), with reduced dimension 5 and tangent dimension 6.
+- Adds `the-fold-char2-hopf-galois-normalizer.md` and `tools/fold_char2_hopf_galois.py`.
+- Computes fixed-group-scheme torsor classes over a characteristic-two field: (H^1_{\mathrm{fppf}}(k,G)\cong(k/k^4)\times(k/k^2)). This does not classify all algebra forms or all Hopf structures.
