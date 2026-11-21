@@ -991,3 +991,12 @@ The note also establishes a concrete characteristic-two direction: C_k ≅ k[x,z
 - Adds `the-fold-char2-mixed-hopf-normalizer.md`.
 
 - Exhibits a nonzero boundary over `k=F₂(s,t)`: for `lambda=s`, the class `Q(t,s)` is nonsplit by a valuation-at-infinity argument, so the `alpha₄`-torsor `u⁴=t` does not lift.
+
+
+### G-4f — Arithmetic of the quaternion boundary
+- Describes the image for lambda nonzero as the fixed-second-slot symbol subgroup
+  `{[b,lambda)_2 : b in k}`, and records the exact affine kernel criterion.
+- Gives a valuation proof that `[st,s)_2` is nonzero over `F₂(s,t)`.
+- Shows that adjoining `sqrt(lambda)` kills the entire boundary map, and records
+  the remaining field-uniform kernel problem.
+- Adds `the-fold-char2-quaternion-boundary-arithmetic.md`.
