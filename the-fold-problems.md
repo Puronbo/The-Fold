@@ -1378,3 +1378,23 @@ This is the exact polynomial group law on the seven-dimensional unipotent kernel
 See `the-fold-unipotent-group-law.md` and `tools/fold_unipotent_group_law.py`.
 
 **Open problem UF-027-A:** compute inverse and commutator formulas, center, derived subgroup, and lower central series; compare with the m-adic filtration and the D16 action.
+
+
+## UF-028 — Lie algebra and commutator structure
+
+The Lie algebra of the seven-dimensional kernel has bracket
+\[
+[D_1,D_2](x)=\omega_u x³y,\qquad [D_1,D_2](y)=\omega_v x³y,
+\]
+with
+\[
+\begin{aligned}
+\omega_u={}&a₁d₂-a₂d₁+2b₁c₂-b₁e₂-2b₂c₁+b₂e₁,\\
+\omega_v={}&-a₁c₂+2a₁e₂+a₂c₁-2a₂e₁-b₁d₂+b₂d₁.
+\end{aligned}
+\]
+Its center and derived algebra coincide and are two-dimensional. At group level the exact commutator is a socle translation; the center and derived subgroup are both precisely the socle-translation subgroup. Thus the nonlinear kernel has nilpotency class two.
+
+See `the-fold-unipotent-lie-algebra.md` and `tools/fold_unipotent_commutators.py`.
+
+**Open problem UF-028-A:** determine the D16 representation on the Lie algebra, its quotient by the center, and the center itself; establish equivariance of the commutator pairing.
