@@ -1003,3 +1003,29 @@ Full proofs, D6 formulas, polynomial sharpness, topological construction, exampl
 **Important boundary.** Fourier projection guarantees an analytic periodic representative for each algebraically allowed character, but it does not guarantee that the zero set equals an arbitrarily prescribed crease network. Exact global analytic zero-divisor realization remains open in this project. Smooth sufficiency also depends on the regular-branch hypotheses; arbitrary singular graphs need separate treatment.
 
 Proofs, local models, Fourier construction, references, and bounded tests are in the-fold-smooth-analytic-heights.md and tools/fold_smooth_analytic_heights.py.
+
+
+## UF-009 — Exact analytic zero-set realization of periodic crease networks
+
+**Question.** When is a periodic crease network the exact zero set of one global real-analytic scalar height, rather than merely contained in the zero set of a symmetry-compatible function?
+
+**Analytic-principality theorem.** Let X be a compact nonsingular pure two-dimensional global real-analytic set and C a compact locally principal real-analytic divisor. If the face-adjacency dual D(C) is bipartite, its face colouring shows that X\C is disconnected and that the mod-2 divisor class [C] vanishes in H_1(X;Z_2). By the global-principality theorem of Acquistapace–Díaz-Cano, C is the exact zero divisor of a global real-analytic function. Their generic-equation result allows multiplicity one along each irreducible crease component, so the function changes sign across every regular crease arc.
+
+**Converse.** Any scalar function with exact zero set C and sign reversal across every crease induces a two-colouring of adjacent faces. Thus the dual must be bipartite. Under the stated locally principal analytic hypotheses, bipartiteness is therefore necessary and sufficient.
+
+**Equivariant exact realization.** If a finite analytic symmetry group preserves C and D(C) is connected and bipartite, the unique face bipartition induces a character chi_C. From an exact analytic height h_0 construct
+\[
+H(x)=\sum_{g\in G}\chi_C(g)h_0(gx).
+\]
+Every summand has the same sign on each face, so the sum has no extra zeros and still vanishes exactly on C. Reindexing the sum proves H(ax)=chi_C(a)H(x). This produces an exact analytic height with the network-induced character.
+
+**Explicit torus products.** For primitive integer covectors n_j and an even number of distinct levels c_{j,l} modulo one in each direction family, the function
+\[
+h(x,y)=\prod_j\prod_{l=1}^{2r_j}
+\sin(\pi(n_j\cdot(x,y)-c_{j,l}))
+\]
+is globally periodic, real analytic, and has exactly the prescribed paired affine circles as its zero set. At a transverse intersection of q distinct families its vanishing order is q. The UF-008 square and triangular examples are special cases.
+
+**Scope.** The theorem applies to compact nonsingular global real-analytic surfaces and compact locally principal real-analytic crease divisors. It does not yet classify non-locally-principal singularities, noncompact covers, prescribed higher odd multiplicities, or networks with disconnected duals and nontrivial component permutations.
+
+Full proof, cited analytic-principality input, exact products, equivariant averaging, and tests are in the-fold-exact-analytic-networks.md and tools/fold_exact_analytic_networks.py.
