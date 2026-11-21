@@ -2086,3 +2086,8 @@ The full-affine (ch)-coefficient vector vanishes identically across the sixteen 
 A=C=J=E=0,qquad B+Gbt=0,
 ]
 where (t=i^{-1}). Outside this locus the mixed nilpotent monomial is detected by at least one target coordinate. This does not settle the full coefficient-module or Hopf-core computation. See the-fold-char2-full-affine-ch-coefficient.md.
+
+
+### UF-064 — First-order full-affine coefficient map
+
+The correctly ordered full determinant-open conjugation has no terms linear in c,d,h in X'. In Z', the coefficient matrix in the basis c,d,h is the table in Section 7 of the-fold-char2-full-affine-ch-coefficient.md. Its minor on rows z,x,xz is A²atC, so the first-order map has generic rank three. Higher nilpotent layers and the Hopf core remain open.
