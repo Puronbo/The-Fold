@@ -82,5 +82,21 @@ Therefore each structure makes Spec(A) a trivial H-torsor over k and A a Hopf–
 
 - Determine whether every commutative Hopf structure on A over an algebraically closed field is isomorphic to one of the four product structures, or construct counterexamples.
 - Classify non-product extensions of the rank-four and rank-two group schemes.
-- Compute the automorphism group schemes and translation normalizers for all four Hopf structures.
+- Compute the automorphism group scheme and translation normalizer of the new non-product cocycle group.
 - Study forms and twists over imperfect fields and mixed-characteristic bases.
+
+
+## G-3c — A fifth, non-product Hopf structure
+
+The same algebra also admits
+[
+\Delta(x)=x\otimes1+1\otimes x,qquad
+\Delta(z)=z\otimes1+1\otimes z+x^2\otimes x^2.
+]
+The coproduct is coassociative, preserves x⁴=z²=0, and has antipode S(x)=x, S(z)=z. Its group law is the central extension cocycle (x,z)+(x',z')=(x+x',z+z'+x²x'²).
+
+It is not isomorphic to any of the four product structures: its primitive space has dimension two (basis x,x²), its relative-Frobenius image is alpha_2, and its restricted Lie 2-power map is zero. These invariants distinguish it respectively from alpha_4 x alpha_2, the two mu_4 products, and alpha_4 x mu_2.
+
+The standard-library verifier tools/fold_char2_cocycle_hopf.py checks coassociativity, relations, counit, antipode, and primitive-space dimension exactly over F₂.
+
+**Open G-3c:** compute its automorphism group scheme and translation normalizer; classify its torsors; and determine whether additional non-product Hopf structures exist.
