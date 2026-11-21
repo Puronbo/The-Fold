@@ -926,3 +926,5 @@ The note also establishes a concrete characteristic-two direction: C_k ≅ k[x,z
 - For the rank-four extension E_lambda of alpha_2 by mu_2, proves `δ'_lambda([a])=0` iff `c²+a d²+d=λ` has a solution in k.
 - By Frobenius factorization, the same criterion governs the boundary for G_lambda-torsors under alpha_4.
 - Shows the boundary vanishes identically when λ is a square; the explicit Brauer-class representative remains open.
+
+- Adds `tools/fold_char2_mixed_torsor_boundary.py` to verify the action cocycle identity and the explicit boundary-vanishing equation.
