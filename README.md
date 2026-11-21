@@ -633,3 +633,5 @@ It is a 7-dimensional unipotent group. The full automorphism group is its semidi
 
 
 **Full automorphism functor across characteristics (UF-034):** the integral algebra is presented functorially by substitutions x↦X, y↦Y satisfying X²+Y² = X²Y² = 0, with automorphisms cut out by invertibility of the induced rank-eight linear map. The full derivation dimension is 8 in every odd characteristic and 16 in characteristic two. The characteristic-three center jump of the restricted seven-dimensional bracket algebra is a separate phenomenon. See `the-fold-full-automorphism-characteristics.md` and `tools/fold_full_automorphism_characteristics.py`.
+
+**Odd-characteristic full automorphisms (UF-035):** the full group is the seven-dimensional identity-linear unipotent kernel semidirect the one-dimensional scalar extension of D16. Its dimension and tangent dimension are both eight, proving smoothness in every odd characteristic. Characteristic two is the unique nonsmooth geometric fiber found so far; the characteristic-three bracket-center jump is separate. See `the-fold-odd-characteristic-automorphisms.md`.
