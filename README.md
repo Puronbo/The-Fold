@@ -555,3 +555,4 @@ observer gives the reading. The four zones are the map's legend.
 
 
 **Exact analytic crease networks (UF-009):** for compact nonsingular global real-analytic surfaces and locally principal analytic crease divisors, a bipartite face dual supplies the disconnection and vanishing mod-2 class hypotheses of the Acquistapace–Díaz-Cano global-principality theorem. Hence the network is the exact zero divisor of a global real-analytic function, with multiplicity one on each irreducible crease component. A finite character-weighted group average imposes the induced symmetry without changing zeros. Paired rational line families also have an explicit sine-product construction. See `the-fold-exact-analytic-networks.md` and `tools/fold_exact_analytic_networks.py`.
+
