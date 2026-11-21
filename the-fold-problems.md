@@ -1599,3 +1599,8 @@ The inverse constant expansion gives d₂ ≡ a(φc₁²+ηc₁d₁)/Δ mod n³.
 ### UF-052 inverse audit — coupled recursion
 
 The Section 8 explicit formula for S=c₋h₋+d₋a₋ is withdrawn: it omitted first-order feedback in a₋ and h₋ from the exact coproduct terms γS and ηS. Section 9 of `the-fold-char2-quadratic-conjugation-coaction.md` records the corrected coupled filtered system, including c₂,d₂,h₁,a₁ and S modulo n³. The quadratic coefficient span remains open; no conclusion about ch or d₀h is currently justified.
+
+
+### UF-053 — partial resolution: nilpotent-coordinate coefficient span
+
+The coupled inverse recursion in Section 9 of `the-fold-char2-quadratic-conjugation-coaction.md` simplifies to S=c₋h₋+d₋a₋ ≡ d₀/Δ + φi²c²/Δ³ mod n³. Taking homogeneous degree two in the universal conjugate coordinates c,d₀,h gives the coefficient module M₂=⟨c², cd₀, d₀h⟩ in gr²_n A, rank three. The class ch is not detected by these three output coordinates. This is not yet the full orbit-image ideal: the remaining target coordinates and then the Hopf-core operation must still be computed. See Section 10 of the UF-052 paper.
