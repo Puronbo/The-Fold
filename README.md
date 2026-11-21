@@ -630,3 +630,6 @@ It is a 7-dimensional unipotent group. The full automorphism group is its semidi
 
 
 **Characteristic-two automorphism group scheme (UF-033):** for C = k[x,z]/(x^4,z^2), the full derivation algebra has dimension 16. The automorphism scheme is cut out by three Frobenius-thickening equations, has reduced dimension 13 and tangent dimension 16, and is therefore non-smooth. This is larger than the seven-dimensional characteristic-zero unipotent subgroup. See `the-fold-char2-automorphism-scheme.md` and `tools/fold_char2_automorphism_scheme.py`.
+
+
+**Full automorphism functor across characteristics (UF-034):** the integral algebra is presented functorially by substitutions x↦X, y↦Y satisfying X²+Y² = X²Y² = 0, with automorphisms cut out by invertibility of the induced rank-eight linear map. The full derivation dimension is 8 in every odd characteristic and 16 in characteristic two. The characteristic-three center jump of the restricted seven-dimensional bracket algebra is a separate phenomenon. See `the-fold-full-automorphism-characteristics.md` and `tools/fold_full_automorphism_characteristics.py`.
