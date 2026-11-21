@@ -1490,3 +1490,16 @@ Proof and exact verifier: `the-fold-d4-characteristic-two.md`, `tools/fold_d4_ch
 Proof and structural verifier: `the-fold-char2-automorphism-scheme.md`, `tools/fold_char2_automorphism_scheme.py`.
 
 **Open problem UF-034:** determine the full automorphism group scheme over arbitrary characteristic and identify the integral closure of the characteristic-zero seven-dimensional unipotent subgroup inside it.
+
+
+## UF-034 — Full automorphism functor across characteristics
+
+**Theorem UF-034.1.** For (C_{\mathbb Z}=\mathbb Z[x,y]/(x^2+y^2,x^2y^2)), the endomorphism functor is represented by pairs (X,Y\in C_A) satisfying (X^2+Y^2=0) and (X^2Y^2=0). The automorphism locus is the open subset where the induced rank-eight linear map has unit determinant.
+
+**Theorem UF-034.2.** The full derivation algebra has dimension 8 in every odd characteristic and dimension 16 in characteristic two. The relation matrix after removing its common factor 2 has nonzero Smith invariants (1,1,1,1,1,1,1,2).
+
+The characteristic-three center enlargement of the seven-dimensional bracket algebra is distinct from this full tangent calculation.
+
+Proof and verifier: `the-fold-full-automorphism-characteristics.md`, `tools/fold_full_automorphism_characteristics.py`.
+
+**Open problem UF-035:** classify the reduced automorphism group in odd characteristic, establish smoothness, and identify the schematic closure of the characteristic-zero seven-dimensional unipotent subgroup over (\\mathbb Z).
