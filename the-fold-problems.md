@@ -1322,3 +1322,18 @@ All other products between non-unit basis vectors vanish.
 **Equivariant consequence.** Multiplication couples the character lines and E copies, so the isotypic decomposition is not a direct-product or ideal decomposition. In particular E₁·E₂ maps through the alternating determinant pairing to the socle character. The algebra multiplication tensor contains more information than the representation decomposition alone.
 
 The exact multiplication table and verifier are in `the-fold-d4-multiplication-tensor.md` and `tools/fold_d4_multiplication_tensor.py`. The next open problem is to compute the full automorphism stabilizer of this tensor and test whether D4 is intrinsically recoverable.
+
+
+## UF-025 — Graded automorphism group and enlargement beyond D4
+
+**Theorem UF-025.1.** In characteristic zero, every graded linear automorphism is A=tQ, where t∈k* and Q∈O(2,k) has first row (a,b) satisfying
+\[
+ab(a²-b²)=0.
+\]
+The orthogonal subgroup has 16 elements and is dihedral of order 16. The original signed-permutation D4 is an index-two subgroup.
+
+**Explicit extra symmetry.** The map x↦x−y, y↦x+y sends q=x²+y² to 2q and sends both fourth powers to zero in C. After normalization by √2 it is a 45-degree rotation of order eight, not contained in signed-permutation D4.
+
+**Scope.** This determines the graded linear automorphism group, not the full possibly nonlinear algebra automorphism group. It shows D4 is not the full graded symmetry group; further intrinsic recovery requires additional data such as chosen axes or quotient-map structure.
+
+See `the-fold-graded-automorphism-group.md` and `tools/fold_graded_automorphisms.py`.
