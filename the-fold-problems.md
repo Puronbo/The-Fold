@@ -2009,3 +2009,8 @@ The non-product central extensions have exact fppf torsor sequences:
 Both are short exact because the quotient has no nonidentity k-points and `H²(k,α₂)=H²(k,α₄)=0`. Since both groups are killed by two, the sequences split noncanonically as F₂-vector spaces. Thus their abstract H¹ groups agree with that of the product `α₄×α₂`, although the group schemes differ. Full proof: `the-fold-char2-nonproduct-torsor-classes.md`.
 
 The `G_lambda` automorphism proof now explicitly excludes a possible additive component in the image of `t` by comparing the mixed tensor summands. The composition convention is stated at the ring-map level, and the symbolic verifier checks the full substitutions and inverse, not only preservation of the defining equations.
+
+
+## G-4c — Comparative fppf torsor groups
+
+The torsor groups of all seven known Hopf structures are now tabulated in `the-fold-char2-comparative-torsor-groups.md`. The four product rows follow from Kummer and Frobenius sequences; the `G_C` and `G_D` rows from their central-extension sequences; and the `G_lambda` row from its quaternion Brauer boundary. In particular, abstract `H¹` does not distinguish `G_C` or `G_D` from `α₄×α₂`.
