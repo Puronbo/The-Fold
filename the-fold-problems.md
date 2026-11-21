@@ -2014,3 +2014,10 @@ The `G_lambda` automorphism proof now explicitly excludes a possible additive co
 ## G-4c — Comparative fppf torsor groups
 
 The torsor groups of all seven known Hopf structures are now tabulated in `the-fold-char2-comparative-torsor-groups.md`. The four product rows follow from Kummer and Frobenius sequences; the `G_C` and `G_D` rows from their central-extension sequences; and the `G_lambda` row from its quaternion Brauer boundary. In particular, abstract `H¹` does not distinguish `G_C` or `G_D` from `α₄×α₂`.
+
+
+## G-4d — Explicit torsor models for G_C and G_D
+
+Every G_C-torsor is represented by `u⁴=a, v²=b`, with action `(u,v)·(r,s)=(u+r,v+s+u²r²)` and parameter relation `(a,b)~(a+q⁴,b+q⁴a+p²)`. Its torsor addition is `(a,b)+(a',b')=(a+a',b+b'+aa')`.
+
+Every G_D-torsor is represented by `u²=a, v⁴=b`, with action `(u,v)·(r,s)=(u+s,v+r+us)` and parameter relation `(a,b)~(a+q²,b+q⁴a²+p⁴)`. Its addition is `(a+a',b+b'+a²a'²)`. The models, canonical-map inverses, completeness, and equivalence proofs are in `the-fold-char2-nonproduct-torsor-models.md`.
