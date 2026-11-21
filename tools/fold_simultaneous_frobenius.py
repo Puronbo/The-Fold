@@ -52,9 +52,16 @@ def main():
         for j in range(8):
             gram[i][j] = multiply_basis(i, j).get(INDEX[(3, 1)], 0)
 
-    expected = [[0] * 8 for _ in range(8)]
-    for i in range(8):
-        expected[i][7 - i] = 1
+    expected = [
+        [0, 0, 0, 0, 0, 0, 0, 1],
+        [0, 0, 0, 0, 0, 1, 0, 0],
+        [0, 0, 0, 0, 0, 0, 1, 0],
+        [0, 0, 0, 0, 1, 0, 0, 0],
+        [0, 0, 0, 1, 0, 0, 0, 0],
+        [0, 1, 0, 0, 0, 0, 0, 0],
+        [0, 0, 1, 0, 0, 0, 0, 0],
+        [1, 0, 0, 0, 0, 0, 0, 0],
+    ]
     assert gram == expected
     assert determinant(gram) == 1
 
