@@ -70,3 +70,27 @@ The calculation is an identity in the truncated polynomial ring, not merely an e
 ## 4. Verification boundary
 
 The proof is a finite polynomial substitution in the explicitly stated quotient ring. It is independently reproducible by expanding the two displayed substitutions and discarding monomials divisible by \(x^4,z^2,c^4\), or \(h^2\), with coefficients reduced modulo two. No claim is made about the full ambient centralizer of \(U\), only the displayed family \(T\).
+
+
+## Correction — composition order and withdrawal of the centralizer claim
+
+The preceding centralizer assertion is withdrawn. The original substitution calculation applied the conjugating maps in the wrong order. For algebra automorphisms represented by their images of x and z, the correct conjugate is obtained by applying g^{-1} to the input, then u, then g; equivalently, evaluate g(u(g^{-1}(x))) and g(u(g^{-1}(z))).
+
+A counterexample already occurs in the displayed family. Take
+\[
+g(x)=x+c,\qquad g(z)=z+hx,
+\]
+with c⁴=h²=0, and the valid U-element
+\[
+u(x)=x+Ax²,\qquad u(z)=z+Axz.
+\]
+Its inverse is g^{-1}(x)=x+c and g^{-1}(z)=z+hx+hc. Correct composition gives
+\[
+(gug^{-1})(x)=x+Ax²+Ac²,
+\]
+\[
+(gug^{-1})(z)=z+Axz+Acz+Ach\,x+Ac²h.
+\]
+Thus the target coefficient of x in the second coordinate is Ac h. In particular, this family does not centralize U, and ch is detected. The prior conclusion that no target coordinate varies on this family is false.
+
+The earlier theorem/proof and any downstream inference based on this centralizer calculation must not be used. This correction does not affect the separate UF-055 cubic translation calculation, whose composition order was already correct.
