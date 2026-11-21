@@ -1953,3 +1953,7 @@ The fppf torsor sequence is
 0 -> k^×/(k^×)^2 -> H^1(k,G_lambda) -> k/k^4 -> Br(k)[2].
 ```
 The boundary map is determined by lambda and remains open. See the-fold-char2-imperfect-mixed-hopf-family.md.
+
+
+### G-3i verification refinement
+The normalized symmetric cocycle basis includes a possible `rho xy` term. The `mu_2`-valued condition gives `rho²=0`, and the field hypothesis forces `rho=0`. The remaining equations yield the previously stated `k/k²` classification in the fixed global-section polynomial model. See the updated cocycle verifier.
