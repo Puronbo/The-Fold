@@ -236,6 +236,7 @@ author. The CMB enters as a rhyme; the exact physics is standard cosmology. See 
 | deriving the hexagonal crease catalogue and its two sublattice signs | `the-fold-hexagonal-lattice.md` |
 | classifying periodic crease networks and surviving sign characters | `the-fold-periodic-networks.md` |
 | classifying periodic sign characters for all frieze and wallpaper groups | `the-fold-frieze-wallpaper-characters.md` |
+| proving forced zeros and topological realizability of crease networks | `the-fold-forced-zero-topology.md` |
 | the interactive models | the nine HTML files |
 
 ## Contents
@@ -306,6 +307,7 @@ author. The CMB enters as a rhyme; the exact physics is standard cosmology. See 
 | `the-fold-hexagonal-lattice.md` | UF-004: six zero-line crease axes of Re(z^6), D6 character kernels, and the A/B-preserving D3 catalogue |
 | `the-fold-periodic-networks.md` | UF-005: wallpaper groups, finite-torus crease-network symmetries, sign-character maps, and common kernels |
 | `the-fold-frieze-wallpaper-characters.md` | UF-006: translation-kernel theorem, seven frieze presentations, and periodic character counts for all 17 wallpaper groups |
+| `the-fold-forced-zero-topology.md` | UF-007: fixed-point forced-zero theorem, bipartite face-dual realization criterion, and sharp minimal-degree D6 semi-invariants |
 | `the-fold-minimal-operations.md` | UF-002: feasibility, set-cover equivalence, NP-hardness, minimal arithmetic spectral power-exponent families, and a reference solver |
 
 Open the HTML files directly in a browser — no build step, no dependencies.
@@ -540,3 +542,6 @@ observer gives the reading. The four zones are the map's legend.
 
 
 **Frieze and wallpaper characters (UF-006):** when a signed height is periodic under the full translation subgroup T, its sign homomorphism factors through the finite point group P=W/T. This remains true for nonsplit wallpaper extensions. The seven frieze groups give 17 translation-trivial character maps; the 17 wallpaper types give 46. Glide reflections may reverse height once while their squares preserve it. See `the-fold-frieze-wallpaper-characters.md` and `tools/fold_frieze_wallpaper_characters.py`.
+
+
+**Forced zeros and crease topology (UF-007):** anti-symmetries force their fixed sets into the height zero set. A connected crease network supports a continuous scalar height that changes sign across every crease iff its face dual is bipartite; the network then determines its sign character. In the D6 model, the three nontrivial characters have sharp minimal polynomial degrees 6, 3, and 3. See the-fold-forced-zero-topology.md and tools/fold_forced_zero_topology.py.
