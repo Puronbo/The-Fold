@@ -144,6 +144,7 @@ in lattice coordinates. A motif consists of a vertex set, an undirected set of m
 \[
 x\mapsto Ax+b\quad (A\in P_\Lambda,\ b\in T_N).
 \]
+Here the torus coordinates use a chosen finite grid inside the periodic cell; increasing the grid resolution permits rational offset vectors such as half-cell glide translations.
 
 A candidate belongs to the network group exactly when it preserves the vertex set and marked bonds. It belongs to the sign-covariant height subgroup if it sends the sampled height field to itself or its negative; the colour condition is analogous. The companion program tools/fold_periodic_networks.py implements this exact finite enumeration.
 
@@ -151,7 +152,7 @@ This model can encode rational affine offsets and glide-like actions when the to
 
 ## 6. Three lattice tests
 
-The program computes lattice point groups directly from the Gram matrix.
+The program computes lattice point groups directly from the Gram matrix. Its finite coefficient search bound follows from the smallest eigenvalue of the positive-definite Gram matrix; candidate matrices are then checked exactly by (A^TGA=G) and (|\det A|=1).
 
 | Lattice metric in a chosen basis | Gram matrix | Point-group order |
 |---|---|---:|
@@ -191,7 +192,7 @@ The affine extension matters. A point-group element may lift to a rotation/refle
 
 ## 8. Limits and next problems
 
-1. The finite-torus checker is exact for the finite combinatorial motif it is given. It does not prove continuous symmetry of an arbitrary curve from finitely many samples.
+1. The finite-torus checker is exact for the finite combinatorial motif it is given. In the current run, the lattice point groups also passed 212 closure and inverse checks. It does not prove continuous symmetry of an arbitrary curve from finitely many samples.
 2. The sign-character framework assumes each decoration is transformed globally by one sign. More general decorations require higher permutation representations.
 3. A height function such as \(\operatorname{Re}(z^6)\) defines a local six-line crease star; by itself it is not a periodic honeycomb height function. The periodic lattice and its basis must be supplied separately.
 4. The next step is to classify which character maps are realizable for each wallpaper group and which decorations force their kernels.
