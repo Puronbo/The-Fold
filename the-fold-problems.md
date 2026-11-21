@@ -1700,3 +1700,38 @@ Thus ch appears in twelve of the sixteen target coefficient functions and vanish
 **Theorem UF-061.1.** The fifteen nonconstant monomials of T=k[c,d,h]/(c⁴,d²,h²) give fifteen columns in the 16×15 coefficient matrix of the full affine conjugation's target coordinates. At the admissible specialization a=i=1, b=0 and (A,B,C,D,E,G,J)=(0,0,0,1,1,1,1), the 15×15 minor using all target rows except ε′ has determinant 1 over F₂. Hence the coefficient matrix has generic rank 15, its maximal possible rank. Thus every nilpotent monomial direction is generically linearly independent across the sixteen target functions. This is not a computation of the orbit-image kernel or its Hopf core. See `the-fold-char2-affine-coefficient-matrix-rank.md`.
 
 **Open UF-062:** determine the maximal-minor rank-drop locus and then compute the orbit-image kernel and its largest Hopf ideal.
+
+
+## G-1/G-2/G-4 — Hopf–Galois structure, normalizer, and torsors
+
+**Theorem G-1.1.** In characteristic two, (A=k[x,z]/(x^4,z^2)) is the coordinate Hopf algebra of (G=\alpha_4\times\alpha_2) with x,z primitive. Its regular coaction has coinvariants k and canonical map
+[
+\beta:A\otimes_k A\to A\otimes_k A,quad
+a\otimes b\mapsto(a\otimes1)\Delta(b),
+]
+with inverse (a\otimes h\mapsto\sum aS(h_{(1)})\otimes h_{(2)}). Hence Spec(A) is the trivial G-torsor over k and A is a Hopf–Galois object. The verifier `tools/fold_char2_hopf_galois.py` constructs the 64-by-64 canonical-map matrix over F₂ and checks rank 64.
+
+**Theorem G-2.1.** The centralizer of the translation subgroup G in the automorphism scheme of the underlying finite affine scheme Spec(A) is G itself. The normalizer is (G\rtimes\operatorname{Aut}_{\mathrm{grp}}(G)). Both assertions are functorial over all characteristic-two coefficient algebras.
+
+The group-scheme automorphism functor is represented by
+[
+\operatorname{Aut}_{\mathrm{grp}}(G)
+=\operatorname{Spec} k[a,a^{-1},f,f^{-1},b,c,d,e]/(d^2),
+]
+using (x\mapsto ax+bx^2+cz), (z\mapsto dx+ex^2+fz). It has reduced dimension five and tangent dimension six, so is non-smooth.
+
+**Theorem G-4.1.** For a characteristic-two field k,
+[
+H^1_{\mathrm{fppf}}(k,G)\cong(k/k^4)\times(k/k^2).
+]
+This classifies torsors under the fixed group scheme G. It does not classify all Hopf structures or all algebra forms.
+
+Added `the-fold-char2-hopf-galois-normalizer.md` and `tools/fold_char2_hopf_galois.py`.
+
+**Still open G-3:** classify all Hopf structures on the underlying algebra, beyond the primitive/filtered structures considered here.
+
+**Still open G-4b:** classify algebra forms and group-scheme twists, and study extension/degeneration over mixed-characteristic arithmetic bases.
+
+**Still open G-5:** construct a global arithmetic family before attempting automorphic representations, Hecke operators, or theta correspondences.
+
+UF-062 remains independent and open.
