@@ -74,7 +74,7 @@ The equality K=K_2 remains open. Matching reduced supports and tangent dimension
 
 Let n=(c,d_0,h) be the nilradical ideal. Every element r of n satisfies r^4=0, but the ideal powers satisfy n^5≠0 and n^6=0. After computing J_orb and its Hopf core, compare the resulting ideal with I(K_2) through the full intrinsic filtration
 \[
-A\supset n\supset n^2\supset n^3\supset n^4=0.
+A\supset n\supset n^2\supset n^3\supset n^4\supset n^5\supset n^6=0.
 \]
 The first-order comparison must recover the established 16-dimensional tangent space. A discrepancy at order two or three would detect higher-order excess or deficiency in the Frobenius candidate.
 
