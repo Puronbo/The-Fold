@@ -83,3 +83,27 @@ The centralizer of a subgroup is closed under composition. Therefore the product
 The proof reduces the general affine case to the triangular calculation UF-057 and the upper-triangular substitution displayed above. All identities are polynomial identities over arbitrary characteristic-two coefficient algebras subject to the stated nilpotence and unit conditions. A finite symbolic check can verify the upper-triangular expansion, but the factorization is the structural proof.
 
 **Next problem UF-059:** allow the first nonlinear ambient coefficients in (g), beginning with quadratic perturbations of (g(x)) and (g(z)), and determine the first nonlinear stratum on which conjugation ceases to be trivial. Continue to track all sixteen target coefficient functions separately from the orbit-image ideal and its Hopf core.
+
+
+## Correction — composition order and withdrawal of the centralizer claim
+
+The preceding centralizer assertion is withdrawn. The original substitution calculation applied the conjugating maps in the wrong order. For algebra automorphisms represented by their images of x and z, the correct conjugate is obtained by applying g^{-1} to the input, then u, then g; equivalently, evaluate g(u(g^{-1}(x))) and g(u(g^{-1}(z))).
+
+A counterexample already occurs in the displayed family. Take
+\[
+g(x)=x+c,\qquad g(z)=z+hx,
+\]
+with c⁴=h²=0, and the valid U-element
+\[
+u(x)=x+Ax²,\qquad u(z)=z+Axz.
+\]
+Its inverse is g^{-1}(x)=x+c and g^{-1}(z)=z+hx+hc. Correct composition gives
+\[
+(gug^{-1})(x)=x+Ax²+Ac²,
+\]
+\[
+(gug^{-1})(z)=z+Axz+Acz+Ach\,x+Ac²h.
+\]
+Thus the target coefficient of x in the second coordinate is Ac h. In particular, this family does not centralize U, and ch is detected. The prior conclusion that no target coordinate varies on this family is false.
+
+The earlier theorem/proof and any downstream inference based on this centralizer calculation must not be used. This correction does not affect the separate UF-055 cubic translation calculation, whose composition order was already correct.
