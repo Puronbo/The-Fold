@@ -1973,3 +1973,8 @@ The composition law for f after g is `(aa', a'b+a²b', u+au', β+u'b+a²β'+auu'
 ## G-3k — Frobenius factorization of the mixed-family boundary
 
 Let E_lambda be the extension of alpha_2 by mu_2 with cocycle `1+lambda*r*s`. Since `1+lambda*x²*y²` is its pullback along relative Frobenius `F:alpha_4 -> alpha_2`, the extension G_lambda is `F*E_lambda`. Naturality gives `δ_lambda=δ'_lambda∘F_*`. The map `F_*:k/k⁴ -> k/k²` sends `[a]` to `[a]`, so `δ_lambda` factors through k/k² and vanishes on k²/k⁴. The unresolved boundary is reduced to `δ'_lambda` for E_lambda.
+
+
+## G-3l — Vanishing criterion for the mixed-family boundary
+
+For `E_lambda` and an `alpha_2`-torsor `u²=a`, the boundary vanishes exactly when there are `c,d∈k` with `c²+a d²+d=λ`. The proof classifies the possible `mu_2`-torsor over `k[u]/(u²-a)` and derives the action cocycle equation. By Frobenius factorization, this also gives the vanishing criterion for `G_lambda` on `alpha_4`-torsors. In particular, if λ is square then the boundary is identically zero. The Brauer class itself is not yet explicitly identified; see `the-fold-char2-imperfect-mixed-hopf-family.md`.
