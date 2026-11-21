@@ -263,3 +263,19 @@ Equivalently, the quotient parameter consists exactly of those fourth-power clas
 c^2+a d^2+d=\lambda
 \]
 is solvable in k. The remaining independent parameter is a square class in \(k^\times/(k^\times)^2\). When \(\lambda\in k^2\), every \([a]\in k/k^4\) is allowed.
+
+
+## 10. Isomorphism criterion between parameters
+
+For \(\lambda,\mu\in k\), the groups \(G_\lambda\) and \(G_\mu\) are isomorphic over k if and only if
+\[
+\boxed{\ \exists a\in k^\times:\quad
+\lambda+\mu a^4\in k^2.\ }
+\]
+Indeed, an isomorphism must preserve the unique multiplicative-type subgroup \(\mu_2\) and induce an automorphism \(x\mapsto ax+bx^2\) of the quotient \(\alpha_4\). The lift has \(t\mapsto t(1+\beta x^2)\) over the field, and Hopf compatibility is precisely
+\[
+\beta^2=\lambda+\mu a^4.
+\]
+Conversely, any such \(a,\beta\) gives an isomorphism. The parameter b is unrestricted and does not affect the obstruction.
+
+Thus the fixed-section extension classes \(k/k^2\) must still be quotiented by the scaling action induced by \(\operatorname{Aut}(\alpha_4)\) to obtain isomorphism classes of the total group schemes. In particular, \(\lambda\notin k^2\) guarantees \(G_\lambda\) is not isomorphic to the product \(G_0=\alpha_4\times\mu_2\).
