@@ -1639,3 +1639,10 @@ u(z)=z+Axz+Gx^3+(B+G)x^2z+Jx^3z
 gives (gug^{-1}=u). Thus (T) is contained in the scheme-theoretic centralizer of (U). In particular, this restriction of the conjugation family does not detect (ch); it does not prove that (ch) is absent from the full universal image. The full ambient coaction and Hopf core remain open. See `the-fold-char2-nilpotent-affine-centralizer.md`.
 
 **Open UF-057:** enlarge the tested affine family by general reduced linear coefficients and higher ambient coefficients, and determine whether the mixed class (ch) appears in any of the fourteen nonconstant target-coordinate expansions.
+
+
+### UF-057 — Triangular affine centralizer
+
+For the seven-dimensional subgroup U, consider (g(x)=c+ax, g(z)=d+hx+iz), with a,i units and c⁴=d²=h²=0. The inverse is (g^{-1}(x)=a^{-1}(x+c)), (g^{-1}(z)=i^{-1}(z+d+ha^{-1}(x+c))). Exact substitution gives (gug^{-1}=u) for every U-element. Thus this entire triangular affine family lies in the scheme-theoretic centralizer, including its mixed nilpotent coefficient products. This does not cover the off-diagonal linear coefficient in g(x), nor higher ambient terms. See `the-fold-char2-triangular-affine-centralizer.md`.
+
+**Open UF-058:** introduce the off-diagonal linear term (bz) in g(x), retain the full determinant-open affine family, and test whether (ch) enters any target coefficient.
