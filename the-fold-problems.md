@@ -2068,3 +2068,12 @@ This describes the entire kernel as the image of the additive polynomial
 `L_s(r)=s r²+r` modulo squares. The class [t] is outside this image by
 the valuation obstruction already recorded. A simpler intrinsic description
 of this image subspace remains open.
+
+ 
+### G-4h — Coefficient and Artin–Schreier criterion for the full kernel
+
+For \(k=\mathbb F_2(s,t)\), \(\lambda=s\), put \(K=k^2=\mathbb F_2(S,T)\), \(S=s^2,T=t^2\). Writing a class as \(\alpha s+\beta t+\gamma st\), the exact kernel condition is
+\[
+\exists q\in K:\ q^2+q+S(\alpha+T\beta^2+ST\gamma^2)\in S K^2.
+\]
+This follows by expanding the full parameterization \([sr^2+r]\) in the \(K\)-basis \(1,s,t,st\), then eliminating one coefficient using surjectivity of \(K\to K^2\). It is an exact one-variable Artin–Schreier coset criterion; a closed valuation/differential classification of its solutions remains open. See the-fold-char2-quaternion-boundary-arithmetic.md.
