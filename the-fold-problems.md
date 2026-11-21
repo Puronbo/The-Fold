@@ -1957,3 +1957,14 @@ The boundary map is determined by lambda and remains open. See the-fold-char2-im
 
 ### G-3i verification refinement
 The normalized symmetric cocycle basis includes a possible `rho xy` term. The `mu_2`-valued condition gives `rho²=0`, and the field hypothesis forces `rho=0`. The remaining equations yield the previously stated `k/k²` classification in the fixed global-section polynomial model. See the updated cocycle verifier.
+
+
+## G-3j — Automorphism group of G_lambda
+
+For every k-algebra R, the group-scheme automorphisms are
+```
+x -> a x + b x²
+t -> t(1 + u x + β x² + uβ x³)
+u²=0, β²=λ(1+a⁴), a invertible.
+```
+The composition law for f after g is `(aa', a'b+a²b', u+au', β+u'b+a²β'+auu')`; the inverse is `(a⁻¹,a⁻³b,a⁻¹u,a⁻²β+a⁻³ub)`. The reduced dimension is two and tangent dimension four. The nilpotent parameter u is essential: omitting it would miss infinitesimal automorphisms. Full proof and symbolic verifier: `the-fold-char2-imperfect-mixed-hopf-automorphisms.md` and `tools/fold_char2_mixed_hopf_automorphisms.py`.
