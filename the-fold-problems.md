@@ -1496,7 +1496,7 @@ Proof and structural verifier: `the-fold-char2-automorphism-scheme.md`, `tools/f
 
 **Theorem UF-034.1.** For (C_{\mathbb Z}=\mathbb Z[x,y]/(x^2+y^2,x^2y^2)), the endomorphism functor is represented by pairs (X,Y\in C_A) satisfying (X^2+Y^2=0) and (X^2Y^2=0). The automorphism locus is the open subset where the induced rank-eight linear map has unit determinant.
 
-**Theorem UF-034.2.** The full derivation algebra has dimension 8 in every odd characteristic and dimension 16 in characteristic two. The relation matrix after removing its common factor 2 has nonzero Smith invariants (1,1,1,1,1,1,1,2).
+**Theorem UF-034.2 (corrected).** The full derivation algebra has dimension 9 in every odd characteristic and dimension 16 in characteristic two. The relation map after removing its common factor 2 has rank seven and Smith form with seven nonzero invariants, all equal to 1. The actual differentiated-relation map therefore has seven nonzero Smith invariants equal to 2. The kernel dimensions are 9 and 16, respectively.
 
 The characteristic-three center enlargement of the seven-dimensional bracket algebra is distinct from this full tangent calculation.
 
