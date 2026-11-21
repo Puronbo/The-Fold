@@ -1007,3 +1007,9 @@ The note also establishes a concrete characteristic-two direction: C_k ≅ k[x,z
   inside `k/k²), by solving the explicit torsor-lifting equation.
 - Records that this is the image of an additive polynomial modulo squares;
   finding a simpler intrinsic description remains open.
+
+ 
+### G-4h — One-variable Artin–Schreier criterion for the quaternion kernel
+- Expands the full kernel parameterization over \(\mathbb F_2(s,t)\) in the square-subfield basis \(1,s,t,st\).
+- Eliminates one coefficient to obtain an exact one-variable condition over \(K=\mathbb F_2(s^2,t^2)\): \(q^2+q+S(\alpha+T\beta^2+ST\gamma^2)\in S K^2\).
+- Clarifies that this is a coset-membership criterion, not a claim of \(K\)-linearity or a closed-form classification.
