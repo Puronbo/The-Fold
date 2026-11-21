@@ -87,7 +87,7 @@ for p in (2,5,7,11,13):
     assert rank_mod(radical_map, p) == 5
 
 # Characteristic-three kernel generator (-1,0,1,0,1).
-w = sp.Matrix([-1,0,1,0,1])
+w = sp.Matrix([0,0,-1,0,1])
 assert all(sum(int(row[i])*int(w[i]) for i in range(5)) % 3 == 0 for row in radical_map.tolist())
 
 print("UF-031 checks passed.")
