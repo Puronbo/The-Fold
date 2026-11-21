@@ -1609,3 +1609,12 @@ The coupled inverse recursion in Section 9 of `the-fold-char2-quadratic-conjugat
 ### UF-053 homogeneous-grading audit
 
 The exact fractions (ic+bd₀)/Δ and (hc+ad₀)/Δ are not homogeneous in the nilradical filtration because Δ=ai+bh. Section 11 of `the-fold-char2-quadratic-conjugation-coaction.md` replaces the earlier degree labels with genuinely homogeneous pieces C₁,D₁,C₂,D₂ and independently rederives S ≡ d₀/Δ + φi²c²/Δ³ mod n³. The rank-three coefficient span in Section 10 is retained.
+
+
+## UF-054 — Full target-coordinate quadratic audit
+
+**Exact filtration warning.** Cubic terms in the seven-dimensional subgroup U cannot be discarded when computing nonconstant target coefficients modulo the third nilradical power. In characteristic two, `(x+c)^3=x^3+cx^2+c^2x+c^3`, so the coefficient of x has nilradical degree two even though the constant contribution has degree three. The translation test `g(x)=x+c`, `g(z)=z` exhibits a cubic perturbation contributing `Bc²` to a linear target coefficient.
+
+The UF-053 module `⟨c²,cd₀,d₀h⟩` remains restricted to the three nilpotent target coordinates c,d₀,h. It is not the full conjugacy-family coefficient module, and no conclusion about detection of ch by the remaining target coordinates is drawn. See `the-fold-char2-full-conjugation-quadratic-audit.md`.
+
+**Open UF-055:** compute the full degree-two coefficient module across all thirteen nonconstant target coordinates, its annihilator, the conjugacy-image kernel, and its largest Hopf subideal. Do not identify any of these objects with one another without proof.
