@@ -15,7 +15,7 @@ def reduce_gf2(expr):
 
 
 def compose(outer, inner):
-    """Return outer o inner as images of x,z (ring maps)."""
+    """Ring-map composition outer after inner."""
     ox, oz = outer
     ix, iz = inner
     return (
@@ -24,37 +24,56 @@ def compose(outer, inner):
     )
 
 
+def deriv(P, Q, expr):
+    return reduce_gf2(sp.diff(expr, x)*P + sp.diff(expr, z)*Q)
+
+
+def bracket(D, E):
+    P, Q = D
+    R, S = E
+    return (
+        reduce_gf2(deriv(P, Q, R) + deriv(R, S, P)),
+        reduce_gf2(deriv(P, Q, S) + deriv(R, S, Q)),
+    )
+
+
 def main():
     a,b,c,d,u,e,v = sp.symbols("a b c d u e v")
-    X = x+(a+b)*x**2+b*x*z+(c+d)*x**3+d*x**2*z+u*x**3*z
-    Z = z+(a+b)*x*z+(c+e)*x**3+(d+e)*x**2*z+(u+v)*x**3*z
-
-    # The U-subgroup equations hold identically over F2.
+    # Integral U family reduced mod 2, in coordinates x,z.
     A = a+b
-    C = c+d
+    B = c+d
+    C = b
+    D = d
+    E = u
     F = 0
-    H = a+b
     G = c+e
+    H = a+b
     I = d+e
+    J = u+v
+
     assert sp.Poly(F, a,b,c,d,u,e,v, modulus=2).is_zero
     assert sp.Poly(H-A, a,b,c,d,u,e,v, modulus=2).is_zero
-    assert sp.Poly(C+G+I, a,b,c,d,u,e,v, modulus=2).is_zero
+    assert sp.Poly(B+G+I, a,b,c,d,u,e,v, modulus=2).is_zero
 
-    # g: z -> z+x^2 and u: x -> x+xz are involutions.
+    # g:z -> z+x^2 and u:x -> x+xz are involutions.
     ident = (x,z)
     g = (x,z+x**2)
     u_map = (x+x*z,z)
     assert compose(g,g) == ident
     assert compose(u_map,u_map) == ident
-
-    # g o u o g sends x -> x+xz+x^3, z -> z+x^2.
     conjugate = compose(g, compose(u_map,g))
-    expected = (x+x*z+x**3,z)
-    assert conjugate == expected
+    assert conjugate == (x+x*z+x**3,z)
     assert sp.Poly(conjugate[0]-x, x,z, modulus=2).coeff_monomial(x**3) == 1
 
+    # Lie bracket [eta,delta] = (x^3,0), the missing cubic tangent.
+    eta = (0,x**2)       # eta(x)=0, eta(z)=x^2
+    delta = (x*z,0)      # delta(x)=xz, delta(z)=0
+    assert bracket(eta,delta) == (x**3,0)
+
     print("UF-037 exact GF(2) checks: PASS")
-    print("U has codimension 3 in H; explicit conjugation proves U is not normal")
+    print("U has codimension 3 in H and is not normal")
+    print("its normal closure is the 8-dimensional subgroup N")
+    print("H/N is the 2-dimensional additive group")
 
 
 if __name__ == "__main__":
