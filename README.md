@@ -1013,3 +1013,8 @@ The note also establishes a concrete characteristic-two direction: C_k ≅ k[x,z
 - Expands the full kernel parameterization over \(\mathbb F_2(s,t)\) in the square-subfield basis \(1,s,t,st\).
 - Eliminates one coefficient to obtain an exact one-variable condition over \(K=\mathbb F_2(s^2,t^2)\): \(q^2+q+S(\alpha+T\beta^2+ST\gamma^2)\in S K^2\).
 - Clarifies that this is a coset-membership criterion, not a claim of \(K\)-linearity or a closed-form classification.
+
+
+### UF-063 — Exact invisible locus of the mixed (ch) direction
+- Extracts the precise closed locus where the full-affine (ch)-coefficient vector vanishes in all sixteen target coordinates: (A=C=J=E=0), (B+Gbt=0).
+- Separates invisibility of this one nilpotent direction from the still-open full coefficient module and Hopf-core calculations.
