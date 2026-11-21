@@ -1735,3 +1735,23 @@ Added `the-fold-char2-hopf-galois-normalizer.md` and `tools/fold_char2_hopf_galo
 **Still open G-5:** construct a global arithmetic family before attempting automorphic representations, Hecke operators, or theta correspondences.
 
 UF-062 remains independent and open.
+
+
+## G-3 — Multiple group laws on the same Fold algebra
+
+**Theorem G-3.1.** Over a field of characteristic two, the algebra (A=k[x,z]/(x^4,z^2)) is the coordinate algebra of each of the four group schemes
+[
+\alpha_4\times\alpha_2,\quad
+\mu_4\times\alpha_2,\quad
+\alpha_4\times\mu_2,\quad
+\mu_4\times\mu_2.
+]
+For multiplicative coordinates the coproduct is (\Delta(u)=u\otimes1+1\otimes u+u\otimes u); for additive coordinates it is primitive. The antipode for a multiplicative coordinate with (u^{2^r}=0) is (S(u)=u+u^2+\cdots+u^{2^r-1}).
+
+These four group schemes are pairwise non-isomorphic. The rank of the image of the restricted 2-power map on the Lie algebra distinguishes zero, one, and two multiplicative factors. The two mixed products are separated by their relative-Frobenius images, respectively (mu_2) and (alpha_2), which are non-isomorphic.
+
+The verifier tools/fold_char2_hopf_structures.py confirms that each of the four regular Hopf–Galois canonical maps has rank 64 over F₂.
+
+**Open G-3a:** determine whether non-product Hopf structures exist on A and classify all structures up to Hopf isomorphism. The four product structures are examples, not an exhaustive classification.
+
+**Open G-3b:** compute the automorphism group schemes and translation normalizers for the three non-additive product laws. The G-2 explicit automorphism-group presentation currently applies only to alpha_4 x alpha_2.
