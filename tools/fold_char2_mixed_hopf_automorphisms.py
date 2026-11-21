@@ -37,18 +37,29 @@ Gcomp = sp.groebner(
 assert Gcomp.reduce(u_total**2)[1] == 0
 assert Gcomp.reduce(beta_total**2 + lam*(1+(a*ap)**4))[1] == 0
 
-# Inverse formulas: all identities are reduced in characteristic two.
-# a_inv=a^-1, b_inv=a^-3*b, u_inv=a^-1*u,
-# beta_inv=a^-2*beta+a^-3*u*b.
-# Clearing powers of a, the composition coordinates reduce to zero
-# using u^2=0 and 2=0.
-b_inv_num = b  # a^3*b_inv
-u_inv_num = u  # a*u_inv
-beta_inv_num = a*beta + u*b  # a^3*beta_inv
-assert sp.Poly(2*b, a, b, modulus=2).as_expr() == 0
-assert sp.Poly(2*u, a, u, modulus=2).as_expr() == 0
-assert sp.Poly(u**2, u, modulus=2).as_expr() == 0
-assert b_inv_num == b and u_inv_num == u and beta_inv_num == a*beta + u*b
+# Inverse formulas, checked as identities in the coordinate ring.
+ai, bi, ui, betai = sp.symbols("ai bi ui betai")
+inverse_relations = [
+    a*ai + 1,
+    bi + ai**3*b,
+    ui + ai*u,
+    betai + ai**2*beta + ai**3*u*b,
+    u**2,
+    beta**2 + lam*(1+a**4),
+]
+Ginv = sp.groebner(
+    inverse_relations,
+    a, ai, b, bi, u, ui, beta, betai, lam,
+    order="lex", modulus=2
+)
+inverse_composition = [
+    a*ai + 1,
+    ai*b + a**2*bi,
+    u + a*ui,
+    beta + ui*b + a**2*betai + a*u*ui,
+]
+assert all(Ginv.reduce(q)[1] == 0 for q in inverse_composition)
+
 
 print("PASS: Hopf-lift cocycle equation")
 print("PASS: composition preserves u^2=0 and beta^2=lambda*(1+a^4)")
