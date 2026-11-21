@@ -829,3 +829,12 @@ The note also establishes a concrete characteristic-two direction: C_k ≅ k[x,z
 - On E=0 the generic rank is exactly 11 over F₂(A,B,C,D,G,J); an explicit 11-by-11 minor is C^3 D^4 J^4.
 - Adds the-fold-char2-affine-rank-drop-slice.md and tools/fold_char2_affine_rank_drop_slice.py (SymPy required).
 - This resolves only a restricted slice; the full determinant-open rank-drop locus and the orbit-image Hopf core remain open.
+
+
+### G-3b — Corrected scheme-theoretic normalizers for all four Hopf laws
+- Proves the translation centralizer is the translation subgroup for each of the four group laws; the normalizer is the translation group semidirect its full group-scheme automorphism functor.
+- Corrects an initial mixed-case calculation: cross-homomorphisms vanish on field-valued points but not over nonreduced coefficient rings.
+- For mu_4 x alpha_2, finds the infinitesimal cross map t -> 1+r z with r²=0; its automorphism group scheme has underlying C2 x G_m x alpha_2, reduced dimension 1 and tangent dimension 2.
+- For alpha_4 x mu_2, finds the cross map t -> 1+p x+q x²+pq x³ with p²=q²=0; its automorphism group scheme has reduced dimension 2 and tangent dimension 4.
+- Retains the additive-additive automorphism scheme (reduced/tangent dimensions 5/6) and the multiplicative-multiplicative constant D8 automorphism group.
+- Adds the-fold-char2-hopf-normalizers-all-four.md, including corrected mixed-case composition laws.
