@@ -1989,3 +1989,5 @@ The central extension `E_lambda` is the pullback of `SL₂ -> PGL₂` along `alp
 The resulting torsor classes fit into `0 -> k×/(k×)² -> H¹(k,G_lambda) -> ker([a]↦[Q(a,λ)] : k/k⁴ -> Br(k)[2]) -> 0`; this splits noncanonically because G_lambda is killed by two.
 
 The quaternion descent identities are encoded in `tools/fold_char2_mixed_quaternion_descent.py`.
+
+For parameters λ,μ, the mixed groups are isomorphic iff some `a∈k×` satisfies `λ+μa⁴∈k²`; this quotients fixed-section cocycle classes by the induced scaling action of `Aut(alpha_4)`.
