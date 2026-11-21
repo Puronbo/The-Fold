@@ -1110,3 +1110,30 @@ Therefore [b(D)] must vanish in coker(M). A nonintegral solution is a definitive
 **Local-to-global pipeline.** Compute b(D), solve Ma=-b(D) over Q, and reject if the correction is not integral. If it is integral, use the rationality/Picard hypotheses to decide whether the lattice test is sufficient; otherwise compute the remaining Picard/class obstruction. Once locally Cartier everywhere, reapply UF-010's odd-support homology and complement-disconnection criterion.
 
 Full proofs, ADE calculations, simple-elliptic interpretation, references, and exact-arithmetic tests are in the-fold-exceptional-lattices-class-groups.md and tools/fold_exceptional_lattice_obstruction.py.
+
+
+## UF-013 — Equivariant resolution, exceptional curves, and Fold characters
+
+**Question.** When a finite symmetry group acts on a singular Fold surface, how does it lift to the resolution, what representation does it induce on the exceptional lattice, and which exact analytic height characters can descend?
+
+**Equivariant exceptional-lattice action.** A finite group acting on a normal surface germ lifts to its unique minimal resolution (or to a suitable equivariant good resolution). If \(E_i\) are exceptional components, the induced permutation matrices \(P_g\) preserve the intersection matrix:
+\[
+P_g^T M P_g=M.
+\]
+Hence the action descends to the numerical discriminant group. It need not determine the action on the exceptional curves as Riemann surfaces, their marked points, or their degree-zero Picard varieties.
+
+**Concrete D4 action on the UF-011 cone.** On \(X:z^2=x^4+y^4\), define \(r(x,y,z)=(-y,x,z)\) and \(s(x,y,z)=(y,x,z)\). These generate the order-eight dihedral group \(D_4\). The simple-elliptic \(\widetilde E_7\) exceptional curve is \(E:w^2=t^4+1\), with \(t=x/y,w=z/y^2\). The lifted maps are \(r_E(t,w)=(-1/t,w/t^2)\), \(s_E(t,w)=(1/t,w/t^2)\). They act nontrivially on E (their image is \(V_4\)), but the unique exceptional component is fixed, so the rank-one lattice \(M=[-2]\) has trivial D4 action.
+
+**Exact character height.** \(h=xy\) has exact zero divisor consisting of four branches \(x=0,z=\pm y^2\) and \(y=0,z=\pm x^2\). It transforms by \(\chi(r)=-1,\chi(s)=+1\). The four strict-transform branches meet E transversely, so \(b(D)=4\); the exceptional correction equation \(-2a=-4\) gives the integral value \(a=2\). This example proves that the exceptional lattice representation can be trivial while the exact analytic generator has a nontrivial character.
+
+**Elliptic-curve differential.** For \(\omega=dt/w\), \(r_E^*\omega=+\omega\) and \(s_E^*\omega=-\omega\). The curve automorphism/Picard data therefore contain information absent from the lattice \(L=\mathbb Z[E]\). This agrees with the known description of simple-elliptic automorphisms in terms of torsion translations and automorphisms of the exceptional elliptic curve.
+
+**Unit-cocycle criterion.** If an invariant principal divisor has a generator \(h_0\), write \(g^*h_0=u_g h_0\) with \(u_g\) a unit. A new generator \(h=v h_0\) has character \(\chi\) exactly when
+\[
+(g^*v/v)u_g=\chi(g)
+\]
+for all \(g\in G\). Thus divisor invariance and numerical Cartierness do not by themselves guarantee a prescribed equivariant generator; the unit cocycle must be adjusted by a unit. For real separating divisors with a connected bipartite face dual, UF-009's sign-colouring average is a useful sufficient construction.
+
+**Four D4 real characters.** For the chosen generators \((r,s)\), polynomial semi-invariants are \(z\) for \((+,+)\), \(xy\) for \((-,+)\), \(x^2-y^2\) for \((-,-)\), and \(xy(x^2-y^2)\) for \((+,-)\). The \(z\) representative has only the vertex as its real zero set on X; the other three produce real curve networks.
+
+Full proofs, induced elliptic-curve maps, marked points, the cocycle condition, and exact finite checks are in [the-fold-equivariant-resolution-symmetry.md](the-fold-equivariant-resolution-symmetry.md) and tools/fold_equivariant_resolution.py.
