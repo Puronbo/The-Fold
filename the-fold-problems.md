@@ -1618,3 +1618,12 @@ The exact fractions (ic+bd₀)/Δ and (hc+ad₀)/Δ are not homogeneous in the n
 The UF-053 module `⟨c²,cd₀,d₀h⟩` remains restricted to the three nilpotent target coordinates c,d₀,h. It is not the full conjugacy-family coefficient module, and no conclusion about detection of ch by the remaining target coordinates is drawn. See `the-fold-char2-full-conjugation-quadratic-audit.md`.
 
 **Open UF-055:** compute the full degree-two coefficient module across all thirteen nonconstant target coordinates, its annihilator, the conjugacy-image kernel, and its largest Hopf subideal. Do not identify any of these objects with one another without proof.
+
+
+## UF-055 — Exact cubic conjugation test and coordinate-count correction
+
+The full substitution has fourteen nonconstant coefficient functions plus two constants. The three nilpotent outputs are c,d₀,h, where h is one of the nonconstant coefficients; the remaining thirteen coefficient functions are a,b,α,β,γ,δ,ε,i,φ,ψ,η,θ,κ. This corrects the prior shorthand that described the remaining list as thirteen target coefficients without separately counting h.
+
+For g(x)=x+c, g(z)=z with c⁴=0, and u(x)=x+Bx³, u(z)=z+Bx³ in U, direct composition gives X'=x+B(x+c)³ and Z'=z+B(x+c)³. In characteristic two, the linear coefficient changes by Bc². Hence cubic parameters contribute to the quadratic nilradical layer of nonconstant target coefficients.
+
+**Open UF-056:** compute homogeneous degree-two components of all sixteen coefficient functions c,d₀,a,b,α,β,γ,δ,ε,h,i,φ,ψ,η,θ,κ; determine their coefficient module and annihilator; then compute the conjugacy-image kernel and its largest Hopf ideal. These are distinct objects and must remain distinguished. See `the-fold-char2-fourteen-coordinate-conjugation-test.md`.
