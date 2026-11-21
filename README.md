@@ -816,3 +816,7 @@ The note also establishes a concrete characteristic-two direction: C_k ≅ k[x,z
 - Extends the canonical-map verifier to all four structures; all four 64-by-64 matrices have rank 64 over F_2.
 - Adds the-fold-char2-multiple-hopf-structures.md and tools/fold_char2_hopf_structures.py.
 - Explicitly does not claim an exhaustive classification; non-product Hopf structures remain open.
+
+
+### UF-061 verification addition
+- Adds tools/fold_char2_affine_coefficient_matrix_rank.py, which reconstructs the admissible specialization in the exact truncated polynomial ring and verifies the stated 15-by-15 determinant is 1 over F₂ using standard-library arithmetic.
