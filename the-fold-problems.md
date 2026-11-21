@@ -1589,3 +1589,8 @@ See `the-fold-char2-quadratic-nilradical-coproduct.md`.
 ### UF-052 correction / UF-053 reopened
 
 The h-coordinate of the conjugate includes (hC+iA)(c₋h₋+d₋a₋). Its lowest-order approximation has cancellation of the ch terms and equals (hC+iA)d₀/Δ modulo n². The earlier boxed formula modulo n³ and the claim of independent detection of ch and d₀h are withdrawn; second-order inverse coefficients are required. See the correction section in `the-fold-char2-quadratic-conjugation-coaction.md`.
+
+
+### UF-052 second-order completion
+
+The inverse constant expansion gives d₂ ≡ a(φc₁²+ηc₁d₁)/Δ mod n³. Including this term yields the corrected expression for c₋h₋+d₋a₋ and hence for the h-coordinate of gug⁻¹ modulo n³; see Section 8 of `the-fold-char2-quadratic-conjugation-coaction.md`. This correction still does not determine the full orbit ideal or Hopf core, and it gives no independent detection of ch or d₀h through the h-coordinate.
