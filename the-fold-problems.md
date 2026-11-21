@@ -1455,4 +1455,25 @@ The D4 generators \(r^2\) and \(s\) have integral matrices, even though the full
 
 The proof and symbolic verifier are in `the-fold-d4-modular-center.md` and `tools/fold_d4_modular_center.py`.
 
-**Open problem UF-031-A:** determine the indecomposable D4-module and bracket structure in characteristic two, where Maschke's theorem no longer applies.
+**Resolved by UF-032:** in characteristic two the D4 action factors through C2 and the module is 3J2 ⊕ J1. The reduced bracket remains surjective with zero radical on the five-dimensional quotient, so center = derived algebra = the two-dimensional socle plane.
+
+
+## UF-032 — Characteristic-two D4 module and bracket
+
+**Theorem UF-032.1.** The integral D4 action reduces modulo two with the reflection generator acting trivially and the quarter-turn generator swapping the coordinate pairs \((a,b)\), \((c,e)\), and \((u,v)\), while fixing \(d\). Hence the action factors through \(C_2\) and
+\[
+\mathfrak u_{\mathbb F_2}\cong 3J_2\oplus J_1,
+\]
+where \(J_2\) is the indecomposable two-dimensional regular \(\mathbb F_2[C_2]\)-module and \(J_1\) is trivial.
+
+**Theorem UF-032.2.** The characteristic-two bracket has precisely four nonzero basic products:
+\[
+[a,d]=u,\quad[b,e]=u,\quad[a,c]=v,\quad[b,d]=v.
+\]
+It remains surjective onto \(\langle u,v\rangle\), and its radical on the five-dimensional quotient is zero. Thus center = derived algebra = \(\langle u,v\rangle\), dimension two. The bracket remains D4-equivariant.
+
+This is a modular nonsemisimplicity phenomenon without a bracket-center jump. It differs from characteristic three, where the center acquires the additional cubic trivial-character line. The theorem concerns the specified integral bracket lattice; identifying it with the full tangent Lie algebra of the characteristic-two automorphism group scheme remains open.
+
+Proof and exact verifier: `the-fold-d4-characteristic-two.md`, `tools/fold_d4_characteristic_two.py`.
+
+**Open problem UF-032-A:** determine the full automorphism group scheme of the vertex algebra over \(\mathbb Z\), including its characteristic-two tangent dimension and smoothness.
