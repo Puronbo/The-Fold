@@ -1190,3 +1190,28 @@ This is a module/representation decomposition, not a product decomposition of ri
 The Hilbert numerator is 1+2t+2t²+2t³+t⁴, agreeing with the weighted hypersurface Hilbert series. The E-isotypic part has A-basis degrees 1,1,3,3, so E occurs with multiplicity two.
 
 Proof, degree check, scope, and finite verifier are in the UF-015 paper and tools/fold_d4_analytic_representation_decomposition.py.
+
+
+## UF-016 — Complete multiplication algebra of the Fold
+
+**Question.** Determine all products in the rank-eight analytic coordinate algebra over A=K{p,z}.
+
+Put p=x²+y² and q=x²y²=(p²−z²)/2. Then
+\[
+R\cong A\{x,y\}/(x^2+y^2-p,\ x^2y^2-q).
+\]
+In the ordered A-basis (1,x,y,xy,x²,x²y,x³,x³y), multiplication by x and y is represented by the two explicit 8×8 matrices in the UF-016 paper.
+
+**Theorem UF-016.1.** These commuting operators satisfy
+\[
+M_xM_y=M_yM_x,\quad M_x^2+M_y^2=pI_8,\quad M_x^2M_y^2=qI_8.
+\]
+Every product is obtained by applying a word in the two operators to the unit vector, so these matrices determine the entire multiplication algebra and all structure constants. The representation is faithful.
+
+**Spectral consequence.** The generic characteristic polynomial of either multiplication operator is
+\[
+(T^4-pT^2+q)^2.
+\]
+The joint eigenvalue pairs satisfy X²+Y²=p and X²Y²=q and reconstruct the generic D4 orbit fiber. At the singular fiber, scheme-theoretic nilpotents and non-semisimple operator structure must be retained; eigenvalues alone do not encode the nonreduced fiber.
+
+The exact matrices, reduction rules, proof, character tensor-product rules, spectral caveats, and subsequent discriminant questions are in the UF-016 paper. The standard-library exact verifier is tools/fold_multiplication_algebra.py.
