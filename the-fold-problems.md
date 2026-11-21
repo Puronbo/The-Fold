@@ -1577,3 +1577,10 @@ The normal closure is obtained by taking the largest Hopf ideal contained in thi
 
 **Open UF-052:** derive the conjugation coaction on all four degree-two classes and compare with the candidate.
 See `the-fold-char2-quadratic-nilradical-coproduct.md`.
+
+
+## UF-052 — Quadratic conjugation coaction
+
+**Theorem UF-052.1.** For U-parameters A,C and a full automorphism g, the universal conjugate coordinates modulo n³ are explicitly computed in terms of c² and cd₀ for the c,d₀ outputs, and ch,d₀h for the h output. The formulas are recorded in `the-fold-char2-quadratic-conjugation-coaction.md`. This is the degree-two conjugacy pullback, not yet the orbit ideal's Hopf core.
+
+**Open UF-053:** compute the coefficient span/annihilator in the four-dimensional degree-two layer and compare it with the candidate.
