@@ -980,3 +980,6 @@ The note also establishes a concrete characteristic-two direction: C_k ≅ k[x,z
 - For each fourth-power class `[a]` whose quaternion `Q(a,lambda)` splits, constructs a torsor `u⁴=a, v²=q` with action `(u,v)·(r,t)=(u+r, vt(1+(c+d u²)r²)` whenever `c²+a d²+d=lambda`.
 - Gives the inverse to the canonical action map and proves the model realizes every lift; the remaining fiber parameter is `k×/(k×)²`.
 - Adds `the-fold-char2-mixed-torsor-models.md` and a symbolic verifier.
+
+- Expresses the mixed-family Brauer boundary in standard characteristic-two symbol notation: for `lambda ≠ 0`, `δ_lambda([a])=[a*lambda,lambda)_2`; for `lambda=0` it is zero.
+- Adds `tools/fold_char2_mixed_torsor_models.py`; the explicit `G_lambda` action law and canonical-map inverse were checked symbolically over F₂.
