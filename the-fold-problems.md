@@ -2021,3 +2021,5 @@ The torsor groups of all seven known Hopf structures are now tabulated in `the-f
 Every G_C-torsor is represented by `u⁴=a, v²=b`, with action `(u,v)·(r,s)=(u+r,v+s+u²r²)` and parameter relation `(a,b)~(a+q⁴,b+q⁴a+p²)`. Its torsor addition is `(a,b)+(a',b')=(a+a',b+b'+aa')`.
 
 Every G_D-torsor is represented by `u²=a, v⁴=b`, with action `(u,v)·(r,s)=(u+s,v+r+us)` and parameter relation `(a,b)~(a+q²,b+q⁴a²+p⁴)`. Its addition is `(a+a',b+b'+a²a'²)`. The models, canonical-map inverses, completeness, and equivalence proofs are in `the-fold-char2-nonproduct-torsor-models.md`.
+
+The explicit G_C/G_D torsor models are checked by `tools/fold_char2_nonproduct_torsor_models.py`; the exact symbolic identities were executed over F₂.
