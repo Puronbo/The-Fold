@@ -707,3 +707,6 @@ It is a 7-dimensional unipotent group. The full automorphism group is its semidi
 
 
 **UF-052 correction:** the h-coordinate formula omitted c₋h₋. The ch terms cancel at lowest order; the earlier degree-two detection claim is withdrawn pending second-order inverse calculations. See the correction in `the-fold-char2-quadratic-conjugation-coaction.md`.
+
+
+**UF-052 second-order completion:** the inverse constant coefficient d₋ has a nonzero quadratic correction. The h-coordinate formula has been corrected modulo n³ in Section 8 of the conjugation-coaction paper; ch and d₀h are not independently detected by that coordinate at this order.
