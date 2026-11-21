@@ -1062,3 +1062,28 @@ The even loop is a zero of multiplicity two but is not a sign-changing wall. Acc
 **Periodic covers.** A global analytic generator on the universal cover need not be periodic. For a periodic scalar Fold, descend the divisor to the compact torus and test principality there; a torus generator lifts to a periodic height.
 
 Full statements, torus products, singular examples, and the bounded verifier are in the-fold-divisor-parity-classification.md and tools/fold_divisor_parity_classification.py.
+
+
+## UF-011 — Local principality, normalization, and singularity resolution
+
+**Question.** When does a singular crease component define a locally principal divisor, and what exactly can normalization or resolution repair?
+
+**Local generator-count test.** For a local analytic ring \((A,\mathfrak m,k)\) and a finitely generated divisor ideal \(I\),
+\[
+\mu_A(I)=\dim_k(I/\mathfrak m I).
+\]
+By Nakayama's lemma, \(\mu=1\) is equivalent to local principality; \(\mu\ge2\) proves failure. In a smooth ambient surface, regular local rings are factorial, so codimension-one divisors are locally principal. Singular support alone is not an obstruction.
+
+**Normal but non-Cartier counterexample.** The source-paper surface \(X:z^2=x^4+y^4\) is a two-dimensional hypersurface with isolated singularity at the origin. Its complexification is a domain, satisfies S2 because it is a hypersurface, and satisfies R1 because the singular locus has codimension two; Serre's criterion makes it normal. The divisor \(Y:x=0,z=y^2\) has local ideal \(I=(x,z-y^2)\). The independent linear classes x and z in \(\mathfrak m/\mathfrak m^2\) show \(\dim I/\mathfrak m I=2\). Thus the normalization is the identity and cannot repair the non-Cartier divisor.
+
+**Cusp normalization.** The cusp as a curve in the smooth plane is principal, defined by \(y^2-x^3\). Intrinsically, its point ideal in \(A=\mathbb R\{t^2,t^3\}\) is \((t^2,t^3)\), which needs two generators. The normalization \(B=\mathbb R\{t\}\) extends it to \((t^2)\), principal of order two. Normalization repairs the nonnormal curve ideal but changes the divisor multiplicity.
+
+**Node distinction.** The plane node \(xy=0\) is a principal curve divisor in the plane. Its intrinsic node ideal \((x,y)\) needs two generators in \(\mathbb R\{x,y\}/(xy)\). Normalization separates the two branches and makes the extended point ideal principal componentwise, with order one on each branch.
+
+**Weighted blow-up calculation.** In the chart \(x=uv,\ y=u,\ z=u^2w\), the strict transform of the cone is \(w^2=1+v^4\). The strict transform of Y is \(v=0,w=1\). Since \((w-1)(w+1)=v^4\) and \(w+1\) is a unit near w=1, its ideal \((v,w-1)\) equals \((v)\). This repairs the local strict-transform ideal in this chart; it is not a claim that the single chart is a complete global resolution.
+
+**Resolution boundary.** On a smooth resolution surface, strict transforms of codimension-one divisors are Cartier. But strict transform, total transform, and push-forward are different; exceptional components and their multiplicities carry the original obstruction. A principal divisor upstairs does not imply the original Weil divisor was Cartier downstairs.
+
+**Local-to-global pipeline.** Compute the local ring and ideal, test \(\mu(I)\), examine normality and the local divisor class group, track branch valuations under normalization or exceptional valuations under resolution, then reapply UF-010's odd-support mod-2 and complement-disconnection criterion.
+
+Full proofs, calculations, examples, and the standard-library verifier are in the-fold-local-principality-resolution.md and tools/fold_local_principality_resolution.py.
