@@ -885,3 +885,11 @@ The note also establishes a concrete characteristic-two direction: C_k ≅ k[x,z
 - Records the six known structures in terms of Frobenius kernel and image; G_D realizes a height-one kernel with nilpotent Jordan restricted 2-map.
 - Reduces the exhaustive classification to height-one kernels and extensions compatible with the fixed rank-eight algebra.
 - Adds the-fold-char2-frobenius-hopf-classification.md.
+
+
+### G-3h/G-4 — Fppf torsors under the nilpotent-p-map group G_D
+- Uses 0 -> alpha_4 -> G_D -> alpha_2 -> 0 to prove 0 -> k/k⁴ -> H¹_fppf(k,G_D) -> k/k² -> 0.
+- The sequence splits noncanonically as F₂-vector spaces because G_D is killed by 2.
+- Constructs explicit rank-eight torsors B_(a,b)=k[u,v]/(u⁴-a,v²-b) with coaction rho(u)=u⊗1+1⊗x+v⊗z and rho(v)=v⊗1+1⊗z.
+- Gives an explicit inverse to the canonical map and shows the torsors realize all classes after choosing representatives.
+- Adds the-fold-char2-nilpotent-pmap-torsors.md.
