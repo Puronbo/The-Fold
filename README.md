@@ -658,3 +658,8 @@ It is a 7-dimensional unipotent group. The full automorphism group is its semidi
 **UF-040 — Frobenius-kernel candidate:** the reduced quotient Q = Aut(C)_red/N is a smooth five-dimensional group. The preimage of its first Frobenius kernel is a candidate for the scheme-theoretic normal closure of U. It predicts reduced support N and tangent dimension 16, but the quotient map's extension to the full non-reduced automorphism scheme and the minimality proof remain open. See `the-fold-char2-frobenius-normal-closure.md`.
 
 **Open UF-041:** derive Q's explicit group law and test extension of the quotient morphism.
+
+
+**UF-041 — Second-Frobenius normal thickening:** the ambient nilradical is killed by the second relative Frobenius since c⁴=d⁴=h⁴=0. This gives a canonical homomorphism from the full automorphism scheme to the twice-twisted reduced quotient Q^(2), Q=Aut(C)_red/N. Its kernel is a normal subgroup scheme containing U, with reduced support N and tangent dimension 16. The minimal normal closure is contained in this explicit thickening; equality is not yet proved. See `the-fold-char2-second-frobenius-closure.md`.
+
+**Open UF-042:** compute the minimal Hopf ideal and test equality with the second-Frobenius kernel.
