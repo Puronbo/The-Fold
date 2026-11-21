@@ -51,3 +51,19 @@ These four cases exhaust ranks zero, one, and two, and the two rank-one cases ar
 The product Hopf structures realize the three split types. The non-product group \(G_C\) has the same height-one kernel as \(\alpha_2\times\alpha_2\), while \(G_D\) realizes the fourth, nilpotent-Jordan type. The imperfect mixed family \(G_\lambda\) has height-one kernel \(\alpha_2\times\mu_2\).
 
 This is a classification of possible height-one kernels over an algebraically closed field. It is not a classification of the full rank-eight Hopf structures: distinct central extensions can share the same kernel and Frobenius image, as the Fold examples already demonstrate.
+
+
+## 3. Kernel/image incidence matrix for the rank-eight problem
+
+The Frobenius image is independently constrained to be \(\alpha_2\) or \(\mu_2\). Combining that with Theorem 1 gives eight a priori kernel/image pairs:
+
+| Height-one kernel \(K=G[F]\) | Image \(\alpha_2\) | Image \(\mu_2\) |
+|---|---|---|
+| \(\alpha_2\times\alpha_2\) | realized: \(\alpha_4\times\alpha_2\), \(G_C\) | open |
+| \(I_{1,1}\) | realized: \(G_D\) | open |
+| \(\alpha_2\times\mu_2\) | realized: \(\alpha_4\times\mu_2\), \(G_\lambda\) | realized: \(\mu_4\times\alpha_2\) |
+| \(\mu_2\times\mu_2\) | open | realized: \(\mu_4\times\mu_2\) |
+
+Here “open” means not yet realized or ruled out under the fixed total coordinate algebra \(k[x,z]/(x^4,z^2)\). It is not an assertion that such an extension exists.
+
+The next classification step is therefore finite at the level of kernel/image *types*: determine which of the three open pairs admit extension data whose total coordinate algebra is the Fold algebra, then classify the corresponding extensions up to group-scheme isomorphism. The family \(G_\lambda\) shows that even a fixed realized pair can carry nontrivial arithmetic extension parameters.
