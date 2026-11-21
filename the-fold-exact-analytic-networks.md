@@ -194,3 +194,7 @@ These are numerical checks of explicit formulas. The global existence theorem in
 ## References
 
 - Francesca Acquistapace and A. Díaz-Cano, “Divisors in global analytic sets,” *Journal of the European Mathematical Society* 13 (2011), no. 2, 297–307. The paper proves global principality for locally principal divisors under complement-disconnection and vanishing mod-2 class hypotheses, and proves existence of generic equations with multiplicity one along irreducible components. [Publisher abstract and DOI](https://ems.press/journals/jems/articles/1995), [DOI 10.4171/JEMS/253](https://doi.org/10.4171/JEMS/253).
+
+## UF-010 extension: weighted divisors and odd support
+
+UF-009 treats the reduced crease divisor, where every component has multiplicity one. For a weighted divisor D=ΣmᵢCᵢ, the global-principality test is applied to the odd support C_odd=∪_{mᵢ odd}Cᵢ, not to the full support: the mod-2 class Σmᵢ[Cᵢ] must vanish, the complement of C_odd must be disconnected, and each component ideal must be locally principal. Every positive even residual divisor has a positive analytic equation, so arbitrary prescribed higher odd multiplicities are obtained by multiplying the odd-support generator by that positive factor. See the-fold-divisor-parity-classification.md (UF-010).
