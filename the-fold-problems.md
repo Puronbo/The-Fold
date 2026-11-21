@@ -1824,3 +1824,28 @@ It is a nontrivial central extension of alpha_4 by alpha_2 and is not isomorphic
 The standard-library verifier tools/fold_char2_cocycle_hopf.py checks the Hopf identities and primitive-space dimension exactly over F₂. This gives at least five pairwise non-isomorphic Hopf structures on the same algebra. The four product structures' torsor classes remain as in G-4; the fifth cocycle group's torsors are not yet classified.
 
 **Open G-3c:** determine the full automorphism group scheme and translation normalizer of the cocycle group; classify its fppf torsors; and search for further non-product Hopf structures.
+
+
+## G-3d — Automorphism group and normalizer of the cocycle Hopf law
+
+**Theorem G-3d.1.** For the non-product Hopf law with Delta(x)=x tensor 1+1 tensor x and Delta(z)=z tensor 1+1 tensor z+x² tensor x², every group-scheme automorphism over a characteristic-two k-algebra R is
+```
+x -> a x + b x^2
+z -> a^4 z + c x + d x^2
+a in R^×, c^2=0
+```
+The automorphism group scheme is Spec k[a,a^{-1},b,c,d]/(c²), with reduced dimension 3 and tangent dimension 4. Its composition law is
+```
+(a,b,c,d)(a',b',c',d')
+= (aa', a'b+a^2 b', (a')^4 c+a c', (a')^4 d+b c'+a^2 d')
+```
+and its inverse is
+```
+(a,b,c,d)^(-1) = (a^(-1), b a^(-3), c a^(-5), d a^(-6)+bc a^(-7)).
+```
+
+**Theorem G-3d.2.** The translation centralizer is G_C and its normalizer in the automorphism scheme of the underlying affine scheme is G_C semidirect Aut_grp(G_C).
+
+The full calculation is in the-fold-char2-cocycle-automorphism-normalizer.md.
+
+**Open G-3d:** classify fppf torsors under G_C and determine whether additional non-product Hopf structures exist.
