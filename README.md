@@ -235,6 +235,7 @@ author. The CMB enters as a rhyme; the exact physics is standard cosmology. See 
 | choosing the smallest crease-reflection generator set | `the-fold-geometric-generators.md` |
 | deriving the hexagonal crease catalogue and its two sublattice signs | `the-fold-hexagonal-lattice.md` |
 | classifying periodic crease networks and surviving sign characters | `the-fold-periodic-networks.md` |
+| classifying periodic sign characters for all frieze and wallpaper groups | `the-fold-frieze-wallpaper-characters.md` |
 | the interactive models | the nine HTML files |
 
 ## Contents
@@ -304,6 +305,7 @@ author. The CMB enters as a rhyme; the exact physics is standard cosmology. See 
 | `the-fold-geometric-generators.md` | UF-003: primitive crease reflections, dihedral subgroup generation, gcd criterion, and minimum-axis set-cover solver |
 | `the-fold-hexagonal-lattice.md` | UF-004: six zero-line crease axes of Re(z^6), D6 character kernels, and the A/B-preserving D3 catalogue |
 | `the-fold-periodic-networks.md` | UF-005: wallpaper groups, finite-torus crease-network symmetries, sign-character maps, and common kernels |
+| `the-fold-frieze-wallpaper-characters.md` | UF-006: translation-kernel theorem, seven frieze presentations, and periodic character counts for all 17 wallpaper groups |
 | `the-fold-minimal-operations.md` | UF-002: feasibility, set-cover equivalence, NP-hardness, minimal arithmetic spectral power-exponent families, and a reference solver |
 
 Open the HTML files directly in a browser — no build step, no dependencies.
@@ -535,3 +537,6 @@ observer gives the reading. The four zones are the map's legend.
 
 
 **Periodic network classification (UF-005):** a periodic crease graph has a wallpaper symmetry group with a rank-two translation subgroup and finite point quotient. Signed height and site decorations define characters when each is transformed globally by a sign; the subgroup preserving all decorations is the kernel of their combined character map. The finite-torus solver tests square, triangular, and generic oblique examples. See the-fold-periodic-networks.md and tools/fold_periodic_networks.py.
+
+
+**Frieze and wallpaper characters (UF-006):** when a signed height is periodic under the full translation subgroup T, its sign homomorphism factors through the finite point group P=W/T. This remains true for nonsplit wallpaper extensions. The seven frieze groups give 17 translation-trivial character maps; the 17 wallpaper types give 46. Glide reflections may reverse height once while their squares preserve it. See `the-fold-frieze-wallpaper-characters.md` and `tools/fold_frieze_wallpaper_characters.py`.
