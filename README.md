@@ -242,6 +242,7 @@ author. The CMB enters as a rhyme; the exact physics is standard cosmology. See 
 | classifying disconnected crease components and prescribed analytic multiplicities | `the-fold-divisor-parity-classification.md` |
 | testing local principality, normalization, and singularity resolution | `the-fold-local-principality-resolution.md` |
 | computing exceptional intersection lattices and local divisor-class obstructions | `the-fold-exceptional-lattices-class-groups.md` |
+| lifting Fold symmetries to singularity resolutions and exceptional curves | `the-fold-equivariant-resolution-symmetry.md` |
 | the interactive models | the nine HTML files |
 
 ## Contents
@@ -318,6 +319,7 @@ author. The CMB enters as a rhyme; the exact physics is standard cosmology. See 
 | `the-fold-divisor-parity-classification.md` | UF-010: weighted-divisor principalness criterion, odd-support homology/separation tests, all-even positive equations, singular local orders, and disconnected torus crease examples |
 | `the-fold-local-principality-resolution.md` | UF-011: local generator-count test, normal-but-non-Cartier cone example, cusp/node normalization multiplicities, and weighted blow-up principalization |
 | `the-fold-exceptional-lattices-class-groups.md` | UF-012: integral exceptional-correction criterion, ADE discriminant groups, and the simple-elliptic UF-011 cone's numerical Z/2 obstruction with Pic0 caveat |
+| `the-fold-equivariant-resolution-symmetry.md` | UF-013: D4 action on the UF-011 cone, elliptic exceptional-curve automorphisms, trivial lattice action with nontrivial height character, and unit-cocycle condition |
 | `the-fold-minimal-operations.md` | UF-002: feasibility, set-cover equivalence, NP-hardness, minimal arithmetic spectral power-exponent families, and a reference solver |
 
 Open the HTML files directly in a browser — no build step, no dependencies.
@@ -571,3 +573,6 @@ observer gives the reading. The four zones are the map's legend.
 
 
 **Exceptional intersection lattices (UF-012):** if D is principal downstairs, its strict transform has an integral exceptional valuation correction a satisfying Ma=-b, where M is the negative-definite exceptional intersection matrix and b_j=(D~.E_j). The cokernel gives the complete local class obstruction for rational singularities under standard hypotheses; for the UF-011 simple-elliptic E7-tilde cone it is only the finite numerical quotient Z/2, with a degree-zero Picard contribution remaining. See the-fold-exceptional-lattices-class-groups.md and tools/fold_exceptional_lattice_obstruction.py.
+
+
+**Equivariant resolution and Fold characters (UF-013):** the cone X:z²=x⁴+y⁴ admits a natural D4 action by signed permutations of x,y. Its unique exceptional curve is fixed, so the rank-one lattice action is trivial, while the elliptic curve action is nontrivial. The exact principal height h=xy transforms by χ(r)=-1, χ(s)=+1, with four strict-transform intersections and exceptional correction a=2. A general invariant principal divisor admits a prescribed character generator only when its unit cocycle can be adjusted by a unit. See `the-fold-equivariant-resolution-symmetry.md` and `tools/fold_equivariant_resolution.py`.
