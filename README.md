@@ -1065,3 +1065,12 @@ The complete first-order c,d,h coefficient map in both conjugated coordinates is
 - Identifies \(\ker\theta\) with the contraction of the graph ideal \((Y_j-f_j)\) to the target polynomial ring, giving an exact elimination setup that retains \(c^4=d^2=h^2=0\).
 - Proves localization at the UF-067 maximal minor does not change this affine-slice image-algebra kernel, because the source parameter algebra is free over an integral reduced base and the minor is a nonzero divisor.
 - Explicitly distinguishes this affine slice from the full universal conjugation image \(G\times U\to G\); the full orbit-image ideal and its Hopf core remain open.
+
+
+### UF-071 — Two-copy coproduct criterion for the affine-slice image
+- Identifies the affine-linear conjugators as a subgroup scheme \(G_{\rm aff}\subset G\).
+- Defines the affine-slice image ideal \(I_{\rm aff}=\ker(O(G)\to O(G_{\rm aff})\otimes O(U))\), distinguishing it from the full universal orbit-image ideal.
+- Gives the exact Hopf test using two independent conjugates and explains why a shared conjugator does not test closure.
+- Does not assert the affine-slice image is a subgroup or compute its Hopf core.
+
+**Open UF-072:** compute the one-copy affine-slice elimination ideal and the two-copy coproduct test; compare its Hopf core with the full universal normal-closure Hopf core.
