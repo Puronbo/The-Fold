@@ -64,12 +64,7 @@ and its radical on the five-dimensional quotient is zero. Consequently
 =\langle u,v\rangle,\quad \dim Z=2.}
 \]
 
-**Proof.** Reduce the UF-028 structure constants modulo two: terms with coefficient 2 vanish and minus signs become plus. The four displayed brackets remain. They show surjectivity onto \(\langle u,v\rangle\). If \(z=\alpha a+\beta b+\gamma c+\delta d+\eta e\) brackets to zero with all five basis vectors, testing against \(d,e,c,a,b\) respectively gives
-\[
-\alpha=0,\quad \beta=0,\quad \alpha=0,\quad
-\delta=0,\quad \beta=0
-\]
-and the remaining tests against \(a,b\) give \(\gamma=0,\eta=0\). Equivalently, the radical matrix has rank five over \(\mathbb F_2\). Thus no noncentral direction joins the center. All brackets land in \(\langle u,v\rangle\), which is central by construction. \(\square\)
+**Proof.** Reduce the UF-028 structure constants modulo two: terms with coefficient 2 vanish and minus signs become plus. The four displayed brackets remain. They show surjectivity onto \(\langle u,v\rangle\). If \(z=\alpha a+\beta b+\gamma c+\delta d+\eta e\) brackets to zero with every vector, then testing against \(d\) gives \(\alpha u+\beta v=0\), hence \(\alpha=\beta=0\). Testing against \(a\) then gives \(\delta u+\gamma v=0\), hence \(\delta=\gamma=0\). Finally, testing against \(b\) gives \(\eta u+\delta v=0\), hence \(\eta=0\). Equivalently, the radical matrix has rank five over \(\mathbb F_2\). Thus no noncentral direction joins the center. All brackets land in \(\langle u,v\rangle\), which is central by construction. \(\square\)
 
 The center does **not** grow in characteristic two for this integral bracket model. This contrasts with characteristic three, where the radical gains the extra cubic trivial-character line.
 
