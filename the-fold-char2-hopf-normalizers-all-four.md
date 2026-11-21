@@ -1,87 +1,112 @@
-# Normalizers of all four product Hopf structures (G-3b)
+# Corrected normalizers of all four product Hopf structures (G-3b)
 
-Let k have characteristic two and let the common underlying algebra be
-\[
-A=k[x,z]/(x^4,z^2).
-\]
-For each of the four product Hopf structures from G-3, write G for its group scheme and let G act on itself by translations.
+**Correction.** The first version incorrectly asserted that additive/multiplicative cross-homomorphisms vanish. That argument only checked geometric points. Over nonreduced coefficient algebras, infinitesimal cross-homomorphisms exist. They change the scheme-theoretic automorphism groups of the two mixed products. The calculations below replace the earlier mixed-case claims.
 
-The general translation-normalizer theorem gives
+Let k have characteristic two and let A=k[x,z]/(x^4,z^2). For each product Hopf law G on Spec(A), translations satisfy
 \[
 C_{\operatorname{Aut}(\operatorname{Spec}A)}(G)=G,\qquad
 N_{\operatorname{Aut}(\operatorname{Spec}A)}(G)
 =G\rtimes\operatorname{Aut}_{\mathrm{grp}}(G).
 \]
-The following computes the four automorphism groups.
+This functorial normalizer theorem is unchanged. The automorphism-group calculations are corrected as follows.
 
 ## 1. Additive-additive: alpha_4 x alpha_2
 
-The primitive elements are spanned by x,x²,z. A group-scheme automorphism has
+A group-scheme automorphism has
 \[
 x\mapsto ax+bx^2+cz,\qquad z\mapsto dx+ex^2+fz,
 \]
-with d²=0 and af-cd invertible. Since d is nilpotent, this is equivalent to a,f being units. Thus
+with d²=0 and af-cd invertible. Equivalently a,f are units. Thus
 \[
 \operatorname{Aut}_{\mathrm{grp}}(\alpha_4\times\alpha_2)
 =\operatorname{Spec}k[a^{\pm1},f^{\pm1},b,c,d,e]/(d^2).
 \]
-Its reduced dimension is five and tangent dimension six.
+Reduced dimension five, tangent dimension six.
 
 ## 2. Multiplicative-additive: mu_4 x alpha_2
 
-There are no nontrivial homomorphisms between a multiplicative-type factor mu_4 and an additive factor alpha_2. In coordinates, this follows because the additive coordinate algebra has no nontrivial group-like elements and the multiplicative coordinate algebra has no nonzero primitive elements. Therefore every automorphism is block diagonal.
-
-Since mu_4=D(Z/4), its automorphism group is the constant group Aut(Z/4)≅C2. Since Aut(alpha_2)=G_m, we get
+There is an infinitesimal cross-homomorphism alpha_2→mu_4. If z is the primitive coordinate on alpha_2 and t is the multiplicative coordinate on mu_4, its pullback is
 \[
-\operatorname{Aut}_{\mathrm{grp}}(\mu_4\times\alpha_2)
-\cong C_2\times\mathbb G_m.
+t\longmapsto1+r z,\qquad r^2=0.
 \]
-It is smooth of dimension one.
+The reverse cross-homomorphism mu_4→alpha_2 is zero because O(mu_4) has no nonzero primitive elements.
+
+Every automorphism is therefore described by
+\[
+(t,z)\longmapsto
+\bigl(t^\epsilon(1+r z),\,s z\bigr),
+\quad \epsilon\in(\mathbb Z/4)^\times=\{1,3\},\
+s\in R^\times,\ r^2=0.
+\]
+For composition f_(epsilon,s,r) after f_(epsilon',s',r'), the parameters obey
+\[
+(\epsilon,s,r)(\epsilon',s',r')
+=(\epsilon\epsilon',\,ss',\,r'+rs').
+\]
+Thus the automorphism group scheme has underlying scheme
+\[
+C_2\times\mathbb G_m\times\alpha_2.
+\]
+It has reduced dimension one and tangent dimension two. It is not smooth.
 
 ## 3. Additive-multiplicative: alpha_4 x mu_2
 
-Again the cross-homomorphisms vanish, so automorphisms are block diagonal. The group mu_2=D(Z/2) has trivial automorphism group. The primitive elements of O(alpha_4)=k[x]/x^4 are kx⊕kx², so
+There is an infinitesimal cross-homomorphism alpha_4→mu_2. Write t=1+z for the multiplicative coordinate on mu_2. Its pullback along such a homomorphism is the group-like element
 \[
-x\mapsto ax+bx^2,\qquad a\in R^\times,\ b\in R
+t\longmapsto 1+p x+q x^2+pq x^3,\qquad p^2=q^2=0.
 \]
-describes every automorphism of alpha_4. Thus
+Indeed, comparing Delta(g) with g tensor g for g=1+p x+q x²+r x³ gives r=pq and p²=q²=0. The reverse cross-homomorphism mu_2→alpha_4 is zero because O(mu_2) has no nonzero primitive elements.
+
+The cross-homomorphism group scheme K is
+\[
+K=\operatorname{Spec}k[p,q]/(p^2,q^2).
+\]
+Its group law, induced by multiplication of group-like elements, is
+\[
+(p,q)(p',q')=(p+p',\,q+q'+pp').
+\]
+The diagonal automorphism group is Aut(alpha_4), whose elements are x↦a x+b x² with a a unit. Thus
 \[
 \operatorname{Aut}_{\mathrm{grp}}(\alpha_4\times\mu_2)
-\cong\operatorname{Aut}_{\mathrm{grp}}(\alpha_4),
+\cong \operatorname{Aut}(\alpha_4)\ltimes K
 \]
-a smooth two-dimensional group scheme. Its multiplication in the displayed coordinates is
+(up to the equivalent opposite convention for the semidirect action). The scheme has reduced dimension two and tangent dimension four. It is not smooth.
+
+For reference, composition of the alpha_4 automorphisms x↦a x+b x² and x↦a' x+b' x² has coefficients
 \[
-(a,b)(a',b')=(aa',\,a'b+b'a^2).
+(a,b)(a',b')=(aa',\,ab'+ba'^2)
 \]
+in the point-map convention.
 
 ## 4. Multiplicative-multiplicative: mu_4 x mu_2
 
-This is the diagonalizable group D(M), with M=Z/4⊕Z/2. Its group-scheme automorphism group is the constant group Aut(M). An automorphism is represented on M by
+This is D(M) for M=Z/4⊕Z/2. Its automorphism group is the constant group Aut(M). The automorphisms are represented by
 \[
 \begin{pmatrix}a&c\\b&1\end{pmatrix},
-\quad a\in\{1,3\},\quad b\in\{0,1\},\quad c\in\{0,2\},
+\quad a\in\{1,3\},\ b\in\{0,1\},\ c\in\{0,2\},
 \]
-where the first row is read modulo four and the second modulo two. There are eight such matrices. Exactly two have order four and five nonidentity elements have order two, so this group is the dihedral group D8 of order eight. Therefore
+with the first row modulo four and second row modulo two. There are eight elements, with two elements of order four and five nonidentity involutions. Hence
 \[
 \operatorname{Aut}_{\mathrm{grp}}(\mu_4\times\mu_2)\cong D_8
 \]
 as a constant finite étale group scheme.
 
-## 5. Four normalizers
+## 5. Corrected normalizer summary
 
-Combining the four calculations with the translation-normalizer theorem:
 \[
 \begin{array}{c|c|c}
-G & \operatorname{Aut}_{\mathrm{grp}}(G) & N(G)\\
+G & \operatorname{Aut}_{\mathrm{grp}}(G) &
+(\dim_{\mathrm{red}},\dim_{\mathrm{tan}})\\
 \hline
 \alpha_4\times\alpha_2 &
-\operatorname{Spec}k[a^{\pm1},f^{\pm1},b,c,d,e]/(d^2) &
-G\rtimes\operatorname{Aut}(G)\\
-\mu_4\times\alpha_2 & C_2\times\mathbb G_m & G\rtimes(C_2\times\mathbb G_m)\\
-\alpha_4\times\mu_2 & \operatorname{Aut}(\alpha_4) & G\rtimes\operatorname{Aut}(\alpha_4)\\
-\mu_4\times\mu_2 & D_8 & G\rtimes D_8
+\operatorname{Spec}k[a^{\pm1},f^{\pm1},b,c,d,e]/(d^2) &(5,6)\\
+\mu_4\times\alpha_2 &
+C_2\times\mathbb G_m\times\alpha_2 &(1,2)\\
+\alpha_4\times\mu_2 &
+\operatorname{Aut}(\alpha_4)\ltimes K &(2,4)\\
+\mu_4\times\mu_2 & D_8 &(0,0)
 \end{array}
 \]
-For all four, the centralizer of translations is exactly G.
+For each row, the translation centralizer is G and the normalizer is G semidirect the displayed automorphism group scheme.
 
-These are normalizers inside the automorphism group scheme of the common underlying finite affine scheme. They are not assertions that the full automorphism group of A is exhausted by these normalizers.
+The key lesson is scheme-theoretic: checking homomorphisms only over fields misses nilpotent cross-homomorphisms. The mixed-case automorphism group schemes are non-smooth even though their geometric-point cross-homomorphisms are trivial.
