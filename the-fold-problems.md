@@ -1594,3 +1594,8 @@ The h-coordinate of the conjugate includes (hC+iA)(c₋h₋+d₋a₋). Its lowes
 ### UF-052 second-order completion
 
 The inverse constant expansion gives d₂ ≡ a(φc₁²+ηc₁d₁)/Δ mod n³. Including this term yields the corrected expression for c₋h₋+d₋a₋ and hence for the h-coordinate of gug⁻¹ modulo n³; see Section 8 of `the-fold-char2-quadratic-conjugation-coaction.md`. This correction still does not determine the full orbit ideal or Hopf core, and it gives no independent detection of ch or d₀h through the h-coordinate.
+
+
+### UF-052 inverse audit — coupled recursion
+
+The Section 8 explicit formula for S=c₋h₋+d₋a₋ is withdrawn: it omitted first-order feedback in a₋ and h₋ from the exact coproduct terms γS and ηS. Section 9 of `the-fold-char2-quadratic-conjugation-coaction.md` records the corrected coupled filtered system, including c₂,d₂,h₁,a₁ and S modulo n³. The quadratic coefficient span remains open; no conclusion about ch or d₀h is currently justified.
