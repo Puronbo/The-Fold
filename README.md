@@ -719,3 +719,8 @@ It is a 7-dimensional unipotent group. The full automorphism group is its semidi
 
 
 **UF-053 grading audit:** Section 11 of the quadratic conjugation paper corrects the homogeneous-degree bookkeeping in the inverse expansion and independently verifies the Section 10 formula and rank-three span.
+
+
+**UF-054 — Full target-coordinate quadratic audit:** identifies why the rank-three module from the conjugate's nilpotent coordinates cannot be promoted to the full conjugacy-family coefficient module: cubic parameters in U contribute quadratic nilradical terms to nonconstant target coefficients, as shown by `(x+c)^3`. The complete thirteen-coordinate audit and subsequent Hopf-core computation remain open. See `the-fold-char2-full-conjugation-quadratic-audit.md`.
+
+**Open UF-055:** compute the full degree-two target-coordinate coefficient module, its annihilator, and then the scheme-theoretic conjugacy-image kernel and largest Hopf ideal contained in it.
