@@ -2032,3 +2032,8 @@ When `c²+a d²+d=lambda`, the scheme `u⁴=a, v²=q` is a `G_lambda`-torsor und
 Verifier: `tools/fold_char2_mixed_torsor_models.py`.
 
 The mixed-family boundary also has standard symbol form: for `lambda≠0`, `Q(a,lambda)≅[a*lambda,lambda)_2` via `I=UD`, `J=D`; for `lambda=0` the boundary is zero. The explicit torsor action and inverse are checked in `tools/fold_char2_mixed_torsor_models.py`.
+
+
+## G-2c — Normalizer of G_lambda translations
+
+Inside the full automorphism scheme of the underlying Fold affine scheme, the translation centralizer is exactly `G_lambda` and the normalizer is `G_lambda ⋊ Aut_grp(G_lambda)`. The latter has reduced dimension two and tangent dimension six (two translation directions plus four automorphism tangent directions). See `the-fold-char2-mixed-hopf-normalizer.md`.
