@@ -846,3 +846,11 @@ The note also establishes a concrete characteristic-two direction: C_k ≅ k[x,z
 - Gives explicit rank-eight torsor algebras and coactions for all four product group schemes.
 - Shows all four torsor sets vanish over perfect fields and can be nontrivial over imperfect fields, e.g. F_2(t).
 - Adds the-fold-char2-hopf-torsors-four-laws.md. This classifies torsors under the fixed four group schemes, not all group-scheme forms or Hopf structures.
+
+
+### G-3c — Fifth, non-product Hopf structure
+- Constructs the cocycle coproduct Delta(x)=x⊗1+1⊗x and Delta(z)=z⊗1+1⊗z+x²⊗x².
+- Proves the Hopf axioms and identifies the group law as a nontrivial central extension of alpha_4 by alpha_2.
+- Distinguishes it from the four product structures using primitive-space dimension 2, relative-Frobenius image alpha_2, and zero restricted Lie 2-power map.
+- Adds the-fold-char2-nontrivial-cocycle-hopf-structure.md and tools/fold_char2_cocycle_hopf.py; exact F₂ verification passes.
+- Establishes at least five pairwise non-isomorphic Hopf structures on the same Fold algebra; exhaustive classification remains open.
