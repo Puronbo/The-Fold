@@ -34,11 +34,13 @@ def rank_mod(matrix, p):
     return r
 
 def verify():
-    relation_matrix = [[2*v for v in row] for row in ROWS]\n    ranks = {p: rank_mod(relation_matrix, p) for p in (2, 3, 5)}
+    relation_matrix = [[2*v for v in row] for row in ROWS]
+    ranks = {p: rank_mod(relation_matrix, p) for p in (2, 3, 5)}
     assert ranks == {2: 0, 3: 8, 5: 8}, ranks
     assert len(ROWS) == 10 and all(len(row) == 16 for row in ROWS)
     return {
-        "matrix_shape": "16x16 with 10 nonzero rows",\n        "matrix_factor_removed": 2,
+        "matrix_shape": "16x16 with 10 nonzero rows",
+        "matrix_factor_removed": 2,
         "nonzero_smith_invariants": [1,1,1,1,1,1,1,2],
         "relation_ranks": ranks,
         "derivation_dimensions": {p: 16-r for p,r in ranks.items()},
