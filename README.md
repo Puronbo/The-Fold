@@ -934,3 +934,5 @@ The note also establishes a concrete characteristic-two direction: C_k ≅ k[x,z
 - Identifies `δ'_lambda([a])` with the Brauer class of `Q(a,λ)=k⟨U,D⟩/(U²=a,D²=λ,DU+UD=1)`.
 - Proves this by realizing `E_lambda` as the pullback of `SL₂ -> PGL₂` and computing the descended matrix algebra.
 - Therefore `δ_lambda([a] mod k⁴)=[Q(a,λ)]`; the equation `c²+a d²+d=λ` is its exact splitting criterion.
+
+- Describes all `G_lambda`-torsor classes as an extension of `k×/(k×)²` by the kernel of `[a] ↦ [Q(a,λ)]` on `k/k⁴`; it splits noncanonically as an F₂-vector-space sequence.
