@@ -80,3 +80,27 @@ The extension also gives the fppf cohomology sequence
 \xrightarrow{\delta_\lambda}\operatorname{Br}(k)[2].
 \]
 Here the first term is \(H^1(k,\mu_2)\), the middle quotient is \(H^1(k,\alpha_4)\), and \(H^2(k,\mu_2)\cong\operatorname{Br}(k)[2]\). The boundary map \(\delta_\lambda\), determined by the cocycle class of lambda, has not been computed. Determining it is the next torsor problem for this family.
+
+
+## 6. Frobenius factorization of the torsor obstruction
+
+Let \(E_\lambda\) be the central extension of \(\alpha_2\) by \(\mu_2\) with cocycle
+\[
+C_\lambda(r,s)=1+\lambda rs.
+\]
+The cocycle defining \(G_\lambda\) is its pullback along relative Frobenius
+\[
+F:\alpha_4\longrightarrow\alpha_2,\qquad x\longmapsto x^2,
+\]
+because \(C_\lambda(F(x),F(y))=1+\lambda x^2y^2\). Hence \(G_\lambda\) is the pullback extension \(F^*E_\lambda\).
+
+Naturality of the fppf connecting map gives
+\[
+\delta_\lambda
+=\delta'_\lambda\circ F_*:
+H^1(k,\alpha_4)=k/k^4
+\longrightarrow H^2(k,\mu_2)=\operatorname{Br}(k)[2].
+\]
+Under the standard descriptions, \(F_*\) sends the class of \(a\) modulo fourth powers to the same element \(a\) modulo squares: the \(\alpha_4\)-torsor \(u^4=a\) maps to the \(\alpha_2\)-torsor \((u^2)^2=a\). Therefore \(\delta_\lambda\) depends only on the image of \(a\) in \(k/k^2\). In particular it vanishes on the subgroup \(k^2/k^4\subset k/k^4\).
+
+The remaining arithmetic problem is now reduced to computing the connecting map \(\delta'_\lambda:k/k^2\to\operatorname{Br}(k)[2]\) for the rank-four extension \(E_\lambda\). This is a sharper problem than computing \(\delta_\lambda\) directly.
