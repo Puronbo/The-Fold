@@ -130,12 +130,9 @@ The dimensions therefore refer to different objects:
 \dim T_1\operatorname{Aut}(C_k)=16.
 \]
 
-## 7. New questions
+## 7. Further direction
 
-1. Determine the action of \(\mathcal H/\mathcal N\cong\mathbb G_a^2\) on the homogeneous space \(\mathcal H/U\), and decide whether \(\mathcal H/U\) is an affine three-space as a scheme.
-2. Determine whether the normal closure construction commutes with extension of the characteristic-two ground field and with passage to the full nonreduced automorphism group scheme.
-3. Compute the full group law on \(\mathcal N\) and identify its lower central series.
-4. Compare the two-dimensional quotient directions with the three extra infinitesimal directions in the full automorphism scheme; do not identify them without a separate calculation.
+UF-038 resolves the homogeneous space and the internal structure of N: \\(\\mathcal H/U\\cong\\mathbb A^3\\), \\(N/U\\cong\\mathbb G_a\\), and N is class-two nilpotent with center equal to its derived subgroup. The remaining question is UF-039: extend the normal-closure calculation from the reduced identity-linear group to the full nonreduced characteristic-two automorphism group scheme, including its additional infinitesimal directions.
 
 ## Reproducibility
 
