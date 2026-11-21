@@ -72,7 +72,7 @@ The equality K=K_2 remains open. Matching reduced supports and tangent dimension
 
 ## 5. Finite nilradical filtration
 
-Let n=(c,d_0,h) be the nilradical ideal. It satisfies n^4=0. After computing J_orb and its Hopf core, compare the resulting ideal with I(K_2) through the intrinsic filtration
+Let n=(c,d_0,h) be the nilradical ideal. Every element r of n satisfies r^4=0, but the ideal powers satisfy n^5≠0 and n^6=0. After computing J_orb and its Hopf core, compare the resulting ideal with I(K_2) through the full intrinsic filtration
 \[
 A\supset n\supset n^2\supset n^3\supset n^4=0.
 \]
@@ -84,4 +84,4 @@ The filtration comparison must be carried out intrinsically; a chosen coordinate
 
 UF-048 specifies the correct universal algebra map and the exact two-stage calculation: first compute ker(Conj*), then compute its largest Hopf ideal. Neither computation is claimed complete here.
 
-**Open UF-049:** calculate the kernel of the universal conjugation pullback in the full coordinate ring, compute its Hopf core, and compare it with K_2 modulo successive powers of n.
+**Open UF-049:** calculate the kernel of the universal conjugation pullback in the full coordinate ring, compute its Hopf core, and compare it with K_2 modulo successive powers of n through n^6=0.
