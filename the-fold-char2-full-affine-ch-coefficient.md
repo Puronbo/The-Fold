@@ -120,32 +120,50 @@ L=Abt+C,quad M=B+Ed+Gbt+Jbdt,quad N=E+Jbt.
 Thus the mixed (ch) direction is detected away from this explicit closed parameter locus and is invisible on it. This is a statement about one coefficient vector only; it does not compute the full coefficient module, the universal orbit-image kernel, or its Hopf core.
 
 
-## 7. UF-064 — First-order nilpotent coefficient map
+## 7. UF-064 — Corrected first-order nilpotent coefficient map
 
-Let \(\mathfrak n=(c,d,h)\), with \(c^4=d^2=h^2=0\), and put \(r=a^{-1}\), \(t=i^{-1}\). In the correctly ordered full-affine conjugation, reduce the sixteen target coefficients modulo \(\mathfrak n^2\). The \(X'\)-coordinate has no terms linear in \(c,d,h\). The linear terms in \(Z'\) are:
+Let \(\mathfrak n=(c,d,h)\), with \(c^4=d^2=h^2=0\), and put \(t=i^{-1}\) and \(Q=Ab+Ci\). Define
+\[
+R=Di^2+Gb^2+Gbi.
+\]
+Extracting coefficients from the exact composition \(g(u(g^{-1}(-)))\), and reducing modulo \(\mathfrak n^2\), gives the following complete table. Entries are coefficients of the indicated nilpotent monomial in the target coordinate coefficient; omitted entries are zero.
 
 \[
 \begin{array}{c|ccc}
-\text{target coefficient}&[c]&[d]&[h]\\ \hline
-x&Aat&0&0\\
-z&A&Abt&0\\
-x^2&Ga^2t&a^2t(B+G)&0\\
-x^3&0&Ja^3t&Ga^2t(bt+1)\\
-xz&0&0&C\\
-x^2z&Ja^2&Jba^2t&a(D+Gb^2t^2+Gbt)\\
-x^3z&0&0&a^2E
+\text{coefficient in }X' &[c]&[d]&[h]\\ \hline
+c'&0&0&0\\
+a'&0&tQ&0\\
+b'&Q/a&btQ/a&0\\
+\alpha'&at(Bi+Gb)&at(Bb+Di+Gb)&C\\
+\beta'&0&a^2t(Ei+Jb)&at^2R\\
+\gamma'&0&0&0\\
+\delta'&a(Ei+Jb)&abt(Ei+Jb)&bt^2R\\
+\epsilon'&0&0&0
+\end{array}
+\qquad
+\begin{array}{c|ccc}
+\text{coefficient in }Z' &[c]&[d]&[h]\\ \hline
+d'&0&0&0\\
+h'&0&Aat&0\\
+i'&A&Abt&0\\
+\phi'&Ga^2t&a^2t(B+G)&0\\
+\psi'&0&Ja^3t&Ga^2t^2(b+i)\\
+\eta'&0&0&C\\
+\theta'&Ja^2&Ja^2bt&at^2R\\
+\kappa'&0&0&Ea^2
 \end{array}
 \]
-All entries are in characteristic two. In particular, terms with coefficient 2 in an unreduced intermediate expression vanish.
 
-The three columns are generically independent. The minor from rows \(z,x,xz\), with columns \(c,d,h\), is
+For example, the coefficient of \(d\) in the \(x\)-coefficient of \(Z'\) is \(Aat\), while the coefficient of \(c\) there is zero. Thus the earlier UF-064 table had misplaced first-order contributions and incorrectly asserted that \(X'\) had no linear terms. The table above supersedes that earlier table.
+
+The generic-rank-three conclusion remains valid. In the rows \(i'\) (the \(z\)-coefficient of \(Z'\)), \(h'\) (the \(x\)-coefficient of \(Z'\)), and \(\alpha'\) (the \(x^2\)-coefficient of \(X'\)), the \((c,d,h)\)-minor is
 \[
 \det\begin{pmatrix}
 A&Abt&0\\
 0&Aat&0\\
-0&0&C
+at(Bi+Gb)&at(Bb+Di+Gb)&C
 \end{pmatrix}=A^2atC.
 \]
-Since \(a,t\) are units, the first-order coefficient map has generic rank three on the open locus \(AC\ne0\).
+Since \(a,t\) are units, the first-order map has rank three on the open locus \(AC\ne0\).
 
-This is the exact first associated-graded layer \(\mathfrak n/\mathfrak n^2\), not the full coefficient module. The quadratic and higher nilpotent monomials, the full scheme-theoretic orbit-image kernel, and its Hopf core remain to be computed.
+This computes exactly the \(\mathfrak n/\mathfrak n^2\) layer only. It does not determine the quadratic and higher nilpotent layers, the full coefficient module, the universal orbit-image kernel, or its Hopf core.
