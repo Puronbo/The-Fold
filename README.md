@@ -1018,3 +1018,8 @@ The note also establishes a concrete characteristic-two direction: C_k ≅ k[x,z
 ### UF-063 — Exact invisible locus of the mixed (ch) direction
 - Extracts the precise closed locus where the full-affine (ch)-coefficient vector vanishes in all sixteen target coordinates: (A=C=J=E=0), (B+Gbt=0).
 - Separates invisibility of this one nilpotent direction from the still-open full coefficient module and Hopf-core calculations.
+
+
+### UF-064 — First-order nilpotent coefficient map
+- Computes the complete linear c,d,h layer of the full-affine conjugation target coefficients.
+- Shows generic rank three via the explicit minor A²atC, while keeping higher nilpotent layers open.
