@@ -1472,7 +1472,7 @@ where \(J_2\) is the indecomposable two-dimensional regular \(\mathbb F_2[C_2]\)
 \]
 It remains surjective onto \(\langle u,v\rangle\), and its radical on the five-dimensional quotient is zero. Thus center = derived algebra = \(\langle u,v\rangle\), dimension two. The bracket remains D4-equivariant.
 
-This is a modular nonsemisimplicity phenomenon without a bracket-center jump. It differs from characteristic three, where the center acquires the additional cubic trivial-character line. The theorem concerns the specified integral bracket lattice; identifying it with the full tangent Lie algebra of the characteristic-two automorphism group scheme remains open.
+This is a modular nonsemisimplicity phenomenon without a bracket-center jump. It differs from characteristic three, where the center acquires the additional cubic trivial-character line. The theorem concerns the specified integral bracket lattice. UF-033 separately computes the full characteristic-two derivation algebra, which has dimension 16; the seven-dimensional bracket Lie algebra is not the full tangent algebra.
 
 Proof and exact verifier: `the-fold-d4-characteristic-two.md`, `tools/fold_d4_characteristic_two.py`.
 
@@ -1481,9 +1481,9 @@ Proof and exact verifier: `the-fold-d4-characteristic-two.md`, `tools/fold_d4_ch
 
 ## UF-033 — The characteristic-two automorphism group scheme
 
-**Theorem UF-033.1.** For (C=k[x,z]/(x^4,z^2)) in characteristic two, every derivation is determined freely by (D(x),D(z)in C). Hence (dim_koperatorname{Der}_k(C)=16).
+**Theorem UF-033.1.** For C = k[x,z]/(x^4,z^2) in characteristic two, every derivation is determined freely by D(x), D(z) in C. Hence dim_k Der_k(C) = 16.
 
-**Theorem UF-033.2.** For general images (X,Z), the endomorphism scheme equations are exactly (c^4=d^2=h^2=0), where (c,d) are their constant coefficients and (h) is the x-linear coefficient of Z. The automorphism locus is the open subset where (ai-bh) is invertible.
+**Theorem UF-033.2.** For general images X,Z, the endomorphism-scheme equations are exactly c^4 = d^2 = h^2 = 0, where c,d are their constant coefficients and h is the x-linear coefficient of Z. The automorphism locus is the open subset where ai − bh is invertible.
 
 **Theorem UF-033.3.** The reduced automorphism scheme has dimension 13, while its identity tangent space has dimension 16. It is therefore non-smooth. The 16-dimensional tangent algebra is the full derivation algebra, not the reduction of the seven-dimensional characteristic-zero unipotent Lie algebra.
 
