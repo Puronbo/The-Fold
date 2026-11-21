@@ -243,6 +243,7 @@ author. The CMB enters as a rhyme; the exact physics is standard cosmology. See 
 | testing local principality, normalization, and singularity resolution | `the-fold-local-principality-resolution.md` |
 | computing exceptional intersection lattices and local divisor-class obstructions | `the-fold-exceptional-lattices-class-groups.md` |
 | lifting Fold symmetries to singularity resolutions and exceptional curves | `the-fold-equivariant-resolution-symmetry.md` |
+| classifying every analytic D4 semi-invariant on the quartic cone | `the-fold-d4-analytic-character-classification.md` |
 | the interactive models | the nine HTML files |
 
 ## Contents
@@ -320,6 +321,7 @@ author. The CMB enters as a rhyme; the exact physics is standard cosmology. See 
 | `the-fold-local-principality-resolution.md` | UF-011: local generator-count test, normal-but-non-Cartier cone example, cusp/node normalization multiplicities, and weighted blow-up principalization |
 | `the-fold-exceptional-lattices-class-groups.md` | UF-012: integral exceptional-correction criterion, ADE discriminant groups, and the simple-elliptic UF-011 cone's numerical Z/2 obstruction with Pic0 caveat |
 | `the-fold-equivariant-resolution-symmetry.md` | UF-013: D4 action on the UF-011 cone, elliptic exceptional-curve automorphisms, trivial lattice action with nontrivial height character, and unit-cocycle condition |
+| `the-fold-d4-analytic-character-classification.md` | UF-014: complete convergent analytic character modules, invariant quotient ring K{p,z}, and all odd multiplicity patterns on forced reflection branches |
 | `the-fold-minimal-operations.md` | UF-002: feasibility, set-cover equivalence, NP-hardness, minimal arithmetic spectral power-exponent families, and a reference solver |
 
 Open the HTML files directly in a browser — no build step, no dependencies.
@@ -576,3 +578,6 @@ observer gives the reading. The four zones are the map's legend.
 
 
 **Equivariant resolution and Fold characters (UF-013):** the cone X:z²=x⁴+y⁴ admits a natural D4 action by signed permutations of x,y. Its unique exceptional curve is fixed, so the rank-one lattice action is trivial, while the elliptic curve action is nontrivial. The exact principal height h=xy transforms by χ(r)=-1, χ(s)=+1, with four strict-transform intersections and exceptional correction a=2. A general invariant principal divisor admits a prescribed character generator only when its unit cocycle can be adjusted by a unit. See `the-fold-equivariant-resolution-symmetry.md` and `tools/fold_equivariant_resolution.py`.
+
+
+**Complete analytic D4 character classification (UF-014):** on X:z²=x⁴+y⁴, every convergent scalar semi-invariant has the unique form h=ΔχF(p,z), where p=x²+y², F is an arbitrary invariant analytic germ, and Δχ is 1, xy, x²−y², or xy(x²−y²) for the four one-dimensional D4 characters. The theorem covers all analytic germs, not just polynomials. On forced reflection supports, multiplicities are 1+2k independently on each D4 branch orbit. See the-fold-d4-analytic-character-classification.md and tools/fold_d4_analytic_character_classification.py.
