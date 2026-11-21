@@ -949,3 +949,11 @@ The note also establishes a concrete characteristic-two direction: C_k ≅ k[x,z
 - Adds `the-fold-char2-height-one-kernel-classification.md`.
 
 - Organizes the rank-eight classification into eight kernel/image pairs; five are realized and three remain open, not ruled out.
+
+
+### G-4b — Fppf torsors of the non-product Hopf structures
+- For `G_C`, proves `0 → k/k² → H¹(k,G_C) → k/k⁴ → 0`.
+- For `G_D`, proves `0 → k/k⁴ → H¹(k,G_D) → k/k² → 0`.
+- Both obstruction groups vanish because `H²(k,α₂)=H²(k,α₄)=0`; both sequences split noncanonically as F₂-vector spaces.
+- Consequently these torsor groups are abstractly isomorphic to that of `α₄×α₂`, despite the non-isomorphic Hopf structures.
+- Adds `the-fold-char2-nonproduct-torsor-classes.md`.
