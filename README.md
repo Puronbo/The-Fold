@@ -914,3 +914,9 @@ The note also establishes a concrete characteristic-two direction: C_k ≅ k[x,z
 - Includes the infinitesimal `u`-direction missed by field-valued-point calculations; the automorphism group has reduced dimension two and tangent dimension four.
 - Derives the composition and inverse laws and adds `tools/fold_char2_mixed_hopf_automorphisms.py`.
 - Adds `the-fold-char2-imperfect-mixed-hopf-automorphisms.md`.
+
+
+### G-3k — Frobenius factorization of the mixed-family torsor obstruction
+- Identifies `G_lambda` as the pullback of the rank-four central extension `E_lambda` of `alpha_2` by `mu_2` along `F: alpha_4 -> alpha_2`.
+- Proves `δ_lambda = δ'_lambda ∘ F_*`; therefore the obstruction depends only on `a mod k²` and vanishes on `k²/k⁴`.
+- Reduces the remaining arithmetic calculation to `δ'_lambda: k/k² -> Br(k)[2]`.
