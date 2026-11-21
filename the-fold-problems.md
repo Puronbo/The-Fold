@@ -1907,7 +1907,7 @@ The translation centralizer is G_D and the normalizer is G_D semidirect Aut_grp(
 
 ## G-3f — Frobenius reduction
 
-For every Hopf structure on A, the square subalgebra is k[x²]/(x⁴), the Frobenius kernel has coordinate algebra k[x,z]/(x²,z²), and F²=0. Over an algebraically closed field the rank-two Frobenius image is alpha_2 or mu_2. The six known Hopf structures and their Frobenius kernels/images are tabulated in the-fold-char2-frobenius-hopf-classification.md.
+For every Hopf structure on A, the square subalgebra is k[x²]/(x⁴), the Frobenius kernel has coordinate algebra k[x,z]/(x²,z²), and F²=0. Over an algebraically closed field the rank-two Frobenius image is alpha_2 or mu_2. The six base Hopf structures and the G_lambda imperfect-field family, with their Frobenius kernels/images, are tabulated in the-fold-char2-frobenius-hopf-classification.md.
 
 This reduces the exhaustive classification to possible height-one kernels and extensions compatible with the fixed algebra. It does not yet prove that the six examples are exhaustive.
 
