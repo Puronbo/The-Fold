@@ -186,3 +186,8 @@ The generator-count test is exact for a finitely generated local ideal. Normalit
 - The Stacks Project, “Serre's criterion for normality,” Tag 031O. [Reference](https://stacks.math.columbia.edu/tag/031O).
 - R. Hartshorne and C. Polini, “Divisors class groups of singular surfaces,” for the relation between divisors, Cartier classes, and normalization. [arXiv:1301.3222](https://arxiv.org/abs/1301.3222).
 - For real-analytic resolution of hypersurfaces by admissible blow-ups, see the resolution statement in Appendix D.2 of this analytic-geometry manuscript. [PDF](https://math.univ-cotedazur.fr/u/rifford/Papiers_en_ligne/Sard_BFPR_Accepted.pdf).
+
+
+## UF-012 extension: exceptional lattice class of the cone divisor
+
+The surface z²=x⁴+y⁴ is the simple-elliptic E7-tilde singularity: its minimal resolution has one genus-one exceptional curve E with E²=-2. In the weighted chart x=uv, y=u, z=u²w, the strict transform of Y:x=0,z=y² is v=0,w=1 and meets E:u=0 transversely once. Thus M=[-2], b(Y)=[1], and the integral correction equation has solution a=1/2. The nonzero numerical residue in coker(M)=Z/2 independently detects non-Cartierness. Because E is elliptic, degree-zero Picard data remain; Z/2 is the finite numerical quotient, not automatically the full local class group. See the-fold-exceptional-lattices-class-groups.md (UF-012).
