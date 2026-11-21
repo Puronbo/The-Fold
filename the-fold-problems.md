@@ -1416,3 +1416,26 @@ The bracket is D16-equivariant because the action is by conjugation; the symboli
 See `the-fold-d16-lie-representation.md` and `tools/fold_d16_lie_representation.py`.
 
 **Open problem UF-029-A:** restrict the four summands to the original D4 subgroup and compute modular decomposition changes prime by prime.
+
+
+## UF-030 — Modular stability and the exceptional central prime
+
+**Theorem UF-030.1.** Over an algebraically closed field of any odd characteristic, the D16 representation of UF-029 remains semisimple and multiplicity-free:
+\[
+\mathfrak u\cong E_1\oplus E_2\oplus\chi\oplus E_3.
+\]
+This follows from Maschke's theorem and the distinct eighth-root eigenvalue pairs. Over nonclosed fields, square-root availability can change the ground-field realization without changing geometric semisimplicity.
+
+**Theorem UF-030.2.** The integral commutator map \(\Lambda^2\mathbb Z^5\to\mathbb Z^2\) has Smith normal form \((1,1)\), hence remains surjective in every characteristic.
+
+**Theorem UF-030.3.** The radical map \(W\to\operatorname{Hom}(W,Z)\) has Smith normal form
+\[
+(1,1,1,1,3).
+\]
+Therefore the center is two-dimensional in every characteristic other than three, but grows to dimension three in characteristic three. The extra central line is precisely the cubic character line \(\chi=\langle(-1,0,1)\rangle\). The derived algebra remains the two-dimensional socle center in every characteristic.
+
+**Important scope.** The normalized orthogonal D16 matrices contain denominators involving 2 and \(\sqrt2\). This note does not claim they reduce directly to characteristic two. Constructing a compatible integral D16 lattice is still required before a characteristic-two modular representation theorem can be stated.
+
+Exact determinantal-divisor and modular-rank checks are in `tools/fold_d16_modular_stability.py`; the proof and coefficient-field distinctions are in `the-fold-d16-modular-stability.md`.
+
+**Open problem UF-030-A:** construct or obstruct an integral D16-stable lattice compatible with the normalized action, then determine the characteristic-two module and the corresponding automorphism-group scheme.
