@@ -23,8 +23,8 @@ assert G.reduce((1+f*r**2)**2+1)[1] == 0
 up, v, vp, q = sp.symbols("up v vp q")
 rinv = up+u
 Ginv = sp.groebner(
-    [u**4+a, up**4+a, v**2+q, vp**2+q, q],
-    u, up, v, vp, q, a, order="lex", modulus=2
+    [u**4+a, up**4+a, v**2+q, vp**2+q],
+    u, up, v, vp, q, a, c, d, order="lex", modulus=2
 )
 assert Ginv.reduce(rinv**4)[1] == 0
 tau_num = vp*(1+f*rinv**2)
