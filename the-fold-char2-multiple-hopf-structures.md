@@ -74,7 +74,7 @@ Therefore each structure makes Spec(A) a trivial H-torsor over k and A a Hopf–
 
 1. The algebra structure alone does not determine a group law, even among finite connected commutative group schemes.
 2. The four product structures already give a nontrivial finite sample of the Hopf-structure moduli problem.
-3. The translation subgroup and its normalizer depend on which Hopf law is chosen. The G-2 normalizer theorem applies to each of the four group laws, but the explicit automorphism-group equations in the G-2 note are for the additive-additive law only.
+3. The translation subgroup and its normalizer depend on the Hopf law. The corrected G-3b note computes the scheme-theoretic automorphism groups and translation normalizers for all four product laws, including infinitesimal cross-homomorphisms in the mixed cases. The fifth cocycle law has its general normalizer description, but its explicit automorphism group scheme remains open.
 4. This is not yet a classification of all Hopf structures on A. Non-product comultiplications and deformations/extensions remain to be studied.
 5. The result is specific to characteristic two. These coordinate identifications do not produce the same Hopf algebras over Z.
 
