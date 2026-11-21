@@ -300,3 +300,42 @@ Therefore, for \(\lambda\ne0\),
 \delta_\lambda([a])=[a\lambda,\lambda)_2.
 \]
 This places the Fold boundary directly in the standard characteristic-two quaternion-symbol calculus. When \(\lambda=0\), the original presentation \(Q(a,0)\) is split by the criterion of Section 7, so the boundary is zero; the standard symbol notation with second parameter zero is not used.
+
+
+## 12. An explicit nonzero Brauer obstruction
+
+Take
+\[
+k=\mathbb F_2(s,t),\qquad \lambda=s,\qquad a=t.
+\]
+Then \(a\notin k^2\), and the boundary class
+\[
+\delta_s([t])=[Q(t,s)]\in\operatorname{Br}(k)[2]
+\]
+is nonzero.
+
+### Proof
+
+By the splitting criterion, if \(Q(t,s)\) were split there would be \(c,d\in k\) with
+\[
+c^2+t d^2+d=s.
+\]
+Multiplying by t and setting \(y=td\) gives
+\[
+y^2+y=t(s+c^2).
+\]
+Use the valuation \(v_\infty\) at \(t=\infty\), normalized by \(v_\infty(t)=-1\), with residue field \(\mathbb F_2(s)\).
+
+If \(v_\infty(c)\ge0\), then \(s+c^2\) has valuation zero: its residue cannot vanish because \(s\) is not a square in \(\mathbb F_2(s)\). Hence
+\[
+v_\infty(t(s+c^2))=-1.
+\]
+If \(v_\infty(c)<0\), then \(c^2\) dominates s and
+\[
+v_\infty(t(s+c^2))=2v_\infty(c)-1,
+\]
+again an odd negative integer.
+
+But for every \(y\in k\), an Artin–Schreier element \(y^2+y\) has either nonnegative valuation or an even negative valuation: when \(v_\infty(y)<0\), the term \(y^2\) dominates and the valuation is \(2v_\infty(y)\). It can never have odd negative valuation. This contradiction proves that \(Q(t,s)\) is nonsplit.
+
+Therefore the boundary map for \(G_s\) is genuinely nonzero over \(\mathbb F_2(s,t)\). The \(\alpha_4\)-torsor \(u^4=t\) does not lift to a \(G_s\)-torsor. This supplies an explicit imperfect-field example where the quaternion obstruction removes a nonzero class from the quotient of the torsor sequence.
