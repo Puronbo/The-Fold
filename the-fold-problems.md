@@ -929,3 +929,33 @@ The extension need not split; glide reflections are affine lifts that prevent as
 **Scope correction for UF-004.** \(h(z)=\operatorname{Re}(z^6)\) is a homogeneous local six-line crease star; it is not itself a periodic honeycomb height function. The global honeycomb requires a triangular translation lattice and a two-site basis as separate data. The UF-004 local \(D_6\) and A/B parity calculations are retained, but the periodic extension is handled here.
 
 Full definitions, the two proved character theorems, wallpaper-group boundary, limits, and executable solver are in the-fold-periodic-networks.md and tools/fold_periodic_networks.py.
+
+
+## UF-006 — Sign characters of frieze and wallpaper groups
+
+**Question.** Which global sign characters can a periodic Fold height carry under the seven frieze groups and the seventeen wallpaper groups, and how do glide reflections affect the answer?
+
+**Translation-kernel theorem.** For a frieze or wallpaper group \(W\), let \(T\triangleleft W\) be its full translation subgroup and \(P=W/T\) its finite point group. Every periodic height-sign character is trivial on \(T\), and there is a canonical isomorphism
+\[
+\{\chi\in\operatorname{Hom}(W,C_2):\chi|_T=1\}\cong\operatorname{Hom}(P,C_2).
+\]
+The proof is direct: characters trivial on \(T\) descend uniquely to the quotient. No splitting of the crystallographic extension is needed.
+
+**Glide corollary.** If \(g\) is a glide reflection with \(g^2=t\in T\), then \(\chi(g)^2=\chi(t)=+1\). Both \(\chi(g)=+1\) and \(-1\) are possible. A glide may reverse height once while its square, a pure translation, preserves it.
+
+**Seven frieze groups.** Explicit presentations yield the following counts of all abstract characters and of those trivial on translations, respectively:
+\[
+F_1:(8,4),\ F_2:(4,4),\ F_3:(4,2),\ F_4:(4,2),\
+F_5:(4,2),\ F_6:(2,2),\ F_7:(2,1).
+\]
+There are 28 abstract character maps and 17 translation-trivial maps across the seven types. The abstract types are \(\mathbb Z\), \(\mathbb Z\times C_2\), \(D_\infty\), and \(D_\infty\times C_2\).
+
+**All 17 wallpaper groups.** The periodic character count is \(|\operatorname{Hom}(P,C_2)|\), determined by the finite point group:
+- \(C_n\): one character when \(n\) is odd; two when \(n\) is even.
+- \(D_n\) (order \(2n\)): two characters when \(n\) is odd; four when \(n\) is even.
+
+The resulting counts are: p1=1; p2, pm, pg, cm=2 each; pmm, pmg, pgg, cmm=4 each; p4=2; p4m and p4g=4 each; p3=1; p3m1 and p31m=2 each; p6=2; p6m=4. Their total is 46. Only p1 and p3 have only the trivial periodic sign character.
+
+**Scope.** These are algebraically possible characters, not guaranteed realizations by a particular fixed crease motif. A given height must still satisfy the pointwise sign-covariance equation; its zero set, stabilizers, and decorations can exclude some algebraic candidates.
+
+Full presentations, proofs, tables, references, and the standard-library enumerator are in the-fold-frieze-wallpaper-characters.md and tools/fold_frieze_wallpaper_characters.py.
