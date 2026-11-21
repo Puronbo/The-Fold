@@ -1788,41 +1788,39 @@ For each group law G, the translation centralizer is exactly G and the normalize
 The mixed automorphism group schemes are non-smooth; their infinitesimal cross terms are invisible on field-valued points. The initial no-cross-homomorphism claim is withdrawn.
 
 
+
 ## G-4 — Fppf torsors for all four product Hopf structures
 
-For n=1,2,
-[
-H^1_{\mathrm{fppf}}(k,\alpha_{2^n})\cong k/k^{2^n},qquad
-H^1_{\mathrm{fppf}}(k,\mu_{2^n})\cong k^\times/(k^\times)^{2^n}.
-]
-Thus the four products have cohomology classes:
+For n=1,2 the fppf cohomology groups are:
+```
+H^1(k, alpha_(2^n)) = k / k^(2^n)
+H^1(k, mu_(2^n))    = k^× / (k^×)^(2^n)
+```
+Thus:
 - alpha_4 x alpha_2: (k/k^4) x (k/k^2);
 - mu_4 x alpha_2: (k×/(k×)^4) x (k/k^2);
 - alpha_4 x mu_2: (k/k^4) x (k×/(k×)^2);
 - mu_4 x mu_2: (k×/(k×)^4) x (k×/(k×)^2).
 
-Explicit rank-eight torsor algebras and coactions are given in the-fold-char2-hopf-torsors-four-laws.md. All classes vanish over perfect fields; they can be nontrivial over imperfect fields such as F₂(t).
-
-This classifies torsors under the four fixed group schemes, not all forms/twists of the group schemes or all Hopf structures on A.
-
+Explicit rank-eight torsor algebras and coactions are given in the-fold-char2-hopf-torsors-four-laws.md. All classes vanish over perfect fields; they can be nontrivial over imperfect fields such as F₂(t). This classifies torsors under the four fixed product group schemes, not all forms/twists or all Hopf structures.
 
 ## G-3c — Fifth, non-product Hopf structure
 
-**Theorem G-3c.1.** On (A=k[x,z]/(x^4,z^2)) in characteristic two, the formulas
-[
-\Delta(x)=x\otimes1+1\otimes x,qquad
-\Delta(z)=z\otimes1+1\otimes z+x^2\otimes x^2
-]
-with counit zero on x,z and antipode S(x)=x, S(z)=z define a commutative Hopf algebra.
+**Theorem G-3c.1.** On A=k[x,z]/(x^4,z^2) in characteristic two, the formulas
+```
+Delta(x) = x tensor 1 + 1 tensor x
+Delta(z) = z tensor 1 + 1 tensor z + x^2 tensor x^2
+epsilon(x) = epsilon(z) = 0
+S(x) = x, S(z) = z
+```
+define a commutative Hopf algebra.
 
 The corresponding group law is
-[
-(x,z)+(x',z')=(x+x',z+z'+x^2x'^2),
-]
-a nontrivial central extension of alpha_4 by alpha_2. It is not isomorphic to any of the four product structures: its primitive space has dimension two with basis x,x²; its relative-Frobenius image is alpha_2; and its restricted Lie 2-power map is zero.
+```
+(x,z) + (x',z') = (x+x', z+z'+x^2 x'^2).
+```
+It is a nontrivial central extension of alpha_4 by alpha_2 and is not isomorphic to any of the four product structures: its primitive space has dimension two with basis x,x²; its relative-Frobenius image is alpha_2; and its restricted Lie 2-power map is zero.
 
-The standard-library verifier tools/fold_char2_cocycle_hopf.py checks the Hopf identities and primitive-space dimension exactly over F₂.
-
-This gives at least five pairwise non-isomorphic Hopf structures on the same algebra. The four product structures' torsor classes remain as in G-4; the fifth cocycle group's torsors are not yet classified.
+The standard-library verifier tools/fold_char2_cocycle_hopf.py checks the Hopf identities and primitive-space dimension exactly over F₂. This gives at least five pairwise non-isomorphic Hopf structures on the same algebra. The four product structures' torsor classes remain as in G-4; the fifth cocycle group's torsors are not yet classified.
 
 **Open G-3c:** determine the full automorphism group scheme and translation normalizer of the cocycle group; classify its fppf torsors; and search for further non-product Hopf structures.
