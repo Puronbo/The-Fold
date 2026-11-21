@@ -1978,3 +1978,5 @@ Let E_lambda be the extension of alpha_2 by mu_2 with cocycle `1+lambda*r*s`. Si
 ## G-3l — Vanishing criterion for the mixed-family boundary
 
 For `E_lambda` and an `alpha_2`-torsor `u²=a`, the boundary vanishes exactly when there are `c,d∈k` with `c²+a d²+d=λ`. The proof classifies the possible `mu_2`-torsor over `k[u]/(u²-a)` and derives the action cocycle equation. By Frobenius factorization, this also gives the vanishing criterion for `G_lambda` on `alpha_4`-torsors. In particular, if λ is square then the boundary is identically zero. The Brauer class itself is not yet explicitly identified; see `the-fold-char2-imperfect-mixed-hopf-family.md`.
+
+The exact action-cocycle calculation is independently encoded in `tools/fold_char2_mixed_torsor_boundary.py`.
