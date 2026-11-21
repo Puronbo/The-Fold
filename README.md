@@ -237,6 +237,7 @@ author. The CMB enters as a rhyme; the exact physics is standard cosmology. See 
 | classifying periodic crease networks and surviving sign characters | `the-fold-periodic-networks.md` |
 | classifying periodic sign characters for all frieze and wallpaper groups | `the-fold-frieze-wallpaper-characters.md` |
 | proving forced zeros and topological realizability of crease networks | `the-fold-forced-zero-topology.md` |
+| constructing smooth and analytic periodic heights from crease networks | `the-fold-smooth-analytic-heights.md` |
 | the interactive models | the nine HTML files |
 
 ## Contents
@@ -308,6 +309,7 @@ author. The CMB enters as a rhyme; the exact physics is standard cosmology. See 
 | `the-fold-periodic-networks.md` | UF-005: wallpaper groups, finite-torus crease-network symmetries, sign-character maps, and common kernels |
 | `the-fold-frieze-wallpaper-characters.md` | UF-006: translation-kernel theorem, seven frieze presentations, and periodic character counts for all 17 wallpaper groups |
 | `the-fold-forced-zero-topology.md` | UF-007: fixed-point forced-zero theorem, bipartite face-dual realization criterion, and sharp minimal-degree D6 semi-invariants |
+| `the-fold-smooth-analytic-heights.md` | UF-008: smooth realization under regular-branch hypotheses, branch-count vanishing-order bounds, and Fourier construction of analytic periodic semi-invariants |
 | `the-fold-minimal-operations.md` | UF-002: feasibility, set-cover equivalence, NP-hardness, minimal arithmetic spectral power-exponent families, and a reference solver |
 
 Open the HTML files directly in a browser — no build step, no dependencies.
@@ -545,3 +547,6 @@ observer gives the reading. The four zones are the map's legend.
 
 
 **Forced zeros and crease topology (UF-007):** anti-symmetries force their fixed sets into the height zero set. A connected crease network supports a continuous scalar height that changes sign across every crease iff its face dual is bipartite; the network then determines its sign character. In the D6 model, the three nontrivial characters have sharp minimal polynomial degrees 6, 3, and 3. See the-fold-forced-zero-topology.md and tools/fold_forced_zero_topology.py.
+
+
+**Smooth and analytic Fold heights (UF-008):** for finite networks of regular smooth branches, bipartiteness of the face dual is equivalent to existence of a global smooth sign-changing height. A vertex with q smooth branches forces vanishing order at least q, sharply attained by the local product. Fourier projection realizes every real sign character of a finite periodic point group by a nonzero real-analytic periodic function. Exact realization of a preselected zero network remains a stronger problem. See the-fold-smooth-analytic-heights.md and tools/fold_smooth_analytic_heights.py.
