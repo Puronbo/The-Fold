@@ -1,40 +1,41 @@
-# UF-034 — Full derivations of the integral vertex algebra
+# UF-034 — The full automorphism functor across characteristics
 
-## 1. Algebra and basis
+## 1. Integral algebra and its functor of points
 
 Let
 \[
 C_{\mathbb Z}=\mathbb Z[x,y]/(x^2+y^2,x^2y^2)
 \cong \mathbb Z[x,y]/(y^2+x^2,x^4).
 \]
-It is free of rank eight with ordered basis
+It is free of rank eight with basis
 \[
 1,x,x^2,x^3,y,xy,x^2y,x^3y.
 \]
-The second presentation follows by substituting \(y^2=-x^2\), which gives \(x^4=0\).
-
 For any commutative ring A, an A-algebra endomorphism is specified by X,Y in C_A satisfying
 \[
 X^2+Y^2=0,\qquad X^2Y^2=0.
 \]
-The automorphism functor is the open subscheme on which the induced A-linear map C_A to C_A has invertible determinant. This full-module criterion is valid over arbitrary base rings, including nonreduced rings.
+The automorphism functor is the open subscheme where the induced A-linear map C_A to C_A has invertible determinant. This full-module criterion is valid over arbitrary base rings, including nonreduced rings.
 
 ## 2. Derivation equations
 
-A derivation is specified by P=D(x) and Q=D(y). Differentiating the two defining relations gives
+A derivation is specified by P=D(x) and Q=D(y). Differentiating the defining relations gives
 \[
 2(xP+yQ)=0,\qquad 2(xy^2P+x^2yQ)=0.
 \]
-Using \(y^2=-x^2\), the map after removing the common factor 2 is
+Using y^2=-x^2, the second expression becomes
 \[
-\Phi:C_{\mathbb Z}^2\longrightarrow C_{\mathbb Z}^2,
-\qquad (P,Q)\longmapsto(xP+yQ,\;-x^3P+x^2yQ).
+2(-x^3P+x^2yQ)=0.
 \]
-In the displayed basis, its 16-by-16 integer matrix has rank seven. Its Smith normal form has seven nonzero invariants, all equal to one:
+Let Phi:C_Z^2 to C_Z^2 be the integral linear map
 \[
-\boxed{\operatorname{SNF}(\Phi)=\operatorname{diag}(1,1,1,1,1,1,1,0,\ldots,0).}
+\Phi(P,Q)=(xP+yQ,\;-x^3P+x^2yQ).
 \]
-Thus the actual differentiated-relation matrix is 2Phi. Its Smith form has seven nonzero invariants equal to 2, not eight invariants with a final 2. This distinction matters: the kernel dimension is nine in odd characteristic.
+In the rank-eight basis, its 16-by-16 matrix has rank eight over Q and Smith invariants
+\[
+\boxed{1,1,1,1,1,1,1,2.}
+\]
+Thus the actual differentiated-relation matrix 2Phi has eight nonzero Smith invariants 2,2,2,2,2,2,2,4. In particular, Phi has rank seven modulo two and rank eight modulo every odd prime. The actual map 2Phi is zero modulo two.
 
 **Theorem UF-034.1.**
 \[
@@ -42,22 +43,22 @@ Thus the actual differentiated-relation matrix is 2Phi. Its Smith form has seven
 \dim_k\operatorname{Der}_k(C_k)=
 \begin{cases}
 16,&\operatorname{char}k=2,\\
-9,&\operatorname{char}k\ne2.
+8,&\operatorname{char}k\ne2.
 \end{cases}}
 \]
-Indeed, in characteristic two the differentiated relations vanish identically, so P,Q are arbitrary. In odd characteristic, 2 is invertible and Phi has rank seven over every such field: its Smith form has only unit nonzero invariants. The kernel therefore has dimension 16-7=9.
+In odd characteristic, 2 is invertible and Phi has rank eight, so its kernel has dimension 16-8=8. In characteristic two, both differentiated relations vanish, so P,Q are arbitrary and the dimension is 16.
 
 There is no characteristic-three jump in the dimension of the full derivation algebra. The characteristic-three center enlargement in UF-030/031 concerns the bracket radical of a particular seven-dimensional integral Lie algebra, not this full derivation kernel.
 
 ## 3. Tangent dimensions versus group dimensions
 
-The derivation calculation determines the identity tangent dimension of the full automorphism group scheme: nine in odd characteristic and sixteen in characteristic two. It does not, by itself, determine the dimension or smoothness of the reduced automorphism group in odd characteristic.
+The derivation calculation determines the identity tangent dimension of the full automorphism group scheme: eight in odd characteristic and sixteen in characteristic two. In characteristic zero this agrees with the established structure Aut(C)=U semidirect G_gr, where U is seven-dimensional and G_gr has a one-dimensional scalar factor with finite orthogonal subgroup D16.
 
 In characteristic two, UF-033 gives the stronger scheme-level result: reduced dimension 13 and tangent dimension 16, hence non-smoothness. The odd-characteristic reduced group and the schematic closure of the characteristic-zero seven-dimensional unipotent subgroup remain open.
 
-## 4. Exact verifier and scope
+## 4. Verifier and scope
 
-Run `python3 tools/fold_full_automorphism_characteristics.py`. The standard-library verifier constructs Phi from the multiplication table, computes exact rational rank and modular ranks, and checks the rank-seven/unit-minor certificate. It verifies the derivation dimensions in characteristics 2, 3, and 5. It is an exact linear-algebra check, not a classification of the full group scheme.
+Run `python3 tools/fold_full_automorphism_characteristics.py`. The standard-library verifier constructs Phi from the multiplication table, checks its exact rational rank and modular ranks at 2, 3, and 5, and verifies the derivation dimensions. The Smith invariants above are an exact integer-matrix calculation; the script is not presented as a general Smith-normal-form implementation.
 
 ## Open problem UF-035
 
