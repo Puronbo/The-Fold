@@ -65,12 +65,18 @@ Its group law, induced by multiplication of group-like elements, is
 \[
 (p,q)(p',q')=(p+p',\,q+q'+pp').
 \]
-The diagonal automorphism group is Aut(alpha_4), whose elements are x↦a x+b x² with a a unit. Thus
+An automorphism is uniquely a pair (phi,h), acting on group points by
 \[
-\operatorname{Aut}_{\mathrm{grp}}(\alpha_4\times\mu_2)
-\cong \operatorname{Aut}(\alpha_4)\ltimes K
+(x,t)\longmapsto(\phi(x),\,t h(x)),
+\quad \phi(x)=a x+b x^2,\quad
+h(x)=1+p x+q x^2+pq x^3.
 \]
-(up to the equivalent opposite convention for the semidirect action). The scheme has reduced dimension two and tangent dimension four. It is not smooth.
+Its exact composition law is
+\[
+(\phi,h)\cdot(\phi',h')
+=(\phi\circ\phi',\,h'\cdot(h\circ\phi')).
+\]
+Thus the underlying scheme is Aut(alpha_4) x K, with the displayed semidirect composition. It has reduced dimension two and tangent dimension four, so it is not smooth.
 
 For reference, composition of the alpha_4 automorphisms x↦a x+b x² and x↦a' x+b' x² has coefficients
 \[
