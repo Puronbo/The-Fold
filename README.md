@@ -983,3 +983,9 @@ The note also establishes a concrete characteristic-two direction: C_k ≅ k[x,z
 
 - Expresses the mixed-family Brauer boundary in standard characteristic-two symbol notation: for `lambda ≠ 0`, `δ_lambda([a])=[a*lambda,lambda)_2`; for `lambda=0` it is zero.
 - Adds `tools/fold_char2_mixed_torsor_models.py`; the explicit `G_lambda` action law and canonical-map inverse were checked symbolically over F₂.
+
+
+### G-2c — Translation normalizer of the mixed Hopf family
+- Applies the functorial regular-translation theorem to `G_lambda`: centralizer is `G_lambda`, normalizer is `G_lambda ⋊ Aut_grp(G_lambda)`.
+- Computes reduced dimension two and tangent dimension six for the normalizer, retaining the infinitesimal automorphism parameters.
+- Adds `the-fold-char2-mixed-hopf-normalizer.md`.
