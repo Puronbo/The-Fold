@@ -1029,3 +1029,36 @@ is globally periodic, real analytic, and has exactly the prescribed paired affin
 **Scope.** The theorem applies to compact nonsingular global real-analytic surfaces and compact locally principal real-analytic crease divisors. It does not yet classify non-locally-principal singularities, noncompact covers, prescribed higher odd multiplicities, or networks with disconnected duals and nontrivial component permutations.
 
 Full proof, cited analytic-principality input, exact products, equivariant averaging, and tests are in the-fold-exact-analytic-networks.md and tools/fold_exact_analytic_networks.py.
+
+
+## UF-010 — Divisor parity, disconnected creases, singularities, and multiplicity
+
+**Question.** How do disconnected crease components, singular analytic branches, and prescribed zero multiplicities affect exact global analytic height realization?
+
+**Weighted-divisor criterion.** Let \(X\) be a pure-dimensional irreducible global real-analytic set and let \(D=\sum_i m_i C_i\) be a locally finite effective divisor, with each component ideal sheaf locally principal. Define the odd support \(C_{\mathrm{odd}}=\bigcup_{m_i\text{ odd}}C_i\). Acquistapace–Díaz-Cano, Corollary 3.7, gives:
+\[
+\prod_i\mathfrak p_i^{m_i}\text{ is principal}
+\iff
+\sum_i m_i[C_i]=0\text{ in }H^\infty_{q-1}(X;\mathbb Z_2)
+\quad\text{and}\quad
+X\setminus C_{\mathrm{odd}}\text{ is disconnected}.
+\]
+The componentwise local-principality hypotheses are required.
+
+**Parity decomposition.** Write \(D=D_{\mathrm{odd}}+2E\), where \(D_{\mathrm{odd}}\) is the reduced odd support and \(E=\sum_i\lfloor m_i/2\rfloor C_i\). The source paper proves every positive even divisor \(2E\) has a positive analytic equation. Thus the global topological obstructions are entirely controlled by the odd support; prescribed higher odd multiplicities are obtained by multiplying its reduced generator by a positive equation for the residual even divisor.
+
+**Disconnected support examples.** On the torus, one essential odd loop fails; two parallel essential odd loops succeed even though each separately is nonseparating; three parallel odd loops fail the mod-2 class condition despite having disconnected complement; four succeed. The face-dual cycles are \(C_1,C_2,C_3,C_4\), respectively.
+
+**Mixed multiplicities.** Two parallel odd loops plus an additional even loop have an exact periodic height proportional to
+\[
+\sin(2\pi x)\bigl(1-\cos(2\pi(x-\tfrac14))\bigr).
+\]
+The even loop is a zero of multiplicity two but is not a sign-changing wall. Accordingly, use the dual/homology test on the odd support, not on the entire weighted support.
+
+**Singular local orders.** If a locally principal local equation is \(h=u\prod_i f_i^{m_i}\), then its analytic order at a point is \(\sum_i m_i\,\operatorname{ord}_p(f_i)\). A node \(xy=0\) has order two; the cusp \(y^2-x^3=0\) has order two despite having one irreducible real branch; weighting the cusp divisor by three gives order six. Local principality on a singular ambient space is a separate obstruction and cannot be inferred from mod-2 topology alone.
+
+**Disconnected-component symmetries.** A symmetry preserving a weighted divisor must preserve multiplicities on component orbits. A half-period translation can swap two disconnected parallel odd crease circles and reverse the height. For a connected odd-support face dual, the network-induced sign is a character; multiple independent dual components may instead require a signed permutation representation.
+
+**Periodic covers.** A global analytic generator on the universal cover need not be periodic. For a periodic scalar Fold, descend the divisor to the compact torus and test principality there; a torus generator lifts to a periodic height.
+
+Full statements, torus products, singular examples, and the bounded verifier are in the-fold-divisor-parity-classification.md and tools/fold_divisor_parity_classification.py.
