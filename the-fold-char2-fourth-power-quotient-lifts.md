@@ -81,4 +81,4 @@ This is the local expression of the UF-043 candidate after pullback to the full 
 
 ## Next problem
 
-**UF-047:** determine whether the quotient Frobenius equations can be descended from this chart to a global ideal on the determinant-open automorphism scheme, and compute their overlap transformations. Then compare the resulting global kernel with the universal conjugation-stable Hopf ideal.
+**UF-048:** compute the universal conjugation coaction on the globally defined Frobenius quotient equations and determine whether the resulting kernel is generated scheme-theoretically by conjugates of U.
