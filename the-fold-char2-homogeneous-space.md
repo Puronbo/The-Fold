@@ -142,6 +142,6 @@ Here \(N\) is normal in H, while U is normal only in N.
 
 Run:
 ```sh
-python3 tools/fold_char2_homogeneous_space.py
+python3 tools/fold_char2-homogeneous-space.py
 ```
 The verifier checks the N composition law, inverse, commutator, the homomorphism \(\lambda\), and the section-based quotient coordinates in the truncated polynomial ring over \(\mathbb F_2\).

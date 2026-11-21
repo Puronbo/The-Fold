@@ -645,6 +645,6 @@ It is a 7-dimensional unipotent group. The full automorphism group is its semidi
 **Open UF-038:** determine the homogeneous space H/U, the lower central series of N, and the extension to the nonreduced characteristic-two automorphism scheme.
 
 
-**Characteristic-two homogeneous space and class-two normal closure (UF-038):** the eight-dimensional normal closure N has an explicit integer-free characteristic-two group law; N/U ≅ G_a, its center equals its derived subgroup and is G_a², and N has nilpotency class two. The non-normal homogeneous space H/U is nevertheless affine three-space, with explicit polynomial right-coset coordinates (F, H+A, B+G+I+F(A+C)+A(H+A)). The exact verifier checks the composition law, inverse, commutator, and quotient coordinates. See `the-fold-char2-homogeneous-space.md` and `tools/fold_char2-homogeneous-space.py`.
+**Characteristic-two homogeneous space and class-two normal closure (UF-038):** the eight-dimensional normal closure N has an explicit characteristic-two group law; N/U ≅ G_a, its center equals its derived subgroup and is G_a², and N has nilpotency class two. The non-normal homogeneous space H/U is nevertheless affine three-space, with explicit polynomial right-coset coordinates (F, H+A, B+G+I+F(A+C)+A(H+A)). The exact verifier checks the composition law, inverse, commutator, and quotient coordinates. See `the-fold-char2-homogeneous-space.md` and `tools/fold_char2-homogeneous-space.py`.
 
 **Open UF-039:** extend the normal-closure calculation to the full nonreduced characteristic-two automorphism group scheme.

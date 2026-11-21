@@ -1528,6 +1528,6 @@ Proof and symbolic verifier: `the-fold-integral-unipotent.md`, `tools/fold_integ
 
 **Resolved by UF-037:** in characteristic two, the ten-dimensional identity-linear kernel H has coordinates (A,B,C,D,E,F,G,H,I,J), and the flat seven-dimensional subgroup U is cut out by F=0, H=A, B+G+I=0. U is not normal. Its normal closure N is the eight-dimensional subgroup F=0, H=A, and H/N ≅ G_a². The third transverse direction B+G+I is supplied by conjugation; the two remaining directions form the genuine additive quotient. See `the-fold-char2-identity-kernel.md` and `tools/fold_char2_identity_kernel.py`.
 
-**Resolved by UF-038:** N/U ≅ G_a, N is two-step nilpotent with Z(N)=[N,N] ≅ G_a², and the homogeneous space H/U is explicitly A³. The right-coset coordinates are (F, H+A, B+G+I+F(A+C)+A(H+A)). See `the-fold-char2-homogeneous-space.md` and `tools/fold_char2_homogeneous_space.py`.
+**Resolved by UF-038:** N/U ≅ G_a, N is two-step nilpotent with Z(N)=[N,N] ≅ G_a², and the homogeneous space H/U is explicitly A³. The right-coset coordinates are (F, H+A, B+G+I+F(A+C)+A(H+A)). See `the-fold-char2-homogeneous-space.md` and `tools/fold_char2-homogeneous-space.py`.
 
 **Open problem UF-039:** extend the normal-closure analysis from the reduced identity-linear group H to the full nonreduced characteristic-two automorphism group scheme, accounting for its six additional infinitesimal tangent directions.
