@@ -2111,3 +2111,14 @@ UF-065, the full positive-layer rank profile is (3,4,4,3,1), matching the
 Hilbert dimensions of the nilpotent parameter algebra. This does not yet
 determine the unfiltered coefficient module, orbit-image ideal, or Hopf core.
 See Section 9 of the-fold-char2-full-affine-ch-coefficient.md.
+
+
+### UF-067 — Generic full rank of the unfiltered coefficient matrix
+The 16-by-15 matrix of all nonconstant nilpotent monomial coefficient
+vectors has generic rank 15. A maximal minor is certified nonzero by an
+exact specialization over F_256=F_2[u]/(u^8+u^4+u^3+u^2+1): with
+(a,b,i,A,B,C,D,E,G,J)=(d9,c5,c3,d7,14,84,f8,cf,9b,f4), deleting the
+X' x^3 z row gives determinant 4a. This proves generic linear independence
+across all nilpotent degrees, but does not yet identify the orbit-image
+ideal or its largest Hopf ideal. See Section 10 of
+the-fold-char2-full-affine-ch-coefficient.md.
