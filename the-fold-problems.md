@@ -1998,3 +1998,12 @@ For parameters λ,μ, the mixed groups are isomorphic iff some `a∈k×` satisfi
 Over an algebraically closed field, the two-dimensional abelian restricted Lie algebra of a rank-four height-one commutative group scheme has a semilinear 2-map. Its rank is 0, 1, or 2; the rank-one case splits into image=kernel (nilpotent Jordan, `I_{1,1}`) or image≠kernel (`alpha₂×mu₂`). Rank 0 and 2 give `alpha₂²` and `mu₂²`. These are exactly four types, all already realized by Fold Hopf structures. This exhausts the possible height-one Frobenius kernels but not the full rank-eight extensions. Full proof: `the-fold-char2-height-one-kernel-classification.md`.
 
 The height-one-kernel note gives the eight possible kernel/image pairs; three are not yet realized or ruled out. This is the next finite incidence problem before classifying extension classes.
+
+
+## G-4b — Torsors under G_C and G_D
+
+The non-product central extensions have exact fppf torsor sequences:
+- `0 → k/k² → H¹(k,G_C) → k/k⁴ → 0`, from `0 → α₂ → G_C → α₄ → 0`.
+- `0 → k/k⁴ → H¹(k,G_D) → k/k² → 0`, from `0 → α₄ → G_D → α₂ → 0`.
+
+Both are short exact because the quotient has no nonidentity k-points and `H²(k,α₂)=H²(k,α₄)=0`. Since both groups are killed by two, the sequences split noncanonically as F₂-vector spaces. Thus their abstract H¹ groups agree with that of the product `α₄×α₂`, although the group schemes differ. Full proof: `the-fold-char2-nonproduct-torsor-classes.md`.
