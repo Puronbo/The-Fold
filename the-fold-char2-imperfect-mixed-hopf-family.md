@@ -68,3 +68,15 @@ The terms involving alpha are the multiplicative coboundary of (h(x)=1+alpha x^3
 k/k^2.
 ]
 The family G_lambda represents the class of lambda. This is not a classification of extensions that are not trivial as torsors over alpha_4, nor a classification of all Hopf structures on A.
+
+
+## 5. Torsor-cohomology sequence and next calculation
+
+The extension also gives the fppf cohomology sequence
+\[
+0\longrightarrow k^\times/(k^\times)^2
+\longrightarrow H^1_{\mathrm{fppf}}(k,G_\lambda)
+\longrightarrow k/k^4
+\xrightarrow{\delta_\lambda}\operatorname{Br}(k)[2].
+\]
+Here the first term is \(H^1(k,\mu_2)\), the middle quotient is \(H^1(k,\alpha_4)\), and \(H^2(k,\mu_2)\cong\operatorname{Br}(k)[2]\). The boundary map \(\delta_\lambda\), determined by the cocycle class of lambda, has not been computed. Determining it is the next torsor problem for this family.
