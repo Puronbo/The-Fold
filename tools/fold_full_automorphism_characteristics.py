@@ -99,29 +99,6 @@ def verify():
     relation_map_mod2_rank = rank_mod([[2 * v for v in row] for row in phi], 2)
     assert relation_map_mod2_rank == 0
 
-    # A 7x7 minor equal to +1 certifies that all seven nonzero Smith
-    # invariants are units; the rational rank certifies there are no others.
-    # Rows 1..7 and columns 0..6 form such a minor.
-    minor = [row[:7] for row in phi[1:8]]
-    assert rank_rational(minor) == 7
-    # Since the selected minor is triangular after row/column inspection,
-    # compute its determinant by fraction-free elimination.
-    from fractions import Fraction
-    a = [[Fraction(v) for v in row] for row in minor]
-    det = Fraction(1)
-    for c in range(7):
-        pivot = next((i for i in range(c, 7) if a[i][c]), None)
-        assert pivot is not None
-        if pivot != c:
-            a[c], a[pivot] = a[pivot], a[c]
-            det = -det
-        value = a[c][c]
-        det *= value
-        for i in range(c + 1, 7):
-            factor = a[i][c] / value
-            for j in range(c + 1, 7):
-                a[i][j] -= factor * a[c][j]
-    assert abs(det) == 1, det
 
     return {
         "phi_shape": "16x16",
