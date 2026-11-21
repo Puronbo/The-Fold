@@ -989,3 +989,5 @@ The note also establishes a concrete characteristic-two direction: C_k ≅ k[x,z
 - Applies the functorial regular-translation theorem to `G_lambda`: centralizer is `G_lambda`, normalizer is `G_lambda ⋊ Aut_grp(G_lambda)`.
 - Computes reduced dimension two and tangent dimension six for the normalizer, retaining the infinitesimal automorphism parameters.
 - Adds `the-fold-char2-mixed-hopf-normalizer.md`.
+
+- Exhibits a nonzero boundary over `k=F₂(s,t)`: for `lambda=s`, the class `Q(t,s)` is nonsplit by a valuation-at-infinity argument, so the `alpha₄`-torsor `u⁴=t` does not lift.
