@@ -15,7 +15,7 @@ After the three nilpotent coefficients (c,d_0,h), there are seven nonconstant co
 \qquad
 (h,i,\phi,\psi,\eta,\theta,\kappa).
 \]
-Thus the complete target-coordinate audit has fourteen nonconstant coefficient functions, not thirteen. The UF-054/PR wording saying thirteen is corrected here. The coefficient h is counted in the second list and is one of the three nilpotent coordinates; if one excludes c,d₀,h from the remaining list, the remaining ordinary coefficient list has twelve entries. Accordingly the complete audit consists of the three nilpotent outputs c,d₀,h and the eleven remaining nonconstant coefficients a,b,α,β,γ,δ,ε,i,φ,ψ,η,θ,κ? This list has thirteen entries, so the total including c,d₀,h is sixteen coefficient functions. More precisely, X has seven nonconstant coefficients, Z has seven nonconstant coefficients, and c,d₀ are the two constants; h is a nonconstant coefficient of Z. Hence the full substitution has fourteen nonconstant coefficients plus two constants, of which c,d₀,h are nilpotent. The audit should cover all fourteen nonconstant coefficients and both constants.
+Thus the complete target has fourteen nonconstant coefficient functions and two constants. Since h is one of the fourteen and c,d₀ are the two constants, the nilpotent-coordinate subset is {c,d₀,h}; the other thirteen coefficient functions are {a,b,α,β,γ,δ,ε,i,φ,ψ,η,θ,κ}. The earlier wording “thirteen nonconstant coefficients” referred to this latter list and omitted h from the count. The full audit must cover all sixteen coefficient functions.
 
 ## 2. Exact cubic-translation test
 
