@@ -957,3 +957,5 @@ The note also establishes a concrete characteristic-two direction: C_k ≅ k[x,z
 - Both obstruction groups vanish because `H²(k,α₂)=H²(k,α₄)=0`; both sequences split noncanonically as F₂-vector spaces.
 - Consequently these torsor groups are abstractly isomorphic to that of `α₄×α₂`, despite the non-isomorphic Hopf structures.
 - Adds `the-fold-char2-nonproduct-torsor-classes.md`.
+
+- Refines the full `G_lambda` automorphism proof by ruling out an additive component in the image of `t`, clarifies pullback composition order, and extends the symbolic verifier to check the full substitution law and inverse.
