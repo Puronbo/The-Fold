@@ -35,7 +35,7 @@ X=ax+bx^2,\qquad a\in R^\times.
 \]
 The restriction to the kernel is the identity because \(\operatorname{Aut}(\mu_2)\) is trivial.
 
-A lift of this quotient map sends \(t\) to \(t h(x)\), where \(h\) is a normalized \(\mu_2\)-valued function on \(\alpha_4\). Write
+Write the image of (t) initially as (p(x)+tq(x)), with (p(0)=0) and (q(0)=1). In the Hopf identity for this image, the component in the (1otimes t) summand is (p(x)otimes q(y)) times a unit. The coproduct of (p(x)+tq(x)) has no such mixed component. Since (q) is a unit, this forces (p=0). Thus the image is (t h(x)), where (h=q) is a normalized (mu_2)-valued function on (alpha_4). Write
 \[
 h(x)=1+ux+\beta x^2+\gamma x^3.
 \]
@@ -57,7 +57,7 @@ the remaining cubic equation follows from \(u^2=0\). Conversely these equations 
 
 ## Theorem 2. Composition and inverse
 
-Use composition \(f\circ g\), meaning apply g first and then f. For
+Here (f,g) denote the corresponding algebra substitutions (pullbacks), and (f\circ g) means ordinary composition of these ring maps: apply (g) to an algebra element, then (f). For geometric group-scheme maps the order is reversed, as usual for pullbacks. For
 \(f=(a,b,u,\beta)\) and \(g=(a',b',u',\beta')\),
 \[
 f\circ g=
