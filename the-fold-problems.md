@@ -1306,3 +1306,19 @@ of rank four. The five projectors are pairwise orthogonal and sum to identity in
 **Modular statement.** In characteristic two, r acts as coordinate swap and s acts trivially. The fixed space has dimension six; the effective C2-module consists of four trivial lines and two indecomposable 2D regular modules. The projectors cannot be reduced because their denominators are not units. These are representation summands, not necessarily algebra ideals.
 
 The paper and exact rational/F2 verifier are `the-fold-d4-character-projectors.md` and `tools/fold_d4_character_projectors.py`.
+
+
+## UF-024 — Multiplication tensor in the D4-isotypic basis
+
+**Theorem UF-024.1.** In the basis (1,c=x²,b=xy,d=x³y,x,y,u=x³,v=−x²y), the four character lines have characters ++, −+, −−, +−, and the two E copies are (x,y) and (u,v). The complete nonzero non-unit products are
+\[
+bc=d,\quad x²=c,\quad xy=b,\quad y²=-c,
+\]
+\[
+xv=-d,\quad yu=d,\quad bx=-v,\quad by=-u,\quad cx=u,\quad cy=-v.
+\]
+All other products between non-unit basis vectors vanish.
+
+**Equivariant consequence.** Multiplication couples the character lines and E copies, so the isotypic decomposition is not a direct-product or ideal decomposition. In particular E₁·E₂ maps through the alternating determinant pairing to the socle character. The algebra multiplication tensor contains more information than the representation decomposition alone.
+
+The exact multiplication table and verifier are in `the-fold-d4-multiplication-tensor.md` and `tools/fold_d4_multiplication_tensor.py`. The next open problem is to compute the full automorphism stabilizer of this tensor and test whether D4 is intrinsically recoverable.
