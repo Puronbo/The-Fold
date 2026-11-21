@@ -109,3 +109,12 @@ The exact standard-library verifier is tools/fold_char2_nilpotent_pmap_hopf.py. 
 ## 5. Classification consequence
 
 There are now at least six pairwise non-isomorphic commutative Hopf structures on the same Fold algebra: four product laws and two non-product central extensions. The Frobenius-kernel reduction note explains how to organize the remaining classification. The fppf torsors of G_D and the search for further Hopf structures remain open.
+
+
+## 6. Fixed central-extension cocycle calculation
+
+For the extension alpha_4 -> G_D -> alpha_2 with a chosen global product-coordinate section, a normalized symmetric polynomial cocycle C(z,z') has only one possible term:
+```
+C(z,z') = lambda z z'
+```
+because z²=z'²=0. It satisfies the cocycle identity. A section change f(z) is linear, f(z)=a z, and its additive coboundary is zero. Thus the split class lambda=0 and the non-split class lambda≠0 are the only classes in this fixed polynomial-cocycle model; any nonzero lambda is normalized to 1 by scaling the alpha_4 coordinate x. This does not classify extensions without a chosen global section.
