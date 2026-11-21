@@ -62,7 +62,7 @@ def _entry_bound(G: Gram) -> int:
     lambda_min = (g11 + g22 - sqrt(discriminant)) / 2
     if lambda_min <= 0:
         raise ValueError("Gram matrix must be positive definite")
-    return max(1, ceil(sqrt(max(g11, g22) / lambda_min)))
+    return max(1, ceil(sqrt(max(g11, g22) / lambda_min)) + 1)
 
 
 def lattice_point_group(G: Gram) -> tuple[Matrix, ...]:
@@ -265,6 +265,14 @@ def verify() -> dict[str, int]:
     assert len(hex_group) == 12
     assert len(oblique_group) == 2
 
+    point_group_checks = 0
+    for point_group in (square_group, hex_group, oblique_group):
+        for A in point_group:
+            assert inverse_matrix(A) in point_group
+            for B in point_group:
+                assert matmul(A, B) in point_group
+                point_group_checks += 1
+
     square = checkerboard_square_example(4)
     network_group = network_symmetries(square)
     joint_group = sign_symmetries(square)
@@ -305,6 +313,7 @@ def verify() -> dict[str, int]:
         "square_lattice_point_group": len(square_group),
         "hexagonal_lattice_point_group": len(hex_group),
         "generic_oblique_point_group": len(oblique_group),
+        "point_group_closure_checks": point_group_checks,
         "square_periodic_network_symmetries": len(network_group),
         "joint_sign_symmetry_subgroup": len(joint_group),
         "independent_sign_character_image": len(image),
