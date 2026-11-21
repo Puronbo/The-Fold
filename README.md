@@ -907,3 +907,10 @@ The note also establishes a concrete characteristic-two direction: C_k ≅ k[x,z
 - Restores the complete normalized symmetric cocycle basis by including the possible `xy` term.
 - The condition `F²=0` forces its coefficient `rho` to satisfy `rho²=0`; over a field this gives `rho=0`.
 - Re-runs the remaining cocycle equations and coboundary calculation with an exact symbolic verifier.
+
+
+### G-3j — Automorphisms of the imperfect mixed Hopf family
+- Computes the full group-scheme automorphism functor: `x ↦ ax+bx²`, `t ↦ t(1+ux+βx²+uβx³)`, with `u²=0` and `β²=λ(1+a⁴)`.
+- Includes the infinitesimal `u`-direction missed by field-valued-point calculations; the automorphism group has reduced dimension two and tangent dimension four.
+- Derives the composition and inverse laws and adds `tools/fold_char2_mixed_hopf_automorphisms.py`.
+- Adds `the-fold-char2-imperfect-mixed-hopf-automorphisms.md`.
