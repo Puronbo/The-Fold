@@ -1786,3 +1786,21 @@ For each group law G, the translation centralizer is exactly G and the normalize
 - For mu_4 x mu_2, Aut_grp(G)=D8 as a constant finite étale group scheme, dimensions (0,0).
 
 The mixed automorphism group schemes are non-smooth; their infinitesimal cross terms are invisible on field-valued points. The initial no-cross-homomorphism claim is withdrawn.
+
+
+## G-4 — Fppf torsors for all four product Hopf structures
+
+For n=1,2,
+[
+H^1_{\mathrm{fppf}}(k,\alpha_{2^n})\cong k/k^{2^n},qquad
+H^1_{\mathrm{fppf}}(k,\mu_{2^n})\cong k^\times/(k^\times)^{2^n}.
+]
+Thus the four products have cohomology classes:
+- alpha_4 x alpha_2: (k/k^4) x (k/k^2);
+- mu_4 x alpha_2: (k×/(k×)^4) x (k/k^2);
+- alpha_4 x mu_2: (k/k^4) x (k×/(k×)^2);
+- mu_4 x mu_2: (k×/(k×)^4) x (k×/(k×)^2).
+
+Explicit rank-eight torsor algebras and coactions are given in the-fold-char2-hopf-torsors-four-laws.md. All classes vanish over perfect fields; they can be nontrivial over imperfect fields such as F₂(t).
+
+This classifies torsors under the four fixed group schemes, not all forms/twists of the group schemes or all Hopf structures on A.
