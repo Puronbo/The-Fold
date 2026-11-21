@@ -2122,3 +2122,7 @@ X' x^3 z row gives determinant 4a. This proves generic linear independence
 across all nilpotent degrees, but does not yet identify the orbit-image
 ideal or its largest Hopf ideal. See Section 10 of
 the-fold-char2-full-affine-ch-coefficient.md.
+
+
+### UF-068 — Local splitting of the full coefficient map
+The UF-067 maximal minor \(\delta\) is nonzero, so on the dense principal open \(D(\delta)\) the 16-by-15 coefficient map is a split injection with free rank-one cokernel. This is a module statement only: it does not identify the orbit-image ideal or prove coproduct stability. UF-069 is to compute the coefficient-algebra multiplication and coproduct on this chart, then test the rank-one residual direction.
