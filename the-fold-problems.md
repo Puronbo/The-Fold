@@ -2096,3 +2096,8 @@ The correctly ordered full determinant-open conjugation has no terms linear in c
 ### UF-064 correction — complete first-order map
 
 The original UF-064 first-order table omitted linear terms in X' and misplaced some c,d contributions in Z'. It is superseded by the corrected two-coordinate tables in Section 7 of the affine coefficient paper. The generic-rank-three minor A²atC is unchanged. All subsequent higher-layer calculations must use the corrected table.
+
+
+### UF-065 — Quadratic nilpotent coefficient layer
+
+The complete degree-two coefficient vectors for c², cd, ch, dh are recorded in Section 8 of the affine coefficient paper. The ch column agrees with UF-060. A four-by-four minor on X' rows c',a',b',alpha' is bQ²TR/(a³i⁵), where Q=Ab+Ci, R=Di²+Gb²+Gbi, T=Bb+Di+Gb. Hence this graded layer has generic rank four. Higher layers and the full orbit-image/Hopf-core problem remain open.
