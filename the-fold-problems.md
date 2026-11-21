@@ -1137,3 +1137,29 @@ for all \(g\in G\). Thus divisor invariance and numerical Cartierness do not by 
 **Four D4 real characters.** For the chosen generators \((r,s)\), polynomial semi-invariants are \(z\) for \((+,+)\), \(xy\) for \((-,+)\), \(x^2-y^2\) for \((-,-)\), and \(xy(x^2-y^2)\) for \((+,-)\). The \(z\) representative has only the vertex as its real zero set on X; the other three produce real curve networks.
 
 Full proofs, induced elliptic-curve maps, marked points, the cocycle condition, and exact finite checks are in [the-fold-equivariant-resolution-symmetry.md](the-fold-equivariant-resolution-symmetry.md) and tools/fold_equivariant_resolution.py.
+
+
+## UF-014 — Complete analytic D4 character classification on the cone
+
+**Question.** Classify every convergent analytic scalar height germ on \(X:z^2=x^4+y^4\) that transforms by a one-dimensional character of the natural D4 symmetry, and determine the exact forced crease supports and allowed multiplicities.
+
+**Invariant analytic ring.** With \(p=x^2+y^2\), \(q=x^2y^2\), the signed-permutation reflection group has \(\mathbb K\{x,y\}^{D_4}=\mathbb K\{p,q\}\). On X, \(z^2=p^2-2q\), so
+\[
+\mathcal O_{X,0}^{D_4}\cong\mathbb K\{p,z\}.
+\]
+
+**Complete semi-invariant theorem.** The D4 generators are \(r(x,y,z)=(-y,x,z)\) and \(s(x,y,z)=(y,x,z)\). For the four characters \((\chi(r),\chi(s))=(+,+),(-,+),(-,-),(+,-)\), define
+\[
+\Delta_\chi=1,\quad xy,\quad x^2-y^2,\quad xy(x^2-y^2),
+\]
+respectively. Every convergent analytic germ satisfying \(g^*h=\chi(g)h\) has a unique representation
+\[
+h=\Delta_\chi F(p,z),\qquad F\in\mathbb K\{p,z\}.
+\]
+The proof uses unique Weierstrass division \(h=a(x,y)+zb(x,y)\), divisibility by the reflection hyperplanes on which \(\chi=-1\), and the invariant-ring description. Thus each scalar character space is free rank one over the invariant analytic ring. This is a classification of one-dimensional scalar semi-invariants; the two-dimensional irreducible representation is a separate covariant problem.
+
+**Exact forced multiplicities.** The quotient coordinates \((p,z)\) have four relevant branch curves \(z-p=0,\ z+p=0,\ z-p/\sqrt2=0,\ z+p/\sqrt2=0\). Their pullbacks are the positive/negative coordinate and diagonal branch orbits, each with ramification multiplicity two. Consequently a semi-invariant with no extra divisor components has multiplicities \(1+2k_i\) independently on each forced D4-orbit. The \((- ,+)\) character uses the two coordinate orbits; \((-,-)\) uses the two diagonal orbits; \((+,-)\) uses all four. The trivial character forces no reflection crease.
+
+**Degree statement.** With weights \(\deg x=\deg y=1,\deg z=2\), the minimal semi-invariant degrees are 0,2,2,4. The trivial relative-invariant generator is 1; z is one example of a trivial-character function, not the generator of that module.
+
+Complete proofs, quotient branch equations, multiplicity classification, and finite checks are in the-fold-d4-analytic-character-classification.md and tools/fold_d4_analytic_character_classification.py.
