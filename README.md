@@ -820,3 +820,12 @@ The note also establishes a concrete characteristic-two direction: C_k ≅ k[x,z
 
 ### UF-061 verification addition
 - Adds tools/fold_char2_affine_coefficient_matrix_rank.py, which reconstructs the admissible specialization in the exact truncated polynomial ring and verifies the stated 15-by-15 determinant is 1 over F₂ using standard-library arithmetic.
+
+
+### UF-062A — Exact rank-drop scheme on a triangular affine slice
+- Restricts the affine conjugator to g(x)=x+c, g(z)=z+d+hx while retaining all seven U parameters.
+- Computes all sixteen maximal minors of the 16-by-15 nilpotent coefficient matrix exactly over F₂[A,B,C,D,E,G,J]: their ideal is (E^15), and the only nonzero maximal minor is the one omitting epsilon-prime.
+- Therefore the rank-15 locus on this slice is D(E), with set-theoretic rank-drop support V(E).
+- On E=0 the generic rank is exactly 11 over F₂(A,B,C,D,G,J); an explicit 11-by-11 minor is C^3 D^4 J^4.
+- Adds the-fold-char2-affine-rank-drop-slice.md and tools/fold_char2_affine_rank_drop_slice.py (SymPy required).
+- This resolves only a restricted slice; the full determinant-open rank-drop locus and the orbit-image Hopf core remain open.
