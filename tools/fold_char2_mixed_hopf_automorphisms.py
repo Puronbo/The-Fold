@@ -37,6 +37,22 @@ Gcomp = sp.groebner(
 assert Gcomp.reduce(u_total**2)[1] == 0
 assert Gcomp.reduce(beta_total**2 + lam*(1+(a*ap)**4))[1] == 0
 
+# Verify that the parameter law is exactly composition of the substitutions.
+x = sp.symbols("x")
+b_total = ap*b + a**2*bp
+q = a*x + b*x**2
+h_f = 1 + u*x + beta*x**2 + u*beta*x**3
+h_g_at_f = 1 + up*q + betap*q**2 + up*betap*q**3
+h_total = 1 + u_total*x + beta_total*x**2 + u_total*beta_total*x**3
+Gcompx = sp.groebner(
+    relations + [x**4],
+    x, a, ap, b, bp, u, up, beta, betap, lam,
+    order="lex", modulus=2
+)
+assert Gcompx.reduce(sp.expand(h_f*h_g_at_f + h_total))[1] == 0
+x_composed = sp.expand(ap*(a*x+b*x**2) + bp*(a*x+b*x**2)**2)
+assert Gcompx.reduce(x_composed + (a*ap*x+b_total*x**2))[1] == 0
+
 # Inverse formulas, checked as identities in the coordinate ring.
 ai, bi, ui, betai = sp.symbols("ai bi ui betai")
 inverse_relations = [
@@ -62,5 +78,5 @@ assert all(Ginv.reduce(q)[1] == 0 for q in inverse_composition)
 
 
 print("PASS: Hopf-lift cocycle equation")
-print("PASS: composition preserves u^2=0 and beta^2=lambda*(1+a^4)")
+print("PASS: composition law agrees with substitution on x and t")\nprint("PASS: composition preserves u^2=0 and beta^2=lambda*(1+a^4)")
 print("PASS: inverse formulas in characteristic two")
