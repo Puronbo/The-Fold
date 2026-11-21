@@ -5,17 +5,18 @@ Verifies worked algebraic examples in the companion note. This is not a
 solver for arbitrary analytic germs or local divisor class groups.
 """
 from __future__ import annotations
+from fractions import Fraction
 
 
 def rank_over_rational(rows):
     """Exact row rank for the small integer tangent-space examples."""
     if not rows:
         return 0
-    a = [[float(x) for x in row] for row in rows]
+    a = [[Fraction(x) for x in row] for row in rows]
     m, n = len(a), len(a[0])
     rank = col = 0
     while rank < m and col < n:
-        pivot = next((r for r in range(rank, m) if abs(a[r][col]) > 1e-12), None)
+        pivot = next((r for r in range(rank, m) if a[r][col] != 0), None)
         if pivot is None:
             col += 1
             continue
