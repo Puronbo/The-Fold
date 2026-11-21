@@ -45,7 +45,17 @@ The extra term is a symmetric normalized 2-cocycle. It satisfies
 C(x,y)+C(x+y,w)=C(y,w)+C(x,y+w),
 \qquad C(x,y)=x^2y^2.
 \]
-It is not a coboundary of a polynomial f(x) of degree below four: the only possible normalized coboundaries from f in the augmentation ideal are multiples of \(x^2y+xy^2\), not \(x^2y^2\).
+To classify normalized symmetric polynomial 2-cocycles for this fixed extension, write
+\[
+C(x,y)=\lambda_{12}(x^2y+xy^2)+\lambda_{13}(x^3y+xy^3)
++\lambda_{22}x^2y^2+\lambda_{23}(x^3y^2+x^2y^3)
++\lambda_{33}x^3y^3.
+\]
+The condition C²=0 excludes an xy term. Substitution in the cocycle equation
+\[
+C(x,y)+C(x+y,w)=C(y,w)+C(x,y+w)
+\]
+forces \(\lambda_{13}=\lambda_{23}=\lambda_{33}=0\), leaving \(\lambda_{12},\lambda_{22}\) free. The term \(\lambda_{12}(x^2y+xy^2)\) is the coboundary of \(\lambda_{12}x^3\), so the extension-class space for this fixed problem is one-dimensional, represented by \(\lambda_{22}x^2y^2\). A nonzero value is normalized to 1 by rescaling z. Thus this fixed central-extension problem has exactly the split and non-split classes.
 
 ## 2. It is not one of the four product structures
 
