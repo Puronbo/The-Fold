@@ -1033,3 +1033,10 @@ The complete first-order c,d,h coefficient map in both conjugated coordinates is
 - Computes all four degree-two coefficient vectors c², cd, ch, dh in all sixteen target coordinates.
 - Cross-checks the ch column against UF-060.
 - Proves generic rank four for the quadratic associated-graded coefficient map by an explicit minor.
+
+
+### UF-066 — Higher nilpotent coefficient layers
+- Computes all degree-three, degree-four, and degree-five coefficient vectors in both conjugated coordinates.
+- Gives explicit nonzero minors proving generic associated-graded ranks 4, 3, and 1.
+- Completes the positive-layer rank profile as (3,4,4,3,1), matching the graded dimensions of the nilpotent parameter algebra.
+- Keeps the full coefficient module, scheme-theoretic orbit-image ideal, and largest Hopf ideal as distinct unresolved targets.
