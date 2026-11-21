@@ -1398,3 +1398,21 @@ Its center and derived algebra coincide and are two-dimensional. At group level 
 See `the-fold-unipotent-lie-algebra.md` and `tools/fold_unipotent_commutators.py`.
 
 **Open problem UF-028-A:** determine the D16 representation on the Lie algebra, its quotient by the center, and the center itself; establish equivariance of the commutator pairing.
+
+
+## UF-029 — D16 representation on the nonlinear Lie algebra
+
+Under conjugation by a 45-degree rotation r and reflection s, the Lie algebra decomposes multiplicity-free:
+\[
+\mathfrak u\cong E_1\oplus E_2\oplus\chi\oplus E_3.
+\]
+Here E1 is the quadratic parameter plane (a,b), E2 is the invariant cubic plane e=c, χ is the cubic line (-1,0,1) with r acting by −1 and s by +1, and E3 is the socle center (u,v). Thus
+\[
+\mathfrak u/Z(\mathfrak u)\cong E_1\oplus E_2\oplus\chi,
+\qquad Z(\mathfrak u)\cong E_3.
+\]
+The bracket is D16-equivariant because the action is by conjugation; the symbolic verifier checks the explicit identities for both generators.
+
+See `the-fold-d16-lie-representation.md` and `tools/fold_d16_lie_representation.py`.
+
+**Open problem UF-029-A:** restrict the four summands to the original D4 subgroup and compute modular decomposition changes prime by prime.
