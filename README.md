@@ -900,7 +900,7 @@ The note also establishes a concrete characteristic-two direction: C_k ≅ k[x,z
 - Verifies the multiplicative 2-cocycle and Hopf identities; gives the central extension 0 -> mu_2 -> G_lambda -> alpha_4 -> 0.
 - Proves the extension splits exactly when lambda is a square in k; for lambda nonsquare it is not isomorphic to alpha_4 x mu_2.
 - Over k=F₂(s), lambda=s gives an additional Hopf structure on the same algebra, beyond the six base examples.
-- Classifies normalized symmetric cocycles in the fixed global-section model by k/k²; records the torsor sequence and the exact boundary-vanishing criterion c²+a d²+d=λ; the explicit Brauer-class representative remains open; adds the-fold-char2-imperfect-mixed-hopf-family.md and tools/fold_char2_mixed_hopf_cocycle_class.py.
+- Classifies normalized symmetric cocycles in the fixed global-section model by k/k²; records the torsor sequence and the exact boundary-vanishing criterion c²+a d²+d=λ; identifies the full Brauer class as the quaternion algebra Q(a,λ); adds the-fold-char2-imperfect-mixed-hopf-family.md and tools/fold_char2_mixed_hopf_cocycle_class.py.
 
 
 ### G-3i cocycle-classification verification refinement
@@ -928,3 +928,9 @@ The note also establishes a concrete characteristic-two direction: C_k ≅ k[x,z
 - Shows the boundary vanishes identically when λ is a square; the explicit Brauer-class representative remains open.
 
 - Adds `tools/fold_char2_mixed_torsor_boundary.py` to verify the action cocycle identity and the explicit boundary-vanishing equation.
+
+
+### G-3m — Explicit quaternion class of the mixed-family boundary
+- Identifies `δ'_lambda([a])` with the Brauer class of `Q(a,λ)=k⟨U,D⟩/(U²=a,D²=λ,DU+UD=1)`.
+- Proves this by realizing `E_lambda` as the pullback of `SL₂ -> PGL₂` and computing the descended matrix algebra.
+- Therefore `δ_lambda([a] mod k⁴)=[Q(a,λ)]`; the equation `c²+a d²+d=λ` is its exact splitting criterion.
