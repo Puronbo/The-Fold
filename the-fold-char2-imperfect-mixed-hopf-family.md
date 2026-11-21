@@ -79,7 +79,7 @@ The extension also gives the fppf cohomology sequence
 \longrightarrow k/k^4
 \xrightarrow{\delta_\lambda}\operatorname{Br}(k)[2].
 \]
-Here the first term is \(H^1(k,\mu_2)\), the middle quotient is \(H^1(k,\alpha_4)\), and \(H^2(k,\mu_2)\cong\operatorname{Br}(k)[2]\). The boundary map \(\delta_\lambda\), determined by the cocycle class of lambda, has not been computed. Determining it is the next torsor problem for this family.
+Here the first term is \(H^1(k,\mu_2)\), the middle quotient is \(H^1(k,\alpha_4)\), and \(H^2(k,\mu_2)\cong\operatorname{Br}(k)[2]\). The boundary map \(\delta_\lambda\) is further analyzed in Sections 6–7 below: it factors through \(k/k^2\), and its vanishing is characterized by an explicit quadratic equation. An explicit Brauer-class formula remains open.
 
 
 ## 6. Frobenius factorization of the torsor obstruction
@@ -103,4 +103,72 @@ H^1(k,\alpha_4)=k/k^4
 \]
 Under the standard descriptions, \(F_*\) sends the class of \(a\) modulo fourth powers to the same element \(a\) modulo squares: the \(\alpha_4\)-torsor \(u^4=a\) maps to the \(\alpha_2\)-torsor \((u^2)^2=a\). Therefore \(\delta_\lambda\) depends only on the image of \(a\) in \(k/k^2\). In particular it vanishes on the subgroup \(k^2/k^4\subset k/k^4\).
 
-The remaining arithmetic problem is now reduced to computing the connecting map \(\delta'_\lambda:k/k^2\to\operatorname{Br}(k)[2]\) for the rank-four extension \(E_\lambda\). This is a sharper problem than computing \(\delta_\lambda\) directly.
+The remaining arithmetic problem is to identify the Brauer class \(\delta'_λ([a])\) explicitly, beyond the vanishing criterion in Section 7.
+
+
+## 7. Exact vanishing criterion for the boundary
+
+Let \(E_\lambda\) be the rank-four extension of \(\alpha_2\) by \(\mu_2\) from Section 6. Fix an \(\alpha_2\)-torsor
+\[
+P_a=\operatorname{Spec}B,\qquad B=k[u]/(u^2-a).
+\]
+Then
+\[
+\boxed{\ \delta'_\lambda([a])=0
+\quad\Longleftrightarrow\quad
+\exists\,c,d\in k:\ c^2+a d^2+d=\lambda.\ }
+\]
+
+### Proof
+
+A lift of \(P_a\) to an \(E_\lambda\)-torsor is a \(\mu_2\)-torsor over \(P_a\) equipped with a compatible \(E_\lambda\)-action. The ring \(B\) is local (a field or a local dual-number algebra), so \(\operatorname{Pic}(B)=0\). Every \(\mu_2\)-torsor over \(P_a\) therefore has the form
+\[
+Q=\operatorname{Spec}B[v]/(v^2=q(u))
+\]
+for a unit \(q(u)=q_0+q_1u\in B^\times\).
+
+Write the lifted action in the form
+\[
+u\longmapsto u+r,\qquad
+v\longmapsto vt\,\varphi(u,r),
+\]
+where \(r^2=0\), \(t^2=1\), and \(\varphi(u,0)=1\). Preservation of \(v^2=q(u)\) requires
+\[
+\varphi(u,r)^2=q(u+r)/q(u).
+\]
+Every square in \(B[r]/(r^2)\) has zero \(r\)-coefficient. Since
+\(q(u+r)=q(u)+q_1r\), it follows that \(q_1=0\). Thus \(q=q_0\in k^\times\), and \(\varphi^2=1\), so
+\[
+\varphi(u,r)=1+f(u)r,\qquad f(u)=c+du.
+\]
+
+The group law in \(E_\lambda\) is
+\[
+(r,t)(s,t')=(r+s,tt'(1+\lambda rs)).
+\]
+The action law is equivalent to
+\[
+\varphi(u,r)\varphi(u+r,s)
+=(1+\lambda rs)\varphi(u,r+s).
+\]
+Using \(f(u+r)=f(u)+dr\), this identity is equivalent to
+\[
+f(u)^2+d=\lambda.
+\]
+Since \(u^2=a\), this is exactly \(c^2+a d^2+d=\lambda\).
+
+Conversely, any \(c,d\) satisfying this equation gives the action
+\[
+u\mapsto u+r,\qquad v\mapsto vt(1+(c+du)r)
+\]
+on \(B[v]/(v^2-q_0)\), for any \(q_0\in k^\times\). The canonical map is an isomorphism: its inverse recovers
+\[
+r=u_1+u_2,\qquad
+t=(v_2/v_1)\bigl(1+(c+du_1)(u_1+u_2)\bigr).
+\]
+Thus the lift exists exactly under the stated condition, proving the criterion.
+
+By Frobenius factorization, the same criterion governs
+\(\delta_\lambda([a])\) for an \(\alpha_4\)-torsor \(u^4=a\). In particular, the boundary vanishes on square classes and vanishes identically if \(\lambda\in k^2\) (take \(d=0\), \(c^2=\lambda\)).
+
+This computes the kernel of the boundary map, not yet its value as a specific element of \(\operatorname{Br}(k)[2]\). Identifying that Brauer class remains open.
