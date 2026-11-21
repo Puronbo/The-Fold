@@ -37,8 +37,8 @@ jac = s.det(s.Matrix([
     [s.diff(x**2+y**2, v) for v in (x,y)],
     [s.diff(x**2*y**2, v) for v in (x,y)],
 ]))
-assert s.factor(jac - 2*x*y*(x**2-y**2)) == 0
-assert s.expand(jac**2 - 4*x**2*y**2*(x**2-y**2)**2) == 0
+assert s.factor(jac - 4*x*y*(x**2-y**2)) == 0
+assert s.expand(jac**2 - 16*x**2*y**2*(x**2-y**2)**2) == 0
 print("UF-017: PASS")
 print("trace determinant =", s.factor(B.det()))
 print("quotient Jacobian =", s.factor(jac))
