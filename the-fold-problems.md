@@ -1477,3 +1477,16 @@ This is a modular nonsemisimplicity phenomenon without a bracket-center jump. It
 Proof and exact verifier: `the-fold-d4-characteristic-two.md`, `tools/fold_d4_characteristic_two.py`.
 
 **Open problem UF-032-A:** determine the full automorphism group scheme of the vertex algebra over \(\mathbb Z\), including its characteristic-two tangent dimension and smoothness.
+
+
+## UF-033 — The characteristic-two automorphism group scheme
+
+**Theorem UF-033.1.** For (C=k[x,z]/(x^4,z^2)) in characteristic two, every derivation is determined freely by (D(x),D(z)in C). Hence (dim_koperatorname{Der}_k(C)=16).
+
+**Theorem UF-033.2.** For general images (X,Z), the endomorphism scheme equations are exactly (c^4=d^2=h^2=0), where (c,d) are their constant coefficients and (h) is the x-linear coefficient of Z. The automorphism locus is the open subset where (ai-bh) is invertible.
+
+**Theorem UF-033.3.** The reduced automorphism scheme has dimension 13, while its identity tangent space has dimension 16. It is therefore non-smooth. The 16-dimensional tangent algebra is the full derivation algebra, not the reduction of the seven-dimensional characteristic-zero unipotent Lie algebra.
+
+Proof and structural verifier: `the-fold-char2-automorphism-scheme.md`, `tools/fold_char2_automorphism_scheme.py`.
+
+**Open problem UF-034:** determine the full automorphism group scheme over arbitrary characteristic and identify the integral closure of the characteristic-zero seven-dimensional unipotent subgroup inside it.
