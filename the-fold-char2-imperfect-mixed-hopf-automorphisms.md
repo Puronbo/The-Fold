@@ -58,7 +58,7 @@ the remaining cubic equation follows from \(u^2=0\). Conversely these equations 
 
 ## Theorem 2. Composition and inverse
 
-Here (f,g) denote the corresponding algebra substitutions (pullbacks), and (f\circ g) means ordinary composition of these ring maps: apply (g) to an algebra element, then (f). For geometric group-scheme maps the order is reversed, as usual for pullbacks. For
+Here \(f,g\) denote the corresponding algebra substitutions (pullbacks), and \(f\circ g\) means ordinary composition of these ring maps: apply \(g\) to an algebra element, then \(f\). For geometric group-scheme maps the order is reversed, as usual for pullbacks. For
 \(f=(a,b,u,\beta)\) and \(g=(a',b',u',\beta')\),
 \[
 f\circ g=
