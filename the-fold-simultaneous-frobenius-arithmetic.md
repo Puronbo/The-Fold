@@ -36,7 +36,7 @@ Define λ:R0→k to extract the coefficient of x³y in the basis B. Then
 \[
 \langle a,b\rangle=\lambda(ab)
 \]
-is a nondegenerate associative symmetric bilinear form. In the ordered basis B its Gram matrix is the anti-diagonal permutation matrix:
+is a nondegenerate associative symmetric bilinear form. In the ordered basis B its Gram matrix is the following permutation matrix (one nonzero entry in each row and column):
 \[
 G_{ij}=\lambda(b_i b_j),\qquad
 G=\begin{pmatrix}
@@ -52,7 +52,7 @@ G=\begin{pmatrix}
 \]
 Consequently det(G)=1 and the pairing is perfect over every field, including characteristic 2.
 
-**Proof.** Reduce every monomial using y²=−x² and x⁴=0. Each basis monomial has exactly one complementary basis monomial whose product reduces to ±x³y; all other products have zero x³y coefficient. The signs occur in symmetric pairs, so the displayed Gram matrix follows. Its determinant is the determinant of the 8×8 reversal permutation, (−1)^{28}=1. Associativity and symmetry follow from commutativity and associativity of R0. ∎
+**Proof.** Reduce every monomial using y²=−x² and x⁴=0. Each basis monomial has exactly one complementary basis monomial whose product reduces to ±x³y; all other products have zero x³y coefficient. The signs occur in symmetric pairs, so the displayed Gram matrix follows. The associated permutation is (7,5,6,4,3,1,2,0), which has 26 inversions, so its determinant is +1. Associativity and symmetry follow from commutativity and associativity of R0. ∎
 
 The pairing identifies R0 with its k-linear dual as an R0-module. This independently certifies the Artin Gorenstein property already implied by the complete-intersection presentation. The socle generator x³y from UF-019 pairs nontrivially with 1.
 
