@@ -279,3 +279,24 @@ Indeed, an isomorphism must preserve the unique multiplicative-type subgroup \(\
 Conversely, any such \(a,\beta\) gives an isomorphism. The parameter b is unrestricted and does not affect the obstruction.
 
 Thus the fixed-section extension classes \(k/k^2\) must still be quotiented by the scaling action induced by \(\operatorname{Aut}(\alpha_4)\) to obtain isomorphism classes of the total group schemes. In particular, \(\lambda\notin k^2\) guarantees \(G_\lambda\) is not isomorphic to the product \(G_0=\alpha_4\times\mu_2\).
+
+
+## 11. Standard characteristic-two quaternion symbol
+
+For \(\lambda\ne0\), the quaternion algebra \(Q(a,\lambda)\) is isomorphic to the standard characteristic-two symbol algebra
+\[
+[a\lambda,\lambda)_2
+=k\langle I,J\rangle/
+(I^2+I=a\lambda,\ J^2=\lambda,\ JI=(I+1)J).
+\]
+Indeed, inside \(Q(a,\lambda)\) take \(I=UD\) and \(J=D\). Then
+\[
+I^2+I=a\lambda,\qquad J^2=\lambda,\qquad JI=(I+1)J.
+\]
+Because \(\lambda\ne0\), \(D\) is invertible and \(U=ID^{-1}\), so \(I,J\) generate the full algebra. Both algebras have dimension four, hence this gives the claimed isomorphism.
+
+Therefore, for \(\lambda\ne0\),
+\[
+\delta_\lambda([a])=[a\lambda,\lambda)_2.
+\]
+This places the Fold boundary directly in the standard characteristic-two quaternion-symbol calculus. When \(\lambda=0\), the original presentation \(Q(a,0)\) is split by the criterion of Section 7, so the boundary is zero; the standard symbol notation with second parameter zero is not used.
