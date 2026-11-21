@@ -12,7 +12,7 @@ gamma = u * beta
 h = lambda q: 1 + u*q + beta*q**2 + gamma*q**3
 lhs = sp.expand(h(x) * h(y) * h(x+y))
 rhs = sp.expand((1 + lam*x**2*y**2) * (1 + lam*a**4*x**2*y**2))
-Gxy = sp.groebner([u**2, x**4, y**4], x, y, u, beta, lam, order="lex", modulus=2)
+Gxy = sp.groebner([u**2, x**4, y**4, beta**2 + lam*(1+a**4)], x, y, u, beta, a, lam, order="lex", modulus=2)
 assert Gxy.reduce(lhs + rhs)[1] == 0
 
 # The coefficient comparison leaves beta^2 = lambda*(1+a^4).
