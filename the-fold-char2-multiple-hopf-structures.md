@@ -4,7 +4,7 @@ Let k have characteristic two and
 \[
 A=k[x,z]/(x^4,z^2).
 \]
-The algebra A admits at least four pairwise non-isomorphic commutative finite group-scheme structures. The primitive Hopf structure is concrete but not unique.
+The algebra A admits at least six pairwise non-isomorphic commutative finite group-scheme structures over every characteristic-two field: four product laws and two non-product central extensions. Over imperfect fields, a further nonsplit mixed family supplies additional forms. The primitive Hopf structure is concrete but far from unique.
 
 ## 1. Four product structures
 
