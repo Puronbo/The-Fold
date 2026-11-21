@@ -853,7 +853,7 @@ The note also establishes a concrete characteristic-two direction: C_k ≅ k[x,z
 - Proves the Hopf axioms and identifies the group law as a nontrivial central extension of alpha_4 by alpha_2.
 - Distinguishes it from the four product structures using primitive-space dimension 2, relative-Frobenius image alpha_2, and zero restricted Lie 2-power map.
 - Adds the-fold-char2-nontrivial-cocycle-hopf-structure.md and tools/fold_char2_cocycle_hopf.py; exact F₂ verification passes.
-- Establishes at least five pairwise non-isomorphic Hopf structures on the same Fold algebra; exhaustive classification remains open.
+- Together with G_D, establishes at least six pairwise non-isomorphic base Hopf structures on the same Fold algebra; exhaustive classification remains open.
 
 
 ### G-3d — Automorphism group and translation normalizer of the fifth Hopf law
