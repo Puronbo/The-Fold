@@ -854,3 +854,11 @@ The note also establishes a concrete characteristic-two direction: C_k ≅ k[x,z
 - Distinguishes it from the four product structures using primitive-space dimension 2, relative-Frobenius image alpha_2, and zero restricted Lie 2-power map.
 - Adds the-fold-char2-nontrivial-cocycle-hopf-structure.md and tools/fold_char2_cocycle_hopf.py; exact F₂ verification passes.
 - Establishes at least five pairwise non-isomorphic Hopf structures on the same Fold algebra; exhaustive classification remains open.
+
+
+### G-3d — Automorphism group and translation normalizer of the fifth Hopf law
+- Computes every Hopf automorphism of the cocycle group: x maps to ax+bx² and z maps to a⁴z+cx+dx², with a invertible and c²=0.
+- Gives the exact composition and inverse laws.
+- Identifies Aut_grp(G_C)=Spec k[a,a⁻¹,b,c,d]/(c²), reduced dimension 3 and tangent dimension 4.
+- Proves the translation centralizer is G_C and the normalizer is G_C semidirect Aut_grp(G_C).
+- Adds the-fold-char2-cocycle-automorphism-normalizer.md. The cocycle group's fppf torsors and further Hopf structures remain open.
