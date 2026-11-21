@@ -1693,3 +1693,10 @@ This establishes detection of ch by the affine conjugation family, but the calcu
 Thus ch appears in twelve of the sixteen target coefficient functions and vanishes in γ′, ε′, η′, κ′. This is the complete ch-component of the full affine coaction, not the complete coefficient module or the orbit-image Hopf core. See `the-fold-char2-full-affine-ch-coefficient.md`.
 
 **Open UF-061:** compute all nilradical monomial coefficients in all sixteen target functions, determine the full affine coefficient module and annihilator, and compare the orbit-image kernel with the second-Frobenius candidate.
+
+
+## UF-061 — Maximal generic rank of the affine coefficient matrix
+
+**Theorem UF-061.1.** The fifteen nonconstant monomials of T=k[c,d,h]/(c⁴,d²,h²) give fifteen columns in the 16×15 coefficient matrix of the full affine conjugation's target coordinates. At the admissible specialization a=i=1, b=0 and (A,B,C,D,E,G,J)=(0,0,0,1,1,1,1), the 15×15 minor using all target rows except ε′ has determinant 1 over F₂. Hence the coefficient matrix has generic rank 15, its maximal possible rank. Thus every nilpotent monomial direction is generically linearly independent across the sixteen target functions. This is not a computation of the orbit-image kernel or its Hopf core. See `the-fold-char2-affine-coefficient-matrix-rank.md`.
+
+**Open UF-062:** determine the maximal-minor rank-drop locus and then compute the orbit-image kernel and its largest Hopf ideal.
