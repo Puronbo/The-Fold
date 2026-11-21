@@ -40,7 +40,7 @@ def build_phi():
         first = [a + b for a, b in zip(
             multiply_by_monomial(p, (1, 0)),
             multiply_by_monomial(q, (0, 1)))]
-        second = [a + b for a, b in zip(
+        second = [-a + b for a, b in zip(
             multiply_by_monomial(p, (3, 0)),
             multiply_by_monomial(q, (2, 1)))]
         columns.append(first + second)
@@ -93,8 +93,8 @@ def rank_rational(matrix):
 def verify():
     phi = build_phi()
     assert len(phi) == 16 and all(len(row) == 16 for row in phi)
-    assert rank_rational(phi) == 7
-    assert {p: rank_mod(phi, p) for p in (3, 5, 7)} == {3: 7, 5: 7, 7: 7}
+    assert rank_rational(phi) == 8
+    assert {p: rank_mod(phi, p) for p in (3, 5, 7)} == {3: 8, 5: 8, 7: 8}
     assert rank_mod(phi, 2) == 7  # Phi itself; the actual relation map is 2*Phi.
     relation_map_mod2_rank = rank_mod([[2 * v for v in row] for row in phi], 2)
     assert relation_map_mod2_rank == 0
@@ -102,11 +102,11 @@ def verify():
 
     return {
         "phi_shape": "16x16",
-        "rank_phi_over_Q": 7,
+        "rank_phi_over_Q": 8,
         "rank_phi_mod_odd_primes": {p: rank_mod(phi, p) for p in (3, 5, 7)},
         "rank_relation_map_mod_2": relation_map_mod2_rank,
-        "smith_nonzero_invariants_of_phi": [1] * 7,
-        "derivation_dimensions": {"characteristic_2": 16, "odd_characteristic": 9},
+        "smith_nonzero_invariants_of_phi": [1] * 7 + [2],
+        "derivation_dimensions": {"characteristic_2": 16, "odd_characteristic": 8},
     }
 
 
