@@ -1604,3 +1604,8 @@ The Section 8 explicit formula for S=c₋h₋+d₋a₋ is withdrawn: it omitted 
 ### UF-053 — partial resolution: nilpotent-coordinate coefficient span
 
 The coupled inverse recursion in Section 9 of `the-fold-char2-quadratic-conjugation-coaction.md` simplifies to S=c₋h₋+d₋a₋ ≡ d₀/Δ + φi²c²/Δ³ mod n³. Taking homogeneous degree two in the universal conjugate coordinates c,d₀,h gives the coefficient module M₂=⟨c², cd₀, d₀h⟩ in gr²_n A, rank three. The class ch is not detected by these three output coordinates. This is not yet the full orbit-image ideal: the remaining target coordinates and then the Hopf-core operation must still be computed. See Section 10 of the UF-052 paper.
+
+
+### UF-053 homogeneous-grading audit
+
+The exact fractions (ic+bd₀)/Δ and (hc+ad₀)/Δ are not homogeneous in the nilradical filtration because Δ=ai+bh. Section 11 of `the-fold-char2-quadratic-conjugation-coaction.md` replaces the earlier degree labels with genuinely homogeneous pieces C₁,D₁,C₂,D₂ and independently rederives S ≡ d₀/Δ + φi²c²/Δ³ mod n³. The rank-three coefficient span in Section 10 is retained.
