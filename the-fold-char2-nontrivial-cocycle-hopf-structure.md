@@ -51,11 +51,11 @@ C(x,y)=\lambda_{12}(x^2y+xy^2)+\lambda_{13}(x^3y+xy^3)
 +\lambda_{22}x^2y^2+\lambda_{23}(x^3y^2+x^2y^3)
 +\lambda_{33}x^3y^3.
 \]
-The condition C²=0 excludes an xy term. Substitution in the cocycle equation
+The relation z²=0 forces the coefficient of xy to vanish, since its square would contribute a nonzero x² tensor y² term. Substitution in the cocycle equation
 \[
 C(x,y)+C(x+y,w)=C(y,w)+C(x,y+w)
 \]
-forces \(\lambda_{13}=\lambda_{23}=\lambda_{33}=0\), leaving \(\lambda_{12},\lambda_{22}\) free. The term \(\lambda_{12}(x^2y+xy^2)\) is the coboundary of \(\lambda_{12}x^3\), so the extension-class space for this fixed problem is one-dimensional, represented by \(\lambda_{22}x^2y^2\). A nonzero value is normalized to 1 by rescaling z. Thus this fixed central-extension problem has exactly the split and non-split classes.
+forces \(\lambda_{13}=\lambda_{23}=\lambda_{33}=0\), leaving \(\lambda_{12},\lambda_{22}\) free. The term \(\lambda_{12}(x^2y+xy^2)\) is the coboundary of \(\lambda_{12}x^3\), so the extension-class space for this fixed problem is one-dimensional, represented by \(\lambda_{22}x^2y^2\). A nonzero value is normalized to 1 by rescaling z. Thus, among central extensions admitting this global product-coordinate section and represented by these normalized polynomial cocycles, there are exactly the split and non-split classes. This is not a classification of central extensions without such a section.
 
 ## 2. It is not one of the four product structures
 
