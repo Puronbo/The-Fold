@@ -244,6 +244,7 @@ author. The CMB enters as a rhyme; the exact physics is standard cosmology. See 
 | computing exceptional intersection lattices and local divisor-class obstructions | `the-fold-exceptional-lattices-class-groups.md` |
 | lifting Fold symmetries to singularity resolutions and exceptional curves | `the-fold-equivariant-resolution-symmetry.md` |
 | classifying every analytic D4 semi-invariant on the quartic cone | `the-fold-d4-analytic-character-classification.md` |
+| decomposing the complete analytic D4 representation ring on the cone | `the-fold-d4-analytic-representation-decomposition.md` |
 | the interactive models | the nine HTML files |
 
 ## Contents
@@ -581,3 +582,6 @@ observer gives the reading. The four zones are the map's legend.
 
 
 **Complete analytic D4 character classification (UF-014):** on X:z²=x⁴+y⁴, every convergent scalar semi-invariant has the unique form h=ΔχF(p,z), where p=x²+y², F is an arbitrary invariant analytic germ, and Δχ is 1, xy, x²−y², or xy(x²−y²) for the four one-dimensional D4 characters. The theorem covers all analytic germs, not just polynomials. On forced reflection supports, multiplicities are 1+2k independently on each D4 branch orbit. See the-fold-d4-analytic-character-classification.md and tools/fold_d4_analytic_character_classification.py.
+
+
+**Complete analytic D4 representation decomposition (UF-015):** the cone coordinate ring is free of rank eight over its invariant analytic ring A=K{p,z}. Its explicit A-basis consists of four scalar relative invariants and two E-covariant pairs V1=(x,y), V3=(xy²,x²y). Thus the two-dimensional irreducible occurs with multiplicity two, and every E-covariant is a unique A-linear combination of V1 and V3. See the-fold-d4-analytic-representation-decomposition.md and tools/fold_d4_analytic_representation_decomposition.py.
