@@ -663,3 +663,8 @@ It is a 7-dimensional unipotent group. The full automorphism group is its semidi
 **UF-041 — Second-Frobenius normal thickening:** the ambient nilradical is killed by the second relative Frobenius since c⁴=d⁴=h⁴=0. This gives a canonical homomorphism from the full automorphism scheme to the twice-twisted reduced quotient Q^(2), Q=Aut(C)_red/N. Its kernel is a normal subgroup scheme containing U, with reduced support N and tangent dimension 16. The minimal normal closure is contained in this explicit thickening; equality is not yet proved. See `the-fold-char2-second-frobenius-closure.md`.
 
 **Open UF-042:** compute the minimal Hopf ideal and test equality with the second-Frobenius kernel.
+
+
+**UF-042 — Explicit reduced quotient law:** the five-dimensional quotient Q = Aut(C)_red/N is now identified as `(G_a^2) ⋊ B`. The graded subgroup B has multiplication `(a1a2, a2 b1 + b2 d1, d1 d2)`; its action on the quotient coordinates (F,R) is `(a²F/d, aR + abF/d)`. This yields the full semidirect-product law. See `the-fold-char2-reduced-quotient-law.md`.
+
+**Open UF-043:** determine the exact Hopf ideal of the scheme-theoretic normal closure by scheme-valued conjugation and compare it with the second-Frobenius kernel.
