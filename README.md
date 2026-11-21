@@ -768,3 +768,19 @@ The papers UF-056, UF-057, and UF-058 now carry explicit withdrawal/correction s
 This establishes detection of ch by the affine conjugation family, but the calculation is restricted to a=i=1,d=0 and is not the full affine coaction or the orbit-image Hopf core. See `the-fold-char2-affine-ch-coefficient-vector.md`.
 
 **Open UF-060:** compute the complete determinant-open affine coaction for arbitrary a,b,d,h,i,c and determine the coefficient module across all sixteen target functions, its annihilator, and its relation to the second-Frobenius candidate.
+
+
+## UF-060 — Full determinant-open affine ch coefficient
+
+**Theorem UF-060.1.** For the full affine family g(x)=c+ax+bz, g(z)=d+hx+iz, with a,i units and c⁴=d²=h²=0, put r=a⁻¹, t=i⁻¹, L=Abt+C, M=B+Ed+Gbt+Jbdt, and N=E+Jbt. With the correct composition order, the exact coefficient of ch in the conjugated coordinate polynomials is
+
+\[
+[ch]X'=bd r²tL+rLx+br²Lz+btM x²+aN x³+bN x²z,
+\]
+\[
+[ch]Z'=drtL+Atx+rLz+atM x²+Ja²t x³+aN x²z.
+\]
+
+Thus ch appears in twelve of the sixteen target coefficient functions and vanishes in γ′, ε′, η′, κ′. This is the complete ch-component of the full affine coaction, not the complete coefficient module or the orbit-image Hopf core. See `the-fold-char2-full-affine-ch-coefficient.md`.
+
+**Open UF-061:** compute all nilradical monomial coefficients in all sixteen target functions, determine the full affine coefficient module and annihilator, and compare the orbit-image kernel with the second-Frobenius candidate.
