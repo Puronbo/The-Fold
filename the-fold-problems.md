@@ -1755,3 +1755,7 @@ The verifier tools/fold_char2_hopf_structures.py confirms that each of the four 
 **Open G-3a:** determine whether non-product Hopf structures exist on A and classify all structures up to Hopf isomorphism. The four product structures are examples, not an exhaustive classification.
 
 **Open G-3b:** compute the automorphism group schemes and translation normalizers for the three non-additive product laws. The G-2 explicit automorphism-group presentation currently applies only to alpha_4 x alpha_2.
+
+
+### UF-061 — Reproducible specialization certificate
+Adds tools/fold_char2_affine_coefficient_matrix_rank.py. The standard-library verifier constructs the correctly ordered conjugation in F₂[x,z,c,d,h]/(x⁴,z²,c⁴,d²,h²), extracts the sixteen target coefficient rows and fifteen nilpotent monomial columns, omits epsilon-prime, and checks the exact 15-by-15 determinant equals 1. UF-062 remains the determinantal rank-drop locus and Hopf-core problem.
