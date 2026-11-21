@@ -759,3 +759,12 @@ Therefore the target coefficient of x in the second coordinate is Ac h. This is 
 The papers UF-056, UF-057, and UF-058 now carry explicit withdrawal/correction sections. Do not use their earlier centralizer conclusions. The full affine conjugation coefficient module, scheme-theoretic image kernel, and largest Hopf ideal remain open.
 
 **Open UF-059:** compute the correct conjugation coaction for the full determinant-open affine family, all sixteen target coefficient functions, and the resulting coefficient module/annihilator. Only then proceed to the universal orbit-image kernel and its largest Hopf ideal.
+
+
+## UF-059 — Mixed ch coefficient vector on an affine slice
+
+**Theorem UF-059.1.** On the affine slice g(x)=x+c+bz, g(z)=z+hx with c⁴=h²=0, the determinant 1+bh is a unit. Using the correct composition order, the coefficient of ch is nonzero in ten target coordinates: a', b', α', β', δ', h', i', φ', ψ', θ', with respective coefficients Ab+C, Ab²+Cb, Bb+Gb², E+Jb, Eb+Jb², A, Ab+C, B+Gb, J, E+Jb. It vanishes in c', d', γ', ε', η', κ'. In particular, b=0 gives h'=Ach for the A-only element of U. This is an exact coefficient extraction in the truncated ring, not a first-order approximation.
+
+This establishes detection of ch by the affine conjugation family, but the calculation is restricted to a=i=1,d=0 and is not the full affine coaction or the orbit-image Hopf core. See `the-fold-char2-affine-ch-coefficient-vector.md`.
+
+**Open UF-060:** compute the complete determinant-open affine coaction for arbitrary a,b,d,h,i,c and determine the coefficient module across all sixteen target functions, its annihilator, and its relation to the second-Frobenius candidate.
