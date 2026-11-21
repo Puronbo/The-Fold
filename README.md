@@ -900,7 +900,7 @@ The note also establishes a concrete characteristic-two direction: C_k ≅ k[x,z
 - Verifies the multiplicative 2-cocycle and Hopf identities; gives the central extension 0 -> mu_2 -> G_lambda -> alpha_4 -> 0.
 - Proves the extension splits exactly when lambda is a square in k; for lambda nonsquare it is not isomorphic to alpha_4 x mu_2.
 - Over k=F₂(s), lambda=s gives an additional Hopf structure on the same algebra, beyond the six base examples.
-- Classifies normalized symmetric cocycles in the fixed global-section model by k/k²; records the torsor sequence k×/(k×)² -> H¹(k,G_lambda) -> k/k⁴ -> Br(k)[2] and leaves its boundary map open; adds the-fold-char2-imperfect-mixed-hopf-family.md and tools/fold_char2_mixed_hopf_cocycle_class.py.
+- Classifies normalized symmetric cocycles in the fixed global-section model by k/k²; records the torsor sequence and the exact boundary-vanishing criterion c²+a d²+d=λ; the explicit Brauer-class representative remains open; adds the-fold-char2-imperfect-mixed-hopf-family.md and tools/fold_char2_mixed_hopf_cocycle_class.py.
 
 
 ### G-3i cocycle-classification verification refinement
@@ -920,3 +920,9 @@ The note also establishes a concrete characteristic-two direction: C_k ≅ k[x,z
 - Identifies `G_lambda` as the pullback of the rank-four central extension `E_lambda` of `alpha_2` by `mu_2` along `F: alpha_4 -> alpha_2`.
 - Proves `δ_lambda = δ'_lambda ∘ F_*`; therefore the obstruction depends only on `a mod k²` and vanishes on `k²/k⁴`.
 - Reduces the remaining arithmetic calculation to `δ'_lambda: k/k² -> Br(k)[2]`.
+
+
+### G-3l — Exact vanishing criterion for the mixed-family torsor boundary
+- For the rank-four extension E_lambda of alpha_2 by mu_2, proves `δ'_lambda([a])=0` iff `c²+a d²+d=λ` has a solution in k.
+- By Frobenius factorization, the same criterion governs the boundary for G_lambda-torsors under alpha_4.
+- Shows the boundary vanishes identically when λ is a square; the explicit Brauer-class representative remains open.
