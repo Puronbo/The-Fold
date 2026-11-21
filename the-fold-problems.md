@@ -1849,3 +1849,31 @@ and its inverse is
 The full calculation is in the-fold-char2-cocycle-automorphism-normalizer.md.
 
 **Open G-3d:** classify fppf torsors under G_C and determine whether additional non-product Hopf structures exist.
+
+
+## G-3e/G-4 — Fppf torsors of the fifth cocycle group
+
+There is an exact sequence of commutative fppf sheaves
+```
+0 -> alpha_2 -> G_C -> alpha_4 -> 0
+```
+and the cohomology sequence is short exact:
+```
+0 -> k/k^2 -> H^1_fppf(k,G_C) -> k/k^4 -> 0.
+```
+Here H²_fppf(k,alpha_2)=0 by the Frobenius sequence and affine vanishing for G_a. Since G_C is killed by 2, the sequence splits noncanonically as F₂-vector spaces.
+
+For a,b in k, explicit torsors are
+```
+B_(a,b) = k[u,v]/(u^4-a, v^2-b)
+rho(u) = u tensor 1 + 1 tensor x
+rho(v) = v tensor 1 + 1 tensor z + u^2 tensor x^2.
+```
+The canonical map has inverse in coordinates
+```
+x -> u_1+u_2
+z -> v_1+v_2+u_1^2(u_1+u_2)^2.
+```
+For fixed a, varying b runs through the kernel k/k². After choosing representatives for k/k⁴, these torsors parameterize all G_C-torsor classes; the abstract group splitting is noncanonical.
+
+Full derivation: the-fold-char2-cocycle-torsors.md.
