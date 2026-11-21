@@ -947,3 +947,5 @@ The note also establishes a concrete characteristic-two direction: C_k ≅ k[x,z
 - Proves there are exactly four types: `alpha₂²`, `I_{1,1}`, `alpha₂×mu₂`, and `mu₂²`.
 - Matches all four types to existing Fold Hopf laws; further examples must differ through extension data or Frobenius image.
 - Adds `the-fold-char2-height-one-kernel-classification.md`.
+
+- Organizes the rank-eight classification into eight kernel/image pairs; five are realized and three remain open, not ruled out.
