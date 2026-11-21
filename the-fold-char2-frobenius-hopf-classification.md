@@ -22,7 +22,7 @@ of dimension four. Also the second relative Frobenius is zero because x⁴=z⁴=
 
 Over an algebraically closed field, the connected commutative group schemes of rank two are alpha_2 and mu_2. Therefore the Frobenius image of any Hopf structure on A is one of these two group schemes.
 
-## 2. The five known examples in Frobenius terms
+## 2. The six known examples in Frobenius terms
 
 \[
 \begin{array}{c|c|c}
@@ -32,12 +32,13 @@ G & G[F] & F(G)\\
 \mu_4\times\alpha_2 & \mu_2\times\alpha_2 & \mu_2\\
 \alpha_4\times\mu_2 & \alpha_2\times\mu_2 & \alpha_2\\
 \mu_4\times\mu_2 & \mu_2\times\mu_2 & \mu_2\\
-G_C & \alpha_2\times\alpha_2 & \alpha_2
+G_C & \alpha_2\times\alpha_2 & \alpha_2\\
+G_D & H_D & \alpha_2
 \end{array}
 \]
 Here G_C is the non-product cocycle group from G-3c. Its cross term x² tensor x² vanishes after restricting to the Frobenius kernel, so its kernel is alpha_2 x alpha_2; its Frobenius image is alpha_2.
 
-The five structures show that the Frobenius kernel and image do not determine the extension: alpha_4 x alpha_2 and G_C have the same Frobenius kernel and image but are non-isomorphic.
+The six structures show that the Frobenius kernel and image do not determine the extension: alpha_4 x alpha_2 and G_C have the same Frobenius kernel and image but are non-isomorphic; G_D realizes a different height-one kernel H_D with nilpotent Jordan restricted 2-map.
 
 ## 3. A reduced classification problem
 
