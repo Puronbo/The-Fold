@@ -1000,3 +1000,10 @@ The note also establishes a concrete characteristic-two direction: C_k ≅ k[x,z
 - Shows that adjoining `sqrt(lambda)` kills the entire boundary map, and records
   the remaining field-uniform kernel problem.
 - Adds `the-fold-char2-quaternion-boundary-arithmetic.md`.
+
+
+### G-4g — Full quaternion-boundary kernel over F₂(s,t)
+- Proves the exact parameterization `ker(delta_s) = {[s r²+r] : r in F₂(s,t)×}`
+  inside `k/k²), by solving the explicit torsor-lifting equation.
+- Records that this is the image of an additive polynomial modulo squares;
+  finding a simpler intrinsic description remains open.
