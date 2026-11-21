@@ -83,3 +83,27 @@ k[a^{\pm1},i^{\pm1},c,d,h,A,B,C,D,E,G,J,x,z]/
 with characteristic two understood. It can be checked by direct expansion and coefficient comparison.
 
 **Open UF-058:** add the missing off-diagonal linear term b z to g(x), preserving the full determinant-open affine family, and determine whether the mixed class ch then appears in one or more of the sixteen target coefficient functions. After that, higher ambient coefficients must be incorporated before any claim about the full conjugacy-image kernel or Hopf core.
+
+
+## Correction — composition order and withdrawal of the centralizer claim
+
+The preceding centralizer assertion is withdrawn. The original substitution calculation applied the conjugating maps in the wrong order. For algebra automorphisms represented by their images of x and z, the correct conjugate is obtained by applying g^{-1} to the input, then u, then g; equivalently, evaluate g(u(g^{-1}(x))) and g(u(g^{-1}(z))).
+
+A counterexample already occurs in the displayed family. Take
+\[
+g(x)=x+c,\qquad g(z)=z+hx,
+\]
+with c⁴=h²=0, and the valid U-element
+\[
+u(x)=x+Ax²,\qquad u(z)=z+Axz.
+\]
+Its inverse is g^{-1}(x)=x+c and g^{-1}(z)=z+hx+hc. Correct composition gives
+\[
+(gug^{-1})(x)=x+Ax²+Ac²,
+\]
+\[
+(gug^{-1})(z)=z+Axz+Acz+Ach\,x+Ac²h.
+\]
+Thus the target coefficient of x in the second coordinate is Ac h. In particular, this family does not centralize U, and ch is detected. The prior conclusion that no target coordinate varies on this family is false.
+
+The earlier theorem/proof and any downstream inference based on this centralizer calculation must not be used. This correction does not affect the separate UF-055 cubic translation calculation, whose composition order was already correct.
