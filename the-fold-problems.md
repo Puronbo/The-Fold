@@ -986,3 +986,20 @@ They have exactly six, three, and three forced reflection axes as zero sets. Any
 **Obstructions.** A three-ray Y-junction has dual C3 and cannot be the exact sign-changing zero set of a continuous scalar height. A nonseparating crease loop on a torus gives a dual self-loop and is likewise obstructed. These scalar obstructions do not exclude vector-valued order parameters or sections of nontrivial line bundles.
 
 Full proofs, D6 formulas, polynomial sharpness, topological construction, examples, references, and tests are in the-fold-forced-zero-topology.md and tools/fold_forced_zero_topology.py.
+
+
+## UF-008 — Smooth and analytic realizability of Fold heights
+
+**Question.** When does a periodic crease network admit a smooth or real-analytic signed height, and what does its local vertex geometry force about vanishing order?
+
+**Smooth realization theorem.** Assume a finite crease graph on a smooth surface has only regular smooth branches through its vertices (no terminal half-edges, cusps, or isolated singular components). Then a global \(C^\infty\) scalar height with exact zero set equal to the network and opposite signs across each crease exists if and only if its face-adjacency dual is bipartite. Necessity is the face-sign colouring argument; sufficiency follows by taking local products of branch-defining functions with signs matched to the dual colouring and gluing them by a nonnegative smooth partition of unity.
+
+**Local branch-count theorem.** If q distinct regular branches meet at p and a smooth height vanishes on all of them, repeated Hadamard division gives \(h=(\prod_{i=1}^q\phi_i)u\). Hence \(\operatorname{ord}_p(h)\ge q\), with equality attained by the product. A transverse four-valent crossing has minimum order 2; a six-valent three-branch junction has minimum order 3. The branch count is half the valence under the regular-branch hypothesis.
+
+**Analytic Fourier-projection theorem.** For a finite wallpaper point group P acting affinely on a rank-two torus, every real character \(\chi:P\to\{\pm1\}\) has a nonzero real-analytic periodic semi-invariant. Choose a lattice frequency with trivial dual stabilizer and project its Fourier mode over P with character weights. The resulting Fourier orbit sum transforms by \(\chi\). At least one of its real and imaginary parts is nonzero and has the same character.
+
+**Explicit periodic models.** The square-torus function \(\sin(2\pi x)\sin(2\pi y)\) has two crossing crease families and order-2 vertices. The triangular-torus function \(\sin(2\pi x)\sin(2\pi y)\sin(2\pi(x+y))\) has three crease directions, four triple-intersection vertices of order 3, and realizes the D6 character \(\chi(r)=-1,\chi(s)=+1\) for \(r(x,y)=(-y,x+y)\), \(s(x,y)=(-x-y,y)\).
+
+**Important boundary.** Fourier projection guarantees an analytic periodic representative for each algebraically allowed character, but it does not guarantee that the zero set equals an arbitrarily prescribed crease network. Exact global analytic zero-divisor realization remains open in this project. Smooth sufficiency also depends on the regular-branch hypotheses; arbitrary singular graphs need separate treatment.
+
+Proofs, local models, Fourier construction, references, and bounded tests are in the-fold-smooth-analytic-heights.md and tools/fold_smooth_analytic_heights.py.
