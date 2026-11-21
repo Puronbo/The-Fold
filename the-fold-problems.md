@@ -1584,3 +1584,8 @@ See `the-fold-char2-quadratic-nilradical-coproduct.md`.
 **Theorem UF-052.1.** For U-parameters A,C and a full automorphism g, the universal conjugate coordinates modulo n³ are explicitly computed in terms of c² and cd₀ for the c,d₀ outputs, and ch,d₀h for the h output. The formulas are recorded in `the-fold-char2-quadratic-conjugation-coaction.md`. This is the degree-two conjugacy pullback, not yet the orbit ideal's Hopf core.
 
 **Open UF-053:** compute the coefficient span/annihilator in the four-dimensional degree-two layer and compare it with the candidate.
+
+
+### UF-052 correction / UF-053 reopened
+
+The h-coordinate of the conjugate includes (hC+iA)(c₋h₋+d₋a₋). Its lowest-order approximation has cancellation of the ch terms and equals (hC+iA)d₀/Δ modulo n². The earlier boxed formula modulo n³ and the claim of independent detection of ch and d₀h are withdrawn; second-order inverse coefficients are required. See the correction section in `the-fold-char2-quadratic-conjugation-coaction.md`.
