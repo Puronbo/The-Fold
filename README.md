@@ -693,3 +693,8 @@ It is a 7-dimensional unipotent group. The full automorphism group is its semidi
 **UF-049 — Nilradical length and associated graded:** the nilpotent coefficient algebra has relative length 16 over the reduced base and Hilbert series 1+3T+4T²+4T³+3T⁴+T⁵ for the ordinary nilradical filtration. Thus n⁵ is nonzero but n⁶=0, even though every individual element of n has fourth power zero. This is not the tangent dimension calculation; it is the length and associated-graded structure of the nilpotent coefficient thickening. See `the-fold-char2-nilradical-associated-graded.md`.
 
 **Open UF-050:** compare the normal-closure and second-Frobenius-kernel ideals on each associated-graded piece.
+
+
+**UF-050 — Associated graded of the second-Frobenius candidate:** proves that the Frobenius candidate's coordinate algebra is the reduced candidate coordinate algebra tensored with T=k[c,d₀,h]/(c⁴,d₀²,h²). It therefore retains the full nilpotent thickening, with graded ranks 1,3,4,4,3,1. This does not prove that the minimal normal closure has the same thickening. See `the-fold-char2-frobenius-candidate-associated-graded.md`.
+
+**Open UF-051:** determine the degree-two nilradical relations imposed by the actual normal-closure Hopf ideal.
