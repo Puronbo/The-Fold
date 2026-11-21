@@ -35,10 +35,11 @@ X=ax+bx^2,\qquad a\in R^\times.
 \]
 The restriction to the kernel is the identity because \(\operatorname{Aut}(\mu_2)\) is trivial.
 
-Write the image of (t) initially as (p(x)+tq(x)), with (p(0)=0) and (q(0)=1). In the Hopf identity for this image, the component in the (1otimes t) summand is (p(x)otimes q(y)) times a unit. The coproduct of (p(x)+tq(x)) has no such mixed component. Since (q) is a unit, this forces (p=0). Thus the image is (t h(x)), where (h=q) is a normalized (mu_2)-valued function on (alpha_4). Write
+Write the image of \(t\) initially as \(p(x)+tq(x)\), with \(p(0)=0\) and \(q(0)=1\). Since \(p\in(x)\), we have \(p^2=0\); the relation \((p+tq)^2=1\) therefore gives \(q^2=1\), so \(q\) is a unit. In the Hopf identity, the components in the \(1\otimes t\) and \(t\otimes1\) summands on the right are respectively \(p(x)\otimes q(y)\) and \(q(x)\otimes p(y)\), multiplied by units. The coproduct of \(p(x)+tq(x)\) has no mixed \(1\otimes t\) or \(t\otimes1\) component. Hence \(p=0\). Thus the image is \(t h(x)\), where \(h=q\) is a normalized \(\mu_2\)-valued function on \(\alpha_4\). Write
 \[
 h(x)=1+ux+\beta x^2+\gamma x^3.
 \]
+
 The relation \(h^2=1\) gives \(u^2=0\). The Hopf condition is
 \[
 h(x)h(y)h(x+y)
