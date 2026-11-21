@@ -739,3 +739,23 @@ It is a 7-dimensional unipotent group. The full automorphism group is its semidi
 **UF-058 — Full affine centralizer:** proves that every determinant-open affine automorphism `g(x)=c+ax+bz`, `g(z)=d+hx+iz` centralizes the seven-dimensional subgroup U. The proof factors the linear matrix into lower- and upper-triangular parts; UF-057 handles the lower-triangular/translation factors and exact substitution handles the upper-triangular factor. Hence the off-diagonal coefficient `b` still produces no conjugation variation, and `ch` is absent from all sixteen target-coordinate variations on the affine family. Nonlinear ambient coefficients and the universal orbit-image Hopf core remain open. See `the-fold-char2-full-affine-centralizer.md`.
 
 **Open UF-059:** introduce quadratic ambient terms and identify the first nonlinear stratum where conjugation becomes nontrivial.
+
+
+## UF-058 — Composition-order correction: affine conjugation detects ch
+
+**Correction and withdrawal.** The claimed centralizer results UF-056 and UF-057, and the attempted full-affine extension UF-058, used the wrong order when applying the substitution maps. Those centralizer conclusions are withdrawn. For algebra automorphisms represented by their images, the correct calculation is g(u(g^{-1}(x))) and g(u(g^{-1}(z))).
+
+Take the triangular affine element g(x)=x+c, g(z)=z+hx, with c⁴=h²=0, and the U-element u(x)=x+Ax², u(z)=z+Axz. Since g^{-1}(x)=x+c and g^{-1}(z)=z+hx+hc, exact composition in characteristic two gives
+
+\[
+(gug^{-1})(x)=x+Ax²+Ac²,
+\]
+\[
+(gug^{-1})(z)=z+Axz+Acz+Ach\,x+Ac²h.
+\]
+
+Therefore the target coefficient of x in the second coordinate is Ac h. This is an exact scheme-level polynomial identity and proves that ch is detected by the affine conjugation family. It directly contradicts the prior assertion that the triangular affine family centralizes U. The separate UF-055 cubic translation calculation remains valid because it used the correct composition order.
+
+The papers UF-056, UF-057, and UF-058 now carry explicit withdrawal/correction sections. Do not use their earlier centralizer conclusions. The full affine conjugation coefficient module, scheme-theoretic image kernel, and largest Hopf ideal remain open.
+
+**Open UF-059:** compute the correct conjugation coaction for the full determinant-open affine family, all sixteen target coefficient functions, and the resulting coefficient module/annihilator. Only then proceed to the universal orbit-image kernel and its largest Hopf ideal.
