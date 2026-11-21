@@ -64,7 +64,7 @@ The kernel is unipotent: its elements act trivially on every associated-graded p
 
 ## Consequences
 
-1. The full automorphism group is infinite-dimensional as a set only in the sense of a positive-dimensional algebraic group; its algebraic-group dimension is 7, with a finite-by-one-dimensional graded quotient.
+1. The full automorphism group is a positive-dimensional algebraic group of dimension 8: seven dimensions from the unipotent kernel and one from scalar dilations in the graded quotient.
 2. The D4 action is not the full symmetry group. It is contained in the larger graded D16 subgroup, and the seven-parameter unipotent kernel supplies additional nonlinear automorphisms.
 3. The seven-parameter family is not merely a collection of examples: it is the entire kernel of the linear-part map.
 4. The automorphism group is determined by the algebra and its maximal-ideal filtration. Choosing a particular D4 subgroup still requires additional structure; the abstract algebra has a larger graded symmetry group.
