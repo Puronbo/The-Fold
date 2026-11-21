@@ -724,3 +724,7 @@ It is a 7-dimensional unipotent group. The full automorphism group is its semidi
 **UF-054 — Full target-coordinate quadratic audit:** identifies why the rank-three module from the conjugate's nilpotent coordinates cannot be promoted to the full conjugacy-family coefficient module: cubic parameters in U contribute quadratic nilradical terms to nonconstant target coefficients, as shown by `(x+c)^3`. The complete thirteen-coordinate audit and subsequent Hopf-core computation remain open. See `the-fold-char2-full-conjugation-quadratic-audit.md`.
 
 **Open UF-055:** compute the full degree-two target-coordinate coefficient module, its annihilator, and then the scheme-theoretic conjugacy-image kernel and largest Hopf ideal contained in it.
+
+**UF-055 — Exact cubic conjugation test and coordinate-count correction:** clarifies that the full substitution has fourteen nonconstant coefficients plus two constants (sixteen coefficient functions total); the three nilpotent outputs are c, d₀, h, with h counted among the nonconstant coefficients. Gives an exact conjugation by x-translation showing a cubic U-parameter contributes Bc² to a linear target coefficient. See `the-fold-char2-fourteen-coordinate-conjugation-test.md`.
+
+**Open UF-056:** compute the complete degree-two coaction across all sixteen coefficient functions, then determine the full conjugacy-image kernel and its largest Hopf ideal.
