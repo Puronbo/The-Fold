@@ -959,3 +959,9 @@ The note also establishes a concrete characteristic-two direction: C_k ≅ k[x,z
 - Adds `the-fold-char2-nonproduct-torsor-classes.md`.
 
 - Refines the full `G_lambda` automorphism proof by ruling out an additive component in the image of `t`, clarifies pullback composition order, and extends the symbolic verifier to check the full substitution law and inverse.
+
+
+### G-4c — Comparative torsor table for all seven known Hopf structures
+- Collects the fppf `H¹` groups of the four products, `G_C`, `G_D`, and `G_lambda`.
+- Shows `G_C` and `G_D` have abstract torsor groups matching `α₄×α₂`, while `G_lambda` is controlled by the quaternion splitting kernel.
+- Adds `the-fold-char2-comparative-torsor-groups.md`.
