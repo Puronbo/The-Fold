@@ -1163,3 +1163,30 @@ The proof uses unique Weierstrass division \(h=a(x,y)+zb(x,y)\), divisibility by
 **Degree statement.** With weights \(\deg x=\deg y=1,\deg z=2\), the minimal semi-invariant degrees are 0,2,2,4. The trivial relative-invariant generator is 1; z is one example of a trivial-character function, not the generator of that module.
 
 Complete proofs, quotient branch equations, multiplicity classification, and finite checks are in the-fold-d4-analytic-character-classification.md and tools/fold_d4_analytic_character_classification.py.
+
+
+## UF-015 — Complete analytic D4 representation decomposition
+
+**Question.** Complete UF-014 by classifying the two-dimensional irreducible covariants and decomposing the entire convergent analytic coordinate ring of X:z²=x⁴+y⁴ over its invariant analytic ring A=K{p,z}.
+
+**Theorem.** The coordinate ring is free of rank eight over A, with basis
+\[
+1,\ xy,\ x^2-y^2,\ xy(x^2-y^2),\ x,\ y,\ xy^2,\ x^2y.
+\]
+The first four basis elements generate the four rank-one character modules from UF-014. The remaining four form two copies of the two-dimensional irreducible representation E, generated as vector-valued covariants by
+\[
+V_1=(x,y),\qquad V_3=(xy^2,x^2y).
+\]
+Both transform by the same matrices rho(r) and rho(s) given in the UF-015 paper. Every analytic E-covariant is uniquely A_1(p,z)V_1+A_3(p,z)V_3.
+
+**Proof strategy.** The signed-permutation reflection-group theorem gives a free rank-eight analytic module over K{p,q}. Its coinvariant basis is verified by reducing modulo (p,q), where y²=-x² and x⁴=0. The cone relation identifies q=(p²-z²)/2, and analytic base change gives the displayed A-basis. This proves completeness and uniqueness, not merely generation by examples.
+
+**Representation decomposition.**
+\[
+\mathcal O_{X,0}\cong A\otimes(\mathbf1\oplus\chi_{-+}\oplus\chi_{--}\oplus\chi_{+-}\oplus E\oplus E).
+\]
+This is a module/representation decomposition, not a product decomposition of rings; multiplication still couples the summands.
+
+The Hilbert numerator is 1+2t+2t²+2t³+t⁴, agreeing with the weighted hypersurface Hilbert series. The E-isotypic part has A-basis degrees 1,1,3,3, so E occurs with multiplicity two.
+
+Proof, degree check, scope, and finite verifier are in the UF-015 paper and tools/fold_d4_analytic_representation_decomposition.py.
