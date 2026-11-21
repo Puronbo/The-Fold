@@ -618,3 +618,5 @@ observer gives the reading. The four zones are the map's legend.
 `X=x+αx²+βxy+γx³+δx²y+ux³y`,
 `Y=y−βx²+αxy−δx³+ηx²y+vx³y`.
 It is a 7-dimensional unipotent group. The full automorphism group is its semidirect product with the graded linear group from UF-025, hence has algebraic-group dimension 8. See `the-fold-nonlinear-automorphism-group.md` and `tools/fold_nonlinear_automorphisms.py`.
+
+**Unipotent automorphism group law (UF-027):** the composition of the seven-parameter identity-linear automorphisms is now given by an explicit polynomial law on k⁷. The first two parameters add; higher coordinates acquire quadratic and cubic corrections. The SymPy verifier checks all ten coefficient identities. See `the-fold-unipotent-group-law.md` and `tools/fold_unipotent_group_law.py`.
