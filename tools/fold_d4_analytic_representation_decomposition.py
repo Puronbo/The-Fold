@@ -67,8 +67,12 @@ def verify():
     degrees=(0,2,2,4,1,1,3,3)
     counts={d:degrees.count(d) for d in set(degrees)}
     assert counts=={0:1,1:2,2:2,3:2,4:1}
-    # Numerator is (1+t)(1+t+t^2+t^3).
-    assert (1,2,2,2,1)==(1,1,1,1,0) if False else True
+    # Numerator is (1+t)(1+t+t^2+t^3) = 1+2t+2t^2+2t^3+t^4.
+    poly=[0]*5
+    for i,a in enumerate((1,1)):
+        for j,b in enumerate((1,1,1,1)):
+            poly[i+j]+=a*b
+    assert poly==[1,2,2,2,1]
     return {
         "D4_group_elements":len(G),
         "D4_relation_checks":relation_checks,
