@@ -1046,3 +1046,9 @@ The complete first-order c,d,h coefficient map in both conjugated coordinates is
 - Forms the complete 16-by-15 matrix for all nonconstant monomials in (c,d,h).
 - Proves generic rank 15 by an explicit maximal-minor specialization over F_256; the determinant is 4a after deleting the X' x^3 z row.
 - Establishes generic linear independence across nilpotent degrees, while keeping the orbit-image ideal and Hopf-core problem open.
+
+
+### UF-068 — Local module structure of the full coefficient map
+- Localizes at the nonzero UF-067 maximal minor and proves the 16-by-15 coefficient map splits as an injection on a dense principal open.
+- Its cokernel is free of rank one there; the fifteen coefficient directions are a direct summand of the target module.
+- Explicitly does not identify the orbit-image ideal or its Hopf core; multiplication relations and coproduct stability remain open (UF-069).
