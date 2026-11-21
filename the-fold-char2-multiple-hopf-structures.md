@@ -104,3 +104,17 @@ It is not isomorphic to any of the four product structures: its primitive space 
 The standard-library verifier tools/fold_char2_cocycle_hopf.py checks coassociativity, relations, counit, antipode, and primitive-space dimension exactly over F_2.
 
 **Open G-3c:** compute its automorphism group scheme and translation normalizer; classify its torsors; and determine whether additional non-product Hopf structures exist.
+
+
+## G-3g — Sixth, non-product structure with nilpotent restricted Lie map
+
+A second non-product law is
+```
+Delta(x) = x tensor 1 + 1 tensor x + z tensor z
+Delta(z) = z tensor 1 + 1 tensor z
+```
+It is a nontrivial central extension of alpha_2 by alpha_4. Its primitive space is span{z,x²}, its Frobenius image is alpha_2, and its restricted Lie 2-map has nilpotent Jordan form D_z^[2]=D_x, D_x^[2]=0. It is pairwise non-isomorphic to the four product laws and G_C.
+
+Its full automorphism group scheme is Spec k[a,a^-1,b,c,d]/(b²), with reduced/tangent dimensions 3/4. The translation centralizer is G_D and the normalizer is G_D semidirect Aut_grp(G_D). See the-fold-char2-nilpotent-pmap-hopf-structure.md.
+
+The Frobenius reduction note the-fold-char2-frobenius-hopf-classification.md now tabulates all six known structures. Exhaustiveness remains open.
