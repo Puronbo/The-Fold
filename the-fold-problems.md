@@ -1931,3 +1931,18 @@ z -> v_1+v_2
 x -> u_1+u_2+v_1(v_1+v_2).
 ```
 For fixed b, varying a runs through the kernel k/k⁴. Full proof: the-fold-char2-nilpotent-pmap-torsors.md.
+
+
+## G-3i — Imperfect-field mixed Hopf family
+
+For t=1+z and lambda in k, define
+```
+Delta(x) = x tensor 1 + 1 tensor x
+Delta(t) = (t tensor t)(1 + lambda x^2 tensor x^2)
+t^2 = 1, x^4 = 0.
+```
+The factor 1+lambda x² tensor x² is a mu_2-valued multiplicative 2-cocycle on alpha_4, so this defines a commutative Hopf law. It is an extension 0 -> mu_2 -> G_lambda -> alpha_4 -> 0.
+
+The extension splits exactly when lambda is a square in k. If lambda=beta², T=t(1+beta x²) is group-like. If lambda is nonsquare, the unique mu_2 subgroup makes a product isomorphism impossible. Thus over an imperfect field such as F₂(s), lambda=s gives another Hopf structure on the same algebra, non-isomorphic to the six base examples.
+
+Full derivation: the-fold-char2-imperfect-mixed-hopf-family.md. Over perfect fields this family splits and adds no new isomorphism class.
