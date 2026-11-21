@@ -145,3 +145,48 @@ It gives the entire kernel as a subset of k/k², though it does not yet give
 a simpler intrinsic description of the image subspace or its quotient.
 
 The class [t] is not in this image, by the valuation obstruction in Section 2.
+
+## 7. Coefficient criterion over the square subfield
+
+Put
+\[
+K=k^2=\mathbb F_2(S,T),\qquad S=s^2,\quad T=t^2,
+\]
+so that \(K^2=k^4=\mathbb F_2(S^2,T^2)\). Every class in \(k/K\) has a unique expression
+\[
+[a]=\alpha s+\beta t+\gamma st,\qquad \alpha,\beta,\gamma\in K.
+\]
+Write \(r=r_0+r_1s+r_2t+r_3st\), with \(r_i\in K\). Since
+\[
+r^2=r_0^2+S r_1^2+T r_2^2+ST r_3^2\in K,
+\]
+the coefficient vector of \(sr^2+r\) modulo \(K\) is
+\[
+(r_1+r^2,\ r_2,\ r_3)
+\]
+in the basis \(s,t,st\). Therefore \([a]\) belongs to the boundary kernel precisely when there are \(r_0,r_1\in K\) with
+\[
+\beta=r_2,\quad\gamma=r_3,\quad
+\alpha=r_1+r_0^2+S r_1^2+T\beta^2+ST\gamma^2.
+\]
+The Frobenius map \(K\to K^2\) is onto. Eliminating \(r_0\) gives the one-variable criterion
+\[
+\boxed{
+[a]\in\ker\delta_s
+\iff
+\exists u\in K:\ 
+\alpha+T\beta^2+ST\gamma^2+u+Su^2\in K^2.
+}
+\]
+This is an exact equivalence: the discarded term is \(r_0^2\), and every element of \(K^2\) has a square root in \(K\).
+
+There is also an Artin--Schreier form. Put
+\[
+A=\alpha+T\beta^2+ST\gamma^2,\qquad q=Su.
+\]
+Multiplication by \(S\) shows that the criterion is equivalent to
+\[
+\boxed{\exists q\in K:\quad q^2+q+SA\in S K^2.}
+\]
+Thus the full kernel membership question is reduced to an Artin--Schreier coset test over \(K=\mathbb F_2(S,T)\). This does not yet evaluate that test in closed form for arbitrary rational functions \(\alpha,\beta,\gamma\); in particular, it is not a claim that the image is a \(K\)-linear subspace.
+
