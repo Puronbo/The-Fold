@@ -731,3 +731,6 @@ It is a 7-dimensional unipotent group. The full automorphism group is its semidi
 
 
 **UF-056 — Nilpotent affine centralizer:** proves that the two-parameter infinitesimal family g(x)=x+c, g(z)=z+hx (c⁴=h²=0) centralizes the entire seven-dimensional subgroup U, using the exact inverse z↦z+hx+hc and the U relation I=B+G. This restricted family therefore contributes no new conjugates and does not detect ch, despite ch being present in its coefficient algebra. The full ambient conjugation problem remains open. See `the-fold-char2-nilpotent-affine-centralizer.md`.
+
+
+**UF-057 — Triangular affine centralizer:** extends the exact centralizer result to all triangular affine automorphisms (g(x)=c+ax, g(z)=d+hx+iz), with a,i units and c⁴=d²=h²=0. Exact substitution shows every such g centralizes U. This restricted family contains mixed nilpotent products such as ch and dh but contributes no nontrivial conjugates. Off-diagonal linear and higher ambient coefficients remain open. See `the-fold-char2-triangular-affine-centralizer.md`.
