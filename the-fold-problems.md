@@ -1087,3 +1087,26 @@ By Nakayama's lemma, \(\mu=1\) is equivalent to local principality; \(\mu\ge2\) 
 **Local-to-global pipeline.** Compute the local ring and ideal, test \(\mu(I)\), examine normality and the local divisor class group, track branch valuations under normalization or exceptional valuations under resolution, then reapply UF-010's odd-support mod-2 and complement-disconnection criterion.
 
 Full proofs, calculations, examples, and the standard-library verifier are in the-fold-local-principality-resolution.md and tools/fold_local_principality_resolution.py.
+
+
+## UF-012 — Exceptional intersection lattices and local divisor classes
+
+**Question.** How does a non-Cartier crease divisor appear on a resolution, and when can exceptional intersection data decide whether it descends as a principal analytic height?
+
+**Exceptional-correction theorem.** Let M be the negative-definite intersection matrix of the exceptional curves E_i on a resolution, and let b(D)_j=(D~.E_j). If D is Cartier/principal downstairs, then its principal equation upstairs has divisor D~+Σa_iE_i with integral exceptional valuations a_i, so
+\[
+Ma=-b(D),\qquad a\in\mathbb Z^r.
+\]
+Therefore [b(D)] must vanish in coker(M). A nonintegral solution is a definitive non-Cartier obstruction. For rational surface singularities under the standard henselian/complete hypotheses, the local class group is the exceptional-lattice discriminant group, making this criterion complete. For non-rational singularities, it is only the finite numerical quotient and degree-zero Picard data can remain.
+
+**Lipman sequence.** The resolution class group separates a numerically trivial Picard term from a finite quotient controlled by the exceptional intersection matrix, with a final obstruction group G. Lipman's unibranch condition (in particular, for henselian local rings) makes G vanish. Rational singularities also eliminate the degree-zero part, recovering the finite discriminant-group description. For general exceptional components, the degrees d_i enter the intersection map; when the exceptional curves are rational, d_i=1 and the finite group is coker(M).
+
+**ADE calibration.** For the A_n rational double point \(xy=z^{n+1}\), the exceptional graph is a chain of n rational (-2)-curves. Its matrix has determinant \((-1)^n(n+1)\) and cokernel \(\mathbb Z/(n+1)\). The prime divisor \((x,z)\) meets one end exceptional curve once and generates this cyclic group; \((n+1)\) times that divisor is principal.
+
+**UF-011 cone reanalysis.** The normal cone \(z^2=x^4+y^4\) is the simple-elliptic singularity \(\widetilde E_7=\widetilde T_{2,4,4}\). Its minimal resolution has one elliptic exceptional curve E with \(E^2=-2\). In the weighted chart \(x=uv,y=u,z=u^2w\), the crease strict transform \(v=0,w=1\) meets E:u=0 transversely once, so b(Y)=1. The numerical lattice quotient is \(\mathbb Z/2\), and the correction equation \(-2a=-1\) gives \(a=1/2\). Thus the local non-Cartier obstruction is visible in the exceptional lattice, independently of the two-generator ideal proof.
+
+**Important limitation.** Since E is elliptic, its degree-zero Picard group is nontrivial. The \(\mathbb Z/2\) lattice quotient is not automatically the full local divisor class group. The nonzero residue already proves this crease is non-Cartier; no claim about the complete class-group structure is needed.
+
+**Local-to-global pipeline.** Compute b(D), solve Ma=-b(D) over Q, and reject if the correction is not integral. If it is integral, use the rationality/Picard hypotheses to decide whether the lattice test is sufficient; otherwise compute the remaining Picard/class obstruction. Once locally Cartier everywhere, reapply UF-010's odd-support homology and complement-disconnection criterion.
+
+Full proofs, ADE calculations, simple-elliptic interpretation, references, and exact-arithmetic tests are in the-fold-exceptional-lattices-class-groups.md and tools/fold_exceptional_lattice_obstruction.py.
