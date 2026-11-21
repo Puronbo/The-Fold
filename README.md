@@ -716,3 +716,6 @@ It is a 7-dimensional unipotent group. The full automorphism group is its semidi
 
 
 **UF-053 partial result:** the corrected coupled inverse computation yields the rank-three coefficient module ⟨c², cd₀, d₀h⟩ from the conjugate's three nilpotent coordinate functions in gr². The remaining direction ch is not detected by those three outputs; the other target coordinates and Hopf core remain open. See Section 10 of `the-fold-char2-quadratic-conjugation-coaction.md`.
+
+
+**UF-053 grading audit:** Section 11 of the quadratic conjugation paper corrects the homogeneous-degree bookkeeping in the inverse expansion and independently verifies the Section 10 formula and rank-three span.
