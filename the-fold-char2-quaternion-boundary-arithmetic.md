@@ -119,3 +119,29 @@ Useful next cases:
 This note computes the image description and gives a nonzero rational
 function field example. It does not claim a complete classification of the
 kernel for F_2(s,t), nor a complete classification over all imperfect fields.
+
+
+## 6. Exact kernel parameterization for F₂(s,t), lambda=s
+
+The splitting equation is
+[
+c^2+a d^2+d=s.
+]
+Since s is not a square in k, d cannot be zero. Put r=d^{-1}. Solving for a gives
+[
+a=s r^2+r+(cr)^2.
+]
+Thus the square class of a is [s r²+r]. Conversely, for any r in k×,
+choose d=r^{-1}, c=0, and a=s r²+r; then the splitting equation holds.
+Therefore
+[
+\boxed{\ker\delta_s
+=\{[s r^2+r]\in k/k^2:r\in k^\times\}.}
+]
+Equivalently this is the image of the additive polynomial
+L_s(r)=s r²+r, modulo k². The parameterization is invariant under changing
+a by a square: such a change is absorbed into c² in the splitting equation.
+It gives the entire kernel as a subset of k/k², though it does not yet give
+a simpler intrinsic description of the image subspace or its quotient.
+
+The class [t] is not in this image, by the valuation obstruction in Section 2.
