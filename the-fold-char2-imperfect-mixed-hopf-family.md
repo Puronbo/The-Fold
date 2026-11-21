@@ -242,3 +242,24 @@ Q(a,\lambda)\cong M_2(k)
 \quad\Longleftrightarrow\quad
 \exists c,d\in k:\ c^2+a d^2+d=\lambda.
 \]
+
+
+## 9. Resulting description of the torsor classes
+
+The nonabelian cohomology sequence is a sequence of abelian groups here because \(G_\lambda\) is commutative. The boundary formula gives
+\[
+0\longrightarrow k^\times/(k^\times)^2
+\longrightarrow H^1_{\mathrm{fppf}}(k,G_\lambda)
+\longrightarrow
+\ker\!\left(
+k/k^4\xrightarrow{[a]\mapsto[Q(a,\lambda)]}
+\operatorname{Br}(k)[2]\right)
+\longrightarrow0.
+\]
+Since \(G_\lambda\) is killed by two, all groups in this sequence are \(\mathbb F_2\)-vector spaces, so the sequence splits noncanonically.
+
+Equivalently, the quotient parameter consists exactly of those fourth-power classes \([a]\) for which
+\[
+c^2+a d^2+d=\lambda
+\]
+is solvable in k. The remaining independent parameter is a square class in \(k^\times/(k^\times)^2\). When \(\lambda\in k^2\), every \([a]\in k/k^4\) is allowed.
