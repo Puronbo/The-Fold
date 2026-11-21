@@ -40,7 +40,7 @@ Z={}&z+(a+b)xz+(c+e)x^3+(d+e)x^2z+(u+v)x^3z.
 \]
 Consequently the image \(U_k\subset H\) is exactly the closed linear subspace cut out by
 \[
-\boxed{F=0,\qquad H=A,\qquad C+G+I=0.}
+\boxed{F=0,\qquad H=A,\qquad B+G+I=0.}
 \]
 These are three independent linear equations in the ten coordinates. Conversely, any tuple satisfying them is obtained uniquely from the seven original parameters. Hence
 \[
