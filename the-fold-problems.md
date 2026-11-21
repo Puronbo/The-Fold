@@ -2101,3 +2101,13 @@ The original UF-064 first-order table omitted linear terms in X' and misplaced s
 ### UF-065 — Quadratic nilpotent coefficient layer
 
 The complete degree-two coefficient vectors for c², cd, ch, dh are recorded in Section 8 of the affine coefficient paper. The ch column agrees with UF-060. A four-by-four minor on X' rows c',a',b',alpha' is bQ²TR/(a³i⁵), where Q=Ab+Ci, R=Di²+Gb²+Gbi, T=Bb+Di+Gb. Hence this graded layer has generic rank four. Higher layers and the full orbit-image/Hopf-core problem remain open.
+
+
+### UF-066 — Complete higher nilpotent layers
+The cubic, quartic, and top-degree coefficient vectors are now computed in
+both conjugated coordinates. Explicit minors prove generic associated-graded
+ranks 4, 3, and 1 in degrees three, four, and five. Together with UF-064 and
+UF-065, the full positive-layer rank profile is (3,4,4,3,1), matching the
+Hilbert dimensions of the nilpotent parameter algebra. This does not yet
+determine the unfiltered coefficient module, orbit-image ideal, or Hopf core.
+See Section 9 of the-fold-char2-full-affine-ch-coefficient.md.
