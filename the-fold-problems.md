@@ -1215,3 +1215,14 @@ Every product is obtained by applying a word in the two operators to the unit ve
 The joint eigenvalue pairs satisfy X²+Y²=p and X²Y²=q and reconstruct the generic D4 orbit fiber. At the singular fiber, scheme-theoretic nilpotents and non-semisimple operator structure must be retained; eigenvalues alone do not encode the nonreduced fiber.
 
 The exact matrices, reduction rules, proof, character tensor-product rules, spectral caveats, and subsequent discriminant questions are in the UF-016 paper. The standard-library exact verifier is tools/fold_multiplication_algebra.py.
+
+
+## UF-017 — Fold trace discriminant and spectral geometry
+
+**Theorem.** For the rank-eight basis (1,x,y,xy,x²,x²y,x³,x³y), the trace-pairing Gram determinant is
+\[
+\det(\operatorname{Tr}(b_i b_j))=2^{16}q^4(p^2-4q)^4,\quad q=(p^2-z^2)/2.
+\]
+The quotient Jacobian for p=x²+y² and q=x²y² is J=4xy(x²−y²), and its square is 16q(p²−4q). Thus the pullback of the trace determinant is exactly J⁸. The reduced branch components are the images of x=0, y=0, x−y=0, x+y=0.
+
+The trace form is nondegenerate off the discriminant and degenerates on it. It does not by itself determine the full nonreduced local algebra or Jordan structure; those remain follow-up questions. Exact matrix construction and symbolic determinant verification are in the UF-017 paper and verifier.
