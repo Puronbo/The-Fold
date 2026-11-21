@@ -1526,4 +1526,6 @@ Proof: `the-fold-odd-characteristic-automorphisms.md`.
 
 Proof and symbolic verifier: `the-fold-integral-unipotent.md`, `tools/fold_integral_unipotent.py`.
 
-**Open problem UF-037:** give an explicit ideal-level or local-ring witness for the failure of flatness at 2; describe the quotient of the ten-dimensional characteristic-two identity-linear kernel by U_F2, and determine the integral closure of the full graded quotient.
+**Resolved by UF-037:** in characteristic two, the ten-dimensional identity-linear kernel H has coordinates (A,B,C,D,E,F,G,H,I,J), and the flat seven-dimensional subgroup U is cut out by F=0, H=A, B+G+I=0. U is not normal. Its normal closure N is the eight-dimensional subgroup F=0, H=A, and H/N ≅ G_a². The third transverse direction B+G+I is supplied by conjugation; the two remaining directions form the genuine additive quotient. See `the-fold-char2-identity-kernel.md` and `tools/fold_char2_identity_kernel.py`.
+
+**Open problem UF-038:** determine the homogeneous space H/U explicitly, compute the full group law and lower central series of N, and extend the normal-closure calculation to the nonreduced full characteristic-two automorphism group scheme.
