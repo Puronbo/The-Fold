@@ -70,4 +70,4 @@ For other finite symmetry groups introduced by Fold extensions, compute the mini
 
 ## Reproducibility
 
-Run `python3 tools/fold_modular_d4.py`. The verifier checks the group-order arithmetic, the collapse of sign characters in characteristic two, the invariant generators under the effective swap, and the dimension count of the regular decomposition. The general coinvariant-regular theorem is supplied by the nonmodular reflection-group theorem, not by this finite script.
+Run `python3 tools/fold_modular_d4.py`. The verifier checks the group-order arithmetic, the characteristic-two root-of-unity collapse, and the dimension count of the regular decomposition. The invariant-ring identification and the general coinvariant-regular theorem are proved by the arguments above and the nonmodular reflection-group theorem, not by this finite script.
