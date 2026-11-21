@@ -1337,3 +1337,25 @@ The orthogonal subgroup has 16 elements and is dihedral of order 16. The origina
 **Scope.** This determines the graded linear automorphism group, not the full possibly nonlinear algebra automorphism group. It shows D4 is not the full graded symmetry group; further intrinsic recovery requires additional data such as chosen axes or quotient-map structure.
 
 See `the-fold-graded-automorphism-group.md` and `tools/fold_graded_automorphisms.py`.
+
+
+## UF-026 — Complete nonlinear automorphism group
+
+**Theorem UF-026.1.** Over characteristic zero, every automorphism inducing the identity on m/m² is uniquely of the form
+\[
+X=x+αx²+βxy+γx³+δx²y+ux³y,
+\]
+\[
+Y=y−βx²+αxy−δx³+ηx²y+vx³y,
+\]
+with seven arbitrary parameters. This kernel is a 7-dimensional unipotent algebraic group.
+
+**Theorem UF-026.2.** The linear-part map gives a split exact sequence
+\[
+1\to Aut_1(C)\to Aut(C)\to G_{gr}\to1,
+\]
+so Aut(C)≅Aut₁(C)⋊G_gr. Since G_gr has one-dimensional scalar factor and finite orthogonal part D16, the full automorphism group has dimension 8.
+
+The coefficient constraints follow from expanding X²+Y² in the basis x³,x²y,x³y; X⁴ vanishes automatically once the linear part is x. Nakayama's lemma proves each such endomorphism is an automorphism. The symbolic verifier is `tools/fold_nonlinear_automorphisms.py`; the complete proof and characteristic-zero scope are in `the-fold-nonlinear-automorphism-group.md`.
+
+**Open problem UF-026-A:** compute the seven-parameter group law and lower central series, then study the modular characteristic-two automorphism group.
