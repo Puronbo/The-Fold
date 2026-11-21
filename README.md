@@ -791,3 +791,10 @@ Thus ch appears in twelve of the sixteen target coefficient functions and vanish
 **Theorem UF-061.1.** The fifteen nonconstant monomials of T=k[c,d,h]/(c⁴,d²,h²) give fifteen columns in the 16×15 coefficient matrix of the full affine conjugation's target coordinates. At the admissible specialization a=i=1, b=0 and (A,B,C,D,E,G,J)=(0,0,0,1,1,1,1), the 15×15 minor using all target rows except ε′ has determinant 1 over F₂. Hence the coefficient matrix has generic rank 15, its maximal possible rank. Thus every nilpotent monomial direction is generically linearly independent across the sixteen target functions. This is not a computation of the orbit-image kernel or its Hopf core. See `the-fold-char2-affine-coefficient-matrix-rank.md`.
 
 **Open UF-062:** determine the maximal-minor rank-drop locus and then compute the orbit-image kernel and its largest Hopf ideal.
+
+
+## New research direction — automorphic methods and Hopf–Galois theory
+
+Added `the-fold-automorphic-and-hopf-galois-applicability.md`, an applicability audit of the four-page RH/GRH research announcement at alpo.ge/remark.pdf. It distinguishes automorphic forms/representations from algebra automorphisms, concludes that theta lifts and adelic machinery do not directly apply to the finite Fold algebra without additional global arithmetic structure, and identifies determinant, representation, and integral-lattice methods as methodological parallels.
+
+The note also establishes a concrete characteristic-two direction: C_k ≅ k[x,z]/(x⁴,z²) admits the primitive Hopf structure of O(α₄×α₂), giving a rank-eight finite connected group scheme and a Hopf–Galois torsor structure via the regular coaction. This is characteristic-two-specific and does not identify the full automorphism group scheme with the translation subgroup. Suggested follow-ups cover exact verification, normalizers/centralizers, Hopf-structure classification, and descent/twists.
