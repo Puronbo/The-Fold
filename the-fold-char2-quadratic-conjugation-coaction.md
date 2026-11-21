@@ -108,3 +108,31 @@ so the two classes ch and d₀h are both visible as A varies. The c and d₀ coo
 ## 6. Next problem UF-053
 
 Compute the coefficient span of these three formulas as A,C vary and the reduced coefficients vary, then determine the annihilator in the four-dimensional degree-two space. Compare that annihilator with the degree-two part of the second-Frobenius candidate. Continue to distinguish the orbit-image ideal from its Hopf core.
+
+
+## 7. Correction — the h-coordinate requires the inverse h-coefficient
+
+The displayed h-coordinate formula in Section 4 omitted the term involving the inverse coefficient h₋. The exact difference of the h-coproducts contains
+\[
+(hC+iA)(c_-h_-+d_-a_-),
+\]
+not only \((hC+iA)d_-a_-\). To first nilpotent order,
+\[
+c_-\equiv\frac{ic+bd_0}{\Delta},\quad
+d_-\equiv\frac{hc+ad_0}{\Delta},\quad
+h_-\equiv\frac h\Delta,\quad
+a_-\equiv\frac i\Delta.
+\]
+At the lowest nonzero order this gives
+\[
+c_-h_-+d_-a_-
+\equiv
+\frac{(ic+bd_0)h+(hc+ad_0)i}{\Delta^2}
+=\frac{d_0}{\Delta}
+\quad\pmod{\mathfrak n^2},
+\]
+where \(d_0^2=h^2=0\), characteristic two, and \(ai+bh=\Delta\) were used. In particular, the apparent \(ch\) terms cancel at this order.
+
+This calculation exposes the omission but does not determine the full expression modulo \(\mathfrak n^3\): that would require the second-order part of \(d_-\) and the corresponding inverse coefficients. Accordingly, the boxed h-coordinate formula and the claim that it independently detects both \(ch\) and \(d_0h\) in Section 4 are withdrawn pending that calculation. The c- and d₀-coordinate formulas are not affected by this specific omission.
+
+**Revised status:** UF-052's h-coordinate result is provisional and must not be used to infer the quadratic coefficient span. UF-053 is reopened to compute the inverse coefficients to sufficient order before taking the span.
