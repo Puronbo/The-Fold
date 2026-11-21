@@ -324,3 +324,50 @@ M_2=\langle c^2,\;cd_0,\;d_0h\rangle
 It has rank three. The remaining basis vector \(ch\) is not detected by the degree-two parts of the three nilpotent coordinate outputs.
 
 **Interpretation limit.** This is the coefficient span for the three coordinate functions c,d₀,h under the universal conjugation family. It is not the full orbit-image ideal: other target coordinate functions may detect additional classes. Nor is it the Hopf core or the degree-two part of the normal-closure ideal. Thus UF-053 is partially resolved, with a concrete rank-three submodule and a specific missing direction to test against the remaining coordinates.
+
+
+## 11. Homogeneous bookkeeping audit — exact degree-one and degree-two inverse constants
+
+There is one more bookkeeping point: the rational expressions \((ic+bd_0)/\Delta\) and \((hc+ad_0)/\Delta\) are valid first-order solutions of the linear system as exact fractions, but they are not homogeneous of degree one because \(\Delta=ai+bh\) itself contains a degree-one nilpotent term. Thus Section 9's labels \(c_1,d_1\) as homogeneous degree-one pieces are withdrawn. The final simplified expression in Section 10 is unchanged, but its homogeneous derivation is as follows.
+
+Write
+\[
+c_-=C_1+C_2+O(\mathfrak n^3),\qquad
+d_-=D_1+D_2+O(\mathfrak n^3),
+\]
+with each subscript now denoting a genuinely homogeneous degree. The constant equations give
+\[
+C_1=\frac ca+\frac{bd_0}{ai},\qquad D_1=\frac{d_0}{i},
+\]
+and
+\[
+D_2=\frac{hC_1+\phi C_1^2+\eta C_1D_1}{i},\qquad
+C_2=\frac{bD_2+\alpha C_1^2+\gamma C_1D_1}{a}.
+\]
+The exact linear-coefficient inverse equations are
+\[
+1=aa_-+bh_-+\gamma S,\qquad
+0=ha_-+ih_-+\eta S,
+\quad S=c_-h_-+d_-a_-.
+\]
+Their degree-zero and degree-one parts give
+\[
+a_0=\frac1a,\qquad
+S_1=\frac{D_1}{a}=\frac{d_0}{ai},\qquad
+H_1=\frac{h+\eta D_1}{ai},\qquad
+a_1=\frac{bH_1+\gamma D_1/a}{a},
+\]
+where \(h_-=H_1+O(\mathfrak n^2)\) and \(a_-=a_0+a_1+O(\mathfrak n^2)\). Hence
+\[
+S_2=C_1H_1+D_1a_1+\frac{D_2}{a}.
+\]
+Substituting the displayed expressions, using \(D_1^2=0\), and cancelling the two equal \(\eta cd_0\)-terms gives
+\[
+S_2=\frac{b d_0h}{a^2i^2}+\frac{\phi c^2}{a^3i}.
+\]
+Combining \(S_1+S_2\) and expanding \(\Delta^{-1}\) recovers exactly
+\[
+S\equiv\frac{d_0}{\Delta}+\frac{\phi i^2c^2}{\Delta^3}
+\pmod{\mathfrak n^3}.
+\]
+Thus the Section 10 boxed result survives, now with a genuinely homogeneous derivation. The coefficient-span conclusion in Section 10 is retained.
