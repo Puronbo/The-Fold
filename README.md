@@ -678,3 +678,8 @@ It is a 7-dimensional unipotent group. The full automorphism group is its semidi
 **UF-044 — Universal Hopf-ideal characterization:** the minimal normal closure corresponds to the largest conjugation-stable Hopf ideal contained in the full ideal of U. The universal condition is `Ad^*(J) ⊆ A ⊗ J`. This formalizes the exact problem without claiming it is solved. See `the-fold-char2-universal-hopf-ideal.md`.
 
 **Open UF-045:** compute the full coordinate Hopf algebra and conjugation coaction, including explicit regular extensions of the quotient functions F and R.
+
+
+**UF-047 — Globality of the second-Frobenius quotient equations:** the full determinant condition Delta = ai - bh invertible, together with h^2 = 0, implies ai = Delta + bh is a unit. Thus a and i are individually units, so the quotient coordinate formulas from UF-045/046 are global on the entire automorphism scheme. The fourth-power lifts are globally regular; no chart-overlap gluing is needed. This does not establish minimality of the normal closure. See the-fold-char2-fourth-power-quotient-lifts.md.
+
+**Open UF-048:** compute the universal conjugation coaction on the globally defined Frobenius quotient equations and determine whether the Frobenius-kernel candidate is generated scheme-theoretically by conjugates of U.
