@@ -900,4 +900,4 @@ The note also establishes a concrete characteristic-two direction: C_k ≅ k[x,z
 - Verifies the multiplicative 2-cocycle and Hopf identities; gives the central extension 0 -> mu_2 -> G_lambda -> alpha_4 -> 0.
 - Proves the extension splits exactly when lambda is a square in k; for lambda nonsquare it is not isomorphic to alpha_4 x mu_2.
 - Over k=F₂(s), lambda=s gives an additional Hopf structure on the same algebra, beyond the six base examples.
-- Adds the-fold-char2-imperfect-mixed-hopf-family.md and updates the Frobenius classification.
+- Classifies normalized symmetric cocycles in the fixed global-section model by k/k²; adds the-fold-char2-imperfect-mixed-hopf-family.md and tools/fold_char2_mixed_hopf_cocycle_class.py.
