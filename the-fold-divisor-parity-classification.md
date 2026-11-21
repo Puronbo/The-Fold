@@ -265,3 +265,7 @@ The code takes local principality and complement connectivity as mathematical in
 ## References
 
 - F. Acquistapace and A. Díaz-Cano, “Divisors in global analytic sets,” *Journal of the European Mathematical Society* 13 (2011), no. 2, 297–307. Theorem 2.2 (generic equation), Theorem 2.3 (positive equation for positive even divisors), Theorem 3.4 (reduced locally principal divisors), and especially Corollary 3.7 (arbitrary component multiplicities, with the homology and complement conditions applied to the odd support). [Publisher page and DOI 10.4171/JEMS/253](https://ems.press/journals/jems/articles/1995); [full article PDF](https://ems.press/content/serial-article-files/31761).
+
+## UF-011 extension: local principality and normalization
+
+The local-principality hypothesis in UF-010 is substantive. Example 3.1 of Acquistapace–Díaz-Cano gives the normal surface z²=x⁴+y⁴ with divisor x=0,z=y²; its local ideal is (x,z-y²), with two minimal generators. Its normalization is the identity. Conversely, the intrinsic cusp point ideal (t²,t³) becomes (t²) on normalization, recording multiplicity two. A weighted blow-up chart locally principalizes the strict transform of the cone divisor. See the-fold-local-principality-resolution.md (UF-011).
