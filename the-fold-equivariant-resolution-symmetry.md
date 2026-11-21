@@ -235,3 +235,7 @@ Construct the full equivariant divisor-class sequence for simple-elliptic and ra
 - A. R. R. Ruggiero et al., discussion of unique minimal good resolutions and equivariant log resolutions of normal surface singularities; see Proposition 3.1 for a resolution to which all automorphisms lift. [Annales de la Faculté des Sciences de Toulouse PDF](https://afst.centre-mersenne.org/item/10.5802/afst.1425.pdf).
 - D. van Straten et al., description of simple elliptic \\widetilde E_7 as type (2,4,4) and its exceptional elliptic curve. [Survey chapter PDF](https://download.uni-mainz.de/mathematik/Algebraische%20Geometrie/DvS-Publikationen/Tree%20Singularities%20229-287%20deformations-of-surface-singularities-2013.pdf).
 - E. Looijenga, *Rational Surfaces and Singularities*, for resolution graphs and simple-elliptic configurations. [Lecture notes](https://webspace.science.uu.nl/~looij101/delpezzo.pdf).
+
+## UF-014 clarification: the trivial-character module
+
+The entry z in the four-character polynomial table is an example of a trivial-character function, not the relative-invariant generator of the trivial character module. The generator is 1. The complete analytic statement is O_X,0^chi = Delta_chi K{p,z}, with Delta_++=1, Delta_-+=xy, Delta_--=x^2-y^2, and Delta_+-=xy(x^2-y^2). Thus all convergent analytic semi-invariants are classified, not just the displayed polynomials. See the-fold-d4-analytic-character-classification.md (UF-014).
