@@ -893,3 +893,11 @@ The note also establishes a concrete characteristic-two direction: C_k ≅ k[x,z
 - Constructs explicit rank-eight torsors B_(a,b)=k[u,v]/(u⁴-a,v²-b) with coaction rho(u)=u⊗1+1⊗x+v⊗z and rho(v)=v⊗1+1⊗z.
 - Gives an explicit inverse to the canonical map and shows the torsors realize all classes after choosing representatives.
 - Adds the-fold-char2-nilpotent-pmap-torsors.md.
+
+
+### G-3i — Imperfect-field mixed Hopf family
+- Constructs G_lambda with t=1+z, Delta(x)=x⊗1+1⊗x and Delta(t)=(t⊗t)(1+lambda x²⊗x²).
+- Verifies the multiplicative 2-cocycle and Hopf identities; gives the central extension 0 -> mu_2 -> G_lambda -> alpha_4 -> 0.
+- Proves the extension splits exactly when lambda is a square in k; for lambda nonsquare it is not isomorphic to alpha_4 x mu_2.
+- Over k=F₂(s), lambda=s gives an additional Hopf structure on the same algebra, beyond the six base examples.
+- Adds the-fold-char2-imperfect-mixed-hopf-family.md and updates the Frobenius classification.
