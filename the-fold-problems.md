@@ -959,3 +959,30 @@ The resulting counts are: p1=1; p2, pm, pg, cm=2 each; pmm, pmg, pgg, cmm=4 each
 **Scope.** These are algebraically possible characters, not guaranteed realizations by a particular fixed crease motif. A given height must still satisfy the pointwise sign-covariance equation; its zero set, stabilizers, and decorations can exclude some algebraic candidates.
 
 Full presentations, proofs, tables, references, and the standard-library enumerator are in the-fold-frieze-wallpaper-characters.md and tools/fold_frieze_wallpaper_characters.py.
+
+
+## UF-007 — Forced zeros, crease topology, and minimal D6 semi-invariants
+
+**Question.** Given a group character and a prescribed crease network, what zeros are forced by symmetry, when can a continuous signed height realize that network, and what are the simplest D6 realizations?
+
+**Fixed-point theorem.** If \(h(gx)=\chi(g)h(x)\) and \(\chi(g)=-1\), then every fixed point of \(g\) is a zero of \(h\):
+\[
+\operatorname{Fix}(g)\subseteq h^{-1}(0).
+\]
+The union of fixed sets of all sign-reversing elements is therefore a forced-zero locus.
+
+**D6 sharp examples.** With \(r(z)=e^{i\pi/3}z\) and \(s(z)=e^{i\pi/6}\bar z\), the three nontrivial real characters have harmonic polynomial representatives:
+\[
+f_{\det}=\operatorname{Re}(z^6),\quad
+f_{\mathrm{sub}}=\operatorname{Re}(e^{-i\pi/4}z^3),\quad
+f_{\mathrm{mix}}=\operatorname{Re}(e^{i\pi/4}z^3).
+\]
+They have exactly six, three, and three forced reflection axes as zero sets. Any polynomial in the corresponding character space must be divisible by the distinct linear forms defining the anti-reflection axes; hence the minimum total degrees 6, 3, and 3 are sharp.
+
+**Dual-graph theorem.** Let C be a closed embedded crease graph on a connected surface, and let D(C) be its face-adjacency dual, retaining loops when both sides of an edge border the same face. A face-sign assignment that reverses across each crease exists iff D(C) is bipartite. For a connected bipartite dual it is unique up to global sign reversal. A signed-distance construction then gives a continuous height with exact zero set C.
+
+**Network-induced character.** If a symmetry group preserves C and D(C) is connected and bipartite, each symmetry either preserves or exchanges the two dual colour classes. This gives a unique character \(\chi_C:G\to\{\pm1\}\); any continuous scalar height with zero set C and sign reversal across every crease has this character. Thus a fixed crease network may realize only one of the characters that are abstractly allowed by the group.
+
+**Obstructions.** A three-ray Y-junction has dual C3 and cannot be the exact sign-changing zero set of a continuous scalar height. A nonseparating crease loop on a torus gives a dual self-loop and is likewise obstructed. These scalar obstructions do not exclude vector-valued order parameters or sections of nontrivial line bundles.
+
+Full proofs, D6 formulas, polynomial sharpness, topological construction, examples, references, and tests are in the-fold-forced-zero-topology.md and tools/fold_forced_zero_topology.py.
