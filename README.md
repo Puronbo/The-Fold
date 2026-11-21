@@ -972,3 +972,5 @@ The note also establishes a concrete characteristic-two direction: C_k ≅ k[x,z
 - Derives complete parameter equivalences and twisted addition laws: `(a,b)+(a',b')=(a+a',b+b'+aa')` for G_C and `(a+a',b+b'+a²a'²)` for G_D.
 - Explains why the cohomology splittings are noncanonical.
 - Adds `the-fold-char2-nonproduct-torsor-models.md`.
+
+- Adds `tools/fold_char2_nonproduct_torsor_models.py`, an exact symbolic verifier for the G_C and G_D torsor actions, equivalences, canonical-map inverses, and contracted-product formulas.
