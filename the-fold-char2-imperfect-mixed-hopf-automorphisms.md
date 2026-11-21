@@ -13,19 +13,19 @@ Write \(G_\lambda=\operatorname{Spec}A\).
 For every k-algebra R, every group-scheme automorphism of \((G_\lambda)_R\) is uniquely of the form
 \[
 x\longmapsto ax+bx^2,\qquad
-t\longmapsto t(1+\beta x^2),
+t\longmapsto t(1+ux+\beta x^2+u\beta x^3),
 \]
-where \(a\in R^\times\), \(b,\beta\in R\), and
+where \(a\in R^\times\), \(b,u,\beta\in R\), and
 \[
-\boxed{\ \beta^2=\lambda(1+a^4)\ }.
+u^2=0,\qquad \beta^2=\lambda(1+a^4).
 \]
 Consequently
 \[
 \operatorname{Aut}_{\rm grp}(G_\lambda)
 =\operatorname{Spec}
-k[a,a^{-1},b,\beta]/(\beta^2+\lambda(1+a^4)).
+k[a,a^{-1},b,u,\beta]/(u^2,\ \beta^2+\lambda(1+a^4)).
 \]
-It has dimension two and tangent dimension three at the identity. Its reduced support has dimension two. The parameter \(\beta\) records infinitesimal homomorphisms \(\alpha_4\to\mu_2\); it must not be discarded by checking only field-valued points.
+It has dimension two and tangent dimension four at the identity. Its reduced support has dimension two. The parameters \(u,\beta\) record infinitesimal homomorphisms and lifts; they cannot be discarded by checking only field-valued points.
 
 ### Proof
 
@@ -35,43 +35,58 @@ X=ax+bx^2,\qquad a\in R^\times.
 \]
 The restriction to the kernel is the identity because \(\operatorname{Aut}(\mu_2)\) is trivial.
 
-A lift of this quotient map must send \(t\) to \(t h(x)\), where \(h\) is a normalized \(\mu_2\)-valued function on \(\alpha_4\). Write
+A lift of this quotient map sends \(t\) to \(t h(x)\), where \(h\) is a normalized \(\mu_2\)-valued function on \(\alpha_4\). Write
 \[
-h(x)=1+\beta x^2+\gamma x^3;
+h(x)=1+ux+\beta x^2+\gamma x^3.
 \]
-the \(x\)-term is excluded by \(h^2=1\). The Hopf condition is
+The relation \(h^2=1\) gives \(u^2=0\). The Hopf condition is
 \[
 h(x)h(y)h(x+y)
 =(1+\lambda x^2y^2)(1+\lambda a^4x^2y^2).
 \]
-The left side is
+Using \(u^2=0\), the left side is
 \[
-1+\beta^2x^2y^2+\gamma(x^2y+xy^2)+\gamma^2x^3y^3.
+1+(u\beta+\gamma)(x^2y+xy^2)
++\beta^2x^2y^2+\gamma^2x^3y^3.
 \]
-Coefficient comparison gives \(\gamma=0\) and
-\(\beta^2=\lambda(1+a^4)\). Conversely this equation makes the displayed substitution a Hopf map. Its cotangent determinant is \(a\), so it is an automorphism exactly when \(a\) is a unit. This proves the functorial description, including nonreduced R-points.
+Coefficient comparison gives
+\[
+\gamma=u\beta,\qquad \beta^2=\lambda(1+a^4);
+\]
+the remaining cubic equation follows from \(u^2=0\). Conversely these equations make the displayed substitution a Hopf map. Its cotangent determinant is \(a\), so it is an automorphism exactly when \(a\) is a unit. This proves the functorial description, including nonreduced R-points.
 
 ## Theorem 2. Composition and inverse
 
 Use composition \(f\circ g\), meaning apply g first and then f. For
-\(f=(a,b,\beta)\) and \(g=(a',b',\beta')\),
+\(f=(a,b,u,\beta)\) and \(g=(a',b',u',\beta')\),
 \[
 f\circ g=
-\left(aa',\ a'b+a^2b',\ \beta+a^2\beta'\right).
+\left(
+aa',\
+a'b+a^2b',\
+u+au',\
+\beta+u'b+a^2\beta'+auu'
+\right).
 \]
-The defining equation is preserved:
+The defining equations are preserved:
 \[
-(\beta+a^2\beta')^2
+(u+au')^2=0,\qquad
+(\beta+u'b+a^2\beta'+auu')^2
 =\lambda(1+(aa')^4).
 \]
-The identity is \((1,0,0)\), and
+The identity is \((1,0,0,0)\), and
 \[
-(a,b,\beta)^{-1}
-=(a^{-1},a^{-3}b,a^{-2}\beta).
+f^{-1}=
+\left(
+a^{-1},\
+a^{-3}b,\
+a^{-1}u,\
+a^{-2}\beta+a^{-3}ub
+\right).
 \]
 
-## 3. Geometric meaning
+## 3. Geometry
 
-The automorphism group is generally non-smooth: at the identity the equation for \(\beta\) has zero differential in characteristic two, so the tangent dimension is three while the reduced dimension is two. For \(\lambda\notin k^2\), the reduced curve in the \((a,\beta)\)-plane is geometrically a purely inseparable double cover of \(\mathbb G_m\); it becomes split after adjoining \(\sqrt\lambda\).
+The two defining equations have zero differential at the identity in characteristic two. Thus the tangent space has dimension four, whereas the reduced support has dimension two. The group scheme is non-smooth. For \(\lambda\notin k^2\), the reduced curve in the \((a,\beta)\)-plane is a purely inseparable double cover of \(\mathbb G_m\); it becomes split after adjoining \(\sqrt\lambda\).
 
 This computes automorphisms of the fixed Hopf group \(G_\lambda\), not automorphisms of the underlying Fold algebra that fail to preserve its coproduct.
