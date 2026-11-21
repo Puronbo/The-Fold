@@ -190,3 +190,8 @@ The checks establish the finite algebra implemented by the script. The symbolic 
 UF-004 derives the local crease catalogue from the height polynomial and a separately supplied hexagonal two-site motif. It does not identify the polynomial's six-line zero set with a global periodic honeycomb. The six creases generate \(D_6\); their parity split records the independent sublattice sign; and the sublattice-preserving operations form \(D_3\).
 
 The periodic generalization is developed in UF-005. The remaining question is to extend that framework from finite examples to arbitrary periodic crease networks: characterize which zero-line arrangements are compatible with a lattice point group, which sign characters survive decorations, and how the local crease generators assemble into a global wallpaper-group action.
+
+
+## UF-007 connection: forced-zero realization
+
+The three nontrivial real characters of the local D6 action are now realized by explicit harmonic polynomials: Re(z^6), Re(e^{-iπ/4}z^3), and Re(e^{iπ/4}z^3). Their zero sets are respectively all six crease axes, the three odd axes, and the three even axes. The fixed-point theorem forces these axes, and a polynomial divisibility argument proves the degrees 6, 3, and 3 are minimal. The general fixed-zero, bipartite-dual, and network-induced-character results are in the-fold-forced-zero-topology.md.
