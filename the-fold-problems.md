@@ -1945,4 +1945,4 @@ The factor 1+lambda x² tensor x² is a mu_2-valued multiplicative 2-cocycle on 
 
 The extension splits exactly when lambda is a square in k. If lambda=beta², T=t(1+beta x²) is group-like. If lambda is nonsquare, the unique mu_2 subgroup makes a product isomorphism impossible. Thus over an imperfect field such as F₂(s), lambda=s gives another Hopf structure on the same algebra, non-isomorphic to the six base examples.
 
-Full derivation: the-fold-char2-imperfect-mixed-hopf-family.md. Over perfect fields this family splits and adds no new isomorphism class.
+Full derivation: the-fold-char2-imperfect-mixed-hopf-family.md. The normalized symmetric cocycle classes in the fixed global-section model are k/k², verified by tools/fold_char2_mixed_hopf_cocycle_class.py. Over perfect fields this family splits and adds no new isomorphism class.
