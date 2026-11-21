@@ -55,3 +55,16 @@ If \(\lambda\notin k^2\), the extension is non-split. The subgroup \(\mu_2\) is 
 The relative Frobenius image is \(\alpha_2\), and the Frobenius kernel is \(\alpha_2\times\mu_2\). The restricted Lie 2-map has one nonzero semisimple direction, as for the product \(\alpha_4\times\mu_2\); the distinction is the non-split extension class. Thus for an imperfect field, for example \(k=\mathbb F_2(s)\) with \(\lambda=s\), this gives another Hopf structure on the same algebra, non-isomorphic to the six previously listed structures.
 
 Over a perfect field every \(\lambda\) is a square, so this family contributes no new isomorphism class there. This is a family of extensions with a fixed quotient and kernel, not a classification of all Hopf structures or all isomorphisms between arbitrary Hopf laws.
+
+
+## 4. Cocycle classes in the fixed global-section model
+
+A normalized symmetric polynomial (mu_2)-valued cocycle on alpha_4 has the form (C=1+F), where F²=0. Write F in the symmetric monomial basis with exponents below four. The cocycle equations force
+[
+F=alpha(x^2y+xy^2)+lambda x^2y^2+alpha^2x^3y^3.
+]
+The terms involving alpha are the multiplicative coboundary of (h(x)=1+alpha x^3). A general allowed 1-cochain (h(x)=1+eta x^2+gamma x^3) changes the coefficient lambda by (eta^2), while gamma removes the alpha-term. Thus the extension classes in this fixed global-section polynomial-cocycle model are parameterized by
+[
+k/k^2.
+]
+The family G_lambda represents the class of lambda. This is not a classification of extensions that are not trivial as torsors over alpha_4, nor a classification of all Hopf structures on A.
