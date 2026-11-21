@@ -974,3 +974,9 @@ The note also establishes a concrete characteristic-two direction: C_k ≅ k[x,z
 - Adds `the-fold-char2-nonproduct-torsor-models.md`.
 
 - Adds `tools/fold_char2_nonproduct_torsor_models.py`, an exact symbolic verifier for the G_C and G_D torsor actions, equivalences, canonical-map inverses, and contracted-product formulas.
+
+
+### G-4e — Explicit torsors under G_lambda
+- For each fourth-power class `[a]` whose quaternion `Q(a,lambda)` splits, constructs a torsor `u⁴=a, v²=q` with action `(u,v)·(r,t)=(u+r, vt(1+(c+d u²)r²)` whenever `c²+a d²+d=lambda`.
+- Gives the inverse to the canonical action map and proves the model realizes every lift; the remaining fiber parameter is `k×/(k×)²`.
+- Adds `the-fold-char2-mixed-torsor-models.md` and a symbolic verifier.
