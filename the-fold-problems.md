@@ -1877,3 +1877,36 @@ z -> v_1+v_2+u_1^2(u_1+u_2)^2.
 For fixed a, varying b runs through the kernel k/k². After choosing representatives for k/k⁴, these torsors parameterize all G_C-torsor classes; the abstract group splitting is noncanonical.
 
 Full derivation: the-fold-char2-cocycle-torsors.md.
+
+
+## G-3g — Sixth, non-product Hopf structure with nilpotent Lie 2-map
+
+**Theorem G-3g.1.** On A=k[x,z]/(x⁴,z²), the coproduct
+```
+Delta(x) = x tensor 1 + 1 tensor x + z tensor z
+Delta(z) = z tensor 1 + 1 tensor z
+epsilon(x)=epsilon(z)=0; S(x)=x, S(z)=z
+```
+defines a commutative Hopf algebra. Its group law is (x,z)+(x',z')=(x+x'+zz',z+z'), a nontrivial central extension of alpha_2 by alpha_4.
+
+Its primitive space is span{z,x²}, its Frobenius image is alpha_2, and its invariant derivations satisfy D_z^[2]=D_x and D_x^[2]=0. These invariants distinguish it from the four product structures and the earlier cocycle group G_C.
+
+**Theorem G-3g.2.** Every group-scheme automorphism is
+```
+x -> a^2 x + a b x^2 z + c z + d x^2
+z -> a z + b x^2
+a invertible, b^2=0
+```
+The automorphism group scheme is Spec k[a,a^{-1},b,c,d]/(b²), reduced dimension 3 and tangent dimension 4. Its composition law is
+```
+(aa', a'b+a^4b', (a')^2 c+a c', (a')^2 d+b c'+a^4 d')
+```
+and its inverse is (a^(-1), b a^(-5), c a^(-3), d a^(-6)+bc a^(-7)).
+
+The translation centralizer is G_D and the normalizer is G_D semidirect Aut_grp(G_D). Full proof: the-fold-char2-nilpotent-pmap-hopf-structure.md.
+
+## G-3f — Frobenius reduction
+
+For every Hopf structure on A, the square subalgebra is k[x²]/(x⁴), the Frobenius kernel has coordinate algebra k[x,z]/(x²,z²), and F²=0. Over an algebraically closed field the rank-two Frobenius image is alpha_2 or mu_2. The six known Hopf structures and their Frobenius kernels/images are tabulated in the-fold-char2-frobenius-hopf-classification.md.
+
+This reduces the exhaustive classification to possible height-one kernels and extensions compatible with the fixed algebra. It does not yet prove that the six examples are exhaustive.
