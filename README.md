@@ -734,3 +734,8 @@ It is a 7-dimensional unipotent group. The full automorphism group is its semidi
 
 
 **UF-057 — Triangular affine centralizer:** extends the exact centralizer result to all triangular affine automorphisms (g(x)=c+ax, g(z)=d+hx+iz), with a,i units and c⁴=d²=h²=0. Exact substitution shows every such g centralizes U. This restricted family contains mixed nilpotent products such as ch and dh but contributes no nontrivial conjugates. Off-diagonal linear and higher ambient coefficients remain open. See `the-fold-char2-triangular-affine-centralizer.md`.
+
+
+**UF-058 — Full affine centralizer:** proves that every determinant-open affine automorphism `g(x)=c+ax+bz`, `g(z)=d+hx+iz` centralizes the seven-dimensional subgroup U. The proof factors the linear matrix into lower- and upper-triangular parts; UF-057 handles the lower-triangular/translation factors and exact substitution handles the upper-triangular factor. Hence the off-diagonal coefficient `b` still produces no conjugation variation, and `ch` is absent from all sixteen target-coordinate variations on the affine family. Nonlinear ambient coefficients and the universal orbit-image Hopf core remain open. See `the-fold-char2-full-affine-centralizer.md`.
+
+**Open UF-059:** introduce quadratic ambient terms and identify the first nonlinear stratum where conjugation becomes nontrivial.
