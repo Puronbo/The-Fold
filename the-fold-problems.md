@@ -2039,3 +2039,20 @@ The mixed-family boundary also has standard symbol form: for `lambda≠0`, `Q(a,
 Inside the full automorphism scheme of the underlying Fold affine scheme, the translation centralizer is exactly `G_lambda` and the normalizer is `G_lambda ⋊ Aut_grp(G_lambda)`. The latter has reduced dimension two and tangent dimension six (two translation directions plus four automorphism tangent directions). See `the-fold-char2-mixed-hopf-normalizer.md`.
 
 An explicit nonzero obstruction is now proved over `k=F₂(s,t)`: for `lambda=s` and quotient class `[t]`, the splitting equation `c²+t d²+d=s` has no solution. Multiplying by t gives an Artin–Schreier equation whose right side has odd negative valuation at t=infinity, impossible for an element of the form `y²+y`. Thus `Q(t,s)` is nontrivial in the Brauer group and the corresponding alpha₄-torsor does not lift.
+
+
+## G-4f — Arithmetic of the quaternion boundary
+
+For lambda nonzero, the mixed-family boundary has image
+`{[b,lambda)_2 : b in k}` and exact kernel criterion
+`c²+a d²+d=lambda`. Over k=F₂(s,t), lambda=s, the class a=t is
+nontrivial: multiplying the splitting equation by t and setting y=td gives
+`y²+y=t(s+c²)`; the right side has odd negative valuation at t=infinity,
+whereas an Artin–Schreier expression y²+y has even negative valuation.
+Adjoining sqrt(lambda) kills the whole boundary map. The complete note
+`the-fold-char2-quaternion-boundary-arithmetic.md` records the proof and
+the remaining kernel-classification problems.
+
+**Open arithmetic problem:** classify all a in F₂(s,t) satisfying
+`c²+a d²+d=s`, and extend the description to useful imperfect-field
+extensions and valuation settings.
