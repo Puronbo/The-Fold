@@ -136,3 +136,59 @@ where \(d_0^2=h^2=0\), characteristic two, and \(ai+bh=\Delta\) were used. In pa
 This calculation exposes the omission but does not determine the full expression modulo \(\mathfrak n^3\): that would require the second-order part of \(d_-\) and the corresponding inverse coefficients. Accordingly, the boxed h-coordinate formula and the claim that it independently detects both \(ch\) and \(d_0h\) in Section 4 are withdrawn pending that calculation. The c- and d₀-coordinate formulas are not affected by this specific omission.
 
 **Revised status:** UF-052's h-coordinate result is provisional and must not be used to infer the quadratic coefficient span. UF-053 is reopened to compute the inverse coefficients to sufficient order before taking the span.
+
+
+## 8. Second-order inverse expansion and corrected h-coordinate
+
+The inverse constants can be expanded one order further. Put
+\[
+c_1=\frac{ic+bd_0}{\Delta},\qquad
+d_1=\frac{hc+ad_0}{\Delta}.
+\]
+Solving the two constant equations for the inverse, the degree-two part of \(d_-\) is
+\[
+d_2\equiv\frac{a}{\Delta}
+\left(\phi c_1^2+\eta c_1d_1\right)
+\pmod{\mathfrak n^3}.
+\]
+The term multiplied by h in the second-row inverse matrix has degree at least three and is omitted. The inverse linear coefficients satisfy
+\[
+a_-\equiv\frac{i}{\Delta}\pmod{\mathfrak n}
+\]
+and their first correction contributes only degree at least three to \(d_-a_-\). Thus
+\[
+c_-h_-+d_-a_-
+\equiv c_1\frac h\Delta+d_1\frac i\Delta
++d_2\frac i\Delta
+\pmod{\mathfrak n^3}.
+\]
+The first two terms simplify to \(d_0/\Delta\), as in Section 7. Substituting
+\[
+c_1^2=\frac{i^2c^2}{\Delta^2},\qquad
+c_1d_1=\frac{ihc^2+\Delta cd_0}{\Delta^2}
+\]
+gives
+\[
+\boxed{
+c_-h_-+d_-a_-
+\equiv
+\frac{d_0}{\Delta}
++\frac{ai\left(\phi i^2c^2+
+\eta(ihc^2+\Delta cd_0)\right)}{\Delta^4}
+\pmod{\mathfrak n^3}.
+}
+\]
+Consequently the corrected h-coordinate of the conjugate is
+\[
+\boxed{
+h(gug^{-1})\equiv
+(hC+iA)\left[
+\frac{d_0}{\Delta}
++\frac{ai\left(\phi i^2c^2+
+\eta(ihc^2+\Delta cd_0)\right)}{\Delta^4}
+\right]
+\pmod{\mathfrak n^3}.
+}
+\]
+This replaces the earlier boxed formula in Section 4. In particular, the degree-two correction here involves c² and cd₀ (with coefficients depending on h and the reduced parameters); it does not supply independent evidence for ch or d₀h. The four-dimensional associated-graded space still has to be analyzed using the full universal pullback, including all coordinate functions, rather than only the h-coordinate.
+
