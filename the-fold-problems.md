@@ -1968,3 +1968,8 @@ t -> t(1 + u x + β x² + uβ x³)
 u²=0, β²=λ(1+a⁴), a invertible.
 ```
 The composition law for f after g is `(aa', a'b+a²b', u+au', β+u'b+a²β'+auu')`; the inverse is `(a⁻¹,a⁻³b,a⁻¹u,a⁻²β+a⁻³ub)`. The reduced dimension is two and tangent dimension four. The nilpotent parameter u is essential: omitting it would miss infinitesimal automorphisms. Full proof and symbolic verifier: `the-fold-char2-imperfect-mixed-hopf-automorphisms.md` and `tools/fold_char2_mixed_hopf_automorphisms.py`.
+
+
+## G-3k — Frobenius factorization of the mixed-family boundary
+
+Let E_lambda be the extension of alpha_2 by mu_2 with cocycle `1+lambda*r*s`. Since `1+lambda*x²*y²` is its pullback along relative Frobenius `F:alpha_4 -> alpha_2`, the extension G_lambda is `F*E_lambda`. Naturality gives `δ_lambda=δ'_lambda∘F_*`. The map `F_*:k/k⁴ -> k/k²` sends `[a]` to `[a]`, so `δ_lambda` factors through k/k² and vanishes on k²/k⁴. The unresolved boundary is reduced to `δ'_lambda` for E_lambda.
