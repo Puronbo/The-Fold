@@ -2037,3 +2037,5 @@ The mixed-family boundary also has standard symbol form: for `lambda≠0`, `Q(a,
 ## G-2c — Normalizer of G_lambda translations
 
 Inside the full automorphism scheme of the underlying Fold affine scheme, the translation centralizer is exactly `G_lambda` and the normalizer is `G_lambda ⋊ Aut_grp(G_lambda)`. The latter has reduced dimension two and tangent dimension six (two translation directions plus four automorphism tangent directions). See `the-fold-char2-mixed-hopf-normalizer.md`.
+
+An explicit nonzero obstruction is now proved over `k=F₂(s,t)`: for `lambda=s` and quotient class `[t]`, the splitting equation `c²+t d²+d=s` has no solution. Multiplying by t gives an Artin–Schreier equation whose right side has odd negative valuation at t=infinity, impossible for an element of the form `y²+y`. Thus `Q(t,s)` is nontrivial in the Brauer group and the corresponding alpha₄-torsor does not lift.
