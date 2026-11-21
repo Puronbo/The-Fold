@@ -940,3 +940,10 @@ The note also establishes a concrete characteristic-two direction: C_k ≅ k[x,z
 - Adds `tools/fold_char2_mixed_quaternion_descent.py` to verify the matrix realization and quaternion descent identities.
 
 - Classifies parameter isomorphisms: `G_lambda ≅ G_mu` iff some `a∈k×` satisfies `lambda+mu*a⁴∈k²`; fixed-section classes must be quotiented by the quotient automorphism scaling action.
+
+
+### G-3n — Exhaustive height-one kernel classification
+- Classifies all rank-four commutative height-one kernels over an algebraically closed field by the rank and Jordan type of the semilinear restricted 2-map.
+- Proves there are exactly four types: `alpha₂²`, `I_{1,1}`, `alpha₂×mu₂`, and `mu₂²`.
+- Matches all four types to existing Fold Hopf laws; further examples must differ through extension data or Frobenius image.
+- Adds `the-fold-char2-height-one-kernel-classification.md`.
