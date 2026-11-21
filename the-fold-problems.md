@@ -1273,3 +1273,17 @@ In odd characteristic, the fiber is étale exactly when q(p²−4q)≠0. The two
 **Theorem UF-021.2.** In characteristic two, the quotient Jacobian vanishes identically, so every finite fiber is non-étale; the trace discriminant also vanishes identically. This does not contradict UF-020: the abstract vertex algebra still has a perfect Frobenius pairing, and all fibers retain vector-space length eight.
 
 **Arithmetic conclusion.** Characteristic two is the unique exceptional residue characteristic for generic étaleness and the trace discriminant. Rational point splitting can still vary with the parameter field and is not classified by this statement. See `the-fold-residue-characteristics.md` and `tools/fold_residue_characteristics.py`.
+
+
+## UF-022 — Modular D4 symmetry and a precise eigenprime
+
+**Theorem UF-022.1.** For odd characteristic, the invariant ring of the signed-permutation D4 action is k[x²+y²,x²y²], and the vertex quotient is its coinvariant algebra. Since the characteristic does not divide |D4|=8, the coinvariant algebra is the regular representation
+\[
+\mathbf1\oplus\chi_1\oplus\chi_2\oplus\chi_3\oplus 2E.
+\]
+
+**Theorem UF-022.2.** In characteristic two, sign changes act trivially and the action factors through coordinate swap. The invariant ring becomes k[x+y,xy], while p=(x+y)² and q=(xy)²; the characteristic-zero sign characters collapse and the semisimple decomposition fails.
+
+**Definition (project-local modular eigenprime).** For a specified integral G-module M, a prime ℓ is a modular eigenprime if reduction modulo ℓ changes its semisimple irreducible-character multiplicities from characteristic zero. For this D4 coinvariant module the only such prime is 2. This term is relative to the named action/module, not a claim that primes are eigenvalues.
+
+The paper and finite identity verifier are `the-fold-modular-d4-eigenprimes.md` and `tools/fold_modular_d4.py`.
