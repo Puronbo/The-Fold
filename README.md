@@ -240,6 +240,7 @@ author. The CMB enters as a rhyme; the exact physics is standard cosmology. See 
 | constructing smooth and analytic periodic heights from crease networks | `the-fold-smooth-analytic-heights.md` |
 | realizing prescribed analytic crease divisors as exact zero sets | `the-fold-exact-analytic-networks.md` |
 | classifying disconnected crease components and prescribed analytic multiplicities | `the-fold-divisor-parity-classification.md` |
+| testing local principality, normalization, and singularity resolution | `the-fold-local-principality-resolution.md` |
 | the interactive models | the nine HTML files |
 
 ## Contents
@@ -314,6 +315,7 @@ author. The CMB enters as a rhyme; the exact physics is standard cosmology. See 
 | `the-fold-smooth-analytic-heights.md` | UF-008: smooth realization under regular-branch hypotheses, branch-count vanishing-order bounds, and Fourier construction of analytic periodic semi-invariants |
 | `the-fold-exact-analytic-networks.md` | UF-009: global analytic principality from locally principal bipartite crease divisors, symmetry-preserving analytic averaging, and exact torus line products |
 | `the-fold-divisor-parity-classification.md` | UF-010: weighted-divisor principalness criterion, odd-support homology/separation tests, all-even positive equations, singular local orders, and disconnected torus crease examples |
+| `the-fold-local-principality-resolution.md` | UF-011: local generator-count test, normal-but-non-Cartier cone example, cusp/node normalization multiplicities, and weighted blow-up principalization |
 | `the-fold-minimal-operations.md` | UF-002: feasibility, set-cover equivalence, NP-hardness, minimal arithmetic spectral power-exponent families, and a reference solver |
 
 Open the HTML files directly in a browser — no build step, no dependencies.
@@ -561,3 +563,6 @@ observer gives the reading. The four zones are the map's legend.
 
 
 **Weighted analytic crease divisors (UF-010):** for D=ΣmᵢCᵢ, only components with odd multiplicity control sign changes. Under the global-principality hypotheses, D is principal iff its mod-2 divisor class vanishes and removing its odd support disconnects X, with each component ideal locally principal. All-even divisors have positive analytic equations without a separation condition. Two disjoint nonseparating loops can separate collectively, while three parallel odd loops fail the mod-2 test. See `the-fold-divisor-parity-classification.md` and `tools/fold_divisor_parity_classification.py`.
+
+
+**Local principality and normalization (UF-011):** the key local test is μ(I)=dim_k(I/mI). The source-paper cone X:z²=x⁴+y⁴ is normal but the divisor Y:x=0,z=y² has local ideal (x,z-y²) with two minimal generators, so normalization is the identity and does not repair it. A cusp's intrinsic point ideal (t²,t³) becomes (t²) after normalization, recording order two. A weighted blow-up chart makes the cone divisor's strict transform locally principal. See the-fold-local-principality-resolution.md and tools/fold_local_principality_resolution.py.
