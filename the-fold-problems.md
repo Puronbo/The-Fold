@@ -2134,3 +2134,7 @@ On the chart \(D(\delta)\) from UF-068, partition \(M=(M_0;v)\) using the invert
 
 ### UF-070 — Elimination presentation of the affine-conjugator coefficient image algebra
 The sixteen target coefficient functions of the three-parameter affine-conjugator family define \(\theta:k[Y_1,\ldots,Y_{16}]\to\mathcal R\), with \(Y_j\mapsto f_j\), where \(\mathcal R=k[a,b,i,A,B,C,D,E,G,J,a^{-1},i^{-1},c,d,h]/(c^4,d^2,h^2)\). The auxiliary affine-slice image algebra is \(k[f_1,\ldots,f_{16}]\cong k[Y]/\ker\theta\), and \(\ker\theta\) is the contraction of the graph ideal \((Y_j-f_j)\) to \(k[Y]\). Since the UF-067 minor \(\delta\) is a nonzero divisor on this source algebra, localization at \(\delta\) leaves this kernel unchanged. This is not the full universal conjugation image for \(G\times U\to G\); its full orbit-image ideal and Hopf core remain open. See Section 13 of the affine coefficient paper.
+
+
+### UF-072 — Two-copy coproduct test for the affine-conjugator image
+Let \(I_{\rm aff}\) be the kernel of \(O(G)\to O(G_{\rm aff})\otimes O(U)\) for the affine-linear conjugator subgroup \(G_{\rm aff}\). UF-071 proves the exact Hopf criterion: test \(\Delta(I_{\rm aff})\subseteq I_{\rm aff}\otimes O(G)+O(G)\otimes I_{\rm aff}\) by substituting the product of two independently parameterized conjugates \(g_1u_1g_1^{-1}\) and \(g_2u_2g_2^{-1}\). The one-copy elimination ideal and this two-copy test remain uncomputed. Even its Hopf core is only the affine-conjugator-generated subgroup, not necessarily the full normal closure under \(G\).
