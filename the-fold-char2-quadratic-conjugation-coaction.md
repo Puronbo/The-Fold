@@ -192,3 +192,64 @@ h(gug^{-1})\equiv
 \]
 This replaces the earlier boxed formula in Section 4. In particular, the degree-two correction here involves c² and cd₀ (with coefficients depending on h and the reduced parameters); it does not supply independent evidence for ch or d₀h. The four-dimensional associated-graded space still has to be analyzed using the full universal pullback, including all coordinate functions, rather than only the h-coordinate.
 
+
+
+## 9. Coupled inverse equations — replacement for Section 8
+
+A further audit shows that Section 8 still treated \(a_-\) and \(h_-\) as though their first-order terms were determined by the linear inverse matrix alone. This is false: the exact coproducts contain the feedback term
+\[
+S:=c_-h_-+d_-a_-,
+\]
+and
+\[
+1=aa_-+bh_-+\gamma S,\qquad
+0=ha_-+ih_-+\eta S.
+\]
+Thus the boxed formula in Section 8 is withdrawn as well.
+
+The correct filtered computation is recursive. Write
+\[
+c_-=c_1+c_2+O(\mathfrak n^3),\quad
+d_-=d_1+d_2+O(\mathfrak n^3),
+\]
+where the degree-one terms are
+\[
+c_1=\frac{ic+bd_0}{\Delta},\qquad
+d_1=\frac{hc+ad_0}{\Delta}.
+\]
+Set
+\[
+Q_X=\alpha c_1^2+\gamma c_1d_1,\qquad
+Q_Z=\phi c_1^2+\eta c_1d_1.
+\]
+The constant-term inverse equations give
+\[
+c_2=\frac{iQ_X+bQ_Z}{\Delta},\qquad
+d_2=\frac{hQ_X+aQ_Z}{\Delta}
+\equiv\frac{aQ_Z}{\Delta}\pmod{\mathfrak n^3},
+\]
+since h has nilpotent degree one.
+
+For the linear inverse coefficients, write
+\[
+a_-=a_0+a_1+O(\mathfrak n^2),\qquad
+h_-=h_1+O(\mathfrak n^2).
+\]
+Since \(S\) has degree-one part \(S_1=d_1/a\), the two linear coproduct equations yield
+\[
+a_0=\frac1a,\qquad
+h_1=\frac{h+\eta d_1}{ai},\qquad
+a_1=\frac{b h_1+\gamma d_1/a}{a}.
+\]
+Consequently the complete expression needed through degree two is
+\[
+\boxed{
+S=c_-h_-+d_-a_-
+\equiv
+\frac{d_1}{a}+c_1h_1+d_1a_1+\frac{d_2}{a}
+\pmod{\mathfrak n^3}.
+}
+\]
+This is a coupled recursive formula in the full coordinate ring, with no discarded degree-two feedback terms. It replaces the simplification in Section 8. In particular, no coefficient-span conclusion for \(ch,d_0h\) is drawn until this expression is substituted into the conjugation formula and the remaining target coordinates are computed.
+
+**Status:** the first-order inverse constants \(c_1,d_1\) remain valid. The prior explicit Section 8 expression for S and the resulting boxed h-coordinate formula are withdrawn. The recursion above is the verified filtered reduction of the exact inverse equations; further expansion and comparison with all target coordinates remain open.
