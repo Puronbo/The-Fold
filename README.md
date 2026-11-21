@@ -1027,3 +1027,9 @@ The note also establishes a concrete characteristic-two direction: C_k ≅ k[x,z
 
 ### UF-064 correction
 The complete first-order c,d,h coefficient map in both conjugated coordinates is recorded in the affine coefficient paper. The initial table was corrected: X' also has linear nilpotent terms. The generic rank-three minor A²atC remains valid.
+
+
+### UF-065 — Quadratic nilpotent layer
+- Computes all four degree-two coefficient vectors c², cd, ch, dh in all sixteen target coordinates.
+- Cross-checks the ch column against UF-060.
+- Proves generic rank four for the quadratic associated-graded coefficient map by an explicit minor.
