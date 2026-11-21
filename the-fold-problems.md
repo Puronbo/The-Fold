@@ -1627,3 +1627,15 @@ The full substitution has fourteen nonconstant coefficient functions plus two co
 For g(x)=x+c, g(z)=z with c⁴=0, and u(x)=x+Bx³, u(z)=z+Bx³ in U, direct composition gives X'=x+B(x+c)³ and Z'=z+B(x+c)³. In characteristic two, the linear coefficient changes by Bc². Hence cubic parameters contribute to the quadratic nilradical layer of nonconstant target coefficients.
 
 **Open UF-056:** compute homogeneous degree-two components of all sixteen coefficient functions c,d₀,a,b,α,β,γ,δ,ε,h,i,φ,ψ,η,θ,κ; determine their coefficient module and annihilator; then compute the conjugacy-image kernel and its largest Hopf ideal. These are distinct objects and must remain distinguished. See `the-fold-char2-fourteen-coordinate-conjugation-test.md`.
+
+
+### UF-056 — Nilpotent affine centralizer
+
+Let (T) be the family (g(x)=x+c, g(z)=z+hx), with (c^4=h^2=0). Its inverse is (g^{-1}(x)=x+c, g^{-1}(z)=z+hx+hc). Exact substitution in the seven-parameter subgroup
+[
+u(x)=x+Ax^2+Bx^3+Cxz+Dx^2z+Ex^3z,quad
+u(z)=z+Axz+Gx^3+(B+G)x^2z+Jx^3z
+]
+gives (gug^{-1}=u). Thus (T) is contained in the scheme-theoretic centralizer of (U). In particular, this restriction of the conjugation family does not detect (ch); it does not prove that (ch) is absent from the full universal image. The full ambient coaction and Hopf core remain open. See `the-fold-char2-nilpotent-affine-centralizer.md`.
+
+**Open UF-057:** enlarge the tested affine family by general reduced linear coefficients and higher ambient coefficients, and determine whether the mixed class (ch) appears in any of the fourteen nonconstant target-coordinate expansions.
