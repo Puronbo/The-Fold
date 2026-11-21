@@ -1910,3 +1910,24 @@ The translation centralizer is G_D and the normalizer is G_D semidirect Aut_grp(
 For every Hopf structure on A, the square subalgebra is k[x²]/(x⁴), the Frobenius kernel has coordinate algebra k[x,z]/(x²,z²), and F²=0. Over an algebraically closed field the rank-two Frobenius image is alpha_2 or mu_2. The six known Hopf structures and their Frobenius kernels/images are tabulated in the-fold-char2-frobenius-hopf-classification.md.
 
 This reduces the exhaustive classification to possible height-one kernels and extensions compatible with the fixed algebra. It does not yet prove that the six examples are exhaustive.
+
+
+## G-3h/G-4 — Fppf torsors under G_D
+
+The exact sequence 0 -> alpha_4 -> G_D -> alpha_2 -> 0 gives
+```
+0 -> k/k^4 -> H^1_fppf(k,G_D) -> k/k^2 -> 0.
+```
+Here H²_fppf(k,alpha_4)=0 and alpha_2(k)=0. Since G_D is killed by 2, the sequence splits noncanonically as F₂-vector spaces.
+
+For a,b in k, explicit rank-eight torsors are B_(a,b)=k[u,v]/(u⁴-a,v²-b), with
+```
+rho(u) = u tensor 1 + 1 tensor x + v tensor z
+rho(v) = v tensor 1 + 1 tensor z.
+```
+The inverse canonical-map coordinates are
+```
+z -> v_1+v_2
+x -> u_1+u_2+v_1(v_1+v_2).
+```
+For fixed b, varying a runs through the kernel k/k⁴. Full proof: the-fold-char2-nilpotent-pmap-torsors.md.
