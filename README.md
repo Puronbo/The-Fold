@@ -882,7 +882,7 @@ The note also establishes a concrete characteristic-two direction: C_k ≅ k[x,z
 ### G-3f — Frobenius reduction of the Hopf-structure classification
 - Shows A²=k[x²]/(x⁴) has rank two and the Frobenius kernel has coordinate algebra k[x,z]/(x²,z²), rank four, independent of the coproduct.
 - Shows F²=0 and the Frobenius image is either alpha_2 or mu_2 over an algebraically closed field.
-- Records the six known structures in terms of Frobenius kernel and image; G_D realizes a height-one kernel with nilpotent Jordan restricted 2-map.
+- Records six base structures and the G_lambda imperfect-field family in terms of Frobenius kernel and image; G_D realizes a height-one kernel with nilpotent Jordan restricted 2-map.
 - Reduces the exhaustive classification to height-one kernels and extensions compatible with the fixed rank-eight algebra.
 - Adds the-fold-char2-frobenius-hopf-classification.md.
 
