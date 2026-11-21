@@ -1226,3 +1226,15 @@ The exact matrices, reduction rules, proof, character tensor-product rules, spec
 The quotient Jacobian for p=x²+y² and q=x²y² is J=4xy(x²−y²), and its square is 16q(p²−4q). Thus the pullback of the trace determinant is exactly J⁸. The reduced branch components are the images of x=0, y=0, x−y=0, x+y=0.
 
 The trace form is nondegenerate off the discriminant and degenerates on it. It does not by itself determine the full nonreduced local algebra or Jordan structure; those remain follow-up questions. Exact matrix construction and symbolic determinant verification are in the UF-017 paper and verifier.
+
+
+## UF-018 — Local algebras and Jordan strata
+
+**Theorem UF-018.1.** The length-eight fibers stratify as follows:
+- q=0, p≠0: four geometric points, each of local length two; trace rank four; Mx and My have Jordan block sizes [2,2,1,1,1,1].
+- p²−4q=0, p≠0: four geometric points, each of local length two; trace rank four; both coordinate operators have Jordan sizes [2,2,2,2].
+- p=q=0: one geometric point of local length eight; trace rank one; both coordinate operators have Jordan sizes [4,4].
+
+The two generic branches have equal point counts, local lengths, and trace rank, but their operator Jordan patterns distinguish them in the chosen coordinates. The vertex has a single highly nonreduced fiber. A single operator's Jordan form is not a complete invariant; the faithful simultaneous pair and unit are required.
+
+Proof, local presentations, exact specialized matrices, and a SymPy verifier are in the UF-018 paper and script.
