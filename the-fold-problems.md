@@ -1996,3 +1996,5 @@ For parameters λ,μ, the mixed groups are isomorphic iff some `a∈k×` satisfi
 ## G-3n — Exhaustive height-one kernel classification
 
 Over an algebraically closed field, the two-dimensional abelian restricted Lie algebra of a rank-four height-one commutative group scheme has a semilinear 2-map. Its rank is 0, 1, or 2; the rank-one case splits into image=kernel (nilpotent Jordan, `I_{1,1}`) or image≠kernel (`alpha₂×mu₂`). Rank 0 and 2 give `alpha₂²` and `mu₂²`. These are exactly four types, all already realized by Fold Hopf structures. This exhausts the possible height-one Frobenius kernels but not the full rank-eight extensions. Full proof: `the-fold-char2-height-one-kernel-classification.md`.
+
+The height-one-kernel note gives the eight possible kernel/image pairs; three are not yet realized or ruled out. This is the next finite incidence problem before classifying extension classes.
