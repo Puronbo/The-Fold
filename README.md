@@ -869,3 +869,19 @@ The note also establishes a concrete characteristic-two direction: C_k ≅ k[x,z
 - Proves the short exact sequence 0 -> k/k² -> H¹_fppf(k,G_C) -> k/k⁴ -> 0; it splits noncanonically as F₂-vector spaces because G_C is killed by 2.
 - Constructs explicit rank-eight torsors B_(a,b)=k[u,v]/(u⁴-a,v²-b) with the cocycle coaction and gives an explicit inverse to the canonical map.
 - Adds the-fold-char2-cocycle-torsors.md. The cohomology group splitting is noncanonical; no canonical direct-product law on the parameters is claimed.
+
+
+### G-3g — Sixth, non-product Hopf structure with nilpotent Lie 2-map
+- Constructs Delta(x)=x⊗1+1⊗x+z⊗z and Delta(z)=z⊗1+1⊗z.
+- Identifies it as a nontrivial central extension of alpha_2 by alpha_4.
+- Computes primitive space span{z,x²}, Frobenius image alpha_2, and restricted Lie 2-map D_z^[2]=D_x, D_x^[2]=0; these distinguish it from the previous five structures.
+- Computes Aut_grp(G_D)=Spec k[a,a⁻¹,b,c,d]/(b²), with reduced/tangent dimensions 3/4 and explicit composition/inverse.
+- Proves the translation centralizer is G_D and the normalizer is G_D semidirect Aut_grp(G_D).
+- Adds the-fold-char2-nilpotent-pmap-hopf-structure.md and tools/fold_char2_nilpotent_pmap_hopf.py.
+
+### G-3f — Frobenius reduction of the Hopf-structure classification
+- Shows A²=k[x²]/(x⁴) has rank two and the Frobenius kernel has coordinate algebra k[x,z]/(x²,z²), rank four, independent of the coproduct.
+- Shows F²=0 and the Frobenius image is either alpha_2 or mu_2 over an algebraically closed field.
+- Records the six known structures in terms of Frobenius kernel and image; G_D realizes a height-one kernel with nilpotent Jordan restricted 2-map.
+- Reduces the exhaustive classification to height-one kernels and extensions compatible with the fixed rank-eight algebra.
+- Adds the-fold-char2-frobenius-hopf-classification.md.
