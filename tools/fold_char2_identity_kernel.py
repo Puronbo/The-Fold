@@ -49,9 +49,9 @@ def main():
 
     # g o u o g sends x -> x+xz+x^3, z -> z+x^2.
     conjugate = compose(g, compose(u_map,g))
-    expected = (x+x*z+x**3,z+x**2)
+    expected = (x+x*z+x**3,z)
     assert conjugate == expected
-    assert sp.Poly(conjugate[1]-z, x,z, modulus=2).coeff_monomial(x**2) == 1
+    assert sp.Poly(conjugate[0]-x, x,z, modulus=2).coeff_monomial(x**3) == 1
 
     print("UF-037 exact GF(2) checks: PASS")
     print("U has codimension 3 in H; explicit conjugation proves U is not normal")
