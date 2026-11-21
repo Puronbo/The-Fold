@@ -62,18 +62,25 @@ In particular, for every field \(k\), including characteristic two, the reduced 
 
 The use of \(a\wedge d\) and \(a\wedge c\) is important: the coefficient 2 in some other entries does not create an exceptional prime.
 
-## Theorem 3 — The center of the reduced alternating algebra remains two-dimensional
+## Theorem 3 — The radical has one exceptional prime
 
-For the reduced two-step alternating algebra defined by \(B_k\), the radical of the bracket on the five-dimensional quotient is zero in every characteristic. Thus its center is exactly the designated two-dimensional target \(Z_k\), and its derived algebra is also \(Z_k\).
-
-**Proof.** If \((a,b,c,d,e)\) brackets to zero with every vector, test successively against the five coordinate basis vectors. The coefficient-one pairings include
+For the reduced two-step alternating algebra defined by \(B_k\), let \(A\) be the \(10\times5\) integer matrix of the map
 \[
-(a,d)\mapsto B_u,\quad (a,c)\mapsto -B_v,\quad
-(b,e)\mapsto -B_u,\quad (b,d)\mapsto -B_v,
+W\longrightarrow \operatorname{Hom}(W,Z),\qquad
+z\longmapsto (w\mapsto B(z,w)),
 \]
-and the remaining pairings \((b,c)\mapsto 2B_u\), \((a,e)\mapsto2B_v\). The coefficient-one relations force each of \(a,b,c,d,e\) to vanish; this remains true in characteristic two. Surjectivity from Theorem 2 identifies the derived algebra with all of \(Z_k\). \(\square\)
+where \(W=\mathbb Z^5\) has coordinates \((a,b,c,d,e)\). Its Smith normal form is
+\[
+\boxed{\operatorname{SNF}(A)=\operatorname{diag}(1,1,1,1,3).}
+\]
+Consequently:
+- if \(\operatorname{char}k\ne3\), the radical on \(W_k\) is zero and the center is exactly \(Z_k\), of dimension two;
+- if \(\operatorname{char}k=3\), the radical is one-dimensional, spanned by \((-1,0,1)\) in the cubic coordinates \((c,d,e)\), and the center has dimension three;
+- the derived algebra remains \(Z_k\), of dimension two, in every characteristic.
 
-This is a statement about the reduction of the integral alternating bracket. In characteristic two, alternating and skew-symmetric forms must be distinguished: the bracket remains alternating because it is defined on \(\Lambda^2\), even though minus signs equal plus signs.
+**Proof.** The ten equations are obtained by evaluating both bracket components against each of the five coordinate vectors. Exact integer minors give determinantal divisors \(\Delta_1=\Delta_2=\Delta_3=\Delta_4=1\) and \(\Delta_5=3\), yielding the displayed Smith form. Reduction modulo a prime therefore drops the rank precisely at 3, from five to four. Substitution shows that \((-1,0,1)\) is the radical vector modulo 3. Theorem 2 independently proves that the bracket map onto \(Z_k\) is surjective in every characteristic. \(\square\)
+
+The exceptional line is not arbitrary: it is exactly the one-dimensional D16 summand \(\chi\) identified in UF-029. In characteristic three the central commutator form no longer detects this cubic direction, so it joins the center.
 
 ## Conclusions and limits
 
@@ -83,7 +90,7 @@ This is a statement about the reduction of the integral alternating bracket. In 
 4. **Bracket rank:** the integral commutator map has Smith invariants \((1,1)\), so no prime, including 2, lowers its rank.
 5. **Characteristic two caution:** the normalized orthogonal D16 matrices of UF-029 do not furnish a direct integral reduction at 2. A separate integral model of the group action is required before asserting a characteristic-two D16-module decomposition.
 
-The project-local term “modular eigenprime” should therefore be used only after specifying an integral group module and a comparison rule for its reductions. For the bracket map itself, there is no exceptional prime. For the D16 module, all odd primes are uniform geometrically; characteristic two remains outside the present normalized model rather than being a proved reduction of it.
+The project-local term “modular eigenprime” should therefore be used only after specifying an integral group module and a comparison rule for its reductions. For the bracket map itself, there is no exceptional prime. For the center of the integral alternating Lie algebra, 3 is an exceptional prime. For the D16 module, all odd primes are uniform geometrically; characteristic two remains outside the present normalized model rather than being a proved reduction of it.
 
 ## Reproducibility
 
@@ -91,7 +98,7 @@ Run:
 
 `python3 tools/fold_d16_modular_stability.py`
 
-The verifier checks the integer bracket matrix, its unit minor, surjectivity modulo a range of primes, and the radical of the five-dimensional quotient bracket by exact arithmetic.
+The verifier checks the integer bracket matrix, its unit minor, surjectivity modulo a range of primes, and the Smith invariants and modular radical of the five-dimensional quotient bracket by exact arithmetic.
 
 ## Follow-up
 
