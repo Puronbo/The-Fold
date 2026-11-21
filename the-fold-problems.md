@@ -1260,3 +1260,16 @@ The Hilbert function alone is not asserted to classify the algebra. The proof an
 **Arithmetic consequence.** The integral local algebra is free of rank eight and its Hilbert function, socle dimension, and Frobenius determinant do not distinguish any prime. Characteristic 2 is nevertheless exceptional for the quotient map (p,q)=(x²+y²,x²y²), because its Jacobian 4xy(x²−y²) vanishes identically in characteristic 2. This is a distinction between the abstract local algebra and its D4 quotient geometry.
 
 **Open problem UF-020-A.** Classify all parameterized fibers R_{p,q} over residue characteristics, and determine whether odd characteristics introduce additional exceptional strata after specialization. The paper and exact verifier are `the-fold-simultaneous-frobenius-arithmetic.md` and `tools/fold_simultaneous_frobenius.py`.
+
+
+## UF-021 — Complete residue-characteristic classification
+
+**Theorem UF-021.1.** Every fiber R_{p,q} has rank/length eight in every characteristic, by the monic tower presentation
+\[
+k[x]/(x^4-px^2+q)\quad\text{with }y^2=p-x^2.
+\]
+In odd characteristic, the fiber is étale exactly when q(p²−4q)≠0. The two generic discriminant branches have the same four length-two local points and Jordan types as in UF-018, and the vertex retains Hilbert function (1,2,2,2,1).
+
+**Theorem UF-021.2.** In characteristic two, the quotient Jacobian vanishes identically, so every finite fiber is non-étale; the trace discriminant also vanishes identically. This does not contradict UF-020: the abstract vertex algebra still has a perfect Frobenius pairing, and all fibers retain vector-space length eight.
+
+**Arithmetic conclusion.** Characteristic two is the unique exceptional residue characteristic for generic étaleness and the trace discriminant. Rational point splitting can still vary with the parameter field and is not classified by this statement. See `the-fold-residue-characteristics.md` and `tools/fold_residue_characteristics.py`.
