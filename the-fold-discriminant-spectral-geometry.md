@@ -42,7 +42,7 @@ For p=x²+y² and q=x²y²,
 J=\det\frac{\partial(p,q)}{\partial(x,y)}
 =2xy(x^2-y^2),\qquad J^2=4q(p^2-4q).
 \]
-Thus the branch divisor is exactly the image of the reflection arrangement, and the trace discriminant is a fourth power of its reduced equation up to a nonzero rational constant.
+Thus the branch divisor is exactly the image of the reflection arrangement, and in fact, in this basis, det(B)=J⁸ exactly after pullback: 2¹⁶q⁴(p²−4q)⁴=[16q(p²−4q)]⁴.
 
 ## 5. Spectral meaning and limitations
 
