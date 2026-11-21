@@ -1502,4 +1502,15 @@ The characteristic-three center enlargement of the seven-dimensional bracket alg
 
 Proof and verifier: `the-fold-full-automorphism-characteristics.md`, `tools/fold_full_automorphism_characteristics.py`.
 
-**Open problem UF-035:** classify the reduced automorphism group in odd characteristic, establish smoothness, and identify the schematic closure of the characteristic-zero seven-dimensional unipotent subgroup over (\\mathbb Z).
+**Resolved by UF-035:** the full automorphism group over every algebraically closed field of odd characteristic is U ⋊ G_gr, with dim(U)=7 and G_gr=(G_m × D16)/⟨(-1,-I)⟩ of dimension 1. The full group is smooth of dimension and tangent dimension 8. See `the-fold-odd-characteristic-automorphisms.md`.\n\n**Open problem UF-036:** construct and identify the schematic closure over Z of the characteristic-zero seven-dimensional unipotent subgroup, and determine flatness of the full automorphism group scheme over Z.
+
+
+## UF-035 — Odd-characteristic automorphism classification
+
+**Theorem UF-035.1.** Over every algebraically closed field of odd characteristic, the full automorphism group is the semidirect product of the seven-dimensional identity-linear unipotent group U and the one-dimensional graded quotient G_gr=(G_m × D16)/⟨(-1,-I)⟩. Its dimension is eight.
+
+**Theorem UF-035.2.** The full automorphism group scheme is smooth of dimension eight in every odd characteristic: the geometric reduced group has dimension eight and UF-034 gives tangent dimension eight. Characteristic two remains the unique nonsmooth fiber established here; characteristic three's center jump is a property of the marked seven-dimensional bracket algebra, not the full automorphism group.
+
+Proof: `the-fold-odd-characteristic-automorphisms.md`.
+
+**Open problem UF-036:** identify the schematic closure over Z of U and determine flatness of the full automorphism group scheme over Z.
