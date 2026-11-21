@@ -704,3 +704,6 @@ It is a 7-dimensional unipotent group. The full automorphism group is its semidi
 
 
 **UF-052:** derives the universal conjugation pullback modulo the third nilradical power, explicitly exposing the quadratic classes c², cd₀, ch, d₀h. The Hopf-core calculation remains open. See `the-fold-char2-quadratic-conjugation-coaction.md`.
+
+
+**UF-052 correction:** the h-coordinate formula omitted c₋h₋. The ch terms cancel at lowest order; the earlier degree-two detection claim is withdrawn pending second-order inverse calculations. See the correction in `the-fold-char2-quadratic-conjugation-coaction.md`.
