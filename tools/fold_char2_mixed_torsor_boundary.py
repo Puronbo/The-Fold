@@ -23,7 +23,7 @@ assert G.reduce(identity)[1] == 0
 
 # Conversely, coefficient comparison in the action identity gives
 # d + f(u)^2 = lambda; with u^2=a and f=c+d*u this is the same equation.
-assert sp.expand(f**2 + d + lam).subs(u**2, a) == c**2 + a*d**2 + d + lam
+assert G.reduce(f**2 + d + lam)[1] == 0
 
 # Canonical-map inverse for B=k[u,v]/(u²-a,v²-q), q a unit:
 # r=u1+u2 and t=(v2/v1)*(1+f(u1)r). The factor is self-inverse
