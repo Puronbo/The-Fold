@@ -2030,3 +2030,5 @@ The explicit G_C/G_D torsor models are checked by `tools/fold_char2_nonproduct_t
 When `c²+a d²+d=lambda`, the scheme `u⁴=a, v²=q` is a `G_lambda`-torsor under `(u,v)·(r,t)=(u+r, v t(1+(c+d u²)r²))`. The action law is exactly the quaternion splitting equation; the canonical action map has inverse `r=u'+u`, `t=(v'/v)(1+(c+d u²)r²)`. Varying `q` modulo squares gives the full fiber over the quotient torsor. See `the-fold-char2-mixed-torsor-models.md`.
 
 Verifier: `tools/fold_char2_mixed_torsor_models.py`.
+
+The mixed-family boundary also has standard symbol form: for `lambda≠0`, `Q(a,lambda)≅[a*lambda,lambda)_2` via `I=UD`, `J=D`; for `lambda=0` the boundary is zero. The explicit torsor action and inverse are checked in `tools/fold_char2_mixed_torsor_models.py`.
