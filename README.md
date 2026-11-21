@@ -234,6 +234,7 @@ author. The CMB enters as a rhyme; the exact physics is standard cosmology. See 
 | choosing the smallest arithmetic spectral power-exponent family | `the-fold-minimal-operations.md` |
 | choosing the smallest crease-reflection generator set | `the-fold-geometric-generators.md` |
 | deriving the hexagonal crease catalogue and its two sublattice signs | `the-fold-hexagonal-lattice.md` |
+| classifying periodic crease networks and surviving sign characters | `the-fold-periodic-networks.md` |
 | the interactive models | the nine HTML files |
 
 ## Contents
@@ -302,6 +303,7 @@ author. The CMB enters as a rhyme; the exact physics is standard cosmology. See 
 | `the-fold-universal-invariant.md` | UF-001: the universal invariant under a family of allowed operations, including finite spectral prime-core dynamics |
 | `the-fold-geometric-generators.md` | UF-003: primitive crease reflections, dihedral subgroup generation, gcd criterion, and minimum-axis set-cover solver |
 | `the-fold-hexagonal-lattice.md` | UF-004: six zero-line crease axes of Re(z^6), D6 character kernels, and the A/B-preserving D3 catalogue |
+| `the-fold-periodic-networks.md` | UF-005: wallpaper groups, finite-torus crease-network symmetries, sign-character maps, and common kernels |
 | `the-fold-minimal-operations.md` | UF-002: feasibility, set-cover equivalence, NP-hardness, minimal arithmetic spectral power-exponent families, and a reference solver |
 
 Open the HTML files directly in a browser — no build step, no dependencies.
@@ -530,3 +532,6 @@ observer gives the reading. The four zones are the map's legend.
 
 
 **Hexagonal lattice catalogue (UF-004):** the repository's height h(z)=Re(z^6) fixes the six crease axes at 15°+30°j. The six reflections generate D6; even-index creases preserve the honeycomb A/B labels, while odd-index creases exchange them. The two sign characters (determinant and sublattice) are independent. See the-fold-hexagonal-lattice.md and tools/fold_hexagonal_lattice.py.
+
+
+**Periodic network classification (UF-005):** a periodic crease graph has a wallpaper symmetry group with a rank-two translation subgroup and finite point quotient. Signed height and site decorations define characters when each is transformed globally by a sign; the subgroup preserving all decorations is the kernel of their combined character map. The finite-torus solver tests square, triangular, and generic oblique examples. See the-fold-periodic-networks.md and tools/fold_periodic_networks.py.
