@@ -613,3 +613,8 @@ observer gives the reading. The four zones are the map's legend.
 **D4-isotypic multiplication tensor (UF-024):** an explicit basis is 1, x², xy, x³y, x, y, x³, −x²y. The four character lines are represented by 1, x², xy, x³y, and the two E copies by (x,y) and (x³,−x²y). The complete multiplication table shows how these representation summands couple; in particular E₁E₂ maps by an alternating determinant pairing to the socle character line. The isotypic decomposition is not a product decomposition. See `the-fold-d4-multiplication-tensor.md` and `tools/fold_d4_multiplication_tensor.py`.
 
 **Graded automorphism group (UF-025):** the homogeneous presentation C=k[x,y]/(x²+y²,x⁴) yields a graded linear automorphism group whose orthogonal part is dihedral of order 16, up to scalar dilations. It strictly contains the original signed-permutation D4: the 45-degree change x↦x−y, y↦x+y preserves the ideal after rescaling the quadratic relation. This classifies graded linear automorphisms only, not all nonlinear automorphisms. See `the-fold-graded-automorphism-group.md` and `tools/fold_graded_automorphisms.py`.
+
+**Complete nonlinear automorphism group (UF-026):** the kernel of the linear-part map consists exactly of the seven-parameter substitutions
+`X=x+αx²+βxy+γx³+δx²y+ux³y`,
+`Y=y−βx²+αxy−δx³+ηx²y+vx³y`.
+It is a 7-dimensional unipotent group. The full automorphism group is its semidirect product with the graded linear group from UF-025, hence has algebraic-group dimension 8. See `the-fold-nonlinear-automorphism-group.md` and `tools/fold_nonlinear_automorphisms.py`.
