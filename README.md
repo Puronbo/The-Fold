@@ -807,3 +807,12 @@ The note also establishes a concrete characteristic-two direction: C_k ≅ k[x,z
 - Computes (operatorname{Aut}_{\mathrm{grp}}(G)=operatorname{Spec} k[a^{\pm1},f^{\pm1},b,c,d,e]/(d^2)), with reduced dimension 5 and tangent dimension 6.
 - Adds `the-fold-char2-hopf-galois-normalizer.md` and `tools/fold_char2_hopf_galois.py`.
 - Computes fixed-group-scheme torsor classes over a characteristic-two field: (H^1_{\mathrm{fppf}}(k,G)\cong(k/k^4)\times(k/k^2)). This does not classify all algebra forms or all Hopf structures.
+
+
+### G-3 — Four pairwise non-isomorphic Hopf structures on the same algebra
+- Exhibits the four product group schemes alpha_4 x alpha_2, mu_4 x alpha_2, alpha_4 x mu_2, and mu_4 x mu_2 on the same underlying algebra k[x,z]/(x^4,z^2).
+- Gives additive and multiplicative coproducts, counits, and antipodes in the common truncated coordinates.
+- Proves pairwise non-isomorphism using the restricted 2-power map on Lie algebras and, for the two mixed cases, the scheme-theoretic image of relative Frobenius.
+- Extends the canonical-map verifier to all four structures; all four 64-by-64 matrices have rank 64 over F_2.
+- Adds the-fold-char2-multiple-hopf-structures.md and tools/fold_char2_hopf_structures.py.
+- Explicitly does not claim an exhaustive classification; non-product Hopf structures remain open.
