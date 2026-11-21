@@ -1439,3 +1439,20 @@ Therefore the center is two-dimensional in every characteristic other than three
 Exact determinantal-divisor and modular-rank checks are in `tools/fold_d16_modular_stability.py`; the proof and coefficient-field distinctions are in `the-fold-d16-modular-stability.md`.
 
 **Open problem UF-030-A:** construct or obstruct an integral D16-stable lattice compatible with the normalized action, then determine the characteristic-two module and the corresponding automorphism-group scheme.
+
+
+## UF-031 — D4 restriction and the intrinsic characteristic-three center
+
+**Theorem UF-031.1.** Restricting the UF-029 Lie algebra representation to the original signed-permutation subgroup \(D_4=\langle r^2,s\rangle\) gives, over every algebraically closed field of odd characteristic,
+\[
+\mathfrak u\!\downarrow_{D_4}\cong 2E\oplus\mathbf1\oplus\chi_{-+}\oplus\chi_{--}.
+\]
+The D16 character line \(\chi=\langle(-1,0,1)\rangle\) becomes trivial; the cubic plane splits into the two indicated one-dimensional characters; the quadratic and socle planes each restrict to the unique two-dimensional irreducible \(E\). This is not the regular D4 representation because \(\chi_{+-}\) is absent.
+
+**Theorem UF-031.2.** The center is intrinsically detectable from the D4 action and bracket. Away from characteristic three it is the socle plane \(E\). In characteristic three it enlarges to \(E\oplus\mathbf1\), with the additional trivial line exactly the cubic vector \((-1,0,1)\). The derived algebra remains \(E\), two-dimensional.
+
+The D4 generators \(r^2\) and \(s\) have integral matrices, even though the full normalized D16 generator \(r\) contains \(1/\sqrt2\). Thus this restriction genuinely has a characteristic-three reduction. The change is in the bracket radical, not in the underlying D4-module decomposition.
+
+The proof and symbolic verifier are in `the-fold-d4-modular-center.md` and `tools/fold_d4_modular_center.py`.
+
+**Open problem UF-031-A:** determine the indecomposable D4-module and bracket structure in characteristic two, where Maschke's theorem no longer applies.
