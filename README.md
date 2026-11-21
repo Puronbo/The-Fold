@@ -901,3 +901,9 @@ The note also establishes a concrete characteristic-two direction: C_k ≅ k[x,z
 - Proves the extension splits exactly when lambda is a square in k; for lambda nonsquare it is not isomorphic to alpha_4 x mu_2.
 - Over k=F₂(s), lambda=s gives an additional Hopf structure on the same algebra, beyond the six base examples.
 - Classifies normalized symmetric cocycles in the fixed global-section model by k/k²; records the torsor sequence k×/(k×)² -> H¹(k,G_lambda) -> k/k⁴ -> Br(k)[2] and leaves its boundary map open; adds the-fold-char2-imperfect-mixed-hopf-family.md and tools/fold_char2_mixed_hopf_cocycle_class.py.
+
+
+### G-3i cocycle-classification verification refinement
+- Restores the complete normalized symmetric cocycle basis by including the possible `xy` term.
+- The condition `F²=0` forces its coefficient `rho` to satisfy `rho²=0`; over a field this gives `rho=0`.
+- Re-runs the remaining cocycle equations and coboundary calculation with an exact symbolic verifier.
