@@ -965,3 +965,10 @@ The note also establishes a concrete characteristic-two direction: C_k ≅ k[x,z
 - Collects the fppf `H¹` groups of the four products, `G_C`, `G_D`, and `G_lambda`.
 - Shows `G_C` and `G_D` have abstract torsor groups matching `α₄×α₂`, while `G_lambda` is controlled by the quaternion splitting kernel.
 - Adds `the-fold-char2-comparative-torsor-groups.md`.
+
+
+### G-4d — Explicit torsor models for G_C and G_D
+- Constructs every torsor as `u⁴=a, v²=b` for G_C and `u²=a, v⁴=b` for G_D, with explicit group actions and inverses to the canonical maps.
+- Derives complete parameter equivalences and twisted addition laws: `(a,b)+(a',b')=(a+a',b+b'+aa')` for G_C and `(a+a',b+b'+a²a'²)` for G_D.
+- Explains why the cohomology splittings are noncanonical.
+- Adds `the-fold-char2-nonproduct-torsor-models.md`.
