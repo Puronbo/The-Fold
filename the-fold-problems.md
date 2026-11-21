@@ -1502,7 +1502,7 @@ The characteristic-three center enlargement of the seven-dimensional bracket alg
 
 Proof and verifier: `the-fold-full-automorphism-characteristics.md`, `tools/fold_full_automorphism_characteristics.py`.
 
-**Resolved by UF-035:** the full automorphism group over every algebraically closed field of odd characteristic is U ⋊ G_gr, with dim(U)=7 and G_gr=(G_m × D16)/⟨(-1,-I)⟩ of dimension 1. The full group is smooth of dimension and tangent dimension 8. See `the-fold-odd-characteristic-automorphisms.md`.\n\n**Open problem UF-036:** construct and identify the schematic closure over Z of the characteristic-zero seven-dimensional unipotent subgroup, and determine flatness of the full automorphism group scheme over Z.
+**Resolved by UF-035:** the full automorphism group over every algebraically closed field of odd characteristic is U ⋊ G_gr, with dim(U)=7 and G_gr=(G_m × D16)/⟨(-1,-I)⟩ of dimension 1. The full group is smooth of dimension and tangent dimension 8. See `the-fold-odd-characteristic-automorphisms.md`.\n\n**Resolved by UF-036:** the schematic closure is the flat seven-dimensional group scheme U_Z ≅ A^7_Z; the full automorphism scheme is not flat over Z because its generic fiber has dimension 8 while its characteristic-two fiber has dimension 13. See `the-fold-integral-unipotent.md`.
 
 
 ## UF-035 — Odd-characteristic automorphism classification
@@ -1513,4 +1513,17 @@ Proof and verifier: `the-fold-full-automorphism-characteristics.md`, `tools/fold
 
 Proof: `the-fold-odd-characteristic-automorphisms.md`.
 
-**Open problem UF-036:** identify the schematic closure over Z of U and determine flatness of the full automorphism group scheme over Z.
+**Resolved by UF-036:** the closure of U_Q is U_Z ≅ A^7_Z, a smooth flat integral group scheme; the full automorphism scheme is non-flat at 2. See `the-fold-integral-unipotent.md`.
+
+
+## UF-036 — Integral unipotent subgroup and full-scheme flatness
+
+**Theorem UF-036.1.** The seven-parameter identity-linear substitutions define a group scheme U_Z ≅ A^7_Z. The UF-027 composition law and its inverse have integer coefficients, and every substitution preserves the defining relations integrally and has determinant one on the rank-eight algebra. Thus U_Z is smooth and flat over Z, with seven-dimensional fibers in every characteristic.
+
+**Theorem UF-036.2.** The schematic closure of the characteristic-zero subgroup U_Q inside Aut(C_Z) is exactly U_Z. Its coordinate ring is torsion-free over Z, so the closure has no vertical components or extra special-fiber thickening.
+
+**Theorem UF-036.3.** The full automorphism scheme is not flat over Z: the generic fiber has dimension eight, whereas the characteristic-two fiber has dimension thirteen. For group schemes locally of finite presentation, flatness forces fiber dimension to be locally constant. The characteristic-two identity-linear kernel has dimension ten, so U_F2 is a proper seven-dimensional subgroup of it.
+
+Proof and symbolic verifier: `the-fold-integral-unipotent.md`, `tools/fold_integral_unipotent.py`.
+
+**Open problem UF-037:** give an explicit ideal-level or local-ring witness for the failure of flatness at 2; describe the quotient of the ten-dimensional characteristic-two identity-linear kernel by U_F2, and determine the integral closure of the full graded quotient.
