@@ -118,3 +118,34 @@ L=Abt+C,quad M=B+Ed+Gbt+Jbdt,quad N=E+Jbt.
 **Proof.** If the coefficient vector vanishes, its (x)-coefficient in ([ch]X') gives (rL=0), hence (L=0). Its (x)-coefficient in ([ch]Z') gives (At=0), hence (A=0), and therefore (C=0). The (x^3)-coefficient in ([ch]Z') is (Ja^2t), so (J=0). The (x^2z)-coefficient in ([ch]Z') is (aN), so (N=0), hence (E=0). The (x^2)-coefficient in ([ch]Z') is (atM), so (M=0), which now reads (B+Gbt=0). Conversely, these five equations make (L=M=N=A=J=0), and every entry in the UF-060 coefficient table vanishes.
 
 Thus the mixed (ch) direction is detected away from this explicit closed parameter locus and is invisible on it. This is a statement about one coefficient vector only; it does not compute the full coefficient module, the universal orbit-image kernel, or its Hopf core.
+
+
+## 7. UF-064 — First-order nilpotent coefficient map
+
+Let \(\mathfrak n=(c,d,h)\), with \(c^4=d^2=h^2=0\), and put \(r=a^{-1}\), \(t=i^{-1}\). In the correctly ordered full-affine conjugation, reduce the sixteen target coefficients modulo \(\mathfrak n^2\). The \(X'\)-coordinate has no terms linear in \(c,d,h\). The linear terms in \(Z'\) are:
+
+\[
+\begin{array}{c|ccc}
+\text{target coefficient}&[c]&[d]&[h]\\ \hline
+x&Aat&0&0\\
+z&A&Abt&0\\
+x^2&Ga^2t&a^2t(B+G)&0\\
+x^3&0&Ja^3t&Ga^2t(bt+1)\\
+xz&0&0&C\\
+x^2z&Ja^2&Jba^2t&a(D+Gb^2t^2+Gbt)\\
+x^3z&0&0&a^2E
+\end{array}
+\]
+All entries are in characteristic two. In particular, terms with coefficient 2 in an unreduced intermediate expression vanish.
+
+The three columns are generically independent. The minor from rows \(z,x,xz\), with columns \(c,d,h\), is
+\[
+\det\begin{pmatrix}
+A&Abt&0\\
+0&Aat&0\\
+0&0&C
+\end{pmatrix}=A^2atC.
+\]
+Since \(a,t\) are units, the first-order coefficient map has generic rank three on the open locus \(AC\ne0\).
+
+This is the exact first associated-graded layer \(\mathfrak n/\mathfrak n^2\), not the full coefficient module. The quadratic and higher nilpotent monomials, the full scheme-theoretic orbit-image kernel, and its Hopf core remain to be computed.
