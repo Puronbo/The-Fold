@@ -146,7 +146,7 @@ a simpler intrinsic description of the image subspace or its quotient.
 
 The class [t] is not in this image, by the valuation obstruction in Section 2.
 
-## 7. Coefficient criterion over the square subfield
+## 7. G-4h — Coefficient criterion over the square subfield
 
 Put
 \[
