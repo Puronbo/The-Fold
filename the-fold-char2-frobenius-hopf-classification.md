@@ -54,3 +54,15 @@ The rank-four kernel is controlled by its two-dimensional abelian restricted Lie
 2. For each possible kernel and quotient alpha_2 or mu_2, classify extensions whose total coordinate algebra is k[x,z]/(x⁴,z²).
 3. Determine which extension classes are isomorphic after allowing all algebra automorphisms of A, not merely changes of section.
 4. Establish whether the resulting list is exhaustive over algebraically closed fields, then study descent to imperfect fields.
+
+
+## 5. A sixth structure realizes the nilpotent height-one kernel
+
+The G-3g group G_D has
+```
+Delta(x) = x tensor 1 + 1 tensor x + z tensor z
+Delta(z) = z tensor 1 + 1 tensor z
+```
+Its Frobenius kernel has coordinate algebra k[x,z]/(x²,z²) with this induced coproduct. Its invariant derivations satisfy D_z^[2]=D_x and D_x^[2]=0, so its two-dimensional restricted Lie algebra has a nonzero nilpotent Jordan 2-map. The Frobenius image is alpha_2.
+
+Thus the height-one kernel in the reduction need not be a product alpha_2 x alpha_2, alpha_2 x mu_2, or mu_2 x mu_2. The nilpotent-Jordan type is realized by an actual lift to the fixed rank-eight algebra.
