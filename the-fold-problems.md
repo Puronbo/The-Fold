@@ -1562,3 +1562,10 @@ The normal closure is obtained by taking the largest Hopf ideal contained in thi
 **Theorem UF-049.1.** For the nilradical ideal n=(c,d₀,h), with c⁴=d₀²=h²=0, the monomial basis cʳd₀ˢhᵗ (0≤r≤3, 0≤s,t≤1) gives the Hilbert series (1+T+T²+T³)(1+T)² = 1+3T+4T²+4T³+3T⁴+T⁵. Thus the associated-graded ranks in positive degrees are 3,4,4,3,1; n⁵≠0 and n⁶=0. Every individual element of n nevertheless has fourth power zero. This distinction is essential for the Hopf-ideal comparison.
 
 **Open UF-050:** compute the normal-closure and second-Frobenius-kernel ideals on each associated-graded piece and identify the first degree at which they differ, if any. See `the-fold-char2-nilradical-associated-graded.md`.
+
+
+## UF-050 — Associated graded of the second-Frobenius candidate
+
+**Theorem UF-050.1.** The full automorphism coordinate algebra decomposes as A ≅ A_red ⊗ T, where T=k[c,d₀,h]/(c⁴,d₀²,h²), because determinant localization is equivalent to inverting ai and the Frobenius-candidate equations are pulled back from the reduced quotient. The candidate quotient therefore retains the full nilpotent coefficient algebra. Its associated-graded ranks over its reduced support are 1,3,4,4,3,1 in degrees zero through five; the positive-degree ranks are 3,4,4,3,1. This determines the candidate's thickening but not the minimal normal closure.
+
+**Open UF-051:** compute the actual normal-closure Hopf ideal in degree two n²/n³ and test whether it imposes any additional relation beyond the second-Frobenius candidate. See `the-fold-char2-frobenius-candidate-associated-graded.md`.
