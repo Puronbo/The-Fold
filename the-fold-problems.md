@@ -908,3 +908,24 @@ i.e. 15°, 45°, 75°, 105°, 135°, and 165°. Reflection across each line is a
 **Boundary.** The 30° rotation permutes the zero-line arrangement and negates \(h\), but it has order 12 and is not a honeycomb lattice point symmetry. The lattice's rotational symmetry is 60°, consistent with the planar crystallographic restriction. The honeycomb is a triangular Bravais lattice with a two-site basis; making the two basis sites inequivalent reduces the point symmetry to D3.
 
 Full proofs, exact character kernels, examples, and the standard-library verification program are in [the-fold-hexagonal-lattice.md](the-fold-hexagonal-lattice.md) and tools/fold_hexagonal_lattice.py.
+
+
+## UF-005 — Periodic crease networks and surviving sign characters
+
+**Question.** Can the symmetry group of a periodic Fold network be derived from the translation lattice, crease graph, signed height, and site decorations, with the surviving invariants identified exactly?
+
+**Geometric group.** A periodic crease graph on a flat torus lifts to a periodic graph in the plane. Its full isometry group \(W_C\) has a rank-two translation subgroup \(T_C\) and a finite quotient \(P_C=W_C/T_C\), giving the wallpaper-group exact sequence
+\[
+1\longrightarrow T_C\longrightarrow W_C\longrightarrow P_C\longrightarrow1.
+\]
+The extension need not split; glide reflections are affine lifts that prevent assuming a universal semidirect-product decomposition. There are 17 wallpaper-group types.
+
+**Height character.** For a nonzero signed periodic height, restrict to symmetries satisfying \(h(gx)=\chi_h(g)h(x)\) with \(\chi_h(g)\in\{\pm1\}\). These symmetries form a subgroup and \(\chi_h\) is a homomorphism. The exact height-preserving subgroup is \(\ker\chi_h\). Network symmetries that preserve the zero set but not the defining height up to sign need not belong to this subgroup.
+
+**Multiple decorations.** A binary site decoration \(c:S\to\{\pm1\}\), such as A/B, gives a second character when each allowed symmetry globally preserves or globally exchanges the two labels. With \(k\) binary decorations, the character map is \(\chi:G\to(\mathbb Z/2)^k\). The common sign-preserving subgroup is \(\ker\chi\). If the image has rank \(r\), its index is exactly \(2^r\); dependent signs do not add a new independent reduction.
+
+**Finite model and tests.** The reference implementation enumerates affine maps \(x\mapsto Ax+b\) on a finite torus, where \(A^TGA=G\), and checks preservation of vertices, crease-crossing bonds, height signs, and colour signs. It verifies point-group orders 8 (square), 12 (triangular), and 2 (generic oblique). In the 4-by-4 square example, the joint sign map has all four values in \(\mathbb Z_2^2\): 64 joint sign-covariant symmetries and a common sign-preserving kernel of order 16. The triangular Bravais-net example has 192 affine symmetries on the same finite torus.
+
+**Scope correction for UF-004.** \(h(z)=\operatorname{Re}(z^6)\) is a homogeneous local six-line crease star; it is not itself a periodic honeycomb height function. The global honeycomb requires a triangular translation lattice and a two-site basis as separate data. The UF-004 local \(D_6\) and A/B parity calculations are retained, but the periodic extension is handled here.
+
+Full definitions, the two proved character theorems, wallpaper-group boundary, limits, and executable solver are in the-fold-periodic-networks.md and tools/fold_periodic_networks.py.
