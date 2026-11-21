@@ -1546,3 +1546,12 @@ The fourth-power pullbacks F-tilde = phi^4/i^4 and R-tilde = alpha^4/a^4 + b^4 p
 **Scope:** this globalizes the second-Frobenius quotient-kernel equations. It does not compute the largest conjugation-stable Hopf ideal contained in the ideal of U, so equality with the minimal normal closure remains open.
 
 **Open UF-048:** compute the universal conjugation coaction on the globally defined Frobenius quotient equations and determine whether the resulting kernel is generated scheme-theoretically by conjugates of U.
+
+
+## UF-048 — Universal conjugation coefficient ideal
+
+**Theorem/definition UF-048.1.** In full substitution coordinates, the seven-dimensional subgroup U is defined by c=d₀=h=0, a=i=1, b=0, and φ=0, η−α=0, β+ψ+θ=0. Its universal conjugation map is G×U→G, (g,u)↦gug⁻¹, inducing Conj*:A→A⊗O(U). Expanding the pullbacks of the generators of I(U) in the U-parameters gives the coefficient ideal of the conjugacy family.
+
+The orbit-family coefficient ideal is not automatically a Hopf ideal. The normal closure requires the largest conjugation-stable Hopf ideal contained in I(U), as in UF-044. The calculation therefore separates universal orbit coefficients from the Hopf-core step.
+
+**Open UF-049:** compute the coefficient ideal in the full ring A=k[c,d₀,h,a,b,…,Δ⁻¹]/(c⁴,d₀²,h²), then compute its Hopf core and compare with the second-Frobenius kernel through the intrinsic nilradical filtration.
