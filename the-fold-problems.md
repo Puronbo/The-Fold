@@ -1535,3 +1535,14 @@ Proof and symbolic verifier: `the-fold-integral-unipotent.md`, `tools/fold_integ
 **UF-040 candidate:** let Q=A_red/N, a smooth five-dimensional quotient. The scheme-theoretic normal closure may be the kernel of A → Q → Q^(1), i.e. the preimage of the first Frobenius kernel. This predicts reduced support N and tangent dimension 16. The extension of the quotient map to the full non-reduced automorphism scheme and the minimality proof remain open. See `the-fold-char2-frobenius-normal-closure.md`.
 
 **Open UF-041:** compute the semidirect-product law of Q and determine whether its quotient morphism extends to the full automorphism group scheme.
+
+
+## UF-047 — Globality of the second-Frobenius quotient equations
+
+**Theorem UF-047.1.** In the full characteristic-two automorphism coordinate ring, let Delta = ai - bh be the invertible linear determinant. Since h^2 = 0, bh is nilpotent. In characteristic two, ai = Delta + bh, hence ai is a unit. Therefore both a and i are units. The localization used to define the quotient coordinates F = phi/i and R = alpha/a + b phi/(ai) + eta/i is the entire determinant-open automorphism scheme, not a proper chart.
+
+The fourth-power pullbacks F-tilde = phi^4/i^4 and R-tilde = alpha^4/a^4 + b^4 phi^4/(a^4 i^4) + eta^4/i^4 are therefore globally regular on the full automorphism scheme. This removes the chart-overlap issue for these formulas.
+
+**Scope:** this globalizes the second-Frobenius quotient-kernel equations. It does not compute the largest conjugation-stable Hopf ideal contained in the ideal of U, so equality with the minimal normal closure remains open.
+
+**Open UF-048:** compute the universal conjugation coaction on the globally defined Frobenius quotient equations and determine whether the resulting kernel is generated scheme-theoretically by conjugates of U.
