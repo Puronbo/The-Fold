@@ -2091,3 +2091,8 @@ where (t=i^{-1}). Outside this locus the mixed nilpotent monomial is detected by
 ### UF-064 — First-order full-affine coefficient map
 
 The correctly ordered full determinant-open conjugation has no terms linear in c,d,h in X'. In Z', the coefficient matrix in the basis c,d,h is the table in Section 7 of the-fold-char2-full-affine-ch-coefficient.md. Its minor on rows z,x,xz is A²atC, so the first-order map has generic rank three. Higher nilpotent layers and the Hopf core remain open.
+
+
+### UF-064 correction — complete first-order map
+
+The original UF-064 first-order table omitted linear terms in X' and misplaced some c,d contributions in Z'. It is superseded by the corrected two-coordinate tables in Section 7 of the affine coefficient paper. The generic-rank-three minor A²atC is unchanged. All subsequent higher-layer calculations must use the corrected table.
