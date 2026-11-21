@@ -2077,3 +2077,12 @@ For \(k=\mathbb F_2(s,t)\), \(\lambda=s\), put \(K=k^2=\mathbb F_2(S,T)\), \(S=s
 \exists q\in K:\ q^2+q+S(\alpha+T\beta^2+ST\gamma^2)\in S K^2.
 \]
 This follows by expanding the full parameterization \([sr^2+r]\) in the \(K\)-basis \(1,s,t,st\), then eliminating one coefficient using surjectivity of \(K\to K^2\). It is an exact one-variable Artin–Schreier coset criterion; a closed valuation/differential classification of its solutions remains open. See the-fold-char2-quaternion-boundary-arithmetic.md.
+
+
+### UF-063 — Degeneracy locus for the mixed (ch) coefficient
+
+The full-affine (ch)-coefficient vector vanishes identically across the sixteen target coordinates exactly on
+[
+A=C=J=E=0,qquad B+Gbt=0,
+]
+where (t=i^{-1}). Outside this locus the mixed nilpotent monomial is detected by at least one target coordinate. This does not settle the full coefficient-module or Hopf-core computation. See the-fold-char2-full-affine-ch-coefficient.md.
