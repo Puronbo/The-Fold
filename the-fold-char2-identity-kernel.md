@@ -1,96 +1,141 @@
-# UF-037 — The characteristic-two identity-linear kernel and the failure of normality
+# UF-037 — The characteristic-two identity-linear kernel and its normal closure
 
-## 1. Coordinates for the full identity-linear kernel
+## 1. The full identity-linear kernel
 
-Work over a field k of characteristic two with
+Let k be an algebraically closed field of characteristic two and
 \[
 C_k=k[x,z]/(x^4,z^2),\qquad z=x+y.
 \]
-The maximal ideal is \(\mathfrak m=(x,z)\), and
+The maximal ideal satisfies
 \[
 \mathfrak m^2=\langle x^2,x^3,xz,x^2z,x^3z\rangle_k.
 \]
-
-An automorphism inducing the identity on \(\mathfrak m/\mathfrak m^2\) must have the form
+Every automorphism inducing the identity on \(\mathfrak m/\mathfrak m^2\) has the form
 \[
 \begin{aligned}
 X={}&x+A x^2+B x^3+C xz+D x^2z+E x^3z,\\
 Z={}&z+F x^2+G x^3+H xz+I x^2z+J x^3z.
 \end{aligned}
 \]
-Every one of these ten coefficients is arbitrary. Indeed, \(X^4=0\) and \(Z^2=0\) hold automatically in this form, and the induced cotangent map is the identity, so the endomorphism is an automorphism of the finite local algebra. Thus the identity-linear kernel is the affine space
+All ten coefficients are arbitrary: in characteristic two, \(X^4=0\) and \(Z^2=0\) automatically for these expressions. The identity cotangent map makes the resulting endomorphism an automorphism. Thus the reduced identity-linear kernel is the smooth group
 \[
-H\cong\mathbb A^{10}_k.
+\mathcal H\cong\mathbb A^{10}_k.
 \]
 
-## 2. The seven-dimensional flat subgroup inside H
+## 2. The seven-dimensional flat subgroup
 
-Reduce the integral UF-026 substitutions modulo two and change variables to \(z=x+y\). Write their seven parameters as \((a,b,c,d,u,e,v)\), in the order inherited from
-\[
-X=x+a x^2+bxy+c x^3+d x^2y+u x^3y,
-\quad
-Y=y-bx^2+a xy-dx^3+e x^2y+v x^3y.
-\]
-The resulting coefficients in the \((x,z)\) presentation are
+Reducing the integral UF-026 family modulo two and substituting \(z=x+y\) gives
 \[
 \begin{aligned}
 X={}&x+(a+b)x^2+b xz+(c+d)x^3+d x^2z+u x^3z,\\
 Z={}&z+(a+b)xz+(c+e)x^3+(d+e)x^2z+(u+v)x^3z.
 \end{aligned}
 \]
-Consequently the image \(U_k\subset H\) is exactly the closed linear subspace cut out by
+In the ten coordinates above, its image \(U\subset\mathcal H\) is defined by
 \[
 \boxed{F=0,\qquad H=A,\qquad B+G+I=0.}
 \]
-These are three independent linear equations in the ten coordinates. Conversely, any tuple satisfying them is obtained uniquely from the seven original parameters. Hence
+These three independent linear equations give \(U\cong\mathbb A^7_k\), as expected from the flat integral model UF-036. The three transverse coordinates may be taken to be
 \[
-U_k\cong\mathbb A^7_k,\qquad \dim(H)-\dim(U_k)=3.
+F,\qquad H-A,\qquad B+G+I.
 \]
-This identifies the three extra reduced directions explicitly: the coefficient \(F\) of \(x^2\) in \(Z\), the difference \(H-A\) between the \(xz\) coefficient of \(Z\) and the \(x^2\) coefficient of \(X\), and the linear combination \(C+G+I\).
 
-## 3. Theorem UF-037.1 — The subgroup U_k is not normal in H
+## 3. Theorem UF-037.1 — U is not normal
 
-The inclusion \(U_k\subset H\) is not a normal-subgroup inclusion. In particular, there is no quotient group scheme \(H/U_k\) in the usual sense of quotient by a normal subgroup.
+The subgroup \(U\) is not normal in \(\mathcal H\).
 
-**Proof by explicit conjugation.** Consider the two automorphisms
+Take
 \[
 g(x)=x,\quad g(z)=z+x^2,
-\]
-and
-\[
+\qquad
 u(x)=x+xz,\quad u(z)=z.
 \]
-Both have identity linear part. The element \(u\) belongs to \(U_k\): it is obtained from the integral family by taking \(a=b=1\) and all other parameters zero. The element \(g\) belongs to \(H\).
-
-Both are involutions in characteristic two. A direct substitution gives
+Here \(g\in\mathcal H\), while \(u\in U\) (choose \(a=b=1\), all other UF-026 parameters zero). Both maps are involutions. Direct substitution gives
 \[
 (g\circ u\circ g)(x)=x+xz+x^3,
 \qquad
-(g\circ u\circ g)(z)=z+x^2.
+(g\circ u\circ g)(z)=z.
 \]
-The conjugate is still in H, but it is not in U_k because its \(Z\)-image has a nonzero \(x^2\)-coefficient \(F=1\), whereas every element of U_k has \(F=0\). Thus U_k is not normal. \(\square\)
+This conjugate violates \(B+G+I=0\): its coefficients are \(B=1,G=I=0\). Therefore \(gug^{-1}\notin U\), proving non-normality.
 
-This corrects the natural but invalid interpretation of the three-dimensional difference as a quotient *group*. The codimension is three, but the subgroup is not normal.
+Consequently the three-dimensional variety-theoretic difference \(\mathcal H/U\) is not a quotient group. A homogeneous-space quotient may still exist, but it is a different question.
 
-## 4. What the three directions do and do not mean
+## 4. Theorem UF-037.2 — The normal closure has dimension eight
 
-The three linear equations above give a canonical description of the embedded subgroup relative to the chosen coordinates \((x,z)\). They do not, by themselves, define a three-dimensional group quotient. Since U_k is not normal, the set/fppf quotient \(H/U_k\), if represented as a homogeneous space, is not a quotient group.
+Define the degree-two coefficient homomorphism
+\[
+\pi:\mathcal H\longrightarrow\mathbb G_{a,k}^4,
+\qquad
+\varphi\longmapsto(A,C,F,H).
+\]
+Composition adds the degree-two coefficients, so \(\pi\) is a group homomorphism. Let
+\[
+W=\{(A,C,F,H):F=0,\ H=A\}\cong\mathbb G_a^2,
+\qquad
+\mathcal N=\pi^{-1}(W).
+\]
+Then \(\mathcal N\) is a closed normal subgroup of \(\mathcal H\), isomorphic as a variety to \(\mathbb A^8_k\). It is defined simply by
+\[
+F=0,\qquad H=A,
+\]
+with all six cubic coefficients free. In particular \(U\subset\mathcal N\).
 
-There is nevertheless a three-dimensional transverse parameter count. A next step is to determine whether the homogeneous space is representable and whether it admits a useful affine chart or a filtration compatible with conjugation. The conjugation example shows that any such structure must account for the nontrivial action of H on the three transverse directions.
+The normal closure of U in \(\mathcal H\) is exactly \(\mathcal N\).
 
-## 5. Tangent-space warning
+**Proof.** Since \(\mathcal N\) is normal and contains U, the normal closure is contained in \(\mathcal N\). The Lie algebra of U contains
+\[
+\delta(x)=xz,\quad\delta(z)=0,
+\]
+and the Lie algebra of \(\mathcal H\) contains \(\eta(x)=0,\eta(z)=x^2\). In characteristic two,
+\[
+[\eta,\delta](x)=x^3,\qquad [\eta,\delta](z)=0.
+\]
+More concretely, for \(\epsilon^2=0\), the infinitesimal element
+\(u_\epsilon(x)=x+\epsilon xz,\ u_\epsilon(z)=z\) lies in U, and conjugation by the actual element g gives
+\[
+(g u_\epsilon g^{-1})(x)=x+\epsilon(xz+x^3),\qquad
+(g u_\epsilon g^{-1})(z)=z.
+\]
+Thus the tangent spaces of the two smooth seven-dimensional subgroups U and \(gUg^{-1}\) together contain the missing direction \(\tau(x)=x^3,\tau(z)=0\), and span all eight dimensions of \(\operatorname{Lie}(\mathcal N)\). The differential at the identity of the multiplication map
+\[
+U\times gUg^{-1}\longrightarrow\mathcal N
+\]
+therefore has rank eight. Its image closure has dimension at least eight. It is contained in \(\mathcal N\), which has dimension eight, so the normal closure of U is exactly \(\mathcal N\). \(\square\)
 
-The ten-dimensional group H above is the reduced identity-linear subgroup over the field k. It is not the full tangent space of the characteristic-two automorphism scheme. UF-033 gives the latter dimension as 16, because three nilpotent coefficient directions in the general automorphism-scheme equations contribute additional infinitesimal directions beyond the field-valued reduced locus.
+## 5. The genuine quotient group
 
-Thus the three-dimensional codimension here compares two ordinary reduced subgroups; it is not the three-dimensional smoothness defect of the full automorphism scheme.
+Because \(\mathcal N\) is normal, the quotient exists and is particularly simple:
+\[
+\boxed{\mathcal H/\mathcal N\cong\mathbb G_{a,k}^2.}
+\]
+The two quotient coordinates are
+\[
+F,\qquad H-A.
+\]
+Thus the original three extra directions split into two qualitatively different pieces:
 
-## 6. Consequences for the research program
+- \(F\) and \(H-A\) are the two genuine quotient-group directions.
+- \(B+G+I\) is not a quotient-group coordinate. It is the one missing cubic direction that is supplied when U is enlarged to its normal closure.
 
-1. The flat integral closure \(U_{\mathbb Z}\) remains a seven-dimensional subgroup in characteristic two.
-2. The full reduced identity-linear kernel is ten-dimensional and contains \(U_{\mathbb F_2}\) properly.
-3. The three extra coordinates are explicitly \(F\), \(H-A\), and \(C+G+I\).
-4. The inclusion is not normal, so a quotient *group* is unavailable without replacing U by a normal subgroup or taking its normal closure.
-5. The next meaningful problem is the normal closure of U in H, and separately the geometry of the homogeneous space H/U.
+This is a sharper structural answer than the raw dimension difference \(10-7=3\).
+
+## 6. Tangent-space distinction
+
+The group \(\mathcal H\) is the reduced identity-linear subgroup of field-valued automorphisms. It has dimension ten. It is not the full tangent space of the characteristic-two automorphism scheme: UF-033 gives tangent dimension sixteen because the general automorphism-scheme equations have additional nilpotent coefficient directions.
+
+The dimensions therefore refer to different objects:
+\[
+\dim U=7,\qquad \dim\mathcal N=8,\qquad
+\dim\mathcal H=10,\qquad
+\dim T_1\operatorname{Aut}(C_k)=16.
+\]
+
+## 7. New questions
+
+1. Determine the action of \(\mathcal H/\mathcal N\cong\mathbb G_a^2\) on the homogeneous space \(\mathcal H/U\), and decide whether \(\mathcal H/U\) is an affine three-space as a scheme.
+2. Determine whether the normal closure construction commutes with extension of the characteristic-two ground field and with passage to the full nonreduced automorphism group scheme.
+3. Compute the full group law on \(\mathcal N\) and identify its lower central series.
+4. Compare the two-dimensional quotient directions with the three extra infinitesimal directions in the full automorphism scheme; do not identify them without a separate calculation.
 
 ## Reproducibility
 
@@ -98,4 +143,4 @@ Run:
 ```sh
 python3 tools/fold_char2_identity_kernel.py
 ```
-The verifier checks the seven-parameter coordinate constraints and the explicit conjugation counterexample in the truncated polynomial ring over \(\mathbb F_2\).
+The verifier checks the coefficient equations, the explicit non-normality conjugation, and the derivation bracket producing the extra cubic tangent direction over \(\mathbb F_2\).
