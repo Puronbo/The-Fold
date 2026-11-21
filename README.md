@@ -838,3 +838,11 @@ The note also establishes a concrete characteristic-two direction: C_k ≅ k[x,z
 - For alpha_4 x mu_2, finds the cross map t -> 1+p x+q x²+pq x³ with p²=q²=0; its automorphism group scheme has reduced dimension 2 and tangent dimension 4.
 - Retains the additive-additive automorphism scheme (reduced/tangent dimensions 5/6) and the multiplicative-multiplicative constant D8 automorphism group.
 - Adds the-fold-char2-hopf-normalizers-all-four.md, including corrected mixed-case composition laws.
+
+
+### G-4 — Explicit fppf torsors for all four Fold group laws
+- Uses the Frobenius exact sequences for alpha_4, alpha_2 and the fppf Kummer sequences for mu_4, mu_2.
+- Computes the four H^1 sets as products of k/k^4, k/k^2, k×/(k×)^4, and k×/(k×)^2 according to the additive/multiplicative factors.
+- Gives explicit rank-eight torsor algebras and coactions for all four product group schemes.
+- Shows all four torsor sets vanish over perfect fields and can be nontrivial over imperfect fields, e.g. F_2(t).
+- Adds the-fold-char2-hopf-torsors-four-laws.md. This classifies torsors under the fixed four group schemes, not all group-scheme forms or Hopf structures.
