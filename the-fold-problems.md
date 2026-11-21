@@ -1991,3 +1991,8 @@ The resulting torsor classes fit into `0 -> k×/(k×)² -> H¹(k,G_lambda) -> ke
 The quaternion descent identities are encoded in `tools/fold_char2_mixed_quaternion_descent.py`.
 
 For parameters λ,μ, the mixed groups are isomorphic iff some `a∈k×` satisfies `λ+μa⁴∈k²`; this quotients fixed-section cocycle classes by the induced scaling action of `Aut(alpha_4)`.
+
+
+## G-3n — Exhaustive height-one kernel classification
+
+Over an algebraically closed field, the two-dimensional abelian restricted Lie algebra of a rank-four height-one commutative group scheme has a semilinear 2-map. Its rank is 0, 1, or 2; the rank-one case splits into image=kernel (nilpotent Jordan, `I_{1,1}`) or image≠kernel (`alpha₂×mu₂`). Rank 0 and 2 give `alpha₂²` and `mu₂²`. These are exactly four types, all already realized by Fold Hopf structures. This exhausts the possible height-one Frobenius kernels but not the full rank-eight extensions. Full proof: `the-fold-char2-height-one-kernel-classification.md`.
