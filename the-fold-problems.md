@@ -1759,3 +1759,16 @@ The verifier tools/fold_char2_hopf_structures.py confirms that each of the four 
 
 ### UF-061 — Reproducible specialization certificate
 Adds tools/fold_char2_affine_coefficient_matrix_rank.py. The standard-library verifier constructs the correctly ordered conjugation in F₂[x,z,c,d,h]/(x⁴,z²,c⁴,d²,h²), extracts the sixteen target coefficient rows and fifteen nilpotent monomial columns, omits epsilon-prime, and checks the exact 15-by-15 determinant equals 1. UF-062 remains the determinantal rank-drop locus and Hopf-core problem.
+
+
+## UF-062A — Rank-drop scheme on a triangular affine slice
+
+**Theorem UF-062A.1.** For g(x)=x+c, g(z)=z+d+hx and arbitrary U parameters A,B,C,D,E,G,J, the ideal of maximal minors of the 16-by-15 nilpotent coefficient matrix is exactly (E^15). The unique nonzero maximal minor is the one omitting epsilon-prime, equal to E^15. Thus the rank-15 locus is D(E), and the rank-drop support is V(E).
+
+**Theorem UF-062A.2.** On E=0, the generic matrix rank is 11 over F₂(A,B,C,D,G,J). A displayed 11-by-11 minor, using target rows (c′,a′,b′,alpha′,beta′,d′,h′,i′,phi′,psi′,eta′) and columns (h,d,dh,c,ch,cd,cdh,c²,c²h,c³,c³h), is C³D⁴J⁴.
+
+The exact symbolic calculation is documented in the-fold-char2-affine-rank-drop-slice.md and verified by tools/fold_char2_affine_rank_drop_slice.py (requires SymPy).
+
+**Still open UF-062B:** determine the rank-drop ideal for the full determinant-open affine family with arbitrary reduced coefficients a,b,i.
+
+**Still open UF-062C:** stratify all lower-rank loci inside E=0 and compute the universal orbit-image kernel and its largest Hopf ideal. The coefficient-matrix determinantal ideal is not itself the orbit-image kernel.
