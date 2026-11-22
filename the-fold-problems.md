@@ -2465,3 +2465,7 @@ For \(k=\mathbb F_2(s,t)\), \(\lambda=s\), put \(K=k^2=\mathbb F_2(S,T)\), \(S=s
 \operatorname{im}(\delta_s)\cong K/(K^2+\{u+Su^2:u\in K\}).
 \]
 Every image class has a symbol representative \([AS,s)_2\). This is an exact quotient presentation; its dimension and an explicit basis remain open. The nonzero class \(\delta_s([t])\) corresponds to the coset of \(T\).
+
+
+### G-4j — infinite-dimensional quaternion-boundary image
+For \(K=\mathbb F_2(S,T)\), the quotient \(K/(K^2+\{u+Su^2:u\in K\})\) is infinite-dimensional over \(\mathbb F_2\). At the valuation \(T=\infty\), every denominator element with a pole has even pole order: the leading terms of \(z^2\) and \(Su^2\) cannot cancel because \(S\) is nonsquare in the residue field \(\mathbb F_2(S)\), and \(u\) has strictly smaller pole order than \(u^2\). Thus the classes of \(T^{2n+1}\), \(n\ge0\), are linearly independent. Via G-4i, the boundary image has infinite \(\mathbb F_2\)-dimension, with independent representatives \([ST^{2n+1},s)_2\). The quotient's full normal form remains open.
