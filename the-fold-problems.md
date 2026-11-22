@@ -3090,3 +3090,12 @@ Its first two nonconstant coefficients are
 With \(a=a_0²+Sa_1²\), one obtains \(C_0(\Delta_2)=S(ea_1+fa_0)²\), hence \(C_0²(\Delta_2)=0\). The first two corrections therefore vanish in the stable pure-scaling quotient.
 
 **Conjectural pattern:** \(C_0^{v_2(m)+1}(\Delta_m)=0\) for every coefficient q^m. Bounded exact rational tests support this but no proof is established. The full section-group coinvariant remains open. Ohi's parameter-independent Cartier residue theorem provides a possible route: identify our residue module with the appropriate \(Z_\infty/B_\infty\) residue target and verify its valuation hypotheses under section changes.
+
+
+### G-4ct — stable scaling quotient as \(\Omega_F^1/B_\infty\)
+
+The map \(\Theta(x)=(x/S)dS\) intertwines the p-basis root operator \(C_0\) with Cartier: \(C\Theta=\Theta C_0\). Its kernel modulo exact forms is \(SF²\), so it induces \(F/SF²\simeq\Omega_F^1/dF\) and then
+\[
+F/\bigcup_n\ker C_0^n\simeq\Omega_F^1/B_\infty.
+\]
+Thus the pure-scaling stable quotient is the Cartier-stable differential module of the coefficient function field, with the G-4cq closed-point residue coordinates. The full section-change action on this module remains to be tested.
