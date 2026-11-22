@@ -1286,3 +1286,6 @@ the quaternion-boundary arithmetic note.
 
 
 **G-4q — exceptional scalar coefficient system:** at P=T²+S, set X=x+Sq in the G-4p completed coordinates. The scalar image becomes X²+(S+P)y²+SPq²+r+Sr², with exact even/odd coefficient equations. Omitting r+Sr², the square-only image is characterized coefficientwise by equality of the S-component of coefficient 2j and the 1-component of coefficient 2j+1 in F=F₂(S)=F²⊕SF². The full scalar quotient remains open because r+Sr² couples indices j and 2j; see the quaternion-boundary arithmetic note.
+
+
+**G-4r — exceptional completed local quotient:** at P=T²+S, the completed local quotient K_P/(F₂(S)[[P]][T]+{z²+u+Su²}) has exact F₂-dimension ℵ₀. A leading-pole coefficient obstruction shows that Sb/P^(2m+1) survives for every nonzero b∈F₂(S)² and m≥1; an F₂-basis of F₂(S)² yields a countably infinite independent family. The upper bound follows because the field of finite principal parts is countable. This is local and does not determine the global rational quotient; see the quaternion-boundary note.
