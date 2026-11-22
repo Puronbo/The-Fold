@@ -1347,3 +1347,6 @@ the quaternion-boundary arithmetic note.
 
 
 **G-4ak — global scope correction:** the base \(K=\mathbb F_2(S,T)\) is a two-variable function field, not a global field, so the Albert–Brauer–Hasse–Noether parity sequence cannot be applied to it. The local G-4aj quotient is proved but is not yet identified with a Kato residue or a global localization kernel. The next bridge is the characteristic-two Kato/logarithmic-Hodge–Witt residue of \([aS,S)_2\) at \(P=(T^2+S)\), followed by codimension-two compatibility on the surface. See the arithmetic note and problem register for the precise open obligations.
+
+
+**G-4am — exceptional symbol differential:** at \(P=(T^2+S)\), absolute differentials give \(dp=dS\), so the characteristic-two symbol representative \((aS)d\log S\) is exactly \(a\,dp\). The residue differential vanishes after reduction, but the uniformizer-direction differential records the wild part. This is an exact representative identity, not yet an identification of the G-4aj quotient with a Kato group or graded piece; Cartier/Frobenius and exact-differential quotients remain to be computed.
