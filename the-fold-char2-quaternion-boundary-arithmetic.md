@@ -756,3 +756,17 @@ z=rT/P,\quad u=T/P,
 which has a genuine simple pole because P does not divide \(T^2+T\).
 
 This proves that odd pole order alone cannot obstruct classes at this quartic exceptional place. The construction is an explicit family inside the denominator image; it is not a classification of all principal parts and does not establish the dimension of the quartic local quotient. The extra T²-coordinate coupling in G-4u remains the central open issue.
+
+
+## 22. G-4w — exact two-coordinate reduction at the quartic place
+
+Let \(p=P(T)\), and let a target have scalar and \(T^2\)-coordinates A,B, with its T and T³ coordinates integral. In any representation modulo \(\mathcal O_P=F[[p]][T]\), the exact T,T³ denominator coordinates r₁,r₃ must be integral. Their contributions to A,B are then integral. Set \(C=A+(p+S)B\). Substitution into the four-coordinate formulas of G-4u gives
+\[
+C\equiv x_0^2+(p+S)x_1^2+((p+S)x_3)^2
++r_0+Sr_0^2+(p+S)r_2\pmod{F[[p]]},
+\]
+\[
+B\equiv x_1^2+x_2^2+(p+1+S)x_3^2+r_2+Sr_2^2
+\pmod{F[[p]]}.
+\]
+The x₂ term cancels from C; the r₁,r₃ terms are integral. These two equations are equivalent to the scalar/T² part of the local representation problem, since A=C+(p+S)B. The first equation by itself has no obstruction because p+S is a unit and r₂ appears linearly. Any obstruction must use both equations and their shared variables x₁,x₃,r₂. This is an exact reduction, not a solution of the quartic local quotient.
