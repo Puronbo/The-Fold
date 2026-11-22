@@ -2430,3 +2430,10 @@ For the degree-eight CM field L over its real quartic F, the ambiguous class num
 - The local valuations of \(\theta=\pi/(\beta+2)\) are 0 and 2, and \(N_{L/\mathbb Q}(\theta)=4\), hence \((\theta)=\mathfrak P_1^2\) after labeling.
 - G-34 proves there is no 2-torsion in \(\operatorname{Cl}(L)\), so \(\mathfrak P_1\) is principal. The relation \((\beta+2)\mathcal O_L=\mathfrak P_0\mathfrak P_1\) then makes \(\mathfrak P_0\) principal too.
 - This removes the norm-two primes from the Minkowski search; the exact odd class number remains open.
+
+
+### G-35C — finite support of the remaining Minkowski classes
+- The degree-eight Minkowski bound is less than 27.488.
+- The inert primes 3 and 5 in the real quartic have prime-ideal norms 81 and 625. The known relative splitting at 7 gives prime-ideal norms 49 in the CM field. All primes above 2 are principal by G-35B.
+- A prime ideal above any rational prime \(p\ge11\) with residue degree at least two has norm at least \(p^2>27\).
+- Therefore the remaining Minkowski generators are degree-one prime ideals above exactly the candidate rational primes 11, 13, 17, 19, and 23. Their principality and relations remain to be computed.
