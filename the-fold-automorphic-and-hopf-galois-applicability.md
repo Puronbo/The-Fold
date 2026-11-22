@@ -93,7 +93,33 @@ This is a concrete Galois-theoretic structure on the Fold algebra, not merely an
 - Other Hopf structures may exist. Their classification is a separate problem.
 - A Hopf–Galois structure over a field does not by itself produce a classical Galois extension or an automorphic representation.
 
-## 6. Recommended research programme
+## 6. Involutions and Galois modules in characteristic two
+
+There is an important representation-theoretic caveat whenever an order-two symmetry is used over a characteristic-two base. Let (V) be a (k)-vector space, ({\rm char}(k)=2), and let (J\in\operatorname{GL}(V)) satisfy (J^2=1). Put (N=J-1). Then
+[
+N^2=(J-1)^2=J^2-2J+1=0.
+]
+Conversely, every square-zero endomorphism (N) defines an involution (J=1+N). Thus a representation of the constant group (C_2) in characteristic two is equivalently a module over
+[
+k[C_2]\cong k[\epsilon]/(\epsilon^2),\qquad \epsilon\mapsto J-1.
+]
+
+The canonical filtration is
+[
+0\subseteq\operatorname{im}(J-1)
+\subseteq\ker(J-1)\subseteq V,
+]
+and there is an exact sequence
+[
+0\longrightarrow\ker(J-1)\longrightarrow V
+\xrightarrow{\ J-1\ }\operatorname{im}(J-1)
+\longrightarrow0.
+]
+The induced action of (J) is trivial on both the submodule \(\ker(J-1)\) and the quotient \(V/\ker(J-1)\). In general there is no canonical decomposition into plus and minus eigenspaces: the projectors \((1\pm J)/2\) do not exist, and \(J-1\) can be nonzero. The smallest nontrivial example is the two-dimensional module with (N(e_2)=e_1), (N(e_1)=0).
+
+This gives a concrete characteristic-two replacement for the usual eigenspace method in any Galois or automorphism-group representation attached to the Fold algebra. One should compute the square-zero operator, its image/kernel filtration, and the associated extension class rather than assume semisimplicity. This statement concerns representations of the constant group (C_2); for a general profinite Galois group, it applies after restriction to an order-two subgroup when such a subgroup is present.
+
+## 7. Recommended research programme
 
 **G-1.** Verify the characteristic-two Hopf structure and the canonical Hopf–Galois map by an exact algebraic verifier.
 
@@ -105,7 +131,7 @@ This is a concrete Galois-theoretic structure on the Fold algebra, not merely an
 
 **G-5.** Only after identifying a meaningful arithmetic family should one revisit automorphic methods. Potential targets would be representations of a global symmetry group, Hecke operators, or theta correspondences; none is currently canonically supplied by the finite algebra.
 
-## 7. Bottom line
+## 8. Bottom line
 
 The PDF's theta-lift/automorphic RH framework is not directly applicable to the Fold algebra as presently defined. Its determinant, representation, and integral-structure themes do suggest methodological parallels.
 
