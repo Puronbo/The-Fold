@@ -2154,3 +2154,10 @@ Setting \(c=d=h=0\) makes the affine conjugator \(g(x)=ax+bz,\ g(z)=iz\). A univ
 - Proves each of the nine generators has fourth power zero, so the full affine-slice image algebra is finite as an (S)-module.
 - Gives the exact first-layer presentation (mathcal N/\mathcal N^2\cong S^9/K_1), with (K_1) the still-uncomputed relation module obtained by eliminating (a,b,i).
 - Higher filtration layers and the independent two-copy coproduct/Hopf test remain open.
+
+
+### UF-072D — First-order relation-module bound
+- Subtracts the nine UF-072C generators in the corrected UF-064 table and records their exact linear (c,d,h) coefficient vectors.
+- Proves the seven nonzero columns are linearly independent over (k(A,B,C,D,E,G,J)) after retaining the Laurent parameters (a,b,i).
+- Shows the first-order source-expansion map has kernel exactly the two coordinate summands for (n_1=X_1) and (n_4=Z_1).
+- Consequently the true relation module for (mathcal N/\mathcal N^2) is contained in (Se_1\oplus Se_4), but equality is not asserted: quadratic source terms must still be compared with products in \(\mathcal N^2\) (UF-072E).
