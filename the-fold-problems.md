@@ -2535,12 +2535,12 @@ At P=T⁴+T²+S, r=T²+T satisfies r²+S=P. Thus z=rw/P^(m+1), u=w/P^(m+1) gives
 For targets with integral T,T³ coordinates, the corresponding denominator parameters r₁,r₃ are integral. Writing A,B for scalar,T² coordinates and C=A+(p+S)B, the exact remaining equations modulo F[[p]] are C=x₀²+(p+S)x₁²+((p+S)x₃)²+r₀+Sr₀²+(p+S)r₂ and B=x₁²+x₂²+(p+1+S)x₃²+r₂+Sr₂². The first equation alone is unobstructed; the coupled pair is the remaining local problem.
 
 
-### G-4x — erratum to quartic coupled reduction
-The G-4w coefficient of x₃² in C was misstated. The corrected pair, derived from G-4u, is C=x₀²+(p+S)x₁²+(p+S)x₃²+r₀+Sr₀²+(p+S)r₂ and B=x₁²+x₂²+(p+1+S)x₃²+r₂+Sr₂² modulo F[[p]]. The prior first equation is superseded. The quartic local quotient remains open; no conclusion based on the erroneous coefficient is retained.
+### G-4x — erratum to the attempted quartic correction
+The G-4w coefficient of x₃² was correct: it is (p+S)². The attempted G-4x correction to p+S was erroneous. The exact pair is C=x₀²+(p+S)x₁²+(p+S)²x₃²+r₀+Sr₀²+(p+S)r₂ and B=x₁²+x₂²+(p+1+S)x₃²+r₂+Sr₂² modulo F[[p]]. G-4y and G-4z are updated using this corrected coefficient. The quartic local quotient remains open.
 
 
 ### G-4y — quartic square-class criterion after elimination
-Using the corrected G-4x equations, solve r₂=R=(C+x₀²+(p+S)x₁²+(p+S)x₃²+r₀+Sr₀²)/(p+S). The target is represented iff there exist x₀,x₁,x₃,r₀ such that B+(p+1+S)x₃²+R+SR² lies in F((p))²+F[[p]]. This is exact but retains four existential parameters. The coefficient quotient has copies of F/F² at negative even exponents and F at negative odd exponents; these are coefficient slots, each countably infinite-dimensional over F₂.
+Using the corrected G-4x equations, solve r₂=R=(C+x₀²+(p+S)x₁²+(p+S)²x₃²+r₀+Sr₀²)/(p+S). The target is represented iff there exist x₀,x₁,x₃,r₀ such that B+(p+1+S)x₃²+R+SR² lies in F((p))²+F[[p]]. This is exact but retains four existential parameters. The coefficient quotient has copies of F/F² at negative even exponents and F at negative odd exponents; these are coefficient slots, each countably infinite-dimensional over F₂.
 
 
 ### G-4z — coefficient recursion for the quartic local membership test
