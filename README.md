@@ -1564,3 +1564,6 @@ A machine-learning bridge is specified: exact symbolic feature coordinates, filt
 
 
 **G-4cp–G-4cq — pure-scaling stable quotient:** the iterated scaling \(t\mapsto t(1+p)\) is governed by the p-basis root operator \(C_0(z_0²+Sz_1²)=z_0\). Its stable quotient is \(\mathbb F_2\oplus\bigoplus_{Q\ne S}\mathbb F_2[S]/(Q)\), with Q ranging over monic irreducibles. This is the residue-field module of finite closed points of the affine S-line. The full section-group coinvariant may impose further relations. Exact rational-function verifier: tools/cartier_stable_part.py.
+
+
+**G-4cp–G-4cq — scaling stable quotient:** the pure scaling section change induces the p-basis root operator \(C_0(a_0²+Sa_1²)=a_0\). Its stable quotient is \(\mathbb F_2\oplus\bigoplus_{Q\ne S}\mathbb F_2[S]/(Q)\), the residue-field module of finite closed points of the affine S-line. This is exact for the pure-scaling tower; the full section-change coinvariant may be a further quotient. The rational-function verifier is tools/cartier_stable_part.py.
