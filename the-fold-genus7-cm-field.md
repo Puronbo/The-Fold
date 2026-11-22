@@ -286,3 +286,62 @@ For any rational prime \(p\ge11\), a prime ideal of \(L\) with residue degree at
 \boxed{11,13,17,19,23}
 \]
 and have residue degree one over \(\mathbb Q\). It follows that the ideal classes of these degree-one primes generate \(\operatorname{Cl}(L)\). This is a finite support reduction, not yet a computation of their principality or relations.
+
+
+## G-35D — the CM class group is cyclic
+
+The element \(\theta=\pi/(\beta+2)\) is primitive over \(\mathbb Q\). Indeed, with \(F(X)=X^8+4X^7+6X^6+4X^5+2X^4+8X^3+24X^2+32X+16\), the degree-eight polynomial of \(\pi\), we have
+\[
+\theta=\frac{\pi^2}{\pi^2+2\pi+2}.
+\]
+For two conjugates \(x,y\), equality of these rational functions implies either \(x=y\) or \(xy+x+y=0\). The latter would make \(x\) a common root of \(F(X)\) and
+\[
+(X+1)^8F\!\left(-\frac{X}{X+1}\right)
+=X^8+12X^7+62X^6+180X^5+322X^4
++360X^3+248X^2+96X+16.
+\]
+Their resultant is \(2^{44}\ne0\), so the eight conjugates of \(\theta\) are distinct. Eliminating \(\beta\) from \(g(\beta)=0\) and
+\[
+X^2(\beta+2)^2-\beta X(\beta+2)+2=0
+\]
+gives \(4H(X)\), where
+\[
+H(X)=X^8-8X^7+26X^6-44X^5+53X^4
+-68X^3+64X^2-24X+4.
+\]
+Thus \(H\) is the minimal polynomial of \(\theta\). Its discriminant is \(2^{38}17^2\), while \(\operatorname{disc}(L)=2^{16}17^2\), so
+\[
+[\mathcal O_L:\mathbb Z[\theta]]=2^{11}.
+\]
+In particular this index is prime to 11, 13, 17, 19, and 23.
+
+Exact modular factorization of \(H\) gives:
+\[
+\begin{array}{c|c}
+p&\text{irreducible factor degrees, with multiplicity}\
+\hline
+11&4+4\\
+13&2+2+2+2\\
+17&1^2+1^2+2+2\\
+19&2+2+2+2\\
+23&2+2+2+2
+\end{array}
+\]
+The factors and irreducibility tests are checked in certificates/g35d_cm_minkowski_primes.py. Since the index is prime to these primes, these are the actual prime-ideal residue degrees in \(\mathcal O_L\). Thus only two prime ideals \(\mathfrak P_1,\mathfrak P_2\) of norm 17 can occur in a Minkowski representative; all other prime ideals over these five rational primes have norm greater than 27.
+
+For the real quartic, \(g(-4)=34\) and \(g(Y)\bmod17=(Y+4)^2(Y^2-4Y-3)\). Hence \((\beta+4)\) is the product of the unique prime \(\mathfrak p_2=(\beta+2)\) above 2 and the degree-one prime \(\mathfrak p_{17}=(17,\beta+4)\) above 17. Therefore
+\[
+\gamma=\frac{\beta+4}{\beta+2}\in\mathcal O_F,
+\qquad (\gamma)=\mathfrak p_{17},
+\qquad N_{F/\mathbb Q}(\gamma)=17.
+\]
+Its norm is positive, so its sign vector has even parity. The previously established full even-parity unit-signature subgroup lets us multiply \(\gamma\) by a unit to make it totally positive; thus \(\mathfrak p_{17}\) is narrow-principal. Since \(L/F\) is the narrow Hilbert class field, \(\mathfrak p_{17}\) splits:
+\[
+\mathfrak p_{17}\mathcal O_L=\mathfrak P_1\mathfrak P_2.
+\]
+By G-35B, all prime ideals above 2 are principal. Minkowski's bound is below 27, and the factorization table shows that every nonprincipal Minkowski representative must therefore be one of \(\mathfrak P_1,\mathfrak P_2\). Their product is principal, so their classes are inverse. Consequently
+\[
+\boxed{\operatorname{Cl}(L)=\langle[\mathfrak P_1]\rangle
+\text{ is cyclic of odd order}.}
+\]
+This determines the structure and a single generator, but not its order. In particular, class number one is not claimed. The exact modular factorization, Rabin irreducibility checks, discriminant, index, and primitive-element resultant are in certificates/g35d_cm_minkowski_primes.py.
