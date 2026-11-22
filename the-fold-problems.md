@@ -2622,3 +2622,8 @@ Use the smooth divisor \(P=V(T^2+S)\) on \(X=\operatorname{Spec}\mathbb F_2[S,T]
 ### G-4ao — exact-differential parity in the normal pole filtration
 
 In local coordinates \(S=t^2+p\), with residue field \(E=\mathbb F_2(t)\), one has \(d(c(t)p^{-r})=p^{-r}c'(t)dt+r c(t)p^{-r-1}dp\). For odd r, the leading normal term is \(c p^{-(r+1)}dp\); hence every even-index normal associated-graded layer is hit by exact differentials. Odd normal pole indices are the candidate surviving layers, matching the odd indices in G-4aj. The tangent term remains and Cartier/Frobenius has not yet been computed, so survival and Kato identification remain open.
+
+
+### G-4ap — tangent constraint on exact normal forms
+
+In \(L=E((p))\), \(E=\mathbb F_2(t)\), write \(g=\sum c_n(t)p^n\). Then \(dg=\sum c_n'p^n dt+\sum n c_np^{n-1}dp\). Since \(\ker(d/dt)=E^2\), an exact differential is purely normal exactly when every coefficient \(c_n\in E^2\). Thus \(dL\cap Ldp\) consists of normal terms \(c_np^{n-1}dp\) with n odd and \(c_n\in E^2\), i.e. even pole indices with square coefficients. This corrects any claim that arbitrary E-coefficients in even normal layers are removed in the actual quotient by exact forms. The leading-normal-symbol parity calculation G-4ao remains valid, but its lower-order tangent term cannot be discarded in the filtered quotient. Full Cartier comparison remains open.
