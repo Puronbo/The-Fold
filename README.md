@@ -1266,3 +1266,11 @@ has relative norm \(N_{L/F}(\alpha)=((\beta+4)/(\beta+2))(1+\beta)\), hence abso
 
 
 **G-4n — exceptional-place witness:** at P=T²−S, S becomes square in the residue field and z=TS/P, u=S/P give z²+u+Su²=(S²+S)/P, a genuine simple pole. This is not a full local reduction theorem.
+
+
+**G-4o — higher odd poles at the exceptional place:** at P=T²+S, the
+identity z=Tw/P^(m+1), u=w/P^(m+1) gives
+z²+u+Su²=(w²+wP^m)/P^(2m+1) for m≥1, producing arbitrary odd pole
+orders with square leading coefficient when w is a unit. At m=0 the
+coefficient is w²+w, not generally a square. This refines, but does not
+solve, the local quotient problem; see the quaternion-boundary note.
