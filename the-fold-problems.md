@@ -2573,3 +2573,7 @@ For each odd r, the classes \([S^n p^{-r}]\), n≥0, are linearly independent in
 
 ### G-4ag — complete exceptional local normal form
 The map \(\phi:F\to F/F^2\), \(x\mapsto[Sx^2]\), is bijective since \(F=F^2\oplus SF^2\). A finite backward recursion along each odd-core doubling chain reduces every principal part uniquely to the zeroth coordinate. Hence each chain cokernel is canonically F, with basis \([S^np^{-r}]\) for n≥0; the full local quotient has basis \(\{S^np^{-r}:n≥0, r\text{ odd positive}\}\). This supersedes the earlier statement that chain normal forms were open. Dual extensions in G-4ac are unique because phi is onto.
+
+
+### G-4ah — correction to local chain scope
+G-4ad–G-4ag classify the auxiliary quotient H₀ only. The full completed local quotient includes the additional square term \((S+p)F((p))^2\), because \((x+Ty)^2=x^2+(S+p)y^2\). Exact full quotient: \(F((p))/(F[[p]]+F((p))^2+(S+p)F((p))^2+\{r+Sr^2\})\). It is H₀ modulo the image of this extra term. The auxiliary basis is not yet a full local normal form. G-4r/G-4s remain the established full-quotient lower bounds.
