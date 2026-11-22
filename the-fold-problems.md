@@ -2300,3 +2300,13 @@ otinmathcal N^3) by UF-072O.
 - The G-12 cyclic quartic class in (W_2(K)/(F-1)W_2(K)) lifts through the surjection (W_3(K)/(F-1)\twoheadrightarrow W_2(K)/(F-1)). The lifted character modulo eight must have order eight because its reduction modulo four has order four. Hence the given quartic field is the quartic subfield of a cyclic octic extension.
 - For (1\to C_2\to C_8\to C_4\to1) with trivial coefficients (mathbb F_2), the restriction (H^1(C_8,mathbb F_2)\to H^1(C_2,mathbb F_2)) is zero. Five-term exactness forces the transgression (H^1(C_2,mathbb F_2)^{C_4}\to H^2(C_4,mathbb F_2)) to be injective, hence an isomorphism between one-dimensional spaces.
 - This is a proved finite-group example of a nonzero transgression. Still open: an explicit third Witt coordinate/equation for the octic field, and a Fold-specific Galois module realizing the same obstruction.
+
+### G-14 — explicit cyclic-octic equations
+- The G-12 quartic tower is the length-two ASW class \((s,s)\), since \((F-1)(u,w)=(u^2+u,w^2+w+u^3+u^2)\).
+- Its length-three lift \((s,s,0)\) gives
+  \[
+  u^2+u=s,\quad w^2+w=u^3+u,\quad
+  v^2+v=u^7+u^4+u^3w^2+u^3w+u^2w^2+u^2w+w^3+w^2.
+  \]
+- Translation by \((1,0,0)\in W_3(\mathbb F_2)\) gives the order-eight generator \(\sigma(u)=u+1,\ \sigma(w)=w+u,\ \sigma(v)=v+u^3+uw+u\). Its square sends \((u,w,v)\) to \((u,w+1,v+w)\), and its fourth power sends \(v\) to \(v+1\).
+- This closes the explicit-equation gap in G-13. The transgression is nonzero by the five-term argument already recorded there; connecting it to a Fold-specific Galois module remains open.
