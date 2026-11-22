@@ -2918,3 +2918,6 @@ Thus H=X₁ and X=X_t satisfy [H,X]=X, H^[2]=H, X^[2]=0. On the ambient logarith
 ρ_v(g,h)=(X_v(g)+ftg, X_v(h)).
 \]
 It is a restricted representation. It is not yet a representation on the Kato-style quotient: exact forms are stable, but the AS/Frobenius denominator need not be, since X_v(m²+m)=X_v(m). Determine the precise obstruction / any stable replacement before claiming quotient action.
+
+
+**Correction to G-4ce quotient caveat:** the denominator is B¹+(Φ−1)M for differential Frobenius Φ, not a scalar Artin–Schreier image. Test stability by reducing L_X(Φ(m)−m) modulo that denominator. For m=pⁿdlogt this is (p^{2n}+pⁿ)ft dlogt, while Φ(L_Xm)=p^{2n}Sf²dlogt. Noncommutation is established; denominator instability is not yet proved because exact forms may absorb the discrepancy.
