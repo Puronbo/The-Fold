@@ -1292,3 +1292,6 @@ the quaternion-boundary arithmetic note.
 
 
 **G-4s — explicit exceptional-place global family:** the completed local obstruction at P=T²+S descends to global independence because a global denominator relation would persist after completion. In particular, {S^(2n+1)/(T²+S)^(2m+1): n≥0, m≥1} is an explicit F₂-linearly independent family in the global quotient Q. Together with G-4k, this gives another concrete family within the already countably infinite-dimensional quotient; no complete basis is claimed.
+
+
+**G-4t — combined finite-place independent system:** for every irreducible R where S remains nonsquare in the residue field, odd-pole residue lifts form an independent family. For every R_c=T²+Sc², c∈F₂(S)×, the exceptional-place obstruction gives the independent family S^(2n+1)/R_c^(2m+1), n≥0, m≥1. Localization proves the union is jointly independent globally. This combines separable and inseparable places but does not classify every square-residue irreducible or provide a full Hamel basis; see the quaternion-boundary note.
