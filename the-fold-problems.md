@@ -2477,3 +2477,7 @@ At every place \(v_{T-a}\), \(a\in\mathbb F_2(S)\), the residue field is \(\math
 
 ### G-4l — separable-place refinement
 For every monic separable irreducible P in F₂(S)[T], S remains nonsquare in its finite separable residue extension. Hence every element z²+u+Su² has no pole or even pole order at P. Choosing an F₂-basis of the residue field and polynomial lifts r(T), the classes r(T)/P^(2n+1) are jointly independent as P ranges over separable irreducibles and n≥0. This refines G-4k but is not a complete quotient basis.
+
+
+### G-4m — exact local parity criterion
+At an irreducible P with residue E=F₂(S)[T]/(P), all denominator poles are even exactly when S is nonsquare in E. If S is square, lift a root r, write r²+S=PC, and choose w with C̄w̄²+w̄≠0; then z=rw/P and u=w/P give z²+u+Su²=(Cw²+w)/P, a simple pole. Exceptional places are necessarily inseparable. Full local quotient structure remains open.
