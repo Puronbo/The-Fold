@@ -278,7 +278,7 @@ Use three distinct holdouts:
 - unseen pole orders (higher-order-to-simple-pole reduction);
 - unseen rational numerators/denominators (avoid memorizing coefficient patterns).
 
-The learning targets are p-basis decomposition, C0 orbits, eventual simple-pole coordinates, and residue-field predictions. The full section-change coinvariant is still open, so the stable residue module is supervised only as the exact pure-scaling quotient. Do not label it as the full-group invariant space until the other section-change parameters have been checked.
+The full section-change coinvariant is now computed in G-4ct. The correct target is the Frobenius-normalized orbit sum across exponents \(-q,-2q,-4q,\ldots\), not a residue at one exponent. The exact rational residue generator covers each finite residue field; add orbit-stage sequences and adjacent \((\alpha,\alpha^2)\) relation pairs to train the normalized sum.
 
 
 ## 12. Learning the finite section-change Cartier tower
@@ -431,7 +431,7 @@ F/(\wp(F)+SF^2),&n=0,\\
 0,&n>0.
 \end{cases}
 \]
-This gives the exact graded targets for invariant linear readouts. The extension between different odd layers and the zero mode is still not canonically split; models should first learn the graded residue readout, then separately model the filtered extension cocycles.
+G-4ct upgrades these graded targets to the full canonical coinvariant. The invariant readout uses Frobenius-normalized sums over each exponent-doubling orbit, together with the zero-mode \(F/\wp(F)\) coordinate. There is no remaining algebraic filtered-extension cocycle to learn in the coinvariant itself; higher coordinate changes can still be studied on the original quotient before taking coinvariants.
 
 ### Rational coefficient encoder
 
