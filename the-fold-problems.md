@@ -2673,3 +2673,8 @@ The chain direct limit \(\varinjlim_j(E/E^{2^{j+1}},c\mapsto c²)\) is canonical
 ### G-4ax — mixed B₂ monomial formula
 
 For \(f=cp^n\), \(c=c_0²+t c_1²\), inverse Cartier of df is \(t c_1^4p^{2n}dt+n(c_0^4+t²c_1^4)p^{2n-1}dp\). Even n gives a pure tangent generator; odd n gives tangent plus normal terms. For n=−r with r odd positive, the mixed normal coefficient is \(t²E^4=S F²\), paired with tangent coefficient \(tE^4\) at pole index 2r. This matches the coefficient space in G-4aj but only as one component of a mixed B₂ relation; it is not independently killed.
+
+
+### G-4ay — logarithmic mixed generator
+
+For r odd positive, \(C^{-1}(d(cp^{-r}))=c_0^4p^{-(2r+1)}dp+S c_1^4p^{-2r}d\log(t/p)\), where \(c=c_0²+t c_1²\), S=t² and c₁⁴∈F². The mixed term is a logarithmic differential with coefficient in \(S F²\), matching the higher-chain coefficient in G-4aj. This identifies the geometric source of that coefficient but does not yet prove completeness of all mixed relations.
