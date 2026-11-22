@@ -328,3 +328,16 @@ This suggests replacing raw coefficient vectors by a residue-aware latent repres
 - retain the distinguished \(S=0\) block separately.
 
 This representation is canonical for the pure-scaling subgroup. It becomes a canonical feature space for the full section-change group only after the open G-4cr/G-4cs residue-invariance problem is settled. The learning system must preserve this distinction.
+
+
+## 14. Latest rational pullback stress test
+
+The exact finite-section test harness was run with:
+- 12 rational inputs \(a,e,f\in\mathbb F_2(S)\);
+- irreducible denominator factors of degree at most 3;
+- pullback expansion through \(q^9\);
+- all nine nonconstant coefficients checked against the proposed \(C_0^{v_2(m)+1}\)-torsion bound.
+
+All 108 coefficient checks passed. A separate generated sample of 100 rational inputs produced 900 coefficient targets with observed Cartier-torsion indices 1, 2, 3, and 4. This is bounded computational evidence only; it does not prove the all-orders pattern or identify the full section-group coinvariant.
+
+G-4ct now identifies the stable target exactly as \(\Omega_F^1/B_\infty\). For the model, this suggests a two-stage encoder: first map a rational coefficient into the Cartier-stable differential module, then express the stable component through its closed-point residue coordinates. The full section group is not yet certified to act trivially on that module.
