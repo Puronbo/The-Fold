@@ -1519,3 +1519,6 @@ the quaternion-boundary arithmetic note.
 
 
 **G-4ce — restricted 2-map and logarithmic action:** X_v=tv∂ₜ, v=e+ft, satisfies X_v^[2]=X_{ev}; hence [H,X]=X, H^[2]=H, X^[2]=0. Its Lie derivative on (g dlogt+h dlogp) is (X_v(g)+ftg, X_v(h)), a restricted representation on the ambient logarithmic module. The Kato-style quotient action is not yet established: exact forms are stable, but AS/Frobenius relations may not be.
+
+
+**G-4ce quotient caveat correction:** test stability against differential Frobenius Φ, not scalar AS. For m=pⁿdlogt, L_X(Φm−m)=(p^{2n}+pⁿ)ft dlogt, whereas Φ(L_Xm)=p^{2n}Sf²dlogt. Noncommutation is shown; quotient instability still requires reduction modulo exact forms.
