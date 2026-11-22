@@ -1316,3 +1316,6 @@ the quaternion-boundary arithmetic note.
 
 
 **G-4aa — finite-slot dual obstruction:** no nonzero F₂-linear functional supported on finitely many negative Laurent coefficient slots annihilates the local denominator image. Any separating dual certificate must have infinite slot support. This does not imply local surjectivity; the quartic local quotient remains unresolved.
+
+
+**G-4ab — infinite-support local dual annihilator:** a nonzero functional on the exceptional completed principal-part quotient can be built recursively along the exponent chain −1, −2, −4, … using the injective map (x\mapsto[Sx^2]\) from (F=\mathbb F_2(S)) to (F/F^2). It annihilates (z^2+u+Su^2), proving the local quotient is nonzero. The construction is noncanonical and does not classify the quotient.
