@@ -986,3 +986,18 @@ W_0\ \longleftarrow\ F_0\ \longrightarrow\ W_1
 where the maps from F_0 are identity to W_0 and phi to W_1, and for j≥1 the maps from F_j are q to W_j and phi to W_{j+1}. This is a genuine categorical colimit presentation; it avoids pretending that phi descends to F/F² (it generally does not).
 
 Dualizing this presentation gives exactly the compatibility equations of G-4ac. Thus G-4ac is the algebraic dual of this canonical cokernel model. This description is canonical, but it is still a presentation rather than a simpler closed-form evaluation of each cokernel.
+
+
+## 30. G-4ae — each odd-core chain cokernel has countably infinite dimension
+
+Let C denote the cokernel of the chain map T_r in G-4ad. Its presentation is independent of the odd chain label r.
+
+The target of T_r is a countable F₂-vector space: F=F₂(S) is countable, as is F/F², and a countable direct sum of countable sets is countable. Hence C is countable as a set and has dimension at most aleph₀.
+
+On the other hand, the algebraic dual C* is the space of compatible coefficient-functional sequences from G-4ac. The projection from this space to the initial functional λ₀∈F* is surjective, because phi is injective and each prescribed functional on phi(F) extends to F/F². Since F has countably infinite F₂-dimension, |F*|=2^{aleph₀}. Thus |C*|≥2^{aleph₀}; the reverse inequality follows because C is countable. Consequently |C*|=2^{aleph₀}, and since the scalar field is finite, dim_F₂ C*=2^{aleph₀}.
+
+In particular C cannot be finite-dimensional. Together with its countable upper bound,
+\[
+\boxed{\dim_{\mathbb F_2} C=\aleph_0.}
+\]
+All odd-core chain cokernels are canonically isomorphic by their identical presentations. There are countably infinitely many odd r, so the full local scalar quotient is a direct sum of countably infinitely many countably infinite-dimensional chain cokernels. This determines the dimension of each summand, but does not supply a canonical basis or explicit normal forms.
