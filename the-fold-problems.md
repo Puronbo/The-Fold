@@ -3052,3 +3052,16 @@ N_{odd}(x,y)=\big(S(fa+eb)^2,\ (ec)^2+(Sfd)^2\big).
 Its first-coordinate image is exactly \(SF²\), while its second coordinate is already killed at first order. Hence the two-diagonal associated-graded coinvariant approximation is zero at even negative layers and \(F/SF²\simeq\Omega_F^1/dF\) at odd negative layers. The latter identification is \(x\mapsto (x/S)dS\), using \(\partial_S(F)=F²\).
 
 **Open:** compute the full coinvariant quotient after higher Frobenius/divided-power diagonals, mixed-depth composition terms, and the zero-mode boundary. The iterated scaling \(S\mapsto S(1+p²)\) suggests a Cartier/Frobenius tower; its complete image is not yet classified.
+
+
+### G-4cp — pure-scaling p-basis tower
+
+The section change \(t\mapsto t(1+p)\) sends \(S\mapsto S(1+p²)\). On a residual odd-layer coefficient \(x=a^{2^h}\), h≥1, its first possible correction is \(p^{2^{h+1}}(Sa')^{2^h}\). The lower quotient corrections vanish. Since \(a'\) ranges over \(F²\), the root-coordinate relation image is \(\ker C_0=SF²\), where \(C_0(z_0²+Sz_1²)=z_0\). Repeating the reduction gives the pure-scaling tower \(\varinjlim(F,C_0)\simeq F/\bigcup_n\ker C_0^n\). This is not yet the full section-group coinvariant.
+
+### G-4cq — stable quotient as finite closed-point residue data
+
+For \(F=\mathbb F_2(S)\), \(C_0(f)^2=f+Sf'\). The operator contracts a Q-pole of order m to order at most \(\lceil m/2\rceil\) for Q≠S, and is invertible on simple-pole coefficients \(P/Q\) when Q≠S, via \(\bar A²=\bar S\,\overline{Q'}\,\bar P\). The S-principal-part block is nilpotent (pole order at most \(\lfloor m/2\rfloor\)); polynomial degree is halved and leaves only constants. Therefore
+\[
+F/\bigcup_n\ker C_0^n\simeq \mathbb F_2\oplus\bigoplus_{Q\ne S}\mathbb F_2[S]/(Q).
+\]
+This is the finite closed-point residue module of the affine S-line, with the constant block accounting for S=0. The corresponding differential residue is obtained from \(x=a²\mapsto (a/S)dS\) after Cartier. The pure-scaling quotient is now explicit; whether other section-change parameters impose additional relations is open. Adds exact rational-function verifier tools/cartier_stable_part.py.
