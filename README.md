@@ -1510,3 +1510,6 @@ the quaternion-boundary arithmetic note.
 
 
 **G-4cb — second isolated diagonal:** for q=pʳ and t'=t(1+q(e+ft)), the coefficient coordinate moves at q². With D_v=S(e²+Sf²)∂_S, the second diagonal at p^{2r} is N_odd(x,y)=(Sf²x+D_vx,e²y+D_vy), N_even(d)=e²d+D_vd. It is parity-independent, unlike the first diagonal. Simultaneous-depth cross terms remain open.
+
+
+**G-4cc — two-depth composition:** composing t↦t(1+pʳv) then t↦t₁(1+pˢu), with v=e_v+f_vt and u=e_u+f_ut, generates the mixed coefficient e_uv at depth r+s. Reversing order gives e_vu; the leading order-sensitive term is t(e_uf_v+e_vf_u). This is an associated-graded calculation; resonances with quadratic diagonals require adding both contributions.
