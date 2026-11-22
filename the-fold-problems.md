@@ -2713,3 +2713,8 @@ The mixed logarithmic family starts already in B₁: for odd r, \(d(cp^{-r})\) w
 ### G-4bf — coefficient-space match with G-4aj
 
 For odd m≥3, set j=v₂(m−1). The pure-normal coefficient space is \(F^{2^j}\), while the mixed-normal coefficient space is \(S^{2^{j-1}}F^{2^j}\); together they split \(F^{2^{j-1}}\). Taking the unique \(2^{j-1}\)-st root identifies the mixed component with \(S F²\), exactly the G-4aj higher-chain coefficient space. The tangent partner must still be controlled to prove independence and completeness in the full quotient.
+
+
+### G-4bg — index-one coefficient bridge
+
+With E=F(t), t²=S, the additive map \(\rho(a+bt)=a+Sb²\) induces an isomorphism \(E/\wp(E)\cong F/\wp(F)\). It carries Artin–Schreier images to Artin–Schreier images and has kernel exactly \(\wp(E)\). This matches the index-one coefficient in G-4aj. Together with the higher odd-pole \(S F²\) match, every coefficient space agrees; equality of all relations remains to be proved.
