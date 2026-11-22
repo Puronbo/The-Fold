@@ -1189,3 +1189,6 @@ For the cyclic extension in G-18 and any (possibly nontrivial) \(\mathbb F_2[C_{
 
 
 **Galois cohomology — degree-16 ramification (G-22):** the explicit cyclic degree-16 Artin–Schreier–Witt cover has upper breaks \((1,2,4,8)\), lower breaks \((1,3,11,43)\), different exponent \(100\), and genus \(35\). The conductor-discriminant sum independently gives the same different exponent. See the-fold-automorphic-and-hopf-galois-applicability.md for the calculation and scope.
+
+
+**Galois cohomology — tower \(2\)-rank (G-23):** all four curves in the one-point cyclic \(2\)-power tower have geometric \(2\)-rank zero by Deuring–Shafarevich. Their genera are \(0,1,7,35\); the genus-one intermediate curve is supersingular. The higher-genus Newton polygons and \(a\)-numbers remain undetermined.
