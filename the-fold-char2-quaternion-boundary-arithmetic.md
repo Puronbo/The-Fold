@@ -2732,3 +2732,74 @@ whereas
 \Phi(\mathcal L_{X_v}m)=p^{2n}S f²\,ω.
 \]
 This exhibits the noncommutation but does not by itself prove that the denominator is not stable, since exact forms may absorb the discrepancy. The quotient-action question remains open pending reduction modulo B¹+(Φ−1)M.
+
+
+## 83. G-4cf — explicit failure of quotient stability
+
+We now settle the quotient-action test left open in G-4ce. Retain
+[
+M=L,omegaoplus L,eta,quad L=E((p)),quad
+R=B^1+(Phi-1)M,
+]
+where (omega=dlog t), (eta=dlog p),
+(B^1=dL), and
+[
+Phi(p^j(A,B))=p^{2j}(A^2,B^2).
+]
+Let (X_v=tvpartial_t), with (v=e+ft), and let
+[
+ho_v(A,B)=(X_v(A)+ftA, X_v(B)).
+]
+
+Choose the simplest nonzero t-direction, (v=t), so (e=0,f=1) and
+(X_t=t^2partial_t=Spartial_t). Take any negative odd integer
+(n), and set (m=p^nomega). Then
+[
+r=(Phi-1)m=p^{2n}omega+p^nomegain R.
+]
+Since (ho_t(omega)=tomega) and (X_t(p)=0),
+[
+ho_t(r)=p^{2n}tomega+p^ntomega.
+]
+The first summand is exact:
+[
+p^{2n}tomega=p^{2n}dt=d(p^{2n}t),
+]
+because (2n=0) in the coefficient of (dlog p). Therefore
+[
+[ho_t(r)]_M=[p^ntomega] quad	ext{mod }B^1.
+]
+
+At the negative odd exponent (n), the initial relation space of R is
+exactly
+[
+G={(tb,a+bt):a,bin F},qquad E=Foplus tF.
+]
+The coefficient pair of (tomega) is ((t,0)), and it is not in G:
+the first coordinate forces (b=1), while the second would force
+(a=t
+otin F). Thus its class in the odd graded quotient is nonzero.
+By the strictness result G-4bv, this nonzero initial class cannot be
+cancelled by higher-exponent terms of a putative relation in R.
+Consequently
+[
+oxed{ho_t(R)\not\subseteq R.}
+]
+More generally the same witness works for every (v=e+ft) with
+(f\ne0): after removing the exact (p^{2n}ft\omega) term, the
+surviving odd-layer class is ((0,f)\in Q_n\simeq F^2).
+
+**Conclusion.** The restricted Lie-algebra representation on the ambient
+logarithmic module does not descend to the Kato-style quotient. The
+failure is already visible in the first t-direction and at every negative
+odd layer. This does not contradict functoriality of Cartier under actual
+morphisms: an infinitesimal derivation need not preserve the Frobenius
+relation subspace. Any quotient-level symmetry must be restricted to the
+stabilizer of R, or formulated using a different, genuinely functorial
+action; neither replacement is asserted here.
+
+**Correction to the earlier G-4ce caveat.** The scalar
+Artin–Schreier observation involving (m^2+m) is irrelevant to this
+denominator. The failure above is proved directly for
+(R=B^1+(Phi-1)M), using its strict negative associated-graded
+relations.
