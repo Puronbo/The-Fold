@@ -2296,3 +2296,7 @@ otinmathcal N^3) by UF-072O.
 - For trivial coefficients \(\mathbb F_2\), \(D=0\) and norm \(D^3=0\), hence \(H^1=H^2=\mathbb F_2\).
 - The nonzero target is not itself a nonzero transgression; an invariant class in \(H^1(G_L,\mathbb F_2)^{C_4}\) must still be constructed and evaluated.
 
+### G-13 — cyclic octic lift and explicit nonzero transgression
+- The G-12 cyclic quartic class in (W_2(K)/(F-1)W_2(K)) lifts through the surjection (W_3(K)/(F-1)\twoheadrightarrow W_2(K)/(F-1)). The lifted character modulo eight must have order eight because its reduction modulo four has order four. Hence the given quartic field is the quartic subfield of a cyclic octic extension.
+- For (1\to C_2\to C_8\to C_4\to1) with trivial coefficients (mathbb F_2), the restriction (H^1(C_8,mathbb F_2)\to H^1(C_2,mathbb F_2)) is zero. Five-term exactness forces the transgression (H^1(C_2,mathbb F_2)^{C_4}\to H^2(C_4,mathbb F_2)) to be injective, hence an isomorphism between one-dimensional spaces.
+- This is a proved finite-group example of a nonzero transgression. Still open: an explicit third Witt coordinate/equation for the octic field, and a Fold-specific Galois module realizing the same obstruction.
