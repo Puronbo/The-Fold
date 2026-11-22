@@ -1258,3 +1258,25 @@ d\log(\bar S)=\frac{d(T²)}{T²}=0
 because the absolute differential of a square vanishes in characteristic two. Thus the ordinary residue-field logarithmic differential of the second entry S of the symbol \([aS,S)_2\) is zero at P.
 
 This is a concrete warning against expecting the tame/logarithmic residue of the second entry to detect the G-4aj local classes. The vanishing does not prove that the quaternion class is unramified or trivial: the coefficient a may have poles, and the p-primary Brauer class can carry wild information invisible to this residue differential. The next local task is to compute the Kato filtration/refined Swan data of \([aS,S)_2\) for representatives a in the G-4aj normal-form basis, and determine whether the filtration detects all or only part of the local quotient. No identification of the quotient with a Kato graded piece is claimed here.
+
+
+## 38. G-4am — the exceptional symbol has differential representative \(a\,dp\)
+
+Let \(K=\mathbb F_2(S,T)\), \(P=(p)\) with \(p=T^2+S\), and let \(K_P\) be the completion. In absolute Kähler differentials over \(\mathbb F_2\), the identity \(p=T^2+S\) gives
+\[
+dp=d(T^2)+dS=dS,
+\]
+since the characteristic is two. Therefore
+\[
+d\log S=\frac{dS}{S}=\frac{dp}{S},
+\qquad
+(aS)d\log S=a\,dp.
+\]
+Under the standard characteristic-two differential-symbol map for the quaternion symbol, \([x,b)_2\) is represented by \(x\,d\log b\). Thus the local differential representative of \([aS,S)_2\) at P is exactly
+\[
+\boxed{a\,dp.}
+\]
+
+This identifies the direction in which the exceptional symbol can carry wild information: although the residue image \(\bar S=T^2\) has \(d\log\bar S=0\), the absolute differential before reduction is \(dp/S\), and multiplication by the first slot \(aS\) leaves \(a\,dp\). In particular, for a Laurent principal part \(a=c p^{-r}\), the representative is \(c p^{-r}dp\); its pole order is visible in the uniformizer differential.
+
+**Scope:** this is an exact identity of differential representatives. It does not yet identify \(K_P/(\mathcal O_P+\mathcal D_P)\) with a Kato cohomology group or a Kato graded piece. The remaining calculation is to pass from \(a\,dp\) to the quotient defining characteristic-two \(H^2\), track Cartier/Frobenius relations and exact differentials, and compare the resulting filtration with the G-4aj normal form. In particular, no injectivity or surjectivity from the G-4aj additive quotient is claimed.
