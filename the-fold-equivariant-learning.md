@@ -363,3 +363,23 @@ A useful learning task is to predict the Hasse-power level \(v_2(n)\) from the t
 C_0(\Delta_{2n})=S^nu^na^{[n]}+Sf^2u^{n-1}B_{n-1}.
 \]
 The exact verifier can check these outputs symbolically. The remaining even-coefficient cancellation and the full-group residue invariance remain open; the model should help find the needed identity but cannot substitute for its proof.
+
+
+## 16. Hasse–Taylor constraints as symbolic supervision
+
+G-4cu proves two new exact targets for rational-function learning:
+- every odd q-coefficient \(\Delta_m\) of the section pullback lies in \(SF²=\ker C_0\);
+- if \(2^k\mid n\), the truncated Hasse sum \(B_{n-1}(a)=\sum_{i<n}S^ia^{[i]}\) is a \(2^k\)-th power.
+
+For even \(m=2n\), the first Cartier root is
+\[
+C_0(\Delta_{2n})=S^nu^na^{[n]}+Sf²u^{n-1}B_{n-1}(a).
+\]
+This is a useful exact target for the next model, but the cancellation that would prove the full even-coefficient torsion bound is still open.
+
+The rational verifier now checks the odd-coefficient and Hasse-power statements as theorem tests, separately from the conjectural even-coefficient bound. Training examples should label these three categories separately:
+1. proved odd-coefficient exactness;
+2. proved Hasse-sum Frobenius level;
+3. exploratory high-order even torsion.
+
+This prevents the model from treating the conjecture as a theorem merely because the bounded stress tests have not falsified it.
