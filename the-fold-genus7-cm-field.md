@@ -172,3 +172,30 @@ the ideals \((\beta)\) and \((\beta-2)\) factor as the prime above 2 times \(\ma
 The degree-eight Frobenius polynomial therefore factors modulo 7 as four irreducible quadratics, matching the relative splitting pattern: two degree-one primes inert, and one degree-two prime split. The exact modular products and irreducibility checks are in `certificates/g33_cm_artin_splitting.py`.
 
 This is a concrete Artin reciprocity law for the genus-seven simple factor's CM field. It does not yet determine the full class group of the degree-eight CM field.
+
+
+## G-34 — oddness of the degree-eight CM class number
+
+Put \(F=\mathbb Q(\beta)\) and \(L=\mathbb Q(\pi)\). The extension \(L/F\) is quadratic, unramified at every finite place, and ramified at all four real places. We know \(h_F=1\) and, from G-31, the unit-signature image has order eight.
+
+At every finite place, an unramified local extension has surjective norm on unit groups. At each real place that becomes complex, the local norm subgroup is \(\mathbb R_{>0}\). The Hasse norm theorem therefore gives
+\[
+E_F\cap N_{L/F}(L^\times)=E_F^+,
+\]
+the totally positive units, and
+\[
+[E_F:E_F\cap N(L^\times)]=[E_F:E_F^+]=8.
+\]
+
+The ambiguous class number formula for a quadratic extension, counting infinite ramified places, now gives
+\[
+|\operatorname{Cl}(L)^{\operatorname{Gal}(L/F)}|
+=h_F\frac{2^{t-1}}{[E_F:E_F\cap N(L^\times)]}
+=1\cdot\frac{2^3}{8}=1.
+\]
+For any ideal class \(c\) of \(L\), its norm is trivial because \(h_F=1\). Hence complex conjugation sends \(c\) to \(c^{-1}\). Its fixed subgroup is precisely the 2-torsion subgroup of \(\operatorname{Cl}(L)\). Since the fixed subgroup is trivial,
+\[
+\boxed{\operatorname{Cl}(L)[2]=0,\qquad h_L\text{ is odd}.}
+\]
+
+This does not determine the odd part of the class group, nor prove that \(h_L=1\). The ambiguous class formula and its infinite-place convention are stated, for example, in Martinet's notes on units in quadratic fields, Theorem 0.1.
