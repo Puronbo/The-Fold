@@ -5,10 +5,9 @@ Builds the complete degree-four initial span of N^3:
   (i) cubic products with one quadratic correction,
   (ii) n1 or n4 times two first-order generators,
   (iii) all fourfold products of first-order generators.
-Then tests in_4(n1*n4). Q7 dh factor is corrected. A fresh independent
-reconstruction of this matrix gives ranks (172,173) at each of five listed
-and additional nonzero F_256 specializations. These are specialization ranks
-only, hence generic lower bounds; no generic upper bound is certified.
+Then tests in_4(n1*n4). Q7 dh factor is corrected. A verified execution of the three listed nonzero F_256 specializations gives
+ranks (172,173) in every case. These are specialization ranks only, hence
+generic lower bounds; no generic upper bound is certified.
 """
 from itertools import combinations_with_replacement
 import sympy as sp
