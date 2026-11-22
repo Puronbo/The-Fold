@@ -1052,9 +1052,12 @@ This establishes completeness of the test space, not its rank. If the target in4
 
 ## UF-072P — Fresh degree-four specialization lower bounds
 
-Rebuilt the complete 350-column degree-four initial matrix from the audited linear and quadratic source expansions: 84 corrected triple products, 56 products involving n1 or n4 and a pair of first-order generators, and 210 fourfold products. The common coefficient matrix has 470 source/Laurent rows. Independently reconstructed the matrix and evaluated it over F_256=F_2[u]/(u^8+u^4+u^3+u^2+1) at five distinct nonzero parameter specializations. Every specialization gives
+Rebuilt the complete 350-column degree-four initial matrix from the audited linear and quadratic source expansions: 84 corrected triple products, 56 products involving n1 or n4 and a pair of first-order generators, and 210 fourfold products. The common coefficient matrix has 470 source/Laurent rows. Independently reconstructed the matrix and evaluated it over F_256=F_2[u]/(u^8+u^4+u^3+u^2+1) at three listed nonzero parameter specializations. Every specialization gives
 \[
 \operatorname{rank}(M)=172,\qquad \operatorname{rank}(M\mid v)=173,
 \quad v=\operatorname{in}_4(n_1n_4)=A^2c^3d/(ai).
 \]
 These are exact finite-field specialization ranks, so they imply the generic lower bounds rank_K(M)>=172 and rank_K(M|v)>=173. They do not prove rank_K(M)<=172. Thus the generic strict rank gap, and hence nonmembership of n1*n4 in N^3, is not yet established. The next task is a reproducible symbolic upper-bound certificate for rank_K(M), ideally matching 172.
+
+
+**Execution audit.** The committed certificate's actual three listed tuples were executed against its 350-column/470-row construction. The outputs were (172,173) for each tuple. The earlier count of five was a documentation error; only these three cases are claimed.
