@@ -1592,3 +1592,6 @@ A machine-learning bridge is specified: exact symbolic feature coordinates, filt
 **G-4cr — associated-graded coinvariants:** every negative even layer and every negative odd second coordinate is killed; the negative odd first coordinate survives exactly as \(\mathcal R=\bigoplus_Q k_Q\) after the Cartier-nilpotent tower is removed. At exponent zero only \(F/(\wp(F)+SF^2)\) survives. The filtered extension between these graded pieces is not yet classified.
 
 **G-4cs — rational residue features:** tools/residue_feature_data.py generates exact rational-function samples \(x=N/D\) with prescribed residue \(\alpha\in k_Q\) for \((x/S)dS=\alpha Q'/Q\,dS\), and stores the trace-determined infinity residue.
+
+
+**G-4cs — rational residue-feature generator:** tools/residue_feature_data.py emits exact rational coefficient examples \(x=S\alpha Q'/Q\), with prescribed finite residue \(\alpha\in k_Q\) and trace-determined infinity residue. A direct arithmetic check covered 14 irreducibles through degree five and 52 basis residue elements.
