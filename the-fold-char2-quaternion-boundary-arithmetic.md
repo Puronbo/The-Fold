@@ -1394,3 +1394,27 @@ lies in the normal/conormal direction. This is the geometric reason the residue-
 The smoothness of P, the conormal sequence, the identification of its conormal generator with dp, and the representative identity \((aS)d\log S=a\,dp\) are exact. The assertion that the G-4aj quotient is a Kato graded object is **not** proved. In particular, the associated-graded Cartier calculation, filtration comparison, and closed-point gluing remain open.
 
 The efficiency gain sought here is structural: one geometric filtration should simultaneously organize the local computation, the proof of independence, and the compatibility checks. If the associated-graded calculation fails to reproduce G-4aj, that failure is a diagnostic that the proposed symbol-to-quotient bridge is incomplete, rather than a reason to force an algebraic identification.
+
+
+## 40. G-4ao — first pole-graded calculation: exact differentials eliminate even normal pole layers
+
+Choose an equicharacteristic coefficient-field coordinate \(t\) lifting the residue parameter T, so locally \(S=t^2+p\), with residue field \(E=\mathbb F_2(t)\). The conormal generator is \(dp\), and \(dt\) is tangent. Filter absolute one-forms by pole order in p, with normal layer of pole index m represented by \(c p^{-m}dp\), \(c\in E\).
+
+For a lifted coefficient \(c(t)\) and integer r≥1,
+\[
+d(c(t)p^{-r})
+=p^{-r}c'(t)dt-r c(t)p^{-r-1}dp.
+\]
+In characteristic two, the leading normal term is present exactly when r is odd:
+\[
+\operatorname{in}_{\mathrm{nor}}d(c(t)p^{-r})=
+\begin{cases}
+c(t)p^{-(r+1)}dp,&r\text{ odd},\\
+0,&r\text{ even}.
+\end{cases}
+\]
+(The sign is immaterial in characteristic two.) Since c ranges over all residue coefficients, every even-index normal graded layer \(m=r+1\) is hit by a leading exact differential. Thus the associated-graded quotient by exact forms has no even-index normal layer; odd normal pole indices are the candidate surviving layers.
+
+This parity calculation gives a geometric explanation for why the G-4aj normal form is indexed by odd r: it is already forced at the first associated-graded stage by the derivative of the normal parameter. It does **not** yet prove that every odd layer survives the full logarithmic Cartier quotient, nor does it identify the additive G-4aj quotient with Kato cohomology. The tangent term \(p^{-r}c'(t)dt\) is one pole level lower and must be tracked in the filtered complex; the next step is to compute its interaction with Cartier and Frobenius, rather than discard it.
+
+**Coordinate caveat:** this calculation is made after choosing a coefficient field and a lift t. The associated graded and the parity statement are intrinsic, while the displayed splitting into dt and dp depends on that choice.
