@@ -2896,3 +2896,12 @@ For t₁=t(1+pʳv), t₂=t₁(1+pˢu), with v=e_v+f_vt and u=e_u+f_ut, the leadi
 f_utv+vu=e_uv.
 \]
 Reversing order gives e_vu; their characteristic-two difference is t(e_uf_v+e_vf_u). This is a two-depth associated-graded composition result. When r+s resonates with 2r or 2s, add this generated coefficient to the intrinsic quadratic diagonal. Full higher commutator and coefficient-field corrections remain open.
+
+
+### G-4cd — Lie bracket of infinitesimal section changes
+
+For E=F(t), t²=S, F=F₂(S), define X_v=tv∂ₜ for v=e_v+f_vt. Then
+\[
+[X_v,X_u]=X_{t(e_vf_u+e_uf_v)}.
+\]
+In basis H=1, X=t of the parameter space, [H,X]=X and [H,H]=[X,X]=0. This is the two-dimensional nonabelian affine Lie algebra over F; its center is zero and derived algebra is Ft. Giving a parameter depth r yields a graded bracket of degree r+s. This identifies the associated-graded infinitesimal algebra, not the full nonlinear group; characteristic-two exponential/logarithm shortcuts are unavailable without further work.
