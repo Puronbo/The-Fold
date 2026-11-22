@@ -2384,3 +2384,10 @@ Thus it is surjective, with kernel exactly the norm image. In Jordan form it kil
   \]
 - Counts for degrees 8–10 independently check the reconstructed polynomial. Exact reproducible script: `certificates/g24_genus7_weil_polynomial.py`.
 - This determines the genus-seven Jacobian's Frobenius polynomial/isogeny class, but not its simple-factor decomposition or the genus-35 Jacobian. Derivation and Weil reference: [Galois applicability note](the-fold-automorphic-and-hopf-galois-applicability.md).
+
+
+### G-26 — genus-seven Jacobian isogeny factors and Newton polygon
+- Factors the G-25 Weil polynomial as \((1+2T^2)^2(1+2T+2T^2)Q(T)\), with the explicit degree-eight factor Q.
+- The Jacobian is isogenous to the product of two copies of the trace-zero supersingular elliptic class, the G-24 trace-minus-two elliptic class, and a four-dimensional factor with polynomial Q. No simplicity claim is made for the latter.
+- The exact 2-adic Newton polygon has vertices \((0,7),(4,4),(10,1),(14,0)\), giving slopes \(1/4\) (multiplicity 4), \(1/2\) (multiplicity 6), and \(3/4\) (multiplicity 4).
+- Hence the Jacobian has p-rank zero but is not supersingular. Adds "certificates/g26_genus7_newton_polygon.py"; the genus-35 Jacobian remains open.
