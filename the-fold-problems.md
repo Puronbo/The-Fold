@@ -2921,3 +2921,25 @@ It is a restricted representation. It is not yet a representation on the Kato-st
 
 
 **Correction to G-4ce quotient caveat:** the denominator is B¹+(Φ−1)M for differential Frobenius Φ, not a scalar Artin–Schreier image. Test stability by reducing L_X(Φ(m)−m) modulo that denominator. For m=pⁿdlogt this is (p^{2n}+pⁿ)ft dlogt, while Φ(L_Xm)=p^{2n}Sf²dlogt. Noncommutation is established; denominator instability is not yet proved because exact forms may absorb the discrepancy.
+
+
+### G-4cf — quotient instability proved
+
+The ambient restricted Lie representation does not descend to
+(M/R), (R=B^1+(\Phi-1)M). For (v=t), (m=p^n d\log t) and
+any negative odd n,
+[
+r=(\Phi-1)m=p^{2n}d\log t+p^n d\log t\in R,
+]
+but
+[
+\rho_t(r)=p^{2n}t,d\log t+p^nt,d\log t.
+]
+The first term is exact, while the second has nonzero class in the
+negative odd graded quotient: its coefficient pair ((t,0)) is not in
+(G=\{(tb,a+bt):a,b\in F\}). Strictness of R rules out cancellation
+by higher terms. Hence (\rho_t(R)\not\subseteq R). More generally
+any (v=e+ft) with f nonzero gives surviving class ((0,f)).
+The quotient representation question is settled negatively for the full
+two-dimensional ambient Lie algebra. A possible smaller stabilizer
+subalgebra, or a different functorial quotient action, remains open.
