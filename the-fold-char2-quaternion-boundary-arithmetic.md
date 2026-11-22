@@ -3495,3 +3495,148 @@ The Hasse-sum lemma therefore supplies a \(2^{v_2(n)}\)-power constraint on the 
 \(C_0^{v_2(m)+1}(\Delta_m)=0\). Establishing the necessary cancellation with the first term is the remaining all-orders step.
 
 **Status.** The odd-coefficient theorem and Hasse-sum Frobenius lemma are proved. The even-coefficient torsion bound remains a conjecture supported by the bounded rational tests in G-4cr.
+
+
+## 92. G-4cp — pure-scaling coinvariants and the Cartier-residue module
+
+Let \(Q=M/R\). After the first-order arrows and the isolated second diagonal, a negative odd associated-graded layer has the residual first coordinate
+\[
+F/SF^2.
+\]
+We now compute the further relations produced by the **pure-scaling subgroup**
+\[
+\mathcal T=\left\{
+t\longmapsto t(1+p^r e): r\ge1,\ e\in F
+\right\},
+\qquad p\longmapsto p.
+\]
+This is an exact calculation for \(\mathcal T\), not yet for the full section-change group \(\mathcal G\).
+
+### 92.1 The Frobenius-depth diagonal
+
+Write \(S_{\rm new}=s^2\), where \(s=t(1+p^r e)\). Then
+\[
+S_{\rm new}=S_{\rm old}(1+p^{2r}e^2),
+\qquad
+S_{\rm old}=S_{\rm new}+p^{2r}S e^2+O(p^{4r}).
+\]
+Let \(x=a^{2^h}\), where \(h\) is maximal with \(a\in F\) and \(a\notin F^2\). The first possible change in the coefficient is
+\[
+\boxed{
+x(S_{\rm old})-x(S)
+=p^{2^{h+1}r}(S e^2 a')^{2^h}
++O(p^{2^{h+2}r}).
+}
+\]
+Here \(a'=da/dS\). In characteristic two, \(\partial_S(F)=F^2\), so \(a'\in F^2\). As \(e\) and \(a\) vary, the leading coefficient space is exactly
+\[
+U_h=S^{2^h}F^{2^{h+1}}.
+\]
+For the reverse inclusion, given \(b\in F\), take \(e=1\) and \(a=Sb^2\); then \(a'=b^2\) and the leading coefficient is \(S^{2^h}b^{2^{h+1}}\).
+
+Every nonconstant rational function has a finite maximal Frobenius depth h: if it belonged to every \(F^{2^h}\), all its divisor valuations on \(\mathbb P^1\) would be divisible by arbitrarily large powers of two, forcing it to be constant. Thus all higher pure-scaling leading relations are accounted for by
+\[
+U_{\rm nil}=\sum_{h\ge0}S^{2^h}F^{2^{h+1}}.
+\]
+The term \(h=0\) is the already-known second diagonal \(SF^2\); \(h\ge1\) gives the successive higher diagonals. Therefore the pure-scaling associated-graded coinvariant of each negative odd layer is
+\[
+F/U_{\rm nil}.
+\]
+
+### 92.2 Identification with Cartier-nilpotent differentials
+
+Define
+\[
+\iota:F\xrightarrow{\sim}\Omega_F^1,\qquad
+x\longmapsto \frac{x}{S}\,dS.
+\]
+For the Cartier operator on \(F=\mathbb F_2(S)\), write uniquely
+\[
+g=a^2+Sb^2,\qquad a,b\in F.
+\]
+Then
+\[
+C(g\,dS)=b\,dS,\qquad \ker C=F^2\,dS.
+\]
+Iteration gives
+\[
+\ker C^n
+=\bigoplus_{h=0}^{n-1}
+S^{2^h-1}F^{2^{h+1}}\,dS.
+\]
+But
+\[
+\iota(U_h)=S^{2^h-1}F^{2^{h+1}}\,dS.
+\]
+Consequently
+\[
+\boxed{
+F/U_{\rm nil}\simeq
+\Omega_F^1\Big/\bigcup_{n\ge1}\ker C^n.
+}
+\]
+The quotient removes exactly the Cartier-nilpotent differentials, not merely the exact ones. The Cartier facts used here—its p-basis formula, exact kernel, and invariance of logarithmic differentials—are standard. <https://sporadic.stanford.edu/reference/function_fields/sage/rings/function_field/differential.html>
+
+### 92.3 Residue description on the projective line
+
+For \(Q\in\mathbb F_2[S]\) monic irreducible, let
+\[
+k_Q=\mathbb F_2[S]/(Q)\simeq\mathbb F_{2^{\deg Q}}.
+\]
+The finite-place residue map induces an isomorphism
+\[
+\boxed{
+\Omega_F^1\Big/\bigcup_{n\ge1}\ker C^n
+\ \xrightarrow{\sim}\
+\bigoplus_{Q\ {\rm monic\ irreducible}} k_Q.
+}
+\]
+The residue at infinity is determined by the global residue theorem:
+\[
+\operatorname{res}_\infty(\omega)
+=\sum_Q\operatorname{Tr}_{k_Q/\mathbb F_2}
+  \big(\operatorname{res}_Q(\omega)\big).
+\]
+
+Here is a direct argument. In a local parameter z at a closed point, Cartier sends a Laurent expansion
+\[
+\sum_j c_j z^j\,dz
+\quad\longmapsto\quad
+\sum_j c_{2j+1}^{1/2}z^j\,dz.
+\]
+It lowers every pole order greater than one after iteration, while the coefficient of \(z^{-1}dz\) is carried by inverse Frobenius. Hence a rational differential has all residues zero exactly when some Cartier iterate kills it: after enough iterations only possible simple poles remain, and zero residues remove those; a pole-free differential on \(\mathbb P^1\) is zero. Conversely, a zero Cartier iterate forces every residue to vanish.
+
+Surjectivity onto finite residue data follows by partial fractions: for each Q, \(Q'\not\equiv0\pmod Q\), and forms \(a(S)Q'(S)dS/Q(S)\) realize arbitrary residue \(a\bmod Q\) at Q, with the infinity residue forced by the trace sum.
+
+Combining the identifications, each negative odd layer's pure-scaling coinvariant is explicitly
+\[
+\boxed{
+\bigoplus_{Q\ {\rm monic\ irreducible}}
+\mathbb F_{2^{\deg Q}}.
+}
+\]
+This is a countably infinite \(\mathbb F_2\)-vector space. For example,
+\[
+x=1\ \longmapsto\ d\log S
+\]
+has finite residue 1 at Q=S, while
+\[
+x=\frac{1}{S+1}\ \longmapsto\
+\frac{dS}{S(S+1)}
+=d\log S+d\log(S+1)
+\]
+has residue 1 at both Q=S and Q=S+1.
+
+### 92.4 What is and is not settled for the full group
+
+The full group \(\mathcal G\) contains \(\mathcal T\), so its negative odd associated-graded coinvariant is a further quotient of this residue module. The full second diagonal is compatible with the residue description: for
+\[
+x=a^2+Sb^2,\qquad y=c^2+Sd^2,
+\]
+its first coordinate is \(S(fa+eb)^2\), which under \(\iota\) becomes the exact differential
+\[
+(fa+eb)^2\,dS=d\big(S(fa+eb)^2\big).
+\]
+Thus no new Cartier-stable residue is removed at this diagonal.
+
+**Open:** determine whether every higher \(t\)-dependent and mixed-depth correction is Cartier-nilpotent (equivalently, has zero residues in this model), or whether the full section-change group imposes additional relations among the residue coordinates. The zero-mode coinvariant must also be computed separately. G-4cp is therefore an exact pure-scaling result and a residue-theoretic candidate for the full answer, not yet a complete computation of \(Q_{\mathcal G}\).
