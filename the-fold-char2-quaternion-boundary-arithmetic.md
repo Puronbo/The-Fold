@@ -1245,3 +1245,16 @@ For prime-to-characteristic torsion, one expects the familiar Gersten/Bloch–Og
 - Only after this local symbol-to-Kato comparison is proved should one assemble the residues over all irreducible curves of X and impose the surface-level reciprocity relation.
 
 This scope correction prevents the use of a one-dimensional global-field theorem in a two-dimensional function-field problem. It does not alter the local normal-form theorem G-4aj.
+
+
+
+## 37. G-4al — the residue logarithmic differential vanishes at the exceptional divisor
+
+At P=(T²+S), the residue field is E=F₂(T), with residue image \(\bar S=T²\). Hence
+\[
+d\log(\bar S)=\frac{d(T²)}{T²}=0
+\quad\text{in }\Omega^1_{E/\mathbb F_2},
+\]
+because the absolute differential of a square vanishes in characteristic two. Thus the ordinary residue-field logarithmic differential of the second entry S of the symbol \([aS,S)_2\) is zero at P.
+
+This is a concrete warning against expecting the tame/logarithmic residue of the second entry to detect the G-4aj local classes. The vanishing does not prove that the quaternion class is unramified or trivial: the coefficient a may have poles, and the p-primary Brauer class can carry wild information invisible to this residue differential. The next local task is to compute the Kato filtration/refined Swan data of \([aS,S)_2\) for representatives a in the G-4aj normal-form basis, and determine whether the filtration detects all or only part of the local quotient. No identification of the quotient with a Kato graded piece is claimed here.
