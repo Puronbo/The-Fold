@@ -1561,3 +1561,6 @@ A machine-learning bridge is specified: exact symbolic feature coordinates, filt
 
 
 **G-4co — two-diagonal coinvariant approximation:** first-order arrows kill every negative even layer and the second coordinate of each negative odd layer. The corrected isolated p² diagonal kills \(SF²\) in the remaining first coordinate, leaving \(F/SF²\simeq\Omega_F^1/dF\) at odd layers at this truncation. Higher Cartier/Frobenius diagonals and zero-mode coinvariants remain open. The exact data generator now emits and self-tests second-diagonal GF(2)[S] examples.
+
+
+**G-4cp–G-4cq — pure-scaling stable quotient:** the iterated scaling \(t\mapsto t(1+p)\) is governed by the p-basis root operator \(C_0(z_0²+Sz_1²)=z_0\). Its stable quotient is \(\mathbb F_2\oplus\bigoplus_{Q\ne S}\mathbb F_2[S]/(Q)\), with Q ranging over monic irreducibles. This is the residue-field module of finite closed points of the affine S-line. The full section-group coinvariant may impose further relations. Exact rational-function verifier: tools/cartier_stable_part.py.
