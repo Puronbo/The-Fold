@@ -2887,3 +2887,12 @@ N_{odd}(x,y)=(Sf²x+D_vx,\ e²y+D_vy),\qquad
 N_{even}(d)=e²d+D_vd
 \]
 at p^{2r}. Unlike the first diagonal, this is parity-independent; f reappears even when r is even. These are isolated-parameter formulas only; simultaneous-depth cross terms and the arbitrary-depth composition law remain open.
+
+
+### G-4cc — generated interaction at depth r+s
+
+For t₁=t(1+pʳv), t₂=t₁(1+pˢu), with v=e_v+f_vt and u=e_u+f_ut, the leading mixed coefficient at p^{r+s} is
+\[
+f_utv+vu=e_uv.
+\]
+Reversing order gives e_vu; their characteristic-two difference is t(e_uf_v+e_vf_u). This is a two-depth associated-graded composition result. When r+s resonates with 2r or 2s, add this generated coefficient to the intrinsic quadratic diagonal. Full higher commutator and coefficient-field corrections remain open.
