@@ -2577,3 +2577,7 @@ The map \(\phi:F\to F/F^2\), \(x\mapsto[Sx^2]\), is bijective since \(F=F^2\oplu
 
 ### G-4ah — correction to local chain scope
 G-4ad–G-4ag classify the auxiliary quotient H₀ only. The full completed local quotient includes the additional square term \((S+p)F((p))^2\), because \((x+Ty)^2=x^2+(S+p)y^2\). Exact full quotient: \(F((p))/(F[[p]]+F((p))^2+(S+p)F((p))^2+\{r+Sr^2\})\). It is H₀ modulo the image of this extra term. The auxiliary basis is not yet a full local normal form. G-4r/G-4s remain the established full-quotient lower bounds.
+
+
+### G-4ai — exact full local quotient presentation
+With \(\tau=\phi^{-1}\circ q\), the full local quotient is the direct sum of odd-chain copies of F modulo relations \(e_{2m-1}(a^2)+e_{\operatorname{odd}(m)}(\tau^{v_2(m)}a)=0\), for m≥1 and a∈F. These encode the extra square term \((S+p)y^2\). This is an exact presentation, not yet a basis. G-4r/G-4s establish countably infinite dimension for the full quotient.
