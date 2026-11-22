@@ -507,3 +507,57 @@ This element is invariant because Da=0, and its class is taken modulo the norm i
 **Consequences.** For trivial A=\(\mathbb F_2\), D=0 and this reduces to G-18. For a free \(\mathbb F_2[Q]\)-module, all Jordan blocks have length q, so H²=0 and every invariant kernel character is a norm; no nonzero transgression survives. For any module containing a short Jordan block, choosing its bottom vector gives a kernel character with nonzero transgression.
 
 **Scope.** This is still an abstract finite-group construction. It gives a sharper coefficient-module criterion for a future Fold/Galois bridge, but it does not identify a coefficient module arising from the Fold.
+
+
+## G-21 — explicit cyclic degree-16 Artin–Schreier–Witt tower
+
+Let \(K=\mathbb F_2(s)\), and take the length-four Witt vector
+\[
+\mathbf a=(s,s,0,0)\in W_4(K).
+\]
+Writing \((F-1)(u,w,v,z)=\mathbf a\), the first three coordinates are the G-12/G-14 equations:
+\[
+\begin{aligned}
+u^2+u&=s,\\
+w^2+w&=u^3+u,\\
+v^2+v&=u^7+u^4+u^3w^2+u^3w+u^2w^2+u^2w+w^3+w^2.
+\end{aligned}
+\]
+The fourth coordinate, obtained from the fourth Witt ghost polynomial and reduced modulo two, is
+\[
+\begin{aligned}
+z^2+z={}&u^{15}+u^{13}+u^{12}+u^{11}
++u^{10}w^2+u^{10}w+u^{10}\\
+&+u^8w^2+u^8w+u^8
++u^7w^3+u^7w^2+u^7v^2+u^7v\\
+&+u^4w^3+u^4w^2+u^4v^2+u^4v\\
+&+u^3w^6+u^3w^4+u^3w^2v^2+u^3w^2v
++u^3wv^2+u^3wv\\
+&+u^2w^6+u^2w^4+u^2w^2v^2+u^2w^2v
++u^2wv^2+u^2wv\\
+&+w^7+w^4+w^3v^2+w^3v+w^2v^2+w^2v+v^3+v^2.
+\end{aligned}
+\]
+There is no \(z\)-term on the right: the \(z^2+z\) is the fourth coordinate of \(F-1\).
+
+The generator is Witt translation by \((1,0,0,0)\):
+\[
+\begin{aligned}
+\sigma(u)&=u+1,\\
+\sigma(w)&=w+u,\\
+\sigma(v)&=v+u^3+uw+u,\\
+\sigma(z)&=z+u^7+u^5+u^4w+u^3w+u^3v+u^3\\
+&\qquad\quad+u^2w+uw^3+uwv+uv+u.
+\end{aligned}
+\]
+Because \((1,0,0,0)\) has additive order \(16\) in \(W_4(\mathbb F_2)\), this translation has exact order \(16\).
+
+**Degree and tower.** The first coordinate \(s\) is not in \(\wp(K)=\{x^2+x:x\in K\}\): its pole at infinity has odd order one, while every pole of \(x^2+x\) has even order. The Artin–Schreier–Witt degree criterion therefore gives a cyclic extension \(M_4/K\) of degree \(16\). Its truncations are exactly the quartic field of G-12 and octic field of G-14. Thus the explicit arithmetic realization is now expanded through degree \(16\), rather than only specified abstractly by a length-four Witt vector.
+
+**Derivation check.** The displayed fourth coordinate is obtained recursively from the Witt ghost polynomials
+\[
+w_j(X_0,\ldots,X_j)=\sum_{i=0}^j2^iX_i^{2^{j-i}},
+\]
+using \(F(u,w,v,z)=(u^2,w^2,v^2,z^2)\) and the Witt additive inverse, then reducing the resulting integral polynomial modulo two. The translation formulas are obtained from the same ghost-polynomial addition recursion. This records the algebraic derivation; no external computer-algebra proof certificate or Fold-specific Galois module is claimed.
+
+**Scope.** G-21 closes the next explicit-coordinate gap in the common \(\mathbb F_2(s)\) tower. It does not create the missing Fold-derived representation or identify a Selmer class. Those remain open.
