@@ -1023,3 +1023,46 @@ In particular, because the monomials 1,S,S²,… are F₂-linearly independent i
 are an explicit countably infinite linearly independent family, for every odd r. This makes the lower bound in G-4ae constructive. Combined with the countable upper bound, it gives dim_F₂ C_r=aleph₀ without invoking the algebraic dual.
 
 The family is an embedded copy of the polynomial subspace F₂[S] in each chain. It is not claimed to span C_r; determining a complementary normal form remains open.
+
+
+## 32. G-4ag — the chain cokernel is canonically F
+
+A crucial strengthening is that
+\[
+\phi:F\to F/F^2,\qquad x\mapsto[Sx^2]
+\]
+is bijective, not merely injective. Indeed, F=F₂(S), F²=F₂(S²), and [F:F²]=2. Since S∉F²,
+\[
+F=F^2\oplus S F^2
+\]
+as F²-vector spaces. Every class in F/F² therefore has a unique form [Sx²], because Frobenius maps F bijectively onto F².
+
+Consequently every chain cokernel C_r=coker(T_r) from G-4ad is canonically isomorphic to F, via the zeroth-coordinate embedding. To prove surjectivity, let y=(y_0,y_1,\ldots,y_N,0,\ldots) be a finite-support target, with y_0∈F and y_j∈F/F² for j≥1. Set x_N=0 and recursively, for j=N,N−1,…,1, define
+\[
+x_{j-1}=\phi^{-1}\bigl(y_j+q(x_j)\bigr).
+\]
+Then x=(x_0,…,x_{N-1},0,…) has finite support and the higher coordinates of y+T_r(x) vanish. Thus every cokernel class has a zeroth-coordinate representative.
+
+That representative is unique: if T_r(x) is supported only in coordinate zero and x is nonzero, let N be the largest index with x_N≠0. The (N+1)-st coordinate of T_r(x) is phi(x_N)≠0, contradiction. Hence
+\[
+\boxed{C_r\cong F=\mathbb F_2(S).}
+\]
+The reduction algorithm above is canonical and finite for every finite principal part.
+
+In particular, the classes
+\[
+\boxed{[S^n p^{-r}],\quad n\ge0}
+\]
+are not merely independent (G-4af): they form an F₂-basis of C_r for every odd r. Therefore the full local scalar quotient has the explicit basis
+\[
+\boxed{
+\left\{S^n p^{-r}: n\ge0,\ r\ge1\text{ odd}\right\}.
+}
+\]
+This proves the quotient is countably infinite-dimensional and supplies a complete normal form: reduce independently along each odd-core chain, then collect the resulting zeroth-coordinate coefficients.
+
+**Correction to G-4ac:** because phi is bijective, every extension step in the dual recurrence is unique, not merely possible after choosing a vector-space complement. On each chain, an initial functional lambda_0∈F* determines all later functionals uniquely by
+\[
+\lambda_{j+1}=\lambda_j\circ q\circ\phi^{-1}\quad(j\ge0),
+\]
+where for j=0 the same formula uses q:F→F/F² and for j≥1 q acts on the coefficient representative F→F/F². More precisely, the recurrence is lambda_1∘phi=lambda_0 and lambda_{j+1}∘phi=lambda_j∘q for j≥1. Since phi is bijective, these determine lambda_{j+1} uniquely. Thus the chain annihilator is canonically F*, and the full annihilator is the product of F* over odd r. Its F₂-dimension is continuum, as previously established, but its inverse-limit ambiguity disappears.
