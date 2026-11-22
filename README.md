@@ -1248,3 +1248,6 @@ Degrees 8–10 provide independent checks. Reproducible exact enumeration: `cert
 \alpha=-(1+\beta)+(-4-3\beta+2\beta^2+\beta^3)\frac{\pi}{\beta+2}
 \]
 has relative norm \(N_{L/F}(\alpha)=((\beta+4)/(\beta+2))(1+\beta)\), hence absolute norm 17. Its principal ideal is one of the two norm-17 primes; their product is already principal. With the Minkowski support reduction and principal primes above 2, this proves the degree-eight CM field has class number one.
+
+
+**G-4i — quaternion-boundary image quotient:** for \(k=\mathbb F_2(s,t)\), \(\lambda=s\), the boundary image is additively isomorphic to \(K/(K^2+\{u+Su^2:u\in K\})\), where \(K=\mathbb F_2(S,T)=k^2\), \(S=s^2,T=t^2\). The isomorphism follows from the exact G-4h coefficient kernel criterion. Each image class has a representative \([AS,s)_2\); the quotient's dimension and basis remain open. Details: the-fold-char2-quaternion-boundary-arithmetic.md.
