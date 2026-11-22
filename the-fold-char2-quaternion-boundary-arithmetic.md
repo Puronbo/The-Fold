@@ -1461,3 +1461,22 @@ be the finite normal principal parts. By G-4ap, the exact forms that lie in \(Ld
 }
 \]
 This is an exact de Rham quotient of pure normal principal parts. It is not yet the Kato group: the higher Cartier filtration and its interaction with tangent terms have not been imposed. In particular, do not infer the G-4aj normal form from this intermediate quotient. It is a checkpoint for the next filtered Cartier calculation.
+
+
+## 43. G-4ar — inverse-Cartier recurrence on normal pole symbols
+
+Keep \(L=E((p))\), \(E=\mathbb F_2(t)\), with 2-basis \(\{t,p\}\). The inverse Cartier formula on the normal basis differential is
+\[
+C^{-1}(h\,dp)=[h^2p\,dp]\quad\text{in }\Omega_L^1/dL.
+\]
+For \(h=cp^{-m}\), this gives the exact recurrence
+\[
+C^{-1}(cp^{-m}dp)=[c^2p^{-(2m-1)}dp].
+\]
+Thus the pole-index map is \(m\mapsto2m-1\), and the residue coefficient is squared. Before quotienting by the higher Cartier filtration, the corresponding \(C^{-1}-1\) expression is represented by
+\[
+ c^2p^{-(2m-1)}dp+cp^{-m}dp.
+\]
+At m=1 this is \((c^2+c)p^{-1}dp\), the Artin–Schreier shape. For m>1 it links the m-slot to the (2m−1)-slot. Iterating the index map gives \(m_j=2^j(m-1)+1\).
+
+This is an exact inverse-Cartier calculation modulo exact forms. It is a recurrence on the normal representatives and suggests a chain structure, but it does not yet classify \(H_2^2(L)\): the quotient by \(B_\infty\) must still be imposed, and mixed tangent terms generated in the construction of \(B_i\) must be tracked. In particular, the m=1 Artin–Schreier shape is not by itself a proof that the G-4aj chain-1 summand is the corresponding Kato summand. The next task is to calculate which of these normal symbols lie in \(B_\infty\) and how the recurrence interacts with the exact normal quotient G-4aq.
