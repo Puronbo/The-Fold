@@ -2222,4 +2222,6 @@ Q_8=Ja c^2+at(Ea+Jb)cd+bt^2(Bi+Gb)ch+bt^2(Bb+Di+Gb)dh,
 \quad
 Q_9=Ja^2t ch+a^2t^2(Ei+Jb)dh.
 \]
+A follow-up term-by-term comparison against UF-065 confirms that the corrected quadratic inputs Q2,Q3,Q5,Q6,Q7,Q8,Q9 and the n1,n4 terms now match the source table. This validates the quadratic input table only; all degree-four ranks remain withdrawn pending a fresh matrix computation.
+
 An additional audit found a missing factor of `a` in the `dh`-coefficient of `Q_7=Q(Z_{x^2})`. The previously reported 175/176 specialization ranks are withdrawn too. The correct coefficient is `at^2(Bb+Di+Gb)`. The script has been patched, but no degree-four rank is currently certified. The generic rank and whether `n_1n_4` survives modulo `N^3` remain open.
