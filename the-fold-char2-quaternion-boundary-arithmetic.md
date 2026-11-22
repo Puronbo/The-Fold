@@ -912,3 +912,39 @@ These coefficient functionals define a linear functional \(\ell\) on the direct 
 therefore cancel these contributions in pairs. All off-chain contributions vanish. Hence \(\ell(u+Su^2)=0\). Squares are already zero in H, so \(\ell\) annihilates the full denominator \(z^2+u+Su^2\). Since \(\ell_{-1}\ne0\), the resulting functional is nonzero.
 
 Thus the local quotient H is nonzero, with a separating functional of necessarily infinite slot support. The construction is noncanonical (it uses successive vector-space extensions); it is not an explicit finite certificate or a classification of H.
+
+
+## 28. G-4ac — exact inverse-limit description of all local annihilators
+
+For each positive odd integer r, the coefficient spaces along the chain of exponents \(-r,-2r,-4r,\ldots\) are
+\[
+V_{r,0}=F,\qquad V_{r,j}=F/F^2\quad(j\ge1).
+\]
+Write \(q:F\to F/F^2\) for the quotient map and \(\phi:F\to F/F^2\) for \(x\mapsto[Sx^2]\). A functional on the principal-part quotient is a family
+\[
+\lambda_{r,0}\in V_{r,0}^*,\qquad
+\lambda_{r,j}\in V_{r,j}^*\quad(j\ge1),
+\]
+where stars denote algebraic F₂-duals. It annihilates every \(u+Su^2\) if and only if, for every odd r,
+\[
+\lambda_{r,1}\circ\phi=\lambda_{r,0},
+\qquad
+\lambda_{r,j+1}\circ\phi=\lambda_{r,j}\circ q
+\quad(j\ge1).
+\]
+Indeed, a coefficient x of u at exponent \(-2^jr\) contributes [x] at that same exponent (x itself when j=0) and [Sx²] at the doubled exponent. These are the only two contributions, and distinct odd-core chains are disjoint. Thus the displayed equations are necessary and sufficient.
+
+Equivalently, the full annihilator is the product over odd r of the inverse limits of the dual spaces under the restriction maps
+\[
+(F/F^2)^*\longrightarrow F^*,\quad \mu\longmapsto\mu\circ\phi,
+\]
+and
+\[
+(F/F^2)^*\longrightarrow(F/F^2)^*,\quad
+\mu\longmapsto\mu\circ\phi\circ q^{-1}
+\]
+understood as the relation \(\lambda_{j+1}\circ\phi=\lambda_j\circ q\), not as a globally defined inverse to q. Each extension step is surjective because phi is injective: define the next functional on phi(F) by the prescribed right-hand side and extend linearly to all of F/F².
+
+Since F is countable and has countably infinite F₂-dimension, \(F^*\) has cardinality \(2^{\aleph_0}\). Projection of each chain inverse limit onto its initial \(F^*\) is surjective, while the set of all countable sequences of coefficient functionals has cardinality at most \((2^{\aleph_0})^{\aleph_0}=2^{\aleph_0}\). Hence even one chain contributes continuum many annihilators, and the full annihilator has cardinality exactly continuum. As an F₂-vector space its dimension is therefore continuum.
+
+This classifies the annihilator abstractly as an inverse-limit space; it does not identify a canonical basis or a canonical splitting of the restriction maps.
