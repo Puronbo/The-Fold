@@ -1074,3 +1074,9 @@ The complete first-order c,d,h coefficient map in both conjugated coordinates is
 - Does not assert the affine-slice image is a subgroup or compute its Hopf core.
 
 **Open UF-072:** compute the one-copy affine-slice elimination ideal and the two-copy coproduct test; compare its Hopf core with the full universal normal-closure Hopf core.
+
+
+### UF-072A — Structure of the affine-slice image algebra
+- Proves that the nilradical of the auxiliary affine-conjugator image algebra is exactly its intersection with the source nilradical \((c,d,h)\).
+- Gives the sharp general exponent bound \(\operatorname{Nil}(\mathcal A_{\rm aff})^6=0\) and the Krull-dimension upper bound \(\dim\mathcal A_{\rm aff}\leq10\), from its ten-dimensional reduced parameter base.
+- Does not claim the image dimension is ten, compute elimination generators, or establish Hopf stability. UF-072B targets the reduced image and its Jacobian before lifting through the nilpotent filtration.
