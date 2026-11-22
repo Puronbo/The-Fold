@@ -2841,3 +2841,14 @@ and on negative even layers F it is
 d\mapsto(e²+e₁)d.
 \]
 The exponent-zero associated-graded layer is fixed. These are the second-order diagonals; first-order opposite-parity maps are G-4bw. Open: verify the composition law for successive section changes, including cross terms, and determine whether higher diagonals are forced or independent.
+
+
+### G-4by — corrected second-order maps and composition law
+
+G-4bx is superseded: the coefficient field moves at order p² because s²=t²+p²t²v₀²+O(p³). Include Dᵥ=S(e²+Sf²)∂S. The corrected maps are
+\[
+Q_{odd}: (x,y)\mapsto(Sf²x+Dᵥx,\ f₁x+(e²+e₁)y+Dᵥy),
+\quad
+Q_{even}:d\mapsto(e²+e₁)d+Dᵥd.
+\]
+The section-composition parameters satisfy e_{w₁}=e_{v₁}+e_{u₁}+e_ue_v and f_{w₁}=f_{v₁}+f_{u₁}+e_uf_v, while D_w=D_v+D_u. The second-order maps obey N_odd(w)=N_odd(v)+N_odd(u)+M_uL_v and N_even(w)=N_even(v)+N_even(u)+L_uM_v, exactly the filtered composition law. Orders p³ and above remain open.
