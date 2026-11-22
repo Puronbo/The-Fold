@@ -1752,3 +1752,34 @@ S^{2^{j-1}}E^{2^{j+1}}=t^{2^j}E^{2^{j+1}}.
 These are complementary in \(E^{2^j}\). The mixed coefficient is paired with tangent coefficient \(t^{2^j-1}E^{2^{j+1}}\) at pole index \(2^jr\). At tangent pole indices divisible by \(2^{j+1}\), the pure tangent coefficient space is \(t^{2^j-1}E^{2^{j+1}}\).
 
 These families, together with B₁, give all finite-principal-part generators obtained by iterating inverse Cartier on exact Laurent monomials: decompose each coefficient as \(c_0²+t c_1²\), and treat even and odd p-exponents separately. Thus the finite-principal-part filtration is now explicitly organized into pure normal, pure tangent, and mixed logarithmic pieces. The remaining Kato problem is the cokernel of \(C^{-1}-1\) on this paired system, with exact differentials already accounted for; this is where the G-4aj local normal form must be recovered.
+
+
+## 56. G-4be — corrected complete Cartier tower including the B₁ mixed term
+
+**Refinement of G-4bd:** B₁ itself has mixed exact principal parts, so the logarithmic tower starts at j=0, not j=1. For an odd negative exponent n=−r and \(c=c_0²+t c_1²\),
+\[
+d(cp^{-r})=c_1²p^{-r}dt+c_0²p^{-(r+1)}dp+t c_1²p^{-(r+1)}dp.
+\]
+The last two terms split into a pure-normal exact term and a mixed logarithmic exact term:
+\[
+ c_0²p^{-(r+1)}dp,
+\qquad
+ t c_1²p^{-r}d\log(t/p).
+\]
+Thus, for every j≥0, odd r and b∈E, the iterated Cartier families are
+\[
+\begin{aligned}
+\nu_{j,r,b}&=b^{2^{j+1}}p^{-(2^jr+1)}dp,\\
+\eta_{j,r,b}&=t^{2^j}b^{2^{j+1}}p^{-2^jr}d\log(t/p).
+\end{aligned}
+\]
+The mixed family obeys \(C^{-1}(\eta_{j,r,b})=\eta_{j+1,r,b}\). For even negative exponents n=−2k, the pure tangent family is
+\[
+\tau_{j,k,b}=t^{2^j-1}b^{2^{j+1}}p^{-2^{j+1}k}dt,
+\qquad j\ge0, k\ge1.
+\]
+At j=0 this is \(b²p^{-2k}dt\), the pure tangent exact term in B₁. Together these families give all finite-principal-part generators obtained by iterating inverse Cartier on exact Laurent monomials; coefficient decomposition \(c=c_0²+t c_1²\) and parity of n prove completeness.
+
+At normal pole index \(m=2^jr+1\), the pure-normal coefficient space is \(E^{2^{j+1}}\), and the mixed-normal coefficient space is \(t^{2^j}E^{2^{j+1}}\). They complement to \(E^{2^j}\). The mixed component is paired with tangent coefficient \(t^{2^j-1}E^{2^{j+1}}\) at tangent pole index \(2^jr\). Thus the full finite-principal-part Cartier filtration is organized by pure-normal, pure-tangent, and mixed logarithmic families from level j=0 onward.
+
+This corrects the incomplete B₁ description in G-4bd: B₁ is not merely the sum of pure tangent and pure normal intersections; it also contains the mixed exact logarithmic pairs above. The full \(C^{-1}-1\) cokernel is still the remaining task.
