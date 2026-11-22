@@ -136,3 +136,45 @@ This gives a concrete characteristic-two replacement for the usual eigenspace me
 The PDF's theta-lift/automorphic RH framework is not directly applicable to the Fold algebra as presently defined. Its determinant, representation, and integral-structure themes do suggest methodological parallels.
 
 Galois theory, in its group-scheme and Hopf–Galois forms, is much more directly applicable. In characteristic two the Fold algebra itself is naturally the coordinate algebra of \(\alpha_4\times\alpha_2\), and its translation action gives an explicit rank-eight Hopf–Galois torsor structure. This is a concrete new direction worth developing independently of the PDF's RH/GRH claims.
+
+## 7. Cohomology of an order-two Galois quotient in characteristic two
+
+The square-zero operator above also computes the cohomology of the order-two quotient exactly. Let (L/K) be a separable quadratic Galois extension in characteristic two, let
+\[
+\Gamma=\operatorname{Gal}(L/K)=\langle\sigma\mid\sigma^2=1\rangle\cong C_2,
+\]
+and let (V) be a finite-dimensional discrete (k[Gamma])-module, where (k) has characteristic two. Put (N=\sigma-1). Then (N^2=0), and the norm operator is
+\[
+1+\sigma=\sigma-1=N.
+\]
+The standard two-periodic resolution of the trivial (k[C_2])-module therefore has every positive differential equal to (N). Consequently,
+\[
+H^0(C_2,V)=\ker N,\qquad
+H^q(C_2,V)=\ker N/\operatorname{im}N\quad(q\ge1).
+\]
+In particular, all positive-degree cohomology groups are canonically the same quotient as vector spaces. If (r=\operatorname{rank}_kN) and (m=\dim_kV), then
+\[
+\dim_kH^q(C_2,V)=m-2r\quad(q\ge1).
+\]
+This follows because (\operatorname{im}N\subseteq\ker N), with dimensions (r) and (m-r), respectively. Thus the non-semisimple part of the involution is measured by (r), while the residual quotient (\ker N/\operatorname{im}N) measures the cohomology in every positive degree.
+
+There is also a direct bridge to the absolute Galois group. Write (G_K=\operatorname{Gal}(K^{\mathrm{sep}}/K)), (G_L=\operatorname{Gal}(K^{\mathrm{sep}}/L)), and assume the (G_K)-action on (V) is continuous. Inflation–restriction gives the exact segment
+\[
+0\to H^1(C_2,V^{G_L})
+\to H^1(G_K,V)
+\to H^1(G_L,V)^{C_2}
+\xrightarrow{\mathrm{tr}} H^2(C_2,V^{G_L}).
+\]
+The end term is explicitly
+\[
+H^2(C_2,V^{G_L})
+=\ker(N|_{V^{G_L}})/\operatorname{im}(N|_{V^{G_L}}).
+\]
+Hence the obstruction to descending a (G_L)-cohomology class invariant under the quotient involution is represented by this concrete square-zero quotient. This is a precise Galois-cohomological interface; it does not compute the global groups (H^1(G_K,V)) or (H^1(G_L,V)) without additional arithmetic information.
+
+In characteristic two, every separable quadratic extension is Artin–Schreier: it can be written (L=K(\theta)) with (\theta^2-\theta=a\in K), and its nontrivial automorphism sends (\theta\mapsto\theta+1). Thus this calculation applies to the order-two quotient attached to any such extension. It does not say that an arbitrary profinite Galois representation factors through (C_2); it applies to the restriction/quotient sequence just specified.
+
+### G-7 — Exact order-two cohomology and descent obstruction
+
+The preceding formulas give a finite, checkable invariant for each quadratic Galois quotient: compute (N=\sigma-1) on (V^{G_L}), then compute (\ker N/\operatorname{im}N). Its dimension is (\dim V^{G_L}-2\operatorname{rank}N). This quotient is the target of the inflation–restriction transgression. For Fold representations, the next concrete task is to construct natural (G_K)-modules from the automorphism-group-scheme or Hopf–Galois data and evaluate this obstruction; no such global representation or arithmetic class is asserted here.
+
