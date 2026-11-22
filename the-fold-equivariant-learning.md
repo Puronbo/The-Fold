@@ -341,3 +341,25 @@ The exact finite-section test harness was run with:
 All 650 coefficient checks passed. A separate generated sample of 100 rational inputs produced 900 coefficient targets with observed Cartier-torsion indices 1, 2, 3, and 4. This is bounded computational evidence only; it does not prove the all-orders pattern or identify the full section-group coinvariant.
 
 G-4ct now identifies the stable target exactly as \(\Omega_F^1/B_\infty\). For the model, this suggests a two-stage encoder: first map a rational coefficient into the Cartier-stable differential module, then express the stable component through its closed-point residue coordinates. The full section group is not yet certified to act trivially on that module.
+
+
+## 15. Hasse–Taylor learning targets
+
+G-4cu gives a closed coefficient formula for the finite-section pullback. If \(a^{[i]}\) are Hasse derivatives and \(B_N(a)=\sum_{i=0}^N S^ia^{[i]}\), then
+\[
+\Delta_m=\mathbf1_{2\mid m}S^mu^m(a^{[m/2]})²+
+Sf²u^{m-1}B_{\lfloor(m-1)/2\rfloor}(a)².
+\]
+For odd m, \(\Delta_m\in SF²\) and is killed by one \(C_0\). Also \(2^k\mid n\) implies \(B_{n-1}(a)\in F^{2^k}\). These are exact algebraic labels for all rational-function inputs.
+
+The rational harness now verifies:
+- the Hasse–Taylor coefficient identities through the selected q-order;
+- one-step Cartier vanishing for every odd coefficient;
+- the Frobenius-power property of \(B_{n-1}\);
+- the previously conjectural higher-order torsion bound as a separate exploratory check.
+
+A useful learning task is to predict the Hasse-power level \(v_2(n)\) from the truncated Taylor-sum construction, then predict the even coefficient's Cartier root
+\[
+C_0(\Delta_{2n})=S^nu^na^{[n]}+Sf^2u^{n-1}B_{n-1}.
+\]
+The exact verifier can check these outputs symbolically. The remaining even-coefficient cancellation and the full-group residue invariance remain open; the model should help find the needed identity but cannot substitute for its proof.
