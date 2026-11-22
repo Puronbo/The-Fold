@@ -437,7 +437,7 @@ Since N acts trivially on A, the standard cochain formula for transgression give
 \[
 d_2([\chi])=[-\chi\circ\omega].
 \]
-But \(\chi\circ\omega\) is exactly the factor set of the pushout extension along \(\chi\). Thus its cohomology class is the pushout extension class, up to the stated sign convention. In particular, the transgression vanishes if and only if the pushout extension splits. Equivalently, the character \(\chi\) extends to a homomorphism \(G\to A\) compatible with the quotient action.
+But \(\chi\circ\omega\) is exactly the factor set of the pushout extension along \(\chi\). Thus its cohomology class is the pushout extension class, up to the stated sign convention. In particular, the transgression vanishes if and only if the pushout extension splits. Equivalently, the character \(\chi\) extends to a 1-cocycle (crossed homomorphism) \(G\to A\) compatible with the quotient action.
 
 **Application to G-18.** Take
 \[
