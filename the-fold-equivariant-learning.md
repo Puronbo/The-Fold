@@ -244,3 +244,38 @@ Train a model to predict:
 Use irreducible polynomials of unseen degrees as a structural holdout. Also hold out pole orders and rational numerators/denominators, so the model cannot solve the task by memorizing polynomial bit patterns. An exact GF(2)[S] verifier remains authoritative.
 
 The remaining mathematical question is whether general section changes act trivially on this residue module. Until that is proved or disproved, these are the exact invariants of the pure-scaling subgroup, not certified invariants of the full section-change group.
+
+
+## 11. Stable Cartier modules: rational-function data
+
+The exact learning benchmark now includes rational functions, not only polynomial coefficients. This is necessary because the stable scaling quotient contains simple-pole classes at every monic irreducible \(Q\ne S\); a polynomial-only dataset misses them.
+
+A rational function is encoded as a reduced bitmask pair \(N/D\). The p-basis root operator is computed by
+\[
+ND=A^2+SB^2,\qquad C_0(N/D)=A/D,\quad C_1(N/D)=B/D.
+\]
+The verifier checks
+\[
+C_0(f)^2=f+Sf'.
+\]
+The stable quotient for the pure scaling subgroup is
+\[
+\mathbb F_2\oplus\bigoplus_{Q\ne S}\mathbb F_2[S]/(Q).
+\]
+A simple pole \(P/Q\) is a stable coordinate, and \(C_0\) acts on its residue coefficient by the invertible semilinear map
+\[
+\bar P\longmapsto
+\sqrt{\bar S\,\overline{Q'}\,\bar P}.
+\]
+Higher-order poles contract to simple poles; the distinguished S-pole block is nilpotent.
+
+The exact rational verifier is tools/cartier_stable_part.py. Its test design checks all irreducible polynomials up to a selected degree, the ranks of the simple-pole maps, and the reduction of pole order under \(C_0\).
+
+### Revised benchmark protocol
+
+Use three distinct holdouts:
+- unseen irreducible polynomials Q (new closed points);
+- unseen pole orders (higher-order-to-simple-pole reduction);
+- unseen rational numerators/denominators (avoid memorizing coefficient patterns).
+
+The learning targets are p-basis decomposition, C0 orbits, eventual simple-pole coordinates, and residue-field predictions. The full section-change coinvariant is still open, so the stable residue module is supervised only as the exact pure-scaling quotient. Do not label it as the full-group invariant space until the other section-change parameters have been checked.
