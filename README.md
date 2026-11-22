@@ -1406,3 +1406,7 @@ the quaternion-boundary arithmetic note.
 
 
 **G-4az — first perfection layer:** the mixed coefficient \(S E^4\) maps to \(t^{1/2}E/E\subset E^{\rm perf}/E\) in each chain, via fourth roots. Its inverse-Cartier orbit represents the same direct-limit class; completeness of mixed relations remains open.
+
+
+
+**G-4ba — tangent B₁ relations:** pure tangent exact principal parts, like pure normal ones, occur at even pole indices with coefficients E². The two directions first couple in B₂ through the logarithmic generator.
