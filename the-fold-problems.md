@@ -2602,3 +2602,8 @@ At P=(T²+S), the residue field is E=F₂(T) and \(\bar S=T²\), so \(d\log(\bar
 ### G-4am — differential representative of the exceptional quaternion symbol
 
 At \(P=(T^2+S)\), put \(p=T^2+S\). Absolute differentials satisfy \(dp=dS\), hence \((aS)d\log S=a\,dp\). Under the characteristic-two differential-symbol description, \([aS,S)_2\) is represented locally by \(a\,dp\). This explains why the vanishing residue differential \(d\log\bar S\) does not settle the wild class: the pre-residue uniformizer differential survives. Exact representative identity proved; identification of the G-4aj quotient with Kato cohomology/filtration remains open. Next compute the quotient by exact differentials and Cartier/Frobenius, then compare its graded pieces with the G-4aj basis.
+
+
+### G-4an — explicit characteristic-two Kato quotient at the exceptional completion
+
+The change of coordinates \(p=T^2+S\) gives \(K_P=\mathbb F_2(T)((p))\), with 2-basis \(\{T,p\}\). Hence every coefficient has a unique four-term square decomposition. The characteristic-two differential presentation is \(H_2^2(K_P)=\operatorname{coker}(1-\gamma:\Omega^1\to\Omega^1/dK_P)\), with \(\gamma(hdT)=[h^2T dT]\) and \(\gamma(hdp)=[h^2p dp]\). Since \([aS,S)_2\) is represented by \(a dp\), its Kato class is now explicit in this quotient. Correction: Cartier C itself acts on closed forms/de Rham classes, not arbitrary 1-forms; use \(\gamma\) for the all-forms cokernel map. Remaining open bridge: determine exactly how \(\mathcal O_P+\mathcal D_P\) maps into this quotient, and whether the G-4aj additive quotient embeds, surjects, or neither.
