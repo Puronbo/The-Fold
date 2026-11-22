@@ -2509,3 +2509,7 @@ modulo the valuation ring, and relating local data globally, remain open.
 
 ### G-4q — coefficient filtration at the exceptional place
 At P=T²+S, replacing X=x+Sq puts the completed scalar coordinate in the exact form A=X²+(S+P)y²+SPq²+r+Sr². Its coefficients satisfy [P^(2j)]A=X_j²+Sy_j²+r_(2j)+Sr_j² and [P^(2j+1)]A=y_j²+Sq_j²+r_(2j+1). For the square-only part, use F=F²⊕SF²: if c_(2j)=a_j+Sb_j and c_(2j+1)=e_j+Sd_j, membership is equivalent to b_j=e_j for every j. The full quotient remains open because r+Sr² couples indices j and 2j; the next task is its principal-part recurrence.
+
+
+### G-4r — exact dimension of the exceptional completed local quotient
+Let P=T²+S and K_P=F((P))[T], F=F₂(S), T²=S+P. For a zero-T-coordinate target, q=0. The two coefficient obstructions E_j=π_S(c_(2j))+π_0(c_(2j+1)) and D_j=π_S(c_(2j+1)) vanish on X²+(S+P)y². On r+Sr² they are E_j=π_S(r_(2j))+r_j²+π_0(r_(2j+1)) and D_j=π_S(r_(2j+1)). If j₀≤−2 is the lowest pair index of a principal part, a least-index argument forces r_n=0 for n<j₀, hence D_(j₀)=0. Therefore Sb/P^(2m+1), for b∈F² nonzero and m≥1, is not a local denominator class. Taking an F₂-basis of F² and all m≥1 gives a countably infinite independent family. Since F is countable, the completed local quotient K_P/(F[[P]][T]+{z²+u+Su²}) has exact F₂-dimension ℵ₀. This is a completed local theorem, not a global normal form.
