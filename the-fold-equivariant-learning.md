@@ -136,3 +136,15 @@ Independent higher-depth parameters are new deformation directions; lower-depth 
 - **Proved / algebraically checked:** first-order graded transitions (with the even-depth correction), leading bracket/composition term, and isolated second diagonal.
 - **Implemented and self-tested:** standard-library GF(2)[S] data generator.
 - **Not yet done:** train a neural model; compute the invariant ring; classify equivariant maps; obtain exact higher-order quotient matrices and labels.
+
+
+## 7. Fixed vectors versus invariant functions
+
+G-4cm proves that the common fixed-vector subspace of the quotient representation is exactly the zero-exponent layer \(Q_0\). Thus a **linear** invariant readout on the quotient must factor through the zero-mode projection. This does not imply that every invariant polynomial or nonlinear statistic factors through \(Q_0\): nonlinear orbit invariants can exist even when the fixed-vector subspace is small.
+
+This gives a useful machine-learning diagnostic:
+- linear invariant features should be tested against the zero-mode projection;
+- nonlinear invariant candidates must be tested on full group orbits;
+- an equivariant latent representation must retain the negative filtered components, since those components transform nontrivially even though each associated-graded layer is unchanged on its diagonal.
+
+The distinction prevents the model from collapsing all negative layers merely because their associated-graded action is the identity.
