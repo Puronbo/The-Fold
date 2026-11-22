@@ -1442,3 +1442,22 @@ For clarity, the two statements must not be conflated:
 - **Exact relation staying purely normal:** only coefficients in \(E^2\) are available at even pole indices.
 
 The next calculation must retain the tangent filtration and the higher Cartier filtration simultaneously. No G-4aj/Kato comparison follows from this result.
+
+
+## 42. G-4aq — explicit normal principal-part de Rham quotient
+
+Let \(L=E((p))\), \(E=\mathbb F_2(t)\), and let
+\[
+\operatorname{PP}_{\rm nor}=\bigoplus_{m\ge1}E p^{-m}dp
+\]
+be the finite normal principal parts. By G-4ap, the exact forms that lie in \(Ldp\) are precisely the sums \(c_np^{n-1}dp\) with n odd and \(c_n\in E^2\). Writing \(m=1-n\), these are exactly the even pole indices with square coefficients. Conversely, for every even m and c∈E, \(d(c^2p^{1-m})=c^2p^{-m}dp\). Hence
+\[
+\boxed{
+\operatorname{PP}_{\rm nor}/(dL\cap\operatorname{PP}_{\rm nor})
+\cong
+\bigoplus_{m\ge1,\ m\text{ odd}}E p^{-m}dp
+\oplus
+\bigoplus_{m\ge1,\ m\text{ even}}(E/E^2)p^{-m}dp.
+}
+\]
+This is an exact de Rham quotient of pure normal principal parts. It is not yet the Kato group: the higher Cartier filtration and its interaction with tangent terms have not been imposed. In particular, do not infer the G-4aj normal form from this intermediate quotient. It is a checkpoint for the next filtered Cartier calculation.
