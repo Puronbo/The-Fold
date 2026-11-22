@@ -1446,3 +1446,7 @@ the quaternion-boundary arithmetic note.
 
 
 **G-4bj — perfect-closure orbit quotient:** each nonzero exponent orbit is \((E^{perf})²/(G_0+(U∞,0))\), where \(G_0=\{(tb,a+bt)}\) and \(U∞=\sum_{h≥1}t^{1/2^h}F^{1/2^h}\). Simplifying this residual quotient is the next step.
+
+
+
+**G-4bk — negative exponent orbits:** the full two-coordinate orbit quotient simplifies to \(F⊕F\) for every negative odd root. The tangent relations account for \(E^{perf}/E\); the residual graph quotient is computed by \((A,B)↦(A₀,A₁+B₁)\). Exponent zero and completion remain.
