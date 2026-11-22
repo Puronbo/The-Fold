@@ -1337,3 +1337,6 @@ the quaternion-boundary arithmetic note.
 
 
 **Scope correction G-4ah:** the G-4ad–G-4ag chain decomposition and basis classify only the auxiliary quotient (H_0=F((p))/(F[[p]]+F((p))^2+\{r+Sr^2\})). In the full completion (K_P=F((p))[T]), (T^2=S+p), squares also contribute ((S+p)y^2). The full local quotient is exactly (F((p))/(F[[p]]+F((p))^2+(S+p)F((p))^2+\{r+Sr^2\})). Thus it is H₀ further quotiented by the image of ((S+p)F((p))^2); the auxiliary basis is not yet a basis of the full quotient. G-4r/G-4s remain the validated full-quotient lower bounds.
+
+
+**G-4ai — exact full-quotient presentation:** set \(\tau(a)=\phi^{-1}([a])\), equivalently \(\tau(x^2+Sy^2)=y\). In auxiliary chain coordinates, the full quotient is \((\bigoplus_{r>0\text{ odd}}F e_r)/\langle e_{2m-1}(a^2)+e_{\operatorname{odd}(m)}(\tau^{v_2(m)}a)\rangle\). These are exactly the relations contributed by \((S+p)F((p))^2\). This is an exact presentation, not yet a normal form; the full quotient has countably infinite dimension by G-4r/G-4s and countability.
