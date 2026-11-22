@@ -3002,3 +3002,28 @@ Its \(p^r\)-diagonal is precisely G-4ca. This identifies the known
 graded arrows as the leading terms of the finite quotient automorphism.
 Computing the reduced matrices on \(M/R\), rather than on the ambient
 logarithmic module, remains open.
+
+
+### G-4ca corrigendum — even-depth first arrow
+
+The even-depth odd-source arrow in G-4ca omitted the contribution from the first coefficient \(A_1\). For an odd source representative \((A,B)=(x,ty)\), the exact first graded correction is
+\[
+\delta^{odd}_{r,v}(x,y)=
+\begin{cases}
+f_rx+e_ry\in F,&r\text{ odd},\\
+(0,f_rx+e_ry)\in F^2,&r\text{ even},
+\end{cases}
+\]
+where \(v=e_r+f_rt\). For an even source representative \((0,td)\), it is \((0,e_rd)\) for odd r and \(e_rd\) for even r, with the target quotient type changing with parity. Thus both e_r and f_r are visible in the first arrow from an odd source at every depth. G-4bw (r=1) is unchanged; the corrected arbitrary-depth statement supersedes only the even-r line and its earlier “f invisible” interpretation.
+
+### G-4cj — centerless filtered section-change group
+
+The positive-depth graded Lie algebra has generators \(H_r,X_r\) and brackets \([H_r,X_s]=X_{r+s}\), all H-H and X-X brackets zero. Its center is zero, also coefficientwise in the completion. The full formal section-change group is centerless: for any nonidentity element with leading parameter v at depth r, choose an independent parameter u at depth s>r. The leading commutator coefficient is \(e_uv+e_vu=t(e_uf_v+e_vf_u)\ne0\) at depth r+s.
+
+### G-4ck — faithful finite quotient action
+
+Using the corrected G-4ca map, every nonzero leading parameter \(v_r=e_r+f_rt\) acts nontrivially on a sufficiently deep negative odd graded layer: choose (x,y)=(1,0) when f_r≠0 and (0,1) when f_r=0. Strictness prevents cancellation by higher filtration terms. Hence the kernel of the formal section-change action on \(M/R\) is trivial. Pullback is naturally a right action; the kernel statement is unaffected by the convention. Since the acting group is centerless and the action faithful, its image is centerless.
+
+### G-4cl — equivariant-learning research bridge
+
+Treat coefficient-section changes as gauge/frame transformations. The planned learning stack has an exact symbolic front end, a filtered equivariant transformation layer, invariant readouts, and an exact algebraic verifier. Certified labels currently include the first graded arrows, corrected second isolated diagonal, and leading composition/bracket. Higher-order quotient matrices are not yet certified and must not be used as guessed training labels. Open adjacent problems: invariant-ring computation, equivariant-map classification, and filtered extension/cohomology calculations.
