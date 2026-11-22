@@ -1729,3 +1729,26 @@ Because \(E^{2^j}=E^{2^{j+1}}\oplus t^{2^j}E^{2^{j+1}}\), these are complementar
 This yields the complete shape of the iterated monomial generators of \(B_\infty\) on finite principal parts: B₁ contributes pure tangent and pure normal square-coefficient terms at even pole indices; for each j≥1, r odd, and b∈E, there are (i) pure-normal terms \(b^{2^{j+1}}p^{-(2^jr+1)}dp\), (ii) mixed logarithmic terms \(\eta_{j,r,b}\), and (iii) pure-tangent terms \(t^{2^j-1}b^{2^{j+1}}p^{-2^{j+1}k}dt\) for k≥1. These arise by applying inverse Cartier j times to exact monomials with odd or even p-exponent, respectively. Distinct pole indices and the displayed complementary coefficient decompositions give the finite-principal-part normal/tangent organization.
 
 This is a description of the Cartier filtration generators, not yet of the quotient by \(C^{-1}-1\). The remaining step is to impose that operator on the paired tangent/logarithmic sector and prove that its cokernel yields the G-4aj higher-chain summands without extra classes.
+
+
+## 55. G-4bd — all finite-principal-part Cartier generators by level
+
+The monomial calculation gives a uniform description of the finite-principal-part generators of the full Cartier filtration. B₁ contributes pure tangent and pure normal terms \(E²p^{-m}dt\) and \(E²p^{-m}dp\) at even pole indices m.
+
+For each level j≥1, each positive odd r, and each b∈E, inverse Cartier iterates of the exact monomial inputs give:
+\[
+\begin{aligned}
+\nu_{j,r,b}&=b^{2^{j+1}}p^{-(2^jr+1)}dp,\\
+\eta_{j,r,b}&=S^{2^{j-1}}b^{2^{j+1}}p^{-2^jr}d\log(t/p),\\
+\tau_{j,k,b}&=t^{2^j-1}b^{2^{j+1}}p^{-2^{j+1}k}dt\quad(k\ge1).
+\end{aligned}
+\]
+Here \(\nu\) is pure normal, \(\eta\) is mixed logarithmic, and \(\tau\) is pure tangent. The mixed family satisfies \(C^{-1}(\eta_{j,r,b})=\eta_{j+1,r,b}\); the pure families propagate by the same coefficient-squaring and pole-doubling rule.
+
+At normal pole index \(m=2^jr+1\), the pure-normal coefficient space is \(E^{2^{j+1}}\), while the mixed-normal coefficient space is
+\[
+S^{2^{j-1}}E^{2^{j+1}}=t^{2^j}E^{2^{j+1}}.
+\]
+These are complementary in \(E^{2^j}\). The mixed coefficient is paired with tangent coefficient \(t^{2^j-1}E^{2^{j+1}}\) at pole index \(2^jr\). At tangent pole indices divisible by \(2^{j+1}\), the pure tangent coefficient space is \(t^{2^j-1}E^{2^{j+1}}\).
+
+These families, together with B₁, give all finite-principal-part generators obtained by iterating inverse Cartier on exact Laurent monomials: decompose each coefficient as \(c_0²+t c_1²\), and treat even and odd p-exponents separately. Thus the finite-principal-part filtration is now explicitly organized into pure normal, pure tangent, and mixed logarithmic pieces. The remaining Kato problem is the cokernel of \(C^{-1}-1\) on this paired system, with exact differentials already accounted for; this is where the G-4aj local normal form must be recovered.
