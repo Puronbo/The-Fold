@@ -270,3 +270,19 @@ Thus \([\mathfrak P_1]\) is 2-torsion. G-34 proves \(\operatorname{Cl}(L)[2]=0\)
 \boxed{\text{both primes of }L\text{ above }2\text{ are principal}.}
 \]
 This eliminates all ideals supported only above 2 from the remaining Minkowski class-group search.
+
+
+## G-35C — finite support of the remaining Minkowski classes
+
+The degree-eight Minkowski bound is
+\[
+M_L=\frac{8!}{8^8}\left(\frac4\pi\right)^4
+\sqrt{2^{16}17^2}<27.488.
+\]
+Every ideal class therefore has an integral representative of norm at most 27. The rational primes 3 and 5 are inert in \(F\), so their prime ideals already have norms \(3^4\) and \(5^4\), both above the bound. At 7, the two degree-one primes of \(F\) are inert in \(L/F\), and the degree-two prime splits in \(L/F\); all resulting prime ideals of \(L\) have norm \(7^2=49\). The primes above 2 are principal by G-35B.
+
+For any rational prime \(p\ge11\), a prime ideal of \(L\) with residue degree at least two has norm at least \(p^2>27\). Thus the only prime ideals that can occur in a Minkowski representative and have not already been eliminated lie above
+\[
+\boxed{11,13,17,19,23}
+\]
+and have residue degree one over \(\mathbb Q\). It follows that the ideal classes of these degree-one primes generate \(\operatorname{Cl}(L)\). This is a finite support reduction, not yet a computation of their principality or relations.
