@@ -2315,3 +2315,9 @@ otinmathcal N^3) by UF-072O.
 - For (C_8\twoheadrightarrow C_4), with section (s(i)=g^i), (0\le i<4), the normalized factor set is (\tau(i,j)=\lfloor(i+j)/4\rfloor\bmod2).
 - The G-11 cyclic sum is (w_\tau=\sum_{j=0}^3\tau(j,1)=1). With trivial (\mathbb F_2)-coefficients, the norm is zero, so this represents the nonzero generator of (H^2(C_4,\mathbb F_2)).
 - This identifies the explicit G-13 transgression with the G-11 cocycle-sum obstruction. Still open: a Fold-specific Galois module and arithmetic class.
+
+### G-16 — uniform cyclic (2)-power transgression family
+- For every (r\ge1), the extension (1\to C_{2^r}\to C_{2^{r+2}}\to C_4\to1) has an isomorphism transgression (H^1(C_{2^r},\mathbb F_2)^{C_4}\xrightarrow{\sim}H^2(C_4,\mathbb F_2)) for trivial coefficients.
+- Proof: both groups are one-dimensional; restriction from (H^1(C_{2^{r+2}})) to (H^1(C_{2^r})) is zero since the subgroup generator is the fourth power of the ambient generator; five-term exactness gives injectivity.
+- Pushing the extension factor set through the nonzero character (C_{2^r}\to\mathbb F_2) gives (\tau(i,j)=\lfloor(i+j)/4\rfloor\bmod2), with cyclic sum 1. This is uniform in (r).
+- The finite-group theorem is proved. Its arithmetic realization by explicit length-((r+2)) Witt vectors and its Fold-specific interpretation remain open.
