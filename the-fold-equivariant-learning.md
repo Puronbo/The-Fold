@@ -307,3 +307,24 @@ G-4cq identifies the pure-scaling stable module with residue fields \(\kappa_Q\)
 - the applicable Cartier filtration depth and valuation bound.
 
 This benchmark must distinguish the pure-scaling residue module (proved) from the still-open full section-group coinvariant. No full-group invariant label should be included before that bridge is proved.
+
+
+## 13. Use the Cartier-stable differential module as the canonical latent space
+
+G-4ct gives an exact intertwining map
+\[
+\Theta(x)=\frac{x}{S}dS,\qquad C\Theta=\Theta C_0,
+\]
+and identifies the pure-scaling stable quotient with
+\[
+\Omega_F^1/B_\infty.
+\]
+The finite closed-point coordinates are residue fields \(\kappa_Q\), plus the constant block at \(S=0\).
+
+This suggests replacing raw coefficient vectors by a residue-aware latent representation:
+- decompose a rational coefficient into its partial-fraction blocks;
+- apply Cartier until each nonstable higher-pole block contracts or vanishes;
+- encode each stable simple-pole block by its residue-field coordinate;
+- retain the distinguished \(S=0\) block separately.
+
+This representation is canonical for the pure-scaling subgroup. It becomes a canonical feature space for the full section-change group only after the open G-4cr/G-4cs residue-invariance problem is settled. The learning system must preserve this distinction.
