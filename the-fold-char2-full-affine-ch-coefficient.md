@@ -935,3 +935,43 @@ raises it to 61. Adjoining both also gives rank 61. Thus the first corrected vec
 The computation is reproducible with SymPy using [certificates/uf072h_generic_cubic_rank.py](https://github.com/Puronbo/The-Fold/blob/research/universal-fold-invariant/certificates/uf072h_generic_cubic_rank.py). It constructs the Laurent coefficient matrix explicitly and converts it to the exact field F_2(A,B,C,D,E,G,J) before rank computation. Its output is 84 triple columns, 228 source/Laurent rows, and ranks 60, 60, 61, 61 for the base map, plus the corrected n_2n_5 vector, plus the mixed vector, and plus both, respectively.
 
 **Consequence.** The generic cubic initial calculation establishes exactly one new direction from the two corrected quadratic-kernel combinations. It does not compute the full N^2/N^3, because products involving n_1,n_4 can begin in degree three or later, and it does not give an integral S-module presentation. The one-copy elimination ideal and two-copy Hopf criterion remain separate tasks.
+
+
+## 23. UF-072I — Degree-three classes from all pair products
+
+The degree-three source terms of products involving the two generators with zero linear part can be computed from the UF-065 quadratic terms and the UF-072D linear vectors. Write
+[
+q_1=(A/a)c^2+left(Ab/(ai)+C/aight)cd,qquad
+q_4=(A/i)cd.
+]
+For each (jin{2,3,5,6,7,8,9}), the cubic initial terms are
+[
+operatorname{in}_3(n_1n_j)=q_1L_j,qquad
+operatorname{in}_3(n_4n_j)=q_4L_j,
+]
+with multiplication in (k[a^{pm1},b,i^{pm1}][c,d,h]/(c^4,d^2,h^2)).
+
+Exact elimination over (K=mathbb F_2(A,B,C,D,E,G,J)) gives:
+[
+egin{array}{c|c}
+	ext{initial vectors included}&	ext{rank}\hline
+	ext{84 triple products}&60\
+	ext{plus the 14 }n_1n_j,n_4n_j	ext{ cubic terms}&70\
+	ext{plus corrected }operatorname{in}_3(n_2n_5)&70\
+	ext{plus also }operatorname{in}_3(n_2n_6+n_3n_5)&71
+end{array}
+]
+The ten new pivot columns from the fourteen (n_1,n_4) products are
+[
+n_1n_2,n_1n_3,n_1n_5,n_1n_6,n_1n_7,n_1n_8,n_1n_9,
+n_4n_7,n_4n_8,n_4n_9.
+]
+The mixed quadratic-kernel combination contributes one further independent class. The corrected (n_2n_5) vector contributes none. The full pivot list and rank calculation are reproducible in [certificates/uf072i_degree3_pair_product_rank.py](https://github.com/Puronbo/The-Fold/blob/research/universal-fold-invariant/certificates/uf072i_degree3_pair_product_rank.py).
+
+Thus the degree-three part of the associated filtration of (mathcal N^2/mathcal N^3), after tensoring with (K), has dimension 11: ten classes from products involving (n_1,n_4), and one from (n_2n_6+n_3n_5). Together with the 24-dimensional degree-two part from UF-072F, the first two graded pieces contribute
+[
+24+11=35
+]
+generic dimensions.
+
+**Scope.** This is not yet the full dimension of ((mathcal N^2/mathcal N^3)otimes_S K). Products (n_1^2,n_1n_4,n_4^2) begin in source degree four, and quartic/higher terms of the other pair products can also survive. The exact higher filtration layers and integral (S)-module presentation remain open.
