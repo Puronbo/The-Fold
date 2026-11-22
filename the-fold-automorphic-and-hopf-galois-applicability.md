@@ -158,6 +158,12 @@ In particular, all positive-degree cohomology groups are canonically the same qu
 \]
 This follows because (\operatorname{im}N\subseteq\ker N), with dimensions (r) and (m-r), respectively. Thus the non-semisimple part of the involution is measured by (r), while the residual quotient (\ker N/\operatorname{im}N) measures the cohomology in every positive degree.
 
+The operator also gives the complete finite-dimensional module classification. Choose a basis of \(\operatorname{im}N\), lift it to vectors \(v_i\) with \(Nv_i=u_i\), and choose a complement \(W\) of \(\operatorname{im}N\) in \(\ker N\). Then
+\[
+V\cong k[C_2]^r\oplus k^{m-2r},
+\]
+where each regular summand is a two-dimensional Jordan block and the remaining summand has trivial action. This decomposition is unique up to isomorphism, though the chosen bases and complements are not canonical. Thus the positive-degree cohomology has dimension equal to the number of trivial Jordan blocks.
+
 There is also a direct bridge to the absolute Galois group. Write (G_K=\operatorname{Gal}(K^{\mathrm{sep}}/K)), (G_L=\operatorname{Gal}(K^{\mathrm{sep}}/L)), and assume the (G_K)-action on (V) is continuous. Inflation–restriction gives the exact segment
 \[
 0\to H^1(C_2,V^{G_L})
