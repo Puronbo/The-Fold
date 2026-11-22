@@ -1254,3 +1254,6 @@ has relative norm \(N_{L/F}(\alpha)=((\beta+4)/(\beta+2))(1+\beta)\), hence abso
 
 
 **G-4j — infinite-dimensional quaternion-boundary image:** a valuation at \(T=\infty\) proves the classes of \(T^{2n+1}\) are independent in the G-4i quotient, since denominator elements with poles have even pole order. Therefore the boundary image over \(\mathbb F_2(s,t)\), \(\lambda=s\), has infinite \(\mathbb F_2\)-dimension. Independent symbol representatives are \([ST^{2n+1},s)_2\). Full quotient normal forms remain open; see the quaternion-boundary arithmetic note.
+
+
+**G-4k — exact dimension:** finite places \(T=a\), for \(a\in\mathbb F_2(S)\), give independent quotient classes \((T-a)^{-(2n+1)}\). The denominator has only even pole orders at each such place because S is nonsquare in the residue field. As K is countable, the quaternion-boundary image has exact \(\mathbb F_2\)-dimension \(\aleph_0\). A canonical basis/reduction algorithm remains open; see the quaternion-boundary arithmetic note.
