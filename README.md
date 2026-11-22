@@ -1438,3 +1438,7 @@ the quaternion-boundary arithmetic note.
 
 
 **G-4bh — logarithmic Cartier coordinates:** inverse Cartier squares both log coefficients and doubles the Laurent exponent. Exact monomial inputs \((a+bt)p^n\) give initial coefficient pair \((tb,n(a+bt))\), so their Frobenius iterates generate the finite Cartier filtration. The full quotient remains open.
+
+
+
+**G-4bi — full exponent-orbit model:** each nonzero odd exponent r contributes a Frobenius direct limit of two-coordinate modules \((E\oplus E)/R_{r,j}\), with root exact graph relations and intermediate tangent-only relations. The zero exponent is separate. This retains mixed tangent constraints and supersedes the pure-normal approximation as the full finite-principal-part presentation.
