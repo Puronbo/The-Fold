@@ -1603,3 +1603,13 @@ Q_{\mathcal G}\cong F/\wp(F)\oplus
 \bigoplus_{q>0\ {\rm odd}}\ \bigoplus_{Q\ {\rm monic\ irreducible}}\mathbb F_{2^{\deg Q}}.
 \]
 The orbit sum is essential for annihilating \((\Phi-1)M\); raw residues at a single exponent do not descend. This resolves the filtered extension left open in G-4cr.
+
+
+**G-4ct–G-4cu — complete coinvariants:** the full group coinvariant is
+\[
+Q_{\mathcal G}\cong F/\wp(F)\oplus
+\bigoplus_{q>0\ {\rm odd}}\ \bigoplus_{Q\ {\rm monic\ irreducible}}\mathbb F_{2^{\deg Q}}.
+\]
+For each odd root q, the invariant residue is the Frobenius-normalized sum over the full exponent-doubling orbit \(-q,-2q,-4q,\ldots\). This annihilates the differential-Frobenius relation and is invariant under all finite section changes. The zero summand \(F/(\wp+SF²)\) is canonically identified with \(F/\wp(F)\) by the p-basis first-coordinate map. The filtered extension left open in G-4cr is now resolved by a canonical orbit-residue splitting.
+
+The rational residue generator also emits orbit-sequence examples with the orbit-samples option; adjacent-stage relation pairs are included in its exact self-test.
