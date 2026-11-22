@@ -2768,3 +2768,8 @@ The characteristic-two differential symbol sends \([aS,S)_2\) to \(aS,d\log S=a,
 ### G-4bq — base S versus coefficient-field t²
 
 The geometric coordinate satisfies t²=S_base+p, not t²=S_base. Hence \(Sc²p^{-m}dp\) splits into \(t²c²p^{-m}dp+c²p^{-(m-1)}dp\). Both terms must be converted to dlog p before assigning exponent orbits. The previous G-4bp/bo symbol compatibility shorthand omitted this adjacent term and is not yet fully verified. Recompute the exact exponent indexing and root-graph reduction before claiming the scalar projection agrees with the symbol map.
+
+
+### G-4br — exact adjacent-term exponent correction
+
+For \(a=Sc²p^{-m}\), m odd, with base S=t²+p, the logarithmic expression is \(a dp=t²c²p^{-(m-1)}d\log p+c²p^{-(m-2)}d\log p\). The second exponent −(m−2) is negative odd and its coefficient c²∈F is killed by the root graph G₀. The first exponent −(m−1) lies at stage j=v₂(m−1); its root is tc for j=1 and lies in U_{j−1} for j≥2, mapping to Sc². This completes the symbol comparison; G-4bq's intermediate exponent −(m−3) is withdrawn.
