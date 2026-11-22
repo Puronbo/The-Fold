@@ -750,3 +750,27 @@ The elliptic factors each have slope 1/2; the four-dimensional factor A_4 has sl
 The exact certificate "certificates/g26_genus7_newton_polygon.py" checks the factorization identity and computes the lower hull using integer arithmetic. It takes the G-25 Weil polynomial as input; the independent finite-field point-count certificate remains "certificates/g24_genus7_weil_polynomial.py".
 
 References: the Newton-polygon/root-valuation convention is stated in [A note on some Picard curves over finite fields](https://doi.org/10.1016/J.FFA.2014.12.002); the finite-field Frobenius-polynomial/isogeny-class theorem is summarized in [Handbook of Finite Fields, §16.6](https://archive.ymsc.tsinghua.edu.cn/pacm_download/672/12637-dingjt-p2.pdf). The residual degree-eight factor's further decomposition, and the genus-35 Jacobian, remain open.
+
+
+### G-27 — irreducibility and simplicity of the degree-eight factor
+
+Write
+\[
+Q^*(X)=X^8Q(1/X)=X^8+4X^7+6X^6+4X^5+2X^4+8X^3+24X^2+32X+16.
+\]
+Its 2-adic Newton polygon has slopes -3/4 and -1/4, each of horizontal length four. For a factor over Q, the multiplicity of each slope must be divisible by its denominator 4. A proper factorization of this degree-eight polynomial would therefore require a monic quartic factor.
+
+By Gauss's lemma such a factor has integer coefficients. Its roots are four of the Weil roots, each of complex absolute value sqrt(2). The elementary symmetric bounds force it to have the form
+\[
+X^4+aX^3+bX^2+cX+d,
+\quad |a|\le5,\ |b|\le12,\ |c|\le11,\ d=\pm4.
+\]
+There are exactly 12,650 candidates. Exact integer polynomial division shows that none divides Q*. This proves Q* irreducible over Q. The exhaustive check is recorded in "certificates/g27_degree8_irreducibility.py"; it was executed and checked all 12,650 candidates.
+
+Consequently the degree-eight factor corresponds to a simple four-dimensional isogeny factor over F2. Thus the genus-seven Jacobian decomposition in G-26 is now
+\[
+J(C)\sim E_0^2\times E_{-2}\times A_4,
+\]
+with A_4 simple and having Frobenius polynomial Q*. Its Newton slopes are 1/4 (four times) and 3/4 (four times).
+
+The factorization-to-isogeny interpretation uses the Honda–Tate theorem: an irreducible Weil polynomial determines a simple isogeny class. Reference: [Isogeny Classes of Abelian Varieties over Finite Fields](https://par.nsf.gov/servlets/purl/10327895), §2. The Newton-slope denominator and multiplicity rule is summarized in [Handbook of Finite Fields, §16.6](https://archive.ymsc.tsinghua.edu.cn/pacm_download/672/12637-dingjt-p2.pdf).
