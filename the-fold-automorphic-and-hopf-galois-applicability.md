@@ -625,3 +625,25 @@ As a consistency check, the conductor exponents of the nontrivial characters, gr
 agreeing with the different exponent.
 
 **Scope.** G-22 computes the local ramification filtration, local different, and global genus for the explicit degree-16 ASW cover. These are arithmetic invariants of the model tower; they do not yet identify a Galois representation or Selmer class arising from the Fold.
+
+
+## G-23 — zero p-rank throughout the one-point tower
+
+Let \(C_n\) be the smooth projective curve with function field \(M_n\), for \(1\le n\le4\), over \(\mathbb F_2\). After base change to \(\overline{\mathbb F}_2\), the cover
+\[
+C_n\longrightarrow\mathbb P^1
+\]
+is a \(2\)-group Galois cover with group \(C_{2^n}\), branched at exactly one point, totally ramified there. The Deuring–Shafarevich formula for a \(p\)-group cover is
+\[
+\gamma(C_n)-1
+=|G|(\gamma(\mathbb P^1)-1)
++\sum_{Q\in C_n}(e_Q-1),
+\]
+where \(\gamma\) denotes the geometric \(p\)-rank. Here \(\gamma(\mathbb P^1)=0\), there is one ramified point with \(e_Q=2^n\), and all other terms vanish. Therefore
+\[
+\gamma(C_n)-1=-2^n+(2^n-1)=-1,
+\qquad\boxed{\gamma(C_n)=0}.
+\]
+Thus all four curves in the tower have \(2\)-rank zero, despite their genera \(0,1,7,35\). In particular, the genus-one quartic intermediate curve is supersingular (for an elliptic curve, \(p\)-rank zero is equivalent to supersingularity).
+
+This conclusion uses only the one-point total ramification and the Deuring–Shafarevich formula; it does not determine the full Newton polygon or the \(a\)-number of the higher-genus Jacobians. Reference for the formula: Booher–Cais, *Iwasawa theory for p-torsion class group schemes in characteristic p*, §2, or the statement reproduced in the Galois-module reference cited in the problem register.
