@@ -198,3 +198,49 @@ A run with these settings passed all self-tests and generated 5,000 JSONL exampl
 A useful next model predicts the first nonzero Frobenius-scaled diagonal for inputs in \(F^{2^h}\). The scaling section \(t\mapsto t(1+p)\) changes \(S\) by \(S\mapsto S(1+p^2)\), so a \(2^h\)-th power has its first possible coefficient at depth \(2^{h+1}\). The target coefficient is \((Sa')^{2^h}\) when the input is \(a^{2^h}\).
 
 This creates a controlled extrapolation benchmark over the Frobenius level h. Train on small h, hold out larger h, and require the exact verifier to check the predicted exponent and coefficient. The goal is to discover the full coinvariant/Frobenius tower without treating guessed higher-order formulas as proof.
+
+
+## 10. Rational-function Cartier features and residue targets
+
+The polynomial-only benchmark is insufficient for the stable scaling problem: nontrivial periodic simple-pole classes require rational denominators. A second exact encoder now works directly in \(F=\mathbb F_2(S)\), representing a rational function as a normalized numerator/denominator pair of GF(2)[S] bitmasks.
+
+For the p-basis decomposition
+\[
+f=a_0^2+Sa_1^2,
+\]
+the even-component root \(C_0(f)=a_0\) is computed without adjoining square roots by multiplying \(f=N/D\) by \(D^2\) and splitting \(ND=A^2+SB^2\):
+\[
+C_0(f)=A/D,\qquad C_1(f)=B/D.
+\]
+The exact check identity is
+\[
+C_0(f)^2=f+Sf'.
+\]
+
+The pure-scaling tower is the direct limit of \(C_0\), equivalently \(F/\bigcup_n\ker C_0^n\). Its stable quotient has the explicit residue-field decomposition
+\[
+\mathbb F_2\oplus\bigoplus_{Q\ne S}\mathbb F_2[S]/(Q),
+\]
+over monic irreducibles Q. Each \(Q\ne S\) simple-pole coefficient block is acted on invertibly; higher Q-poles contract to simple poles. The S-pole block is nilpotent and polynomial terms reduce to constants.
+
+The companion script tools/cartier_stable_part.py:
+- performs exact rational arithmetic over GF(2)(S);
+- computes \(C_0,C_1\), derivatives, and iterates;
+- enumerates irreducible Q of bounded degree;
+- checks invertibility on each simple-pole coefficient space for Q≠S;
+- checks pole-order contraction and the identity \(C_0(f)^2=f+Sf'\);
+- emits rational-function orbit examples for learning.
+
+Independent core checks passed for all 14 monic irreducibles of degree at most five and pole orders through eight. These tests confirm the p-basis identity, simple-pole ranks, and pole-order bounds. They are exact algebra checks; no neural training or generalization claim is made.
+
+### New learning benchmark: residue recovery
+
+Train a model to predict:
+1. the next \(C_0\)-iterate of a rational function;
+2. whether a simple-pole block is stable or nilpotent;
+3. the residue-field coordinate \(P(\alpha)/(\alpha Q'(\alpha))\) for a simple pole \(P/Q\);
+4. the eventual simple-pole representative after repeated p-basis reduction.
+
+Use irreducible polynomials of unseen degrees as a structural holdout. Also hold out pole orders and rational numerators/denominators, so the model cannot solve the task by memorizing polynomial bit patterns. An exact GF(2)[S] verifier remains authoritative.
+
+The remaining mathematical question is whether general section changes act trivially on this residue module. Until that is proved or disproved, these are the exact invariants of the pure-scaling subgroup, not certified invariants of the full section-change group.
