@@ -2,8 +2,9 @@
 """Exact GF(2)[S] data generator for the Fold section-change action.
 
 Polynomials are encoded as nonnegative integers: bit i is the coefficient
-of S**i. The script emits certified first- and second-diagonal targets,
-plus bracket/composition examples. It does not guess higher quotient maps.
+of S**i. The script emits certified first/second-diagonal, pure-scaling
+Hasse/Frobenius, and bracket/composition targets. It does not guess
+higher quotient maps or claim coverage of rational denominators.
 """
 from __future__ import annotations
 
@@ -203,21 +204,6 @@ def leading_mixed_parameter(v: tuple[int, int], u: tuple[int, int]):
 
 def random_poly(rng: random.Random, max_degree: int) -> int:
     return rng.randrange(1 << (max_degree + 1))
-
-
-def square_root_polynomial(a: int) -> int:
-    """Return the polynomial square root, raising if a is not a square."""
-    out = 0
-    i = 0
-    while a:
-        if a & 1:
-            if i & 1:
-                raise AssertionError("polynomial is not a square")
-            out |= 1 << (i // 2)
-        i += 1
-        a >>= 1
-    return out
-
 
 def self_test() -> None:
     values = [0, 1, S, 1 ^ S, 1 ^ (1 << 2), 1 ^ S ^ (1 << 3)]
