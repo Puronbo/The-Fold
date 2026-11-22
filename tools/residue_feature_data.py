@@ -120,6 +120,42 @@ def field_trace(alpha: int, q: int) -> int:
     return trace
 
 
+
+def inverse_frobenius(alpha: int, j: int, q: int) -> int:
+    """Apply Frob^(-j) in the finite field GF(2)[S]/(q)."""
+    d = degree(q)
+    steps = (-j) % d
+    value = mod(alpha, q)
+    for _ in range(steps):
+        value = square_mod(value, q)
+    return value
+
+
+def orbit_residue(alphas: list[int], q: int) -> int:
+    """Frobenius-normalized sum over an exponent-doubling orbit."""
+    total = 0
+    for j, alpha in enumerate(alphas):
+        total = add(total, inverse_frobenius(alpha, j, q))
+    return mod(total, q)
+
+
+def orbit_sample(q: int, root_q: int, alphas: list[int]) -> dict:
+    if root_q < 1 or root_q % 2 == 0:
+        raise ValueError("orbit root must be a positive odd integer")
+    d = degree(q)
+    stages = [mod(a, q) for a in alphas]
+    return {
+        "task": "frobenius_orbit_residue",
+        "Q_bits": q,
+        "Q": poly_string(q),
+        "residue_degree": d,
+        "odd_root_q": root_q,
+        "exponents": [-root_q * (1 << j) for j in range(len(stages))],
+        "stage_residues": stages,
+        "normalized_orbit_residue": orbit_residue(stages, q),
+    }
+
+
 def poly_string(a: int) -> str:
     if a == 0:
         return "0"
@@ -211,6 +247,26 @@ def self_test() -> None:
                 assert field_trace(add(a, b), q) == add(
                     field_trace(a, q), field_trace(b, q)
                 )
+
+    # Frobenius-normalized orbit sums kill every adjacent Cartier relation:
+    # alpha at stage j and alpha^2 at stage j+1.
+    for q in qs:
+        d = degree(q)
+        for alpha in range(1 << d):
+            for j in range(4):
+                stages = [0] * (j + 2)
+                stages[j] = alpha
+                stages[j + 1] = square_mod(alpha, q)
+                assert orbit_residue(stages, q) == 0
+        # The normalized sum is additive and invariant after adding a
+        # relation pair at any adjacent pair of stages.
+        for alpha in range(1 << d):
+            for beta in range(1 << d):
+                base = [alpha, beta, 0, 0]
+                augmented = base[:]
+                augmented[1] = add(augmented[1], alpha)
+                augmented[2] = add(augmented[2], square_mod(alpha, q))
+                assert orbit_residue(base, q) == orbit_residue(augmented, q)
     print(
         f"self-test: {len(qs)} irreducibles and {tested} exact residue basis cases passed",
         file=sys.stderr,
@@ -226,19 +282,44 @@ def generate(max_degree: int, samples_per_point: int, seed: int) -> Iterable[dic
             yield residue_sample(q, alpha)
 
 
+def generate_orbits(
+    max_degree: int, samples_per_point: int, max_stages: int, seed: int
+) -> Iterable[dict]:
+    rng = random.Random(seed ^ 0x5A17)
+    roots = [1, 3, 5, 7, 9, 11, 13, 15]
+    for q in irreducibles(max_degree):
+        d = degree(q)
+        for _ in range(samples_per_point):
+            count = 1 + rng.randrange(max_stages)
+            alphas = [rng.randrange(1 << d) for _ in range(count)]
+            root_q = roots[rng.randrange(len(roots))]
+            yield orbit_sample(q, root_q, alphas)
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--max-degree", type=int, default=5)
     parser.add_argument("--samples-per-point", type=int, default=8)
     parser.add_argument("--seed", type=int, default=20261123)
+    parser.add_argument("--orbit-samples", type=int, default=0,
+                        help="also emit this many Frobenius-orbit samples per irreducible")
+    parser.add_argument("--max-orbit-stages", type=int, default=5)
     parser.add_argument("--self-test", action="store_true")
     args = parser.parse_args()
     if args.max_degree < 1 or args.samples_per_point < 1:
         parser.error("max-degree and samples-per-point must be positive")
+    if args.orbit_samples < 0 or args.max_orbit_stages < 1:
+        parser.error("orbit-samples must be nonnegative and max-orbit-stages positive")
     if args.self_test:
         self_test()
     for row in generate(args.max_degree, args.samples_per_point, args.seed):
         print(json.dumps(row, sort_keys=True))
+    if args.orbit_samples:
+        for row in generate_orbits(
+            args.max_degree, args.orbit_samples,
+            args.max_orbit_stages, args.seed
+        ):
+            print(json.dumps(row, sort_keys=True))
 
 
 if __name__ == "__main__":
