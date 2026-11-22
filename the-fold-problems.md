@@ -2585,3 +2585,9 @@ With \(\tau=\phi^{-1}\circ q\), the full local quotient is the direct sum of odd
 
 ### G-4aj — complete full local normal form
 The full local quotient is \(F/\wp(F)\oplus\bigoplus_{r\ge3,\ r\text{ odd}}SF^2\), where \(\wp(a)=a^2+a\). The chain-1 Artin–Schreier summand has basis \(1\), odd powers \(S^d\), and \(S^j/Q^d\) for monic irreducible Q, odd d≥1, 0≤j<deg Q. For each odd r≥3, use the basis \(S\mathcal E^2\) at p^{-r}, where \(\mathcal E\) is the standard partial-fraction basis of F consisting of S^d and S^j/Q^d for all Q,d≥1,0≤j<deg Q. This gives a complete explicit countable basis of the full local quotient.
+
+
+
+### G-4ak — surface-level global comparison and characteristic-two residue bridge
+
+The field \(K=\mathbb F_2(S,T)\) has transcendence degree two, so it is not a global field and the Albert–Brauer–Hasse–Noether exact sequence for number fields/one-variable function fields does not apply. The divisor \(P=(T^2+S)\) lies on the regular surface \(\operatorname{Spec}\mathbb F_2[S,T]\), with residue field \(\mathbb F_2(T)\) and residue relation \(S=T^2\). The full local quotient G-4aj remains proved, but it has not yet been identified with a characteristic-two Kato residue or a global localization kernel. The correct next step is to compute the Kato/logarithmic-Hodge–Witt residue of the quaternion symbol \([aS,S)_2\) at P, identify its relation (if any) to the G-4aj quotient and its filtration, then check codimension-two boundaries at closed points of P. Only then assemble the codimension-one residues over the surface. Do not use an ABHN parity argument for K. References for the distinction: Kato’s p-primary/Gersten framework and the characteristic-p logarithmic Hodge–Witt Kato complex; see the bibliography/search notes in the research conversation. Status: open bridge, not a theorem.
