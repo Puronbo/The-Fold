@@ -1525,3 +1525,6 @@ the quaternion-boundary arithmetic note.
 
 
 **G-4cf — quotient instability proved:** the ambient restricted Lie action does not descend to the Kato-style quotient. For (v=t) and any negative odd n, the relation (r=(\Phi-1)(p^n d\log t)) is sent to (p^{2n}t,d\log t+p^nt,d\log t). The first term is exact; the second has nonzero class in the odd graded quotient because ((t,0)\notin G=\{(tb,a+bt):a,b\in F\}). Strictness prevents higher-term cancellation. Thus (\rho_t(R)\not\subseteq R), and the full two-dimensional ambient Lie algebra has no induced quotient representation. A smaller stabilizer remains to be determined.
+
+
+**G-4cg — zero infinitesimal stabilizer:** the constant direction is detected by (m=p^nt,d\log t), while the t-direction is detected by (m=p^n d\log t), for negative odd n. After removing an exact leading term, each nonzero parameter (v=e+ft) leaves a nonzero class in the odd graded quotient. Thus no nonzero element of the two-dimensional ambient section-change Lie algebra preserves (R=B^1+(\Phi-1)M). This does not rule out discrete coordinate automorphisms or other independently constructed quotient symmetries.
