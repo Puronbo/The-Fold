@@ -1366,3 +1366,7 @@ the quaternion-boundary arithmetic note.
 
 
 **G-4ap — tangent constraint on exact normal forms:** in \(L=E((p))\), \(E=\mathbb F_2(t)\), an exact differential \(dg\) is purely normal only if every Laurent coefficient of g lies in \(E^2\), since \(\ker(d/dt)=E^2\). Thus exact purely-normal relations have even pole indices and square coefficients, not arbitrary residue coefficients. The leading-normal-symbol parity in G-4ao remains valid, but the tangent term one level lower must be retained; the full Cartier/Kato comparison is still open.
+
+
+
+**G-4aq — normal de Rham checkpoint:** modulo exact forms that remain purely normal, finite normal principal parts have quotient \(\bigoplus_{m\ odd}E p^{-m}dp\oplus\bigoplus_{m\ even}(E/E^2)p^{-m}dp\), for \(E=\mathbb F_2(t)\). This is not yet the Kato group; higher Cartier filtration and tangent interaction remain to be computed.
