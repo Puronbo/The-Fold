@@ -371,3 +371,15 @@ Push it out along the nonzero character \(C_{2^r}\to\mathbb F_2\), which sends \
 \sum_{j=0}^3\tau(j,1)=1.
 \]
 It represents the nonzero class in \(H^2(C_4,\mathbb F_2)\), uniformly in \(r\). Thus the G-15 cocycle-sum certificate is not special to the octic case.
+
+### G-17 — arithmetic realization of the entire G-16 family
+
+The G-16 family is realized over the same rational function field \(K=\mathbb F_2(s)\). For every \(n\ge2\), take the length-\(n\) Witt vector
+\[
+\mathbf a_n=(s,s,0,\ldots,0)\in W_n(K)
+\]
+and solve the Artin–Schreier–Witt equation \((F-1)\mathbf y=\mathbf a_n\). The degree criterion says that a length-\(n\) Witt vector defines an extension of degree \(2^n\) whenever its first coordinate is not in \(\wp(K)=\{x^2+x:x\in K\}\). Here \(s\notin\wp(K)\), since it has a pole of odd order one at infinity, whereas a pole of \(x^2+x\) has even order. Hence \([M_n:K]=2^n\) and \(\operatorname{Gal}(M_n/K)\cong C_{2^n}\).
+
+Truncating \(\mathbf a_n\) to length two gives \((s,s)\), exactly the G-12 quartic class. Thus the quartic field \(L\) is the specified degree-four subfield of every \(M_n\). Taking \(n=r+2\) realizes every G-16 exact sequence as a function-field Galois sequence over this one fixed \(K\).
+
+For \(n=3\), the coordinate expansion is the explicit G-14 octic tower. For general \(n\), the Witt-vector equation is an exact finite-coordinate specification; expanded higher coordinate polynomials are not written out here. This closes the existence/arithmetic-realization gap in G-16, while leaving the Fold-specific interpretation open. The degree criterion is stated in Pop, *The Oort Conjecture on lifting covers of curves*, Fact 2.1(1), pp. 289–290.
