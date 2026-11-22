@@ -1885,3 +1885,28 @@ This presentation retains both logarithmic directions and all exact-form relatio
 The exponent-zero orbit is separate because doubling fixes zero rather than moving along an infinite chain. It must be treated as the cokernel of coefficient Frobenius-minus-identity on \(E\oplus E\), modulo the Cartier iterates of the exact pairs \((tb,0)\), b∈F. This is not included in the displayed nonzero-orbit direct sum.
 
 **Scope:** the decomposition is exact for finite Laurent principal parts, where all sums have finite support. Passing to the completed Laurent field requires specifying the topology and proving continuity/closedness of the relation subspaces. Simplifying the direct limits and comparing their result with G-4aj remain open.
+
+
+## 61. G-4bj — perfect-closure quotient for each nonzero exponent orbit
+
+The direct limit in G-4bi admits a canonical realization inside \((E^{\rm perf})²\). At stage j, map
+\[
+(A,B)\longmapsto(A^{1/2^j},B^{1/2^j}).
+\]
+These maps are compatible with the Frobenius transitions and their union identifies the ambient direct limit with \((E^{\rm perf})²\). Under this map, the root graph \(G_j\) becomes the fixed subspace
+\[
+G_0=\{(tb,a+bt):a,b\in F\}.
+\]
+The intermediate tangent subspace \((t^{2^k}F^{2^k},0)\), k<j, becomes
+\[
+(t^{1/2^{j-k}}F^{1/2^{j-k}},0).
+\]
+Taking the union over stages gives
+\[
+U_\infty=\sum_{h\ge1}t^{1/2^h}F^{1/2^h}\subset E^{\rm perf}.
+\]
+Consequently each nonzero exponent orbit has the canonical presentation
+\[
+\boxed{(E^{\rm perf}\oplus E^{\rm perf})/(G_0+(U_\infty,0)).}
+\]
+This removes the explicit Frobenius direct-limit notation. The remaining algebraic task is to describe \(U_\infty\), then simplify the residual graph relation and compare the resulting quotient with the higher-chain \(S F²\) summands in G-4aj. Positive and negative odd roots still give distinct copies; exponent zero remains separate.
