@@ -53,3 +53,51 @@ print("Norm(beta+2) = 2; hence (beta+2) is the unique prime above 2")
 print("Minkowski bound = (3/2)*sqrt(17) < 7")
 print("all ideal classes have a principal representative of norm <= 6")
 print("ordinary class number h_K = 1")
+
+# Three norm-one units whose signs generate the even-parity subgroup.
+from fractions import Fraction as Q
+def eval_poly(coeff,x):
+    return sum(Q(c)*x**i for i,c in enumerate(coeff))
+def interval_horner(coeff,lo,hi):
+    left=right=Q(coeff[-1])
+    for c in coeff[-2::-1]:
+        vals=(left*lo,left*hi,right*lo,right*hi)
+        left=min(vals)+c; right=max(vals)+c
+    return left,right
+root_intervals=[
+    (Q(-281,100),Q(-280,100)),
+    (Q(-253,100),Q(-252,100)),
+    (Q(-89,100),Q(-88,100)),
+    (Q(222,100),Q(223,100)),
+]
+for lo,hi in root_intervals:
+    assert eval_poly(g,lo)*eval_poly(g,hi)<0
+units=[
+    [1,1,0,0],       # 1+beta
+    [1,3,1,0],       # 1+3 beta+beta^2
+    [-1,-4,-4,-1],   # -1-4 beta-4 beta^2-beta^3
+]
+expected=[[-1,-1,1,1],[1,-1,-1,1],[1,-1,1,-1]]
+for unit,signs in zip(units,expected):
+    assert resultant(g,unit)==1
+    for (lo,hi),sign in zip(root_intervals,signs):
+        a,b=interval_horner(unit,lo,hi)
+        assert (a>0 and sign==1) or (b<0 and sign==-1)
+# Their sign vectors have rank three over F_2, so they generate
+# the full even-parity subgroup of {+1,-1}^4.
+vectors=[[int(s<0) for s in row] for row in expected]
+def rank_f2(rows):
+    rows=[r[:] for r in rows]; rank=0
+    for col in range(4):
+        pivot=next((i for i in range(rank,len(rows)) if rows[i][col]),None)
+        if pivot is None: continue
+        rows[rank],rows[pivot]=rows[pivot],rows[rank]
+        for i in range(len(rows)):
+            if i!=rank and rows[i][col]:
+                rows[i]=[x^y for x,y in zip(rows[i],rows[rank])]
+        rank+=1
+    return rank
+assert rank_f2(vectors)==3
+print("three explicit norm-one units generate all eight even sign patterns")
+print("using h_K=1 and the nontrivial finite-unramified CM quadratic extension, h_K^+=2")
+print("the CM quadratic extension is the narrow Hilbert class field")
