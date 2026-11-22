@@ -1061,3 +1061,37 @@ These are exact finite-field specialization ranks, so they imply the generic low
 
 
 **Execution audit.** The committed certificate's actual three listed tuples were executed against its 350-column/470-row construction. The outputs were (172,173) for each tuple. The earlier count of five was a documentation error; only these three cases are claimed.
+
+
+## UF-072Q — Dual-certificate route for the degree-four separation
+
+Let (M) be the (470\times350) audited degree-four initial matrix and let
+(v=\operatorname{in}_4(n_1n_4)). The three UF-072P specializations establish
+\[
+\operatorname{rank}_K(M)\ge172,\qquad
+\operatorname{rank}_K([M\mid v])\ge173.
+\]
+A full rank computation is not necessary to prove the desired nonmembership.
+It is enough to construct a single exact row functional
+\[
+\lambda\in K^{470},\qquad
+\boxed{\lambda M=0,\quad \lambda v\ne0.}
+\]
+Indeed, if (v=Mw) for some (w\in K^{350}), then
+\(\lambda v=\lambda Mw=0\), a contradiction. This proves
+(v\notin\operatorname{im}_K(M)), and therefore
+(n_1n_4\notin\mathcal N^3), by the UF-072O completeness implication.
+
+A useful finite-support search strategy is to choose a row subset (R) for which
+the augmented specialization ([M\mid v]_R) has a nonzero (173\times173)
+minor, then seek a symbolic dependence among the corresponding 173 rows of
+(M_R). The specialization ranks show that such row subsets exist at each
+listed point, although the selected subset and minor must be recorded and
+verified. The symbolic dependence must annihilate **all 350 columns** on those
+rows, and its pairing with (v_R) must be a nonzero rational function.
+A relation verified only after specialization is not sufficient.
+
+This route directly certifies separation; it does not assert
+\(\operatorname{rank}_K(M)=172\). The latter would additionally require a
+rank-172 upper-bound certificate. No dual vector has yet been constructed, so
+UF-072P's status is unchanged.
