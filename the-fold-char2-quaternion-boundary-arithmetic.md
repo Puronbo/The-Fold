@@ -774,29 +774,32 @@ The x₂ term cancels from C; the r₁,r₃ terms are integral. These two equati
 
 ## 23. G-4x — erratum and corrected quartic coupled equations
 
-**Correction to G-4w:** the coefficient of x₃² in C was misstated there as (p+S)². The correct coefficient is p+S. Starting from the exact G-4u coordinates
+**Erratum to G-4w:** the displayed coefficient of x₃² in C there is correct; the subsequent G-4x attempted correction was itself erroneous. From the exact G-4u coordinates
 \[
 A=x_0^2+(p+S)(x_2^2+x_3^2)+r_0+Sr_0^2+S(p+S)(r_2^2+r_3^2),
 \]
 \[
 B=x_1^2+x_2^2+(p+1+S)x_3^2+r_2+S(r_1^2+r_2^2+(p+1+S)r_3^2),
 \]
-and using C=A+(p+S)B, the x₂² and r₂² terms cancel, while
-\((p+S)+(p+S)(p+1+S)=p+S\). Since r₁,r₃ are integral for a target with integral T,T³ coordinates, their remaining terms are integral. Thus the corrected exact equations modulo F[[p]] are
+and C=A+(p+S)B, the x₂² and r₂² terms cancel. The x₃² coefficient is
 \[
-C=x_0^2+(p+S)x_1^2+(p+S)x_3^2+r_0+Sr_0^2+(p+S)r_2,
+(p+S)+(p+S)(p+1+S)=(p+S)^2,
+\]
+not p+S. Since r₁,r₃ are integral for a target with integral T,T³ coordinates, their remaining terms are integral. The correct coupled equations modulo F[[p]] are therefore
+\[
+C=x_0^2+(p+S)x_1^2+(p+S)^2x_3^2+r_0+Sr_0^2+(p+S)r_2,
 \]
 \[
 B=x_1^2+x_2^2+(p+1+S)x_3^2+r_2+Sr_2^2.
 \]
-All subsequent work must use these corrected equations. The earlier G-4w displayed first equation is superseded. No obstruction or local-quotient conclusion was based on the erroneous coefficient; the quartic local quotient remains open.
+G-4w's displayed equations were correct; G-4x's alleged correction and all downstream formulas depending on the smaller x₃² coefficient are superseded.
 
 
 ## 24. G-4y — eliminate the linear shared variable and reduce to a square-class test
 
 Use the corrected G-4x equations. Given a target pair (C,B), the first equation uniquely determines r₂ once x₀,x₁,x₃,r₀ are chosen:
 \[
-R=\frac{C+x_0^2+(p+S)x_1^2+(p+S)x_3^2+r_0+Sr_0^2}{p+S},\qquad r_2=R.
+R=\frac{C+x_0^2+(p+S)x_1^2+(p+S)^2x_3^2+r_0+Sr_0^2}{p+S},\qquad r_2=R.
 \]
 The second equation is then
 \[
@@ -814,7 +817,7 @@ with R as above. This is an exact elimination of r₂ and x₂, not yet a closed
 For interpretation, write \(F=\mathbb F_2(S)\) and use \(F=F^2\oplus SF^2\). The quotient \(F((p))/(F((p))^2+F[[p]])\) has one F₂-coordinate from the S-component of each negative even Laurent coefficient, and two F₂-coordinates (the full coefficient in F) from each negative odd Laurent coefficient. Thus the remaining condition is an explicit infinite sequence of coefficient constraints on the four parameters. It is not legitimate to discard those parameters or infer a parity obstruction without solving the coupled constraints.
 
 
-**G-4y coefficient clarification.** The phrase “one F₂-coordinate” above should be read as one coefficient slot, not one-dimensional over F₂. More precisely, each negative even exponent contributes a copy of \(F/F^2\cong SF^2\), and each negative odd exponent contributes a copy of F. Both coefficient spaces have countably infinite F₂-dimension. The total square-class quotient is therefore countably dimensional, consistent with the countability of F((p))'s finite-principal-part quotient.
+**G-4y coefficient clarification.** Each negative even exponent contributes a copy of \(F/F^2\cong SF^2\), and each negative odd exponent contributes a copy of F. Both coefficient spaces have countably infinite F₂-dimension. Since a Laurent series has only finitely many negative terms, the total square-class quotient is the direct sum of these coefficient spaces and has countably infinite F₂-dimension.
 
 
 ## 25. G-4z — explicit coefficient projections and recursion
@@ -822,7 +825,7 @@ For interpretation, write \(F=\mathbb F_2(S)\) and use \(F=F^2\oplus SF^2\). The
 Let \(K_P=F((p))\), \(F=\mathbb F_2(S)\), and \(\mathcal H=K_P/(K_P^2+F[[p]])\). Every class has the exact coordinates
 \[
 \bigl((f_{-(2j-1)})_{j\ge1},\ (\pi_S(f_{-2j}))_{j\ge1}\bigr)
-\in \prod_{j\ge1}F\ \oplus\ \prod_{j\ge1}F^2,
+\in \bigoplus_{j\ge1}F\ \oplus\ \bigoplus_{j\ge1}F^2,
 \]
 with finite support in the pole index for each Laurent series. Here \(F=F^2\oplus SF^2\), and \(\pi_S(a+Sb)=b\) for a,b∈F²; identifying F/F² with F² by this projection gives the even coordinates. Equivalently, as F₂-vector spaces,
 \[
@@ -831,14 +834,16 @@ with finite support in the pole index for each Laurent series. Here \(F=F^2\oplu
 
 There is a direct coefficient recursion for the G-4y criterion. Put q=S+p and
 \[
-U=C+x_0^2+q x_1^2+q x_3^2+r_0+Sr_0^2,
+U=C+x_0^2+q x_1^2+q^2 x_3^2+r_0+Sr_0^2,
 \qquad R=q^{-1}U.
 \]
 Write each series as \(x_i=\sum_k x_{i,k}p^k\), \(r_0=\sum_k r_kp^k\), and similarly for U,R,C. For any integer n,
 \[
 U_n=C_n+\mathbf1_{2\mid n}x_{0,n/2}^2
-+\mathbf1_{2\mid n}S(x_{1,n/2}^2+x_{3,n/2}^2)
-+\mathbf1_{n\equiv1\ (2)}(x_{1,(n-1)/2}^2+x_{3,(n-1)/2}^2)
++\mathbf1_{2\mid n}S x_{1,n/2}^2
++\mathbf1_{n\equiv1\ (2)}x_{1,(n-1)/2}^2
++\mathbf1_{2\mid n}S^2x_{3,n/2}^2
++\mathbf1_{2\mid n}x_{3,(n-2)/2}^2
 +r_n+\mathbf1_{2\mid n}S r_{n/2}^2.
 \]
 The identity qR=U is equivalent to the triangular recursion
