@@ -856,58 +856,58 @@ The first three come from (L_2,L_5) being pure (d)-directions and (d^2=0). For t
 **Correction to the informal count in the preceding research note:** the degree-two source layer has dimension four, with basis ((c^2,cd,ch,dh)), not ten. The number 45 counts all pair products of nine generators; only 28 of those have potentially nonzero degree-two initial terms.
 
 
-## 21. UF-072G — Cubic obstructions to lifting quadratic initial relations
 
-Use the first-order vectors (L_j) and the quadratic source components (Q_j) from Sections 18 and 20. The four-dimensional degree-three source layer has basis
+## 21. UF-072G — Cubic obstructions: corrected calculation
+
+Use the first-order vectors (L_j) and quadratic source components (Q_j) from Sections 18 and 20. The degree-three source layer has basis
 [
 (c^3,c^2d,c^2h,cdh).
 ]
-For a product of two generators, its degree-three term is (L_rQ_s+Q_rL_s), computed in the truncated source algebra.
+For two generators, the degree-three term is (L_rQ_s+Q_rL_s), computed in the truncated source algebra.
 
-The full expansions of (n_2=X_x-1) and (n_5=Z_x) have no (c)-linear or (c^3)-type terms: their nonzero source monomials are among
+The full expansions of (n_2=X_x-1) and (n_5=Z_x) have only source monomials among
 [
 d, c^2, ch, dh, c^2d, c^2h, c^2dh.
 ]
-Every listed monomial has square zero under (c^4=d^2=h^2=0). In characteristic two, Frobenius is additive, so
+Each has square zero under (c^4=d^2=h^2=0). Since Frobenius is additive in characteristic two,
 [
 oxed{n_2^2=n_5^2=0}
 ]
-as exact identities in the source algebra, hence in the affine image algebra.
+as exact identities in the source algebra and hence in the affine image algebra.
 
-The other two kernel generators of the quadratic initial map have the following cubic initial terms. Put (Q=Ab+Ci). Direct multiplication of the UF-064/UF-065 homogeneous components gives
-[
-operatorname{in}_3(n_2n_5)=
-left(
-0,rac{a(AB+CG)}{i},0,
-rac{AQ(a+1)}{i^2}
-ight),
-]
-and
-[
-operatorname{in}_3(n_2n_6+n_3n_5)=
-left(
-AB+CG, AD+BC+CG,rac{AQ(a+1)}{ai},rac{AbQ(a+1)}{ai^2}
-ight).
-]
-Coordinates in both tuples are ordered as ((c^3,c^2d,c^2h,cdh)). These vectors are nonzero over (K(a,b,i)).
-
-To test whether they disappear modulo (mathcal N^3), form the cubic initial multiplication map from the 84 formal triple products of the seven nonzero first-order generators:
-[
-mu_3:operatorname{Sym}^3_K(K^7)longrightarrow K(a,b,i)^4.
-]
-Clear the common denominator (a^3i^4), expand the four coordinates in Laurent monomials in (a,b,i), and regard coefficients as elements of (K=mathbb F_2(A,B,C,D,E,G,J)). The coefficient matrix has 89 distinct Laurent monomials in its support and exact rank
-[
-operatorname{rank}_K(mu_3)=60.
-]
-Appending the two cubic vectors displayed above raises the rank to 62. Thus their classes are linearly independent modulo the (K)-span of all cubic initial triple products.
-
-Any element of (mathcal N^3) has degree-three source initial term in the image of (mu_3): a triple product involving (n_1) or (n_4) starts in degree at least four, because those two generators have no linear source term. Coefficients from (mathcal A_{m aff}) reduce to (S) in this initial degree, and hence to (K) after localization. The rank jump therefore proves
+**Correction to the previous version.** Direct multiplication of the UF-064/UF-065 components gives
 [
 oxed{
-[n_2n_5], [n_2n_6+n_3n_5]
-	ext{ are independent nonzero classes in }
-(mathcal N^2/mathcal N^3)otimes_S K.
+operatorname{in}_3(n_2n_5)
+=left(0,rac{a(AB+CG)}{i},0,0ight).
 }
 ]
+The (cdh)-coordinate is zero: its two contributions are both (AQ/i^2) and cancel in characteristic two. The previously recorded nonzero (cdh)-coordinate was an arithmetic error.
 
-**Interpretation.** Two of the four quadratic initial kernel relations lift to exact zero products; the other two do not lift into (mathcal N^3). This gives a rigorous lower bound of two for the generic (K)-dimension of ((mathcal N^2/mathcal N^3)otimes_S K). It is not yet a complete presentation of that quotient: the other pair products, especially those involving (n_1,n_4), may contribute additional independent classes, and the integral (S)-module structure remains undetermined.
+For the other quadratic initial relation, the computation gives
+[
+oxed{
+operatorname{in}_3(n_2n_6+n_3n_5)
+=left(
+AB+CG, AD+BC+CG,rac{AQ(a+1)}{ai},rac{AbQ(a+1)}{ai^2}
+ight).
+}
+]
+All coordinates are ordered as ((c^3,c^2d,c^2h,cdh)).
+
+A fresh finite-field check of the cubic initial multiplication map is recorded in the companion certificate
+[`certificates/uf072g_cubic_specialization.py`](https://github.com/Puronbo/The-Fold/blob/research/universal-fold-invariant/certificates/uf072g_cubic_specialization.py).
+It uses
+[
+mathbb F_{256}=mathbb F_2[u]/(u^8+u^4+u^3+u^2+1)
+]
+and the specialization
+[
+(a,b,i,A,B,C,D,E,G,J)
+=(mathtt{d9},mathtt{c5},mathtt{c3},mathtt{d7},
+mathtt{14},mathtt{84},mathtt{f8},mathtt{cf},
+mathtt{9b},mathtt{f4}).
+]
+The 84 triple products of the seven nonzero first-order generators have specialized coefficient-matrix rank 60. Appending the corrected vector (operatorname{in}_3(n_2n_5)) leaves the rank at 60; appending (operatorname{in}_3(n_2n_6+n_3n_5)) raises it to 61; appending both also gives rank 61. These are exact finite-field ranks, reproducible by the companion script.
+
+**Scope.** The specialization certifies the displayed ranks at this parameter point, and therefore gives lower bounds for the corresponding generic ranks. It does not by itself prove the exact generic rank over (K=operatorname{Frac}(S)), nor does it establish that either product represents a nonzero class in the generic fiber of (mathcal N^2/mathcal N^3). In particular, the earlier claim that two independent generic classes had been proved is withdrawn. The exact generic cubic relation module and the full quotient (mathcal N^2/mathcal N^3) remain open.
