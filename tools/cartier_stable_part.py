@@ -163,6 +163,8 @@ def rank_f2(columns: list[int]) -> int:
 
 def simple_pole_rank(q: int) -> int:
     degree = q.bit_length() - 1
+    if q == S:
+        return 0
     columns = []
     for i in range(degree):
         out = c0((1 << i, q))
@@ -174,8 +176,8 @@ def simple_pole_rank(q: int) -> int:
     return rank_f2(columns)
 
 
-def divides(a: int, b: int) -> bool:
-    return pdivmod(a, b)[1] == 0
+def is_multiple_of(value: int, divisor: int) -> bool:
+    return pdivmod(value, divisor)[1] == 0
 
 
 def c0_iterates(x: Rat, count: int) -> list[Rat]:
@@ -238,7 +240,7 @@ def self_test(max_q_degree: int, max_pole_order: int) -> None:
             # Deterministic nonzero numerator samples at all small degrees.
             for numerator in range(1, min(1 << (degree * m), 96)):
                 out = c0((numerator, _poly_power(q, m)))
-                assert divides(bound, out[1])
+                assert is_multiple_of(bound, out[1])
 
     # Representative stable/nonstable examples.
     assert c0((1, S)) == (0, 1)
@@ -268,7 +270,7 @@ def generate(count: int, max_degree: int, max_q_degree: int, seed: int) -> Itera
         q = rng.choice(qs)
         degree = q.bit_length() - 1
         pole_order = 1 + rng.randrange(6)
-        numerator = random_poly(rng, max(0, degree * pole_order - 1))
+        numerator = random_poly(rng, min(max_degree, max(0, degree * pole_order - 1)))
         denominator = _poly_power(q, pole_order)
         x = rnorm(numerator, denominator)
         orbit = c0_iterates(x, 5)
@@ -293,8 +295,8 @@ def main() -> None:
     parser.add_argument("--seed", type=int, default=20261123)
     parser.add_argument("--self-test", action="store_true")
     args = parser.parse_args()
-    if min(args.count, args.max_degree, args.max_q_degree, args.max_pole_order) < 0:
-        parser.error("count and degree bounds must be nonnegative")
+    if min(args.count, args.max_degree, args.max_pole_order) < 0 or args.max_q_degree < 1:
+        parser.error("count and degree bounds must be nonnegative; max-q-degree must be at least 1")
     if args.self_test:
         self_test(args.max_q_degree, args.max_pole_order)
     for row in generate(args.count, args.max_degree, args.max_q_degree, args.seed):
