@@ -1098,3 +1098,6 @@ The complete first-order c,d,h coefficient map in both conjugated coordinates is
 
 
 **UF-072G correction:** the cubic term of \(n_2n_5\) has zero \(cdh\)-coordinate. A reproducible finite-field calculation gives ranks 60 (triple products), 60 (plus \(n_2n_5\)), and 61 (plus \(n_2n_6+n_3n_5\)); the former two-independent-generic-classes claim is withdrawn. See [the certificate](https://github.com/Puronbo/The-Fold/blob/research/universal-fold-invariant/certificates/uf072g_cubic_specialization.py).
+
+
+**UF-072H:** exact elimination over F_2(A,B,C,D,E,G,J) gives generic cubic triple-product rank 60. The corrected n_2n_5 vector leaves this rank unchanged; n_2n_6+n_3n_5 raises it to 61. Exact certificate: [uf072h_generic_cubic_rank.py](https://github.com/Puronbo/The-Fold/blob/research/universal-fold-invariant/certificates/uf072h_generic_cubic_rank.py). The full N^2/N^3 remains open.
