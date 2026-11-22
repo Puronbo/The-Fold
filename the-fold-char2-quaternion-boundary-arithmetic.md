@@ -1322,3 +1322,36 @@ where the displayed relations are interpreted as additive generators (and the fo
 **Important correction to the preceding preliminary calculation:** Cartier \(C\) is naturally defined on closed forms (or their de Rham classes), not as an operator on arbitrary 1-forms. Therefore formulas such as \(C(f\,dT)=f_{10}dT\) for arbitrary f must not be used. The valid all-forms operation in the Kato cokernel presentation is \(\gamma\) above, i.e. inverse Cartier followed by reduction modulo exact forms. The p-basis formulas for \(\gamma\) are the formulas used in this section.
 
 This gives a concrete presentation of the local Kato group and a representative-level map from the quaternion symbol. It still does **not** prove that the separate additive quotient G-4aj is isomorphic to this Kato group, nor that its displayed basis maps injectively or surjectively. Such a comparison requires computing the image of \(\mathcal O_P+\mathcal D_P\) under \(a\mapsto a\,dp\) and its intersection with the exact/Cartier relation subgroup.
+
+
+## 40. G-4ao — correction: the Kato group is a Cartier-filtration cokernel
+
+The provisional G-4an presentation that quotiented \(\Omega^1_{K_P}\) only by exact forms and the additive expressions \(h\,dT+h^2T\,dT\), \(h\,dp+h^2p\,dp\) is **not** the correct complete presentation. It omitted the higher Cartier filtration. Replace that presentation by the following standard one.
+
+For a characteristic-two field F, put \(B_1=dF\subset\Omega_F^1\). Recursively, for \(i\ge2\), let \(B_i\subset\Omega_F^1\) be the inverse image of \(C^{-1}(B_{i-1})\) under the quotient map \(\Omega_F^1\to\Omega_F^1/B_1\). The inverse Cartier isomorphism gives
+\[
+C^{-1}:B_i\xrightarrow{\sim}B_{i+1}/B_1.
+\]
+Put \(B_\infty=\bigcup_{i\ge1}B_i\). The characteristic-two Kato group has the presentation
+\[
+\boxed{
+H_2^2(F)\simeq
+\operatorname{coker}\left(
+\wp:\Omega_F^1/B_\infty\to\Omega_F^1/B_\infty
+\right),\qquad
+\wp=C^{-1}-\mathrm{id}.
+}
+\]
+Here \(C^{-1}:\Omega_F^1\to\Omega_F^1/dF\) is the inverse Cartier map, and the displayed endomorphism is understood on the quotient by \(B_\infty\). This is the differential-form presentation in Hiranouchi–Sugiyama, *Extended differential symbol and the Kato homology groups* (2025), §3.3, equations (3.4)–(3.5) and Corollary 3.5.
+
+For \(F=K_P=\mathbb F_2(T)((p))\), the 2-basis \(\{T,p\}\) gives
+\[
+C^{-1}(h\,dT)=[h^2T\,dT],\qquad
+C^{-1}(h\,dp)=[h^2p\,dp]
+\quad\text{in }\Omega_F^1/dF.
+\]
+Indeed, these follow from \(C^{-1}(a\,d\log b)=a^2d\log b\), writing \(dT=T\,d\log T\) and \(dp=p\,d\log p\). These are identities modulo exact forms, not a license to omit \(B_\infty\).
+
+The exceptional quaternion symbol \([aS,S)_2\) is represented by \(a\,dp\), as in G-4am. Its Kato class is therefore the class of \(a\,dp\) in the Cartier-filtration cokernel above.
+
+**Remaining bridge:** compute the image/intersection of the additive subspace \(\mathcal O_P+\mathcal D_P\) under \(a\mapsto a\,dp\) in this cokernel, and establish whether the induced map from G-4aj is well-defined, injective, surjective, or neither. No such comparison is asserted. This correction supersedes the oversimplified quotient written in G-4an; the p-basis and inverse-Cartier formulas themselves remain valid.
