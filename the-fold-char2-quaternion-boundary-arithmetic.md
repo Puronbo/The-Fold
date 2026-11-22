@@ -1502,3 +1502,37 @@ Consequently, for every \(n\ge1\),
 The pole-index sequence is \(r_j=2^j(m-1)+1\); because m−1 is odd, its jth term has \(v_2(r_j-1)=j\). Thus the filtration contains explicit \(2^n\)-power coefficient subspaces at odd indices with prescribed \(2\)-adic valuation of r−1.
 
 **Scope:** this proves inclusion of the displayed representatives in \(B_n\), not equality for \(B_n\cap Ldp\), and not a full description of \(B_\infty\cap\operatorname{PP}_{\rm nor}\). Mixed tangent forms arising from general exact differentials may contribute additional elements. The next problem is to determine whether these inclusions exhaust the pure-normal part of the filtration, then impose the \(C^{-1}-1\) recurrence on the resulting coefficient quotients. No Kato/G-4aj identification is claimed.
+
+
+## 45. G-4at — exact pure-normal finite Cartier filtration
+
+The inclusions in G-4as can be sharpened to an equality for finite pure-normal principal parts. Let \(L=E((p))\), \(E=\mathbb F_2(t)\), and let \(B_1=dL\), \(B_{n+1}=C^{-1}(B_n)\) be the standard Cartier filtration on one-forms (with \(C:Z^1\to\Omega_L^1\)). Put
+\[
+V_n=B_n\cap\bigoplus_{m\ge1}E p^{-m}dp,
+\]
+where the sum means finite principal parts. Then
+\[
+\boxed{
+V_n=
+\bigoplus_{m\ge2,\ m\text{ even}} E^2p^{-m}dp
+\ \oplus\!
+\bigoplus_{\substack{m\ge3,\ m\text{ odd}\\v_2(m-1)\le n-1}}
+E^{2^{v_2(m-1)+1}}p^{-m}dp.
+}
+\]
+There is no pole-index-one summand in any finite \(V_n\).
+
+**Proof.** For \(B_1\), G-4ap gives exactly the even-index terms with square coefficients. For the induction, a pure-normal form \(\omega=\sum c_mp^{-m}dp\) in \(B_n\) is closed. Since \(d\omega=\sum c'_mp^{-m}dt\wedge dp\), every \(c_m\in E^2\). Write \(c_m=b_m^2\). The Cartier formula for the p-basis \(\{t,p\}\) gives
+\[
+C(b_m^2p^{-m}dp)=
+\begin{cases}b_mp^{-(m+1)/2}dp&m\text{ odd},\\0&m\text{ even}.\end{cases}
+\]
+Distinct odd indices descend to distinct indices, so no cancellation occurs. Thus \(\omega\in B_{n+1}\) exactly when its even-index coefficients are in \(E^2\) and, for each odd \(m\), the square root coefficient at index \((m+1)/2\) belongs to \(V_n\). If m=1 this condition recursively forces the coefficient to be zero, since index one is absent from \(V_1\). For odd m≥3, the recursion gives \(v_2(m-1)\le n\) and coefficient space \(E^{2^{v_2(m-1)+1}}\). This proves the displayed formula by induction.
+
+Taking the union over finite n yields
+\[
+B_\infty\cap\operatorname{PP}_{\rm nor}=
+\bigoplus_{m\ge2,\ m\text{ even}}E^2p^{-m}dp
+\oplus\bigoplus_{m\ge3,\ m\text{ odd}}E^{2^{v_2(m-1)+1}}p^{-m}dp.
+\]
+This is an exact description of the pure-normal finite-principal-part intersection. It does not classify arbitrary mixed forms in \(B_\infty\), nor by itself identify the full Kato quotient after imposing \(C^{-1}-1\). The index-one Artin–Schreier slot remains outside \(B_\infty\), as expected.
