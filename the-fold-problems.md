@@ -2481,3 +2481,7 @@ For every monic separable irreducible P in F₂(S)[T], S remains nonsquare in it
 
 ### G-4m — exact local parity criterion
 At an irreducible P with residue E=F₂(S)[T]/(P), all denominator poles are even exactly when S is nonsquare in E. If S is square, lift a root r, write r²+S=PC, and choose w with C̄w̄²+w̄≠0; then z=rw/P and u=w/P give z²+u+Su²=(Cw²+w)/P, a simple pole. Exceptional places are necessarily inseparable. Full local quotient structure remains open.
+
+
+### G-4n — explicit exceptional place
+At P=T²−S, the residue field is F₂(S)(√S), so S becomes square. The exact denominator identity, with u=S/P and z=TS/P, is z²+u+Su²=(S²+S)/P. Thus a genuine simple pole occurs. This is a witness to the exceptional inseparable behavior, not a proof that arbitrary simple principal parts are removable.
