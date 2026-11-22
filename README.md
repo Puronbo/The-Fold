@@ -1134,5 +1134,5 @@ For a separable quadratic extension (L/K) in characteristic two, let (C_2=\opera
 \[
 H^q(C_2,V)=\ker N/\operatorname{im}N\quad(q\ge1).
 \]
-If (m=\dim V) and (r=\operatorname{rank}N), this dimension is (m-2r). The inflation–restriction transgression from (H^1(G_L,V)^{C_2}) lands in this explicit (H^2(C_2,V^{G_L})), giving a concrete order-two descent obstruction. This does not construct a global Fold Galois representation; that remains the next arithmetic task. See [the applicability and Galois note](the-fold-automorphic-and-hopf-galois-applicability.md).
+If (m=\dim V) and (r=\operatorname{rank}N), this dimension is (m-2r). In fact (V≅k[C_2]^r⊕k^{m-2r}), so positive cohomology counts the trivial Jordan blocks. The inflation–restriction transgression from (H^1(G_L,V)^{C_2}) lands in this explicit (H^2(C_2,V^{G_L})), giving a concrete order-two descent obstruction. This does not construct a global Fold Galois representation; that remains the next arithmetic task. See [the applicability and Galois note](the-fold-automorphic-and-hopf-galois-applicability.md).
 
