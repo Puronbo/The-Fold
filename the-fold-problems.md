@@ -2200,3 +2200,9 @@ Setting \(c=d=h=0\) makes the affine conjugator \(g(x)=ax+bz,\ g(z)=iz\). A univ
 - Ten independent classes come from n_1/n_4 products and one from the mixed quadratic-kernel relation. Together with the degree-two rank 24, the first two graded pieces contribute 35 generic dimensions.
 - Degree-four and higher contributions, including n_1^2,n_1n_4,n_4^2, remain open.
 - Reproducible exact certificate: certificates/uf072i_degree3_pair_product_rank.py.
+
+
+### UF-072J — Remaining constant-generator product
+- Proves exact identities n_1^2=n_4^2=0 because their source expansions have degree at least two and every such monomial squares to zero in k[c,d,h]/(c^4,d^2,h^2).
+- Computes in_4(n_1n_4)=A^2 c^3d/(ai), a nonzero source term.
+- Whether n_1n_4 lies in N^3 is open; this requires the degree-four initial image of N^3, including triple-product syzygies and fourfold first-order products.
