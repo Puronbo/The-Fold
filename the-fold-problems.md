@@ -2231,3 +2231,11 @@ An additional audit found a missing factor of `a` in the `dh`-coefficient of `Q_
 - No other generator-degree pattern contributes in source degree four. This proves completeness of the test space, not its rank.
 - If in4(n1*n4) lies outside its K-linear span over K=Frac(S), then n1*n4 is not in N^3. If it lies inside, integral S-module membership remains unresolved.
 - Next: rebuild the audited matrix and certify its exact generic rank and augmented rank.
+
+
+### UF-072P — Fresh degree-four specialization lower bounds
+- Rebuilt the 350-column, 470-row degree-four initial matrix from the audited L_j and Q_j tables.
+- Five distinct nonzero F_256 specializations all give rank 172, rising to 173 after adjoining in4(n1*n4).
+- Therefore the generic ranks are at least 172 and 173, respectively. No generic upper bound is known; the strict generic rank gap and n1*n4 nonmembership in N^3 remain open.
+- Next: construct a symbolic rank-172 upper-bound certificate over K=Frac(S).
+- Certificate: certificates/uf072k_degree4_specialization.py (specialization computation only).
