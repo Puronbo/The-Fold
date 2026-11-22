@@ -2597,3 +2597,8 @@ The field \(K=\mathbb F_2(S,T)\) has transcendence degree two, so it is not a gl
 ### G-4al — exceptional divisor has zero residue logarithmic differential
 
 At P=(T²+S), the residue field is E=F₂(T) and \(\bar S=T²\), so \(d\log(\bar S)=0\) in \(\Omega^1_{E/\mathbb F_2}\). This does not imply the quaternion symbol is unramified or trivial; it shows that the ordinary residue-field logarithmic differential of the second symbol entry cannot by itself detect the local classes. Compute Kato filtration/refined Swan data for \([aS,S)_2\) on G-4aj normal-form representatives. Do not identify the local quotient with a Kato graded piece until this is proved. Status: concrete local calculation target.
+
+
+### G-4am — differential representative of the exceptional quaternion symbol
+
+At \(P=(T^2+S)\), put \(p=T^2+S\). Absolute differentials satisfy \(dp=dS\), hence \((aS)d\log S=a\,dp\). Under the characteristic-two differential-symbol description, \([aS,S)_2\) is represented locally by \(a\,dp\). This explains why the vanishing residue differential \(d\log\bar S\) does not settle the wild class: the pre-residue uniformizer differential survives. Exact representative identity proved; identification of the G-4aj quotient with Kato cohomology/filtration remains open. Next compute the quotient by exact differentials and Cartier/Frobenius, then compare its graded pieces with the G-4aj basis.
