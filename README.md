@@ -1498,3 +1498,6 @@ the quaternion-boundary arithmetic note.
 
 
 **G-4bx — second-order section changes:** for t'=t(1+pv₀+p²v₁)+O(p³), v₀=e+ft and v₁=e₁+f₁t, the p² maps are Q_odd≅F²→Q_odd≅F², (x,y)↦(Sf²x,(f₁+ef)x+(e²+e₁)y), and Q_even≅F→Q_even≅F, d↦(e²+e₁)d. The zero-mode graded layer is fixed. Composition law and higher diagonals remain open.
+
+
+**G-4by — second-order composition:** G-4bx is corrected for coefficient-field motion S_new=S_old+p²S_oldv₀²+O(p³). With Dᵥ=S(e²+Sf²)∂S, the p² maps are Q_odd: (x,y)↦(Sf²x+Dᵥx, f₁x+(e²+e₁)y+Dᵥy), and Q_even: d↦(e²+e₁)d+Dᵥd. They satisfy N_odd(w)=N_odd(v)+N_odd(u)+M_uL_v and N_even(w)=N_even(v)+N_even(u)+L_uM_v under composition. Higher orders remain open.
