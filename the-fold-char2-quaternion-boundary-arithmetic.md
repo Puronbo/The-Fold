@@ -1100,3 +1100,49 @@ The extra term (S+p)F((p))² is exactly the missing coupling between neighboring
 Equivalently, the full quotient is the auxiliary chain cokernel H₀ from G-4ad, further quotiented by the image of (S+p)F((p))². The G-4r local parity obstruction and G-4s global independent family were established against the full denominator and remain valid. The G-4ac through G-4ag dual and chain calculations must be read as auxiliary-quotient results only.
 
 **Revised open problem:** compute the image of (S+p)F((p))² inside the explicit chain normal form H₀≅⊕_{r odd}F. Determine the resulting quotient, including whether the G-4r independent family spans the full local quotient.
+
+
+## 34. G-4ai — exact relation presentation of the full local quotient
+
+Let q:F→F/F² be the quotient map, phi(x)=[Sx²], and define
+\[
+\tau=\phi^{-1}\circ q:F\to F.
+\]
+Since F=F²⊕SF², every a has a unique decomposition a=x²+Sy² and tau(a)=y. In particular tau is F₂-linear.
+
+Under the auxiliary normal-form isomorphism H₀≅⊕_{r odd}F e_r of G-4ag, a coefficient c∈F/F² at chain level j≥1 reduces to
+\[
+\rho_j(c),\qquad
+\rho_1=\phi^{-1},\quad
+\rho_{j+1}=\rho_j\circ q\circ\phi^{-1}.
+\]
+Thus for a∈F,
+\[
+\rho_j(\phi(a))=\tau^{j-1}(a).
+\]
+
+Now let y=\sum_n a_n p^n∈F((p)). The additional square term is
+\[
+(S+p)y^2=\sum_n \bigl(Sa_n^2p^{2n}+a_n^2p^{2n+1}\bigr).
+\]
+Only n<0 contributes to the principal part. Put m=−n≥1, write m=2^v r with r odd, and consider the corresponding pair:
+- the coefficient S a² at exponent −2m lies at level v+1 of chain r; its auxiliary normal form is \(\tau^v(a)\) at the zeroth coordinate of chain r;
+- the coefficient a² at exponent −(2m−1) lies at level zero of chain 2m−1.
+
+Therefore the image of (S+p)F((p))² in H₀ is exactly the F₂-span of
+\[
+e_{2m-1}(a^2)+e_{\operatorname{odd}(m)}(\tau^{v_2(m)}(a)),
+\qquad m\ge1,\ a\in F.
+\]
+It follows that the full local quotient has the exact presentation
+\[
+\boxed{
+K_P/(O+\mathcal D)\cong
+\left(\bigoplus_{r\ge1,\ r\text{ odd}}F e_r\right)
+\Big/
+\left\langle
+e_{2m-1}(a^2)+e_{\operatorname{odd}(m)}(\tau^{v_2(m)}a)
+\right\rangle_{\mathbb F_2}.
+}
+\]
+This is an exact presentation, not yet a normal form. The independent full-quotient family from G-4r/G-4s supplies a countably infinite lower bound; the ambient principal-part space is countable, so the full local quotient has dimension exactly aleph₀. The remaining task is to reduce the displayed relations to a canonical basis or prove that a chosen family spans.
