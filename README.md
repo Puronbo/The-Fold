@@ -1086,3 +1086,6 @@ The complete first-order c,d,h coefficient map in both conjugated coordinates is
 - Proves that every reduced affine-linear conjugator \(g(x)=ax+bz,\ g(z)=iz\) centralizes every element of \(U\) in characteristic two.
 - Identifies the reduced affine-slice image algebra exactly as \(k[A,B,C,D,E,G,J]\), with dimension seven (not merely at most ten).
 - Distinguishes this reduced centralization result from the still-open nilpotent translation thickening and two-independent-copy coproduct test (UF-072C).
+
+
+**UF-072D:** the nine-generator first-order source-expansion map has exactly two invisible generators, the constant coefficients (X_1) and (Z_1). The true relation module in the nilradical conormal layer is contained in their span; deciding whether they lie in the square of the nilradical remains UF-072E.
