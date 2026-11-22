@@ -1257,3 +1257,6 @@ has relative norm \(N_{L/F}(\alpha)=((\beta+4)/(\beta+2))(1+\beta)\), hence abso
 
 
 **G-4k — exact dimension:** finite places \(T=a\), for \(a\in\mathbb F_2(S)\), give independent quotient classes \((T-a)^{-(2n+1)}\). The denominator has only even pole orders at each such place because S is nonsquare in the residue field. As K is countable, the quaternion-boundary image has exact \(\mathbb F_2\)-dimension \(\aleph_0\). A canonical basis/reduction algorithm remains open; see the quaternion-boundary arithmetic note.
+
+
+**G-4l — separable places:** at every monic separable irreducible P in F₂(S)[T], S stays nonsquare in the residue field, so denominator elements z²+u+Su² have only even pole orders. Residue-field basis lifts divided by P^(2n+1) give a jointly independent family in Q. See the quaternion-boundary arithmetic note; this is not yet a complete basis.
