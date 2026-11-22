@@ -218,6 +218,15 @@ def self_test(
             if k:
                 assert is_frobenius_power(truncated_hasse_sum(a, n), k)
 
+        # Exact theorem: every odd q-coefficient is already Cartier-exact.
+        for m in range(1, order, 2):
+            assert c0(delta[m]) == ZERO
+
+        # Exact Hasse-sum lemma: 2^k|n implies B_(n-1)(a) is a 2^k power.
+        for n in range(2, order):
+            k = v2(n)
+            assert is_frobenius_power(truncated_hasse_sum(a, n), k)
+
         # Exploratory higher-order bound; recorded separately from theorem checks.
         for m in range(1, order):
             current = delta[m]
