@@ -2473,3 +2473,7 @@ For \(K=\mathbb F_2(S,T)\), the quotient \(K/(K^2+\{u+Su^2:u\in K\})\) is infini
 
 ### G-4k — exact dimension of quaternion-boundary image
 At every place \(v_{T-a}\), \(a\in\mathbb F_2(S)\), the residue field is \(\mathbb F_2(S)\) and S is nonsquare. Every denominator element \(z^2+u+Su^2\) therefore has either no pole or even pole order there. Hence the classes of \((T-a)^{-(2n+1)}\), for all \(a\in\mathbb F_2(S)\) and \(n\ge0\), are linearly independent in the G-4i quotient. Since K is countable, its quotient has at most countable dimension. Thus the quotient and \(\operatorname{im}(\delta_s)\) have exact dimension \(\aleph_0\). A canonical basis and reduction algorithm remain open.
+
+
+### G-4l — separable-place refinement
+For every monic separable irreducible P in F₂(S)[T], S remains nonsquare in its finite separable residue extension. Hence every element z²+u+Su² has no pole or even pole order at P. Choosing an F₂-basis of the residue field and polynomial lifts r(T), the classes r(T)/P^(2n+1) are jointly independent as P ranges over separable irreducibles and n≥0. This refines G-4k but is not a complete quotient basis.
