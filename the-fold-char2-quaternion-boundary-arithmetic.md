@@ -2566,25 +2566,32 @@ For an odd negative layer, take (A,B)=(x,sy), x,y∈F. The correction is
 \[
 \left(sf_rx,\;sv_ry+(r\bmod2)v_rx\right).
 \]
-The even-layer quotient reads the s-coefficient of the second coordinate. As s²=S∈F, that coefficient is
+The target quotient depends on the parity of r, so both coordinates must be retained. The exact reductions are
 \[
-\boxed{L_r(x,y)=
+\boxed{
+\delta^{odd}_{r,v}(x,y)=
 \begin{cases}
-f_rx+e_ry,&r\text{ odd},\\
-e_ry,&r\text{ even}.
+f_rx+e_ry\in F,&r\text{ odd},\\
+(0,f_rx+e_ry)\in F^2,&r\text{ even}.
 \end{cases}}
 \]
-For an even negative layer, take (A,B)=(0,sd). The correction is (0,sv_rd), whose odd-layer quotient is
-\[
-\boxed{M_r(d)=(0,e_rd)}
-\]
-for either parity of r.
+For odd r, the target is Q_even and reads the t-coefficient of the second coordinate. For even r, the target is Q_odd and reads (A_0,A_1+B_1); the term f_rx comes from the t-coefficient of the first correction sf_rx and must not be omitted.
 
-This recovers G-4bw at r=1 and the isolated v₂ contribution to G-4by at r=2. At r=3 it recovers G-4bz. The parity distinction has a geometric source: dlog(p^r) contributes r·dlog p, which survives precisely for odd r in characteristic two. Thus f_r contributes to the odd-to-even arrow only at odd depths; e_r contributes at every depth.
+For an even negative layer, take (A,B)=(0,sd). The correction is (0,sv_rd), so its target class is
+\[
+\boxed{
+\delta^{even}_{r,v}(d)=
+\begin{cases}
+(0,e_rd)\in F^2,&r\text{ odd},\\
+e_rd\in F,&r\text{ even}.
+\end{cases}}
+
+
+This recovers G-4bw at r=1 and the isolated v₂ contribution to G-4by at r=2. At r=3 it recovers G-4bz. The parity distinction has a geometric source: dlog(p^r) contributes r·dlog p, which survives precisely for odd r in characteristic two. Thus f_r contributes to the odd-source arrow at every depth; for even r it lands in the same-parity Q_odd layer, while for odd r it lands in Q_even. The e_r contribution is likewise visible at every depth.
 
 **Clockwise convention.** Regard the negative graded layers as an oriented sequence, with the odd and even quotient types alternating. Declare clockwise to mean forward in filtration depth: a term at exponent n that contributes at exponent n+r has moved r places clockwise. Since n<0, this is motion toward exponent zero and toward less singular principal parts. This is a convention for visualizing the filtration, not an extra algebraic structure or a claim that the exponent lattice is literally periodic. In this convention every isolated section parameter produces a forward arrow; odd r crosses to the opposite parity type, while even r returns to the same parity type.
 
-**Scope.** These are the first nonzero graded arrows of an isolated parameter v_r. They do not give the complete p^{2r} and higher corrections, where the coefficient field moves, nor do they classify simultaneous parameters v₀,…,vᵣ. In particular, the even-depth parameter f_r is invisible in this first graded arrow and may reappear in its higher-order corrections.
+**Scope.** These are the first nonzero graded arrows of an isolated parameter v_r. They do not give the complete p^{2r} and higher corrections, where the coefficient field moves, nor do they classify simultaneous parameters v₀,…,vᵣ. In particular, both e_r and f_r are detectable in the first graded arrow from an odd source layer.
 
 
 ## 79. G-4cb — second clockwise movement for an isolated depth-r change
@@ -2986,3 +2993,114 @@ automorphism of the quotient \(M/R\). The quotient-level matrix still
 requires reduction of these exact coefficient pairs modulo
 \(B^1+(\Phi-1)M\); the displayed formula is the ambient pullback and
 does not by itself supply that reduced matrix.
+
+
+## 87. G-4cj — centrality of the filtered section-change group
+
+Let \(\mathfrak g_+=\prod_{r\ge1}\mathfrak g_r\), with
+\(\mathfrak g_r=F H_r\oplus F X_r\) and leading brackets
+\[
+[H_r,X_s]=X_{r+s},\qquad
+[H_r,H_s]=[X_r,X_s]=0.
+\]
+For \(z=\sum_r(a_rH_r+b_rX_r)\), commuting with every \(H_s\)
+forces all \(b_r=0\), and commuting with every \(X_s\) then forces all
+\(a_r=0\). Coefficientwise the same argument applies to the completed
+product. Hence
+\[
+\boxed{Z(\mathfrak g_+)=0.}
+\]
+
+The finite filtered group has the same centerless behavior. Let a
+nonidentity section change have first nonzero depth r and parameter
+\(v=e_v+f_vt\). Choose a pure section change at depth s with parameter
+\(u=e_u+f_ut\), where s>r and u is F-linearly independent of v.
+The leading mixed coefficient in the two composition orders is,
+by G-4cc, respectively \(e_uv\) and \(e_vu\). Their difference (equal
+to their sum in characteristic two) is
+\[
+e_uv+e_vu=t(e_uf_v+e_vf_u).
+\]
+This is nonzero precisely when u and v are independent. Thus the
+commutator has a nonzero leading term at depth r+s, and the original
+element is not central. Therefore
+\[
+\boxed{Z(\mathcal G)=\{1\}.}
+\]
+The proof concerns the full formal filtered section-change group with
+all positive depths available; a depth-truncated quotient can have a
+larger apparent center near its top degree.
+
+## 88. G-4ck — the finite quotient action is faithful
+
+Let a nonidentity formal section change have first nonzero coefficient
+\[
+t'=t\bigl(1+p^rv_r+O(p^{r+1})\bigr),\qquad
+v_r=e_r+f_rt,\quad (e_r,f_r)\ne(0,0).
+\]
+Choose an odd negative source exponent n with n+r<0, so the source and
+target remain in the strict negative filtration.
+
+The corrected G-4ca calculation gives, on an odd source class
+\((x,y)\in Q_n\simeq F^2\),
+\[
+(x,y)\longmapsto
+\begin{cases}
+f_rx+e_ry\in Q_{n+r}\simeq F,&r\text{ odd},\\
+(0,f_rx+e_ry)\in Q_{n+r}\simeq F^2,&r\text{ even},
+\end{cases}
+\]
+as the first nonzero off-diagonal term. If f_r is nonzero, choose
+(x,y)=(1,0); if f_r=0, then e_r is nonzero and choose (x,y)=(0,1).
+In either case the displayed class is nonzero.
+
+Higher-depth coefficients of the section change contribute only at
+strictly later filtration positions and cannot cancel this first
+nonzero graded transition. Strictness from G-4bv therefore implies
+that the induced quotient automorphism is not the identity. Hence
+\[
+\boxed{\ker\bigl(\mathcal G\curvearrowright M/R\bigr)=\{1\}.}
+\]
+More precisely, pullback gives a right action (or equivalently a
+representation of the opposite group); this convention does not affect
+the kernel or the center. Combining faithfulness with G-4cj shows that
+the image action is centerless as well.
+
+This proves that the quotient detects every nontrivial formal
+coefficient-section change in this group. It does not assert that the
+quotient has no invariant vectors or invariant scalar functions.
+
+## 89. G-4cl — connection to equivariant learning
+
+The coefficient-section group acts like a gauge-change group: changing
+the lift t changes coordinates, while the filtered quotient and its
+associated-graded layers are intrinsic. The coordinate-dependent
+splittings are choices of frame. This is the same structural distinction
+used in gauge-equivariant and group-equivariant learning: internal
+features transform covariantly, while final observables may be invariant.
+
+A mathematically faithful learning design should therefore have three
+parts:
+
+1. **Exact symbolic front end.** Store quotient elements in typed
+   odd/even graded coordinates and retain the filtration depth.
+2. **Equivariant transformation layer.** Apply the verified section
+   pullback and its quotient reduction, rather than relying on random
+   data augmentation. The first-order layer is G-4ca (with the
+   corrigendum above); G-4by supplies the corrected second diagonal.
+3. **Invariant readout and exact verifier.** Learn or construct scalar
+   features constant on section-change orbits, but check every proposed
+   identity by exact polynomial arithmetic and quotient reduction.
+
+The current verified supervision targets are the first-order graded
+arrows, the second-order isolated diagonal, and the leading
+two-depth composition/bracket. Higher-order quotient matrices are not
+yet available as certified labels. A model should not be trained on
+guessed higher-order targets and then treated as evidence.
+
+The adjacent mathematical questions are: (i) compute the invariant
+ring of the quotient action, (ii) classify equivariant maps between
+the odd/even graded modules, and (iii) compute the filtered extension
+cocycles represented by the p^2 and higher composition terms. These
+are natural inputs for a later equivariant architecture, not results
+claimed here.
