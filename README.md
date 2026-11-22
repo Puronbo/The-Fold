@@ -1205,3 +1205,6 @@ Degrees 8–10 provide independent checks. Reproducible exact enumeration: `cert
 
 
 **Galois cohomology — genus-seven Jacobian decomposition (G-26):** the G-25 Weil polynomial factors as \((1+2T^2)^2(1+2T+2T^2)Q(T)\), where Q has degree eight. The Jacobian is isogenous to the corresponding two elliptic factors (the first repeated twice) and a four-dimensional factor with polynomial Q. Its exact Newton slopes are \(1/4\) four times, \(1/2\) six times, and \(3/4\) four times. Thus its 2-rank is zero but it is not supersingular. Exact factorization/Newton-hull certificate: "certificates/g26_genus7_newton_polygon.py". The residual factor's further decomposition and the genus-35 Jacobian remain open.
+
+
+**Galois cohomology — simple four-dimensional factor (G-27):** the degree-eight Frobenius factor of the genus-seven Jacobian is irreducible over Q. Its Newton polygon forces any proper rational factor to be quartic; Weil bounds reduce quartic candidates to 12,650, all excluded by exact integer division. The corresponding four-dimensional isogeny factor is simple, with slopes 1/4 four times and 3/4 four times. Certificate: "certificates/g27_degree8_irreducibility.py".
