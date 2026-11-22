@@ -2553,3 +2553,7 @@ No nonzero F₂-linear functional supported on finitely many negative Laurent co
 
 ### G-4ab — infinite-support local dual annihilator
 The exceptional completed principal-part quotient has a nonzero F₂-linear functional annihilating the full denominator image. Construct it recursively along exponents −1,−2,−4,… using the injective map (x\mapsto[Sx^2]\colon F\to F/F^2), extending functionals at each stage. This proves nontriviality independently of the principal-part family, but the functional is noncanonical and does not give a complete local quotient classification.
+
+
+### G-4ac — exact local annihilator inverse system
+The annihilator splits over odd-core doubling chains. On each chain, coefficient functionals satisfy \(\lambda_1\circ\phi=\lambda_0\) and \(\lambda_{j+1}\circ\phi=\lambda_j\circ q\) for j≥1, with \(q(x)=[x]\) and \(\phi(x)=[Sx^2]\). These are necessary and sufficient, and every extension exists since \(\phi\) is injective. The full annihilator has F₂-dimension continuum. The local quotient classification remains open.
