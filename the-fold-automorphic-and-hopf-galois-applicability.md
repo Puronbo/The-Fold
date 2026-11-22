@@ -226,3 +226,9 @@ Thus the obstruction to descending an invariant class is measured by the explici
 
 For a cyclic Galois quotient (C_{2^n}), the operator (D=\sigma-1) is nilpotent of order at most (2^n). The norm is (D^{2^n-1}), so positive cohomology in every degree has dimension equal to the number of Jordan blocks of length strictly less than (2^n). The maximal-length blocks are exactly the free/projective (k[C_{2^n}])-summands. This refines the quadratic G-7 criterion. The remaining Fold-specific task is to construct natural global modules and compute their Jordan block profiles and descent transgressions.
 \n
+
+### G-9 — Jordan-chain representatives for cyclic (2)-power cohomology
+
+Let \(q=2^n\), \(k\) have characteristic two, and \(D=\sigma-1\) on a finite-dimensional \(k[C_q]\)-module \(V\). Choose a Jordan-chain decomposition into blocks \(J_d\), with basis \(e_0,\ldots,e_{d-1}\), \(De_0=0\), and \(De_j=e_{j-1}\) for \(j>0\). For a block of length \(d<q\), its contribution to \(H^1(C_q,V)=\ker D^{q-1}/\operatorname{im}D\) is represented by the top vector \(e_{d-1}\); its contribution to \(H^2(C_q,V)=\ker D/\operatorname{im}D^{q-1}\) is represented by the bottom vector \(e_0\). A length-\(q\) block contributes zero: the top vector lies in \(\operatorname{im}D\), and the bottom vector equals \(D^{q-1}e_{q-1}\), hence is a norm.
+
+Thus, after choosing Jordan chains, the short-block top vectors form a basis of \(H^1\), and the short-block bottom vectors form a basis of \(H^2\). This is a representative-level refinement of G-8, not merely a dimension count. In a Galois extension \(1\to G_L\to G_K\to C_q\to1\), it identifies coordinates in the target \(H^2(C_q,V^{G_L})\) in which a transgression must be evaluated. It does not compute that transgression without an explicit extension, module action, and invariant cohomology class.
