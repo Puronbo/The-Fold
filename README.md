@@ -1192,3 +1192,6 @@ For the cyclic extension in G-18 and any (possibly nontrivial) \(\mathbb F_2[C_{
 
 
 **Galois cohomology — tower \(2\)-rank (G-23):** all four curves in the one-point cyclic \(2\)-power tower have geometric \(2\)-rank zero by Deuring–Shafarevich. Their genera are \(0,1,7,35\); the genus-one intermediate curve is supersingular. The higher-genus Newton polygons and \(a\)-numbers remain undetermined.
+
+
+**Galois cohomology — quartic elliptic quotient Frobenius (G-24):** identifies the genus-one intermediate curve as \(y^2+y=x^3+x\), counts five \(\mathbb F_2\)-points, and obtains Frobenius polynomial \(T^2+2T+2\). Its trace \(-2\) confirms supersingularity independently of the Deuring–Shafarevich argument. Higher-genus Jacobian Newton polygons remain open; see the Galois applicability note.
