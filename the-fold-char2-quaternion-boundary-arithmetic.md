@@ -790,3 +790,25 @@ C=x_0^2+(p+S)x_1^2+(p+S)x_3^2+r_0+Sr_0^2+(p+S)r_2,
 B=x_1^2+x_2^2+(p+1+S)x_3^2+r_2+Sr_2^2.
 \]
 All subsequent work must use these corrected equations. The earlier G-4w displayed first equation is superseded. No obstruction or local-quotient conclusion was based on the erroneous coefficient; the quartic local quotient remains open.
+
+
+## 24. G-4y — eliminate the linear shared variable and reduce to a square-class test
+
+Use the corrected G-4x equations. Given a target pair (C,B), the first equation uniquely determines r₂ once x₀,x₁,x₃,r₀ are chosen:
+\[
+R=\frac{C+x_0^2+(p+S)x_1^2+(p+S)x_3^2+r_0+Sr_0^2}{p+S},\qquad r_2=R.
+\]
+The second equation is then
+\[
+B=x_1^2+x_2^2+(p+1+S)x_3^2+R+SR^2
+\pmod{F[[p]]}.
+\]
+Since x₂ is free, x₁²+x₂² ranges over all squares (for fixed x₁, vary x₂; equivalently x₁+x₂ ranges over F((p))). Hence the exact criterion is
+\[
+\boxed{(C,B)\text{ is represented modulo }F[[p]]iff
+\exists x_0,x_1,x_3,r_0\in F((p)):\
+B+(p+1+S)x_3^2+R+SR^2\in F((p))^2+F[[p]],}
+\]
+with R as above. This is an exact elimination of r₂ and x₂, not yet a closed-form classification because of the remaining existential parameters.
+
+For interpretation, write \(F=\mathbb F_2(S)\) and use \(F=F^2\oplus SF^2\). The quotient \(F((p))/(F((p))^2+F[[p]])\) has one F₂-coordinate from the S-component of each negative even Laurent coefficient, and two F₂-coordinates (the full coefficient in F) from each negative odd Laurent coefficient. Thus the remaining condition is an explicit infinite sequence of coefficient constraints on the four parameters. It is not legitimate to discard those parameters or infer a parity obstruction without solving the coupled constraints.
