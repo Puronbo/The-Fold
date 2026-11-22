@@ -1298,3 +1298,6 @@ the quaternion-boundary arithmetic note.
 
 
 **G-4u — higher-degree exceptional place:** the irreducible quartic \(T^4+T^2+S\) has residue field containing \(\sqrt S\). Exact four-coordinate formulas for the completed local denominator image are recorded in the quaternion-boundary note. Its local quotient is open; the quadratic exceptional-place argument is not assumed to generalize unchanged.
+
+
+**G-4v — quartic exceptional cancellation:** at \(P=T^4+T^2+S\), the identity \((T^2+T)^2+S=P\) yields explicit denominator elements \((w^2+wP^m)/P^{2m+1}\), including every odd pole order. Hence the nonsquare-residue parity obstruction fails here; the full local quotient remains open.
