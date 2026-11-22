@@ -1527,3 +1527,12 @@ the quaternion-boundary arithmetic note.
 **G-4cf — quotient instability proved:** the ambient restricted Lie action does not descend to the Kato-style quotient. For \(v=t\) and any negative odd n, the relation \(r=(\Phi-1)(p^n d\log t)\) is sent to a class whose leading odd-layer component is nonzero modulo exact forms. Thus \(\rho_t(R)\not\subseteq R\), and the full two-dimensional ambient Lie algebra has no induced quotient representation. A smaller stabilizer remains to be determined.
 
 **G-4cg — zero infinitesimal stabilizer:** the constant direction is detected by \(m=p^nt\,d\log t\), while the t-direction is detected by \(m=p^n d\log t\), for negative odd n. After removing an exact leading term, each nonzero parameter \(v=e+ft\) leaves a nonzero class in the odd graded quotient. Thus no nonzero element of the two-dimensional ambient section-change Lie algebra preserves \(R=B^1+(\Phi-1)M\). This does not rule out discrete coordinate automorphisms or other independently constructed quotient symmetries.
+
+
+**G-4ch — finite quotient action:** finite section changes
+\(t\mapsto t(1+p^rv)\), \(p\mapsto p\), are continuous
+\(\mathbb F_2((p))\)-automorphisms (the t-derivative is \(1+p^re\)).
+They preserve exact forms, and naturality of inverse Cartier modulo
+exact forms implies that they preserve \(R=B^1+(\Phi-1)M\). Thus they
+act on \(M/R\), despite the zero stabilizer of the naive ambient Lie
+derivative proved in G-4cf–G-4cg. Explicit quotient matrices remain open.
