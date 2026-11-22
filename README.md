@@ -1186,3 +1186,6 @@ For the cyclic extension in G-18 and any (possibly nontrivial) \(\mathbb F_2[C_{
 
 
 **Galois cohomology — explicit degree-16 tower (G-21):** the cyclic Artin–Schreier–Witt family over \(\mathbb F_2(s)\) is now expanded through length four. The quartic and octic truncations are joined by a fully written fourth Witt coordinate and the exact order-16 generator translation. The degree follows from the odd pole order of the first coordinate \(s\). This remains an arithmetic model, not yet a Fold-derived Galois representation or Selmer class; see the-fold-automorphic-and-hopf-galois-applicability.md.
+
+
+**Galois cohomology — degree-16 ramification (G-22):** the explicit cyclic degree-16 Artin–Schreier–Witt cover has upper breaks \((1,2,4,8)\), lower breaks \((1,3,11,43)\), different exponent \(100\), and genus \(35\). The conductor-discriminant sum independently gives the same different exponent. See the-fold-automorphic-and-hopf-galois-applicability.md for the calculation and scope.
