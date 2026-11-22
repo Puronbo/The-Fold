@@ -1495,3 +1495,6 @@ the quaternion-boundary arithmetic note.
 
 
 **G-4bw — first-order extension maps:** for t'=t(1+pv₀)+O(p²), v₀=e+ft, the adjacent graded transitions are Q_odd≅F²→Q_even≅F, (x,y)↦fx+ey, and Q_even≅F→Q_odd≅F², d↦(0,ed). These are first-order section-change extension maps; higher-order terms and the zero mode remain to be computed.
+
+
+**G-4bx — second-order section changes:** for t'=t(1+pv₀+p²v₁)+O(p³), v₀=e+ft and v₁=e₁+f₁t, the p² maps are Q_odd≅F²→Q_odd≅F², (x,y)↦(Sf²x,(f₁+ef)x+(e²+e₁)y), and Q_even≅F→Q_even≅F, d↦(e²+e₁)d. The zero-mode graded layer is fixed. Composition law and higher diagonals remain open.
