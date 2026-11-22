@@ -2773,3 +2773,8 @@ The geometric coordinate satisfies t²=S_base+p, not t²=S_base. Hence \(Sc²p^{
 ### G-4br — exact adjacent-term exponent correction
 
 For \(a=Sc²p^{-m}\), m odd, with base S=t²+p, the logarithmic expression is \(a dp=t²c²p^{-(m-1)}d\log p+c²p^{-(m-2)}d\log p\). The second exponent −(m−2) is negative odd and its coefficient c²∈F is killed by the root graph G₀. The first exponent −(m−1) lies at stage j=v₂(m−1); its root is tc for j=1 and lies in U_{j−1} for j≥2, mapping to Sc². This completes the symbol comparison; G-4bq's intermediate exponent −(m−3) is withdrawn.
+
+
+### G-4bs — completed local quotient via positive-tail contraction
+
+For \(L=E((p))\), inverse Cartier doubles p-exponents in logarithmic coordinates. Every positive tail \(\omega_+\) is killed by \(1-C^{-1}\), using the convergent series \(\eta=\sum_{k≥0}(C^{-1})^k\omega_+\). Hence the completed local Kato quotient is determined by finite negative principal parts and exponent zero, with decomposition \(F/(wp(F)+SF²)⊕F/wp(F)⊕\bigoplus_{q≥1\ odd}(F⊕F⊕E^{perf}/E)\). The scalar boundary quotient is the projection described in G-4bo/G-4br.
