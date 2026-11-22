@@ -2132,3 +2132,31 @@ The first term has exponent \(-(m-1)=-2^j q\), with j=v₂(m−1)≥1 and q odd.
 For j=1 this is tc, whose graph-quotient invariant is c in the second F-coordinate. For j≥2 it lies in \(U_{j-1}\), and the map \(\theta_{j-1}\) sends it to \(Sc²\in SF²\). Thus the surviving term maps to exactly the scalar normal-form coefficient, while the adjacent term is killed by the root exact relation.
 
 This completes the coefficient-field correction: G-4bp's symbol compatibility is valid after including the adjacent term explicitly. The erroneous intermediate exponent \(-(m-3)\) in G-4bq is withdrawn; the correct exponent is \(-(m-2)\).
+
+
+## 70. G-4bs — positive-tail contraction and completed local Kato quotient
+
+Let \(L=E((p))\) with logarithmic differential module \(\Omega_L^1=L,d\log t\oplus L,d\log p\), equipped with the p-adic topology. In these coordinates inverse Cartier has representative
+\[
+F_C(A,d\log t+B,d\log p)=A²d\log t+B²d\log p,
+\]
+and doubles the p-exponent. If \(\omega_+\in p\Omega^1_{E[[p]]}\), then
+\[
+\eta=\sum_{k=0}^{\infty}F_C^k(\omega_+)
+\]
+converges p-adically, since \(v_p(F_C^k\omega_+)\ge2^k\). Telescoping gives
+\[
+(1-F_C)\eta=\omega_+-\lim_{N\to\infty}F_C^{N+1}(\omega_+)=\omega_+.
+\]
+Thus every positive-power tail vanishes in the cokernel of \(1-C^{-1}\). The negative part of a Laurent series is finite, and exponent zero is fixed by Frobenius, so the full completed local quotient is determined by the finite negative principal parts and the zero mode. No additional positive-tail classes occur.
+
+Combining G-4bl and G-4bm, the completed local Kato group in this two-dimensional p-basis model is therefore algebraically
+\[
+\boxed{
+H_2^2(L)\simeq F/(\wp(F)+SF²)\oplus F/\wp(F)
+\oplus\bigoplus_{q\ge1,\ q\text{ odd}}\left(F\oplus F\oplus E^{\rm perf}/E\right),
+}
+\]
+with the topology used only to contract the positive tail. The direct-sum terms are finite-support negative exponent orbits. The scalar quaternion boundary quotient is obtained from this full Kato group by the projection in G-4bo/G-4br: retain the zero-mode \(F/\wp(F)\), the second F-coordinate at stage one of each negative orbit, and all later perfection layers; discard the zero-mode \(F/(\wp(F)+SF²)\) and the first F-coordinate of each orbit.
+
+**Scope:** this calculation is for the completed field with the chosen coefficient-field parameter t and p-basis \(\{t,p\}\). Any comparison under a different coefficient-field section must transport the logarithmic coordinates and filtration accordingly.
