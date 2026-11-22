@@ -1516,3 +1516,6 @@ the quaternion-boundary arithmetic note.
 
 
 **G-4cd — Lie bracket:** the infinitesimal section-change vector fields X_v=tv∂ₜ (v=e_v+f_vt, E=F(t), t²=S) satisfy [X_v,X_u]=X_{t(e_vf_u+e_uf_v)}. In basis 1,t the parameter algebra has [1,t]=t: the two-dimensional nonabelian affine Lie algebra over F₂(S). Depths add under the bracket. This is the associated-graded infinitesimal algebra, not yet the full nonlinear group.
+
+
+**G-4ce — restricted 2-map and logarithmic action:** X_v=tv∂ₜ, v=e+ft, satisfies X_v^[2]=X_{ev}; hence [H,X]=X, H^[2]=H, X^[2]=0. Its Lie derivative on (g dlogt+h dlogp) is (X_v(g)+ftg, X_v(h)), a restricted representation on the ambient logarithmic module. The Kato-style quotient action is not yet established: exact forms are stable, but AS/Frobenius relations may not be.
