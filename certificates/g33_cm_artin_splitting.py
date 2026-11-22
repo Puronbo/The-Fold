@@ -53,9 +53,10 @@ for f in f7:
 g7=[0,1,5,4,1]
 assert product_mod([[0,1],[5,1],[3,6,1]],7)==g7
 # Norms from the monic quartic: N(beta-r)=g(r).
-assert (-(14)) == -14                 # g(0)
-assert (-(14)) == -14                 # g(2)
-assert 2 == 2                         # g(-2)
+def eval_g(r): return r**4+4*r**3-2*r**2-20*r-14
+assert eval_g(0)==-14
+assert eval_g(2)==-14
+assert eval_g(-2)==2
 print("F mod 3 and mod 5: two irreducible quartics each")
 print("F mod 7: four irreducible quadratics")
 print("g mod 7: Y (Y-2) (Y^2-Y+3)")
