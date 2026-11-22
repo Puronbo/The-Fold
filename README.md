@@ -1331,3 +1331,6 @@ the quaternion-boundary arithmetic note.
 
 
 **G-4af — explicit chain generators:** for every odd chain label r, the classes (S^n p^{-r}), (n\ge0), are linearly independent in its cokernel. The zeroth-coordinate copy of F embeds because every nonzero finite-support input to T has a nonzero final output coordinate (\phi(x_N)). Thus the countably infinite dimension of each chain has a constructive lower-bound witness; these classes are not yet a spanning normal form.
+
+
+**G-4ag — complete local normal form (supersedes the earlier open status):** the map \(\phi(x)=[Sx^2]\colon F\to F/F^2\) is bijective because \(F=F^2\oplus SF^2\). Backward recursion along each odd-core chain reduces every finite principal part uniquely to its zeroth coordinate. Thus every chain cokernel is canonically \(F=\mathbb F_2(S)\), with basis \([S^n p^{-r}]\), n≥0. The full exceptional completed local scalar quotient has basis \(\{S^n p^{-r}:n≥0,r\text{ odd positive}\}\). The G-4ac dual extensions are unique, not arbitrary.
