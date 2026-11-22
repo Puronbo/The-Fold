@@ -3319,3 +3319,67 @@ For \(a=P/Q\), \(Q\ne S\), its local residue at Q is
 This is an isomorphism on the simple-pole coefficient space. The constant block gives the residue at S=0. The local Cartier facts used here—that exact differentials are the kernel and logarithmic forms are fixed—are standard. <Cite refs={["turn230974search1","turn422555search21","turn422555search22"]}/>
 
 **Scope.** G-4cq computes the pure-scaling stable quotient, not the full \(\mathcal G\)-coinvariant. The next test is whether the remaining section-change parameters induce zero on these residue coordinates or impose further relations among them.
+
+
+## 94. G-4cr — arbitrary finite section changes and the first two Cartier-torsion corrections
+
+Fix a finite section change
+\[
+s=t(1+p^r(e+ft)),\qquad q=p^{2r},\qquad
+u=e^2+Sf^2.
+\]
+Then
+\[
+S_s=s^2=S(1+qu).
+\]
+For an odd residual class represented by \(x=a^2\), the first logarithmic coefficient after pullback has F-component
+\[
+\boxed{
+A'_0=a(S(1+qu))^2\frac{1+qe^2}{1+qu}.
+}
+\]
+To see the factor, rationalize the logarithmic frame coefficient
+\(1+p^rft/(1+p^r(e+ft))\) in \(E=F\oplus tF\) and take its F-component. The coefficient-field substitution is \(S\mapsto S_s\).
+
+Write
+\[
+A'_0-a^2=q\Delta_1+q^2\Delta_2+O(q^3).
+\]
+A direct expansion gives
+\[
+\boxed{\Delta_1=Sf^2a^2\in SF^2=\ker C_0.}
+\]
+The next coefficient is
+\[
+\boxed{
+\Delta_2=(Su\,a')^2+Sf^2u\,a^2.
+}
+\]
+Decompose \(a=a_0^2+Sa_1^2\), so \(a'=a_1^2\). Since
+\[
+Sf^2u=(Sf^2)^2+S(ef)^2,
+\]
+the p-basis decomposition of \(\Delta_2\) yields
+\[
+\boxed{
+C_0(\Delta_2)=S(ea_1+fa_0)^2\in SF^2,
+\qquad C_0^2(\Delta_2)=0.
+}
+\]
+Thus the first two nontrivial coefficients of every finite section change are invisible in the stable pure-scaling quotient.
+
+**Higher-order pattern (conjectural).** Truncated exact rational-function calculations suggest that the coefficient \(\Delta_m\) of \(q^m\) satisfies
+\[
+C_0^{\,v_2(m)+1}(\Delta_m)=0,\qquad m\ge1.
+\]
+This was checked on bounded random rational inputs, but no all-orders induction has been established. The exact test generator records these coefficients and attempts to falsify the bound. Until the proof is supplied, the pure-scaling residue module is not identified with the full section-group coinvariant.
+
+## 95. G-4cs — residue-theoretic route to the all-orders question
+
+The stable quotient from G-4cq is a direct sum of residue-field coordinates at finite closed points of the coefficient S-line. This suggests testing the full section action through Cartier-compatible residue maps rather than by expanding every coefficient independently.
+
+For a one-dimensional function field in characteristic p, Cartier commutes with residues; iterated Cartier reduces bounded higher poles to the simple-pole range. Ohi proves that, for closed forms in the appropriate Cartier filtration and with a specified valuation bound, the residue is independent of the chosen parameter modulo the corresponding \(B_m\)-space. In particular, his Corollary gives a parameter-independent residue map on \(Z_\infty/B_\infty\). <https://www.rs.tus.ac.jp/sutjmath/_userdata/31-2/03-Ohi.pdf>
+
+This is a plausible bridge to the section-change problem because \(p\) is fixed and \(t'\equiv t\pmod p\). But the precise identification of our stable quotient with Ohi's residue target, and verification of the required \(Z_m\) valuation bounds for the transformed representatives, remain to be done. No full-group coinvariant theorem is claimed here.
+
+**Next exact target.** Construct the residue-coordinate map from each odd negative Cartier orbit to \(\kappa_Q\), then calculate its pullback under \(t\mapsto t(1+p^rv)\). If all residue coordinates are unchanged, the full coinvariant equals the pure-scaling stable quotient. If not, the first changed closed-point residue gives an explicit extra relation.
