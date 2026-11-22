@@ -3027,3 +3027,8 @@ Using the corrected G-4ca map, every nonzero leading parameter \(v_r=e_r+f_rt\) 
 ### G-4cl — equivariant-learning research bridge
 
 Treat coefficient-section changes as gauge/frame transformations. The planned learning stack has an exact symbolic front end, a filtered equivariant transformation layer, invariant readouts, and an exact algebraic verifier. Certified labels currently include the first graded arrows, corrected second isolated diagonal, and leading composition/bracket. Higher-order quotient matrices are not yet certified and must not be used as guessed training labels. Open adjacent problems: invariant-ring computation, equivariant-map classification, and filtered extension/cohomology calculations.
+
+
+### G-4cm — fixed-vector subspace
+
+The fixed-vector subspace of the finite section-change action on \(Q=M/R\) is exactly the zero-exponent layer \(Q_0=(E\oplus E)/(T+(\wp(E)\oplus\wp(E)))\). Negative leading layers \(n\le-2\) are detected by the depth-one arrows. For \(n=-1\), a depth-one constant parameter \(e=S^k\) sends \((x,y)\) to the zero-layer Artin–Schreier class represented under \(\rho\) by \(S^kx+S^{2k+1}y^2\); choose k to force an odd pole at infinity. Zero-mode classes are fixed because section changes create only positive-order terms, which vanish in Q. This is a fixed-vector statement; the nonlinear invariant ring remains open.
