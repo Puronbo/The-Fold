@@ -341,3 +341,33 @@ that odd pole order.
 This refines the rational-place family in G-4k. It is still an
 independent family, not a complete basis or a reduction algorithm
 for Q.
+
+
+## 12. G-4m — exact local parity criterion
+
+Let P be any monic irreducible of F[T], where F=F2(S), and let
+E=F[T]/(P). If S is nonsquare in E, the leading-pole argument in G-4l
+shows every denominator element z²+u+Su² has either no pole or even
+pole order at P.
+
+Conversely, suppose S is square in E. Choose r∈F[T] lifting a square
+root of S in E, so P divides r²+S. Write r²+S=PC. Since E is infinite,
+choose w∈F[T] with residue satisfying Cbar*wbar²+wbar ≠ 0; this is
+possible because X↦Cbar X²+X is a nonzero polynomial. Put
+z=rw/P and u=w/P. Direct calculation gives
+\[
+z^2+u+Su^2
+=\frac{(r^2+S)w^2+wP}{P^2}
+=\frac{Cw^2+w}{P},
+\]
+which has a simple pole at P.
+
+Consequently the local parity obstruction is exact:
+\[
+\text{every denominator element has no pole or even pole order at P}
+\iff S\notin E^2.
+\]
+In particular, if S becomes a square in E, then E/F is not separable,
+so P is inseparable. This identifies exactly the places where the
+G-4l parity argument applies; it does not by itself compute the full
+local quotient or a global normal form.
