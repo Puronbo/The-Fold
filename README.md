@@ -1486,3 +1486,6 @@ the quaternion-boundary arithmetic note.
 
 
 **G-4bt — notation:** distinguish base \(S_0\) from coefficient-field square \(\Sigma=t²=S_0+p\). Geometric Cartier formulas use \(F_c=\mathbb F_2(\Sigma)\); scalar normal forms use \(F_0=\mathbb F_2(S_0)\). The p-shift is essential in the symbol comparison.
+
+
+**G-4bu — coefficient-section transition:** for another lift t'=t(1+pv), the exact formula for dlog t' is identity modulo p in the logarithmic basis (dlog t,dlog p); (t')²−t² is divisible by p². Thus leading graded differential data are section-independent, but the explicit direct-sum orbit splitting is not yet canonical. Open: prove strictness of B¹+(C⁻¹−1)Ω¹ for the p-adic filtration and derive the induced triangular transition on the quotient.
