@@ -2251,3 +2251,10 @@ otinoperatorname{im}_K(M)), hence (n_1n_4
 otinmathcal N^3) by UF-072O.
 - A promising search is a 173-row restriction whose augmented specialization has a nonzero 173-by-173 minor; seek a symbolic row dependence on the 350 unaugmented columns and verify its nonzero pairing with (v).
 - A specialization-only dependence is insufficient. No symbolic dual vector has yet been found; UF-072P's finite-field lower bounds remain the only certified degree-four rank information.
+
+
+### G-6 — Involutive representations in characteristic two
+- For a representation (J^2=1) over a field of characteristic two, set (N=J-1). Then (N^2=0), and conversely every square-zero (N) gives an involution (J=1+N).
+- Equivalently, (C_2)-modules are modules over (k[\epsilon]/(\epsilon^2)). The canonical invariant is the filtration (operatorname{im}N\subseteq\ker N\subseteq V), not a plus/minus eigenspace decomposition.
+- The exact sequence (0\to\ker N\to V\xrightarrow{N}\operatorname{im}N\to0) records the possible non-semisimple extension. This is the correct local model for order-two symmetries in characteristic-two Fold/Galois representations.
+- Scope: this applies to restriction to an order-two subgroup; it does not classify arbitrary profinite Galois representations or imply that every such representation contains an involution.
