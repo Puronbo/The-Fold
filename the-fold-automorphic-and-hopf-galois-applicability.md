@@ -647,3 +647,29 @@ where \(\gamma\) denotes the geometric \(p\)-rank. Here \(\gamma(\mathbb P^1)=0\
 Thus all four curves in the tower have \(2\)-rank zero, despite their genera \(0,1,7,35\). In particular, the genus-one quartic intermediate curve is supersingular (for an elliptic curve, \(p\)-rank zero is equivalent to supersingularity).
 
 This conclusion uses only the one-point total ramification and the Deuring–Shafarevich formula; it does not determine the full Newton polygon or the \(a\)-number of the higher-genus Jacobians. Reference for the formula: Booher–Cais, *Iwasawa theory for p-torsion class group schemes in characteristic p*, §2, or the statement reproduced in the Galois-module reference cited in the problem register.
+
+
+## G-24 — explicit Frobenius polynomial of the quartic elliptic quotient
+
+The quartic intermediate field from G-12 is
+\[
+K(u,w),\qquad u^2+u=s,\qquad w^2+w=u^3+u.
+\]
+Its smooth projective curve is the genus-one curve with its rational point at infinity
+\[
+E:\quad y^2+y=x^3+x
+\]
+over \(\mathbb F_2\), under \(x=u,y=w\). The affine equation is nonsingular because its partial derivative with respect to \(y\) is 1; the projective Weierstrass model has the usual single point at infinity.
+
+A direct point count gives two affine points over each of \(x=0,1\), and one point at infinity. Hence
+\[
+\#E(\mathbb F_2)=5,\qquad
+a_1=2+1-5=-2.
+\]
+The Frobenius characteristic polynomial is therefore
+\[
+\boxed{P_E(T)=T^2-a_1T+2=T^2+2T+2.}
+\]
+In characteristic 2, the elliptic-curve criterion says that supersingularity is equivalent to divisibility of the Frobenius trace by 2. Since \(a_1=-2\), this independently confirms that E is supersingular. The criterion applies also in characteristics 2 and 3; what fails in these small characteristics is the stronger prime-field shortcut that supersingularity forces trace zero. See MIT 18.783 Lecture 13, Theorem 13.3 and Warning 13.5: https://ocw.mit.edu/courses/18-783-elliptic-curves-spring-2021/6b139f926bbbe94db322ea23300b0246_MIT18_783S21_notes13.pdf.
+
+This pins down the complete Frobenius polynomial of the genus-one quotient, not merely its 2-rank. It does not determine the Newton polygons or isogeny decompositions of the genus-7 and genus-35 Jacobians, nor does it construct a Fold-specific Galois module.
