@@ -266,6 +266,9 @@ def self_test() -> None:
             depth = max_frobenius_depth_polynomial(x)
             if a not in (0, 1):
                 assert depth is not None and depth >= h
+        for a in values:
+            x = frobenius_power(a | S, h)
+            assert max_frobenius_depth_polynomial(x) == h
 
     # Every nonzero leading parameter is detected by the corrected first arrow.
     for e in values:
@@ -308,15 +311,18 @@ def generate(count: int, max_degree: int, seed: int) -> Iterable[dict]:
             "d": d, "target": second_even_diagonal(e, f, d),
         }
         h = rng.randrange(5)
-        a = random_poly(rng, max_degree)
+        # The S term guarantees a is not a square, so h is the exact
+        # Frobenius depth of x_scale rather than merely a chosen root level.
+        a = random_poly(rng, max_degree) | S
         e_scale = 1
         x_scale = frobenius_power(a, h)
+        assert max_frobenius_depth_polynomial(x_scale) == h
         yield {
             "task": "pure_scaling_frobenius_tower",
             "frobenius_level": h,
             "source_polynomial": a,
             "coefficient": x_scale,
-            "leading_depth_for_r1": 1 << (h + 1),
+            "first_nonzero_depth_for_r1": 1 << (h + 1),
             "leading_coefficient": scaling_leading_term(a, h, e_scale),
         }
         ue, uf = random_poly(rng, max_degree), random_poly(rng, max_degree)
