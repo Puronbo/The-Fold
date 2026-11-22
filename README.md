@@ -1513,3 +1513,6 @@ the quaternion-boundary arithmetic note.
 
 
 **G-4cc — two-depth composition:** composing t↦t(1+pʳv) then t↦t₁(1+pˢu), with v=e_v+f_vt and u=e_u+f_ut, generates the mixed coefficient e_uv at depth r+s. Reversing order gives e_vu; the leading order-sensitive term is t(e_uf_v+e_vf_u). This is an associated-graded calculation; resonances with quadratic diagonals require adding both contributions.
+
+
+**G-4cd — Lie bracket:** the infinitesimal section-change vector fields X_v=tv∂ₜ (v=e_v+f_vt, E=F(t), t²=S) satisfy [X_v,X_u]=X_{t(e_vf_u+e_uf_v)}. In basis 1,t the parameter algebra has [1,t]=t: the two-dimensional nonabelian affine Lie algebra over F₂(S). Depths add under the bracket. This is the associated-graded infinitesimal algebra, not yet the full nonlinear group.
