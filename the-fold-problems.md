@@ -2617,3 +2617,8 @@ The provisional G-4an quotient by exact forms and the raw relations \(h dT+h^2T 
 ### G-4an — geometry-shaped proof architecture
 
 Use the smooth divisor \(P=V(T^2+S)\) on \(X=\operatorname{Spec}\mathbb F_2[S,T]\) as the organizing object. Its conormal sequence has generator \(dp=dS\), since \(S=T^2\) and \(dS=0\) along P. The exceptional symbol differential is \(a\,dp\), so it is normal-direction data. Proposed route: (i) filter these forms by pole order along P; (ii) compute associated-graded Cartier/Frobenius and exact-differential relations; (iii) compare graded layers with the G-4aj Artin–Schreier chain-1 and odd-chain \(r\ge3\) normal form; (iv) check codimension-two boundaries at closed points of P. The conormal geometry is proved; the filtration/Kato identification and gluing are open. This is a proof strategy, not a theorem.
+
+
+### G-4ao — exact-differential parity in the normal pole filtration
+
+In local coordinates \(S=t^2+p\), with residue field \(E=\mathbb F_2(t)\), one has \(d(c(t)p^{-r})=p^{-r}c'(t)dt+r c(t)p^{-r-1}dp\). For odd r, the leading normal term is \(c p^{-(r+1)}dp\); hence every even-index normal associated-graded layer is hit by exact differentials. Odd normal pole indices are the candidate surviving layers, matching the odd indices in G-4aj. The tangent term remains and Cartier/Frobenius has not yet been computed, so survival and Kato identification remain open.
