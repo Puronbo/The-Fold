@@ -2138,3 +2138,7 @@ The sixteen target coefficient functions of the three-parameter affine-conjugato
 
 ### UF-072 — Two-copy coproduct test for the affine-conjugator image
 Let \(I_{\rm aff}\) be the kernel of \(O(G)\to O(G_{\rm aff})\otimes O(U)\) for the affine-linear conjugator subgroup \(G_{\rm aff}\). UF-071 proves the exact Hopf criterion: test \(\Delta(I_{\rm aff})\subseteq I_{\rm aff}\otimes O(G)+O(G)\otimes I_{\rm aff}\) by substituting the product of two independently parameterized conjugates \(g_1u_1g_1^{-1}\) and \(g_2u_2g_2^{-1}\). The one-copy elimination ideal and this two-copy test remain uncomputed. Even its Hopf core is only the affine-conjugator-generated subgroup, not necessarily the full normal closure under \(G\).
+
+
+### UF-072A — Nilradical and dimension bound for the affine-slice image
+The affine-slice source is \(\mathcal R=B_{\rm red}\otimes k[c,d,h]/(c^4,d^2,h^2)\), where \(B_{\rm red}=k[a^{\pm1},b,i^{\pm1},A,B,C,D,E,G,J]\) has dimension ten. For \(\mathcal A_{\rm aff}=k[f_1,\ldots,f_{16}]\subseteq\mathcal R\), the ideal \(\mathcal N=\mathcal A_{\rm aff}\cap(c,d,h)\mathcal R\) is exactly its nilradical: \(\mathcal A_{\rm aff}/\mathcal N\) embeds in the reduced ring \(B_{\rm red}\), and \(\mathcal N^6=0\). Consequently \(\dim\mathcal A_{\rm aff}\leq10\). This is a structural bound, not an elimination presentation or coproduct calculation. **UF-072B:** compute the reduced image/Jacobian rank, then the nilpotent filtration and two-copy coproduct.
