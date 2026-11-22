@@ -1362,3 +1362,7 @@ the quaternion-boundary arithmetic note.
 
 
 **G-4ao — geometric pole parity:** in local coordinates \(S=t^2+p\), exact differentials satisfy \(d(c(t)p^{-r})=p^{-r}c'(t)dt+r c(t)p^{-r-1}dp\). For odd r the leading normal term kills the even pole-index layer r+1. This explains why odd normal pole indices are the candidate survivors in G-4aj. The tangent term and Cartier/Frobenius quotient still need calculation; this is not yet a Kato identification.
+
+
+
+**G-4ap — tangent constraint on exact normal forms:** in \(L=E((p))\), \(E=\mathbb F_2(t)\), an exact differential \(dg\) is purely normal only if every Laurent coefficient of g lies in \(E^2\), since \(\ker(d/dt)=E^2\). Thus exact purely-normal relations have even pole indices and square coefficients, not arbitrary residue coefficients. The leading-normal-symbol parity in G-4ao remains valid, but the tangent term one level lower must be retained; the full Cartier/Kato comparison is still open.
