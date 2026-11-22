@@ -600,3 +600,39 @@ This is a theorem about the completed local quotient at the exceptional
 inseparable place. It does not compute the global rational quotient
 \(K/(K^2+L_S(K))\), nor does it assert that every local class is
 represented by a rational global class.
+
+
+## 18. G-4s — explicit global independent family from the exceptional place
+
+The local classes in G-4r are represented by rational functions in
+\(K=F(T)\), not merely by formal Laurent series. The natural map from
+the global quotient
+\[
+Q=K/(K^2+\{u+Su^2:u\in K\})
+\]
+to the completed local quotient at \(P=T^2+S\) is well-defined:
+a global denominator relation remains a denominator relation after
+embedding \(K\hookrightarrow K_P\). Therefore any family independent
+in the completed local quotient remains independent globally.
+
+In particular, choose the explicit \(\mathbb F_2\)-independent
+coefficient family \(b=S^{2n}\in F^2\), \(n\ge0\). G-4r gives
+\[
+\boxed{
+\left\{\frac{S^{2n+1}}{(T^2+S)^{2m+1}}:
+ n\ge0,\ m\ge1\right\}
+\text{ is linearly independent in }Q.
+}
+\]
+For a finite nonzero relation, choose the largest \(m\), equivalently
+the lowest pair index at \(P\). Its odd Laurent coefficient has
+nonzero \(S F^2\)-component \(S\sum_n\epsilon_n S^{2n}\), while all
+terms with smaller \(m\) are less singular. This violates the
+G-4r leading-pole condition for a denominator class.
+
+This is an explicit two-parameter independent family in the original
+global quotient. It complements the separable-place families of G-4l.
+The quotient's exact dimension was already established as countably
+infinite in G-4k; G-4s supplies a concrete independent family supported
+at the exceptional inseparable place, not a full global basis or
+reduction algorithm.
