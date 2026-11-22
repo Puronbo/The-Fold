@@ -2549,3 +2549,7 @@ The square-class space H=F((p))/(F((p))²+F[[p]]) has odd negative coefficients 
 
 ### G-4aa — finite-slot dual obstruction
 No nonzero F₂-linear functional supported on finitely many negative Laurent coefficient slots annihilates the local denominator image. Any separating dual certificate must have infinite slot support. This rules out finite-coordinate dual certificates but does not prove surjectivity or determine the quartic local quotient.
+
+
+### G-4ab — infinite-support local dual annihilator
+The exceptional completed principal-part quotient has a nonzero F₂-linear functional annihilating the full denominator image. Construct it recursively along exponents −1,−2,−4,… using the injective map (x\mapsto[Sx^2]\colon F\to F/F^2), extending functionals at each stage. This proves nontriviality independently of the principal-part family, but the functional is noncanonical and does not give a complete local quotient classification.
