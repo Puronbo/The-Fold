@@ -1101,3 +1101,6 @@ The complete first-order c,d,h coefficient map in both conjugated coordinates is
 
 
 **UF-072H:** exact elimination over F_2(A,B,C,D,E,G,J) gives generic cubic triple-product rank 60. The corrected n_2n_5 vector leaves this rank unchanged; n_2n_6+n_3n_5 raises it to 61. Exact certificate: [uf072h_generic_cubic_rank.py](https://github.com/Puronbo/The-Fold/blob/research/universal-fold-invariant/certificates/uf072h_generic_cubic_rank.py). The full N^2/N^3 remains open.
+
+
+**UF-072I:** exact generic elimination shows the cubic triple-product rank rises from 60 to 70 after adding cubic initial terms of n_1n_j and n_4n_j, and to 71 after adding n_2n_6+n_3n_5. The first two graded pieces of N^2/N^3 contribute 24+11=35 generic dimensions; higher layers remain open. Certificate: [uf072i_degree3_pair_product_rank.py](https://github.com/Puronbo/The-Fold/blob/research/universal-fold-invariant/certificates/uf072i_degree3_pair_product_rank.py).
