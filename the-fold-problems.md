@@ -2612,3 +2612,8 @@ The change of coordinates \(p=T^2+S\) gives \(K_P=\mathbb F_2(T)((p))\), with 2-
 ### G-4ao — correction to the Kato differential presentation
 
 The provisional G-4an quotient by exact forms and the raw relations \(h dT+h^2T dT\), \(h dp+h^2p dp\) omitted the higher Cartier filtration and is not the complete presentation. The correct characteristic-two formula is \(H_2^2(F)=\operatorname{coker}(\wp:\Omega_F^1/B_\infty\to\Omega_F^1/B_\infty)\), where \(\wp=C^{-1}-1\), \(B_1=dF\), and \(B_i\) is recursively the inverse image of \(C^{-1}(B_{i-1})\) modulo \(B_1\); set \(B_\infty=\bigcup_iB_i\). For \(F=K_P=\mathbb F_2(T)((p))\), \(C^{-1}(h dT)=[h^2T dT]\) and \(C^{-1}(h dp)=[h^2p dp]\) modulo exact forms. The symbol remains represented by \(a dp\). Source: Hiranouchi–Sugiyama (2025), §3.3, (3.4)–(3.5), Corollary 3.5. Open: compare the image of \(\mathcal O_P+\mathcal D_P\) with \(B_\infty\) and the Cartier-cokernel relations; no G-4aj/Kato isomorphism is claimed.
+
+
+### G-4an — geometry-shaped proof architecture
+
+Use the smooth divisor \(P=V(T^2+S)\) on \(X=\operatorname{Spec}\mathbb F_2[S,T]\) as the organizing object. Its conormal sequence has generator \(dp=dS\), since \(S=T^2\) and \(dS=0\) along P. The exceptional symbol differential is \(a\,dp\), so it is normal-direction data. Proposed route: (i) filter these forms by pole order along P; (ii) compute associated-graded Cartier/Frobenius and exact-differential relations; (iii) compare graded layers with the G-4aj Artin–Schreier chain-1 and odd-chain \(r\ge3\) normal form; (iv) check codimension-two boundaries at closed points of P. The conormal geometry is proved; the filtration/Kato identification and gluing are open. This is a proof strategy, not a theorem.
