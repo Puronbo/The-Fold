@@ -1122,3 +1122,7 @@ The subsequent audit also found a missing factor of `a` in the `dh`-coefficient 
 
 ### UF-072O — Degree-four test-space completeness
 The 350-column construction accounts for every source-degree-four initial contribution from N^3: 84 corrected triple products, 56 n1/n4-pair products, and 210 fourfold products arising from multiplication by an algebra generator. This is a completeness result only; no degree-four rank is certified. A target outside the generic K-span proves nonmembership in N^3, while membership in that K-span still requires an integral S-module argument.
+
+
+### UF-072P — Fresh degree-four specialization lower bounds
+The rebuilt 350-column, 470-row degree-four matrix gives ranks 172 and 173 after adjoining in4(n1*n4), respectively, at five nonzero F_256 specializations. These imply generic lower bounds only; the matching symbolic upper bound 172 is still needed to prove a generic strict rank gap. The certificate records the specialization test: [uf072k_degree4_specialization.py](https://github.com/Puronbo/The-Fold/blob/research/universal-fold-invariant/certificates/uf072k_degree4_specialization.py).
