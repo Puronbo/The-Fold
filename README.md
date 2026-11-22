@@ -1382,3 +1382,7 @@ the quaternion-boundary arithmetic note.
 
 
 **G-4at — exact pure-normal Cartier filtration:** for finite normal principal parts, \(B_n\) consists exactly of even pole indices with coefficients E², together with odd indices m≥3 satisfying \(v_2(m-1)\le n-1\), whose coefficient space is \(E^{2^{v_2(m-1)+1}}\). Pole index 1 is absent at every finite level. This is an exact pure-normal result, not a classification of mixed forms or the full Kato quotient.
+
+
+
+**G-4au — pure-normal Cartier–AS chain model:** after imposing only pure-normal relations, the index-one slot is E/\wp(E); odd indices r≡3 mod4 retain E/E⁴, and odd r≥5 with r≡1 mod4 retain E/E². This is an intermediate model only; mixed tangent relations remain to be imposed.
