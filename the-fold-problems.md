@@ -2642,3 +2642,14 @@ For \(L=E((p))\), inverse Cartier sends \(cp^{-m}dp\) to \(c^2p^{-(2m-1)}dp\) mo
 ### G-4as — explicit higher-Cartier filtration inclusions
 
 For every even m≥2 and a∈E, \(d(a^2p^{1-m})=a^2p^{-m}dp\in B_1\). Iterating inverse Cartier yields \(a^{2^n}p^{-(2^{n-1}(m-1)+1)}dp\in B_n\). Thus at odd pole index r, the filtration contains the coefficient subspace \(E^{2^n}\) whenever \(v_2(r-1)=n-1\). This is an inclusion only; equality of the pure-normal intersection with these subspaces and the contribution of mixed tangent forms remain open.
+
+
+### G-4at — exact pure-normal Cartier filtration
+
+For \(L=E((p))\), \(E=\mathbb F_2(t)\), standard \(B_1=dL\), \(B_{n+1}=C^{-1}(B_n)\), the finite pure-normal principal-part intersection is exactly
+\[
+B_n\cap\bigoplus_{m\ge1}Ep^{-m}dp=
+\bigoplus_{m\ge2,\ m\ even}E^2p^{-m}dp
+\oplus\bigoplus_{m\ge3,\ m\ odd,\ v_2(m-1)\le n-1}E^{2^{v_2(m-1)+1}}p^{-m}dp.
+\]
+Pole index 1 is absent at every finite level. Proof: closedness forces each coefficient into E²; Cartier kills even indices and sends \(b²p^{-m}dp\) at odd m to \(bp^{-(m+1)/2}dp\), giving the stated induction. This exactly sharpens G-4as for pure-normal principal parts; arbitrary mixed forms and the full \(C^{-1}-1\) quotient remain open.
