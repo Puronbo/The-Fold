@@ -1394,3 +1394,7 @@ the quaternion-boundary arithmetic note.
 
 
 **G-4aw — perfection form:** each even-root pure-normal chain is canonically \(E^{\rm perf}/E\), where \(E=\mathbb F_2(t)\); the index-one part is E/\wp(E). This remains a pure-normal model, not the full Kato quotient.
+
+
+
+**G-4ax — mixed B₂ formula:** inverse Cartier of \(d(cp^n)\), with \(c=c_0²+t c_1²\), is \(t c_1^4p^{2n}dt+n(c_0^4+t²c_1^4)p^{2n-1}dp\). The mixed normal coefficient at odd negative n is \(S F²\), paired with a tangent term; this is the first geometric appearance of the G-4aj higher-chain coefficient, not an independent relation.
