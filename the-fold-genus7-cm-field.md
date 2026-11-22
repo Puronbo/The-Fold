@@ -141,3 +141,34 @@ has two factors of degree four over \(\mathbb Q_2\). In each factor the image of
 \{(1/4)^4,(3/4)^4\}.}
 \]
 This recovers the fourfold Newton slopes from the local decomposition of its CM field. The two elliptic factors contribute the six slope-1/2 roots in the full genus-seven Jacobian.
+
+
+## G-33 — Artin sign character and explicit prime splitting
+
+Write \(K^+=\mathbb Q(\beta)\) and \(K=\mathbb Q(\pi)\). G-31 proves
+\[
+\mathrm{Cl}^+(K^+)\cong C_2,
+\]
+and identifies \(K/K^+\) with its narrow Hilbert class field. The unit-signature subgroup is exactly the even-parity subgroup of \(\{\pm1\}^4\). Consequently the narrow class of a principal ideal \((\alpha)\) is determined by the parity of the number of negative real embeddings of \(\alpha\), equivalently by the sign of \(N_{K^+/\mathbb Q}(\alpha)\). Under the Artin isomorphism this parity is the Frobenius character:
+\[
+\boxed{\operatorname{Frob}_{(\alpha)}(K/K^+)=1
+\iff N_{K^+/\mathbb Q}(\alpha)>0.}
+\]
+Here the identity means complete splitting in the quadratic extension; negative norm means inertness.
+
+This gives concrete splitting checks.
+
+- For \(p=3,5\), the quartic \(g(Y)\) is irreducible modulo \(p\), so \((p)\) is a prime ideal of norm \(p^4\). Its positive generator \(p\) makes its narrow class trivial, so it splits in \(K/K^+\). Accordingly the degree-eight Frobenius polynomial factors modulo each of 3 and 5 as two irreducible quartics.
+- Modulo 7,
+\[
+g(Y)=Y(Y-2)(Y^2-Y+3).
+\]
+Let \(\mathfrak p_0=(7,\beta)\), \(\mathfrak p_2=(7,\beta-2)\), and let \(\mathfrak q\) be the degree-two prime from the quadratic factor. Since
+\[
+N(\beta)=N(\beta-2)=-14,\qquad N(\beta+2)=2,
+\]
+the ideals \((\beta)\) and \((\beta-2)\) factor as the prime above 2 times \(\mathfrak p_0\) and \(\mathfrak p_2\), respectively. The prime above 2 is narrow-principal because its generator \(\beta+2\) has even sign parity and the units realize every even-parity signature. Thus \(\mathfrak p_0\) and \(\mathfrak p_2\) represent the nontrivial narrow class and are inert in \(K/K^+\). Since \((7)=\mathfrak p_0\mathfrak p_2\mathfrak q\), the class of \(\mathfrak q\) is trivial, so \(\mathfrak q\) splits.
+
+The degree-eight Frobenius polynomial therefore factors modulo 7 as four irreducible quadratics, matching the relative splitting pattern: two degree-one primes inert, and one degree-two prime split. The exact modular products and irreducibility checks are in `certificates/g33_cm_artin_splitting.py`.
+
+This is a concrete Artin reciprocity law for the genus-seven simple factor's CM field. It does not yet determine the full class group of the degree-eight CM field.
