@@ -1128,3 +1128,11 @@ The 350-column construction accounts for every source-degree-four initial contri
 The rebuilt 350-column, 470-row degree-four matrix gives ranks 172 and 173 after adjoining in4(n1*n4), respectively, at three listed F_256 specializations. These imply generic lower bounds only; the matching symbolic upper bound 172 is still needed to prove a generic strict rank gap. The certificate records the specialization test: [uf072k_degree4_specialization.py](https://github.com/Puronbo/The-Fold/blob/research/universal-fold-invariant/certificates/uf072k_degree4_specialization.py).
 
 Execution audit: all three tuples in the certificate were run and each returned ranks (172,173). The earlier count of five was erroneous; only three specializations are claimed.
+
+### G-7 — Quadratic Galois cohomology in characteristic two
+For a separable quadratic extension (L/K) in characteristic two, let (C_2=\operatorname{Gal}(L/K)) act on a finite-dimensional module (V), and put (N=\sigma-1). The norm equals (N), so the standard two-periodic resolution gives
+\[
+H^q(C_2,V)=\ker N/\operatorname{im}N\quad(q\ge1).
+\]
+If (m=\dim V) and (r=\operatorname{rank}N), this dimension is (m-2r). The inflation–restriction transgression from (H^1(G_L,V)^{C_2}) lands in this explicit (H^2(C_2,V^{G_L})), giving a concrete order-two descent obstruction. This does not construct a global Fold Galois representation; that remains the next arithmetic task. See [the applicability and Galois note](the-fold-automorphic-and-hopf-galois-applicability.md).
+
