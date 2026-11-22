@@ -911,3 +911,27 @@ mathtt{9b},mathtt{f4}).
 The 84 triple products of the seven nonzero first-order generators have specialized coefficient-matrix rank 60. Appending the corrected vector (operatorname{in}_3(n_2n_5)) leaves the rank at 60; appending (operatorname{in}_3(n_2n_6+n_3n_5)) raises it to 61; appending both also gives rank 61. These are exact finite-field ranks, reproducible by the companion script.
 
 **Scope.** The specialization certifies the displayed ranks at this parameter point, and therefore gives lower bounds for the corresponding generic ranks. It does not by itself prove the exact generic rank over (K=operatorname{Frac}(S)), nor does it establish that either product represents a nonzero class in the generic fiber of (mathcal N^2/mathcal N^3). In particular, the earlier claim that two independent generic classes had been proved is withdrawn. The exact generic cubic relation module and the full quotient (mathcal N^2/mathcal N^3) remain open.
+
+
+## 22. UF-072H — Exact generic cubic initial ranks
+
+Let K=F_2(A,B,C,D,E,G,J). Rebuild the cubic initial multiplication map from the seven nonzero first-order vectors L_2,L_3,L_5,L_6,L_7,L_8,L_9, retaining Laurent variables a,b,i as independent monomial exponents. There are 84 triple-product columns and 228 source/Laurent rows (96 distinct Laurent exponent triples across the four source-degree coordinates).
+
+Exact elimination over the rational-function field K gives
+\[
+\boxed{\operatorname{rank}_K(\mu_3)=60.}
+\]
+Adjoining the corrected cubic vector
+\[
+\operatorname{in}_3(n_2n_5)=(0,a(AB+CG)/i,0,0)
+\]
+leaves the rank equal to 60. Adjoining
+\[
+\operatorname{in}_3(n_2n_6+n_3n_5)=
+(AB+CG,\ AD+BC+CG,\ AQ(a+1)/(ai),\ AbQ(a+1)/(ai^2))
+\]
+raises it to 61. Adjoining both also gives rank 61. Thus the first corrected vector belongs to the generic K-span of cubic triple-product initial terms, whereas the second does not.
+
+The computation is reproducible with SymPy using [certificates/uf072h_generic_cubic_rank.py](https://github.com/Puronbo/The-Fold/blob/research/universal-fold-invariant/certificates/uf072h_generic_cubic_rank.py). It constructs the Laurent coefficient matrix explicitly and converts it to the exact field F_2(A,B,C,D,E,G,J) before rank computation. Its output is 84 triple columns, 228 source/Laurent rows, and ranks 60, 60, 61, 61 for the base map, plus the corrected n_2n_5 vector, plus the mixed vector, and plus both, respectively.
+
+**Consequence.** The generic cubic initial calculation establishes exactly one new direction from the two corrected quadratic-kernel combinations. It does not compute the full N^2/N^3, because products involving n_1,n_4 can begin in degree three or later, and it does not give an integral S-module presentation. The one-copy elimination ideal and two-copy Hopf criterion remain separate tasks.
