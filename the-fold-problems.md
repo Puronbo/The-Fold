@@ -2708,3 +2708,8 @@ At each level j≥1, odd r and b∈E, the iterated Cartier generators are pure n
 ### G-4be — B₁-starting mixed Cartier tower
 
 The mixed logarithmic family starts already in B₁: for odd r, \(d(cp^{-r})\) with \(c=c_0²+t c_1²\) splits into pure normal \(c_0²p^{-(r+1)}dp\) plus mixed \(t c_1²p^{-r}d\log(t/p)\). Its iterates are \(t^{2^j}b^{2^{j+1}}p^{-2^jr}d\log(t/p)\), j≥0. Pure normal iterates have coefficient E^{2^{j+1}} at pole 2^jr+1; the mixed normal coefficient is t^{2^j}E^{2^{j+1}}, complementary in E^{2^j}. Pure tangent iterates arise from even exponents. This corrects the incomplete B₁ description in G-4bd; the full \(C^{-1}-1\) cokernel remains open.
+
+
+### G-4bf — coefficient-space match with G-4aj
+
+For odd m≥3, set j=v₂(m−1). The pure-normal coefficient space is \(F^{2^j}\), while the mixed-normal coefficient space is \(S^{2^{j-1}}F^{2^j}\); together they split \(F^{2^{j-1}}\). Taking the unique \(2^{j-1}\)-st root identifies the mixed component with \(S F²\), exactly the G-4aj higher-chain coefficient space. The tangent partner must still be controlled to prove independence and completeness in the full quotient.
