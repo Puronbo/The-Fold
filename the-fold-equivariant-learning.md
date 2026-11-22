@@ -162,3 +162,39 @@ Q^{\mathcal G}=\{q:gq=q\ \forall g\},\qquad
 (Q^*)^{\mathcal G}\simeq (Q_{\mathcal G})^*.
 \]
 The first is known from G-4cm. The second requires an independent computation of coinvariants. The exact data pipeline must keep both targets separate; otherwise a learner may be trained toward an incorrect invariant readout.
+
+
+## 9. Cartier-aware coinvariant features
+
+G-4co gives a mathematically useful intermediate target. At the first arrow level, all negative even layers and the second coordinate of negative odd layers are in the generated difference image. The corrected second diagonal removes \(SF^2\) from the first coordinate of each odd negative layer. The resulting two-diagonal residual is
+\[
+F/SF^2\simeq\Omega_F^1/dF,\qquad [x]\mapsto (x/S)dS.
+\]
+This is an approximation to the full coinvariant quotient, not its final answer; higher Frobenius/divided-power terms and the zero-mode boundary may impose more relations.
+
+The exact encoder should therefore perform the p-basis decomposition
+\[
+x=a^2+Sb^2
+\]
+and retain the \(a\)- and \(b\)-channels separately. The Cartier operator provides the natural quotient map on differentials: exact forms are its kernel, and logarithmic forms are Cartier-stable. See the [function-field Cartier reference](https://sporadic.stanford.edu/reference/function_fields/sage/rings/function_field/differential.html).
+
+### New certified tasks
+
+The data generator now includes:
+- p-basis decomposition and derivative extraction;
+- the corrected second odd-layer diagonal;
+- the second even-layer diagonal;
+- verification that the first coordinate of the odd second diagonal lies in \(SF^2\), and that this image is attained exactly on polynomial coefficients.
+
+Run:
+\`\`\`bash
+python tools/section_change_equivariance_data.py --self-test --count 1000 --max-degree 5 > section_change_train.jsonl
+\`\`\`
+
+A run with these settings passed all self-tests and generated 5,000 JSONL examples. This is a reproducible exact dataset generator over \(\mathbb F_2[S]\), not evidence of neural generalization to \(\mathbb F_2(S)\).
+
+### Learning the unresolved tower
+
+A useful next model predicts the first nonzero Frobenius-scaled diagonal for inputs in \(F^{2^h}\). The scaling section \(t\mapsto t(1+p)\) changes \(S\) by \(S\mapsto S(1+p^2)\), so a \(2^h\)-th power has its first possible coefficient at depth \(2^{h+1}\). The target coefficient is \((Sa')^{2^h}\) when the input is \(a^{2^h}\).
+
+This creates a controlled extrapolation benchmark over the Frobenius level h. Train on small h, hold out larger h, and require the exact verifier to check the predicted exponent and coefficient. The goal is to discover the full coinvariant/Frobenius tower without treating guessed higher-order formulas as proof.
