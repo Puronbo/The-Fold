@@ -1306,10 +1306,10 @@ the quaternion-boundary arithmetic note.
 **G-4w — quartic local reduction:** the scalar and \(T^2\) coordinates reduce exactly to a coupled pair of additive equations after taking \(C=A+(p+S)B\). The first equation alone is unobstructed; any local obstruction must involve the shared variables in both equations. Details are in the quaternion-boundary arithmetic note.
 
 
-**G-4x — correction:** the quartic coupled equation in G-4w had an incorrect coefficient on \(x_3^2\). The correct coefficient is \(p+S\), not \((p+S)^2\). The corrected pair is recorded in the arithmetic note; the local quotient remains open.
+**G-4x — erratum:** the attempted correction to G-4w was itself wrong. The original coefficient \((p+S)^2\) is correct; the coupled equations and downstream square-class recursion have been restored accordingly. The quartic local quotient remains open.
 
 
-**G-4y — quartic elimination:** the corrected coupled system can be reduced by solving for \(r_2\), leaving one square-class condition in \(F((p))/(F((p))^2+F[[p]])\) with four existential parameters. This is exact but not yet a closed-form local classification. See the arithmetic note.
+**G-4y — quartic elimination:** using the correct \((p+S)^2x_3^2\) term, the coupled system reduces by solving for \(r_2\), leaving one square-class condition with four existential parameters. This is exact but not yet a closed-form local classification. See the arithmetic note.
 
 
-**G-4z — quartic coefficient recursion:** the remaining square-class condition has an explicit Laurent-coefficient recursion for R=(S+p)⁻¹U and a parity test on E=B+(1+S)x₃²+px₃²+R+SR². This converts the local membership question into exact coefficient constraints but does not yet determine the image codimension. See the arithmetic note.
+**G-4z — quartic coefficient recursion:** the recursion uses U=C+x₀²+(S+p)x₁²+(S+p)²x₃²+r₀+Sr₀² and R=(S+p)⁻¹U, followed by the parity test on E=B+(1+S)x₃²+px₃²+R+SR². The square-class space is a direct sum of finite-principal-part coefficient slots. The local image codimension remains open. See the arithmetic note.
