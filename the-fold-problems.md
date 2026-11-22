@@ -2743,3 +2743,8 @@ The tangent subspace \(U∞=\sum_{h≥1}t^{1/2^h}F^{1/2^h}\) is the canonical co
 ### G-4bl — zero orbit and finite-polar-part quotient
 
 The exponent-zero contribution is \(F/(\wp(F)+SF²)\oplus F/\wp(F)\): the first coordinate is E/(tF+wp(E)) after projection E→F modulo tF, and the second is E/wp(E)≅F/wp(F). Combining with G-4bk, the finite-polar-part model is \(F/(\wp(F)+SF²)\oplus F/wp(F)\oplus\bigoplus_{r≥1\ odd}(F⊕F)\). This is an algebraic finite-support statement, not yet a topological completion theorem. The scalar G-4aj quotient should be compared as a projection/subquotient, not identified with the full two-coordinate model.
+
+
+### G-4bm — correction: retain second-coordinate perfection tail
+
+The G-4bk simplification omitted the second-coordinate tail: only the first coordinate is quotiented by \(U∞=E^{perf}/E\). Thus each negative odd orbit is \(F⊕F⊕E^{perf}/E\), not merely F⊕F. The corrected finite-polar model is \(F/(wp(F)+SF²)⊕F/wp(F)⊕\bigoplus_{r≥1\ odd}(F⊕F⊕E^{perf}/E)\). The previous smaller orbit claim is withdrawn.
