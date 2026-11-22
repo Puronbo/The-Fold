@@ -1232,3 +1232,6 @@ Degrees 8–10 provide independent checks. Reproducible exact enumeration: `cert
 
 
 **CM integral basis (G-35A):** the original quadratic generator \(\pi\) is rescaled to \(\theta=\pi/(\beta+2)\). The monic polynomial of \(\theta\) has integral coefficients and unit relative discriminant, so the relative index-discriminant identity together with G-29's finite-unramified result proves \(\mathcal O_L=\mathcal O_F[\theta]\). This supplies the exact integral basis needed for the degree-eight Minkowski enumeration; the odd class number is known, but its exact value remains open.
+
+
+**Principal primes above 2 (G-35B):** reduction of the G-35A integral-basis polynomial modulo the unique real-quartic prime above 2 is \(X(X-1)\), so that prime splits into two norm-two primes in the CM field. The element \(\theta=\pi/(\beta+2)\) has ideal equal to the square of one of them. G-34's vanishing of CM 2-torsion makes that prime principal, and the product relation makes the other principal. This removes the norm-two primes from the Minkowski class-group search; the exact odd class number is still unknown.
