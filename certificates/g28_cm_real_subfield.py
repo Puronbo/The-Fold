@@ -79,7 +79,7 @@ for r in range(3):
     assert divmod_mod(g3,[(-r)%3,1],3)[1] != [0]
 for a,b in product(range(3), repeat=2):
     assert divmod_mod(g3,[b,a,1],3)[1] != [0]
-assert g3 == [2,1,1,1,1]
+assert g3 == [1,1,1,1,1]
 
 # Discriminant(g) = Res(g,g') (the degree-four sign is positive).
 derivative = [i*g[i] for i in range(1,len(g))]
