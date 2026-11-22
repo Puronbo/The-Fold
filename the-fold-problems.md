@@ -2703,3 +2703,8 @@ For j≥1 and odd r, mixed generators are \(S^{2^{j-1}}b^{2^{j+1}}p^{-2^jr}d\log
 ### G-4bd — complete finite-principal-part Cartier generators
 
 At each level j≥1, odd r and b∈E, the iterated Cartier generators are pure normal \(b^{2^{j+1}}p^{-(2^jr+1)}dp\), mixed logarithmic \(S^{2^{j-1}}b^{2^{j+1}}p^{-2^jr}d\log(t/p)\), and pure tangent \(t^{2^j-1}b^{2^{j+1}}p^{-2^{j+1}k}dt\) (k≥1), together with B₁ square-coefficient even-pole terms. At each normal pole index, pure and mixed normal coefficients complement to E^{2^j}; the mixed part is paired with a tangent term. This organizes all finite-principal-part Cartier generators; the full \(C^{-1}-1\) cokernel remains to be computed.
+
+
+### G-4be — B₁-starting mixed Cartier tower
+
+The mixed logarithmic family starts already in B₁: for odd r, \(d(cp^{-r})\) with \(c=c_0²+t c_1²\) splits into pure normal \(c_0²p^{-(r+1)}dp\) plus mixed \(t c_1²p^{-r}d\log(t/p)\). Its iterates are \(t^{2^j}b^{2^{j+1}}p^{-2^jr}d\log(t/p)\), j≥0. Pure normal iterates have coefficient E^{2^{j+1}} at pole 2^jr+1; the mixed normal coefficient is t^{2^j}E^{2^{j+1}}, complementary in E^{2^j}. Pure tangent iterates arise from even exponents. This corrects the incomplete B₁ description in G-4bd; the full \(C^{-1}-1\) cokernel remains open.
