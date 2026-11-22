@@ -1179,3 +1179,7 @@ The G-16/G-17 result extends from quotient C4 to every C_(2^m): for all r,m≥1,
 
 ### G-19 — transgression as a pushout extension class
 For an abelian-kernel extension and a quotient-invariant character of the kernel into a coefficient module on which the kernel acts trivially, the Hochschild–Serre transgression is the pushout extension class (up to the standard factor-set sign). In G-18, the nonzero character sends the cyclic carry factor set to the explicit cocycle with cyclic sum 1. This explains the obstruction as nonsplitting of the pushed-out extension. It remains a group-cohomological result, not yet a Fold-derived construction; details and reference are in the Galois applicability note.
+
+
+### G-20 — arbitrary quotient-module transgression
+For the cyclic extension in G-18 and any (possibly nontrivial) \(\mathbb F_2[C_{2^m}]\)-module A, the transgression from invariant kernel characters is the quotient map \(A^{C_{2^m}}\to A^{C_{2^m}}/N_QA=H^2(C_{2^m},A)\). It is surjective, and its kernel is exactly the norm image. In Jordan form it detects precisely the short blocks; full-length free blocks contribute zero. Details and proof are in the Galois applicability note. This is not yet Fold-specific.
