@@ -83,7 +83,7 @@ so \((\beta+2)=\mathfrak p\). Every ideal of norm at most six is therefore princ
 \[
 \boxed{h_K=1.}
 \]
-This is the ordinary class number, not the narrow class number. The finite-unramified CM extension is compatible with a nontrivial narrow class group; its exact narrow class group and unit-signature index remain to be determined. The finite checks and norm computation are in certificates/g30_real_quartic_class_number.py.
+This is the ordinary class number. Section 5 below proves the narrow class number is exactly two and computes the full unit-signature image. The finite checks and norm computation are in certificates/g30_real_quartic_class_number.py.
 
 
 ## 5. Narrow class number and class-field identification
@@ -344,7 +344,7 @@ By G-35B, all prime ideals above 2 are principal. Minkowski's bound is below 27,
 \boxed{\operatorname{Cl}(L)=\langle[\mathfrak P_1]\rangle
 \text{ is cyclic of odd order}.}
 \]
-This determines the structure and a single generator, but not its order. In particular, class number one is not claimed. The exact modular factorization, Rabin irreducibility checks, discriminant, index, and primitive-element resultant are in certificates/g35d_cm_minkowski_primes.py.
+At the G-35D stage the order of this cyclic group was not yet determined. G-35E below supplies an explicit generator of a norm-17 prime and completes the class-number calculation. The exact modular factorization, Rabin irreducibility checks, discriminant, index, and primitive-element resultant are in certificates/g35d_cm_minkowski_primes.py.
 
 
 ## G-35E — explicit norm generator and class number one
