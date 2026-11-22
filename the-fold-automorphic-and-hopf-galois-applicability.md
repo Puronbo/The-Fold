@@ -550,7 +550,7 @@ The generator is Witt translation by \((1,0,0,0)\):
 &\qquad\quad+u^2w+uw^3+uwv+uv+u.
 \end{aligned}
 \]
-Because \((1,0,0,0)\) has additive order \(16\) in \(W_4(\mathbb F_2)\), this translation has exact order \(16\).
+In characteristic two, Witt multiplication by 2 is \(2(x_0,x_1,x_2,x_3)=(0,x_0^2,x_1^2,x_2^2)\). Hence \(2(1,0,0,0)=(0,1,0,0)\), \(4(1,0,0,0)=(0,0,1,0)\), \(8(1,0,0,0)=(0,0,0,1)\), and \(16(1,0,0,0)=0\). Thus the translation has exact order \(16\).
 
 **Degree and tower.** The first coordinate \(s\) is not in \(\wp(K)=\{x^2+x:x\in K\}\): its pole at infinity has odd order one, while every pole of \(x^2+x\) has even order. The Artin–Schreier–Witt degree criterion therefore gives a cyclic extension \(M_4/K\) of degree \(16\). Its truncations are exactly the quartic field of G-12 and octic field of G-14. Thus the explicit arithmetic realization is now expanded through degree \(16\), rather than only specified abstractly by a length-four Witt vector.
 
