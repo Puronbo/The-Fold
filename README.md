@@ -1092,3 +1092,6 @@ The complete first-order c,d,h coefficient map in both conjugated coordinates is
 
 
 **UF-072F:** exact quadratic initial multiplication matrix has rank 24 over \(\operatorname{Frac}(S)\), with four initial relations. The degree-two source layer is four-dimensional; higher-order contributions to \(\mathcal N^2/\mathcal N^3\) remain unresolved.
+
+
+**UF-072G:** proves (n_2^2=n_5^2=0) exactly and exhibits two independent nonzero classes in the generic fiber of \(\mathcal N^2/\mathcal N^3\), via a cubic initial rank jump from 60 to 62. A full quotient presentation remains open.
