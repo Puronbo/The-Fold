@@ -2517,3 +2517,7 @@ Let P=T²+S and K_P=F((P))[T], F=F₂(S), T²=S+P. For a zero-T-coordinate targe
 
 ### G-4s — explicit global family from the exceptional place
 The local quotient obstruction at P=T²+S applies to rational global classes because K=F(T) embeds in K_P and every global denominator relation remains valid after completion. Taking b=S^(2n) in the G-4r family gives the explicit global independent family {S^(2n+1)/(T²+S)^(2m+1): n≥0, m≥1} in Q. For a finite relation, the largest m gives the lowest P-adic pair index, whose odd coefficient has nonzero S F² component. This complements the separable-place family; it is not a full global basis.
+
+
+### G-4t — combined independent system over finite places
+For every monic irreducible R with S nonsquare in E_R=F[T]/(R), odd-pole residue lifts \tilde e/R^(2m+1), with e in an F₂-basis of E_R and m≥0, are jointly independent by localization and the even-pole criterion. At each exceptional quadratic R_c=T²+Sc² (c∈F×), a modified coefficient obstruction gives the independent family S^(2n+1)/R_c^(2m+1), n≥0,m≥1. Localizing at each place proves the union of all these families is independent in Q. This covers all nonsquare-residue places and this explicit family of square-residue places, but not every possible exceptional irreducible or a full Hamel basis.
