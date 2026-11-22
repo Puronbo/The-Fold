@@ -1125,4 +1125,6 @@ The 350-column construction accounts for every source-degree-four initial contri
 
 
 ### UF-072P — Fresh degree-four specialization lower bounds
-The rebuilt 350-column, 470-row degree-four matrix gives ranks 172 and 173 after adjoining in4(n1*n4), respectively, at five nonzero F_256 specializations. These imply generic lower bounds only; the matching symbolic upper bound 172 is still needed to prove a generic strict rank gap. The certificate records the specialization test: [uf072k_degree4_specialization.py](https://github.com/Puronbo/The-Fold/blob/research/universal-fold-invariant/certificates/uf072k_degree4_specialization.py).
+The rebuilt 350-column, 470-row degree-four matrix gives ranks 172 and 173 after adjoining in4(n1*n4), respectively, at three listed F_256 specializations. These imply generic lower bounds only; the matching symbolic upper bound 172 is still needed to prove a generic strict rank gap. The certificate records the specialization test: [uf072k_degree4_specialization.py](https://github.com/Puronbo/The-Fold/blob/research/universal-fold-invariant/certificates/uf072k_degree4_specialization.py).
+
+Execution audit: all three tuples in the certificate were run and each returned ranks (172,173). The earlier count of five was erroneous; only three specializations are claimed.
