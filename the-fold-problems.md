@@ -3041,3 +3041,14 @@ Do not infer invariant linear readouts from the fixed-vector theorem G-4cm. For 
 Q_{\mathcal G}=Q/\langle gq-q:g\in\mathcal G,\ q\in Q\rangle,
 \]
 whereas G-4cm computes the primal fixed subspace \(Q^{\mathcal G}=Q_0\). Computing \(Q_{\mathcal G}\), and then the nonlinear invariant ring \(k[Q]^{\mathcal G}\), are separate open problems. This distinction is now enforced in the equivariant-learning specification and training-target design.
+
+
+### G-4co — two-diagonal coinvariants and de Rham residual
+
+At every negative even graded exponent, first-order section-change arrows span the entire layer. At every negative odd exponent they span the second coordinate \(0\oplus F\). The isolated p² diagonal on an odd source, after p-basis decomposition \(x=a²+Sb²,\ y=c²+Sd²\), is
+\[
+N_{odd}(x,y)=\big(S(fa+eb)^2,\ (ec)^2+(Sfd)^2\big).
+\]
+Its first-coordinate image is exactly \(SF²\), while its second coordinate is already killed at first order. Hence the two-diagonal associated-graded coinvariant approximation is zero at even negative layers and \(F/SF²\simeq\Omega_F^1/dF\) at odd negative layers. The latter identification is \(x\mapsto (x/S)dS\), using \(\partial_S(F)=F²\).
+
+**Open:** compute the full coinvariant quotient after higher Frobenius/divided-power diagonals, mixed-depth composition terms, and the zero-mode boundary. The iterated scaling \(S\mapsto S(1+p²)\) suggests a Cartier/Frobenius tower; its complete image is not yet classified.
