@@ -1195,3 +1195,10 @@ For the cyclic extension in G-18 and any (possibly nontrivial) \(\mathbb F_2[C_{
 
 
 **Galois cohomology — quartic elliptic quotient Frobenius (G-24):** identifies the genus-one intermediate curve as \(y^2+y=x^3+x\), counts five \(\mathbb F_2\)-points, and obtains Frobenius polynomial \(T^2+2T+2\). Its trace \(-2\) confirms supersingularity independently of the Deuring–Shafarevich argument. Higher-genus Jacobian Newton polygons remain open; see the Galois applicability note.
+
+
+**Galois cohomology — genus-seven Jacobian Frobenius (G-25):** exact finite-field counts over \(\mathbb F_{2^m}\), \(1\le m\le10\), determine the genus-seven octic curve's Weil polynomial
+\[
+1+6T+20T^2+48T^3+90T^4+140T^5+196T^6+272T^7+392T^8+560T^9+720T^{10}+768T^{11}+640T^{12}+384T^{13}+128T^{14}.
+\]
+Degrees 8–10 provide independent checks. Reproducible exact enumeration: `certificates/g24_genus7_weil_polynomial.py`. The genus-35 Jacobian remains open; see the Galois applicability note.
