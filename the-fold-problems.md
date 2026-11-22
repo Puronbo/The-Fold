@@ -2209,16 +2209,4 @@ Setting \(c=d=h=0\) makes the affine conjugator \(g(x)=ax+bz,\ g(z)=iz\). A univ
 
 
 
-### UF-072K — Degree-four specialization bounds
-
-The complete degree-four initial span of \(\mathcal N^3\) includes 84
-quadratic-correction triple products, 56 products \(n_1\) or \(n_4\)
-times a pair of first-order generators, and all 210 fourfold products of
-the seven first-order generators. The resulting 350-column matrix has
-470 source/Laurent rows. Three exact \(\mathbb F_{256}\) specializations
-give rank 176, rising to 177 after adjoining
-\(\operatorname{in}_4(n_1n_4)=A^2c^3d/(ai)\). Hence the generic ranks
-are at least 176 and 177, respectively. This is not yet a proof that the
-target is outside the generic span, because an upper bound of 176 for the
-350-column matrix has not been established. See
-\texttt{certificates/uf072k_degree4_specialization.py}.
+undefined
