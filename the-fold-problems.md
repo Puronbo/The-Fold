@@ -2758,3 +2758,8 @@ For each negative odd root −q, the perfection tail decomposes into \(U_h=t^{1/
 ### G-4bo — corrected scalar index shift and symbol map
 
 Since \(a\,dp=ap\,d\log p\), scalar pole m corresponds to logarithmic exponent −(m−1). For m=2^j q+1 (q odd, j≥1), it lies in orbit −q. At j=1, the second F-coordinate of the orbit maps c↦Sc² to SF²; at j≥2, the layer U_{j−1} maps by \(t^{1/2^{j−1}}x↦Sx^{2^j}\). The zero-mode second factor gives F/wp(F) at m=1. Thus the scalar normal form is obtained by quotienting the finite-polar model by the zero-mode factor F/(wp(F)+SF²) and the first F-coordinate of each negative orbit. This corrects G-4bn's one-step shift and kernel. The symbol representative \([aS,S)_2\leftrightarrow a\,dp\) verifies the projection on scalar normal-form generators; completion and arbitrary representatives remain to be checked.
+
+
+### G-4bp — quaternion symbol compatibility proved on the scalar basis
+
+The characteristic-two differential symbol sends \([aS,S)_2\) to \(aS,d\log S=a,dp\). For the pole-one generator \(a=cp^{-1}\), the zero-orbit projection gives [c]∈F/wp(F). For every higher generator \(a=Sc²p^{-m}\), m=2^j q+1 odd, the log exponent is −2^j q; its orbit projection gives exactly Sc²∈SF², using the graph invariant when j=1 and U_{j−1} when j≥2. Since these are the complete G-4aj scalar normal-form generators and the maps are additive, the projection agrees with the original quaternion boundary map on the full algebraic scalar quotient. Only the completed Kato/topological extension remains.
