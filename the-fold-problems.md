@@ -2333,3 +2333,11 @@ otinmathcal N^3) by UF-072O.
 
 ### G-19 — transgression equals the pushout extension class
 **Status: proved.** For an extension with abelian kernel N, a G-module A on which N acts trivially, and a Q-equivariant homomorphism \(\chi:N\to A\), the Hochschild–Serre transgression of \([\chi]\) is represented, up to the factor-set sign convention, by \(\chi\circ\omega\), where \(\omega(q_1,q_2)=s(q_1)s(q_2)s(q_1q_2)^{-1}\). This is precisely the factor set of the pushout extension along \(\chi\). Therefore transgression vanishes exactly when that pushout splits, equivalently when \\(\\chi\\) extends to a 1-cocycle on G. Applied to G-18, \(\chi(k)=1\) sends the cyclic carry factor set to \(\lfloor(i+j)/2^m\rfloor\bmod2\), whose cyclic sum is 1. This supplies a direct extension-class interpretation of the nonzero transgression. No Fold-derived extension or character has been constructed; the Fold bridge remains open. Full proof and reference: [Galois applicability note](the-fold-automorphic-and-hopf-galois-applicability.md).
+
+
+### G-20 — transgression for arbitrary quotient modules
+**Status: proved.** For \(1\to C_{2^r}\to C_{2^{r+m}}\to Q=C_{2^m}\to1\) and any \(\mathbb F_2[Q]\)-module A inflated to the middle group, identify \(H^1(C_{2^r},A)^Q\) with \(A^Q=\ker D\), where D=σ−1. The transgression is the quotient map
+\[
+\ker D\longrightarrow\ker D/\operatorname{im}(D^{2^m-1})=H^2(Q,A),\quad a\mapsto[a].
+\]
+Thus it is surjective, with kernel exactly the norm image. In Jordan form it kills bottom vectors from full-length blocks and detects one class from every shorter block. This generalizes G-18 and makes the coefficient-module dependence explicit. It remains an abstract cyclic-group theorem, not a Fold-specific construction. Full proof: [Galois applicability note](the-fold-automorphic-and-hopf-galois-applicability.md).
