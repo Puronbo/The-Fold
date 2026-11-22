@@ -2658,3 +2658,8 @@ Pole index 1 is absent at every finite level. Proof: closedness forces each coef
 ### G-4au — pure-normal Cartier–AS chain quotient
 
 After quotienting pure-normal principal parts by \(B_\infty\) and by their own \(C^{-1}-1\) relations, the index-one slot is E/\wp(E). Indices ≥2 split into chains \(e,2e-1,4e-3,\ldots\) starting at even e. The first odd slot in each chain (r≡3 mod4) retains E/E⁴; each later odd slot (r≡1 mod4, r≥5) retains E/E². This is only the pure-normal model; mixed tangent relations may further reduce it and must be computed before comparison with the full Kato group or G-4aj.
+
+
+### G-4av — correction to pure-normal chain quotient
+
+The slotwise decomposition in G-4au is withdrawn. Along a chain rooted at even e≥2, indices \(m_j=2^j(e-1)+1\) have coefficient spaces \(W_j=E/E^{2^{j+1}}\), and the relation identifies \([c]\in W_j\) with \([c²]\in W_{j+1}\). The chain contribution is the direct limit \(\varinjlim(W_j,\mathrm{Frob})\), not independent residual quotients at each node. Its successive cokernels are E/E², giving a noncanonical F₂-vector-space splitting as countably many copies of E/E². Index one contributes E/\wp(E). This remains a pure-normal model; mixed tangent relations are still uncomputed.
