@@ -1462,3 +1462,7 @@ the quaternion-boundary arithmetic note.
 
 
 **G-4bn — scalar quotient recovered:** each perfection layer in the orbit rooted at −q maps to SF² at scalar pole m=2^h q+1; the zero-mode AS factor maps to index one. This recovers the full G-4aj coefficient/index normal form as a coordinate-defined quotient of the geometric polar model. Identifying this projection with the original quaternion boundary map remains open.
+
+
+
+**G-4bo — corrected scalar index shift:** because \(a dp=ap,d\log p\), scalar pole m corresponds to logarithmic exponent −(m−1). The first F-coordinate chain layer at j=1 and the later perfection layers map to SF² at all odd m≥3; the zero-mode second factor gives F/wp(F). The quaternion differential representative \(a dp\) verifies this on normal-form generators. G-4bn's earlier index shift/kernel is superseded.
