@@ -2086,3 +2086,28 @@ For the pole-one basis generator \(a=c p^{-1}\), the log exponent is zero and th
 For a higher scalar basis generator \(a=Sc²p^{-m}\), m≥3 odd, write \(m-1=2^j q\), q odd and j≥1. Its log coefficient is \(Sc²p^{-2^jq}\), at stage j of the orbit rooted at −q. Taking the \(2^j\)-th root gives \(t^{1/2^{j-1}}c^{1/2^{j-1}}\). If j=1, the graph quotient invariant \(A_1+B_1\) is c, and its scalar image is \(Sc²\). If j≥2, the root lies in \(U_{j-1}\), and \(\theta_{j-1}\) sends it to \(Sc²\). Thus every higher scalar basis generator maps to its identical coefficient in \(SF²\).
 
 The G-4aj normal form is a direct sum with precisely these pole-one and higher odd-pole generators. Both maps are additive, and every scalar class is a finite linear combination of this basis. Therefore agreement on these generators proves that the coordinate-defined quotient projection is the original quaternion differential-symbol boundary map on the entire algebraic scalar quotient. This closes the algebraic symbol-compatibility step; it does not by itself prove a topological identification of the full completed Kato group beyond the finite-polar-part subspace.
+
+
+## 68. G-4bq — coefficient-field correction in the quaternion-symbol comparison
+
+**Refinement of G-4bp:** the base-field element S is not literally the geometric coefficient-field square t². In the chosen equicharacteristic coordinate,
+\[
+S_{\rm base}=t²+p.
+\]
+Therefore for a higher scalar normal-form generator \(a=S_{\rm base}c²p^{-m}\), m≥3 odd, the differential symbol is
+\[
+a\,dp=(t²c²p^{-(m-1)}+c²p^{-(m-2)})\,dp.
+\]
+In logarithmic coordinates this has the two terms
+\[
+(t²c²p^{-(m-1)+1})d\log p+(c²p^{-(m-2)+1})d\log p.
+\]
+The second term has logarithmic exponent \(-(m-3)\) if expressed after multiplying by p; equivalently, in the dp coefficient it is at pole order m−2. Its coefficient c² lies in F and its logarithmic exponent is an odd integer (because m−3 is even; the p-exponent in the log coefficient is −(m−3)). More directly, in the orbit presentation the scalar normal term \(c²p^{-(m-2)}dp\) is \(c²p^{-(m-3)}d\log p\). Its coefficient belongs to F and is killed by the root exact graph whenever the exponent \(-(m-3)\) is a negative odd root; for m=3 it is exponent zero and is handled by the zero-mode relation. Thus this adjacent term contributes no higher scalar normal-form class.
+
+The first term is
+\[
+t²c²p^{-(m-1)}dp=t²c²p^{-(m-2)}d\log p.
+\]
+Writing \(m-1=2^j q\), j≥1, q odd, its logarithmic exponent is \(-(m-2)=-(2^j q-1)\), so the exact orbit indexing must be read from the logarithmic coefficient, not from the dp pole order alone. The scalar normal-form comparison is therefore made after the full dp-to-dlog conversion and the root-graph reduction; G-4bp's shorthand that treated S as the coefficient-field element without displaying the adjacent term is incomplete.
+
+**Outstanding verification:** redo the pole-index bookkeeping in the symbol map with the exact logarithmic exponents in both terms above. Do not use the simplified G-4bo correspondence until this adjacent-term calculation is fully reconciled with the (m=2^j q+1) orbit indexing.
