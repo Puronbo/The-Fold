@@ -1684,3 +1684,25 @@ The differential is purely tangent exactly when \(c_n=0\) for every odd n. For e
 \boxed{dL\cap\operatorname{PP}_{\rm tan}=\bigoplus_{m\ge1,\ m\text{ even}}E^2p^{-m}dt.}
 \]
 This is the tangent counterpart of G-4ap's pure-normal exact relation. At B₁ the two directions are symmetric; the mixed logarithmic coupling first appears in B₂, as in G-4ax–G-4ay.
+
+
+## 53. G-4bb — complete monomial shape of the second Cartier layer
+
+Modulo B₁, the monomial formula G-4ax gives the following decomposition of the finite-principal-part part of B₂. For negative even exponent n=−2k, k≥1, one gets a pure tangent term
+\[
+tE^4p^{-4k}dt.
+\]
+For negative odd exponent n=−r, r≥1 odd, one gets
+\[
+tE^4p^{-2r}dt
++E^4p^{-(2r+1)}dp
++SE^4p^{-(2r+1)}dp.
+\]
+The last two normal coefficient spaces are complementary inside E² because \(E²=E^4\oplus SE^4\). Thus, for each odd r, the second Cartier layer has:
+- a tangent component \(tE^4\) at pole index 2r;
+- a pure-normal component \(E^4\) at normal pole index 2r+1;
+- a mixed-normal component \(SE^4\) at the same normal pole index, paired with the tangent component.
+
+Together with B₁, which contributes square-coefficient tangent and normal principal parts at even pole indices, this describes the monomial-generated finite-principal-part B₂ layer. The decomposition is direct at the displayed coefficient slots: \(E²\cap tE^4=0\), and \(E^4\cap SE^4=0\). Distinct Laurent exponents do not cancel. This is a complete B₂ calculation for finite Laurent inputs; the extension to arbitrary completed inputs follows coefficientwise when the relevant topology is fixed.
+
+This makes the geometry of the G-4aj coefficient transparent: \(SE^4\) is not the pure-normal B₂ piece but the normal half of a mixed tangent/logarithmic generator. The next task is to iterate this paired decomposition through B₃ and beyond, and determine whether its full Cartier orbit exhausts the mixed constraints needed for the G-4aj normal form.
