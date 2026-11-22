@@ -1146,3 +1146,7 @@ For a Jordan chain \(De_j=e_{j-1}\) of length \(d<q=2^n\), the top vector \(e_{d
 
 ### G-10 — Cochain-level Galois transgression
 The Hochschild–Serre transgression can be computed from an invariant class \([\alpha]\in H^1(N,V)^Q\): extend a representing 1-cocycle on N to a 1-cochain on G, choose the extension so its coboundary descends to a 2-cocycle on Q with values in \(V^N\), and take that cohomology class. For a cyclic 2-power quotient in characteristic two, G-8 identifies the quotient \(H^2=\ker D/\operatorname{im}D^{q-1}\), and G-9 gives explicit Jordan-chain representatives. A Fold-specific arithmetic computation still requires a concrete extension, module, and invariant cocycle.
+
+### G-11 — Cyclic cocycle-sum obstruction vector
+For a normalized inhomogeneous 2-cocycle \(\tau\) on \(C_q=\langle\sigma\rangle\), using multiplication \((w,g)(w',g')=(w+gw'+\tau(g,g'),gg')\), its extension class in \(H^2(C_q,W)=W^{C_q}/N W\) is represented by \(w_\tau=\sum_{j=0}^{q-1}\tau(\sigma^j,\sigma)\). In characteristic two the norm is \(D^{q-1}\). Thus the G-10 transgression can be reduced to one invariant vector, then tested against the short Jordan-block bottom-vector coordinates from G-9. This is a general computational criterion; a Fold-specific arithmetic input is still open. See [the Galois applicability note](the-fold-automorphic-and-hopf-galois-applicability.md).
+
