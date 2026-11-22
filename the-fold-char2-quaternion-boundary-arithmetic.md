@@ -1671,3 +1671,16 @@ C^{-1}(\eta_{r,A})=\eta_{2r,A^2},
 so the corresponding coefficient at the next node maps to the same element of the direct limit. Thus the G-4aj coefficient space \(S F^2=S E^4\) is identified with the first purely inseparable layer \(t^{1/2}E/E\) inside each pure-normal perfection chain.
 
 This is a precise embedding of the mixed logarithmic sector into the pure-normal chain model. It does not show that this sector exhausts the full chain contribution or that the complementary layers are killed by all mixed relations. Determining that is the next completeness problem.
+
+
+## 52. G-4ba — exact tangent principal-part relations at B₁
+
+Let \(\operatorname{PP}_{\rm tan}=\bigoplus_{m\ge1}E p^{-m}dt\). For \(g=\sum_n c_n(t)p^n\),
+\[
+dg=\sum_n c_n'(t)p^n dt+\sum_n n c_n(t)p^{n-1}dp.
+\]
+The differential is purely tangent exactly when \(c_n=0\) for every odd n. For even n, the tangent coefficient is \(c_n'\), and \(dE/dt=E^2\), since \(c=c_0^2+t c_1^2\) gives \(c'=c_1^2\). Therefore
+\[
+\boxed{dL\cap\operatorname{PP}_{\rm tan}=\bigoplus_{m\ge1,\ m\text{ even}}E^2p^{-m}dt.}
+\]
+This is the tangent counterpart of G-4ap's pure-normal exact relation. At B₁ the two directions are symmetric; the mixed logarithmic coupling first appears in B₂, as in G-4ax–G-4ay.
