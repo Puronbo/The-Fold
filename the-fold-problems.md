@@ -3228,3 +3228,8 @@ F/\wp(F)\oplus
 \bigoplus_{q>0\ {\rm odd}}\bigoplus_{Q\ {\rm monic\ irreducible}} k_Q.
 \]
 The proof uses the associated-graded calculation G-4cr and finite pole-order induction. This upgrades the G-4cr associated-graded result to a canonical full algebraic coinvariant normal form and resolves the filtered-extension question. The orbit-normalized sum is essential: a single coefficient residue at exponent \(-q\) does not annihilate \((\Phi-1)M\).
+
+
+### G-4cv — orbit-residue data and invariant-readout benchmark
+
+The rational residue generator now also emits finite sequences on a negative exponent-doubling orbit. Each sequence records q, Q, stage exponents \(-2^j q\), residues \(\alpha_j\in k_Q\), and the exact normalized target \(\sum_j\operatorname{Frob}^{-j}(\alpha_j)\). Its self-test checks that every adjacent relation pair \((\alpha,\alpha^2)\) contributes zero. Independent exact finite-field checks covered all 1,056 such pairs for the 14 irreducibles of degree at most five (four adjacent positions and every field element).
