@@ -1576,3 +1576,6 @@ A machine-learning bridge is specified: exact symbolic feature coordinates, filt
 
 
 **G-4ct — Cartier-stable target:** the pure-scaling stable quotient is \(\Omega_F^1/B_\infty\), via \(x\mapsto(x/S)dS\), which intertwines \(C_0\) and Cartier. The rational finite-section pullback harness passed 650 bounded coefficient checks on 50 rational inputs through \(q^{13}\); higher-order torsion remains conjectural.
+
+
+**G-4cu — Hasse–Taylor pullback formula:** every odd q-coefficient of the finite section-change pullback is in \(SF²=\ker C_0\), hence exact after one Cartier step. The truncated Hasse sum \(B_{n-1}=\sum_{i<n}S^ia^{[i]}\) is a \(2^{v_2(n)}\)-th power. For even coefficients, the first Cartier root is \(S^nu^na^{[n]}+Sf²u^{n-1}B_{n-1}\); the all-orders even torsion bound remains open. The rational harness now checks the exact odd-layer and Hasse-sum identities.
