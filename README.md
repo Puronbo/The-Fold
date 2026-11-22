@@ -1353,3 +1353,6 @@ the quaternion-boundary arithmetic note.
 
 
 **G-4an — explicit Kato differential presentation:** with \(p=T^2+S\), one has \(K_P=\mathbb F_2(T)((p))\) and 2-basis \(\{T,p\}\). The standard quotient is \(H_2^2(K_P)=\operatorname{coker}(1-\gamma:\Omega^1\to\Omega^1/dK_P)\), where \(\gamma(hdT)=[h^2T dT]\) and \(\gamma(hdp)=[h^2p dp]\). The exceptional symbol is represented by \(a dp\). Cartier itself acts on closed forms; \(\gamma\) is the all-forms map in the cokernel presentation. Still open: compare the image of \(\mathcal O_P+\mathcal D_P\) with the exact/Cartier relation subgroup to identify any map from G-4aj.
+
+
+**G-4ao — correction to Kato presentation:** G-4an's provisional quotient by exact forms plus raw \(h dT+h^2T dT\), \(h dp+h^2p dp\) relations omitted the higher Cartier filtration. The correct group is \(H_2^2(F)=\operatorname{coker}(C^{-1}-1:\Omega_F^1/B_\infty\to\Omega_F^1/B_\infty)\), with \(B_1=dF\), recursively defined \(B_i\), and \(B_\infty=\bigcup B_i\). The p-basis formulas for inverse Cartier remain valid modulo exact forms. See the arithmetic note, G-4ao, and Hiranouchi–Sugiyama (2025), §3.3. The comparison with G-4aj remains open.
