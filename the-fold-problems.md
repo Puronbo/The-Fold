@@ -2310,3 +2310,8 @@ otinmathcal N^3) by UF-072O.
   \]
 - Translation by \((1,0,0)\in W_3(\mathbb F_2)\) gives the order-eight generator \(\sigma(u)=u+1,\ \sigma(w)=w+u,\ \sigma(v)=v+u^3+uw+u\). Its square sends \((u,w,v)\) to \((u,w+1,v+w)\), and its fourth power sends \(v\) to \(v+1\).
 - This closes the explicit-equation gap in G-13. The transgression is nonzero by the five-term argument already recorded there; connecting it to a Fold-specific Galois module remains open.
+
+### G-15 — explicit cyclic factor set
+- For (C_8\twoheadrightarrow C_4), with section (s(i)=g^i), (0\le i<4), the normalized factor set is (\tau(i,j)=\lfloor(i+j)/4\rfloor\bmod2).
+- The G-11 cyclic sum is (w_\tau=\sum_{j=0}^3\tau(j,1)=1). With trivial (\mathbb F_2)-coefficients, the norm is zero, so this represents the nonzero generator of (H^2(C_4,\mathbb F_2)).
+- This identifies the explicit G-13 transgression with the G-11 cocycle-sum obstruction. Still open: a Fold-specific Galois module and arithmetic class.
