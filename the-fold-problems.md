@@ -2273,3 +2273,8 @@ otinmathcal N^3) by UF-072O.
 - Decomposing (V) into nilpotent Jordan blocks, every block of length (d<q) contributes one dimension in every positive degree; a length-(q) block is free/projective and contributes zero. Hence (dim H^j(C_q,V)) equals the number of blocks shorter than (q), for all (j\ge1).
 - Inflation–restriction places the descent obstruction in (H^2(C_q,V^{G_L})). The theorem gives an exact finite quotient test, not a global Fold Galois representation or an evaluated arithmetic transgression.
 \n
+
+### G-9 — Explicit Jordan-chain representatives
+- For each Jordan block \(J_d\) of \(D=\sigma-1\) with \(d<q=2^n\), a chain \(De_j=e_{j-1}\) contributes the class of its top vector \(e_{d-1}\) to \(H^1(C_q,V)\) and the class of its bottom vector \(e_0\) to \(H^2(C_q,V)\).
+- A length-\(q\) block contributes zero: its top vector is in \(\operatorname{im}D\), and its bottom vector is a norm \(D^{q-1}e_{q-1}\).
+- Hence these short-block representatives give explicit bases, once Jordan chains are chosen. The arithmetic transgression still requires a concrete Galois extension, module, and invariant class; no Fold-specific transgression is claimed.
