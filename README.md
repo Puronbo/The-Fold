@@ -1229,3 +1229,6 @@ Degrees 8–10 provide independent checks. Reproducible exact enumeration: `cert
 
 
 **Odd CM class number (G-34):** the ambiguous class number formula, four ramified infinite places, and the previously computed order-eight unit-signature image show that the degree-eight CM field has trivial ambiguous class group. Since the real quartic class number is one, complex conjugation acts by inversion on the CM class group; hence its 2-torsion is trivial and its class number is odd. The odd part and exact class group remain open. Details: `the-fold-genus7-cm-field.md`.
+
+
+**CM integral basis (G-35A):** the original quadratic generator \(\pi\) is rescaled to \(\theta=\pi/(\beta+2)\). The monic polynomial of \(\theta\) has integral coefficients and unit relative discriminant, so the relative index-discriminant identity together with G-29's finite-unramified result proves \(\mathcal O_L=\mathcal O_F[\theta]\). This supplies the exact integral basis needed for the degree-eight Minkowski enumeration; the odd class number is known, but its exact value remains open.
