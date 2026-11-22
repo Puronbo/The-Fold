@@ -1163,3 +1163,6 @@ u^2+u=s,\quad w^2+w=u^3+u,\quad
 v^2+v=u^7+u^4+u^3w^2+u^3w+u^2w^2+u^2w+w^3+w^2.
 \]
 A generator is \(\sigma(u)=u+1,\ \sigma(w)=w+u,\ \sigma(v)=v+u^3+uw+u\); its square sends \((w,v)\) to \((w+1,v+w)\), and its fourth power sends \(v\) to \(v+1\). Thus the G-13 nonzero transgression example now has explicit field equations. The remaining arithmetic task is a Fold-specific realization. See [the Galois applicability note](the-fold-automorphic-and-hopf-galois-applicability.md).
+
+### G-15 — explicit cyclic factor set
+For (C_8\twoheadrightarrow C_4), the section (s(i)=g^i) gives (\tau(i,j)=\lfloor(i+j)/4\rfloor\bmod2). Its G-11 cyclic sum is (w_\tau=\sum_{j=0}^3\tau(j,1)=1), the nonzero generator of (H^2(C_4,\mathbb F_2)) with trivial coefficients. This explicitly identifies the G-13 transgression with the cyclic cocycle-sum obstruction. The Fold-specific realization remains open; see [the Galois applicability note](the-fold-automorphic-and-hopf-galois-applicability.md).
