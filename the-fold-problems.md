@@ -2778,3 +2778,8 @@ For \(a=Sc²p^{-m}\), m odd, with base S=t²+p, the logarithmic expression is \(
 ### G-4bs — completed local quotient via positive-tail contraction
 
 For \(L=E((p))\), inverse Cartier doubles p-exponents in logarithmic coordinates. Every positive tail \(\omega_+\) is killed by \(1-C^{-1}\), using the convergent series \(\eta=\sum_{k≥0}(C^{-1})^k\omega_+\). Hence the completed local Kato quotient is determined by finite negative principal parts and exponent zero, with decomposition \(F/(wp(F)+SF²)⊕F/wp(F)⊕\bigoplus_{q≥1\ odd}(F⊕F⊕E^{perf}/E)\). The scalar boundary quotient is the projection described in G-4bo/G-4br.
+
+
+### G-4bt — coefficient-field notation
+
+Use \(S_0\) for the base parameter and \(\Sigma=t²=S_0+p\) for the geometric coefficient-field square. The Cartier calculations use \(F_c=\mathbb F_2(\Sigma)\); the scalar G-4aj normal form uses \(F_0=\mathbb F_2(S_0)\). They are not literally the same subfield of the completion. The symbol comparison must retain \(S_0=\Sigma+p\).
