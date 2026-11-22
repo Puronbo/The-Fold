@@ -2585,7 +2585,7 @@ For an even negative layer, take (A,B)=(0,sd). The correction is (0,sv_rd), so i
 (0,e_rd)\in F^2,&r\text{ odd},\\
 e_rd\in F,&r\text{ even}.
 \end{cases}}
-
+\]
 
 This recovers G-4bw at r=1 and the isolated v₂ contribution to G-4by at r=2. At r=3 it recovers G-4bz. The parity distinction has a geometric source: dlog(p^r) contributes r·dlog p, which survives precisely for odd r in characteristic two. Thus f_r contributes to the odd-source arrow at every depth; for even r it lands in the same-parity Q_odd layer, while for odd r it lands in Q_even. The e_r contribution is likewise visible at every depth.
 
@@ -3011,7 +3011,14 @@ product. Hence
 \boxed{Z(\mathfrak g_+)=0.}
 \]
 
-The finite filtered group has the same centerless behavior. Let a
+Let \(\mathcal G\) be the group of continuous substitutions
+\[
+\sigma(p)=p,\qquad
+\sigma(t)=t\left(1+\sum_{r\ge1}p^rv_r\right),\qquad v_r\in E.
+\]
+Every such substitution is tangent to the identity modulo p and hence
+is a continuous automorphism of \(L=E((p))\). The finite filtered group
+has the same centerless behavior. Let a
 nonidentity section change have first nonzero depth r and parameter
 \(v=e_v+f_vt\). Choose a pure section change at depth s with parameter
 \(u=e_u+f_ut\), where s>r and u is F-linearly independent of v.
