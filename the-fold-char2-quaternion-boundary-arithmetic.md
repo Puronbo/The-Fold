@@ -2326,3 +2326,74 @@ Substitution into the correction formula gives the adjacent-layer maps:
 These maps are independent of the exponent within each parity class. They are additive in v₀, as expected from composition of section changes modulo p². They are the first-order extension data that the associated-graded calculation alone cannot see.
 
 **Scope.** This computes the adjacent graded action modulo p². It does not yet compute the higher-order transition terms or prove that the resulting filtered extension is classified by these first-order maps alone. The exponent-zero layer must also be treated separately.
+
+
+## 75. G-4bx — second-order section-change maps and the zero mode
+
+Let a change of coefficient-field section be
+\[
+s=t'=t(1+pv_0+p^2v_1)+O(p^3),
+\qquad
+v_0=e+ft,\quad v_1=e_1+f_1t,
+\]
+with e,f,e₁,f₁∈F and t²=S in the residue coefficient field. We compute the induced transition through order p².
+
+The inverse coordinate substitution is
+\[
+t=s+p\alpha+p^2\beta+O(p^3),
+\quad
+\alpha=sv_0,
+\quad
+\beta=sv_0^2+s^2fv_0+sv_1.
+\]
+The logarithmic basis transition, expressed in s, is
+\[
+d\log t=(1+psf+p^2((sf)^2+sv_1'))d\log s
++(pv_0+p^2v_0^2)d\log p+O(p^3),
+\]
+where v₁'=∂ₛv₁=f₁. Therefore, for a form pⁿ(A,B) in the old logarithmic coordinates, its new coefficient pair has expansion
+\[
+A_{m new}=p^n(A+pA_1+p^2A_2)+O(p^{n+3}),
+\quad
+B_{m new}=p^n(B+pB_1+p^2B_2)+O(p^{n+3}),
+\]
+where all coefficient functions below are evaluated at s and
+\[
+A_1=\alpha\partial_s A+sfA,
+\qquad
+B_1=\alpha\partial_s B+v_0A,
+\]
+\[
+A_2=\beta\partial_s A+\alpha^2\partial_s^{[2]}A
++\alpha sf\partial_s A+((sf)^2+sf_1)A,
+\]
+\[
+B_2=\beta\partial_s B+\alpha^2\partial_s^{[2]}B
++\alpha(v_0\partial_s A+fA)+v_0^2A.
+\]
+Here ∂ₛ^[2] is the second Hasse derivative, required for the Taylor expansion in characteristic two.
+
+For an odd negative exponent, choose the representative (A,B)=(x,sy) of its class (x,y)∈F². The quotient map is
+\[
+(A,B)\longmapsto(A_0,A_1+B_1),
+\]
+where subscripts denote the F and sF coefficients. Substitution into the second-order terms gives
+\[
+\boxed{
+(x,y)\longmapsto
+\left(Sf^2x,\ (f_1+ef)x+(e^2+e_1)y\right).
+}
+\]
+For an even negative exponent, choose representative (A,B)=(0,sd), d∈F. Its second-order contribution is B₂=βd, whose sF coefficient is (e²+e₁)d. Thus
+\[
+\boxed{d\longmapsto(e^2+e_1)d.}
+\]
+These are the p² diagonals, mapping a graded layer to the layer two exponents higher, hence preserving parity. The p¹ diagonals are the opposite-parity maps of G-4bw.
+
+At exponent zero, the induced associated-graded map is the identity. Indeed, the coordinate substitution is congruent to t modulo p, and the logarithmic basis transition is the identity modulo p; all corrections have strictly positive p-order. Thus the zero-mode quotient
+\[
+(E\oplus E)/(T+(\wp(E)\oplus\wp(E)))
+\]
+is unchanged on its leading graded layer.
+
+**Scope and next check.** The displayed maps are the second-order diagonals for a single section change, not a classification of the full filtered automorphism. We must still verify the composition law for two successive changes, including the cross terms contributed by the first-order maps, and determine whether the resulting higher diagonals are forced by the first-order data or carry new independent parameters.
