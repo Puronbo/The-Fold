@@ -1313,3 +1313,6 @@ the quaternion-boundary arithmetic note.
 
 
 **G-4z — quartic coefficient recursion:** the recursion uses U=C+x₀²+(S+p)x₁²+(S+p)²x₃²+r₀+Sr₀² and R=(S+p)⁻¹U, followed by the parity test on E=B+(1+S)x₃²+px₃²+R+SR². The square-class space is a direct sum of finite-principal-part coefficient slots. The local image codimension remains open. See the arithmetic note.
+
+
+**G-4aa — finite-slot dual obstruction:** no nonzero F₂-linear functional supported on finitely many negative Laurent coefficient slots annihilates the local denominator image. Any separating dual certificate must have infinite slot support. This does not imply local surjectivity; the quartic local quotient remains unresolved.
