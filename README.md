@@ -1220,3 +1220,6 @@ Degrees 8–10 provide independent checks. Reproducible exact enumeration: `cert
 
 
 **Narrow class field (G-31):** three explicit norm-one units generate all eight even-parity signatures. Together with h_K=1 and the finite-unramified CM quadratic extension, this proves h_K^+=2 and identifies Q(pi)/Q(beta) as the narrow Hilbert class field. Exact unit norm and rational interval-sign checks are included in `certificates/g30_real_quartic_class_number.py`.
+
+
+**CM splitting and Newton slopes (G-32):** the two local factors of the CM quadratic at the prime above 2 have normalized valuations 1/4 and 3/4. Each local degree-four factor contributes four conjugates, recovering the simple fourfold slopes (1/4)^4 and (3/4)^4 from the CM prime decomposition.
