@@ -3285,7 +3285,9 @@ at Q gives
 \boxed{\bar A^{\,2}=\alpha\,\overline{Q'}\,\bar P
 \quad\text{in }\kappa_Q=\mathbb F_2[S]/(Q).}
 \]
-Here \(\alpha\ne0\) and \(Q'\ne0\), because finite fields are perfect and Q is irreducible. Squaring is an automorphism of \(\kappa_Q\); hence \(C_0\) acts invertibly on the simple-pole coefficient space \(\kappa_Q\). At \(Q=S\), the simple pole \(1/S\) is sent to zero. The polynomial block contributes only its constant term.
+Here \(\alpha\ne0\) and \(Q'\ne0\), because finite fields are perfect and Q is irreducible. Squaring is an automorphism of \(\kappa_Q\); hence \(C_0\) acts invertibly on the simple-pole coefficient space \(\kappa_Q\).
+
+At \(Q=S\), multiplication by S cancels the leading derivative term: if f has pole order m, then \(f+Sf'\) has pole order at most m−1 when m is odd and at most m when m is even. Since it is a square, \(C_0(f)\) has pole order at most \(\lfloor m/2\rfloor\). Thus every S-principal part is eventually killed, including the simple pole \(1/S\). The polynomial block has degree at most halved under \(C_0\), so only its constant term survives.
 
 We obtain the explicit stable quotient
 \[
