@@ -464,3 +464,71 @@ image. The T-coordinate q is freely specified, but it contributes
 S(S+P)q² to the scalar coordinate. The scalar-coordinate quotient
 after this coupling, and the image modulo the integral local ring,
 remain to be computed. This is not yet a global normal form for Q.
+
+
+## 16. G-4q — coefficient filtration of the exceptional scalar coordinate
+
+Retain \(F=\mathbb F_2(S)\), \(P=T^2+S\), and the completed
+coordinates of G-4p. The scalar coordinate is
+\[
+A=x^2+(S+P)y^2+r+Sr^2+S(S+P)q^2.
+\]
+Set \(X=x+Sq\). Since \(x\) and \(q\) vary independently, so do
+\(X\) and \(q\), and the formula becomes
+\[
+\boxed{A=X^2+(S+P)y^2+SPq^2+r+Sr^2.}
+\]
+This separates the three-square part from the additive polynomial
+\(L_S(r)=r+Sr^2\).
+
+Write Laurent expansions
+\[
+X=\sum_jX_jP^j,\quad y=\sum_jy_jP^j,\quad
+q=\sum_jq_jP^j,\quad r=\sum_jr_jP^j,
+\]
+with coefficients in \(F\) and finite negative support. Coefficient
+comparison gives the exact equations
+\[
+\boxed{
+\begin{aligned}
+[P^{2j}]A&=X_j^2+Sy_j^2+r_{2j}+Sr_j^2,\\
+[P^{2j+1}]A&=y_j^2+Sq_j^2+r_{2j+1}.
+\end{aligned}}
+\]
+In particular, the same \(y_j^2\) couples the even coefficient at
+\(2j\) to the odd coefficient at \(2j+1\); the term \(Sr_j^2\)
+also couples coefficient \(j\) of \(r\) to coefficient \(2j\) of
+\(L_S(r)\). Thus pole orders cannot be analyzed independently one
+coefficient at a time.
+
+There is a sharper exact description if the additive-polynomial term
+is temporarily omitted. Since \(F=F^2\oplus SF^2\) as an
+\(F^2\)-vector space, uniquely write
+\[
+c_{2j}=a_j+Sb_j,\qquad c_{2j+1}=e_j+Sd_j,
+\quad a_j,b_j,e_j,d_j\in F^2.
+\]
+A Laurent series \(c=\sum_nc_nP^n\) lies in
+\[
+F((P))^2+(S+P)F((P))^2+SPF((P))^2
+\]
+if and only if
+\[
+\boxed{b_j=e_j\quad\text{for every }j.}
+\]
+Indeed, the square part has coefficients
+\(c_{2j}=X_j^2+Sy_j^2\) and
+\(c_{2j+1}=y_j^2+Sq_j^2\); conversely the equality \(b_j=e_j\)
+allows one to choose the square roots \(X_j^2=a_j\),
+\(y_j^2=b_j=e_j\), and \(q_j^2=d_j\) independently for each
+\(j\). This is an exact coefficient test for the square-only image,
+not for the full scalar image, where \(r+Sr^2\) must still be
+included.
+
+**Status:** the completed scalar image now has an explicit coefficient
+system, and its square-only subspace has a complete coefficient test.
+The quotient by the full image of \(X^2+(S+P)y^2+SPq^2+r+Sr^2\),
+modulo \(F[[P]]\), is still open. The next target is to analyze the
+coupled recurrence contributed by \(r_{2j}+Sr_j^2\), then determine
+which negative coefficient classes survive in the associated
+principal-part filtration. No global quotient normal form is claimed.
