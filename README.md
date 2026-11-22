@@ -1422,3 +1422,7 @@ the quaternion-boundary arithmetic note.
 
 
 **G-4bd — finite Cartier filtration:** all finite-principal-part generators split into B₁ even-pole square terms and, at level j≥1, pure-normal, pure-tangent, and mixed logarithmic families. At each normal pole, pure and mixed coefficients complement to E^{2^j}; the full \(C^{-1}-1\) cokernel remains open.
+
+
+
+**G-4be — mixed tower begins in B₁:** exact differentials at odd p-exponents already contain \(t b²p^{-r}d\log(t/p)\); inverse Cartier iterates give \(t^{2^j}b^{2^{j+1}}p^{-2^jr}d\log(t/p)\). The pure-normal and mixed-normal coefficient spaces complement to E^{2^j}. The full \(C^{-1}-1\) cokernel remains open.
