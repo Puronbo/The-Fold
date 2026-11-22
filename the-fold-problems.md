@@ -2469,3 +2469,7 @@ Every image class has a symbol representative \([AS,s)_2\). This is an exact quo
 
 ### G-4j — infinite-dimensional quaternion-boundary image
 For \(K=\mathbb F_2(S,T)\), the quotient \(K/(K^2+\{u+Su^2:u\in K\})\) is infinite-dimensional over \(\mathbb F_2\). At the valuation \(T=\infty\), every denominator element with a pole has even pole order: the leading terms of \(z^2\) and \(Su^2\) cannot cancel because \(S\) is nonsquare in the residue field \(\mathbb F_2(S)\), and \(u\) has strictly smaller pole order than \(u^2\). Thus the classes of \(T^{2n+1}\), \(n\ge0\), are linearly independent. Via G-4i, the boundary image has infinite \(\mathbb F_2\)-dimension, with independent representatives \([ST^{2n+1},s)_2\). The quotient's full normal form remains open.
+
+
+### G-4k — exact dimension of quaternion-boundary image
+At every place \(v_{T-a}\), \(a\in\mathbb F_2(S)\), the residue field is \(\mathbb F_2(S)\) and S is nonsquare. Every denominator element \(z^2+u+Su^2\) therefore has either no pole or even pole order there. Hence the classes of \((T-a)^{-(2n+1)}\), for all \(a\in\mathbb F_2(S)\) and \(n\ge0\), are linearly independent in the G-4i quotient. Since K is countable, its quotient has at most countable dimension. Thus the quotient and \(\operatorname{im}(\delta_s)\) have exact dimension \(\aleph_0\). A canonical basis and reduction algorithm remain open.
