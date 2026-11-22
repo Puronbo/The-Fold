@@ -2716,3 +2716,19 @@ because X_v(t)/t=v and d(v)=fdt=ft\omega, while X_v(p)=0. Thus on the coefficien
 This is a genuine representation of the restricted Lie algebra on the ambient logarithmic differential module: it is the standard Lie-derivative action, so [ρ_v,ρ_u]=ρ_[v,u] and ρ_v²=ρ_{ev}. On pairs with g,h∈F((p)), X_v fixes the coefficients and the action reduces to (ftg,0), but the image generally lies in E((p))², not F((p))².
 
 **Crucial quotient caveat.** This establishes a representation on the ambient differential module, not yet on the Kato-style quotient by exact forms and Artin–Schreier/Frobenius relations. Lie derivative preserves exact forms because L_D(dg)=d(Dg). But for an Artin–Schreier relation m²+m, one has X_v(m²+m)=X_v(m), since X_v(m²)=0; this is not automatically another Artin–Schreier relation. Thus stability of the full denominator is unproved and may fail. The quotient representation test must explicitly compute this obstruction before any induced action is claimed.
+
+
+**G-4ce correction (denominator stability test).** The quotient denominator uses the differential Frobenius operator Φ on logarithmic forms, not the scalar Artin–Schreier map m↦m²+m. Accordingly, the scalar observation X_v(m²+m)=X_v(m) is not itself a proof about quotient stability and should not be used for that purpose. The correct test is whether
+\[
+\mathcal L_{X_v}(\Phi(m)-m)
+\]
+belongs to B¹+(Φ−1)M for every m∈M. In general Lie derivative and Φ do not commute. For m=pⁿω with ω=dlogt,
+\[
+\mathcal L_{X_v}(\Phi(m)-m)
+=(p^{2n}+p^n)ft\,ω,
+\]
+whereas
+\[
+\Phi(\mathcal L_{X_v}m)=p^{2n}S f²\,ω.
+\]
+This exhibits the noncommutation but does not by itself prove that the denominator is not stable, since exact forms may absorb the discrepancy. The quotient-action question remains open pending reduction modulo B¹+(Φ−1)M.
