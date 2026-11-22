@@ -2905,3 +2905,16 @@ For E=F(t), t²=S, F=F₂(S), define X_v=tv∂ₜ for v=e_v+f_vt. Then
 [X_v,X_u]=X_{t(e_vf_u+e_uf_v)}.
 \]
 In basis H=1, X=t of the parameter space, [H,X]=X and [H,H]=[X,X]=0. This is the two-dimensional nonabelian affine Lie algebra over F; its center is zero and derived algebra is Ft. Giving a parameter depth r yields a graded bracket of degree r+s. This identifies the associated-graded infinitesimal algebra, not the full nonlinear group; characteristic-two exponential/logarithm shortcuts are unavailable without further work.
+
+
+### G-4ce — restricted 2-map and ambient logarithmic representation
+
+For X_v=tv∂ₜ on E=F(t), t²=S, v=e+ft, one has
+\[
+X_v^{[2]}=X_v²=X_{ev}.
+\]
+Thus H=X₁ and X=X_t satisfy [H,X]=X, H^[2]=H, X^[2]=0. On the ambient logarithmic module with ω=dlogt, η=dlogp, the Lie derivative acts by
+\[
+ρ_v(g,h)=(X_v(g)+ftg, X_v(h)).
+\]
+It is a restricted representation. It is not yet a representation on the Kato-style quotient: exact forms are stable, but the AS/Frobenius denominator need not be, since X_v(m²+m)=X_v(m). Determine the precise obstruction / any stable replacement before claiming quotient action.
