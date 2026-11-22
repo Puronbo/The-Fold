@@ -1328,3 +1328,6 @@ the quaternion-boundary arithmetic note.
 
 
 **G-4ae — dimension of each chain:** every odd-core chain cokernel in G-4ad has countably infinite F₂-dimension. Its target is countable, giving the upper bound; its dual maps surjectively onto (F^*) by the extension property of (phi), giving continuum many dual functionals and ruling out finite dimension. Thus the full local quotient is a countable direct sum of countably infinite-dimensional isomorphic chain cokernels. Explicit normal forms remain open.
+
+
+**G-4af — explicit chain generators:** for every odd chain label r, the classes (S^n p^{-r}), (n\ge0), are linearly independent in its cokernel. The zeroth-coordinate copy of F embeds because every nonzero finite-support input to T has a nonzero final output coordinate (\phi(x_N)). Thus the countably infinite dimension of each chain has a constructive lower-bound witness; these classes are not yet a spanning normal form.
