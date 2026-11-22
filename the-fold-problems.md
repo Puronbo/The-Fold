@@ -2561,3 +2561,7 @@ The annihilator splits over odd-core doubling chains. On each chain, coefficient
 
 ### G-4ad — canonical chain-cokernel model
 The local scalar quotient decomposes over odd-core exponent chains. Each chain is canonically \(\operatorname{coker}T_r\), with \(T_r((x_j))_0=x_0\) and \(T_r((x_j))_j=q(x_j)+\phi(x_{j-1})\), where \(q:F\to F/F^2\) and \(\phi(x)=[Sx^2]\). This is equivalently the colimit of the zigzag \(W_0\leftarrow F_0\to W_1\leftarrow F_1\to\cdots\). Dualizing yields G-4ac. Closed-form evaluation of the chain cokernels remains open.
+
+
+### G-4ae — chain cokernel dimension
+Each odd-core chain cokernel has countably infinite F₂-dimension. The target presentation is countable, while the dual surjects onto F* and therefore has continuum cardinality; this excludes finite dimension. All odd-core summands have identical presentations. This gives the dimension of each summand, not an explicit basis or normal form.
