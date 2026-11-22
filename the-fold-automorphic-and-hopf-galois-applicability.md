@@ -347,3 +347,27 @@ It is normalized and satisfies the 2-cocycle identity because it is the factor s
 w_\tau=\sum_{j=0}^{3}\tau(j,1)=0+0+0+1=1.
 \]
 For trivial \(\mathbb F_2\)-coefficients, \(D=0\) and the norm \(D^3=0\), so \(H^2(C_4,\mathbb F_2)\cong\mathbb F_2\), represented by 1. Thus the G-13 transgression is exactly the nonzero G-11 cyclic obstruction class under this section convention.
+
+### G-16 — a uniform family of nonzero transgressions
+
+For every integer \(r\ge1\), consider
+\[
+1\to C_{2^r}\to C_{2^{r+2}}\to C_4\to1.
+\]
+With trivial \(\mathbb F_2\)-coefficients, the transgression
+\[
+d_2:H^1(C_{2^r},\mathbb F_2)^{C_4}\longrightarrow H^2(C_4,\mathbb F_2)
+\]
+is an isomorphism. Indeed, both spaces are one-dimensional. The restriction \(H^1(C_{2^{r+2}},\mathbb F_2)\to H^1(C_{2^r},\mathbb F_2)\) is zero because a generator of the kernel is the fourth power of a generator of the larger cyclic group. Five-term exactness makes \(d_2\) injective, hence bijective.
+
+There is a uniform factor-set certificate. Let \(g\) generate \(C_{2^{r+2}}\), let \(k=g^4\) generate the kernel, and choose section \(s(i)=g^i\), \(0\le i<4\). The extension factor set with values in the kernel is
+\[
+\widetilde\tau(i,j)=k^{\lfloor(i+j)/4\rfloor}.
+\]
+Push it out along the nonzero character \(C_{2^r}\to\mathbb F_2\), which sends \(k\mapsto1\). The resulting \(\mathbb F_2\)-valued cocycle is
+\[
+\tau(i,j)=\lfloor(i+j)/4\rfloor\bmod2,
+\qquad
+\sum_{j=0}^3\tau(j,1)=1.
+\]
+It represents the nonzero class in \(H^2(C_4,\mathbb F_2)\), uniformly in \(r\). Thus the G-15 cocycle-sum certificate is not special to the octic case.
