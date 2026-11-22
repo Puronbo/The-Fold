@@ -1418,3 +1418,7 @@ the quaternion-boundary arithmetic note.
 
 
 **G-4bc — iterated mixed sector:** inverse Cartier propagates the logarithmic generators \(S^{2^{j-1}}E^{2^{j+1}}p^{-2^jr}d\log(t/p)\). At each normal pole index, pure-normal and mixed-normal coefficient spaces complement to \(E^{2^j}\), with the mixed part paired to a tangent term. The full \(C^{-1}-1\) cokernel remains open.
+
+
+
+**G-4bd — finite Cartier filtration:** all finite-principal-part generators split into B₁ even-pole square terms and, at level j≥1, pure-normal, pure-tangent, and mixed logarithmic families. At each normal pole, pure and mixed coefficients complement to E^{2^j}; the full \(C^{-1}-1\) cokernel remains open.
