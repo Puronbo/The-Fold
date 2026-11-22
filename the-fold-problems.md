@@ -2591,3 +2591,9 @@ The full local quotient is \(F/\wp(F)\oplus\bigoplus_{r\ge3,\ r\text{ odd}}SF^2\
 ### G-4ak — surface-level global comparison and characteristic-two residue bridge
 
 The field \(K=\mathbb F_2(S,T)\) has transcendence degree two, so it is not a global field and the Albert–Brauer–Hasse–Noether exact sequence for number fields/one-variable function fields does not apply. The divisor \(P=(T^2+S)\) lies on the regular surface \(\operatorname{Spec}\mathbb F_2[S,T]\), with residue field \(\mathbb F_2(T)\) and residue relation \(S=T^2\). The full local quotient G-4aj remains proved, but it has not yet been identified with a characteristic-two Kato residue or a global localization kernel. The correct next step is to compute the Kato/logarithmic-Hodge–Witt residue of the quaternion symbol \([aS,S)_2\) at P, identify its relation (if any) to the G-4aj quotient and its filtration, then check codimension-two boundaries at closed points of P. Only then assemble the codimension-one residues over the surface. Do not use an ABHN parity argument for K. References for the distinction: Kato’s p-primary/Gersten framework and the characteristic-p logarithmic Hodge–Witt Kato complex; see the bibliography/search notes in the research conversation. Status: open bridge, not a theorem.
+
+
+
+### G-4al — exceptional divisor has zero residue logarithmic differential
+
+At P=(T²+S), the residue field is E=F₂(T) and \(\bar S=T²\), so \(d\log(\bar S)=0\) in \(\Omega^1_{E/\mathbb F_2}\). This does not imply the quaternion symbol is unramified or trivial; it shows that the ordinary residue-field logarithmic differential of the second symbol entry cannot by itself detect the local classes. Compute Kato filtration/refined Swan data for \([aS,S)_2\) on G-4aj normal-form representatives. Do not identify the local quotient with a Kato graded piece until this is proved. Status: concrete local calculation target.
