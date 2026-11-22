@@ -1968,3 +1968,29 @@ Combining this with G-4bk gives the complete finite-polar-part presentation
 Here \(\mathcal H_{\rm pol}\) means the quotient of finite logarithmic differential principal parts with exponents n≤0 by exact differentials and the inverse-Cartier-minus-identity relations. Negative exponent orbits are indexed by negative odd roots −r. The decomposition is algebraic and finite-support; it does not yet assert a completed-field/topological isomorphism for all Laurent series.
 
 This result gives a precise two-component contribution at every negative odd pole orbit, plus the two distinct zero-orbit terms. The comparison with the scalar quotient G-4aj must now be understood as a projection/subquotient question, not as equality of the full two-coordinate Kato model with the one-coordinate scalar normal form.
+
+
+## 64. G-4bm — correction: the second-coordinate perfection tail survives
+
+**Correction to G-4bk and G-4bl.** The simplification there incorrectly quotiented the second logarithmic coordinate by \(U_\infty\). The tangent-only relations \((U_\infty,0)\) occur in the first coordinate only. They do not remove the perfection tail in the second coordinate.
+
+Since \(E^{\rm perf}=E\oplus U_\infty\),
+\[
+\frac{(E^{\rm perf})²}{G_0+(U_\infty,0)}
+\simeq \frac{E\oplus E^{\rm perf}}{G_0}
+\simeq \left(\frac{E\oplus E}{G_0}\right)\oplus E^{\rm perf}/E.
+\]
+The explicit map \((A,B)\mapsto(A_0,A_1+B_1)\) from G-4bk identifies \((E\oplus E)/G_0\) with \(F\oplus F\). Therefore the corrected contribution of each negative odd exponent orbit is
+\[
+\boxed{F\oplus F\oplus E^{\rm perf}/E.}
+\]
+The earlier G-4bk assertion that the whole orbit quotient is just F⊕F is withdrawn; it computed only the finite E⊕E graph quotient and omitted the residual second-coordinate perfection tail.
+
+Accordingly, the corrected finite-polar-part presentation is
+\[
+\boxed{
+F/(\wp(F)+SF²)\oplus F/\wp(F)
+\oplus\bigoplus_{r\ge1,\ r\text{ odd}}\left(F\oplus F\oplus E^{\rm perf}/E\right).
+}
+\]
+The exponent-zero terms from G-4bl are unchanged. This remains an algebraic finite-support statement, not yet a topological completion theorem.
