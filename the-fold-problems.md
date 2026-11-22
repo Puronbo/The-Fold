@@ -3074,3 +3074,19 @@ The pure scaling \(t\mapsto t(1+p)\) induces the p-basis root operator \(C_0(a_0
 F/\bigcup_n\ker C_0^n\simeq \mathbb F_2\oplus\bigoplus_{Q\ne S}\mathbb F_2[S]/(Q)
 \]
 over monic irreducibles Q. The non-S simple-pole blocks are stable; higher poles contract to simple poles; the S-principal part is nilpotent; polynomial terms leave constants. This is the finite closed-point residue module. The full section-group coinvariant remains open: determine whether other section changes preserve this residue module or impose further relations. Rational exact arithmetic and checks are in tools/cartier_stable_part.py.
+
+
+### G-4cr — first two section-change coefficients are Cartier-torsion
+
+For \(s=t(1+p^r(e+ft))\), q=p^{2r}, u=e²+Sf², and odd residual input \(x=a²\), the exact first-coordinate F-part is
+\[
+A'_0=a(S(1+qu))²\frac{1+qe²}{1+qu}.
+\]
+Its first two nonconstant coefficients are
+\[
+\Delta_1=Sf²a²\in\ker C_0,\qquad
+\Delta_2=(Su\,a')²+Sf²u\,a².
+\]
+With \(a=a_0²+Sa_1²\), one obtains \(C_0(\Delta_2)=S(ea_1+fa_0)²\), hence \(C_0²(\Delta_2)=0\). The first two corrections therefore vanish in the stable pure-scaling quotient.
+
+**Conjectural pattern:** \(C_0^{v_2(m)+1}(\Delta_m)=0\) for every coefficient q^m. Bounded exact rational tests support this but no proof is established. The full section-group coinvariant remains open. Ohi's parameter-independent Cartier residue theorem provides a possible route: identify our residue module with the appropriate \(Z_\infty/B_\infty\) residue target and verify its valuation hypotheses under section changes.
