@@ -3810,3 +3810,170 @@ F/(\wp(F)+SF^2),&n=0,\\[1mm]
 In particular, the invariant linear functionals are dual to a filtered space whose graded pieces are now explicit. A noncanonical vector-space splitting gives the direct sum of these graded pieces, but no canonical splitting of the filtered coinvariant has been proved. The higher extension class between surviving odd layers and the zero layer remains to be computed; this is distinct from the now-settled residue relations.
 
 **Learning consequence.** The exact linear-invariant targets are the residue fields k_Q at every negative odd exponent, together with the zero-mode quotient \(F/(\wp(F)+SF^2)\). A model should encode a rational differential by its finite residue vector, not by polynomial coefficients alone.
+
+
+## 95. G-4ct — canonical Frobenius-orbit residues and the full coinvariant
+
+The associated-graded result G-4cr has a canonical refinement. The key is that inverse Cartier links exponents \(n\) and \(2n\); therefore the residue attached to a negative odd layer must include all stages in its exponent-doubling orbit.
+
+Write an arbitrary logarithmic form as
+\[
+m=\sum_{n\in\mathbb Z}p^n(A_n\,d\log t+B_n\,d\log p),
+\qquad A_n=a_n+t b_n,\quad a_n,b_n\in F.
+\]
+Only finitely many negative \(n\) occur. For every positive odd integer q and every monic irreducible \(Q\in\mathbb F_2[S]\), define
+\[
+\boxed{
+\mathfrak r_{q,Q}(m)=
+\sum_{j\ge0}\operatorname{Frob}_{k_Q}^{-j}
+\left(
+\operatorname{res}_Q\left(\frac{a_{-2^j q}}{S}\,dS\right)
+\right),
+\qquad k_Q=\mathbb F_2[S]/(Q).
+}
+\]
+The sum is finite, and inverse Frobenius is unambiguous because \(k_Q\) is a finite perfect field. Put
+\[
+\mathcal R=\bigoplus_{Q\ {\rm monic\ irreducible}}k_Q.
+\]
+Also define the zero-mode coordinate
+\[
+\mathfrak z(m)=[a_0]\in F/(\wp(F)+SF^2).
+\]
+
+### 95.1 These coordinates annihilate the defining relations
+
+For an exact form \(dg\), writing each coefficient of g as \(c_n=u_n+t v_n\), one has
+\[
+d(c_np^n)=p^n t v_n\,d\log t
++n c_np^n\,d\log p.
+\]
+Its \(d\log t\)-coefficient has zero F-component. Thus every \(\mathfrak r_{q,Q}\) and \(\mathfrak z\) vanishes on \(B^1\).
+
+Now take a monomial input \(p^n(A,B)\), where \(A=a+tb\). Its \((\Phi-1)\)-relation has
+\[
+p^{2n}A^2+p^nA
+\]
+in the first logarithmic coordinate. Since
+\[
+A^2=a^2+Sb^2,\qquad
+\frac{A^2}{S}dS
+=\frac{a^2}{S}dS+b^2dS,
+\]
+and \(b^2dS=d(Sb^2)\) is exact, the residue at Q of the doubled coefficient is the square of the residue of \((a/S)dS\). Equivalently, this follows from
+\[
+C\left(\frac{a^2}{S}dS\right)=\frac aS\,dS
+\]
+and the local Cartier-residue formula. The two contributions to \(\mathfrak r_{q,Q}\), at stages j and j+1, are therefore
+\[
+\operatorname{Frob}^{-j}(\alpha)
++\operatorname{Frob}^{-(j+1)}(\alpha^2)=0.
+\]
+Every negative exponent belongs to exactly one orbit \(-2^j q\), q odd, so all \(\mathfrak r_{q,Q}\) annihilate \((\Phi-1)M\).
+
+At exponent zero, the F-component of \(A^2+A\) is
+\[
+a^2+a+Sb^2\in\wp(F)+SF^2.
+\]
+Hence \(\mathfrak z\) also annihilates \((\Phi-1)M\). We have constructed a well-defined linear map
+\[
+\mathfrak R:Q=M/R\longrightarrow
+F/(\wp(F)+SF^2)\oplus\bigoplus_{q>0,\ q\ {\rm odd}}\mathcal R.
+\]
+
+### 95.2 The map is invariant under every finite section change
+
+For a general section change, write its inverse as \(t=sU(s,p)\), with
+\[
+U=\alpha+s\beta,\quad
+W=U^2=\alpha^2+S\beta^2,\quad Z=SW.
+\]
+If the old first coefficient is \(A=a(S,p)+t b(S,p)\), then after pullback and logarithmic-frame conversion its F-component is exactly
+\[
+\boxed{a^\sigma(S,p)=a(Z,p)\frac{\alpha^2}{W}.}
+\]
+Indeed, the frame factor is \(\alpha/(\alpha+s\beta)\); the two terms involving \(b\) cancel in its F-component in characteristic two.
+
+Since
+\[
+\frac{dZ}{dS}=W+S\frac{dW}{dS}=\alpha^2,
+\]
+we obtain the exact differential identity
+\[
+\boxed{
+\frac{a^\sigma(S,p)}{S}\,dS
+=\phi^*\left(\frac{a(S,p)}S\,dS\right),
+\qquad \phi(S)=Z=SW.
+}
+\]
+At every finite closed point Q, \(z=Q(S)\) is carried to \(z'=z+O(p^2)\), while p is fixed. The induced automorphism of \(k_Q((z))((p))\) is continuous and fixes \(k_Q\). The higher-dimensional residue is invariant under continuous automorphisms of iterated Laurent series fields (Gorchinskiy–Osipov, Proposition 5.3, Corollary 5.4 and Remark 5.5). Thus every coefficientwise residue of the differential series above is unchanged. Consequently all orbit sums \(\mathfrak r_{q,Q}\) are invariant.
+
+For the zero-mode coordinate, the p^0 coefficient of the pulled-back differential differs from the original by a differential with zero residue at every finite Q. By G-4cp, its coefficient belongs to
+\[
+U_{\rm nil}=\sum_{h\ge0}S^{2^h}F^{2^{h+1}}.
+\]
+This subspace is contained in \(\wp(F)+SF^2\): for h≥1, put \(c=S^{2^{h-1}}b^{2^h}\); then
+\[
+S^{2^h}b^{2^{h+1}}=\wp(c)+c,
+\]
+and iterate until the h=0 term lies in \(SF^2\). Therefore \(\mathfrak z\) is invariant as well.
+
+The map \(\mathfrak R\) descends to the full group coinvariant \(Q_{\mathcal G}\).
+
+### 95.3 It is an isomorphism, so the filtered extension is canonically split
+
+The map is surjective. For \([a]\in F/(\wp+SF^2)\), use the zero-mode representative \(A_0=a\), B=0. For \(\alpha\in k_Q\) in the qth residue summand, use the single coefficient
+\[
+A_{-q}=S\alpha\,\frac{Q'}Q,\qquad B_{-q}=0,
+\]
+with all other coefficients zero. Its only finite residue is \(\alpha\) at Q, and it contributes only to \(\mathfrak r_{q,Q}\).
+
+Filter both sides by pole bound N. On the target, the Nth step consists of the zero summand and residue modules indexed by odd q≤N. A coefficient at exponent \(-2^j q\) contributes to root q, so \(\mathfrak R\) preserves this filtration. Its associated-graded map at an odd N is exactly
+\[
+F/U_{\rm nil}\xrightarrow{\sim}\mathcal R
+\]
+from G-4cp; at an even N both associated-graded pieces vanish by G-4cr; at N=0 the map is the identity on \(F/(\wp+SF^2)\). Thus the associated-graded map is an isomorphism at every level.
+
+Every element has finite negative pole order, and positive tails vanish by G-4bs. Induction on N therefore proves that \(\mathfrak R\) itself is an isomorphism:
+\[
+\boxed{
+Q_{\mathcal G}\ \simeq\
+F/(\wp(F)+SF^2)
+\ \oplus\
+\bigoplus_{\substack{q\ge1\\q\ {\rm odd}}}
+\ \bigoplus_{Q\ {\rm monic\ irreducible}} k_Q.
+}
+\]
+Unlike the earlier G-4cr associated-graded statement, this is a full algebraic coinvariant normal form. The splitting is canonical through the explicit orbit-residue map \(\mathfrak R\); the Frobenius-normalized sum is essential. A residue taken only at exponent \(-q\) would not annihilate \((\Phi-1)M\).
+
+### 95.4 Simplify the zero-mode summand
+
+There is a useful canonical additive isomorphism
+\[
+F/(\wp(F)+SF^2)\simeq F/\wp(F).
+\]
+For \(a\in F\), write its unique 2-basis decomposition \(a=u^2+Sv^2\), and put \(\tau(a)=u\). Then \(\tau(SF^2)=0\). Also
+\[
+\tau(\wp(u^2+Sv^2))
+=u^2+Sv^2+u
+\equiv \wp(u)\pmod{SF^2}.
+\]
+Conversely, if \(\tau(a)=\wp(u)\), then
+\[
+a\equiv \wp(u)^2=\wp(u^2)\pmod{SF^2}.
+\]
+Thus \(\tau\) induces the asserted isomorphism.
+
+We may consequently write the full answer as
+\[
+\boxed{
+Q_{\mathcal G}\ \simeq\
+F/\wp(F)
+\ \oplus\
+\bigoplus_{\substack{q\ge1\\q\ {\rm odd}}}
+\ \bigoplus_{Q\ {\rm monic\ irreducible}}\mathbb F_{2^{\deg Q}}.
+}
+\]
+The zero summand has the explicit Artin–Schreier basis recorded in G-4aj. This completes the algebraic invariant-linear-readout problem. The algebraic dual is the product of the duals of these summands; via the finite-field trace pairing, each residue-field functional is \(x\mapsto\operatorname{Tr}_{k_Q/\mathbb F_2}(c x)\).
+
+**Scope:** this is an algebraic direct-sum theorem for finite negative principal parts, with positive tails contracted as in G-4bs. It does not claim a new topology or a continuous-dual classification for a different completion.
