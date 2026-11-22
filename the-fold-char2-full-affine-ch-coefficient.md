@@ -568,3 +568,37 @@ J_{\rm orb}=\ker\bigl(O(G)\to O(G)\otimes O(U)\bigr).
 No subgroup assertion, equality with the second-Frobenius candidate, or computation of either Hopf core is made here.
 
 **Open UF-072.** Compute the one-copy affine-slice elimination ideal \(I_{\rm aff}\), then perform the two-independent-copy substitution to test the coproduct condition. If it fails, determine the largest Hopf ideal contained in \(I_{\rm aff}\); separately compare that result with the full universal Hopf core.
+
+
+## 15. UF-072A — Nilradical and dimension bound for the affine-slice image
+
+Retain the source algebra and map from Section 13:
+\[
+\mathcal R=k[a,a^{-1},b,i,i^{-1},A,B,C,D,E,G,J,c,d,h]/(c^4,d^2,h^2),
+\qquad \mathcal A_{\rm aff}=k[f_1,\ldots,f_{16}]\subseteq\mathcal R.
+\]
+Let
+\[
+B_{\rm red}=k[a,a^{-1},b,i,i^{-1},A,B,C,D,E,G,J],
+\quad T=k[c,d,h]/(c^4,d^2,h^2),
+\quad \mathfrak n=(c,d,h)\subset T.
+\]
+Then \(\mathcal R=B_{\rm red}\otimes_kT\), \(\mathfrak n^6=0\), and \(\mathcal R/\mathfrak n\mathcal R\cong B_{\rm red}\), a reduced integral domain. Define
+\[
+\mathcal N=\mathcal A_{\rm aff}\cap\mathfrak n\mathcal R.
+\]
+The restriction of the quotient map \(\mathcal R\to B_{\rm red}\) to \(\mathcal A_{\rm aff}\) has kernel exactly \(\mathcal N\), so
+\[
+\mathcal A_{\rm aff}/\mathcal N\hookrightarrow B_{\rm red}.
+\]
+Moreover, every element of \(\mathcal N\) lies in \(\mathfrak n\mathcal R\), hence \(\mathcal N^6=0\). Conversely, if an element of \(\mathcal A_{\rm aff}\) is nilpotent, its image in the reduced ring \(B_{\rm red}\) is zero, so it belongs to \(\mathcal N\). Therefore \(\mathcal N\) is exactly the nilradical of \(\mathcal A_{\rm aff}\), and
+\[
+\boxed{\operatorname{Nil}(\mathcal A_{\rm aff})^6=0,\qquad
+\mathcal A_{\rm aff,red}\hookrightarrow B_{\rm red},\qquad
+\dim\mathcal A_{\rm aff}\leq10.}
+\]
+The dimension bound follows because \(B_{\rm red}\) is a Laurent-polynomial ring in ten variables and integral extensions are not being assumed: the reduced image is a finitely generated subalgebra of this ten-dimensional domain, so its transcendence degree (and Krull dimension) is at most ten. A nilpotent ideal does not change Krull dimension.
+
+**Scope.** This proves the nilpotence exponent bound and dimension upper bound for the auxiliary affine-conjugator image algebra. It does not compute its defining elimination ideal, establish a matching dimension lower bound, test the two-copy coproduct, or identify the full universal Hopf core. In particular, the generic rank-15 coefficient-matrix result concerns nilpotent directions over the parameter ring and does not imply that the image algebra has dimension 15.
+
+**Next UF-072B.** Compute the reduced image map obtained by setting \(c=d=h=0\), determine its Jacobian rank and exact reduced image ideal, then lift the calculation through the nilpotent filtration \(\mathcal N/\mathcal N^2,\ldots,\mathcal N^5\). Only after this one-copy algebra is explicit should the independent two-copy coproduct test be run.
