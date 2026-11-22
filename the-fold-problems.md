@@ -2533,3 +2533,7 @@ At P=T⁴+T²+S, r=T²+T satisfies r²+S=P. Thus z=rw/P^(m+1), u=w/P^(m+1) gives
 
 ### G-4w — quartic local two-coordinate reduction
 For targets with integral T,T³ coordinates, the corresponding denominator parameters r₁,r₃ are integral. Writing A,B for scalar,T² coordinates and C=A+(p+S)B, the exact remaining equations modulo F[[p]] are C=x₀²+(p+S)x₁²+((p+S)x₃)²+r₀+Sr₀²+(p+S)r₂ and B=x₁²+x₂²+(p+1+S)x₃²+r₂+Sr₂². The first equation alone is unobstructed; the coupled pair is the remaining local problem.
+
+
+### G-4x — erratum to quartic coupled reduction
+The G-4w coefficient of x₃² in C was misstated. The corrected pair, derived from G-4u, is C=x₀²+(p+S)x₁²+(p+S)x₃²+r₀+Sr₀²+(p+S)r₂ and B=x₁²+x₂²+(p+1+S)x₃²+r₂+Sr₂² modulo F[[p]]. The prior first equation is superseded. The quartic local quotient remains open; no conclusion based on the erroneous coefficient is retained.
