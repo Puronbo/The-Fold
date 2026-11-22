@@ -256,3 +256,25 @@ In characteristic two with \(q=2^n\), the norm is \(D^{q-1}\), where \(D=\sigma-
 
 This is a general cyclic-cohomology computation, not yet an arithmetic evaluation for the Fold: a concrete Galois extension, coefficient module, and invariant class remain necessary.
 
+### G-12 — Explicit cyclic quartic test extension and coefficient modules
+
+Let \(K=\mathbb F_2(s)\) and
+\[
+L=K(u,w),\qquad u^2+u=s,\qquad w^2+w=u^3+u.
+\]
+The first equation gives \(K(u)=\mathbb F_2(u)\). The rational function \(u^3+u\) has a pole of odd order three at infinity, whereas every pole of \(r^2+r\) has even order. Thus the second Artin–Schreier equation is nontrivial and \([L:K]=4\).
+
+The assignments
+\[
+\sigma(u)=u+1,\qquad \sigma(w)=w+u+1
+\]
+preserve the equations: \((u+1)^3+(u+1)=(u^3+u)+(u^2+u)\), and \((u+1)^2+(u+1)=u^2+u\). They satisfy \(\sigma^2(u)=u\), \(\sigma^2(w)=w+1\), so \(\sigma\) has order four and \(\operatorname{Gal}(L/K)=C_4\).
+
+Two coefficient modules give a useful contrast. By the normal basis theorem, the additive \(K[C_4]\)-module \(L\) is regular, hence free/projective; its positive-degree group cohomology vanishes. In contrast, for the trivial module \(V=\mathbb F_2\), the operator \(D=\sigma-1\) is zero and the norm \(D^3\) is zero, so
+\[
+H^1(C_4,\mathbb F_2)=H^2(C_4,\mathbb F_2)=\mathbb F_2.
+\]
+This explicitly demonstrates why the coefficient module matters: the same concrete cyclic quartic quotient has a cohomologically invisible regular module and a nonzero trivial-coefficient obstruction target.
+
+This example does not yet produce a nonzero Hochschild–Serre transgression. That requires a specified invariant class in \(H^1(G_L,V)^{C_4}\), not just a nonzero target group. The Artin–Schreier–Witt classification supplies the general framework for cyclic \(2^n\)-extensions; this elementary tower is a directly verified length-four test case.
+
