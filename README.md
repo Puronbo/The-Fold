@@ -1301,3 +1301,6 @@ the quaternion-boundary arithmetic note.
 
 
 **G-4v — quartic exceptional cancellation:** at \(P=T^4+T^2+S\), the identity \((T^2+T)^2+S=P\) yields explicit denominator elements \((w^2+wP^m)/P^{2m+1}\), including every odd pole order. Hence the nonsquare-residue parity obstruction fails here; the full local quotient remains open.
+
+
+**G-4w — quartic local reduction:** the scalar and \(T^2\) coordinates reduce exactly to a coupled pair of additive equations after taking \(C=A+(p+S)B\). The first equation alone is unobstructed; any local obstruction must involve the shared variables in both equations. Details are in the quaternion-boundary arithmetic note.
