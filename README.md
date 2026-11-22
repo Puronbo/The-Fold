@@ -1089,3 +1089,6 @@ The complete first-order c,d,h coefficient map in both conjugated coordinates is
 
 
 **UF-072D:** the nine-generator first-order source-expansion map has exactly two invisible generators, the constant coefficients (X_1) and (Z_1). The true relation module in the nilradical conormal layer is contained in their span; deciding whether they lie in the square of the nilradical remains UF-072E.
+
+
+**UF-072F:** exact quadratic initial multiplication matrix has rank 24 over \(\operatorname{Frac}(S)\), with four initial relations. The degree-two source layer is four-dimensional; higher-order contributions to \(\mathcal N^2/\mathcal N^3\) remain unresolved.
