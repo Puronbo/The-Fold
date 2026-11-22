@@ -2796,3 +2796,16 @@ d\log t'=
 It is the identity modulo p on the ambient logarithmic differential lattice, and (t')²−t² is divisible by p². Thus leading p-graded coefficient pairs are independent of the section, while the explicit orbit direct-sum splitting is section-dependent.
 
 **Open subproblem:** prove that B¹+(C⁻¹−1)Ω¹ is strict for the p-adic filtration, or exhibit the first failure. Ambient associated-graded invariance does not imply quotient strictness. If strictness holds, identify the intrinsic associated-graded Kato quotient and prove that changes of section induce filtered triangular transition maps on the quotient. Keep the scalar quaternion projection intrinsic via its symbol characterization; do not claim the F_c⊕F_c⊕E^perf/E splitting is canonical.
+
+
+### G-4bv — strictness proved for the Cartier/exact filtration
+
+Let M=L dlog t ⊕ L dlog p, B¹=dL, and Φ(pⁿ(A,B))=p²ⁿ(A²,B²). With E=F₂(t), F=E² and E=F⊕tF, the exact differential coefficient space at exponent n is G={(tb,a+bt):a,b∈F} for odd n and T={(tb,0):b∈F} for even n. The initial relation spaces for R=B¹+(Φ−1)M are:
+- n<0 odd: G;
+- n<0 even: (F⊕F)⊕T, with zero intersection because F∩tF=0;
+- n=0: T+(wp(E)⊕wp(E));
+- n>0: E⊕E, and the positive tail is contracted by the convergent Cartier series.
+
+At negative even n, the only incoming doubled exponent is n/2 and Frobenius is injective; at negative odd n there is no incoming doubled exponent. Hence no hidden leading-term cancellation occurs. Every listed initial vector is realized, proving strictness for the p-adic exponent filtration.
+
+**Open next:** compute the extension maps between these intrinsic graded layers and identify the coefficient-section-dependent orbit decomposition as a filtered splitting. Strictness gives an intrinsic associated-graded quotient, not a canonical direct-sum decomposition of the full quotient.
