@@ -1094,7 +1094,7 @@ The complete first-order c,d,h coefficient map in both conjugated coordinates is
 **UF-072F:** exact quadratic initial multiplication matrix has rank 24 over \(\operatorname{Frac}(S)\), with four initial relations. The degree-two source layer is four-dimensional; higher-order contributions to \(\mathcal N^2/\mathcal N^3\) remain unresolved.
 
 
-**UF-072G:** proves (n_2^2=n_5^2=0) exactly and exhibits two independent nonzero classes in the generic fiber of \(\mathcal N^2/\mathcal N^3\), via a cubic initial rank jump from 60 to 62. A full quotient presentation remains open.
+**UF-072G:** proves (n_2^2=n_5^2=0) exactly. Its corrected cubic calculation gives a finite-field triple-product rank of 60; adjoining the corrected initial term of n_2n_5 leaves rank 60, while adjoining that of n_2n_6+n_3n_5 raises it to 61. The exact generic cubic relation module remains open.
 
 
 **UF-072G correction:** the cubic term of \(n_2n_5\) has zero \(cdh\)-coordinate. A reproducible finite-field calculation gives ranks 60 (triple products), 60 (plus \(n_2n_5\)), and 61 (plus \(n_2n_6+n_3n_5\)); the former two-independent-generic-classes claim is withdrawn. See [the certificate](https://github.com/Puronbo/The-Fold/blob/research/universal-fold-invariant/certificates/uf072g_cubic_specialization.py).
