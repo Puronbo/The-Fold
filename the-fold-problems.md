@@ -2391,3 +2391,10 @@ Thus it is surjective, with kernel exactly the norm image. In Jordan form it kil
 - The Jacobian is isogenous to the product of two copies of the trace-zero supersingular elliptic class, the G-24 trace-minus-two elliptic class, and a four-dimensional factor with polynomial Q. No simplicity claim is made for the latter.
 - The exact 2-adic Newton polygon has vertices \((0,7),(4,4),(10,1),(14,0)\), giving slopes \(1/4\) (multiplicity 4), \(1/2\) (multiplicity 6), and \(3/4\) (multiplicity 4).
 - Hence the Jacobian has p-rank zero but is not supersingular. Adds "certificates/g26_genus7_newton_polygon.py"; the genus-35 Jacobian remains open.
+
+
+### G-27 — irreducible degree-eight factor
+- Proves the reciprocal degree-eight Frobenius factor irreducible over Q.
+- The Newton polygon forces any proper rational factor to have degree four. Weil-root absolute values bound a monic quartic divisor to 12,650 integer candidates; exact integer division excludes every candidate.
+- The corresponding four-dimensional abelian isogeny factor is therefore simple over F2, with slopes 1/4 (four times) and 3/4 (four times).
+- Adds the executed certificate "certificates/g27_degree8_irreducibility.py".
