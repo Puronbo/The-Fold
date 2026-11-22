@@ -1706,3 +1706,26 @@ The last two normal coefficient spaces are complementary inside E² because \(E�
 Together with B₁, which contributes square-coefficient tangent and normal principal parts at even pole indices, this describes the monomial-generated finite-principal-part B₂ layer. The decomposition is direct at the displayed coefficient slots: \(E²\cap tE^4=0\), and \(E^4\cap SE^4=0\). Distinct Laurent exponents do not cancel. This is a complete B₂ calculation for finite Laurent inputs; the extension to arbitrary completed inputs follows coefficientwise when the relevant topology is fixed.
 
 This makes the geometry of the G-4aj coefficient transparent: \(SE^4\) is not the pure-normal B₂ piece but the normal half of a mixed tangent/logarithmic generator. The next task is to iterate this paired decomposition through B₃ and beyond, and determine whether its full Cartier orbit exhausts the mixed constraints needed for the G-4aj normal form.
+
+
+## 54. G-4bc — iterated mixed logarithmic Cartier generators
+
+For every j≥1, positive odd r, and b∈E, define
+\[
+\eta_{j,r,b}=S^{2^{j-1}}b^{2^{j+1}}p^{-2^jr}d\log(t/p).
+\]
+Writing \(A=S^{2^{j-1}}b^{2^{j+1}}\), the two components are \((A/t)p^{-2^jr}dt\) and \(A p^{-(2^jr+1)}dp\). Since \(A\in E^2\), inverse Cartier gives
+\[
+C^{-1}(\eta_{j,r,b})=\eta_{j+1,r,b}.
+\]
+Thus the mixed logarithmic sector is stable under inverse Cartier, with the pole indices doubling and the coefficient squaring.
+
+At the same normal pole index \(m=2^jr+1\), the pure-normal generator has coefficient space \(E^{2^{j+1}}\), while the mixed-normal component has coefficient space
+\[
+S^{2^{j-1}}E^{2^{j+1}}=t^{2^j}E^{2^{j+1}}.
+\]
+Because \(E^{2^j}=E^{2^{j+1}}\oplus t^{2^j}E^{2^{j+1}}\), these are complementary and together span the full coefficient space \(E^{2^j}\). The mixed summand is paired with the tangent component \(t^{2^j-1}E^{2^{j+1}}p^{-2^jr}dt\).
+
+This yields the complete shape of the iterated monomial generators of \(B_\infty\) on finite principal parts: B₁ contributes pure tangent and pure normal square-coefficient terms at even pole indices; for each j≥1, r odd, and b∈E, there are (i) pure-normal terms \(b^{2^{j+1}}p^{-(2^jr+1)}dp\), (ii) mixed logarithmic terms \(\eta_{j,r,b}\), and (iii) pure-tangent terms \(t^{2^j-1}b^{2^{j+1}}p^{-2^{j+1}k}dt\) for k≥1. These arise by applying inverse Cartier j times to exact monomials with odd or even p-exponent, respectively. Distinct pole indices and the displayed complementary coefficient decompositions give the finite-principal-part normal/tangent organization.
+
+This is a description of the Cartier filtration generators, not yet of the quotient by \(C^{-1}-1\). The remaining step is to impose that operator on the paired tangent/logarithmic sector and prove that its cokernel yields the G-4aj higher-chain summands without extra classes.
