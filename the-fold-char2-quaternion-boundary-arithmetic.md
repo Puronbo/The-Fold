@@ -2274,3 +2274,55 @@ Every listed vector is realized by an exact differential or a single Cartier rel
 This does **not** make the full direct-sum splitting in G-4bs canonical. It proves that its associated-graded layers are canonical; choosing representatives and splitting the successive extensions still depends on the coefficient-field lift. The nontrivial extension data are exactly where the Frobenius orbit/direct-limit model lives.
 
 The next step is to compute the extension maps between the canonical graded layers and show that the coordinate-dependent orbit decomposition is a filtered splitting of this intrinsic object.
+
+
+## 74. G-4bw — first-order extension maps under a change of coefficient section
+
+We now compute the first nontrivial off-diagonal action of a section change on the intrinsic associated-graded quotient from G-4bv. Let
+\[
+t'=t(1+pv_0)+O(p^2),\qquad v_0=e+ft,\quad e,f\in F.
+\]
+Expanding the exact transition formula of G-4bu to first order gives
+\[
+d\log t'=(1+ptf)d\log t+pv_0d\log p+O(p^2).
+\]
+If a logarithmic form has coefficient pair (A,B), its coefficients in the new basis, expressed in the new residue parameter, are
+\[
+A'=A+p\,t(v_0\partial_t A+fA)+O(p^2),
+\]
+\[
+B'=B+p\,(t v_0\partial_t B+v_0A)+O(p^2).
+\]
+Thus the correction from exponent n to exponent n+1 is
+\[
+\delta_{v_0}(A,B)=
+\big(t(v_0A'+fA),\;t v_0B'+v_0A\big),
+\]
+where primes in this display mean \(\partial_t\).
+
+For negative odd n, the graded quotient is
+\[
+Q_n=(E\oplus E)/G\simeq F^2,
+\qquad
+A=a+bt, B=c+dt\longmapsto(x,y)=(a,b+d).
+\]
+For negative even n, it is
+\[
+Q_n=(E\oplus E)/((F\oplus F)+T)\simeq F,
+\qquad
+A=a+bt, B=c+dt\longmapsto d.
+\]
+Substitution into the correction formula gives the adjacent-layer maps:
+
+- From negative odd n≤−3 to negative even n+1:
+\[
+\boxed{\delta_{v_0}:F^2\to F,\qquad (x,y)\mapsto fx+ey.}
+\]
+- From negative even n≤−2 to negative odd n+1:
+\[
+\boxed{\delta_{v_0}:F\to F^2,\qquad d\mapsto(0,ed).}
+\]
+
+These maps are independent of the exponent within each parity class. They are additive in v₀, as expected from composition of section changes modulo p². They are the first-order extension data that the associated-graded calculation alone cannot see.
+
+**Scope.** This computes the adjacent graded action modulo p². It does not yet compute the higher-order transition terms or prove that the resulting filtered extension is classified by these first-order maps alone. The exponent-zero layer must also be treated separately.
