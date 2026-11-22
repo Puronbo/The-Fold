@@ -540,3 +540,28 @@ Training examples should include:
 - full section-change perturbations whose orbit-residue target must remain fixed.
 
 This prevents the model from confusing coefficientwise residues with the actual invariant of the Cartier quotient.
+
+
+## 14. Orbit-residue sequence benchmark
+
+The rational residue generator now emits sequences on an exponent-doubling orbit. A sample contains the odd root q, irreducible Q, finite-field residues \(\alpha_j\) at exponents \(-2^j q\), and the exact target
+\[
+\sum_j\operatorname{Frob}_{k_Q}^{-j}(\alpha_j).
+\]
+This is the canonical invariant in G-4ct. Adjacent pairs \((\alpha,\alpha^2)\) at stages j and j+1 have normalized sum zero; they are the exact training examples for the \((\Phi-1)\)-relation.
+
+Generate rational coefficient samples and orbit sequences together:
+\`\`\`bash
+python tools/residue_feature_data.py --self-test --max-degree 5 --samples-per-point 8 --orbit-samples 8 --max-orbit-stages 6 > residue_orbit_train.jsonl
+\`\`\`
+
+Independent exact finite-field checks covered 1,056 adjacent-stage relation pairs over all 14 irreducibles of degree at most five. This validates the Frobenius normalization identity, not a trained model's performance.
+
+### Final invariant-readout target
+
+The full algebraic linear-invariant space is now dual to
+\[
+F/\wp(F)\oplus
+\bigoplus_{q>0\ {\rm odd}}\bigoplus_{Q\ {\rm monic\ irreducible}}k_Q.
+\]
+For each finite residue coordinate, use the trace-pairing readout \(x\mapsto\operatorname{Tr}_{k_Q/\mathbb F_2}(c_{q,Q}x)\). The zero-mode \(F/\wp(F)\) factor uses its explicit Artin–Schreier basis. The model should predict the normalized orbit sums, not raw per-exponent residues.
