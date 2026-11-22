@@ -2513,3 +2513,7 @@ At P=T²+S, replacing X=x+Sq puts the completed scalar coordinate in the exact f
 
 ### G-4r — exact dimension of the exceptional completed local quotient
 Let P=T²+S and K_P=F((P))[T], F=F₂(S), T²=S+P. For a zero-T-coordinate target, q=0. The two coefficient obstructions E_j=π_S(c_(2j))+π_0(c_(2j+1)) and D_j=π_S(c_(2j+1)) vanish on X²+(S+P)y². On r+Sr² they are E_j=π_S(r_(2j))+r_j²+π_0(r_(2j+1)) and D_j=π_S(r_(2j+1)). If j₀≤−2 is the lowest pair index of a principal part, a least-index argument forces r_n=0 for n<j₀, hence D_(j₀)=0. Therefore Sb/P^(2m+1), for b∈F² nonzero and m≥1, is not a local denominator class. Taking an F₂-basis of F² and all m≥1 gives a countably infinite independent family. Since F is countable, the completed local quotient K_P/(F[[P]][T]+{z²+u+Su²}) has exact F₂-dimension ℵ₀. This is a completed local theorem, not a global normal form.
+
+
+### G-4s — explicit global family from the exceptional place
+The local quotient obstruction at P=T²+S applies to rational global classes because K=F(T) embeds in K_P and every global denominator relation remains valid after completion. Taking b=S^(2n) in the G-4r family gives the explicit global independent family {S^(2n+1)/(T²+S)^(2m+1): n≥0, m≥1} in Q. For a finite relation, the largest m gives the lowest P-adic pair index, whose odd coefficient has nonzero S F² component. This complements the separable-place family; it is not a full global basis.
