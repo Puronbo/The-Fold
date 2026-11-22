@@ -2210,3 +2210,23 @@ Setting \(c=d=h=0\) makes the affine conjugator \(g(x)=ax+bz,\ g(z)=iz\). A univ
 
 
 undefined
+
+
+
+### UF-072L — Corrected degree-four specialization bounds
+
+Corrects the quadratic source terms for \(n_8=Z_{xz}-s_A\) and
+\(n_9=Z_{x^2z}-s_B-s_G\):
+\[
+Q_8=Ja c^2+at(Ea+Jb)cd+bt^2(Bi+Gb)ch+bt^2(Bb+Di+Gb)dh,
+\quad
+Q_9=Ja^2t ch+a^2t^2(Ei+Jb)dh.
+\]
+The complete degree-four initial matrix remains 350 columns by 470
+source/Laurent rows. Three exact \(\mathbb F_{256}\) specializations give
+rank 175, rising to 176 after adjoining
+\(\operatorname{in}_4(n_1n_4)=A^2c^3d/(ai)\). These imply generic lower
+bounds only; the generic upper bound 175 and hence the survival of
+\(n_1n_4\) modulo \(\mathcal N^3\) remain unproved. The prior 176/177
+ranks are withdrawn. Corrected certificate:
+\texttt{certificates/uf072k_degree4_specialization.py}.
