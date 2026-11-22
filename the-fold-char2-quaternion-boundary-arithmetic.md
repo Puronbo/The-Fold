@@ -1810,3 +1810,28 @@ S^{2^{j-1}}b^{2^j}\longmapsto S b².
 Thus every odd normal pole index m≥3 carries exactly the same abstract coefficient space \(S F²\) in its tangent-coupled graded component. This recovers the higher-chain coefficient space in G-4aj at all odd indices, not only those congruent to 3 modulo 4. The pole-index-one component is exceptional and remains the Artin–Schreier summand \(F/\wp(F)\).
 
 **Scope:** this is an exact splitting of the coefficient spaces in the iterated Cartier generators and a canonical identification of the mixed graded coefficient component. It is not yet a proof that the full local quotient is the direct sum in G-4aj: one must still prove that the mixed tangent relations create no further dependencies among the \(S F²\) components and leave no additional classes.
+
+
+## 58. G-4bg — index-one Artin–Schreier coefficient bridge
+
+The geometric coefficient field \(E=\mathbb F_2(t)\) and scalar coefficient field \(F=\mathbb F_2(S)\) satisfy \(E=F(t)\), \(t²=S\). Every c∈E is uniquely \(c=a+bt\), a,b∈F. Define the additive map
+\[
+\rho:E\to F,\qquad \rho(a+bt)=a+Sb².
+\]
+It induces an isomorphism
+\[
+\boxed{E/\wp_E(E)\xrightarrow{\sim}F/\wp_F(F).}
+\]
+Indeed, for u,v∈F,
+\[
+\wp_E(u+vt)=(u²+u+Sv²)+vt,
+\]
+so \(\rho(\wp_E(u+vt))=u²+u=\wp_F(u)\). Surjectivity is immediate from \(\rho(a)=a\). If \(\rho(a+bt)=\wp_F(u)\), then
+\[
+a+bt=\wp_F(u)+(Sb²+bt)=\wp_E(u)+\wp_E(bt)=\wp_E(u+bt),
+\]
+so the induced map is injective.
+
+This resolves the apparent mismatch between the geometric index-one coefficient \(E/\wp(E)\) and the scalar local normal-form coefficient \(F/\wp(F)\) in G-4aj. Combined with G-4bf, which identifies each higher odd-pole mixed coefficient with \(S F²\), the geometry now reproduces every coefficient space in the G-4aj normal form.
+
+**Scope:** matching all coefficient spaces is not yet a proof that the geometric filtration and the scalar quotient have identical relations. The remaining theorem is to prove that the mixed tangent relations impose exactly the G-4ai/G-4aj relations and no others, including the independence of the resulting higher-chain summands.
