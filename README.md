@@ -1410,3 +1410,7 @@ the quaternion-boundary arithmetic note.
 
 
 **G-4ba — tangent B₁ relations:** pure tangent exact principal parts, like pure normal ones, occur at even pole indices with coefficients E². The two directions first couple in B₂ through the logarithmic generator.
+
+
+
+**G-4bb — B₂ decomposition:** negative even exponents give pure tangent \(tE^4\); negative odd exponents give tangent \(tE^4\) paired with normal \(SE^4\), alongside pure-normal \(E^4\). The split \(E²=E^4\oplus SE^4\) isolates the mixed higher-chain coefficient.
