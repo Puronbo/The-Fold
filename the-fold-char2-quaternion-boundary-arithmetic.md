@@ -698,3 +698,43 @@ field makes \(S\) square, nor does it give a complete global basis.
 The already established upper bound \(\dim_{\mathbb F_2}Q\le\aleph_0\)
 shows that this independent family is maximal in cardinality, not
 necessarily a Hamel basis.
+
+
+## 20. G-4u — a quartic exceptional residue place and its local coordinates
+
+Let \(F=\mathbb F_2(S)\) and
+\[
+P(T)=T^4+T^2+S.
+\]
+This polynomial is irreducible over F. To see this, let \(\beta\) be a root of \(X^2+X+S\). That quadratic is irreducible: if \(r^2+r=S\) for \(r\in F\), the pole order at infinity of the left side is even whenever it has a pole, whereas S has pole order one. In \(F(\beta)\), a square root of \(\beta\) would have form \(x+y\beta\); comparing coefficients in
+\[
+(x+y\beta)^2=(x^2+Sy^2)+y^2\beta=\beta
+\]
+forces \(y=1\) and \(x^2=S\), impossible in F. Thus \(X^2-\beta\) is irreducible over \(F(\beta)\). If \(\alpha^2=\beta\), then \([F(\alpha):F]=4\), and \(\alpha\) has minimal polynomial \(P\). Moreover
+\[
+(\alpha+\beta)^2=\beta+\beta^2=S,
+\]
+so S becomes a square in the degree-four residue field. This is an explicit higher-degree exceptional irreducible, not covered by the quadratic family \(T^2+Sc^2\).
+
+Put \(p=P(T)\). The P-adic completion is \(F((p))[T]\) with basis \(1,T,T^2,T^3\), since reduction modulo p is the irreducible polynomial P. The relation is
+\[
+T^4=p+T^2+S,\qquad
+T^6=p+(p+1+S)T^2+S.
+\]
+For
+\[
+z=x_0+x_1T+x_2T^2+x_3T^3,\quad
+u=r_0+r_1T+r_2T^2+r_3T^3,
+\]
+where all coefficients lie in \(F((p))\), the denominator \(z^2+\nu+S\nu^2\) has coordinates
+\[
+\begin{aligned}
+[1]:\;&x_0^2+(p+S)(x_2^2+x_3^2)+r_0+Sr_0^2
+       +S(p+S)(r_2^2+r_3^2),\\
+[T]:\;&r_1,\\
+[T^2]:\;&x_1^2+x_2^2+(p+1+S)x_3^2+r_2
+       +S(r_1^2+r_2^2+(p+1+S)r_3^2),\\
+[T^3]:\;&r_3.
+\end{aligned}
+\]
+These identities are exact. They reduce the local quotient problem at P to a coupled coefficient problem in F((p)); they do not yet establish its dimension or a principal-part criterion. In particular, the quadratic exceptional-place proof G-4r cannot simply be copied: there are now four basis coordinates, and the T²-coordinate imposes an additional coupled integrality condition. **Open task G-4u.1:** determine \(K_P/(\mathcal O_P+\{z^2+\nu+S\nu^2\})\), or at least construct an infinite independent family in it, with \(\mathcal O_P=F[[p]][T]\).
