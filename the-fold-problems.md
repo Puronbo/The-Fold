@@ -2161,3 +2161,11 @@ Setting \(c=d=h=0\) makes the affine conjugator \(g(x)=ax+bz,\ g(z)=iz\). A univ
 - Proves the seven nonzero columns are linearly independent over (k(A,B,C,D,E,G,J)) after retaining the Laurent parameters (a,b,i).
 - Shows the first-order source-expansion map has kernel exactly the two coordinate summands for (n_1=X_1) and (n_4=Z_1).
 - Consequently the true relation module for (mathcal N/\mathcal N^2) is contained in (Se_1\oplus Se_4), but equality is not asserted: quadratic source terms must still be compared with products in \(\mathcal N^2\) (UF-072E).
+
+
+### UF-072E — The conormal layer is free of rank nine
+- Specializes (b=C=0) and compares Laurent (a)-exponents in the UF-065 quadratic expansions.
+- Proves (n_1\notin\mathcal N^2) from ([c^2]n_1=A/a), while all products of first-order generators have (c^2)-coefficients with nonnegative (a)-exponents.
+- Proves (n_4\notin\mathcal N^2) from ([cd]n_4=A/i), while all products have (cd)-coefficients with (a)-exponent at least one.
+- Together with UF-072D, establishes (K_1=0) and \(\mathcal N/\mathcal N^2\cong S^9\).
+- Higher associated-graded layers and the two-copy Hopf test remain open.
