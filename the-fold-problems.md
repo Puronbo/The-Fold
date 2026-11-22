@@ -2683,3 +2683,8 @@ For r odd positive, \(C^{-1}(d(cp^{-r}))=c_0^4p^{-(2r+1)}dp+S c_1^4p^{-2r}d\log(
 ### G-4az — mixed logarithmic sector in the perfection quotient
 
 At the first odd node of an even-root chain, the G-4ay normal coefficient \(S c_1^4\in S E^4\) maps under G-4aw to \(t^{1/2}c_1+E\in E^{\rm perf}/E\). Thus \(S E^4\) is exactly the first purely inseparable layer \(t^{1/2}E/E\) in the chain. The logarithmic inverse-Cartier orbit \(\eta_{r,A}\mapsto\eta_{2r,A²}\) represents the same direct-limit class. Whether other mixed relations kill the complementary perfection layers remains open.
+
+
+### G-4ba — tangent exact principal parts
+
+For \(L=E((p))\), the exact forms that are purely tangent have even pole indices and coefficients in E²: \(dL\cap\operatorname{PP}_{tan}=\bigoplus_{m\ even}E²p^{-m}dt\). This follows by requiring all odd Laurent coefficients of the primitive to vanish and using \(dE/dt=E²\). The B₁ tangent and normal relations are symmetric; their coupling begins at B₂.
