@@ -2261,7 +2261,7 @@ otinmathcal N^3) by UF-072O.
 
 ### G-7 — Order-two Galois cohomology in characteristic two
 - For a separable quadratic extension (L/K) in characteristic two and a finite-dimensional (k[C_2])-module (V), put (N=\sigma-1). Since (N^2=0) and the norm (1+\sigma=N), the two-periodic cyclic resolution gives (H^q(C_2,V)=\ker N/\operatorname{im}N) for every (q\ge1).
-- If (m=\dim_kV) and (r=\operatorname{rank}N), then every positive-degree cohomology group has dimension (m-2r).
+- If (m=\dim_kV) and (r=\operatorname{rank}N), then every positive-degree cohomology group has dimension (m-2r). Choosing lifts of a basis of (im N) gives the decomposition (V≅k[C_2]^r⊕k^{m-2r}); positive cohomology counts the trivial Jordan blocks.
 - Inflation–restriction identifies the descent obstruction for invariant classes in (H^1(G_L,V)) with the transgression into (H^2(C_2,V^{G_L})), which is this same square-zero quotient.
 - This is a structural calculation for a specified quadratic quotient, not a classification of arbitrary profinite Galois representations. The Fold-specific task is to construct natural global modules and evaluate the transgression on actual arithmetic classes.
 
