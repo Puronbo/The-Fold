@@ -3014,7 +3014,8 @@ product. Hence
 Let \(\mathcal G\) be the group of continuous substitutions
 \[
 \sigma(p)=p,\qquad
-\sigma(t)=t\left(1+\sum_{r\ge1}p^rv_r\right),\qquad v_r\in E.
+\sigma(t)=t\left(1+\sum_{r\ge1}p^rv_r\right),\qquad
+v_r\in F\oplus tF.
 \]
 Every such substitution is tangent to the identity modulo p and hence
 is a continuous automorphism of \(L=E((p))\). The finite filtered group
