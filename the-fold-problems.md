@@ -2169,3 +2169,10 @@ Setting \(c=d=h=0\) makes the affine conjugator \(g(x)=ax+bz,\ g(z)=iz\). A univ
 - Proves (n_4\notin\mathcal N^2) from ([cd]n_4=A/i), while all products have (cd)-coefficients with (a)-exponent at least one.
 - Together with UF-072D, establishes (K_1=0) and \(\mathcal N/\mathcal N^2\cong S^9\).
 - Higher associated-graded layers and the two-copy Hopf test remain open.
+
+
+### UF-072F — Quadratic initial multiplication map
+- Forms the 28 pair products of the seven nonzero first-order generators and expands them in the four-dimensional degree-two source basis ((c^2,cd,ch,dh)).
+- Exact elimination over (K=\mathbb F_2(A,B,C,D,E,G,J)), after clearing (a^2i^3), gives rank 24 and a four-dimensional kernel.
+- Kernel basis: (n_2^2, n_2n_5, n_5^2, n_2n_6+n_3n_5), interpreted only as quadratic initial relations.
+- Does not determine the full quotient \(\mathcal N^2/\mathcal N^3\), because products involving (n_1,n_4) may start in degree three or higher; higher terms and integral (S)-module relations remain open.
