@@ -2533,3 +2533,55 @@ w_2=v_2+u_2+t f_{u_0}v_1+t f_{u_1}v_0
 Thus the composite cubic coefficient consists of the freely chosen cubic coefficients v₂+u₂ plus cross terms forced by lower orders. This is the expected filtered composition law: lower-order data determine the nonlinear correction, but do not determine the new cubic parameter.
 
 **Conclusion.** The section-change action has independent graded parameters at cubic order. The first two diagonals do not determine the full filtered extension. The cubic leading maps and the cubic composition parameter are established; a complete formula for the p³ action when v₀ and v₁ are simultaneously nonzero, including all quotient projections, remains a separate calculation.
+
+
+## 78. G-4ca — arbitrary-depth isolated section changes and clockwise filtration
+
+We now compute the first nonzero graded effect of an isolated section parameter at arbitrary depth. Fix r≥1 and put
+\[
+s=t'=t(1+p^r v_r),\qquad v_r=e_r+f_rt,\quad e_r,f_r\in F.
+\]
+All formulas in this section are modulo terms of p-order at least 2r. Since
+\[
+s^2=t^2(1+p^{2r}v_r^2),
+\]
+the coefficient field does not move before order 2r. The inverse coordinate substitution and logarithmic basis change are
+\[
+t=s+p^rsv_r+O(p^{2r}),
+\]
+\[
+d\log t=(1+p^rsf_r)d\log s
++(r\bmod2)p^rv_r d\log p+O(p^{2r}).
+\]
+Consequently a coefficient pair transforms by
+\[
+(A,B)\longmapsto(A,B)+p^r
+\left(
+s(v_r\partial_sA+f_rA),\;
+sv_r\partial_sB+(r\bmod2)v_rA
+\right)+O(p^{2r}).
+\]
+
+For an odd negative layer, take (A,B)=(x,sy), x,y∈F. The correction is
+\[
+\left(sf_rx,\;sv_ry+(r\bmod2)v_rx\right).
+\]
+The even-layer quotient reads the s-coefficient of the second coordinate. As s²=S∈F, that coefficient is
+\[
+\boxed{L_r(x,y)=
+\begin{cases}
+f_rx+e_ry,&r\text{ odd},\\
+e_ry,&r\text{ even}.
+\end{cases}}
+\]
+For an even negative layer, take (A,B)=(0,sd). The correction is (0,sv_rd), whose odd-layer quotient is
+\[
+\boxed{M_r(d)=(0,e_rd)}
+\]
+for either parity of r.
+
+This recovers G-4bw at r=1 and the isolated v₂ contribution to G-4by at r=2. At r=3 it recovers G-4bz. The parity distinction has a geometric source: dlog(p^r) contributes r·dlog p, which survives precisely for odd r in characteristic two. Thus f_r contributes to the odd-to-even arrow only at odd depths; e_r contributes at every depth.
+
+**Clockwise convention.** Regard the negative graded layers as an oriented sequence, with the odd and even quotient types alternating. Declare clockwise to mean forward in filtration depth: a term at exponent n that contributes at exponent n+r has moved r places clockwise. Since n<0, this is motion toward exponent zero and toward less singular principal parts. This is a convention for visualizing the filtration, not an extra algebraic structure or a claim that the exponent lattice is literally periodic. In this convention every isolated section parameter produces a forward arrow; odd r crosses to the opposite parity type, while even r returns to the same parity type.
+
+**Scope.** These are the first nonzero graded arrows of an isolated parameter v_r. They do not give the complete p^{2r} and higher corrections, where the coefficient field moves, nor do they classify simultaneous parameters v₀,…,vᵣ. In particular, the even-depth parameter f_r is invisible in this first graded arrow and may reappear in its higher-order corrections.
