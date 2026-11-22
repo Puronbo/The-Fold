@@ -394,3 +394,36 @@ the separable-place parity obstruction cannot be extended to every
 irreducible. It does not imply that arbitrary simple principal parts
 at P are removable: the coefficient S²+S is specific, and the
 denominator subgroup is only an F₂-vector space, not an F-vector space.
+
+
+## 14. G-4o — higher odd poles at the exceptional place
+
+The exact local behavior at the inseparable place P=T²+S can be refined
+beyond the simple-pole witness. For every w∈F[T] and m≥1, set
+\[
+u=w/P^{m+1},\qquad z=Tw/P^{m+1}.
+\]
+Using T²+S=P gives
+\[
+z²+u+Su²
+=\frac{w²+wP^m}{P^{2m+1}}.
+\]
+If w is a P-adic unit, this has pole order 2m+1 and leading
+coefficient w̄² in E=F(√S). Thus this explicit family realizes
+arbitrarily high odd pole orders with square leading coefficient.
+
+For m=0 the corresponding identity instead gives
+\[
+(Tw/P)²+w/P+S(w/P)²=(w²+w)/P.
+\]
+Its simple-pole coefficient is the Artin–Schreier value w̄²+w̄,
+not generally a square. The earlier G-4n witness is w=S and has
+coefficient S²+S. Therefore the square-leading-coefficient statement
+is restricted to the displayed higher-pole family m≥1; it is not a
+classification of all odd principal parts of arbitrary denominator
+elements.
+
+The local quotient at P remains open. In particular, these identities
+do not show that every principal part with a square leading coefficient
+is removable, nor do they determine the interaction between successive
+principal-part coefficients.
