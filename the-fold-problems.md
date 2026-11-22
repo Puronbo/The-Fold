@@ -2809,3 +2809,22 @@ Let M=L dlog t ⊕ L dlog p, B¹=dL, and Φ(pⁿ(A,B))=p²ⁿ(A²,B²). With E=F
 At negative even n, the only incoming doubled exponent is n/2 and Frobenius is injective; at negative odd n there is no incoming doubled exponent. Hence no hidden leading-term cancellation occurs. Every listed initial vector is realized, proving strictness for the p-adic exponent filtration.
 
 **Open next:** compute the extension maps between these intrinsic graded layers and identify the coefficient-section-dependent orbit decomposition as a filtered splitting. Strictness gives an intrinsic associated-graded quotient, not a canonical direct-sum decomposition of the full quotient.
+
+
+### G-4bw — first-order extension maps
+
+For t'=t(1+pv₀)+O(p²), write v₀=e+ft with e,f∈F. The first-order coefficient transition is
+\[
+(A,B)\mapsto(A,B)+p\big(t(v₀\partial_tA+fA),\ t v₀\partial_tB+v₀A\big)+O(p²).
+\]
+On the intrinsic negative graded layers Q_odd≅F² and Q_even≅F, the adjacent maps are:
+\[
+Q_n\to Q_{n+1},\quad(x,y)\mapsto fx+ey
+\quad(n≤−3\text{ odd}),
+\]
+and
+\[
+Q_n\to Q_{n+1},\quad d\mapsto(0,ed)
+\quad(n≤−2\text{ even}).
+\]
+These are the first-order extension data, not a complete classification of the filtered extension. Still open: higher-order terms, the exponent-zero layer, and whether the full filtered extension is determined by this action.
