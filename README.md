@@ -1116,4 +1116,6 @@ undefined
 
 ## UF-072L — Corrected degree-four checkpoint
 
+A term-by-term comparison with UF-065 now confirms the patched quadratic inputs, including Q7. This is an input-table audit only; no degree-four ranks are currently claimed.
+
 The subsequent audit also found a missing factor of `a` in the `dh`-coefficient of `Q_7`. The 175/176 ranks are withdrawn. The certificate has been patched, but no new ranks are claimed until the full calculation is rerun. See [the certificate](https://github.com/Puronbo/The-Fold/blob/research/universal-fold-invariant/certificates/uf072k_degree4_specialization.py).
