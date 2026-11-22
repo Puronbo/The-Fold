@@ -1555,3 +1555,6 @@ A machine-learning bridge is specified: exact symbolic feature coordinates, filt
 
 
 **G-4cm — fixed-vector subspace:** the common fixed vectors of the finite section-change action on \(M/R\) are exactly the zero-exponent layer \(Q_0\). All negative leading layers are moved by a depth-one parameter; the \(p^{-1}\) case is detected by an Artin–Schreier class with odd pole order at infinity. This does not classify nonlinear invariant functions.
+
+
+**G-4cn — invariant readouts:** G-4cm computes fixed vectors, not invariant linear functionals. Linear invariant readouts are dual to the coinvariant quotient \(Q_{\mathcal G}=Q/\langle gq-q\rangle\), which remains open; the nonlinear invariant ring is separate.
