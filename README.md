@@ -1322,3 +1322,6 @@ the quaternion-boundary arithmetic note.
 
 
 **G-4ac — exact local dual description:** all annihilating functionals split over odd-core exponent chains \(-r,-2r,-4r,\ldots\). On each chain their coefficient functionals satisfy \(\lambda_1\circ\phi=\lambda_0\) and \(\lambda_{j+1}\circ\phi=\lambda_j\circ q\), where \(q:F\to F/F^2\) and \(\phi(x)=[Sx^2]\). Each extension exists because \(\phi\) is injective. The full annihilator has F₂-dimension continuum; this is a dual-space classification, not a classification of the local quotient itself.
+
+
+**G-4ad — canonical local quotient presentation:** the exceptional scalar principal-part quotient splits over odd-core exponent chains. Each chain is the cokernel of (T((x_j))_0=x_0), (T((x_j))_j=q(x_j)+\phi(x_{j-1})), where (q:F\to F/F^2) and (\phi(x)=[Sx^2]). Equivalently it is the colimit of the zigzag (W_0\leftarrow F_0\to W_1\leftarrow F_1\to\cdots). Its dual recovers the inverse-system equations of G-4ac. This is canonical, but does not yet evaluate the cokernels in closed form.
