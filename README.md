@@ -1426,3 +1426,7 @@ the quaternion-boundary arithmetic note.
 
 
 **G-4be — mixed tower begins in B₁:** exact differentials at odd p-exponents already contain \(t b²p^{-r}d\log(t/p)\); inverse Cartier iterates give \(t^{2^j}b^{2^{j+1}}p^{-2^jr}d\log(t/p)\). The pure-normal and mixed-normal coefficient spaces complement to E^{2^j}. The full \(C^{-1}-1\) cokernel remains open.
+
+
+
+**G-4bf — G-4aj coefficient match:** at every odd pole m≥3, the mixed normal component is \(S^{2^{j-1}}F^{2^j}\), where j=v₂(m−1); inverse Frobenius identifies it with \(S F²\). The tangent relations still need a global independence/completeness proof.
