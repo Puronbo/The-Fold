@@ -1783,3 +1783,30 @@ At j=0 this is \(b²p^{-2k}dt\), the pure tangent exact term in B₁. Together t
 At normal pole index \(m=2^jr+1\), the pure-normal coefficient space is \(E^{2^{j+1}}\), and the mixed-normal coefficient space is \(t^{2^j}E^{2^{j+1}}\). They complement to \(E^{2^j}\). The mixed component is paired with tangent coefficient \(t^{2^j-1}E^{2^{j+1}}\) at tangent pole index \(2^jr\). Thus the full finite-principal-part Cartier filtration is organized by pure-normal, pure-tangent, and mixed logarithmic families from level j=0 onward.
 
 This corrects the incomplete B₁ description in G-4bd: B₁ is not merely the sum of pure tangent and pure normal intersections; it also contains the mixed exact logarithmic pairs above. The full \(C^{-1}-1\) cokernel is still the remaining task.
+
+
+## 57. G-4bf — odd-pole normal coefficient splitting matches G-4aj
+
+Let \(F=E²=\mathbb F_2(S)\), \(S=t²\). For every odd normal pole index m≥3, write
+\[
+j=v_2(m-1)\ge1,\qquad r=(m-1)/2^j\quad(r\text{ odd}).
+\]
+The pure-normal Cartier generator at this slot has coefficient space
+\[
+E^{2^{j+1}}=F^{2^j}.
+\]
+The mixed logarithmic generator has normal coefficient space
+\[
+t^{2^j}E^{2^{j+1}}=S^{2^{j-1}}F^{2^j},
+\]
+paired with tangent coefficient \(t^{2^j-1}E^{2^{j+1}}\) at tangent pole index \(2^jr\). These two spaces are complementary in
+\[
+E^{2^j}=F^{2^{j-1}}=F^{2^j}\oplus S^{2^{j-1}}F^{2^j}.
+\]
+The mixed coefficient space is canonically isomorphic to \(S F²\) by inverse Frobenius:
+\[
+S^{2^{j-1}}b^{2^j}\longmapsto S b².
+\]
+Thus every odd normal pole index m≥3 carries exactly the same abstract coefficient space \(S F²\) in its tangent-coupled graded component. This recovers the higher-chain coefficient space in G-4aj at all odd indices, not only those congruent to 3 modulo 4. The pole-index-one component is exceptional and remains the Artin–Schreier summand \(F/\wp(F)\).
+
+**Scope:** this is an exact splitting of the coefficient spaces in the iterated Cartier generators and a canonical identification of the mixed graded coefficient component. It is not yet a proof that the full local quotient is the direct sum in G-4aj: one must still prove that the mixed tangent relations create no further dependencies among the \(S F²\) components and leave no additional classes.
