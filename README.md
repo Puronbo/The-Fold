@@ -1307,3 +1307,6 @@ the quaternion-boundary arithmetic note.
 
 
 **G-4x — correction:** the quartic coupled equation in G-4w had an incorrect coefficient on \(x_3^2\). The correct coefficient is \(p+S\), not \((p+S)^2\). The corrected pair is recorded in the arithmetic note; the local quotient remains open.
+
+
+**G-4y — quartic elimination:** the corrected coupled system can be reduced by solving for \(r_2\), leaving one square-class condition in \(F((p))/(F((p))^2+F[[p]])\) with four existential parameters. This is exact but not yet a closed-form local classification. See the arithmetic note.
