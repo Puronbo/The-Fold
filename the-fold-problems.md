@@ -3032,3 +3032,12 @@ Treat coefficient-section changes as gauge/frame transformations. The planned le
 ### G-4cm — fixed-vector subspace
 
 The fixed-vector subspace of the finite section-change action on \(Q=M/R\) is exactly the zero-exponent layer \(Q_0=(E\oplus E)/(T+(\wp(E)\oplus\wp(E)))\). Negative leading layers \(n\le-2\) are detected by the depth-one arrows. For \(n=-1\), a depth-one constant parameter \(e=S^k\) sends \((x,y)\) to the zero-layer Artin–Schreier class represented under \(\rho\) by \(S^kx+S^{2k+1}y^2\); choose k to force an odd pole at infinity. Zero-mode classes are fixed because section changes create only positive-order terms, which vanish in Q. This is a fixed-vector statement; the nonlinear invariant ring remains open.
+
+
+### G-4cn — invariant linear functionals / coinvariants
+
+Do not infer invariant linear readouts from the fixed-vector theorem G-4cm. For the possibly non-semisimple action, invariant linear functionals are the dual of the coinvariant quotient
+\[
+Q_{\mathcal G}=Q/\langle gq-q:g\in\mathcal G,\ q\in Q\rangle,
+\]
+whereas G-4cm computes the primal fixed subspace \(Q^{\mathcal G}=Q_0\). Computing \(Q_{\mathcal G}\), and then the nonlinear invariant ring \(k[Q]^{\mathcal G}\), are separate open problems. This distinction is now enforced in the equivariant-learning specification and training-target design.
