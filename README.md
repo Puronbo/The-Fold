@@ -1585,3 +1585,10 @@ A machine-learning bridge is specified: exact symbolic feature coordinates, filt
 
 
 **G-4cp — pure-scaling Cartier-residue coinvariants:** after the first two diagonals, higher pure-scaling changes remove the Cartier-nilpotent differential subspace. Each negative odd associated-graded layer's pure-scaling coinvariant is \(\Omega_F^1/\bigcup_n\ker C^n\), equivalently the direct sum of residue fields \(\bigoplus_{Q\text{ monic irreducible}}\mathbb F_{2^{\deg Q}}\); the infinity residue is trace-determined. The full t-dependent group may impose further relations, still open. The data generator now includes exact Hasse/Frobenius-level targets over \(\mathbb F_2[S]\).
+
+
+**G-4cq — full section-change residue invariance:** the exact coefficient-curve pullback extends at every finite closed point Q to a continuous automorphism of the two-dimensional local field \(k_Q((z))((p))\), with \(z=Q(S)\), \(z\mapsto z+O(p^2)\), \(p\mapsto p\). The two-dimensional residue theorem proves all coefficientwise residues are preserved, including for rational parameters with poles at Q.
+
+**G-4cr — associated-graded coinvariants:** every negative even layer and every negative odd second coordinate is killed; the negative odd first coordinate survives exactly as \(\mathcal R=\bigoplus_Q k_Q\) after the Cartier-nilpotent tower is removed. At exponent zero only \(F/(\wp(F)+SF^2)\) survives. The filtered extension between these graded pieces is not yet classified.
+
+**G-4cs — rational residue features:** tools/residue_feature_data.py generates exact rational-function samples \(x=N/D\) with prescribed residue \(\alpha\in k_Q\) for \((x/S)dS=\alpha Q'/Q\,dS\), and stores the trace-determined infinity residue.
