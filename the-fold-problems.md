@@ -2637,3 +2637,8 @@ For \(L=E((p))\), \(E=\mathbb F_2(t)\), the pure-normal exact relations are exac
 ### G-4ar — inverse-Cartier recurrence on normal symbols
 
 For \(L=E((p))\), inverse Cartier sends \(cp^{-m}dp\) to \(c^2p^{-(2m-1)}dp\) modulo exact forms. Hence \(C^{-1}-1\) links pole index m to 2m−1, with coefficient squaring; at m=1 it gives the Artin–Schreier-shaped coefficient \(c^2+c\). Iterating the index map gives \(2^j(m-1)+1\). This is exact modulo dL, but not a classification of the Kato group: quotient by \(B_\infty\) and mixed tangent contributions remain to be computed.
+
+
+### G-4as — explicit higher-Cartier filtration inclusions
+
+For every even m≥2 and a∈E, \(d(a^2p^{1-m})=a^2p^{-m}dp\in B_1\). Iterating inverse Cartier yields \(a^{2^n}p^{-(2^{n-1}(m-1)+1)}dp\in B_n\). Thus at odd pole index r, the filtration contains the coefficient subspace \(E^{2^n}\) whenever \(v_2(r-1)=n-1\). This is an inclusion only; equality of the pure-normal intersection with these subspaces and the contribution of mixed tangent forms remain open.
