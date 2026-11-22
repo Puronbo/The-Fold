@@ -1350,3 +1350,6 @@ the quaternion-boundary arithmetic note.
 
 
 **G-4am — exceptional symbol differential:** at \(P=(T^2+S)\), absolute differentials give \(dp=dS\), so the characteristic-two symbol representative \((aS)d\log S\) is exactly \(a\,dp\). The residue differential vanishes after reduction, but the uniformizer-direction differential records the wild part. This is an exact representative identity, not yet an identification of the G-4aj quotient with a Kato group or graded piece; Cartier/Frobenius and exact-differential quotients remain to be computed.
+
+
+**G-4an — explicit Kato differential presentation:** with \(p=T^2+S\), one has \(K_P=\mathbb F_2(T)((p))\) and 2-basis \(\{T,p\}\). The standard quotient is \(H_2^2(K_P)=\operatorname{coker}(1-\gamma:\Omega^1\to\Omega^1/dK_P)\), where \(\gamma(hdT)=[h^2T dT]\) and \(\gamma(hdp)=[h^2p dp]\). The exceptional symbol is represented by \(a dp\). Cartier itself acts on closed forms; \(\gamma\) is the all-forms map in the cokernel presentation. Still open: compare the image of \(\mathcal O_P+\mathcal D_P\) with the exact/Cartier relation subgroup to identify any map from G-4aj.
