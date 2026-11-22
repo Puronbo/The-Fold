@@ -2537,3 +2537,7 @@ For targets with integral T,T³ coordinates, the corresponding denominator param
 
 ### G-4x — erratum to quartic coupled reduction
 The G-4w coefficient of x₃² in C was misstated. The corrected pair, derived from G-4u, is C=x₀²+(p+S)x₁²+(p+S)x₃²+r₀+Sr₀²+(p+S)r₂ and B=x₁²+x₂²+(p+1+S)x₃²+r₂+Sr₂² modulo F[[p]]. The prior first equation is superseded. The quartic local quotient remains open; no conclusion based on the erroneous coefficient is retained.
+
+
+### G-4y — quartic square-class criterion after elimination
+Using the corrected G-4x equations, solve r₂=R=(C+x₀²+(p+S)x₁²+(p+S)x₃²+r₀+Sr₀²)/(p+S). The target is represented iff there exist x₀,x₁,x₃,r₀ such that B+(p+1+S)x₃²+R+SR² lies in F((p))²+F[[p]]. This is exact but retains four existential parameters. The coefficient quotient has copies of F/F² at negative even exponents and F at negative odd exponents; these are coefficient slots, each countably infinite-dimensional over F₂.
