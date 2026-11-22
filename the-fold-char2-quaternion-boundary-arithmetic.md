@@ -1652,3 +1652,22 @@ Thus
  c_0^4p^{-(2r+1)}dp+S c_1^4p^{-2r}d\log(t/p).}
 \]
 Here \(c_1^4\in E^4=F^2\), so the logarithmic coefficient lies in \(S F^2\), exactly the higher-chain coefficient space in G-4aj. The normal and tangent components are the two components of one logarithmic differential along the exceptional divisor; they must be tracked together. This is a concrete geometric match of coefficient spaces, but not yet a proof that the full local quotient has precisely the G-4aj normal form: one must still prove that the logarithmic generators account for all mixed Cartier relations and that no additional relations arise.
+
+
+## 51. G-4az — location of the logarithmic sector in the perfection chain
+
+Fix an even-root chain with first odd normal index \(m=2r+1\), r odd. Its coefficient space at that node is \(E/E^4\). The mixed logarithmic generator from G-4ay has normal coefficient
+\[
+A=S c_1^4=t^2c_1^4\in S E^4,
+\]
+and tangent partner at index 2r. Under the direct-limit identification of G-4aw, the normal coefficient maps to
+\[
+[A]\longmapsto A^{1/4}+E=t^{1/2}c_1+E.
+\]
+As c₁ ranges over E, this is the distinguished additive subspace \(t^{1/2}E/E\subset E^{\rm perf}/E\), and the map \(S E^4\to t^{1/2}E/E\) is injective. Under inverse Cartier, the logarithmic form \(\eta_{r,A}=A p^{-2r}d\log(t/p)\) satisfies
+\[
+C^{-1}(\eta_{r,A})=\eta_{2r,A^2},
+\]
+so the corresponding coefficient at the next node maps to the same element of the direct limit. Thus the G-4aj coefficient space \(S F^2=S E^4\) is identified with the first purely inseparable layer \(t^{1/2}E/E\) inside each pure-normal perfection chain.
+
+This is a precise embedding of the mixed logarithmic sector into the pure-normal chain model. It does not show that this sector exhausts the full chain contribution or that the complementary layers are killed by all mixed relations. Determining that is the next completeness problem.
