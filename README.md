@@ -1172,3 +1172,7 @@ For every (r\ge1), (1\to C_{2^r}\to C_{2^{r+2}}\to C_4\to1) has an isomorphism t
 
 ### G-17 — arithmetic realization in every Witt length
 Every G-16 cyclic extension is realized over (K=\mathbb F_2(s)): for each (n\ge2), the length-(n) Witt vector ((s,s,0,\ldots,0)) defines a cyclic extension of degree (2^n), because its first coordinate (s) is not Artin–Schreier (odd pole order at infinity). Its length-two truncation is the explicit G-12 quartic class. The Witt equation specifies all levels; expanded coordinate polynomials beyond length three and a Fold-specific interpretation remain open. See [the Galois applicability note](the-fold-automorphic-and-hopf-galois-applicability.md).
+
+
+### G-18 — arbitrary cyclic quotient transgression
+The G-16/G-17 result extends from quotient C4 to every C_(2^m): for all r,m≥1, the extension \(1\to C_{2^r}\to C_{2^{r+m}}\to C_{2^m}\to1\) has an isomorphism transgression with trivial \(\mathbb F_2\)-coefficients. Its explicit pushed-out factor set \(\tau(i,j)=\lfloor(i+j)/2^m\rfloor\bmod2\) has cyclic sum 1. Every pair (r,m) is realized over the single field \(\mathbb F_2(s)\) by the Artin–Schreier–Witt vector \((s,s,0,\ldots,0)\) of length r+m. The theorem is not yet Fold-specific; see [the Galois applicability note](the-fold-automorphic-and-hopf-galois-applicability.md).
