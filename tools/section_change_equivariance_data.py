@@ -53,6 +53,72 @@ def derivative(a: int) -> int:
     return out
 
 
+
+def frobenius_power(a: int, h: int) -> int:
+    """Return a^(2^h) in GF(2)[S]."""
+    for _ in range(h):
+        a = square(a)
+    return a
+
+
+def binomial_odd(n: int, k: int) -> bool:
+    """Lucas' theorem: binomial(n,k) is odd iff k's bits are in n."""
+    return (n & k) == k
+
+
+def scaling_hasse_coefficient(x: int, j: int) -> int:
+    r"""Coefficient of q^j in x(S/(1+q)) over GF(2)[S].
+
+    For a monomial S^d the coefficient is
+      binomial(d+j-1,j) S^d,
+    with the constant monomial contributing zero for j>0.
+    """
+    if j < 1:
+        raise ValueError("j must be positive")
+    out = 0
+    degree = 0
+    while (1 << degree) <= x:
+        if (x >> degree) & 1 and binomial_odd(degree + j - 1, j):
+            out |= 1 << degree
+        degree += 1
+    return out
+
+
+def max_frobenius_depth_polynomial(x: int) -> int | None:
+    """Largest h with x in GF(2)[S]^(2^h); None for constants."""
+    if x == 0 or x == 1:
+        return None
+    depth = 10**9
+    degree = 0
+    while (1 << degree) <= x:
+        if (x >> degree) & 1 and degree:
+            depth = min(depth, (degree & -degree).bit_length() - 1)
+        degree += 1
+    return depth if depth != 10**9 else None
+
+
+def square_root_polynomial(a: int) -> int:
+    """Return the polynomial square root, raising if a is not a square."""
+    out = 0
+    i = 0
+    while a:
+        if a & 1:
+            if i & 1:
+                raise AssertionError("polynomial is not a square")
+            out |= 1 << (i // 2)
+        i += 1
+        a >>= 1
+    return out
+
+
+def scaling_leading_term(a: int, h: int, e: int = 1) -> int:
+    """Leading coefficient of a^(2^h)(S/(1+q*e^2))-a^(2^h)(S).
+
+    The first possible term is q^(2^h) (S*e^2*a')^(2^h).
+    """
+    return frobenius_power(mul(mul(S, square(e)), derivative(a)), h)
+
+
 def p_basis_decompose(a: int) -> tuple[int, int]:
     """Return (a0,a1) with a = a0**2 + S*a1**2 uniquely."""
     a0 = 0
@@ -201,6 +267,20 @@ def self_test() -> None:
         first, _ = second_odd_diagonal(1, 0, mul(S, square(b)), 0)
         assert first == mul(S, square(b))
 
+    # Hasse coefficients of the pure-scaling substitution.
+    for h in range(5):
+        j = 1 << h
+        for a in values:
+            x = frobenius_power(a, h)
+            observed = scaling_hasse_coefficient(x, j)
+            predicted = scaling_leading_term(a, h)
+            assert observed == predicted, (h, a, observed, predicted)
+        for a in values:
+            x = frobenius_power(a, h)
+            depth = max_frobenius_depth_polynomial(x)
+            if a not in (0, 1):
+                assert depth is not None and depth >= h
+
     # Every nonzero leading parameter is detected by the corrected first arrow.
     for e in values:
         for f in values:
@@ -240,6 +320,18 @@ def generate(count: int, max_degree: int, seed: int) -> Iterable[dict]:
         yield {
             "task": "second_even_diagonal", "e": e, "f": f,
             "d": d, "target": second_even_diagonal(e, f, d),
+        }
+        h = rng.randrange(5)
+        a = random_poly(rng, max_degree)
+        e_scale = 1
+        x_scale = frobenius_power(a, h)
+        yield {
+            "task": "pure_scaling_frobenius_tower",
+            "frobenius_level": h,
+            "source_polynomial": a,
+            "coefficient": x_scale,
+            "leading_depth_for_r1": 1 << (h + 1),
+            "leading_coefficient": scaling_leading_term(a, h, e_scale),
         }
         ue, uf = random_poly(rng, max_degree), random_poly(rng, max_degree)
         yield {
