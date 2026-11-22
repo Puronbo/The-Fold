@@ -3639,3 +3639,53 @@ its first coordinate is \(S(fa+eb)^2\), which under \(\iota\) becomes the exact 
 Thus no new Cartier-stable residue is removed at this diagonal.
 
 **Open:** determine whether every higher \(t\)-dependent and mixed-depth correction is Cartier-nilpotent (equivalently, has zero residues in this model), or whether the full section-change group imposes additional relations among the residue coordinates. The zero-mode coinvariant must also be computed separately. G-4cp is therefore an exact pure-scaling result and a residue-theoretic candidate for the full answer, not yet a complete computation of \(Q_{\mathcal G}\).
+
+
+## 93. G-4cq — exact formal coefficient-curve pullback behind the full action
+
+The residue calculation can be connected to the **full** finite section-change formula, not only pure scaling. Let \(s=\sigma(t)\) be any allowed coefficient-section change, and write its inverse as
+\[
+t=\psi(s,p)=s\,U(s,p).
+\]
+Because \(E=F\oplus sF\), decompose uniquely
+\[
+U=\alpha+s\beta,\qquad \alpha,\beta\in F[[p]],
+\quad \alpha\equiv1\pmod p,\quad\beta\equiv0\pmod p.
+\]
+Set
+\[
+W=U^2=\alpha^2+S\beta^2,\qquad Z=SW.
+\]
+The logarithmic basis coefficient is
+\[
+\frac{s\,\partial_s\psi}{\psi}
+=\frac{\alpha}{\alpha+s\beta}.
+\]
+Its F-component is \(\alpha^2/W\). Therefore, for an odd-layer representative
+\[
+(A,B)=(x,sy),\qquad x,y\in F,
+\]
+the first coordinate of the transformed odd quotient class is exactly
+\[
+x'=x(SW)\frac{\alpha^2}{W}.
+\]
+Now differentiate \(Z=SW\) with respect to S. Since derivatives of squares vanish in characteristic two,
+\[
+\frac{dZ}{dS}=W+S\frac{dW}{dS}
+=\alpha^2+S\beta^2+S\beta^2
+=\alpha^2.
+\]
+It follows that
+\[
+\boxed{
+\frac{x'}{S}\,dS
+=\frac{x(Z)}{Z}\,dZ
+=\phi^*\left(\frac{x(S)}{S}\,dS\right),
+\qquad \phi(S)=Z=SW.
+}
+\]
+Moreover \(\phi(S)=S+O(p^2)\) and \(\phi'(S)=\alpha^2\) is a unit. Thus the full section-change action on the residual odd first coordinate is an honest formal pullback on coefficient-field differentials.
+
+This is a useful reduction: the remaining full-group coinvariant question is now a residue-functoriality problem for the formal substitution \(\phi\). For pure scaling, the coefficient corrections are exactly the Cartier-nilpotent tower of G-4cp. For a general t-dependent substitution with rational-function coefficients, we still need to prove that every positive-p coefficient of \(\phi^*\omega-\omega\) has zero residues at all closed points, or find a counterexample. The formal change is the identity modulo p, but its coefficient functions may have poles at closed points, so ordinary local-coordinate invariance cannot be invoked without checking the relevant two-dimensional completion.
+
+**Status:** the pullback normal form above is exact. The assertion that the full group preserves every stable residue coordinate remains a sharply formulated open test; it is not yet promoted to a theorem.
