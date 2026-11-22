@@ -2365,3 +2365,10 @@ Thus it is surjective, with kernel exactly the norm image. In Jordan form it kil
 - The genera are \(0,1,7,35\); in particular, the genus-one quartic intermediate curve is supersingular.
 - This determines the \(2\)-rank only, not the Newton polygons or higher-genus Jacobian \(a\)-numbers.
 - Proof and formula reference: [Galois applicability note](the-fold-automorphic-and-hopf-galois-applicability.md).
+
+
+### G-24 — Frobenius polynomial of the quartic elliptic quotient
+- Identifies the genus-one quartic intermediate curve as \(E:y^2+y=x^3+x\) over \(\mathbb F_2\).
+- Directly counts \(\#E(\mathbb F_2)=5\), giving Frobenius trace \(-2\) and characteristic polynomial \(T^2+2T+2\).
+- Since the trace is divisible by 2, E is supersingular; this independently checks the G-23 2-rank conclusion.
+- This determines the elliptic quotient's Frobenius polynomial, not the higher-genus Jacobian Newton polygons or a Fold-derived Galois representation. Full calculation and reference: [Galois applicability note](the-fold-automorphic-and-hopf-galois-applicability.md).
