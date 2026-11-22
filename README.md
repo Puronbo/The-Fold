@@ -1155,3 +1155,11 @@ Over \(K=\mathbb F_2(s)\), set \(u^2+u=s\) and \(w^2+w=u^3+u\). The odd pole ord
 
 ### G-13 — cyclic octic lift and nonzero transgression
 The explicit G-12 cyclic quartic extension (L/K) lifts to a cyclic octic extension (M/K): the Artin–Schreier–Witt truncation (W_3(K)/(F-1)\to W_2(K)/(F-1)) is surjective, and any lift of the order-four character has order eight. For (1\to C_2\to C_8\to C_4\to1) with trivial (mathbb F_2)-coefficients, restriction (H^1(C_8,\mathbb F_2)\to H^1(C_2,\mathbb F_2)) is zero. The five-term sequence therefore makes the transgression (H^1(C_2,\mathbb F_2)^{C_4}\to H^2(C_4,\mathbb F_2)) an isomorphism. This supplies a concrete nonzero finite-group transgression; an explicit third Witt coordinate and a Fold-specific arithmetic realization remain open. Details: [Galois applicability note](the-fold-automorphic-and-hopf-galois-applicability.md).
+
+### G-14 — explicit cyclic octic equations
+The G-12 quartic extension is represented by the length-two Witt vector \((s,s)\). Its length-three lift \((s,s,0)\) gives the explicit cyclic-octic tower
+\[
+u^2+u=s,\quad w^2+w=u^3+u,\quad
+v^2+v=u^7+u^4+u^3w^2+u^3w+u^2w^2+u^2w+w^3+w^2.
+\]
+A generator is \(\sigma(u)=u+1,\ \sigma(w)=w+u,\ \sigma(v)=v+u^3+uw+u\); its square sends \((w,v)\) to \((w+1,v+w)\), and its fourth power sends \(v\) to \(v+1\). Thus the G-13 nonzero transgression example now has explicit field equations. The remaining arithmetic task is a Fold-specific realization. See [the Galois applicability note](the-fold-automorphic-and-hopf-galois-applicability.md).
