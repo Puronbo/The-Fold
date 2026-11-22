@@ -1235,3 +1235,6 @@ Degrees 8–10 provide independent checks. Reproducible exact enumeration: `cert
 
 
 **Principal primes above 2 (G-35B):** reduction of the G-35A integral-basis polynomial modulo the unique real-quartic prime above 2 is \(X(X-1)\), so that prime splits into two norm-two primes in the CM field. The element \(\theta=\pi/(\beta+2)\) has ideal equal to the square of one of them. G-34's vanishing of CM 2-torsion makes that prime principal, and the product relation makes the other principal. This removes the norm-two primes from the Minkowski class-group search; the exact odd class number is still unknown.
+
+
+**Finite CM Minkowski support (G-35C):** the degree-eight Minkowski bound and the known splitting at 2, 3, 5, and 7 reduce all possible nontrivial Minkowski generators to degree-one prime ideals above 11, 13, 17, 19, and 23. This proves a finite support reduction, not the exact CM class group.
