@@ -1343,3 +1343,7 @@ the quaternion-boundary arithmetic note.
 
 
 **G-4aj — complete full local normal form and basis:** the full quotient is canonically (F/\wp(F)\oplus\bigoplus_{r\ge3,,r\text{ odd}}SF^2), with \(\wp(a)=a^2+a\). The chain-1 summand has basis (1), odd powers (S^d), and (S^j/Q^d) for monic irreducible Q, odd d, and (0\le j<\deg Q). For each odd r≥3, a basis is (S\mathcal E^2) at p^{-r}, where \(\mathcal E=\{S^d:d\ge0\}\cup\{S^j/Q^d:Q\text{ monic irreducible},d\ge1,0\le j<\deg Q\}\) is the partial-fraction basis of F. Thus the full exceptional local quotient now has an explicit countable basis; chain-1 contributes the Artin–Schreier classes omitted by G-4r/G-4s.
+
+
+
+**G-4ak — global scope correction:** the base \(K=\mathbb F_2(S,T)\) is a two-variable function field, not a global field, so the Albert–Brauer–Hasse–Noether parity sequence cannot be applied to it. The local G-4aj quotient is proved but is not yet identified with a Kato residue or a global localization kernel. The next bridge is the characteristic-two Kato/logarithmic-Hodge–Witt residue of \([aS,S)_2\) at \(P=(T^2+S)\), followed by codimension-two compatibility on the surface. See the arithmetic note and problem register for the precise open obligations.
