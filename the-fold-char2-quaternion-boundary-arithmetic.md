@@ -1208,3 +1208,40 @@ Its Frobenius image \(\mathcal E^2\) is a basis of F². Therefore a basis of the
 2. for every odd r≥3, the classes \(S b\,p^{-r}\) with b∈\(\mathcal E^2\).
 
 The second family is precisely the full chain family underlying G-4r/G-4s. The first family supplies the previously unaccounted chain-1 summand. In particular the full quotient has countably infinite F₂-dimension, with an explicit countable basis.
+
+
+
+## 36. G-4ak — global comparison: correct surface-level framework and scope correction
+
+The base field in the quaternion-boundary problem is
+\[
+K=\mathbb F_2(S,T),
+\]
+which has transcendence degree two over its finite constant field. It is not a global field in the Albert–Brauer–Hasse–Noether sense (a number field or a one-variable function field over a finite field). Consequently, the exact sequence
+\[
+0\to\operatorname{Br}(K)\to\bigoplus_v\operatorname{Br}(K_v)
+\xrightarrow{\sum\operatorname{inv}_v}\mathbb Q/\mathbb Z\to0
+\]
+must not be invoked for this K. It would be a category error to infer a global classification of the present boundary image from a parity condition on places.
+
+The relevant geometric object is the regular surface
+\[
+X=\operatorname{Spec}\mathbb F_2[S,T]
+\]
+(or a suitable regular proper compactification), with function field K. The divisor P=(T²+S) is one codimension-one point. Its residue field is
+\[
+\kappa(P)=\mathbb F_2(S)[T]/(T²+S)\cong\mathbb F_2(T),
+\]
+where the residue image of S is T². The completion used in G-4aj is the completion of K at this divisorial valuation, with a purely inseparable residue extension over the coefficient field F=F₂(S) encoded by T²=S in the residue.
+
+For prime-to-characteristic torsion, one expects the familiar Gersten/Bloch–Ogus residue pattern on a regular surface. Here the classes are 2-primary in characteristic two, so the residue formalism must instead be the characteristic-p Kato/logarithmic-Hodge–Witt one; the p-primary Gersten/Kato complex is not interchangeable with the prime-to-p Brauer residue complex. In particular, one must specify the cohomological theory, twists, and residue maps before claiming exactness. The Kato complex for a regular surface has codimension-one residue fields and a further codimension-two boundary; this is the appropriate shape of the global compatibility problem.
+
+### Established scope versus open bridge
+
+- G-4aj is a complete computation of the explicitly defined additive local quotient \(K_P/(\mathcal O_P+\mathcal D_P)\). Its normal form and basis are local algebra statements.
+- This computation does not by itself identify that quotient with a Kato residue group, a kernel of a global localization map, or a summand of \(\operatorname{Br}(K)[2]\).
+- The global symbol map \([a]\mapsto[aS,S)_2\) and its kernel criterion remain the algebraic objects to compare with the local calculation.
+- The next proof obligation is to write the characteristic-two Kato residue of the quaternion symbol at P directly, determine whether the G-4aj quotient maps to its unramified/ramified filtration, and check the codimension-two compatibility at closed points on the divisor P.
+- Only after this local symbol-to-Kato comparison is proved should one assemble the residues over all irreducible curves of X and impose the surface-level reciprocity relation.
+
+This scope correction prevents the use of a one-dimensional global-field theorem in a two-dimensional function-field problem. It does not alter the local normal-form theorem G-4aj.
