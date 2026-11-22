@@ -459,3 +459,51 @@ the explicit G-18 cocycle. Its cyclic sum is 1, so its class is nonzero. Hence t
 **Scope.** This theorem explains the group-cohomological meaning of G-18. It does not construct a Fold-derived kernel N, character \(\chi\), or Galois representation. Those remain separate open tasks.
 
 **Reference.** A factor-set formula for transgression, \(d_2(\phi)=-\phi\circ\omega\) when N acts trivially on the coefficient module, is stated and proved as Proposition 6.1 in *The Galois action and cohomology of a relative homology group of Fermat curves*, [Journal of Algebra (2018)](https://doi.org/10.1016/j.jalgebra.2018.02.021).
+
+
+## G-20 — arbitrary quotient modules: transgression is the invariant class modulo norms
+
+Fix
+\[
+1\to N=\langle k\rangle\cong C_{2^r}
+\to G=\langle g\rangle\cong C_{2^{r+m}}
+\to Q=\langle\sigma\rangle\cong C_{2^m}\to1,
+\qquad k=g^{2^m}.
+\]
+Let A be any (possibly nontrivial) \(\mathbb F_2[Q]\)-module, inflated to G, so N acts trivially. Put \(D=\sigma-1\) and \(q=2^m\). A homomorphism \(\chi:N\to A\) is determined by \(a=\chi(k)\); because A has exponent two, this is well-defined for every a∈A. It is Q-invariant precisely when \(Da=0\).
+
+**Theorem.** Under the cyclic identification
+\[
+H^2(Q,A)=A^Q/N_QA=\ker D/\operatorname{im}(D^{q-1}),
+\]
+the transgression is
+\[
+\boxed{d_2(a)=[a].}
+\]
+In particular,
+\[
+\ker d_2=\operatorname{im}(D^{q-1})\subseteq\ker D,
+\qquad
+\operatorname{im}d_2=H^2(Q,A).
+\]
+Thus for this particular cyclic extension, the transgression from invariant kernel characters is surjective, and its kernel consists exactly of norm elements.
+
+**Proof.** Choose section \(s(i)=g^i\), 0≤i<q. Its kernel-valued factor set is
+\[
+\omega(i,j)=k^{\lfloor(i+j)/q\rfloor}.
+\]
+Pushing out by \(\chi(k)=a\) gives the A-valued factor set
+\[
+\tau_a(i,j)=\left\lfloor\frac{i+j}{q}\right\rfloor a.
+\]
+The factor-set formula for transgression therefore identifies \(d_2(a)\) with \([\tau_a]\), up to sign (irrelevant in characteristic two). For cyclic Q, the class in H² is represented by the cyclic sum
+\[
+\sum_{j=0}^{q-1}\tau_a(j,1)=a.
+\]
+This element is invariant because Da=0, and its class is taken modulo the norm image \(N_QA=D^{q-1}A\). Hence the displayed formula and kernel/image statements follow. The cyclic cohomology quotient \(A^Q/N_QA\) follows from the standard two-periodic cyclic resolution; see Neukirch–Schmidt–Wingberg, *Cohomology of Number Fields*, §I.7 [electronic edition](https://www.mathi.uni-heidelberg.de/~schmidt/NSW2e/NSW2.3.pdf).
+
+**Jordan interpretation.** Decompose D into nilpotent Jordan blocks of lengths d≤q. The invariant subspace \(\ker D\) has one bottom vector per block. The norm \(D^{q-1}\) maps the top vector to the bottom vector exactly on blocks of length q, and vanishes on shorter blocks. Consequently H² has one basis class per block of length <q, exactly as in G-8/G-9. The transgression sends a kernel character to its bottom-vector coordinates and discards precisely the full-length (projective) block coordinates.
+
+**Consequences.** For trivial A=\(\mathbb F_2\), D=0 and this reduces to G-18. For a free \(\mathbb F_2[Q]\)-module, all Jordan blocks have length q, so H²=0 and every invariant kernel character is a norm; no nonzero transgression survives. For any module containing a short Jordan block, choosing its bottom vector gives a kernel character with nonzero transgression.
+
+**Scope.** This is still an abstract finite-group construction. It gives a sharper coefficient-module criterion for a future Fold/Galois bridge, but it does not identify a coefficient module arising from the Fold.
