@@ -1146,3 +1146,65 @@ e_{2m-1}(a^2)+e_{\operatorname{odd}(m)}(\tau^{v_2(m)}a)
 }
 \]
 This is an exact presentation, not yet a normal form. The independent full-quotient family from G-4r/G-4s supplies a countably infinite lower bound; the ambient principal-part space is countable, so the full local quotient has dimension exactly aleph₀. The remaining task is to reduce the displayed relations to a canonical basis or prove that a chosen family spans.
+
+
+## 35. G-4aj — complete triangular normal form for the full local quotient
+
+For each odd r≥3, the unique relation family indexed by m=(r+1)/2 is
+\[
+e_r(a^2)=e_{r_0}(\tau^v(a)),\quad
+r_0=\operatorname{odd}(m),\quad v=v_2(m).
+\]
+Here r₀<r. Since Frobenius F→F² is bijective, this relation eliminates exactly the F²-component at chain r. Decompose every coefficient uniquely as c=x²+Sy². Retain Sy² at chain r and transfer x² to the smaller chain r₀. Repeating in decreasing chain index terminates for every finite-support vector. At chain 1, the relation is e₁(a²+a)=0.
+
+This yields the canonical vector-space isomorphism
+\[
+\boxed{
+K_P/(O+\mathcal D)
+\cong
+F/\wp(F)\oplus
+\bigoplus_{\substack{r\ge3\\r\text{ odd}}}SF^2,
+\qquad \wp(a)=a^2+a.
+}
+\]
+The isomorphism is obtained by the finite reduction algorithm just described. To prove uniqueness, suppose a finite sum of defining relations lies in the proposed normal-form subspace. Choose the largest r≥3 whose relation parameter a_r is nonzero. At coordinate r, only that relation contributes, and its component is a_r²∈F². The normal-form subspace at r is SF², and F²∩SF²=0, so a_r=0, contradiction. Descending induction removes all r≥3 relations; at r=1 the only remaining relation space is exactly wp(F).
+
+### Explicit basis of the Artin–Schreier summand
+
+Let Q range over monic irreducible polynomials in F₂[S]. For each Q choose the standard F₂-basis
+\[
+1,S,\ldots,S^{\deg Q-1}
+\]
+of the residue field F₂[S]/(Q). Then a basis of F/\wp(F) is
+\[
+\boxed{
+\{1\}
+\cup\{S^d:d\ge1\text{ odd}\}
+\cup
+\left\{
+\frac{S^j}{Q(S)^d}:
+Q\text{ monic irreducible},d\ge1\text{ odd},0\le j<\deg Q
+\right\}.
+}
+\]
+Spanning follows from partial fractions. At a finite place Q, if a principal part has highest pole order d even, choose a numerator whose residue is the square root of its leading residue coefficient and subtract its Artin–Schreier image; this removes the even leading pole and lowers the pole order. Iterate until only odd pole orders remain. At infinity, reduce even polynomial degrees by subtracting \(\wp(S^{d/2})=S^d+S^{d/2}\). This leaves the displayed representatives.
+
+For independence, any nonconstant \(g^2+g\) has at every pole of g a pole of even order, since the leading pole of g² strictly dominates that of g. Thus a nonzero finite combination of the displayed finite-place terms has an odd pole at some Q, or, after those vanish, a polynomial with odd degree has an odd pole at infinity. Neither can be Artin–Schreier. The constant 1 is not in \(\wp(F)\), since a rational function with no poles is in F₂ and \(\wp(F₂)=0\).
+
+### Explicit basis of the full local quotient
+
+A standard F₂-basis of F itself, by partial fractions, is
+\[
+\mathcal E=
+\{S^d:d\ge0\}
+\cup
+\left\{
+\frac{S^j}{Q(S)^d}:
+Q\text{ monic irreducible},d\ge1,0\le j<\deg Q
+\right\}.
+\]
+Its Frobenius image \(\mathcal E^2\) is a basis of F². Therefore a basis of the full local quotient is the union of:
+1. the chain-1 Artin–Schreier basis displayed above; and
+2. for every odd r≥3, the classes \(S b\,p^{-r}\) with b∈\(\mathcal E^2\).
+
+The second family is precisely the full chain family underlying G-4r/G-4s. The first family supplies the previously unaccounted chain-1 summand. In particular the full quotient has countably infinite F₂-dimension, with an explicit countable basis.
