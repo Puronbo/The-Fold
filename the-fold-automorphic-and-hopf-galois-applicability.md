@@ -561,3 +561,67 @@ w_j(X_0,\ldots,X_j)=\sum_{i=0}^j2^iX_i^{2^{j-i}},
 using \(F(u,w,v,z)=(u^2,w^2,v^2,z^2)\) and the Witt additive inverse, then reducing the resulting integral polynomial modulo two. The translation formulas are obtained from the same ghost-polynomial addition recursion. This records the algebraic derivation; no external computer-algebra proof certificate or Fold-specific Galois module is claimed.
 
 **Scope.** G-21 closes the next explicit-coordinate gap in the common \(\mathbb F_2(s)\) tower. It does not create the missing Fold-derived representation or identify a Selmer class. Those remain open.
+
+
+## G-22 — ramification filtration and genus of the degree-16 Witt cover
+
+Let \(K_\infty=\mathbb F_2((t))\), \(t=s^{-1}\), be the completion of \(K=\mathbb F_2(s)\) at infinity. The length-four Artin–Schreier–Witt class is
+\[
+\mathbf a=(t^{-1},t^{-1},0,0).
+\]
+Both nonzero coordinates are already reduced: their only negative-valuation monomial has pole order \(1\), prime to \(2\). For a reduced ASW vector \((f_1,\ldots,f_n)\), the upper breaks are
+\[
+m_i=\max_{1\le j\le i}\{2^{i-j}\deg_{t^{-1}}(f_j)\}.
+\]
+This is the standard ramification-break formula; see Obus–Wewers, *Cyclic extensions and the local lifting problem*, §2, equation (2), which states the general \(p\)-formula and identifies these numbers with the upper breaks.
+
+Here \(\deg(f_1)=\deg(f_2)=1\) and \(f_3=f_4=0\). Consequently
+\[
+(m_1,m_2,m_3,m_4)=(1,2,4,8).
+\]
+All four are genuine successive breaks. The extension is totally ramified at infinity: the first coordinate has a pole, and the reduced length-four vector has degree \(2^4\).
+
+Herbrand's function converts the upper breaks to lower breaks. Between \(m_i\) and \(m_{i+1}\), the index \([G_0:G^u]\) is \(2^i\). Thus
+\[
+\begin{aligned}
+b_1&=1,\\
+b_2&=1+(2-1)2=3,\\
+b_3&=3+(4-2)4=11,\\
+b_4&=11+(8-4)8=43.
+\end{aligned}
+\]
+The lower breaks are therefore \((1,3,11,43)\), and the lower ramification groups have orders
+\[
+|G_i|=
+\begin{cases}
+16,&0\le i\le1,\\
+8,&2\le i\le3,\\
+4,&4\le i\le11,\\
+2,&12\le i\le43,\\
+1,&i\ge44.
+\end{cases}
+\]
+The different exponent is
+\[
+\begin{aligned}
+d_{L/K}
+&=\sum_{i\ge0}(|G_i|-1)\\
+&=2(16-1)+2(8-1)+8(4-1)+32(2-1)\\
+&=30+14+24+32=\boxed{100}.
+\end{aligned}
+\]
+
+The global cover \(M_4\to\mathbb P^1_{\mathbb F_2}\) is étale on the affine \(s\)-line because the ASW map \(F-1\) is finite étale there and the defining Witt vector has polynomial coordinates. Its only branch point is \(s=\infty\), where the inertia group is all of \(C_{16}\). Riemann–Hurwitz gives
+\[
+2g(M_4)-2=16(-2)+100=68,
+\qquad\boxed{g(M_4)=35}.
+\]
+The cover is geometrically connected: a nontrivial constant-field subextension would be unramified, whereas every nontrivial quotient in this cyclic tower has a positive upper break.
+
+As a consistency check, the conductor exponents of the nontrivial characters, grouped by exact order \(2,4,8,16\), are respectively \(2,3,5,9\). The conductor-discriminant sum is
+\[
+1\cdot2+2\cdot3+4\cdot5+8\cdot9=100,
+\]
+agreeing with the different exponent.
+
+**Scope.** G-22 computes the local ramification filtration, local different, and global genus for the explicit degree-16 ASW cover. These are arithmetic invariants of the model tower; they do not yet identify a Galois representation or Selmer class arising from the Fold.
