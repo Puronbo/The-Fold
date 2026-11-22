@@ -1994,3 +1994,46 @@ F/(\wp(F)+SF²)\oplus F/\wp(F)
 }
 \]
 The exponent-zero terms from G-4bl are unchanged. This remains an algebraic finite-support statement, not yet a topological completion theorem.
+
+
+## 65. G-4bn — recover the scalar local normal form as a quotient of the geometric polar model
+
+The corrected negative-orbit contribution from G-4bm is
+\[
+F\oplus F\oplus E^{\rm perf}/E.
+\]
+The inseparable tail has the canonical layer decomposition
+\[
+E^{\rm perf}/E=\bigoplus_{h\ge1}U_h,
+\qquad U_h=t^{1/2^h}F^{1/2^h},
+\]
+because, with \(E_h=F^{1/2^h}\), one has \(E_{h+1}=E_h\oplus t^{1/2^h}E_h\).
+
+For every h≥1 define
+\[
+\theta_h:U_h\to SF²,
+\qquad t^{1/2^h}x\longmapsto Sx^{2^{h+1}}.
+\]
+This is an additive isomorphism: \(x\mapsto x^{2^{h+1}}\) maps \(F^{1/2^h}\) bijectively onto F², and multiplication by S identifies F² with SF².
+
+A negative exponent orbit is rooted at \(-q\), q≥1 odd. Its hth perfection layer corresponds to scalar odd pole index
+\[
+m=2^h q+1.
+\]
+Every odd m≥3 occurs exactly once, since \(m-1=2^h q\) has a unique 2-adic valuation h≥1 and odd part q. Thus the direct sum of all perfection tails, over all negative odd roots q, maps bijectively to
+\[
+\bigoplus_{m\ge3,\ m\text{ odd}}SF²,
+\]
+with the coefficient at m given by \(\theta_h\).
+
+The zero-exponent contribution from G-4bl is
+\[
+F/(\wp(F)+SF²)\oplus F/\wp(F).
+\]
+Projecting onto the second factor gives the index-one Artin–Schreier component. Projecting each negative orbit onto its perfection tail and applying \(\theta_h\) gives every higher scalar component. Therefore there is a coordinate-defined surjection from the finite-polar geometric Cartier quotient onto
+\[
+\boxed{F/\wp(F)\oplus\bigoplus_{m\ge3,\ m\text{ odd}}SF²,}
+\]
+which is exactly the G-4aj scalar local normal form. Its kernel is explicitly the zero-mode summand \(F/(\wp(F)+SF²)\) together with the two F-components from each negative exponent orbit.
+
+This establishes a complete match of pole indexing and coefficient spaces, and realizes the scalar quotient as a quotient of the full two-coordinate finite-polar model. **Remaining identification problem:** prove that this coordinate-defined projection agrees with the map induced by the original quaternion boundary symbols \([aS,S)_2\), rather than merely being an abstract/coordinate-defined quotient with the same normal form. Completion/topological issues also remain outside the finite-support setting.
