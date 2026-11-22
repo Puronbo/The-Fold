@@ -1458,3 +1458,7 @@ the quaternion-boundary arithmetic note.
 
 
 **G-4bm — correction:** each negative odd orbit retains the second-coordinate perfection tail, so its contribution is \(F⊕F⊕E^{perf}/E\), not just F⊕F. The finite-polar model is corrected accordingly.
+
+
+
+**G-4bn — scalar quotient recovered:** each perfection layer in the orbit rooted at −q maps to SF² at scalar pole m=2^h q+1; the zero-mode AS factor maps to index one. This recovers the full G-4aj coefficient/index normal form as a coordinate-defined quotient of the geometric polar model. Identifying this projection with the original quaternion boundary map remains open.
