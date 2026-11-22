@@ -1066,3 +1066,40 @@ This proves the quotient is countably infinite-dimensional and supplies a comple
 \lambda_{j+1}=\lambda_j\circ q\circ\phi^{-1}\quad(j\ge0),
 \]
 where for j=0 the same formula uses q:F→F/F² and for j≥1 q acts on the coefficient representative F→F/F². More precisely, the recurrence is lambda_1∘phi=lambda_0 and lambda_{j+1}∘phi=lambda_j∘q for j≥1. Since phi is bijective, these determine lambda_{j+1} uniquely. Thus the chain annihilator is canonically F*, and the full annihilator is the product of F* over odd r. Its F₂-dimension is continuum, as previously established, but its inverse-limit ambiguity disappears.
+
+
+## 33. G-4ah — scope correction and exact full local quotient
+
+The chain-cokernel results G-4ad through G-4ag concern the **auxiliary** quotient
+\[
+H_0=F((p))\big/\bigl(F[[p]]+F((p))^2+\{r+Sr^2:r\in F((p))\}\bigr).
+\]
+They do not classify the full exceptional completed local quotient. The reason is that in K_P=F((p))[T], T²=S+p, a square is
+\[
+(x+Ty)^2=x^2+(S+p)y^2,
+\]
+and the second summand is not generally a square in F((p)). Thus the G-4ag chain basis is a basis of H₀ only.
+
+The full quotient can nevertheless be written as a scalar quotient. For z=x+Ty and u=r+Tq,
+\[
+z^2+u+Su^2=
+\bigl(x^2+(S+p)y^2+r+Sr^2+S(S+p)q^2\bigr)+Tq.
+\]
+Modulo O=F[[p]][T], the T-coordinate q can be removed by choosing q to be the negative-power part of the target's T-coordinate; the remaining integral T-coordinate is absorbed into O. Consequently
+\[
+K_P/(O+\mathcal D)\cong
+F((p))\Big/
+\Bigl(
+F[[p]]+F((p))^2+(S+p)F((p^2))
++\{r+Sr^2:r\in F((p))\}
+\Bigr).
+\]
+Here F((p²)) denotes Laurent series supported on even powers of p, with coefficients in F. The identity
+\[
+\{y^2+S q^2:y,q\in F((p))\}=F((p^2))
+\]
+follows coefficientwise from F=F²⊕SF². Thus the combined terms (S+p)y²+S(S+p)q² give exactly (S+p)F((p²)).
+
+Equivalently, the full quotient is H₀ modulo the image of (S+p)F((p²)). This is the missing coupling between adjacent exponent positions; it links the odd exponent 2m−1 to the even exponent 2m. The G-4r local parity obstruction and G-4s global independent family were established against the full denominator and remain the valid lower-bound results. The G-4ac through G-4ag dual and chain calculations must be read as auxiliary-quotient results only.
+
+**Revised open problem:** compute the quotient of the explicit chain normal form H₀≅⊕_{r odd}F by the image of (S+p)F((p²)); in particular, determine whether the G-4r independent family spans the full local quotient and derive a complete normal form.
