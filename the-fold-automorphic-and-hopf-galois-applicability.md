@@ -416,3 +416,46 @@ realizes the group extension above. For m=2, \(M_m\) is precisely the explicit q
 **Scope.** This is a theorem about finite cyclic groups and explicit Artin–Schreier–Witt extensions. It does not yet identify a Fold-derived Galois representation, Selmer class, or arithmetic transgression. That bridge remains open.
 
 Reference for the degree criterion: the Artin–Schreier–Witt classification and criterion that the extension has degree p^n exactly when the first Witt coordinate is not in the Artin–Schreier image are stated in [Annals of Mathematics 180 (2014), Fact 2.1(1)](https://annals.math.princeton.edu/wp-content/uploads/annals-v180-n1-p06-p.pdf).
+
+## G-19 — transgression is the pushed-out extension class
+
+Let
+\[
+1\longrightarrow N\longrightarrow G\xrightarrow{\pi}Q\longrightarrow1
+\]
+be an extension with **abelian** kernel N. Let A be a G-module on which N acts trivially, and let \(\chi:N\to A\) be a Q-equivariant homomorphism. Then \(\chi\) defines an invariant class in \(H^1(N,A)^Q\), and the Hochschild–Serre transgression is the class of the pushout extension:
+\[
+\boxed{d_2([\chi])=[\chi_*G]\in H^2(Q,A).}
+\]
+The sign depends on the convention for the extension factor set and the inhomogeneous coboundary; it is immaterial over \(\mathbb F_2\).
+
+**Factor-set proof.** Choose a normalized section \(s:Q\to G\), and define
+\[
+\omega(q_1,q_2)=s(q_1)s(q_2)s(q_1q_2)^{-1}\in N.
+\]
+Since N acts trivially on A, the standard cochain formula for transgression gives
+\[
+d_2([\chi])=[-\chi\circ\omega].
+\]
+But \(\chi\circ\omega\) is exactly the factor set of the pushout extension along \(\chi\). Thus its cohomology class is the pushout extension class, up to the stated sign convention. In particular, the transgression vanishes if and only if the pushout extension splits. Equivalently, the character \(\chi\) extends to a homomorphism \(G\to A\) compatible with the quotient action.
+
+**Application to G-18.** Take
+\[
+N=\langle k=g^{2^m}\rangle\cong C_{2^r},\quad
+G=\langle g\rangle\cong C_{2^{r+m}},\quad
+Q=G/N\cong C_{2^m},
+\]
+and let \(A=\mathbb F_2\) with trivial action. The nonzero character \(\chi(k)=1\) is Q-invariant. For representatives \(s(i)=g^i\), \(0\le i<2^m\), the factor set is
+\[
+\omega(i,j)=k^{\lfloor(i+j)/2^m\rfloor}.
+\]
+Pushing it through \(\chi\) gives
+\[
+(\chi\circ\omega)(i,j)=
+\left\lfloor\frac{i+j}{2^m}\right\rfloor\bmod2,
+\]
+the explicit G-18 cocycle. Its cyclic sum is 1, so its class is nonzero. Hence the pushout extension is nonsplit and the transgression is nonzero. This recovers the G-18 isomorphism by a direct extension-class identification, in addition to the five-term exact-sequence proof.
+
+**Scope.** This theorem explains the group-cohomological meaning of G-18. It does not construct a Fold-derived kernel N, character \(\chi\), or Galois representation. Those remain separate open tasks.
+
+**Reference.** A factor-set formula for transgression, \(d_2(\phi)=-\phi\circ\omega\) when N acts trivially on the coefficient module, is stated and proved as Proposition 6.1 in *The Galois action and cohomology of a relative homology group of Fermat curves*, [Journal of Algebra (2018)](https://doi.org/10.1016/j.jalgebra.2018.02.021).
