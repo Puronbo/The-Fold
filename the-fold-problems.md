@@ -2284,3 +2284,9 @@ otinmathcal N^3) by UF-072O.
 - Extend its representative to a 1-cochain on G; the Hochschild–Serre construction chooses the extension so its coboundary descends to a 2-cocycle on Q with coefficients in \(V^N\). Its class is the transgression \(d_2([\alpha])\).
 - In the cyclic characteristic-two case, reduce that class in \(\ker D/\operatorname{im}D^{q-1}\) and use G-9's short-block bottom vectors as coordinates.
 - This gives an explicit computational procedure, not a Fold arithmetic example: a concrete extension, module, and invariant cocycle are still needed.
+
+### G-11 — Cyclic cocycle-sum obstruction vector
+- For a normalized inhomogeneous 2-cocycle \(\tau:C_q\times C_q\to W\), with multiplication convention \((w,g)(w',g')=(w+gw'+\tau(g,g'),gg')\), the extension class is represented in \(W^{C_q}/N_{C_q}W\) by \(w_\tau=\sum_{j=0}^{q-1}\tau(\sigma^j,\sigma)\).
+- In characteristic two, check \(Dw_\tau=0\) and reduce modulo \(D^{q-1}W\); G-9 identifies the surviving coordinates as the bottom vectors of short Jordan blocks.
+- This gives a direct test once the G-10 quotient cocycle is known. No Fold-specific arithmetic transgression has been evaluated.
+
