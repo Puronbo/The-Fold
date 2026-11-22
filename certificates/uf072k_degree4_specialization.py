@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
-"""Corrected finite-field degree-four test for UF-072L. Requires SymPy.
+"""Audited finite-field degree-four test for UF-072M. Requires SymPy.
 
 Builds the complete degree-four initial span of N^3:
   (i) cubic products with one quadratic correction,
   (ii) n1 or n4 times two first-order generators,
   (iii) all fourfold products of first-order generators.
-Then tests in_4(n1*n4). Ranks are specialization certificates only.
+Then tests in_4(n1*n4). Do not treat previous published ranks as valid; Q7 dh factor corrected.
 """
 from itertools import combinations_with_replacement
 import sympy as sp
@@ -39,7 +39,7 @@ Q={
     {(-1,2,-2):A,(-1,1,-1):C}],
 7: [{},{(2,0,-1):J},
     {(1,0,-1):B,(1,1,-2):G},
-    {(0,1,-1):D,(0,2,-2):B+G}],
+    {(1,0,-1):D,(1,1,-2):B+G}],
 8: [{(1,0,0):J},
     {(2,0,-1):E,(1,1,-1):J},
     {(0,1,-1):B,(0,2,-2):G},
