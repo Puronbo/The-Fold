@@ -915,7 +915,7 @@ The 84 triple products of the seven nonzero first-order generators have speciali
 
 ## 22. UF-072H — Exact generic cubic initial ranks
 
-Let K=F_2(A,B,C,D,E,G,J). Rebuild the cubic initial multiplication map from the seven nonzero first-order vectors L_2,L_3,L_5,L_6,L_7,L_8,L_9, retaining Laurent variables a,b,i as independent monomial exponents. There are 84 triple-product columns and 228 source/Laurent rows (96 distinct Laurent exponent triples across the four source-degree coordinates).
+Let K=F_2(A,B,C,D,E,G,J). Rebuild the cubic initial multiplication map from the seven nonzero first-order vectors L_2,L_3,L_5,L_6,L_7,L_8,L_9, retaining Laurent variables a,b,i as independent monomial exponents. There are 84 triple-product columns. Their support occupies 228 source/Laurent rows, with 96 distinct Laurent exponent triples across the four source-degree coordinates. After adjoining the two test vectors, the common row set has 236 rows.
 
 Exact elimination over the rational-function field K gives
 \[
