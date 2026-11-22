@@ -140,11 +140,25 @@ Independent higher-depth parameters are new deformation directions; lower-depth 
 
 ## 7. Fixed vectors versus invariant functions
 
-G-4cm proves that the common fixed-vector subspace of the quotient representation is exactly the zero-exponent layer \(Q_0\). Thus a **linear** invariant readout on the quotient must factor through the zero-mode projection. This does not imply that every invariant polynomial or nonlinear statistic factors through \(Q_0\): nonlinear orbit invariants can exist even when the fixed-vector subspace is small.
+G-4cm proves that the common fixed-vector subspace of the quotient representation is exactly the zero-exponent layer \(Q_0\). This is a statement about invariant **vectors**, not invariant linear functionals. A linear readout \(\ell:Q\to k\) is invariant precisely when it annihilates the span of all differences \(gq-q\); equivalently, it belongs to the dual of the coinvariant quotient
+\[
+Q_{\mathcal G}=Q/\langle gq-q:g\in\mathcal G,\ q\in Q\rangle.
+\]
+The fixed-vector theorem does not determine this coinvariant quotient, so it does not yet show that invariant linear readouts factor through \(Q_0\). Nonlinear invariant functions are a further, separate question.
 
 This gives a useful machine-learning diagnostic:
-- linear invariant features should be tested against the zero-mode projection;
+- the fixed-vector subspace is \(Q_0\), but linear invariant readouts must be computed from the coinvariants \(Q_{\mathcal G}\), not inferred from fixed vectors;
 - nonlinear invariant candidates must be tested on full group orbits;
 - an equivariant latent representation must retain the negative filtered components, since those components transform nontrivially even though each associated-graded layer is unchanged on its diagonal.
 
 The distinction prevents the model from collapsing all negative layers merely because their associated-graded action is the identity.
+
+
+## 8. Important representation-theoretic distinction
+
+For a possibly non-semisimple representation, fixed vectors and invariant linear functionals are different objects:
+\[
+Q^{\mathcal G}=\{q:gq=q\ \forall g\},\qquad
+(Q^*)^{\mathcal G}\simeq (Q_{\mathcal G})^*.
+\]
+The first is known from G-4cm. The second requires an independent computation of coinvariants. The exact data pipeline must keep both targets separate; otherwise a learner may be trained toward an incorrect invariant readout.
