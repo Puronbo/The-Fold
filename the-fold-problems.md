@@ -2494,3 +2494,14 @@ z²+u+Su²=(w²+wP^m)/P^(2m+1), with square leading coefficient w̄².
 For m=0 the leading coefficient is instead w̄²+w̄ (Artin–Schreier).
 Thus the simple-pole case must not be conflated with the higher odd-pole
 family. Full local principal-part quotient remains open.
+
+
+### G-4p — completed local coordinates at P=T²+S
+In K_P=F₂(S)((P))[T], with T²=S+P, write z=x+Ty and u=r+Tq.
+Then
+z²+u+Su² =
+(x²+(S+P)y²+r+Sr²+S(S+P)q²)+Tq.
+This is an exact coordinate description of the completed local
+denominator image. The T-coordinate q is free but couples quadratically
+to the scalar coordinate. Computing the resulting scalar quotient
+modulo the valuation ring, and relating local data globally, remain open.
