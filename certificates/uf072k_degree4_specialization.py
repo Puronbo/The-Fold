@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Finite-field degree-four test for UF-072K. Requires SymPy.
+"""Corrected finite-field degree-four test for UF-072L. Requires SymPy.
 
 Builds the complete degree-four initial span of N^3:
   (i) cubic products with one quadratic correction,
@@ -40,13 +40,13 @@ Q={
 7: [{},{(2,0,-1):J},
     {(1,0,-1):B,(1,1,-2):G},
     {(0,1,-1):D,(0,2,-2):B+G}],
-8: [{},
+8: [{(1,0,0):J},
     {(2,0,-1):E,(1,1,-1):J},
-    {(2,0,-1):E,(1,1,-1):J,(0,1,-1):B,(0,2,-2):G},
-    {(2,1,-2):E,(1,2,-2):J,(0,1,-1):D,(0,2,-2):B+G}],
-9: [{(1,0,0):J},{},
-    {(1,0,-1):E,(0,1,-1):J,(2,0,-1):J},
-    {(2,1,-2):E+J,(1,2,-2):J,(3,0,-2):E}]
+    {(0,1,-1):B,(0,2,-2):G},
+    {(0,1,-1):D,(0,2,-2):B+G}],
+9: [{},{},
+    {(2,0,-1):J},
+    {(2,0,-1):E,(2,1,-2):J}]
 }
 def clean(p):
     return {e:sp.expand(v) for e,v in p.items() if sp.expand(v)!=0}
