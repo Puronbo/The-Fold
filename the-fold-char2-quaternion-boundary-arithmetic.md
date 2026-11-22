@@ -1607,3 +1607,24 @@ Consequently the pure-normal Cartier–AS model has the canonical description
 \boxed{Q_{\rm nor}\simeq E/\wp(E)\oplus\bigoplus_{e\ge2,\ e\text{ even}}E^{\rm perf}/E.}
 \]
 The isomorphism is canonical after the chain roots e are fixed. This identifies each chain with the purely inseparable classes added by perfecting the residue coefficient field. It remains only a pure-normal model; mixed tangent relations can further reduce it in the full Kato quotient.
+
+
+## 49. G-4ax — complete monomial generators for the mixed B₂ layer
+
+The mixed relation in the previous calculation comes from a uniform monomial formula. Write a Laurent monomial \(f=cp^n\), with \(c=c_0^2+t c_1^2\), \(c_0,c_1\in E\). Then
+\[
+df=c_1^2p^n dt+ncp^{n-1}dp,
+\]
+and inverse Cartier gives the closed representative
+\[
+\boxed{
+C^{-1}(df)=t c_1^4p^{2n}dt+n(c_0^4+t^2c_1^4)p^{2n-1}dp.
+}
+\]
+Here n is read in \(\mathbb F_2\). Thus:
+- If n is even, the generator is pure tangent: \(t c_1^4p^{2n}dt\).
+- If n is odd, it is the sum of a tangent term \(t c_1^4p^{2n}dt\), a pure-normal term \(c_0^4p^{2n-1}dp\), and the mixed normal term \(t^2c_1^4p^{2n-1}dp\).
+
+For n=−r with r positive odd, the mixed normal term has pole index 2r+1 and coefficient \(t^2E^4=S F^2\), where \(S=t^2\), \(F=E^2=\mathbb F_2(S)\). Its tangent partner has pole index 2r and coefficient \(tE^4\). This is the precise first-layer geometric occurrence of the higher-chain coefficient \(S F^2\) from G-4aj.
+
+The formula describes generators of \(B_2=C^{-1}(dL)\) arising from monomials; finite sums give all Laurent-polynomial inputs, and coefficientwise continuity gives the completed statement. It does not say the mixed normal term alone lies in \(B_2\): only the full tangent-plus-normal sum is killed. That distinction is essential for the next quotient calculation.
