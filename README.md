@@ -1595,3 +1595,11 @@ A machine-learning bridge is specified: exact symbolic feature coordinates, filt
 
 
 **G-4cs — rational residue-feature generator:** tools/residue_feature_data.py emits exact rational coefficient examples \(x=S\alpha Q'/Q\), with prescribed finite residue \(\alpha\in k_Q\) and trace-determined infinity residue. A direct arithmetic check covered 14 irreducibles through degree five and 52 basis residue elements.
+
+
+**G-4ct — full coinvariant normal form:** the invariant at each negative odd root q is the Frobenius-normalized sum of coefficient residues across its exponent-doubling orbit \(-q,-2q,-4q,\ldots\). Together with the zero-mode class, these give a canonical isomorphism
+\[
+Q_{\mathcal G}\cong F/\wp(F)\oplus
+\bigoplus_{q>0\ {\rm odd}}\ \bigoplus_{Q\ {\rm monic\ irreducible}}\mathbb F_{2^{\deg Q}}.
+\]
+The orbit sum is essential for annihilating \((\Phi-1)M\); raw residues at a single exponent do not descend. This resolves the filtered extension left open in G-4cr.
