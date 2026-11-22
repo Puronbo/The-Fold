@@ -2615,3 +2615,39 @@ This gives a two-diagonal picture:
 - at distance 2r clockwise, the coefficient-field displacement and quadratic frame correction are parity-insensitive.
 
 **Qualification.** These are the isolated-parameter diagonals. They do not include cross terms from simultaneous parameters at intermediate depths, and they do not assert that the displayed operators alone determine the full p-adic section-change action. A full composition law at arbitrary depth remains to be proved.
+
+
+## 80. G-4cc — leading composition interaction at two distinct depths
+
+Take two isolated changes, in the stated order,
+\[
+t_1=t(1+p^rv),\qquad t_2=t_1(1+p^su),
+\]
+with v=e_v+f_vt and u=e_u+f_ut. For the leading mixed order p^{r+s}, coefficient functions in F may be held fixed: the coefficient coordinate S=t² moves under the first change only at p^{2r}, so its effect on the second factor begins at p^{2r+s}. But the linear t-dependence of u must be evaluated at t₁:
+\[
+u(t_1)=u(t)+f_up^rtv+O(p^{2r+s}	ext{ coefficient-field terms}).
+\]
+Multiplying gives
+\[
+\frac{t_2}{t}
+=1+p^rv+p^su+p^{r+s}(f_utv+vu)+O(\text{higher mixed order}).
+\]
+Since u=e_u+f_ut and the characteristic is two,
+\[
+f_utv+vu=v(f_ut+u)=e_uv.
+\]
+Hence the leading mixed composition coefficient is
+\[
+\boxed{w_{r+s}^{\rm mixed}=e_uv.}
+\]
+In coordinates, this is (e_ue_v)+(e_uf_v)t. It is a generated depth-(r+s) parameter, even though neither input had a parameter at that depth.
+
+Reversing the order gives e_vu. Thus the leading order-sensitive difference (equivalently, the characteristic-two sum of the two mixed coefficients) is
+\[
+e_uv+e_vu=t(e_uf_v+e_vf_u).
+\]
+It vanishes precisely when e_uf_v=e_vf_u. This is a leading commutator calculation for the coordinate substitutions; it does not yet assert a global group commutator formula after all higher coefficient-field corrections are included.
+
+**Resonance warning.** If r+s equals an existing diagonal such as 2r or 2s, this generated mixed coefficient must be added to the intrinsic quadratic diagonal at that same p-order. The isolated second-diagonal operators G-4cb alone do not include this interaction. The calculation is cleanest as a two-depth associated-graded composition statement.
+
+**Geometric reading.** Clockwise arrows do not merely superpose. Two forward motions at depths r and s can generate a new forward motion at depth r+s. The first nontrivial interaction is controlled only by the constant coefficient e_u of the second change and the full coefficient v of the first.
