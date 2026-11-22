@@ -1260,3 +1260,6 @@ has relative norm \(N_{L/F}(\alpha)=((\beta+4)/(\beta+2))(1+\beta)\), hence abso
 
 
 **G-4l — separable places:** at every monic separable irreducible P in F₂(S)[T], S stays nonsquare in the residue field, so denominator elements z²+u+Su² have only even pole orders. Residue-field basis lifts divided by P^(2n+1) give a jointly independent family in Q. See the quaternion-boundary arithmetic note; this is not yet a complete basis.
+
+
+**G-4m — local parity criterion:** at an irreducible P with residue E, denominator elements z²+u+Su² have only even pole orders exactly when S is nonsquare in E. If S is square, an explicit simple-pole denominator exists. Thus the exceptional places are inseparable; see the quaternion-boundary arithmetic note.
