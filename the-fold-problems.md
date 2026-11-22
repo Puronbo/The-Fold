@@ -2828,3 +2828,16 @@ Q_n\to Q_{n+1},\quad d\mapsto(0,ed)
 \quad(n≤−2\text{ even}).
 \]
 These are the first-order extension data, not a complete classification of the filtered extension. Still open: higher-order terms, the exponent-zero layer, and whether the full filtered extension is determined by this action.
+
+
+### G-4bx — second-order section-change maps
+
+For t'=t(1+pv₀+p²v₁)+O(p³), v₀=e+ft and v₁=e₁+f₁t, the p² transition on negative odd graded layers F² is
+\[
+(x,y)\mapsto(Sf²x,(f₁+ef)x+(e²+e₁)y),
+\]
+and on negative even layers F it is
+\[
+d\mapsto(e²+e₁)d.
+\]
+The exponent-zero associated-graded layer is fixed. These are the second-order diagonals; first-order opposite-parity maps are G-4bw. Open: verify the composition law for successive section changes, including cross terms, and determine whether higher diagonals are forced or independent.
