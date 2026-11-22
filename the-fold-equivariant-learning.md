@@ -415,3 +415,48 @@ which has prescribed residue \(\bar\alpha\) at Q and a trace-determined residue 
 ### Frobenius-depth task
 
 For \(x=a^{2^h}\), the first pure-scaling correction occurs at p-depth \(2^{h+1}r\), with coefficient \((S e^2a')^{2^h}\). The data generator now emits this target and checks it against the exact Hasse coefficient of \(x(S/(1+q))\), \(q=p^{2r}\), using Lucas' theorem for binomial coefficients. This makes the model's extrapolation task explicit: infer the first nonzero depth from the Frobenius depth h, then predict the coefficient. The test suite verifies the formula over \(\mathbb F_2[S]\), while rational-denominator residue learning remains future work.
+
+
+## 11. Full-group residue invariants and rational-function data
+
+G-4cq proves that the full finite section-change group preserves the stable Cartier-residue coordinates, including for rational parameters with poles at closed points. The proof localizes at each irreducible Q, extends the substitution to the two-dimensional local field \(k_Q((z))((p))\), and applies invariance of the top residue under continuous automorphisms.
+
+G-4cr computes the associated-graded coinvariants:
+\[
+\operatorname{gr}_n(Q_{\mathcal G})\simeq
+\begin{cases}
+\mathcal R=\bigoplus_{Q\ {\rm monic\ irreducible}}k_Q,&n<0\text{ odd},\\
+0,&n<0\text{ even},\\
+F/(\wp(F)+SF^2),&n=0,\\
+0,&n>0.
+\end{cases}
+\]
+This gives the exact graded targets for invariant linear readouts. The extension between different odd layers and the zero mode is still not canonically split; models should first learn the graded residue readout, then separately model the filtered extension cocycles.
+
+### Rational coefficient encoder
+
+The new exact generator tools/residue_feature_data.py creates rational functions
+\[
+x=\frac{S\alpha Q'}{Q}
+\]
+for a monic irreducible Q and a residue \(\alpha\in k_Q\). Then
+\[
+\frac{x}{S}dS=\alpha\frac{Q'}{Q}dS
+\]
+has residue \(\alpha\) at Q, and the residue at infinity is the field trace \(\operatorname{Tr}_{k_Q/\mathbb F_2}(\alpha)\). The generator stores numerator and denominator polynomials, the irreducible, the finite residue, and the trace coordinate. It uses integer bitmasks for GF(2)[S] and finite-field arithmetic modulo Q; it has no floating point or external package dependency.
+
+Example:
+\`\`\`bash
+python tools/residue_feature_data.py --self-test --max-degree 5 --samples-per-point 8 > residue_train.jsonl
+\`\`\`
+
+This fills the main gap in the earlier polynomial-only dataset: it samples residue coordinates at irreducible denominators Q other than S. The tests should hold out entire irreducibles and residue-field degrees, not just random alpha values at Q already seen in training.
+
+### Learning tasks after G-4cr
+
+1. Predict finite-place residue vectors from normalized rational numerator/denominator input.
+2. Predict the trace-determined infinity residue from the finite residue data.
+3. Verify invariance of the residue vector under random full section changes with rational e,f, using the exact local two-dimensional residue check.
+4. Learn the extension cocycles between surviving odd layers while preserving the known graded coinvariant readout.
+
+The exact target is now a structured family of finite fields \(k_Q\), not a generic latent vector. This should make the feature space more interpretable and the generalization tests more stringent.
