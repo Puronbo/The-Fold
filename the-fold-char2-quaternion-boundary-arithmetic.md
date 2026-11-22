@@ -3104,3 +3104,43 @@ the odd/even graded modules, and (iii) compute the filtered extension
 cocycles represented by the p^2 and higher composition terms. These
 are natural inputs for a later equivariant architecture, not results
 claimed here.
+
+
+## 90. G-4cm — fixed vectors of the finite section-change action
+
+Let \(Q=M/R\). The positive p-adic tail is zero in Q by G-4bs, and the zero-exponent layer is
+\[
+Q_0=(E\oplus E)/(T+(\wp(E)\oplus\wp(E))),
+\qquad T=\{(tb,0):b\in F\}.
+\]
+Every zero-mode representative is fixed by the section-change group: a section change is the identity modulo p, so it changes a zero-mode representative only by positive-order terms, all of which lie in R. Hence \(Q_0\subseteq Q^{\mathcal G}\).
+
+Conversely, let a class have a nonzero negative leading layer at exponent n<0.
+
+If n≤−2 is odd, its leading coordinate is \((x,y)\in F^2\setminus\{0\}\). A depth-one parameter with f=1,e=0 detects x when x≠0; otherwise e=1,f=0 detects y. If n≤−2 is even, its leading coordinate is d∈F^\times; the depth-one parameter e=1 sends it to the nonzero class \((0,d)\) in the next odd layer. These corrections remain in the negative filtration and cannot be cancelled by higher source terms.
+
+It remains to treat n=−1. Write the leading representative as
+\[
+p^{-1}(x\,d\log t+t y\,d\log p),\qquad (x,y)\ne(0,0).
+\]
+Use a depth-one change with v=e=S^k and f=0. The order-p^0 correction has first coordinate zero and second coordinate
+\[
+S^k x+tS^k y.
+\]
+Under the established isomorphism
+\[
+\rho:E/\wp(E)\xrightarrow{\sim}F/\wp(F),
+\qquad \rho(a+bt)=a+Sb^2,
+\]
+its class maps to
+\[
+S^k x+S^{2k+1}y^2.
+\]
+If y≠0, choose k sufficiently large that the second term has strictly larger degree at infinity than the first; the sum then has an odd-order pole at infinity. If y=0 and x≠0, choose k so that S^k x has positive odd degree at infinity. An Artin–Schreier element \(\wp(c)=c^2+c\) cannot have an odd-order pole: any pole of c produces a pole of even order in c²+c. Therefore the zero-layer correction is nonzero in Q₀.
+
+Thus no class with a nonzero negative leading term is fixed. We conclude
+\[
+\boxed{Q^{\mathcal G}=Q_0.}
+\]
+
+This is a fixed-vector theorem, not a computation of the full invariant ring \(k[Q]^{\mathcal G}\). Nonlinear invariant functions may exist even though no negative-leading vector is fixed.
