@@ -1283,3 +1283,6 @@ z²+u+Su²=(x²+(S+P)y²+r+Sr²+S(S+P)q²)+Tq.
 The free T-coordinate is coupled to the scalar coordinate by q².
 The completed local quotient and its global assembly remain open; see
 the quaternion-boundary arithmetic note.
+
+
+**G-4q — exceptional scalar coefficient system:** at P=T²+S, set X=x+Sq in the G-4p completed coordinates. The scalar image becomes X²+(S+P)y²+SPq²+r+Sr², with exact even/odd coefficient equations. Omitting r+Sr², the square-only image is characterized coefficientwise by equality of the S-component of coefficient 2j and the 1-component of coefficient 2j+1 in F=F₂(S)=F²⊕SF². The full scalar quotient remains open because r+Sr² couples indices j and 2j; see the quaternion-boundary arithmetic note.
