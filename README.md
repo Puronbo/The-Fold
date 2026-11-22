@@ -1582,3 +1582,6 @@ A machine-learning bridge is specified: exact symbolic feature coordinates, filt
 
 
 **G-4cu — Hasse–Taylor coefficient theorem:** every odd finite-section q-coefficient is in \(SF²=\ker C_0\) and is exact after one Cartier step. The truncated Hasse sum \(B_{n-1}=\sum_{i<n}S^ia^{[i]}\) lies in \(F^{2^{v_2(n)}}\). For even coefficients, \(C_0(\Delta_{2n})=S^nu^na^{[n]}+Sf²u^{n-1}B_{n-1}\); the all-orders even torsion bound remains open. Rational tests now cover the exact odd and Hasse-sum identities.
+
+
+**G-4cp — pure-scaling Cartier-residue coinvariants:** after the first two diagonals, higher pure-scaling changes remove the Cartier-nilpotent differential subspace. Each negative odd associated-graded layer's pure-scaling coinvariant is \(\Omega_F^1/\bigcup_n\ker C^n\), equivalently the direct sum of residue fields \(\bigoplus_{Q\text{ monic irreducible}}\mathbb F_{2^{\deg Q}}\); the infinity residue is trace-determined. The full t-dependent group may impose further relations, still open. The data generator now includes exact Hasse/Frobenius-level targets over \(\mathbb F_2[S]\).
