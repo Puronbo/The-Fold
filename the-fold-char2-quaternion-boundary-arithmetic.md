@@ -532,3 +532,71 @@ modulo \(F[[P]]\), is still open. The next target is to analyze the
 coupled recurrence contributed by \(r_{2j}+Sr_j^2\), then determine
 which negative coefficient classes survive in the associated
 principal-part filtration. No global quotient normal form is claimed.
+
+
+## 17. G-4r — nontriviality and countable dimension of the exceptional completed local quotient
+
+Let \(\mathcal O=F[[P]][T]\subset K_P=F((P))[T]\), with
+\(T^2=S+P\), and let \(\mathcal D\) be the additive denominator
+image \(\{z^2+u+Su^2:z,u\in K_P\}\). We study
+\(K_P/(\mathcal O+\mathcal D)\) as an \(\mathbb F_2\)-vector
+space. Write \(F=F^2\oplus SF^2\), and let \(\pi_0,\pi_S\)
+be the two coefficient projections, with the factor \(S\) removed
+in \(\pi_S\).
+
+For a target with zero \(T\)-coordinate, its representation must
+have \(q=0\) in G-4p. Its scalar denominator then has the form
+\[
+X^2+(S+P)y^2+r+Sr^2.
+\]
+For any scalar Laurent series \(c=\sum c_nP^n\), define the two
+square-only obstructions at pair index \(j\) by
+\[
+E_j(c)=\pi_S(c_{2j})+\pi_0(c_{2j+1}),\qquad
+D_j(c)=\pi_S(c_{2j+1}).
+\]
+Both vanish on \(X^2+(S+P)y^2\). On \(r+Sr^2\), they are
+\[
+E_j(r+Sr^2)=\pi_S(r_{2j})+r_j^2+\pi_0(r_{2j+1}),
+\qquad D_j(r+Sr^2)=\pi_S(r_{2j+1}).
+\]
+
+Now suppose the target principal part has lowest pair index
+\(j_0\le -2\), meaning its coefficients at \(P^{2j}\) and
+\(P^{2j+1}\) vanish for every \(j<j_0\). If a representing
+\(r\) had a nonzero coefficient at some index below \(j_0\),
+choose its least index \(m\). Then \(r_{2m}=r_{2m+1}=0\),
+and the vanishing of \(E_m\) for the target would force
+\(r_m^2=0\), a contradiction. Thus \(r_n=0\) for all
+\(n<j_0\). Since \(2j_0+1<j_0\), this forces
+\[
+D_{j_0}(c)=\pi_S(c_{2j_0+1})=0.
+\]
+This is a necessary leading-pole condition for local denominator
+representability.
+
+In particular, for every nonzero \(b\in F^2\) and every \(m\ge1\),
+\[
+\boxed{\frac{Sb}{P^{2m+1}}\notin\mathcal O+\mathcal D.}
+\]
+More strongly, choose an \(\mathbb F_2\)-basis \(\mathcal B\) of
+\(F^2\). Then
+\[
+\left\{\frac{Sb}{P^{2m+1}}:b\in\mathcal B,\ m\ge1\right\}
+\]
+is linearly independent in \(K_P/(\mathcal O+\mathcal D)\): in any
+finite nonzero relation, take the largest pole order (smallest pair
+index); its \(D_j\) obstruction is the nonzero basis combination at
+that level.
+
+The field \(F=\mathbb F_2(S)\) is countable, so the set of finite
+principal parts in \(K_P\) is countable. Hence the local quotient has
+at most countable dimension. The independent family above is countably
+infinite, giving the exact result
+\[
+\boxed{\dim_{\mathbb F_2}K_P/(\mathcal O+\mathcal D)=\aleph_0.}
+\]
+This is a theorem about the completed local quotient at the exceptional
+inseparable place. It does not compute the global rational quotient
+\(K/(K^2+L_S(K))\), nor does it assert that every local class is
+represented by a rational global class.
