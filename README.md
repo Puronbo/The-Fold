@@ -1370,3 +1370,7 @@ the quaternion-boundary arithmetic note.
 
 
 **G-4aq — normal de Rham checkpoint:** modulo exact forms that remain purely normal, finite normal principal parts have quotient \(\bigoplus_{m\ odd}E p^{-m}dp\oplus\bigoplus_{m\ even}(E/E^2)p^{-m}dp\), for \(E=\mathbb F_2(t)\). This is not yet the Kato group; higher Cartier filtration and tangent interaction remain to be computed.
+
+
+
+**G-4ar — inverse-Cartier recurrence:** on normal symbols, \(C^{-1}(cp^{-m}dp)=[c^2p^{-(2m-1)}dp]\) modulo exact forms. Thus the index map is \(m\mapsto2m-1\), with an Artin–Schreier-shaped fixed slot at m=1. The higher Cartier filtration \(B_\infty\) and tangent interaction are still uncomputed, so this is a recurrence, not a Kato normal-form theorem.
