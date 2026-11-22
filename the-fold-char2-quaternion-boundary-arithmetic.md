@@ -1418,3 +1418,27 @@ c(t)p^{-(r+1)}dp,&r\text{ odd},\\
 This parity calculation gives a geometric explanation for why the G-4aj normal form is indexed by odd r: it is already forced at the first associated-graded stage by the derivative of the normal parameter. It does **not** yet prove that every odd layer survives the full logarithmic Cartier quotient, nor does it identify the additive G-4aj quotient with Kato cohomology. The tangent term \(p^{-r}c'(t)dt\) is one pole level lower and must be tracked in the filtered complex; the next step is to compute its interaction with Cartier and Frobenius, rather than discard it.
 
 **Coordinate caveat:** this calculation is made after choosing a coefficient field and a lift t. The associated graded and the parity statement are intrinsic, while the displayed splitting into dt and dp depends on that choice.
+
+
+## 41. G-4ap — tangent constraint on exact normal forms
+
+The first normal-symbol calculation G-4ao is valid as a statement about the *leading normal symbol* of an exact differential, but it does not by itself classify exact relations among forms that are required to remain purely normal. The tangent component cannot simply be discarded when passing to the actual quotient.
+
+Work in the completed local field \(L=E((p))\), \(E=\mathbb F_2(t)\), using the chosen coefficient field. Every \(g\in L\) has a unique Laurent expansion \(g=\sum_n c_n(t)p^n\), with finitely many negative terms. Then
+\[
+dg=\sum_n c_n'(t)p^n\,dt+\sum_n n c_n(t)p^{n-1}\,dp.
+\]
+The kernel of \(d/dt:E\to E\) is exactly \(E^2=\mathbb F_2(t^2)\). Therefore \(dg\) is purely normal (has zero \(dt\)-component) if and only if every \(c_n\in E^2\). In characteristic two, only odd n contribute to the second sum. Hence
+\[
+ dL\cap L,dp
+ =\left\{\sum_{n\text{ odd}}c_n p^{n-1}dp:c_n\in E^2\right\}.
+\]
+Equivalently, for finite normal principal parts, the exact purely-normal relations occur at even pole indices \(m=1-n\), with coefficient in \(E^2\), not arbitrary coefficient in E. Conversely every such finite relation is realized by differentiating \(c^2p^{1-m}\) when m is even.
+
+This corrects any inference that the entire even-index normal coefficient space is removed in the actual quotient by exact forms. The associated-graded leading-normal-symbol statement remains: for odd r, \(d(cp^{-r})\) has leading normal symbol \(cp^{-r-1}dp\), while its tangent term is one pole level lower. But this leading-symbol observation alone does not show that the tangent term can be eliminated in the filtered complex. The exact intersection above is a statement about pure-normal forms in \(\Omega_L^1/dL\), and is not yet the full Cartier quotient \(H_2^2(L)\).
+
+For clarity, the two statements must not be conflated:
+- **Leading normal symbol:** all coefficients c appear at even pole index r+1 when r is odd.
+- **Exact relation staying purely normal:** only coefficients in \(E^2\) are available at even pole indices.
+
+The next calculation must retain the tangent filtration and the higher Cartier filtration simultaneously. No G-4aj/Kato comparison follows from this result.
