@@ -1386,3 +1386,7 @@ the quaternion-boundary arithmetic note.
 
 
 **G-4au — pure-normal Cartier–AS chain model:** after imposing only pure-normal relations, the index-one slot is E/\wp(E); odd indices r≡3 mod4 retain E/E⁴, and odd r≥5 with r≡1 mod4 retain E/E². This is an intermediate model only; mixed tangent relations remain to be imposed.
+
+
+
+**G-4av — correction to pure-normal chains:** chain relations identify successive pole slots by Frobenius, so each even-root chain contributes \(\varinjlim_j(E/E^{2^{j+1}},c\mapsto c²)\), not independent slot quotients. Index one contributes E/\wp(E). Mixed tangent relations remain to be imposed.
