@@ -1613,3 +1613,6 @@ Q_{\mathcal G}\cong F/\wp(F)\oplus
 For each odd root q, the invariant residue is the Frobenius-normalized sum over the full exponent-doubling orbit \(-q,-2q,-4q,\ldots\). This annihilates the differential-Frobenius relation and is invariant under all finite section changes. The zero summand \(F/(\wp+SF²)\) is canonically identified with \(F/\wp(F)\) by the p-basis first-coordinate map. The filtered extension left open in G-4cr is now resolved by a canonical orbit-residue splitting.
 
 The rational residue generator also emits orbit-sequence examples with the orbit-samples option; adjacent-stage relation pairs are included in its exact self-test.
+
+
+**G-4cv — orbit-residue training data:** tools/residue_feature_data.py now emits finite exponent-doubling sequences with residues \(\alpha_j\in k_Q\) and target \(\sum_j\operatorname{Frob}^{-j}(\alpha_j)\). Its exact adjacent-stage relation is \((\alpha,\alpha^2)\mapsto0\). Independent finite-field checks passed 1,056 such relations over all 14 irreducibles of degree at most five.
