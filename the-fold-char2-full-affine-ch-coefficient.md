@@ -1048,3 +1048,13 @@ No other case contributes in degree four: two of n1,n4 already force degree at l
 This establishes completeness of the test space, not its rank. If the target in4(n1*n4) is outside the K-linear span of these columns after tensoring with K=Frac(S), then n1*n4 is certainly not in N^3. If it lies in that K-span, membership remains undecided: K-linear coefficients need not belong to S, and a generic-field relation need not lift to an integral S-module relation.
 
 **Next UF-072P:** rebuild the 350-column matrix from the audited source table, obtain a reproducible exact rank certificate over K (or a rigorous symbolic upper bound combined with a lower-bound minor), and test the target augmentation. Keep generic linear-span membership separate from actual S-module membership.
+
+
+## UF-072P — Fresh degree-four specialization lower bounds
+
+Rebuilt the complete 350-column degree-four initial matrix from the audited linear and quadratic source expansions: 84 corrected triple products, 56 products involving n1 or n4 and a pair of first-order generators, and 210 fourfold products. The common coefficient matrix has 470 source/Laurent rows. Independently reconstructed the matrix and evaluated it over F_256=F_2[u]/(u^8+u^4+u^3+u^2+1) at five distinct nonzero parameter specializations. Every specialization gives
+\[
+\operatorname{rank}(M)=172,\qquad \operatorname{rank}(M\mid v)=173,
+\quad v=\operatorname{in}_4(n_1n_4)=A^2c^3d/(ai).
+\]
+These are exact finite-field specialization ranks, so they imply the generic lower bounds rank_K(M)>=172 and rank_K(M|v)>=173. They do not prove rank_K(M)<=172. Thus the generic strict rank gap, and hence nonmembership of n1*n4 in N^3, is not yet established. The next task is a reproducible symbolic upper-bound certificate for rank_K(M), ideally matching 172.
