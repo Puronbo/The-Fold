@@ -184,3 +184,45 @@ In characteristic two, every separable quadratic extension is Artin–Schreier: 
 
 The preceding formulas give a finite, checkable invariant for each quadratic Galois quotient: compute (N=\sigma-1) on (V^{G_L}), then compute (\ker N/\operatorname{im}N). Its dimension is (\dim V^{G_L}-2\operatorname{rank}N). This quotient is the target of the inflation–restriction transgression. For Fold representations, the next concrete task is to construct natural (G_K)-modules from the automorphism-group-scheme or Hopf–Galois data and evaluate this obstruction; no such global representation or arithmetic class is asserted here.
 
+
+
+## 8. Cyclic (2)-power Galois quotients
+
+The order-two calculation extends to every cyclic quotient of order (q=2^n). Let (L/K) be a finite cyclic Galois extension in characteristic two, with
+\[
+\Gamma=\operatorname{Gal}(L/K)=\langle\sigma\rangle\cong C_q,
+\]
+and let (V) be a finite-dimensional (k[\Gamma]\)-module. Put (D=\sigma-1). In characteristic two,
+\[
+k[C_q]\cong k[D]/(D^q),\qquad
+\mathsf{Norm}=1+\sigma+\cdots+\sigma^{q-1}=D^{q-1}.
+\]
+Indeed, writing \(\sigma=1+D\), the geometric sum is \(((1+D)^q-1)/D=D^{q-1}\), since \((1+D)^q=1+D^q\).
+
+The standard two-periodic cyclic resolution therefore yields
+\[
+H^{2j+1}(C_q,V)=\ker(D^{q-1})/\operatorname{im}D,
+\qquad
+H^{2j+2}(C_q,V)=\ker D/\operatorname{im}(D^{q-1})
+\quad(j\ge0).
+\]
+Write the nilpotent Jordan decomposition of (D) as a direct sum of blocks of lengths (1\le d\le q). On a block of length (d<q), (D^{q-1}=0), so each displayed quotient has dimension one. On a block of length (q), both quotients vanish: (\ker D^{q-1}=\operatorname{im}D), and (\ker D=\operatorname{im}D^{q-1}). Additivity gives the compact formula
+\[
+\boxed{\dim_k H^j(C_q,V)
+=\#\{\text{Jordan blocks of }D\text{ with length }<q\},
+\quad j\ge1.}
+\]
+Equivalently, positive-degree cohomology detects precisely the non-projective indecomposable summands; the length-(q) blocks are free (k[C_q])-modules and contribute no cohomology. This recovers G-7 at (q=2).
+
+For the absolute Galois sequence (1\to G_L\to G_K\to C_q\to1), inflation–restriction gives
+\[
+0\to H^1(C_q,V^{G_L})\to H^1(G_K,V)
+\to H^1(G_L,V)^{C_q}
+\xrightarrow{\mathrm{tr}} H^2(C_q,V^{G_L}).
+\]
+Thus the obstruction to descending an invariant class is measured by the explicitly computable (H^2) quotient above, applied to (V^{G_L}). In characteristic two, cyclic (2)-power extensions are described by Artin–Schreier–Witt theory. This gives a family of finite quotient tests, but still does not construct a global Fold Galois module or evaluate a specific arithmetic transgression.
+
+### G-8 — Cyclic (2)-power cohomology and projective-block detection
+
+For a cyclic Galois quotient (C_{2^n}), the operator (D=\sigma-1) is nilpotent of order at most (2^n). The norm is (D^{2^n-1}), so positive cohomology in every degree has dimension equal to the number of Jordan blocks of length strictly less than (2^n). The maximal-length blocks are exactly the free/projective (k[C_{2^n}])-summands. This refines the quadratic G-7 criterion. The remaining Fold-specific task is to construct natural global modules and compute their Jordan block profiles and descent transgressions.
+\n
