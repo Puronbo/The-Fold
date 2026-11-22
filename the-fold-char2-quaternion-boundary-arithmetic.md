@@ -2850,3 +2850,82 @@ ambient Lie-derivative action.
 Lie derivatives. It does not rule out actions of discrete coordinate
 automorphisms, nor does it classify a different quotient-level symmetry
 constructed independently of this ambient action.
+
+
+## 85. G-4ch — finite section changes do preserve the Cartier quotient
+
+G-4cg says that the ambient Lie derivative has zero stabilizer on
+\(M/R\). This does **not** imply that finite coefficient-section
+automorphisms fail to act. In fact, they do act, for a different reason:
+naturality of inverse Cartier is a statement modulo exact forms.
+
+Let \(L=E((p))\), \(E=\mathbb F_2(t)\), and fix \(r\ge1\) and
+\(v=e+ft\in E\). Define the continuous substitution
+\[
+\sigma_{r,v}(p)=p,\qquad
+\sigma_{r,v}(t)=t(1+p^rv).
+\]
+It is a well-defined continuous \(\mathbb F_2((p))\)-automorphism of L.
+Indeed, writing \(S=t^2\), with \(e,f\in\mathbb F_2(S)\), the formal
+derivative of the new t-coordinate with respect to t is
+\[
+\frac{\partial}{\partial t}\bigl(t(1+p^r(e+ft))\bigr)
+=1+p^re,
+\]
+a p-adic unit. The substitution is the identity on the residue field,
+so the formal inverse-function argument gives an automorphism.
+
+Let \(\sigma=\sigma_{r,v}\) and let \(\sigma^*\) denote pullback on
+differentials. It preserves exact forms:
+\[
+\sigma^*(B^1)=B^1,\qquad B^1=dL,
+\]
+because \(\sigma^*(dg)=d(\sigma(g))\).
+
+The chosen operator
+\[
+\Phi(p^n(A,B))=p^{2n}(A^2,B^2)
+\]
+is a logarithmic representative of inverse Cartier. The essential
+point is that inverse Cartier is natural under field/scheme
+isomorphisms: on cohomology modulo exact forms,
+\[
+[\sigma^*\Phi(m)]=[\Phi(\sigma^*m)]
+\quad\text{in }Z^1/B^1.
+\]
+This is the standard functoriality of the Cartier isomorphism; the
+representative maps need not commute strictly, only modulo \(B^1\).
+Consequently
+\[
+\sigma^*((\Phi-1)m)
+=\bigl(\Phi(\sigma^*m)-\sigma^*m\bigr)+b_m,
+\qquad b_m\in B^1.
+\]
+It follows that
+\[
+\sigma^*(R)\subseteq R,\qquad
+R=B^1+(\Phi-1)M.
+\]
+Applying the same argument to \(\sigma^{-1}\) gives equality. Hence
+\[
+\boxed{\sigma_{r,v}^*(R)=R,}
+\]
+and every finite section change induces an automorphism of \(M/R\).
+
+This resolves the apparent conflict with G-4cf–G-4cg. Those results
+differentiate the finite action by the ambient Lie derivative and
+then ask that this derivative preserve R. But inverse Cartier
+naturality is only an equality modulo exact forms, and it is tied to
+the Frobenius twist of the automorphism. It does not imply that the
+naive tangent operator \(\rho_v\) preserves the chosen representative
+subspace \(R\). In particular, the finite automorphism action on
+\(M/R\) need not be differentiable as an action of the ordinary
+two-dimensional section-change Lie algebra on this quotient.
+
+**Scope and next calculation.** The existence of the finite quotient
+action is proved. Its explicit filtered matrices, their composition
+law on the quotient, and the relation (if any) between different
+depths remain to be computed. The associated-graded arrows G-4ca are
+the first-order-in-\(p^r\) data, not yet a complete formula for the
+induced quotient automorphism.
+
