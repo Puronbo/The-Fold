@@ -713,3 +713,40 @@ P_C(T)={}&1+6T+20T^2+48T^3+90T^4+140T^5+196T^6\\
 The point counts for m=8,9,10 are independent checks against the completed polynomial, not inputs to its determination. The exact finite-field enumeration and Newton/functional-equation reconstruction are reproducible in `certificates/g24_genus7_weil_polynomial.py`.
 
 The functional equation and point-count formula used here are stated in Ritzenthaler, *Effective geometry and arithmetic of curves*, §6.1, Theorem 6.1.1 and Corollary 6.1.2: https://ritzenth.pages.math.cnrs.fr/web/cours/main.pdf. The genus and unique point at infinity are inherited from the already established G-22 ramification calculation. This determines the Frobenius polynomial of the genus-seven Jacobian, hence its isogeny class over \(\mathbb F_2\); it does not yet factor that polynomial into simple isogeny factors or determine the genus-35 Jacobian.
+
+
+### G-26 — isogeny factors and Newton polygon of the genus-seven Jacobian
+
+Let C be the genus-seven octic curve of G-25, and let P_C(T) be its certified Weil polynomial. Exact multiplication in Z[T] gives
+\[
+\begin{aligned}
+P_C(T)
+={}&(1+2T^2)^2(1+2T+2T^2)Q(T),\\
+Q(T)
+={}&1+4T+6T^2+4T^3+2T^4+8T^5\\
+&+24T^6+32T^7+16T^8.
+\end{aligned}
+\]
+By the finite-field isogeny theorem, this factorization gives an isogeny decomposition
+\[
+J(C)\sim E_0^2\times E_{-2}\times A_4,
+\]
+where E_0 is the elliptic isogeny class with Frobenius polynomial 1+2T^2, E_{-2} is the quartic elliptic class from G-24 with polynomial 1+2T+2T^2, and A_4 is a four-dimensional factor with polynomial Q(T). No claim that A_4 is simple is made here.
+
+For the Newton polygon, use the monic Frobenius polynomial F(X)=X^14P_C(1/X). The 2-adic valuations of its coefficients in increasing X-degree are
+\[
+(7,7,7,8,4,4,3,4,2,2,1,4,2,1,0).
+\]
+Their lower convex hull has vertices
+\[
+(0,7),\ (4,4),\ (10,1),\ (14,0).
+\]
+The polygon slopes are -3/4, -1/2, -1/4; the Frobenius-root valuations are their negatives. Therefore the Newton slopes of J(C), with multiplicity, are
+\[
+\boxed{\tfrac14^{\,4},\quad\tfrac12^{\,6},\quad\tfrac34^{\,4}.}
+\]
+The elliptic factors each have slope 1/2; the four-dimensional factor A_4 has slopes 1/4 (four times) and 3/4 (four times). Thus G-23's 2-rank-zero conclusion is sharpened: J(C) has p-rank zero but is not supersingular, because its slopes are not all 1/2.
+
+The exact certificate "certificates/g26_genus7_newton_polygon.py" checks the factorization identity and computes the lower hull using integer arithmetic. It takes the G-25 Weil polynomial as input; the independent finite-field point-count certificate remains "certificates/g24_genus7_weil_polynomial.py".
+
+References: the Newton-polygon/root-valuation convention is stated in [A note on some Picard curves over finite fields](https://doi.org/10.1016/J.FFA.2014.12.002); the finite-field Frobenius-polynomial/isogeny-class theorem is summarized in [Handbook of Finite Fields, §16.6](https://archive.ymsc.tsinghua.edu.cn/pacm_download/672/12637-dingjt-p2.pdf). The residual degree-eight factor's further decomposition, and the genus-35 Jacobian, remain open.
