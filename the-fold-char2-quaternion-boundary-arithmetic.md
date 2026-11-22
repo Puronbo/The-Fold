@@ -1480,3 +1480,25 @@ Thus the pole-index map is \(m\mapsto2m-1\), and the residue coefficient is squa
 At m=1 this is \((c^2+c)p^{-1}dp\), the Artin–Schreier shape. For m>1 it links the m-slot to the (2m−1)-slot. Iterating the index map gives \(m_j=2^j(m-1)+1\).
 
 This is an exact inverse-Cartier calculation modulo exact forms. It is a recurrence on the normal representatives and suggests a chain structure, but it does not yet classify \(H_2^2(L)\): the quotient by \(B_\infty\) must still be imposed, and mixed tangent terms generated in the construction of \(B_i\) must be tracked. In particular, the m=1 Artin–Schreier shape is not by itself a proof that the G-4aj chain-1 summand is the corresponding Kato summand. The next task is to calculate which of these normal symbols lie in \(B_\infty\) and how the recurrence interacts with the exact normal quotient G-4aq.
+
+
+## 44. G-4as — explicit power subspaces in the higher Cartier filtration
+
+Continue with \(L=E((p))\), \(E=\mathbb F_2(t)\), and the filtration \(B_1=dL\), \(B_{n+1}\) defined by inverse Cartier as in G-4ao. For every even integer \(m\ge2\) and \(a\in E\),
+\[
+d(a^2p^{1-m})=a^2p^{-m}dp,
+\]
+since \(d(a^2)=0\) and \(1-m\) is odd. Thus this pure normal form lies in \(B_1\).
+
+Applying inverse Cartier repeatedly, using \(C^{-1}(h dp)=[h^2p dp]\), gives
+\[
+a^2p^{-m}dp\mapsto a^4p^{-(2m-1)}dp
+\mapsto a^8p^{-(4m-3)}dp\mapsto\cdots.
+\]
+Consequently, for every \(n\ge1\),
+\[
+\boxed{a^{2^n}p^{-\left(2^{n-1}(m-1)+1\right)}dp\in B_n.}
+\]
+The pole-index sequence is \(r_j=2^j(m-1)+1\); because m−1 is odd, its jth term has \(v_2(r_j-1)=j\). Thus the filtration contains explicit \(2^n\)-power coefficient subspaces at odd indices with prescribed \(2\)-adic valuation of r−1.
+
+**Scope:** this proves inclusion of the displayed representatives in \(B_n\), not equality for \(B_n\cap Ldp\), and not a full description of \(B_\infty\cap\operatorname{PP}_{\rm nor}\). Mixed tangent forms arising from general exact differentials may contribute additional elements. The next problem is to determine whether these inclusions exhaust the pure-normal part of the filtration, then impose the \(C^{-1}-1\) recurrence on the resulting coefficient quotients. No Kato/G-4aj identification is claimed.
