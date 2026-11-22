@@ -948,3 +948,41 @@ understood as the relation \(\lambda_{j+1}\circ\phi=\lambda_j\circ q\), not as a
 Since F is countable and has countably infinite F₂-dimension, \(F^*\) has cardinality \(2^{\aleph_0}\). Projection of each chain inverse limit onto its initial \(F^*\) is surjective, while the set of all countable sequences of coefficient functionals has cardinality at most \((2^{\aleph_0})^{\aleph_0}=2^{\aleph_0}\). Hence even one chain contributes continuum many annihilators, and the full annihilator has cardinality exactly continuum. As an F₂-vector space its dimension is therefore continuum.
 
 This classifies the annihilator abstractly as an inverse-limit space; it does not identify a canonical basis or a canonical splitting of the restriction maps.
+
+
+## 29. G-4ad — canonical chain-cokernel / zigzag-colimit model
+
+The scalar principal-part quotient
+\[
+F((p))/(F((p))^2+F[[p]])
+\]
+splits as a direct sum over odd positive integers r, one summand for each exponent chain \(-r,-2r,-4r,\ldots\). The map \(u\mapsto u+Su^2\) preserves this decomposition.
+
+For one chain put \(W_0=F\), \(W_j=F/F^2\) for j≥1, and let q:F→F/F² and phi(x)=[Sx²]. The chain denominator map is the finite-support linear map
+\[
+T_r:\bigoplus_{j\ge0}F\longrightarrow
+W_0\oplus\bigoplus_{j\ge1}W_j
+\]
+given by
+\[
+T_r((x_j)_{j\ge0})_0=x_0,\qquad
+T_r((x_j)_{j\ge0})_j=q(x_j)+\phi(x_{j-1})\quad(j\ge1).
+\]
+It maps finite-support sequences to finite-support sequences (with support enlarged by at most one slot). Therefore the full scalar quotient by the u+Su² image has the canonical decomposition
+\[
+\boxed{
+\bigoplus_{r\ge1,\ r\text{ odd}}
+\operatorname{coker}(T_r).
+}
+\]
+The z² term is already zero in the ambient quotient by F((p))².
+
+Equivalently, each chain cokernel is the colimit of the zigzag of F₂-vector spaces
+\[
+W_0\ \longleftarrow\ F_0\ \longrightarrow\ W_1
+\ \longleftarrow\ F_1\ \longrightarrow\ W_2
+\ \longleftarrow\ F_2\ \longrightarrow\cdots,
+\]
+where the maps from F_0 are identity to W_0 and phi to W_1, and for j≥1 the maps from F_j are q to W_j and phi to W_{j+1}. This is a genuine categorical colimit presentation; it avoids pretending that phi descends to F/F² (it generally does not).
+
+Dualizing this presentation gives exactly the compatibility equations of G-4ac. Thus G-4ac is the algebraic dual of this canonical cokernel model. This description is canonical, but it is still a presentation rather than a simpler closed-form evaluation of each cokernel.
