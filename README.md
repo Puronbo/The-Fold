@@ -1567,3 +1567,6 @@ A machine-learning bridge is specified: exact symbolic feature coordinates, filt
 
 
 **G-4cp–G-4cq — scaling stable quotient:** the pure scaling section change induces the p-basis root operator \(C_0(a_0²+Sa_1²)=a_0\). Its stable quotient is \(\mathbb F_2\oplus\bigoplus_{Q\ne S}\mathbb F_2[S]/(Q)\), the residue-field module of finite closed points of the affine S-line. This is exact for the pure-scaling tower; the full section-change coinvariant may be a further quotient. The rational-function verifier is tools/cartier_stable_part.py.
+
+
+**G-4cr–G-4cs — finite section-change Cartier-torsion:** the first two pullback coefficients of an odd residual \(a²\) are \(\Delta_1=Sf²a²\in\ker C_0\) and \(\Delta_2=(Su\,a')²+Sf²u\,a²\), with \(C_0²(\Delta_2)=0\). A higher-order torsion bound is conjectural and bounded-tested only. Ohi's parameter-independent Cartier residue theorem is recorded as a possible all-orders bridge; hypotheses and the residue-target identification remain open. Exact test generator: tools/section_change_cartier_stability.py.
