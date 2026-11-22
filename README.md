@@ -1251,3 +1251,6 @@ has relative norm \(N_{L/F}(\alpha)=((\beta+4)/(\beta+2))(1+\beta)\), hence abso
 
 
 **G-4i — quaternion-boundary image quotient:** for \(k=\mathbb F_2(s,t)\), \(\lambda=s\), the boundary image is additively isomorphic to \(K/(K^2+\{u+Su^2:u\in K\})\), where \(K=\mathbb F_2(S,T)=k^2\), \(S=s^2,T=t^2\). The isomorphism follows from the exact G-4h coefficient kernel criterion. Each image class has a representative \([AS,s)_2\); the quotient's dimension and basis remain open. Details: the-fold-char2-quaternion-boundary-arithmetic.md.
+
+
+**G-4j — infinite-dimensional quaternion-boundary image:** a valuation at \(T=\infty\) proves the classes of \(T^{2n+1}\) are independent in the G-4i quotient, since denominator elements with poles have even pole order. Therefore the boundary image over \(\mathbb F_2(s,t)\), \(\lambda=s\), has infinite \(\mathbb F_2\)-dimension. Independent symbol representatives are \([ST^{2n+1},s)_2\). Full quotient normal forms remain open; see the quaternion-boundary arithmetic note.
