@@ -2341,3 +2341,11 @@ otinmathcal N^3) by UF-072O.
 \ker D\longrightarrow\ker D/\operatorname{im}(D^{2^m-1})=H^2(Q,A),\quad a\mapsto[a].
 \]
 Thus it is surjective, with kernel exactly the norm image. In Jordan form it kills bottom vectors from full-length blocks and detects one class from every shorter block. This generalizes G-18 and makes the coefficient-module dependence explicit. It remains an abstract cyclic-group theorem, not a Fold-specific construction. Full proof: [Galois applicability note](the-fold-automorphic-and-hopf-galois-applicability.md).
+
+
+### G-21 — explicit cyclic degree-16 Witt tower
+- Expands the common Artin–Schreier–Witt class \((s,s,0,0)\in W_4(\mathbb F_2(s))\) into all four coordinate equations.
+- Derives the fourth coordinate from the Witt ghost polynomials and gives the full generator translation by \((1,0,0,0)\), of exact order 16.
+- The odd pole order of \(s\) proves the class has degree 16; its length-two and length-three truncations are exactly the quartic and octic fields of G-12 and G-14.
+- This is an explicit arithmetic tower calculation. It does not supply a Fold-derived Galois representation or Selmer class.
+- Full equations and derivation convention: [Galois applicability note](the-fold-automorphic-and-hopf-galois-applicability.md).
