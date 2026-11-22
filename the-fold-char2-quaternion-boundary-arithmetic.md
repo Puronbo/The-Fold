@@ -3383,3 +3383,55 @@ For a one-dimensional function field in characteristic p, Cartier commutes with 
 This is a plausible bridge to the section-change problem because \(p\) is fixed and \(t'\equiv t\pmod p\). But the precise identification of our stable quotient with Ohi's residue target, and verification of the required \(Z_m\) valuation bounds for the transformed representatives, remain to be done. No full-group coinvariant theorem is claimed here.
 
 **Next exact target.** Construct the residue-coordinate map from each odd negative Cartier orbit to \(\kappa_Q\), then calculate its pullback under \(t\mapsto t(1+p^rv)\). If all residue coordinates are unchanged, the full coinvariant equals the pure-scaling stable quotient. If not, the first changed closed-point residue gives an explicit extra relation.
+
+
+## 96. G-4ct — the pure-scaling stable quotient is a Cartier-stable differential module
+
+Define
+\[
+\Theta:F\longrightarrow\Omega_F^1,\qquad
+\Theta(x)=\frac{x}{S}\,dS.
+\]
+Write \(x=x_0^2+Sx_1^2\). Then
+\[
+\Theta(x)=\left(\frac{x_0^2}{S}+x_1^2\right)dS.
+\]
+The second term is exact, while the Cartier operator sends
+\[
+C\left(\frac{x_0^2}{S}\,dS\right)
+=\frac{x_0}{S}\,dS.
+\]
+Therefore
+\[
+\boxed{C\circ\Theta=\Theta\circ C_0.}
+\]
+Moreover, \(\Theta(x)\) is exact exactly when \(x\in SF^2\), because
+\[
+\Theta(Sb^2)=b^2dS=d(Sb^2).
+\]
+Hence
+\[
+F/SF^2\simeq\Omega_F^1/dF
+\]
+and the intertwining identity identifies every iterated kernel:
+\[
+\Theta(\ker C_0^n)=\ker C^n.
+\]
+Consequently
+\[
+\boxed{
+F/\bigcup_{n\ge1}\ker C_0^n
+\simeq
+\Omega_F^1/\bigcup_{n\ge1}\ker C^n
+=\Omega_F^1/B_\infty.
+}
+\]
+Here \(B_\infty=\bigcup_n\ker C^n\) is the standard Cartier-exact filtration in degree one for the one-variable function field F.
+
+This gives an intrinsic differential target for the pure-scaling stable quotient. The explicit decomposition from G-4cq is its closed-point residue-coordinate description:
+\[
+\Omega_F^1/B_\infty
+\simeq
+\mathbb F_2\oplus\bigoplus_{Q\ne S}\kappa_Q.
+\]
+The remaining full-group problem is now sharply formulated: show that every finite section change acts trivially on this Cartier-stable differential quotient, or exhibit a closed-point residue it changes.
