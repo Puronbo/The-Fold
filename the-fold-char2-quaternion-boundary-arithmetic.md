@@ -636,3 +636,65 @@ The quotient's exact dimension was already established as countably
 infinite in G-4k; G-4s supplies a concrete independent family supported
 at the exceptional inseparable place, not a full global basis or
 reduction algorithm.
+
+
+## 19. G-4t — a combined independent system across finite places
+
+For a monic irreducible \(R\in F[T]\), write
+\(E_R=F[T]/(R)\). If \(S\) is nonsquare in \(E_R\), G-4m
+shows that every denominator \(z^2+u+Su^2\) has no pole or an
+even-order pole at \(R\). Choose an \(\mathbb F_2\)-basis
+\(\mathcal B_R\) of \(E_R\), and for each \(e\in\mathcal B_R\)
+choose a polynomial lift \(\widetilde e\) of degree less than
+\(\deg R\). Then
+\[
+\left\{\frac{\widetilde e}{R^{2m+1}}:
+R\text{ monic irreducible},\ S\notin E_R^2,
+ e\in\mathcal B_R,\ m\ge0\right\}
+\]
+is jointly linearly independent in \(Q\). To prove this, localize
+a finite relation at a place \(R\) occurring in it and take the
+largest odd pole order with nonzero residue coefficient. Terms
+supported at other irreducibles are integral there, while a
+denominator has only even pole order. This contradicts the assumed
+relation.
+
+There is also a family at a concrete infinite collection of
+exceptional inseparable places. For every \(c\in F^\times\), put
+\[
+R_c=T^2+Sc^2.
+\]
+It is irreducible over \(F\), since \(S\) is nonsquare, and its
+residue field contains \(\sqrt S\). In its completion write
+\(T^2=Sc^2+R_c\) and \(z=x+Ty\), \(u=r+Tq\). For a target
+with zero \(T\)-coordinate modulo the valuation ring, \(q\) is
+integral and its scalar contribution is integral. The scalar
+principal-part denominator is therefore
+\[
+X^2+(Sc^2+R_c)y^2+r+Sr^2.
+\]
+For \(F=F^2\oplus SF^2\), define \(\pi_0,\pi_S\) as before.
+The square-only relation at pair index \(j\) is
+\[
+\pi_S(c_{2j})+c^2\pi_0(c_{2j+1})=0,
+\]
+while the second obstruction is \(\pi_S(c_{2j+1})\). The first
+obstruction applied to \(r+Sr^2\) contains \(r_j^2\). The same
+least-index argument as G-4r therefore proves that
+\[
+\boxed{\left\{\frac{S^{2n+1}}{R_c^{2m+1}}:
+ n\ge0,\ m\ge1\right\}}
+\]
+is linearly independent at \(R_c\). Localizing at each distinct
+\(R_c\) proves joint independence as \(c\) varies, and also proves
+independence jointly with the preceding nonsquare-residue family.
+
+Consequently the union of these two place-indexed families is an
+explicit countably infinite independent family in the global quotient
+\(Q\). It covers every finite irreducible place where \(S\) remains
+nonsquare, together with the exceptional quadratic places
+\(T^2+Sc^2\). It does not yet classify all irreducibles whose residue
+field makes \(S\) square, nor does it give a complete global basis.
+The already established upper bound \(\dim_{\mathbb F_2}Q\le\aleph_0\)
+shows that this independent family is maximal in cardinality, not
+necessarily a Hamel basis.
