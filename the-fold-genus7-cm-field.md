@@ -241,3 +241,32 @@ which generates the unit ideal by the two ideal identities above. Hence the orde
 This corrects the use of \(\pi\) as a candidate relative integral-basis generator: the rescaled generator is the one with unit relative discriminant. It is the appropriate starting point for an exact enumeration of prime ideals under the G-35 Minkowski bound.
 
 The order-index discriminant identity used here is the standard relation between the discriminant of an order and that of its integral closure; see, for example, MIT 18.785 Lecture 12, Theorem 12.22 and the displayed index formula.
+
+
+## G-35B — both primes above 2 are principal
+
+Reduce the G-35A monic polynomial of \(\theta=\pi/q\), where \(q=\beta+2\), modulo the unique prime \(\mathfrak p=(q)\) of \(F\) above 2. Since
+\[
+\frac{\beta}{q}=1-\frac2q\equiv1\pmod{\mathfrak p},
+\qquad
+\frac2{q^2}\equiv0\pmod{\mathfrak p},
+\]
+the reduction is \(X^2-X=X(X-1)\). The relative integral-basis result makes this factorization exact for the maximal order, so
+\[
+\mathfrak p\mathcal O_L=\mathfrak P_0\mathfrak P_1,
+\qquad N_{L/\mathbb Q}(\mathfrak P_i)=2.
+\]
+The two local roots of \(X^2-\beta X+2\) have \(\mathfrak p\)-valuations 1 and 3, while \(v_{\mathfrak p}(q)=1\). Thus the corresponding values of \(\theta=\pi/q\) have valuations 0 and 2. Its absolute norm is
+\[
+N_{L/\mathbb Q}(\theta)
+=N_{F/\mathbb Q}(2/q^2)=4.
+\]
+It follows that, with a suitable labeling,
+\[
+(\theta)=\mathfrak P_1^2.
+\]
+Thus \([\mathfrak P_1]\) is 2-torsion. G-34 proves \(\operatorname{Cl}(L)[2]=0\), so \(\mathfrak P_1\) is principal. Since \((q)\mathcal O_L=\mathfrak P_0\mathfrak P_1\), the other prime \(\mathfrak P_0\) is principal as well:
+\[
+\boxed{\text{both primes of }L\text{ above }2\text{ are principal}.}
+\]
+This eliminates all ideals supported only above 2 from the remaining Minkowski class-group search.
