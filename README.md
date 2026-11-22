@@ -1274,3 +1274,12 @@ z²+u+Su²=(w²+wP^m)/P^(2m+1) for m≥1, producing arbitrary odd pole
 orders with square leading coefficient when w is a unit. At m=0 the
 coefficient is w²+w, not generally a square. This refines, but does not
 solve, the local quotient problem; see the quaternion-boundary note.
+
+
+**G-4p — exceptional-place completion:** at P=T²+S, the completion is
+K_P=F₂(S)((P))[T] with T²=S+P. Writing z=x+Ty and u=r+Tq gives the
+exact denominator formula
+z²+u+Su²=(x²+(S+P)y²+r+Sr²+S(S+P)q²)+Tq.
+The free T-coordinate is coupled to the scalar coordinate by q².
+The completed local quotient and its global assembly remain open; see
+the quaternion-boundary arithmetic note.
