@@ -460,3 +460,43 @@ This fills the main gap in the earlier polynomial-only dataset: it samples resid
 4. Learn the extension cocycles between surviving odd layers while preserving the known graded coinvariant readout.
 
 The exact target is now a structured family of finite fields \(k_Q\), not a generic latent vector. This should make the feature space more interpretable and the generalization tests more stringent.
+
+
+## 12. Full-group graded coinvariants and rational residue learning
+
+G-4cq uses two-dimensional local residue invariance to prove that the entire finite section-change group preserves every stable Cartier-residue coordinate, even when the parameters e,f have poles at the closed point. G-4cr then computes the associated-graded coinvariants:
+- each negative odd layer contributes \(\mathcal R=\bigoplus_Q k_Q\);
+- negative even layers and negative odd second coordinates contribute zero;
+- the zero layer contributes only \(F/(\wp(F)+SF^2)\);
+- positive layers vanish.
+
+The filtered extension between the surviving graded pieces remains open. This is important for architecture design: a residue readout is now an exact invariant at the graded level, but the model should not assume the full filtered quotient is a canonical direct sum.
+
+### Rational residue generator
+
+The new standard-library script tools/residue_feature_data.py emits rational coefficients
+\[
+x=\frac{S\alpha Q'}{Q}
+\]
+and their exact finite-residue targets
+\[
+\operatorname{res}_Q((x/S)dS)=\alpha\pmod Q.
+\]
+It stores the finite-field residue in the polynomial basis of \(k_Q\), the trace-determined infinity residue, and a coprime numerator/denominator encoding. Its irreducibility test is Rabin's exact GF(2) test; all polynomial and finite-field operations use integer bitmasks.
+
+Run:
+\`\`\`bash
+python tools/residue_feature_data.py --self-test --max-degree 5 --samples-per-point 8 > residue_train.jsonl
+\`\`\`
+
+An independent arithmetic check verified 14 monic irreducibles through degree five, all 52 basis residue elements across those fields, coprime rational encodings, and trace linearity. This checks the construction algebraically; it is not a neural training run.
+
+### Updated machine-learning agenda
+
+The immediate supervised tasks are now:
+1. rational numerator/denominator to finite residue vector;
+2. finite residue vector to the infinity trace;
+3. exact invariance checks under rational full section changes;
+4. learning the unresolved filtered extension cocycles while keeping the graded residue features fixed.
+
+Hold out entire irreducible polynomials and residue-field degrees to test generalization beyond memorized denominators. The old polynomial-only dataset remains useful for the Cartier/Frobenius tower, but it is not enough to learn the complete finite-place residue module.
