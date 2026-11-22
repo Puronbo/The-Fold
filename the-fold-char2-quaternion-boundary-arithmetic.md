@@ -738,3 +738,21 @@ where all coefficients lie in \(F((p))\), the denominator \(z^2+\nu+S\nu^2\) has
 \end{aligned}
 \]
 These identities are exact. They reduce the local quotient problem at P to a coupled coefficient problem in F((p)); they do not yet establish its dimension or a principal-part criterion. In particular, the quadratic exceptional-place proof G-4r cannot simply be copied: there are now four basis coordinates, and the T²-coordinate imposes an additional coupled integrality condition. **Open task G-4u.1:** determine \(K_P/(\mathcal O_P+\{z^2+\nu+S\nu^2\})\), or at least construct an infinite independent family in it, with \(\mathcal O_P=F[[p]][T]\).
+
+
+## 21. G-4v — explicit odd-pole denominator elements at the quartic exceptional place
+
+At the quartic place \(P=T^4+T^2+S\), put \(r=T^2+T\). The exact identity \(r^2+S=P\) gives, for \(w\in F[T]\) and \(m\ge1\),
+\[
+z=rw/P^{m+1},\quad u=w/P^{m+1}
+\quad\Longrightarrow\quad
+z^2+u+Su^2=(w^2+wP^m)/P^{2m+1}.
+\]
+For P-unit w this has pole order exactly \(2m+1\), with leading residue coefficient \(\bar w^2\). In particular w=1 gives \((1+P^m)/P^{2m+1}\), a denominator element with every prescribed odd pole order at least three and leading coefficient one. For the simple pole, use m=0 and w=T:
+\[
+z=rT/P,\quad u=T/P,
+\quad z^2+u+Su^2=(T^2+T)/P,
+\]
+which has a genuine simple pole because P does not divide \(T^2+T\).
+
+This proves that odd pole order alone cannot obstruct classes at this quartic exceptional place. The construction is an explicit family inside the denominator image; it is not a classification of all principal parts and does not establish the dimension of the quartic local quotient. The extra T²-coordinate coupling in G-4u remains the central open issue.
