@@ -2678,3 +2678,8 @@ For \(f=cp^n\), \(c=c_0²+t c_1²\), inverse Cartier of df is \(t c_1^4p^{2n}dt+
 ### G-4ay — logarithmic mixed generator
 
 For r odd positive, \(C^{-1}(d(cp^{-r}))=c_0^4p^{-(2r+1)}dp+S c_1^4p^{-2r}d\log(t/p)\), where \(c=c_0²+t c_1²\), S=t² and c₁⁴∈F². The mixed term is a logarithmic differential with coefficient in \(S F²\), matching the higher-chain coefficient in G-4aj. This identifies the geometric source of that coefficient but does not yet prove completeness of all mixed relations.
+
+
+### G-4az — mixed logarithmic sector in the perfection quotient
+
+At the first odd node of an even-root chain, the G-4ay normal coefficient \(S c_1^4\in S E^4\) maps under G-4aw to \(t^{1/2}c_1+E\in E^{\rm perf}/E\). Thus \(S E^4\) is exactly the first purely inseparable layer \(t^{1/2}E/E\) in the chain. The logarithmic inverse-Cartier orbit \(\eta_{r,A}\mapsto\eta_{2r,A²}\) represents the same direct-limit class. Whether other mixed relations kill the complementary perfection layers remains open.
