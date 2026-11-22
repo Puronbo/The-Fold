@@ -1241,3 +1241,10 @@ Degrees 8–10 provide independent checks. Reproducible exact enumeration: `cert
 
 
 **CM class-group structure (G-35D):** the degree-eight CM field has cyclic class group of odd order. A primitive integral element \(\theta=\pi/(\beta+2)\) has index \(2^{11}\), and exact factorization modulo the five remaining Minkowski primes shows that only two norm-17 prime ideals can represent nontrivial classes. Their product is principal because the underlying real-quartic prime is narrow-principal and splits in the narrow Hilbert class field. Thus one norm-17 prime generates the full class group. Its order, and hence the exact class number, remain open.
+
+
+**Exact CM class number (G-35E):** an explicit integral element
+\[
+\alpha=-(1+\beta)+(-4-3\beta+2\beta^2+\beta^3)\frac{\pi}{\beta+2}
+\]
+has relative norm \(N_{L/F}(\alpha)=((\beta+4)/(\beta+2))(1+\beta)\), hence absolute norm 17. Its principal ideal is one of the two norm-17 primes; their product is already principal. With the Minkowski support reduction and principal primes above 2, this proves the degree-eight CM field has class number one.
