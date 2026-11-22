@@ -1053,13 +1053,13 @@ In particular, the classes
 \[
 \boxed{[S^n p^{-r}],\quad n\ge0}
 \]
-are not merely independent (G-4af): they form an F₂-basis of C_r for every odd r. Therefore the full local scalar quotient has the explicit basis
+are not merely independent (G-4af): they form an F₂-basis of C_r for every odd r. Therefore the auxiliary quotient H₀ has the explicit basis
 \[
 \boxed{
 \left\{S^n p^{-r}: n\ge0,\ r\ge1\text{ odd}\right\}.
 }
 \]
-This proves the quotient is countably infinite-dimensional and supplies a complete normal form: reduce independently along each odd-core chain, then collect the resulting zeroth-coordinate coefficients.
+This proves H₀ is countably infinite-dimensional and supplies a complete normal form for that auxiliary quotient: reduce independently along each odd-core chain, then collect the resulting zeroth-coordinate coefficients.
 
 **Correction to G-4ac:** because phi is bijective, every extension step in the dual recurrence is unique, not merely possible after choosing a vector-space complement. On each chain, an initial functional lambda_0∈F* determines all later functionals uniquely by
 \[
