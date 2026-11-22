@@ -1482,3 +1482,7 @@ the quaternion-boundary arithmetic note.
 
 
 **G-4bs — completed local Kato quotient:** positive p-adic tails are contracted by the convergent geometric series \(\sum_{k≥0}(C^{-1})^k\omega_+\), since inverse Cartier doubles valuations. The completed quotient is therefore the finite-polar model plus the zero mode; the scalar quaternion quotient is its explicit projection.
+
+
+
+**G-4bt — notation:** distinguish base \(S_0\) from coefficient-field square \(\Sigma=t²=S_0+p\). Geometric Cartier formulas use \(F_c=\mathbb F_2(\Sigma)\); scalar normal forms use \(F_0=\mathbb F_2(S_0)\). The p-shift is essential in the symbol comparison.
