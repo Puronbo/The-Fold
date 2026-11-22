@@ -1430,3 +1430,7 @@ the quaternion-boundary arithmetic note.
 
 
 **G-4bf — G-4aj coefficient match:** at every odd pole m≥3, the mixed normal component is \(S^{2^{j-1}}F^{2^j}\), where j=v₂(m−1); inverse Frobenius identifies it with \(S F²\). The tangent relations still need a global independence/completeness proof.
+
+
+
+**G-4bg — index-one bridge:** for E=F(t), t²=S, \(\rho(a+bt)=a+Sb²\) induces \(E/\wp(E)\cong F/\wp(F)\). Thus the geometric and G-4aj index-one coefficient spaces agree; full relation completeness remains open.
