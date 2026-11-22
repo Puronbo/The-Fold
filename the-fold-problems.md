@@ -3065,3 +3065,12 @@ For \(F=\mathbb F_2(S)\), \(C_0(f)^2=f+Sf'\). The operator contracts a Q-pole of
 F/\bigcup_n\ker C_0^n\simeq \mathbb F_2\oplus\bigoplus_{Q\ne S}\mathbb F_2[S]/(Q).
 \]
 This is the finite closed-point residue module of the affine S-line, with the constant block accounting for S=0. The corresponding differential residue is obtained from \(x=a²\mapsto (a/S)dS\) after Cartier. The pure-scaling quotient is now explicit; whether other section-change parameters impose additional relations is open. Adds exact rational-function verifier tools/cartier_stable_part.py.
+
+
+### G-4cp–G-4cq — scaling coinvariants and residue fields
+
+The pure scaling \(t\mapsto t(1+p)\) induces the p-basis root operator \(C_0(a_0²+Sa_1²)=a_0\) on the odd-layer residual. Its stable quotient is \(F/\bigcup_n\ker C_0^n\). For \(F=\mathbb F_2(S)\), partial fractions give
+\[
+F/\bigcup_n\ker C_0^n\simeq \mathbb F_2\oplus\bigoplus_{Q\ne S}\mathbb F_2[S]/(Q)
+\]
+over monic irreducibles Q. The non-S simple-pole blocks are stable; higher poles contract to simple poles; the S-principal part is nilpotent; polynomial terms leave constants. This is the finite closed-point residue module. The full section-group coinvariant remains open: determine whether other section changes preserve this residue module or impose further relations. Rational exact arithmetic and checks are in tools/cartier_stable_part.py.
