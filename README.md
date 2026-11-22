@@ -1570,3 +1570,6 @@ A machine-learning bridge is specified: exact symbolic feature coordinates, filt
 
 
 **G-4cr–G-4cs — finite section-change Cartier-torsion:** the first two pullback coefficients of an odd residual \(a²\) are \(\Delta_1=Sf²a²\in\ker C_0\) and \(\Delta_2=(Su\,a')²+Sf²u\,a²\), with \(C_0²(\Delta_2)=0\). A higher-order torsion bound is conjectural and bounded-tested only. Ohi's parameter-independent Cartier residue theorem is recorded as a possible all-orders bridge; hypotheses and the residue-target identification remain open. Exact test generator: tools/section_change_cartier_stability.py.
+
+
+**G-4ct — Cartier-stable differential interpretation:** the map \(x\mapsto (x/S)dS\) intertwines \(C_0\) with the Cartier operator and identifies the pure-scaling stable quotient with \(\Omega_F^1/B_\infty\). Its explicit finite closed-point residue decomposition is from G-4cq. Whether the full section-change group acts trivially on this stable module remains open.
