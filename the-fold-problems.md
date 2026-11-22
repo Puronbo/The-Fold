@@ -2178,9 +2178,9 @@ Setting \(c=d=h=0\) makes the affine conjugator \(g(x)=ax+bz,\ g(z)=iz\). A univ
 - Does not determine the full quotient \(\mathcal N^2/\mathcal N^3\), because products involving (n_1,n_4) may start in degree three or higher; higher terms and integral (S)-module relations remain open.
 
 
-### UF-072G — Cubic obstructions and two surviving classes
-- Proves the exact identities (n_2^2=n_5^2=0) from their complete source monomial supports and the truncation relations.
-- Computes cubic initial terms of (n_2n_5) and (n_2n_6+n_3n_5).
-- The cubic initial triple-product map from 84 triples has exact rank 60 over (K=\operatorname{Frac}(S)); adjoining those two vectors raises the rank to 62.
-- Therefore these products give two independent nonzero classes in the generic fiber of \(\mathcal N^2/\mathcal N^3\).
-- A full presentation of this quotient, including products involving (n_1,n_4), remains open.
+
+### UF-072G — Corrected cubic initial calculation
+- Corrects \(\operatorname{in}_3(n_2n_5)=(0,a(AB+CG)/i,0,0)\); its \(cdh\)-coordinate cancels.
+- Retains the displayed cubic initial vector for \(n_2n_6+n_3n_5\).
+- A reproducible \(\mathbb F_{256}\) specialization gives cubic triple-map rank 60; adjoining the corrected first vector leaves rank 60, while adjoining the second raises it to 61.
+- These are specialization ranks and generic lower bounds only. The exact generic cubic relation module and \(\mathcal N^2/\mathcal N^3\) remain open. The previous claim of two independent generic classes is withdrawn.
