@@ -2160,3 +2160,18 @@ H_2^2(L)\simeq F/(\wp(F)+SF²)\oplus F/\wp(F)
 with the topology used only to contract the positive tail. The direct-sum terms are finite-support negative exponent orbits. The scalar quaternion boundary quotient is obtained from this full Kato group by the projection in G-4bo/G-4br: retain the zero-mode \(F/\wp(F)\), the second F-coordinate at stage one of each negative orbit, and all later perfection layers; discard the zero-mode \(F/(\wp(F)+SF²)\) and the first F-coordinate of each orbit.
 
 **Scope:** this calculation is for the completed field with the chosen coefficient-field parameter t and p-basis \(\{t,p\}\). Any comparison under a different coefficient-field section must transport the logarithmic coordinates and filtration accordingly.
+
+
+## 71. G-4bt — separate the base parameter from the coefficient-field square
+
+To prevent a notational collision in G-4bs–G-4br, write \(S_0\) for the original rational-function parameter in \(F_0=\mathbb F_2(S_0)\), and write
+\[
+\Sigma=t²=S_0+p
+\]
+for the square of the chosen coefficient-field parameter in \(E=\mathbb F_2(t)\). The coefficient field used in the logarithmic Cartier computation is
+\[
+F_c=E²=\mathbb F_2(\Sigma),
+\]
+whereas the scalar normal-form quotient G-4aj is expressed over \(F_0\) and uses \(S_0\). These are related inside the completion by \(S_0=\Sigma+p\), not by equality.
+
+Accordingly, every occurrence of \(F,S\) in the geometric Cartier formulas G-4ap–G-4bs means \(F_c,\Sigma\). Every occurrence of \(F,S\) in the scalar normal form G-4aj means \(F_0,S_0\). The symbol comparison G-4br explicitly uses \(S_0=\Sigma+p\) and is the bridge between these two coefficient-field sections. This distinction is essential: replacing \(S_0\) by \(\Sigma\) before expanding in p would erase the adjacent-pole term that is killed by the root exact graph.
