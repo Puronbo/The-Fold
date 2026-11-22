@@ -1006,34 +1006,4 @@ The second product term vanishes because it contains (d^2). The monomial (c^3d) 
 
 
 
-## UF-072K — Degree-four initial image of N^3: specialization bounds
-
-The degree-four initial image of \(\mathcal N^3\) must include three types of columns:
-(1) the degree-four parts of triple products of the seven generators with nonzero
-linear terms, obtained by inserting one quadratic correction;
-(2) products of \(n_1\) or \(n_4\) with any pair of those seven generators;
-and (3) all fourfold products of the seven first-order generators. The third
-family is required because \(\mathcal N^3\) is an ideal, not merely the
-\(S\)-span of the 84 triple products.
-
-The resulting matrix has 350 columns (84 + 56 + 210) and 470 source/Laurent
-rows. The candidate target is
-\[
-\operatorname{in}_4(n_1n_4)=A^2a^{-1}i^{-1}c^3d.
-\]
-Over \(\mathbb F_{256}=\mathbb F_2[u]/(u^8+u^4+u^3+u^2+1)\), three
-specializations of \((A,B,C,D,E,G,J)\) give rank 176 for the 350-column
-matrix and rank 177 after adjoining the target. The tuples are
-\[
-(d7,14,84,f8,cf,9b,f4),\quad
-(31,72,a4,5b,e1,93,c7),\quad
-(a1,3d,6f,e3,55,b2,19).
-\]
-These exact specialization ranks prove generic lower bounds 176 and 177
-for the two respective matrices. They do **not** yet prove that the generic
-rank of the 350-column matrix is at most 176; consequently they do not yet
-prove \(n_1n_4\notin\mathcal N^3\). The exact generic rank comparison
-remains open.
-
-Reproducible finite-field certificate:
-\texttt{certificates/uf072k_degree4_specialization.py}.
+undefined
