@@ -1319,3 +1319,6 @@ the quaternion-boundary arithmetic note.
 
 
 **G-4ab — infinite-support local dual annihilator:** a nonzero functional on the exceptional completed principal-part quotient can be built recursively along the exponent chain −1, −2, −4, … using the injective map (x\mapsto[Sx^2]\) from (F=\mathbb F_2(S)) to (F/F^2). It annihilates (z^2+u+Su^2), proving the local quotient is nonzero. The construction is noncanonical and does not classify the quotient.
+
+
+**G-4ac — exact local dual description:** all annihilating functionals split over odd-core exponent chains \(-r,-2r,-4r,\ldots\). On each chain their coefficient functionals satisfy \(\lambda_1\circ\phi=\lambda_0\) and \(\lambda_{j+1}\circ\phi=\lambda_j\circ q\), where \(q:F\to F/F^2\) and \(\phi(x)=[Sx^2]\). Each extension exists because \(\phi\) is injective. The full annihilator has F₂-dimension continuum; this is a dual-space classification, not a classification of the local quotient itself.
