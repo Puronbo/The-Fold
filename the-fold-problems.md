@@ -2943,3 +2943,20 @@ any (v=e+ft) with f nonzero gives surviving class ((0,f)).
 The quotient representation question is settled negatively for the full
 two-dimensional ambient Lie algebra. A possible smaller stabilizer
 subalgebra, or a different functorial quotient action, remains open.
+
+
+### G-4cg — zero infinitesimal stabilizer
+
+G-4cf's counterexample extends to the constant parameter. If (e\ne0),
+use (m=p^nt\,d\log t) at negative odd n. Then
+[
+\rho_{e+ft}((\Phi-1)m)
+=p^{2n}Sft\,d\log t+p^net\,d\log t.
+]
+The first term is exact; the second has nonzero odd-layer class. If
+(f\ne0), G-4cf's (m=p^n d\log t) witness gives a nonzero class.
+Hence no nonzero (v=e+ft) preserves (R=B^1+(\Phi-1)M):
+the infinitesimal stabilizer in the two-dimensional section-change Lie
+algebra is zero. This concerns the ambient Lie-derivative action only;
+discrete coordinate automorphisms or other quotient symmetries are not
+classified.
