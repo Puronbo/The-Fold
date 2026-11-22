@@ -305,3 +305,33 @@ d_2:H^1(C_2,\mathbb F_2)^{C_4}\to H^2(C_4,\mathbb F_2)
 injective. Both sides are one-dimensional, so this transgression is an isomorphism and in particular nonzero.
 
 This is an actual nonzero transgression for a specified finite Galois extension, not merely a nonzero obstruction target. It is a finite cyclic-group test case; it does not yet identify a Fold-specific Galois module or arithmetic class. The ASW classification and Witt truncation framework are described in the cited references.
+
+### G-14 — explicit length-three Witt lift of the quartic field
+
+Use standard 2-typical Witt coordinates. For length two,
+\[
+(F-1)(u,w)=(u^2+u,\;w^2+w+u^3+u^2).
+\]
+Thus the G-12 field is represented by \((s,s)\): the first equation is \(u^2+u=s\), and the second is \(w^2+w+u^3+u^2=s\), equivalent to \(w^2+w=u^3+u\).
+
+Lift the representative to \((s,s,0)\in W_3(K)\). The third coordinate of \(F(u,w,v)-(u,w,v)\), reduced in characteristic two, is
+\[
+u^7+u^4+u^3w^2+u^3w+u^2w^2+u^2w+w^3+w^2+v^2+v.
+\]
+Therefore the explicit cyclic-octic tower is
+\[
+\begin{aligned}
+u^2+u&=s,\\
+w^2+w&=u^3+u,\\
+v^2+v&=u^7+u^4+u^3w^2+u^3w+u^2w^2+u^2w+w^3+w^2.
+\end{aligned}
+\]
+It is the ASW extension attached to \((s,s,0)\), whose reduction is the order-four class of G-12; its character has order eight, so the full extension is cyclic of degree eight and has the specified quartic subfield.
+
+Translation by \((1,0,0)\in W_3(\mathbb F_2)\cong\mathbb Z/8\mathbb Z\) gives a generator
+\[
+\sigma(u)=u+1,\quad
+\sigma(w)=w+u,\quad
+\sigma(v)=v+u^3+uw+u.
+\]
+Its square sends \((u,w,v)\mapsto(u,w+1,v+w)\), and its fourth power sends \((u,w,v)\mapsto(u,w,v+1)\), confirming order eight. This makes the G-13 nonzero transgression example fully explicit at the field-equation level.
