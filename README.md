@@ -1325,3 +1325,6 @@ the quaternion-boundary arithmetic note.
 
 
 **G-4ad — canonical local quotient presentation:** the exceptional scalar principal-part quotient splits over odd-core exponent chains. Each chain is the cokernel of (T((x_j))_0=x_0), (T((x_j))_j=q(x_j)+\phi(x_{j-1})), where (q:F\to F/F^2) and (\phi(x)=[Sx^2]). Equivalently it is the colimit of the zigzag (W_0\leftarrow F_0\to W_1\leftarrow F_1\to\cdots). Its dual recovers the inverse-system equations of G-4ac. This is canonical, but does not yet evaluate the cokernels in closed form.
+
+
+**G-4ae — dimension of each chain:** every odd-core chain cokernel in G-4ad has countably infinite F₂-dimension. Its target is countable, giving the upper bound; its dual maps surjectively onto (F^*) by the extension property of (phi), giving continuum many dual functionals and ruling out finite dimension. Thus the full local quotient is a countable direct sum of countably infinite-dimensional isomorphic chain cokernels. Explicit normal forms remain open.
