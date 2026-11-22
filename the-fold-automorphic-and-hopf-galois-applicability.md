@@ -673,3 +673,43 @@ The Frobenius characteristic polynomial is therefore
 In characteristic 2, the elliptic-curve criterion says that supersingularity is equivalent to divisibility of the Frobenius trace by 2. Since \(a_1=-2\), this independently confirms that E is supersingular. The criterion applies also in characteristics 2 and 3; what fails in these small characteristics is the stronger prime-field shortcut that supersingularity forces trace zero. See MIT 18.783 Lecture 13, Theorem 13.3 and Warning 13.5: https://ocw.mit.edu/courses/18-783-elliptic-curves-spring-2021/6b139f926bbbe94db322ea23300b0246_MIT18_783S21_notes13.pdf.
 
 This pins down the complete Frobenius polynomial of the genus-one quotient, not merely its 2-rank. It does not determine the Newton polygons or isogeny decompositions of the genus-7 and genus-35 Jacobians, nor does it construct a Fold-specific Galois module.
+
+
+## G-25 — exact Weil polynomial of the genus-seven octic curve
+
+The length-three Artin–Schreier–Witt truncation from G-14 has affine model
+\[
+\begin{aligned}
+u^2+u&=s,\\
+w^2+w&=u^3+u,\\
+v^2+v&=u^7+u^4+u^3w^2+u^3w+u^2w^2+u^2w+w^3+w^2.
+\end{aligned}
+\]
+Let C be its smooth projective curve. G-22 gives genus 7 and a unique totally ramified point above s=∞, rational over \(\mathbb F_2\).
+
+For each m, enumerate u,w in \(\mathbb F_{2^m}\). The map z↦z²+z has fibers of size zero or two; precomputing all roots of z²+z=c therefore counts v exactly. Each affine triple (u,w,v) determines s=u²+u, and the unique point at infinity is then added. The exact counts for m=1,...,10 are
+\[
+\begin{array}{c|rrrrrrrrrr}
+m&1&2&3&4&5&6&7&8&9&10\\
+\#C(\mathbb F_{2^m})&9&9&9&9&49&105&121&177&513&1009.
+\end{array}
+\]
+For the genus-seven Weil polynomial, only the first seven counts are needed. Put
+\[
+S_m=2^m+1-\#C(\mathbb F_{2^m}).
+\]
+The first seven power sums are
+\[
+(S_1,\ldots,S_7)=(-6,-4,0,8,-16,-40,8).
+\]
+Newton identities give the first eight coefficients; the curve zeta functional equation supplies the remaining coefficients. The result, in the normalization \(Z(C,T)=P_C(T)/((1-T)(1-2T))\), is
+\[
+\boxed{\begin{aligned}
+P_C(T)={}&1+6T+20T^2+48T^3+90T^4+140T^5+196T^6\\
+&+272T^7+392T^8+560T^9+720T^{10}\\
+&+768T^{11}+640T^{12}+384T^{13}+128T^{14}.
+\end{aligned}}
+\]
+The point counts for m=8,9,10 are independent checks against the completed polynomial, not inputs to its determination. The exact finite-field enumeration and Newton/functional-equation reconstruction are reproducible in `certificates/g24_genus7_weil_polynomial.py`.
+
+The functional equation and point-count formula used here are stated in Ritzenthaler, *Effective geometry and arithmetic of curves*, §6.1, Theorem 6.1.1 and Corollary 6.1.2: https://ritzenth.pages.math.cnrs.fr/web/cours/main.pdf. The genus and unique point at infinity are inherited from the already established G-22 ramification calculation. This determines the Frobenius polynomial of the genus-seven Jacobian, hence its isogeny class over \(\mathbb F_2\); it does not yet factor that polynomial into simple isogeny factors or determine the genus-35 Jacobian.
