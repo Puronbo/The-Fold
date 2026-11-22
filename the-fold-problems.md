@@ -2403,3 +2403,8 @@ Thus it is surjective, with kernel exactly the norm image. In Jordan form it kil
 ## G-33 — CM Artin character and prime splitting
 
 The real quartic CM subfield has narrow class group C2, and its narrow Hilbert class field is the genus-seven simple factor's degree-eight Frobenius field. Because the unit-signature subgroup is exactly the even-parity subgroup, the Artin character of a principal prime ideal (alpha) is the parity of the real signs of alpha, equivalently the sign of its field norm. This predicts explicit relative splitting: 3 and 5 split over their inert degree-four primes; at 7 the two degree-one primes are inert and the degree-two prime splits. The corresponding degree-eight polynomial factorizations modulo 3, 5, and 7 are certified exactly. This is a concrete arithmetic consequence of the CM class-field identification; the CM field's own full class group remains open.
+
+
+## G-34 — odd class number of the CM Frobenius field
+
+For the degree-eight CM field L over its real quartic F, the ambiguous class number formula gives |Cl(L)^Gal(L/F)|=1: there are four ramified infinite places, no ramified finite places, h_F=1, and the norm-unit index is the order-eight totally-positive signature quotient. As h_F=1, conjugation acts on Cl(L) by inversion. Therefore Cl(L)[2]=0 and h_L is odd. Determining its odd part and exact class group remains open.
