@@ -2525,3 +2525,7 @@ For every monic irreducible R with S nonsquare in E_R=F[T]/(R), odd-pole residue
 
 ### G-4u.1 — higher-degree square-residue exceptional places
 The irreducible quartic P=T⁴+T²+S over F₂(S) has residue field containing √S: if β²+β+S=0 and α²=β, then α has minimal polynomial P and (α+β)²=S. The exact P-adic coordinates of z²+u+Su² are recorded in the quaternion-boundary arithmetic note. Determine the local quotient at P, or construct an infinite independent family. The quadratic G-4r argument does not transfer verbatim because the T² coordinate introduces an additional coupled condition.
+
+
+### G-4v — quartic exceptional odd-pole cancellation
+At P=T⁴+T²+S, r=T²+T satisfies r²+S=P. Thus z=rw/P^(m+1), u=w/P^(m+1) gives z²+u+Su²=(w²+wP^m)/P^(2m+1). For P-unit w this has odd pole order 2m+1 and leading residue w̄²; the simple pole is obtained with m=0,w=T. Therefore odd pole order alone is not an obstruction at this exceptional place. The local quotient and the coupled T²-coordinate problem remain open.
