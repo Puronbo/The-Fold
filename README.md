@@ -1289,3 +1289,6 @@ the quaternion-boundary arithmetic note.
 
 
 **G-4r — exceptional completed local quotient:** at P=T²+S, the completed local quotient K_P/(F₂(S)[[P]][T]+{z²+u+Su²}) has exact F₂-dimension ℵ₀. A leading-pole coefficient obstruction shows that Sb/P^(2m+1) survives for every nonzero b∈F₂(S)² and m≥1; an F₂-basis of F₂(S)² yields a countably infinite independent family. The upper bound follows because the field of finite principal parts is countable. This is local and does not determine the global rational quotient; see the quaternion-boundary note.
+
+
+**G-4s — explicit exceptional-place global family:** the completed local obstruction at P=T²+S descends to global independence because a global denominator relation would persist after completion. In particular, {S^(2n+1)/(T²+S)^(2m+1): n≥0, m≥1} is an explicit F₂-linearly independent family in the global quotient Q. Together with G-4k, this gives another concrete family within the already countably infinite-dimensional quotient; no complete basis is claimed.
