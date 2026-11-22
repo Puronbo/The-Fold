@@ -48,6 +48,18 @@ Since the order of 3 in (Z/5Z)^× is 4, Phi_5 is irreducible over F_3, so g is i
 \]
 This is the discriminant of the displayed polynomial, not yet a claim about the full ring-of-integers discriminant.
 
+## Galois group of the real quartic
+
+The cubic resolvent of g is
+\\[
+R(Z)=Z^3+2Z^2-24Z-64=(Z+4)(Z^2-2Z-16).
+\\]
+The rational root means the quartic Galois group preserves one pairing of its four roots, so it is contained in the stabilizer of that pairing, a group isomorphic to D_4. Modulo 3, g is irreducible, giving a 4-cycle. Modulo 7,
+\\[
+g(Y)\\equiv Y(Y-2)(Y^2-Y+3),
+\\]
+and the quadratic factor is irreducible, giving a transposition. Both primes are unramified (they do not divide the polynomial discriminant). A subgroup of this pairing stabilizer containing a 4-cycle and a transposition is the full D_4. Thus the Galois closure of the maximal real quartic has dihedral group of order 8.
+
 ## CM and endomorphism consequence
 
 For a Weil q-number π with no real embeddings, the standard Weil-number characterization says that Q(π) is a CM field and that Q(π+q/π) is its maximal totally real subfield. Here q=2, and the irreducible degree-eight F gives [Q(π):Q]=8. Thus
