@@ -3638,7 +3638,7 @@ its first coordinate is \(S(fa+eb)^2\), which under \(\iota\) becomes the exact 
 \]
 Thus no new Cartier-stable residue is removed at this diagonal.
 
-**Open:** determine whether every higher \(t\)-dependent and mixed-depth correction is Cartier-nilpotent (equivalently, has zero residues in this model), or whether the full section-change group imposes additional relations among the residue coordinates. The zero-mode coinvariant must also be computed separately. G-4cp is therefore an exact pure-scaling result and a residue-theoretic candidate for the full answer, not yet a complete computation of \(Q_{\mathcal G}\).
+**Resolved by G-4cq and G-4ct:** full section changes preserve coefficientwise residues, and Frobenius-normalized sums over each exponent-doubling orbit annihilate the differential-Frobenius relations. The zero-mode coordinate is included in G-4ct. Thus the full coinvariant is now computed; see its canonical normal form there.
 
 
 ## 93. G-4cq — exact formal coefficient-curve pullback behind the full action
@@ -3688,7 +3688,7 @@ Moreover \(\phi(S)=S+O(p^2)\) and \(\phi'(S)=\alpha^2\) is a unit. Thus the full
 
 This is a useful reduction: the remaining full-group coinvariant question is now a residue-functoriality problem for the formal substitution \(\phi\). For pure scaling, the coefficient corrections are exactly the Cartier-nilpotent tower of G-4cp. For a general t-dependent substitution with rational-function coefficients, we still need to prove that every positive-p coefficient of \(\phi^*\omega-\omega\) has zero residues at all closed points, or find a counterexample. The formal change is the identity modulo p, but its coefficient functions may have poles at closed points, so ordinary local-coordinate invariance cannot be invoked without checking the relevant two-dimensional completion.
 
-**Status:** the pullback normal form is exact. The local two-dimensional residue argument in the G-4cq addendum below resolves the test: every full finite section change preserves all coefficientwise residue coordinates. The filtered extension between surviving exponent layers remains open.
+**Status:** the pullback normal form and full-group coefficientwise residue invariance are exact. G-4ct below resolves the remaining filtered extension by a Frobenius-normalized orbit-residue map and gives the full coinvariant normal form.
 
 
 ### G-4cq addendum — local two-dimensional residue proof
@@ -3719,7 +3719,7 @@ Because p is fixed, two-dimensional residue invariance gives
 \]
 This proves that every full finite section change preserves every coefficientwise residue coordinate of the residual odd-layer differential. It applies even when e or f has a pole at Q; the local parameter map is still z+O(p²), with its higher coefficients allowed to have finite z-poles.
 
-Therefore the open residue-invariance test at the end of G-4cq is resolved: **the t-dependent and mixed-depth directions impose no additional relations on the Cartier-residue coordinates.** The remaining issue is the filtered extension between different exponent layers, not further residue relations.
+Therefore the open residue-invariance test at the end of G-4cq is resolved: **the t-dependent and mixed-depth directions impose no additional relations on the Cartier-residue coordinates.** G-4ct further resolves the filtered extension by the Frobenius-normalized orbit sum.
 
 
 
