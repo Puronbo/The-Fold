@@ -812,3 +812,6 @@ B+(p+1+S)x_3^2+R+SR^2\in F((p))^2+F[[p]],}
 with R as above. This is an exact elimination of r₂ and x₂, not yet a closed-form classification because of the remaining existential parameters.
 
 For interpretation, write \(F=\mathbb F_2(S)\) and use \(F=F^2\oplus SF^2\). The quotient \(F((p))/(F((p))^2+F[[p]])\) has one F₂-coordinate from the S-component of each negative even Laurent coefficient, and two F₂-coordinates (the full coefficient in F) from each negative odd Laurent coefficient. Thus the remaining condition is an explicit infinite sequence of coefficient constraints on the four parameters. It is not legitimate to discard those parameters or infer a parity obstruction without solving the coupled constraints.
+
+
+**G-4y coefficient clarification.** The phrase “one F₂-coordinate” above should be read as one coefficient slot, not one-dimensional over F₂. More precisely, each negative even exponent contributes a copy of \(F/F^2\cong SF^2\), and each negative odd exponent contributes a copy of F. Both coefficient spaces have countably infinite F₂-dimension. The total square-class quotient is therefore countably dimensional, consistent with the countability of F((p))'s finite-principal-part quotient.
