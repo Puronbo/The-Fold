@@ -2235,7 +2235,9 @@ An additional audit found a missing factor of `a` in the `dh`-coefficient of `Q_
 
 ### UF-072P — Fresh degree-four specialization lower bounds
 - Rebuilt the 350-column, 470-row degree-four initial matrix from the audited L_j and Q_j tables.
-- Five distinct nonzero F_256 specializations all give rank 172, rising to 173 after adjoining in4(n1*n4).
+- Three listed nonzero F_256 specializations all give rank 172, rising to 173 after adjoining in4(n1*n4).
 - Therefore the generic ranks are at least 172 and 173, respectively. No generic upper bound is known; the strict generic rank gap and n1*n4 nonmembership in N^3 remain open.
 - Next: construct a symbolic rank-172 upper-bound certificate over K=Frac(S).
 - Certificate: certificates/uf072k_degree4_specialization.py (specialization computation only).
+
+- Execution audit: the three tuples in the certificate were run; each returned (172,173). Earlier references to five specializations were erroneous and are corrected here.
