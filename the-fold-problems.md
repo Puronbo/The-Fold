@@ -2146,3 +2146,11 @@ The affine-slice source is \(\mathcal R=B_{\rm red}\otimes k[c,d,h]/(c^4,d^2,h^2
 
 ### UF-072B — Exact reduced affine-slice image
 Setting \(c=d=h=0\) makes the affine conjugator \(g(x)=ax+bz,\ g(z)=iz\). A universal substitution calculation in characteristic two proves \(gug^{-1}=u\) for every \(u\in U\). The reduced sixteen-coordinate image is exactly \((0,1,0,A,B,C,D,E;0,0,1,0,G,A,B+G,J)\), so the reduced image algebra is \(k[A,B,C,D,E,G,J]\), and \(\dim\mathcal A_{\rm aff}=7\). This sharpens UF-072A's upper bound ten. The nilpotent thickening and two-copy coproduct remain open. **UF-072C:** compute the five nilpotent layers over this seven-dimensional reduced image and then perform the independent two-copy Hopf test.
+
+
+### UF-072C — Nine explicit generators for the affine-slice nilradical
+- Chooses seven target coefficient lifts whose reductions are (A,B,C,D,E,G,J); they generate a polynomial subalgebra (S\cong k[A,B,C,D,E,G,J]) mapping isomorphically to the reduced image.
+- Constructs the other nine target coefficients after subtracting their reduced values. These generate the nilradical (mathcal N) as an ideal.
+- Proves each of the nine generators has fourth power zero, so the full affine-slice image algebra is finite as an (S)-module.
+- Gives the exact first-layer presentation (mathcal N/\mathcal N^2\cong S^9/K_1), with (K_1) the still-uncomputed relation module obtained by eliminating (a,b,i).
+- Higher filtration layers and the independent two-copy coproduct/Hopf test remain open.
