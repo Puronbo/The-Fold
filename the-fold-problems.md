@@ -2873,3 +2873,17 @@ Q_{odd}\to Q_{even}: (x,y)\mapsto
 Q_{even}\to Q_{odd}:d\mapsto(0,e_rd).
 \]
 The parity effect comes from dlog(pʳ): its contribution survives iff r is odd in characteristic two. Adopt clockwise = forward filtration depth, i.e. n↦n+r toward zero/less singular terms. Open: compute higher corrections beginning at order 2r, where the coefficient field moves, and classify simultaneous parameters.
+
+
+### G-4cb — second diagonal at arbitrary isolated depth
+
+For q=pʳ and t'=t(1+q(e+ft)), the coefficient coordinate moves at q²:
+\[
+S_{old}=S_{new}+q²S_{new}(e²+S_{new}f²)+O(q⁴).
+\]
+Put D_v=S(e²+Sf²)∂_S. Rescaling the corrected isolated p² calculation gives
+\[
+N_{odd}(x,y)=(Sf²x+D_vx,\ e²y+D_vy),\qquad
+N_{even}(d)=e²d+D_vd
+\]
+at p^{2r}. Unlike the first diagonal, this is parity-independent; f reappears even when r is even. These are isolated-parameter formulas only; simultaneous-depth cross terms and the arbitrary-depth composition law remain open.
