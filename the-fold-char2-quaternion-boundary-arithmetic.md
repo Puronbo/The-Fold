@@ -371,3 +371,26 @@ In particular, if S becomes a square in E, then E/F is not separable,
 so P is inseparable. This identifies exactly the places where the
 G-4l parity argument applies; it does not by itself compute the full
 local quotient or a global normal form.
+
+
+## 13. G-4n — explicit exceptional inseparable place
+
+Take P=T²-S=T²+S in F[T], F=F₂(S). It is irreducible and
+inseparable, with residue field F(√S), so S becomes a square there.
+The exceptional-place construction is explicit:
+\[
+u=S/P,\qquad z=TS/P.
+\]
+Since T²+S=P,
+\[
+z²+u+Su²
+=\frac{T²S²+S³}{P²}+\frac SP
+=\frac{S²(T²+S)+SP}{P²}
+=\frac{S²+S}{P}.
+\]
+The numerator is nonzero in the residue field, so this denominator
+element has a genuine simple pole at P. This confirms concretely that
+the separable-place parity obstruction cannot be extended to every
+irreducible. It does not imply that arbitrary simple principal parts
+at P are removable: the coefficient S²+S is specific, and the
+denominator subgroup is only an F₂-vector space, not an F-vector space.
