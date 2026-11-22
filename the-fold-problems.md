@@ -2693,3 +2693,8 @@ For \(L=E((p))\), the exact forms that are purely tangent have even pole indices
 ### G-4bb — second Cartier layer decomposition
 
 Modulo B₁, negative even exponents give pure tangent \(tE^4\) at tangent pole indices divisible by four. Negative odd exponents n=−r give a tangent term \(tE^4\) at pole 2r, plus normal terms \(E^4\) and \(SE^4\) at pole 2r+1. Since \(E²=E^4\oplus SE^4\), the latter split into pure-normal and mixed-normal parts; the mixed part is paired with the tangent term. This is the finite Laurent B₂ decomposition. Higher Cartier levels must propagate the paired pieces.
+
+
+### G-4bc — iterated mixed logarithmic sector
+
+For j≥1 and odd r, mixed generators are \(S^{2^{j-1}}b^{2^{j+1}}p^{-2^jr}d\log(t/p)\); inverse Cartier sends the jth to the (j+1)st. At normal pole index \(2^jr+1\), the pure-normal coefficient space \(E^{2^{j+1}}\) and mixed-normal coefficient space \(t^{2^j}E^{2^{j+1}}\) complement each other in \(E^{2^j}\). The mixed part is paired with tangent coefficient \(t^{2^j-1}E^{2^{j+1}}\). This organizes the iterated Cartier filtration; the quotient by \(C^{-1}-1\) remains to be computed.
