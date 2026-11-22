@@ -2803,3 +2803,51 @@ Artin–Schreier observation involving (m^2+m) is irrelevant to this
 denominator. The failure above is proved directly for
 (R=B^1+(Phi-1)M), using its strict negative associated-graded
 relations.
+
+
+## 84. G-4cg — the quotient has zero infinitesimal stabilizer
+
+G-4cf used (m=p^n\omega) to detect every parameter with (f\ne0).
+The complementary test detects the constant parameter. Let (e\ne0),
+take (v=e+ft), choose negative odd n, and set (m=p^nt\omega).
+Then
+[
+(\Phi-1)m=p^{2n}S\omega+p^nt\omega.
+]
+Using (X_v(t)=et+fS), (X_v(S)=0), and the connection term
+(ft\cdot t=fS), we get
+[
+\rho_v(t\omega)=et\omega,qquad
+\rho_v(S\omega)=Sft\omega.
+]
+Therefore
+[
+\rho_v((\Phi-1)m)
+=p^{2n}Sft\omega+p^net\omega.
+]
+The first term is exact:
+[
+p^{2n}Sft\omega=d(p^{2n}Sft),
+]
+since (dS=df=0) in (E=F_2(t)) and (2n=0) in characteristic two.
+The remaining term (e p^nt\omega) has nonzero class in the negative
+odd graded quotient, because ((t,0)\notin G).
+
+Combining this with G-4cf:
+- if (f\ne0), the test (m=p^n\omega) leaves the nonzero class
+  (f(0,1)\in Q_n\simeq F^2);
+- if (e\ne0), the test (m=p^nt\omega) leaves the nonzero class
+  (e(0,1)\in Q_n\simeq F^2).
+
+Thus every nonzero (v=e+ft\in E) fails to preserve R. We have proved
+[
+oxed{\{v\in E:\rho_v(R)\subseteq R\}=0.}
+]
+Equivalently, the two-dimensional restricted section-change Lie algebra
+has zero infinitesimal stabilizer on this Kato-style quotient under the
+ambient Lie-derivative action.
+
+**Scope.** This rules out a nonzero infinitesimal action induced by these
+Lie derivatives. It does not rule out actions of discrete coordinate
+automorphisms, nor does it classify a different quotient-level symmetry
+constructed independently of this ambient action.
