@@ -2569,3 +2569,7 @@ Each odd-core chain cokernel has countably infinite F₂-dimension. The target p
 
 ### G-4af — explicit independent chain family
 For each odd r, the classes \([S^n p^{-r}]\), n≥0, are linearly independent in C_r. The zeroth-coordinate F embeds in coker(T_r): any nonzero finite-support input has nonzero output at one index beyond its last nonzero coordinate, by injectivity of phi. This gives a constructive countable lower bound for every chain. It does not yet give a spanning set or normal form.
+
+
+### G-4ag — complete exceptional local normal form
+The map \(\phi:F\to F/F^2\), \(x\mapsto[Sx^2]\), is bijective since \(F=F^2\oplus SF^2\). A finite backward recursion along each odd-core doubling chain reduces every principal part uniquely to the zeroth coordinate. Hence each chain cokernel is canonically F, with basis \([S^np^{-r}]\) for n≥0; the full local quotient has basis \(\{S^np^{-r}:n≥0, r\text{ odd positive}\}\). This supersedes the earlier statement that chain normal forms were open. Dual extensions in G-4ac are unique because phi is onto.
