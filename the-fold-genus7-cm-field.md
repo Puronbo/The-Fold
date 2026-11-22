@@ -122,3 +122,22 @@ The narrow Hilbert class field has degree two over K. Since L/K is itself quadra
 \boxed{L=K^{\mathrm{narrow\ Hilbert}}.}
 \]
 The exact unit norms, rational root intervals, interval sign checks, and rank-three signature calculation are included in certificates/g30_real_quartic_class_number.py.
+
+
+## 6. Local splitting recovers the fourfold Newton slopes
+
+The two degree-one Newton-polygon factors of \(X^2-\beta X+2\) over \(K_{\mathfrak p}\) have root valuations 1 and 3, respectively, for the normalization \(v_{\mathfrak p}(\beta)=1\). Since \(v_{\mathfrak p}(2)=4\), the corresponding normalized 2-adic valuations are
+\[
+\frac{1}{4},\qquad\frac{3}{4}.
+\]
+The decomposition
+\[
+L\otimes_{\mathbb Q}\mathbb Q_2
+\cong K_{\mathfrak p}\times K_{\mathfrak p}
+\]
+has two factors of degree four over \(\mathbb Q_2\). In each factor the image of \(\pi\) generates the local degree-four field, so its valuation occurs four times among the local Frobenius conjugates. Consequently
+\[
+\boxed{\operatorname{Slopes}(A_4)=
+\{(1/4)^4,(3/4)^4\}.}
+\]
+This recovers the fourfold Newton slopes from the local decomposition of its CM field. The two elliptic factors contribute the six slope-1/2 roots in the full genus-seven Jacobian.
