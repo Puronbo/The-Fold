@@ -199,3 +199,45 @@ For any ideal class \(c\) of \(L\), its norm is trivial because \(h_F=1\). Hence
 \]
 
 This does not determine the odd part of the class group, nor prove that \(h_L=1\). The ambiguous class formula and its infinite-place convention are stated, for example, in Martinet's notes on units in quadratic fields, Theorem 0.1.
+
+
+## G-35A — relative integral basis for the CM field
+
+Let \(F=\mathbb Q(\beta)\), \(L=F(\pi)\), with
+\[
+g(\beta)=0,\qquad \pi^2-\beta\pi+2=0.
+\]
+Put \(\mathfrak p=(\beta+2)\). Since \(N_{F/\mathbb Q}(\beta+2)=g(-2)=2\), this is the unique prime above 2 and \((2)=\mathfrak p^4\). The G-29 local calculation gives
+\[
+(\beta^2-8)=\mathfrak p^2.
+\]
+Define
+\[
+\theta=\frac{\pi}{\beta+2}.
+\]
+Substitution into the quadratic equation gives the monic polynomial
+\[
+X^2-\frac{\beta}{\beta+2}X+
+\frac{2}{(\beta+2)^2}.
+\]
+Its coefficients are integral at \(\mathfrak p\), since
+\[
+v_{\mathfrak p}\!\left(\frac{\beta}{\beta+2}\right)=0,
+\qquad
+v_{\mathfrak p}\!\left(\frac{2}{(\beta+2)^2}\right)=2.
+\]
+At every other finite prime the denominator is a unit and \(\pi\) is integral. Thus \(\theta\) is an algebraic integer.
+
+The relative discriminant of this monic polynomial is
+\[
+\frac{\beta^2-8}{(\beta+2)^2},
+\]
+which generates the unit ideal by the two ideal identities above. Hence the order \(\mathcal O_F[\theta]\) has unit relative discriminant. G-29 already proves that the relative field discriminant of \(L/F\) is the unit ideal. The relative order-index discriminant identity therefore forces the index
+\([\mathcal O_L:\mathcal O_F[\theta]]\) to be the unit ideal. We conclude
+\[
+\boxed{\mathcal O_L=\mathcal O_F[\theta],
+\quad \theta=\pi/(\beta+2).}
+\]
+This corrects the use of \(\pi\) as a candidate relative integral-basis generator: the rescaled generator is the one with unit relative discriminant. It is the appropriate starting point for an exact enumeration of prime ideals under the G-35 Minkowski bound.
+
+The order-index discriminant identity used here is the standard relation between the discriminant of an order and that of its integral closure; see, for example, MIT 18.785 Lecture 12, Theorem 12.22 and the displayed index formula.
