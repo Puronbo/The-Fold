@@ -2632,3 +2632,8 @@ In \(L=E((p))\), \(E=\mathbb F_2(t)\), write \(g=\sum c_n(t)p^n\). Then \(dg=\su
 ### G-4aq — normal principal-part quotient modulo exact forms
 
 For \(L=E((p))\), \(E=\mathbb F_2(t)\), the pure-normal exact relations are exactly square-coefficient terms at even pole indices. Thus the finite normal principal-part quotient by exact forms is \(\bigoplus_{m\ odd}E p^{-m}dp\oplus\bigoplus_{m\ even}(E/E^2)p^{-m}dp\). This is an exact de Rham intermediate quotient, not the full Kato group; the higher Cartier filtration and tangent interaction remain open.
+
+
+### G-4ar — inverse-Cartier recurrence on normal symbols
+
+For \(L=E((p))\), inverse Cartier sends \(cp^{-m}dp\) to \(c^2p^{-(2m-1)}dp\) modulo exact forms. Hence \(C^{-1}-1\) links pole index m to 2m−1, with coefficient squaring; at m=1 it gives the Artin–Schreier-shaped coefficient \(c^2+c\). Iterating the index map gives \(2^j(m-1)+1\). This is exact modulo dL, but not a classification of the Kato group: quotient by \(B_\infty\) and mixed tangent contributions remain to be computed.
