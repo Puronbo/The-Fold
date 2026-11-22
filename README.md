@@ -1536,3 +1536,12 @@ They preserve exact forms, and naturality of inverse Cartier modulo
 exact forms implies that they preserve \(R=B^1+(\Phi-1)M\). Thus they
 act on \(M/R\), despite the zero stabilizer of the naive ambient Lie
 derivative proved in G-4cf–G-4cg. Explicit quotient matrices remain open.
+
+
+**G-4ci — exact finite pullback:** for \(t\mapsto t(1+p^rv)\),
+\[
+A'=\sigma(A)\left(1+\frac{p^rft}{1+p^rv}\right),\qquad
+B'=\sigma(B)+\sigma(A)\frac{(r\bmod2)p^rv}{1+p^rv}.
+\]
+Its leading \(p^r\)-term is exactly G-4ca. This is the ambient formula;
+the reduced matrices on \(M/R\) remain to be computed.
