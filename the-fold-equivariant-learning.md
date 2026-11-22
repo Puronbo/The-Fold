@@ -500,3 +500,43 @@ The immediate supervised tasks are now:
 4. learning the unresolved filtered extension cocycles while keeping the graded residue features fixed.
 
 Hold out entire irreducible polynomials and residue-field degrees to test generalization beyond memorized denominators. The old polynomial-only dataset remains useful for the Cartier/Frobenius tower, but it is not enough to learn the complete finite-place residue module.
+
+
+## 13. Canonical orbit-residue coordinates for all invariant linear readouts
+
+G-4ct upgrades the graded result to the full algebraic coinvariant. For a negative exponent-doubling orbit rooted at \(-q\), q positive odd, the correct invariant is not a residue at a single exponent. It is the Frobenius-normalized orbit sum
+\[
+\mathfrak r_{q,Q}
+=\sum_{j\ge0}\operatorname{Frob}_{k_Q}^{-j}
+\operatorname{res}_Q\left(\frac{a_{-2^j q}}S\,dS\right),
+\]
+where \(A_n=a_n+t b_n\) is the first logarithmic coefficient at exponent n. This telescopes under \((\Phi-1)\), and it is invariant under the full section-change group by the exact coefficient-curve pullback and two-dimensional residue invariance.
+
+The complete algebraic coinvariant is canonically
+\[
+Q_{\mathcal G}\simeq
+F/\wp(F)\oplus
+\bigoplus_{q>0\ {\rm odd}}\bigoplus_{Q\ {\rm monic\ irreducible}} k_Q.
+\]
+The zero summand is identified with \(F/\wp(F)\) by the p-basis map \(a=u^2+Sv^2\mapsto u\). Thus the filtered extension is no longer open: the orbit-residue map supplies a canonical splitting, not merely a noncanonical vector-space decomposition.
+
+An invariant linear readout is any \(\mathbb F_2\)-linear functional on this direct sum. Each finite residue coordinate has the trace-dual form
+\[
+x\longmapsto \operatorname{Tr}_{k_Q/\mathbb F_2}(c_{q,Q}x),
+\qquad c_{q,Q}\in k_Q.
+\]
+Because the source is an algebraic direct sum, an arbitrary algebraic linear functional may select coefficients on infinitely many coordinates; continuous/readout restrictions would impose a separate finiteness or decay condition.
+
+### Orbit-aware data task
+
+A residue example must now carry its exponent-orbit root q and stage j. If \(\alpha_j\in k_Q\) is the finite residue at exponent \(-2^j q\), the invariant target is
+\[
+\sum_j \operatorname{Frob}^{-j}(\alpha_j).
+\]
+Training examples should include:
+- single-stage inputs;
+- relation pairs \((\alpha_j,\alpha_j^2)\) at adjacent stages, whose normalized sum is zero;
+- random finite orbit sequences with known normalized sum;
+- full section-change perturbations whose orbit-residue target must remain fixed.
+
+This prevents the model from confusing coefficientwise residues with the actual invariant of the Cartier quotient.
