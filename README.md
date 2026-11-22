@@ -1398,3 +1398,7 @@ the quaternion-boundary arithmetic note.
 
 
 **G-4ax — mixed B₂ formula:** inverse Cartier of \(d(cp^n)\), with \(c=c_0²+t c_1²\), is \(t c_1^4p^{2n}dt+n(c_0^4+t²c_1^4)p^{2n-1}dp\). The mixed normal coefficient at odd negative n is \(S F²\), paired with a tangent term; this is the first geometric appearance of the G-4aj higher-chain coefficient, not an independent relation.
+
+
+
+**G-4ay — logarithmic mixed generator:** the mixed B₂ term for odd negative p-exponents is \(S c_1^4p^{-2r}d\log(t/p)\), with coefficient in \(S F²\). Its normal and tangent pieces are one logarithmic form, matching the higher-chain coefficient space of G-4aj; completeness of mixed relations remains open.
