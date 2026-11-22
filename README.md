@@ -1143,3 +1143,6 @@ For a cyclic quotient (C_q), (q=2^n), in characteristic two, set (D=\sigma-1). T
 
 ### G-9 — Explicit cyclic-cohomology representatives
 For a Jordan chain \(De_j=e_{j-1}\) of length \(d<q=2^n\), the top vector \(e_{d-1}\) represents its basis class in \(H^1(C_q,V)\), and the bottom vector \(e_0\) represents its basis class in \(H^2(C_q,V)\). A length-\(q\) block contributes zero because its top is a D-boundary and its bottom is a norm. Thus G-8 has explicit representative-level bases, not only a dimension formula. Evaluating a Galois transgression still requires a specified extension and module.
+
+### G-10 — Cochain-level Galois transgression
+The Hochschild–Serre transgression can be computed from an invariant class \([\alpha]\in H^1(N,V)^Q\): extend a representing 1-cocycle on N to a 1-cochain on G, choose the extension so its coboundary descends to a 2-cocycle on Q with values in \(V^N\), and take that cohomology class. For a cyclic 2-power quotient in characteristic two, G-8 identifies the quotient \(H^2=\ker D/\operatorname{im}D^{q-1}\), and G-9 gives explicit Jordan-chain representatives. A Fold-specific arithmetic computation still requires a concrete extension, module, and invariant cocycle.
