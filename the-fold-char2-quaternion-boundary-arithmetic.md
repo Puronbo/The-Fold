@@ -305,3 +305,39 @@ Under G-4i the corresponding independent boundary representatives are
 \]
 This establishes the exact vector-space dimension, but does not give a
 canonical basis or a reduction algorithm for arbitrary rational functions.
+
+
+## 11. G-4l — separable-place parity obstruction
+
+Let \(F=\mathbb F_2(S)\), \(K=F(T)\), and let \(P\in F[T]\) be monic,
+irreducible, and separable. Its residue field
+\(E_P=F[T]/(P)\) is finite separable over F. Since \(S\) is nonsquare
+in F, adjoining \(\sqrt S\) is a nontrivial purely inseparable
+extension. A finite separable extension cannot contain this element;
+therefore S remains nonsquare in \(E_P\).
+
+For \(d=z^2+u+Su^2\), consider the P-adic valuation. If u has a pole
+of order m, then \(Su^2\) has pole order 2m; if z has a pole of order
+n, then \(z^2\) has pole order 2n. If these orders tie, cancellation
+of their leading coefficients would imply that S is a square in
+\(E_P\), impossible. If they do not tie, the larger even pole order
+survives. If u is regular, any pole comes from z² and is even. Thus
+every denominator element has either no pole or even pole order at P.
+
+Choose an F2-basis of E_P and polynomial representatives r(T) of
+degree less than deg(P). For all such representatives and all n≥0,
+the classes
+\[
+r(T)/P^{2n+1}
+\]
+are jointly linearly independent in Q, as P ranges over the monic
+separable irreducibles. For a finite relation, choose a P occurring
+in it and the largest n with nonzero coefficient at that P. The
+corresponding residue coefficient is nonzero by basis independence,
+so the relation has an odd pole order at P. Terms indexed by other
+irreducibles are regular at P, and denominator elements cannot have
+that odd pole order.
+
+This refines the rational-place family in G-4k. It is still an
+independent family, not a complete basis or a reduction algorithm
+for Q.
