@@ -190,3 +190,37 @@ Multiplication by \(S\) shows that the criterion is equivalent to
 \]
 Thus the full kernel membership question is reduced to an Artin--Schreier coset test over \(K=\mathbb F_2(S,T)\). This does not yet evaluate that test in closed form for arbitrary rational functions \(\alpha,\beta,\gamma\); in particular, it is not a claim that the image is a \(K\)-linear subspace.
 
+
+## 8. G-4i — intrinsic additive quotient for the boundary image
+
+Retain \(K=\mathbb F_2(S,T)=k^2\), with \(S=s^2\), \(T=t^2\). For
+\([a]=\alpha s+\beta t+\gamma st\in k/K\), define
+\[
+A(a)=\alpha+T\beta^2+ST\gamma^2\in K.
+\]
+The expression is additive in \([a]\). The G-4h coefficient criterion says
+\[
+[a]\in\ker\delta_s
+\iff A(a)\in K^2+L_S(K),\qquad
+L_S(u)=u+Su^2.
+\]
+Consequently the map
+\[
+\Psi:k/K\longrightarrow K/(K^2+L_S(K)),\qquad
+[a]\longmapsto[A(a)]
+\]
+is a well-defined surjective additive homomorphism: for every \(A\in K\),
+\(\Psi([As])=[A]\). Its kernel is exactly \(\ker\delta_s\). The first
+isomorphism theorem therefore gives the exact image structure
+\[
+\boxed{\operatorname{im}(\delta_s)\cong
+K/(K^2+\{u+Su^2:u\in K\})}
+\]
+as additive groups (equivalently, \(\mathbb F_2\)-vector spaces).
+
+Equivalently every image class has a representative symbol
+\([AS,s)_2\), with two parameters giving the same class precisely when
+their difference lies in \(K^2+L_S(K)\). This is an intrinsic quotient
+presentation, not a dimension computation: determining the dimension or a
+basis of this quotient remains open. The class \(\delta_s([t])\) corresponds
+to the coset of \(T\), which is nonzero by the valuation argument in §2.
