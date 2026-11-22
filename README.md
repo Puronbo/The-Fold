@@ -1378,3 +1378,7 @@ the quaternion-boundary arithmetic note.
 
 
 **G-4as — higher-Cartier inclusions:** for even m≥2, exact normal forms \(a^2p^{-m}dp\) lie in B₁; iterating inverse Cartier shows \(a^{2^n}p^{-(2^{n-1}(m-1)+1)}dp\in B_n\). Hence selected odd-pole layers contain explicit power subspaces indexed by \(v_2(r-1)\). This is an inclusion, not a full description of \(B_\infty\); mixed tangent contributions remain open.
+
+
+
+**G-4at — exact pure-normal Cartier filtration:** for finite normal principal parts, \(B_n\) consists exactly of even pole indices with coefficients E², together with odd indices m≥3 satisfying \(v_2(m-1)\le n-1\), whose coefficient space is \(E^{2^{v_2(m-1)+1}}\). Pole index 1 is absent at every finite level. This is an exact pure-normal result, not a classification of mixed forms or the full Kato quotient.
