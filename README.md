@@ -1310,3 +1310,6 @@ the quaternion-boundary arithmetic note.
 
 
 **G-4y — quartic elimination:** the corrected coupled system can be reduced by solving for \(r_2\), leaving one square-class condition in \(F((p))/(F((p))^2+F[[p]])\) with four existential parameters. This is exact but not yet a closed-form local classification. See the arithmetic note.
+
+
+**G-4z — quartic coefficient recursion:** the remaining square-class condition has an explicit Laurent-coefficient recursion for R=(S+p)⁻¹U and a parity test on E=B+(1+S)x₃²+px₃²+R+SR². This converts the local membership question into exact coefficient constraints but does not yet determine the image codimension. See the arithmetic note.
