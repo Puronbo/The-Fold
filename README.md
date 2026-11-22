@@ -1304,3 +1304,6 @@ the quaternion-boundary arithmetic note.
 
 
 **G-4w — quartic local reduction:** the scalar and \(T^2\) coordinates reduce exactly to a coupled pair of additive equations after taking \(C=A+(p+S)B\). The first equation alone is unobstructed; any local obstruction must involve the shared variables in both equations. Details are in the quaternion-boundary arithmetic note.
+
+
+**G-4x — correction:** the quartic coupled equation in G-4w had an incorrect coefficient on \(x_3^2\). The correct coefficient is \(p+S\), not \((p+S)^2\). The corrected pair is recorded in the arithmetic note; the local quotient remains open.
