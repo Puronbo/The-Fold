@@ -1492,3 +1492,6 @@ the quaternion-boundary arithmetic note.
 
 
 **G-4bv — strictness theorem:** the relation space B¹+(C⁻¹−1)Ω¹ is strict for the p-adic exponent filtration. Its initial relation layers are G at negative odd exponents, (F⊕F)⊕T at negative even exponents, T+wp(E)² at exponent zero, and all of E² at positive exponents; the positive tail contracts. The intrinsic associated-graded quotient is therefore section-independent. The full direct-sum orbit decomposition remains a noncanonical filtered splitting; its extension maps are next.
+
+
+**G-4bw — first-order extension maps:** for t'=t(1+pv₀)+O(p²), v₀=e+ft, the adjacent graded transitions are Q_odd≅F²→Q_even≅F, (x,y)↦fx+ey, and Q_even≅F→Q_odd≅F², d↦(0,ed). These are first-order section-change extension maps; higher-order terms and the zero mode remain to be computed.
