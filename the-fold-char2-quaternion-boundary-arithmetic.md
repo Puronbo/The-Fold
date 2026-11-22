@@ -878,3 +878,37 @@ Let \(\ell:\mathcal H\to\mathbb F_2\) be an F₂-linear functional supported on 
 If \(\ell\ne0\), choose the most negative exponent n in its finite slot support on which its component is nonzero. Vary the Laurent coefficient u_n freely while setting all other coefficients of u to zero. The resulting principal part of u+Su² has contributions only at exponents n and 2n. Since 2n<n and is more negative than every exponent in I, its 2n contribution is invisible to ell. The n-slot contribution is the arbitrary class of u_n in F when n is odd, or in F/F² when n is even. Thus the n-slot component of ell must vanish, a contradiction. Therefore ell=0.
 
 Consequently, no nonzero finite-slot F₂-linear functional separates a class from the denominator image. This does **not** imply that the denominator image is all of H: a nonzero algebraic separating functional on a proper subspace may have infinite slot support. Any dual obstruction must therefore involve infinitely many principal-part slots. This is a restriction on certificate shape, not a local quotient classification.
+
+
+## 27. G-4ab — an infinite-support annihilator exists
+
+Let \(F=\mathbb F_2(S)\) and
+\[
+\mathcal H=F((p))/(F((p))^2+F[[p]])
+\cong\bigoplus_{r\ge1}F p^{-(2r-1)}
+\oplus\bigoplus_{r\ge1}(F/F^2)p^{-2r}.
+\]
+For the exponent chain \(-1,-2,-4,-8,\ldots\), define the injective F₂-linear map
+\[
+\phi:F\longrightarrow F/F^2,\qquad x\longmapsto[Sx^2].
+\]
+It is injective: if \(Sx^2=y^2\) and x is nonzero, then \(S=(y/x)^2\), contrary to S being nonsquare in F.
+
+Choose a nonzero F₂-linear functional \(\ell_{-1}:F\to\mathbb F_2\). Since \(\phi\) is injective, extend it to \(\ell_{-2}:F/F^2\to\mathbb F_2\) such that
+\[
+\ell_{-2}([Sx^2])=\ell_{-1}(x).
+\]
+Inductively, after choosing \(\ell_{-2^j}\) for j≥1, define a functional on the subspace \(\phi(F)\) by
+\[
+[Sx^2]\longmapsto\ell_{-2^j}([x]),
+\]
+and extend it to all of \(F/F^2\), obtaining \(\ell_{-2^{j+1}}\). Injectivity of phi makes each extension well-defined. Set all coefficient functionals at negative exponents outside this chain equal to zero.
+
+These coefficient functionals define a linear functional \(\ell\) on the direct sum \(\mathcal H\): each principal part has only finitely many nonzero slots. For an arbitrary Laurent principal part u, the coefficient u_m contributes to \(u+Su^2\) at exponents m and 2m. The chain recurrences
+\[
+\ell_{-1}(x)=\ell_{-2}([Sx^2]),\qquad
+\ell_{-2^j}([x])=\ell_{-2^{j+1}}([Sx^2])\quad(j\ge1)
+\]
+therefore cancel these contributions in pairs. All off-chain contributions vanish. Hence \(\ell(u+Su^2)=0\). Squares are already zero in H, so \(\ell\) annihilates the full denominator \(z^2+u+Su^2\). Since \(\ell_{-1}\ne0\), the resulting functional is nonzero.
+
+Thus the local quotient H is nonzero, with a separating functional of necessarily infinite slot support. The construction is noncanonical (it uses successive vector-space extensions); it is not an explicit finite certificate or a classification of H.
