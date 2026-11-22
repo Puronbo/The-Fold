@@ -268,3 +268,40 @@ More explicitly, the independent image classes are represented by
 G-4i quotient isomorphism to \([T^{2n+1}]\in Q\). Equivalently they are
 the boundary values \(\delta_s([sT^{2n+1}])\). This proves infinite
 rank, not a basis or a complete normal form for the quotient.
+
+
+## 10. G-4k — exact countable dimension and finite-place independent family
+
+The valuation argument of G-4j applies at every place \(v_a=v_{T-a}\),
+for \(a\in\mathbb F_2(S)\). The residue field is
+\(\mathbb F_2(S)\), in which \(S\) is not a square. For a denominator
+element \(d=z^2+u+Su^2\), if \(u\) has a pole of order \(m>0\) at
+\(v_a\), then \(Su^2\) has pole order \(2m\), strictly exceeding
+the pole order \(m\) of \(u\). Its leading term cannot cancel with
+that of \(z^2\), since such cancellation would make \(S\) a square
+in the residue field. If \(u\) is regular, any pole comes from \(z^2\)
+and has even order. Hence every denominator element has either no pole
+or an even pole order at each \(v_a\).
+
+It follows that
+\[
+\left\{(T-a)^{-(2n+1)}:
+a\in\mathbb F_2(S),\ n\ge0\right\}
+\]
+is linearly independent in \(Q=K/(K^2+L_S(K))\): in a finite
+nontrivial linear combination, choose a place \(v_a\) that occurs;
+the largest odd pole order at that place survives, whereas all other
+terms are regular there. It cannot equal a denominator element.
+
+The indexing set is countably infinite, and \(K=\mathbb F_2(S,T)\)
+is countable. Therefore
+\[
+\boxed{\dim_{\mathbb F_2}Q=\aleph_0
+=\dim_{\mathbb F_2}\operatorname{im}(\delta_s).}
+\]
+Under G-4i the corresponding independent boundary representatives are
+\[
+\left[S(T-a)^{-(2n+1)},s\right)_2.
+\]
+This establishes the exact vector-space dimension, but does not give a
+canonical basis or a reduction algorithm for arbitrary rational functions.
