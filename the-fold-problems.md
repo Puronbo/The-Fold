@@ -2408,3 +2408,18 @@ The real quartic CM subfield has narrow class group C2, and its narrow Hilbert c
 ## G-34 — odd class number of the CM Frobenius field
 
 For the degree-eight CM field L over its real quartic F, the ambiguous class number formula gives |Cl(L)^Gal(L/F)|=1: there are four ramified infinite places, no ramified finite places, h_F=1, and the norm-unit index is the order-eight totally-positive signature quotient. As h_F=1, conjugation acts on Cl(L) by inversion. Therefore Cl(L)[2]=0 and h_L is odd. Determining its odd part and exact class group remains open.
+
+
+### G-35A — relative integral basis of the degree-eight CM field
+- Set \(\mathfrak p=(\beta+2)\), with \((2)=\mathfrak p^4\), \((\beta^2-8)=\mathfrak p^2\), and \(N(\beta+2)=2\).
+- The rescaled element \(\theta=\pi/(\beta+2)\) satisfies the monic quadratic
+  \[
+  X^2-\frac{\beta}{\beta+2}X+\frac{2}{(\beta+2)^2}=0.
+  \]
+  Its coefficients are integral at \(\mathfrak p\) and elsewhere, so \(\theta\in\mathcal O_L\).
+- Its relative polynomial discriminant is \((\beta^2-8)/(\beta+2)^2\), a unit. Since G-29 establishes that the relative field discriminant is also a unit, the relative index-discriminant identity gives
+  \[
+  \mathcal O_L=\mathcal O_F[\theta].
+  \]
+- This provides an exact relative integral basis for the Minkowski enumeration. The full absolute class group remains undetermined.
+- Derivation: [CM-field arithmetic note](the-fold-genus7-cm-field.md).
