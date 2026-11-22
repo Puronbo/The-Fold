@@ -238,3 +238,21 @@ Thus, after choosing Jordan chains, the short-block top vectors form a basis of 
 For an exact sequence \(1\to N\to G\xrightarrow{\pi}Q\to1\) and a \(G\)-module \(V\), put \(W=V^N\). Let \([\alpha]\in H^1(N,V)^Q\), represented by a 1-cocycle \(\alpha:N\to V\). The transgression is computed by extending \(\alpha\) to a 1-cochain \(\beta:G\to V\) and taking its coboundary. In the standard cochain construction, invariance of \([\alpha]\) permits the extension to be chosen so that \(d\beta\) descends to a 2-cocycle on \(Q\) with values in \(W\); its class is \(d_2([\alpha])\in H^2(Q,W)\). The representative depends on choices, but the cohomology class does not. This is the explicit cochain description of the Hochschild–Serre transgression.
 
 For \(Q=C_q\) in characteristic two, G-8 computes the target as \(\ker D/\operatorname{im}D^{q-1}\), and G-9 supplies Jordan-chain representatives for its classes. Thus an actual arithmetic computation has a finite endpoint: construct \(\alpha\), perform the cochain extension and coboundary calculation, then reduce the resulting invariant vector modulo the norm image. No Fold-specific \(N,G,V,\alpha\) has yet been constructed, so no numerical transgression is claimed.
+
+### G-11 — Cyclic cocycle sum and the explicit obstruction vector
+
+Let \(Q=C_q=\langle\sigma\rangle\) act on \(W\), and let \(\tau:Q\times Q\to W\) be a normalized inhomogeneous 2-cocycle. In the extension represented by \(\tau\), use the multiplication convention
+\[
+(w,g)(w',g')=(w+g w'+\tau(g,g'),gg').
+\]
+The q-th power of the lift \((0,\sigma)\) is
+\[
+(w_\tau,1),\qquad
+w_\tau=\sum_{j=0}^{q-1}\tau(\sigma^j,\sigma).
+\]
+Associativity implies \(w_\tau\in W^Q\); changing the lift changes it by a norm. Under the standard cyclic identification, the class of \(\tau\) in \(H^2(C_q,W)\) is therefore represented by \(w_\tau\in W^Q/N_QW\).
+
+In characteristic two with \(q=2^n\), the norm is \(D^{q-1}\), where \(D=\sigma-1\). Thus after constructing the G-10 quotient cocycle, sum its q consecutive values, verify \(Dw_\tau=0\), and reduce modulo \(\operatorname{im}D^{q-1}\). In a Jordan basis this reads off exactly the coefficients on bottom vectors of blocks of length less than q. This supplies a direct representative-level vanishing test for the transgression. The formula depends on the stated inhomogeneous cocycle convention; changing convention changes the displayed cocycle formula accordingly.
+
+This is a general cyclic-cohomology computation, not yet an arithmetic evaluation for the Fold: a concrete Galois extension, coefficient module, and invariant class remain necessary.
+
