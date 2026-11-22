@@ -2733,3 +2733,8 @@ For each nonzero odd exponent r, its orbit 2^j r has coefficient module \(V_{r,j
 ### G-4bj — perfect-closure orbit quotient
 
 Taking 2^j-th roots identifies the direct limit for each nonzero odd exponent orbit with \((E^{perf})²/(G_0+(U_\infty,0))\), where \(G_0=\{(tb,a+bt):a,b∈F\}\) and \(U_\infty=\sum_{h≥1}t^{1/2^h}F^{1/2^h}\). This is the closed-form full two-coordinate orbit quotient. Simplifying U∞ and comparing with G-4aj remain open.
+
+
+### G-4bk — negative orbit quotient is F⊕F
+
+The tangent subspace \(U∞=\sum_{h≥1}t^{1/2^h}F^{1/2^h}\) is the canonical complement \(E^{perf}/E\). After quotienting it, each negative exponent orbit reduces to \((E⊕E)/G₀\). For A=A₀+tA₁ and B=B₀+tB₁, the map \((A,B)↦(A₀,A₁+B₁)\) has kernel G₀ and identifies the orbit quotient with F⊕F. This computes every negative odd exponent orbit; exponent zero and completion remain.
