@@ -1628,3 +1628,27 @@ Here n is read in \(\mathbb F_2\). Thus:
 For n=−r with r positive odd, the mixed normal term has pole index 2r+1 and coefficient \(t^2E^4=S F^2\), where \(S=t^2\), \(F=E^2=\mathbb F_2(S)\). Its tangent partner has pole index 2r and coefficient \(tE^4\). This is the precise first-layer geometric occurrence of the higher-chain coefficient \(S F^2\) from G-4aj.
 
 The formula describes generators of \(B_2=C^{-1}(dL)\) arising from monomials; finite sums give all Laurent-polynomial inputs, and coefficientwise continuity gives the completed statement. It does not say the mixed normal term alone lies in \(B_2\): only the full tangent-plus-normal sum is killed. That distinction is essential for the next quotient calculation.
+
+
+## 50. G-4ay — logarithmic form of the mixed normal–tangent generator
+
+For n=−r with r≥1 odd, the G-4ax formula separates as
+\[
+C^{-1}(d(cp^{-r}))=
+ c_0^4p^{-(2r+1)}dp
+ +t c_1^4p^{-2r}dt+t^2c_1^4p^{-(2r+1)}dp,
+\]
+where \(c=c_0^2+t c_1^2\). Since \(S=t^2\) and in characteristic two
+\[
+d\log(t/p)=dt/t+dp/p,
+\]
+the mixed pair is exactly
+\[
+\boxed{S c_1^4p^{-2r}d\log(t/p).}
+\]
+Thus
+\[
+\boxed{C^{-1}(d(cp^{-r}))=
+ c_0^4p^{-(2r+1)}dp+S c_1^4p^{-2r}d\log(t/p).}
+\]
+Here \(c_1^4\in E^4=F^2\), so the logarithmic coefficient lies in \(S F^2\), exactly the higher-chain coefficient space in G-4aj. The normal and tangent components are the two components of one logarithmic differential along the exceptional divisor; they must be tracked together. This is a concrete geometric match of coefficient spaces, but not yet a proof that the full local quotient has precisely the G-4aj normal form: one must still prove that the logarithmic generators account for all mixed Cartier relations and that no additional relations arise.
