@@ -1183,3 +1183,6 @@ For an abelian-kernel extension and a quotient-invariant character of the kernel
 
 ### G-20 — arbitrary quotient-module transgression
 For the cyclic extension in G-18 and any (possibly nontrivial) \(\mathbb F_2[C_{2^m}]\)-module A, the transgression from invariant kernel characters is the quotient map \(A^{C_{2^m}}\to A^{C_{2^m}}/N_QA=H^2(C_{2^m},A)\). It is surjective, and its kernel is exactly the norm image. In Jordan form it detects precisely the short blocks; full-length free blocks contribute zero. Details and proof are in the Galois applicability note. This is not yet Fold-specific.
+
+
+**Galois cohomology — explicit degree-16 tower (G-21):** the cyclic Artin–Schreier–Witt family over \(\mathbb F_2(s)\) is now expanded through length four. The quartic and octic truncations are joined by a fully written fourth Witt coordinate and the exact order-16 generator translation. The degree follows from the odd pole order of the first coordinate \(s\). This remains an arithmetic model, not yet a Fold-derived Galois representation or Selmer class; see the-fold-automorphic-and-hopf-galois-applicability.md.
