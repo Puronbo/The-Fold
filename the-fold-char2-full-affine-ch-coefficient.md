@@ -1026,4 +1026,8 @@ Here \(n_8=Z_{xz}-s_A\), \(n_9=Z_{x^2z}-s_B-s_G\), and
 \(t=i^{-1}\). In particular, the \(ch,dh\) terms of \(Z_{x^2z}\)
 and \(s_B\) cancel before subtracting \(s_G\).
 
+### UF-072N — Cross-check of the quadratic lifts
+
+The nine quadratic correction vectors used in the degree-four certificate were compared term-by-term with the complete UF-065 coefficient table, using the definitions of the nine nilradical generators. The entries for Q2, Q3, Q5, Q6, Q8, Q9 and the quadratic terms of n1,n4 agree. Q7 agrees after restoring the missing factor of a in its dh coefficient. In particular, Q8 and Q9 are the corrected differences after subtracting their chosen coefficient lifts, not the raw eta' and theta' rows. This validates the quadratic input table, but does not validate any degree-four matrix rank: the matrix must still be rebuilt and recomputed.
+
 Further audit found that the degree-four script also omitted a factor of `a` in the `dh`-coefficient of `Q_7`. The previously reported 175/176 ranks are therefore withdrawn as well. The corrected coefficient is `at^2(Bb+Di+Gb)=aD/i+a(B+G)b/i^2`. The certificate has been patched, but its ranks have not yet been re-established. No degree-four rank bound or membership conclusion is currently claimed.remain open.
