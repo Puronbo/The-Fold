@@ -863,3 +863,18 @@ x_{3,(n-1)/2}^2,&n\text{ odd}.
 \end{cases}
 \]
 The target is represented precisely when E_n=0 for every negative odd n and E_n∈F² for every negative even n. This is a fully explicit infinite coefficient test, with existential Laurent coefficient sequences x₀,x₁,x₃,r₀. It does not yet decide whether every target pair is represented or determine the codimension of the image.
+
+
+## 26. G-4aa — no finite-slot dual functional annihilates the local denominator image
+
+Let
+\[
+\mathcal H=F((p))/(F((p))^2+F[[p]])
+\cong\bigoplus_{j\ge1}F p^{-(2j-1)}
+\oplus\bigoplus_{j\ge1}(F/F^2)p^{-2j}.
+\]
+Let \(\ell:\mathcal H\to\mathbb F_2\) be an F₂-linear functional supported on a finite set I of negative exponent slots. Suppose \(\ell\) annihilates the image of \(u\mapsto u+Su^2\), hence in particular the full denominator image \(z^2+u+Su^2\).
+
+If \(\ell\ne0\), choose the most negative exponent n in its finite slot support on which its component is nonzero. Vary the Laurent coefficient u_n freely while setting all other coefficients of u to zero. The resulting principal part of u+Su² has contributions only at exponents n and 2n. Since 2n<n and is more negative than every exponent in I, its 2n contribution is invisible to ell. The n-slot contribution is the arbitrary class of u_n in F when n is odd, or in F/F² when n is even. Thus the n-slot component of ell must vanish, a contradiction. Therefore ell=0.
+
+Consequently, no nonzero finite-slot F₂-linear functional separates a class from the denominator image. This does **not** imply that the denominator image is all of H: a nonzero algebraic separating functional on a proper subspace may have infinite slot support. Any dual obstruction must therefore involve infinitely many principal-part slots. This is a restriction on certificate shape, not a local quotient classification.
