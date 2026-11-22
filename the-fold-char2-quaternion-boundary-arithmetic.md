@@ -3688,7 +3688,7 @@ Moreover \(\phi(S)=S+O(p^2)\) and \(\phi'(S)=\alpha^2\) is a unit. Thus the full
 
 This is a useful reduction: the remaining full-group coinvariant question is now a residue-functoriality problem for the formal substitution \(\phi\). For pure scaling, the coefficient corrections are exactly the Cartier-nilpotent tower of G-4cp. For a general t-dependent substitution with rational-function coefficients, we still need to prove that every positive-p coefficient of \(\phi^*\omega-\omega\) has zero residues at all closed points, or find a counterexample. The formal change is the identity modulo p, but its coefficient functions may have poles at closed points, so ordinary local-coordinate invariance cannot be invoked without checking the relevant two-dimensional completion.
 
-**Status:** the pullback normal form above is exact. The assertion that the full group preserves every stable residue coordinate remains a sharply formulated open test; it is not yet promoted to a theorem.
+**Status:** the pullback normal form is exact. The local two-dimensional residue argument in the G-4cq addendum below resolves the test: every full finite section change preserves all coefficientwise residue coordinates. The filtered extension between surviving exponent layers remains open.
 
 
 ### G-4cq addendum — local two-dimensional residue proof
