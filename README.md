@@ -1079,4 +1079,10 @@ The complete first-order c,d,h coefficient map in both conjugated coordinates is
 ### UF-072A — Structure of the affine-slice image algebra
 - Proves that the nilradical of the auxiliary affine-conjugator image algebra is exactly its intersection with the source nilradical \((c,d,h)\).
 - Gives the sharp general exponent bound \(\operatorname{Nil}(\mathcal A_{\rm aff})^6=0\) and the Krull-dimension upper bound \(\dim\mathcal A_{\rm aff}\leq10\), from its ten-dimensional reduced parameter base.
-- Does not claim the image dimension is ten, compute elimination generators, or establish Hopf stability. UF-072B targets the reduced image and its Jacobian before lifting through the nilpotent filtration.
+- Does not claim the image dimension is ten, compute elimination generators, or establish Hopf stability. UF-072B identifies the reduced image exactly and proves its dimension is seven; UF-072C lifts through the nilpotent filtration.
+
+
+### UF-072B — Exact reduced affine-slice image
+- Proves that every reduced affine-linear conjugator \(g(x)=ax+bz,\ g(z)=iz\) centralizes every element of \(U\) in characteristic two.
+- Identifies the reduced affine-slice image algebra exactly as \(k[A,B,C,D,E,G,J]\), with dimension seven (not merely at most ten).
+- Distinguishes this reduced centralization result from the still-open nilpotent translation thickening and two-independent-copy coproduct test (UF-072C).
