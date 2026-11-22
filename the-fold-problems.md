@@ -2748,3 +2748,8 @@ The exponent-zero contribution is \(F/(\wp(F)+SF²)\oplus F/\wp(F)\): the first 
 ### G-4bm — correction: retain second-coordinate perfection tail
 
 The G-4bk simplification omitted the second-coordinate tail: only the first coordinate is quotiented by \(U∞=E^{perf}/E\). Thus each negative odd orbit is \(F⊕F⊕E^{perf}/E\), not merely F⊕F. The corrected finite-polar model is \(F/(wp(F)+SF²)⊕F/wp(F)⊕\bigoplus_{r≥1\ odd}(F⊕F⊕E^{perf}/E)\). The previous smaller orbit claim is withdrawn.
+
+
+### G-4bn — scalar normal form as quotient of geometric polar model
+
+For each negative odd root −q, the perfection tail decomposes into \(U_h=t^{1/2^h}F^{1/2^h}\), h≥1. The map \(t^{1/2^h}x\mapsto Sx^{2^{h+1}}\) identifies U_h with SF², and its scalar pole index is m=2^h q+1. This parametrizes every odd m≥3 uniquely. The zero-orbit second factor gives F/wp(F) at index one. Hence a coordinate-defined quotient of the full finite-polar model is exactly \(F/wp(F)\oplus\bigoplus_{m≥3\ odd}SF²\), the G-4aj scalar normal form. The kernel consists of the zero-mode factor F/(wp(F)+SF²) and the two F-components at every negative orbit. Still to prove: this projection is the original quaternion-symbol boundary map, and the completed-field statement.
