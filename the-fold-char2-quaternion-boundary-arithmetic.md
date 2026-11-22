@@ -2471,3 +2471,65 @@ N_{even}(w)=N_{even}(v)+N_{even}(u)+L_uM_v.
 For the odd layer, the cross term is \(M_uL_v(x,y)=(0,e_u(f_vx+e_vy))\); for the even layer it is \(L_uM_v(d)=e_ue_vd\). These are precisely the cross terms dictated by composition of filtered triangular maps. The derivation terms add because \((v_0+u_0)^2=v_0^2+u_0^2\).
 
 **Conclusion.** The first- and second-order section-change maps satisfy the composition law through order p², once the induced motion of the coefficient field is included. The second-order maps are therefore not arbitrary corrections: their nonlinear cross terms are forced by the group law of coefficient-section changes. This is a genuine functoriality check, but it does not yet prove that the full filtered extension is determined by its first two diagonals; orders p³ and above remain.
+
+
+## 77. G-4bz — independent cubic section data
+
+We isolate the genuinely new cubic parameter by taking
+\[
+s=t'=t(1+p^3v_2),\qquad v_2=e_2+f_2t,\quad e_2,f_2\in F.
+\]
+Since
+\[
+s^2=t^2(1+p^6v_2^2),
+\]
+the coefficient field is unchanged through order p³. The inverse substitution is
+\[
+t=s+p^3s v_2+O(p^6).
+\]
+Differentiating in logarithmic coordinates gives
+\[
+d\log t=(1+p^3sf_2)d\log s+p^3v_2d\log p+O(p^6).
+\]
+For a coefficient pair (A,B), the transported pair is therefore
+\[
+(A,B)+p^3\big(s(v_2\partial_sA+f_2A),\;
+s v_2\partial_sB+v_2A\big)+O(p^6).
+\]
+
+For a negative odd layer, use the representative (A,B)=(x,sy), x,y∈F. Since ∂ₛx=0 and ∂ₛ(sy)=y, the cubic correction is
+\[
+( sf_2x,\;s v_2y+v_2x).
+\]
+Projecting to the next even graded quotient, which reads the s-coefficient of the second coordinate, gives
+\[
+\boxed{L_{v_2}(x,y)=f_2x+e_2y.}
+\]
+For a negative even layer, use (A,B)=(0,sd), d∈F. The correction is (0,sv_2d), whose next odd quotient class is
+\[
+\boxed{M_{v_2}(d)=(0,e_2d).}
+\]
+
+These are exactly the first-order transition formulas of G-4bw, now appearing three filtration steps higher. But their parameters e₂,f₂ are independent of e,f,e₁,f₁: one may take v₀=v₁=0 and choose v₂ arbitrarily. Hence the cubic action is not determined by the first- and second-order data. It contains a genuinely new graded section parameter.
+
+We can also record the cubic coefficient in the composition law. Let
+\[
+t_1=t(1+pv_0+p^2v_1+p^3v_2),\quad
+t_2=t_1(1+pu_0(t_1)+p^2u_1(t_1)+p^3u_2(t_1)),
+\]
+where each uᵢ=eᵤᵢ+fᵤᵢt and each vᵢ=eᵥᵢ+fᵥᵢt. Expanding the product and evaluating the uᵢ at t₁ gives
+\[
+w_0=v_0+u_0,
+\]
+\[
+w_1=v_1+u_1+t f_{u_0}v_0+v_0u_0,
+\]
+\[
+\boxed{
+w_2=v_2+u_2+t f_{u_0}v_1+t f_{u_1}v_0
++v_0u_1+t f_{u_0}v_0^2+v_1u_0.
+}
+\]
+Thus the composite cubic coefficient consists of the freely chosen cubic coefficients v₂+u₂ plus cross terms forced by lower orders. This is the expected filtered composition law: lower-order data determine the nonlinear correction, but do not determine the new cubic parameter.
+
+**Conclusion.** The section-change action has independent graded parameters at cubic order. The first two diagonals do not determine the full filtered extension. The cubic leading maps and the cubic composition parameter are established; a complete formula for the p³ action when v₀ and v₁ are simultaneously nonzero, including all quotient projections, remains a separate calculation.
