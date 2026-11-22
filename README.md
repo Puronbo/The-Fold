@@ -1238,3 +1238,6 @@ Degrees 8–10 provide independent checks. Reproducible exact enumeration: `cert
 
 
 **Finite CM Minkowski support (G-35C):** the degree-eight Minkowski bound and the known splitting at 2, 3, 5, and 7 reduce all possible nontrivial Minkowski generators to degree-one prime ideals above 11, 13, 17, 19, and 23. This proves a finite support reduction, not the exact CM class group.
+
+
+**CM class-group structure (G-35D):** the degree-eight CM field has cyclic class group of odd order. A primitive integral element \(\theta=\pi/(\beta+2)\) has index \(2^{11}\), and exact factorization modulo the five remaining Minkowski primes shows that only two norm-17 prime ideals can represent nontrivial classes. Their product is principal because the underlying real-quartic prime is narrow-principal and splits in the narrow Hilbert class field. Thus one norm-17 prime generates the full class group. Its order, and hence the exact class number, remain open.
