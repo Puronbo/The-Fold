@@ -815,3 +815,46 @@ For interpretation, write \(F=\mathbb F_2(S)\) and use \(F=F^2\oplus SF^2\). The
 
 
 **G-4y coefficient clarification.** The phrase “one F₂-coordinate” above should be read as one coefficient slot, not one-dimensional over F₂. More precisely, each negative even exponent contributes a copy of \(F/F^2\cong SF^2\), and each negative odd exponent contributes a copy of F. Both coefficient spaces have countably infinite F₂-dimension. The total square-class quotient is therefore countably dimensional, consistent with the countability of F((p))'s finite-principal-part quotient.
+
+
+## 25. G-4z — explicit coefficient projections and recursion
+
+Let \(K_P=F((p))\), \(F=\mathbb F_2(S)\), and \(\mathcal H=K_P/(K_P^2+F[[p]])\). Every class has the exact coordinates
+\[
+\bigl((f_{-(2j-1)})_{j\ge1},\ (\pi_S(f_{-2j}))_{j\ge1}\bigr)
+\in \prod_{j\ge1}F\ \oplus\ \prod_{j\ge1}F^2,
+\]
+with finite support in the pole index for each Laurent series. Here \(F=F^2\oplus SF^2\), and \(\pi_S(a+Sb)=b\) for a,b∈F²; identifying F/F² with F² by this projection gives the even coordinates. Equivalently, as F₂-vector spaces,
+\[
+\mathcal H\cong\bigoplus_{j\ge1}F\,p^{-(2j-1)}\oplus\bigoplus_{j\ge1}(F/F^2)\,p^{-2j}.
+\]
+
+There is a direct coefficient recursion for the G-4y criterion. Put q=S+p and
+\[
+U=C+x_0^2+q x_1^2+q x_3^2+r_0+Sr_0^2,
+\qquad R=q^{-1}U.
+\]
+Write each series as \(x_i=\sum_k x_{i,k}p^k\), \(r_0=\sum_k r_kp^k\), and similarly for U,R,C. For any integer n,
+\[
+U_n=C_n+\mathbf1_{2\mid n}x_{0,n/2}^2
++\mathbf1_{2\mid n}S(x_{1,n/2}^2+x_{3,n/2}^2)
++\mathbf1_{n\equiv1\ (2)}(x_{1,(n-1)/2}^2+x_{3,(n-1)/2}^2)
++r_n+\mathbf1_{2\mid n}S r_{n/2}^2.
+\]
+The identity qR=U is equivalent to the triangular recursion
+\[
+R_n=S^{-1}(U_n+R_{n-1}),
+\]
+with all coefficients below a common lower bound zero. Finally, the residual expression in G-4y is
+\[
+E=B+(1+S)x_3^2+p x_3^2+R+SR^2,
+\]
+so
+\[
+E_n=B_n+R_n+
+\begin{cases}
+(1+S)x_{3,n/2}^2+S R_{n/2}^2,&n\text{ even},\\
+x_{3,(n-1)/2}^2,&n\text{ odd}.
+\end{cases}
+\]
+The target is represented precisely when E_n=0 for every negative odd n and E_n∈F² for every negative even n. This is a fully explicit infinite coefficient test, with existential Laurent coefficient sequences x₀,x₁,x₃,r₀. It does not yet decide whether every target pair is represented or determine the codimension of the image.
