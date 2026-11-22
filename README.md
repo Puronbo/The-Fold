@@ -1442,3 +1442,7 @@ the quaternion-boundary arithmetic note.
 
 
 **G-4bi — full exponent-orbit model:** each nonzero odd exponent r contributes a Frobenius direct limit of two-coordinate modules \((E\oplus E)/R_{r,j}\), with root exact graph relations and intermediate tangent-only relations. The zero exponent is separate. This retains mixed tangent constraints and supersedes the pure-normal approximation as the full finite-principal-part presentation.
+
+
+
+**G-4bj — perfect-closure orbit quotient:** each nonzero exponent orbit is \((E^{perf})²/(G_0+(U∞,0))\), where \(G_0=\{(tb,a+bt)}\) and \(U∞=\sum_{h≥1}t^{1/2^h}F^{1/2^h}\). Simplifying this residual quotient is the next step.
