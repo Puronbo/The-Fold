@@ -1334,3 +1334,6 @@ the quaternion-boundary arithmetic note.
 
 
 **G-4ag — complete local normal form (supersedes the earlier open status):** the map \(\phi(x)=[Sx^2]\colon F\to F/F^2\) is bijective because \(F=F^2\oplus SF^2\). Backward recursion along each odd-core chain reduces every finite principal part uniquely to its zeroth coordinate. Thus every chain cokernel is canonically \(F=\mathbb F_2(S)\), with basis \([S^n p^{-r}]\), n≥0. The full exceptional completed local scalar quotient has basis \(\{S^n p^{-r}:n≥0,r\text{ odd positive}\}\). The G-4ac dual extensions are unique, not arbitrary.
+
+
+**Scope correction G-4ah:** the G-4ad–G-4ag chain decomposition and basis classify only the auxiliary quotient (H_0=F((p))/(F[[p]]+F((p))^2+\{r+Sr^2\})). In the full completion (K_P=F((p))[T]), (T^2=S+p), squares also contribute ((S+p)y^2). The full local quotient is exactly (F((p))/(F[[p]]+F((p))^2+(S+p)F((p))^2+\{r+Sr^2\})). Thus it is H₀ further quotiented by the image of ((S+p)F((p))^2); the auxiliary basis is not yet a basis of the full quotient. G-4r/G-4s remain the validated full-quotient lower bounds.
