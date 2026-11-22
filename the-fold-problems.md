@@ -2349,3 +2349,12 @@ Thus it is surjective, with kernel exactly the norm image. In Jordan form it kil
 - The odd pole order of \(s\) proves the class has degree 16; its length-two and length-three truncations are exactly the quartic and octic fields of G-12 and G-14.
 - This is an explicit arithmetic tower calculation. It does not supply a Fold-derived Galois representation or Selmer class.
 - Full equations and derivation convention: [Galois applicability note](the-fold-automorphic-and-hopf-galois-applicability.md).
+
+
+### G-22 — ramification filtration and genus of the degree-16 tower
+- For the reduced local Witt vector \((t^{-1},t^{-1},0,0)\) at \(s=\infty\), the upper breaks are \((1,2,4,8)\).
+- Herbrand conversion gives lower breaks \((1,3,11,43)\); the lower ramification group orders are \(16,8,4,2,1\) on the corresponding intervals.
+- The different exponent is \(100\). The one-point global cover of \(\mathbb P^1_{\mathbb F_2}\) has genus \(35\) by Riemann–Hurwitz.
+- The nontrivial character conductor exponents \(2,3,5,9\), with multiplicities \(1,2,4,8\), reproduce the different exponent \(100\).
+- This completes ramification invariants of the explicit arithmetic model; no Fold-derived Galois representation or Selmer class is constructed.
+- Full derivation and references: [Galois applicability note](the-fold-automorphic-and-hopf-galois-applicability.md).
