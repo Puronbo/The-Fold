@@ -1280,3 +1280,45 @@ Under the standard characteristic-two differential-symbol map for the quaternion
 This identifies the direction in which the exceptional symbol can carry wild information: although the residue image \(\bar S=T^2\) has \(d\log\bar S=0\), the absolute differential before reduction is \(dp/S\), and multiplication by the first slot \(aS\) leaves \(a\,dp\). In particular, for a Laurent principal part \(a=c p^{-r}\), the representative is \(c p^{-r}dp\); its pole order is visible in the uniformizer differential.
 
 **Scope:** this is an exact identity of differential representatives. It does not yet identify \(K_P/(\mathcal O_P+\mathcal D_P)\) with a Kato cohomology group or a Kato graded piece. The remaining calculation is to pass from \(a\,dp\) to the quotient defining characteristic-two \(H^2\), track Cartier/Frobenius relations and exact differentials, and compare the resulting filtration with the G-4aj normal form. In particular, no injectivity or surjectivity from the G-4aj additive quotient is claimed.
+
+
+## 39. G-4an — explicit Kato differential quotient in the p-basis \(\{T,p\}\)
+
+The coordinate change \(S=T^2+p\) gives \(K=\mathbb F_2(T,p)\), and completion at \(p=0\) gives
+\[
+K_P=\mathbb F_2(T)((p)).
+\]
+The pair \(\{T,p\}\) is a 2-basis: every \(f\in K_P\) has a unique decomposition
+\[
+f=f_{00}^2+T f_{10}^2+p f_{01}^2+Tp f_{11}^2.
+\]
+Consequently \(\Omega^1_{K_P/\mathbb F_2}=K_PdT\oplus K_Pdp\).
+
+For a field of characteristic 2, the standard differential presentation is
+\[
+H_2^2(K_P)
+=\operatorname{coker}\left(
+1-\gamma:\Omega^1_{K_P}\longrightarrow
+\Omega^1_{K_P}/dK_P
+\right),
+\]
+where \(\gamma\) is the additive Frobenius-semilinear map characterized by
+\[
+\gamma(h\,dT)=[h^2T\,dT],\qquad
+\gamma(h\,dp)=[h^2p\,dp].
+\]
+Thus the differential quotient is explicitly
+\[
+\frac{K_PdT\oplus K_Pdp}
+{dK_P+
+\left\langle
+h,dT+h^2T,dT,\;
+h,dp+h^2p,dp
+: h\in K_P
+\right\}_{\mathbb F_2}},
+\]
+where the displayed relations are interpreted as additive generators (and the formula is in characteristic two). The local symbol \([aS,S)_2\) is represented by \(a,dp\), so its class is obtained by inserting \(a\) into the second summand and reducing by these exact and Cartier relations.
+
+**Important correction to the preceding preliminary calculation:** Cartier \(C\) is naturally defined on closed forms (or their de Rham classes), not as an operator on arbitrary 1-forms. Therefore formulas such as \(C(f\,dT)=f_{10}dT\) for arbitrary f must not be used. The valid all-forms operation in the Kato cokernel presentation is \(\gamma\) above, i.e. inverse Cartier followed by reduction modulo exact forms. The p-basis formulas for \(\gamma\) are the formulas used in this section.
+
+This gives a concrete presentation of the local Kato group and a representative-level map from the quaternion symbol. It still does **not** prove that the separate additive quotient G-4aj is isomorphic to this Kato group, nor that its displayed basis maps injectively or surjectively. Such a comparison requires computing the image of \(\mathcal O_P+\mathcal D_P\) under \(a\mapsto a\,dp\) and its intersection with the exact/Cartier relation subgroup.
