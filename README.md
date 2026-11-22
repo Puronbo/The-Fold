@@ -1504,3 +1504,6 @@ the quaternion-boundary arithmetic note.
 
 
 **G-4bz — independent cubic data:** the isolated change t'=t(1+p³(e₂+f₂t)) induces Q_odd≅F²→Q_even≅F, (x,y)↦f₂x+e₂y, and Q_even≅F→Q_odd≅F², d↦(0,e₂d), three filtration steps higher. These parameters are independent of the first two orders. The cubic composition coefficient is recorded in the arithmetic document; its lower-order cross terms are forced, but its new cubic parameter is free.
+
+
+**G-4ca — arbitrary-depth section arrows:** an isolated section change t'=t(1+pʳ(eᵣ+fᵣt)) induces r-step graded arrows Q_odd→Q_even, (x,y)↦fᵣx+eᵣy for odd r and (x,y)↦eᵣy for even r; Q_even→Q_odd, d↦(0,eᵣd) for every r. The parity distinction is caused by dlog(pʳ). We orient the filtration clockwise as forward movement n↦n+r toward zero. Higher corrections at order 2r remain open.
