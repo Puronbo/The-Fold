@@ -2423,3 +2423,10 @@ For the degree-eight CM field L over its real quartic F, the ambiguous class num
   \]
 - This provides an exact relative integral basis for the Minkowski enumeration. The full absolute class group remains undetermined.
 - Derivation: [CM-field arithmetic note](the-fold-genus7-cm-field.md).
+
+
+### G-35B — principal prime ideals above 2
+- The G-35A integral-basis polynomial reduces modulo \(\mathfrak p=(\beta+2)\) to \(X(X-1)\), so the unique prime of the real quartic above 2 splits into two degree-one primes \(\mathfrak P_0,\mathfrak P_1\) in \(L\), each of absolute norm 2.
+- The local valuations of \(\theta=\pi/(\beta+2)\) are 0 and 2, and \(N_{L/\mathbb Q}(\theta)=4\), hence \((\theta)=\mathfrak P_1^2\) after labeling.
+- G-34 proves there is no 2-torsion in \(\operatorname{Cl}(L)\), so \(\mathfrak P_1\) is principal. The relation \((\beta+2)\mathcal O_L=\mathfrak P_0\mathfrak P_1\) then makes \(\mathfrak P_0\) principal too.
+- This removes the norm-two primes from the Minkowski search; the exact odd class number remains open.
