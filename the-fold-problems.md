@@ -2783,3 +2783,16 @@ For \(L=E((p))\), inverse Cartier doubles p-exponents in logarithmic coordinates
 ### G-4bt — coefficient-field notation
 
 Use \(S_0\) for the base parameter and \(\Sigma=t²=S_0+p\) for the geometric coefficient-field square. The Cartier calculations use \(F_c=\mathbb F_2(\Sigma)\); the scalar G-4aj normal form uses \(F_0=\mathbb F_2(S_0)\). They are not literally the same subfield of the completion. The symbol comparison must retain \(S_0=\Sigma+p\).
+
+
+### G-4bu — coefficient-section invariance and filtered strictness
+
+For a second coefficient-field lift t'=t(1+pv), v∈E[[p]], the exact logarithmic transition is
+\[
+d\log t'=
+\left(1+\frac{pt\partial_t v}{1+pv}\right)d\log t+
+\frac{p(v+p\partial_p v)}{1+pv}d\log p.
+\]
+It is the identity modulo p on the ambient logarithmic differential lattice, and (t')²−t² is divisible by p². Thus leading p-graded coefficient pairs are independent of the section, while the explicit orbit direct-sum splitting is section-dependent.
+
+**Open subproblem:** prove that B¹+(C⁻¹−1)Ω¹ is strict for the p-adic filtration, or exhibit the first failure. Ambient associated-graded invariance does not imply quotient strictness. If strictness holds, identify the intrinsic associated-graded Kato quotient and prove that changes of section induce filtered triangular transition maps on the quotient. Keep the scalar quaternion projection intrinsic via its symbol characterization; do not claim the F_c⊕F_c⊕E^perf/E splitting is canonical.
