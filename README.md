@@ -1434,3 +1434,7 @@ the quaternion-boundary arithmetic note.
 
 
 **G-4bg — index-one bridge:** for E=F(t), t²=S, \(\rho(a+bt)=a+Sb²\) induces \(E/\wp(E)\cong F/\wp(F)\). Thus the geometric and G-4aj index-one coefficient spaces agree; full relation completeness remains open.
+
+
+
+**G-4bh — logarithmic Cartier coordinates:** inverse Cartier squares both log coefficients and doubles the Laurent exponent. Exact monomial inputs \((a+bt)p^n\) give initial coefficient pair \((tb,n(a+bt))\), so their Frobenius iterates generate the finite Cartier filtration. The full quotient remains open.
