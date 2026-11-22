@@ -2505,3 +2505,7 @@ This is an exact coordinate description of the completed local
 denominator image. The T-coordinate q is free but couples quadratically
 to the scalar coordinate. Computing the resulting scalar quotient
 modulo the valuation ring, and relating local data globally, remain open.
+
+
+### G-4q — coefficient filtration at the exceptional place
+At P=T²+S, replacing X=x+Sq puts the completed scalar coordinate in the exact form A=X²+(S+P)y²+SPq²+r+Sr². Its coefficients satisfy [P^(2j)]A=X_j²+Sy_j²+r_(2j)+Sr_j² and [P^(2j+1)]A=y_j²+Sq_j²+r_(2j+1). For the square-only part, use F=F²⊕SF²: if c_(2j)=a_j+Sb_j and c_(2j+1)=e_j+Sd_j, membership is equivalent to b_j=e_j for every j. The full quotient remains open because r+Sr² couples indices j and 2j; the next task is its principal-part recurrence.
