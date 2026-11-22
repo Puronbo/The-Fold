@@ -1470,3 +1470,7 @@ the quaternion-boundary arithmetic note.
 
 
 **G-4bp — symbol compatibility:** the quaternion differential representative \([aS,S)_2\leftrightarrow a,dp\) maps pole-one generators to F/wp(F) and every higher odd-pole generator Sc²p^{-m} to Sc²∈SF² through the logarithmic orbit projection. Agreement on the complete G-4aj basis proves algebraic compatibility with the original boundary map; completed topology remains separate.
+
+
+
+**G-4bq — coefficient-field caveat:** the local lift satisfies t²=S_base+p. The higher symbol representative therefore splits into adjacent p-pole terms before conversion to dlog p. G-4bp/bo's symbol compatibility shorthand is superseded pending exact exponent bookkeeping.
