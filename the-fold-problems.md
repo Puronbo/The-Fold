@@ -2861,3 +2861,15 @@ For the isolated cubic section change t'=t(1+p³v₂), v₂=e₂+f₂t, the indu
 w₂=v₂+u₂+t f_{u₀}v₁+t f_{u₁}v₀+v₀u₁+t f_{u₀}v₀²+v₁u₀.
 \]
 The lower-order cross terms are forced, while v₂+u₂ is new. Open: compute the complete p³ quotient action when v₀,v₁ are nonzero, then generalize to all filtration orders.
+
+
+### G-4ca — arbitrary-depth section arrows and orientation
+
+For an isolated change t'=t(1+pʳvᵣ), vᵣ=eᵣ+fᵣt, the first graded arrows r steps forward are
+\[
+Q_{odd}\to Q_{even}: (x,y)\mapsto
+\begin{cases}f_rx+e_ry&r\text{ odd},\\e_ry&r\text{ even},\end{cases}
+\qquad
+Q_{even}\to Q_{odd}:d\mapsto(0,e_rd).
+\]
+The parity effect comes from dlog(pʳ): its contribution survives iff r is odd in characteristic two. Adopt clockwise = forward filtration depth, i.e. n↦n+r toward zero/less singular terms. Open: compute higher corrections beginning at order 2r, where the coefficient field moves, and classify simultaneous parameters.
