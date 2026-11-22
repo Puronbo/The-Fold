@@ -427,3 +427,40 @@ The local quotient at P remains open. In particular, these identities
 do not show that every principal part with a square leading coefficient
 is removable, nor do they determine the interaction between successive
 principal-part coefficients.
+
+
+## 15. G-4p — exact completed local coordinate description
+
+Let F=F₂(S), K=F(T), and P=T²+S. The P-adic completion of K
+contains F((P)) as its coefficient subfield and has degree two over it:
+\[
+K_P=F((P))[T],\qquad T²=S+P.
+\]
+Indeed X²+S+P is irreducible over F((P)), since its reduction
+X²+S is irreducible over F. Every element therefore has a unique
+coordinate expression x+Ty with x,y∈F((P)).
+
+Write z=x+Ty and u=r+Tq. In characteristic two,
+\[
+z²=x²+(S+P)y²,\qquad
+u²=r²+(S+P)q².
+\]
+Hence the denominator map has the exact coordinate formula
+\[
+z²+u+Su²
+=\bigl(x²+(S+P)y²+r+Sr²+S(S+P)q²\bigr)+Tq.
+\]
+Thus its completed local image, as a subset of
+F((P))⊕T F((P)), is exactly
+\[
+\left\{
+\left(x²+(S+P)y²+r+Sr²+S(S+P)q²,\ q\right):
+x,y,r,q\in F((P))
+\right\}.
+\]
+
+This gives an exact two-coordinate description of the completed local
+image. The T-coordinate q is freely specified, but it contributes
+S(S+P)q² to the scalar coordinate. The scalar-coordinate quotient
+after this coupling, and the image modulo the integral local ring,
+remain to be computed. This is not yet a global normal form for Q.
