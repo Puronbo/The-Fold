@@ -770,3 +770,23 @@ B\equiv x_1^2+x_2^2+(p+1+S)x_3^2+r_2+Sr_2^2
 \pmod{F[[p]]}.
 \]
 The x₂ term cancels from C; the r₁,r₃ terms are integral. These two equations are equivalent to the scalar/T² part of the local representation problem, since A=C+(p+S)B. The first equation by itself has no obstruction because p+S is a unit and r₂ appears linearly. Any obstruction must use both equations and their shared variables x₁,x₃,r₂. This is an exact reduction, not a solution of the quartic local quotient.
+
+
+## 23. G-4x — erratum and corrected quartic coupled equations
+
+**Correction to G-4w:** the coefficient of x₃² in C was misstated there as (p+S)². The correct coefficient is p+S. Starting from the exact G-4u coordinates
+\[
+A=x_0^2+(p+S)(x_2^2+x_3^2)+r_0+Sr_0^2+S(p+S)(r_2^2+r_3^2),
+\]
+\[
+B=x_1^2+x_2^2+(p+1+S)x_3^2+r_2+S(r_1^2+r_2^2+(p+1+S)r_3^2),
+\]
+and using C=A+(p+S)B, the x₂² and r₂² terms cancel, while
+\((p+S)+(p+S)(p+1+S)=p+S\). Since r₁,r₃ are integral for a target with integral T,T³ coordinates, their remaining terms are integral. Thus the corrected exact equations modulo F[[p]] are
+\[
+C=x_0^2+(p+S)x_1^2+(p+S)x_3^2+r_0+Sr_0^2+(p+S)r_2,
+\]
+\[
+B=x_1^2+x_2^2+(p+1+S)x_3^2+r_2+Sr_2^2.
+\]
+All subsequent work must use these corrected equations. The earlier G-4w displayed first equation is superseded. No obstruction or local-quotient conclusion was based on the erroneous coefficient; the quartic local quotient remains open.
