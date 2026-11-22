@@ -2184,3 +2184,11 @@ Setting \(c=d=h=0\) makes the affine conjugator \(g(x)=ax+bz,\ g(z)=iz\). A univ
 - Retains the displayed cubic initial vector for \(n_2n_6+n_3n_5\).
 - A reproducible \(\mathbb F_{256}\) specialization gives cubic triple-map rank 60; adjoining the corrected first vector leaves rank 60, while adjoining the second raises it to 61.
 - These are specialization ranks and generic lower bounds only. The exact generic cubic relation module and \(\mathcal N^2/\mathcal N^3\) remain open. The previous claim of two independent generic classes is withdrawn.
+
+
+### UF-072H — Exact generic cubic ranks
+- Computes the cubic initial matrix over K=F_2(A,B,C,D,E,G,J), retaining Laurent monomials in a,b,i.
+- Exact SymPy rational-function-field elimination gives rank 60 for the 84 triple products.
+- Adjoining corrected in_3(n_2n_5) leaves rank 60; adjoining in_3(n_2n_6+n_3n_5) gives rank 61; adjoining both gives 61.
+- Exactly one of these two vectors contributes a new generic cubic initial direction. This does not determine the full N^2/N^3 or its integral S-module structure.
+- Reproducible exact certificate: certificates/uf072h_generic_cubic_rank.py.
