@@ -2071,3 +2071,18 @@ At exponent zero, the second summand \(F/\wp(F)\) maps to the scalar pole-one Ar
 with kernel exactly the zero-mode factor \(F/(\wp(F)+SF²)\) and the first F-coordinate from each negative exponent orbit. This corrects G-4bn's one-step shift and its overlarge kernel claim.
 
 Finally, for the original quaternion symbol, the standard differential representative of \([aS,S)_2\) is \(aS\,d\log S=a\,dS=a\,dp\), since \(S=t²+p\) and \(d(t²)=0\). Thus its logarithmic coefficient is precisely \(ap\) in the \(d\log p\) coordinate. On the scalar normal-form generators \(a=Sc²p^{-m}\), the orbit computation above gives exactly the coefficient maps \(c\mapsto Sc²\). This verifies the projection on the normal-form generators of the scalar quotient. The remaining formal step is to check the map on arbitrary representatives and the completed topology; the generator-level comparison is now explicit.
+
+
+## 67. G-4bp — compatibility with the original quaternion boundary symbols
+
+The coordinate-defined projection in G-4bo agrees with the original quaternion-symbol map on the complete scalar normal-form basis. In characteristic two, the differential symbol representative is
+\[
+[aS,S)_2\longleftrightarrow aS\,d\log S=a\,dS=a\,dp,
+\]
+since \(S=t²+p\) and \(d(t²)=0\). Hence in logarithmic coordinates the symbol has pair \((0,ap)\).
+
+For the pole-one basis generator \(a=c p^{-1}\), the log exponent is zero and the second coordinate is c. The zero-orbit projection \(E/\wp_E(E)\to F/\wp_F(F)\) from G-4bg sends c∈F to its class [c], exactly the scalar AS basis element.
+
+For a higher scalar basis generator \(a=Sc²p^{-m}\), m≥3 odd, write \(m-1=2^j q\), q odd and j≥1. Its log coefficient is \(Sc²p^{-2^jq}\), at stage j of the orbit rooted at −q. Taking the \(2^j\)-th root gives \(t^{1/2^{j-1}}c^{1/2^{j-1}}\). If j=1, the graph quotient invariant \(A_1+B_1\) is c, and its scalar image is \(Sc²\). If j≥2, the root lies in \(U_{j-1}\), and \(\theta_{j-1}\) sends it to \(Sc²\). Thus every higher scalar basis generator maps to its identical coefficient in \(SF²\).
+
+The G-4aj normal form is a direct sum with precisely these pole-one and higher odd-pole generators. Both maps are additive, and every scalar class is a finite linear combination of this basis. Therefore agreement on these generators proves that the coordinate-defined quotient projection is the original quaternion differential-symbol boundary map on the entire algebraic scalar quotient. This closes the algebraic symbol-compatibility step; it does not by itself prove a topological identification of the full completed Kato group beyond the finite-polar-part subspace.
