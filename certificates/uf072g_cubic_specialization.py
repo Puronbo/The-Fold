@@ -133,7 +133,7 @@ base = [[column.get(row, 0) for column in columns] for row in rows]
 # Correct cubic initial term of n_2*n_5:
 # (0, a(AB+CG)/i, 0, 0), in (c^3,c^2d,c^2h,cdh).
 pair_25 = {
-    ((2,1,0), (1,0,-1)): mul(a, mul(A,B) ^ mul(C,G))
+    ((2,1,0), (1,0,-1)): mul(A,B) ^ mul(C,G)
 }
 
 # Cubic initial term of n_2*n_6+n_3*n_5, expanded in Laurent monomials.
