@@ -2698,3 +2698,8 @@ Modulo B₁, negative even exponents give pure tangent \(tE^4\) at tangent pole 
 ### G-4bc — iterated mixed logarithmic sector
 
 For j≥1 and odd r, mixed generators are \(S^{2^{j-1}}b^{2^{j+1}}p^{-2^jr}d\log(t/p)\); inverse Cartier sends the jth to the (j+1)st. At normal pole index \(2^jr+1\), the pure-normal coefficient space \(E^{2^{j+1}}\) and mixed-normal coefficient space \(t^{2^j}E^{2^{j+1}}\) complement each other in \(E^{2^j}\). The mixed part is paired with tangent coefficient \(t^{2^j-1}E^{2^{j+1}}\). This organizes the iterated Cartier filtration; the quotient by \(C^{-1}-1\) remains to be computed.
+
+
+### G-4bd — complete finite-principal-part Cartier generators
+
+At each level j≥1, odd r and b∈E, the iterated Cartier generators are pure normal \(b^{2^{j+1}}p^{-(2^jr+1)}dp\), mixed logarithmic \(S^{2^{j-1}}b^{2^{j+1}}p^{-2^jr}d\log(t/p)\), and pure tangent \(t^{2^j-1}b^{2^{j+1}}p^{-2^{j+1}k}dt\) (k≥1), together with B₁ square-coefficient even-pole terms. At each normal pole index, pure and mixed normal coefficients complement to E^{2^j}; the mixed part is paired with a tangent term. This organizes all finite-principal-part Cartier generators; the full \(C^{-1}-1\) cokernel remains to be computed.
