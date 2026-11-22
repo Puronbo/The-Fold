@@ -1001,3 +1001,25 @@ In particular C cannot be finite-dimensional. Together with its countable upper 
 \boxed{\dim_{\mathbb F_2} C=\aleph_0.}
 \]
 All odd-core chain cokernels are canonically isomorphic by their identical presentations. There are countably infinitely many odd r, so the full local scalar quotient is a direct sum of countably infinitely many countably infinite-dimensional chain cokernels. This determines the dimension of each summand, but does not supply a canonical basis or explicit normal forms.
+
+
+## 31. G-4af — explicit independent family in every chain cokernel
+
+Fix any positive odd integer r and let C_r=coker(T_r) be the chain cokernel of G-4ad. The zeroth-coordinate inclusion
+\[
+F\longrightarrow W_0\oplus\bigoplus_{j\ge1}W_j,
+\qquad a\longmapsto(a,0,0,\ldots)
+\]
+has zero intersection with im(T_r). Indeed, if T_r(x) has finite support and x is a nonzero finite-support sequence, let N be the largest index with x_N≠0. Its (N+1)-st output coordinate is
+\[
+q(x_{N+1})+\phi(x_N)=\phi(x_N)\ne0,
+\]
+since x_{N+1}=0 and phi is injective. Therefore T_r(x) cannot be supported only in coordinate zero. Hence F embeds in C_r.
+
+In particular, because the monomials 1,S,S²,… are F₂-linearly independent in F=F₂(S), the classes
+\[
+\boxed{[S^n p^{-r}]\in C_r,\qquad n\ge0}
+\]
+are an explicit countably infinite linearly independent family, for every odd r. This makes the lower bound in G-4ae constructive. Combined with the countable upper bound, it gives dim_F₂ C_r=aleph₀ without invoking the algebraic dual.
+
+The family is an embedded copy of the polynomial subspace F₂[S] in each chain. It is not claimed to span C_r; determining a complementary normal form remains open.
