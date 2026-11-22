@@ -1007,3 +1007,45 @@ The second product term vanishes because it contains (d^2). The monomial (c^3d) 
 
 
 undefined
+
+
+
+## UF-072L — Corrected degree-four specialization bounds
+
+An audit against the UF-065 coefficient table found that the earlier degree-four
+certificate had incorrectly copied the quadratic parts of \(n_8\) and \(n_9\).
+The correct quadratic parts, in source basis \((c^2,cd,ch,dh)\), are:
+\[
+\begin{aligned}
+Q_8={}&Ja\,c^2+at(Ea+Jb)\,cd
+       +bt^2(Bi+Gb)\,ch+bt^2(Bb+Di+Gb)\,dh,\\
+Q_9={}&Ja^2t\,ch+a^2t^2(Ei+Jb)\,dh.
+\end{aligned}
+\]
+Here \(n_8=Z_{xz}-s_A\), \(n_9=Z_{x^2z}-s_B-s_G\), and
+\(t=i^{-1}\). In particular, the \(ch,dh\) terms of \(Z_{x^2z}\)
+and \(s_B\) cancel before subtracting \(s_G\).
+
+After correcting these two lifts, the complete degree-four initial matrix
+still has 350 columns (84 quadratic-correction triple products, 56
+\(n_1/n_4\)-pair products, and 210 fourfold first-order products) and 470
+source/Laurent rows. An independent exact implementation over
+\(\mathbb F_{256}\) gives the following ranks at three parameter
+specializations \((A,B,C,D,E,G,J)\):
+\[
+\begin{array}{c|cc}
+(d7,14,84,f8,cf,9b,f4)&175&176\\
+(31,72,a4,5b,e1,93,c7)&175&176\\
+(a1,3d,6f,e3,55,b2,19)&175&176
+\end{array}
+\]
+The first column of ranks is for the 350-column matrix; the second adjoins
+\(\operatorname{in}_4(n_1n_4)=A^2c^3d/(ai)\). These prove generic lower
+bounds 175 and 176, respectively. They do not establish the needed generic
+upper bound 175, so they do not yet prove that \(n_1n_4\) survives modulo
+\(\mathcal N^3\).
+
+The corrected implementation is
+\texttt{certificates/uf072k_degree4_specialization.py}. The previous
+176/177 ranks are withdrawn. Exact generic rank and the membership test
+remain open.
