@@ -2290,3 +2290,9 @@ otinmathcal N^3) by UF-072O.
 - In characteristic two, check \(Dw_\tau=0\) and reduce modulo \(D^{q-1}W\); G-9 identifies the surviving coordinates as the bottom vectors of short Jordan blocks.
 - This gives a direct test once the G-10 quotient cocycle is known. No Fold-specific arithmetic transgression has been evaluated.
 
+### G-12 — Explicit cyclic quartic test case
+- Constructs \(K=\mathbb F_2(s)\), \(L=K(u,w)\) with \(u^2+u=s\), \(w^2+w=u^3+u\), and generator \(\sigma(u)=u+1\), \(\sigma(w)=w+u+1\). The odd pole order of \(u^3+u\) proves the second Artin–Schreier step is nontrivial; \(\sigma^2(w)=w+1\), so the Galois group is cyclic of order four.
+- For the additive regular module \(L\), the normal basis theorem gives projectivity and vanishing positive cohomology.
+- For trivial coefficients \(\mathbb F_2\), \(D=0\) and norm \(D^3=0\), hence \(H^1=H^2=\mathbb F_2\).
+- The nonzero target is not itself a nonzero transgression; an invariant class in \(H^1(G_L,\mathbb F_2)^{C_4}\) must still be constructed and evaluated.
+
