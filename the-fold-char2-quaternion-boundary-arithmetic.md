@@ -1589,3 +1589,21 @@ Q_{\rm nor}\cong E/\wp(E)\oplus\bigoplus_{e\ge2,\ e\text{ even}}\varinjlim_j(E/E
 For each j, the cokernel of \(F_j\) is naturally \(E/E^2\), since \(W_{j+1}/F_j(W_j)\cong E/(E^2+E^{2^{j+2}})=E/E^2\). As F₂-vector spaces the transition maps split (noncanonically), so each chain colimit is noncanonically isomorphic to \(\bigoplus_{j\ge0}E/E^2\). This vector-space splitting is not canonical and should not be mistaken for a preferred normal form.
 
 The earlier G-4au assertion that each first odd slot independently contributes E/E⁴ and each later slot E/E² is withdrawn. The corrected direct-limit model remains restricted to pure-normal symbols and their own Cartier relations; mixed tangent forms can impose further relations in the full Kato group.
+
+
+## 48. G-4aw — identify the chain direct limit with the perfection quotient
+
+The direct limit in G-4av has a canonical closed form. Let \(E^{\rm perf}=\bigcup_{n\ge0}E^{1/2^n}\) be the perfect closure of \(E=\mathbb F_2(t)\). At stage j define
+\[
+\Psi_j:E/E^{2^{j+1}}\longrightarrow E^{\rm perf}/E,
+\qquad[c]\longmapsto c^{1/2^{j+1}}+E.
+\]
+This is well-defined: changing c by \(d^{2^{j+1}}\) changes its root by d∈E. It is injective because \(c^{1/2^{j+1}}\in E\) exactly when \(c\in E^{2^{j+1}}\). It is compatible with Frobenius transitions, since \((c²)^{1/2^{j+2}}=c^{1/2^{j+1}}\). It is surjective on the direct limit because every element of \(E^{\rm perf}\) lies in some \(E^{1/2^n}\). Hence
+\[
+\boxed{\varinjlim_j(E/E^{2^{j+1}},\mathrm{Frob})\simeq E^{\rm perf}/E.}
+\]
+Consequently the pure-normal Cartier–AS model has the canonical description
+\[
+\boxed{Q_{\rm nor}\simeq E/\wp(E)\oplus\bigoplus_{e\ge2,\ e\text{ even}}E^{\rm perf}/E.}
+\]
+The isomorphism is canonical after the chain roots e are fixed. This identifies each chain with the purely inseparable classes added by perfecting the residue coefficient field. It remains only a pure-normal model; mixed tangent relations can further reduce it in the full Kato quotient.
