@@ -3108,3 +3108,26 @@ The pure-scaling stable quotient is canonically \(\Omega_F^1/B_\infty\): \(\Thet
 The exact rational section-change harness was stress-tested on 12 rational triples \((a,e,f)\), through q-order 9. All 108 coefficient tests satisfied the conjectural \(C_0^{v_2(m)+1}\)-torsion bound. A separate 100-input generated sample supplied 900 target coefficients with observed torsion indices 1–4. These are bounded computational checks, not an all-orders proof.
 
 **Open:** identify the full section-change action on \(\Omega_F^1/B_\infty\). The likely route is a residue map on the coefficient curve and parameter-independence modulo the Cartier filtration; hypotheses must be verified for the exact transformed representatives.
+
+
+### G-4cu — Hasse–Taylor coefficient formula and exact odd layers
+
+For \(S'=S(1+qu)\), \(u=e²+Sf²\), the coefficient of \(q^m\) in the transformed odd-layer scalar coefficient is
+\[
+\Delta_m=\mathbf1_{2\mid m}S^mu^m(a^{[m/2]})²+
+Sf²u^{m-1}B_{\lfloor(m-1)/2\rfloor}(a)²,
+\quad B_N(a)=\sum_{i=0}^N S^ia^{[i]}.
+\]
+For odd m, \(\Delta_m=S(fu^{(m-1)/2}B_{(m-1)/2})²\in SF²=\ker C_0\). Thus every odd coefficient is exactly killed by one Cartier root.
+
+For \(2^k\mid n\), the Hasse sum \(B_{n-1}(a)\) lies in \(F^{2^k}\). Proof: for each \(1\le j<2^k\), its Hasse derivative \(D^{[j]}\) has coefficient at \(a^{[h]}\) equal to
+\[
+\binom hj\sum_{\ell=\max(0,j-h)}^{\min(j,n-1-h+j)}\binom j\ell.
+\]
+The coefficient vanishes for \(h<j\), the inner sum is \(2^j=0\) for \(j\le h<n\), and for \(h=n+r\), \(0\le r<j\), Lucas gives \(\binom hj=\binom rj=0\). Thus all Hasse derivatives below \(2^k\) vanish, characterizing \(F^{2^k}\).
+
+For even m=2n the first Cartier root is exactly
+\[
+C_0(\Delta_{2n})=S^nu^na^{[n]}+Sf²u^{n-1}B_{n-1}(a).
+\]
+The Hasse-power constraint gives the next algebraic reduction, but cancellation with the first term is still needed to prove the conjectural full torsion bound \(C_0^{v_2(m)+1}\Delta_m=0\). Odd coefficients are now a theorem; the even bound remains conjectural and bounded-tested.
