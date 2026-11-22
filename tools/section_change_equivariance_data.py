@@ -2,8 +2,8 @@
 """Exact GF(2)[S] data generator for the Fold section-change action.
 
 Polynomials are encoded as nonnegative integers: bit i is the coefficient
-of S**i. This emits verified low-order graded examples only; it does not
-fabricate the still-unknown higher-order quotient action.
+of S**i. The script emits certified first- and second-diagonal targets,
+plus bracket/composition examples. It does not guess higher quotient maps.
 """
 from __future__ import annotations
 
@@ -21,13 +21,24 @@ def add(a: int, b: int) -> int:
 
 
 def mul(a: int, b: int) -> int:
-    """Polynomial multiplication in GF(2)[S], encoded by bitmasks."""
     out = 0
     while b:
         if b & 1:
             out ^= a
         a <<= 1
         b >>= 1
+    return out
+
+
+def square(a: int) -> int:
+    """Frobenius square in GF(2)[S]."""
+    out = 0
+    i = 0
+    while a:
+        if a & 1:
+            out |= 1 << (2 * i)
+        i += 1
+        a >>= 1
     return out
 
 
@@ -42,18 +53,24 @@ def derivative(a: int) -> int:
     return out
 
 
-def e_mul(u: tuple[int, int], v: tuple[int, int]) -> tuple[int, int]:
-    """Multiply a+b*t and c+d*t with t^2=S."""
-    a, b = u
-    c, d = v
-    return (
-        add(mul(a, c), mul(S, mul(b, d))),
-        add(mul(a, d), mul(b, c)),
-    )
+def p_basis_decompose(a: int) -> tuple[int, int]:
+    """Return (a0,a1) with a = a0**2 + S*a1**2 uniquely."""
+    a0 = 0
+    a1 = 0
+    i = 0
+    while a:
+        if a & 1:
+            if i & 1:
+                a1 |= 1 << ((i - 1) // 2)
+            else:
+                a0 |= 1 << (i // 2)
+        i += 1
+        a >>= 1
+    return a0, a1
 
 
 def odd_layer_raw(r: int, e: int, f: int, x: int, y: int):
-    """Raw p^r correction for the odd-layer representative (x,t*y)."""
+    """Raw p^r correction for odd representative (x,t*y)."""
     eps = r & 1
     delta_a = (0, mul(f, x))
     delta_b = (
@@ -64,12 +81,9 @@ def odd_layer_raw(r: int, e: int, f: int, x: int, y: int):
 
 
 def odd_layer_action(r: int, e: int, f: int, x: int, y: int):
-    """Reduced correction; the target quotient depends on depth parity."""
     da, db = odd_layer_raw(r, e, f, x, y)
     if r & 1:
-        # Target Q_even: retain the t coefficient of the second entry.
         return {"target_type": "Q_even", "target": db[1]}
-    # Target Q_odd: (A,B) -> (A_0,A_1+B_1).
     return {
         "target_type": "Q_odd",
         "target": [da[0], add(da[1], db[1])],
@@ -77,33 +91,45 @@ def odd_layer_action(r: int, e: int, f: int, x: int, y: int):
 
 
 def even_layer_raw(e: int, f: int, d: int):
-    """Raw correction for the even-layer representative (0,t*d)."""
+    """Raw correction for even representative (0,t*d)."""
     return (0, 0), (mul(S, mul(f, d)), mul(e, d))
 
 
 def even_layer_action(r: int, e: int, f: int, d: int):
     da, db = even_layer_raw(e, f, d)
     if r & 1:
-        return {
-            "target_type": "Q_odd",
-            "target": [da[0], add(da[1], db[1])],
-        }
-    return {"target_type": "Q_even", "target": db[1]}
+        return {"target_type": "Q_odd", "target": [0, mul(e, d)]}
+    return {"target_type": "Q_even", "target": mul(e, d)}
 
 
-def bracket_parameter(
-    v: tuple[int, int], u: tuple[int, int]
-) -> tuple[int, int]:
-    """Parameter of [X_v,X_u] = X_{t(e_v*f_u+e_u*f_v)}."""
+def second_odd_diagonal(e: int, f: int, x: int, y: int):
+    """Correct p^(2r) diagonal on an odd layer.
+
+    If x=a^2+S*b^2 and y=c^2+S*d^2, then
+      N_odd(x,y) = (S*(f*a+e*b)^2, (e*c)^2+(S*f*d)^2).
+    """
+    a, b = p_basis_decompose(x)
+    c, d = p_basis_decompose(y)
+    first = mul(S, square(add(mul(f, a), mul(e, b))))
+    second = add(square(mul(e, c)), square(mul(S, mul(f, d))))
+    return first, second
+
+
+def second_even_diagonal(e: int, f: int, d: int) -> int:
+    """Correct p^(2r) diagonal on an even layer."""
+    a, b = p_basis_decompose(d)
+    return add(square(mul(e, a)), square(mul(S, mul(f, b))))
+
+
+def bracket_parameter(v: tuple[int, int], u: tuple[int, int]):
+    """Parameter of [X_v,X_u]=X_{t(e_v*f_u+e_u*f_v)}."""
     ev, fv = v
     eu, fu = u
     return (0, add(mul(ev, fu), mul(eu, fv)))
 
 
-def leading_mixed_parameter(
-    v: tuple[int, int], u: tuple[int, int]
-) -> tuple[int, int]:
-    """Mixed coefficient e_u*v for the composition order in G-4cc."""
+def leading_mixed_parameter(v: tuple[int, int], u: tuple[int, int]):
+    """Mixed coefficient e_u*v for the specified G-4cc composition order."""
     ev, fv = v
     eu, _fu = u
     return (mul(eu, ev), mul(eu, fv))
@@ -113,90 +139,113 @@ def random_poly(rng: random.Random, max_degree: int) -> int:
     return rng.randrange(1 << (max_degree + 1))
 
 
-def self_test() -> None:
-    values = [0, 1, S, 1 ^ S, 1 ^ (1 << 2)]
-    assert derivative(1 ^ S ^ (1 << 2) ^ (1 << 3)) == 1 ^ (1 << 2)
-    assert e_mul((1, 1), (1, 1)) == (1 ^ S, 0)
+def square_root_polynomial(a: int) -> int:
+    """Return the polynomial square root, raising if a is not a square."""
+    out = 0
+    i = 0
+    while a:
+        if a & 1:
+            if i & 1:
+                raise AssertionError("polynomial is not a square")
+            out |= 1 << (i // 2)
+        i += 1
+        a >>= 1
+    return out
 
-    # Verify reductions from raw coefficient pairs, for both depth parities.
-    for r in (1, 2):
+
+def self_test() -> None:
+    values = [0, 1, S, 1 ^ S, 1 ^ (1 << 2), 1 ^ S ^ (1 << 3)]
+
+    # Unique p-basis decomposition and derivative extraction.
+    for x in values:
+        a, b = p_basis_decompose(x)
+        assert x == add(square(a), mul(S, square(b)))
+        assert derivative(x) == square(b)
+
+    # Exact first-diagonal projections in both parity cases.
+    for r in (1, 2, 3, 4):
         for e in values:
             for f in values:
                 for x in values:
                     for y in values:
-                        da, db = odd_layer_raw(r, e, f, x, y)
-                        expected = add(mul(f, x), mul(e, y))
-                        got = odd_layer_action(r, e, f, x, y)["target"]
+                        got = odd_layer_action(r, e, f, x, y)
+                        value = add(mul(f, x), mul(e, y))
                         if r & 1:
-                            assert got == expected
-                            assert db[1] == expected
+                            assert got == {"target_type": "Q_even", "target": value}
                         else:
-                            assert got == [0, expected]
-                            assert add(da[1], db[1]) == expected
+                            assert got == {"target_type": "Q_odd", "target": [0, value]}
                 for d in values:
-                    da, db = even_layer_raw(e, f, d)
-                    got = even_layer_action(r, e, f, d)["target"]
+                    got = even_layer_action(r, e, f, d)
                     if r & 1:
-                        assert got == [0, mul(e, d)]
+                        assert got == {"target_type": "Q_odd", "target": [0, mul(e, d)]}
                     else:
-                        assert got == mul(e, d)
+                        assert got == {"target_type": "Q_even", "target": mul(e, d)}
 
-    # Every nonzero leading parameter is detected on an odd-layer probe.
+    # Second diagonal and its image description.
+    for e in values:
+        for f in values:
+            for x in values:
+                for y in values:
+                    first, second = second_odd_diagonal(e, f, x, y)
+                    a, b = p_basis_decompose(x)
+                    c, d = p_basis_decompose(y)
+                    assert first == mul(S, square(add(mul(f, a), mul(e, b))))
+                    assert second == add(square(mul(e, c)), square(mul(S, mul(f, d))))
+                    assert first % 2 == 0  # divisible by S
+                    square_root_polynomial(second)  # second component is a square
+            for d in values:
+                square_root_polynomial(second_even_diagonal(e, f, d))
+
+    # The odd first-coordinate image is exactly S*F^2 on polynomials.
+    for b in values:
+        first, _ = second_odd_diagonal(1, 0, mul(S, square(b)), 0)
+        assert first == mul(S, square(b))
+
+    # Every nonzero leading parameter is detected by the corrected first arrow.
     for e in values:
         for f in values:
             if e == 0 and f == 0:
                 continue
             x, y = (1, 0) if f else (0, 1)
-            for r in (1, 2):
-                got = odd_layer_action(r, e, f, x, y)["target"]
-                assert got != 0 and got != [0, 0]
+            for r in (1, 2, 3, 4):
+                target = odd_layer_action(r, e, f, x, y)["target"]
+                assert target != 0 and target != [0, 0]
 
-    # The bracket is alternating and detects these independent test pairs.
     for v in [(e, f) for e in values for f in values]:
         assert bracket_parameter(v, v) == (0, 0)
     for v, u in [((1, 0), (0, 1)), ((S, 1), (1, S))]:
         assert bracket_parameter(v, u) != (0, 0)
-
-    print("self-test: all exact GF(2)[S] checks passed", file=sys.stderr)
 
 
 def generate(count: int, max_degree: int, seed: int) -> Iterable[dict]:
     rng = random.Random(seed)
     for _ in range(count):
         r = 1 + rng.randrange(8)
-        e, f, x, y, d = (
-            random_poly(rng, max_degree) for _ in range(5)
-        )
+        e, f, x, y, d = (random_poly(rng, max_degree) for _ in range(5))
         yield {
-            "task": "odd_layer_transition",
-            "depth": r,
-            "e": e,
-            "f": f,
-            "x": x,
-            "y": y,
+            "task": "odd_layer_transition", "depth": r,
+            "e": e, "f": f, "x": x, "y": y,
             **odd_layer_action(r, e, f, x, y),
         }
         yield {
-            "task": "even_layer_transition",
-            "depth": r,
-            "e": e,
-            "f": f,
-            "d": d,
+            "task": "even_layer_transition", "depth": r,
+            "e": e, "f": f, "d": d,
             **even_layer_action(r, e, f, d),
         }
-
-        ue, uf = (
-            random_poly(rng, max_degree),
-            random_poly(rng, max_degree),
-        )
+        n1, n2 = second_odd_diagonal(e, f, x, y)
         yield {
-            "task": "bracket_and_composition",
-            "v": [e, f],
-            "u": [ue, uf],
+            "task": "second_odd_diagonal", "e": e, "f": f,
+            "x": x, "y": y, "target": [n1, n2],
+        }
+        yield {
+            "task": "second_even_diagonal", "e": e, "f": f,
+            "d": d, "target": second_even_diagonal(e, f, d),
+        }
+        ue, uf = random_poly(rng, max_degree), random_poly(rng, max_degree)
+        yield {
+            "task": "bracket_and_composition", "v": [e, f], "u": [ue, uf],
             "bracket_parameter": list(bracket_parameter((e, f), (ue, uf))),
-            "ordered_mixed_parameter": list(
-                leading_mixed_parameter((e, f), (ue, uf))
-            ),
+            "ordered_mixed_parameter": list(leading_mixed_parameter((e, f), (ue, uf))),
         }
 
 
@@ -211,6 +260,7 @@ def main() -> None:
         parser.error("count and max-degree must be nonnegative")
     if args.self_test:
         self_test()
+        print("self-test: all exact GF(2)[S] checks passed", file=sys.stderr)
     for row in generate(args.count, args.max_degree, args.seed):
         print(json.dumps(row, sort_keys=True))
 
