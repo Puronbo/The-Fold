@@ -1454,3 +1454,7 @@ the quaternion-boundary arithmetic note.
 
 
 **G-4bl — finite-polar-part model:** the zero orbit contributes \(F/(\wp(F)+SF²)\oplus F/\wp(F)\); each negative odd orbit contributes F⊕F. This is the finite-support logarithmic Kato presentation. Completion and comparison with the scalar G-4aj quotient remain open.
+
+
+
+**G-4bm — correction:** each negative odd orbit retains the second-coordinate perfection tail, so its contribution is \(F⊕F⊕E^{perf}/E\), not just F⊕F. The finite-polar model is corrected accordingly.
