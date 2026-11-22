@@ -128,6 +128,35 @@ def c0_torsion_index(x: Rat, limit: int = 32) -> int | None:
     return None
 
 
+def hasse_coefficients(a: Rat, count: int) -> Series:
+    """Return D^[i]a, i<count, from a(S+X)=sum D^[i]a X^i."""
+    base = [S_RAT, ONE] + [ZERO for _ in range(count - 2)]
+    return rational_substitution(a, base, count)
+
+
+def truncated_hasse_sum(a: Rat, n: int) -> Rat:
+    """B_(n-1)(a)=sum_{i=0}^{n-1} S^i D^[i]a."""
+    coeffs = hasse_coefficients(a, n)
+    total = ZERO
+    power = ONE
+    for i in range(n):
+        total = radd(total, rmul(power, coeffs[i]))
+        power = rmul(power, S_RAT)
+    return total
+
+
+def is_frobenius_power(a: Rat, level: int) -> bool:
+    """Check exactly whether N/D is a 2^level-th power in F_2(S)."""
+    if level <= 0 or a == ZERO:
+        return True
+    stride = 1 << level
+    return all(
+        ((poly >> degree) & 1) == 0 or degree % stride == 0
+        for poly in a
+        for degree in range(poly.bit_length())
+    )
+
+
 def random_rational(rng: random.Random, max_degree: int, qs: list[int]) -> Rat:
     numerator = rng.randrange(1 << (max_degree + 1))
     denominator = 1
@@ -177,6 +206,17 @@ def self_test(
         assert c0(delta[2]) == root
         assert c0(root) == ZERO
         assert c0(delta[1]) == ZERO
+
+        # Exact theorem: every odd q-coefficient is already Cartier-exact.
+        for m in range(1, order, 2):
+            assert c0(delta[m]) == ZERO
+
+        # Exact Hasse-sum lemma: if 2^k divides n, then
+        # B_(n-1)=sum_{i<n} S^i D^[i]a lies in F^(2^k).
+        for n in range(2, order):
+            k = v2(n)
+            if k:
+                assert is_frobenius_power(truncated_hasse_sum(a, n), k)
 
         # Exploratory higher-order bound; recorded separately from theorem checks.
         for m in range(1, order):
