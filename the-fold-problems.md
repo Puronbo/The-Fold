@@ -3178,3 +3178,25 @@ The filtered extension between these graded pieces is still open; do not identif
 ### G-4cs — exact rational residue-feature dataset
 
 Adds tools/residue_feature_data.py. It generates rational coefficients \(x=N/D\) whose differential \((x/S)dS=\alpha Q'/Q\,dS\) has prescribed residue \(\alpha\in k_Q\) at any chosen monic irreducible Q. It uses exact GF(2) polynomial arithmetic, Rabin irreducibility, finite-field trace, and no floating point. This covers finite closed points beyond Q=S, which the polynomial-only generator missed.
+
+
+### G-4ct — canonical full coinvariant normal form
+
+For \(m=\sum_n p^n(A_n\,d\log t+B_n\,d\log p)\), write \(A_n=a_n+t b_n\), \(a_n,b_n\in F\). For every positive odd q and monic irreducible Q define the Frobenius-normalized orbit residue
+\[
+\mathfrak r_{q,Q}(m)=\sum_{j\ge0}\operatorname{Frob}_{k_Q}^{-j}
+\operatorname{res}_Q\left((a_{-2^j q}/S)dS\right).
+\]
+The sum is finite. Exact forms contribute zero; \((\Phi-1)M\) contributes a telescoping pair because \(C((a²/S)dS)=(a/S)dS\) and local residues of Cartier are inverse-Frobenius. The zero coordinate is \(a_0\bmod(\wp(F)+SF²)\).
+
+The full section-change action on the F-component of A is \(a^\sigma(S,p)=a(Z,p)\alpha²/W\), with \(W=\alpha²+S\beta²\), \(Z=SW\). Hence \((a^\sigma/S)dS=\phi^*((a/S)dS)\), \(\phi(S)=Z\). Local two-dimensional residue invariance proves every orbit residue is invariant. The p⁰ coefficient difference has zero residues, hence lies in \(U_{\rm nil}\subset\wp(F)+SF²\), so the zero coordinate is invariant too.
+
+This yields a canonical surjection from \(Q_{\mathcal G}\) to \(F/(\wp+SF²)\oplus\bigoplus_{q>0\ odd}\bigoplus_Q k_Q\). Its associated-graded map is an isomorphism at every pole bound (G-4cr), so finite-pole induction proves it is an isomorphism:
+\[
+Q_{\mathcal G}\cong F/(\wp+SF²)\oplus\bigoplus_{q>0\ odd}\mathcal R.
+\]
+The zero summand is canonically \(F/\wp(F)\): if \(a=u²+Sv²\), the map \([a]\mapsto[u]\) induces the isomorphism. Thus the full coinvariant is canonically
+\[
+F/\wp(F)\oplus\bigoplus_{q>0\ odd}\bigoplus_Q \mathbb F_{2^{\deg Q}}.
+\]
+This resolves the filtered-extension question: the Frobenius-normalized orbit residues provide the canonical splitting. It supersedes G-4cr's statement that only the associated-graded coinvariant was known.
