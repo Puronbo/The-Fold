@@ -3200,3 +3200,31 @@ The zero summand is canonically \(F/\wp(F)\): if \(a=u²+Sv²\), the map \([a]\m
 F/\wp(F)\oplus\bigoplus_{q>0\ odd}\bigoplus_Q \mathbb F_{2^{\deg Q}}.
 \]
 This resolves the filtered-extension question: the Frobenius-normalized orbit residues provide the canonical splitting. It supersedes G-4cr's statement that only the associated-graded coinvariant was known.
+
+
+### G-4cu — simplified zero-mode invariant
+
+The residual zero-mode factor has a canonical additive isomorphism
+\[
+F/(\wp(F)+SF²)\xrightarrow{\sim}F/\wp(F),
+\quad
+a=u²+Sv²\longmapsto u.
+\]
+The map is well-defined because \(\tau(SF²)=0\) and \(\tau(\wp(x))\equiv\wp(\tau(x))\pmod{SF²}\); its kernel is exactly \(\wp(F)+SF²\). Therefore the canonical full coinvariant normal form in G-4ct can be written with \(F/\wp(F)\) as its zero summand.
+
+### G-4ct — filtered extension resolved
+
+The Frobenius-normalized orbit-residue map is
+\[
+\mathfrak r_{q,Q}
+=\sum_{j\ge0}\operatorname{Frob}_{k_Q}^{-j}
+\operatorname{res}_Q((a_{-2^j q}/S)dS),
+\quad q>0\text{ odd},
+\]
+where \(A_n=a_n+t b_n\). It annihilates exact forms and \((\Phi-1)M\) by the Cartier-residue identity, and it is invariant under the full finite section-change group by the exact pullback formula and two-dimensional residue invariance. Together with \([a_0]\in F/(\wp+SF²)\), it induces a filtered isomorphism
+\[
+Q_{\mathcal G}\cong
+F/\wp(F)\oplus
+\bigoplus_{q>0\ {\rm odd}}\bigoplus_{Q\ {\rm monic\ irreducible}} k_Q.
+\]
+The proof uses the associated-graded calculation G-4cr and finite pole-order induction. This upgrades the G-4cr associated-graded result to a canonical full algebraic coinvariant normal form and resolves the filtered-extension question. The orbit-normalized sum is essential: a single coefficient residue at exponent \(-q\) does not annihilate \((\Phi-1)M\).
