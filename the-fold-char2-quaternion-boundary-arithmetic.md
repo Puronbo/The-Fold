@@ -2737,57 +2737,56 @@ This exhibits the noncommutation but does not by itself prove that the denominat
 ## 83. G-4cf — explicit failure of quotient stability
 
 We now settle the quotient-action test left open in G-4ce. Retain
-[
-M=L,omegaoplus L,eta,quad L=E((p)),quad
-R=B^1+(Phi-1)M,
-]
-where (omega=dlog t), (eta=dlog p),
-(B^1=dL), and
-[
-Phi(p^j(A,B))=p^{2j}(A^2,B^2).
-]
-Let (X_v=tvpartial_t), with (v=e+ft), and let
-[
-ho_v(A,B)=(X_v(A)+ftA, X_v(B)).
-]
+\[
+M=L\,\omega\oplus L\,\eta,\quad L=E((p)),\quad
+R=B^1+(\Phi-1)M,
+\]
+where \(\omega=d\log t\), \(\eta=d\log p\),
+\(B^1=dL\), and
+\[
+\Phi(p^j(A,B))=p^{2j}(A^2,B^2).
+\]
+Let \(X_v=tv\partial_t\), with \(v=e+ft\), and let
+\[
+\rho_v(A,B)=(X_v(A)+ftA,\ X_v(B)).
+\]
 
-Choose the simplest nonzero t-direction, (v=t), so (e=0,f=1) and
-(X_t=t^2partial_t=Spartial_t). Take any negative odd integer
-(n), and set (m=p^nomega). Then
-[
-r=(Phi-1)m=p^{2n}omega+p^nomegain R.
-]
-Since (ho_t(omega)=tomega) and (X_t(p)=0),
-[
-ho_t(r)=p^{2n}tomega+p^ntomega.
-]
+Choose the simplest nonzero t-direction, \(v=t\), so \(e=0,f=1\) and
+\(X_t=t^2\partial_t=S\partial_t\). Take any negative odd integer
+\(n\), and set \(m=p^n\omega\). Then
+\[
+r=(\Phi-1)m=p^{2n}\omega+p^n\omega\in R.
+\]
+Since \(\rho_t(\omega)=t\omega\) and \(X_t(p)=0\),
+\[
+\rho_t(r)=p^{2n}t\omega+p^nt\omega.
+\]
 The first summand is exact:
-[
-p^{2n}tomega=p^{2n}dt=d(p^{2n}t),
-]
-because (2n=0) in the coefficient of (dlog p). Therefore
-[
-[ho_t(r)]_M=[p^ntomega] quad	ext{mod }B^1.
-]
+\[
+p^{2n}t\omega=p^{2n}dt=d(p^{2n}t),
+\]
+because \(2n=0\) in the coefficient of \(d\log p\). Therefore
+\[
+[\rho_t(r)]_M=[p^nt\omega] \quad\text{mod }B^1.
+\]
 
-At the negative odd exponent (n), the initial relation space of R is
+At the negative odd exponent \(n\), the initial relation space of R is
 exactly
-[
-G={(tb,a+bt):a,bin F},qquad E=Foplus tF.
-]
-The coefficient pair of (tomega) is ((t,0)), and it is not in G:
-the first coordinate forces (b=1), while the second would force
-(a=t
-otin F). Thus its class in the odd graded quotient is nonzero.
+\[
+G=\{(tb,a+bt):a,b\in F\},\qquad E=F\oplus tF.
+\]
+The coefficient pair of \(t\omega\) is \((t,0)\), and it is not in G:
+the first coordinate forces \(b=1\), while the second would force
+\(a=t\notin F\). Thus its class in the odd graded quotient is nonzero.
 By the strictness result G-4bv, this nonzero initial class cannot be
 cancelled by higher-exponent terms of a putative relation in R.
 Consequently
-[
-oxed{ho_t(R)\not\subseteq R.}
-]
-More generally the same witness works for every (v=e+ft) with
-(f\ne0): after removing the exact (p^{2n}ft\omega) term, the
-surviving odd-layer class is ((0,f)\in Q_n\simeq F^2).
+\[
+\boxed{\rho_t(R)\not\subseteq R.}
+\]
+More generally the same witness works for every \(v=e+ft\) with
+\(f\ne0\): after removing the exact \(p^{2n}ft\omega\) term, the
+surviving odd-layer class is \((0,f)\in Q_n\simeq F^2\).
 
 **Conclusion.** The restricted Lie-algebra representation on the ambient
 logarithmic module does not descend to the Kato-style quotient. The
@@ -2799,50 +2798,50 @@ stabilizer of R, or formulated using a different, genuinely functorial
 action; neither replacement is asserted here.
 
 **Correction to the earlier G-4ce caveat.** The scalar
-Artin–Schreier observation involving (m^2+m) is irrelevant to this
+Artin–Schreier observation involving \(m^2+m\) is irrelevant to this
 denominator. The failure above is proved directly for
-(R=B^1+(Phi-1)M), using its strict negative associated-graded
+\(R=B^1+(\Phi-1)M\), using its strict negative associated-graded
 relations.
 
 
 ## 84. G-4cg — the quotient has zero infinitesimal stabilizer
 
-G-4cf used (m=p^n\omega) to detect every parameter with (f\ne0).
-The complementary test detects the constant parameter. Let (e\ne0),
-take (v=e+ft), choose negative odd n, and set (m=p^nt\omega).
+G-4cf used \(m=p^n\omega\) to detect every parameter with \(f\ne0\).
+The complementary test detects the constant parameter. Let \(e\ne0\),
+take \(v=e+ft\), choose negative odd n, and set \(m=p^nt\omega\).
 Then
-[
+\[
 (\Phi-1)m=p^{2n}S\omega+p^nt\omega.
-]
-Using (X_v(t)=et+fS), (X_v(S)=0), and the connection term
-(ft\cdot t=fS), we get
-[
-\rho_v(t\omega)=et\omega,qquad
+\]
+Using \(X_v(t)=et+fS\), \(X_v(S)=0\), and the connection term
+\(ft\cdot t=fS\), we get
+\[
+\rho_v(t\omega)=et\omega,\qquad
 \rho_v(S\omega)=Sft\omega.
-]
+\]
 Therefore
-[
+\[
 \rho_v((\Phi-1)m)
 =p^{2n}Sft\omega+p^net\omega.
-]
+\]
 The first term is exact:
-[
+\[
 p^{2n}Sft\omega=d(p^{2n}Sft),
-]
-since (dS=df=0) in (E=F_2(t)) and (2n=0) in characteristic two.
-The remaining term (e p^nt\omega) has nonzero class in the negative
-odd graded quotient, because ((t,0)\notin G).
+\]
+since \(dS=df=0\) in \(E=F_2(t)\) and \(2n=0\) in characteristic two.
+The remaining term \(e p^nt\omega\) has nonzero class in the negative
+odd graded quotient, because \((t,0)\notin G\).
 
 Combining this with G-4cf:
-- if (f\ne0), the test (m=p^n\omega) leaves the nonzero class
-  (f(0,1)\in Q_n\simeq F^2);
-- if (e\ne0), the test (m=p^nt\omega) leaves the nonzero class
-  (e(0,1)\in Q_n\simeq F^2).
+- if \(f\ne0\), the test \(m=p^n\omega\) leaves the nonzero class
+  \((0,f)\in Q_n\simeq F^2\);
+- if \(e\ne0\), the test \(m=p^nt\omega\) leaves the nonzero class
+  \((0,e)\in Q_n\simeq F^2\).
 
-Thus every nonzero (v=e+ft\in E) fails to preserve R. We have proved
-[
-oxed{\{v\in E:\rho_v(R)\subseteq R\}=0.}
-]
+Thus every nonzero \(v=e+ft\in E\) fails to preserve R. We have proved
+\[
+\boxed{\{v\in E:\rho_v(R)\subseteq R\}=0.}
+\]
 Equivalently, the two-dimensional restricted section-change Lie algebra
 has zero infinitesimal stabilizer on this Kato-style quotient under the
 ambient Lie-derivative action.
