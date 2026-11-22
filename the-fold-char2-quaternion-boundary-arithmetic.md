@@ -2220,3 +2220,57 @@ Thus if Σ=t² and Σ'=(t')², then Σ'−Σ is divisible by p². This is compat
 **Important limitation.** Identity on the associated graded of the ambient differential module does not, by itself, prove strictness of the induced filtration after quotienting by exact forms and (C⁻¹−1)-relations. Nor does it prove that the section-dependent orbit splittings are related by a uniquely determined triangular automorphism of the final quotient. Those are the remaining functoriality questions. The scalar projection is better behaved: it is characterized on the intrinsic quaternion differential symbols and the section-independent scalar normal form G-4aj, so its target quotient does not depend on the auxiliary lift.
 
 **Next task.** Prove strictness for the combined relation subspace B¹+(C⁻¹−1)Ω¹ with respect to the p-adic filtration, or find the first filtration degree where strictness fails. If strictness holds, the associated-graded quotient is intrinsic and the coordinate splittings are filtered choices of section; if it fails, the failure identifies an additional extension term that the present direct-sum model misses.
+
+
+## 73. G-4bv — strictness of the Cartier/exact relation filtration
+
+We can now close the strictness problem posed in G-4bu. Put
+\[
+M=\Omega^1_L=L\,d\log t\oplus L\,d\log p,
+\qquad L=E((p)),\quad E=\mathbb F_2(t),\quad F=E^2.
+\]
+Let \(B^1=dL\), and let \(\Phi\) be the chosen logarithmic representative of inverse Cartier,
+\[
+\Phi\big(p^n(A,B)\big)=p^{2n}(A^2,B^2).
+\]
+The relation space defining the Kato quotient is
+\[
+R=B^1+(\Phi-1)M.
+\]
+For \(c=a+bt\in E\), with a,b∈F, one has
+\[
+d(cp^n)=p^n\big(tb,\,(n\bmod 2)c\big)
+\]
+in the logarithmic basis. Hence the exact subspace at exponent n is
+\[
+D_n=
+\begin{cases}
+G=\{(tb,a+bt):a,b\in F\},&n\text{ odd},\\
+T=\{(tb,0):b\in F\},&n\text{ even}.
+\end{cases}
+\]
+
+We compute the initial relation subspace at each exponent, using the least p-exponent as the leading term.
+
+- If n>0, the leading term of (Φ−1)(p^n(A,B)) is p^n(A,B). Since (A,B) is arbitrary, the positive associated-graded relation space is all E⊕E. Independently, the whole positive tail is in (Φ−1)M by the convergent geometric series from G-4bs.
+- If n=0, the exponent is fixed by Φ. The relation space is exactly \(T+(\wp(E)\oplus\wp(E))\), where \(\wp(x)=x^2+x\).
+- If n<0 is odd, no inverse-Cartier image can have leading exponent n, because doubling a negative integer gives an even integer. Thus the initial relation space is exactly G.
+- If n<0 is even, write n=2r with r<0. The leading term of (Φ−1)(p^r(A,B)) is p^n(A²,B²), so its coefficient space is F⊕F. Exact forms at exponent n contribute T. These spaces intersect trivially: E=F⊕tF, hence \((F\oplus F)\cap T=0\).
+
+There is no hidden cancellation in the negative range. At a fixed negative even exponent n, the only inverse-Cartier input capable of producing its leading term is the coefficient at n/2; Frobenius is injective, and its leading coefficient space F⊕F has zero intersection with the exact tangent space T. At a negative odd exponent there is no incoming doubled exponent at all. Therefore the initial relation space is precisely
+\[
+\operatorname{in}_n(R)=
+\begin{cases}
+G,&n<0\text{ odd},\\
+(F\oplus F)\oplus T,&n<0\text{ even},\\
+T+(\wp(E)\oplus\wp(E)),&n=0,\\
+E\oplus E,&n>0.
+\end{cases}
+\]
+Every listed vector is realized by an exact differential or a single Cartier relation, so these are equalities, not just inclusions.
+
+**Conclusion.** The relation space \(B^1+(\Phi-1)M\) is strict for the p-adic exponent filtration. The associated-graded quotient is consequently intrinsic under coefficient-section changes, because G-4bu showed that those changes are filtered and identity on the ambient associated graded.
+
+This does **not** make the full direct-sum splitting in G-4bs canonical. It proves that its associated-graded layers are canonical; choosing representatives and splitting the successive extensions still depends on the coefficient-field lift. The nontrivial extension data are exactly where the Frobenius orbit/direct-limit model lives.
+
+The next step is to compute the extension maps between the canonical graded layers and show that the coordinate-dependent orbit decomposition is a filtered splitting of this intrinsic object.
