@@ -224,3 +224,47 @@ their difference lies in \(K^2+L_S(K)\). This is an intrinsic quotient
 presentation, not a dimension computation: determining the dimension or a
 basis of this quotient remains open. The class \(\delta_s([t])\) corresponds
 to the coset of \(T\), which is nonzero by the valuation argument in §2.
+
+
+## 9. G-4j — infinite-dimensionality of the quaternion-boundary image
+
+Let
+\[
+Q=K/(K^2+L_S(K)),\qquad K=\mathbb F_2(S,T),\quad
+L_S(u)=u+Su^2.
+\]
+Use the valuation at \(T=\infty\), whose residue field is
+\(\kappa=\mathbb F_2(S)\). Every element of the denominator with a pole
+at infinity has even pole order. To see this, write it as
+\[
+z^2+u+Su^2.
+\]
+If \(u\) has pole order \(n>0\), then \(Su^2\) has pole order \(2n\),
+strictly larger than the pole order of \(u\). The two even-order terms
+\(z^2\) and \(Su^2\), if they have equal pole order, cannot cancel:
+cancellation of leading coefficients would give
+\(S=(\bar z/\bar u)^2\) in \(\kappa\), impossible because \(S\) is
+not a square in \(\mathbb F_2(S)\). If their pole orders differ, the
+larger even order survives. If \(u\) has no pole, then only \(z^2\)
+can contribute a pole, and its order is even. Thus every nonzero
+denominator element with a pole has even pole order.
+
+Every nonzero finite \(\mathbb F_2\)-linear combination of
+\[
+T,\ T^3,\ T^5,\ T^7,\ldots
+\]
+has odd pole order at infinity. No such combination belongs to the
+denominator. Their classes are therefore linearly independent in \(Q\),
+so
+\[
+\boxed{\dim_{\mathbb F_2}Q=\infty.}
+\]
+By G-4i this proves
+\[
+\boxed{\dim_{\mathbb F_2}\operatorname{im}(\delta_s)=\infty.}
+\]
+More explicitly, the independent image classes are represented by
+\([S T^{2n+1},s)_2\), for \(n\ge0\), since they correspond under the
+G-4i quotient isomorphism to \([T^{2n+1}]\in Q\). Equivalently they are
+the boundary values \(\delta_s([sT^{2n+1}])\). This proves infinite
+rank, not a basis or a complete normal form for the quotient.
