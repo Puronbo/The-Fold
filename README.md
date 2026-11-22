@@ -1136,3 +1136,7 @@ H^q(C_2,V)=\ker N/\operatorname{im}N\quad(q\ge1).
 \]
 If (m=\dim V) and (r=\operatorname{rank}N), this dimension is (m-2r). In fact (V≅k[C_2]^r⊕k^{m-2r}), so positive cohomology counts the trivial Jordan blocks. The inflation–restriction transgression from (H^1(G_L,V)^{C_2}) lands in this explicit (H^2(C_2,V^{G_L})), giving a concrete order-two descent obstruction. This does not construct a global Fold Galois representation; that remains the next arithmetic task. See [the applicability and Galois note](the-fold-automorphic-and-hopf-galois-applicability.md).
 
+
+
+### G-8 — Cyclic 2-power Galois cohomology
+For a cyclic quotient (C_q), (q=2^n), in characteristic two, set (D=\sigma-1). Then (k[C_q]=k[D]/(D^q)), and the norm is (D^{q-1}). The two-periodic cyclic resolution gives odd cohomology (\ker D^{q-1}/\operatorname{im}D) and even positive cohomology (\ker D/\operatorname{im}D^{q-1}). Each nilpotent Jordan block of length less than (q) contributes one dimension in every positive degree; a length-(q) block is free and contributes zero. Thus positive cohomology counts the non-projective indecomposable blocks. Inflation–restriction places the descent obstruction in (H^2(C_q,V^{G_L})). See [the Galois applicability note](the-fold-automorphic-and-hopf-galois-applicability.md).
