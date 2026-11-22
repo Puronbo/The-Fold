@@ -2192,3 +2192,11 @@ Setting \(c=d=h=0\) makes the affine conjugator \(g(x)=ax+bz,\ g(z)=iz\). A univ
 - Adjoining corrected in_3(n_2n_5) leaves rank 60; adjoining in_3(n_2n_6+n_3n_5) gives rank 61; adjoining both gives 61.
 - Exactly one of these two vectors contributes a new generic cubic initial direction. This does not determine the full N^2/N^3 or its integral S-module structure.
 - Reproducible exact certificate: certificates/uf072h_generic_cubic_rank.py.
+
+
+### UF-072I — Degree-three pair-product classes
+- Computes cubic initial terms of all products n_1n_j and n_4n_j for j=2,3,5,6,7,8,9.
+- Exact generic rank rises from 60 for triple products to 70 after these 14 columns; corrected n_2n_5 adds none, while n_2n_6+n_3n_5 raises rank to 71.
+- Ten independent classes come from n_1/n_4 products and one from the mixed quadratic-kernel relation. Together with the degree-two rank 24, the first two graded pieces contribute 35 generic dimensions.
+- Degree-four and higher contributions, including n_1^2,n_1n_4,n_4^2, remain open.
+- Reproducible exact certificate: certificates/uf072i_degree3_pair_product_rank.py.
