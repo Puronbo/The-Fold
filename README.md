@@ -1545,3 +1545,10 @@ B'=\sigma(B)+\sigma(A)\frac{(r\bmod2)p^rv}{1+p^rv}.
 \]
 Its leading \(p^r\)-term is exactly G-4ca. This is the ambient formula;
 the reduced matrices on \(M/R\) remain to be computed.
+
+
+### G-4cj–G-4cl — section-change centrality, faithfulness, and learning
+
+The arbitrary-depth G-4ca arrow is corrected: for an odd source class \((x,y)\), the target is \(f_rx+e_ry\) in \(Q_{\rm even}\) when r is odd, and \((0,f_rx+e_ry)\) in \(Q_{\rm odd}\) when r is even. The \(f_rx\) term at even depth comes from the first coefficient and was previously omitted. The graded Lie algebra and the full positive-depth section-change group have trivial center. The corrected first arrow detects every nonzero leading parameter, so the finite section-change action on \(M/R\) has trivial kernel.
+
+A machine-learning bridge is specified: exact symbolic feature coordinates, filtered equivariant transformations, invariant readouts, and exact verification. The file tools/section_change_equivariance_data.py emits verified low-order GF(2)[S] training examples for odd/even layer transitions and bracket/composition tasks. This is a data generator and research benchmark foundation; no neural model training or higher-order quotient labels are claimed.
