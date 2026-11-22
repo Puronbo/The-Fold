@@ -2397,3 +2397,77 @@ At exponent zero, the induced associated-graded map is the identity. Indeed, the
 is unchanged on its leading graded layer.
 
 **Scope and next check.** The displayed maps are the second-order diagonals for a single section change, not a classification of the full filtered automorphism. We must still verify the composition law for two successive changes, including the cross terms contributed by the first-order maps, and determine whether the resulting higher diagonals are forced by the first-order data or carry new independent parameters.
+
+
+## 76. G-4by — corrected second-order maps and composition law
+
+**Corrigendum to G-4bx.** The p² calculation must transport the coefficient field F as well as the parameter t. Since
+\[
+s^2=t^2(1+pv_0+p^2v_1)^2
+=t^2+p^2t^2v_0^2+O(p^3),
+\]
+an old coefficient c(S), S=t², is expressed in the new coefficient field as
+\[
+c(S_{old})=c(S_{new})+p^2S v_0^2\partial_Sc+O(p^3).
+\]
+This adds the derivation
+\[
+D_{v_0}=S v_0^2\partial_S
+=S(e^2+Sf^2)\partial_S
+\]
+to both F-coordinates. Also, the correct second-order B-coordinate formula has no extra \(\alpha fA\) term: because the basis transition is expressed in the new coordinate, its off-diagonal coefficient is \(pv_0+p^2v_0^2\).
+
+Thus the corrected p² diagonals are
+\[
+\boxed{
+N_{odd}(x,y)=
+\big(Sf^2x+D_{v_0}x,\;
+f_1x+(e^2+e_1)y+D_{v_0}y\big),
+}
+\]
+and
+\[
+\boxed{
+N_{even}(d)=(e^2+e_1)d+D_{v_0}d.
+}
+\]
+These replace the formulas in G-4bx. The zero-mode graded layer remains fixed.
+
+We can now verify composition. Apply first the section change v and then u, with
+\[
+v_0=e_v+f_vt,\quad u_0=e_u+f_ut.
+\]
+The composite parameter is
+\[
+w_0=v_0+u_0,
+\quad
+w_1=v_1+u_1+t v_0\partial_tu_0+v_0u_0.
+\]
+Since \(\partial_tu_0=f_u\), the cross term simplifies in characteristic two to
+\[
+t v_0f_u+v_0u_0=e_uv_0.
+\]
+Consequently
+\[
+e_{w_1}=e_{v_1}+e_{u_1}+e_ue_v,
+\quad
+f_{w_1}=f_{v_1}+f_{u_1}+e_uf_v,
+\quad
+D_{w_0}=D_{v_0}+D_{u_0}.
+\]
+
+Let \(L_v:Q_{odd}\to Q_{even}\) and \(M_v:Q_{even}\to Q_{odd}\) be the first-order maps from G-4bw:
+\[
+L_v(x,y)=f_vx+e_vy,
+\qquad M_v(d)=(0,e_vd).
+\]
+The corrected second-order maps satisfy exactly
+\[
+N_{odd}(w)=N_{odd}(v)+N_{odd}(u)+M_uL_v,
+\]
+\[
+N_{even}(w)=N_{even}(v)+N_{even}(u)+L_uM_v.
+\]
+For the odd layer, the cross term is \(M_uL_v(x,y)=(0,e_u(f_vx+e_vy))\); for the even layer it is \(L_uM_v(d)=e_ue_vd\). These are precisely the cross terms dictated by composition of filtered triangular maps. The derivation terms add because \((v_0+u_0)^2=v_0^2+u_0^2\).
+
+**Conclusion.** The first- and second-order section-change maps satisfy the composition law through order p², once the induced motion of the coefficient field is included. The second-order maps are therefore not arbitrary corrections: their nonlinear cross terms are forced by the group law of coefficient-section changes. This is a genuine functoriality check, but it does not yet prove that the full filtered extension is determined by its first two diagonals; orders p³ and above remain.
