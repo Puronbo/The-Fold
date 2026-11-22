@@ -2278,3 +2278,9 @@ otinmathcal N^3) by UF-072O.
 - For each Jordan block \(J_d\) of \(D=\sigma-1\) with \(d<q=2^n\), a chain \(De_j=e_{j-1}\) contributes the class of its top vector \(e_{d-1}\) to \(H^1(C_q,V)\) and the class of its bottom vector \(e_0\) to \(H^2(C_q,V)\).
 - A length-\(q\) block contributes zero: its top vector is in \(\operatorname{im}D\), and its bottom vector is a norm \(D^{q-1}e_{q-1}\).
 - Hence these short-block representatives give explicit bases, once Jordan chains are chosen. The arithmetic transgression still requires a concrete Galois extension, module, and invariant class; no Fold-specific transgression is claimed.
+
+### G-10 — Cochain-level transgression computation
+- For \(1\to N\to G\to Q\to1\), an invariant class \([\alpha]\in H^1(N,V)^Q\) is represented by a 1-cocycle on N.
+- Extend its representative to a 1-cochain on G; the Hochschild–Serre construction chooses the extension so its coboundary descends to a 2-cocycle on Q with coefficients in \(V^N\). Its class is the transgression \(d_2([\alpha])\).
+- In the cyclic characteristic-two case, reduce that class in \(\ker D/\operatorname{im}D^{q-1}\) and use G-9's short-block bottom vectors as coordinates.
+- This gives an explicit computational procedure, not a Fold arithmetic example: a concrete extension, module, and invariant cocycle are still needed.
