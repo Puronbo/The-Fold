@@ -2738,3 +2738,8 @@ Taking 2^j-th roots identifies the direct limit for each nonzero odd exponent or
 ### G-4bk — negative orbit quotient is F⊕F
 
 The tangent subspace \(U∞=\sum_{h≥1}t^{1/2^h}F^{1/2^h}\) is the canonical complement \(E^{perf}/E\). After quotienting it, each negative exponent orbit reduces to \((E⊕E)/G₀\). For A=A₀+tA₁ and B=B₀+tB₁, the map \((A,B)↦(A₀,A₁+B₁)\) has kernel G₀ and identifies the orbit quotient with F⊕F. This computes every negative odd exponent orbit; exponent zero and completion remain.
+
+
+### G-4bl — zero orbit and finite-polar-part quotient
+
+The exponent-zero contribution is \(F/(\wp(F)+SF²)\oplus F/\wp(F)\): the first coordinate is E/(tF+wp(E)) after projection E→F modulo tF, and the second is E/wp(E)≅F/wp(F). Combining with G-4bk, the finite-polar-part model is \(F/(\wp(F)+SF²)\oplus F/wp(F)\oplus\bigoplus_{r≥1\ odd}(F⊕F)\). This is an algebraic finite-support statement, not yet a topological completion theorem. The scalar G-4aj quotient should be compared as a projection/subquotient, not identified with the full two-coordinate model.
