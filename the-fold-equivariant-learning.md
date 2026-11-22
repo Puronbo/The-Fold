@@ -383,3 +383,35 @@ The rational verifier now checks the odd-coefficient and Hasse-power statements 
 3. exploratory high-order even torsion.
 
 This prevents the model from treating the conjecture as a theorem merely because the bounded stress tests have not falsified it.
+
+
+## 10. Residue-aware stable features
+
+G-4cp identifies the pure-scaling coinvariant of each negative odd layer with the stable Cartier-residue module
+\[
+\mathcal R_C=
+\Omega_F^1\Big/\bigcup_{n\ge1}\ker C^n
+\simeq
+\bigoplus_{Q\ {\rm monic\ irreducible}}
+\mathbb F_{2^{\deg Q}}.
+\]
+A rational coefficient \(x\in F\) is encoded by the residues of
+\[
+\omega_x=(x/S)dS
+\]
+at the finite closed points Q. The residue at infinity is determined by the trace sum. This feature map is invariant under the pure-scaling coinvariant relations. Whether the full t-dependent section-change group preserves all these residue coordinates is an open exact test; do not yet treat \(\mathcal R_C\) as the certified full-group invariant space.
+
+### Important coverage limitation
+
+The current exact generator uses polynomial coefficients in \(\mathbb F_2[S]\). For polynomial x, \(\omega_x=(x/S)dS\) has finite poles only at Q=S, so the stable residue feature seen by this dataset is at most the single residue at S. It does not sample the residue-field coordinates at irreducible denominators \(Q\ne S\).
+
+To train models that learn the full residue module, extend the coefficient encoder to normalized rational functions \(N(S)/D(S)\), factor D into monic irreducibles, and represent each residue in the finite field \(\mathbb F_2[S]/(Q)\). A useful exact generating family is
+\[
+\omega_{Q,\alpha}=\alpha(S)\frac{Q'(S)}{Q(S)}\,dS,
+\qquad \alpha\bmod Q\in\mathbb F_2[S]/(Q),
+\]
+which has prescribed residue \(\bar\alpha\) at Q and a trace-determined residue at infinity.
+
+### Frobenius-depth task
+
+For \(x=a^{2^h}\), the first pure-scaling correction occurs at p-depth \(2^{h+1}r\), with coefficient \((S e^2a')^{2^h}\). The data generator now emits this target and checks it against the exact Hasse coefficient of \(x(S/(1+q))\), \(q=p^{2r}\), using Lucas' theorem for binomial coefficients. This makes the model's extrapolation task explicit: infer the first nonzero depth from the Frobenius depth h, then predict the coefficient. The test suite verifies the formula over \(\mathbb F_2[S]\), while rational-denominator residue learning remains future work.
