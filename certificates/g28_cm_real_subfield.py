@@ -92,11 +92,13 @@ assert disc == 4352 == 2**8*17
 
 # Cubic resolvent R(Z) = Z^3 - b Z^2 + (a*c-4*d)Z
 # + (4*b*d-a^2*d-c^2) for g=Y^4+aY^3+bY^2+cY+d.
-resolvent = [-64,-24,2,1]
+aa,bb,cc,dd = g[3],g[2],g[1],g[0]
+resolvent = [4*bb*dd-aa*aa*dd-cc*cc, aa*cc-4*dd, -bb, 1]
 assert resolvent == [-64,-24,2,1]  # (Z+4)(Z^2-2Z-16)
 # Modulo 7, g = Y(Y-2)(Y^2-Y+3), with the quadratic irreducible.
 g7 = mod_poly(g,7)
 assert g7 == [0,1,5,4,1]
+assert mod_poly(mul(mul([0,1],[-2,1]),[3,-1,1]),7) == g7
 assert divmod_mod(g7,[0,1],7)[1] == [0]
 assert divmod_mod(g7,[-2,1],7)[1] == [0]
 assert all(divmod_mod([3, -1, 1],[(-r)%7,1],7)[1] != [0]
