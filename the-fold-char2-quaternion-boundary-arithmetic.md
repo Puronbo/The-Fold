@@ -1835,3 +1835,25 @@ so the induced map is injective.
 This resolves the apparent mismatch between the geometric index-one coefficient \(E/\wp(E)\) and the scalar local normal-form coefficient \(F/\wp(F)\) in G-4aj. Combined with G-4bf, which identifies each higher odd-pole mixed coefficient with \(S F²\), the geometry now reproduces every coefficient space in the G-4aj normal form.
 
 **Scope:** matching all coefficient spaces is not yet a proof that the geometric filtration and the scalar quotient have identical relations. The remaining theorem is to prove that the mixed tangent relations impose exactly the G-4ai/G-4aj relations and no others, including the independence of the resulting higher-chain summands.
+
+
+## 59. G-4bh — logarithmic-coordinate presentation of the Cartier filtration
+
+Use the logarithmic basis \((d\log t,d\log p)\). In the inverse-Cartier representative convention,
+\[
+C^{-1}(A\,d\log t+B\,d\log p)
+=[A²d\log t+B²d\log p]\quad\bmod dL.
+\]
+For a finite Laurent monomial \(f=cp^n\), write uniquely \(c=a+bt\) with a,b∈F=E²=\mathbb F_2(S). Then
+\[
+df=(tb\,d\log t+n(a+bt)\,d\log p)p^n.
+\]
+Its j-fold inverse-Cartier representative is
+\[
+\boxed{\big(t^{2^j}b^{2^j},\ (n\bmod2)^{2^j}(a+bt)^{2^j}\big)p^{2^jn},}
+\]
+where for j=0 the second component is n(a+bt), and for j≥1 it is zero if n is even and \((a+bt)^{2^j}\) if n is odd. Equivalently, the pair is \(((tb)^{2^j},(nc)^{2^j})p^{2^jn}\) for every j≥0.
+
+Every finite Laurent input is a finite sum of monomials, so these pairs generate the finite-principal-part Cartier filtration. This gives a compact two-coordinate presentation: the Cartier operation itself is coefficientwise Frobenius in logarithmic coordinates; all geometric coupling is encoded in the exact-input pairs \((tb,n(a+bt))\). It is the appropriate starting point for comparing the full mixed relation system with G-4ai/G-4aj.
+
+**Scope:** this is a representative-level description of the iterated inverse-Cartier images of finite Laurent exact forms. For arbitrary completed series, one must specify the topology and continuity of the chosen Cartier representatives before extending the generation statement. The Kato quotient still requires imposing the full \(C^{-1}-1\) relations and proving the resulting normal form.
