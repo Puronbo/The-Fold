@@ -1450,3 +1450,7 @@ the quaternion-boundary arithmetic note.
 
 
 **G-4bk — negative exponent orbits:** the full two-coordinate orbit quotient simplifies to \(F⊕F\) for every negative odd root. The tangent relations account for \(E^{perf}/E\); the residual graph quotient is computed by \((A,B)↦(A₀,A₁+B₁)\). Exponent zero and completion remain.
+
+
+
+**G-4bl — finite-polar-part model:** the zero orbit contributes \(F/(\wp(F)+SF²)\oplus F/\wp(F)\); each negative odd orbit contributes F⊕F. This is the finite-support logarithmic Kato presentation. Completion and comparison with the scalar G-4aj quotient remain open.
