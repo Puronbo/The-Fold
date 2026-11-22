@@ -2265,3 +2265,11 @@ otinmathcal N^3) by UF-072O.
 - Inflation–restriction identifies the descent obstruction for invariant classes in (H^1(G_L,V)) with the transgression into (H^2(C_2,V^{G_L})), which is this same square-zero quotient.
 - This is a structural calculation for a specified quadratic quotient, not a classification of arbitrary profinite Galois representations. The Fold-specific task is to construct natural global modules and evaluate the transgression on actual arithmetic classes.
 
+
+
+### G-8 — Cyclic (2)-power Galois cohomology
+- For a finite cyclic quotient (C_q), (q=2^n), in characteristic two, put (D=\sigma-1). Then (k[C_q]\cong k[D]/(D^q)) and the norm is (D^{q-1}).
+- The cyclic resolution gives (H^{2j+1}=\ker D^{q-1}/\operatorname{im}D) and (H^{2j+2}=\ker D/\operatorname{im}D^{q-1}).
+- Decomposing (V) into nilpotent Jordan blocks, every block of length (d<q) contributes one dimension in every positive degree; a length-(q) block is free/projective and contributes zero. Hence (dim H^j(C_q,V)) equals the number of blocks shorter than (q), for all (j\ge1).
+- Inflation–restriction places the descent obstruction in (H^2(C_q,V^{G_L})). The theorem gives an exact finite quotient test, not a global Fold Galois representation or an evaluated arithmetic transgression.
+\n
