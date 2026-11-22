@@ -2541,3 +2541,7 @@ The G-4w coefficient of x₃² in C was misstated. The corrected pair, derived f
 
 ### G-4y — quartic square-class criterion after elimination
 Using the corrected G-4x equations, solve r₂=R=(C+x₀²+(p+S)x₁²+(p+S)x₃²+r₀+Sr₀²)/(p+S). The target is represented iff there exist x₀,x₁,x₃,r₀ such that B+(p+1+S)x₃²+R+SR² lies in F((p))²+F[[p]]. This is exact but retains four existential parameters. The coefficient quotient has copies of F/F² at negative even exponents and F at negative odd exponents; these are coefficient slots, each countably infinite-dimensional over F₂.
+
+
+### G-4z — coefficient recursion for the quartic local membership test
+The square-class space H=F((p))/(F((p))²+F[[p]]) has odd negative coefficients in F and even negative coefficients in F/F². For the G-4y expression put q=S+p, U=C+x₀²+qx₁²+qx₃²+r₀+Sr₀², and R=q⁻¹U. Then R_n=S⁻¹(U_n+R_{n−1}), with U_n given by the parity-indexed coefficient formula in the arithmetic note. The residual E=B+(1+S)x₃²+px₃²+R+SR² has explicit coefficients there. Membership is equivalent to E_n=0 for negative odd n and E_n∈F² for negative even n. This is an exact infinite coefficient test, not yet a codimension computation.
