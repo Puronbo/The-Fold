@@ -1263,3 +1263,6 @@ has relative norm \(N_{L/F}(\alpha)=((\beta+4)/(\beta+2))(1+\beta)\), hence abso
 
 
 **G-4m — local parity criterion:** at an irreducible P with residue E, denominator elements z²+u+Su² have only even pole orders exactly when S is nonsquare in E. If S is square, an explicit simple-pole denominator exists. Thus the exceptional places are inseparable; see the quaternion-boundary arithmetic note.
+
+
+**G-4n — exceptional-place witness:** at P=T²−S, S becomes square in the residue field and z=TS/P, u=S/P give z²+u+Su²=(S²+S)/P, a genuine simple pole. This is not a full local reduction theorem.
