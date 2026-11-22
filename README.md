@@ -1402,3 +1402,7 @@ the quaternion-boundary arithmetic note.
 
 
 **G-4ay — logarithmic mixed generator:** the mixed B₂ term for odd negative p-exponents is \(S c_1^4p^{-2r}d\log(t/p)\), with coefficient in \(S F²\). Its normal and tangent pieces are one logarithmic form, matching the higher-chain coefficient space of G-4aj; completeness of mixed relations remains open.
+
+
+
+**G-4az — first perfection layer:** the mixed coefficient \(S E^4\) maps to \(t^{1/2}E/E\subset E^{\rm perf}/E\) in each chain, via fourth roots. Its inverse-Cartier orbit represents the same direct-limit class; completeness of mixed relations remains open.
