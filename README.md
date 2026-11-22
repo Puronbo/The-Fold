@@ -1166,3 +1166,6 @@ A generator is \(\sigma(u)=u+1,\ \sigma(w)=w+u,\ \sigma(v)=v+u^3+uw+u\); its squ
 
 ### G-15 — explicit cyclic factor set
 For (C_8\twoheadrightarrow C_4), the section (s(i)=g^i) gives (\tau(i,j)=\lfloor(i+j)/4\rfloor\bmod2). Its G-11 cyclic sum is (w_\tau=\sum_{j=0}^3\tau(j,1)=1), the nonzero generator of (H^2(C_4,\mathbb F_2)) with trivial coefficients. This explicitly identifies the G-13 transgression with the cyclic cocycle-sum obstruction. The Fold-specific realization remains open; see [the Galois applicability note](the-fold-automorphic-and-hopf-galois-applicability.md).
+
+### G-16 — uniform cyclic (2)-power transgression family
+For every (r\ge1), (1\to C_{2^r}\to C_{2^{r+2}}\to C_4\to1) has an isomorphism transgression (H^1(C_{2^r},\mathbb F_2)^{C_4}\to H^2(C_4,\mathbb F_2)). The restriction map from the larger cyclic group is zero, so five-term exactness proves injectivity; both spaces are one-dimensional. The pushed-out factor set is (\tau(i,j)=\lfloor(i+j)/4\rfloor\bmod2), whose cyclic sum is 1. Arithmetic realization in all lengths and a Fold-specific interpretation remain open. Details: [Galois applicability note](the-fold-automorphic-and-hopf-galois-applicability.md).
