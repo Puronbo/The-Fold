@@ -2176,3 +2176,11 @@ Setting \(c=d=h=0\) makes the affine conjugator \(g(x)=ax+bz,\ g(z)=iz\). A univ
 - Exact elimination over (K=\mathbb F_2(A,B,C,D,E,G,J)), after clearing (a^2i^3), gives rank 24 and a four-dimensional kernel.
 - Kernel basis: (n_2^2, n_2n_5, n_5^2, n_2n_6+n_3n_5), interpreted only as quadratic initial relations.
 - Does not determine the full quotient \(\mathcal N^2/\mathcal N^3\), because products involving (n_1,n_4) may start in degree three or higher; higher terms and integral (S)-module relations remain open.
+
+
+### UF-072G — Cubic obstructions and two surviving classes
+- Proves the exact identities (n_2^2=n_5^2=0) from their complete source monomial supports and the truncation relations.
+- Computes cubic initial terms of (n_2n_5) and (n_2n_6+n_3n_5).
+- The cubic initial triple-product map from 84 triples has exact rank 60 over (K=\operatorname{Frac}(S)); adjoining those two vectors raises the rank to 62.
+- Therefore these products give two independent nonzero classes in the generic fiber of \(\mathcal N^2/\mathcal N^3\).
+- A full presentation of this quotient, including products involving (n_1,n_4), remains open.
