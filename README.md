@@ -1176,3 +1176,6 @@ Every G-16 cyclic extension is realized over (K=\mathbb F_2(s)): for each (n\ge2
 
 ### G-18 — arbitrary cyclic quotient transgression
 The G-16/G-17 result extends from quotient C4 to every C_(2^m): for all r,m≥1, the extension \(1\to C_{2^r}\to C_{2^{r+m}}\to C_{2^m}\to1\) has an isomorphism transgression with trivial \(\mathbb F_2\)-coefficients. Its explicit pushed-out factor set \(\tau(i,j)=\lfloor(i+j)/2^m\rfloor\bmod2\) has cyclic sum 1. Every pair (r,m) is realized over the single field \(\mathbb F_2(s)\) by the Artin–Schreier–Witt vector \((s,s,0,\ldots,0)\) of length r+m. The theorem is not yet Fold-specific; see [the Galois applicability note](the-fold-automorphic-and-hopf-galois-applicability.md).
+
+### G-19 — transgression as a pushout extension class
+For an abelian-kernel extension and a quotient-invariant character of the kernel into a coefficient module on which the kernel acts trivially, the Hochschild–Serre transgression is the pushout extension class (up to the standard factor-set sign). In G-18, the nonzero character sends the cyclic carry factor set to the explicit cocycle with cyclic sum 1. This explains the obstruction as nonsplitting of the pushed-out extension. It remains a group-cohomological result, not yet a Fold-derived construction; details and reference are in the Galois applicability note.
