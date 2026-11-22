@@ -1501,3 +1501,6 @@ the quaternion-boundary arithmetic note.
 
 
 **G-4by — second-order composition:** G-4bx is corrected for coefficient-field motion S_new=S_old+p²S_oldv₀²+O(p³). With Dᵥ=S(e²+Sf²)∂S, the p² maps are Q_odd: (x,y)↦(Sf²x+Dᵥx, f₁x+(e²+e₁)y+Dᵥy), and Q_even: d↦(e²+e₁)d+Dᵥd. They satisfy N_odd(w)=N_odd(v)+N_odd(u)+M_uL_v and N_even(w)=N_even(v)+N_even(u)+L_uM_v under composition. Higher orders remain open.
+
+
+**G-4bz — independent cubic data:** the isolated change t'=t(1+p³(e₂+f₂t)) induces Q_odd≅F²→Q_even≅F, (x,y)↦f₂x+e₂y, and Q_even≅F→Q_odd≅F², d↦(0,e₂d), three filtration steps higher. These parameters are independent of the first two orders. The cubic composition coefficient is recorded in the arithmetic document; its lower-order cross terms are forced, but its new cubic parameter is free.
