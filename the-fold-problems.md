@@ -2372,3 +2372,15 @@ Thus it is surjective, with kernel exactly the norm image. In Jordan form it kil
 - Directly counts \(\#E(\mathbb F_2)=5\), giving Frobenius trace \(-2\) and characteristic polynomial \(T^2+2T+2\).
 - Since the trace is divisible by 2, E is supersingular; this independently checks the G-23 2-rank conclusion.
 - This determines the elliptic quotient's Frobenius polynomial, not the higher-genus Jacobian Newton polygons or a Fold-derived Galois representation. Full calculation and reference: [Galois applicability note](the-fold-automorphic-and-hopf-galois-applicability.md).
+
+
+### G-25 — exact Weil polynomial of the genus-seven octic curve
+- Counts the points on the smooth projective genus-seven curve over \(\mathbb F_{2^m}\), for \(1\le m\le10\), by exact finite-field enumeration of the three Artin–Schreier coordinates and the unique point at infinity.
+- The counts are \(9,9,9,9,49,105,121,177,513,1009\).
+- Newton identities for the first seven counts and the Weil functional equation give
+  \[
+  P_C(T)=1+6T+20T^2+48T^3+90T^4+140T^5+196T^6+272T^7
+  +392T^8+560T^9+720T^{10}+768T^{11}+640T^{12}+384T^{13}+128T^{14}.
+  \]
+- Counts for degrees 8–10 independently check the reconstructed polynomial. Exact reproducible script: `certificates/g24_genus7_weil_polynomial.py`.
+- This determines the genus-seven Jacobian's Frobenius polynomial/isogeny class, but not its simple-factor decomposition or the genus-35 Jacobian. Derivation and Weil reference: [Galois applicability note](the-fold-automorphic-and-hopf-galois-applicability.md).
