@@ -1558,3 +1558,6 @@ A machine-learning bridge is specified: exact symbolic feature coordinates, filt
 
 
 **G-4cn — invariant readouts:** G-4cm computes fixed vectors, not invariant linear functionals. Linear invariant readouts are dual to the coinvariant quotient \(Q_{\mathcal G}=Q/\langle gq-q\rangle\), which remains open; the nonlinear invariant ring is separate.
+
+
+**G-4co — two-diagonal coinvariant approximation:** first-order arrows kill every negative even layer and the second coordinate of each negative odd layer. The corrected isolated p² diagonal kills \(SF²\) in the remaining first coordinate, leaving \(F/SF²\simeq\Omega_F^1/dF\) at odd layers at this truncation. Higher Cartier/Frobenius diagonals and zero-mode coinvariants remain open. The exact data generator now emits and self-tests second-diagonal GF(2)[S] examples.
