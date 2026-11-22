@@ -2688,3 +2688,8 @@ At the first odd node of an even-root chain, the G-4ay normal coefficient \(S c_
 ### G-4ba — tangent exact principal parts
 
 For \(L=E((p))\), the exact forms that are purely tangent have even pole indices and coefficients in E²: \(dL\cap\operatorname{PP}_{tan}=\bigoplus_{m\ even}E²p^{-m}dt\). This follows by requiring all odd Laurent coefficients of the primitive to vanish and using \(dE/dt=E²\). The B₁ tangent and normal relations are symmetric; their coupling begins at B₂.
+
+
+### G-4bb — second Cartier layer decomposition
+
+Modulo B₁, negative even exponents give pure tangent \(tE^4\) at tangent pole indices divisible by four. Negative odd exponents n=−r give a tangent term \(tE^4\) at pole 2r, plus normal terms \(E^4\) and \(SE^4\) at pole 2r+1. Since \(E²=E^4\oplus SE^4\), the latter split into pure-normal and mixed-normal parts; the mixed part is paired with the tangent term. This is the finite Laurent B₂ decomposition. Higher Cartier levels must propagate the paired pieces.
