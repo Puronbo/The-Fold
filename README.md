@@ -1478,3 +1478,7 @@ the quaternion-boundary arithmetic note.
 
 
 **G-4br — adjacent-term correction:** the exact log exponents are −(m−1) for the surviving t²c² term and −(m−2) for the adjacent c² term. The latter is killed by G₀; the former maps to Sc² at the correct Cartier stage. This completes the coefficient-field correction to the symbol comparison.
+
+
+
+**G-4bs — completed local Kato quotient:** positive p-adic tails are contracted by the convergent geometric series \(\sum_{k≥0}(C^{-1})^k\omega_+\), since inverse Cartier doubles valuations. The completed quotient is therefore the finite-polar model plus the zero mode; the scalar quaternion quotient is its explicit projection.
