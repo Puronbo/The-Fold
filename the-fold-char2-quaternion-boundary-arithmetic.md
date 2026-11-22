@@ -2037,3 +2037,37 @@ Projecting onto the second factor gives the index-one Artin–Schreier component
 which is exactly the G-4aj scalar local normal form. Its kernel is explicitly the zero-mode summand \(F/(\wp(F)+SF²)\) together with the two F-components from each negative exponent orbit.
 
 This establishes a complete match of pole indexing and coefficient spaces, and realizes the scalar quotient as a quotient of the full two-coordinate finite-polar model. **Remaining identification problem:** prove that this coordinate-defined projection agrees with the map induced by the original quaternion boundary symbols \([aS,S)_2\), rather than merely being an abstract/coordinate-defined quotient with the same normal form. Completion/topological issues also remain outside the finite-support setting.
+
+
+## 66. G-4bo — correct the scalar pole/Cartier orbit shift and identify the symbol projection
+
+**Correction to the indexing in G-4bn:** the scalar differential representative is \(a\,dp\), while the Cartier orbit is written in the logarithmic basis \(d\log p=dp/p\). Hence a scalar coefficient with pole \(p^{-m}\) occurs at logarithmic exponent \(-(m-1)\), not \(-m\).
+
+Write an odd scalar pole index m≥3 uniquely as
+\[
+m=2^j q+1,\qquad j\ge1,\quad q\ge1\text{ odd}.
+\]
+The logarithmic exponent \(-2^j q\) belongs to the negative orbit rooted at \(-q\). Its coefficient \(S c²\), with c∈F, is transported to the direct-limit root by taking the \(2^j\)-th root:
+\[
+(S c²)^{1/2^j}=t^{1/2^{j-1}}c^{1/2^{j-1}}.
+\]
+For j=1 this is \(tc\in E\). In the graph quotient \((E\oplus E)/G_0\), the pure-normal pair \((0,tc)\) maps under \((A,B)\mapsto(A_0,A_1+B_1)\) to \((0,c)\). Thus the second F-coordinate of each negative orbit gives the first scalar pole \(m=2q+1\), via \(c\mapsto Sc²\).
+
+For j≥2, the root lies in the perfection layer
+\[
+U_{j-1}=t^{1/2^{j-1}}F^{1/2^{j-1}},
+\]
+and the isomorphism
+\[
+\theta_{j-1}:U_{j-1}\to SF²,
+\qquad t^{1/2^{j-1}}x\mapsto Sx^{2^j}
+\]
+sends it to \(Sc²\). Thus the tail layers map to scalar poles \(m=2^{h+1}q+1\), h≥1. Together with the first F-coordinate at j=1, this accounts for every odd scalar pole m≥3 exactly once.
+
+At exponent zero, the second summand \(F/\wp(F)\) maps to the scalar pole-one Artin–Schreier component. Therefore the coordinate-defined scalar projection is
+\[
+\mathcal H_{\rm pol}\twoheadrightarrow F/\wp(F)\oplus\bigoplus_{m\ge3,\ m\text{ odd}}SF²,
+\]
+with kernel exactly the zero-mode factor \(F/(\wp(F)+SF²)\) and the first F-coordinate from each negative exponent orbit. This corrects G-4bn's one-step shift and its overlarge kernel claim.
+
+Finally, for the original quaternion symbol, the standard differential representative of \([aS,S)_2\) is \(aS\,d\log S=a\,dS=a\,dp\), since \(S=t²+p\) and \(d(t²)=0\). Thus its logarithmic coefficient is precisely \(ap\) in the \(d\log p\) coordinate. On the scalar normal-form generators \(a=Sc²p^{-m}\), the orbit computation above gives exactly the coefficient maps \(c\mapsto Sc²\). This verifies the projection on the normal-form generators of the scalar quotient. The remaining formal step is to check the map on arbitrary representatives and the completed topology; the generator-level comparison is now explicit.
