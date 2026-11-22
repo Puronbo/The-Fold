@@ -2763,3 +2763,8 @@ Since \(a\,dp=ap\,d\log p\), scalar pole m corresponds to logarithmic exponent �
 ### G-4bp — quaternion symbol compatibility proved on the scalar basis
 
 The characteristic-two differential symbol sends \([aS,S)_2\) to \(aS,d\log S=a,dp\). For the pole-one generator \(a=cp^{-1}\), the zero-orbit projection gives [c]∈F/wp(F). For every higher generator \(a=Sc²p^{-m}\), m=2^j q+1 odd, the log exponent is −2^j q; its orbit projection gives exactly Sc²∈SF², using the graph invariant when j=1 and U_{j−1} when j≥2. Since these are the complete G-4aj scalar normal-form generators and the maps are additive, the projection agrees with the original quaternion boundary map on the full algebraic scalar quotient. Only the completed Kato/topological extension remains.
+
+
+### G-4bq — base S versus coefficient-field t²
+
+The geometric coordinate satisfies t²=S_base+p, not t²=S_base. Hence \(Sc²p^{-m}dp\) splits into \(t²c²p^{-m}dp+c²p^{-(m-1)}dp\). Both terms must be converted to dlog p before assigning exponent orbits. The previous G-4bp/bo symbol compatibility shorthand omitted this adjacent term and is not yet fully verified. Recompute the exact exponent indexing and root-graph reduction before claiming the scalar projection agrees with the symbol map.
