@@ -1414,3 +1414,7 @@ the quaternion-boundary arithmetic note.
 
 
 **G-4bb — B₂ decomposition:** negative even exponents give pure tangent \(tE^4\); negative odd exponents give tangent \(tE^4\) paired with normal \(SE^4\), alongside pure-normal \(E^4\). The split \(E²=E^4\oplus SE^4\) isolates the mixed higher-chain coefficient.
+
+
+
+**G-4bc — iterated mixed sector:** inverse Cartier propagates the logarithmic generators \(S^{2^{j-1}}E^{2^{j+1}}p^{-2^jr}d\log(t/p)\). At each normal pole index, pure-normal and mixed-normal coefficient spaces complement to \(E^{2^j}\), with the mixed part paired to a tangent term. The full \(C^{-1}-1\) cokernel remains open.
