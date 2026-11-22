@@ -2926,20 +2926,20 @@ It is a restricted representation. It is not yet a representation on the Kato-st
 ### G-4cf — quotient instability proved
 
 The ambient restricted Lie representation does not descend to
-(M/R), (R=B^1+(\Phi-1)M). For (v=t), (m=p^n d\log t) and
+\(M/R\), \(R=B^1+(\Phi-1)M\). For \(v=t\), \(m=p^n d\log t\) and
 any negative odd n,
-[
+\[
 r=(\Phi-1)m=p^{2n}d\log t+p^n d\log t\in R,
-]
+\]
 but
-[
-\rho_t(r)=p^{2n}t,d\log t+p^nt,d\log t.
-]
+\[
+\rho_t(r)=p^{2n}t\,d\log t+p^nt\,d\log t.
+\]
 The first term is exact, while the second has nonzero class in the
-negative odd graded quotient: its coefficient pair ((t,0)) is not in
-(G=\{(tb,a+bt):a,b\in F\}). Strictness of R rules out cancellation
-by higher terms. Hence (\rho_t(R)\not\subseteq R). More generally
-any (v=e+ft) with f nonzero gives surviving class ((0,f)).
+negative odd graded quotient: its coefficient pair \((t,0)\) is not in
+\(G=\{(tb,a+bt):a,b\in F\}\). Strictness of R rules out cancellation
+by higher terms. Hence \(\rho_t(R)\not\subseteq R\). More generally
+any \(v=e+ft\) with f nonzero gives surviving class \((0,f)\).
 The quotient representation question is settled negatively for the full
 two-dimensional ambient Lie algebra. A possible smaller stabilizer
 subalgebra, or a different functorial quotient action, remains open.
@@ -2947,16 +2947,16 @@ subalgebra, or a different functorial quotient action, remains open.
 
 ### G-4cg — zero infinitesimal stabilizer
 
-G-4cf's counterexample extends to the constant parameter. If (e\ne0),
-use (m=p^nt\,d\log t) at negative odd n. Then
-[
+G-4cf's counterexample extends to the constant parameter. If \(e\ne0\),
+use \(m=p^nt\,d\log t\) at negative odd n. Then
+\[
 \rho_{e+ft}((\Phi-1)m)
 =p^{2n}Sft\,d\log t+p^net\,d\log t.
-]
+\]
 The first term is exact; the second has nonzero odd-layer class. If
-(f\ne0), G-4cf's (m=p^n d\log t) witness gives a nonzero class.
-Hence no nonzero (v=e+ft) preserves (R=B^1+(\Phi-1)M):
-the infinitesimal stabilizer in the two-dimensional section-change Lie
-algebra is zero. This concerns the ambient Lie-derivative action only;
-discrete coordinate automorphisms or other quotient symmetries are not
-classified.
+\(f\ne0\), G-4cf's \(m=p^n d\log t\) witness gives a nonzero class.
+Hence no nonzero \(v=e+ft\) preserves
+\(R=B^1+(\Phi-1)M\): the infinitesimal stabilizer in the two-dimensional
+section-change Lie algebra is zero. This concerns the ambient
+Lie-derivative action only; discrete coordinate automorphisms or other
+quotient symmetries are not classified.
