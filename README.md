@@ -1573,3 +1573,6 @@ A machine-learning bridge is specified: exact symbolic feature coordinates, filt
 
 
 **G-4ct — Cartier-stable differential interpretation:** the map \(x\mapsto (x/S)dS\) intertwines \(C_0\) with the Cartier operator and identifies the pure-scaling stable quotient with \(\Omega_F^1/B_\infty\). Its explicit finite closed-point residue decomposition is from G-4cq. Whether the full section-change group acts trivially on this stable module remains open.
+
+
+**G-4ct — Cartier-stable target:** the pure-scaling stable quotient is \(\Omega_F^1/B_\infty\), via \(x\mapsto(x/S)dS\), which intertwines \(C_0\) and Cartier. The rational finite-section pullback harness passed 108 bounded coefficient checks on 12 rational inputs through \(q^9\); higher-order torsion remains conjectural.
