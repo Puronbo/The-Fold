@@ -2111,3 +2111,24 @@ t²c²p^{-(m-1)}dp=t²c²p^{-(m-2)}d\log p.
 Writing \(m-1=2^j q\), j≥1, q odd, its logarithmic exponent is \(-(m-2)=-(2^j q-1)\), so the exact orbit indexing must be read from the logarithmic coefficient, not from the dp pole order alone. The scalar normal-form comparison is therefore made after the full dp-to-dlog conversion and the root-graph reduction; G-4bp's shorthand that treated S as the coefficient-field element without displaying the adjacent term is incomplete.
 
 **Outstanding verification:** redo the pole-index bookkeeping in the symbol map with the exact logarithmic exponents in both terms above. Do not use the simplified G-4bo correspondence until this adjacent-term calculation is fully reconciled with the (m=2^j q+1) orbit indexing.
+
+
+## 69. G-4br — exact logarithmic exponents and completion of the adjacent-term check
+
+Correct the exponent wording in G-4bq. Starting from \(a=S_{\rm base}c²p^{-m}\), m odd≥3, and using \(S_{\rm base}=t²+p\), one has
+\[
+a\,dp=t²c²p^{-m}dp+c²p^{-(m-1)}dp.
+\]
+Since \(dp=p\,d\log p\), the logarithmic-coordinate expression is
+\[
+\boxed{a\,dp=t²c²p^{-(m-1)}d\log p+c²p^{-(m-2)}d\log p.}
+\]
+The second log exponent is \(-(m-2)\), which is a negative odd integer. It is the root stage (j=0) of its exponent-doubling orbit, and its coefficient c²∈F is killed by the root exact graph \(G_0\), which contains \((0,a)\) for every a∈F.
+
+The first term has exponent \(-(m-1)=-2^j q\), with j=v₂(m−1)≥1 and q odd. Its coefficient is t²c². Taking the \(2^j\)-th root gives
+\[
+(t²c²)^{1/2^j}=t^{1/2^{j-1}}c^{1/2^{j-1}}.
+\]
+For j=1 this is tc, whose graph-quotient invariant is c in the second F-coordinate. For j≥2 it lies in \(U_{j-1}\), and the map \(\theta_{j-1}\) sends it to \(Sc²\in SF²\). Thus the surviving term maps to exactly the scalar normal-form coefficient, while the adjacent term is killed by the root exact relation.
+
+This completes the coefficient-field correction: G-4bp's symbol compatibility is valid after including the adjacent term explicitly. The erroneous intermediate exponent \(-(m-3)\) in G-4bq is withdrawn; the correct exponent is \(-(m-2)\).
