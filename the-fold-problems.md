@@ -3099,3 +3099,12 @@ The map \(\Theta(x)=(x/S)dS\) intertwines the p-basis root operator \(C_0\) with
 F/\bigcup_n\ker C_0^n\simeq\Omega_F^1/B_\infty.
 \]
 Thus the pure-scaling stable quotient is the Cartier-stable differential module of the coefficient function field, with the G-4cq closed-point residue coordinates. The full section-change action on this module remains to be tested.
+
+
+### G-4ct — stable differential quotient and rational pullback stress test
+
+The pure-scaling stable quotient is canonically \(\Omega_F^1/B_\infty\): \(\Theta(x)=(x/S)dS\) intertwines \(C_0\) and Cartier and identifies \(F/SF²\) with \(\Omega_F^1/dF\). The closed-point residue decomposition is the G-4cq coordinate model.
+
+The exact rational section-change harness was stress-tested on 12 rational triples \((a,e,f)\), through q-order 9. All 108 coefficient tests satisfied the conjectural \(C_0^{v_2(m)+1}\)-torsion bound. A separate 100-input generated sample supplied 900 target coefficients with observed torsion indices 1–4. These are bounded computational checks, not an all-orders proof.
+
+**Open:** identify the full section-change action on \(\Omega_F^1/B_\infty\). The likely route is a residue map on the coefficient curve and parameter-independence modulo the Cartier filtration; hypotheses must be verified for the exact transformed representatives.
