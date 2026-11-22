@@ -2258,3 +2258,10 @@ otinmathcal N^3) by UF-072O.
 - Equivalently, (C_2)-modules are modules over (k[\epsilon]/(\epsilon^2)). The canonical invariant is the filtration (operatorname{im}N\subseteq\ker N\subseteq V), not a plus/minus eigenspace decomposition.
 - The exact sequence (0\to\ker N\to V\xrightarrow{N}\operatorname{im}N\to0) records the possible non-semisimple extension. This is the correct local model for order-two symmetries in characteristic-two Fold/Galois representations.
 - Scope: this applies to restriction to an order-two subgroup; it does not classify arbitrary profinite Galois representations or imply that every such representation contains an involution.
+
+### G-7 — Order-two Galois cohomology in characteristic two
+- For a separable quadratic extension (L/K) in characteristic two and a finite-dimensional (k[C_2])-module (V), put (N=\sigma-1). Since (N^2=0) and the norm (1+\sigma=N), the two-periodic cyclic resolution gives (H^q(C_2,V)=\ker N/\operatorname{im}N) for every (q\ge1).
+- If (m=\dim_kV) and (r=\operatorname{rank}N), then every positive-degree cohomology group has dimension (m-2r).
+- Inflation–restriction identifies the descent obstruction for invariant classes in (H^1(G_L,V)) with the transgression into (H^2(C_2,V^{G_L})), which is this same square-zero quotient.
+- This is a structural calculation for a specified quadratic quotient, not a classification of arbitrary profinite Galois representations. The Fold-specific task is to construct natural global modules and evaluate the transgression on actual arithmetic classes.
+
