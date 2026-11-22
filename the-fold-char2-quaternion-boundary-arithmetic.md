@@ -2929,3 +2929,60 @@ depths remain to be computed. The associated-graded arrows G-4ca are
 the first-order-in-\(p^r\) data, not yet a complete formula for the
 induced quotient automorphism.
 
+
+
+## 86. G-4ci — exact finite pullback formula
+
+The quotient automorphism in G-4ch has a closed formula on logarithmic
+coefficient pairs. Write
+\[
+q=p^rv,\qquad v=e+ft,\qquad
+\sigma(t)=t(1+q),\quad \sigma(p)=p.
+\]
+Since \(e,f\in F=\mathbb F_2(S)\) and \(dS=0\) in characteristic two,
+\[
+dv=f\,dt=ft\,d\log t.
+\]
+Therefore
+\[
+d\log\sigma(t)
+=d\log t+d\log(1+p^rv)
+\]
+and
+\[
+\sigma^*(d\log t)
+=\left(1+\frac{p^rft}{1+p^rv}\right)d\log t
++\frac{(r\bmod2)p^rv}{1+p^rv}d\log p.
+\]
+Also \(\sigma^*(d\log p)=d\log p\). Hence the exact pullback of
+\(A\,d\log t+B\,d\log p\) is the pair
+\[
+\boxed{
+\begin{aligned}
+A'&=\sigma(A)\left(1+\frac{p^rft}{1+p^rv}\right),\\
+B'&=\sigma(B)+\sigma(A)\frac{(r\bmod2)p^rv}{1+p^rv}.
+\end{aligned}}
+\]
+Here \(\sigma(A)\) and \(\sigma(B)\) mean full substitution in the
+coefficient Laurent series, not just substitution in t while freezing
+the coefficient field.
+
+Expanding the coefficient substitution at the first nonzero depth,
+\[
+\sigma(g)=g+p^rtv\,\partial_tg+O(p^{2r}),
+\]
+where \(\partial_t\) fixes F, gives
+\[
+(A',B')=(A,B)+p^r
+\left(tv\partial_tA+ftA,\;
+tv\partial_tB+(r\bmod2)vA\right)+O(p^{2r}).
+\]
+This is exactly the G-4ca first graded transition. Thus G-4ca is
+identified as the leading term of the genuine finite pullback, rather
+than merely a formal infinitesimal guess.
+
+Combined with G-4ch, this formula gives an explicit filtered
+automorphism of the quotient \(M/R\). The quotient-level matrix still
+requires reduction of these exact coefficient pairs modulo
+\(B^1+(\Phi-1)M\); the displayed formula is the ambient pullback and
+does not by itself supply that reduced matrix.
