@@ -1474,3 +1474,7 @@ the quaternion-boundary arithmetic note.
 
 
 **G-4bq — coefficient-field caveat:** the local lift satisfies t²=S_base+p. The higher symbol representative therefore splits into adjacent p-pole terms before conversion to dlog p. G-4bp/bo's symbol compatibility shorthand is superseded pending exact exponent bookkeeping.
+
+
+
+**G-4br — adjacent-term correction:** the exact log exponents are −(m−1) for the surviving t²c² term and −(m−2) for the adjacent c² term. The latter is killed by G₀; the former maps to Sc² at the correct Cartier stage. This completes the coefficient-field correction to the symbol comparison.
