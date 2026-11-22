@@ -3209,3 +3209,111 @@ Indeed \(\partial_S(F)=F^2\), since \((a^2+Sb^2)'=b^2\). Hence \((x/S)dS\) is ex
 This ties the coinvariant calculation to the one-variable de Rham/Cartier theory of the coefficient curve. In the p-basis decomposition, the Cartier operator kills exact forms and extracts the \(S\)-component of a differential coefficient; its kernel is exactly \(dF\). Thus the residual is a genuine de Rham class, not an arbitrary vector-space complement. The standard Cartier formulas also give \(C(df)=0\) and fix logarithmic differentials. <https://sporadic.stanford.edu/reference/function_fields/sage/rings/function_field/differential.html>
 
 **Next obstruction.** On a coefficient \(x=a^{2^h}\), the scaling section \(t\mapsto t(1+p)\) moves \(S=t^2\) by \(S\mapsto S(1+p^2)\), and its first possible contribution occurs at p-depth \(2^{h+1}\), with coefficient \((Sa')^{2^h}\). This suggests an iterated Cartier/Frobenius tower acting on the residual \(F/SF^2\). Its full span, together with the independent-depth cross terms, is the next exact coinvariant problem; no terminal quotient is asserted yet.
+
+
+## 92. G-4cp — the pure-scaling Frobenius tower
+
+Let \(Q=M/R\), and consider the isolated scaling section change
+\[
+\sigma(t)=t(1+p),\qquad \sigma(p)=p.
+\]
+It sends the coefficient square to
+\[
+S\longmapsto S(1+p^2).
+\]
+After the first two quotient diagonals, an odd-layer residual class in
+\(F/SF^2\) has a unique representative \(x=a^2\), \(a\in F\). More
+generally, at the hth residual stage use \(x=a^{2^h}\), h≥1.
+
+The coefficient substitution is
+\[
+a(S(1+p^2))=a(S)+p^2Sa'(S)+O(p^4).
+\]
+Raising to \(2^h\) gives
+\[
+\boxed{
+a(S(1+p^2))^{2^h}-a(S)^{2^h}
+=p^{2^{h+1}}(Sa')^{2^h}+O(p^{2^{h+2}}).
+}
+\]
+All earlier coefficient corrections vanish by Frobenius. The normal logarithmic coefficient produced by the exact pullback is a series with coefficients in F, so it has zero t-component in every negative associated-graded layer. Thus the displayed term is the first nonzero quotient correction.
+
+The derivative map \(a\mapsto a'\) has image exactly \(F^2\): if \(b\in F\), then \((Sb^2)'=b^2\). Hence the root-coordinate image at each stage is exactly \(SF^2\). Define the p-basis root operator
+\[
+C_0:F\to F,\qquad
+z=z_0^2+Sz_1^2\ \text{uniquely},\quad C_0(z)=z_0.
+\]
+Then
+\[
+\ker C_0=SF^2,\qquad C_0(F)=F.
+\]
+The successive scaling reductions are therefore the direct-limit system
+\[
+F\xrightarrow{C_0}F\xrightarrow{C_0}F\xrightarrow{C_0}\cdots.
+\]
+Because \(C_0\) is surjective, its direct limit is
+\[
+\boxed{
+\operatorname{Coinv}_{\rm scale}^{\rm odd}
+\simeq F/\bigcup_{n\ge1}\ker(C_0^n).
+}
+\]
+This is the exact coinvariant of the iterated pure-scaling tower on the odd-layer residual. It is not yet asserted to be the coinvariant for the full section-change group.
+
+A useful identity, following immediately from the p-basis decomposition, is
+\[
+\boxed{C_0(z)^2=z+Sz'.}
+\]
+It makes the operator computable on rational functions without adjoining square roots.
+
+## 93. G-4cq — stable p-basis quotient and closed-point residues
+
+We now compute the stable quotient of \(C_0\) for \(F=\mathbb F_2(S)\). Write a rational function in partial fractions: a polynomial part plus principal parts at monic irreducibles \(Q\).
+
+The operator \(C_0\) preserves each prime-support block. For a proper principal part with pole order m at \(Q\ne S\), the identity
+\[
+C_0(f)^2=f+Sf'
+\]
+shows that the pole order drops to at most \(\lceil m/2\rceil\). Thus every higher-order Q-pole is carried after finitely many iterations to a simple pole or to zero. Polynomial degree likewise drops until only a constant can remain.
+
+It remains to inspect simple poles. Let \(Q\ne S\) be monic irreducible, \(\alpha=S\bmod Q\), and write \(f=P/Q\), with \(\deg P<\deg Q\). If \(C_0(f)=A/Q\), then reducing
+\[
+(A/Q)^2=f+Sf'
+\]
+at Q gives
+\[
+\boxed{\bar A^{\,2}=\alpha\,\overline{Q'}\,\bar P
+\quad\text{in }\kappa_Q=\mathbb F_2[S]/(Q).}
+\]
+Here \(\alpha\ne0\) and \(Q'\ne0\), because finite fields are perfect and Q is irreducible. Squaring is an automorphism of \(\kappa_Q\); hence \(C_0\) acts invertibly on the simple-pole coefficient space \(\kappa_Q\). At \(Q=S\), the simple pole \(1/S\) is sent to zero. The polynomial block contributes only its constant term.
+
+We obtain the explicit stable quotient
+\[
+\boxed{
+F/\bigcup_n\ker(C_0^n)
+\simeq
+\mathbb F_2\oplus
+\bigoplus_{\substack{Q\ {\rm monic\ irreducible}\\Q\ne S}}\kappa_Q.
+}
+\]
+The first \(\mathbb F_2\) is the constant-polynomial block; it is naturally the residue contribution at \(S=0\). Thus the stable scaling quotient is a direct sum of residue-field contributions at the finite closed points of the affine S-line. The residue at infinity is determined by the global residue relation.
+
+This has a differential interpretation. The two-diagonal class \(x=a^2\) maps to
+\[
+\Theta(x)=\frac{a^2}{S}\,dS.
+\]
+The ordinary Cartier operator sends this to
+\[
+C(\Theta(x))=\frac{a}{S}\,dS.
+\]
+For \(a=P/Q\), \(Q\ne S\), its local residue at Q is
+\[
+\boxed{
+\operatorname{Res}_Q\left(\frac{P}{SQ}\,dS\right)
+=\frac{\bar P}{\alpha\,\overline{Q'}}
+\in\kappa_Q.
+}
+\]
+This is an isomorphism on the simple-pole coefficient space. The constant block gives the residue at S=0. The local Cartier facts used here—that exact differentials are the kernel and logarithmic forms are fixed—are standard. <Cite refs={["turn230974search1","turn422555search21","turn422555search22"]}/>
+
+**Scope.** G-4cq computes the pure-scaling stable quotient, not the full \(\mathcal G\)-coinvariant. The next test is whether the remaining section-change parameters induce zero on these residue coordinates or impose further relations among them.
