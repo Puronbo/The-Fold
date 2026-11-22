@@ -2321,3 +2321,8 @@ otinmathcal N^3) by UF-072O.
 - Proof: both groups are one-dimensional; restriction from (H^1(C_{2^{r+2}})) to (H^1(C_{2^r})) is zero since the subgroup generator is the fourth power of the ambient generator; five-term exactness gives injectivity.
 - Pushing the extension factor set through the nonzero character (C_{2^r}\to\mathbb F_2) gives (\tau(i,j)=\lfloor(i+j)/4\rfloor\bmod2), with cyclic sum 1. This is uniform in (r).
 - The finite-group theorem is proved. Its arithmetic realization by explicit length-((r+2)) Witt vectors and its Fold-specific interpretation remain open.
+
+### G-17 — arithmetic realization in every Witt length
+- For every (n\ge2), the vector ((s,s,0,\ldots,0)\in W_n(\mathbb F_2(s))) defines a cyclic extension of degree (2^n): its first coordinate (s) is not (x^2+x), as its pole order at infinity is odd.
+- Its length-two truncation is the G-12 quartic class. Therefore every G-16 extension sequence is realized over the same field (\mathbb F_2(s)).
+- This uses the ASW degree criterion (Pop, *The Oort Conjecture on lifting covers of curves*, Fact 2.1(1)). The Witt equation specifies all higher levels exactly; expanded coordinate polynomials beyond length three and a Fold-specific interpretation remain open.
