@@ -1202,3 +1202,6 @@ For the cyclic extension in G-18 and any (possibly nontrivial) \(\mathbb F_2[C_{
 1+6T+20T^2+48T^3+90T^4+140T^5+196T^6+272T^7+392T^8+560T^9+720T^{10}+768T^{11}+640T^{12}+384T^{13}+128T^{14}.
 \]
 Degrees 8–10 provide independent checks. Reproducible exact enumeration: `certificates/g24_genus7_weil_polynomial.py`. The genus-35 Jacobian remains open; see the Galois applicability note.
+
+
+**Galois cohomology — genus-seven Jacobian decomposition (G-26):** the G-25 Weil polynomial factors as \((1+2T^2)^2(1+2T+2T^2)Q(T)\), where Q has degree eight. The Jacobian is isogenous to the corresponding two elliptic factors (the first repeated twice) and a four-dimensional factor with polynomial Q. Its exact Newton slopes are \(1/4\) four times, \(1/2\) six times, and \(3/4\) four times. Thus its 2-rank is zero but it is not supersingular. Exact factorization/Newton-hull certificate: "certificates/g26_genus7_newton_polygon.py". The residual factor's further decomposition and the genus-35 Jacobian remain open.
