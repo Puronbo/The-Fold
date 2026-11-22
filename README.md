@@ -1340,3 +1340,6 @@ the quaternion-boundary arithmetic note.
 
 
 **G-4ai — exact full-quotient presentation:** set \(\tau(a)=\phi^{-1}([a])\), equivalently \(\tau(x^2+Sy^2)=y\). In auxiliary chain coordinates, the full quotient is \((\bigoplus_{r>0\text{ odd}}F e_r)/\langle e_{2m-1}(a^2)+e_{\operatorname{odd}(m)}(\tau^{v_2(m)}a)\rangle\). These are exactly the relations contributed by \((S+p)F((p))^2\). This is an exact presentation, not yet a normal form; the full quotient has countably infinite dimension by G-4r/G-4s and countability.
+
+
+**G-4aj — complete full local normal form and basis:** the full quotient is canonically (F/\wp(F)\oplus\bigoplus_{r\ge3,,r\text{ odd}}SF^2), with \(\wp(a)=a^2+a\). The chain-1 summand has basis (1), odd powers (S^d), and (S^j/Q^d) for monic irreducible Q, odd d, and (0\le j<\deg Q). For each odd r≥3, a basis is (S\mathcal E^2) at p^{-r}, where \(\mathcal E=\{S^d:d\ge0\}\cup\{S^j/Q^d:Q\text{ monic irreducible},d\ge1,0\le j<\deg Q\}\) is the partial-fraction basis of F. Thus the full exceptional local quotient now has an explicit countable basis; chain-1 contributes the Artin–Schreier classes omitted by G-4r/G-4s.
