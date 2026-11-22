@@ -2983,3 +2983,22 @@ subspace R. Cartier naturality is only modulo exact forms and involves
 the Frobenius twist; it does not force that naive derivative to preserve
 R. The finite quotient action exists, but its explicit filtered matrices
 and composition law on the quotient remain to be calculated.
+
+
+### G-4ci — exact finite pullback formula
+
+For \(\sigma(t)=t(1+p^rv)\), \(v=e+ft\), \(\sigma(p)=p\),
+\[
+\sigma^*(d\log t)=
+\left(1+\frac{p^rft}{1+p^rv}\right)d\log t+
+\frac{(r\bmod2)p^rv}{1+p^rv}d\log p.
+\]
+Thus the exact coefficient-pair pullback is
+\[
+A'=\sigma(A)\left(1+\frac{p^rft}{1+p^rv}\right),\quad
+B'=\sigma(B)+\sigma(A)\frac{(r\bmod2)p^rv}{1+p^rv}.
+\]
+Its \(p^r\)-diagonal is precisely G-4ca. This identifies the known
+graded arrows as the leading terms of the finite quotient automorphism.
+Computing the reduced matrices on \(M/R\), rather than on the ambient
+logarithmic module, remains open.
