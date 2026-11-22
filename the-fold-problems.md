@@ -2663,3 +2663,8 @@ After quotienting pure-normal principal parts by \(B_\infty\) and by their own \
 ### G-4av — correction to pure-normal chain quotient
 
 The slotwise decomposition in G-4au is withdrawn. Along a chain rooted at even e≥2, indices \(m_j=2^j(e-1)+1\) have coefficient spaces \(W_j=E/E^{2^{j+1}}\), and the relation identifies \([c]\in W_j\) with \([c²]\in W_{j+1}\). The chain contribution is the direct limit \(\varinjlim(W_j,\mathrm{Frob})\), not independent residual quotients at each node. Its successive cokernels are E/E², giving a noncanonical F₂-vector-space splitting as countably many copies of E/E². Index one contributes E/\wp(E). This remains a pure-normal model; mixed tangent relations are still uncomputed.
+
+
+### G-4aw — perfection form of the pure-normal chain model
+
+The chain direct limit \(\varinjlim_j(E/E^{2^{j+1}},c\mapsto c²)\) is canonically \(E^{\rm perf}/E\), via \([c]\mapsto c^{1/2^{j+1}}+E\). Thus the restricted pure-normal model is \(E/\wp(E)\oplus\bigoplus_{e\ge2,\ e\ even}E^{\rm perf}/E\). Mixed tangent relations remain to be imposed before identifying the full Kato group.
