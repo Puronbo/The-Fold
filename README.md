@@ -1374,3 +1374,7 @@ the quaternion-boundary arithmetic note.
 
 
 **G-4ar — inverse-Cartier recurrence:** on normal symbols, \(C^{-1}(cp^{-m}dp)=[c^2p^{-(2m-1)}dp]\) modulo exact forms. Thus the index map is \(m\mapsto2m-1\), with an Artin–Schreier-shaped fixed slot at m=1. The higher Cartier filtration \(B_\infty\) and tangent interaction are still uncomputed, so this is a recurrence, not a Kato normal-form theorem.
+
+
+
+**G-4as — higher-Cartier inclusions:** for even m≥2, exact normal forms \(a^2p^{-m}dp\) lie in B₁; iterating inverse Cartier shows \(a^{2^n}p^{-(2^{n-1}(m-1)+1)}dp\in B_n\). Hence selected odd-pole layers contain explicit power subspaces indexed by \(v_2(r-1)\). This is an inclusion, not a full description of \(B_\infty\); mixed tangent contributions remain open.
