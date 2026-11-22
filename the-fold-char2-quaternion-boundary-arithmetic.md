@@ -3435,3 +3435,63 @@ This gives an intrinsic differential target for the pure-scaling stable quotient
 \mathbb F_2\oplus\bigoplus_{Q\ne S}\kappa_Q.
 \]
 The remaining full-group problem is now sharply formulated: show that every finite section change acts trivially on this Cartier-stable differential quotient, or exhibit a closed-point residue it changes.
+
+
+## 97. G-4cu — Hasse–Taylor formula for all finite-section coefficients
+
+Retain \(S'=S(1+qu)\), \(u=e^2+Sf^2\), and
+\[
+A'_0=a(S')^2\frac{1+qe^2}{1+qu}
+=a(S')^2\left(1+\frac{qSf^2}{1+qu}\right).
+\]
+Let \(a^{[i]}=D^{[i]}a\) denote the Hasse derivatives, defined by
+\[
+a(S+X)=\sum_{i\ge0}a^{[i]}(S)X^i.
+\]
+Put
+\[
+B_N(a)=\sum_{i=0}^{N}S^i a^{[i]}.
+\]
+Since \(a(S')=\sum_iq^iS^iu^ia^{[i]}\), the exact coefficient of \(q^m\) in \(A'_0-a^2\) is
+\[
+\boxed{
+\Delta_m=
+\mathbf 1_{2\mid m}\,
+S^m u^m\bigl(a^{[m/2]}\bigr)^2
++Sf^2u^{m-1}B_{\lfloor(m-1)/2\rfloor}(a)^2.
+}
+\]
+
+**Odd coefficient theorem.** If m is odd, the first summand vanishes and \(u^{m-1}\) is a square. Hence
+\[
+\boxed{
+\Delta_m
+=S\left(fu^{(m-1)/2}B_{(m-1)/2}(a)\right)^2
+\in SF^2=\ker C_0.
+}
+\]
+Thus every odd q-coefficient is already exact in the first Cartier layer. This is an all-rational-functions identity, not a numerical observation.
+
+**Hasse-sum Frobenius lemma.** If \(2^k\mid n\), then
+\[
+\boxed{B_{n-1}(a)\in F^{2^k}.}
+\]
+To prove it, apply a Hasse derivative \(D^{[j]}\), \(1\le j<2^k\), to the defining sum. The coefficient of \(a^{[h]}\) is
+\[
+\binom hj
+\sum_{\ell=\max(0,j-h)}^{\min(j,n-1-h+j)}\binom j\ell.
+\]
+For \(h<j\), the first factor is zero. For \(j\le h\le n-1\), the inner sum is the full sum \(2^j=0\) in characteristic two. In the remaining range \(h=n+r\), \(0\le r<j\), Lucas' theorem gives
+\(\binom hj\equiv\binom rj=0\pmod2\), because \(n\) is divisible by \(2^k\) and \(j<2^k\). Thus all Hasse derivatives of orders \(1,\ldots,2^k-1\) vanish, which characterizes \(F^{2^k}\) in the one-variable p-basis \(\{S\}\).
+
+For even m=2n, the first Cartier root has the exact form
+\[
+\boxed{
+C_0(\Delta_{2n})
+=S^nu^na^{[n]}+Sf^2u^{n-1}B_{n-1}(a).
+}
+\]
+The Hasse-sum lemma therefore supplies a \(2^{v_2(n)}\)-power constraint on the second term. It is a concrete reduction of the remaining even-coefficient problem, but it does not by itself prove the full conjectural bound
+\(C_0^{v_2(m)+1}(\Delta_m)=0\). Establishing the necessary cancellation with the first term is the remaining all-orders step.
+
+**Status.** The odd-coefficient theorem and Hasse-sum Frobenius lemma are proved. The even-coefficient torsion bound remains a conjecture supported by the bounded rational tests in G-4cr.
