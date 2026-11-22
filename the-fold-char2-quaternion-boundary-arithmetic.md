@@ -3689,3 +3689,124 @@ Moreover \(\phi(S)=S+O(p^2)\) and \(\phi'(S)=\alpha^2\) is a unit. Thus the full
 This is a useful reduction: the remaining full-group coinvariant question is now a residue-functoriality problem for the formal substitution \(\phi\). For pure scaling, the coefficient corrections are exactly the Cartier-nilpotent tower of G-4cp. For a general t-dependent substitution with rational-function coefficients, we still need to prove that every positive-p coefficient of \(\phi^*\omega-\omega\) has zero residues at all closed points, or find a counterexample. The formal change is the identity modulo p, but its coefficient functions may have poles at closed points, so ordinary local-coordinate invariance cannot be invoked without checking the relevant two-dimensional completion.
 
 **Status:** the pullback normal form above is exact. The assertion that the full group preserves every stable residue coordinate remains a sharply formulated open test; it is not yet promoted to a theorem.
+
+
+### G-4cq addendum — local two-dimensional residue proof
+
+Fix a monic irreducible \(Q\in\mathbb F_2[S]\), put \(z=Q(S)\), and let
+\[
+k_Q=\mathbb F_2[S]/(Q),\qquad
+F_Q\simeq k_Q((z)),\qquad
+K_Q=F_Q((p))=k_Q((z))((p)).
+\]
+The inverse section substitution gives \(\phi(S)=S+O(p^2)\), so
+\[
+z'=Q(\phi(S))=z+O(p^2),\qquad p'=p.
+\]
+All coefficients of \(z'-z\) are rational functions of S, hence Laurent series in z with finite lower bound. Thus \(z'\) is an admissible iterated-Laurent parameter and has the same two-dimensional valuation as z.
+
+The p-adic automorphism induces the identity on the residue field \(F_Q\). The finite coefficient field \(k_Q\subset F_Q\) has a unique lift to \(K_Q\) consisting of roots of \(X^{|k_Q|}-X\), by Hensel's lemma (the derivative is \(-1=1\)). Since the substitution fixes p and induces the identity on \(F_Q\), it fixes these Teichmüller lifts. Hence it is a \(k_Q\)-algebra endomorphism of \(k_Q((z))((p))\). Its parameter valuation matrix in (z,p) is the identity. By Gorchinskiy–Osipov, Theorem 4.7 and Theorem 6.8, it is a continuous automorphism; by Corollary 5.4 and Remark 5.5, it preserves the two-dimensional residue. (S. Gorchinskiy and D. Osipov, “Continuous homomorphisms between algebras of iterated Laurent series over a ring,” DOI 10.1134/S0081543816060031.)
+
+For a coefficient-curve differential series \(\omega=\sum_jp^j\omega_j\), with \(\omega_j\in\Omega_F^1\), the one-dimensional residue at Q of its jth coefficient is exactly
+\[
+\operatorname{Res}_{z,p}\left(p^{-j}\omega\wedge d\log p\right).
+\]
+Because p is fixed, two-dimensional residue invariance gives
+\[
+\operatorname{res}_Q((\phi^*\omega)_j)
+=\operatorname{res}_Q(\omega_j)
+\quad\text{for every }j.
+\]
+This proves that every full finite section change preserves every coefficientwise residue coordinate of the residual odd-layer differential. It applies even when e or f has a pole at Q; the local parameter map is still z+O(p²), with its higher coefficients allowed to have finite z-poles.
+
+Therefore the open residue-invariance test at the end of G-4cq is resolved: **the t-dependent and mixed-depth directions impose no additional relations on the Cartier-residue coordinates.** The remaining issue is the filtered extension between different exponent layers, not further residue relations.
+
+
+
+## 94. G-4cr — associated-graded coinvariants of the full section-change group
+
+Let \(\mathcal G\) be the full positive-depth section-change group and
+\[
+Q=M/R,\qquad Q_{\mathcal G}=Q/\langle \sigma q-q:\sigma\in\mathcal G,\ q\in Q\rangle.
+\]
+Filter Q by p-exponent. G-4bv gives the negative associated-graded pieces
+\[
+\operatorname{gr}_nQ\simeq
+\begin{cases}
+F^2,&n<0\text{ odd},\\
+F,&n<0\text{ even}.
+\end{cases}
+\]
+
+We now compute the associated-graded coinvariant relations.
+
+### 94.1 Negative even layers vanish
+
+For a negative even target n, the preceding source layer n−1 is odd. The depth-one arrow
+\[
+F^2\longrightarrow F,\qquad (x,y)\longmapsto fx+ey
+\]
+is surjective as e,f range over F. Hence every negative even target layer is in the initial image of \(\sigma-1\).
+
+### 94.2 The second coordinate of every negative odd layer vanishes
+
+For a negative odd target n, the preceding source layer n−1 is even. The depth-one arrow
+\[
+F\longrightarrow F^2,\qquad d\longmapsto(0,ed)
+\]
+spans \(0\oplus F\). Thus only the first coordinate of a negative odd layer can survive the first-arrow quotient.
+
+### 94.3 The remaining first coordinate is exactly the residue module
+
+By G-4co, the first coordinate x has two-diagonal residual \(F/SF^2\). By G-4cp, the pure-scaling generators remove
+\[
+U_{\rm nil}=\sum_{h\ge0}S^{2^h}F^{2^{h+1}},
+\]
+and
+\[
+F/U_{\rm nil}\simeq
+\Omega_F^1\Big/\bigcup_{j\ge1}\ker C^j
+\simeq
+\mathcal R:=\bigoplus_{Q\ {\rm monic\ irreducible}} k_Q.
+\]
+The first isomorphism uses \(x\mapsto(x/S)dS\); the second is the finite-place residue map.
+
+G-4cq's local two-dimensional residue argument proves that every element of the **full** section-change group preserves these residue coordinates coefficient by coefficient. Thus no t-dependent or mixed-depth transformation can impose a further relation on \(\mathcal R\). Conversely the pure-scaling generators already realize every \(U_h\) as a leading relation: use the depth-two change \(t\mapsto t(1+p^2)\), a source coefficient \(a^{2^h}\) with \(a=Sb^2\), and the leading target term
+\[
+p^{2^{h+2}}S^{2^h}b^{2^{h+1}}.
+\]
+Since \(b\in F\) is arbitrary, this spans \(U_h\) at every negative odd target layer. Higher terms occur strictly later in the filtration and are handled by induction toward exponent zero. Therefore each negative odd associated-graded coinvariant is exactly \(\mathcal R\).
+
+### 94.4 The zero layer
+
+The zero layer from G-4bl splits as
+\[
+Q_0\simeq F/(\wp(F)+SF^2)\oplus F/\wp(F).
+\]
+The second summand is killed by depth-one differences from the \(p^{-1}\) odd layer: take the source representative \((A,B)=(1,0)\) and a parameter \(v=e\); the zero-layer second coordinate is e, and e ranges over F.
+
+The first summand survives. Indeed, on an odd-layer representative A=x∈F, G-4cq gives the transformed first coefficient
+\[
+A'_F=x(SW)\frac{\alpha^2}{W},\qquad W=\alpha^2+S\beta^2,
+\]
+where \(\alpha,\beta\in F[[p]]\). Both W and \(\alpha^2/W\) have only even p-exponents. Thus a negative odd source exponent cannot contribute to the zero exponent in the first coordinate. An even-layer representative has A=0, and a zero-layer representative is unchanged at p-order zero. Hence no difference \(\sigma q-q\) has a component in the first zero summand.
+
+Positive exponents vanish in Q by G-4bs.
+
+### 94.5 Result and scope
+
+The associated-graded coinvariant is therefore
+\[
+\boxed{
+\operatorname{gr}_n(Q_{\mathcal G})\simeq
+\begin{cases}
+\mathcal R=\displaystyle\bigoplus_{Q\ {\rm monic\ irreducible}}\mathbb F_{2^{\deg Q}},
+   &n<0\text{ odd},\\[2mm]
+0,&n<0\text{ even},\\[1mm]
+F/(\wp(F)+SF^2),&n=0,\\[1mm]
+0,&n>0.
+\end{cases}}
+\]
+In particular, the invariant linear functionals are dual to a filtered space whose graded pieces are now explicit. A noncanonical vector-space splitting gives the direct sum of these graded pieces, but no canonical splitting of the filtered coinvariant has been proved. The higher extension class between surviving odd layers and the zero layer remains to be computed; this is distinct from the now-settled residue relations.
+
+**Learning consequence.** The exact linear-invariant targets are the residue fields k_Q at every negative odd exponent, together with the zero-mode quotient \(F/(\wp(F)+SF^2)\). A model should encode a rational differential by its finite residue vector, not by polynomial coefficients alone.
