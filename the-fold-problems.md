@@ -2653,3 +2653,8 @@ B_n\cap\bigoplus_{m\ge1}Ep^{-m}dp=
 \oplus\bigoplus_{m\ge3,\ m\ odd,\ v_2(m-1)\le n-1}E^{2^{v_2(m-1)+1}}p^{-m}dp.
 \]
 Pole index 1 is absent at every finite level. Proof: closedness forces each coefficient into E²; Cartier kills even indices and sends \(b²p^{-m}dp\) at odd m to \(bp^{-(m+1)/2}dp\), giving the stated induction. This exactly sharpens G-4as for pure-normal principal parts; arbitrary mixed forms and the full \(C^{-1}-1\) quotient remain open.
+
+
+### G-4au — pure-normal Cartier–AS chain quotient
+
+After quotienting pure-normal principal parts by \(B_\infty\) and by their own \(C^{-1}-1\) relations, the index-one slot is E/\wp(E). Indices ≥2 split into chains \(e,2e-1,4e-3,\ldots\) starting at even e. The first odd slot in each chain (r≡3 mod4) retains E/E⁴; each later odd slot (r≡1 mod4, r≥5) retains E/E². This is only the pure-normal model; mixed tangent relations may further reduce it and must be computed before comparison with the full Kato group or G-4aj.
