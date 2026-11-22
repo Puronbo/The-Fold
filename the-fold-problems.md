@@ -2358,3 +2358,10 @@ Thus it is surjective, with kernel exactly the norm image. In Jordan form it kil
 - The nontrivial character conductor exponents \(2,3,5,9\), with multiplicities \(1,2,4,8\), reproduce the different exponent \(100\).
 - This completes ramification invariants of the explicit arithmetic model; no Fold-derived Galois representation or Selmer class is constructed.
 - Full derivation and references: [Galois applicability note](the-fold-automorphic-and-hopf-galois-applicability.md).
+
+
+### G-23 — geometric \(2\)-rank of the tower
+- The Deuring–Shafarevich formula applied to each one-point totally ramified \(C_{2^n}\)-cover gives geometric \(2\)-rank zero for every \(1\le n\le4\).
+- The genera are \(0,1,7,35\); in particular, the genus-one quartic intermediate curve is supersingular.
+- This determines the \(2\)-rank only, not the Newton polygons or higher-genus Jacobian \(a\)-numbers.
+- Proof and formula reference: [Galois applicability note](the-fold-automorphic-and-hopf-galois-applicability.md).
