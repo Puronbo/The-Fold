@@ -1466,3 +1466,7 @@ the quaternion-boundary arithmetic note.
 
 
 **G-4bo — corrected scalar index shift:** because \(a dp=ap,d\log p\), scalar pole m corresponds to logarithmic exponent −(m−1). The first F-coordinate chain layer at j=1 and the later perfection layers map to SF² at all odd m≥3; the zero-mode second factor gives F/wp(F). The quaternion differential representative \(a dp\) verifies this on normal-form generators. G-4bn's earlier index shift/kernel is superseded.
+
+
+
+**G-4bp — symbol compatibility:** the quaternion differential representative \([aS,S)_2\leftrightarrow a,dp\) maps pole-one generators to F/wp(F) and every higher odd-pole generator Sc²p^{-m} to Sc²∈SF² through the logarithmic orbit projection. Agreement on the complete G-4aj basis proves algebraic compatibility with the original boundary map; completed topology remains separate.
