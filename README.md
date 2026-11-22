@@ -1223,3 +1223,6 @@ Degrees 8–10 provide independent checks. Reproducible exact enumeration: `cert
 
 
 **CM splitting and Newton slopes (G-32):** the two local factors of the CM quadratic at the prime above 2 have normalized valuations 1/4 and 3/4. Each local degree-four factor contributes four conjugates, recovering the simple fourfold slopes (1/4)^4 and (3/4)^4 from the CM prime decomposition.
+
+
+**CM Artin splitting (G-33):** the narrow Hilbert class field description yields an explicit Frobenius character: for a principal ideal \((\alpha)\) of the real quartic, its Artin symbol is determined by the sign of \(N(\alpha)\). This predicts and verifies the factorization of the degree-eight Frobenius polynomial modulo 3, 5, and 7: two irreducible quartics at 3 and 5, and four irreducible quadratics at 7. Exact modular products and irreducibility checks: `certificates/g33_cm_artin_splitting.py`; derivation: `the-fold-genus7-cm-field.md`.
