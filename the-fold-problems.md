@@ -2241,3 +2241,13 @@ An additional audit found a missing factor of `a` in the `dh`-coefficient of `Q_
 - Certificate: certificates/uf072k_degree4_specialization.py (specialization computation only).
 
 - Execution audit: the three tuples in the certificate were run; each returned (172,173). Earlier references to five specializations were erroneous and are corrected here.
+
+
+### UF-072Q — Dual certificate for degree-four nonmembership
+- Reframes the decisive test: instead of first proving the full generic rank of the 470-by-350 matrix (M), construct one exact row functional (lambdain K^{470}) with (lambda M=0) and (lambda v
+e0), where (v=operatorname{in}_4(n_1n_4)).
+- Such a certificate directly proves (v
+otinoperatorname{im}_K(M)), hence (n_1n_4
+otinmathcal N^3) by UF-072O.
+- A promising search is a 173-row restriction whose augmented specialization has a nonzero 173-by-173 minor; seek a symbolic row dependence on the 350 unaugmented columns and verify its nonzero pairing with (v).
+- A specialization-only dependence is insufficient. No symbolic dual vector has yet been found; UF-072P's finite-field lower bounds remain the only certified degree-four rank information.
