@@ -2718,3 +2718,8 @@ For odd m≥3, set j=v₂(m−1). The pure-normal coefficient space is \(F^{2^j}
 ### G-4bg — index-one coefficient bridge
 
 With E=F(t), t²=S, the additive map \(\rho(a+bt)=a+Sb²\) induces an isomorphism \(E/\wp(E)\cong F/\wp(F)\). It carries Artin–Schreier images to Artin–Schreier images and has kernel exactly \(\wp(E)\). This matches the index-one coefficient in G-4aj. Together with the higher odd-pole \(S F²\) match, every coefficient space agrees; equality of all relations remains to be proved.
+
+
+### G-4bh — logarithmic-coordinate Cartier presentation
+
+In the basis \(d\log t,d\log p\), inverse Cartier is coefficientwise Frobenius modulo exact forms. For \(f=(a+bt)p^n\), a,b∈F, its differential has log-coordinate pair \((tb,n(a+bt))p^n\), and the jth inverse-Cartier representative is \(((tb)^{2^j},(n(a+bt))^{2^j})p^{2^jn}\). These pairs generate the finite-principal-part Cartier filtration. The full \(C^{-1}-1\) quotient and normal-form comparison remain open.
