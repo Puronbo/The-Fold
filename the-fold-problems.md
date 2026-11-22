@@ -3131,3 +3131,12 @@ For even m=2n the first Cartier root is exactly
 C_0(\Delta_{2n})=S^nu^na^{[n]}+Sf²u^{n-1}B_{n-1}(a).
 \]
 The Hasse-power constraint gives the next algebraic reduction, but cancellation with the first term is still needed to prove the conjectural full torsion bound \(C_0^{v_2(m)+1}\Delta_m=0\). Odd coefficients are now a theorem; the even bound remains conjectural and bounded-tested.
+
+
+### G-4cu — proved odd Hasse coefficients and Hasse-sum Frobenius constraint
+
+The exact Hasse–Taylor formula shows every odd q-coefficient of the finite section-change pullback lies in \(SF²=\ker C_0\), hence is exact after one Cartier step. For \(B_{n-1}(a)=\sum_{i<n}S^ia^{[i]}\), if \(2^k\mid n\), all Hasse derivatives \(D^{[j]}B_{n-1}\) for \(1\le j<2^k\) vanish; therefore \(B_{n-1}\in F^{2^k}\). For even m=2n,
+\[
+C_0(\Delta_{2n})=S^nu^na^{[n]}+Sf²u^{n-1}B_{n-1}.
+\]
+The power constraint gives a new handle on the even coefficients, but the cancellation needed for the all-orders torsion bound remains open. The rational test harness now checks the odd-coefficient and Hasse-sum identities separately from the exploratory even bound.
