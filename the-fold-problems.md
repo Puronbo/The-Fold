@@ -2581,3 +2581,7 @@ G-4ad–G-4ag classify the auxiliary quotient H₀ only. The full completed loca
 
 ### G-4ai — exact full local quotient presentation
 With \(\tau=\phi^{-1}\circ q\), the full local quotient is the direct sum of odd-chain copies of F modulo relations \(e_{2m-1}(a^2)+e_{\operatorname{odd}(m)}(\tau^{v_2(m)}a)=0\), for m≥1 and a∈F. These encode the extra square term \((S+p)y^2\). This is an exact presentation, not yet a basis. G-4r/G-4s establish countably infinite dimension for the full quotient.
+
+
+### G-4aj — complete full local normal form
+The full local quotient is \(F/\wp(F)\oplus\bigoplus_{r\ge3,\ r\text{ odd}}SF^2\), where \(\wp(a)=a^2+a\). The chain-1 Artin–Schreier summand has basis \(1\), odd powers \(S^d\), and \(S^j/Q^d\) for monic irreducible Q, odd d≥1, 0≤j<deg Q. For each odd r≥3, use the basis \(S\mathcal E^2\) at p^{-r}, where \(\mathcal E\) is the standard partial-fraction basis of F consisting of S^d and S^j/Q^d for all Q,d≥1,0≤j<deg Q. This gives a complete explicit countable basis of the full local quotient.
