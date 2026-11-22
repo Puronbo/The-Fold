@@ -1940,3 +1940,31 @@ since \(G_0\) has coordinates \((A_0,A_1,B_0,B_1)=(0,b,a,b)\). Consequently
 Every negative exponent orbit \(-r,-2r,-4r,\ldots\), r positive odd, therefore contributes exactly two additive copies of F to the finite-principal-part Kato presentation. The two coordinates are the constant-in-t component of the first logarithmic coefficient and the sum of the t-components of the two logarithmic coefficients.
 
 This is an exact computation for each negative orbit. It does not yet include the exponent-zero orbit or establish a topological completion statement for the full Laurent field.
+
+
+## 63. G-4bl — exponent-zero orbit and complete finite-polar-part presentation
+
+At exponent zero, Frobenius fixes the exponent. The exact differential of c=a+bt∈E, a,b∈F, has logarithmic coefficient pair \((tb,0)\). The \(C^{-1}-1\) relation is coordinatewise Artin–Schreier. Since the Frobenius relation identifies every iterate of \((tb,0)\) with its initial class, the zero-orbit quotient is
+\[
+\frac{E\oplus E}{(tF,0)+(\wp_E(E),\wp_E(E))}
+\simeq \frac{E}{tF+\wp_E(E)}\oplus\frac{E}{\wp_E(E)}.
+\]
+The second factor is \(F/\wp_F(F)\) by G-4bg. For the first, write c=a+bt and project modulo tF. The image of \(\wp_E(c)=a²+a+Sb²+bt\) is \(\wp_F(a)+Sb²\), so
+\[
+\boxed{E/(tF+\wp_E(E))\simeq F/(\wp_F(F)+SF²).}
+\]
+Therefore the zero-exponent contribution is
+\[
+\boxed{F/(\wp(F)+SF²)\oplus F/\wp(F).}
+\]
+
+Combining this with G-4bk gives the complete finite-polar-part presentation
+\[
+\boxed{
+\mathcal H_{\rm pol}\simeq F/(\wp(F)+SF²)\oplus F/\wp(F)
+\oplus\bigoplus_{r\ge1,\ r\text{ odd}}(F\oplus F).
+}
+\]
+Here \(\mathcal H_{\rm pol}\) means the quotient of finite logarithmic differential principal parts with exponents n≤0 by exact differentials and the inverse-Cartier-minus-identity relations. Negative exponent orbits are indexed by negative odd roots −r. The decomposition is algebraic and finite-support; it does not yet assert a completed-field/topological isomorphism for all Laurent series.
+
+This result gives a precise two-component contribution at every negative odd pole orbit, plus the two distinct zero-orbit terms. The comparison with the scalar quotient G-4aj must now be understood as a projection/subquotient question, not as equality of the full two-coordinate Kato model with the one-coordinate scalar normal form.
