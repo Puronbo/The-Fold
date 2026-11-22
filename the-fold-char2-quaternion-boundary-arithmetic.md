@@ -1910,3 +1910,33 @@ Consequently each nonzero exponent orbit has the canonical presentation
 \boxed{(E^{\rm perf}\oplus E^{\rm perf})/(G_0+(U_\infty,0)).}
 \]
 This removes the explicit Frobenius direct-limit notation. The remaining algebraic task is to describe \(U_\infty\), then simplify the residual graph relation and compare the resulting quotient with the higher-chain \(S F²\) summands in G-4aj. Positive and negative odd roots still give distinct copies; exponent zero remains separate.
+
+
+## 62. G-4bk — simplify each negative exponent orbit to two residue-field copies
+
+Let \(E_h=F^{1/2^h}\), so \(E_0=F\), \(E_1=E=F(t)\), and \(E_{h+1}=E_h(t^{1/2^h})\). The extension has degree two and
+\[
+E_{h+1}=E_h\oplus t^{1/2^h}E_h.
+\]
+The tangent relation space in G-4bj is therefore
+\[
+U_\infty=\bigoplus_{h\ge1}t^{1/2^h}E_h,
+\]
+a canonical additive complement to E in \(E^{\rm perf}\). Thus quotienting the first coordinate by \(U_\infty\) reduces the orbit presentation to \((E\oplus E)/G_0\).
+
+Write \(A=A_0+tA_1\), \(B=B_0+tB_1\), with coefficients in F. The map
+\[
+\Phi:E\oplus E\to F\oplus F,
+\qquad (A,B)\mapsto(A_0,A_1+B_1)
+\]
+is surjective and has kernel exactly
+\[
+G_0=\{(tb,a+bt):a,b\in F\},
+\]
+since \(G_0\) has coordinates \((A_0,A_1,B_0,B_1)=(0,b,a,b)\). Consequently
+\[
+\boxed{(E^{\rm perf}\oplus E^{\rm perf})/(G_0+(U_\infty,0))\simeq F\oplus F.}
+\]
+Every negative exponent orbit \(-r,-2r,-4r,\ldots\), r positive odd, therefore contributes exactly two additive copies of F to the finite-principal-part Kato presentation. The two coordinates are the constant-in-t component of the first logarithmic coefficient and the sum of the t-components of the two logarithmic coefficients.
+
+This is an exact computation for each negative orbit. It does not yet include the exponent-zero orbit or establish a topological completion statement for the full Laurent field.
