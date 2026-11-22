@@ -2521,3 +2521,7 @@ The local quotient obstruction at P=T²+S applies to rational global classes bec
 
 ### G-4t — combined independent system over finite places
 For every monic irreducible R with S nonsquare in E_R=F[T]/(R), odd-pole residue lifts \tilde e/R^(2m+1), with e in an F₂-basis of E_R and m≥0, are jointly independent by localization and the even-pole criterion. At each exceptional quadratic R_c=T²+Sc² (c∈F×), a modified coefficient obstruction gives the independent family S^(2n+1)/R_c^(2m+1), n≥0,m≥1. Localizing at each place proves the union of all these families is independent in Q. This covers all nonsquare-residue places and this explicit family of square-residue places, but not every possible exceptional irreducible or a full Hamel basis.
+
+
+### G-4u.1 — higher-degree square-residue exceptional places
+The irreducible quartic P=T⁴+T²+S over F₂(S) has residue field containing √S: if β²+β+S=0 and α²=β, then α has minimal polynomial P and (α+β)²=S. The exact P-adic coordinates of z²+u+Su² are recorded in the quaternion-boundary arithmetic note. Determine the local quotient at P, or construct an infinite independent family. The quadratic G-4r argument does not transfer verbatim because the T² coordinate introduces an additional coupled condition.
