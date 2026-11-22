@@ -2398,3 +2398,8 @@ Thus it is surjective, with kernel exactly the norm image. In Jordan form it kil
 - The Newton polygon forces any proper rational factor to have degree four. Weil-root absolute values bound a monic quartic divisor to 12,650 integer candidates; exact integer division excludes every candidate.
 - The corresponding four-dimensional abelian isogeny factor is therefore simple over F2, with slopes 1/4 (four times) and 3/4 (four times).
 - Adds the executed certificate "certificates/g27_degree8_irreducibility.py".
+
+
+## G-33 — CM Artin character and prime splitting
+
+The real quartic CM subfield has narrow class group C2, and its narrow Hilbert class field is the genus-seven simple factor's degree-eight Frobenius field. Because the unit-signature subgroup is exactly the even-parity subgroup, the Artin character of a principal prime ideal (alpha) is the parity of the real signs of alpha, equivalently the sign of its field norm. This predicts explicit relative splitting: 3 and 5 split over their inert degree-four primes; at 7 the two degree-one primes are inert and the degree-two prime splits. The corresponding degree-eight polynomial factorizations modulo 3, 5, and 7 are certified exactly. This is a concrete arithmetic consequence of the CM class-field identification; the CM field's own full class group remains open.
