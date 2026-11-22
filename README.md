@@ -1390,3 +1390,7 @@ the quaternion-boundary arithmetic note.
 
 
 **G-4av — correction to pure-normal chains:** chain relations identify successive pole slots by Frobenius, so each even-root chain contributes \(\varinjlim_j(E/E^{2^{j+1}},c\mapsto c²)\), not independent slot quotients. Index one contributes E/\wp(E). Mixed tangent relations remain to be imposed.
+
+
+
+**G-4aw — perfection form:** each even-root pure-normal chain is canonically \(E^{\rm perf}/E\), where \(E=\mathbb F_2(t)\); the index-one part is E/\wp(E). This remains a pure-normal model, not the full Kato quotient.
