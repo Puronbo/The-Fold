@@ -2585,3 +2585,33 @@ This recovers G-4bw at r=1 and the isolated v₂ contribution to G-4by at r=2. A
 **Clockwise convention.** Regard the negative graded layers as an oriented sequence, with the odd and even quotient types alternating. Declare clockwise to mean forward in filtration depth: a term at exponent n that contributes at exponent n+r has moved r places clockwise. Since n<0, this is motion toward exponent zero and toward less singular principal parts. This is a convention for visualizing the filtration, not an extra algebraic structure or a claim that the exponent lattice is literally periodic. In this convention every isolated section parameter produces a forward arrow; odd r crosses to the opposite parity type, while even r returns to the same parity type.
 
 **Scope.** These are the first nonzero graded arrows of an isolated parameter v_r. They do not give the complete p^{2r} and higher corrections, where the coefficient field moves, nor do they classify simultaneous parameters v₀,…,vᵣ. In particular, the even-depth parameter f_r is invisible in this first graded arrow and may reappear in its higher-order corrections.
+
+
+## 79. G-4cb — second clockwise movement for an isolated depth-r change
+
+Set q=pʳ and make the isolated change s=t(1+qv), v=e+ft. The first graded arrow is G-4ca. To compute the next diagonal, one must include the motion of the coefficient coordinate:
+\[
+s²=S(1+q²v²),\qquad
+S_{old}=S_{new}+q²S_{new}(e²+S_{new}f²)+O(q⁴).
+\]
+Thus for a coefficient function g(S), the second-diagonal coefficient-field contribution is
+\[
+D_vg=S(e²+Sf²)\partial_Sg.
+\]
+This is not optional: freezing S would omit a genuine term.
+
+Rescaling the corrected second-order coordinate calculation (G-4by) from p to q gives the isolated quadratic diagonal. There is no independent order-q² section parameter in this isolated family, so the independent e₁,f₁ terms of G-4by are set to zero. On the odd and even representatives used above, the second diagonal is
+\[
+\boxed{N^{(r)}_{odd}(x,y)=
+\big(Sf²x+D_vx,\;e²y+D_vy\big),}
+\]
+\[
+\boxed{N^{(r)}_{even}(d)=e²d+D_vd.}
+\]
+These terms occur at p^{2r}. The formulas are independent of the parity of r: parity affects the first diagonal through dlog(q)=r dlog(p), whereas dlog(q²)=0 in characteristic two. In particular, f is invisible in the first arrow when r is even, but it reappears through Sf² and through D_v on the second diagonal.
+
+This gives a two-diagonal picture:
+- at distance r clockwise, the differential-frame arrow is parity-sensitive;
+- at distance 2r clockwise, the coefficient-field displacement and quadratic frame correction are parity-insensitive.
+
+**Qualification.** These are the isolated-parameter diagonals. They do not include cross terms from simultaneous parameters at intermediate depths, and they do not assert that the displayed operators alone determine the full p-adic section-change action. A full composition law at arbitrary depth remains to be proved.
