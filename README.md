@@ -1522,3 +1522,6 @@ the quaternion-boundary arithmetic note.
 
 
 **G-4ce quotient caveat correction:** test stability against differential Frobenius Φ, not scalar AS. For m=pⁿdlogt, L_X(Φm−m)=(p^{2n}+pⁿ)ft dlogt, whereas Φ(L_Xm)=p^{2n}Sf²dlogt. Noncommutation is shown; quotient instability still requires reduction modulo exact forms.
+
+
+**G-4cf — quotient instability proved:** the ambient restricted Lie action does not descend to the Kato-style quotient. For (v=t) and any negative odd n, the relation (r=(\Phi-1)(p^n d\log t)) is sent to (p^{2n}t,d\log t+p^nt,d\log t). The first term is exact; the second has nonzero class in the odd graded quotient because ((t,0)\notin G=\{(tb,a+bt):a,b\in F\}). Strictness prevents higher-term cancellation. Thus (\rho_t(R)\not\subseteq R), and the full two-dimensional ambient Lie algebra has no induced quotient representation. A smaller stabilizer remains to be determined.
