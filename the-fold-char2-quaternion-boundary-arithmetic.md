@@ -2175,3 +2175,48 @@ F_c=E²=\mathbb F_2(\Sigma),
 whereas the scalar normal-form quotient G-4aj is expressed over \(F_0\) and uses \(S_0\). These are related inside the completion by \(S_0=\Sigma+p\), not by equality.
 
 Accordingly, every occurrence of \(F,S\) in the geometric Cartier formulas G-4ap–G-4bs means \(F_c,\Sigma\). Every occurrence of \(F,S\) in the scalar normal form G-4aj means \(F_0,S_0\). The symbol comparison G-4br explicitly uses \(S_0=\Sigma+p\) and is the bridge between these two coefficient-field sections. This distinction is essential: replacing \(S_0\) by \(\Sigma\) before expanding in p would erase the adjacent-pole term that is killed by the root exact graph.
+
+
+## 72. G-4bu — change of coefficient-field section and intrinsic associated graded
+
+The decomposition in G-4bs is written using a chosen coefficient-field lift t of the residue parameter and the logarithmic basis (dlog t,dlog p). The completed Kato quotient and the scalar quaternion boundary map are intrinsic, but the displayed direct-sum splitting need not be. We now compute the transition law under a change of lift.
+
+Let t' be another lift of the same residue element t. Since t'/t ≡ 1 mod p, there is a unique v in E[[p]] such that
+\[
+t'=t(1+pv),\qquad E=\mathbb F_2(t).
+\]
+Write the coefficientwise derivations on E[[p]] as ∂_t and ∂_p, so that
+\[
+dv=(t\partial_t v)d\log t+(p\partial_p v)d\log p.
+\]
+Differentiating t'=t(1+pv) gives the exact transition formula
+\[
+\boxed{
+d\log t'=
+\left(1+\frac{pt\partial_t v}{1+pv}\right)d\log t
++
+\frac{p(v+p\partial_p v)}{1+pv}d\log p,
+\qquad d\log p'=d\log p.
+}
+\]
+All denominators are units. The transition matrix is the identity modulo p.
+
+The coefficient functions transform compatibly: for f in E, f(t') ≡ f(t) mod p. Consequently, for every integer n, the induced map on the ambient logarithmic differential lattice satisfies
+\[
+p^n\Omega^1_{E[[p]]}/p^{n+1}\Omega^1_{E[[p]]}
+\xrightarrow{\ \sim\ }
+p^n\Omega^1_{E[[p]]}/p^{n+1}\Omega^1_{E[[p]]}
+\]
+as the identity after the common residue-field identification. In particular, a Laurent differential's leading p-order coefficient pair is independent of the chosen coefficient-field lift. The transition is filtered and triangular: its correction terms raise p-order by at least one, hence lower pole order by at least one for negative powers.
+
+The square coefficient field changes only at second order:
+\[
+(t')^2=t^2(1+p^2v^2).
+\]
+Thus if Σ=t² and Σ'=(t')², then Σ'−Σ is divisible by p². This is compatible with the earlier base/coefficient distinction S₀=Σ+p: the first adjacent-pole correction in the quaternion symbol is stable under a change of section at its leading graded order, while higher corrections can alter lower-pole representatives.
+
+**Intrinsic conclusion.** The divisor parameter p, the logarithmic differential filtration, the Cartier operator, the exact-differential subspace, and the original quaternion symbol map are independent of the coefficient-field section. The leading graded differential data are canonically identified under every change t↦t'. By contrast, the explicit direct-sum coordinates F_c⊕F_c⊕E^perf/E in G-4bs are a section-dependent splitting; the transition formula shows why they should not yet be called canonical summands.
+
+**Important limitation.** Identity on the associated graded of the ambient differential module does not, by itself, prove strictness of the induced filtration after quotienting by exact forms and (C⁻¹−1)-relations. Nor does it prove that the section-dependent orbit splittings are related by a uniquely determined triangular automorphism of the final quotient. Those are the remaining functoriality questions. The scalar projection is better behaved: it is characterized on the intrinsic quaternion differential symbols and the section-independent scalar normal form G-4aj, so its target quotient does not depend on the auxiliary lift.
+
+**Next task.** Prove strictness for the combined relation subspace B¹+(C⁻¹−1)Ω¹ with respect to the p-adic filtration, or find the first filtration degree where strictness fails. If strictness holds, the associated-graded quotient is intrinsic and the coordinate splittings are filtered choices of section; if it fails, the failure identifies an additional extension term that the present direct-sum model misses.
