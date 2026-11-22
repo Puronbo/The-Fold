@@ -2225,3 +2225,9 @@ Q_9=Ja^2t ch+a^2t^2(Ei+Jb)dh.
 A follow-up term-by-term comparison against UF-065 confirms that the corrected quadratic inputs Q2,Q3,Q5,Q6,Q7,Q8,Q9 and the n1,n4 terms now match the source table. This validates the quadratic input table only; all degree-four ranks remain withdrawn pending a fresh matrix computation.
 
 An additional audit found a missing factor of `a` in the `dh`-coefficient of `Q_7=Q(Z_{x^2})`. The previously reported 175/176 specialization ranks are withdrawn too. The correct coefficient is `at^2(Bb+Di+Gb)`. The script has been patched, but no degree-four rank is currently certified. The generic rank and whether `n_1n_4` survives modulo `N^3` remain open.
+
+### UF-072O — Completeness of the degree-four initial test space
+- The 350-column construction is structurally complete for the source-degree-four initial image of N^3: 84 corrected triple products of the seven degree-one generators, 56 products of n1 or n4 with a pair of degree-one generators, and 210 fourfold products of the seven degree-one generators arising from an algebra multiplier.
+- No other generator-degree pattern contributes in source degree four. This proves completeness of the test space, not its rank.
+- If in4(n1*n4) lies outside its K-linear span over K=Frac(S), then n1*n4 is not in N^3. If it lies inside, integral S-module membership remains unresolved.
+- Next: rebuild the audited matrix and certify its exact generic rank and augmented rank.
