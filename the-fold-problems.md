@@ -2557,3 +2557,7 @@ The exceptional completed principal-part quotient has a nonzero F₂-linear func
 
 ### G-4ac — exact local annihilator inverse system
 The annihilator splits over odd-core doubling chains. On each chain, coefficient functionals satisfy \(\lambda_1\circ\phi=\lambda_0\) and \(\lambda_{j+1}\circ\phi=\lambda_j\circ q\) for j≥1, with \(q(x)=[x]\) and \(\phi(x)=[Sx^2]\). These are necessary and sufficient, and every extension exists since \(\phi\) is injective. The full annihilator has F₂-dimension continuum. The local quotient classification remains open.
+
+
+### G-4ad — canonical chain-cokernel model
+The local scalar quotient decomposes over odd-core exponent chains. Each chain is canonically \(\operatorname{coker}T_r\), with \(T_r((x_j))_0=x_0\) and \(T_r((x_j))_j=q(x_j)+\phi(x_{j-1})\), where \(q:F\to F/F^2\) and \(\phi(x)=[Sx^2]\). This is equivalently the colimit of the zigzag \(W_0\leftarrow F_0\to W_1\leftarrow F_1\to\cdots\). Dualizing yields G-4ac. Closed-form evaluation of the chain cokernels remains open.
