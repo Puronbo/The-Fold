@@ -2728,3 +2728,8 @@ In the basis \(d\log t,d\log p\), inverse Cartier is coefficientwise Frobenius m
 ### G-4bi — full logarithmic exponent-orbit presentation
 
 For each nonzero odd exponent r, its orbit 2^j r has coefficient module \(V_{r,j}=(E\oplus E)/R_{r,j}\), where \(R_{r,j}=G_j+\sum_{k<j}(t^{2^k}F^{2^k},0)\) and \(G_j=\{(t^{2^j}b^{2^j},(a+bt)^{2^j}):a,b∈F\}\). Frobenius on both coordinates gives the transition maps. The finite-principal-part contribution is the direct limit of these modules. The zero-exponent orbit is separate and must be computed independently. This full two-coordinate model retains tangent constraints; simplification and completion remain open.
+
+
+### G-4bj — perfect-closure orbit quotient
+
+Taking 2^j-th roots identifies the direct limit for each nonzero odd exponent orbit with \((E^{perf})²/(G_0+(U_\infty,0))\), where \(G_0=\{(tb,a+bt):a,b∈F\}\) and \(U_\infty=\sum_{h≥1}t^{1/2^h}F^{1/2^h}\). This is the closed-form full two-coordinate orbit quotient. Simplifying U∞ and comparing with G-4aj remain open.
