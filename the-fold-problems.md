@@ -2485,3 +2485,12 @@ At an irreducible P with residue E=F₂(S)[T]/(P), all denominator poles are eve
 
 ### G-4n — explicit exceptional place
 At P=T²−S, the residue field is F₂(S)(√S), so S becomes square. The exact denominator identity, with u=S/P and z=TS/P, is z²+u+Su²=(S²+S)/P. Thus a genuine simple pole occurs. This is a witness to the exceptional inseparable behavior, not a proof that arbitrary simple principal parts are removable.
+
+
+### G-4o — higher odd poles at the exceptional place
+At P=T²+S, for every m≥1 and P-adic unit w, the denominator identity
+z=Tw/P^(m+1), u=w/P^(m+1) gives
+z²+u+Su²=(w²+wP^m)/P^(2m+1), with square leading coefficient w̄².
+For m=0 the leading coefficient is instead w̄²+w̄ (Artin–Schreier).
+Thus the simple-pole case must not be conflated with the higher odd-pole
+family. Full local principal-part quotient remains open.
