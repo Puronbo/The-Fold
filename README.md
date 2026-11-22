@@ -1116,11 +1116,4 @@ undefined
 
 ## UF-072L — Corrected degree-four checkpoint
 
-An audit corrected the quadratic lifts of \(n_8,n_9\). The complete
-350-column, 470-row degree-four initial matrix now gives ranks 175 and 176
-after adjoining \(\operatorname{in}_4(n_1n_4)\), respectively, at each of
-three exact \(\mathbb F_{256}\) specializations. These give generic lower
-bounds only; the upper bound needed to decide whether
-\(n_1n_4\notin\mathcal N^3\) remains open. The earlier 176/177 claim is
-withdrawn. Certificate:
-[uf072k_degree4_specialization.py](https://github.com/Puronbo/The-Fold/blob/research/universal-fold-invariant/certificates/uf072k_degree4_specialization.py).
+The subsequent audit also found a missing factor of `a` in the `dh`-coefficient of `Q_7`. The 175/176 ranks are withdrawn. The certificate has been patched, but no new ranks are claimed until the full calculation is rerun. See [the certificate](https://github.com/Puronbo/The-Fold/blob/research/universal-fold-invariant/certificates/uf072k_degree4_specialization.py).
