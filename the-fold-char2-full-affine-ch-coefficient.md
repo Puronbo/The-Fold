@@ -975,3 +975,31 @@ Thus the degree-three part of the associated filtration of (mathcal N^2/mathcal 
 generic dimensions.
 
 **Scope.** This is not yet the full dimension of ((mathcal N^2/mathcal N^3)otimes_S K). Products (n_1^2,n_1n_4,n_4^2) begin in source degree four, and quartic/higher terms of the other pair products can also survive. The exact higher filtration layers and integral (S)-module presentation remain open.
+
+
+## 24. UF-072J — The remaining constant-generator pair product
+
+The two generators (n_1,n_4) have no source-degree-one terms. Hence every monomial in either source expansion has total ((c,d,h))-degree at least two. In the truncated algebra
+[
+T=k[c,d,h]/(c^4,d^2,h^2),
+]
+the square of every monomial of degree at least two is zero. Frobenius is additive in characteristic two, so the full identities are
+[
+oxed{n_1^2=n_4^2=0.}
+]
+
+Their quadratic initial terms from UF-065 are
+[
+q_1=rac Aa c^2+rac{Ab+Ci}{ai}cd,qquad
+q_4=rac Ai cd.
+]
+Therefore the first nonzero candidate term of their product is
+[
+oxed{
+operatorname{in}_4(n_1n_4)=q_1q_4
+=rac{A^2}{ai}c^3d.
+}
+]
+The second product term vanishes because it contains (d^2). The monomial (c^3d) is nonzero in (T), so (n_1n_4) is nonzero in the source algebra.
+
+**Open membership test.** This does not yet prove that (n_1n_4) survives in (mathcal N^2/mathcal N^3): an element of (mathcal N^3) can have source-degree-four initial term. The next calculation must determine the degree-four initial image of (mathcal N^3), including triple products with one of (n_1,n_4), syzygies among cubic triple-product initial terms, and products of four first-order generators. The full quotient is still not determined.
