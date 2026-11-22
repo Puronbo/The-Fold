@@ -84,3 +84,41 @@ so \((\beta+2)=\mathfrak p\). Every ideal of norm at most six is therefore princ
 \boxed{h_K=1.}
 \]
 This is the ordinary class number, not the narrow class number. The finite-unramified CM extension is compatible with a nontrivial narrow class group; its exact narrow class group and unit-signature index remain to be determined. The finite checks and norm computation are in certificates/g30_real_quartic_class_number.py.
+
+
+## 5. Narrow class number and class-field identification
+
+The following three algebraic integers are units, since their exact norms are one:
+\[
+\epsilon_1=1+\beta,\qquad
+\epsilon_2=1+3\beta+\beta^2,\qquad
+\epsilon_3=-1-4\beta-4\beta^2-\beta^3.
+\]
+The four real roots of g are isolated in the rational intervals
+\[
+(-2.81,-2.80),\quad(-2.53,-2.52),\quad
+(-0.89,-0.88),\quad(2.22,2.23).
+\]
+Exact rational interval evaluation gives their signature vectors, in this ordering:
+\[
+\operatorname{sgn}(\epsilon_1)=(-,-,+,+),\quad
+\operatorname{sgn}(\epsilon_2)=(+,-,-,+),\quad
+\operatorname{sgn}(\epsilon_3)=(+,-,+,-).
+\]
+These three vectors are linearly independent over \(\mathbb F_2\), and each has even parity. Thus the unit-signature image contains the full order-eight even-parity subgroup.
+
+For a totally real quartic, the narrow class number is
+\[
+h_K^+=h_K\,\frac{16}{|\operatorname{sgn}(\mathcal O_K^\times)|}.
+\]
+Since \(h_K=1\), the signature image has size at least eight, so \(h_K^+\le2\). But the already established nontrivial quadratic extension \(L/K\) is unramified at every finite prime; by narrow class field theory it is contained in the narrow Hilbert class field. Hence \(h_K^+\ge2\). Therefore
+\[
+\boxed{h_K^+=2,\qquad
+\operatorname{sgn}(\mathcal O_K^\times)=\{(\pm1)^4:
+\text{even number of minus signs}\}.}
+\]
+The narrow Hilbert class field has degree two over K. Since L/K is itself quadratic and unramified at every finite prime, it is exactly that field:
+\[
+\boxed{L=K^{\mathrm{narrow\ Hilbert}}.}
+\]
+The exact unit norms, rational root intervals, interval sign checks, and rank-three signature calculation are included in certificates/g30_real_quartic_class_number.py.
