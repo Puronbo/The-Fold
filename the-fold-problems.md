@@ -2852,3 +2852,12 @@ Q_{odd}: (x,y)\mapsto(Sf²x+Dᵥx,\ f₁x+(e²+e₁)y+Dᵥy),
 Q_{even}:d\mapsto(e²+e₁)d+Dᵥd.
 \]
 The section-composition parameters satisfy e_{w₁}=e_{v₁}+e_{u₁}+e_ue_v and f_{w₁}=f_{v₁}+f_{u₁}+e_uf_v, while D_w=D_v+D_u. The second-order maps obey N_odd(w)=N_odd(v)+N_odd(u)+M_uL_v and N_even(w)=N_even(v)+N_even(u)+L_uM_v, exactly the filtered composition law. Orders p³ and above remain open.
+
+
+### G-4bz — independent cubic extension data
+
+For the isolated cubic section change t'=t(1+p³v₂), v₂=e₂+f₂t, the induced maps three filtration steps higher are Q_odd≅F²→Q_even≅F, (x,y)↦f₂x+e₂y, and Q_even≅F→Q_odd≅F², d↦(0,e₂d). Since e₂,f₂ are arbitrary while v₀=v₁=0, cubic data are independent of the first two orders. For two successive changes, the composite cubic coefficient is
+\[
+w₂=v₂+u₂+t f_{u₀}v₁+t f_{u₁}v₀+v₀u₁+t f_{u₀}v₀²+v₁u₀.
+\]
+The lower-order cross terms are forced, while v₂+u₂ is new. Open: compute the complete p³ quotient action when v₀,v₁ are nonzero, then generalize to all filtration orders.
