@@ -335,3 +335,15 @@ Translation by \((1,0,0)\in W_3(\mathbb F_2)\cong\mathbb Z/8\mathbb Z\) gives a 
 \sigma(v)=v+u^3+uw+u.
 \]
 Its square sends \((u,w,v)\mapsto(u,w+1,v+w)\), and its fourth power sends \((u,w,v)\mapsto(u,w,v+1)\), confirming order eight. This makes the G-13 nonzero transgression example fully explicit at the field-equation level.
+
+### G-15 — explicit factor set and cyclic cocycle-sum certificate
+
+Write the quotient \(C_4=\mathbb Z/4\mathbb Z\) additively, choose a generator \(g\) of \(C_8\), and use the section \(s(i)=g^i\) for \(i=0,1,2,3\). The factor set for \(1\to\langle g^4\rangle\to C_8\to C_4\to1\) is
+\[
+\tau(i,j)=\left\lfloor\frac{i+j}{4}\right\rfloor\bmod2.
+\]
+It is normalized and satisfies the 2-cocycle identity because it is the factor set of this section. Its cyclic cocycle-sum representative is
+\[
+w_\tau=\sum_{j=0}^{3}\tau(j,1)=0+0+0+1=1.
+\]
+For trivial \(\mathbb F_2\)-coefficients, \(D=0\) and the norm \(D^3=0\), so \(H^2(C_4,\mathbb F_2)\cong\mathbb F_2\), represented by 1. Thus the G-13 transgression is exactly the nonzero G-11 cyclic obstruction class under this section convention.
