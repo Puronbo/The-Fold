@@ -2723,3 +2723,8 @@ With E=F(t), t²=S, the additive map \(\rho(a+bt)=a+Sb²\) induces an isomorphis
 ### G-4bh — logarithmic-coordinate Cartier presentation
 
 In the basis \(d\log t,d\log p\), inverse Cartier is coefficientwise Frobenius modulo exact forms. For \(f=(a+bt)p^n\), a,b∈F, its differential has log-coordinate pair \((tb,n(a+bt))p^n\), and the jth inverse-Cartier representative is \(((tb)^{2^j},(n(a+bt))^{2^j})p^{2^jn}\). These pairs generate the finite-principal-part Cartier filtration. The full \(C^{-1}-1\) quotient and normal-form comparison remain open.
+
+
+### G-4bi — full logarithmic exponent-orbit presentation
+
+For each nonzero odd exponent r, its orbit 2^j r has coefficient module \(V_{r,j}=(E\oplus E)/R_{r,j}\), where \(R_{r,j}=G_j+\sum_{k<j}(t^{2^k}F^{2^k},0)\) and \(G_j=\{(t^{2^j}b^{2^j},(a+bt)^{2^j}):a,b∈F\}\). Frobenius on both coordinates gives the transition maps. The finite-principal-part contribution is the direct limit of these modules. The zero-exponent orbit is separate and must be computed independently. This full two-coordinate model retains tangent constraints; simplification and completion remain open.
