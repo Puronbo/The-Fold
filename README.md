@@ -1295,3 +1295,6 @@ the quaternion-boundary arithmetic note.
 
 
 **G-4t — combined finite-place independent system:** for every irreducible R where S remains nonsquare in the residue field, odd-pole residue lifts form an independent family. For every R_c=T²+Sc², c∈F₂(S)×, the exceptional-place obstruction gives the independent family S^(2n+1)/R_c^(2m+1), n≥0, m≥1. Localization proves the union is jointly independent globally. This combines separable and inseparable places but does not classify every square-residue irreducible or provide a full Hamel basis; see the quaternion-boundary note.
+
+
+**G-4u — higher-degree exceptional place:** the irreducible quartic \(T^4+T^2+S\) has residue field containing \(\sqrt S\). Exact four-coordinate formulas for the completed local denominator image are recorded in the quaternion-boundary note. Its local quotient is open; the quadratic exceptional-place argument is not assumed to generalize unchanged.
