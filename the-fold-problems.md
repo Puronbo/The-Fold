@@ -2960,3 +2960,26 @@ Hence no nonzero \(v=e+ft\) preserves
 section-change Lie algebra is zero. This concerns the ambient
 Lie-derivative action only; discrete coordinate automorphisms or other
 quotient symmetries are not classified.
+
+
+### G-4ch — finite section changes act on the Cartier quotient
+
+For \(r\ge1\) and \(v=e+ft\in E\), the substitution
+\[
+\sigma_{r,v}(p)=p,\qquad \sigma_{r,v}(t)=t(1+p^rv)
+\]
+is a continuous \(\mathbb F_2((p))\)-automorphism of \(L=E((p))\):
+its t-derivative is \(1+p^re\), a unit. Pullback preserves exact
+forms. By naturality of inverse Cartier modulo exact forms,
+\[
+[\sigma^*\Phi(m)]=[\Phi(\sigma^*m)]\quad\text{in }Z^1/B^1.
+\]
+Therefore \(\sigma^*(R)=R\) for \(R=B^1+(\Phi-1)M\), and the finite
+section change induces an automorphism of \(M/R\).
+
+This is compatible with G-4cf–G-4cg: those results show that the
+naive ambient Lie derivative does not preserve the chosen representative
+subspace R. Cartier naturality is only modulo exact forms and involves
+the Frobenius twist; it does not force that naive derivative to preserve
+R. The finite quotient action exists, but its explicit filtered matrices
+and composition law on the quotient remain to be calculated.
