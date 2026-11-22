@@ -2627,3 +2627,8 @@ In local coordinates \(S=t^2+p\), with residue field \(E=\mathbb F_2(t)\), one h
 ### G-4ap — tangent constraint on exact normal forms
 
 In \(L=E((p))\), \(E=\mathbb F_2(t)\), write \(g=\sum c_n(t)p^n\). Then \(dg=\sum c_n'p^n dt+\sum n c_np^{n-1}dp\). Since \(\ker(d/dt)=E^2\), an exact differential is purely normal exactly when every coefficient \(c_n\in E^2\). Thus \(dL\cap Ldp\) consists of normal terms \(c_np^{n-1}dp\) with n odd and \(c_n\in E^2\), i.e. even pole indices with square coefficients. This corrects any claim that arbitrary E-coefficients in even normal layers are removed in the actual quotient by exact forms. The leading-normal-symbol parity calculation G-4ao remains valid, but its lower-order tangent term cannot be discarded in the filtered quotient. Full Cartier comparison remains open.
+
+
+### G-4aq — normal principal-part quotient modulo exact forms
+
+For \(L=E((p))\), \(E=\mathbb F_2(t)\), the pure-normal exact relations are exactly square-coefficient terms at even pole indices. Thus the finite normal principal-part quotient by exact forms is \(\bigoplus_{m\ odd}E p^{-m}dp\oplus\bigoplus_{m\ even}(E/E^2)p^{-m}dp\). This is an exact de Rham intermediate quotient, not the full Kato group; the higher Cartier filtration and tangent interaction remain open.
