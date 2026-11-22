@@ -279,3 +279,31 @@ Use three distinct holdouts:
 - unseen rational numerators/denominators (avoid memorizing coefficient patterns).
 
 The learning targets are p-basis decomposition, C0 orbits, eventual simple-pole coordinates, and residue-field predictions. The full section-change coinvariant is still open, so the stable residue module is supervised only as the exact pure-scaling quotient. Do not label it as the full-group invariant space until the other section-change parameters have been checked.
+
+
+## 12. Learning the finite section-change Cartier tower
+
+The exact finite pullback has now been reduced to a rational one-variable coefficient problem. For \(s=t(1+p^r(e+ft))\), q=p^{2r}, u=e²+Sf², and an odd residual input \(a²\),
+\[
+A'_0=a(S(1+qu))²\frac{1+qe²}{1+qu}.
+\]
+The first two corrections are exact:
+\[
+\Delta_1=Sf²a²\in\ker C_0,\qquad
+C_0²(\Delta_2)=0.
+\]
+A higher-order bound \(C_0^{v_2(m)+1}(\Delta_m)=0\) is a conjectural pattern from bounded exact tests, not a theorem.
+
+The companion script tools/section_change_cartier_stability.py uses exact rational-function arithmetic from cartier_stable_part.py, expands the pullback to a chosen q-order, verifies the first two identities, and stress-tests the proposed higher-order torsion bound. It also emits rational input/target-orbit examples. The exact algebraic identities are the certified labels; higher-order vanishing is explicitly tagged as exploratory.
+
+A productive model task is to predict the C0-torsion depth of each coefficient \(\Delta_m\), then extrapolate to unseen rational denominators and larger m. A verifier should reject any prediction that fails exact rational arithmetic. The model is being used as a conjecture generator, not as a proof engine.
+
+### Residue-coordinate supervision
+
+G-4cq identifies the pure-scaling stable module with residue fields \(\kappa_Q\) at finite closed points. Ohi's Cartier-compatible residue theory gives a possible invariant target under changes of local parameters. The next dataset should pair:
+- a rational coefficient and its simple-pole residue coordinate;
+- its finite section-change pullback;
+- the difference of the resulting residue coordinates;
+- the applicable Cartier filtration depth and valuation bound.
+
+This benchmark must distinguish the pure-scaling residue module (proved) from the still-open full section-group coinvariant. No full-group invariant label should be included before that bridge is proved.
