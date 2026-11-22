@@ -1563,3 +1563,29 @@ At the root, the relation eliminates the root slot and leaves the first odd slot
 Here every odd r≥5 has \(v_2(r-1)\ge2\); the displayed indexing separates first odd chain positions from later positions. The chain argument is finite-support triangular elimination, with Frobenius inducing the isomorphism \(E/E^{2^j}\to E^2/E^{2^{j+1}}\).
 
 **Scope warning:** \(Q_{\rm nor}\) is a pure-normal subquotient model. It is not a proven subspace or quotient decomposition of the full \(H_2^2(L)\), since relations from mixed \(dt\)-components can further identify or kill normal classes. Comparing this model to the G-4aj local quotient is precisely a test for the missing tangent relations.
+
+
+## 47. G-4av — correction: chain contributions are direct limits
+
+**Correction to G-4au.** The slot-by-slot decomposition stated there is not valid: the relation at each node identifies the preceding coefficient class with its Frobenius square at the next node. The chain must be treated as a direct limit, not as independent residual quotients at each pole index.
+
+For an even root \(e\ge2\), set \(m_j=2^j(e-1)+1\), so \(m_0=e\) and \(m_{j+1}=2m_j-1\). By G-4at, the coefficient space at node \(m_j\) is
+\[
+W_j=E/E^{2^{j+1}}.
+\]
+The Cartier–AS relation induces
+\[
+F_j:W_j\longrightarrow W_{j+1},\qquad[c]\longmapsto[c^2].
+\]
+This is well-defined and injective: changing c by an element of \(E^{2^{j+1}}\) changes its square by an element of \(E^{2^{j+2}}\), and \(c^2\in E^{2^{j+2}}\) implies \(c\in E^{2^{j+1}}\). The quotient of the direct sum of the node spaces by the graph relations is therefore exactly
+\[
+\varinjlim_j(W_j,F_j).
+\]
+The index-one chain separately contributes \(E/\wp(E)\). Hence the corrected pure-normal model is
+\[
+\boxed{
+Q_{\rm nor}\cong E/\wp(E)\oplus\bigoplus_{e\ge2,\ e\text{ even}}\varinjlim_j(E/E^{2^{j+1}},\mathrm{Frob}).}
+\]
+For each j, the cokernel of \(F_j\) is naturally \(E/E^2\), since \(W_{j+1}/F_j(W_j)\cong E/(E^2+E^{2^{j+2}})=E/E^2\). As F₂-vector spaces the transition maps split (noncanonically), so each chain colimit is noncanonically isomorphic to \(\bigoplus_{j\ge0}E/E^2\). This vector-space splitting is not canonical and should not be mistaken for a preferred normal form.
+
+The earlier G-4au assertion that each first odd slot independently contributes E/E⁴ and each later slot E/E² is withdrawn. The corrected direct-limit model remains restricted to pure-normal symbols and their own Cartier relations; mixed tangent forms can impose further relations in the full Kato group.
