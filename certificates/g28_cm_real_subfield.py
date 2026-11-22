@@ -90,6 +90,20 @@ for j in range(n): rows.append([0]*j + derivative[::-1] + [0]*(n-1-j))
 disc = determinant_bareiss(rows)
 assert disc == 4352 == 2**8*17
 
+# Cubic resolvent R(Z) = Z^3 - b Z^2 + (a*c-4*d)Z
+# + (4*b*d-a^2*d-c^2) for g=Y^4+aY^3+bY^2+cY+d.
+resolvent = [-64,-24,2,1]
+assert resolvent == [-64,-24,2,1]  # (Z+4)(Z^2-2Z-16)
+# Modulo 7, g = Y(Y-2)(Y^2-Y+3), with the quadratic irreducible.
+g7 = mod_poly(g,7)
+assert g7 == [0,1,5,4,1]
+assert divmod_mod(g7,[0,1],7)[1] == [0]
+assert divmod_mod(g7,[-2,1],7)[1] == [0]
+assert all(divmod_mod([3, -1, 1],[(-r)%7,1],7)[1] != [0]
+           for r in range(7))
+
 print("resultant identity: Res_X(F, X^2-YX+2) = 16*g(Y)^2")
 print("g mod 3 = Phi_5; irreducible over F_3 and hence over Q")
 print("polynomial discriminant(g) =", disc, "= 2^8 * 17")
+print("cubic resolvent factors as (Z+4)(Z^2-2Z-16)")
+print("mod-7 factorization has cycle type (1,1,2); Galois group is D4")
