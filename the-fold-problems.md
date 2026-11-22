@@ -2565,3 +2565,7 @@ The local scalar quotient decomposes over odd-core exponent chains. Each chain i
 
 ### G-4ae — chain cokernel dimension
 Each odd-core chain cokernel has countably infinite F₂-dimension. The target presentation is countable, while the dual surjects onto F* and therefore has continuum cardinality; this excludes finite dimension. All odd-core summands have identical presentations. This gives the dimension of each summand, not an explicit basis or normal form.
+
+
+### G-4af — explicit independent chain family
+For each odd r, the classes \([S^n p^{-r}]\), n≥0, are linearly independent in C_r. The zeroth-coordinate F embeds in coker(T_r): any nonzero finite-support input has nonzero output at one index beyond its last nonzero coordinate, by injectivity of phi. This gives a constructive countable lower bound for every chain. It does not yet give a spanning set or normal form.
