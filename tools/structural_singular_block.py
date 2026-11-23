@@ -79,7 +79,7 @@ def _right_recovery(q, k, p, max_minors):
             "nullspace_certificate": certificate,
         }
     # The images K z_1,...,K z_e must form a codomain basis.
-    b = _transpose(_matmul(k, _transpose(z[1:]), p))
+    b = _matmul(k, _transpose(z[1:]), p)
     if _det_mod(b, p) == 0:
         return {
             "recovered": False,
@@ -134,11 +134,21 @@ def recover_single_singular_block_structurally(
         if result.get("recovered"):
             sr = result.pop("left_transform_S")
             tr = result.pop("right_transform_T")
+            transposed_audit = result.pop("verification")
+            original_s = _transpose(tr)
+            original_t = _transpose(sr)
+            q_target = _transpose(result["canonical_Q"])
+            k_target = _transpose(result["canonical_K"])
+            result["canonical_Q"] = q_target
+            result["canonical_K"] = k_target
             result["strict_equivalence_witness"] = {
-                "original_left_transform_S": _transpose(tr),
-                "original_right_transform_T": _transpose(sr),
+                "original_left_transform_S": original_s,
+                "original_right_transform_T": original_t,
             }
-            result["transposed_problem_verification"] = result.pop("verification")
+            result["transposed_problem_verification"] = transposed_audit
+            result["verification"] = strict_pencil_equivalence_audit(
+                q, k, p, q_target, k_target, original_s, original_t
+            )
     result.update({
         "schema": "the-fold-structural-singular-block-recovery-v1",
         "field": f"F_{p}", "side": side, "shape": source_shape,
