@@ -1,7 +1,34 @@
 import unittest
 
 from tools.pencil_nullspace_certificate import rectangular_pencil_nullspace_certificate
-from tests.test_pencil_kronecker import right_block, left_block, block_diag_rect
+
+
+def right_block(e):
+    q = [[0] * (e + 1) for _ in range(e)]
+    k = [[0] * (e + 1) for _ in range(e)]
+    for i in range(e):
+        q[i][i + 1] = -1
+        k[i][i] = 1
+    return q, k
+
+
+def left_block(e):
+    q, k = right_block(e)
+    return [list(c) for c in zip(*q)], [list(c) for c in zip(*k)]
+
+
+def block_diag_rect(blocks):
+    m = sum(len(q) for q, _ in blocks)
+    n = sum(len(q[0]) for q, _ in blocks)
+    qo, ko = [[0] * n for _ in range(m)], [[0] * n for _ in range(m)]
+    i0 = j0 = 0
+    for q, k in blocks:
+        for i in range(len(q)):
+            for j in range(len(q[0])):
+                qo[i0+i][j0+j], ko[i0+i][j0+j] = q[i][j], k[i][j]
+        i0 += len(q)
+        j0 += len(q[0])
+    return qo, ko
 
 
 class PencilNullspaceCertificateTests(unittest.TestCase):
