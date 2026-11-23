@@ -44,7 +44,8 @@ class KroneckerComponentAssemblyTests(unittest.TestCase):
         multi = result["multi_block_direct_sum_audit"]
         self.assertTrue(multi["verification"]["direct_sum_verified"])
         self.assertEqual(multi["block_shapes"], result["canonical_block_shapes"])
-        self.assertTrue(result["global_strict_equivalence_audit"]["strict_equivalence_certified"])\n        composition = result["component_witness_composition_audit"]
+        self.assertTrue(result["global_strict_equivalence_audit"]["strict_equivalence_certified"])
+        composition = result["component_witness_composition_audit"]
         self.assertTrue(composition["composition_verified"])
         self.assertTrue(all(composition["checks"].values()))
         self.assertEqual(composition["reconstructed_left_transform_S"], result["left_transform_S"])
