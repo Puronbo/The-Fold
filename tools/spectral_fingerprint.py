@@ -425,10 +425,10 @@ def _berlekamp_split_squarefree(f: Sequence[int], p: int) -> list[list[int]]:
                 else:
                     refined.append(factor)
             factors = refined
-        if len(factors) == degree:
+        if len(factors) == len(basis):
             break
-    if any(len(factor) > 2 for factor in factors):
-        raise ArithmeticError("Berlekamp basis failed to split squarefree polynomial")
+    if len(factors) != len(basis):
+        raise ArithmeticError("Berlekamp basis did not produce the expected number of factors")
     return sorted((_poly_monic(x, p) for x in factors),
                   key=lambda x: (len(x), x))
 
