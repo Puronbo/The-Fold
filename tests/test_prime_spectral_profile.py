@@ -24,8 +24,8 @@ class PrimeSpectralProfileTests(unittest.TestCase):
         self.assertEqual(by_prime[7]["frobenius_orbit_degree_histogram"], {"2": 2})
         self.assertEqual(by_prime[5]["frobenius_orbit_degree_histogram"], {"1": 2})
         comparisons = {item["prime"]: item for item in result["comparisons"]}
-        self.assertFalse(comparisons[3]["matrices"]["quarter_turn"]["same_frobenius_profile_as_reference"])
-        self.assertTrue(comparisons[5]["matrices"]["quarter_turn"]["same_frobenius_profile_as_reference"])
+        self.assertFalse(comparisons[3]["matrices"]["quarter_turn"]["same_full_frobenius_profile_as_reference"])
+        self.assertTrue(comparisons[5]["matrices"]["quarter_turn"]["same_orbit_degree_histogram_as_reference"])\n        self.assertFalse(comparisons[5]["matrices"]["quarter_turn"]["same_full_frobenius_profile_as_reference"])\n        self.assertFalse(comparisons[3]["matrices"]["quarter_turn"]["same_orbit_degree_histogram_as_reference"])
 
     def test_profile_accounts_for_full_dimension_with_multiplicity(self):
         result = prime_spectral_profile([[2, 0], [0, 2]], [3])
