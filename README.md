@@ -38,8 +38,9 @@ adding a note:
 - **The minimal operation family is a cyclicity test.** Every information costs at most one scale if and
   only if `U(n)` is cyclic; the maximum cost is `rank U(n)`, which is unbounded; the fold fixes the even
   half of the character lattice and never costs zero (`the-fold-minimal-operations.md`).
-- **Reuse, not citation count.** The corpus draws 377 note-to-note edges over 50 notes, 7.54 per note,
-  and the two orphans are the notes that ask what the exercise is for (`the-fold-value.md`).
+- **Reuse, not citation count.** The corpus draws 377 note-to-note edges over 63 notes, 5.98 per note;
+  fifteen notes are cited by nothing, thirteen of them research notes outside the zone map, and the two
+  fold-note orphans are the ones that ask what the exercise is for (`the-fold-value.md`).
 
 **Formal core:** `lake build` compiles a dependency-free Lean 4 library in `Fold/` — the fold as an
 involution, its fixed set and quotient, the observer as a cut, the scale action, doubling's two period
@@ -330,6 +331,25 @@ author. The CMB enters as a rhyme; the exact physics is standard cosmology. See 
 | `the-fold-lean.md` | formal core: the Lean 4 project - involution, quotient, cut, scale, chi, the wheel, the doubling action, and the finite counterexamples |
 | `the-fold-minimal-operations.md` | follow-up note: the minimal operation family - the character lattice, cost as the rank of a kernel, cyclicity as the dividing line, and the fold as the parity |
 
+### Research notes
+
+The characteristic-two and Hopf notes are indexed here but sit outside the zone map: they are research
+papers with their own theorem numbering, not fold notes with zone tables.
+
+- `the-fold-d4-characteristic-two.md` — UF-032: the characteristic-two D4 module and bracket
+- `the-fold-char2-identity-kernel.md` — UF-037: the identity-linear kernel and its normal closure
+- `the-fold-char2-homogeneous-space.md` — UF-038: the homogeneous space `H/U` and the class-two normal closure
+- `the-fold-char2-frobenius-normal-closure.md` — UF-040: the Frobenius-kernel candidate for the infinitesimal normal closure
+- `the-fold-char2-second-frobenius-closure.md` — UF-041: the second-Frobenius quotient and a canonical thickening
+- `the-fold-char2-reduced-quotient-law.md` — UF-042: the explicit five-dimensional reduced quotient
+- `the-fold-char2-second-frobenius-hopf-ideal.md` — UF-043: the explicit Hopf ideal and the size of the second-Frobenius candidate
+- `the-fold-char2-universal-hopf-ideal.md` — UF-044: the universal Hopf-ideal characterization of the normal closure
+- `the-fold-char2-fourteen-coordinate-conjugation-test.md` — UF-055: the fourteen-coordinate conjugation audit and an exact cubic test
+- `the-fold-char2-full-affine-ch-coefficient.md` — UF-060: the full determinant-open affine `ch` coefficient
+- `the-fold-char2-nontrivial-cocycle-hopf-structure.md` — a fifth, non-product Hopf structure on the characteristic-two Fold algebra
+- `the-fold-char2-quaternion-boundary-arithmetic.md` — G-4f: arithmetic of the quaternion boundary over imperfect fields
+- `the-fold-automorphic-and-hopf-galois-applicability.md` — applicability audit: automorphic methods and Galois theory for the Fold algebra
+
 Open the HTML files directly in a browser — no build step, no dependencies.
 
 ## Build
@@ -364,25 +384,25 @@ definition is not a claim, so the legend is counted apart rather than inflating 
 counts the **prose attributions**, because that is how most of the corpus actually labels.
 
 ```
-zone map: 13 files with zone tables of 51
+zone map: 13 files with zone tables of 64
      exact           143
      reformulation    10
      rhyme            24
      false friend     15
      the absence       1
-     without tables    38
+     without tables    51
      legend (definitions, not claims)    11
 
-prose attributions: 49 files of 51
-     exact           161
+prose attributions: 53 files of 64
+     exact           173
      reformulation    10
      rhyme            22
      false friend     39
-     total           232
+     total           244
 ```
 
 The tables are the formal layer and cover thirteen files. The prose is where the corpus actually works:
-forty-nine of fifty-one files label their comparisons in the predicative form — a noun phrase
+fifty-three of sixty-four files label their comparisons in the predicative form — a noun phrase
 then `is exact`, `remains a rhyme`, `is a false friend` — as in "the quotient statement is exact" or
 "`height` is a false friend unless the register is named". The detector is deliberately narrow: it
 skips the maxims ("a rhyme written as a proof"), skips negated rejections ("this is not exact"), reads
@@ -396,21 +416,22 @@ not a result", "a statement about the lattice, not about the probe". That is the
 step short of a label — it says what the claim is *not* without saying which of the four it is.
 
 ```
-status markers (marked by contrast, zone not named): 29 files of 51
-     total            56
+status markers (marked by contrast, zone not named): 30 files of 64
+     total            57
      derivation       20
      about             8
-     proof             5
+     proof             6
      identity          6
      boost             2
      theorem           6
      other             9
+     no zone language     9
 ```
 
-The objects are the finding. Twenty say "not a derivation", five "not a proof", six "not a theorem",
-and one "not a reduction": thirty-two point at proof. One of those is not a claim — "the Fold is a
+The objects are the finding. Twenty say "not a derivation", six "not a proof", six "not a theorem",
+and one "not a reduction": thirty-three point at proof. One of those is not a claim — "the Fold is a
 dictionary, not a proof engine" — and one "not the identity" is a list of what a point is not, so the
-fifty-six marked sentences carry fifty-four claims, and thirty-one of them say that nothing was proved.
+fifty-seven marked sentences carry fifty-five claims, and thirty-two of them say that nothing was proved.
 That is the corpus's own definition of **reformulation**, yet the word appears as a label twenty times,
 ten in tables and ten in prose. The middle zone is not scarce; it is unnamed, and the corpus says it
 with a contrast instead of a noun.
@@ -419,9 +440,10 @@ The remaining objects do different work. "Not an identity", "not about", "not a 
 in two senses, which is false-friend work rather than a zone; "not a law", "not a model", "not a
 result" separate a description from a mechanism.
 
-With that count the map closes: every one of the fifty-one files carries zone language. The three
-notes that looked silent in the first two counts — `the-fold-closure.md`, `the-fold-division.md`,
-`the-fold-horizon.md` — mark exactly once each, and each mark is the one that matters:
+With that count the map closes on fifty-five of the sixty-four files: the nine research notes listed
+above carry no zone language at all. The three notes that looked silent in the first two counts —
+`the-fold-closure.md`, `the-fold-division.md`, `the-fold-horizon.md` — mark exactly once each, and each
+mark is the one that matters:
 
 | note | the mark |
 |---|---|
