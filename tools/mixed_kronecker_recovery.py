@@ -7,7 +7,7 @@ inconclusive when the candidate budget is exhausted.
 """
 from __future__ import annotations
 
-from itertools import permutations, product
+from itertools import chain, permutations, product
 from typing import Sequence
 
 from tools.pencil_kronecker import rectangular_pencil_kronecker_profile
@@ -238,15 +238,11 @@ def recover_mixed_kronecker_pencil(
     if search_mode == "exhaustive":
         identity = _identity(rows)
         identity_flat = tuple(value for row in identity for value in row)
-        left_iterator = iter([identity])
-        left_iterator = (
-            matrix for matrix in (
-                [identity] + [
-                    _matrix_from_flat(list(values), rows)
-                    for values in product(range(p), repeat=rows*rows)
-                    if values != identity_flat
-                ]
-            )
+        left_iterator = chain(
+            [identity],
+            (_matrix_from_flat(list(values), rows)
+             for values in product(range(p), repeat=rows*rows)
+             if values != identity_flat),
         )
     else:
         left_iterator = _left_candidates(rows, p, max_candidates)
