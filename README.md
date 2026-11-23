@@ -579,3 +579,6 @@ observer gives the reading. The four zones are the map's legend.
 
 
 **Structural singular-block recovery (G-EP32):** `tools/structural_singular_block.py` uses a certified polynomial minimal-vector coefficient chain to construct domain and codomain bases, then produces constant strict-equivalence witnesses for a single pure right or left singular block. It avoids G-EP31's exhaustive GL-group search. Both basis determinants and the final identities are verified exactly. It refuses mixed pencils and still inherits the small-dense polynomial-minor budget of G-EP24/G-EP27. See `tests/test_structural_singular_block.py` and `research/the-fold-structural-singular-block-recovery.md`.
+
+
+**Pure singular-only pencil recovery (G-EP33):** `tools/singular_only_pencil.py` extends the G-EP32 basis construction from one singular block to a direct sum of multiple right-only or left-only singular blocks. It concatenates the reversed signed polynomial minimal-vector chains, verifies aggregate domain/codomain basis determinants, constructs constant strict-equivalence witnesses, and audits both coefficient identities. Mixed left/right pencils and pencils with regular parts are explicitly refused; this is not a general Kronecker decomposition. See `tests/test_singular_only_pencil.py` and `research/the-fold-singular-only-pencil-recovery.md`.
