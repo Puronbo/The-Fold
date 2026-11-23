@@ -27,3 +27,6 @@
 
 
 **Multi-block direct-sum witness verifier (G-EP58):** `tools/pencil_multi_direct_sum_witness.py` independently verifies a supplied constant strict-equivalence witness for two or more rectangular diagonal pencil blocks. It checks the ordered block-shape partition, invertibility of both transforms, and every off-diagonal block in both transformed coefficient matrices over the prime field. It audits supplied decompositions without assuming regularity or discovering the split. See `research/the-fold-multi-block-direct-sum-witness.md` and `tests/test_pencil_multi_direct_sum_witness.py`.
+
+
+**Integrated multi-block audit of mixed recovery (G-EP59):** successful `recover_mixed_kronecker_pencil` results now include `canonical_block_shapes` in canonical construction order and a `multi_block_direct_sum_audit` from G-EP58. The audit independently checks the recovered S,T against each right-minimal, left-minimal, and regular diagonal block, in addition to the existing whole-target strict-equivalence audit. This is a second exact certificate view, not a new discovery method; negative or budget-limited searches retain their previous semantics. See the updated mixed-recovery tests.
