@@ -44,7 +44,7 @@ class MixedKroneckerCertificateTests(unittest.TestCase):
             q, k, 5, right_minimal_indices=[1], left_minimal_indices=[1],
             regular_q=regq, regular_k=regk,
             left_transform=[[1,0,0,0,0],[0,1,0,0,0],[0,0,1,0,0],[0,0,0,1,0],[0,0,0,0,1]],
-            right_transform=[[1,0,0,0,0,0],[0,1,0,0,0,0],[0,0,1,0,0,0],[0,0,0,1,0,0],[0,0,0,0,1,0],[0,0,0,0,0,1]],
+            right_transform=[[1,0,0,0,0],[0,1,0,0,0],[0,0,1,0,0],[0,0,0,1,0],[0,0,0,0,1]],
         )
         self.assertTrue(result["decomposition_certified"])
         self.assertEqual(result["decomposition"]["regular_dimension"], 2)
