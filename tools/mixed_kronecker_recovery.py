@@ -13,6 +13,7 @@ from typing import Sequence
 from tools.pencil_kronecker import rectangular_pencil_kronecker_profile
 from tools.rectangular_pencil import _validate_pair
 from tools.strict_pencil_equivalence import strict_pencil_equivalence_audit
+from tools.pencil_multi_direct_sum_witness import verify_pencil_multi_direct_sum_witness
 
 
 def _identity(n):
@@ -108,6 +109,17 @@ def _regular_blocks(profile, p):
         if valuation:
             blocks.append((_identity(valuation), _nilpotent_jordan(valuation)))
     return blocks
+
+def _canonical_block_shapes(profile, p):
+    """Return ordered rectangular sizes matching _canonical_target's block order."""
+    shapes = []
+    for e in profile["singular_part"]["right_minimal_indices"]:
+        shapes.append((e, e + 1))
+    for e in profile["singular_part"]["left_minimal_indices"]:
+        shapes.append((e + 1, e))
+    shapes.extend((len(q), len(q[0])) for q, _ in _regular_blocks(profile, p))
+    return shapes
+
 
 def _canonical_target(profile, p):
     blocks = []
@@ -296,6 +308,10 @@ def recover_mixed_kronecker_pencil(
                     "left_transform_S": s, "right_transform_T": t,
                     "candidates_examined": examined, "profile": profile,
                     "verification": audit,
+                    "multi_block_direct_sum_audit": verify_pencil_multi_direct_sum_witness(
+                        q, k, p, s, t, _canonical_block_shapes(profile, p)
+                    ),
+                    "canonical_block_shapes": [list(shape) for shape in _canonical_block_shapes(profile, p)],
                     "method": ("exhaustive finite-field S/T witness search" if search_mode == "exhaustive"
                                else "profile-derived canonical target plus structured S search and exact affine solve for T"),
                     "search_mode": search_mode,
