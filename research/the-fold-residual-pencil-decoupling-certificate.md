@@ -25,7 +25,8 @@ supported by the residual profile and its own completeness conditions.
 
 ## Tests
 
-Tests cover a canonical mixed right/left/regular pencil and a synthetic
-coupled block partition. The former checks the exact reconstructed identities
-and carried basis witnesses; the latter checks that nonzero coupling is
-reported with ranks and explicit entries, without a decomposition claim.
+Tests cover a canonical mixed right/left/regular pencil whose deterministic
+coordinate completion leaves measurable coupling, a synthetic exactly
+block-diagonal positive case, and a synthetic coupled obstruction case. The
+suite checks exact reconstruction on the positive case and explicit ranks and
+entries on the negative cases.
