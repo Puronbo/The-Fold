@@ -47,7 +47,8 @@ def regular_pencil_canonical_witness(
         "left_transform_S": witness.get("left_transform_S"),
         "right_transform_T": witness.get("right_transform_T"),
         "construction_method": (
-            "shared-chart operator intertwiner" if witness.get("common_chart")
+            witness.get("intertwiner_construction_method")
+            if witness.get("common_chart")
             else "bounded direct finite-field search"
         ),
         "witness_details": witness,
