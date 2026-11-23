@@ -18,8 +18,8 @@ class PencilDirectSumWitnessTests(unittest.TestCase):
         result = verify_pencil_direct_sum_witness(q, k, 5, s, t, (1, 2))
         self.assertTrue(result["verification"]["direct_sum_verified"])
         self.assertEqual(result["second_block_shape"], [1, 1])
-        self.assertEqual(result["Q_blocks"]["top_right"], [[]])
-        self.assertEqual(result["K_blocks"]["bottom_left"], [[]])
+        self.assertEqual(result["Q_blocks"]["top_right"], [[0]])
+        self.assertEqual(result["K_blocks"]["bottom_left"], [[0, 0]])
 
     def test_rejects_cross_coupling(self):
         q = [[1, 1], [0, 1]]
