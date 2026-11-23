@@ -1599,8 +1599,8 @@ A machine-learning bridge is specified: exact symbolic feature coordinates, filt
 
 **G-4ct — full coinvariant normal form:** the invariant at each negative odd root q is the Frobenius-normalized sum of coefficient residues across its exponent-doubling orbit \(-q,-2q,-4q,\ldots\). Together with the zero-mode class, these give a canonical isomorphism
 \[
-Q_{\mathcal G}\cong F/\wp(F)\oplus
-\bigoplus_{q>0\ {\rm odd}}\ \bigoplus_{Q\ {\rm monic\ irreducible}}\mathbb F_{2^{\deg Q}}.
+Q_{\mathcal G}\cong F/(\wp(F)+SF^2)\oplus
+\bigoplus_{q>0\ {\rm odd}}\ \bigoplus_{Q\ {\rm monic\ irreducible}}k_Q.
 \]
 The orbit sum is essential for annihilating \((\Phi-1)M\); raw residues at a single exponent do not descend. This resolves the filtered extension left open in G-4cr.
 
@@ -1610,7 +1610,7 @@ The orbit sum is essential for annihilating \((\Phi-1)M\); raw residues at a sin
 Q_{\mathcal G}\cong F/\wp(F)\oplus
 \bigoplus_{q>0\ {\rm odd}}\ \bigoplus_{Q\ {\rm monic\ irreducible}}\mathbb F_{2^{\deg Q}}.
 \]
-For each odd root q, the invariant residue is the Frobenius-normalized sum over the full exponent-doubling orbit \(-q,-2q,-4q,\ldots\). This annihilates the differential-Frobenius relation and is invariant under all finite section changes. The zero summand \(F/(\wp+SF²)\) is canonically identified with \(F/\wp(F)\) by the p-basis first-coordinate map. The filtered extension left open in G-4cr is now resolved by a canonical orbit-residue splitting.
+For each odd root q, the invariant residue is the Frobenius-normalized sum over the full exponent-doubling orbit \(-q,-2q,-4q,\ldots\). This annihilates the differential-Frobenius relation and is invariant under all finite section changes. The zero summand \(F/(\wp(F)+SF²)\) is canonically identified with \(\bigoplus_Q\mathbb F_2\) by finite-point residue traces (G-4cy). The filtered extension left open in G-4cr is now resolved by a canonical orbit-residue splitting.
 
 The rational residue generator also emits orbit-sequence examples with the orbit-samples option; adjacent-stage relation pairs are included in its exact self-test.
 
@@ -1624,7 +1624,7 @@ The rational residue generator also emits orbit-sequence examples with the orbit
 **G-4cw — explicit basis and dual invariant readouts:** tools/coinvariant_basis_data.py emits the Artin–Schreier basis for \(F/\wp(F)\), polynomial bases for each residue field \(k_Q\) at every odd root q, and exact trace-dual coefficients. Its finite benchmark with height 5, q≤7 and deg(Q)≤4 has dimension 148 (60 zero-mode + 88 residue coordinates).
 
 
-**G-4cw — finite basis/dual benchmark:** tools/coinvariant_basis_data.py enumerates the Artin–Schreier zero-mode basis and all finite residue-field polynomial bases in a bounded window, then computes trace-dual readouts exactly. Height 5, q≤7, deg(Q)≤4 gives 148 coordinates.
+**G-4cw — finite basis/dual benchmark:** tools/coinvariant_basis_data.py enumerates the zero-mode trace basis and all finite residue-field polynomial bases in a bounded window, then computes trace-dual readouts exactly. Degree cutoff 4, q≤7 gives 96 coordinates.
 
 
 **G-4cx — exact GF(2) system identification:** tools/train_orbit_residue_gf2.py learns the Frobenius-normalized orbit-residue readout as a binary linear map from examples, checks full feature rank, and validates held-out sequences and coordinate basis vectors. An independent exact run recovered all maps for the eight irreducibles of degree at most four with three stages and 128 tests per field.
@@ -1637,3 +1637,14 @@ The rational residue generator also emits orbit-sequence examples with the orbit
 
 
 **G-4cq — residue-field form of the Cartier tower:** the nonnilpotent quotient is the finite-support residue space with global trace zero, equivalently one copy of \(\mathbb F_2[S]/(Q)\) for each finite monic irreducible Q, with the infinity residue determined by total trace. Added tools/cartier_residue_data.py to generate exact finite-field residue examples and Cartier inverse-Frobenius cycles.
+
+
+
+
+**G-4cy — zero-mode correction:** \(F/(\wp(F)+SF^2)\) is not \(F/\wp(F)\). The proposed p-basis map is disproved by \(a=\wp(S)=S^2+S\), whose first component is S. The correct quotient is the Cartier coinvariant of \(\Omega_F^1/dF\), hence \(\bigoplus_Q\mathbb F_2\) via finite-point residue traces. The full coinvariant normal form is therefore
+\[
+Q_{\mathcal G}\cong
+\left(\bigoplus_Q\mathbb F_2\right)\oplus
+\left(\bigoplus_{q>0\ {\rm odd}}\bigoplus_Q k_Q\right).
+\]
+The corrected finite basis benchmark is 8 zero-mode plus 88 orbit-residue coordinates (96 total) at degree cutoffs 4, q≤7.
