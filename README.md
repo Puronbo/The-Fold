@@ -597,3 +597,6 @@ observer gives the reading. The four zones are the map's legend.
 
 
 **No-chart constructive witnesses (G-EP39):** for regular square pencils with no invertible projective member over the base field, the witness routine now falls back to a direct finite-field search. For each invertible left transform (S), it solves (SQ_aT=Q_b), (SK_aT=K_b) linearly for (T), then searches for an invertible solution. Complete finite/infinity profiles decide equivalence first; all returned (S,T) are verified exactly. The search is exponential and budget-bounded, so certificate construction can remain incomplete even when equivalence is decided. See `research/the-fold-no-chart-regular-pencil-witnesses.md`.
+
+
+**Canonical regular-pencil blocks (G-EP40):** complete finite/infinity profiles now assemble into explicit block-diagonal representatives over the original prime field. Finite invariant factors use `(-C(d), I)`; an infinity divisor of size `e` uses `(I, N_e)`. The assembled pencil is reclassified independently and must reproduce the source profile exactly. This supplies a canonical target even without a rational invertible projective member; constant transformations from arbitrary input to that target remain future work. See `research/the-fold-regular-pencil-canonical-blocks.md`.
