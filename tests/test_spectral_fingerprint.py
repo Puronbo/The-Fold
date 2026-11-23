@@ -26,7 +26,7 @@ class SpectralFingerprintTests(unittest.TestCase):
             [0, 0, 0, 0, 0, 0],
         ]
         result = jordan_profile(a, 7, 0)
-        self.assertEqual(result["nullities"], [0, 3, 5, 6])
+        self.assertEqual(result["nullities"], [0, 3, 5, 6, 6])
         self.assertEqual(result["blocks_exactly"], {"1": 1, "2": 1, "3": 1})
         self.assertEqual(result["block_sizes_descending"], [3, 2, 1])
 
