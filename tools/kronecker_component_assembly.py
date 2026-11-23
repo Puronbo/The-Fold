@@ -223,7 +223,11 @@ def assemble_kronecker_components(
         component_audit = strict_pencil_equivalence_audit(q, k, p, tq, tk, s, t)
         if not component_audit["strict_equivalence_certified"]:
             raise ArithmeticError(f"component {index} witness failed local strict-equivalence audit")
-        component_witness_audits.append(component_audit)
+        component_witness_audits.append({
+            **component_audit,
+            "left_transform": [[int(x) % p for x in row] for row in s],
+            "right_transform": [[int(x) % p for x in row] for row in t],
+        })
         target_q.append(tq)
         target_k.append(tk)
         left_blocks.append(s)
