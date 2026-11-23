@@ -594,3 +594,6 @@ observer gives the reading. The four zones are the map's legend.
 
 
 **Constructive regular-pencil witnesses (G-EP38):** when two regular pencils share an invertible projective member over \\(\\mathbb F_p\\), the new `construct_regular_pencil_witness` routine solves the linear intertwiner equations, searches for an invertible intertwiner within a candidate budget, and returns explicit (S,T) with (Q_b=S Q_a T), (K_b=S K_a T). Every identity and invertibility condition is verified exactly. A budget limit or absence of a base-field chart is reported as inconclusive. See `tools/regular_pencil_witness.py` and `research/the-fold-constructive-regular-pencil-witnesses.md`.
+
+
+**No-chart constructive witnesses (G-EP39):** for regular square pencils with no invertible projective member over the base field, the witness routine now falls back to a direct finite-field search. For each invertible left transform (S), it solves (SQ_aT=Q_b), (SK_aT=K_b) linearly for (T), then searches for an invertible solution. Complete finite/infinity profiles decide equivalence first; all returned (S,T) are verified exactly. The search is exponential and budget-bounded, so certificate construction can remain incomplete even when equivalence is decided. See `research/the-fold-no-chart-regular-pencil-witnesses.md`.
