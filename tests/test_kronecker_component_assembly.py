@@ -31,7 +31,7 @@ class KroneckerComponentAssemblyTests(unittest.TestCase):
         self.assertTrue(result["checks"]["global_strict_equivalence_verified"])
         self.assertTrue(result["checks"]["multi_block_direct_sum_verified"])
         self.assertTrue(result["checks"]["component_consistency_verified"])
-        self.assertTrue(result["checks"]["all_component_witnesses_verified"])
+        self.assertTrue(result["checks"]["all_component_witnesses_verified"])\n        self.assertTrue(result["checks"]["component_witness_composition_verified"])
         self.assertEqual(len(result["component_witness_audits"]), 3)
         self.assertTrue(all(a["strict_equivalence_certified"] for a in result["component_witness_audits"]))
         consistency = result["component_consistency_audit"]
@@ -43,7 +43,7 @@ class KroneckerComponentAssemblyTests(unittest.TestCase):
         multi = result["multi_block_direct_sum_audit"]
         self.assertTrue(multi["verification"]["direct_sum_verified"])
         self.assertEqual(multi["block_shapes"], result["canonical_block_shapes"])
-        self.assertTrue(result["global_strict_equivalence_audit"]["strict_equivalence_certified"])
+        self.assertTrue(result["global_strict_equivalence_audit"]["strict_equivalence_certified"])\n        composition = result["component_witness_composition_audit"]\n        self.assertTrue(composition["composition_verified"])\n        self.assertTrue(all(composition["checks"].values()))\n        self.assertEqual(composition["reconstructed_left_transform_S"], result["left_transform_S"])\n        self.assertEqual(composition["reconstructed_right_transform_T"], result["right_transform_T"])\n        self.assertTrue(composition["replayed_global_strict_equivalence_audit"]["strict_equivalence_certified"])
 
     def test_rejects_incorrect_declared_minimal_index(self):
         q, k = right_block(1)
@@ -60,7 +60,7 @@ class KroneckerComponentAssemblyTests(unittest.TestCase):
         self.assertEqual(result["failed_component_index"], 0)
         self.assertNotIn("multi_block_direct_sum_audit", result)
         self.assertNotIn("component_consistency_audit", result)
-        self.assertNotIn("component_witness_audits", result)
+        self.assertNotIn("component_witness_audits", result)\n        self.assertNotIn("component_witness_composition_audit", result)
 
     def test_requires_nonempty_component_list(self):
         with self.assertRaises(ValueError):
