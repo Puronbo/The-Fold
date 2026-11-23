@@ -3202,58 +3202,24 @@ F/\wp(F)\oplus\bigoplus_{q>0\ odd}\bigoplus_Q \mathbb F_{2^{\deg Q}}.
 This resolves the filtered-extension question: the Frobenius-normalized orbit residues provide the canonical splitting. It supersedes G-4cr's statement that only the associated-graded coinvariant was known.
 
 
-### G-4cu — simplified zero-mode invariant
+### G-4cu — proposed zero-mode simplification withdrawn
 
-The residual zero-mode factor has a canonical additive isomorphism
-\[
-F/(\wp(F)+SF²)\xrightarrow{\sim}F/\wp(F),
-\quad
-a=u²+Sv²\longmapsto u.
-\]
-The map is well-defined because \(\tau(SF²)=0\) and \(\tau(\wp(x))\equiv\wp(\tau(x))\pmod{SF²}\); its kernel is exactly \(\wp(F)+SF²\). Therefore the canonical full coinvariant normal form in G-4ct can be written with \(F/\wp(F)\) as its zero summand.
-
-### G-4ct — filtered extension resolved
-
-The Frobenius-normalized orbit-residue map is
-\[
-\mathfrak r_{q,Q}
-=\sum_{j\ge0}\operatorname{Frob}_{k_Q}^{-j}
-\operatorname{res}_Q((a_{-2^j q}/S)dS),
-\quad q>0\text{ odd},
-\]
-where \(A_n=a_n+t b_n\). It annihilates exact forms and \((\Phi-1)M\) by the Cartier-residue identity, and it is invariant under the full finite section-change group by the exact pullback formula and two-dimensional residue invariance. Together with \([a_0]\in F/(\wp+SF²)\), it induces a filtered isomorphism
-\[
-Q_{\mathcal G}\cong
-F/\wp(F)\oplus
-\bigoplus_{q>0\ {\rm odd}}\bigoplus_{Q\ {\rm monic\ irreducible}} k_Q.
-\]
-The proof uses the associated-graded calculation G-4cr and finite pole-order induction. This upgrades the G-4cr associated-graded result to a canonical full algebraic coinvariant normal form and resolves the filtered-extension question. The orbit-normalized sum is essential: a single coefficient residue at exponent \(-q\) does not annihilate \((\Phi-1)M\).
-
+The proposed map \(F/(\wp(F)+SF²)\to F/\wp(F)\), \([a]\mapsto[u]\) for \(a=u²+Sv²\), is not well-defined. For \(a=\wp(S)=S²+S\), the source class is zero but the p-basis first component is \(u=S\), whose class is nonzero in \(F/\wp(F)\). G-4ct remains valid with zero factor \(F/(\wp(F)+SF²)\). G-4cy gives the correct residue-theoretic description.
 
 ### G-4cv — orbit-residue data and invariant-readout benchmark
 
 The rational residue generator now also emits finite sequences on a negative exponent-doubling orbit. Each sequence records q, Q, stage exponents \(-2^j q\), residues \(\alpha_j\in k_Q\), and the exact normalized target \(\sum_j\operatorname{Frob}^{-j}(\alpha_j)\). Its self-test checks that every adjacent relation pair \((\alpha,\alpha^2)\) contributes zero. Independent exact finite-field checks covered all 1,056 such pairs for the 14 irreducibles of degree at most five (four adjacent positions and every field element).
 
 
-### G-4cw — explicit basis and trace-dual coordinates for the full coinvariant
+### G-4cw — corrected zero-mode basis and trace-dual benchmark
 
-Using G-4ct/G-4cu, an explicit F₂-basis of \(Q_{\mathcal G}\) consists of:
-- the standard Artin–Schreier basis of \(F/\wp(F)\): \(1\), positive odd powers \(S^n\), and \(S^j/Q^d\) for monic irreducible Q, odd d, \(0\le j<\deg Q\);
-- for every positive odd orbit root q and every monic irreducible Q, the residue-field basis \(1,\bar S,\ldots,\bar S^{\deg Q-1}\) of \(k_Q\).
+The zero-mode factor is \(F/(\wp(F)+SF²)\), not \(F/\wp(F)\). By G-4cy it is canonically \(\bigoplus_Q\mathbb F_2\), with one generator per finite monic irreducible Q. A generator is represented by
+\[
+a_Q=S\alpha_Q Q'/Q,\qquad \operatorname{Tr}_{k_Q/\mathbb F_2}(\alpha_Q)=1.
+\]
+Its zero-mode readout is the residue trace at Q. The odd-root blocks still have the polynomial basis \(1,\bar S,\ldots,\bar S^{\deg Q-1}\) in each \(k_Q\), with trace-dual coefficients \(c_i\).
 
-For each finite residue field, the trace pairing is nondegenerate, so there is a unique dual basis \(c_i\) satisfying \(\operatorname{Tr}(c_i\bar S^j)=\delta_{ij}\). The exact script tools/coinvariant_basis_data.py enumerates finite cutoffs, computes trace-dual bases by GF(2) Gaussian elimination, and verifies the duality identities.
-
-At height 5, q≤7 and residue degree≤4, the finite benchmark has 60 zero-mode basis vectors and 88 residue basis vectors, total dimension 148. This is a finite benchmark window, not a finite-dimensional replacement for the full coinvariant or its algebraic dual.
-
-
-### G-4cw — explicit full-coinvariant basis and finite trace-dual benchmark
-
-An explicit \(\mathbb F_2\)-basis of \(Q_{\mathcal G}\) is obtained from:
-- the Artin–Schreier basis \(1,\ S^n\) for positive odd n, and \(S^j/Q^d\) for monic irreducible Q, odd d, \(0\le j<\deg Q\), in the zero factor \(F/\wp(F)\);
-- the polynomial basis \(1,\bar S,\ldots,\bar S^{\deg Q-1}\) in every residue field \(k_Q\), for every odd orbit root q.
-
-The trace pairing on each finite field gives explicit dual coefficients \(c_i\) with \(\operatorname{Tr}(c_i\bar S^j)=\delta_{ij}\). The new exact script tools/coinvariant_basis_data.py enumerates finite cutoffs and computes these trace-dual bases by GF(2) Gaussian elimination. At height 5, q≤7, degree(Q)≤4 it emits 60 zero-mode and 88 residue basis coordinates, total 148. This is a finite benchmark window; the full algebraic dual of the infinite direct sum is a product.
-
+The corrected script tools/coinvariant_basis_data.py emits one zero-mode trace generator per irreducible Q and the trace-dual bases for every odd-root residue field. At zero/residue degree cutoffs 4, q≤7, it emits 8 zero-mode and 88 orbit-residue coordinates, total dimension 96. This is a finite benchmark window; the full algebraic dual remains a product.
 
 ### G-4cx — exact GF(2) system identification of orbit-residue readouts
 
@@ -3287,3 +3253,36 @@ The proof uses the local Laurent expansion of Cartier: the residue is sent to it
 Equivalently, choosing the finite affine points gives \(\bigoplus_{Q\ \mathrm{monic\ irreducible}}\mathbb F_2[S]/(Q)\), with the infinity residue determined by the total trace. This classifies the Cartier-nonnilpotent quotient of the *displayed pure-scaling diagonal tower*. It is not yet the full section-change coinvariant \(Q_{\mathcal G}\); other directions and relation syzygies may impose more relations.
 
 **Learning consequence:** rational-function examples should be represented by their irreducible denominator factors and residue-field coordinates. A polynomial-only model misses these stable residue features.
+
+
+
+
+### G-4cy — correct zero-mode Cartier coinvariant
+
+The map \(F/(\wp(F)+SF²)\simeq F/\wp(F)\) proposed in G-4cu is false. The map
+\[
+\Theta:F/SF²\to\Omega_F^1/dF,\qquad [a]\mapsto(a/S)dS
+\]
+is an isomorphism. Cartier is bijective on this quotient, with
+\[
+C(\Theta(a))=\Theta(\tau(a)),\qquad
+a=u²+Sv²,\quad \tau(a)=u.
+\]
+Moreover \(\Theta(\wp(a))=(C^{-1}-1)\Theta(a)\) in characteristic two. Thus
+\[
+F/(\wp(F)+SF²)
+\simeq(\Omega_F^1/dF)/(C^{-1}-1)(\Omega_F^1/dF).
+\]
+Under the finite-place residue decomposition \(\Omega_F^1/dF\simeq\bigoplus_Q k_Q\), Cartier inverse acts by Frobenius square. Its coinvariant in \(k_Q\) is \(k_Q/\{x²+x\}\simeq\mathbb F_2\), via absolute trace. Therefore
+\[
+F/(\wp(F)+SF²)\simeq\bigoplus_{Q\ {\rm monic\ irreducible}}\mathbb F_2,
+\]
+with coordinate \(\operatorname{Tr}_{k_Q/\mathbb F_2}\operatorname{res}_Q((a/S)dS)\).
+
+Combining with G-4ct, the corrected full coinvariant is
+\[
+Q_{\mathcal G}\simeq
+\left(\bigoplus_Q\mathbb F_2\right)\oplus
+\left(\bigoplus_{q>0\ {\rm odd}}\bigoplus_Q k_Q\right).
+\]
+The zero-mode basis has one trace-one residue generator per finite Q. The previous Artin–Schreier basis and dimension 148 benchmark are superseded by the corrected 8+88=96 benchmark at degree cutoffs 4 and q≤7.
