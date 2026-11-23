@@ -470,7 +470,7 @@ G-4cq uses two-dimensional local residue invariance to prove that the entire fin
 - the zero layer contributes only \(F/(\wp(F)+SF^2)\);
 - positive layers vanish.
 
-The filtered extension between the surviving graded pieces remains open. This is important for architecture design: a residue readout is now an exact invariant at the graded level, but the model should not assume the full filtered quotient is a canonical direct sum.
+G-4ct resolves the extension between the surviving graded pieces: the Frobenius-normalized orbit-residue map gives a canonical full algebraic coinvariant splitting. Higher filtered extension data for the original quotient representation (before taking coinvariants) remain a separate open learning target.
 
 ### Rational residue generator
 
