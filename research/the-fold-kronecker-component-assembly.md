@@ -151,3 +151,24 @@ The composition audit now receives the ordered source and canonical coefficient 
 The new aggregate check every_local_certificate_reverified_against_its_bound_pair is true only when each recomputed local strict-equivalence audit succeeds. The returned assembly also exposes component_witnesses_rebound_to_source_and_target_blocks. This recomputation does not trust the previously stored strict_equivalence_certified field as proof; it checks the actual matrices and transformations afresh. The global reconstructed-transform comparisons and global strict-equivalence replay remain independent checks.
 
 Tests verify successful per-component replay, detect a tampered local transformation, and retain malformed-shape and empty-certificate regressions. This is certificate-to-component binding for the supplied ordered partition, not decomposition discovery, component identity beyond that order, or a uniqueness result.
+
+
+## G-EP66 — Component certificate mutation and replay integrity
+
+The G-EP65 binding checks now preflight all four ordered matrix-block collections
+and validate their cardinalities before indexing any component. This ensures
+missing, extra, or malformed block collections fail with a controlled
+validation error rather than an accidental indexing exception.
+
+Adversarial regressions mutate a component's bound source coefficient block
+and, separately, its bound canonical coefficient block while retaining the
+previous local transforms. Fresh strict-equivalence replay must reject each
+changed pair. The tests also forge the stored local success flag in both
+directions: a forged true value cannot mask a failed recomputation, and a
+forged false value cannot override a valid recomputation. These checks confirm
+that the audit's conclusion is derived from the concrete matrices and
+transformations rather than cached metadata.
+
+The scope remains the supplied ordered partition and its component pairs. The
+audit does not discover components, identify them independently of their
+ordering, or prove uniqueness of a decomposition.
