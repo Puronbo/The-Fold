@@ -606,3 +606,6 @@ observer gives the reading. The four zones are the map's legend.
 
 
 **Cyclic Krylov witness fast path (G-EP42):** in a shared chart, if the normalized operators have one rational-canonical invariant factor of degree (n), they are cyclic. The witness constructor finds cyclic vectors, builds Krylov bases (K_A,K_B), and sets (P=K_BK_A^{-1}), then verifies (PA=BP) exactly. This avoids enumerating the full intertwiner space in the cyclic case; noncyclic and no-chart cases retain their prior fallbacks. See `research/the-fold-cyclic-krylov-witnesses.md`.
+
+
+**Rational primary decomposition (G-EP43):** `tools/rational_primary_decomposition.py` computes the invariant subspaces \(\ker(f(A)^n)\) for each irreducible characteristic factor, concatenates their bases, and verifies an invertible change of coordinates that makes the operator block diagonal by primary component. This is an exact structural reduction over the base field, not yet a cyclic-summand decomposition or a general noncyclic pencil-witness algorithm. See `tests/test_rational_primary_decomposition.py` and `research/the-fold-rational-primary-decomposition.md`.
