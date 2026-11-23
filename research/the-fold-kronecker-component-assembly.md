@@ -87,3 +87,23 @@ regularity claim is added; the caller still supplies the partition.
 Tests now assert the ordered three-block shape list and the independent audit
 for a mixed right/left/regular assembly, and ensure failed recovery does not
 emit a success audit.
+
+
+## G-EP61 — Component-report consistency certificate
+
+Successful assembly now emits `component_consistency_audit`. It checks that
+component report count agrees with all source/target block lists; each source
+coefficient pair matches its reported shape; both canonical coefficients have
+matching block dimensions; right and left singular canonical shapes agree with
+the recovered minimal index; and regular canonical blocks are square. It also
+checks that ordered source and canonical block dimensions sum to the respective
+assembled matrix shapes.
+
+The audit is computed from the concrete component matrices and reports. It is
+independent of the strict-equivalence and multi-block zero-pattern audits, and
+all three are exposed in successful results. This does not reclassify a block,
+discover a partition, or prove uniqueness. Failed component recovery continues
+to return an incomplete result without success certificates.
+
+Tests assert every consistency check for a mixed right/left/regular assembly
+and ensure failed recovery emits no consistency certificate.
