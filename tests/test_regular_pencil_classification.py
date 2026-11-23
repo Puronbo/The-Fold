@@ -23,19 +23,20 @@ class RegularPencilClassificationTests(unittest.TestCase):
         k = [[1, 0], [0, 0]]
         result = regular_pencil_complete_profile(q, k, 5)
         self.assertTrue(result["checks"]["finite_chart_normal_rank_is_full"])
-        self.assertTrue(result["checks"]["infinity_chart_normal_rank_is_full"])
-        self.assertEqual(result["finite_degree_sum"], 1)
-        self.assertEqual(result["infinity_degree_sum"], 1)
+        self.assertTrue(result["checks"]["reversed_chart_normal_rank_is_full"])
+        self.assertEqual(result["finite_elementary_divisor_degree_sum"], 1)
+        self.assertEqual(result["infinity_elementary_divisor_degree_sum"], 1)
 
-    def test_classifies_regular_pencil_without_any_rational_invertible_member(self):
-        # det(aQ+bK)=a*b*(a+b): regular over F_2, but zero on P^1(F_2).
+    def test_classifies_regular_pencil_without_rational_invertible_member(self):
+        # det(aQ+bK)=a*b*(a+b): regular over F_2, zero on P^1(F_2).
         q = [[1, 0, 0], [0, 0, 0], [0, 0, 1]]
         k = [[0, 0, 0], [0, 1, 0], [0, 0, 1]]
         result = regular_pencil_complete_profile(q, k, 2)
         self.assertEqual(result["dimension"], 3)
         self.assertEqual(result["total_elementary_divisor_degree"], 3)
-        self.assertEqual(result["finite_degree_sum"], 2)
-        self.assertEqual(result["infinity_degree_sum"], 1)
+        self.assertEqual(result["finite_elementary_divisor_degree_sum"], 2)
+        self.assertEqual(result["infinity_elementary_divisor_degree_sum"], 1)
+        self.assertEqual(result["infinity_elementary_divisor_sizes"], [1])
 
     def test_strict_equivalence_preserves_both_charts(self):
         q = [[1, 2], [0, 1]]
@@ -46,6 +47,19 @@ class RegularPencilClassificationTests(unittest.TestCase):
         result = compare_regular_pencils_complete(q, k, q2, k2, 5)
         self.assertTrue(result["decision_complete"])
         self.assertTrue(result["strictly_equivalent"])
+
+    def test_infinity_block_partition_is_not_just_total_degree(self):
+        # Both pencils have no finite elementary divisors, but different
+        # infinity Jordan partitions: [2] versus [1,1].
+        result = compare_regular_pencils_complete(
+            [[1, 0], [0, 1]], [[0, 1], [0, 0]],
+            [[1, 0], [0, 1]], [[0, 0], [0, 0]], 5
+        )
+        self.assertTrue(result["finite_elementary_divisors_equal"])
+        self.assertFalse(result["infinity_elementary_divisors_equal"])
+        self.assertFalse(result["strictly_equivalent"])
+        self.assertEqual(result["left_profile"]["infinity_elementary_divisor_sizes"], [2])
+        self.assertEqual(result["right_profile"]["infinity_elementary_divisor_sizes"], [1, 1])
 
     def test_distinguishes_finite_elementary_divisors(self):
         result = compare_regular_pencils_complete(
