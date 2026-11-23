@@ -1,6 +1,9 @@
 import unittest
 
-from tools.spectral_fingerprint import (\n    automatic_spectral_fingerprint, characteristic_polynomial,\n    jordan_profile, rank_mod, spectral_fingerprint,\n)
+from tools.spectral_fingerprint import (
+    automatic_spectral_fingerprint, characteristic_polynomial,
+    jordan_profile, rank_mod, spectral_fingerprint,
+)
 
 
 class SpectralFingerprintTests(unittest.TestCase):
@@ -60,6 +63,33 @@ class SpectralFingerprintTests(unittest.TestCase):
         self.assertEqual(result["field"], "F_3")
         self.assertEqual(len(result["profiles"]), 2)
         self.assertFalse(result["automatic_factorization"])
+
+    def test_characteristic_polynomial_exact(self):
+        self.assertEqual(characteristic_polynomial([[0, 1], [1, 0]], 5),
+                         [1, 0, 4])
+        self.assertEqual(characteristic_polynomial([[1, 0], [0, 1]], 2),
+                         [1, 0, 1])
+
+    def test_characteristic_polynomial_in_small_characteristic(self):
+        # det(xI-A) = x^2 + 1 is irreducible over F_3.
+        self.assertEqual(characteristic_polynomial([[0, 2], [1, 0]], 3),
+                         [1, 0, 1])
+
+    def test_automatic_base_field_scan_and_jordan_profile(self):
+        result = automatic_spectral_fingerprint([[0, 1], [1, 0]], 2)
+        self.assertEqual(
+            result["characteristic_polynomial_coefficients_descending"],
+            [1, 0, 1],
+        )
+        self.assertEqual(result["base_field_eigenvalues"],
+                         [{"value": 1, "algebraic_multiplicity": 2}])
+        self.assertEqual(result["profiles"][0]["blocks_exactly"], {"2": 1})
+
+    def test_automatic_scan_can_find_no_base_field_eigenvalues(self):
+        result = automatic_spectral_fingerprint([[0, 2], [1, 0]], 3)
+        self.assertEqual(result["base_field_eigenvalues"], [])
+        self.assertEqual(result["profiles"], [])
+        self.assertFalse(result["irreducible_factorization_complete"])
 
 
 if __name__ == "__main__":
