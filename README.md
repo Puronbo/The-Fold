@@ -570,3 +570,6 @@ observer gives the reading. The four zones are the map's legend.
 
 
 **Independent polynomial transform audit (G-EP29):** `tools/pencil_transform_audit.py` independently checks a G-EP28 certificate by recomputing (U(Q+tK)V=D) and calculating (det U,det V) exactly over (mathbb F_p[t]). Both determinants must be nonzero constants, the units of the polynomial ring, for the transforms to be unimodular. A factorial determinant budget prevents unbounded work. This strengthens auditability but does not provide a Kronecker canonical decomposition or convert polynomial equivalence into strict pencil equivalence. See `tests/test_pencil_transform_audit.py` and `research/the-fold-independent-polynomial-transform-audit.md`.
+
+
+**Strict pencil-equivalence audit (G-EP30):** `tools/strict_pencil_equivalence.py` verifies supplied constant witnesses (S,T) for (Q'=SQT, K'=SKT), checking invertibility and both coefficient identities over (mathbb F_p). This is intentionally distinct from G-EP28–29 polynomial unimodular Smith equivalence. The verifier does not discover witnesses or construct Kronecker form. See `tests/test_strict_pencil_equivalence.py` and `research/the-fold-strict-pencil-equivalence-audit.md`.
