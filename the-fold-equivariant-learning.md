@@ -431,7 +431,7 @@ F/(\wp(F)+SF^2),&n=0,\\
 0,&n>0.
 \end{cases}
 \]
-G-4ct upgrades these graded targets to the full canonical coinvariant. The invariant readout uses Frobenius-normalized sums over each exponent-doubling orbit, together with the zero-mode \(F/\wp(F)\) coordinate. There is no remaining algebraic filtered-extension cocycle to learn in the coinvariant itself; higher coordinate changes can still be studied on the original quotient before taking coinvariants.
+G-4ct upgrades these graded targets to the full canonical coinvariant. The invariant readout uses Frobenius-normalized sums over each exponent-doubling orbit, together with the zero-mode finite-place residue-trace bits \(\bigoplus_Q\mathbb F_2\). There is no remaining algebraic filtered-extension cocycle to learn in the coinvariant itself; higher coordinate changes can still be studied on the original quotient before taking coinvariants.
 
 ### Rational coefficient encoder
 
