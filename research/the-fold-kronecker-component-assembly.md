@@ -172,3 +172,23 @@ transformations rather than cached metadata.
 The scope remains the supplied ordered partition and its component pairs. The
 audit does not discover components, identify them independently of their
 ordering, or prove uniqueness of a decomposition.
+
+
+## G-EP67 — Component input and dimension integrity
+
+The supplied-component assembly boundary now validates each coefficient matrix
+before calling modular pencil routines. Matrix and row containers must be
+nonempty lists or tuples; rows must have a consistent, nonzero width; and each
+entry must be an integer other than a boolean. The Q and K matrices of one
+component must have identical dimensions. The public field parameter must be
+a genuine integer (not a boolean) and is then checked for primality by the
+existing pair validator.
+
+Regression cases cover non-matrix inputs, malformed row containers, ragged
+and empty matrices, floating-point and boolean entries, invalid/composite
+field parameters, and mismatched Q/K shapes. Rectangular components remain
+supported: the checks require matching dimensions within each coefficient
+pair, not square components except where the component kind is regular.
+
+This is input validation only. It does not alter witness construction,
+component ordering, or the requirement that callers supply the partition.
