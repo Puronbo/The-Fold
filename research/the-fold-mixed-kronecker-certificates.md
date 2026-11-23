@@ -8,7 +8,7 @@ Q_\epsilon=[I_\epsilon\ 0],\qquad K_\epsilon=[0\ I_\epsilon].
 \]
 For each left index \(\eta\), the target block is its transpose. These are assembled with the supplied regular pair \((Q_r,K_r)\) by block diagonal sum. The verifier checks the regular pair is square and has full normal rank over \(\mathbb F_p(t)\), then verifies
 \[
-SQS=\text{(not used)},\qquad SQT=Q_{\rm target},\quad SKT=K_{\rm target}.
+SQT=Q_{\rm target},\qquad SKT=K_{\rm target}.
 \]
 (The first displayed expression is deliberately not part of the certificate; the two coefficient identities are the strict-equivalence conditions.)
 
