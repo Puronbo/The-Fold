@@ -276,7 +276,7 @@ class KroneckerComponentAssemblyTests(unittest.TestCase):
             ("canonical_shape", lambda r: r["canonical_shape"].__setitem__(1, 99)),
             ("component_count", lambda r: r.__setitem__("component_count", 99)),
             ("component_reports", lambda r: r["component_reports"][0].__setitem__("kind", "regular")),
-            ("component_witness_audits", lambda r: r["component_witness_audits"][0]["left_transform"][0].__setitem__(0, 4)),
+            ("component_witness_audits", lambda r: r["component_witness_audits"][0]["left_transform"][0].__setitem__(0, (r["component_witness_audits"][0]["left_transform"][0][0] + 1) % 5)),
             ("component_witness_composition_audit", lambda r: r["component_witness_composition_audit"].__setitem__("component_count", 99)),
             ("global_strict_equivalence_audit", lambda r: r["global_strict_equivalence_audit"].__setitem__("strict_equivalence_certified", False)),
             ("multi_block_direct_sum_audit", lambda r: r["multi_block_direct_sum_audit"].__setitem__("block_shapes", [[99, 99]])),
