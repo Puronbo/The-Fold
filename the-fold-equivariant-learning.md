@@ -67,7 +67,7 @@ It emits JSONL examples for:
 
 The script's self-test recomputes the quotient projections from the raw coefficient pairs and checks the nonzero-parameter detection probes. Example:
 \`\`\`bash
-python tools/section_change_equivariance_data.py --self-test --count 1000 --max-degree 4 > section_change_train.jsonl
+python tools/section_change_equivariance_data.py --self-test --count 1000 --max-degree 5 > section_change_train.jsonl
 \`\`\`
 
 This data covers a polynomial coefficient subring, not all rational functions in \(F\). Generalization to rational coefficients is a separate evaluation. No neural network has yet been trained; the script is an exact oracle/data foundation, not a claim of learned performance.
@@ -191,7 +191,7 @@ Run:
 python tools/section_change_equivariance_data.py --self-test --count 1000 --max-degree 5 > section_change_train.jsonl
 \`\`\`
 
-A run with these settings passed all self-tests and generated 5,000 JSONL examples. This is a reproducible exact dataset generator over \(\mathbb F_2[S]\), not evidence of neural generalization to \(\mathbb F_2(S)\).
+The current generator emits nine rows per sample iteration, hence 9,000 rows for count 1,000. I independently checked the polynomial tower decomposition exhaustively for all bitmasks below 2^12 and the Hasse/Frobenius first-coefficient identity for all masks below 2^10 and Frobenius levels h≤6. These are component-level checks; the full updated script has not yet been run as a repository CI job. The symbolic rational witness is a separate exact challenge, not a polynomial training example.
 
 ### Learning the unresolved tower
 
@@ -657,3 +657,6 @@ The generator now emits:
 - a rational Cartier-fixed challenge with \(x=S/(S+1)\) and differential \(d\log(S+1)\).
 
 The polynomial decomposition self-test exhaustively checked all bitmasks below \(2^{12}\) in a separate verification run. The rational challenge is a symbolic witness; it is not represented as a polynomial training example.
+
+
+**Correction to generator status:** the earlier 5,000-row run refers to the previous five-task generator. The current nine-task version has component-level algebraic checks documented above; do not describe the full current script as having passed an end-to-end run until that run is actually performed.
