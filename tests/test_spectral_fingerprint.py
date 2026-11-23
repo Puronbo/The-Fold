@@ -89,7 +89,7 @@ class SpectralFingerprintTests(unittest.TestCase):
         result = automatic_spectral_fingerprint([[0, 2], [1, 0]], 3)
         self.assertEqual(result["base_field_eigenvalues"], [])
         self.assertEqual(result["profiles"], [])
-        self.assertFalse(result["irreducible_factorization_complete"])
+        self.assertTrue(result["irreducible_factorization_complete"])
 
     def test_berlekamp_factorization_irreducible_and_split(self):
         self.assertEqual(
