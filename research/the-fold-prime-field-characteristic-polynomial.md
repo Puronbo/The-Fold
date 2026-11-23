@@ -17,6 +17,14 @@ The cost is exponential in matrix dimension. This is an exact reference implemen
 
 ## Automatic scan
 
+The CLI exposes this mode with `--auto`, for example:
+
+~~~sh
+python tools/spectral_fingerprint.py --prime 2 --matrix-json '[[0,1],[1,0]]' --auto
+~~~
+
+The previous `--eigenvalues` mode remains available for explicitly supplied roots. The two modes are mutually exclusive.
+
 For each of the p field elements, the implementation computes the multiplicity of x−λ in the characteristic polynomial. For every root it invokes the existing exact kernel-growth routine to recover the Jordan block sizes.
 
 The output explicitly marks irreducible_factorization_complete as false. A scan of F_p finds all base-field eigenvalues, but it does not factor the remaining polynomial into irreducibles of degree greater than one and does not construct splitting fields.
