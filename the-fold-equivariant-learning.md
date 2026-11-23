@@ -600,3 +600,26 @@ The cutoff has 60 zero-mode basis elements and 88 residue basis elements, for a 
 The zero-mode count is 60: one constant, three positive odd powers through height five, six classes at the two linear places with three allowed odd denominator powers, two classes at the irreducible quadratic, six at the two cubics, twelve at the three quartics, and thirty at the six quintics.
 
 The complete algebraic dual of the infinite direct sum is a product of coordinate duals. This finite benchmark supplies finite trace-dual readouts only; it does not impose a continuity condition on arbitrary algebraic functionals.
+
+
+## 16. Exact GF(2) system-identification learner
+
+The new script tools/train_orbit_residue_gf2.py learns the orbit-residue readout from examples rather than hard-coding its Frobenius matrices.
+
+For a fixed irreducible Q of degree d and an orbit with L stages, encode the stage residues as a \(dL\)-bit input vector and the normalized orbit residue as a d-bit output. The target map is \(\mathbb F_2\)-linear. The trainer:
+1. draws random orbit sequences and their exact normalized residue targets;
+2. solves for each output bit's linear functional by Gaussian elimination over \(\mathbb F_2\);
+3. requires full feature rank \(dL\), so the learned map is uniquely determined;
+4. evaluates on independent held-out sequences;
+5. verifies the learned map on every coordinate basis vector.
+
+This is an exact symbolic system-identification baseline, not a floating-point neural-network run. It is useful as a ground-truth benchmark for later neural models.
+
+Run:
+\`\`\`bash
+python tools/train_orbit_residue_gf2.py --self-test --max-degree 5 --stages 5 --train-multiplier 12 --test-count 1000
+\`\`\`
+
+An independent implementation of the same GF(2) learner recovered the exact map for all eight monic irreducibles of degree at most four, with three orbit stages, full input rank, 128 held-out sequences per field, and exact coordinate-basis checks. The committed script's self-test covers the same construction; no claim of neural generalization is made.
+
+The next model comparison is now well-defined: the exact GF(2) learner is the oracle baseline; a neural network must match it on held-out sequences and then generalize across unseen irreducibles or larger residue degrees.
