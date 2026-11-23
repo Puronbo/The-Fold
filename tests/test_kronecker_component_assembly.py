@@ -185,8 +185,11 @@ class KroneckerComponentAssemblyTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "nonempty ordered sequence"):
             _component_witness_composition_audit([], *args)
         malformed = [{"left_transform": [[1, 0]], "right_transform": [[1, 0], [0, 1]]}]
+        malformed_args = args[:7] + (
+            [rq], [rk], [right_block(1)[0]], [right_block(1)[1]]
+        )
         with self.assertRaisesRegex(ValueError, "left_transform.*square"):
-            _component_witness_composition_audit(malformed, *args)
+            _component_witness_composition_audit(malformed, *malformed_args)
 
     def test_rejects_incorrect_declared_minimal_index(self):
         q, k = right_block(1)
