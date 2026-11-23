@@ -180,18 +180,11 @@ def main() -> None:
 
 
 
-def characteristic_polynomial(matrix: Sequence[Sequence[int]], p: int) -> list[int]:
-    """Return det(xI-A) coefficients, highest degree first, in F_p.
-
-    A subset dynamic program evaluates the determinant in F_p[x] without
-    division. It is exponential in matrix dimension, so it is intended as
-    an exact small-matrix reference implementation.
-    """
+def _characteristic_polynomial_subset_oracle(
+        matrix: Sequence[Sequence[int]], p: int) -> list[int]:
+    """Exponential subset-DP determinant retained as a small-input oracle."""
     n = _validate_matrix(matrix, p)
     a = _mod_matrix(matrix, p)
-
-    # Polynomials are stored low-degree first. dp[S] is the signed sum
-    # assigning the first |S| rows to the columns in S.
     dp: dict[int, list[int]] = {0: [1]}
     for row in range(n):
         nxt: dict[int, list[int]] = {}
@@ -203,9 +196,7 @@ def characteristic_polynomial(matrix: Sequence[Sequence[int]], p: int) -> list[i
                 entry = [-a[row][col]]
                 if row == col:
                     entry.append(1)
-                # Appending col creates one inversion for every previously
-                # selected column larger than col.
-                inversions = bin(mask >> (col + 1)).count('1')
+                inversions = bin(mask >> (col + 1)).count("1")
                 sign = -1 if inversions % 2 else 1
                 term = [0] * (len(poly) + len(entry) - 1)
                 for i, x in enumerate(poly):
@@ -218,12 +209,82 @@ def characteristic_polynomial(matrix: Sequence[Sequence[int]], p: int) -> list[i
                 for i, value in enumerate(term):
                     current[i] = (current[i] + value) % p
         dp = nxt
+    low = dp[(1 << n) - 1]
+    while len(low) > 1 and low[-1] % p == 0:
+        low.pop()
+    return [x % p for x in reversed(low)]
 
-    low_first = dp[(1 << n) - 1]
-    while len(low_first) > 1 and low_first[-1] % p == 0:
-        low_first.pop()
-    return [x % p for x in reversed(low_first)]
 
+def _upper_hessenberg_similarity(matrix: Matrix, p: int) -> Matrix:
+    """Reduce a matrix to upper Hessenberg form by exact similarities."""
+    h = [row[:] for row in matrix]
+    n = len(h)
+    for col in range(n - 2):
+        pivot_row = next((r for r in range(col + 1, n)
+                          if h[r][col] % p), None)
+        if pivot_row is None:
+            continue
+        pivot = col + 1
+        if pivot_row != pivot:
+            h[pivot], h[pivot_row] = h[pivot_row], h[pivot]
+            for row in h:
+                row[pivot], row[pivot_row] = row[pivot_row], row[pivot]
+        inverse = pow(h[pivot][col], -1, p)
+        for row in range(pivot + 1, n):
+            entry = h[row][col] % p
+            if not entry:
+                continue
+            factor = entry * inverse % p
+            # Left multiplication by an elementary row operation.
+            h[row] = [(h[row][j] - factor * h[pivot][j]) % p
+                      for j in range(n)]
+            # Right multiplication by its inverse preserves similarity.
+            for i in range(n):
+                h[i][pivot] = (h[i][pivot] + factor * h[i][row]) % p
+    return h
+
+
+def characteristic_polynomial(matrix: Sequence[Sequence[int]], p: int) -> list[int]:
+    """Return det(xI-A) over F_p in O(n^3) field operations.
+
+    First apply exact similarity transformations to upper Hessenberg form.
+    The leading-principal characteristic polynomials then obey the
+    Hessenberg continuant recurrence. No division by the dimension or by
+    polynomial coefficients is used; only nonzero field pivots are inverted.
+    """
+    n = _validate_matrix(matrix, p)
+    h = _upper_hessenberg_similarity(_mod_matrix(matrix, p), p)
+
+    # Low-degree-first polynomials. P[k] is det(xI-H[0:k,0:k]).
+    polys: list[list[int]] = [[1]]
+
+    def multiply_x_minus_diagonal(poly: list[int], diagonal: int) -> list[int]:
+        out = [0] * (len(poly) + 1)
+        for degree, coefficient in enumerate(poly):
+            out[degree] = (out[degree] - diagonal * coefficient) % p
+            out[degree + 1] = (out[degree + 1] + coefficient) % p
+        return out
+
+    for size in range(1, n + 1):
+        current = multiply_x_minus_diagonal(polys[size - 1],
+                                             h[size - 1][size - 1])
+        subdiagonal_product = 1
+        for k in range(size - 2, -1, -1):
+            subdiagonal_product = (
+                subdiagonal_product * h[k + 1][k]) % p
+            coefficient = subdiagonal_product * h[k][size - 1] % p
+            if coefficient:
+                previous = polys[k]
+                if len(current) < len(previous):
+                    current.extend([0] * (len(previous) - len(current)))
+                for degree, value in enumerate(previous):
+                    current[degree] = (
+                        current[degree] - coefficient * value) % p
+        while len(current) > 1 and current[-1] == 0:
+            current.pop()
+        polys.append(current)
+
+    return [value % p for value in reversed(polys[n])]
 
 def _evaluate_polynomial(coefficients: Sequence[int], value: int, p: int) -> int:
     result = 0
