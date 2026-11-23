@@ -112,12 +112,6 @@ def polynomial_tower_decomposition(x: int) -> dict:
 
 
 
-def frobenius_power(a: int, h: int) -> int:
-    """Return a^(2^h) in GF(2)[S]."""
-    for _ in range(h):
-        a = square(a)
-    return a
-
 
 def binomial_odd(n: int, k: int) -> bool:
     """Lucas' theorem: binomial(n,k) is odd iff k's bits are in n."""
