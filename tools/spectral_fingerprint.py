@@ -683,7 +683,9 @@ def extension_jordan_profile(matrix: Sequence[Sequence[int]], p: int,
     for size, count in sorted(exact.items(), reverse=True):
         blocks.extend([size] * count)
     return {
-        "field": f"F_{p ** d}",\n        "base_field": f"F_{p}",\n        "extension_degree": d,
+        "field": f"F_{p ** d}",
+        "base_field": f"F_{p}",
+        "extension_degree": d,
         "modulus_coefficients_descending": list(reversed(modulus)),
         "eigenvalue_coefficients_low_degree_first": list(lam),
         "nullities": nullities,
