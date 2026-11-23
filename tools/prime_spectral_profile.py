@@ -97,7 +97,11 @@ def compare_prime_profiles(matrices: Mapping[str, Sequence[Sequence[int]]],
             entries[name] = {
                 "rank": current["rank"],
                 "same_rank_as_reference": current["rank"] == reference["rank"],
-                "same_frobenius_profile_as_reference": (
+                "same_orbit_degree_histogram_as_reference": (
+                    current["frobenius_orbit_degree_histogram"]
+                    == reference["frobenius_orbit_degree_histogram"]
+                ),
+                "same_full_frobenius_profile_as_reference": (
                     current["frobenius_orbit_degree_histogram"]
                     == reference["frobenius_orbit_degree_histogram"]
                     and current["irreducible_orbit_classes"]
