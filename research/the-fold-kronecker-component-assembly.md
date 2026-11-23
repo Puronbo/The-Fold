@@ -192,3 +192,30 @@ pair, not square components except where the component kind is regular.
 
 This is input validation only. It does not alter witness construction,
 component ordering, or the requirement that callers supply the partition.
+
+
+## G-EP68 — Deterministic reconstruction of assembly certificates
+
+The new public function
+`verify_kronecker_component_assembly_certificate(components, p, assembly_result)`
+rebuilds the assembly from the caller's original ordered component inputs by
+rerunning the existing singular recovery and regular canonical-witness
+constructors. It then compares every certificate-bearing result field:
+source and canonical coefficient matrices, dimensions, block shapes, global
+transforms, component reports, local witness audits, composition audit,
+global strict-equivalence audit, multi-block audit, component-consistency
+audit, and aggregate checks.
+
+The verifier does not accept the returned result's own success flags as
+evidence. It derives a fresh assembly and reports a per-field equality map,
+so post-hoc mutation of a matrix, transform, dimension, report, or nested audit
+is detected. Tests exercise a fresh positive result and independently mutate
+each certificate-bearing field.
+
+**Scope limitation:** this is deterministic implementation-level
+reconstruction from the original supplied partition. It deliberately reuses
+the existing constructors and therefore is not a second mathematical
+classification implementation, does not discover an unknown partition, and
+does not establish uniqueness or decomposition provenance beyond the ordered
+inputs. Bounded regular witness search retains its existing inconclusive
+failure semantics.
