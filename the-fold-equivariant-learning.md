@@ -724,3 +724,24 @@ Q_{\mathcal G}\simeq
 \bigoplus_{q>0\ {\rm odd}}\bigoplus_Q k_Q.
 \]
 For machine learning, the zero-mode representation is a finite-support bit vector indexed by irreducible Q; the positive odd-orbit blocks remain finite-field residue vectors.
+
+
+## 18. Complete invariant linear head
+
+G-4da classifies the full invariant linear-functional space:
+\[
+(Q^*)^{\mathcal G}\simeq
+\left(\prod_Q\mathbb F_2\right)\times
+\left(\prod_{q>0\ {\rm odd}}\prod_Q k_Q\right).
+\]
+A linear invariant head is therefore a family of weights \(\epsilon_Q\in\mathbb F_2\) and \(c_{q,Q}\in k_Q\), evaluated by
+\[
+\Lambda(m)=\sum_Q\epsilon_Q z_Q(m)+
+\sum_{q,Q}\operatorname{Tr}_{k_Q/\mathbb F_2}
+(c_{q,Q}\mathfrak r_{q,Q}(m)).
+\]
+The weight families can have infinite support. Each individual input has finite support in the canonical direct-sum coinvariant, so evaluation is finite. Because \(pM\subset R\), the quotient is discrete in the induced p-adic topology; no smaller continuous dual is forced.
+
+For implementation, use finite windows Q of bounded degree and odd roots q≤q_max. The zero-mode weights are bits; each orbit-residue weight is a finite-field element represented by a degree-deg(Q) bitmask. The trace-dual basis in tools/coinvariant_basis_data.py supplies exact readout coefficients. Such windows are truncations of a product dual, not the full dual.
+
+The model's linear invariant head is now mathematically specified. It should be kept distinct from a nonlinear invariant network: G-4da classifies linear readouts only, while the full invariant ring k[Q]^G remains open.
