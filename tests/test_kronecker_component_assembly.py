@@ -1,6 +1,10 @@
+import copy
 import unittest
 
-from tools.kronecker_component_assembly import assemble_kronecker_components
+from tools.kronecker_component_assembly import (
+    _component_witness_composition_audit,
+    assemble_kronecker_components,
+)
 
 
 def transpose(a):
@@ -51,6 +55,61 @@ class KroneckerComponentAssemblyTests(unittest.TestCase):
         self.assertEqual(composition["reconstructed_left_transform_S"], result["left_transform_S"])
         self.assertEqual(composition["reconstructed_right_transform_T"], result["right_transform_T"])
         self.assertTrue(composition["replayed_global_strict_equivalence_audit"]["strict_equivalence_certified"])
+
+
+    def test_composition_audit_detects_a_tampered_local_transform(self):
+        rq, rk = right_block(1)
+        result = assemble_kronecker_components([
+            {"kind": "right", "q": rq, "k": rk},
+            {"kind": "regular", "q": [[1]], "k": [[0]]},
+        ], 5)
+        altered = copy.deepcopy(result["component_witness_audits"])
+        altered[0]["left_transform"][0][0] = (
+            altered[0]["left_transform"][0][0] + 1
+        ) % 5
+        audit = _component_witness_composition_audit(
+            altered, result["left_transform_S"], result["right_transform_T"],
+            result["source_Q"], result["source_K"],
+            result["canonical_Q"], result["canonical_K"], 5,
+        )
+        self.assertFalse(audit["composition_verified"])
+        self.assertFalse(
+            audit["checks"]["reconstructed_left_transform_matches_assembled"]
+        )
+        self.assertFalse(
+            audit["checks"]["reconstructed_global_strict_equivalence_verified"]
+        )
+
+    def test_composition_audit_rejects_dimension_incompatible_certificate(self):
+        rq, rk = right_block(1)
+        result = assemble_kronecker_components([
+            {"kind": "right", "q": rq, "k": rk},
+            {"kind": "regular", "q": [[1]], "k": [[0]]},
+        ], 5)
+        altered = copy.deepcopy(result["component_witness_audits"])
+        altered[0]["left_transform"].append([0, 0, 1])
+        with self.assertRaisesRegex(ValueError, "must be square"):
+            _component_witness_composition_audit(
+                altered, result["left_transform_S"], result["right_transform_T"],
+                result["source_Q"], result["source_K"],
+                result["canonical_Q"], result["canonical_K"], 5,
+            )
+
+    def test_composition_audit_rejects_empty_or_malformed_certificate_lists(self):
+        rq, rk = right_block(1)
+        result = assemble_kronecker_components([
+            {"kind": "right", "q": rq, "k": rk},
+        ], 5)
+        args = (
+            result["left_transform_S"], result["right_transform_T"],
+            result["source_Q"], result["source_K"],
+            result["canonical_Q"], result["canonical_K"], 5,
+        )
+        with self.assertRaisesRegex(ValueError, "nonempty ordered sequence"):
+            _component_witness_composition_audit([], *args)
+        malformed = [{"left_transform": [[1, 0]], "right_transform": [[1, 0], [0, 1]]}]
+        with self.assertRaisesRegex(ValueError, "left_transform.*square"):
+            _component_witness_composition_audit(malformed, *args)
 
     def test_rejects_incorrect_declared_minimal_index(self):
         q, k = right_block(1)
