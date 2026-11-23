@@ -3236,7 +3236,7 @@ The first stages are \(SF²\) at \(p²\), \(S²F⁴\) at \(p⁴\), \(S⁴F⁸\) 
 
 Via \(\Theta([x])=(x/S)dS\), the residual after \(I_0=SF²\) is \(\Omega_F^1/dF\), and the later \(I_h\) correspond to Cartier-nilpotent classes \(\ker C^h\). The rational class \(x=S/(S+1)\) maps to \(d\log(S+1)\), which is Cartier-fixed and nonexact (residue 1 at \(S=1\)). Thus the rational pure-scaling tower has a nonzero Cartier-nonnilpotent residual. This is a subfamily calculation only; the full section-change coinvariant quotient may impose additional relations through other directions or syzygies.
 
-**Open:** determine the full Cartier-nonnilpotent quotient under all section changes, compute relation syzygies, and handle the zero mode. Rational-function tests are mandatory; polynomial-only training sees only the constant residual and misses logarithmic classes.
+**Historical open status superseded:** the full-group question and zero-mode calculation are resolved by G-4cq–G-4cy and the full normal form G-4ct. The pure-scaling tower remains useful as the mechanism exposing the Cartier-nonnilpotent residue module; rational-function tests are essential because polynomial-only training sees only the constant residual.
 
 
 ### G-4cq — residue classification of the Cartier-nonnilpotent tower quotient
