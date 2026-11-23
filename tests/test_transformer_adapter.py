@@ -34,7 +34,7 @@ class TransformerAdapterTests(unittest.TestCase):
 
     def test_rounding_is_ties_to_even(self):
         result = export_weight_matrix([[0.5, 1.5, 2.5, -1.5]], 7)
-        self.assertEqual(result["matrix"], [[0, 2, 2, 6]])
+        self.assertEqual(result["matrix"], [[0, 2, 2, 5]])
 
     def test_tensor_like_input_without_framework_dependency(self):
         result = export_weight_matrix(FakeTensor([[1, 2], [3, 4]]), 5)
