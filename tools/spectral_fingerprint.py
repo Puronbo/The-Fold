@@ -9,7 +9,7 @@ from __future__ import annotations
 
 import argparse
 import json
-from typing import Iterable, Sequence
+from typing import Iterable, Mapping, Sequence
 
 
 Matrix = list[list[int]]
@@ -792,6 +792,143 @@ def automatic_full_spectral_fingerprint(matrix: Sequence[Sequence[int]],
         "extension_eigenvalue_classes": extension_classes,
         "extension_classes_complete": True,
     }
+
+
+
+SparseMatrix = Mapping[int, Mapping[int, int]]
+
+
+def _validate_sparse_matrix(matrix: SparseMatrix, n: int, p: int) -> None:
+    """Validate a square n-by-n sparse matrix in row -> column -> value form."""
+    if not _is_prime(p):
+        raise ValueError("p must be a prime")
+    if not isinstance(n, int) or n <= 0:
+        raise ValueError("n must be a positive integer")
+    for row, entries in matrix.items():
+        if not isinstance(row, int) or not 0 <= row < n:
+            raise ValueError("sparse row index is outside matrix dimensions")
+        for col, value in entries.items():
+            if not isinstance(col, int) or not 0 <= col < n:
+                raise ValueError("sparse column index is outside matrix dimensions")
+            if not isinstance(value, int):
+                raise ValueError("sparse matrix entries must be integers")
+
+
+def _sparse_clean(row: Mapping[int, int], p: int) -> dict[int, int]:
+    return {col: value % p for col, value in row.items() if value % p}
+
+
+def sparse_rank_mod(matrix: SparseMatrix, n: int, p: int) -> int:
+    """Exact rank of an n-by-n sparse matrix using sparse row elimination.
+
+    Rows are dictionaries of nonzero column coefficients. The algorithm
+    stores only nonzero entries until fill-in occurs during elimination.
+    """
+    _validate_sparse_matrix(matrix, n, p)
+    rows = {i: _sparse_clean(matrix.get(i, {}), p)
+            for i in range(n)}
+    pivot_row = 0
+    for col in range(n):
+        pivot = next((r for r in range(pivot_row, n)
+                      if rows[r].get(col, 0)), None)
+        if pivot is None:
+            continue
+        rows[pivot_row], rows[pivot] = rows[pivot], rows[pivot_row]
+        pivot_values = rows[pivot_row]
+        inverse = pow(pivot_values[col], -1, p)
+        rows[pivot_row] = {
+            j: value * inverse % p for j, value in pivot_values.items()
+            if value * inverse % p
+        }
+        pivot_values = rows[pivot_row]
+        for r in range(n):
+            if r == pivot_row:
+                continue
+            factor = rows[r].get(col, 0)
+            if not factor:
+                continue
+            target = rows[r]
+            for j, value in pivot_values.items():
+                updated = (target.get(j, 0) - factor * value) % p
+                if updated:
+                    target[j] = updated
+                else:
+                    target.pop(j, None)
+        pivot_row += 1
+        if pivot_row == n:
+            break
+    return pivot_row
+
+
+def _sparse_matmul(a: SparseMatrix, b: SparseMatrix,
+                   n: int, p: int) -> dict[int, dict[int, int]]:
+    """Multiply square sparse matrices, removing modular zeros."""
+    out: dict[int, dict[int, int]] = {}
+    for i, row in a.items():
+        accum: dict[int, int] = {}
+        for k, left in row.items():
+            if not left:
+                continue
+            for j, right in b.get(k, {}).items():
+                accum[j] = (accum.get(j, 0) + left * right) % p
+        cleaned = {j: value for j, value in accum.items() if value}
+        if cleaned:
+            out[i] = cleaned
+    return out
+
+
+def sparse_jordan_profile(matrix: SparseMatrix, n: int, p: int,
+                          eigenvalue: int) -> dict:
+    """Recover a Jordan profile without first materializing a dense matrix.
+
+    Input format is {row_index: {column_index: integer_value}}. Missing
+    entries are zero. Powers may become dense; the implementation remains
+    sparse in storage where the operator and its powers permit it.
+    """
+    _validate_sparse_matrix(matrix, n, p)
+    lam = int(eigenvalue) % p
+    nil: dict[int, dict[int, int]] = {}
+    for i in range(n):
+        row = _sparse_clean(matrix.get(i, {}), p)
+        diagonal = (row.get(i, 0) - lam) % p
+        if diagonal:
+            row[i] = diagonal
+        else:
+            row.pop(i, None)
+        if row:
+            nil[i] = row
+
+    power: dict[int, dict[int, int]] = {
+        i: {i: 1} for i in range(n)
+    }
+    nullities = [0]
+    for _ in range(1, n + 1):
+        power = _sparse_matmul(power, nil, n, p)
+        nullities.append(n - sparse_rank_mod(power, n, p))
+        if nullities[-1] == nullities[-2]:
+            break
+
+    increments = [nullities[r] - nullities[r - 1]
+                  for r in range(1, len(nullities))]
+    exact = {}
+    for r, current in enumerate(increments, start=1):
+        following = increments[r] if r < len(increments) else 0
+        if current - following:
+            exact[r] = current - following
+    blocks = []
+    for size, count in sorted(exact.items(), reverse=True):
+        blocks.extend([size] * count)
+    return {
+        "eigenvalue": lam,
+        "nullities": nullities,
+        "blocks_at_least": increments,
+        "blocks_exactly": {str(k): v for k, v in sorted(exact.items())},
+        "block_sizes_descending": blocks,
+        "geometric_multiplicity": nullities[1] if len(nullities) > 1 else 0,
+        "algebraic_multiplicity": nullities[-1],
+        "matrix_representation": "sparse-row-dictionaries",
+    }
+
 
 if __name__ == "__main__":
     main()
