@@ -1566,7 +1566,7 @@ A machine-learning bridge is specified: exact symbolic feature coordinates, filt
 **G-4cp–G-4cq — pure-scaling stable quotient:** the iterated scaling \(t\mapsto t(1+p)\) is governed by the p-basis root operator \(C_0(z_0²+Sz_1²)=z_0\). Its stable quotient is \(\mathbb F_2\oplus\bigoplus_{Q\ne S}\mathbb F_2[S]/(Q)\), with Q ranging over monic irreducibles. This is the residue-field module of finite closed points of the affine S-line. The full section-group coinvariant may impose further relations. Exact rational-function verifier: tools/cartier_stable_part.py.
 
 
-**G-4cp–G-4cq — scaling stable quotient:** the pure scaling section change induces the p-basis root operator \(C_0(a_0²+Sa_1²)=a_0\). Its stable quotient is \(\mathbb F_2\oplus\bigoplus_{Q\ne S}\mathbb F_2[S]/(Q)\), the residue-field module of finite closed points of the affine S-line. This is exact for the pure-scaling tower; the full section-change coinvariant may be a further quotient. The rational-function verifier is tools/cartier_stable_part.py.
+**G-4cp–G-4cq — scaling stable quotient:** the pure scaling section change induces the p-basis root operator \(C_0(a_0²+Sa_1²)=a_0\). Its stable quotient is \(\mathbb F_2\oplus\bigoplus_{Q\ne S}\mathbb F_2[S]/(Q)\), the residue-field module of finite closed points of the affine S-line. This is exact for the pure-scaling tower; G-4cq–G-4ct subsequently prove that the full section-change group preserves all these residues and that Frobenius-normalized orbit sums give the complete coinvariant; see the canonical full normal form below. The rational-function verifier is tools/cartier_stable_part.py.
 
 
 **G-4cr–G-4cs — finite section-change Cartier-torsion:** the first two pullback coefficients of an odd residual \(a²\) are \(\Delta_1=Sf²a²\in\ker C_0\) and \(\Delta_2=(Su\,a')²+Sf²u\,a²\), with \(C_0²(\Delta_2)=0\). A higher-order torsion bound is conjectural and bounded-tested only. Ohi's parameter-independent Cartier residue theorem is recorded as a possible all-orders bridge; hypotheses and the residue-target identification remain open. Exact test generator: tools/section_change_cartier_stability.py.
@@ -1589,7 +1589,7 @@ A machine-learning bridge is specified: exact symbolic feature coordinates, filt
 
 **G-4cq — full section-change residue invariance:** the exact coefficient-curve pullback extends at every finite closed point Q to a continuous automorphism of the two-dimensional local field \(k_Q((z))((p))\), with \(z=Q(S)\), \(z\mapsto z+O(p^2)\), \(p\mapsto p\). The two-dimensional residue theorem proves all coefficientwise residues are preserved, including for rational parameters with poles at Q.
 
-**G-4cr — associated-graded coinvariants:** every negative even layer and every negative odd second coordinate is killed; the negative odd first coordinate survives exactly as \(\mathcal R=\bigoplus_Q k_Q\) after the Cartier-nilpotent tower is removed. At exponent zero only \(F/(\wp(F)+SF^2)\) survives. The filtered extension between these graded pieces is not yet classified.
+**G-4cr — associated-graded coinvariants:** every negative even layer and every negative odd second coordinate is killed; the negative odd first coordinate survives exactly as \(\mathcal R=\bigoplus_Q k_Q\) after the Cartier-nilpotent tower is removed. At exponent zero only \(F/(\wp(F)+SF^2)\) survives. Superseded by G-4ct: the Frobenius-normalized orbit-residue map resolves the filtered extension and gives a canonical full coinvariant normal form.
 
 **G-4cs — rational residue features:** tools/residue_feature_data.py generates exact rational-function samples \(x=N/D\) with prescribed residue \(\alpha\in k_Q\) for \((x/S)dS=\alpha Q'/Q\,dS\), and stores the trace-determined infinity residue.
 
@@ -1622,3 +1622,6 @@ The rational residue generator also emits orbit-sequence examples with the orbit
 
 
 **G-4cw — explicit basis and dual invariant readouts:** tools/coinvariant_basis_data.py emits the Artin–Schreier basis for \(F/\wp(F)\), polynomial bases for each residue field \(k_Q\) at every odd root q, and exact trace-dual coefficients. Its finite benchmark with height 5, q≤7 and deg(Q)≤4 has dimension 148 (60 zero-mode + 88 residue coordinates).
+
+
+**G-4cw — finite basis/dual benchmark:** tools/coinvariant_basis_data.py enumerates the Artin–Schreier zero-mode basis and all finite residue-field polynomial bases in a bounded window, then computes trace-dual readouts exactly. Height 5, q≤7, deg(Q)≤4 gives 148 coordinates.
