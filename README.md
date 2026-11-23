@@ -33,3 +33,6 @@
 
 
 **Integrated multi-block audit of supplied component assembly (G-EP60):** successful `assemble_kronecker_components` results now include `canonical_block_shapes` in the supplied component order and an independent `multi_block_direct_sum_audit` from G-EP58. The audit verifies that the assembled block-diagonal transforms annihilate every cross-component block in both pencil coefficients, alongside the existing whole-pencil strict-equivalence audit. Failed component recovery still returns an incomplete result without a success certificate; this remains supplied-partition assembly, not decomposition discovery. See `research/the-fold-kronecker-component-assembly.md` and its tests.
+
+
+**Component-report consistency certificate (G-EP61):** successful `assemble_kronecker_components` results now include `component_consistency_audit`. It cross-checks each reported source shape against both source coefficients, checks both canonical coefficient block shapes, validates right/left singular block dimensions against their recovered minimal indices and regular block squareness, and reconciles ordered component dimensions with the assembled source and canonical shapes. This is a metadata/matrix consistency audit, not independent component classification or decomposition discovery.
