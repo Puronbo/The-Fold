@@ -3155,7 +3155,7 @@ Under \(x\mapsto(x/S)dS\), \(U_h\) maps to \(S^{2^h-1}F^{2^{h+1}}dS\), and the s
 
 For each finite closed point Q of the coefficient curve, complete \(F=\mathbb F_2(S)\) at Q and form the two-dimensional local field \(K_Q=k_Q((z))((p))\), where \(z=Q(S)\), \(k_Q=\mathbb F_2[S]/(Q)\). The exact coefficient-curve substitution from G-4cq has \(S\mapsto\phi(S)=S+O(p^2)\), hence \(z\mapsto z'=z+O(p^2)\), \(p\mapsto p\). The induced map fixes the Teichmüller lift of \(k_Q\), has identity parameter-valuation matrix, and is a continuous \(k_Q\)-algebra automorphism. By Gorchinskiy–Osipov's invariance theorem for iterated-Laurent top residues, every coefficientwise residue \(\operatorname{res}_Q(\omega_j)\) of a pulled-back differential series is unchanged. This applies even when e or f has poles at Q.
 
-Thus no t-dependent or mixed-depth section change imposes further relations on the stable Cartier-residue coordinates. The remaining issue is the filtered extension between exponent layers, not additional residue relations.
+Thus no t-dependent or mixed-depth section change imposes further relations on the stable Cartier-residue coordinates. G-4ct further resolves the filtered coinvariant extension by the Frobenius-normalized orbit-residue map.
 
 ### G-4cr — associated-graded coinvariants of the full group
 
@@ -3173,7 +3173,7 @@ F/(\wp(F)+SF^2),&n=0,\\
 0,&n>0.
 \end{cases}
 \]
-The filtered extension between these graded pieces is still open; do not identify the full coinvariant with a canonical direct sum. As an abstract vector space a splitting can be chosen noncanonically.
+**Superseded by G-4ct:** the filtered extension is now canonically split by Frobenius-normalized orbit residues, and the full algebraic coinvariant has an explicit normal form. Higher filtered action data on Q before coinvariants remain open.
 
 ### G-4cs — exact rational residue-feature dataset
 
