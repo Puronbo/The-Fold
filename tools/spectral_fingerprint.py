@@ -203,7 +203,7 @@ def characteristic_polynomial(matrix: Sequence[Sequence[int]], p: int) -> list[i
                     entry.append(1)
                 # Appending col creates one inversion for every previously
                 # selected column larger than col.
-                inversions = (mask >> (col + 1)).bit_count()
+                inversions = bin(mask >> (col + 1)).count('1')
                 sign = -1 if inversions % 2 else 1
                 term = [0] * (len(poly) + len(entry) - 1)
                 for i, x in enumerate(poly):
