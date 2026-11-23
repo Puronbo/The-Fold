@@ -512,3 +512,6 @@ model — but not what it is for. It is for this:
 Everything else is an entry in that map. The determinant gives the exponents, the fold gives the
 split, the twist gives the period, the closure gives the pattern, the horizon gives the edge, and the
 observer gives the reading. The four zones are the map's legend.
+
+
+**Cyclotomic eigenprimes:** the cyclotomic companion operator has an eigenvalue over F_p exactly when, writing m=p^a n with p not dividing n, n divides p−1. The spectral fingerprint records the full modular factorization together with algebraic multiplicities and eigenspace dimensions; these are distinct data in ramified characteristics. See `research/the-fold-cyclotomic-spectral-fingerprints.md` (G-EP2).
