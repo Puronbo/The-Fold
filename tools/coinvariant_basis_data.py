@@ -2,17 +2,13 @@
 """Finite exact basis/dual-coordinate benchmark for the Fold coinvariant.
 
 The full algebraic coinvariant is
-  F/wp(F) + sum_{q odd>0} sum_Q GF(2)[S]/(Q),
-with F=GF(2)(S), Q monic irreducible.
+  direct_sum_Q GF(2)  +  direct_sum_{q odd>0,Q} GF(2)[S]/(Q),
+where Q runs over monic irreducibles in GF(2)[S].
 
-This script emits finite cutoffs:
-  * zero-mode Artin-Schreier basis elements of height <= H;
-  * residue basis elements for odd roots q <= q_max and deg(Q) <= d_max;
-  * trace-dual readout coefficients for each finite residue-field basis.
-
-All arithmetic is exact over GF(2); no external packages are required.
-A finite cutoff is a benchmark window, not a replacement for the infinite
-algebraic direct sum or its unrestricted algebraic dual.
+The zero-mode factor is identified by residue traces on
+Omega_F^1/dF modulo Cartier coinvariants, not by F/wp(F).
+This script emits finite cutoffs and exact trace-dual readouts.
+All arithmetic is over GF(2); no external packages are required.
 """
 from __future__ import annotations
 
@@ -179,44 +175,45 @@ def poly_string(a: int) -> str:
     return " + ".join(reversed(terms))
 
 
-def as_basis(height: int) -> Iterable[dict]:
-    """The standard basis of F/wp(F), truncated by total pole height."""
-    yield {
-        "task": "zero_mode_as_basis",
-        "kind": "constant",
-        "numerator_bits": 1,
-        "denominator_bits": 1,
-        "label": "1",
-    }
-    for n in range(1, height + 1, 2):
-        yield {
-            "task": "zero_mode_as_basis",
-            "kind": "polynomial_odd_pole_at_infinity",
-            "numerator_bits": 1 << n,
-            "denominator_bits": 1,
-            "label": f"S^{n}",
-            "height": n,
-        }
-    for q in irreducibles(height):
-        d = degree(q)
-        for pole_order in range(1, height // d + 1, 2):
-            denominator = poly_power(q, pole_order)
-            for j in range(d):
-                numerator = 1 << j
-                assert gcd(numerator, denominator) == 1
-                yield {
-                    "task": "zero_mode_as_basis",
-                    "kind": "finite_place_odd_pole",
-                    "Q_bits": q,
-                    "Q": poly_string(q),
-                    "Q_degree": d,
-                    "odd_pole_order": pole_order,
-                    "numerator_bits": numerator,
-                    "denominator_bits": denominator,
-                    "label": f"S^{j}/{poly_string(q)}^{pole_order}",
-                    "height": d * pole_order,
-                }
+def zero_mode_basis(degree_max: int) -> Iterable[dict]:
+    """One trace-one rational differential generator for each Q.
 
+    In the zero mode, F/(wp(F)+S*F^2) is the Cartier coinvariant
+    of Omega_F^1/dF. Its Q-coordinate is Tr_{k_Q/F_2}(res_Q((x/S)dS)).
+    Choose alpha with trace one and set x=S*alpha*Q'/Q.
+    """
+    for q in irreducibles(degree_max):
+        d = degree(q)
+        alpha = next(
+            (a for a in range(1, 1 << d) if field_trace(a, q) == 1),
+            None,
+        )
+        if alpha is None:
+            raise ArithmeticError("finite-field trace map was not surjective")
+        qprime = 0
+        i = 1
+        while (1 << i) <= q:
+            if (q >> i) & 1 and (i & 1):
+                qprime |= 1 << (i - 1)
+            i += 1
+        raw_numerator = mul(mul(0b10, alpha), qprime)
+        common = gcd(raw_numerator, q)
+        numerator = exact_div(raw_numerator, common)
+        denominator = exact_div(q, common)
+        assert gcd(numerator, denominator) == 1
+        yield {
+            "task": "zero_mode_residue_trace_basis",
+            "Q_bits": q,
+            "Q": poly_string(q),
+            "Q_degree": d,
+            "trace_one_residue_bits": alpha,
+            "trace_one_residue": poly_string(alpha),
+            "numerator_bits": numerator,
+            "denominator_bits": denominator,
+            "differential": "(x/S)dS = alpha*Q'(S)/Q(S) dS",
+            "zero_mode_readout": 1,
+            "height": d,
+        }
 
 def residue_basis(q_max: int, degree_max: int) -> Iterable[dict]:
     qs = irreducibles(degree_max)
@@ -240,17 +237,19 @@ def residue_basis(q_max: int, degree_max: int) -> Iterable[dict]:
                 }
 
 
-def dimension_formula(height: int, q_max: int, degree_max: int) -> dict:
-    zero_dim = sum(1 for _ in as_basis(height))
+def dimension_formula(
+    zero_degree_max: int, q_max: int, degree_max: int
+) -> dict:
+    zero_dim = len(irreducibles(zero_degree_max))
     residue_dim = sum(1 for _ in residue_basis(q_max, degree_max))
     return {
-        "zero_mode_basis_dimension": zero_dim,
+        "zero_mode_residue_basis_dimension": zero_dim,
+        "zero_mode_degree_cutoff": zero_degree_max,
         "odd_roots_count": len(range(1, q_max + 1, 2)),
         "finite_irreducible_points_count": len(irreducibles(degree_max)),
         "residue_basis_dimension": residue_dim,
         "total_benchmark_dimension": zero_dim + residue_dim,
     }
-
 
 def self_test() -> None:
     qs = irreducibles(6)
@@ -261,45 +260,65 @@ def self_test() -> None:
         dual = trace_dual_basis(q)
         assert len(dual) == degree(q)
         count_dual += degree(q)
-    zero = list(as_basis(5))
-    assert len(zero) == 60
+
+    zero = list(zero_mode_basis(4))
+    assert len(zero) == 8
+    for row in zero:
+        q = row["Q_bits"]
+        alpha = row["trace_one_residue_bits"]
+        assert field_trace(alpha, q) == 1
+        numerator = row["numerator_bits"]
+        denominator = row["denominator_bits"]
+        assert gcd(numerator, denominator) == 1
+        # x/S = alpha*Q'/Q, so its Q-residue is alpha and has trace one.
+        assert row["zero_mode_readout"] == field_trace(alpha, q)
+
     residues = list(residue_basis(7, 4))
     assert len(residues) == 4 * 22
-    assert dimension_formula(5, 7, 4)["total_benchmark_dimension"] == 148
+    assert dimension_formula(4, 7, 4)["total_benchmark_dimension"] == 96
 
-    # Each trace-dual readout selects exactly one member of the residue basis.
+    # Every finite-field trace-one residue represents the nonzero F_2
+    # coinvariant class; trace-zero residues are precisely Artin-Schreier
+    # differences alpha^2+alpha.
+    for q in qs:
+        d = degree(q)
+        values = range(1 << d)
+        image = {add(a, square_mod(a, q)) for a in values}
+        assert image == {a for a in values if field_trace(a, q) == 0}
+        assert len(image) == (1 << d) // 2
+
     for q in qs:
         dual = trace_dual_basis(q)
         d = degree(q)
-        for i, c in enumerate(dual):
+        for i, value in enumerate(dual):
             for j in range(d):
-                assert field_trace(mul_mod(c, 1 << j, q), q) == (i == j)
+                assert field_trace(mul_mod(value, 1 << j, q), q) == (i == j)
     print(
         f"self-test: {len(qs)} irreducibles, {count_dual} trace-dual coordinates, "
-        f"{len(zero)} AS basis elements, {len(residues)} residue basis elements passed",
+        f"{len(zero)} zero-mode residue generators, {len(residues)} orbit-residue "
+        "basis elements passed",
         file=sys.stderr,
     )
 
-
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--height", type=int, default=5)
+    parser.add_argument("--zero-degree-max", type=int, default=4)
     parser.add_argument("--q-max", type=int, default=7)
     parser.add_argument("--degree-max", type=int, default=4)
     parser.add_argument("--self-test", action="store_true")
     args = parser.parse_args()
-    if args.height < 0 or args.q_max < 0 or args.degree_max < 1:
-        parser.error("height/q-max must be nonnegative and degree-max positive")
+    if args.zero_degree_max < 1 or args.q_max < 0 or args.degree_max < 1:
+        parser.error("zero-degree-max and degree-max must be positive; q-max nonnegative")
     if args.self_test:
         self_test()
-    for row in as_basis(args.height):
+    for row in zero_mode_basis(args.zero_degree_max):
         print(json.dumps(row, sort_keys=True))
     for row in residue_basis(args.q_max, args.degree_max):
         print(json.dumps(row, sort_keys=True))
     print(
         json.dumps(
             {"task": "dimension_summary", **dimension_formula(
-                args.height, args.q_max, args.degree_max
+                args.zero_degree_max, args.q_max, args.degree_max
             )},
             sort_keys=True,
         )
