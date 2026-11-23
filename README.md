@@ -1655,3 +1655,6 @@ The corrected finite basis benchmark is 8 zero-mode plus 88 orbit-residue coordi
 
 
 **G-4da — complete invariant linear readouts:** the algebraic dual of the full coinvariant is the product \((\prod_Q\mathbb F_2)\times(\prod_{q>0\ odd,Q}k_Q)\), with finite-field trace pairings giving every coordinate functional. Since \(pM\subset R\), the quotient is discrete in the induced p-adic topology, so every algebraic readout is continuous. Finite ML benchmarks truncate this product; they do not exhaust it. The nonlinear invariant ring remains open.
+
+
+**G-4da implementation — product-dual readout benchmark:** tools/invariant_linear_readout_data.py samples finite windows of all invariant linear readouts, with zero-mode bit weights and finite-field trace weights for each odd-root residue coordinate. Labels are computed exactly; the benchmark is a finite truncation of the unrestricted product dual.
