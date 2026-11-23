@@ -1625,3 +1625,6 @@ The rational residue generator also emits orbit-sequence examples with the orbit
 
 
 **G-4cw — finite basis/dual benchmark:** tools/coinvariant_basis_data.py enumerates the Artin–Schreier zero-mode basis and all finite residue-field polynomial bases in a bounded window, then computes trace-dual readouts exactly. Height 5, q≤7, deg(Q)≤4 gives 148 coordinates.
+
+
+**G-4cx — exact GF(2) system identification:** tools/train_orbit_residue_gf2.py learns the Frobenius-normalized orbit-residue readout as a binary linear map from examples, checks full feature rank, and validates held-out sequences and coordinate basis vectors. An independent exact run recovered all maps for the eight irreducibles of degree at most four with three stages and 128 tests per field.
