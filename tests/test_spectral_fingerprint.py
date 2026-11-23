@@ -1,7 +1,7 @@
 import unittest
 
 from tools.spectral_fingerprint import (
-    automatic_spectral_fingerprint, characteristic_polynomial, factor_polynomial,
+    automatic_full_spectral_fingerprint, automatic_spectral_fingerprint,\n    characteristic_polynomial, factor_polynomial,
     extension_jordan_profile, is_irreducible_polynomial,
     jordan_profile, rank_mod, spectral_fingerprint,
 )
@@ -150,6 +150,16 @@ class SpectralFingerprintTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             extension_jordan_profile([[0, 1], [1, 0]], 5,
                                      [1, 0, 1], [0, 1])
+
+    def test_automatic_extension_eigenvalue_class(self):
+        result = automatic_full_spectral_fingerprint([[0, 2], [1, 0]], 3)
+        self.assertEqual(result["base_field_eigenvalues"], [])
+        self.assertTrue(result["extension_classes_complete"])
+        self.assertEqual(len(result["extension_eigenvalue_classes"]), 1)
+        eigenclass = result["extension_eigenvalue_classes"][0]
+        self.assertEqual(eigenclass["extension_degree"], 2)
+        self.assertEqual(eigenclass["frobenius_conjugate_count"], 2)
+        self.assertEqual(eigenclass["profile"]["blocks_exactly"], {"1": 1})
 
 
 if __name__ == "__main__":
