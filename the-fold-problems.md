@@ -3258,3 +3258,16 @@ The trace pairing on each finite field gives explicit dual coefficients \(c_i\) 
 ### G-4cx — exact GF(2) system identification of orbit-residue readouts
 
 For fixed Q and orbit length L, the Frobenius-normalized orbit residue is an \(\mathbb F_2\)-linear map \(k_Q^L\to k_Q\). The new script tools/train_orbit_residue_gf2.py learns its binary matrix from random input/output examples by exact Gaussian elimination, requires full feature rank, and checks independent held-out sequences plus every coordinate basis vector. An independent run recovered the exact maps for all eight irreducibles of degree at most four, L=3, with 128 test sequences per field and no errors. This is an exact symbolic-learning baseline, not neural-network training.
+
+
+### G-4cp — pure-scaling Frobenius tower
+
+For the single section change \(t\mapsto t(1+p)\), an odd source \(p^n a^{2^h}d\log t\) has its first nonzero quotient correction at offset \(2^{h+1}\), with coefficient \((Sa')^{2^h}\). Since \(a'\) ranges through \(F²\), the exact diagonal image is
+\[
+I_h=S^{2^h}F^{2^{h+1}}.
+\]
+The first stages are \(SF²\) at \(p²\), \(S²F⁴\) at \(p⁴\), \(S⁴F⁸\) at \(p⁸\), and so on. Finite p-basis decomposition gives \(F=(\oplus_{h<N}I_h)\oplus F^{2^N}\). For polynomial coefficients the quotient by the tower is \(\mathbb F_2\); this conclusion does not extend automatically to rational functions.
+
+Via \(\Theta([x])=(x/S)dS\), the residual after \(I_0=SF²\) is \(\Omega_F^1/dF\), and the later \(I_h\) correspond to Cartier-nilpotent classes \(\ker C^h\). The rational class \(x=S/(S+1)\) maps to \(d\log(S+1)\), which is Cartier-fixed and nonexact (residue 1 at \(S=1\)). Thus the rational pure-scaling tower has a nonzero Cartier-nonnilpotent residual. This is a subfamily calculation only; the full section-change coinvariant quotient may impose additional relations through other directions or syzygies.
+
+**Open:** determine the full Cartier-nonnilpotent quotient under all section changes, compute relation syzygies, and handle the zero mode. Rational-function tests are mandatory; polynomial-only training sees only the constant residual and misses logarithmic classes.
