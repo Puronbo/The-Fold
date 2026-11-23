@@ -10,7 +10,6 @@ from tools.regular_pencil_profile import (
 )
 from tools.rectangular_pencil import _validate_pair
 from tools.rational_canonical import rational_canonical_profile
-from tools.rational_canonical_basis import construct_operator_similarity_witness
 
 
 def _nullspace(matrix, p, columns):
@@ -275,6 +274,9 @@ def construct_regular_pencil_witness(
         # succeeds.
         canonical_examined = 0
         if found is None:
+            # Lazy import avoids the rational-primary module's reuse of this
+            # module's finite-field nullspace helper during initialization.
+            from tools.rational_canonical_basis import construct_operator_similarity_witness
             canonical = construct_operator_similarity_witness(
                 a, b, p, max_candidates=max_candidates
             )
