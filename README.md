@@ -582,3 +582,6 @@ observer gives the reading. The four zones are the map's legend.
 
 
 **Pure singular-only pencil recovery (G-EP33):** `tools/singular_only_pencil.py` extends the G-EP32 basis construction from one singular block to a direct sum of multiple right-only or left-only singular blocks. It concatenates the reversed signed polynomial minimal-vector chains, verifies aggregate domain/codomain basis determinants, constructs constant strict-equivalence witnesses, and audits both coefficient identities. Mixed left/right pencils and pencils with regular parts are explicitly refused; this is not a general Kronecker decomposition. See `tests/test_singular_only_pencil.py` and `research/the-fold-singular-only-pencil-recovery.md`.
+
+
+**Mixed Kronecker certificate verification (G-EP34):** `tools/mixed_kronecker_certificate.py` assembles declared positive-index right and left singular blocks with a supplied square regular pencil, verifies that the regular pencil has full normal rank over `F_p(t)`, and audits supplied constant strict-equivalence witnesses against the assembled target. This verifies a proposed mixed decomposition; it does not discover the decomposition, canonicalize the regular block, or prove uniqueness. See `tests/test_mixed_kronecker_certificate.py` and `research/the-fold-mixed-kronecker-certificates.md`.
