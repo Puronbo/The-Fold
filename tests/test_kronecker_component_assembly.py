@@ -84,6 +84,74 @@ class KroneckerComponentAssemblyTests(unittest.TestCase):
             audit["checks"]["reconstructed_global_strict_equivalence_verified"]
         )
 
+    def test_composition_audit_replays_changed_source_and_canonical_blocks(self):
+        rq, rk = right_block(1)
+        result = assemble_kronecker_components([
+            {"kind": "right", "q": rq, "k": rk},
+            {"kind": "regular", "q": [[1]], "k": [[0]]},
+        ], 5)
+        audits = copy.deepcopy(result["component_witness_audits"])
+        # A forged stored success flag cannot rescue a changed source block.
+        audits[1]["strict_equivalence_certified"] = True
+        changed_source = [rq, [[2]]]
+        source_audit = _component_witness_composition_audit(
+            audits, result["left_transform_S"], result["right_transform_T"],
+            result["source_Q"], result["source_K"],
+            result["canonical_Q"], result["canonical_K"], 5,
+            changed_source, [rk, [[0]]],
+            [right_block(1)[0], [[1]]], [right_block(1)[1], [[0]]],
+        )
+        self.assertFalse(source_audit["per_component_replayed_audits"][1]["strict_equivalence_certified"])
+        self.assertFalse(source_audit["checks"]["every_local_certificate_reverified_against_its_bound_pair"])
+        self.assertFalse(source_audit["composition_verified"])
+
+        # The same witness must also fail when only its canonical partner changes.
+        changed_canonical = [right_block(1)[0], [[2]]]
+        canonical_audit = _component_witness_composition_audit(
+            copy.deepcopy(result["component_witness_audits"]),
+            result["left_transform_S"], result["right_transform_T"],
+            result["source_Q"], result["source_K"],
+            result["canonical_Q"], result["canonical_K"], 5,
+            [rq, [[1]]], [rk, [[0]]],
+            changed_canonical, [right_block(1)[1], [[0]]],
+        )
+        self.assertFalse(canonical_audit["per_component_replayed_audits"][1]["strict_equivalence_certified"])
+        self.assertFalse(canonical_audit["composition_verified"])
+
+    def test_composition_audit_ignores_forged_stored_failure_flag(self):
+        rq, rk = right_block(1)
+        result = assemble_kronecker_components([
+            {"kind": "right", "q": rq, "k": rk},
+            {"kind": "regular", "q": [[1]], "k": [[0]]},
+        ], 5)
+        audits = copy.deepcopy(result["component_witness_audits"])
+        audits[1]["strict_equivalence_certified"] = False
+        audit = _component_witness_composition_audit(
+            audits, result["left_transform_S"], result["right_transform_T"],
+            result["source_Q"], result["source_K"],
+            result["canonical_Q"], result["canonical_K"], 5,
+            [rq, [[1]]], [rk, [[0]]],
+            [right_block(1)[0], [[1]]], [right_block(1)[1], [[0]]],
+        )
+        self.assertTrue(audit["per_component_replayed_audits"][1]["strict_equivalence_certified"])
+        self.assertTrue(audit["composition_verified"])
+
+    def test_composition_audit_checks_block_list_cardinality_before_replay(self):
+        rq, rk = right_block(1)
+        result = assemble_kronecker_components([
+            {"kind": "right", "q": rq, "k": rk},
+            {"kind": "regular", "q": [[1]], "k": [[0]]},
+        ], 5)
+        with self.assertRaisesRegex(ValueError, "counts must agree"):
+            _component_witness_composition_audit(
+                result["component_witness_audits"],
+                result["left_transform_S"], result["right_transform_T"],
+                result["source_Q"], result["source_K"],
+                result["canonical_Q"], result["canonical_K"], 5,
+                [rq], [rk, [[0]]],
+                [right_block(1)[0], [[1]]], [right_block(1)[1], [[0]]],
+            )
+
     def test_composition_audit_rejects_dimension_incompatible_certificate(self):
         rq, rk = right_block(1)
         result = assemble_kronecker_components([
