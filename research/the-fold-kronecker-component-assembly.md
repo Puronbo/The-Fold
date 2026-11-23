@@ -219,3 +219,30 @@ classification implementation, does not discover an unknown partition, and
 does not establish uniqueness or decomposition provenance beyond the ordered
 inputs. Bounded regular witness search retains its existing inconclusive
 failure semantics.
+
+
+## G-EP69 — Direct algebraic verification of assembly certificates
+
+Added `verify_kronecker_component_assembly_algebraically(components, p, assembly_result)`.
+Unlike G-EP68's deterministic constructor replay, this verifier does not rerun
+singular recovery or regular canonicalization. It reconstructs the source
+block-diagonal coefficient matrices directly from the original component
+inputs, validates the claimed canonical block dimensions and off-block zeros,
+and extracts the canonical component blocks.
+
+For each component it invokes the exact strict-equivalence identity verifier
+on the original input pair, extracted canonical pair, and supplied local
+left/right transforms. It then reconstructs the global block-diagonal
+transforms from those local witnesses, compares them with the returned global
+transforms, and independently replays both global identities
+S Q T = Q_target and S K T = K_target over the finite field.
+
+Regression tests accept a fresh certificate, reject altered source/canonical
+matrices and global transforms, reject a nonzero cross-block entry and malformed
+block dimensions, and confirm that falsified cached audit booleans do not
+override valid algebraic identities.
+
+**Scope limitation:** the check is conditional on the caller's ordered
+component partition and the supplied local witnesses. It establishes the
+claimed direct-sum and strict-equivalence identities, not how the partition
+was discovered, whether it is unique, or whether another decomposition exists.
