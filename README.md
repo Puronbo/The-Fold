@@ -585,3 +585,6 @@ observer gives the reading. The four zones are the map's legend.
 
 
 **Mixed Kronecker certificate verification (G-EP34):** `tools/mixed_kronecker_certificate.py` assembles declared positive-index right and left singular blocks with a supplied square regular pencil, verifies that the regular pencil has full normal rank over `F_p(t)`, and audits supplied constant strict-equivalence witnesses against the assembled target. This verifies a proposed mixed decomposition; it does not discover the decomposition, canonicalize the regular block, or prove uniqueness. See `tests/test_mixed_kronecker_certificate.py` and `research/the-fold-mixed-kronecker-certificates.md`.
+
+
+**Regular-pencil similarity profiles (G-EP35):** when the first coefficient (Q) is invertible, exact left-normalization sends ((Q,K)) to ((I,Q^{-1}K)). Two such ordered pairs are strictly equivalent exactly when their normalized operators are similar. The new utility uses G-EP21's rational-canonical invariant factors as a complete strict-equivalence fingerprint in this chart, and compares two pencils without searching for witness matrices. It does not cover regular pencils with singular (Q), nor allow mixing the pencil coefficients. See `tools/regular_pencil_profile.py`, `tests/test_regular_pencil_profile.py`, and `research/the-fold-regular-pencil-similarity-profiles.md`.
