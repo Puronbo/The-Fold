@@ -1,43 +1,34 @@
-# G-EP7 — exact characteristic polynomials and automatic base-field spectra
+# G-EP8 — exact polynomial factorization over prime fields
 
 ## Result
 
-For an integer matrix A and prime p, the engine now computes
-χ_A(x)=det(xI−A) in F_p[x] without division, scans every λ in F_p, and constructs the Jordan profile for each root.
+The spectral engine now factors every nonzero polynomial over a prime field into monic irreducibles with multiplicities. The implementation uses only the Python standard library and exact arithmetic.
 
-The returned coefficient list is in descending degree order. Each base-field root is accompanied by its algebraic multiplicity, recovered by repeated synthetic division, and its Jordan profile from G-EP5/G-EP6.
+For a characteristic polynomial, the automatic fingerprint now includes a complete factorization over F_p. Factors are reported in ascending degree order, with descending coefficient arrays and positive multiplicities. Because characteristic polynomials are monic, no leading-unit entry is expected in this use case.
 
-## Why the determinant algorithm matters
+## Algorithm
 
-The implementation uses a subset dynamic program for the Leibniz determinant. At row k, a state indexed by a k-element set of columns stores the signed polynomial sum over assignments of the first k rows to those columns. Appending column j contributes the entry xδ_kj−a_kj, with sign determined by the number of previously selected columns larger than j.
+1. **Squarefree decomposition.** Compute the formal derivative and polynomial gcds over F_p. Separate squarefree layers by multiplicity. When the derivative vanishes in characteristic p, extract the p-th root (all nonzero exponents are divisible by p) and multiply the recovered multiplicities by p. This handles inseparable repeated powers such as (x²+x+1)² over F_2.
+2. **Berlekamp factorization.** For a squarefree monic polynomial f of degree n, form the matrix of the Frobenius map Q: g ↦ g^p mod f on the basis 1,x,…,x^(n−1). The nullspace of Q−I is the Berlekamp algebra. Its basis elements, combined with gcd splits against g−a for a in F_p, separate f into irreducible factors.
+3. **Verification by reconstruction.** The factor list should multiply back to the monic input polynomial, with each factor raised to its reported multiplicity. Tests cover irreducible and split quadratics, repeated linear factors, and a repeated irreducible factor in characteristic two.
 
-This computes the determinant in F_p[x] using only addition and multiplication. It avoids division by k, so it remains valid when the characteristic divides the matrix dimension — a case where a naive Faddeev–LeVerrier implementation can fail.
+All polynomial coefficient arithmetic is reduced modulo p. No floating-point arithmetic or external symbolic algebra dependency is used.
 
-The cost is exponential in matrix dimension. This is an exact reference implementation for small matrices, not a large-scale characteristic-polynomial algorithm.
+## Scope
 
-## Automatic scan
+This milestone completes factorization over the base prime field. It does not yet adjoin roots of irreducible factors of degree greater than one. Such roots live in finite extensions F_(p^d). The next milestone should implement quotient-field arithmetic, irreducibility validation, and matrix/Jordan computations over those extensions.
 
-The CLI exposes this mode with `--auto`, for example:
+## Complexity
 
-~~~sh
-python tools/spectral_fingerprint.py --prime 2 --matrix-json '[[0,1],[1,0]]' --auto
-~~~
+Berlekamp's method is deterministic, but this straightforward implementation is intended as a transparent reference algorithm for modest polynomial degrees. It is not optimized for very large matrices or degrees. The characteristic-polynomial determinant stage remains exponential in matrix dimension; polynomial factorization is a separate stage.
 
-The previous `--eigenvalues` mode remains available for explicitly supplied roots. The two modes are mutually exclusive.
+## Tests and status
 
-For each of the p field elements, the implementation computes the multiplicity of x−λ in the characteristic polynomial. For every root it invokes the existing exact kernel-growth routine to recover the Jordan block sizes.
+The added tests exercise:
+- x²+1 irreducible over F_3;
+- x²+1 split over F_5;
+- (x+1)² over F_2;
+- (x²+x+1)² over F_2;
+- automatic spectral output carrying the full base-field factorization.
 
-The output explicitly marks irreducible_factorization_complete as false. A scan of F_p finds all base-field eigenvalues, but it does not factor the remaining polynomial into irreducibles of degree greater than one and does not construct splitting fields.
-
-## Checks and examples
-
-- For the quarter-turn matrix [[0,1],[1,0]] over F_2, the characteristic polynomial is x²+1=(x+1)². The scan finds λ=1 with algebraic multiplicity 2, and the Jordan engine finds one block of size 2.
-- For [[0,2],[1,0]] over F_3, the characteristic polynomial is x²+1, irreducible over F_3. The base-field scan correctly returns no eigenvalues.
-
-The determinant recurrence was independently cross-checked by evaluating its output at every field element and comparing with a permutation-expansion determinant for 6,800 random matrix/field evaluations (dimensions 1–4, primes 2, 3, 5, and 7). This is an independent algorithm check, not a claim that the repository's unittest suite or CI has run.
-
-## Boundary and next layer
-
-G-EP7 is complete for exact characteristic polynomials and eigenvalues in the base prime field. It is not a full finite-field spectral factorization.
-
-G-EP8 should add polynomial factorization over F_p, ideally with an optional, isolated backend first, then exact finite-extension arithmetic and root/Jordan profiles over F_{p^d}. It must preserve the distinction between base-field eigenvalues and eigenvalues that exist only in an extension.
+The tests are authored and committed, but the repository test suite and CI have not been run in this environment. The algorithm and implementation should be treated as a committed research implementation pending execution of those tests and independent property-based reconstruction checks.
