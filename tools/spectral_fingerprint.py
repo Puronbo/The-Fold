@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-"""Exact Jordan fingerprints over prime fields (standard library only).
+"""Exact small-matrix spectral fingerprints over prime fields.
 
-This module computes kernel-growth/Jordan data for eigenvalues supplied in
-F_p. It deliberately does not claim to factor characteristic polynomials or
-find eigenvalues automatically.
+The standard-library implementation computes characteristic polynomials
+without division, scans for all base-field eigenvalues, and recovers Jordan
+profiles. It does not factor higher-degree irreducibles or build extensions.
 """
 from __future__ import annotations
 
