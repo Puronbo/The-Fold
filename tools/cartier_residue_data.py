@@ -2,9 +2,9 @@
 """Exact residue-field data for Cartier classes over F_2(S).
 
 Polynomial and residue-field elements are encoded as bitmasks. This script
-builds rational differential examples a(S)/Q(S) dS, computes their closed-
-point residue in F_2[S]/(Q), the forced residue at infinity, and the Cartier
-inverse-Frobenius orbit. It uses only the Python standard library.
+builds single- and multi-point rational differential examples P(S)/D(S) dS,
+computes prescribed closed-point residues in F_2[S]/(Q), the forced residue
+at infinity, and the Cartier inverse-Frobenius orbit. It uses only the Python standard library.
 """
 from __future__ import annotations
 
