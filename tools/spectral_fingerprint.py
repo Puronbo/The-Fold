@@ -1,0 +1,171 @@
+#!/usr/bin/env python3
+"""Exact Jordan fingerprints over prime fields (standard library only).
+
+This module computes kernel-growth/Jordan data for eigenvalues supplied in
+F_p. It deliberately does not claim to factor characteristic polynomials or
+find eigenvalues automatically.
+"""
+from __future__ import annotations
+
+import argparse
+import json
+from typing import Iterable, Sequence
+
+
+Matrix = list[list[int]]
+
+
+def _is_prime(p: int) -> bool:
+    if p < 2:
+        return False
+    if p % 2 == 0:
+        return p == 2
+    d = 3
+    while d * d <= p:
+        if p % d == 0:
+            return False
+        d += 2
+    return True
+
+
+def _validate_matrix(matrix: Sequence[Sequence[int]], p: int) -> int:
+    if not _is_prime(p):
+        raise ValueError("p must be a prime")
+    n = len(matrix)
+    if n == 0 or any(len(row) != n for row in matrix):
+        raise ValueError("matrix must be non-empty and square")
+    return n
+
+
+def _mod_matrix(matrix: Sequence[Sequence[int]], p: int) -> Matrix:
+    return [[int(x) % p for x in row] for row in matrix]
+
+
+def _identity(n: int, p: int) -> Matrix:
+    return [[1 % p if i == j else 0 for j in range(n)] for i in range(n)]
+
+
+def _matmul(a: Matrix, b: Matrix, p: int) -> Matrix:
+    n, inner, m = len(a), len(b), len(b[0])
+    out = [[0] * m for _ in range(n)]
+    for i in range(n):
+        for k in range(inner):
+            aik = a[i][k] % p
+            if aik:
+                for j in range(m):
+                    out[i][j] = (out[i][j] + aik * b[k][j]) % p
+    return out
+
+
+def rank_mod(matrix: Sequence[Sequence[int]], p: int) -> int:
+    """Return exact row rank over F_p using modular Gaussian elimination."""
+    if not _is_prime(p):
+        raise ValueError("p must be a prime")
+    if not matrix:
+        return 0
+    width = len(matrix[0])
+    if any(len(row) != width for row in matrix):
+        raise ValueError("matrix rows must have equal length")
+    a = [[int(x) % p for x in row] for row in matrix]
+    rows = len(a)
+    pivot_row = 0
+    for col in range(width):
+        pivot = next((r for r in range(pivot_row, rows) if a[r][col] % p), None)
+        if pivot is None:
+            continue
+        a[pivot_row], a[pivot] = a[pivot], a[pivot_row]
+        inv = pow(a[pivot_row][col], -1, p)
+        a[pivot_row] = [(x * inv) % p for x in a[pivot_row]]
+        for r in range(rows):
+            if r != pivot_row:
+                factor = a[r][col] % p
+                if factor:
+                    a[r] = [(a[r][j] - factor * a[pivot_row][j]) % p
+                            for j in range(width)]
+        pivot_row += 1
+        if pivot_row == rows:
+            break
+    return pivot_row
+
+
+def _subtract_scalar_identity(a: Matrix, lam: int, p: int) -> Matrix:
+    n = len(a)
+    return [[(a[i][j] - (lam if i == j else 0)) % p
+             for j in range(n)] for i in range(n)]
+
+
+def jordan_profile(matrix: Sequence[Sequence[int]], p: int,
+                   eigenvalue: int) -> dict:
+    """Recover Jordan block sizes for eigenvalue in F_p.
+
+    K_r = nullity((A-lambda I)^r). The output includes K_r, first
+    differences (blocks of size >= r), and exact block-size multiplicities.
+    """
+    n = _validate_matrix(matrix, p)
+    a = _mod_matrix(matrix, p)
+    lam = int(eigenvalue) % p
+    nil = _subtract_scalar_identity(a, lam, p)
+
+    power = _identity(n, p)
+    nullities = [0]
+    for _r in range(1, n + 1):
+        power = _matmul(power, nil, p)
+        nullities.append(n - rank_mod(power, p))
+        if nullities[-1] == nullities[-2]:
+            break
+
+    increments = [nullities[r] - nullities[r - 1]
+                  for r in range(1, len(nullities))]
+    # If stabilization happened early, all later increments are zero.
+    exact = {}
+    for r, current in enumerate(increments, start=1):
+        following = increments[r] if r < len(increments) else 0
+        count = current - following
+        if count:
+            exact[r] = count
+
+    block_sizes = []
+    for size, count in sorted(exact.items(), reverse=True):
+        block_sizes.extend([size] * count)
+
+    return {
+        "eigenvalue": lam,
+        "nullities": nullities,
+        "blocks_at_least": increments,
+        "blocks_exactly": {str(k): v for k, v in sorted(exact.items())},
+        "block_sizes_descending": block_sizes,
+        "geometric_multiplicity": nullities[1] if len(nullities) > 1 else 0,
+        "algebraic_multiplicity": nullities[-1],
+    }
+
+
+def spectral_fingerprint(matrix: Sequence[Sequence[int]], p: int,
+                         eigenvalues: Iterable[int]) -> dict:
+    """Build profiles for a caller-supplied list of F_p eigenvalues."""
+    n = _validate_matrix(matrix, p)
+    vals = sorted({int(x) % p for x in eigenvalues})
+    return {
+        "field": f"F_{p}",
+        "dimension": n,
+        "scope": "Jordan profiles for supplied eigenvalues in the base field",
+        "automatic_factorization": False,
+        "profiles": [jordan_profile(matrix, p, lam) for lam in vals],
+    }
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--prime", type=int, required=True)
+    parser.add_argument("--matrix-json", required=True,
+                        help="JSON array of equal-length matrix rows")
+    parser.add_argument("--eigenvalues", required=True,
+                        help="comma-separated eigenvalues in F_p")
+    args = parser.parse_args()
+    matrix = json.loads(args.matrix_json)
+    eigenvalues = [int(x.strip()) for x in args.eigenvalues.split(",") if x.strip()]
+    print(json.dumps(spectral_fingerprint(matrix, args.prime, eigenvalues),
+                     indent=2, sort_keys=True))
+
+
+if __name__ == "__main__":
+    main()
