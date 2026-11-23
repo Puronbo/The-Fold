@@ -1,7 +1,7 @@
 import unittest
 
 from tools.spectral_fingerprint import (
-    automatic_spectral_fingerprint, characteristic_polynomial,
+    automatic_spectral_fingerprint, characteristic_polynomial, factor_polynomial,
     jordan_profile, rank_mod, spectral_fingerprint,
 )
 
@@ -90,6 +90,42 @@ class SpectralFingerprintTests(unittest.TestCase):
         self.assertEqual(result["base_field_eigenvalues"], [])
         self.assertEqual(result["profiles"], [])
         self.assertFalse(result["irreducible_factorization_complete"])
+
+    def test_berlekamp_factorization_irreducible_and_split(self):
+        self.assertEqual(
+            factor_polynomial([1, 0, 1], 3),
+            [{"coefficients_descending": [1, 0, 1],
+              "multiplicity": 1, "degree": 2}],
+        )
+        self.assertEqual(
+            factor_polynomial([1, 0, 1], 5),
+            [
+                {"coefficients_descending": [1, 2],
+                 "multiplicity": 1, "degree": 1},
+                {"coefficients_descending": [1, 3],
+                 "multiplicity": 1, "degree": 1},
+            ],
+        )
+
+    def test_factorization_repeated_and_inseparable_factors(self):
+        self.assertEqual(
+            factor_polynomial([1, 0, 1], 2),
+            [{"coefficients_descending": [1, 1],
+              "multiplicity": 2, "degree": 1}],
+        )
+        self.assertEqual(
+            factor_polynomial([1, 0, 1, 0, 1], 2),
+            [{"coefficients_descending": [1, 1, 1],
+              "multiplicity": 2, "degree": 2}],
+        )
+
+    def test_automatic_scan_includes_complete_factorization(self):
+        result = automatic_spectral_fingerprint([[0, 2], [1, 0]], 3)
+        self.assertTrue(result["irreducible_factorization_complete"])
+        self.assertEqual(result["factorization"], [
+            {"coefficients_descending": [1, 0, 1],
+             "multiplicity": 1, "degree": 2},
+        ])
 
 
 if __name__ == "__main__":
