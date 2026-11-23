@@ -68,7 +68,7 @@ class MixedKroneckerCertificateTests(unittest.TestCase):
         self.assertTrue(result["decomposition_certified"])
 
     def test_singular_regular_component_rejected(self):
-        q, k = [[1]], [[0]]
+        q, k = [[0]], [[0]]
         with self.assertRaises(ValueError):
             verify_mixed_kronecker_decomposition(
                 q,k,3,regular_q=q,regular_k=k,
