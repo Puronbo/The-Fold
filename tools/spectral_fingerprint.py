@@ -506,3 +506,190 @@ def factor_polynomial(coefficients_descending: Sequence[int], p: int) -> list[di
 
 if __name__ == "__main__":
     main()
+
+
+def _prime_divisors(n: int) -> list[int]:
+    result = []
+    d = 2
+    value = n
+    while d * d <= value:
+        if value % d == 0:
+            result.append(d)
+            while value % d == 0:
+                value //= d
+        d += 1
+    if value > 1:
+        result.append(value)
+    return result
+
+
+def is_irreducible_polynomial(coefficients_descending: Sequence[int],
+                              p: int) -> bool:
+    """Rabin irreducibility test for a nonconstant polynomial over F_p."""
+    if not _is_prime(p):
+        raise ValueError("p must be a prime")
+    f = _poly_monic(list(reversed([int(x) % p
+                                   for x in coefficients_descending])), p)
+    degree = len(f) - 1
+    if degree < 1:
+        raise ValueError("polynomial must be nonconstant")
+    if degree == 1:
+        return True
+    x = [0, 1]
+    for prime_divisor in _prime_divisors(degree):
+        exponent = p ** (degree // prime_divisor)
+        test = _poly_sub(_poly_powmod(x, exponent, f, p), x, p)
+        if _poly_gcd(f, test, p) != [1]:
+            return False
+    return _poly_powmod(x, p ** degree, f, p) == _poly_divmod(x, f, p)[1]
+
+
+def _ext_zero(d: int) -> tuple[int, ...]:
+    return (0,) * d
+
+
+def _ext_one(d: int) -> tuple[int, ...]:
+    return (1,) + (0,) * (d - 1)
+
+
+def _ext_normalize(value: Sequence[int], d: int, p: int) -> tuple[int, ...]:
+    if len(value) > d:
+        raise ValueError("extension element degree must be below modulus degree")
+    return tuple((int(value[i]) if i < len(value) else 0) % p
+                 for i in range(d))
+
+
+def _ext_add(a, b, p: int):
+    return tuple((x + y) % p for x, y in zip(a, b))
+
+
+def _ext_sub(a, b, p: int):
+    return tuple((x - y) % p for x, y in zip(a, b))
+
+
+def _ext_mul(a, b, modulus: Sequence[int], p: int):
+    d = len(modulus) - 1
+    product = _poly_mul(a, b, p)
+    _, remainder = _poly_divmod(product, modulus, p)
+    return _ext_normalize(remainder, d, p)
+
+
+def _ext_pow(a, exponent: int, modulus: Sequence[int], p: int):
+    result = _ext_one(len(modulus) - 1)
+    base = tuple(a)
+    power = exponent
+    while power:
+        if power & 1:
+            result = _ext_mul(result, base, modulus, p)
+        base = _ext_mul(base, base, modulus, p)
+        power >>= 1
+    return result
+
+
+def _ext_inv(a, modulus: Sequence[int], p: int):
+    if not any(a):
+        raise ZeroDivisionError("zero has no multiplicative inverse")
+    return _ext_pow(a, p ** (len(modulus) - 1) - 2, modulus, p)
+
+
+def _ext_matmul(a, b, modulus: Sequence[int], p: int):
+    n, inner, m = len(a), len(b), len(b[0])
+    d = len(modulus) - 1
+    out = [[_ext_zero(d) for _ in range(m)] for _ in range(n)]
+    for i in range(n):
+        for k in range(inner):
+            if any(a[i][k]):
+                for j in range(m):
+                    out[i][j] = _ext_add(
+                        out[i][j],
+                        _ext_mul(a[i][k], b[k][j], modulus, p), p)
+    return out
+
+
+def _ext_rank(matrix, modulus: Sequence[int], p: int) -> int:
+    if not matrix:
+        return 0
+    a = [[tuple(value) for value in row] for row in matrix]
+    rows, cols = len(a), len(a[0])
+    pivot_row = 0
+    for col in range(cols):
+        pivot = next((r for r in range(pivot_row, rows)
+                      if any(a[r][col])), None)
+        if pivot is None:
+            continue
+        a[pivot_row], a[pivot] = a[pivot], a[pivot_row]
+        inverse = _ext_inv(a[pivot_row][col], modulus, p)
+        a[pivot_row] = [_ext_mul(x, inverse, modulus, p)
+                        for x in a[pivot_row]]
+        for r in range(rows):
+            if r != pivot_row and any(a[r][col]):
+                factor = a[r][col]
+                a[r] = [
+                    _ext_sub(a[r][j],
+                             _ext_mul(factor, a[pivot_row][j], modulus, p), p)
+                    for j in range(cols)
+                ]
+        pivot_row += 1
+        if pivot_row == rows:
+            break
+    return pivot_row
+
+
+def extension_jordan_profile(matrix: Sequence[Sequence[int]], p: int,
+                              modulus_descending: Sequence[int],
+                              eigenvalue: Sequence[int]) -> dict:
+    """Jordan profile over F_p[x]/(f), where f is irreducible.
+
+    Extension elements are low-degree-first coefficient arrays in the
+    polynomial basis 1, alpha, ..., alpha^(d-1). Matrix entries are embedded
+    from F_p. The supplied eigenvalue must be a root of the characteristic
+    polynomial for a nonempty profile.
+    """
+    n = _validate_matrix(matrix, p)
+    modulus = _poly_monic(list(reversed(
+        [int(x) % p for x in modulus_descending])), p)
+    if len(modulus) < 2 or not is_irreducible_polynomial(
+            list(reversed(modulus)), p):
+        raise ValueError("extension modulus must be irreducible")
+    d = len(modulus) - 1
+    lam = _ext_normalize(eigenvalue, d, p)
+    zero, one = _ext_zero(d), _ext_one(d)
+    a = []
+    for i, row in enumerate(matrix):
+        converted = []
+        for j, value in enumerate(row):
+            embedded = _ext_normalize([int(value)], d, p)
+            if i == j:
+                embedded = _ext_sub(embedded, lam, p)
+            converted.append(embedded)
+        a.append(converted)
+
+    power = [[one if i == j else zero for j in range(n)]
+             for i in range(n)]
+    nullities = [0]
+    for _ in range(1, n + 1):
+        power = _ext_matmul(power, a, modulus, p)
+        nullities.append(n - _ext_rank(power, modulus, p))
+        if nullities[-1] == nullities[-2]:
+            break
+    increments = [nullities[r] - nullities[r - 1]
+                  for r in range(1, len(nullities))]
+    exact = {}
+    for r, current in enumerate(increments, start=1):
+        following = increments[r] if r < len(increments) else 0
+        if current - following:
+            exact[r] = current - following
+    blocks = []
+    for size, count in sorted(exact.items(), reverse=True):
+        blocks.extend([size] * count)
+    return {
+        "field": f"F_{p}^{d}",
+        "modulus_coefficients_descending": list(reversed(modulus)),
+        "eigenvalue_coefficients_low_degree_first": list(lam),
+        "nullities": nullities,
+        "blocks_at_least": increments,
+        "blocks_exactly": {str(k): v for k, v in sorted(exact.items())},
+        "block_sizes_descending": blocks,
+        "geometric_multiplicity": nullities[1] if len(nullities) > 1 else 0,
+        "algebraic_multiplicity": nullities[-1],
+    }
