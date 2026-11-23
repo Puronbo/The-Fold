@@ -71,3 +71,37 @@ limitations.
 The test suite and CI results are the executable verification record. No
 claim of a polynomial-time generator search or neural-network predictive
 benefit is made.
+
+
+## G-EP46 — Integration into regular-pencil witnesses
+
+The shared-chart branch of `construct_regular_pencil_witness` now uses a
+three-stage construction strategy:
+
+1. For cyclic normalized operators, retain the inexpensive cyclic Krylov
+   fast path.
+2. If that path does not produce a witness, call
+   `construct_operator_similarity_witness`. This handles noncyclic
+   operators by independently assembling full rational-canonical bases and
+   setting (P=K_BK_A^{-1}).
+3. If bounded canonical-basis construction is incomplete, retain the existing
+   nullspace/intertwiner-space search as a fallback.
+
+For the normalized chart operators (A_a,A_b), the resulting (P) satisfies
+(PA_a=A_bP). With chart pivots (H_a,H_b), the strict-equivalence
+transformations are
+[
+S=H_bPH_a^{-1},qquad T=P^{-1}.
+]
+The implementation still verifies both original pencil equations
+[
+SQ_aT=Q_b,qquad SK_aT=K_b
+]
+and invertibility of (S,T). Thus the new basis strategy does not weaken the
+certificate's final checks.
+
+The new regression test uses a noncyclic operator with elementary divisors
+(x^2,x^2) and a nontrivial change of basis. It asserts that the
+rational-canonical-basis path is selected and that all pencil identities
+verify. The no-chart path is unchanged: it still uses the direct bounded
+finite-field search.
