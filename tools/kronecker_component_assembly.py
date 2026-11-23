@@ -75,6 +75,10 @@ def _validate_component_transform(matrix, label):
         raise ValueError(f"{label} must be rectangular and nonempty")
     if len(matrix) != width:
         raise ValueError(f"{label} must be square")
+    for row in matrix:
+        for value in row:
+            if not isinstance(value, int) or isinstance(value, bool):
+                raise ValueError(f"{label} entries must be integers (booleans are not accepted)")
     return matrix
 
 
@@ -425,7 +429,7 @@ def verify_kronecker_component_assembly_certificate(
     }
 
 
-def verify_kronecker_component_assembly_algebraically(
+def _verify_kronecker_component_assembly_algebraically(
     components: Sequence[dict], p: int, assembly_result: dict
 ) -> dict:
     """Verify an assembly certificate directly from input blocks and identities.
@@ -504,6 +508,27 @@ def verify_kronecker_component_assembly_algebraically(
     canonical_q = assembly_result.get("canonical_Q", [])
     canonical_k = assembly_result.get("canonical_K", [])
     try:
+        canonical_q_shape = _validate_component_matrix(canonical_q, "canonical_Q")
+        canonical_k_shape = _validate_component_matrix(canonical_k, "canonical_K")
+        if canonical_q_shape != canonical_k_shape:
+            raise ValueError("canonical coefficient matrices must have identical dimensions")
+    except (TypeError, ValueError):
+        checks.update({
+            "canonical_shape_matches_blocks": False,
+            "canonical_Q_is_block_diagonal_with_claimed_blocks": False,
+            "canonical_K_is_block_diagonal_with_claimed_blocks": False,
+            "every_local_strict_equivalence_identity_verified": False,
+            "assembled_transforms_equal_local_block_diagonal_transforms": False,
+            "global_strict_equivalence_identities_verified": False,
+            "canonical_matrices_well_formed": False,
+        })
+        return {
+            "schema": "the-fold-kronecker-component-algebraic-audit-v1",
+            "verified": False, "checks": checks,
+            "scope": "Malformed canonical matrices prevent algebraic certificate replay.",
+        }
+    checks["canonical_matrices_well_formed"] = True
+    try:
         canonical_shape = [sum(s[0] for s in shapes), sum(s[1] for s in shapes)]
         checks["canonical_shape_matches_blocks"] = (
             assembly_result.get("canonical_shape") == canonical_shape
@@ -542,8 +567,10 @@ def verify_kronecker_component_assembly_algebraically(
     if isinstance(local_items, (list, tuple)) and len(local_items) == len(components) and len(q_blocks) == len(components):
         for i, item in enumerate(local_items):
             try:
-                s = item["left_transform"]
-                t = item["right_transform"]
+                if not isinstance(item, dict):
+                    raise ValueError("local witness audit must be a dictionary")
+                s = _validate_component_transform(item["left_transform"], f"component {i} left transform")
+                t = _validate_component_transform(item["right_transform"], f"component {i} right transform")
                 audit = strict_pencil_equivalence_audit(
                     source_q_blocks[i], source_k_blocks[i], p,
                     q_blocks[i], k_blocks[i], s, t
@@ -557,15 +584,16 @@ def verify_kronecker_component_assembly_algebraically(
         len(local_ok) == len(components) and all(local_ok)
     )
     try:
+        assembled_s = _validate_component_transform(assembly_result.get("left_transform_S"), "assembled left transform")
+        assembled_t = _validate_component_transform(assembly_result.get("right_transform_T"), "assembled right transform")
         rebuilt_s, rebuilt_t = _block_diag(left_blocks), _block_diag(right_blocks)
         checks["assembled_transforms_equal_local_block_diagonal_transforms"] = (
-            _matrix_equal_mod(assembly_result.get("left_transform_S", []), rebuilt_s, p)
-            and _matrix_equal_mod(assembly_result.get("right_transform_T", []), rebuilt_t, p)
+            _matrix_equal_mod(assembled_s, rebuilt_s, p)
+            and _matrix_equal_mod(assembled_t, rebuilt_t, p)
         )
         global_audit = strict_pencil_equivalence_audit(
             expected_source_q, expected_source_k, p,
-            canonical_q, canonical_k, assembly_result.get("left_transform_S", []),
-            assembly_result.get("right_transform_T", [])
+            canonical_q, canonical_k, assembled_s, assembled_t
         )
         checks["global_strict_equivalence_identities_verified"] = bool(
             global_audit["strict_equivalence_certified"]
@@ -589,3 +617,21 @@ def verify_kronecker_component_assembly_algebraically(
             "uniqueness of the supplied decomposition."
         ),
     }
+
+    
+def verify_kronecker_component_assembly_algebraically(
+    components: Sequence[dict], p: int, assembly_result: dict
+) -> dict:
+    """Fail closed on malformed certificate structures and replay exceptions."""
+    try:
+        return _verify_kronecker_component_assembly_algebraically(components, p, assembly_result)
+    except (AttributeError, IndexError, KeyError, OverflowError, TypeError, ValueError):
+        return {
+            "schema": "the-fold-kronecker-component-algebraic-audit-v1",
+            "verified": False,
+            "checks": {"certificate_structure_well_formed": False},
+            "scope": (
+                "Malformed certificate structures or invalid witness matrices are "
+                "rejected without treating cached audit metadata as evidence."
+            ),
+        }
