@@ -565,3 +565,38 @@ F/\wp(F)\oplus
 \bigoplus_{q>0\ {\rm odd}}\bigoplus_{Q\ {\rm monic\ irreducible}}k_Q.
 \]
 For each finite residue coordinate, use the trace-pairing readout \(x\mapsto\operatorname{Tr}_{k_Q/\mathbb F_2}(c_{q,Q}x)\). The zero-mode \(F/\wp(F)\) factor uses its explicit Artin–Schreier basis. The model should predict the normalized orbit sums, not raw per-exponent residues.
+
+
+## 15. Finite basis and dual-readout benchmark
+
+The new script tools/coinvariant_basis_data.py enumerates an exact finite window in the canonical coinvariant:
+\[
+F/\wp(F)\oplus\bigoplus_{q>0\ {\rm odd}}\bigoplus_Q k_Q.
+\]
+
+For the zero Artin–Schreier factor it emits the standard basis elements
+\[
+1,\qquad S^n\ (n>0\text{ odd}),\qquad
+S^j/Q^d\ (Q\text{ monic irreducible},\ d>0\text{ odd},\ 0\le j<\deg Q),
+\]
+with a height cutoff. For each residue block it emits the polynomial basis
+\(1,\bar S,\ldots,\bar S^{m-1}\) of \(k_Q\), for each odd root q in a bounded range.
+
+It also computes a trace-dual basis \(c_i\in k_Q\) satisfying
+\[
+\operatorname{Tr}_{k_Q/\mathbb F_2}(c_i\bar S^j)=\delta_{ij}.
+\]
+Thus every finite residue coordinate has an explicit dual invariant linear readout. The script computes this by exact Gaussian elimination on the trace Gram matrix; it verifies nondegeneracy and all duality identities.
+
+Example finite benchmark:
+\`\`\`bash
+python tools/coinvariant_basis_data.py --self-test --height 5 --q-max 7 --degree-max 4 > coinvariant_basis.jsonl
+\`\`\`
+The cutoff has 60 zero-mode basis elements and 88 residue basis elements, for a total of 148 exact basis coordinates. The residue count is
+\[
+4\cdot\sum_{\deg Q\le4}\deg Q
+=4(2+2+6+12)=88.
+\]
+The zero-mode count is 60: one constant, three positive odd powers through height five, six classes at the two linear places with three allowed odd denominator powers, two classes at the irreducible quadratic, six at the two cubics, twelve at the three quartics, and thirty at the six quintics.
+
+The complete algebraic dual of the infinite direct sum is a product of coordinate duals. This finite benchmark supplies finite trace-dual readouts only; it does not impose a continuity condition on arbitrary algebraic functionals.
