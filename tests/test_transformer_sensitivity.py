@@ -26,7 +26,7 @@ class TransformerSensitivityTests(unittest.TestCase):
         result = compare_snapshots(
             {
                 "reference": [[1.0, 0.0, 0.0], [0.0, 1.0, 0.0]],
-                "same_rank": [[2.0, 0.0, 0.0], [0.0, 3.0, 0.0]],
+                "same_rank": [[2.0, 0.0, 0.0], [0.0, 2.0, 0.0]],
                 "rank_drop": [[1.0, 0.0, 0.0], [0.0, 0.0, 0.0]],
             },
             primes=[3, 5],
