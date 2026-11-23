@@ -600,3 +600,6 @@ observer gives the reading. The four zones are the map's legend.
 
 
 **Canonical regular-pencil blocks (G-EP40):** complete finite/infinity profiles now assemble into explicit block-diagonal representatives over the original prime field. Finite invariant factors use `(-C(d), I)`; an infinity divisor of size `e` uses `(I, N_e)`. The assembled pencil is reclassified independently and must reproduce the source profile exactly. This supplies a canonical target even without a rational invertible projective member; constant transformations from arbitrary input to that target remain future work. See `research/the-fold-regular-pencil-canonical-blocks.md`.
+
+
+**Canonical-form witness pipeline (G-EP41):** `regular_pencil_canonical_witness` now integrates profile extraction, canonical block assembly, independent profile verification, and strict-equivalence witness construction. It returns constant (S,T) only after exact verification of both coefficient identities and invertibility. It uses the fast shared-chart path when available and the budget-bounded direct search otherwise; a scalable blockwise reduction remains open. See `research/the-fold-canonical-form-witness-pipeline.md`.
