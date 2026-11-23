@@ -66,3 +66,24 @@ algorithm.
 `tests/test_kronecker_component_assembly.py` covers a mixed right/left/
 regular direct sum, an incorrect declared minimal index, a component that
 fails singular recovery, and empty input rejection.
+
+
+## G-EP60 — Integrated multi-block direct-sum audit
+
+Successful assembly now derives `canonical_block_shapes` directly from the
+canonical component matrices in the same order as the supplied component list.
+It passes the assembled source pair and global block-diagonal transforms to
+the independent G-EP58 `verify_pencil_multi_direct_sum_witness` verifier.
+The returned `multi_block_direct_sum_audit` checks transform invertibility and
+all off-diagonal component blocks in both coefficients. The existing global
+strict-equivalence audit remains independent and unchanged.
+
+The successful result exposes both certificates and a
+`multi_block_direct_sum_verified` check. A failed singular or regular component
+still returns the existing incomplete result before either global success
+audit is emitted. No component discovery, uniqueness, indecomposability, or
+regularity claim is added; the caller still supplies the partition.
+
+Tests now assert the ordered three-block shape list and the independent audit
+for a mixed right/left/regular assembly, and ensure failed recovery does not
+emit a success audit.
