@@ -557,3 +557,5 @@ observer gives the reading. The four zones are the map's legend.
 
 
 **Cross-dimensional primary-structure comparison (G-EP22):** `tools/primary_structure.py` compares two square operators over the same prime field without requiring equal dimensions. It reports shared irreducible primary support, primary-dimension overlap, and stricter exact elementary-divisor overlap. These are algebraic descriptors, not claims of functional or semantic similarity. See `research/the-fold-cross-dimensional-primary-structure.md`.
+
+**Rectangular matrix-pencil fingerprints (G-EP23):** `tools/rectangular_pencil.py` compares equal-shaped rectangular map pairs without square padding. It records individual and joint ranks plus the rank profile of all p+1 projective combinations aQ+bK over F_p. These are invariants under shared strict equivalence (common invertible input/output coordinate changes), not a complete pencil classification and not a claim of neural-network functional similarity. See `tests/test_rectangular_pencil.py` and `research/the-fold-rectangular-pencil-fingerprints.md`.
