@@ -178,8 +178,8 @@ def poly_string(a: int) -> str:
 def zero_mode_basis(degree_max: int) -> Iterable[dict]:
     """One trace-one rational differential generator for each Q.
 
-    In the zero mode, F/(wp(F)+S*F^2) is the Cartier coinvariant
-    of Omega_F^1/dF. Its Q-coordinate is Tr_{k_Q/F_2}(res_Q((x/S)dS)).
+    In the zero mode, F/(wp(F)+S*F^2) has one F_2 coordinate per
+    finite irreducible Q, given by Tr_{k_Q/F_2}(res_Q((x/S)dS)).
     Choose alpha with trace one and set x=S*alpha*Q'/Q.
     """
     for q in irreducibles(degree_max):
