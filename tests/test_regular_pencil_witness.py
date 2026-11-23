@@ -21,6 +21,7 @@ class RegularPencilWitnessTests(unittest.TestCase):
         self.assertTrue(result["checks"]["S_Ka_T_equals_Kb"])
         self.assertTrue(result["checks"]["S_invertible"])
         self.assertTrue(result["checks"]["T_invertible"])
+        self.assertEqual(result["intertwiner_construction_method"], "cyclic-krylov-bases")
 
     def test_constructs_witness_using_infinity_chart(self):
         q = [[1, 0], [0, 0]]
