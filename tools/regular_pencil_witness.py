@@ -9,7 +9,8 @@ from tools.regular_pencil_profile import (
     _chart_operator,
 )
 from tools.rectangular_pencil import _validate_pair
-from tools.rational_canonical import rational_canonical_profile\nfrom tools.rational_canonical_basis import construct_operator_similarity_witness
+from tools.rational_canonical import rational_canonical_profile
+from tools.rational_canonical_basis import construct_operator_similarity_witness
 
 
 def _nullspace(matrix, p, columns):
