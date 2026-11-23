@@ -1616,3 +1616,6 @@ The rational residue generator also emits orbit-sequence examples with the orbit
 
 
 **G-4cv — orbit-residue training data:** tools/residue_feature_data.py now emits finite exponent-doubling sequences with residues \(\alpha_j\in k_Q\) and target \(\sum_j\operatorname{Frob}^{-j}(\alpha_j)\). Its exact adjacent-stage relation is \((\alpha,\alpha^2)\mapsto0\). Independent finite-field checks passed 1,056 such relations over all 14 irreducibles of degree at most five.
+
+
+**G-4cw — finite basis and dual readouts:** tools/coinvariant_basis_data.py enumerates the explicit Artin–Schreier basis of \(F/\wp(F)\) and the residue-field polynomial bases for bounded odd orbit roots and irreducible degrees. It computes trace-dual residue readouts exactly. The cutoff height 5, q≤7, deg(Q)≤4 has 60 zero-mode and 88 residue coordinates, dimension 148.
