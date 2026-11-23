@@ -1,6 +1,6 @@
 import unittest
 
-from tools.spectral_fingerprint import jordan_profile, rank_mod, spectral_fingerprint
+from tools.spectral_fingerprint import (\n    automatic_spectral_fingerprint, characteristic_polynomial,\n    jordan_profile, rank_mod, spectral_fingerprint,\n)
 
 
 class SpectralFingerprintTests(unittest.TestCase):
