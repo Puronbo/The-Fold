@@ -5,7 +5,7 @@ from tools.spectral_fingerprint import (
     automatic_full_spectral_fingerprint, automatic_spectral_fingerprint,
     characteristic_polynomial, _characteristic_polynomial_subset_oracle, factor_polynomial,
     extension_jordan_profile, is_irreducible_polynomial,
-    jordan_profile, rank_mod, spectral_fingerprint,
+    jordan_profile, rank_mod, sparse_jordan_profile, sparse_rank_mod, spectral_fingerprint,
 )
 
 
@@ -13,6 +13,47 @@ class SpectralFingerprintTests(unittest.TestCase):
     def test_rank_over_prime_field(self):
         self.assertEqual(rank_mod([[1, 2], [2, 1]], 3), 1)
         self.assertEqual(rank_mod([[1, 0], [0, 1]], 5), 2)
+
+    def test_sparse_rank_matches_dense_rank(self):
+        matrices = [
+            [[1, 0, 2], [0, 0, 0], [2, 0, 1]],
+            [[0, 1, 0], [0, 0, 1], [0, 0, 0]],
+            [[1, 2], [2, 1]],
+        ]
+        for matrix in matrices:
+            sparse = {i: {j: value for j, value in enumerate(row) if value}
+                      for i, row in enumerate(matrix)}
+            for p in (2, 3, 5, 7):
+                self.assertEqual(sparse_rank_mod(sparse, len(matrix), p),
+                                 rank_mod(matrix, p))
+
+    def test_sparse_jordan_profile_matches_dense_profile(self):
+        matrices = [
+            ([[0, 1, 0], [0, 0, 1], [0, 0, 0]], 0),
+            ([[2, 1, 0], [0, 2, 1], [0, 0, 2]], 2),
+            ([[1, 0, 0], [0, 1, 0], [0, 0, 3]], 1),
+            ([[0, 1, 0, 0], [0, 0, 0, 0],
+              [0, 0, 0, 1], [0, 0, 0, 0]], 0),
+        ]
+        for matrix, eigenvalue in matrices:
+            sparse = {i: {j: value for j, value in enumerate(row) if value}
+                      for i, row in enumerate(matrix)}
+            for p in (2, 3, 5):
+                dense_result = jordan_profile(matrix, p, eigenvalue)
+                sparse_result = sparse_jordan_profile(
+                    sparse, len(matrix), p, eigenvalue)
+                for key in ("nullities", "blocks_at_least", "blocks_exactly",
+                            "block_sizes_descending", "geometric_multiplicity",
+                            "algebraic_multiplicity"):
+                    self.assertEqual(sparse_result[key], dense_result[key])
+
+    def test_sparse_validation(self):
+        with self.assertRaises(ValueError):
+            sparse_rank_mod({2: {0: 1}}, 2, 5)
+        with self.assertRaises(ValueError):
+            sparse_jordan_profile({0: {3: 1}}, 2, 5, 0)
+        with self.assertRaises(ValueError):
+            sparse_rank_mod({}, 2, 4)
 
     def test_single_nilpotent_block_size_three(self):
         a = [[0, 1, 0], [0, 0, 1], [0, 0, 0]]
