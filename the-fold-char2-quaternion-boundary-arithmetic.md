@@ -4085,3 +4085,67 @@ This uses the standard Hasse-derivative Frobenius rule and Cartier's characteriz
 
 - **Proved:** the exact pure-scaling first nonzero diagonal \(I_h=S^{2^h}F^{2^{h+1}}\) for every h; the finite p-basis decomposition; polynomial tower quotient \(\mathbb F_2\); and the nonzero rational Cartier-fixed witness.
 - **Open:** whether all Cartier-nonnilpotent classes survive the full section-change group, the syzygies among different-depth relations, and the zero-mode coinvariants. The full \(Q_{\mathcal G}\) is not yet computed.
+
+
+## 93. G-4cq — residue classification of the Cartier-nonnilpotent tower quotient
+
+Let \(F=\mathbb F_2(S)\), and let \(\mathbb P^1_F\) here mean the projective \(S\)-line over the constant field \(\mathbb F_2\). Its closed points are the point at infinity and the finite points defined by monic irreducible polynomials \(Q\in\mathbb F_2[S]\). Put
+\[
+k_Q=\mathbb F_2[S]/(Q),\qquad k_\infty=\mathbb F_2.
+\]
+For a rational differential \(\omega\), let \(\operatorname{Res}_P(\omega)\in k(P)\) be its residue at P. The global residue theorem says
+\[
+\sum_P\operatorname{Tr}_{k(P)/\mathbb F_2}
+          \operatorname{Res}_P(\omega)=0.
+\]
+
+The residue map kills exact differentials. It also intertwines Cartier with inverse Frobenius:
+\[
+\operatorname{Res}_P(C\omega)
+=\operatorname{Res}_P(\omega)^{1/2}.
+\]
+This follows from the local parameter formula. If \(z\) is a uniformizer at P and
+\[
+\omega=\sum_{n\in\mathbb Z}a_nz^n\,dz,
+\]
+then in characteristic two
+\[
+C(\omega)=\sum_{m\in\mathbb Z}a_{2m+1}^{1/2}z^m\,dz.
+\]
+In particular the \(z^{-1}dz\) coefficient is sent to its square root.
+
+We claim that
+\[
+\boxed{
+\ker\!\left(\operatorname{Res}:
+\Omega_F^1/dF\to\bigoplus_P k(P)\right)
+=\bigcup_{h\ge1}\ker(C^h).
+}
+\]
+If a residue is nonzero, its iterated square roots remain nonzero because every finite residue field is perfect, so the class cannot be Cartier-nilpotent. Conversely, suppose all residues vanish. A rational differential has only finitely many poles and only finitely many negative Laurent terms at each pole. Since the \(z^{-1}dz\) term is absent, every remaining negative exponent is killed after finitely many Cartier iterations: the exponent-plus-one is repeatedly divided by two when even, and eventually becomes odd and nonzero, at which point Cartier kills that term. Choose one iterate large enough for all poles. Cartier preserves regularity, so that iterate is a global regular differential on \(\mathbb P^1_{\mathbb F_2}\), hence zero because \(\mathbb P^1\) has genus zero. This proves the claim.
+
+The image of the residue map is exactly the trace-zero subspace. Inclusion follows from the global residue theorem. For surjectivity, prescribe arbitrary residues \(\alpha_Q\in k_Q\) at finitely many finite points Q. Since Q is separable, \(Q'\) is invertible modulo Q. Choose a polynomial \(a_Q(S)\) representing \(\alpha_QQ'(S)\) modulo Q. Then
+\[
+\omega_Q=\frac{a_Q(S)}{Q(S)}\,dS
+\]
+has residue \(\alpha_Q\) at Q and no other finite pole. Its residue at infinity is forced to be \(\operatorname{Tr}_{k_Q/\mathbb F_2}(\alpha_Q)\). Summing these forms realizes every finite residue list, with the unique infinity coordinate required by the trace relation.
+
+Consequently the Cartier-nonnilpotent tower quotient has the explicit description
+\[
+\boxed{
+\frac{\Omega_F^1/dF}{\bigcup_{h\ge1}\ker(C^h)}
+\ \simeq\
+\left\{(\alpha_P)_P:
+\begin{array}{l}
+\alpha_P\in k(P),\ \text{finite support},\\
+\sum_P\operatorname{Tr}_{k(P)/\mathbb F_2}(\alpha_P)=0
+\end{array}\right\}
+\ \simeq\
+\bigoplus_{Q\ {\rm monic\ irreducible}} k_Q.
+}
+\]
+The last isomorphism records the finite-point residues; the infinity residue is determined by their total trace.
+
+Under \(\Theta([x])=(x/S)dS\), this is also the explicit form of \(F/\sum_{h\ge0}I_h\) from G-4cp. For example \(x=S/(S+1)\) gives \(d\log(S+1)\), whose finite residue at Q=S+1 is 1 and whose infinity residue is 1. This is a nonzero tower class. More generally, each finite irreducible Q contributes an entire residue field \(k_Q\), not merely the F₂-valued logarithmic classes obtained from \(d\log f\).
+
+**Scope.** This classifies the Cartier-nonnilpotent quotient of the *displayed pure-scaling diagonal tower*. It does not yet prove that these classes survive all section-change directions or all syzygies among relations. The full coinvariant quotient \(Q_{\mathcal G}\) remains open.
