@@ -162,11 +162,16 @@ def main() -> None:
                         help="comma-separated eigenvalues in F_p (manual mode)")
     parser.add_argument("--auto", action="store_true",
                         help="compute the characteristic polynomial and scan F_p")
+    parser.add_argument("--auto-full", action="store_true",
+                        help="also compute Jordan profiles for higher-degree factors")
     args = parser.parse_args()
-    if args.auto == (args.eigenvalues is not None):
-        parser.error("choose exactly one of --auto or --eigenvalues")
+    modes = int(args.auto) + int(args.auto_full) + int(args.eigenvalues is not None)
+    if modes != 1:
+        parser.error("choose exactly one of --auto, --auto-full, or --eigenvalues")
     matrix = json.loads(args.matrix_json)
-    if args.auto:
+    if args.auto_full:
+        result = automatic_full_spectral_fingerprint(matrix, args.prime)
+    elif args.auto:
         result = automatic_spectral_fingerprint(matrix, args.prime)
     else:
         eigenvalues = [int(x.strip()) for x in args.eigenvalues.split(",") if x.strip()]
@@ -694,4 +699,38 @@ def extension_jordan_profile(matrix: Sequence[Sequence[int]], p: int,
         "block_sizes_descending": blocks,
         "geometric_multiplicity": nullities[1] if len(nullities) > 1 else 0,
         "algebraic_multiplicity": nullities[-1],
+    }
+
+
+def automatic_full_spectral_fingerprint(matrix: Sequence[Sequence[int]],
+                                        p: int) -> dict:
+    """Compute one Jordan profile for every irreducible eigenvalue class.
+
+    Degree-one factors are profiled over F_p. For a higher-degree irreducible
+    factor q, the residue class alpha of x in F_p[x]/(q) is a root of q, so
+    the extension profile is computed automatically. Frobenius conjugates
+    have identical Jordan partitions because the matrix entries lie in F_p.
+    """
+    base = automatic_spectral_fingerprint(matrix, p)
+    extension_classes = []
+    for factor in base["factorization"]:
+        if "degree" not in factor or factor["degree"] <= 1:
+            continue
+        modulus = factor["coefficients_descending"]
+        profile = extension_jordan_profile(
+            matrix, p, modulus, [0, 1]
+        )
+        extension_classes.append({
+            "minimal_polynomial_coefficients_descending": modulus,
+            "extension_degree": factor["degree"],
+            "frobenius_conjugate_count": factor["degree"],
+            "algebraic_multiplicity_per_root": factor["multiplicity"],
+            "representative_root_coefficients_low_degree_first": [0, 1],
+            "profile": profile,
+        })
+    return {
+        **base,
+        "scope": "all eigenvalues grouped by irreducible polynomial over F_p",
+        "extension_eigenvalue_classes": extension_classes,
+        "extension_classes_complete": True,
     }
