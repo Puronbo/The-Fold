@@ -6,7 +6,7 @@ from tools.pencil_direct_sum_witness import verify_pencil_direct_sum_witness
 class PencilDirectSumWitnessTests(unittest.TestCase):
     def test_verifies_scrambled_rectangular_direct_sum(self):
         # Source is a constant strict-equivalent scrambling of 1x2 plus 1x1.
-        q0 = [[1, 0, 0], [0, 1, 0]]
+        q0 = [[1, 0, 0], [0, 0, 1]]
         k0 = [[0, 1, 0], [0, 0, 1]]
         s = [[1, 1], [0, 1]]
         t = [[1, 1, 0], [0, 1, 1], [0, 0, 1]]
@@ -31,10 +31,11 @@ class PencilDirectSumWitnessTests(unittest.TestCase):
         self.assertFalse(result["verification"]["Q_cross_blocks_zero"])
 
     def test_rejects_singular_transform(self):
-        with self.assertRaises(ValueError):
-            verify_pencil_direct_sum_witness(
-                [[1]], [[0]], 5, [[0]], [[1]], (0, 0)
-            )
+        result = verify_pencil_direct_sum_witness(
+            [[1]], [[0]], 5, [[0]], [[1]], (0, 0)
+        )
+        self.assertFalse(result["verification"]["left_transform_invertible"])
+        self.assertFalse(result["verification"]["direct_sum_verified"])
 
     def test_validates_prime_and_partition(self):
         with self.assertRaises(ValueError):
