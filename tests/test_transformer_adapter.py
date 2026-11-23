@@ -64,6 +64,8 @@ class TransformerAdapterTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             export_weight_matrix([[float("nan")]], 5)
         with self.assertRaises(ValueError):
+            export_weight_matrix([[1e308]], 5, scale=1e308)
+        with self.assertRaises(ValueError):
             export_weight_matrix([[1, 2], [3]], 5)
 
 
