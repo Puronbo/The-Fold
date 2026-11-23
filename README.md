@@ -530,3 +530,6 @@ observer gives the reading. The four zones are the map's legend.
 
 
 **Transformer weight adapter (G-EP13):** an optional, dependency-free adapter exports nested arrays or tensor-like layer weights into a prime field using an explicit scale and round-to-nearest/ties-to-even policy. Rectangular layers receive exact modular-rank diagnostics; Jordan fingerprints are restricted to square operators. The conversion is lossy and its output depends on the chosen prime and scale; no predictive value on trained models is claimed. See `tools/transformer_adapter.py`, `tests/test_transformer_adapter.py`, and `research/the-fold-transformer-finite-field-adapter.md`.
+
+
+**Transformer fingerprint sensitivity audit (G-EP14):** compare named weight snapshots across chosen primes and quantization scales. The utility reports exact modular-rank stability and, for square operators, optional full spectral/Jordan signature stability. Results are explicitly configuration-specific and do not imply functional or semantic model equivalence. Synthetic tests exercise unchanged and changed signatures; no trained-checkpoint experiment is claimed. See `tools/transformer_sensitivity.py`, `tests/test_transformer_sensitivity.py`, and `research/the-fold-transformer-fingerprint-sensitivity.md`.
