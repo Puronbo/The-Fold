@@ -283,11 +283,7 @@ def construct_regular_pencil_witness(
             if canonical.get('witness_found'):
                 found = canonical['intertwiner']
                 construction_method = 'rational-canonical-bases'
-            canonical_examined = sum(
-                item.get('candidates_examined', 0)
-                for side in ('basis_a', 'basis_b')
-                for item in canonical.get(side, {}).get('component_results', [])
-            )
+            canonical_examined = 0  # G-EP45 currently exposes no aggregate generator counter.
         basis = [] if found is not None else _intertwiner_space(a, b, p)
         dimension = len(basis)
         candidate_count = p ** dimension
