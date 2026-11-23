@@ -208,6 +208,7 @@ def recover_mixed_kronecker_pencil(
     q: Sequence[Sequence[int]], k: Sequence[Sequence[int]], p: int, *,
     max_degree: int = 8, max_minors: int = 2000,
     max_candidates: int = 100_000,
+    search_mode: str = "structured",
 ) -> dict:
     """Recover a mixed Kronecker target and constant witnesses when found.
 
@@ -218,8 +219,10 @@ def recover_mixed_kronecker_pencil(
     algorithm. A failed bounded search is inconclusive.
     """
     rows, cols = _validate_pair(q, k, p)
-    if not isinstance(max_candidates, int) or max_candidates < 1:
+    if not isinstance(max_candidates, int) or isinstance(max_candidates, bool) or max_candidates < 1:
         raise ValueError("max_candidates must be a positive integer")
+    if search_mode not in ("structured", "exhaustive"):
+        raise ValueError("search_mode must be 'structured' or 'exhaustive'")
     profile = rectangular_pencil_kronecker_profile(
         q, k, p, max_degree=max_degree, max_minors=max_minors
     )
@@ -232,8 +235,18 @@ def recover_mixed_kronecker_pencil(
         raise ArithmeticError("profile-derived canonical target has inconsistent dimensions")
 
     examined = 0
-    for s in _left_candidates(rows, p, max_candidates):
+    if search_mode == "exhaustive":
+        left_iterator = (
+            _matrix_from_flat(list(values), rows)
+            for values in product(range(p), repeat=rows*rows)
+        )
+    else:
+        left_iterator = _left_candidates(rows, p, max_candidates)
+
+    exhausted = True
+    for s in left_iterator:
         if examined >= max_candidates:
+            exhausted = False
             break
         examined += 1
         if _det(s, p) == 0:
@@ -243,19 +256,23 @@ def recover_mixed_kronecker_pencil(
         if affine is None:
             continue
         particular, basis = affine
-        remaining = max_candidates - examined
         total = p ** len(basis)
-        candidates = [particular]
-        if total <= remaining:
-            candidates = []
-            for values in product(range(p), repeat=len(basis)):
-                vector = particular[:]
-                for scalar, direction in zip(values, basis):
-                    if scalar:
-                        vector = [(x + scalar*y) % p for x, y in zip(vector, direction)]
-                candidates.append(vector)
-                examined += 1
-        for vector in candidates:
+        if search_mode == "structured" and total > max_candidates - examined:
+            vectors = iter([particular])
+            fully_enumerated = False
+        else:
+            vectors = (
+                [(particular[z] + sum(values[j]*basis[j][z]
+                                      for j in range(len(basis))) ) % p
+                 for z in range(cols*cols)]
+                for values in product(range(p), repeat=len(basis))
+            )
+            fully_enumerated = True
+        for vector in vectors:
+            if examined >= max_candidates:
+                exhausted = False
+                break
+            examined += 1
             t = _matrix_from_flat(vector, cols)
             if _det(t, p) == 0:
                 continue
@@ -274,15 +291,26 @@ def recover_mixed_kronecker_pencil(
                     "left_transform_S": s, "right_transform_T": t,
                     "candidates_examined": examined, "profile": profile,
                     "verification": audit,
-                    "method": "profile-derived canonical target plus structured S search and exact affine solve for T",
-                    "scope": "Constructive mixed recovery when a bounded witness is found; bounded search failure is inconclusive.",
+                    "method": ("exhaustive finite-field S/T witness search" if search_mode == "exhaustive"
+                               else "profile-derived canonical target plus structured S search and exact affine solve for T"),
+                    "search_mode": search_mode,
+                    "scope": "Positive strict-equivalence witnesses are exact and independently verified.",
                 }
+        if not fully_enumerated and search_mode == "structured":
+            exhausted = False
+        if not exhausted:
+            break
+    complete_negative = search_mode == "exhaustive" and exhausted
+
     return {
         "schema": "the-fold-mixed-kronecker-recovery-v1",
         "field": f"F_{p}", "source_shape": [rows, cols],
-        "recovered": False, "decision_complete": False,
+        "recovered": False, "decision_complete": complete_negative,
         "candidates_examined": examined, "max_candidates": max_candidates,
-        "reason": "no witness found within the structured left-transform search budget",
+        "search_mode": search_mode,
+        "reason": ("all invertible S and all affine T solutions were exhausted; no strict-equivalence witness exists"
+                   if complete_negative else "search budget exhausted or structured search family was incomplete"),
         "profile": profile,
-        "scope": "Profile data may be complete, but explicit mixed strict-equivalence witness recovery is bounded and inconclusive on search failure.",
+        "scope": ("Complete finite-field non-equivalence decision for the profile-derived canonical target."
+                  if complete_negative else "Profile data may be complete, but explicit witness search is bounded and failure is inconclusive."),
     }
