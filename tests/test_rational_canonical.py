@@ -7,7 +7,7 @@ class RationalCanonicalTests(unittest.TestCase):
     def test_identity_has_repeated_linear_invariant_factors(self):
         result = rational_canonical_profile([[1, 0], [0, 1]], 5)
         self.assertEqual(result["invariant_factors_coefficients_descending"],
-                         [[4, 1], [4, 1]])
+                         [[1, 4], [1, 4]])
         self.assertTrue(result["similarity_class_complete_over_base_field"])
 
     def test_companion_of_x_squared_plus_one_is_cyclic(self):
@@ -38,11 +38,11 @@ class RationalCanonicalTests(unittest.TestCase):
         a = [[1, 1], [0, 2]]
         # P=[[1,1],[1,0]], P^-1 exists over F_5.
         p = 5
-        pinv = [[0, 1], [1, 4]]
+        pinv = [[0, 1], [1, 4]]\n        basis = [[1, 1], [1, 0]]
         def mm(x, y):
             return [[sum(x[i][k] * y[k][j] for k in range(2)) % p
                      for j in range(2)] for i in range(2)]
-        conjugate = mm(mm(pinv, a), [[0, 1], [1, 4]]) # P^-1 A P, P=P^-1 here
+        conjugate = mm(mm(pinv, a), basis) # P^-1 A P
         left = rational_canonical_profile(a, p)
         right = rational_canonical_profile(conjugate, p)
         self.assertEqual(left["invariant_factors_coefficients_descending"],
