@@ -515,3 +515,5 @@ observer gives the reading. The four zones are the map's legend.
 
 
 **Cyclotomic eigenprimes:** the cyclotomic companion operator has an eigenvalue over F_p exactly when, writing m=p^a n with p not dividing n, n divides p−1. The spectral fingerprint records the full modular factorization together with algebraic multiplicities and eigenspace dimensions; these are distinct data in ramified characteristics. See `research/the-fold-cyclotomic-spectral-fingerprints.md` (G-EP2).
+
+**Cyclotomic eigenprime density:** for a finite family of indices, the density is the proportion of reduced residue classes modulo their least common multiple that are 1 modulo at least one index. Inclusion–exclusion gives an exact totient formula; repeated blocks do not change it. See `research/the-fold-cyclotomic-eigenprime-density.md` (G-EP3).
