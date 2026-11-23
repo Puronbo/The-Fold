@@ -39,13 +39,39 @@ def _matrix_equal_mod(a, b, p):
     )
 
 
+def _validate_component_transform(matrix, label):
+    """Require a nonempty, rectangular, square local basis transformation."""
+    if not isinstance(matrix, (list, tuple)) or not matrix:
+        raise ValueError(f"{label} must be a nonempty square matrix")
+    if any(not isinstance(row, (list, tuple)) for row in matrix):
+        raise ValueError(f"{label} must contain matrix rows")
+    width = len(matrix[0])
+    if width == 0 or any(len(row) != width for row in matrix):
+        raise ValueError(f"{label} must be rectangular and nonempty")
+    if len(matrix) != width:
+        raise ValueError(f"{label} must be square")
+    return matrix
+
+
 def _component_witness_composition_audit(
     component_audits, assembled_s, assembled_t, source_q, source_k,
     canonical_q, canonical_k, p
 ):
     """Rebuild global transforms solely from the ordered local certificates."""
-    reconstructed_s = _block_diag([item["left_transform"] for item in component_audits])
-    reconstructed_t = _block_diag([item["right_transform"] for item in component_audits])
+    if not isinstance(component_audits, (list, tuple)) or not component_audits:
+        raise ValueError("component_audits must be a nonempty ordered sequence")
+    left_transforms, right_transforms = [], []
+    for index, item in enumerate(component_audits):
+        if not isinstance(item, dict):
+            raise ValueError(f"component audit {index} must be a dictionary")
+        left_transforms.append(_validate_component_transform(
+            item.get("left_transform"), f"component {index} left_transform"
+        ))
+        right_transforms.append(_validate_component_transform(
+            item.get("right_transform"), f"component {index} right_transform"
+        ))
+    reconstructed_s = _block_diag(left_transforms)
+    reconstructed_t = _block_diag(right_transforms)
     replay = strict_pencil_equivalence_audit(
         source_q, source_k, p, canonical_q, canonical_k, reconstructed_s, reconstructed_t
     )
