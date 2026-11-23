@@ -4263,3 +4263,67 @@ Q_{\mathcal G}\simeq
 }
 \]
 The zero-mode basis has one trace-one residue generator per finite Q. This replaces the false \(F/\wp(F)\) simplification in 95.4 and the corresponding G-4cu claim.
+
+## 99. G-4da — complete algebraic dual of the coinvariant: all invariant linear readouts
+
+Let
+\[
+Q_{\mathcal G}\simeq
+\left(\bigoplus_{Q\ {\rm monic\ irreducible}}\mathbb F_2\right)
+\oplus
+\left(
+\bigoplus_{\substack{q>0\\q\ {\rm odd}}}
+\ \bigoplus_{Q\ {\rm monic\ irreducible}} k_Q
+\right)
+\]
+be the canonical full coinvariant from G-4ct and G-4cy. Since invariant linear functionals on Q are exactly the linear functionals factoring through \(Q_{\mathcal G}\), we obtain
+\[
+(Q^*)^{\mathcal G}\simeq\operatorname{Hom}_{\mathbb F_2}(Q_{\mathcal G},\mathbb F_2).
+\]
+
+For every finite residue field \(k_Q\), the absolute trace pairing
+\[
+k_Q\times k_Q\longrightarrow\mathbb F_2,\qquad
+(c,x)\longmapsto\operatorname{Tr}_{k_Q/\mathbb F_2}(cx)
+\]
+is nondegenerate. Thus \(k_Q^*\simeq k_Q\), while the dual of a zero-mode \(\mathbb F_2\)-coordinate is another \(\mathbb F_2\). The algebraic dual of a direct sum is the unrestricted product of the coordinate duals. Therefore
+\[
+\boxed{
+(Q^*)^{\mathcal G}
+\simeq
+\left(\prod_{Q\ {\rm monic\ irreducible}}\mathbb F_2\right)
+\times
+\left(
+\prod_{\substack{q>0\\q\ {\rm odd}}}
+\ \prod_{Q\ {\rm monic\ irreducible}} k_Q
+\right).
+}
+\]
+
+Explicitly, an arbitrary family of weights
+\[
+\epsilon_Q\in\mathbb F_2,\qquad c_{q,Q}\in k_Q
+\]
+defines the invariant readout
+\[
+\boxed{
+\Lambda_{\epsilon,c}(m)
+=
+\sum_Q\epsilon_Q\,z_Q(m)
++
+\sum_{\substack{q>0\\q\ {\rm odd}}}\sum_Q
+\operatorname{Tr}_{k_Q/\mathbb F_2}
+\left(c_{q,Q}\,\mathfrak r_{q,Q}(m)\right),
+}
+\]
+where
+\[
+z_Q(m)=
+\operatorname{Tr}_{k_Q/\mathbb F_2}
+\operatorname{res}_Q\left(\frac{a_0}{S}dS\right)
+\]
+and \(\mathfrak r_{q,Q}\) is the normalized orbit residue of G-4ct. The sum is well-defined even when the weight families have infinite support: every \(m\in Q_{\mathcal G}\) has finite support in the direct-sum coordinates, so only finitely many terms are evaluated.
+
+There is no additional continuity restriction for the quotient topology induced by the p-adic topology on M. By G-4bs, every positive p-tail lies in R, so \(pM\subseteq R\). Since \(pM\) is open in M, the quotient \(Q=M/R\) is discrete. Every algebraic linear functional on Q is therefore continuous. The distinction between the direct-sum coinvariant and its product dual is essential: finite-support readout weights describe a useful benchmark, but they are not the full invariant-linear-functional space.
+
+**Learning consequence.** A linear invariant head is parameterized by product weights \((\epsilon_Q,c_{q,Q})\). Finite training windows truncate this product to finitely many irreducible points and odd orbit roots. Nonlinear invariant functions remain a separate invariant-ring problem; G-4da classifies only invariant linear readouts.
