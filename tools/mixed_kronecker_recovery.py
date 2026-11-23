@@ -213,10 +213,11 @@ def recover_mixed_kronecker_pencil(
     """Recover a mixed Kronecker target and constant witnesses when found.
 
     The profile discovers both minimal-index lists and the regular elementary
-    divisors. A structured finite-field search constructs S; for each S the
-    equations for T are solved exactly as an affine linear system. This is a
-    bounded witness constructor, not a polynomial-time canonical-form
-    algorithm. A failed bounded search is inconclusive.
+    divisors. In structured mode, a bounded family of S candidates is tried.
+    In exhaustive mode, every S over F_p and every corresponding affine T
+    solution is enumerated, subject to max_candidates. Positive witnesses are
+    independently audited; a completed exhaustive negative search is a
+    finite-field non-equivalence certificate. Budget exhaustion is inconclusive.
     """
     rows, cols = _validate_pair(q, k, p)
     if not isinstance(max_candidates, int) or isinstance(max_candidates, bool) or max_candidates < 1:
