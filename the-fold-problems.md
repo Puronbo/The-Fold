@@ -3300,3 +3300,27 @@ The residue generator tools/cartier_residue_data.py now assembles a single ratio
 \omega=\sum_Q\alpha_Q\frac{Q'}Q\,dS=\frac{P(S)}{D(S)}\,dS.
 \]
 It verifies each residue by exact inversion in \(k_Q\), computes the infinity residue as the sum of absolute traces, checks the global residue sum, and outputs the reduced tower coefficient \(x=SP/D\). An independent exact finite-field implementation verified a three-point example at \(Q=S\), \(S+1\), and \(S^2+S+1\), including the residue at infinity. This is a rational multi-pole benchmark extension; no neural model is trained.
+
+
+### G-4da — full algebraic dual and invariant linear readouts
+
+From G-4ct/G-4cy,
+\[
+Q_{\mathcal G}\simeq
+\left(\bigoplus_Q\mathbb F_2\right)\oplus
+\left(\bigoplus_{q>0\ {\rm odd}}\bigoplus_Q k_Q\right).
+\]
+The invariant linear functionals are its full algebraic dual:
+\[
+(Q^*)^{\mathcal G}\simeq
+\left(\prod_Q\mathbb F_2\right)\times
+\left(\prod_{q>0\ {\rm odd}}\prod_Q k_Q\right),
+\]
+using the nondegenerate trace pairing on each finite field \(k_Q\). An arbitrary family of weights \((\epsilon_Q,c_{q,Q})\) evaluates by
+\[
+\Lambda(m)=\sum_Q\epsilon_Q z_Q(m)+
+\sum_{q,Q}\operatorname{Tr}_{k_Q/\mathbb F_2}(c_{q,Q}\mathfrak r_{q,Q}(m)).
+\]
+The evaluation is finite for every quotient element because the coinvariant is a direct sum. Since \(pM\subset R\) by positive-tail contraction, Q is discrete in the quotient p-adic topology, so every algebraic functional is continuous. This completely classifies invariant linear readouts; the nonlinear invariant ring remains a separate problem.
+
+**ML target:** learn finite windows of the product weights, using residue-field trace-dual coordinates. Do not confuse finite-support benchmark weights with the unrestricted product dual.
