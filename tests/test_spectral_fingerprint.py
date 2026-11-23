@@ -1,8 +1,9 @@
+import random
 import unittest
 
 from tools.spectral_fingerprint import (
     automatic_full_spectral_fingerprint, automatic_spectral_fingerprint,
-    characteristic_polynomial, factor_polynomial,
+    characteristic_polynomial, _characteristic_polynomial_subset_oracle, factor_polynomial,
     extension_jordan_profile, is_irreducible_polynomial,
     jordan_profile, rank_mod, spectral_fingerprint,
 )
@@ -76,6 +77,46 @@ class SpectralFingerprintTests(unittest.TestCase):
         # det(xI-A) = x^2 + 1 is irreducible over F_3.
         self.assertEqual(characteristic_polynomial([[0, 2], [1, 0]], 3),
                          [1, 0, 1])
+
+    def test_hessenberg_characteristic_polynomial_matches_subset_oracle(self):
+        rng = random.Random(20261123)
+        for p in (2, 3, 5, 7):
+            for n in range(1, 7):
+                for _ in range(18):
+                    matrix = [[rng.randrange(p) for _ in range(n)]
+                              for _ in range(n)]
+                    self.assertEqual(
+                        characteristic_polynomial(matrix, p),
+                        _characteristic_polynomial_subset_oracle(matrix, p),
+                        msg=f"mismatch over F_{p}, dimension {n}: {matrix}",
+                    )
+
+    def test_hessenberg_characteristic_polynomial_in_characteristic_dividing_dimension(self):
+        # These dimensions are divisible by their coefficient characteristic.
+        for p, n in ((2, 2), (3, 3), (5, 5)):
+            zero = [[0] * n for _ in range(n)]
+            self.assertEqual(characteristic_polynomial(zero, p),
+                             [1] + [0] * n)
+            identity = [[int(i == j) for j in range(n)] for i in range(n)]
+            self.assertEqual(characteristic_polynomial(identity, p),
+                             [1] + [(-1) ** k * __import__("functools").reduce(
+                                 lambda a, b: a * b % p,
+                                 [1] * k, 1) for k in range(1, n + 1)]
+                             if False else [1] + [(-1 if k % 2 else 1) * __import__("math").comb(n, k) % p
+                                                  for k in range(1, n + 1)])
+
+    def test_hessenberg_characteristic_polynomial_handles_zero_pivots_and_swaps(self):
+        matrices = [
+            [[0, 1, 2], [0, 0, 1], [1, 2, 0]],
+            [[0, 0, 1, 2], [1, 0, 0, 1], [0, 1, 0, 0], [2, 0, 1, 0]],
+            [[1, 2, 3], [4, 5, 6], [0, 0, 0]],
+        ]
+        for matrix in matrices:
+            for p in (2, 3, 5, 7):
+                self.assertEqual(
+                    characteristic_polynomial(matrix, p),
+                    _characteristic_polynomial_subset_oracle(matrix, p),
+                )
 
     def test_automatic_base_field_scan_and_jordan_profile(self):
         result = automatic_spectral_fingerprint([[0, 1], [1, 0]], 2)
