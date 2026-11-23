@@ -162,6 +162,42 @@ class SpectralFingerprintTests(unittest.TestCase):
         self.assertEqual(eigenclass["frobenius_conjugate_count"], 2)
         self.assertEqual(eigenclass["profile"]["blocks_exactly"], {"1": 1})
 
+    def test_berlekamp_multiple_irreducible_components(self):
+        self.assertEqual(
+            factor_polynomial([1, 0, 0, 4], 5),  # x^3 - 1
+            [
+                {"coefficients_descending": [1, 4],
+                 "multiplicity": 1, "degree": 1},
+                {"coefficients_descending": [1, 1, 1],
+                 "multiplicity": 1, "degree": 2},
+            ],
+        )
+        self.assertEqual(
+            factor_polynomial([1, 0, 4, 0], 5),  # x^3 - x
+            [
+                {"coefficients_descending": [1, 0],
+                 "multiplicity": 1, "degree": 1},
+                {"coefficients_descending": [1, 1],
+                 "multiplicity": 1, "degree": 1},
+                {"coefficients_descending": [1, 4],
+                 "multiplicity": 1, "degree": 1},
+            ],
+        )
+
+    def test_automatic_extension_profile_preserves_repeated_multiplicity(self):
+        matrix = [
+            [0, 2, 0, 0],
+            [1, 0, 0, 0],
+            [0, 0, 0, 2],
+            [0, 0, 1, 0],
+        ]
+        result = automatic_full_spectral_fingerprint(matrix, 3)
+        eigenclass = result["extension_eigenvalue_classes"][0]
+        self.assertEqual(eigenclass["algebraic_multiplicity_per_root"], 2)
+        self.assertEqual(eigenclass["profile"]["algebraic_multiplicity"], 2)
+        self.assertEqual(eigenclass["profile"]["geometric_multiplicity"], 2)
+        self.assertEqual(eigenclass["profile"]["blocks_exactly"], {"1": 2})
+
 
 if __name__ == "__main__":
     unittest.main()
