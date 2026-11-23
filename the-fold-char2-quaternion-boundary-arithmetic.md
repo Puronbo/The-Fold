@@ -3908,16 +3908,28 @@ we obtain the exact differential identity
 \]
 At every finite closed point Q, \(z=Q(S)\) is carried to \(z'=z+O(p^2)\), while p is fixed. The induced automorphism of \(k_Q((z))((p))\) is continuous and fixes \(k_Q\). The higher-dimensional residue is invariant under continuous automorphisms of iterated Laurent series fields (Gorchinskiy–Osipov, Proposition 5.3, Corollary 5.4 and Remark 5.5). Thus every coefficientwise residue of the differential series above is unchanged. Consequently all orbit sums \(\mathfrak r_{q,Q}\) are invariant.
 
-For the zero-mode coordinate, use the exact pullback formula itself. Since
+For the zero-mode coordinate, one must account for negative p-powers: although
 \[
 \alpha=1+O(p),\qquad \beta=O(p),\qquad
 W=\alpha^2+S\beta^2=1+O(p^2),\qquad Z=SW=S+O(p^2),
 \]
-the p⁰ coefficient of
+the substitution \(Z=S+O(p^2)\) can move a negative coefficient \(p^{-2j}a_{-2j}(S)\) into the p⁰ coefficient. Thus the p⁰ coefficient is **not** generally equal to \(a_0(S)\).
+
+What is true, and sufficient, is residue invariance. Write
 \[
-a^\sigma(S,p)=a(Z,p)\frac{\alpha^2}{W}
+\omega(S,p)=\frac{a(S,p)}S\,dS
+=\sum_n p^n\omega_n,\qquad \omega_n=\frac{a_n(S)}S\,dS.
 \]
-is exactly \(a_0(S)\). Thus the zero coordinate \(\mathfrak z(m)=[a_0]\) is fixed even before passing to \(F/(\wp+SF^2)\).
+The exact identity above gives \(\omega^\sigma=\phi^*\omega\), with \(\phi(S)=Z\) and p fixed. By the two-dimensional residue invariance in G-4cq, every coefficientwise finite-point residue is unchanged:
+\[
+\operatorname{res}_Q\left(\frac{a^\sigma_0-a_0}{S}dS\right)=0
+\quad\text{for every finite }Q.
+\]
+The zero-residue theorem G-4cq then places this differential in the Cartier-nilpotent subspace \(N\), and G-4cy identifies \(N\subseteq\Theta(\wp(F)+SF^2)\). Hence
+\[
+[a^\sigma_0]=[a_0]\quad\text{in }F/(\wp(F)+SF^2).
+\]
+This proves invariance of the zero coordinate without the false claim of literal p⁰ coefficient equality.
 
 The map \(\mathfrak R\) descends to the full group coinvariant \(Q_{\mathcal G}\).
 
