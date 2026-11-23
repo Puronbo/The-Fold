@@ -169,3 +169,103 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+
+
+def characteristic_polynomial(matrix: Sequence[Sequence[int]], p: int) -> list[int]:
+    """Return det(xI-A) coefficients, highest degree first, in F_p.
+
+    A subset dynamic program evaluates the determinant in F_p[x] without
+    division. It is exponential in matrix dimension, so it is intended as
+    an exact small-matrix reference implementation.
+    """
+    n = _validate_matrix(matrix, p)
+    a = _mod_matrix(matrix, p)
+
+    # Polynomials are stored low-degree first. dp[S] is the signed sum
+    # assigning the first |S| rows to the columns in S.
+    dp: dict[int, list[int]] = {0: [1]}
+    for row in range(n):
+        nxt: dict[int, list[int]] = {}
+        for mask, poly in dp.items():
+            for col in range(n):
+                bit = 1 << col
+                if mask & bit:
+                    continue
+                entry = [-a[row][col]]
+                if row == col:
+                    entry.append(1)
+                # Appending col creates one inversion for every previously
+                # selected column larger than col.
+                inversions = (mask >> (col + 1)).bit_count()
+                sign = -1 if inversions % 2 else 1
+                term = [0] * (len(poly) + len(entry) - 1)
+                for i, x in enumerate(poly):
+                    for j, y in enumerate(entry):
+                        term[i + j] = (term[i + j] + sign * x * y) % p
+                target = mask | bit
+                current = nxt.setdefault(target, [0] * len(term))
+                if len(current) < len(term):
+                    current.extend([0] * (len(term) - len(current)))
+                for i, value in enumerate(term):
+                    current[i] = (current[i] + value) % p
+        dp = nxt
+
+    low_first = dp[(1 << n) - 1]
+    while len(low_first) > 1 and low_first[-1] % p == 0:
+        low_first.pop()
+    return [x % p for x in reversed(low_first)]
+
+
+def _evaluate_polynomial(coefficients: Sequence[int], value: int, p: int) -> int:
+    result = 0
+    for coefficient in coefficients:
+        result = (result * value + int(coefficient)) % p
+    return result
+
+
+def _linear_root_multiplicity(coefficients: Sequence[int], root: int,
+                              p: int) -> int:
+    """Multiplicity of x-root, using exact synthetic division."""
+    current = [int(x) % p for x in coefficients]
+    multiplicity = 0
+    while len(current) > 1:
+        quotient = [current[0]]
+        for coefficient in current[1:-1]:
+            quotient.append((coefficient + root * quotient[-1]) % p)
+        remainder = (current[-1] + root * quotient[-1]) % p
+        if remainder:
+            break
+        multiplicity += 1
+        current = quotient
+    return multiplicity
+
+
+def automatic_spectral_fingerprint(matrix: Sequence[Sequence[int]],
+                                    p: int) -> dict:
+    """Compute charpoly and all base-field eigenvalue/Jordan profiles.
+
+    This is complete only for eigenvalues in F_p. Irreducible factors of
+    degree > 1 and their roots in extension fields are not computed here.
+    """
+    n = _validate_matrix(matrix, p)
+    coefficients = characteristic_polynomial(matrix, p)
+    roots = []
+    profiles = []
+    for value in range(p):
+        multiplicity = _linear_root_multiplicity(coefficients, value, p)
+        if multiplicity:
+            profile = jordan_profile(matrix, p, value)
+            roots.append({
+                "value": value,
+                "algebraic_multiplicity": multiplicity,
+            })
+            profiles.append(profile)
+    return {
+        "field": f"F_{p}",
+        "dimension": n,
+        "characteristic_polynomial_coefficients_descending": coefficients,
+        "base_field_eigenvalues": roots,
+        "scope": "all eigenvalues in the base prime field",
+        "irreducible_factorization_complete": False,
+        "profiles": profiles,
+    }
