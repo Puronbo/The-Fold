@@ -564,3 +564,6 @@ observer gives the reading. The four zones are the map's legend.
 
 
 **Polynomial pencil nullspace certificates (G-EP27):** `tools/pencil_nullspace_certificate.py` constructs explicit polynomial right/left nullspace generators for `Q+tK`, verifies each product is identically zero over the chosen prime field, and checks that generator shifts span every bounded-degree kernel examined. It turns minimal-index counts into auditable algebraic witnesses, including zero indices; a degree cap that misses generators remains explicitly incomplete. This still does not construct unimodular transformations or a canonical Kronecker decomposition. See `tests/test_pencil_nullspace_certificate.py` and `research/the-fold-polynomial-pencil-nullspace-certificates.md`.
+
+
+**Transformation-certified polynomial Smith reduction (G-EP28):** `tools/pencil_smith_transform.py` now constructs explicit polynomial matrices (U,V,D) with (U(Q+tK)V=D), tracks every unimodular elementary row/column operation, and verifies the resulting diagonal Smith form and divisibility chain. This is constructive polynomial Smith reduction, not yet a full Kronecker canonical decomposition; left/right minimal-index blocks remain separately certified by G-EP25–G-EP27. See `tests/test_pencil_smith_transform.py` and `research/the-fold-transformation-certified-smith-reduction.md`.
