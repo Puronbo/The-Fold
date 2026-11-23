@@ -623,3 +623,37 @@ python tools/train_orbit_residue_gf2.py --self-test --max-degree 5 --stages 5 --
 An independent implementation of the same GF(2) learner recovered the exact map for all eight monic irreducibles of degree at most four, with three orbit stages, full input rank, 128 held-out sequences per field, and exact coordinate-basis checks. The committed script's self-test covers the same construction; no claim of neural generalization is made.
 
 The next model comparison is now well-defined: the exact GF(2) learner is the oracle baseline; a neural network must match it on held-out sequences and then generalize across unseen irreducibles or larger residue degrees.
+
+
+## 10. Pure-scaling tower: polynomial versus rational generalization
+
+For the pure scaling section change \(t\mapsto t(1+p)\), the exact coefficient substitution is \(S\mapsto S/(1+p^2)\). On an odd-layer input \(a^{2^h}\), the first nonzero quotient correction occurs at offset \(2^{h+1}\), with coefficient
+\[
+(Sa')^{2^h}\in I_h:=S^{2^h}F^{2^{h+1}}.
+\]
+The successive targets are \(SF^2,S^2F^4,S^4F^8,\ldots\). The finite p-basis decomposition is exact:
+\[
+F=\left(\bigoplus_{h<N}I_h\right)\oplus F^{2^N}.
+\]
+
+This creates a crucial train/test distinction.
+
+- On \(\mathbb F_2[S]\), every nonconstant monomial belongs to one \(I_h\); the quotient by the displayed tower is only \(\mathbb F_2\).
+- On the full rational field \(F=\mathbb F_2(S)\), the Cartier-nonnilpotent part is nonzero. The rational coefficient \(x=S/(S+1)\) gives \((x/S)dS=d\log(S+1)\), a nonexact Cartier-fixed form.
+
+Therefore a polynomial-only learner can incorrectly infer that the residual is one-dimensional. The benchmark must include rational denominators and Cartier-fixed logarithmic examples. A rational-function encoder should normalize numerator/denominator pairs and preserve irreducible factor and valuation data.
+
+The tower quotient for the pure-scaling diagonal family is
+\[
+(\Omega_F^1/dF)/\bigcup_{h\ge1}\ker C^h.
+\]
+This is not yet the full coinvariant quotient for the entire section-change group. The model should predict candidate additional relations but the exact verifier must preserve this distinction.
+
+### Benchmark extension
+
+The generator now emits:
+- Frobenius-level scaling examples for \(h=0,\ldots,4\);
+- exact polynomial tower decompositions, with each monomial assigned to \(h=v_2(n)\);
+- a rational Cartier-fixed challenge with \(x=S/(S+1)\) and differential \(d\log(S+1)\).
+
+The polynomial decomposition self-test exhaustively checked all bitmasks below \(2^{12}\) in a separate verification run. The rational challenge is a symbolic witness; it is not represented as a polynomial training example.
