@@ -542,3 +542,6 @@ observer gives the reading. The four zones are the map's legend.
 
 
 **Prime-indexed Frobenius-orbit profiles (G-EP17):** `tools/prime_spectral_profile.py` reports modular rank, characteristic factors, Frobenius orbit sizes, and multiplicities across chosen primes. `compare_prime_profiles` explicitly separates rank agreement from orbit-profile agreement. A tested 2×2 example shows that two matrices can have equal rank at every prime but different orbit profiles at some primes. This establishes additional algebraic information, not neural-network predictive value. See `research/the-fold-prime-frobenius-profiles.md`.
+
+
+**Layer-level prime spectral comparisons (G-EP18):** `tools/layer_spectral_comparison.py` accepts explicit snapshot/layer/projection mappings. Square projections receive prime-indexed Frobenius profiles; rectangular projections receive rank-only diagnostics. It reports pairwise within-layer relations and per-projection stability across snapshots, keeping rank, orbit histogram, and exact factor-profile equality separate. Architecture semantics are caller-supplied; matching profiles do not imply functional equivalence. See `research/the-fold-layer-prime-spectral-comparison.md`.
