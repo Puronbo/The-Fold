@@ -1634,3 +1634,6 @@ The rational residue generator also emits orbit-sequence examples with the orbit
 
 
 **G-4cq — residue classification:** the Cartier-nonnilpotent quotient of the pure-scaling diagonal tower is the finite-support closed-point residue space with total trace zero, equivalently \(\bigoplus_{Q\ {\rm monic\ irreducible}}\mathbb F_2[S]/(Q)\), with infinity residue determined by total trace. This is still a subfamily/tower quotient, not the full section-change coinvariant. Rational ML features should use irreducible denominator factors and residue-field coordinates.
+
+
+**G-4cq — residue-field form of the Cartier tower:** the nonnilpotent quotient is the finite-support residue space with global trace zero, equivalently one copy of \(\mathbb F_2[S]/(Q)\) for each finite monic irreducible Q, with the infinity residue determined by total trace. Added tools/cartier_residue_data.py to generate exact finite-field residue examples and Cartier inverse-Frobenius cycles.
