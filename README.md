@@ -525,3 +525,5 @@ observer gives the reading. The four zones are the map's legend.
 
 
 **Executable exact finite-field spectral fingerprints:** the standard-library Python engine computes characteristic polynomials, factors them over F_p with Berlekamp's algorithm, and recovers Jordan profiles over prime fields and finite extensions. Its full automatic mode constructs the quotient extension for each higher-degree irreducible factor and profiles a representative Frobenius root. See `tools/spectral_fingerprint.py`, `tests/test_spectral_fingerprint.py`, and the G-EP6–G-EP10 research notes.
+
+**Sparse exact spectral fingerprints:** sparse row-dictionary matrices now support exact modular rank and Jordan kernel-growth profiles without initially materializing dense arrays. Sparse and dense results are cross-checked on nilpotent, repeated-eigenvalue, and mixed-block examples. Sparse powers can still fill in, so this is a storage-aware exact path rather than a guarantee of sub-cubic runtime. See `tools/spectral_fingerprint.py` and `tests/test_spectral_fingerprint.py` (G-EP12).
