@@ -198,24 +198,105 @@ def residue_example(modulus: int, residue: int) -> dict:
     }
 
 
-def random_configuration(
-    polynomials: list[int], rng: random.Random
-) -> dict:
-    points = []
+def product(polynomials: list[int]) -> int:
+    out = 1
+    for polynomial in polynomials:
+        out = poly_mul(out, polynomial)
+    return out
+
+
+def residue_of_rational_differential(
+    numerator: int, denominator: int, modulus: int
+) -> int:
+    """Residue of (numerator/denominator)dS at the simple Q-pole."""
+    if poly_mod(denominator, modulus) != 0:
+        return 0
+    quotient, remainder = poly_divmod(denominator, modulus)
+    assert remainder == 0
+    qprime = derivative(modulus)
+    unit = poly_mul_mod(quotient, qprime, modulus)
+    return poly_mul_mod(
+        poly_mod(numerator, modulus),
+        poly_inverse_mod(unit, modulus),
+        modulus,
+    )
+
+
+def multi_point_example(points: list[tuple[int, int]]) -> dict:
+    """Build one rational differential with prescribed finite residues.
+
+    For pair (Q, alpha), the summand is alpha(S) Q'(S)/Q(S) dS.
+    The global residue theorem fixes the residue at infinity as the sum
+    of the absolute traces of the finite residues.
+    """
+    if len({q for q, _ in points}) != len(points):
+        raise ValueError("finite closed points must be distinct")
+    for q, alpha in points:
+        if not is_irreducible(q):
+            raise ValueError("each closed point must be monic irreducible")
+        if poly_gcd(derivative(q), q) != 1:
+            raise ValueError("irreducible Q must be separable")
+        if poly_mod(alpha, q) != alpha:
+            raise ValueError("residue representative must have degree < deg(Q)")
+
+    denominator = product([q for q, _ in points])
+    numerator = 0
+    finite_data = []
     total_trace = 0
-    for q in polynomials:
-        d = degree(q)
-        residue = rng.randrange(1 << d)
-        trace = field_trace(residue, q)
-        points.append({"Q": q, "residue": residue, "trace": trace})
+
+    for q, alpha in points:
+        other_factor = exact_poly_quotient(denominator, q)
+        term = poly_mul(poly_mul(alpha, derivative(q)), other_factor)
+        numerator ^= term
+        trace = field_trace(alpha, q)
         total_trace ^= trace
+        finite_data.append({
+            "Q": q,
+            "degree": degree(q),
+            "residue": alpha,
+            "trace": trace,
+            "cartier_inverse_frobenius_cycle": cartier_residue_cycle(alpha, q),
+        })
+
+    # Verify every prescribed finite residue from the assembled single form.
+    for q, alpha in points:
+        recovered = residue_of_rational_differential(numerator, denominator, q)
+        assert recovered == alpha, (q, alpha, recovered)
+
+    diff_num, diff_den = reduce_rational_pair(numerator, denominator)
+    x_num, x_den = reduce_rational_pair(poly_mul(0b10, numerator), denominator)
     return {
-        "task": "global_residue_configuration",
-        "finite_residues": points,
+        "task": "multi_point_rational_differential",
+        "finite_residues": finite_data,
+        "differential_numerator": diff_num,
+        "differential_denominator": diff_den,
+        "differential": "(P(S)/D(S)) dS",
+        "tower_coordinate_x_numerator": x_num,
+        "tower_coordinate_x_denominator": x_den,
         "infinity_residue": total_trace,
         "global_trace_sum": total_trace ^ total_trace,
     }
 
+
+def exact_poly_quotient(a: int, b: int) -> int:
+    quotient, remainder = poly_divmod(a, b)
+    if remainder:
+        raise ArithmeticError("expected exact polynomial division")
+    return quotient
+
+
+def random_configuration(
+    polynomials: list[int], rng: random.Random
+) -> dict:
+    selected = [q for q in polynomials if rng.randrange(2)]
+    if not selected and polynomials:
+        selected = [rng.choice(polynomials)]
+    points = []
+    for q in selected:
+        d = degree(q)
+        residue = rng.randrange(1 << d)
+        points.append((q, residue))
+    return multi_point_example(points)
 
 def self_test() -> None:
     expected = {
@@ -260,6 +341,17 @@ def self_test() -> None:
     q = 0b111  # S^2+S+1, residue field F_4
     witness = residue_example(q, 0b10)
     assert witness["infinity_residue"] == 1  # Tr_{F_4/F_2}(S)=1
+
+    multi = multi_point_example([(0b10, 1), (0b11, 1), (0b111, 0b10)])
+    assert multi["global_trace_sum"] == 0
+    assert multi["infinity_residue"] == 1
+    assert len(multi["finite_residues"]) == 3
+    for point in multi["finite_residues"]:
+        assert residue_of_rational_differential(
+            multi["differential_numerator"],
+            multi["differential_denominator"],
+            point["Q"],
+        ) == point["residue"]
 
 
 def generate(count: int, max_degree: int, seed: int) -> Iterable[dict]:
