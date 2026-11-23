@@ -44,4 +44,4 @@ or, in the repository's witness convention,
 [
 S Q T=Q_{\rm can},\qquad S K T=K_{\rm can}.
 ]
-The latter constructive reduction is the next task. Polynomial Smith transformations cannot simply be substituted for these constant matrices.
+The desired equations are \(S Q T=Q_{\\rm can}\) and \(S K T=K_{\\rm can}\), with constant invertible \(S,T\). This constructive reduction is the next task. Polynomial Smith transformations cannot simply be substituted for these constant matrices.
