@@ -29,7 +29,7 @@ class RationalPrimaryCyclicTests(unittest.TestCase):
         self.assertEqual([s["dimension"] for s in result["summands"]], [1, 1])
 
     def test_budget_exhaustion_is_explicit(self):
-        a = [[0, 1], [0, 0]]
+        a = [[0, 0], [0, 0]]
         result = construct_primary_cyclic_summands(a, 2, [1, 0], [2], max_candidates=1)
         self.assertFalse(result["basis_complete"])
         self.assertFalse(result["search_complete"])
