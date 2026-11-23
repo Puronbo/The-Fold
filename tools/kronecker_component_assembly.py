@@ -55,27 +55,44 @@ def _validate_component_transform(matrix, label):
 
 def _component_witness_composition_audit(
     component_audits, assembled_s, assembled_t, source_q, source_k,
-    canonical_q, canonical_k, p
+    canonical_q, canonical_k, p, source_q_blocks, source_k_blocks,
+    canonical_q_blocks, canonical_k_blocks
 ):
-    """Rebuild global transforms solely from the ordered local certificates."""
+    """Rebuild transforms and re-verify each certificate against its own block pair."""
     if not isinstance(component_audits, (list, tuple)) or not component_audits:
         raise ValueError("component_audits must be a nonempty ordered sequence")
-    left_transforms, right_transforms = [], []
+    block_lists = (source_q_blocks, source_k_blocks, canonical_q_blocks, canonical_k_blocks)
+    if any(not isinstance(blocks, (list, tuple)) for blocks in block_lists):
+        raise ValueError("component matrix blocks must be ordered sequences")
+    if any(len(blocks) != len(component_audits) for blocks in block_lists):
+        raise ValueError("component certificate and matrix-block counts must agree")
+    left_transforms, right_transforms, local_replays = [], [], []
     for index, item in enumerate(component_audits):
         if not isinstance(item, dict):
             raise ValueError(f"component audit {index} must be a dictionary")
-        left_transforms.append(_validate_component_transform(
+        left = _validate_component_transform(
             item.get("left_transform"), f"component {index} left_transform"
-        ))
-        right_transforms.append(_validate_component_transform(
+        )
+        right = _validate_component_transform(
             item.get("right_transform"), f"component {index} right_transform"
+        )
+        left_transforms.append(left)
+        right_transforms.append(right)
+        local_replays.append(strict_pencil_equivalence_audit(
+            source_q_blocks[index], source_k_blocks[index], p,
+            canonical_q_blocks[index], canonical_k_blocks[index], left, right
         ))
+    local_verified = [item["strict_equivalence_certified"] for item in local_replays]
     reconstructed_s = _block_diag(left_transforms)
     reconstructed_t = _block_diag(right_transforms)
     replay = strict_pencil_equivalence_audit(
         source_q, source_k, p, canonical_q, canonical_k, reconstructed_s, reconstructed_t
     )
     checks = {
+        "component_count_matches_matrix_block_lists": all(
+            len(blocks) == len(component_audits) for blocks in block_lists
+        ),
+        "every_local_certificate_reverified_against_its_bound_pair": all(local_verified),
         "reconstructed_left_transform_matches_assembled": _matrix_equal_mod(reconstructed_s, assembled_s, p),
         "reconstructed_right_transform_matches_assembled": _matrix_equal_mod(reconstructed_t, assembled_t, p),
         "reconstructed_global_strict_equivalence_verified": replay["strict_equivalence_certified"],
@@ -83,6 +100,7 @@ def _component_witness_composition_audit(
     return {
         "schema": "the-fold-kronecker-component-witness-composition-audit-v1",
         "component_count": len(component_audits),
+        "per_component_replayed_audits": local_replays,
         "reconstructed_left_transform_S": reconstructed_s,
         "reconstructed_right_transform_T": reconstructed_t,
         "checks": checks,
@@ -272,7 +290,7 @@ def assemble_kronecker_components(
     # G-EP63: rebuild global transforms from ordered local certificates.
     composition_audit = _component_witness_composition_audit(
         component_witness_audits, full_s, full_t, full_q, full_k,
-        canonical_q, canonical_k, p
+        canonical_q, canonical_k, p, source_q, source_k, target_q, target_k
     )
     if not composition_audit["composition_verified"]:
         raise ArithmeticError("component witness composition audit failed")
@@ -319,6 +337,7 @@ def assemble_kronecker_components(
                 item["strict_equivalence_certified"] for item in component_witness_audits
             ),
             "component_witness_composition_verified": composition_audit["composition_verified"],
+            "component_witnesses_rebound_to_source_and_target_blocks": composition_audit["checks"]["every_local_certificate_reverified_against_its_bound_pair"],
         },
         "scope": (
             "Constructive assembly and global verification conditional on the supplied "
