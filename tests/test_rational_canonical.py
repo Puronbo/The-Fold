@@ -32,7 +32,7 @@ class RationalCanonicalTests(unittest.TestCase):
         self.assertEqual(primary["elementary_divisor_exponents_descending"],
                          [3, 1])
         self.assertEqual(result["invariant_factors_coefficients_descending"],
-                         [[0, 1], [0, 0, 0, 1]])
+                         [[1, 0], [1, 0, 0, 0]])
 
     def test_similar_matrices_have_same_invariant_factors(self):
         a = [[1, 1], [0, 2]]
