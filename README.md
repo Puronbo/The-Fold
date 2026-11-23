@@ -1619,3 +1619,6 @@ The rational residue generator also emits orbit-sequence examples with the orbit
 
 
 **G-4cw — finite basis and dual readouts:** tools/coinvariant_basis_data.py enumerates the explicit Artin–Schreier basis of \(F/\wp(F)\) and the residue-field polynomial bases for bounded odd orbit roots and irreducible degrees. It computes trace-dual residue readouts exactly. The cutoff height 5, q≤7, deg(Q)≤4 has 60 zero-mode and 88 residue coordinates, dimension 148.
+
+
+**G-4cw — explicit basis and dual invariant readouts:** tools/coinvariant_basis_data.py emits the Artin–Schreier basis for \(F/\wp(F)\), polynomial bases for each residue field \(k_Q\) at every odd root q, and exact trace-dual coefficients. Its finite benchmark with height 5, q≤7 and deg(Q)≤4 has dimension 148 (60 zero-mode + 88 residue coordinates).
