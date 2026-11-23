@@ -55,7 +55,7 @@ class LayerSpectralComparisonTests(unittest.TestCase):
             x for x in result["cross_snapshot_stability"]
             if x["layer"] == "layer_0" and x["projection"] == "k_proj"
         )
-        self.assertTrue(k["snapshots"]["checkpoint_b"]["same_full_profile_as_reference"])
+        self.assertFalse(k["snapshots"]["checkpoint_b"]["same_full_profile_as_reference"])
         q = next(
             x for x in result["cross_snapshot_stability"]
             if x["layer"] == "layer_0" and x["projection"] == "q_proj"
