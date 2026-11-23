@@ -609,3 +609,6 @@ observer gives the reading. The four zones are the map's legend.
 
 
 **Rational primary decomposition (G-EP43):** `tools/rational_primary_decomposition.py` computes the invariant subspaces \(\ker(f(A)^n)\) for each irreducible characteristic factor, concatenates their bases, and verifies an invertible change of coordinates that makes the operator block diagonal by primary component. This is an exact structural reduction over the base field, not yet a cyclic-summand decomposition or a general noncyclic pencil-witness algorithm. See `tests/test_rational_primary_decomposition.py` and `research/the-fold-rational-primary-decomposition.md`.
+
+
+**Elementary-divisor cyclic generators (G-EP44):** `tools/rational_primary_cyclic.py` performs a budget-bounded exact search for vectors with prescribed annihilator (f^e), then accepts Krylov orbits only when they add their full expected dimension to the assembled span. A complete result provides an invertible cyclic-summand basis within one primary component. Search exhaustion is explicitly inconclusive. See `tests/test_rational_primary_cyclic.py` and `research/the-fold-primary-cyclic-generators.md`.
