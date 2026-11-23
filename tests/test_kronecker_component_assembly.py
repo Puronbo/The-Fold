@@ -338,7 +338,10 @@ class KroneckerComponentAssemblyTests(unittest.TestCase):
     def test_algebraic_certificate_audit_rejects_malformed_block_shape(self):
         from tools.kronecker_component_assembly import verify_kronecker_component_assembly_algebraically
         rq, rk = right_block(1)
-        components = [{"kind": "right", "q": rq, "k": rk}]
+        components = [
+            {"kind": "right", "q": rq, "k": rk},
+            {"kind": "regular", "q": [[1]], "k": [[0]]},
+        ]
         result = assemble_kronecker_components(components, 5)
         altered = copy.deepcopy(result)
         altered["canonical_block_shapes"] = [[0, 2]]
