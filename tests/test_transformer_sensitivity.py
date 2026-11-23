@@ -29,7 +29,7 @@ class TransformerSensitivityTests(unittest.TestCase):
                 "same_rank": [[2.0, 0.0, 0.0], [0.0, 2.0, 0.0]],
                 "rank_drop": [[1.0, 0.0, 0.0], [0.0, 0.0, 0.0]],
             },
-            primes=[3, 5],
+            primes=[3, 7],
             scales=[1.0, 10.0],
         )
         self.assertEqual(len(result["configurations"]), 4)
