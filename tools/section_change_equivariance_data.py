@@ -376,6 +376,10 @@ def generate(count: int, max_degree: int, seed: int) -> Iterable[dict]:
             "task": "second_odd_diagonal", "e": e, "f": f,
             "x": x, "y": y, "target": [n1, n2],
         }
+        yield {
+            "task": "second_even_diagonal", "e": e, "f": f,
+            "d": d, "target": second_even_diagonal(e, f, d),
+        }
 
         h = rng.randrange(5)
         a = random_poly(rng, max_degree)
@@ -392,33 +396,22 @@ def generate(count: int, max_degree: int, seed: int) -> Iterable[dict]:
             "source": x,
             **polynomial_tower_decomposition(x),
         }
-        yield {
-            "task": "rational_cartier_fixed_challenge",
-            "x_numerator": S,
-            "x_denominator": 1 | S,
-            "differential": "dlog(S+1)",
-            "cartier_fixed": True,
-            "residue_at_S_plus_1": 1,
-        }
-        yield {
-            "task": "second_even_diagonal", "e": e, "f": f,
-            "d": d, "target": second_even_diagonal(e, f, d),
-        }
+
         h = rng.randrange(5)
         # The S term guarantees a is not a square, so h is the exact
         # Frobenius depth of x_scale rather than merely a chosen root level.
         a = random_poly(rng, max_degree) | S
-        e_scale = 1
         x_scale = frobenius_power(a, h)
         assert max_frobenius_depth_polynomial(x_scale) == h
         yield {
-            "task": "pure_scaling_frobenius_tower",
+            "task": "pure_scaling_exact_depth",
             "frobenius_level": h,
             "source_polynomial": a,
             "coefficient": x_scale,
             "first_nonzero_depth_for_r1": 1 << (h + 1),
-            "leading_coefficient": scaling_leading_term(a, h, e_scale),
+            "leading_coefficient": scaling_leading_term(a, h, 1),
         }
+
         ue, uf = random_poly(rng, max_degree), random_poly(rng, max_degree)
         yield {
             "task": "bracket_and_composition", "v": [e, f], "u": [ue, uf],
@@ -426,6 +419,15 @@ def generate(count: int, max_degree: int, seed: int) -> Iterable[dict]:
             "ordered_mixed_parameter": list(leading_mixed_parameter((e, f), (ue, uf))),
         }
 
+    # One rational-function challenge is emitted once, not duplicated.
+    yield {
+        "task": "rational_cartier_fixed_challenge",
+        "x_numerator": S,
+        "x_denominator": 1 | S,
+        "differential": "dlog(S+1)",
+        "cartier_fixed": True,
+        "residue_at_S_plus_1": 1,
+    }
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
