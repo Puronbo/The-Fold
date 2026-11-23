@@ -545,3 +545,6 @@ observer gives the reading. The four zones are the map's legend.
 
 
 **Layer-level prime spectral comparisons (G-EP18):** `tools/layer_spectral_comparison.py` accepts explicit snapshot/layer/projection mappings. Square projections receive prime-indexed Frobenius profiles; rectangular projections receive rank-only diagnostics. It reports pairwise within-layer relations and per-projection stability across snapshots, keeping rank, orbit histogram, and exact factor-profile equality separate. Architecture semantics are caller-supplied; matching profiles do not imply functional equivalence. See `research/the-fold-layer-prime-spectral-comparison.md`.
+
+
+**Relational Q/K interaction profiles (G-EP19):** `tools/qk_interaction.py` computes both (QK^T) (output-space product) and (Q^TK) (input-space bilinear form) for equal-shaped Q/K projections, including rectangular projections. It profiles both products across selected primes and profiles Q/K individually when square. Under row-vector activations, the pre-softmax score matrix is (X(Q^TK)X^T). This is an exact diagnostic of quantized matrices, not an attention forward pass or evidence of functional equivalence. See `research/the-fold-qk-interaction-profiles.md`.
