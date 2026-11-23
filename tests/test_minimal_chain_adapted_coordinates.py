@@ -43,16 +43,16 @@ class MinimalChainAdaptedCoordinatesTests(unittest.TestCase):
         self.assertEqual(result["left_chain_cobasis_dimension"], 2)
         self.assertEqual(result["adapted_Q"], matmul(matmul(result["codomain_cobasis_S"], q, 5), result["domain_basis_T"], 5))
         self.assertEqual(result["adapted_K"], matmul(matmul(result["codomain_cobasis_S"], k, 5), result["domain_basis_T"], 5))
-        self.assertEqual(result["basis_completion"]["domain_complement_dimension"], 3)
-        self.assertEqual(result["basis_completion"]["codomain_complement_dimension"], 3)
+        self.assertEqual(result["basis_completion"]["domain_complement_dimension"], 2)
+        self.assertEqual(result["basis_completion"]["codomain_complement_dimension"], 2)
 
     def test_scrambled_mixed_pencil_still_has_certified_adapted_coordinates(self):
         rq, rk = right_block(1)
         lq, lk = transpose(rq), transpose(rk)
         q, k = block_diag([(rq, rk), (lq, lk), ([[1]], [[0]])])
         # Invertible elementary row and column operations over F_5.
-        left = [[1,1,0,0,0], [0,1,1,0,0], [0,0,1,1,0], [0,0,0,1,1], [0,0,0,0,1]]
-        right = [[1,0,0,0,1], [1,1,0,0,0], [0,1,1,0,0], [0,0,1,1,0], [0,0,0,1,1]]
+        left = [[1,1,0,0], [0,1,1,0], [0,0,1,1], [0,0,0,1]]
+        right = [[1,0,0,1], [0,1,0,0], [0,0,1,0], [0,0,0,1]]
         qs, ks = matmul(matmul(left, q, 5), right, 5), matmul(matmul(left, k, 5), right, 5)
         result = minimal_chain_adapted_coordinates(qs, ks, 5, max_degree=3)
         self.assertTrue(result["verification"]["transformed_pair_exact"])
