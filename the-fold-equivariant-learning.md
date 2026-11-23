@@ -518,7 +518,7 @@ Q_{\mathcal G}\simeq
 \left(\bigoplus_{Q\ {\rm monic\ irreducible}}\mathbb F_2\right)\oplus
 \bigoplus_{q>0\ {\rm odd}}\bigoplus_{Q\ {\rm monic\ irreducible}} k_Q.
 \]
-The zero summand is identified with \(F/\wp(F)\) by the p-basis map \(a=u^2+Sv^2\mapsto u\). Thus the filtered extension is no longer open: the orbit-residue map supplies a canonical splitting, not merely a noncanonical vector-space decomposition.
+The zero summand is \(F/(\wp(F)+SF^2)\), identified with \(\bigoplus_Q\mathbb F_2\) by finite-place residue traces. The proposed p-basis first-coordinate map to \(F/\wp(F)\) is false (the class \(a=\wp(S)\) is a counterexample). The orbit-residue map still supplies the canonical filtered splitting.
 
 An invariant linear readout is any \(\mathbb F_2\)-linear functional on this direct sum. Each finite residue coordinate has the trace-dual form
 \[
@@ -564,7 +564,7 @@ The full algebraic linear-invariant space is now dual to
 \left(\bigoplus_Q\mathbb F_2\right)\oplus
 \bigoplus_{q>0\ {\rm odd}}\bigoplus_{Q\ {\rm monic\ irreducible}}k_Q.
 \]
-For each finite residue coordinate, use the trace-pairing readout \(x\mapsto\operatorname{Tr}_{k_Q/\mathbb F_2}(c_{q,Q}x)\). The zero-mode \(F/\wp(F)\) factor uses its explicit Artin–Schreier basis. The model should predict the normalized orbit sums, not raw per-exponent residues.
+For each finite residue coordinate, use the trace-pairing readout \(x\mapsto\operatorname{Tr}_{k_Q/\mathbb F_2}(c_{q,Q}x)\). The zero-mode factor uses one trace-one residue generator per finite irreducible Q; its readout is the residue-trace bit \(z_Q(a)=\operatorname{Tr}_{k_Q/\mathbb F_2}\operatorname{res}_Q((a/S)dS)\). The model should predict the normalized orbit sums, not raw per-exponent residues.
 
 
 ## 15. Finite basis and dual-readout benchmark
@@ -595,7 +595,7 @@ The cutoff has 8 zero-mode basis elements and 88 orbit-residue basis elements, f
 4\cdot\sum_{\deg Q\le4}\deg Q
 =4(2+2+6+12)=88.
 \]
-The zero-mode count is 60: one constant, three positive odd powers through height five, six classes at the two linear places with three allowed odd denominator powers, two classes at the irreducible quadratic, six at the two cubics, twelve at the three quartics, and thirty at the six quintics.
+The zero-mode count is 8: one trace coordinate for each of the eight monic irreducibles of degree at most four.
 
 The complete algebraic dual of the infinite direct sum is a product of coordinate duals. This finite benchmark supplies finite trace-dual readouts only; it does not impose a continuity condition on arbitrary algebraic functionals.
 
@@ -695,17 +695,28 @@ The script emits one row per sample plus one aggregate trace-zero configuration.
 
 ## 17. Correct zero-mode invariant and readout
 
-A proposed shortcut identifying \(F/(\wp(F)+SF^2)\) with \(F/\wp(F)\) by p-basis first coordinate is false: \(a=\wp(S)=S^2+S\) is zero in the source but maps to \(S\), which is nonzero in \(F/\wp(F)\).
+The proposed shortcut \(F/(\wp(F)+SF^2)\to F/\wp(F)\) by p-basis first coordinate is false: \(a=\wp(S)=S^2+S\) is zero in the source but its p-basis first component is S, nonzero modulo \(\wp(F)\).
 
-The correct description is Cartier-theoretic:
-\[
-F/(\wp(F)+SF^2)
-\simeq(\Omega_F^1/dF)/(C^{-1}-1)(\Omega_F^1/dF)
-\simeq\bigoplus_{Q\ {\rm monic\ irreducible}}\mathbb F_2.
-\]
-The zero-mode coordinate for a rational coefficient a is
+The correct zero-mode coordinate is
 \[
 z_Q(a)=\operatorname{Tr}_{k_Q/\mathbb F_2}
-\operatorname{res}_Q((a/S)dS).
+\operatorname{res}_Q((a/S)dS),
+\qquad k_Q=\mathbb F_2[S]/(Q).
 \]
-Thus the learning target at zero exponent is a finite-support bit-vector indexed by finite closed points Q. A basis representative is \(a_Q=S\alpha_Q Q'/Q\) with \(\operatorname{Tr}(\alpha_Q)=1\). The full coinvariant target is now the zero-mode trace bits together with the nonzero orbit-residue blocks \(k_Q\) at each positive odd root q.
+It gives an isomorphism
+\[
+F/(\wp(F)+SF^2)\simeq
+\bigoplus_{Q\ {\rm monic\ irreducible}}\mathbb F_2.
+\]
+
+The proof is residue-theoretic. The map \(\Theta([a])=(a/S)dS\) identifies \(F/SF^2\) with \(\Omega_F^1/dF\). The pure-scaling Cartier-nilpotent tower \(I_h=S^{2^h}F^{2^{h+1}}\) lies inside \(\wp(F)+SF^2\), because for \(x=S^{2^{h-1}}b^{2^h}\in I_{h-1}\), \(x^2=\wp(x)+x\). If all finite residue traces vanish, each finite residue is \(\beta_Q^2+\beta_Q\). Choose a rational differential with residues \(\beta_Q\), subtract the corresponding \(\Theta(\wp(x))\), and the remainder has zero residues everywhere. By the Cartier-kernel/residue theorem, it is Cartier-nilpotent, hence belongs to the tower and therefore to \(\wp(F)+SF^2\). Conversely, \(\wp(x)\) gives residue \(\alpha_Q^2+\alpha_Q\), whose trace is zero, and \(SF^2\) gives exact forms. This proves the kernel; surjectivity is obtained from \(a_Q=S\alpha_Q Q'/Q\) with \(\operatorname{Tr}(\alpha_Q)=1\).
+
+This proof uses Cartier only on chosen representatives and for the nilpotent-tower characterization. It does **not** treat inverse Cartier as an operator on \(\Omega_F^1/dF\), where Cartier has a nontrivial nilpotent kernel.
+
+The corrected full coinvariant target is
+\[
+Q_{\mathcal G}\simeq
+\left(\bigoplus_Q\mathbb F_2\right)\oplus
+\bigoplus_{q>0\ {\rm odd}}\bigoplus_Q k_Q.
+\]
+For machine learning, the zero-mode representation is a finite-support bit vector indexed by irreducible Q; the positive odd-orbit blocks remain finite-field residue vectors.
