@@ -21,10 +21,30 @@ The full statement is in `the-fold-problems.md`, and the engineering instance is
 **Start here:** `the-fold-key.md` — the master key. Give it a value of `k`; it returns the stage,
 the operation, what appears, what survives, and the note that proves it.
 
+**What the corpus found.** Six results survived the zones, and each moved the argument rather than
+adding a note:
+
+- **A theorem ledger.** Of twelve theorems read for premise closure, six have every premise in the
+  Fold, three are exact reformulations, and three remain rhymes; the missing premise, not the
+  resemblance, is the finding (`the-fold-theorems.md`).
+- **Ten words, six hosts.** The physical words the Fold cannot reach reduce to six structures —
+  measure, flow, bath, cut, bundle, inertia — and the first four are the AGI's adjunctions
+  (`the-fold-void.md`).
+- **Probability moved first.** It was the row expected to resist, and it is the one that moved: on a
+  finite `ℤ/n` the counting measure, the quotient `z(1−z)`, and the doubling action are exact; what
+  remains missing is independent trials and the Born rule.
+- **Doubling has two period sets.** `n ∣ 2^k − 1` returns the identity, `n ∣ 2^k + 1` reaches the fold,
+  and for `n > 2` no `k` does both (`the-fold-lean.md`).
+- **The minimal operation family is a cyclicity test.** Every information costs at most one scale if and
+  only if `U(n)` is cyclic; the maximum cost is `rank U(n)`, which is unbounded; the fold fixes the even
+  half of the character lattice and never costs zero (`the-fold-minimal-operations.md`).
+- **Reuse, not citation count.** The corpus draws 377 note-to-note edges over 50 notes, 7.54 per note,
+  and the two orphans are the notes that ask what the exercise is for (`the-fold-value.md`).
+
 **Formal core:** `lake build` compiles a dependency-free Lean 4 library in `Fold/` — the fold as an
-involution, its fixed set and quotient, the observer as a cut, the scale action, the cap/puncture
-ledger, the calendar arithmetic, the wheel's closure, and four finite counterexamples. The build
-proves the skeleton, not the rhymes; the map is `the-fold-lean.md`.
+involution, its fixed set and quotient, the observer as a cut, the scale action, doubling's two period
+sets, the cap/puncture ledger, the calendar arithmetic, the wheel's closure, and four finite
+counterexamples. The build proves the skeleton, not the rhymes; the map is `the-fold-lean.md`.
 
 **Matter reading:** matter is the zero at a scale — stages 0–1 of the chain. In the homothetic
 family `h ∝ k`, `M ∝ h`, `A ∝ h²`, `V ∝ h³`, `S ∝ h²`, `T ∝ 1/h`, while the horizon ratio `k*`
@@ -142,6 +162,15 @@ exact classifier — multiplicity as a residue of `d log` — and five limits: c
 coefficient vs existence, period vs parity, puncture vs singularity, flow vs map. See
 `the-fold-problems.md`.
 
+**Minimal operations:** a family of scales preserving a character is its kernel, so "how few
+operations" is a question about `U(n)`. Every level of information, the constant included, costs at
+most one scale exactly when `U(n)` is cyclic (`n = 1, 2, 4, p^k, 2p^k`), and the maximum cost is
+`rank U(n)`, which is unbounded.
+The fold is not one of the counted operations: `χ(−1) = ±1`, so it preserves exactly the even half of
+the character lattice, and a faithful character is odd, so the information the fold preserves never
+costs zero. Doubling's two period sets, `n ∣ 2^k − 1` and `n ∣ 2^k + 1`, are disjoint for `n > 2`. See
+`the-fold-minimal-operations.md`.
+
 **Initial form:** the initial state is the datum — the unique point fixed by every non-identity
 scale; its form is
 the derivative there, `Dg₀ = 0`, the null form `(0,0,n)`; and its object is the zero object, initial
@@ -231,6 +260,8 @@ author. The CMB enters as a rhyme; the exact physics is standard cosmology. See 
 | engineering applications and the limits of transfer | `the-fold-engineering.md` |
 | the whole corpus as one loop | `the-fold-loop.md` |
 | the observer as a chart-maker, and why a calendar closes | `the-fold-chart.md` |
+| the arithmetic of the four date labels, and why `τ` and `mod 99` disagree | `the-fold-date-numbers.md` |
+| how few operations preserve a chosen amount of information | `the-fold-minimal-operations.md` |
 | the interactive models | the nine HTML files |
 
 ## Contents
@@ -295,7 +326,9 @@ author. The CMB enters as a rhyme; the exact physics is standard cosmology. See 
 | `the-fold-engineering.md` | follow-up note: engineering - geometric similitude, the square–cube law, crease kinematics, sampling, and the false friends |
 | `the-fold-loop.md` | closing note: the corpus retold as one loop — point, boundary, scale, fold, twist, the cosmic history, the CMB, and the observer |
 | `the-fold-chart.md` | follow-up note: the observer as chart-maker - the chart, the calendar as a quotient of periods, the revision loop, and the horizon detector |
+| `the-fold-date-numbers.md` | follow-up note: the date numbers - the four labels, the block lemma for `mod 99`, the divisor counts `80` and `8`, and what the date does not determine |
 | `the-fold-lean.md` | formal core: the Lean 4 project - involution, quotient, cut, scale, chi, the wheel, the doubling action, and the finite counterexamples |
+| `the-fold-minimal-operations.md` | follow-up note: the minimal operation family - the character lattice, cost as the rank of a kernel, cyclicity as the dividing line, and the fold as the parity |
 
 Open the HTML files directly in a browser — no build step, no dependencies.
 
@@ -331,25 +364,25 @@ definition is not a claim, so the legend is counted apart rather than inflating 
 counts the **prose attributions**, because that is how most of the corpus actually labels.
 
 ```
-zone map: 11 files with zone tables of 49
-     exact           135
-     reformulation     9
-     rhyme            22
-     false friend     10
+zone map: 13 files with zone tables of 51
+     exact           143
+     reformulation    10
+     rhyme            24
+     false friend     15
      the absence       1
      without tables    38
      legend (definitions, not claims)    11
 
-prose attributions: 48 files of 49
-     exact           157
-     reformulation     9
-     rhyme            21
+prose attributions: 49 files of 51
+     exact           161
+     reformulation    10
+     rhyme            22
      false friend     39
-     total           226
+     total           232
 ```
 
-The tables are the formal layer and cover eleven files. The prose is where the corpus actually works:
-forty-eight of forty-nine files label their comparisons in the predicative form — a noun phrase
+The tables are the formal layer and cover thirteen files. The prose is where the corpus actually works:
+forty-nine of fifty-one files label their comparisons in the predicative form — a noun phrase
 then `is exact`, `remains a rhyme`, `is a false friend` — as in "the quotient statement is exact" or
 "`height` is a false friend unless the register is named". The detector is deliberately narrow: it
 skips the maxims ("a rhyme written as a proof"), skips negated rejections ("this is not exact"), reads
@@ -363,10 +396,10 @@ not a result", "a statement about the lattice, not about the probe". That is the
 step short of a label — it says what the claim is *not* without saying which of the four it is.
 
 ```
-status markers (marked by contrast, zone not named): 28 files of 49
-     total            54
-     derivation       19
-     about             7
+status markers (marked by contrast, zone not named): 29 files of 51
+     total            56
+     derivation       20
+     about             8
      proof             5
      identity          6
      boost             2
@@ -374,19 +407,19 @@ status markers (marked by contrast, zone not named): 28 files of 49
      other             9
 ```
 
-The objects are the finding. Nineteen say "not a derivation", five "not a proof", six "not a theorem",
-and one "not a reduction": thirty-one point at proof. One of those is not a claim — "the Fold is a
+The objects are the finding. Twenty say "not a derivation", five "not a proof", six "not a theorem",
+and one "not a reduction": thirty-two point at proof. One of those is not a claim — "the Fold is a
 dictionary, not a proof engine" — and one "not the identity" is a list of what a point is not, so the
-fifty-four marked sentences carry fifty-two claims, and thirty of them say that nothing was proved. That
-is the corpus's own definition of **reformulation**, yet the word appears as a label eighteen times, nine
-in tables and nine in prose. The middle zone is not scarce; it is unnamed, and the corpus says it with
-a contrast instead of a noun.
+fifty-six marked sentences carry fifty-four claims, and thirty-one of them say that nothing was proved.
+That is the corpus's own definition of **reformulation**, yet the word appears as a label twenty times,
+ten in tables and ten in prose. The middle zone is not scarce; it is unnamed, and the corpus says it
+with a contrast instead of a noun.
 
 The remaining objects do different work. "Not an identity", "not about", "not a boost" use one word
 in two senses, which is false-friend work rather than a zone; "not a law", "not a model", "not a
 result" separate a description from a mechanism.
 
-With that count the map closes: every one of the forty-nine files carries zone language. The three
+With that count the map closes: every one of the fifty-one files carries zone language. The three
 notes that looked silent in the first two counts — `the-fold-closure.md`, `the-fold-division.md`,
 `the-fold-horizon.md` — mark exactly once each, and each mark is the one that matters:
 

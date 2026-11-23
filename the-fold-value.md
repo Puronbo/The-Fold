@@ -49,7 +49,7 @@ counted. Seven definitions, strongest first, with today's readings.
 | prohibition | does it forbid something? | corrugation ≠ mass; a free twist ≠ an unworked twist; the integer line folds but does not double; the real fold is not a branched cover |
 | prompt closure | did a question produce an exact object? | `7` of `7` prompts since the hexagon |
 | redemption | were old rhymes retired? | `0` of `21`; the rhyme share is stable at `31%` |
-| discipline growth | did the gate learn a new kind of error? | `9` rules over `48` notes: `0` |
+| discipline growth | did the gate learn a new kind of error? | `9` rules over `50` notes: `0` |
 
 The citation meter is now runnable:
 
@@ -57,7 +57,7 @@ The citation meter is now runnable:
 python fold_lint.py reuse
 ```
 
-and it prints `369` edges over `48` notes — `7.69` per note — with the notes that nothing cites. Those
+and it prints `377` edges over `50` notes — `7.54` per note — with the notes that nothing cites. Those
 are the newest, so the orphan count is expected; what is not expected is that **no note has yet been
 written that needed them.**
 

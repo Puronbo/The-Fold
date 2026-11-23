@@ -166,6 +166,8 @@ coincide only where the modulus divides `3`.
 | `Fold.double_iter` | the `k`-th doubling is multiplication by `2^k` | exact |
 | `Fold.double_iter_eq_id_of_dvd` | `n ∣ 2^k − 1` implies `k` doublings are the identity | exact |
 | `Fold.double_iter_eq_id_iff_dvd` | for `n > 1`, the periods are exactly the `k` with `n ∣ 2^k − 1` | exact |
+| `Fold.double_iter_one_eq_neg_iff_dvd` | for `n > 1`, `k` doublings send `1` to the fold exactly when `n ∣ 2^k + 1` | exact |
+| `Fold.double_iter_not_id_and_neg` | for `n > 2`, no `k` is both an identity period and a fold period | exact |
 | `Fold.double_fixed` | the only fixed point is `0` | exact |
 | `Fold.double_eq_neg_iff` | doubling equals the fold iff `n ∣ 3` | exact |
 | `Fold.double_zero_fiber_odd` | for odd `n` the fiber over `0` is `{0}` | exact |
@@ -178,11 +180,18 @@ The inverse is the reason parity matters: `(n+1)/2` is an integer exactly when `
 multiplies by `2` to `n+1 ≡ 1`. The fixed-point statement is the finite crease: doubling has a
 one-point fixed set for every modulus, so unlike the fold it has no line to quotient by. Doubling and
 the fold coincide exactly when `n ∣ 3`: trivially at `n = 1`, and at `n = 3` where `2 = −1`. The
-reading of `+2` as `−1` away from `n ∈ {1, 3}` is a false friend. The period set is now exact as well:
-for `n > 1`, `k` doublings are the identity exactly when `n ∣ 2^k − 1`. For odd `n` the least positive
-period is the multiplicative order of `2`; for even `n` there is none. The file names the set, not the
-least element. On `ℤ/7` the orbits are the three cycles above, and `7 = 2³ − 1` is the arithmetic reason
-the third iterate is the identity.
+reading of `+2` as `−1` away from `n ∈ {1, 3}` is a false friend. Both period sets are now exact:
+for `n > 1`, `k` doublings are the identity exactly when `n ∣ 2^k − 1`, and they send `1` to the fold
+exactly when `n ∣ 2^k + 1`. For `n > 2` the two cannot happen at the same `k`, since a common step
+would give `n ∣ 2`. For odd `n` the least identity period is the multiplicative order of `2`; for even
+`n` there is none. The file names the sets, not their least elements. On `ℤ/7` the orbits are the three
+cycles above, and `7 = 2³ − 1` is the arithmetic reason the third iterate is the identity. The shifted
+set is not the identity set under another name: `n = 7` has order `3` and no `k` at all with
+`2^k ≡ −1`, while `n = 15` has order `4` and also misses the fold, because `⟨2⟩` has a unique element of
+order `2` and it is not `−1`. Reaching the fold is also not a cyclicity test: `n = 33` and `n = 65` are
+not cyclic and do reach it. The count of scales needed to carry a piece of information is the subject of
+`the-fold-minimal-operations.md`; it is decided by cyclicity of `U(n)`, a different hypothesis from the
+fold-period question.
 
 ### The finite counterexamples
 
@@ -371,6 +380,8 @@ The axiom audit is reproducible with `#print axioms` in `Fold/Audit.lean`:
 | `Fold.scale_fix_iff` | `propext`, `Quot.sound` |
 | `Fold.chi_puncture_cap` | `propext` |
 | `Fold.rot_period` | `propext` |
+| `Fold.double_iter_one_eq_neg_iff_dvd` | `propext`, `Quot.sound` |
+| `Fold.double_iter_not_id_and_neg` | `propext`, `Quot.sound` |
 | `Fold.tolerance_not_trans` | `propext`, `Classical.choice`, `Quot.sound` |
 
 `propext`, `Quot.sound`, and `Classical.choice` are Lean's core axioms, not `sorryAx`. No theorem in

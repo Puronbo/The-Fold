@@ -67,6 +67,11 @@ That is the whole structure of a chart: coordinates, a domain, a correction, and
 is not an external grid laid on time. It is an internal quotient of the periods the observer can
 measure.
 
+The dates those periods write are also integers, and their arithmetic separates two invariants. The
+four spellings of `2000-10-26` are all `56 mod 99`, because every block of the label has even length;
+their divisor counts are `80, 80, 8, 8`, because the trailing zeros move. The residue is a function of
+the date; the divisor count is a function of the numeral. See `the-fold-date-numbers.md`.
+
 ## The revision loop
 
 A chart that cannot be revised is a fixed coordinate system. Generality is the loop that revises it:
