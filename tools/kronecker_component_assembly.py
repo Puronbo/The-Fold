@@ -13,6 +13,7 @@ from tools.regular_pencil_canonical_witness import regular_pencil_canonical_witn
 from tools.strict_pencil_equivalence import strict_pencil_equivalence_audit
 from tools.structural_singular_block import recover_single_singular_block_structurally
 from tools.rectangular_pencil import _validate_pair
+from tools.pencil_multi_direct_sum_witness import verify_pencil_multi_direct_sum_witness
 
 
 def _block_diag(matrices):
@@ -125,6 +126,16 @@ def assemble_kronecker_components(
     )
     if not audit["strict_equivalence_certified"]:
         raise ArithmeticError("assembled block-diagonal witnesses failed global strict-equivalence audit")
+
+    # G-EP60: independently verify the supplied assembled transforms against
+    # the ordered component partition, checking every cross-component block.
+    canonical_block_shapes = [[len(matrix), len(matrix[0])] for matrix in target_q]
+    multi_block_audit = verify_pencil_multi_direct_sum_witness(
+        full_q, full_k, p, full_s, full_t, canonical_block_shapes
+    )
+    if not multi_block_audit["verification"]["direct_sum_verified"]:
+        raise ArithmeticError("assembled component witnesses failed multi-block direct-sum audit")
+
     return {
         "schema": "the-fold-kronecker-component-assembly-v1",
         "field": f"F_{p}", "component_count": len(reports),
@@ -133,16 +144,20 @@ def assemble_kronecker_components(
         "source_Q": full_q, "source_K": full_k,
         "canonical_Q": canonical_q, "canonical_K": canonical_k,
         "left_transform_S": full_s, "right_transform_T": full_t,
+        "canonical_block_shapes": canonical_block_shapes,
         "component_reports": reports,
         "global_strict_equivalence_audit": audit,
+        "multi_block_direct_sum_audit": multi_block_audit,
         "assembly_complete": True,
         "checks": {
             "component_count_matches_input": len(reports) == len(components),
             "global_strict_equivalence_verified": audit["strict_equivalence_certified"],
+            "multi_block_direct_sum_verified": multi_block_audit["verification"]["direct_sum_verified"],
         },
         "scope": (
             "Constructive assembly and global verification conditional on the supplied "
-            "component partition. Does not discover the partition or prove uniqueness "
+            "component partition. The multi-block audit independently verifies every "
+            "cross-component zero. Does not discover the partition or prove uniqueness "
             "of the decomposition for an arbitrary unsplit pencil."
         ),
     }
