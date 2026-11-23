@@ -32,6 +32,45 @@ def _block_diag(matrices):
     return out
 
 
+def _matrix_equal_mod(a, b, p):
+    return len(a) == len(b) and all(
+        len(x) == len(y) and all((int(u) - int(v)) % p == 0 for u, v in zip(x, y))
+        for x, y in zip(a, b)
+    )
+
+
+def _component_witness_composition_audit(
+    component_audits, assembled_s, assembled_t, source_q, source_k,
+    canonical_q, canonical_k, p
+):
+    """Rebuild global transforms solely from the ordered local certificates."""
+    reconstructed_s = _block_diag([item["left_transform"] for item in component_audits])
+    reconstructed_t = _block_diag([item["right_transform"] for item in component_audits])
+    replay = strict_pencil_equivalence_audit(
+        source_q, source_k, p, canonical_q, canonical_k, reconstructed_s, reconstructed_t
+    )
+    checks = {
+        "reconstructed_left_transform_matches_assembled": _matrix_equal_mod(reconstructed_s, assembled_s, p),
+        "reconstructed_right_transform_matches_assembled": _matrix_equal_mod(reconstructed_t, assembled_t, p),
+        "reconstructed_global_strict_equivalence_verified": replay["strict_equivalence_certified"],
+    }
+    return {
+        "schema": "the-fold-kronecker-component-witness-composition-audit-v1",
+        "component_count": len(component_audits),
+        "reconstructed_left_transform_S": reconstructed_s,
+        "reconstructed_right_transform_T": reconstructed_t,
+        "checks": checks,
+        "composition_verified": all(checks.values()),
+        "replayed_global_strict_equivalence_audit": replay,
+        "scope": (
+            "Reconstructs global block-diagonal transforms from ordered local "
+            "strict-equivalence certificates, compares them with returned global "
+            "transforms, and replays both pencil identities. It does not discover "
+            "components or establish uniqueness of the partition."
+        ),
+    }
+
+
 def _component_report_consistency_audit(
     reports, source_q, source_k, target_q, target_k, source_shape, canonical_shape
 ):
@@ -200,6 +239,14 @@ def assemble_kronecker_components(
     if not audit["strict_equivalence_certified"]:
         raise ArithmeticError("assembled block-diagonal witnesses failed global strict-equivalence audit")
 
+    # G-EP63: rebuild global transforms from ordered local certificates.
+    composition_audit = _component_witness_composition_audit(
+        component_witness_audits, full_s, full_t, full_q, full_k,
+        canonical_q, canonical_k, p
+    )
+    if not composition_audit["composition_verified"]:
+        raise ArithmeticError("component witness composition audit failed")
+
     # G-EP61: reconcile every component report with the concrete block matrices.
     consistency_audit = _component_report_consistency_audit(
         reports, source_q, source_k, target_q, target_k,
@@ -227,7 +274,7 @@ def assemble_kronecker_components(
         "left_transform_S": full_s, "right_transform_T": full_t,
         "canonical_block_shapes": canonical_block_shapes,
         "component_reports": reports,
-        "component_witness_audits": component_witness_audits,
+        "component_witness_audits": component_witness_audits,\n        "component_witness_composition_audit": composition_audit,
         "global_strict_equivalence_audit": audit,
         "multi_block_direct_sum_audit": multi_block_audit,
         "component_consistency_audit": consistency_audit,
