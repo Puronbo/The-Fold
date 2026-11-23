@@ -77,6 +77,7 @@ class MixedKroneckerRecoveryTests(unittest.TestCase):
         result = recover_mixed_kronecker_pencil(q, k, p, max_degree=2)
         self.assertTrue(result["recovered"], result.get("reason"))
         self.assertTrue(result["verification"]["strict_equivalence_certified"])
+        self.assertTrue(result["multi_block_direct_sum_audit"]["verification"]["direct_sum_verified"])
 
 
     def test_exhaustive_mode_finds_exact_witness(self):
@@ -88,6 +89,7 @@ class MixedKroneckerRecoveryTests(unittest.TestCase):
         self.assertTrue(result["recovered"], result.get("reason"))
         self.assertEqual(result["search_mode"], "exhaustive")
         self.assertTrue(result["verification"]["strict_equivalence_certified"])
+        self.assertTrue(result["multi_block_direct_sum_audit"]["verification"]["direct_sum_verified"])
 
     def test_exhaustive_budget_exhaustion_is_inconclusive(self):
         q, k = self.mixed_pair()
