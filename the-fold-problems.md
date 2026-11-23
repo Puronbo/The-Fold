@@ -3182,25 +3182,25 @@ Adds tools/residue_feature_data.py. It generates rational coefficients \(x=N/D\)
 
 ### G-4ct — canonical full coinvariant normal form
 
-For \(m=\sum_n p^n(A_n\,d\log t+B_n\,d\log p)\), write \(A_n=a_n+t b_n\), \(a_n,b_n\in F\). For every positive odd q and monic irreducible Q define the Frobenius-normalized orbit residue
+For \(m=\sum_n p^n(A_n\,d\log t+B_n\,d\log p)\), write \(A_n=a_n+t b_n\), \(a_n,b_n\in F\). For every positive odd q and monic irreducible Q define
 \[
 \mathfrak r_{q,Q}(m)=\sum_{j\ge0}\operatorname{Frob}_{k_Q}^{-j}
 \operatorname{res}_Q\left((a_{-2^j q}/S)dS\right).
 \]
-The sum is finite. Exact forms contribute zero; \((\Phi-1)M\) contributes a telescoping pair because \(C((a²/S)dS)=(a/S)dS\) and local residues of Cartier are inverse-Frobenius. The zero coordinate is \(a_0\bmod(\wp(F)+SF²)\).
+The sum is finite. Exact forms contribute zero; \((\Phi-1)M\) contributes a telescoping pair because the residue of \(\Theta(a^2)\) is the square of the residue of \(\Theta(a)\), where \(\Theta(a)=(a/S)dS\). The zero coordinate is \(a_0\bmod(\wp(F)+SF²)\).
 
-The full section-change action on the F-component of A is \(a^\sigma(S,p)=a(Z,p)\alpha²/W\), with \(W=\alpha²+S\beta²\), \(Z=SW\). Hence \((a^\sigma/S)dS=\phi^*((a/S)dS)\), \(\phi(S)=Z\). Local two-dimensional residue invariance proves every orbit residue is invariant. The p⁰ coefficient difference has zero residues, hence lies in \(U_{\rm nil}\subset\wp(F)+SF²\), so the zero coordinate is invariant too.
+The full section-change action on the F-component of A is \(a^\sigma(S,p)=a(Z,p)\alpha²/W\), with \(W=\alpha²+S\beta²\), \(Z=SW\). Hence \((a^\sigma/S)dS=\phi^*((a/S)dS)\), \(\phi(S)=Z\). Local two-dimensional residue invariance proves every orbit residue is invariant. The p⁰ coefficient difference has zero finite residues, hence lies in the Cartier-nilpotent subspace \(U_{\rm nil}\subset\wp(F)+SF²\), so the zero coordinate is invariant too.
 
-This yields a canonical surjection from \(Q_{\mathcal G}\) to \(F/(\wp+SF²)\oplus\bigoplus_{q>0\ odd}\bigoplus_Q k_Q\). Its associated-graded map is an isomorphism at every pole bound (G-4cr), so finite-pole induction proves it is an isomorphism:
+The resulting canonical isomorphism is
 \[
-Q_{\mathcal G}\cong F/(\wp+SF²)\oplus\bigoplus_{q>0\ odd}\mathcal R.
+\boxed{
+Q_{\mathcal G}\cong
+F/(\wp(F)+SF²)\oplus
+\bigoplus_{\substack{q>0\\q\ {\rm odd}}}
+\ \bigoplus_{Q\ {\rm monic\ irreducible}} k_Q.
+}
 \]
-The zero summand is canonically \(F/\wp(F)\): if \(a=u²+Sv²\), the map \([a]\mapsto[u]\) induces the isomorphism. Thus the full coinvariant is canonically
-\[
-F/\wp(F)\oplus\bigoplus_{q>0\ odd}\bigoplus_Q \mathbb F_{2^{\deg Q}}.
-\]
-This resolves the filtered-extension question: the Frobenius-normalized orbit residues provide the canonical splitting. It supersedes G-4cr's statement that only the associated-graded coinvariant was known.
-
+The filtered extension is resolved by the Frobenius-normalized orbit-residue coordinates. The zero summand is **not** \(F/\wp(F)\); G-4cu's proposed p-basis first-coordinate simplification is false and is withdrawn. G-4cy identifies the zero factor with \(\bigoplus_Q\mathbb F_2\) via residue traces.
 
 ### G-4cu — proposed zero-mode simplification withdrawn
 
@@ -3257,32 +3257,33 @@ Equivalently, choosing the finite affine points gives \(\bigoplus_{Q\ \mathrm{mo
 
 
 
-### G-4cy — correct zero-mode Cartier coinvariant
+### G-4cy — zero-mode quotient by finite residue traces
 
-The map \(F/(\wp(F)+SF²)\simeq F/\wp(F)\) proposed in G-4cu is false. The map
+Put \(H=\wp(F)+SF²\), \(F=\mathbb F_2(S)\), and use
 \[
-\Theta:F/SF²\to\Omega_F^1/dF,\qquad [a]\mapsto(a/S)dS
+\Theta:F/SF²\xrightarrow{\sim}\Omega_F^1/dF,\qquad
+[a]\longmapsto(a/S)dS.
 \]
-is an isomorphism. Cartier is bijective on this quotient, with
-\[
-C(\Theta(a))=\Theta(\tau(a)),\qquad
-a=u²+Sv²,\quad \tau(a)=u.
-\]
-Moreover \(\Theta(\wp(a))=(C^{-1}-1)\Theta(a)\) in characteristic two. Thus
-\[
-F/(\wp(F)+SF²)
-\simeq(\Omega_F^1/dF)/(C^{-1}-1)(\Omega_F^1/dF).
-\]
-Under the finite-place residue decomposition \(\Omega_F^1/dF\simeq\bigoplus_Q k_Q\), Cartier inverse acts by Frobenius square. Its coinvariant in \(k_Q\) is \(k_Q/\{x²+x\}\simeq\mathbb F_2\), via absolute trace. Therefore
-\[
-F/(\wp(F)+SF²)\simeq\bigoplus_{Q\ {\rm monic\ irreducible}}\mathbb F_2,
-\]
-with coordinate \(\operatorname{Tr}_{k_Q/\mathbb F_2}\operatorname{res}_Q((a/S)dS)\).
+This is an isomorphism because \(dF=F²dS\).
 
-Combining with G-4ct, the corrected full coinvariant is
+Define
 \[
-Q_{\mathcal G}\simeq
-\left(\bigoplus_Q\mathbb F_2\right)\oplus
-\left(\bigoplus_{q>0\ {\rm odd}}\bigoplus_Q k_Q\right).
+\Psi:F\longrightarrow\bigoplus_{Q\ {\rm monic\ irreducible}}\mathbb F_2,\qquad
+a\longmapsto
+\left(\operatorname{Tr}_{k_Q/\mathbb F_2}
+\operatorname{res}_Q((a/S)dS)\right)_Q.
 \]
-The zero-mode basis has one trace-one residue generator per finite Q. The previous Artin–Schreier basis and dimension 148 benchmark are superseded by the corrected 8+88=96 benchmark at degree cutoffs 4 and q≤7.
+The support is finite. If \(a=Sb²\), then \(\Theta(a)=d(Sb²)\). If \(a=\wp(x)\), with \(\alpha_Q=\operatorname{res}_Q(\Theta(x))\), local Cartier/residue compatibility gives \(\operatorname{res}_Q(\Theta(x²))=\alpha_Q²\), so the residue of \(\Theta(\wp(x))\) is \(\alpha_Q²+\alpha_Q\), whose absolute trace is zero. Thus \(H\subseteq\ker\Psi\).
+
+The pure-scaling Cartier tower is \(I_h=S^{2^h}F^{2^{h+1}}\). For h≥1, writing \(x=S^{2^{h-1}}b^{2^h}\in I_{h-1}\), one has \(x²=\wp(x)+x\); induction gives \(I_h\subseteq H\). By G-4cp, under \(\Theta\) the sum of these \(I_h\), including \(I_0=SF²\), is the Cartier-nilpotent subspace \(N=\bigcup_j\ker C^j\).
+
+Now suppose \(\Psi(a)=0\). Each finite residue \(\alpha_Q\) of \(\Theta(a)\) has trace zero, hence is \(\beta_Q²+\beta_Q\) in \(k_Q\). Choose \(\beta_Q\) for the finitely many nonzero residues. Residue-surjectivity from G-4cq gives a rational differential \(\eta=\Theta(x)\) with those finite residues. Then \(\Theta(a)+\Theta(\wp(x))\) has zero finite residues, and its infinity residue is zero by the global residue theorem. G-4cq implies it lies in N, while \(N\subseteq\Theta(H)\). Thus \(a\in H\), proving \(\ker\Psi=H\).
+
+For surjectivity, choose \(\alpha_Q\in k_Q\) with trace one and take \(a_Q=S\alpha_Q Q'/Q\). Then \(\Theta(a_Q)=\alpha_Q Q'/Q\,dS\) has residue \(\alpha_Q\) at Q and zero at every other finite point. Therefore
+\[
+\boxed{
+F/(\wp(F)+SF²)\xrightarrow{\sim}
+\bigoplus_{Q\ {\rm monic\ irreducible}}\mathbb F_2
+}
+\]
+via finite-point residue traces. This proof uses Cartier only to identify the nilpotent tower and compute residues of selected representatives; it does **not** assert that inverse Cartier is an operator on \(\Omega_F^1/dF\).
