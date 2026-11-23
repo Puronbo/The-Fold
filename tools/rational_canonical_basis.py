@@ -119,7 +119,6 @@ def construct_rational_canonical_basis(
             "scope": "Bounded exact cyclic-generator search; incomplete means no conclusion about existence.",
         }
 
-    basis = [row[:] for block in basis_blocks for row in []]  # allocate below
     basis = [[0] * n for _ in range(n)]
     cursor = 0
     for block in basis_blocks:
