@@ -3253,3 +3253,8 @@ An explicit \(\mathbb F_2\)-basis of \(Q_{\mathcal G}\) is obtained from:
 - the polynomial basis \(1,\bar S,\ldots,\bar S^{\deg Q-1}\) in every residue field \(k_Q\), for every odd orbit root q.
 
 The trace pairing on each finite field gives explicit dual coefficients \(c_i\) with \(\operatorname{Tr}(c_i\bar S^j)=\delta_{ij}\). The new exact script tools/coinvariant_basis_data.py enumerates finite cutoffs and computes these trace-dual bases by GF(2) Gaussian elimination. At height 5, q≤7, degree(Q)≤4 it emits 60 zero-mode and 88 residue basis coordinates, total 148. This is a finite benchmark window; the full algebraic dual of the infinite direct sum is a product.
+
+
+### G-4cx — exact GF(2) system identification of orbit-residue readouts
+
+For fixed Q and orbit length L, the Frobenius-normalized orbit residue is an \(\mathbb F_2\)-linear map \(k_Q^L\to k_Q\). The new script tools/train_orbit_residue_gf2.py learns its binary matrix from random input/output examples by exact Gaussian elimination, requires full feature rank, and checks independent held-out sequences plus every coordinate basis vector. An independent run recovered the exact maps for all eight irreducibles of degree at most four, L=3, with 128 test sequences per field and no errors. This is an exact symbolic-learning baseline, not neural-network training.
