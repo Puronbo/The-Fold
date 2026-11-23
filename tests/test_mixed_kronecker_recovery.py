@@ -67,8 +67,11 @@ class MixedKroneckerRecoveryTests(unittest.TestCase):
         q, k = self.mixed_pair()
         scramble = [[1, 1, 0, 0], [0, 1, 0, 0],
                     [0, 0, 1, 0], [0, 0, 0, 1]]
-        si = inverse(scramble, p)
-        q, k = mm(si, q, p), mm(si, k, p)
+        right_scramble = [[1, 0, 0, 0], [0, 1, 1, 0],
+                          [0, 0, 1, 0], [0, 0, 0, 1]]
+        si, ti = inverse(scramble, p), inverse(right_scramble, p)
+        q = mm(mm(si, q, p), ti, p)
+        k = mm(mm(si, k, p), ti, p)
         result = recover_mixed_kronecker_pencil(q, k, p, max_degree=2)
         self.assertTrue(result["recovered"], result.get("reason"))
         self.assertTrue(result["verification"]["strict_equivalence_certified"])
