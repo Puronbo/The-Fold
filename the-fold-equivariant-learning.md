@@ -515,7 +515,7 @@ where \(A_n=a_n+t b_n\) is the first logarithmic coefficient at exponent n. This
 The complete algebraic coinvariant is canonically
 \[
 Q_{\mathcal G}\simeq
-F/\wp(F)\oplus
+\left(\bigoplus_{Q\ {\rm monic\ irreducible}}\mathbb F_2\right)\oplus
 \bigoplus_{q>0\ {\rm odd}}\bigoplus_{Q\ {\rm monic\ irreducible}} k_Q.
 \]
 The zero summand is identified with \(F/\wp(F)\) by the p-basis map \(a=u^2+Sv^2\mapsto u\). Thus the filtered extension is no longer open: the orbit-residue map supplies a canonical splitting, not merely a noncanonical vector-space decomposition.
@@ -561,7 +561,7 @@ Independent exact finite-field checks covered 1,056 adjacent-stage relation pair
 
 The full algebraic linear-invariant space is now dual to
 \[
-F/\wp(F)\oplus
+\left(\bigoplus_Q\mathbb F_2\right)\oplus
 \bigoplus_{q>0\ {\rm odd}}\bigoplus_{Q\ {\rm monic\ irreducible}}k_Q.
 \]
 For each finite residue coordinate, use the trace-pairing readout \(x\mapsto\operatorname{Tr}_{k_Q/\mathbb F_2}(c_{q,Q}x)\). The zero-mode \(F/\wp(F)\) factor uses its explicit Artin–Schreier basis. The model should predict the normalized orbit sums, not raw per-exponent residues.
@@ -571,16 +571,14 @@ For each finite residue coordinate, use the trace-pairing readout \(x\mapsto\ope
 
 The new script tools/coinvariant_basis_data.py enumerates an exact finite window in the canonical coinvariant:
 \[
-F/\wp(F)\oplus\bigoplus_{q>0\ {\rm odd}}\bigoplus_Q k_Q.
+\left(\bigoplus_Q\mathbb F_2\right)\oplus\bigoplus_{q>0\ {\rm odd}}\bigoplus_Q k_Q.
 \]
 
-For the zero Artin–Schreier factor it emits the standard basis elements
+For the zero-mode factor it emits one rational representative for each finite irreducible Q:
 \[
-1,\qquad S^n\ (n>0\text{ odd}),\qquad
-S^j/Q^d\ (Q\text{ monic irreducible},\ d>0\text{ odd},\ 0\le j<\deg Q),
+a_Q=S\alpha_Q Q'/Q,\qquad \operatorname{Tr}_{k_Q/\mathbb F_2}(\alpha_Q)=1.
 \]
-with a height cutoff. For each residue block it emits the polynomial basis
-\(1,\bar S,\ldots,\bar S^{m-1}\) of \(k_Q\), for each odd root q in a bounded range.
+The corresponding differential \((a_Q/S)dS\) has residue \(\alpha_Q\) at Q, so its zero-mode residue-trace coordinate is 1 there and 0 at every other finite point.
 
 It also computes a trace-dual basis \(c_i\in k_Q\) satisfying
 \[
@@ -590,9 +588,9 @@ Thus every finite residue coordinate has an explicit dual invariant linear reado
 
 Example finite benchmark:
 \`\`\`bash
-python tools/coinvariant_basis_data.py --self-test --height 5 --q-max 7 --degree-max 4 > coinvariant_basis.jsonl
+python tools/coinvariant_basis_data.py --self-test --zero-degree-max 4 --q-max 7 --degree-max 4 > coinvariant_basis.jsonl
 \`\`\`
-The cutoff has 60 zero-mode basis elements and 88 residue basis elements, for a total of 148 exact basis coordinates. The residue count is
+The cutoff has 8 zero-mode basis elements and 88 orbit-residue basis elements, for a total of 96 exact basis coordinates. The orbit-residue count is
 \[
 4\cdot\sum_{\deg Q\le4}\deg Q
 =4(2+2+6+12)=88.
@@ -691,3 +689,23 @@ Run the residue-data generator with:
 python tools/cartier_residue_data.py --self-test --count 500 --max-degree 6 > cartier_residues.jsonl
 \`\`\`
 The script emits one row per sample plus one aggregate trace-zero configuration. Its self-test checks irreducible polynomials, finite-field inverses, Frobenius square roots, absolute traces, Cartier cycles, and the residue at infinity.
+
+
+
+
+## 17. Correct zero-mode invariant and readout
+
+A proposed shortcut identifying \(F/(\wp(F)+SF^2)\) with \(F/\wp(F)\) by p-basis first coordinate is false: \(a=\wp(S)=S^2+S\) is zero in the source but maps to \(S\), which is nonzero in \(F/\wp(F)\).
+
+The correct description is Cartier-theoretic:
+\[
+F/(\wp(F)+SF^2)
+\simeq(\Omega_F^1/dF)/(C^{-1}-1)(\Omega_F^1/dF)
+\simeq\bigoplus_{Q\ {\rm monic\ irreducible}}\mathbb F_2.
+\]
+The zero-mode coordinate for a rational coefficient a is
+\[
+z_Q(a)=\operatorname{Tr}_{k_Q/\mathbb F_2}
+\operatorname{res}_Q((a/S)dS).
+\]
+Thus the learning target at zero exponent is a finite-support bit-vector indexed by finite closed points Q. A basis representative is \(a_Q=S\alpha_Q Q'/Q\) with \(\operatorname{Tr}(\alpha_Q)=1\). The full coinvariant target is now the zero-mode trace bits together with the nonzero orbit-residue blocks \(k_Q\) at each positive odd root q.
