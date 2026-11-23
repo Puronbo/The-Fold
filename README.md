@@ -536,3 +536,6 @@ observer gives the reading. The four zones are the map's legend.
 
 
 **Transformer checkpoint inspection (G-EP15):** `tools/transformer_checkpoint.py` scans a supplied PyTorch weights-only checkpoint or state-dictionary mapping, reports modular ranks for eligible 2-D weight tensors across chosen primes/scales, and optionally computes full spectral/Jordan fingerprints for small square matrices. PyTorch is optional and used only by the checkpoint loader; `weights_only=True` is required, and no unrestricted pickle fallback is used. Layer-size and spectral-dimension limits prevent accidental expensive runs. No trained checkpoint has been supplied or empirically evaluated yet. See `tests/test_transformer_checkpoint.py` and `research/the-fold-transformer-checkpoint-inspection.md`.
+
+
+**Synthetic transformer pipeline demo (G-EP16):** `python -m tools.transformer_demo` runs a deterministic transformer-shaped fixture through checkpoint inspection and snapshot sensitivity analysis. It includes square Q/K/V/O attention projections, rectangular MLP up/down matrices, and skipped normalization/bias vectors, with a controlled rank-changing snapshot. The output is explicitly marked synthetic and is not evidence from a trained model. See `tools/transformer_demo.py`, `tests/test_transformer_demo.py`, and `research/the-fold-synthetic-transformer-demo.md`.
