@@ -3324,3 +3324,8 @@ using the nondegenerate trace pairing on each finite field \(k_Q\). An arbitrary
 The evaluation is finite for every quotient element because the coinvariant is a direct sum. Since \(pM\subset R\) by positive-tail contraction, Q is discrete in the quotient p-adic topology, so every algebraic functional is continuous. This completely classifies invariant linear readouts; the nonlinear invariant ring remains a separate problem.
 
 **ML target:** learn finite windows of the product weights, using residue-field trace-dual coordinates. Do not confuse finite-support benchmark weights with the unrestricted product dual.
+
+
+### G-4da implementation — finite product-dual readout benchmark
+
+Added tools/invariant_linear_readout_data.py. It samples bounded windows of the full product dual: one \(\mathbb F_2\) weight per zero-mode finite point Q and one \(k_Q\) weight per odd root/residue-field pair. It produces exact readout labels via the finite-field trace pairing and tests zero-mode coordinate functionals, residue trace-dual basis vectors, and \(\mathbb F_2\)-linearity. This is a finite-window data generator; it does not represent the unrestricted product by a finite vector or claim neural training.
