@@ -1,7 +1,6 @@
 import unittest
 
 from tools.singular_block_recovery import right_singular_block
-from tools.strict_pencil_equivalence import _inverse_mod as unused
 from tools.structural_singular_block import recover_single_singular_block_structurally
 
 
