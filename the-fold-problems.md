@@ -3271,3 +3271,19 @@ The first stages are \(SF²\) at \(p²\), \(S²F⁴\) at \(p⁴\), \(S⁴F⁸\) 
 Via \(\Theta([x])=(x/S)dS\), the residual after \(I_0=SF²\) is \(\Omega_F^1/dF\), and the later \(I_h\) correspond to Cartier-nilpotent classes \(\ker C^h\). The rational class \(x=S/(S+1)\) maps to \(d\log(S+1)\), which is Cartier-fixed and nonexact (residue 1 at \(S=1\)). Thus the rational pure-scaling tower has a nonzero Cartier-nonnilpotent residual. This is a subfamily calculation only; the full section-change coinvariant quotient may impose additional relations through other directions or syzygies.
 
 **Open:** determine the full Cartier-nonnilpotent quotient under all section changes, compute relation syzygies, and handle the zero mode. Rational-function tests are mandatory; polynomial-only training sees only the constant residual and misses logarithmic classes.
+
+
+### G-4cq — residue classification of the Cartier-nonnilpotent tower quotient
+
+For \(F=\mathbb F_2(S)\), the residue map on rational differentials induces
+\[
+(\Omega_F^1/dF)/\bigcup_h\ker C^h
+\simeq
+\left\{(\alpha_P)_P\in\bigoplus_P k(P):
+\sum_P\operatorname{Tr}_{k(P)/\mathbb F_2}(\alpha_P)=0\right\}.
+\]
+The proof uses the local Laurent expansion of Cartier: the residue is sent to its square root, while every non-residue polar term is killed after finitely many Cartier iterations. A differential with zero residues therefore becomes globally regular after some iterate, hence zero on \(\mathbb P^1\). Conversely, the global residue theorem and partial fractions realize every trace-zero finite-support residue family.
+
+Equivalently, choosing the finite affine points gives \(\bigoplus_{Q\ \mathrm{monic\ irreducible}}\mathbb F_2[S]/(Q)\), with the infinity residue determined by the total trace. This classifies the Cartier-nonnilpotent quotient of the *displayed pure-scaling diagonal tower*. It is not yet the full section-change coinvariant \(Q_{\mathcal G}\); other directions and relation syzygies may impose more relations.
+
+**Learning consequence:** rational-function examples should be represented by their irreducible denominator factors and residue-field coordinates. A polynomial-only model misses these stable residue features.
