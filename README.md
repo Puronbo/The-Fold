@@ -1607,8 +1607,9 @@ The orbit sum is essential for annihilating \((\Phi-1)M\); raw residues at a sin
 
 **G-4ct–G-4cu — complete coinvariants:** the full group coinvariant is
 \[
-Q_{\mathcal G}\cong F/\wp(F)\oplus
-\bigoplus_{q>0\ {\rm odd}}\ \bigoplus_{Q\ {\rm monic\ irreducible}}\mathbb F_{2^{\deg Q}}.
+Q_{\mathcal G}\cong
+F/(\wp(F)+SF^2)\oplus
+\bigoplus_{q>0\ {\rm odd}}\ \bigoplus_{Q\ {\rm monic\ irreducible}}k_Q.
 \]
 For each odd root q, the invariant residue is the Frobenius-normalized sum over the full exponent-doubling orbit \(-q,-2q,-4q,\ldots\). This annihilates the differential-Frobenius relation and is invariant under all finite section changes. The zero summand \(F/(\wp(F)+SF²)\) is canonically identified with \(\bigoplus_Q\mathbb F_2\) by finite-point residue traces (G-4cy). The filtered extension left open in G-4cr is now resolved by a canonical orbit-residue splitting.
 
@@ -1630,10 +1631,10 @@ The rational residue generator also emits orbit-sequence examples with the orbit
 **G-4cx — exact GF(2) system identification:** tools/train_orbit_residue_gf2.py learns the Frobenius-normalized orbit-residue readout as a binary linear map from examples, checks full feature rank, and validates held-out sequences and coordinate basis vectors. An independent exact run recovered all maps for the eight irreducibles of degree at most four with three stages and 128 tests per field.
 
 
-**G-4cp — pure-scaling Frobenius tower:** the change \(t\mapsto t(1+p)\) gives successive odd-layer relation images \(SF²,S²F⁴,S⁴F⁸,\ldots\) at offsets \(p²,p⁴,p⁸,\ldots\). The rational residual is described by Cartier-nonnilpotent classes in \(\Omega_F^1/dF\); \(d\log(S+1)\) is a nonzero Cartier-fixed test class. Polynomial-only data collapse to constants and are insufficient for the rational-function problem. The full group coinvariant is still open.
+**G-4cp — pure-scaling Frobenius tower:** the change \(t\mapsto t(1+p)\) gives successive odd-layer relation images \(SF²,S²F⁴,S⁴F⁸,\ldots\) at offsets \(p²,p⁴,p⁸,\ldots\). The rational residual is described by Cartier-nonnilpotent classes in \(\Omega_F^1/dF\); \(d\log(S+1)\) is a nonzero Cartier-fixed test class. Polynomial-only data collapse to constants and are insufficient for the rational-function problem. The full group coinvariant is subsequently computed in G-4ct–G-4cy.
 
 
-**G-4cq — residue classification:** the Cartier-nonnilpotent quotient of the pure-scaling diagonal tower is the finite-support closed-point residue space with total trace zero, equivalently \(\bigoplus_{Q\ {\rm monic\ irreducible}}\mathbb F_2[S]/(Q)\), with infinity residue determined by total trace. This is still a subfamily/tower quotient, not the full section-change coinvariant. Rational ML features should use irreducible denominator factors and residue-field coordinates.
+**G-4cq — residue classification:** the Cartier-nonnilpotent quotient of the pure-scaling diagonal tower is the finite-support closed-point residue space with total trace zero, equivalently \(\bigoplus_{Q\ {\rm monic\ irreducible}}\mathbb F_2[S]/(Q)\), with infinity residue determined by total trace. This is the pure-scaling subfamily result; G-4ct–G-4cy prove the full section-change coinvariant. Rational ML features should use irreducible denominator factors and residue-field coordinates.
 
 
 **G-4cq — residue-field form of the Cartier tower:** the nonnilpotent quotient is the finite-support residue space with global trace zero, equivalently one copy of \(\mathbb F_2[S]/(Q)\) for each finite monic irreducible Q, with the infinity residue determined by total trace. Added tools/cartier_residue_data.py to generate exact finite-field residue examples and Cartier inverse-Frobenius cycles.
@@ -1648,3 +1649,7 @@ Q_{\mathcal G}\cong
 \left(\bigoplus_{q>0\ {\rm odd}}\bigoplus_Q k_Q\right).
 \]
 The corrected finite basis benchmark is 8 zero-mode plus 88 orbit-residue coordinates (96 total) at degree cutoffs 4, q≤7.
+
+
+
+**G-4cy — rigorous zero-mode trace proof:** \(F/(\wp(F)+SF^2)\cong\bigoplus_Q\mathbb F_2\), via \(a\mapsto(\operatorname{Tr}_{k_Q/\mathbb F_2}\operatorname{res}_Q((a/S)dS))_Q\). The proof uses the Cartier-nilpotent tower only as a subspace of \(\wp(F)+SF^2\), then identifies the kernel using finite-field Artin–Schreier trace-zero and residue-surjectivity. It does not treat inverse Cartier as an operator on \(\Omega_F^1/dF\). The correct full normal form is \((\bigoplus_Q\mathbb F_2)\oplus(\bigoplus_{q>0\ odd,Q}k_Q)\).
