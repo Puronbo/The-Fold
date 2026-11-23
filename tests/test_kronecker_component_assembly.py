@@ -244,6 +244,54 @@ class KroneckerComponentAssemblyTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             assemble_kronecker_components([], 3)
 
+    def test_independent_reconstruction_verifier_accepts_fresh_result(self):
+        from tools.kronecker_component_assembly import verify_kronecker_component_assembly_certificate
+        rq, rk = right_block(1)
+        components = [
+            {"kind": "right", "q": rq, "k": rk},
+            {"kind": "regular", "q": [[1]], "k": [[0]]},
+        ]
+        result = assemble_kronecker_components(components, 5)
+        audit = verify_kronecker_component_assembly_certificate(components, 5, result)
+        self.assertTrue(audit["verified"])
+        self.assertTrue(all(audit["checks"].values()))
+
+    def test_independent_reconstruction_verifier_detects_mutated_certificate_fields(self):
+        from tools.kronecker_component_assembly import verify_kronecker_component_assembly_certificate
+        rq, rk = right_block(1)
+        components = [
+            {"kind": "right", "q": rq, "k": rk},
+            {"kind": "regular", "q": [[1]], "k": [[0]]},
+        ]
+        original = assemble_kronecker_components(components, 5)
+        mutations = [
+            ("source_Q", lambda r: r["source_Q"][0].__setitem__(0, 4)),
+            ("source_K", lambda r: r["source_K"][0].__setitem__(0, 4)),
+            ("canonical_Q", lambda r: r["canonical_Q"][0].__setitem__(0, 4)),
+            ("canonical_K", lambda r: r["canonical_K"][0].__setitem__(0, 4)),
+            ("left_transform_S", lambda r: r["left_transform_S"][0].__setitem__(0, (r["left_transform_S"][0][0] + 1) % 5)),
+            ("right_transform_T", lambda r: r["right_transform_T"][0].__setitem__(0, (r["right_transform_T"][0][0] + 1) % 5)),
+            ("canonical_block_shapes", lambda r: r["canonical_block_shapes"][0].__setitem__(0, 99)),
+            ("source_shape", lambda r: r["source_shape"].__setitem__(0, 99)),
+            ("canonical_shape", lambda r: r["canonical_shape"].__setitem__(1, 99)),
+            ("component_count", lambda r: r.__setitem__("component_count", 99)),
+            ("component_reports", lambda r: r["component_reports"][0].__setitem__("kind", "regular")),
+            ("component_witness_audits", lambda r: r["component_witness_audits"][0]["left_transform"][0].__setitem__(0, 4)),
+            ("component_witness_composition_audit", lambda r: r["component_witness_composition_audit"].__setitem__("component_count", 99)),
+            ("global_strict_equivalence_audit", lambda r: r["global_strict_equivalence_audit"].__setitem__("strict_equivalence_certified", False)),
+            ("multi_block_direct_sum_audit", lambda r: r["multi_block_direct_sum_audit"].__setitem__("block_shapes", [[99, 99]])),
+            ("component_consistency_audit", lambda r: r["component_consistency_audit"].__setitem__("consistency_verified", False)),
+            ("checks", lambda r: r["checks"].__setitem__("global_strict_equivalence_verified", False)),
+        ]
+        for field, mutate in mutations:
+            with self.subTest(field=field):
+                altered = copy.deepcopy(original)
+                mutate(altered)
+                audit = verify_kronecker_component_assembly_certificate(components, 5, altered)
+                self.assertFalse(audit["verified"])
+                self.assertFalse(audit["checks"][field])
+
+
 
 if __name__ == "__main__":
     unittest.main()
