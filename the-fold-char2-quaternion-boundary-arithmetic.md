@@ -3908,15 +3908,16 @@ we obtain the exact differential identity
 \]
 At every finite closed point Q, \(z=Q(S)\) is carried to \(z'=z+O(p^2)\), while p is fixed. The induced automorphism of \(k_Q((z))((p))\) is continuous and fixes \(k_Q\). The higher-dimensional residue is invariant under continuous automorphisms of iterated Laurent series fields (Gorchinskiy–Osipov, Proposition 5.3, Corollary 5.4 and Remark 5.5). Thus every coefficientwise residue of the differential series above is unchanged. Consequently all orbit sums \(\mathfrak r_{q,Q}\) are invariant.
 
-For the zero-mode coordinate, the p^0 coefficient of the pulled-back differential differs from the original by a differential with zero residue at every finite Q. By G-4cp, its coefficient belongs to
+For the zero-mode coordinate, use the exact pullback formula itself. Since
 \[
-U_{\rm nil}=\sum_{h\ge0}S^{2^h}F^{2^{h+1}}.
+\alpha=1+O(p),\qquad \beta=O(p),\qquad
+W=\alpha^2+S\beta^2=1+O(p^2),\qquad Z=SW=S+O(p^2),
 \]
-This subspace is contained in \(\wp(F)+SF^2\): for h≥1, put \(c=S^{2^{h-1}}b^{2^h}\); then
+the p⁰ coefficient of
 \[
-S^{2^h}b^{2^{h+1}}=\wp(c)+c,
+a^\sigma(S,p)=a(Z,p)\frac{\alpha^2}{W}
 \]
-and iterate until the h=0 term lies in \(SF^2\). Therefore \(\mathfrak z\) is invariant as well.
+is exactly \(a_0(S)\). Thus the zero coordinate \(\mathfrak z(m)=[a_0]\) is fixed even before passing to \(F/(\wp+SF^2)\).
 
 The map \(\mathfrak R\) descends to the full group coinvariant \(Q_{\mathcal G}\).
 
