@@ -1635,7 +1635,7 @@ The rational residue generator also emits orbit-sequence examples with the orbit
 
 
 
-**G-4cy — zero-mode correction:** \(F/(\wp(F)+SF^2)\) is not \(F/\wp(F)\). The proposed p-basis map is disproved by \(a=\wp(S)=S^2+S\), whose first component is S. The correct quotient is the Cartier coinvariant of \(\Omega_F^1/dF\), hence \(\bigoplus_Q\mathbb F_2\) via finite-point residue traces. The full coinvariant normal form is therefore
+**G-4cy — zero-mode correction:** \(F/(\wp(F)+SF^2)\) is not \(F/\wp(F)\). The proposed p-basis map is disproved by \(a=\wp(S)=S^2+S\), whose first component is S. The correct quotient is \(\bigoplus_Q\mathbb F_2\) via finite-point residue traces. The proof uses the Cartier-nilpotent tower as a subspace of the denominator; it does not treat inverse Cartier as an operator on \(\Omega_F^1/dF\). The full coinvariant normal form is therefore
 \[
 Q_{\mathcal G}\cong
 \left(\bigoplus_Q\mathbb F_2\right)\oplus
