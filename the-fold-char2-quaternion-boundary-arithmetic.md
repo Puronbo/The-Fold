@@ -3947,37 +3947,16 @@ F/(\wp(F)+SF^2)
 \]
 Unlike the earlier G-4cr associated-graded statement, this is a full algebraic coinvariant normal form. The splitting is canonical through the explicit orbit-residue map \(\mathfrak R\); the Frobenius-normalized sum is essential. A residue taken only at exponent \(-q\) would not annihilate \((\Phi-1)M\).
 
-### 95.4 Simplify the zero-mode summand
+### 95.4 — zero-mode simplification withdrawn
 
-There is a useful canonical additive isomorphism
-\[
-F/(\wp(F)+SF^2)\simeq F/\wp(F).
-\]
-For \(a\in F\), write its unique 2-basis decomposition \(a=u^2+Sv^2\), and put \(\tau(a)=u\). Then \(\tau(SF^2)=0\). Also
-\[
-\tau(\wp(u^2+Sv^2))
-=u^2+Sv^2+u
-\equiv \wp(u)\pmod{SF^2}.
-\]
-Conversely, if \(\tau(a)=\wp(u)\), then
-\[
-a\equiv \wp(u)^2=\wp(u^2)\pmod{SF^2}.
-\]
-Thus \(\tau\) induces the asserted isomorphism.
-
-We may consequently write the full answer as
-\[
-\boxed{
-Q_{\mathcal G}\ \simeq\
-F/\wp(F)
-\ \oplus\
-\bigoplus_{\substack{q\ge1\\q\ {\rm odd}}}
-\ \bigoplus_{Q\ {\rm monic\ irreducible}}\mathbb F_{2^{\deg Q}}.
-}
-\]
-The zero summand has the explicit Artin–Schreier basis recorded in G-4aj. This completes the algebraic invariant-linear-readout problem. The algebraic dual is the product of the duals of these summands; via the finite-field trace pairing, each residue-field functional is \(x\mapsto\operatorname{Tr}_{k_Q/\mathbb F_2}(c x)\).
-
-**Scope:** this is an algebraic direct-sum theorem for finite negative principal parts, with positive tails contracted as in G-4bs. It does not claim a new topology or a continuous-dual classification for a different completion.
+The proposed identification \(F/(\wp(F)+SF^2)\simeq F/\wp(F)\) via
+\([a]\mapsto[u]\), where \(a=u^2+Sv^2\), is **incorrect**.
+For \(a=\wp(S)=S^2+S\), the p-basis decomposition has \(u=S,v=1\).
+The class of a is zero in the source, but \([u]=[S]\ne0\) in
+\(F/\wp(F)\), since S has an odd pole at infinity. Thus the proposed map
+does not descend. The full coinvariant theorem in 95.3 remains valid with
+the zero factor \(F/(\wp(F)+SF^2)\); only the claimed simplification is
+withdrawn. The correct residue-theoretic description is G-4cy below.
 
 
 ## 92. G-4cp — pure-scaling Frobenius tower and the Cartier-nonnilpotent residual
@@ -4149,3 +4128,76 @@ The last isomorphism records the finite-point residues; the infinity residue is 
 Under \(\Theta([x])=(x/S)dS\), this is also the explicit form of \(F/\sum_{h\ge0}I_h\) from G-4cp. For example \(x=S/(S+1)\) gives \(d\log(S+1)\), whose finite residue at Q=S+1 is 1 and whose infinity residue is 1. This is a nonzero tower class. More generally, each finite irreducible Q contributes an entire residue field \(k_Q\), not merely the F₂-valued logarithmic classes obtained from \(d\log f\).
 
 **Scope.** This classifies the Cartier-nonnilpotent quotient of the *displayed pure-scaling diagonal tower*. It does not yet prove that these classes survive all section-change directions or all syzygies among relations. The full coinvariant quotient \(Q_{\mathcal G}\) remains open.
+
+
+## 98. G-4cy — correct zero-mode invariant as a Cartier coinvariant
+
+Put \(H=\wp(F)+SF^2\), \(F=\mathbb F_2(S)\), and define
+\[
+\Theta:F/SF^2\xrightarrow{\sim}\Omega_F^1/dF,
+\qquad [a]\longmapsto (a/S)dS.
+\]
+This is an isomorphism because \(dF=F^2dS\): for \(f=u^2+Sv^2\), \(f'=v^2\), and every square \(g^2\) is the derivative of \(Sg^2\).
+
+Let \(C\) be Cartier on \(\Omega_F^1/dF\). It is bijective: under the p-basis decomposition it sends
+\[
+\Theta(u^2+Sv^2)\longmapsto\Theta(u),
+\]
+and its inverse sends \(\Theta(a)\) to \(\Theta(a^2)\). Consequently
+\[
+\Theta(\wp(a))
+=\Theta(a^2+a)
+=(C^{-1}+1)\Theta(a).
+\]
+In characteristic two, \(C^{-1}+1=C^{-1}-1\). Hence
+\[
+\boxed{
+F/(\wp(F)+SF^2)
+\simeq
+(\Omega_F^1/dF)/(C^{-1}-1)(\Omega_F^1/dF).
+}
+\]
+
+Use the closed-point residue isomorphism from G-4cq:
+\[
+\Omega_F^1/dF\simeq\bigoplus_{Q\ {\rm monic\ irreducible}}k_Q,
+\qquad k_Q=\mathbb F_2[S]/(Q),
+\]
+where the residue at infinity is determined by the global trace relation. Cartier acts on each finite residue coordinate by inverse Frobenius, so \(C^{-1}\) acts by Frobenius square. Therefore
+\[
+F/(\wp(F)+SF^2)
+\simeq
+\bigoplus_Q k_Q/\{z^2+z:z\in k_Q\}
+\xrightarrow{\ \operatorname{Tr}\ }
+\boxed{\bigoplus_Q\mathbb F_2}.
+\]
+For every finite field \(k_Q\), the Artin–Schreier image \(\{z^2+z\}\) is exactly the trace-zero subspace, so the trace map induces the displayed isomorphism.
+
+Explicitly, the zero-mode invariant of \(a\in F\) is
+\[
+\boxed{
+[a]\longmapsto
+\left(
+\operatorname{Tr}_{k_Q/\mathbb F_2}
+\operatorname{res}_Q((a/S)dS)
+\right)_Q.
+}
+\]
+Thus one independent zero-mode class survives for each finite closed point Q. A representative with nonzero Q-coordinate is \(a=S\alpha Q'/Q\), where \(\alpha\in k_Q\) has trace one. Its differential \((a/S)dS=\alpha Q'/Q\,dS\) has residue \(\alpha\) at Q and no other finite residue.
+
+Combining this with G-4ct gives the corrected full coinvariant normal form
+\[
+\boxed{
+Q_{\mathcal G}\simeq
+\left(\bigoplus_{Q\ {\rm monic\ irreducible}}\mathbb F_2\right)
+\oplus
+\left(
+\bigoplus_{\substack{q>0\\q\ {\rm odd}}}
+\ \bigoplus_{Q\ {\rm monic\ irreducible}} k_Q
+\right).
+}
+\]
+The second factor is the Frobenius-normalized orbit-residue module from G-4ct. The first is its zero-mode Cartier coinvariant. This replaces the false \(F/\wp(F)\) simplification in 95.4 and the corresponding G-4cu claim.
+
+**Learning consequence.** The zero-mode basis is indexed by finite irreducible Q, with one F₂ coordinate per Q obtained by the residue trace. It is not the Artin–Schreier basis of \(F/\wp(F)\). For each odd exponent root q, the nonzero-orbit block still carries the full residue field \(k_Q\) and its trace-dual readouts.
+
