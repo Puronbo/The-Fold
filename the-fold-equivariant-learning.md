@@ -191,7 +191,7 @@ Run:
 python tools/section_change_equivariance_data.py --self-test --count 1000 --max-degree 5 > section_change_train.jsonl
 \`\`\`
 
-The current generator emits nine rows per sample iteration, hence 9,000 rows for count 1,000. I independently checked the polynomial tower decomposition exhaustively for all bitmasks below 2^12 and the Hasse/Frobenius first-coefficient identity for all masks below 2^10 and Frobenius levels h≤6. These are component-level checks; the full updated script has not yet been run as a repository CI job. The symbolic rational witness is a separate exact challenge, not a polynomial training example.
+The current generator emits eight rows per sample iteration plus one rational challenge, hence 8,001 rows for count 1,000. I independently checked the polynomial tower decomposition exhaustively for all bitmasks below 2^12 and the Hasse/Frobenius first-coefficient identity for all masks below 2^10 and Frobenius levels h≤6. These are component-level checks; the full updated script has not yet been run as a repository CI job. The symbolic rational witness is a separate exact challenge, not a polynomial training example.
 
 ### Learning the unresolved tower
 
