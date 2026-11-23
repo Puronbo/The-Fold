@@ -23,7 +23,7 @@ class RegularPencilCanonicalWitnessTests(unittest.TestCase):
         self.k = [[1, 1], [0, 2]]
         result = regular_pencil_canonical_witness(self.q, self.k, 5)
         self.assert_certificate(result, 5)
-        self.assertEqual(result["construction_method"], "shared-chart operator intertwiner")
+        self.assertEqual(result["construction_method"], "cyclic-krylov-bases")
 
     def test_no_chart_canonical_certificate(self):
         self.q = [[1, 0, 0], [0, 0, 0], [0, 0, 1]]
