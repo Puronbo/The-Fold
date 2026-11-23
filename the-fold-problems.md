@@ -3291,3 +3291,12 @@ F/(\wp(F)+SF²)\xrightarrow{\sim}
 }
 \]
 via finite-point residue traces. This proof uses Cartier only to identify the nilpotent tower and compute residues of selected representatives; it does **not** assert that inverse Cartier is an operator on \(\Omega_F^1/dF\).
+
+
+### G-4cz — multi-point rational residue data
+
+The residue generator tools/cartier_residue_data.py now assembles a single rational differential with several prescribed closed-point residues:
+\[
+\omega=\sum_Q\alpha_Q\frac{Q'}Q\,dS=\frac{P(S)}{D(S)}\,dS.
+\]
+It verifies each residue by exact inversion in \(k_Q\), computes the infinity residue as the sum of absolute traces, checks the global residue sum, and outputs the reduced tower coefficient \(x=SP/D\). An independent exact finite-field implementation verified a three-point example at \(Q=S\), \(S+1\), and \(S^2+S+1\), including the residue at infinity. This is a rational multi-pole benchmark extension; no neural model is trained.
