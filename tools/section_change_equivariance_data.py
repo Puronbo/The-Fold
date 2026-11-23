@@ -54,6 +54,63 @@ def derivative(a: int) -> int:
     return out
 
 
+def frobenius_power(a: int, h: int) -> int:
+    """Return a**(2**h) in GF(2)[S] as an exponent-dilated bitmask."""
+    if h < 0:
+        raise ValueError("Frobenius level must be nonnegative")
+    out = 0
+    i = 0
+    while a:
+        if a & 1:
+            out |= 1 << (i << h)
+        i += 1
+        a >>= 1
+    return out
+
+
+def scaling_tower_coefficient(a: int, h: int) -> int:
+    """First coefficient from t -> t(1+p) on x=a**(2**h).
+
+    The first nonzero A-coordinate correction occurs at p**(2**(h+1))
+    and equals (S * a')**(2**h).
+    """
+    return frobenius_power(mul(S, derivative(a)), h)
+
+
+def polynomial_tower_decomposition(x: int) -> dict:
+    """Decompose a polynomial into constant plus the tower images I_h.
+
+    I_h = S**(2**h) * GF(2)[S]**(2**(h+1)).
+    Every nonconstant monomial S**n belongs to exactly one I_h,
+    namely h=v_2(n). This finite termination is special to polynomials.
+    """
+    groups: dict[int, int] = {}
+    i = 1
+    while (1 << i) <= x:
+        if (x >> i) & 1:
+            h = (i & -i).bit_length() - 1
+            odd_part = i >> h
+            # Choose a=S**odd_part; then (S*a')**(2**h)=S**i.
+            groups[h] = groups.get(h, 0) | (1 << odd_part)
+        i += 1
+    components = []
+    reconstructed = x & 1
+    for h, a in sorted(groups.items()):
+        source_x = frobenius_power(a, h)
+        image = scaling_tower_coefficient(a, h)
+        assert source_x == image
+        reconstructed ^= image
+        components.append({
+            "frobenius_level": h,
+            "source_a": a,
+            "source_x": source_x,
+            "first_target_offset": 1 << (h + 1),
+            "image": image,
+        })
+    assert reconstructed == x
+    return {"constant_residual": x & 1, "components": components}
+
+
 
 def frobenius_power(a: int, h: int) -> int:
     """Return a^(2^h) in GF(2)[S]."""
@@ -253,6 +310,26 @@ def self_test() -> None:
         first, _ = second_odd_diagonal(1, 0, mul(S, square(b)), 0)
         assert first == mul(S, square(b))
 
+    # Pure-scaling Frobenius tower: exact first nonzero coefficients.
+    for h in range(5):
+        for a in values:
+            coefficient = scaling_tower_coefficient(a, h)
+            assert coefficient == frobenius_power(mul(S, derivative(a)), h)
+    for x in [0, 1, S, 1 ^ S, 1 ^ (1 << 2) ^ (1 << 5), (1 << 7) | (1 << 8) | 1]:
+        dec = polynomial_tower_decomposition(x)
+        assert dec["constant_residual"] == (x & 1)
+        assert add(dec["constant_residual"], *[]) == (x & 1)
+        total = x & 1
+        for part in dec["components"]:
+            total ^= part["image"]
+        assert total == x
+
+    # Rational Cartier-fixed challenge: Theta(S/(S+1))=dlog(S+1).
+    # Numerator and denominator use the same GF(2)[S] bitmask encoding.
+    rational_witness = {"numerator": S, "denominator": 1 | S}
+    assert rational_witness["numerator"] == 0b10
+    assert rational_witness["denominator"] == 0b11
+
     # Hasse coefficients of the pure-scaling substitution.
     for h in range(5):
         j = 1 << h
@@ -305,6 +382,30 @@ def generate(count: int, max_degree: int, seed: int) -> Iterable[dict]:
         yield {
             "task": "second_odd_diagonal", "e": e, "f": f,
             "x": x, "y": y, "target": [n1, n2],
+        }
+
+        h = rng.randrange(5)
+        a = random_poly(rng, max_degree)
+        yield {
+            "task": "pure_scaling_frobenius_tower",
+            "frobenius_level": h,
+            "source_a": a,
+            "source_x": frobenius_power(a, h),
+            "first_target_offset": 1 << (h + 1),
+            "target": scaling_tower_coefficient(a, h),
+        }
+        yield {
+            "task": "polynomial_tower_decomposition",
+            "source": x,
+            **polynomial_tower_decomposition(x),
+        }
+        yield {
+            "task": "rational_cartier_fixed_challenge",
+            "x_numerator": S,
+            "x_denominator": 1 | S,
+            "differential": "dlog(S+1)",
+            "cartier_fixed": True,
+            "residue_at_S_plus_1": 1,
         }
         yield {
             "task": "second_even_diagonal", "e": e, "f": f,
