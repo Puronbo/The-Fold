@@ -1,26 +1,49 @@
-# G-EP35 — complete strict-equivalence profiles in the invertible-Q chart
+# G-EP35–G-EP36 — regular-pencil similarity profiles in invertible projective charts
 
-Let (Q,Kin M_n(mathbb F_p)) and assume (Q) is invertible. Left multiplication by (Q^{-1}) sends the ordered pencil pair to
+## G-EP35: the invertible-Q chart
+
+If (Qin M_n(\mathbb F_p)) is invertible, left multiplication by (Q^{-1}) sends
 [
-(Q,K)longmapsto (I,A),qquad A=Q^{-1}K.
+(Q,K)\longmapsto (I,A),\qquad A=Q^{-1}K.
 ]
-For two normalized pairs ((I,A)) and ((I,B)), a strict-equivalence witness (S,T) must satisfy (ST=I), hence (T=S^{-1}), and the second identity becomes (B=SAS^{-1}). Therefore
+Two normalized pairs ((I,A)) and ((I,B)) are strictly equivalent exactly when (A) and (B) are similar. Thus the rational-canonical invariant factors of (A) give a complete strict-equivalence fingerprint in this chart.
+
+## G-EP36: any invertible projective member
+
+The first coefficient need not be invertible. Search the projective line for a member
 [
-(Q_1,K_1)	ext{ and }(Q_2,K_2)	ext{ are strictly equivalent}
-iff Q_1^{-1}K_1	ext{ and }Q_2^{-1}K_2	ext{ are similar}.
+H=Q+\lambda K,\quad \lambda\in\mathbb F_p,
 ]
-The rational canonical invariant factors of (Q^{-1}K) are consequently a complete strict-equivalence fingerprint for ordered pairs in this chart.
+and finally the point at infinity (H=K). If a finite member is invertible, set (A=H^{-1}K). Left normalization gives
+[
+(H^{-1}Q,H^{-1}K)=(I-\lambda A,A).
+]
+If (K) is invertible, set (A=K^{-1}Q), obtaining ((A,I)).
+
+For two ordered pencils, use the **same** projective point. Under a strict-equivalence change (Q'=SQT, K'=SKT), the normalized operator changes by conjugation:
+[
+A'=T^{-1}AT.
+]
+Conversely, similarity of the normalized operators gives simultaneous equivalence of both normalized coefficient matrices, and undoing the left normalizations gives strict equivalence of the original ordered pairs. Therefore the invariant factors of (A) are a complete decision invariant whenever the two pencils share an invertible projective member over the base field.
 
 ## Implementation
 
-- `tools/regular_pencil_profile.py`: `regular_pencil_similarity_profile(q,k,p)` normalizes the pair and calls G-EP21's exact rational-canonical classifier.
-- `compare_regular_pencils(q_a,k_a,q_b,k_b,p)` decides strict equivalence by equality of the complete invariant-factor chains.
-- `tests/test_regular_pencil_profile.py` checks normalization, a nonidentity first coefficient, invariance under explicit strict-equivalence basis changes, separation of distinct similarity classes, and invalid inputs.
+- `tools/regular_pencil_profile.py`: `regular_pencil_similarity_profile(q,k,p)` searches finite projective points ([1:\lambda]) and then ([0:1]), normalizes at the first invertible member, and computes the exact rational-canonical profile.
+- `compare_regular_pencils(...)` searches for a common invertible projective point. It returns a complete yes/no decision if found, and `strictly_equivalent: null` with `decision_complete: false` if no common chart exists.
+- `tests/test_regular_pencil_profile.py` covers the original chart, singular (Q) with another finite invertible member, the infinity chart, strict-equivalence invariance, distinct classes, and an important failure boundary.
 
-No floating-point arithmetic is used. Matrix inversion and multiplication are exact over (mathbb F_p).
+## A regular pencil can have no invertible rational member
 
-## What this does and does not establish
+Over (mathbb F_2), take
+[
+Q=\operatorname{diag}(1,0,1),\qquad K=\operatorname{diag}(0,1,1).
+]
+Then
+[
+\det(aQ+bK)=ab(a+b)
+]
+is a nonzero homogeneous polynomial, so the pencil is regular. Yet it vanishes at all three points of (\mathbb P^1(\mathbb F_2)). Thus no base-field projective chart is invertible. The implementation correctly refuses to classify this case by the chart method; this refusal is not evidence of singularity or non-equivalence.
 
-This is a complete decision procedure for constant strict equivalence of two **ordered** square pencils when each first coefficient (Q) is invertible over the selected field. It does not handle a regular pencil whose (Q) is singular, does not permit a change of basis in the two-dimensional coefficient space (mixing (Q) and (K)), and does not produce explicit strict-equivalence witness matrices. It is a classification result in one chart, not a general Kronecker algorithm.
+## Scope
 
-The condition (Q) invertible itself certifies regularity: (det(Q+tK)) has nonzero constant term (det Q). The resulting operator profile is prime-dependent, as all finite-field reductions are.
+G-EP36 extends complete strict-equivalence classification beyond the invertible-(Q) chart, but not to all regular pencils. A regular pencil can require an extension-field point to obtain an invertible member. This implementation does not yet construct such extensions, nor does it produce explicit strict-equivalence witnesses. It does not allow coefficient mixing as an equivalence operation; the projective point is used only to normalize both ordered coefficients consistently.
