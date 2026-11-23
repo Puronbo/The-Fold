@@ -621,3 +621,6 @@ observer gives the reading. The four zones are the map's legend.
 
 
 **Composable Kronecker component assembly (G-EP47):** `tools/kronecker_component_assembly.py` composes structural recovery of individual right/left singular blocks with regular-pencil canonical witnesses. Given a proposed component partition, it assembles the block-diagonal target and block-diagonal (S,T), then independently verifies (SQT=Q_{\\rm can}) and (SKT=K_{\\rm can}). This is certified assembly, not automatic discovery of the component partition from an arbitrary unsplit pencil. See `tests/test_kronecker_component_assembly.py` and `research/the-fold-kronecker-component-assembly.md`.
+
+
+**Multiple-chain pure singular recovery (G-EP48):** `tools/pure_singular_pencil_recovery.py` recovers any number of right-only or left-only singular Kronecker blocks from the full pencil, including after arbitrary constant basis scrambling. It uses certified polynomial minimal-vector chains, constructs domain/codomain bases, and verifies explicit global strict-equivalence transformations. It does not yet recover a regular summand or mixed left/right pencils. See `tests/test_pure_singular_pencil_recovery.py` and `research/the-fold-pure-singular-pencil-recovery.md`.
