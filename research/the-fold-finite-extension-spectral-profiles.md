@@ -44,3 +44,41 @@ The unit suite now includes:
 - rejection of a reducible extension modulus.
 
 The current GitHub Actions workflow runs the complete standard-library unittest suite on Python 3.11.
+
+
+# G-EP10 — automatic extension eigenvalue classes
+
+## Result
+
+The full automatic spectral routine now combines G-EP7 through G-EP9:
+
+1. Compute the characteristic polynomial exactly.
+2. Factor it into monic irreducibles over F_p.
+3. Profile degree-one factors directly over F_p.
+4. For each irreducible factor q of degree d greater than one, construct F_(p^d)=F_p[x]/(q), take alpha=[x] as the canonical root of q, and compute the Jordan profile at alpha.
+
+The output records one representative root per irreducible factor, its extension degree, its algebraic multiplicity per root, and the number d of Frobenius-conjugate roots represented by that class.
+
+## Why one root represents the whole class
+
+If A has entries in F_p and sigma is a Frobenius automorphism of a splitting field, then applying sigma entrywise to
+\[
+(A-\lambda I)^r v=0
+\]
+gives
+\[
+(A-\sigma(\lambda)I)^r\sigma(v)=0.
+\]
+Thus the kernel dimensions, and therefore the Jordan block partition, are identical for all Frobenius conjugates of lambda. A degree-d irreducible factor contributes d conjugate roots, so one quotient-field representative suffices to recover the common Jordan type.
+
+This is a field-theoretic consequence, not a heuristic.
+
+## CLI
+
+Use `--auto-full` to request all irreducible eigenvalue classes, including extension-field profiles. The existing `--auto` remains a base-field-only mode, and `--eigenvalues` remains the manual profile mode.
+
+## Example
+
+For the matrix [[0,2],[1,0]] over F_3, the characteristic polynomial is x²+1, irreducible over F_3. Full mode constructs F_9=F_3[alpha]/(alpha²+1), profiles alpha, and records the two Frobenius-conjugate roots alpha and alpha³ with the same single size-one Jordan block.
+
+The implementation still assumes the input matrix has entries in the prime field. A future generalization can accept matrix entries already represented in a common extension field.
