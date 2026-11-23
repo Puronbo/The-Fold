@@ -276,3 +276,231 @@ def automatic_spectral_fingerprint(matrix: Sequence[Sequence[int]],
         "irreducible_factorization_complete": False,
         "profiles": profiles,
     }
+
+
+# Polynomial helpers use low-degree-first coefficient lists over F_p.
+def _poly_trim(a: Sequence[int], p: int) -> list[int]:
+    out = [int(x) % p for x in a]
+    while len(out) > 1 and out[-1] == 0:
+        out.pop()
+    return out or [0]
+
+
+def _poly_add(a: Sequence[int], b: Sequence[int], p: int) -> list[int]:
+    out = [0] * max(len(a), len(b))
+    for i in range(len(out)):
+        out[i] = ((a[i] if i < len(a) else 0) +
+                  (b[i] if i < len(b) else 0)) % p
+    return _poly_trim(out, p)
+
+
+def _poly_sub(a: Sequence[int], b: Sequence[int], p: int) -> list[int]:
+    return _poly_add(a, [-(x) for x in b], p)
+
+
+def _poly_mul(a: Sequence[int], b: Sequence[int], p: int) -> list[int]:
+    out = [0] * (len(a) + len(b) - 1)
+    for i, x in enumerate(a):
+        for j, y in enumerate(b):
+            out[i + j] = (out[i + j] + x * y) % p
+    return _poly_trim(out, p)
+
+
+def _poly_divmod(a: Sequence[int], b: Sequence[int], p: int):
+    numerator, denominator = _poly_trim(a, p), _poly_trim(b, p)
+    if denominator == [0]:
+        raise ZeroDivisionError("polynomial division by zero")
+    quotient = [0] * max(1, len(numerator) - len(denominator) + 1)
+    remainder = numerator[:]
+    inv = pow(denominator[-1], -1, p)
+    while remainder != [0] and len(remainder) >= len(denominator):
+        shift = len(remainder) - len(denominator)
+        factor = remainder[-1] * inv % p
+        quotient[shift] = factor
+        for i, value in enumerate(denominator):
+            remainder[shift + i] = (remainder[shift + i] - factor * value) % p
+        remainder = _poly_trim(remainder, p)
+    return _poly_trim(quotient, p), remainder
+
+
+def _poly_monic(a: Sequence[int], p: int) -> list[int]:
+    out = _poly_trim(a, p)
+    if out == [0]:
+        return out
+    inv = pow(out[-1], -1, p)
+    return [(x * inv) % p for x in out]
+
+
+def _poly_gcd(a: Sequence[int], b: Sequence[int], p: int) -> list[int]:
+    x, y = _poly_trim(a, p), _poly_trim(b, p)
+    while y != [0]:
+        _, r = _poly_divmod(x, y, p)
+        x, y = y, r
+    return _poly_monic(x, p)
+
+
+def _poly_derivative(a: Sequence[int], p: int) -> list[int]:
+    if len(a) <= 1:
+        return [0]
+    return _poly_trim([(i * a[i]) % p for i in range(1, len(a))], p)
+
+
+def _poly_powmod(a: Sequence[int], exponent: int,
+                 modulus: Sequence[int], p: int) -> list[int]:
+    result = [1]
+    base = _poly_divmod(a, modulus, p)[1]
+    power = exponent
+    while power:
+        if power & 1:
+            result = _poly_divmod(_poly_mul(result, base, p), modulus, p)[1]
+        base = _poly_divmod(_poly_mul(base, base, p), modulus, p)[1]
+        power >>= 1
+    return result
+
+
+def _nullspace_mod(matrix: Sequence[Sequence[int]], p: int) -> list[list[int]]:
+    """Return a basis of the right nullspace, with vectors as lists."""
+    if not matrix:
+        return []
+    a = [[int(x) % p for x in row] for row in matrix]
+    rows, cols = len(a), len(a[0])
+    pivots = []
+    pivot_row = 0
+    for col in range(cols):
+        pivot = next((r for r in range(pivot_row, rows) if a[r][col]), None)
+        if pivot is None:
+            continue
+        a[pivot_row], a[pivot] = a[pivot], a[pivot_row]
+        inv = pow(a[pivot_row][col], -1, p)
+        a[pivot_row] = [(x * inv) % p for x in a[pivot_row]]
+        for r in range(rows):
+            if r != pivot_row and a[r][col]:
+                factor = a[r][col]
+                a[r] = [(a[r][j] - factor * a[pivot_row][j]) % p
+                        for j in range(cols)]
+        pivots.append(col)
+        pivot_row += 1
+        if pivot_row == rows:
+            break
+    free = [j for j in range(cols) if j not in pivots]
+    basis = []
+    for col in free:
+        vector = [0] * cols
+        vector[col] = 1
+        for r, pivot_col in enumerate(pivots):
+            vector[pivot_col] = (-a[r][col]) % p
+        basis.append(vector)
+    return basis
+
+
+def _berlekamp_split_squarefree(f: Sequence[int], p: int) -> list[list[int]]:
+    """Factor a monic squarefree polynomial using Berlekamp's algorithm."""
+    f = _poly_monic(f, p)
+    degree = len(f) - 1
+    if degree <= 1:
+        return [f]
+    columns = []
+    for j in range(degree):
+        power = _poly_powmod([0, 1], p * j, f, p)
+        columns.append(power + [0] * (degree - len(power)))
+    # Q-I, represented by rows.
+    matrix = [[(columns[col][row] - (1 if row == col else 0)) % p
+               for col in range(degree)] for row in range(degree)]
+    basis = _nullspace_mod(matrix, p)
+    factors = [f]
+    for vector in basis:
+        splitter = _poly_trim(vector, p)
+        for scalar in range(p):
+            refined = []
+            for factor in factors:
+                if len(factor) <= 2:
+                    refined.append(factor)
+                    continue
+                divisor = _poly_gcd(factor,
+                                    _poly_sub(splitter, [scalar], p), p)
+                if divisor != [1] and divisor != factor:
+                    quotient, remainder = _poly_divmod(factor, divisor, p)
+                    if remainder != [0]:
+                        raise ArithmeticError("Berlekamp split had nonzero remainder")
+                    refined.extend([_poly_monic(divisor, p),
+                                    _poly_monic(quotient, p)])
+                else:
+                    refined.append(factor)
+            factors = refined
+        if len(factors) == degree:
+            break
+    if any(len(factor) > 2 for factor in factors):
+        raise ArithmeticError("Berlekamp basis failed to split squarefree polynomial")
+    return sorted((_poly_monic(x, p) for x in factors),
+                  key=lambda x: (len(x), x))
+
+
+def _squarefree_factorization(f: Sequence[int], p: int,
+                              multiplier: int = 1):
+    """Yield (squarefree factor, multiplicity), including inseparable powers."""
+    f = _poly_monic(f, p)
+    if len(f) <= 1:
+        return []
+    derivative = _poly_derivative(f, p)
+    if derivative == [0]:
+        # In characteristic p, a zero derivative means every exponent is
+        # divisible by p; extract the p-th root and multiply multiplicities.
+        root = [f[i] for i in range(0, len(f), p)]
+        return _squarefree_factorization(root, p, multiplier * p)
+    common = _poly_gcd(f, derivative, p)
+    w, rem = _poly_divmod(f, common, p)
+    if rem != [0]:
+        raise ArithmeticError("squarefree decomposition division failed")
+    multiplicity = 1
+    output = []
+    while w != [1]:
+        y = _poly_gcd(w, common, p)
+        z, rem = _poly_divmod(w, y, p)
+        if rem != [0]:
+            raise ArithmeticError("squarefree layer division failed")
+        if z != [1]:
+            output.append((z, multiplicity * multiplier))
+        w = y
+        common, rem = _poly_divmod(common, y, p)
+        if rem != [0]:
+            raise ArithmeticError("squarefree gcd quotient failed")
+        multiplicity += 1
+    if common != [1]:
+        root = [common[i] for i in range(0, len(common), p)]
+        for factor, power in _squarefree_factorization(
+                root, p, multiplier * p):
+            output.append((factor, power))
+    return output
+
+
+def factor_polynomial(coefficients_descending: Sequence[int], p: int) -> list[dict]:
+    """Factor a nonzero polynomial over F_p into monic irreducibles.
+
+    Returns factors in ascending degree order, each with descending
+    coefficients and its positive multiplicity.
+    """
+    if not _is_prime(p):
+        raise ValueError("p must be a prime")
+    descending = [int(x) % p for x in coefficients_descending]
+    if not descending or all(x == 0 for x in descending):
+        raise ValueError("zero polynomial cannot be factored")
+    low = _poly_trim(list(reversed(descending)), p)
+    if len(low) == 1:
+        return []
+    leading = low[-1]
+    monic = _poly_monic(low, p)
+    result = []
+    for squarefree, multiplicity in _squarefree_factorization(monic, p):
+        for factor in _berlekamp_split_squarefree(squarefree, p):
+            result.append({
+                "coefficients_descending": list(reversed(factor)),
+                "multiplicity": multiplicity,
+                "degree": len(factor) - 1,
+            })
+    result.sort(key=lambda item: (item["degree"],
+                                 item["coefficients_descending"]))
+    # The characteristic polynomials produced by this module are monic.
+    # Keep the scalar separately for callers of the general factor API.
+    if leading != 1:
+        result.insert(0, {"constant_unit": leading})
+    return result
