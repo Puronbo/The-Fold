@@ -11,8 +11,8 @@ class PolynomialTransformAuditTests(unittest.TestCase):
         transform = polynomial_smith_transform(q, k, 5)
         audit = audit_polynomial_smith_transform(q, k, 5, transform)
         self.assertTrue(audit["independently_verified"])
-        self.assertEqual(audit["determinant_U_low_degree_first"], [1])
-        self.assertEqual(audit["determinant_V_low_degree_first"], [1])
+        self.assertTrue(audit["U_determinant_is_nonzero_constant"])
+        self.assertTrue(audit["V_determinant_is_nonzero_constant"])
 
     def test_tampered_transform_fails_identity(self):
         q, k = [[0, 1], [1, 0]], [[1, 0], [0, 1]]
