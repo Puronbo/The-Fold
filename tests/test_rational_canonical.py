@@ -38,7 +38,8 @@ class RationalCanonicalTests(unittest.TestCase):
         a = [[1, 1], [0, 2]]
         # P=[[1,1],[1,0]], P^-1 exists over F_5.
         p = 5
-        pinv = [[0, 1], [1, 4]]\n        basis = [[1, 1], [1, 0]]
+        pinv = [[0, 1], [1, 4]]
+        basis = [[1, 1], [1, 0]]
         def mm(x, y):
             return [[sum(x[i][k] * y[k][j] for k in range(2)) % p
                      for j in range(2)] for i in range(2)]
