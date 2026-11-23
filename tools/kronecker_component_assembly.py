@@ -39,6 +39,31 @@ def _matrix_equal_mod(a, b, p):
     )
 
 
+def _validate_component_matrix(matrix, label):
+    """Reject malformed matrix containers and non-integral field entries."""
+    if not isinstance(matrix, (list, tuple)) or not matrix:
+        raise ValueError(f"{label} must be a nonempty matrix")
+    if any(not isinstance(row, (list, tuple)) for row in matrix):
+        raise ValueError(f"{label} must contain matrix rows")
+    width = len(matrix[0])
+    if width == 0 or any(len(row) != width for row in matrix):
+        raise ValueError(f"{label} must be rectangular with nonzero dimensions")
+    for row in matrix:
+        for value in row:
+            if not isinstance(value, int) or isinstance(value, bool):
+                raise ValueError(f"{label} entries must be integers (booleans are not accepted)")
+    return len(matrix), width
+
+
+def _validate_component_pair(q, k, p):
+    """Validate one supplied component pair before modular arithmetic."""
+    q_shape = _validate_component_matrix(q, "component Q")
+    k_shape = _validate_component_matrix(k, "component K")
+    if q_shape != k_shape:
+        raise ValueError("component Q and K must have identical dimensions")
+    return _validate_pair(q, k, p)
+
+
 def _validate_component_transform(matrix, label):
     """Require a nonempty, rectangular, square local basis transformation."""
     if not isinstance(matrix, (list, tuple)) or not matrix:
@@ -209,7 +234,7 @@ def assemble_kronecker_components(
             raise ValueError("each component must be a dictionary")
         kind = component.get("kind")
         q, k = component.get("q"), component.get("k")
-        rows, cols = _validate_pair(q, k, p)
+        rows, cols = _validate_component_pair(q, k, p)
         source_q.append([[int(x) % p for x in row] for row in q])
         source_k.append([[int(x) % p for x in row] for row in k])
         if kind in ("right", "left"):
