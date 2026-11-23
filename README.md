@@ -603,3 +603,6 @@ observer gives the reading. The four zones are the map's legend.
 
 
 **Canonical-form witness pipeline (G-EP41):** `regular_pencil_canonical_witness` now integrates profile extraction, canonical block assembly, independent profile verification, and strict-equivalence witness construction. It returns constant (S,T) only after exact verification of both coefficient identities and invertibility. It uses the fast shared-chart path when available and the budget-bounded direct search otherwise; a scalable blockwise reduction remains open. See `research/the-fold-canonical-form-witness-pipeline.md`.
+
+
+**Cyclic Krylov witness fast path (G-EP42):** in a shared chart, if the normalized operators have one rational-canonical invariant factor of degree (n), they are cyclic. The witness constructor finds cyclic vectors, builds Krylov bases (K_A,K_B), and sets (P=K_BK_A^{-1}), then verifies (PA=BP) exactly. This avoids enumerating the full intertwiner space in the cyclic case; noncyclic and no-chart cases retain their prior fallbacks. See `research/the-fold-cyclic-krylov-witnesses.md`.
