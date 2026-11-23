@@ -174,9 +174,6 @@ def main() -> None:
     print(json.dumps(result, indent=2, sort_keys=True))
 
 
-if __name__ == "__main__":
-    main()
-
 
 def characteristic_polynomial(matrix: Sequence[Sequence[int]], p: int) -> list[int]:
     """Return det(xI-A) coefficients, highest degree first, in F_p.
@@ -273,7 +270,8 @@ def automatic_spectral_fingerprint(matrix: Sequence[Sequence[int]],
         "characteristic_polynomial_coefficients_descending": coefficients,
         "base_field_eigenvalues": roots,
         "scope": "all eigenvalues in the base prime field",
-        "irreducible_factorization_complete": False,
+        "irreducible_factorization_complete": True,
+        "factorization": factor_polynomial(coefficients, p),
         "profiles": profiles,
     }
 
@@ -504,3 +502,7 @@ def factor_polynomial(coefficients_descending: Sequence[int], p: int) -> list[di
     if leading != 1:
         result.insert(0, {"constant_unit": leading})
     return result
+
+
+if __name__ == "__main__":
+    main()
