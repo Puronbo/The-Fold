@@ -41,7 +41,7 @@ class TransformerAdapterTests(unittest.TestCase):
         self.assertEqual(result["matrix"], [[1, 2], [3, 4]])
 
     def test_rectangular_layer_rank(self):
-        result = analyze_weight_matrix([[1, 2, 3], [2, 4, 1]], 5)
+        result = analyze_weight_matrix([[1, 2, 3], [2, 4, 2]], 5)
         self.assertEqual(result["rank_over_field"], 2)
         self.assertEqual(result["rank_defect"], 0)
 
