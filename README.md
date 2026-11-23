@@ -1631,3 +1631,6 @@ The rational residue generator also emits orbit-sequence examples with the orbit
 
 
 **G-4cp — pure-scaling Frobenius tower:** the change \(t\mapsto t(1+p)\) gives successive odd-layer relation images \(SF²,S²F⁴,S⁴F⁸,\ldots\) at offsets \(p²,p⁴,p⁸,\ldots\). The rational residual is described by Cartier-nonnilpotent classes in \(\Omega_F^1/dF\); \(d\log(S+1)\) is a nonzero Cartier-fixed test class. Polynomial-only data collapse to constants and are insufficient for the rational-function problem. The full group coinvariant is still open.
+
+
+**G-4cq — residue classification:** the Cartier-nonnilpotent quotient of the pure-scaling diagonal tower is the finite-support closed-point residue space with total trace zero, equivalently \(\bigoplus_{Q\ {\rm monic\ irreducible}}\mathbb F_2[S]/(Q)\), with infinity residue determined by total trace. This is still a subfamily/tower quotient, not the full section-change coinvariant. Rational ML features should use irreducible denominator factors and residue-field coordinates.
