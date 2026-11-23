@@ -1650,3 +1650,5 @@ The corrected finite basis benchmark is 8 zero-mode plus 88 orbit-residue coordi
 
 
 **G-4cy local identity:** for \(z=Q(S)\), if \(\Theta(x)=h(z)dz\) and \(\alpha=\operatorname{res}_Q\Theta(x)\), then \(\Theta(x^2)=S Q'(S)h(z)^2dz\). Since \(d(SQ')/dz=1\) in characteristic two, the residue is exactly \(\alpha^2\). This makes the trace-zero kernel step explicit.
+
+**G-4cz — multi-point rational residue data:** tools/cartier_residue_data.py now assembles one rational differential with several prescribed finite residues, verifies them by exact residue-field arithmetic, derives the infinity residue from the global trace relation, and emits its reduced tower coefficient. This broadens the benchmark from single-pole samples to genuine multi-denominator rational inputs.
