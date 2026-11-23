@@ -292,6 +292,7 @@ def assemble_kronecker_components(
             "all_component_witnesses_verified": all(
                 item["strict_equivalence_certified"] for item in component_witness_audits
             ),
+            "component_witness_composition_verified": composition_audit["composition_verified"],
         },
         "scope": (
             "Constructive assembly and global verification conditional on the supplied "
