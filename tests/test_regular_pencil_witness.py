@@ -32,12 +32,28 @@ class RegularPencilWitnessTests(unittest.TestCase):
         self.assertTrue(result["witness_found"])
         self.assertEqual(result["common_chart"]["kind"], "infinity")
 
-    def test_inconclusive_when_no_base_field_chart_exists(self):
+    def test_constructs_witness_without_any_rational_chart(self):
         q = [[1, 0, 0], [0, 0, 0], [0, 0, 1]]
         k = [[0, 0, 0], [0, 1, 0], [0, 0, 1]]
-        result = construct_regular_pencil_witness(q, k, q, k, 2)
-        self.assertFalse(result["decision_complete"])
-        self.assertIsNone(result["strictly_equivalent"])
+        s0 = [[0, 1, 0], [1, 0, 0], [0, 0, 1]]
+        t0 = [[1, 1, 0], [0, 1, 0], [0, 0, 1]]
+        q2, k2 = mm(mm(s0, q, 2), t0, 2), mm(mm(s0, k, 2), t0, 2)
+        result = construct_regular_pencil_witness(q, k, q2, k2, 2)
+        self.assertTrue(result["witness_found"])
+        self.assertIsNone(result["common_chart"])
+        self.assertTrue(result["checks"]["S_Qa_T_equals_Qb"])
+        self.assertTrue(result["checks"]["S_Ka_T_equals_Kb"])
+        self.assertTrue(result["checks"]["S_invertible"])
+        self.assertTrue(result["checks"]["T_invertible"])
+
+    def test_no_chart_profile_mismatch_decides_non_equivalence(self):
+        q = [[1, 0, 0], [0, 0, 0], [0, 0, 1]]
+        k = [[0, 0, 0], [0, 1, 0], [0, 0, 1]]
+        q2 = [[1, 0, 0], [0, 0, 0], [0, 0, 1]]
+        k2 = [[0, 0, 0], [0, 1, 0], [0, 0, 0]]
+        result = construct_regular_pencil_witness(q, k, q2, k2, 2)
+        self.assertTrue(result["decision_complete"])
+        self.assertFalse(result["strictly_equivalent"])
 
     def test_candidate_budget_returns_inconclusive(self):
         q = [[1, 0], [0, 1]]
