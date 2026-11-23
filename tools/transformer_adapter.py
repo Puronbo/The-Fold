@@ -6,7 +6,7 @@ through the common detach/cpu/tolist protocol.
 from __future__ import annotations
 
 import math
-from typing import Any, Sequence
+from typing import Any
 
 from tools.spectral_fingerprint import (
     automatic_full_spectral_fingerprint,
@@ -83,7 +83,10 @@ def export_weight_matrix(
                     raise ValueError("weight entries must be finite real numbers") from exc
             if not math.isfinite(numeric):
                 raise ValueError("weight entries must be finite real numbers")
-            output_row.append(int(round(numeric * scale_value)) % p)
+            scaled = numeric * scale_value
+            if not math.isfinite(scaled):
+                raise ValueError("scaled weight entries must remain finite")
+            output_row.append(int(round(scaled)) % p)
         converted.append(output_row)
 
     return {
