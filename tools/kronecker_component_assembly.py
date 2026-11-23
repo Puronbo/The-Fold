@@ -371,3 +371,55 @@ def assemble_kronecker_components(
             "of the decomposition for an arbitrary unsplit pencil."
         ),
     }
+
+
+def verify_kronecker_component_assembly_certificate(
+    components: Sequence[dict],
+    p: int,
+    assembly_result: dict,
+    *,
+    max_candidates: int = 100_000,
+    max_minors: int = 2_000,
+) -> dict:
+    """Reconstruct an assembly from original inputs and compare its certificate.
+
+    The verifier does not trust matrices, reports, audit booleans, or dimensions
+    stored in assembly_result. It deterministically reruns the component
+    constructors from the original ordered inputs, then compares every
+    certificate-bearing output field. This checks reproducibility and mutation
+    integrity; it is not a second Kronecker classifier or a proof that the
+    supplied partition is the unique decomposition.
+    """
+    if not isinstance(assembly_result, dict):
+        raise ValueError("assembly_result must be a dictionary")
+    reconstructed = assemble_kronecker_components(
+        components, p, max_candidates=max_candidates, max_minors=max_minors
+    )
+    fields = (
+        "schema", "field", "assembly_complete", "component_count",
+        "source_shape", "canonical_shape", "source_Q", "source_K",
+        "canonical_Q", "canonical_K", "left_transform_S", "right_transform_T",
+        "canonical_block_shapes", "component_reports", "component_witness_audits",
+        "component_witness_composition_audit", "global_strict_equivalence_audit",
+        "multi_block_direct_sum_audit", "component_consistency_audit", "checks",
+    )
+    checks = {
+        field: field in assembly_result and assembly_result[field] == reconstructed.get(field)
+        for field in fields
+    }
+    return {
+        "schema": "the-fold-kronecker-component-independent-reconstruction-audit-v1",
+        "verified": all(checks.values()),
+        "checks": checks,
+        "reconstructed_component_count": reconstructed.get("component_count"),
+        "reconstructed_source_shape": reconstructed.get("source_shape"),
+        "reconstructed_canonical_shape": reconstructed.get("canonical_shape"),
+        "scope": (
+            "Rebuilds the deterministic component assembly from the original "
+            "ordered component inputs and compares all certificate-bearing "
+            "outputs. Detects altered matrices, transforms, dimensions, reports, "
+            "and stored audit metadata. This is implementation-level replay, "
+            "not an independent classification algorithm, partition discovery, "
+            "or uniqueness proof."
+        ),
+    }
