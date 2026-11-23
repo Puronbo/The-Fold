@@ -1619,14 +1619,7 @@ The rational residue generator also emits orbit-sequence examples with the orbit
 **G-4cv — orbit-residue training data:** tools/residue_feature_data.py now emits finite exponent-doubling sequences with residues \(\alpha_j\in k_Q\) and target \(\sum_j\operatorname{Frob}^{-j}(\alpha_j)\). Its exact adjacent-stage relation is \((\alpha,\alpha^2)\mapsto0\). Independent finite-field checks passed 1,056 such relations over all 14 irreducibles of degree at most five.
 
 
-**G-4cw — finite basis and dual readouts:** tools/coinvariant_basis_data.py enumerates the explicit Artin–Schreier basis of \(F/\wp(F)\) and the residue-field polynomial bases for bounded odd orbit roots and irreducible degrees. It computes trace-dual residue readouts exactly. The cutoff height 5, q≤7, deg(Q)≤4 has 60 zero-mode and 88 residue coordinates, dimension 148.
-
-
-**G-4cw — explicit basis and dual invariant readouts:** tools/coinvariant_basis_data.py emits the Artin–Schreier basis for \(F/\wp(F)\), polynomial bases for each residue field \(k_Q\) at every odd root q, and exact trace-dual coefficients. Its finite benchmark with height 5, q≤7 and deg(Q)≤4 has dimension 148 (60 zero-mode + 88 residue coordinates).
-
-
-**G-4cw — finite basis/dual benchmark:** tools/coinvariant_basis_data.py enumerates the zero-mode trace basis and all finite residue-field polynomial bases in a bounded window, then computes trace-dual readouts exactly. Degree cutoff 4, q≤7 gives 96 coordinates.
-
+**G-4cw — corrected zero-mode basis and trace-dual benchmark:** tools/coinvariant_basis_data.py emits one zero-mode trace-one representative for each finite irreducible Q, plus polynomial bases and trace-dual coefficients for every odd-root residue field \(k_Q\). At zero-mode/residue degree cutoff 4 and q≤7 it emits 8 zero-mode bits and 88 orbit-residue coordinates, total 96. The old Artin–Schreier zero-mode basis and 148-coordinate count are withdrawn.
 
 **G-4cx — exact GF(2) system identification:** tools/train_orbit_residue_gf2.py learns the Frobenius-normalized orbit-residue readout as a binary linear map from examples, checks full feature rank, and validates held-out sequences and coordinate basis vectors. An independent exact run recovered all maps for the eight irreducibles of degree at most four with three stages and 128 tests per field.
 
