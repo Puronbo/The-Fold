@@ -9,7 +9,7 @@ from tools.regular_pencil_profile import (
     _chart_operator,
 )
 from tools.rectangular_pencil import _validate_pair
-from tools.rational_canonical import rational_canonical_profile
+from tools.rational_canonical import rational_canonical_profile\nfrom tools.rational_canonical_basis import construct_operator_similarity_witness
 
 
 def _nullspace(matrix, p, columns):
@@ -266,6 +266,25 @@ def construct_regular_pencil_witness(
             found, cyclic_examined = _cyclic_intertwiner(a, b, p, max_candidates)
             if found is not None:
                 construction_method = 'cyclic-krylov-bases'
+
+        # For noncyclic operators (or when the fast cyclic search misses),
+        # assemble full rational-canonical bases and compare their common
+        # companion-block operator. This avoids enumerating the n^2
+        # dimensional intertwiner space whenever bounded basis construction
+        # succeeds.
+        canonical_examined = 0
+        if found is None:
+            canonical = construct_operator_similarity_witness(
+                a, b, p, max_candidates=max_candidates
+            )
+            if canonical.get('witness_found'):
+                found = canonical['intertwiner']
+                construction_method = 'rational-canonical-bases'
+            canonical_examined = sum(
+                item.get('candidates_examined', 0)
+                for side in ('basis_a', 'basis_b')
+                for item in canonical.get(side, {}).get('component_results', [])
+            )
         basis = [] if found is not None else _intertwiner_space(a, b, p)
         dimension = len(basis)
         candidate_count = p ** dimension
@@ -280,7 +299,7 @@ def construct_regular_pencil_witness(
                 "reason": "intertwiner search exceeds candidate budget; equivalence profile agrees but no witness was constructed",
             }
 
-        examined = cyclic_examined
+        examined = cyclic_examined + canonical_examined
         if found is None:
             for coefficients in product(range(p), repeat=dimension):
                 examined += 1
@@ -317,7 +336,7 @@ def construct_regular_pencil_witness(
             "left_transform_S": s, "right_transform_T": t,
             "intertwiner_space_dimension": dimension,
             "candidates_examined": examined,
-            "cyclic_vector_candidates_examined": cyclic_examined,
+            "cyclic_vector_candidates_examined": cyclic_examined,\n            "rational_canonical_generator_candidates_examined": canonical_examined,
             "checks": {
                 "P_times_A_equals_B_times_P": _matrices_equal(
                     _matmul(found, a, p), _matmul(b, found, p), p),
