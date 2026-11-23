@@ -31,4 +31,4 @@ The added tests exercise:
 - (x²+x+1)² over F_2;
 - automatic spectral output carrying the full base-field factorization.
 
-The tests are authored and committed, but the repository test suite and CI have not been run in this environment. The algorithm and implementation should be treated as a committed research implementation pending execution of those tests and independent property-based reconstruction checks.
+The 15-test repository unittest suite passes in GitHub Actions on the current branch (Python 3.11). An earlier run exposed an incorrect Berlekamp stopping condition; that defect was corrected, and the subsequent run completed successfully. Broader property-based factor-reconstruction checks remain desirable before treating this reference implementation as production-grade.
