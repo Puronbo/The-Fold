@@ -684,3 +684,10 @@ For a differential \(\omega=a(S)Q(S)^{-1}dS\), its residue at Q is
 and its infinity residue is \(\operatorname{Tr}_{k_Q/\mathbb F_2}(\alpha_Q)\). Thus finite-field arithmetic supplies exact labels for rational examples, including the Cartier orbit.
 
 The new companion generator tools/cartier_residue_data.py builds small-degree irreducible examples, computes the residue fields, residues, traces, and inverse-Frobenius Cartier cycles, and checks the global trace constraint. This gives the learning system a representation that respects the actual geometry of the stable tower quotient.
+
+
+Run the residue-data generator with:
+\`\`\`bash
+python tools/cartier_residue_data.py --self-test --count 500 --max-degree 6 > cartier_residues.jsonl
+\`\`\`
+The script emits one row per sample plus one aggregate trace-zero configuration. Its self-test checks irreducible polynomials, finite-field inverses, Frobenius square roots, absolute traces, Cartier cycles, and the residue at infinity.
