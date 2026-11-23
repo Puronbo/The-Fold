@@ -57,16 +57,10 @@ from tools.transformer_adapter import (
 )
 
 # A rectangular projection: rank is well-defined.
-report = analyze_weight_matrix(layer_weight, prime=101, scale=1000)
+report = analyze_weight_matrix(layer_weight, p=101, scale=1000)
 
 # Only for a genuinely square operator in a declared common basis:
 spectral = analyze_square_weight_operator(square_weight, prime=101, scale=1000)
-```
-
-The first example's keyword is `p` in the current API:
-
-```python
-report = analyze_weight_matrix(layer_weight, p=101, scale=1000)
 ```
 
 ## Evidence and limits
