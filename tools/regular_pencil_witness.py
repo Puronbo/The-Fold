@@ -337,7 +337,8 @@ def construct_regular_pencil_witness(
             "left_transform_S": s, "right_transform_T": t,
             "intertwiner_space_dimension": dimension,
             "candidates_examined": examined,
-            "cyclic_vector_candidates_examined": cyclic_examined,\n            "rational_canonical_generator_candidates_examined": canonical_examined,
+            "cyclic_vector_candidates_examined": cyclic_examined,
+            "rational_canonical_generator_candidates_examined": canonical_examined,
             "checks": {
                 "P_times_A_equals_B_times_P": _matrices_equal(
                     _matmul(found, a, p), _matmul(b, found, p), p),
