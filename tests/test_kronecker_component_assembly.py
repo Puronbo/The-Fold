@@ -350,6 +350,91 @@ class KroneckerComponentAssemblyTests(unittest.TestCase):
         self.assertFalse(audit["checks"]["canonical_block_shapes_well_formed"])
 
 
+    def test_algebraic_verifier_fails_closed_on_malformed_nested_certificates(self):
+        from tools.kronecker_component_assembly import verify_kronecker_component_assembly_algebraically
+        rq, rk = right_block(1)
+        components = [
+            {"kind": "right", "q": rq, "k": rk},
+            {"kind": "regular", "q": [[1]], "k": [[0]]},
+        ]
+        original = assemble_kronecker_components(components, 5)
+        malformed_results = []
+        malformed = copy.deepcopy(original)
+        malformed["component_witness_audits"][0] = None
+        malformed_results.append(malformed)
+        malformed = copy.deepcopy(original)
+        malformed["component_witness_audits"][0]["left_transform"] = [[True, 0], [0, 1]]
+        malformed_results.append(malformed)
+        malformed = copy.deepcopy(original)
+        malformed["canonical_Q"] = [[1], ["bad"]]
+        malformed_results.append(malformed)
+        malformed = copy.deepcopy(original)
+        malformed["canonical_K"] = [[1.5, 0, 0, 0]]
+        malformed_results.append(malformed)
+        malformed = copy.deepcopy(original)
+        malformed["left_transform_S"] = [[0]]
+        malformed_results.append(malformed)
+        malformed = copy.deepcopy(original)
+        malformed["right_transform_T"] = [[1, 0], [0]]
+        malformed_results.append(malformed)
+        malformed = copy.deepcopy(original)
+        malformed.pop("canonical_K")
+        malformed_results.append(malformed)
+        for index, candidate in enumerate(malformed_results):
+            with self.subTest(index=index):
+                audit = verify_kronecker_component_assembly_algebraically(
+                    components, 5, candidate
+                )
+                self.assertFalse(audit["verified"])
+
+    def test_algebraic_verifier_rejects_noninvertible_local_witnesses(self):
+        from tools.kronecker_component_assembly import verify_kronecker_component_assembly_algebraically
+        rq, rk = right_block(1)
+        components = [
+            {"kind": "right", "q": rq, "k": rk},
+            {"kind": "regular", "q": [[1]], "k": [[0]]},
+        ]
+        result = assemble_kronecker_components(components, 5)
+        altered = copy.deepcopy(result)
+        altered["component_witness_audits"][1]["left_transform"] = [[0]]
+        altered["left_transform_S"][-1][-1] = 0
+        audit = verify_kronecker_component_assembly_algebraically(
+            components, 5, altered
+        )
+        self.assertFalse(audit["verified"])
+        self.assertFalse(audit["checks"]["every_local_strict_equivalence_identity_verified"])
+
+    def test_algebraic_verifier_rejects_invalid_field_and_component_inputs(self):
+        from tools.kronecker_component_assembly import verify_kronecker_component_assembly_algebraically
+        rq, rk = right_block(1)
+        components = [{"kind": "right", "q": rq, "k": rk}]
+        result = assemble_kronecker_components(components, 5)
+        for invalid_p in (True, 2, 5.0, "5"):
+            with self.subTest(p=invalid_p):
+                with self.assertRaises(ValueError):
+                    verify_kronecker_component_assembly_algebraically(
+                        components, invalid_p, result
+                    )
+        for invalid_components in (
+            [{"kind": "right", "q": [[True]], "k": [[1]]}],
+            [{"kind": "right", "q": [[1, 2], [3]], "k": [[1, 2], [3, 4]]}],
+            [None],
+        ):
+            with self.subTest(components=invalid_components):
+                with self.assertRaises(ValueError):
+                    verify_kronecker_component_assembly_algebraically(
+                        invalid_components, 5, result
+                    )
+
+    def test_algebraic_verifier_rejects_non_dictionary_result(self):
+        from tools.kronecker_component_assembly import verify_kronecker_component_assembly_algebraically
+        rq, rk = right_block(1)
+        with self.assertRaises(ValueError):
+            verify_kronecker_component_assembly_algebraically(
+                [{"kind": "right", "q": rq, "k": rk}], 5, []
+            )
+
+
 
 if __name__ == "__main__":
     unittest.main()
