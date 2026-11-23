@@ -509,9 +509,6 @@ def factor_polynomial(coefficients_descending: Sequence[int], p: int) -> list[di
     return result
 
 
-if __name__ == "__main__":
-    main()
-
 
 def _prime_divisors(n: int) -> list[int]:
     result = []
@@ -734,3 +731,6 @@ def automatic_full_spectral_fingerprint(matrix: Sequence[Sequence[int]],
         "extension_eigenvalue_classes": extension_classes,
         "extension_classes_complete": True,
     }
+
+if __name__ == "__main__":
+    main()
