@@ -612,3 +612,6 @@ observer gives the reading. The four zones are the map's legend.
 
 
 **Elementary-divisor cyclic generators (G-EP44):** `tools/rational_primary_cyclic.py` performs a budget-bounded exact search for vectors with prescribed annihilator (f^e), then accepts Krylov orbits only when they add their full expected dimension to the assembled span. A complete result provides an invertible cyclic-summand basis within one primary component. Search exhaustion is explicitly inconclusive. See `tests/test_rational_primary_cyclic.py` and `research/the-fold-primary-cyclic-generators.md`.
+
+
+**Full rational-canonical bases and similarity witnesses (G-EP45):** `tools/rational_canonical_basis.py` composes the primary decomposition (G-EP43) with bounded elementary-divisor cyclic generators (G-EP44), then assembles a full basis (K) and companion-block operator (C). It verifies (AK=KC) exactly. For two operators with matching invariant factors, it constructs (P=K_BK_A^{-1}) and verifies (PA=BP); profile mismatch is a complete negative decision, while bounded basis-search failure does not overturn a positive similarity decision. Generator discovery remains exponential/budget-bounded. See `tests/test_rational_canonical_basis.py` and `research/the-fold-rational-canonical-bases-and-similarity-witnesses.md`.
