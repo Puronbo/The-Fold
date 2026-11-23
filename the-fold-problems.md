@@ -3244,3 +3244,12 @@ Using G-4ct/G-4cu, an explicit F₂-basis of \(Q_{\mathcal G}\) consists of:
 For each finite residue field, the trace pairing is nondegenerate, so there is a unique dual basis \(c_i\) satisfying \(\operatorname{Tr}(c_i\bar S^j)=\delta_{ij}\). The exact script tools/coinvariant_basis_data.py enumerates finite cutoffs, computes trace-dual bases by GF(2) Gaussian elimination, and verifies the duality identities.
 
 At height 5, q≤7 and residue degree≤4, the finite benchmark has 60 zero-mode basis vectors and 88 residue basis vectors, total dimension 148. This is a finite benchmark window, not a finite-dimensional replacement for the full coinvariant or its algebraic dual.
+
+
+### G-4cw — explicit full-coinvariant basis and finite trace-dual benchmark
+
+An explicit \(\mathbb F_2\)-basis of \(Q_{\mathcal G}\) is obtained from:
+- the Artin–Schreier basis \(1,\ S^n\) for positive odd n, and \(S^j/Q^d\) for monic irreducible Q, odd d, \(0\le j<\deg Q\), in the zero factor \(F/\wp(F)\);
+- the polynomial basis \(1,\bar S,\ldots,\bar S^{\deg Q-1}\) in every residue field \(k_Q\), for every odd orbit root q.
+
+The trace pairing on each finite field gives explicit dual coefficients \(c_i\) with \(\operatorname{Tr}(c_i\bar S^j)=\delta_{ij}\). The new exact script tools/coinvariant_basis_data.py enumerates finite cutoffs and computes these trace-dual bases by GF(2) Gaussian elimination. At height 5, q≤7, degree(Q)≤4 it emits 60 zero-mode and 88 residue basis coordinates, total 148. This is a finite benchmark window; the full algebraic dual of the infinite direct sum is a product.
