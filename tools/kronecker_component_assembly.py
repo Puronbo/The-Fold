@@ -120,6 +120,7 @@ def assemble_kronecker_components(
         raise ValueError("components must be a nonempty sequence")
     source_q, source_k, target_q, target_k = [], [], [], []
     left_blocks, right_blocks, reports = [], [], []
+    component_witness_audits = []
     for index, component in enumerate(components):
         if not isinstance(component, dict):
             raise ValueError("each component must be a dictionary")
@@ -180,6 +181,10 @@ def assemble_kronecker_components(
             }
         else:
             raise ValueError("component kind must be 'right', 'left', or 'regular'")
+        component_audit = strict_pencil_equivalence_audit(q, k, p, tq, tk, s, t)
+        if not component_audit["strict_equivalence_certified"]:
+            raise ArithmeticError(f"component {index} witness failed local strict-equivalence audit")
+        component_witness_audits.append(component_audit)
         target_q.append(tq)
         target_k.append(tk)
         left_blocks.append(s)
@@ -222,6 +227,7 @@ def assemble_kronecker_components(
         "left_transform_S": full_s, "right_transform_T": full_t,
         "canonical_block_shapes": canonical_block_shapes,
         "component_reports": reports,
+        "component_witness_audits": component_witness_audits,
         "global_strict_equivalence_audit": audit,
         "multi_block_direct_sum_audit": multi_block_audit,
         "component_consistency_audit": consistency_audit,
@@ -231,6 +237,9 @@ def assemble_kronecker_components(
             "global_strict_equivalence_verified": audit["strict_equivalence_certified"],
             "multi_block_direct_sum_verified": multi_block_audit["verification"]["direct_sum_verified"],
             "component_consistency_verified": consistency_audit["consistency_verified"],
+            "all_component_witnesses_verified": all(
+                item["strict_equivalence_certified"] for item in component_witness_audits
+            ),
         },
         "scope": (
             "Constructive assembly and global verification conditional on the supplied "
