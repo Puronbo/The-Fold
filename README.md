@@ -1658,3 +1658,6 @@ The corrected finite basis benchmark is 8 zero-mode plus 88 orbit-residue coordi
 
 
 **G-4da implementation — product-dual readout benchmark:** tools/invariant_linear_readout_data.py samples finite windows of all invariant linear readouts, with zero-mode bit weights and finite-field trace weights for each odd-root residue coordinate. Labels are computed exactly; the benchmark is a finite truncation of the unrestricted product dual.
+
+
+**Cyclotomic eigenprimes:** the cyclotomic companion operator has an eigenvalue over F_p exactly when, writing m=p^a n with p not dividing n, n divides p−1. The spectral fingerprint records the full modular factorization together with algebraic multiplicities and eigenspace dimensions; these are distinct data in ramified characteristics. See `research/the-fold-cyclotomic-spectral-fingerprints.md` (G-EP2).
