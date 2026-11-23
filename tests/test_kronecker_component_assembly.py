@@ -30,6 +30,13 @@ class KroneckerComponentAssemblyTests(unittest.TestCase):
         self.assertEqual(result["canonical_block_shapes"], [[1, 2], [2, 1], [1, 1]])
         self.assertTrue(result["checks"]["global_strict_equivalence_verified"])
         self.assertTrue(result["checks"]["multi_block_direct_sum_verified"])
+        self.assertTrue(result["checks"]["component_consistency_verified"])
+        consistency = result["component_consistency_audit"]
+        self.assertTrue(consistency["consistency_verified"])
+        self.assertEqual(consistency["component_count"], 3)
+        self.assertEqual(consistency["source_block_shapes"], [[1, 2], [2, 1], [1, 1]])
+        self.assertEqual(consistency["canonical_block_shapes"], result["canonical_block_shapes"])
+        self.assertTrue(all(consistency["checks"].values()))
         multi = result["multi_block_direct_sum_audit"]
         self.assertTrue(multi["verification"]["direct_sum_verified"])
         self.assertEqual(multi["block_shapes"], result["canonical_block_shapes"])
@@ -49,6 +56,7 @@ class KroneckerComponentAssemblyTests(unittest.TestCase):
         self.assertFalse(result["assembly_complete"])
         self.assertEqual(result["failed_component_index"], 0)
         self.assertNotIn("multi_block_direct_sum_audit", result)
+        self.assertNotIn("component_consistency_audit", result)
 
     def test_requires_nonempty_component_list(self):
         with self.assertRaises(ValueError):
