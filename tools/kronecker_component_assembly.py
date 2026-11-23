@@ -61,11 +61,6 @@ def _component_witness_composition_audit(
     """Rebuild transforms and re-verify each certificate against its own block pair."""
     if not isinstance(component_audits, (list, tuple)) or not component_audits:
         raise ValueError("component_audits must be a nonempty ordered sequence")
-    block_lists = (source_q_blocks, source_k_blocks, canonical_q_blocks, canonical_k_blocks)
-    if any(not isinstance(blocks, (list, tuple)) for blocks in block_lists):
-        raise ValueError("component matrix blocks must be ordered sequences")
-    if any(len(blocks) != len(component_audits) for blocks in block_lists):
-        raise ValueError("component certificate and matrix-block counts must agree")
     left_transforms, right_transforms, local_replays = [], [], []
     for index, item in enumerate(component_audits):
         if not isinstance(item, dict):
@@ -82,6 +77,11 @@ def _component_witness_composition_audit(
             source_q_blocks[index], source_k_blocks[index], p,
             canonical_q_blocks[index], canonical_k_blocks[index], left, right
         ))
+    block_lists = (source_q_blocks, source_k_blocks, canonical_q_blocks, canonical_k_blocks)
+    if any(not isinstance(blocks, (list, tuple)) for blocks in block_lists):
+        raise ValueError("component matrix blocks must be ordered sequences")
+    if any(len(blocks) != len(component_audits) for blocks in block_lists):
+        raise ValueError("component certificate and matrix-block counts must agree")
     local_verified = [item["strict_equivalence_certified"] for item in local_replays]
     reconstructed_s = _block_diag(left_transforms)
     reconstructed_t = _block_diag(right_transforms)
