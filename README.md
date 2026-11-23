@@ -519,3 +519,6 @@ observer gives the reading. The four zones are the map's legend.
 **Cyclotomic eigenprime density:** for a finite family of indices, the density is the proportion of reduced residue classes modulo their least common multiple that are 1 modulo at least one index. Inclusion–exclusion gives an exact totient formula; repeated blocks do not change it. See `research/the-fold-cyclotomic-eigenprime-density.md` (G-EP3).
 
 **Cyclotomic factorization and Jordan structure:** away from ramification, irreducible factor degrees are `ord_m(p)` and the companion operator is diagonalizable over the algebraic closure. At ramified primes, the reduction has repeated factors and the companion has one Jordan block of size `φ(p^a)` per primitive residual root. See `research/the-fold-cyclotomic-factorization-jordan.md` (G-EP4).
+
+
+**Jordan kernel-growth fingerprints:** successive nullities of `(A−λI)^r` recover the Jordan partition: first differences count blocks of size at least `r`, second differences count blocks of exact size `r`. This extends the cyclotomic companion results to arbitrary finite-dimensional operators over a splitting field and specifies an exact-arithmetic interface for reusable software. See `research/the-fold-jordan-kernel-growth.md` (G-EP5).
