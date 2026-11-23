@@ -576,3 +576,6 @@ observer gives the reading. The four zones are the map's legend.
 
 
 **Single singular-block recovery (G-EP31):** `tools/singular_block_recovery.py` performs bounded exhaustive search in (GL_m(\mathbb F_p)\times GL_n(\mathbb F_p)) to construct constant strict-equivalence witnesses from a pencil to one canonical right or left singular block. Every result is checked by G-EP30. Search size and tested pairs are reported; budget exhaustion is explicitly inconclusive. This is a small-case constructive algorithm, not a general mixed-pencil Kronecker decomposition. See `tests/test_singular_block_recovery.py` and `research/the-fold-single-singular-block-recovery.md`.
+
+
+**Structural singular-block recovery (G-EP32):** `tools/structural_singular_block.py` uses a certified polynomial minimal-vector coefficient chain to construct domain and codomain bases, then produces constant strict-equivalence witnesses for a single pure right or left singular block. It avoids G-EP31's exhaustive GL-group search. Both basis determinants and the final identities are verified exactly. It refuses mixed pencils and still inherits the small-dense polynomial-minor budget of G-EP24/G-EP27. See `tests/test_structural_singular_block.py` and `research/the-fold-structural-singular-block-recovery.md`.
