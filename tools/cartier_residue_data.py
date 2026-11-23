@@ -55,6 +55,19 @@ def poly_gcd(a: int, b: int) -> int:
     return a
 
 
+def reduce_rational_pair(numerator: int, denominator: int) -> tuple[int, int]:
+    """Normalize a rational function over GF(2)[S] to coprime terms."""
+    if denominator == 0:
+        raise ZeroDivisionError("zero rational denominator")
+    if numerator == 0:
+        return 0, 1
+    g = poly_gcd(numerator, denominator)
+    n, nr = poly_divmod(numerator, g)
+    d, dr = poly_divmod(denominator, g)
+    assert nr == 0 and dr == 0
+    return n, d
+
+
 def poly_inverse_mod(a: int, modulus: int) -> int:
     """Extended Euclidean inverse in GF(2)[S]/(modulus)."""
     r0, r1 = modulus, poly_mod(a, modulus)
@@ -165,6 +178,9 @@ def residue_example(modulus: int, residue: int) -> dict:
 
     infinity_residue = field_trace(residue, modulus)
     cycle = cartier_residue_cycle(residue, modulus)
+    x_numerator, x_denominator = reduce_rational_pair(
+        poly_mul(0b10, numerator), modulus
+    )
     return {
         "task": "closed_point_residue",
         "Q": modulus,
@@ -177,8 +193,8 @@ def residue_example(modulus: int, residue: int) -> dict:
         "global_trace_sum": poly_add(field_trace(residue, modulus), infinity_residue),
         "cartier_inverse_frobenius_cycle": cycle,
         "cartier_nonnilpotent": residue != 0,
-        "tower_coordinate_x_numerator": poly_mul(0b10, numerator),
-        "tower_coordinate_x_denominator": modulus,
+        "tower_coordinate_x_numerator": x_numerator,
+        "tower_coordinate_x_denominator": x_denominator,
     }
 
 
@@ -229,6 +245,11 @@ def self_test() -> None:
                 assert all(item != 0 for item in cycle)
             else:
                 assert cycle == [0]
+
+    q = 0b10  # S
+    witness_at_zero = residue_example(q, 1)
+    assert witness_at_zero["tower_coordinate_x_numerator"] == 1
+    assert witness_at_zero["tower_coordinate_x_denominator"] == 1
 
     q = 0b11  # S+1
     witness = residue_example(q, 1)
