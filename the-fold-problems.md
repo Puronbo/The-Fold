@@ -3273,7 +3273,11 @@ a\longmapsto
 \left(\operatorname{Tr}_{k_Q/\mathbb F_2}
 \operatorname{res}_Q((a/S)dS)\right)_Q.
 \]
-The support is finite. If \(a=Sb²\), then \(\Theta(a)=d(Sb²)\). If \(a=\wp(x)\), with \(\alpha_Q=\operatorname{res}_Q(\Theta(x))\), local Cartier/residue compatibility gives \(\operatorname{res}_Q(\Theta(x²))=\alpha_Q²\), so the residue of \(\Theta(\wp(x))\) is \(\alpha_Q²+\alpha_Q\), whose absolute trace is zero. Thus \(H\subseteq\ker\Psi\).
+The support is finite. If \(a=Sb²\), then \(\Theta(a)=d(Sb²)\). If \(a=\wp(x)\), put \(z=Q(S)\) and write \(\Theta(x)=h(z)dz\) with \(h(z)=\alpha_Qz^{-1}+\cdots\), where \(\alpha_Q=\operatorname{res}_Q(\Theta(x))\). Since \(dS=dz/Q'(S)\),
+\[
+\Theta(x²)=S Q'(S)h(z)^2\,dz.
+\]
+For \(G(z)=S Q'(S)\), characteristic two gives \(dG/dz=(Q'+SQ'')/Q'=1\), since \(Q''=0\). Hence \(G(z)=G(0)+z+H_0(z²)\); as \(h²\) has only even powers, the \(z^{-1}\)-coefficient of \(Gh²\) is exactly \(\alpha_Q²\). Thus the residue of \(\Theta(\wp(x))\) is \(\alpha_Q²+\alpha_Q\), of absolute trace zero. Hence \(H\subseteq\ker\Psi\).
 
 The pure-scaling Cartier tower is \(I_h=S^{2^h}F^{2^{h+1}}\). For h≥1, writing \(x=S^{2^{h-1}}b^{2^h}\in I_{h-1}\), one has \(x²=\wp(x)+x\); induction gives \(I_h\subseteq H\). By G-4cp, under \(\Theta\) the sum of these \(I_h\), including \(I_0=SF²\), is the Cartier-nilpotent subspace \(N=\bigcup_j\ker C^j\).
 
