@@ -522,3 +522,6 @@ observer gives the reading. The four zones are the map's legend.
 
 
 **Jordan kernel-growth fingerprints:** successive nullities of `(A−λI)^r` recover the Jordan partition: first differences count blocks of size at least `r`, second differences count blocks of exact size `r`. This extends the cyclotomic companion results to arbitrary finite-dimensional operators over a splitting field and specifies an exact-arithmetic interface for reusable software. See `research/the-fold-jordan-kernel-growth.md` (G-EP5).
+
+
+**Executable prime-field Jordan fingerprints:** a standard-library Python engine computes exact modular ranks, kernel-growth sequences, and Jordan partitions for supplied eigenvalues in F_p. Automatic characteristic-polynomial factorization and extension fields remain explicitly out of scope for this first implementation. See `tools/spectral_fingerprint.py`, `tests/test_spectral_fingerprint.py`, and `research/the-fold-prime-field-fingerprint-engine.md` (G-EP6).
