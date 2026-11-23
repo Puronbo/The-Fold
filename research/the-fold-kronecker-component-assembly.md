@@ -142,3 +142,12 @@ matrices), reordering can leave the composed transformation unchanged. The
 audit therefore tests actual algebraic consistency rather than asserting that
 every permutation must fail. G-EP64 adds no partition discovery, uniqueness,
 or new Kronecker classification claim.
+
+
+## G-EP65 — Component certificate provenance and binding
+
+The composition audit now receives the ordered source and canonical coefficient blocks in addition to the assembled pencils. Before composing the global transforms, it independently re-runs the strict-equivalence verifier for each local pair using that certificate's own left and right transforms. It validates that all four ordered matrix-block lists have exactly one entry per local certificate and exposes the resulting per_component_replayed_audits.
+
+The new aggregate check every_local_certificate_reverified_against_its_bound_pair is true only when each recomputed local strict-equivalence audit succeeds. The returned assembly also exposes component_witnesses_rebound_to_source_and_target_blocks. This recomputation does not trust the previously stored strict_equivalence_certified field as proof; it checks the actual matrices and transformations afresh. The global reconstructed-transform comparisons and global strict-equivalence replay remain independent checks.
+
+Tests verify successful per-component replay, detect a tampered local transformation, and retain malformed-shape and empty-certificate regressions. This is certificate-to-component binding for the supplied ordered partition, not decomposition discovery, component identity beyond that order, or a uniqueness result.
