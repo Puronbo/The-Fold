@@ -27,7 +27,12 @@ class KroneckerComponentAssemblyTests(unittest.TestCase):
         self.assertTrue(result["assembly_complete"])
         self.assertEqual(result["component_count"], 3)
         self.assertEqual(result["source_shape"], [4, 4])
+        self.assertEqual(result["canonical_block_shapes"], [[1, 2], [2, 1], [1, 1]])
         self.assertTrue(result["checks"]["global_strict_equivalence_verified"])
+        self.assertTrue(result["checks"]["multi_block_direct_sum_verified"])
+        multi = result["multi_block_direct_sum_audit"]
+        self.assertTrue(multi["verification"]["direct_sum_verified"])
+        self.assertEqual(multi["block_shapes"], result["canonical_block_shapes"])
         self.assertTrue(result["global_strict_equivalence_audit"]["strict_equivalence_certified"])
 
     def test_rejects_incorrect_declared_minimal_index(self):
@@ -37,13 +42,13 @@ class KroneckerComponentAssemblyTests(unittest.TestCase):
                 {"kind": "right", "q": q, "k": k, "minimal_index": 2},
             ], 3)
 
-    def test_reports_component_recovery_failure(self):
-        # A regular square pencil is not a single right singular block.
+    def test_reports_component_recovery_failure_without_audit(self):
         result = assemble_kronecker_components([
             {"kind": "right", "q": [[1]], "k": [[0]]},
         ], 3)
         self.assertFalse(result["assembly_complete"])
         self.assertEqual(result["failed_component_index"], 0)
+        self.assertNotIn("multi_block_direct_sum_audit", result)
 
     def test_requires_nonempty_component_list(self):
         with self.assertRaises(ValueError):
