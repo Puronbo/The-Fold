@@ -660,3 +660,27 @@ The polynomial decomposition self-test exhaustively checked all bitmasks below \
 
 
 **Correction to generator status:** the earlier 5,000-row run refers to the previous five-task generator. The current nine-task version has component-level algebraic checks documented above; do not describe the full current script as having passed an end-to-end run until that run is actually performed.
+
+
+## 11. Residue-field encoding for rational invariants
+
+G-4cq identifies the Cartier-nonnilpotent tower quotient with finite-support residue data:
+\[
+\left\{(\alpha_P)_P:\alpha_P\in k(P),\
+\sum_P\operatorname{Tr}_{k(P)/\mathbb F_2}(\alpha_P)=0\right\}.
+\]
+For affine closed points, \(P\) is represented by a monic irreducible polynomial \(Q(S)\), and \(k(P)=\mathbb F_2[S]/(Q)\). The infinity coordinate is determined by the total trace.
+
+This is a substantially better rational feature representation than raw numerator/denominator tokens:
+- factor the denominator into irreducible \(Q\)'s;
+- encode each residue as a degree-\(\deg Q\) bit vector in \(\mathbb F_2[S]/(Q)\);
+- encode Cartier by inverse Frobenius \(\alpha\mapsto\alpha^{1/2}\) in each finite residue field;
+- enforce the global trace-zero condition exactly.
+
+For a differential \(\omega=a(S)Q(S)^{-1}dS\), its residue at Q is
+\[
+\alpha_Q=a(S)\,Q'(S)^{-1}\pmod Q,
+\]
+and its infinity residue is \(\operatorname{Tr}_{k_Q/\mathbb F_2}(\alpha_Q)\). Thus finite-field arithmetic supplies exact labels for rational examples, including the Cartier orbit.
+
+The new companion generator tools/cartier_residue_data.py builds small-degree irreducible examples, computes the residue fields, residues, traces, and inverse-Frobenius Cartier cycles, and checks the global trace constraint. This gives the learning system a representation that respects the actual geometry of the stable tower quotient.
