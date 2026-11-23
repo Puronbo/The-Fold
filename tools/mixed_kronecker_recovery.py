@@ -95,23 +95,19 @@ def _regular_blocks(profile, p):
         coeffs = [int(x) % p for x in factor]
         while len(coeffs) > 1 and coeffs[-1] == 0:
             coeffs.pop()
-        if len(coeffs) <= 1:
-            continue
-        c = _companion_from_low(coeffs, p)
-        blocks.append(([[(-x) % p for x in row] for row in c], _identity(len(c))))
-    for size in profile["regular_part"]["infinity_elementary_divisor_degree_sum"] and (
-        profile["regular_part"]["infinity_reversed_smith_invariant_factors_low_degree_first"]
-    ) or []:
-        # Infinity block sizes are t-adic valuations, not full reversed degrees.
-        value = 0
-        for coefficient in size:
+        if len(coeffs) > 1:
+            companion = _companion_from_low(coeffs, p)
+            blocks.append(([[(-x) % p for x in row] for row in companion],
+                           _identity(len(companion))))
+    for factor in profile["regular_part"]["infinity_reversed_smith_invariant_factors_low_degree_first"]:
+        valuation = 0
+        for coefficient in factor:
             if int(coefficient) % p:
                 break
-            value += 1
-        if value:
-            blocks.append((_identity(value), _nilpotent_jordan(value)))
+            valuation += 1
+        if valuation:
+            blocks.append((_identity(valuation), _nilpotent_jordan(valuation)))
     return blocks
-
 
 def _canonical_target(profile, p):
     blocks = []
@@ -247,17 +243,12 @@ def recover_mixed_kronecker_pencil(
         if affine is None:
             continue
         particular, basis = affine
-        candidates = [particular]
         remaining = max_candidates - examined
         total = p ** len(basis)
-        if total > 1 and total <= remaining:
-            candidates.extend(
-                [([sum((coeff*direction[z]) for coeff, direction in zip(values, basis))
-                    + particular[z] for z in range(cols*cols)]) for values in []]
-            )
+        candidates = [particular]
+        if total <= remaining:
+            candidates = []
             for values in product(range(p), repeat=len(basis)):
-                if examined >= max_candidates:
-                    break
                 vector = particular[:]
                 for scalar, direction in zip(values, basis):
                     if scalar:
