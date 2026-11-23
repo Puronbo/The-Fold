@@ -158,13 +158,20 @@ def main() -> None:
     parser.add_argument("--prime", type=int, required=True)
     parser.add_argument("--matrix-json", required=True,
                         help="JSON array of equal-length matrix rows")
-    parser.add_argument("--eigenvalues", required=True,
-                        help="comma-separated eigenvalues in F_p")
+    parser.add_argument("--eigenvalues",
+                        help="comma-separated eigenvalues in F_p (manual mode)")
+    parser.add_argument("--auto", action="store_true",
+                        help="compute the characteristic polynomial and scan F_p")
     args = parser.parse_args()
+    if args.auto == (args.eigenvalues is not None):
+        parser.error("choose exactly one of --auto or --eigenvalues")
     matrix = json.loads(args.matrix_json)
-    eigenvalues = [int(x.strip()) for x in args.eigenvalues.split(",") if x.strip()]
-    print(json.dumps(spectral_fingerprint(matrix, args.prime, eigenvalues),
-                     indent=2, sort_keys=True))
+    if args.auto:
+        result = automatic_spectral_fingerprint(matrix, args.prime)
+    else:
+        eigenvalues = [int(x.strip()) for x in args.eigenvalues.split(",") if x.strip()]
+        result = spectral_fingerprint(matrix, args.prime, eigenvalues)
+    print(json.dumps(result, indent=2, sort_keys=True))
 
 
 if __name__ == "__main__":
