@@ -3233,3 +3233,14 @@ The proof uses the associated-graded calculation G-4cr and finite pole-order ind
 ### G-4cv — orbit-residue data and invariant-readout benchmark
 
 The rational residue generator now also emits finite sequences on a negative exponent-doubling orbit. Each sequence records q, Q, stage exponents \(-2^j q\), residues \(\alpha_j\in k_Q\), and the exact normalized target \(\sum_j\operatorname{Frob}^{-j}(\alpha_j)\). Its self-test checks that every adjacent relation pair \((\alpha,\alpha^2)\) contributes zero. Independent exact finite-field checks covered all 1,056 such pairs for the 14 irreducibles of degree at most five (four adjacent positions and every field element).
+
+
+### G-4cw — explicit basis and trace-dual coordinates for the full coinvariant
+
+Using G-4ct/G-4cu, an explicit F₂-basis of \(Q_{\mathcal G}\) consists of:
+- the standard Artin–Schreier basis of \(F/\wp(F)\): \(1\), positive odd powers \(S^n\), and \(S^j/Q^d\) for monic irreducible Q, odd d, \(0\le j<\deg Q\);
+- for every positive odd orbit root q and every monic irreducible Q, the residue-field basis \(1,\bar S,\ldots,\bar S^{\deg Q-1}\) of \(k_Q\).
+
+For each finite residue field, the trace pairing is nondegenerate, so there is a unique dual basis \(c_i\) satisfying \(\operatorname{Tr}(c_i\bar S^j)=\delta_{ij}\). The exact script tools/coinvariant_basis_data.py enumerates finite cutoffs, computes trace-dual bases by GF(2) Gaussian elimination, and verifies the duality identities.
+
+At height 5, q≤7 and residue degree≤4, the finite benchmark has 60 zero-mode basis vectors and 88 residue basis vectors, total dimension 148. This is a finite benchmark window, not a finite-dimensional replacement for the full coinvariant or its algebraic dual.
