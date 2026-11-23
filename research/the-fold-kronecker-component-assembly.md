@@ -107,3 +107,10 @@ to return an incomplete result without success certificates.
 
 Tests assert every consistency check for a mixed right/left/regular assembly
 and ensure failed recovery emits no consistency certificate.
+
+
+## G-EP62 — Per-component strict-equivalence certificates
+
+Before placing each component transform into the global block-diagonal matrices, assembly now calls the exact strict-equivalence verifier on that component's original pair, canonical pair, and local transforms. A failed local identity raises an arithmetic error and cannot be hidden by later assembly. Successful results expose the ordered `component_witness_audits` list and an aggregate `all_component_witnesses_verified` check. The existing global strict-equivalence, multi-block direct-sum, and component-report consistency audits remain separate. This strengthens certificate localization; the supplied-partition requirement and bounded regular-witness behavior are unchanged.
+
+Tests assert one passing local certificate per right, left, and regular component, and confirm that failed component recovery emits no local-witness audit list.
