@@ -30,3 +30,6 @@
 
 
 **Integrated multi-block audit of mixed recovery (G-EP59):** successful `recover_mixed_kronecker_pencil` results now include `canonical_block_shapes` in canonical construction order and a `multi_block_direct_sum_audit` from G-EP58. The audit independently checks the recovered S,T against each right-minimal, left-minimal, and regular diagonal block, in addition to the existing whole-target strict-equivalence audit. This is a second exact certificate view, not a new discovery method; negative or budget-limited searches retain their previous semantics. See the updated mixed-recovery tests.
+
+
+**Integrated multi-block audit of supplied component assembly (G-EP60):** successful `assemble_kronecker_components` results now include `canonical_block_shapes` in the supplied component order and an independent `multi_block_direct_sum_audit` from G-EP58. The audit verifies that the assembled block-diagonal transforms annihilate every cross-component block in both pencil coefficients, alongside the existing whole-pencil strict-equivalence audit. Failed component recovery still returns an incomplete result without a success certificate; this remains supplied-partition assembly, not decomposition discovery. See `research/the-fold-kronecker-component-assembly.md` and its tests.
