@@ -1628,3 +1628,6 @@ The rational residue generator also emits orbit-sequence examples with the orbit
 
 
 **G-4cx — exact GF(2) system identification:** tools/train_orbit_residue_gf2.py learns the Frobenius-normalized orbit-residue readout as a binary linear map from examples, checks full feature rank, and validates held-out sequences and coordinate basis vectors. An independent exact run recovered all maps for the eight irreducibles of degree at most four with three stages and 128 tests per field.
+
+
+**G-4cp — pure-scaling Frobenius tower:** the change \(t\mapsto t(1+p)\) gives successive odd-layer relation images \(SF²,S²F⁴,S⁴F⁸,\ldots\) at offsets \(p²,p⁴,p⁸,\ldots\). The rational residual is described by Cartier-nonnilpotent classes in \(\Omega_F^1/dF\); \(d\log(S+1)\) is a nonzero Cartier-fixed test class. Polynomial-only data collapse to constants and are insufficient for the rational-function problem. The full group coinvariant is still open.
