@@ -548,3 +548,6 @@ observer gives the reading. The four zones are the map's legend.
 
 
 **Relational Q/K interaction profiles (G-EP19):** `tools/qk_interaction.py` computes both (QK^T) (output-space product) and (Q^TK) (input-space bilinear form) for equal-shaped Q/K projections, including rectangular projections. It profiles both products across selected primes and profiles Q/K individually when square. Under row-vector activations, the pre-softmax score matrix is (X(Q^TK)X^T). This is an exact diagnostic of quantized matrices, not an attention forward pass or evidence of functional equivalence. See `research/the-fold-qk-interaction-profiles.md`.
+
+
+**Q/K basis-invariance experiment (G-EP20):** `tools/qk_basis_change.py` tests the coordinated transformation (Q'=QB, K'=KB^{-T}) for integer unimodular B. It verifies the exact inverse identities and checks that (Q'^TK'=B^T(Q^TK)B^{-T}) preserves the full finite-field interaction profile, while separately checking preservation of Q/K ranks. This guarantee applies to the input-space interaction only, not the individual spectra or output-space product. See `research/the-fold-qk-basis-invariance.md`.
