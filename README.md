@@ -45,3 +45,6 @@
 
 
 **Component certificate provenance and binding (G-EP65):** the composition audit now independently re-runs strict-equivalence verification for every local (S_i,T_i) against that component's own source and canonical coefficient pair. It checks certificate/block-list cardinalities, exposes the per-component replay audits, and includes an aggregate source/target-binding check. The stored boolean from an earlier local audit is not trusted as a substitute for recomputation. The global composition and transform-equality checks remain separate. See the component-assembly research note and adversarial tests.
+
+
+**Component certificate mutation and replay integrity (G-EP66):** the composition audit now validates all four ordered block lists and their cardinalities before indexing or replaying any component. Adversarial tests change a bound source block and a bound canonical block while retaining the old transforms, and verify that fresh local replay fails even when stored success metadata is forged. A complementary regression proves that forged stored failure metadata cannot suppress a mathematically valid recomputed certificate. This tests mutation sensitivity for the supplied ordered component pairs; it does not establish component discovery, identity outside that ordering, or uniqueness.
