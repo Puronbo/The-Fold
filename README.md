@@ -36,3 +36,6 @@
 
 
 **Component-report consistency certificate (G-EP61):** successful `assemble_kronecker_components` results now include `component_consistency_audit`. It cross-checks each reported source shape against both source coefficients, checks both canonical coefficient block shapes, validates right/left singular block dimensions against their recovered minimal indices and regular block squareness, and reconciles ordered component dimensions with the assembled source and canonical shapes. This is a metadata/matrix consistency audit, not independent component classification or decomposition discovery.
+
+
+**Per-component strict-equivalence certificates (G-EP62):** supplied-partition assembly now independently audits each component's own (S_i,T_i) against its source and canonical pair before composing the global block-diagonal witness. Successful results expose ordered `component_witness_audits` and an aggregate `all_component_witnesses_verified` check, alongside the existing global, multi-block, and metadata-consistency audits. This localizes a component witness failure rather than relying only on the assembled identity; it does not discover a partition. See `research/the-fold-kronecker-component-assembly.md` and its tests.
