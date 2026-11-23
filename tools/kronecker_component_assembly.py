@@ -514,7 +514,6 @@ def verify_kronecker_component_assembly_algebraically(
         )
         q_blocks, k_blocks = [], []
         row_offset = col_offset = 0
-        off_block_zero = True
         for height, width in shapes:
             q_block = [list(row[col_offset:col_offset + width])
                        for row in canonical_q[row_offset:row_offset + height]]
@@ -522,19 +521,16 @@ def verify_kronecker_component_assembly_algebraically(
                        for row in canonical_k[row_offset:row_offset + height]]
             q_blocks.append(q_block)
             k_blocks.append(k_block)
-            for i in range(canonical_shape[0]):
-                for j in range(canonical_shape[1]):
-                    inside = (row_offset <= i < row_offset + height
-                              and col_offset <= j < col_offset + width)
-                    if not inside and (
-                        int(canonical_q[i][j]) % p != 0
-                        or int(canonical_k[i][j]) % p != 0
-                    ):
-                        off_block_zero = False
             row_offset += height
             col_offset += width
-        checks["canonical_Q_is_block_diagonal_with_claimed_blocks"] = off_block_zero
-        checks["canonical_K_is_block_diagonal_with_claimed_blocks"] = off_block_zero
+        expected_canonical_q = _block_diag(q_blocks)
+        expected_canonical_k = _block_diag(k_blocks)
+        checks["canonical_Q_is_block_diagonal_with_claimed_blocks"] = (
+            _matrix_equal_mod(canonical_q, expected_canonical_q, p)
+        )
+        checks["canonical_K_is_block_diagonal_with_claimed_blocks"] = (
+            _matrix_equal_mod(canonical_k, expected_canonical_k, p)
+        )
     except (IndexError, TypeError, ValueError):
         q_blocks, k_blocks = [], []
         checks["canonical_shape_matches_blocks"] = False
