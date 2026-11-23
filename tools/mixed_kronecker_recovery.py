@@ -236,9 +236,17 @@ def recover_mixed_kronecker_pencil(
 
     examined = 0
     if search_mode == "exhaustive":
+        identity = _identity(rows)
+        identity_flat = tuple(value for row in identity for value in row)
+        left_iterator = iter([identity])
         left_iterator = (
-            _matrix_from_flat(list(values), rows)
-            for values in product(range(p), repeat=rows*rows)
+            matrix for matrix in (
+                [identity] + [
+                    _matrix_from_flat(list(values), rows)
+                    for values in product(range(p), repeat=rows*rows)
+                    if values != identity_flat
+                ]
+            )
         )
     else:
         left_iterator = _left_candidates(rows, p, max_candidates)
