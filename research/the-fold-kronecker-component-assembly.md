@@ -115,3 +115,30 @@ Before placing each component transform into the global block-diagonal matrices,
 
 Tests assert one passing local certificate per right, left, and regular component, and confirm that failed component recovery emits no local-witness audit list.
 \n\n## G-EP63 — Component witness composition audit\n\nThe assembly path independently reconstructs the global left and right transformations using only the ordered local audit certificates. It compares these reconstructed matrices modulo p with the returned global S and T, then passes the reconstructed transforms to a fresh global strict-equivalence audit against the assembled source and canonical pencils. Successful results expose the reconstructed matrices, three explicit checks, and the replayed audit under `component_witness_composition_audit`; the aggregate check is `component_witness_composition_verified`. A failure prevents a successful assembly result. This verifies the composition layer in addition to each local witness and the existing global/multi-block audits; it does not discover components or prove uniqueness.\n\nTests assert exact reconstruction of both transforms and successful replay for a mixed right/left/regular assembly, and confirm that failed recovery emits no composition certificate.\n
+
+## G-EP64 — Adversarial witness-composition validation
+
+The composition-audit helper now validates its inputs before constructing
+block-diagonal matrices. The local certificate list must be a nonempty ordered
+sequence of dictionaries. Each certificate must contain nonempty, rectangular,
+square left and right transformation matrices. Invalid shapes raise a
+controlled `ValueError` rather than leaking indexing errors from block
+assembly.
+
+Adversarial regression coverage includes:
+
+- modifying one local left transformation while retaining the original
+  certificate metadata; the reconstructed-transform comparison and replayed
+  global strict-equivalence check must both fail;
+- adding an incompatible row to a local transform; validation rejects it
+  before composition; and
+- empty certificate lists and malformed nonsquare transforms; both produce
+  explicit validation errors.
+
+Certificate order remains semantically significant because it defines the
+block ordering, but a permutation is not necessarily detectable or invalid:
+if the relevant transformations are interchangeable (for example, identity
+matrices), reordering can leave the composed transformation unchanged. The
+audit therefore tests actual algebraic consistency rather than asserting that
+every permutation must fail. G-EP64 adds no partition discovery, uniqueness,
+or new Kronecker classification claim.
