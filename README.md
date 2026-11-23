@@ -573,3 +573,6 @@ observer gives the reading. The four zones are the map's legend.
 
 
 **Strict pencil-equivalence audit (G-EP30):** `tools/strict_pencil_equivalence.py` verifies supplied constant witnesses (S,T) for (Q'=SQT, K'=SKT), checking invertibility and both coefficient identities over (mathbb F_p). This is intentionally distinct from G-EP28–29 polynomial unimodular Smith equivalence. The verifier does not discover witnesses or construct Kronecker form. See `tests/test_strict_pencil_equivalence.py` and `research/the-fold-strict-pencil-equivalence-audit.md`.
+
+
+**Single singular-block recovery (G-EP31):** `tools/singular_block_recovery.py` performs bounded exhaustive search in (GL_m(\mathbb F_p)\times GL_n(\mathbb F_p)) to construct constant strict-equivalence witnesses from a pencil to one canonical right or left singular block. Every result is checked by G-EP30. Search size and tested pairs are reported; budget exhaustion is explicitly inconclusive. This is a small-case constructive algorithm, not a general mixed-pencil Kronecker decomposition. See `tests/test_singular_block_recovery.py` and `research/the-fold-single-singular-block-recovery.md`.
