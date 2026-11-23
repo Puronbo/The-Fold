@@ -31,18 +31,47 @@ def right_block(e):
 
 
 class ResidualPencilDecouplingTests(unittest.TestCase):
-    def test_canonical_mixed_pencil_has_exact_decoupling_witness(self):
+    def test_canonical_mixed_pencil_reports_actual_basis_coupling(self):
         rq, rk = right_block(1)
         lq, lk = transpose(rq), transpose(rk)
         q, k = block_diag([(rq, rk), (lq, lk), ([[1]], [[0]])])
         result = residual_pencil_decoupling_certificate(q, k, 5, max_degree=2)
+        self.assertFalse(result["decoupled"])
+        self.assertTrue(result["exact_checks"]["adapted_strict_equivalence_verified"])
+        self.assertFalse(result["exact_checks"]["certificate_verified"])
+        self.assertTrue(any(
+            item["Q_nonzero_entries"] or item["K_nonzero_entries"]
+            for item in result["cross_coupling_obstructions"].values()
+        ))
+        self.assertEqual(result["residual_shape"], [2, 2])
+
+    def test_zero_cross_coupling_certifies_exact_block_diagonal_pair(self):
+        diagnostic = {
+            "field": "F_5",
+            "left_chain_cobasis_dimension": 1,
+            "right_chain_basis_dimension": 1,
+            "residual_shape": [1, 1],
+            "Q_blocks": {
+                "chain_to_chain": [[1]], "chain_to_domain_complement": [[]],
+                "codomain_complement_from_chain": [[]], "residual": [[2]],
+            },
+            "K_blocks": {
+                "chain_to_chain": [[0]], "chain_to_domain_complement": [[]],
+                "codomain_complement_from_chain": [[]], "residual": [[3]],
+            },
+            "adapted_coordinates": {
+                "adapted_Q": [[1, 0], [0, 2]],
+                "adapted_K": [[0, 0], [0, 3]],
+                "domain_basis_T": [[1, 0], [0, 1]],
+                "codomain_cobasis_S": [[1, 0], [0, 1]],
+                "verification": {"transformed_pair_exact": True},
+            },
+        }
+        result = _certificate_from_diagnostic(diagnostic, 5)
         self.assertTrue(result["decoupled"])
         self.assertTrue(result["exact_checks"]["certificate_verified"])
-        self.assertTrue(result["exact_checks"]["reconstructed_Q_equals_adapted_Q"])
-        self.assertTrue(result["exact_checks"]["reconstructed_K_equals_adapted_K"])
-        self.assertEqual(result["residual_shape"], [2, 2])
-        self.assertEqual(result["strict_equivalence_witness"]["identity"],
-                         "adapted_Q = S Q T; adapted_K = S K T")
+        self.assertEqual(result["reconstructed_block_diagonal_Q"], [[1, 0], [0, 2]])
+        self.assertEqual(result["reconstructed_block_diagonal_K"], [[0, 0], [0, 3]])
 
     def test_nonzero_coupling_is_reported_without_decomposition_claim(self):
         # A synthetic, exact diagnostic isolates the obstruction branch.
