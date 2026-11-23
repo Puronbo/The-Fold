@@ -75,8 +75,8 @@ class SingularOnlyPencilTests(unittest.TestCase):
         # Right L_1 direct sum with transpose(L_1).
         qr, kr = direct_sum_right([1])
         ql, kl = transpose(qr), transpose(kr)
-        q = [[qr[0][0], qr[0][1], 0], [0, 0, ql[0][0]]]
-        k = [[kr[0][0], kr[0][1], 0], [0, 0, kl[0][0]]]
+        q = [[qr[0][0], qr[0][1], 0], [0, 0, ql[0][0]], [0, 0, ql[1][0]]]
+        k = [[kr[0][0], kr[0][1], 0], [0, 0, kl[0][0]], [0, 0, kl[1][0]]]
         result = recover_singular_only_pencil_structurally(q, k, 3, max_degree=2)
         self.assertFalse(result["recovered"])
 
