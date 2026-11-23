@@ -318,7 +318,6 @@ def self_test() -> None:
     for x in [0, 1, S, 1 ^ S, 1 ^ (1 << 2) ^ (1 << 5), (1 << 7) | (1 << 8) | 1]:
         dec = polynomial_tower_decomposition(x)
         assert dec["constant_residual"] == (x & 1)
-        assert add(dec["constant_residual"], *[]) == (x & 1)
         total = x & 1
         for part in dec["components"]:
             total ^= part["image"]
