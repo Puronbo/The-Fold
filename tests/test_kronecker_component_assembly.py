@@ -292,6 +292,61 @@ class KroneckerComponentAssemblyTests(unittest.TestCase):
                 self.assertFalse(audit["checks"][field])
 
 
+    def test_algebraic_certificate_audit_accepts_fresh_assembly(self):
+        from tools.kronecker_component_assembly import verify_kronecker_component_assembly_algebraically
+        rq, rk = right_block(1)
+        components = [
+            {"kind": "right", "q": rq, "k": rk},
+            {"kind": "regular", "q": [[1]], "k": [[0]]},
+        ]
+        result = assemble_kronecker_components(components, 5)
+        audit = verify_kronecker_component_assembly_algebraically(components, 5, result)
+        self.assertTrue(audit["verified"], audit["checks"])
+        self.assertTrue(all(audit["checks"].values()))
+
+    def test_algebraic_certificate_audit_detects_matrix_and_transform_tampering(self):
+        from tools.kronecker_component_assembly import verify_kronecker_component_assembly_algebraically
+        rq, rk = right_block(1)
+        components = [
+            {"kind": "right", "q": rq, "k": rk},
+            {"kind": "regular", "q": [[1]], "k": [[0]]},
+        ]
+        original = assemble_kronecker_components(components, 5)
+        mutations = [
+            ("source_Q", lambda r: r["source_Q"][0].__setitem__(0, (r["source_Q"][0][0] + 1) % 5)),
+            ("source_K", lambda r: r["source_K"][0].__setitem__(0, (r["source_K"][0][0] + 1) % 5)),
+            ("canonical_Q", lambda r: r["canonical_Q"][0].__setitem__(0, (r["canonical_Q"][0][0] + 1) % 5)),
+            ("canonical_K", lambda r: r["canonical_K"][0].__setitem__(0, (r["canonical_K"][0][0] + 1) % 5)),
+            ("left_transform_S", lambda r: r["left_transform_S"][0].__setitem__(0, (r["left_transform_S"][0][0] + 1) % 5)),
+            ("right_transform_T", lambda r: r["right_transform_T"][0].__setitem__(0, (r["right_transform_T"][0][0] + 1) % 5)),
+            ("cross_block_entry", lambda r: r["canonical_Q"][0].__setitem__(2, 1)),
+        ]
+        for field, mutate in mutations:
+            with self.subTest(field=field):
+                altered = copy.deepcopy(original)
+                mutate(altered)
+                audit = verify_kronecker_component_assembly_algebraically(components, 5, altered)
+                self.assertFalse(audit["verified"])
+        forged = copy.deepcopy(original)
+        forged["global_strict_equivalence_audit"]["strict_equivalence_certified"] = False
+        forged["component_witness_composition_audit"]["composition_verified"] = False
+        forged["checks"]["global_strict_equivalence_verified"] = False
+        self.assertTrue(
+            verify_kronecker_component_assembly_algebraically(components, 5, forged)["verified"]
+        )
+
+    def test_algebraic_certificate_audit_rejects_malformed_block_shape(self):
+        from tools.kronecker_component_assembly import verify_kronecker_component_assembly_algebraically
+        rq, rk = right_block(1)
+        components = [{"kind": "right", "q": rq, "k": rk}]
+        result = assemble_kronecker_components(components, 5)
+        altered = copy.deepcopy(result)
+        altered["canonical_block_shapes"] = [[0, 2]]
+        audit = verify_kronecker_component_assembly_algebraically(components, 5, altered)
+        self.assertFalse(audit["verified"])
+        self.assertFalse(audit["checks"]["canonical_block_shapes_well_formed"])
+
+
 
 if __name__ == "__main__":
     unittest.main()
