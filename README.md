@@ -16,3 +16,5 @@
 
 
 **Residual-pencil diagnostics (G-EP53):** `tools/residual_pencil_diagnostic.py` partitions the G-EP52 adapted pencil into chain and complementary coordinate blocks, reports cross-coupling, and profiles the bottom-right block when it is nonempty and square. The residual profile is explicitly coordinate-local; it is not claimed to be the original pencil's regular part unless decoupling is separately established. See `research/the-fold-residual-pencil-diagnostic.md`.
+
+**Exact residual-pencil decoupling certificates (G-EP54):** `tools/residual_pencil_decoupling_certificate.py` checks both off-diagonal blocks in both adapted coefficient matrices, reports exact ranks and nonzero entries, and reconstructs the block-diagonal pair for equality checks against the adapted pencil. A positive result certifies a direct-sum split in the computed coordinates and carries the G-EP52 strict-equivalence witnesses; a negative result exposes coupling without claiming decomposition or residual regularity. See `tests/test_residual_pencil_decoupling_certificate.py` and `research/the-fold-residual-pencil-decoupling-certificate.md`.
