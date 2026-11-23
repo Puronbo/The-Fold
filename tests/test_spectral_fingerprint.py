@@ -139,7 +139,7 @@ class SpectralFingerprintTests(unittest.TestCase):
         result = extension_jordan_profile(
             [[0, 2], [1, 0]], 3, [1, 0, 1], [0, 1]
         )
-        self.assertEqual(result["field"], "F_3^2")
+        self.assertEqual(result["field"], "F_9")\n        self.assertEqual(result["base_field"], "F_3")\n        self.assertEqual(result["extension_degree"], 2)
         self.assertEqual(result["nullities"], [0, 1, 1])
         self.assertEqual(result["blocks_exactly"], {"1": 1})
         self.assertEqual(result["block_sizes_descending"], [1])
