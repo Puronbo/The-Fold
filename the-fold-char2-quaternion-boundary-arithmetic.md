@@ -4161,13 +4161,21 @@ If \(a=Sb^2\), then
 \]
 so all residues vanish.
 
-For \(a=\wp(x)=x^2+x\), the local inverse-Cartier formula gives
+For \(a=\wp(x)=x^2+x\), put \(z=Q(S)\) and write
 \[
-\operatorname{res}_Q\left(\frac{x^2}{S}dS\right)
-=
-\operatorname{res}_Q\left(\frac{x}{S}dS\right)^2.
+\Theta(x)=\frac{x}{S}dS=h(z)\,dz,\qquad
+h(z)=\alpha_Qz^{-1}+\cdots,
+\quad \alpha_Q=\operatorname{res}_Q(\Theta(x)).
 \]
-Thus if \(\alpha_Q=\operatorname{res}_Q((x/S)dS)\), then
+Since \(dS=dz/Q'(S)\),
+\[
+\Theta(x^2)=S Q'(S)h(z)^2\,dz.
+\]
+Set \(G(z)=S Q'(S)\). In characteristic two \(Q''=0\), whence
+\[
+\frac{dG}{dz}=\frac{Q'(S)+S Q''(S)}{Q'(S)}=1.
+\]
+Thus \(G(z)=G(0)+z+H_0(z^2)\) for a power series \(H_0\). The Laurent series \(h(z)^2\) has only even powers, so the coefficient of \(z^{-1}\) in \(G(z)h(z)^2\) is exactly \(\alpha_Q^2\). Therefore
 \[
 \operatorname{res}_Q(\Theta(\wp(x)))=\alpha_Q^2+\alpha_Q.
 \]
