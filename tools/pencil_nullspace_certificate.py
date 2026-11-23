@@ -97,7 +97,7 @@ def _side_certificate(q, k, p, max_degree, expected_count):
             eps = generator["degree"]
             for shift in range(degree - eps + 1):
                 shifted = [0] * ((degree + 1) * cols)
-                flat = _flatten_coefficients(generator["coefficients"], cols, degree)
+                flat = _flatten_coefficients(generator["coefficients_low_degree_first"], cols, degree)
                 for j in range(eps + 1):
                     start = (j + shift) * cols
                     shifted[start:start+cols] = flat[j*cols:(j+1)*cols]
