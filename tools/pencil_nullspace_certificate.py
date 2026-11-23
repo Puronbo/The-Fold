@@ -115,12 +115,25 @@ def _side_certificate(q, k, p, max_degree, expected_count):
                     "coefficients_low_degree_first": blocks,
                     "verified_polynomial_product_is_zero": True,
                 })
+        # Rebuild the span from the returned generators alone. Do not reuse
+        # the nullspace candidates inserted above: that would make the check
+        # tautological rather than an independent certificate.
+        generated_echelon = []
+        for generator in generators:
+            eps = generator["degree"]
+            for shift in range(degree - eps + 1):
+                shifted = [0] * ((degree + 1) * cols)
+                blocks = generator["coefficients_low_degree_first"]
+                for j, block in enumerate(blocks):
+                    start = (j + shift) * cols
+                    shifted[start:start+cols] = block
+                _insert_basis(generated_echelon, shifted, p)
         expected_nullity = len(kernel)
         span_checks.append({
             "degree_bound": degree,
             "bounded_kernel_dimension": expected_nullity,
-            "generated_shift_span_dimension": len(echelon),
-            "spans_entire_bounded_kernel": len(echelon) == expected_nullity,
+            "generated_shift_span_dimension": len(generated_echelon),
+            "spans_entire_bounded_kernel": len(generated_echelon) == expected_nullity,
         })
     indices = sorted(g["degree"] for g in generators)
     complete = len(generators) == expected_count and all(
