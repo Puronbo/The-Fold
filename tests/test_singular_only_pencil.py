@@ -46,7 +46,7 @@ class SingularOnlyPencilTests(unittest.TestCase):
     def test_single_and_multiple_right_blocks(self):
         for indices, p in (([1], 2), ([1, 2], 3), ([2, 2, 3], 5)):
             q, k = direct_sum_right(indices)
-            result = recover_singular_only_pencil_structurally(q, k, p, max_degree=max(indices))
+            result = recover_singular_only_pencil_structurally(q, k, p, max_degree=max(indices), max_minors=50000)
             self.assertTrue(result["recovered"], result.get("reason"))
             self.assertEqual(result["right_minimal_indices"], indices)
             self.assertTrue(result["verification"]["strict_equivalence_certified"])
