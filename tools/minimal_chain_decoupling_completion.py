@@ -96,6 +96,13 @@ def minimal_chain_decoupling_completion(
 
     right_null = _nullspace_rows(right_constraints, cols, p)
     left_null = _nullspace_rows(left_constraints, rows, p)
+    # The candidate lists are bases of the complete annihilator subspaces.
+    # Their span together with the fixed chain span determines feasibility:
+    # a full-rank concatenation is necessary and sufficient for a basis
+    # extension. Greedy extension of a spanning set is therefore complete;
+    # enumerating field combinations would add no information here.
+    right_span_rank = _rank(right_chain + right_null, p)
+    left_span_rank = _rank(left_chain + left_null, p)
     right_full = _extend(right_chain, right_null, cols, p)
     left_full = _extend(left_chain, left_null, rows, p)
 
@@ -108,13 +115,30 @@ def minimal_chain_decoupling_completion(
             "domain_complement_candidates": len(right_null),
             "codomain_complement_candidates": len(left_null),
         },
+        "feasibility_certificate": {
+            "domain_combined_span_rank": right_span_rank,
+            "domain_ambient_dimension": cols,
+            "domain_deficiency": cols - right_span_rank,
+            "codomain_combined_span_rank": left_span_rank,
+            "codomain_ambient_dimension": rows,
+            "codomain_deficiency": rows - left_span_rank,
+            "criterion": (
+                "A complement exists in each fixed annihilator space iff "
+                "the corresponding chain span plus annihilator span has "
+                "full ambient rank. The reported ranks are exact over F_p."
+            ),
+            "domain_feasible": right_span_rank == cols,
+            "codomain_feasible": left_span_rank == rows,
+        },
         "completion_possible": right_full is not None and left_full is not None,
         "failure_reasons": [],
         "scope": (
-            "A successful result constructs complements in simultaneous "
-            "annihilator spaces, proving both cross-coupling blocks vanish. "
-            "Failure is inconclusive: it only rejects this fixed-chain, "
-            "annihilator-based completion strategy."
+            "The feasibility certificate is necessary and sufficient for "
+            "basis completion inside the two computed annihilator spaces. "
+            "A deficient rank proves no complement exists within that fixed "
+            "space, but does not rule out a different splitting or a more "
+            "general strict-equivalence decomposition. Successful witnesses "
+            "are still checked by direct exact multiplication."
         ),
     }
     if right_full is None:
