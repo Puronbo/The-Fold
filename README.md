@@ -554,3 +554,6 @@ observer gives the reading. The four zones are the map's legend.
 
 
 **Rational canonical classification (G-EP21):** `tools/rational_canonical.py` computes primary nullity growth for every irreducible characteristic factor, recovers elementary divisors (f^e), and assembles the invariant-factor divisibility chain. These invariant factors determine the complete similarity class over the selected prime field. See `research/the-fold-rational-canonical-profiles.md`.
+
+
+**Cross-dimensional primary-structure comparison (G-EP22):** `tools/primary_structure.py` compares two square operators over the same prime field without requiring equal dimensions. It reports shared irreducible primary support, primary-dimension overlap, and stricter exact elementary-divisor overlap. These are algebraic descriptors, not claims of functional or semantic similarity. See `research/the-fold-cross-dimensional-primary-structure.md`.
