@@ -56,6 +56,38 @@ class RegularPencilWitnessTests(unittest.TestCase):
         self.assertTrue(result["decision_complete"])
         self.assertFalse(result["strictly_equivalent"])
 
+
+    def test_noncyclic_chart_uses_rational_canonical_basis_witness(self):
+        # Two size-two nilpotent Jordan blocks: noncyclic, with
+        # elementary divisors x^2 and x^2.
+        a = [[0, 1, 0, 0],
+             [0, 0, 0, 0],
+             [0, 0, 0, 1],
+             [0, 0, 0, 0]]
+        change = [[1, 1, 0, 0],
+                  [0, 1, 1, 0],
+                  [0, 0, 1, 1],
+                  [0, 0, 0, 1]]
+        inv = [[1, 1, 1, 1],
+               [0, 1, 1, 1],
+               [0, 0, 1, 1],
+               [0, 0, 0, 1]]
+        b = mm(mm(change, a, 2), inv, 2)
+        identity = [[int(i == j) for j in range(4)] for i in range(4)]
+        result = construct_regular_pencil_witness(
+            identity, a, identity, b, 2
+        )
+        self.assertTrue(result["witness_found"])
+        self.assertEqual(
+            result["intertwiner_construction_method"],
+            "rational-canonical-bases",
+        )
+        self.assertTrue(result["checks"]["P_times_A_equals_B_times_P"])
+        self.assertTrue(result["checks"]["S_Qa_T_equals_Qb"])
+        self.assertTrue(result["checks"]["S_Ka_T_equals_Kb"])
+        self.assertTrue(result["checks"]["S_invertible"])
+        self.assertTrue(result["checks"]["T_invertible"])
+
     def test_candidate_budget_returns_inconclusive(self):
         q = [[1, 0], [0, 1]]
         k = [[0, 1], [0, 0]]
