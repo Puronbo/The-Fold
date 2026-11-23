@@ -618,3 +618,6 @@ observer gives the reading. The four zones are the map's legend.
 
 
 **Rational-canonical regular-pencil witness integration (G-EP46):** the shared-chart path in `tools/regular_pencil_witness.py` now keeps its cyclic Krylov fast path and, for noncyclic normalized operators, falls back to full rational-canonical bases from G-EP45. It constructs (P=K_BK_A^{-1}), then (S=H_bPH_a^{-1}), (T=P^{-1}), and exactly verifies both original pencil equations and invertibility. If bounded basis construction is incomplete, the prior intertwiner-space fallback remains available. The no-chart path is unchanged and still uses bounded direct search. See the G-EP45/46 research note and the noncyclic regression test.
+
+
+**Composable Kronecker component assembly (G-EP47):** `tools/kronecker_component_assembly.py` composes structural recovery of individual right/left singular blocks with regular-pencil canonical witnesses. Given a proposed component partition, it assembles the block-diagonal target and block-diagonal (S,T), then independently verifies (SQT=Q_{\\rm can}) and (SKT=K_{\\rm can}). This is certified assembly, not automatic discovery of the component partition from an arbitrary unsplit pencil. See `tests/test_kronecker_component_assembly.py` and `research/the-fold-kronecker-component-assembly.md`.
