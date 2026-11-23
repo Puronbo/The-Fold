@@ -3978,3 +3978,110 @@ F/\wp(F)
 The zero summand has the explicit Artin–Schreier basis recorded in G-4aj. This completes the algebraic invariant-linear-readout problem. The algebraic dual is the product of the duals of these summands; via the finite-field trace pairing, each residue-field functional is \(x\mapsto\operatorname{Tr}_{k_Q/\mathbb F_2}(c x)\).
 
 **Scope:** this is an algebraic direct-sum theorem for finite negative principal parts, with positive tails contracted as in G-4bs. It does not claim a new topology or a continuous-dual classification for a different completion.
+
+
+## 92. G-4cp — pure-scaling Frobenius tower and the Cartier-nonnilpotent residual
+
+The two-diagonal quotient \(F/SF²\simeq\Omega_F^1/dF\) from G-4co is not the endpoint. We now use the single finite section change
+\[
+s=t(1+p),\qquad p\mapsto p.
+\]
+When expressing an old form in the new coordinate \(s\), one has
+\[
+t_{\rm old}=\frac{s}{1+p},\qquad
+S_{\rm old}=t_{\rm old}²=\frac{S_{\rm new}}{1+p²}.
+\]
+Also
+\[
+d\log t_{\rm old}=d\log s+\frac{p}{1+p}d\log p.
+\]
+
+Take an odd negative source layer and the representative
+\[
+p^n x\,d\log t,\qquad x=a^{2^h}\in F.
+\]
+Its new first coefficient is
+\[
+A_{\rm new}=a\!\left(\frac{S}{1+p²}\right)^{2^h},
+\]
+and its new second coefficient is
+\[
+B_{\rm new}=\frac{p}{1+p}A_{\rm new}.
+\]
+The coefficients of \(B_{\rm new}\) lie in F and have no t-component, so they contribute zero to the odd/even associated-graded quotient projections. Put \(u=p²\). The first Hasse term of \(a(S/(1+u))\) is
+\[
+a\!\left(\frac{S}{1+u}\right)=a+S a'(S)u+O(u²).
+\]
+By Frobenius,
+\[
+A_{\rm new}
+=a^{2^h}+(S a')^{2^h}p^{2^{h+1}}
++O(p^{2^{h+2}})
+\]
+provided \(a'\ne0\). Thus the first nonzero quotient correction occurs at offset \(2^{h+1}\), with coefficient
+\[
+(Sa')^{2^h}=S^{2^h}(a')^{2^h}.
+\]
+The derivative image is \(F²\): if \(g=b²\), then \((Sg)'=g\). Hence the image at this diagonal is exactly
+\[
+\boxed{I_h=S^{2^h}F^{2^{h+1}}.}
+\]
+For any prescribed negative odd target exponent, choose the odd source exponent \(n\) lower by \(2^{h+1}\); strictness then makes these nonzero leading corrections genuine initial relations.
+
+The first three tower layers are
+\[
+I_0=SF²\quad(p²),\qquad
+I_1=S²F⁴\quad(p⁴),\qquad
+I_2=S⁴F⁸\quad(p⁸),
+\]
+and in general \(I_h\) occurs at \(p^{2^{h+1}}\). This corrects any interpretation of G-4co as a terminal coinvariant calculation. G-4co remains the exact first-two-diagonal approximation.
+
+### Finite-stage decomposition
+
+The p-basis decomposition iterates:
+\[
+F^{2^h}=F^{2^{h+1}}\oplus S^{2^h}F^{2^{h+1}}.
+\]
+Consequently, for every N,
+\[
+\boxed{
+F=\left(\bigoplus_{h=0}^{N-1}I_h\right)\oplus F^{2^N}.
+}
+\]
+For the polynomial subring \(\mathbb F_2[S]\), every nonconstant monomial \(S^m\) belongs to exactly one \(I_h\), namely \(h=v_2(m)\). Therefore the polynomial-coefficient quotient by the displayed tower is just \(\mathbb F_2\).
+
+This polynomial conclusion does **not** extend automatically to the rational function field. The intersection \(\bigcap_NF^{2^N}=\mathbb F_2\) does not imply that the algebraic sum \(\sum_h I_h\) has codimension one: rational functions may have infinite p-basis tails.
+
+### Cartier interpretation
+
+The first residual isomorphism is
+\[
+\Theta:F/SF²\xrightarrow{\sim}\Omega_F^1/dF,
+\qquad [x]\longmapsto (x/S)dS.
+\]
+Under this map, the later tower subspaces \(I_h\), \(h\ge1\), are precisely the Cartier-nilpotent layers: modulo \(I_0\), the subspace generated through stage h corresponds to \(\ker C^h\) on \(\Omega_F^1/dF\). Indeed, if \(x=a²+Sb²\), then
+\[
+C\!\left((x/S)dS\right)=(a/S)dS,
+\]
+and iteration strips successive p-basis square components. Thus the quotient by the full displayed tower is
+\[
+\boxed{
+\frac{\Omega_F^1/dF}
+{\bigcup_{h\ge1}\ker(C^h)}.
+}
+\]
+This is the Cartier-nonnilpotent residual for the pure-scaling diagonal family. We are not asserting that it is already the full coinvariant quotient for all section changes: other group directions and syzygies among filtered relations may impose further relations.
+
+A rational test class survives every Cartier-nilpotent stage:
+\[
+x=\frac{S}{S+1},\qquad
+\Theta(x)=\frac{dS}{S+1}=d\log(S+1).
+\]
+Cartier fixes logarithmic differentials, whereas exact differentials are Cartier-zero. The displayed form is not exact, since its residue at \(S=1\) is 1. Hence its class is nonzero modulo every \(\ker C^h\). In particular, the rational-function tower is strictly richer than the polynomial-coefficient test space.
+
+This uses the standard Hasse-derivative Frobenius rule and Cartier's characterizations \(C(df)=0\) and \(C(dg/g)=dg/g\). <https://eccc.weizmann.ac.il/report/2024/069/download/> <https://www.math.ens.psl.eu/~benoist/refs/Gille-Szamuely.pdf>
+
+### Status
+
+- **Proved:** the exact pure-scaling first nonzero diagonal \(I_h=S^{2^h}F^{2^{h+1}}\) for every h; the finite p-basis decomposition; polynomial tower quotient \(\mathbb F_2\); and the nonzero rational Cartier-fixed witness.
+- **Open:** whether all Cartier-nonnilpotent classes survive the full section-change group, the syzygies among different-depth relations, and the zero-mode coinvariants. The full \(Q_{\mathcal G}\) is not yet computed.
