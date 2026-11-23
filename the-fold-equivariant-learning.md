@@ -745,3 +745,17 @@ The weight families can have infinite support. Each individual input has finite 
 For implementation, use finite windows Q of bounded degree and odd roots q≤q_max. The zero-mode weights are bits; each orbit-residue weight is a finite-field element represented by a degree-deg(Q) bitmask. The trace-dual basis in tools/coinvariant_basis_data.py supplies exact readout coefficients. Such windows are truncations of a product dual, not the full dual.
 
 The model's linear invariant head is now mathematically specified. It should be kept distinct from a nonlinear invariant network: G-4da classifies linear readouts only, while the full invariant ring k[Q]^G remains open.
+
+
+### Exact product-dual readout data
+
+The new tools/invariant_linear_readout_data.py emits bounded samples of the product-dual invariant head. It draws one bit weight for each zero-mode point Q and one \(k_Q\)-element weight for every odd-root/residue-field pair. Labels are computed exactly by
+\[
+\sum_Q\epsilon_Q z_Q+
+\sum_{q,Q}\operatorname{Tr}_{k_Q/\mathbb F_2}(c_{q,Q}r_{q,Q}).
+\]
+Run:
+\`\`\`bash
+python tools/invariant_linear_readout_data.py --self-test --count 1000 --zero-degree-max 4 --q-max 7 --degree-max 4 > invariant_readouts.jsonl
+\`\`\`
+The self-test checks zero-mode basis readouts, every trace-dual residue basis coordinate in the bounded window, and linearity in both the inputs and weights. This is exact symbolic data generation, not a neural training result.
