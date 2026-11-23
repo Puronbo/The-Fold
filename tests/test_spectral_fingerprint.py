@@ -2,7 +2,7 @@ import unittest
 
 from tools.spectral_fingerprint import (
     automatic_spectral_fingerprint, characteristic_polynomial, factor_polynomial,
-    jordan_profile, rank_mod, spectral_fingerprint,
+    extension_jordan_profile, is_irreducible_polynomial,\n    jordan_profile, rank_mod, spectral_fingerprint,
 )
 
 
@@ -126,6 +126,27 @@ class SpectralFingerprintTests(unittest.TestCase):
             {"coefficients_descending": [1, 0, 1],
              "multiplicity": 1, "degree": 2},
         ])
+
+    def test_rabin_irreducibility_over_prime_fields(self):
+        self.assertTrue(is_irreducible_polynomial([1, 0, 1], 3))
+        self.assertFalse(is_irreducible_polynomial([1, 0, 1], 5))
+        self.assertTrue(is_irreducible_polynomial([1, 1, 1], 2))
+
+    def test_extension_field_jordan_profile(self):
+        # x^2+1 is irreducible over F_3. The companion matrix has
+        # eigenvalue alpha in F_9, with a one-dimensional eigenspace.
+        result = extension_jordan_profile(
+            [[0, 2], [1, 0]], 3, [1, 0, 1], [0, 1]
+        )
+        self.assertEqual(result["field"], "F_3^2")
+        self.assertEqual(result["nullities"], [0, 1, 1])
+        self.assertEqual(result["blocks_exactly"], {"1": 1})
+        self.assertEqual(result["block_sizes_descending"], [1])
+
+    def test_extension_field_rejects_reducible_modulus(self):
+        with self.assertRaises(ValueError):
+            extension_jordan_profile([[0, 1], [1, 0]], 5,
+                                     [1, 0, 1], [0, 1])
 
 
 if __name__ == "__main__":
