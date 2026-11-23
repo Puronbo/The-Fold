@@ -283,7 +283,7 @@ def construct_regular_pencil_witness(
             if canonical.get('witness_found'):
                 found = canonical['intertwiner']
                 construction_method = 'rational-canonical-bases'
-            canonical_examined = 0  # G-EP45 currently exposes no aggregate generator counter.
+
         basis = [] if found is not None else _intertwiner_space(a, b, p)
         dimension = len(basis)
         candidate_count = p ** dimension
@@ -298,7 +298,7 @@ def construct_regular_pencil_witness(
                 "reason": "intertwiner search exceeds candidate budget; equivalence profile agrees but no witness was constructed",
             }
 
-        examined = cyclic_examined + canonical_examined
+        examined = cyclic_examined
         if found is None:
             for coefficients in product(range(p), repeat=dimension):
                 examined += 1
@@ -336,7 +336,6 @@ def construct_regular_pencil_witness(
             "intertwiner_space_dimension": dimension,
             "candidates_examined": examined,
             "cyclic_vector_candidates_examined": cyclic_examined,
-            "rational_canonical_generator_candidates_examined": canonical_examined,
             "checks": {
                 "P_times_A_equals_B_times_P": _matrices_equal(
                     _matmul(found, a, p), _matmul(b, found, p), p),
