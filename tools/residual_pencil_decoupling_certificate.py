@@ -35,14 +35,17 @@ def _rank_mod(matrix, p):
 
 
 def _assemble(blocks, p):
-    top_left, top_right = blocks["chain_to_chain"], blocks["chain_to_domain_complement"]
-    bottom_left, bottom_right = blocks["codomain_complement_from_chain"], blocks["residual"]
+    top_left, bottom_right = blocks["chain_to_chain"], blocks["residual"]
+    top_rows = len(top_left)
+    top_cols = len(top_left[0]) if top_left else 0
+    bottom_rows = len(bottom_right)
+    bottom_cols = len(bottom_right[0]) if bottom_right else 0
     return [
-        [int(x) % p for x in left_row] + [int(x) % p for x in right_row]
-        for left_row, right_row in zip(top_left, top_right)
+        [int(x) % p for x in row] + [0] * bottom_cols
+        for row in top_left
     ] + [
-        [int(x) % p for x in left_row] + [int(x) % p for x in right_row]
-        for left_row, right_row in zip(bottom_left, bottom_right)
+        [0] * top_cols + [int(x) % p for x in row]
+        for row in bottom_right
     ]
 
 
