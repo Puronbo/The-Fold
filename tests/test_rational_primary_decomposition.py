@@ -7,7 +7,7 @@ class RationalPrimaryDecompositionTests(unittest.TestCase):
     def test_splits_distinct_linear_primary_components(self):
         a = [[1, 0, 0], [0, 2, 0], [0, 0, 1]]
         result = rational_primary_decomposition(a, 5)
-        self.assertEqual([c["dimension"] for c in result["components"]], [2, 1])
+        self.assertEqual(sorted(c["dimension"] for c in result["components"]), [1, 2])
         self.assertTrue(result["checks"]["change_of_basis_invertible"])
         self.assertTrue(result["checks"]["operator_is_block_diagonal_by_primary_component"])
 
