@@ -1653,3 +1653,7 @@ The corrected finite basis benchmark is 8 zero-mode plus 88 orbit-residue coordi
 
 
 **G-4cy — rigorous zero-mode trace proof:** \(F/(\wp(F)+SF^2)\cong\bigoplus_Q\mathbb F_2\), via \(a\mapsto(\operatorname{Tr}_{k_Q/\mathbb F_2}\operatorname{res}_Q((a/S)dS))_Q\). The proof uses the Cartier-nilpotent tower only as a subspace of \(\wp(F)+SF^2\), then identifies the kernel using finite-field Artin–Schreier trace-zero and residue-surjectivity. It does not treat inverse Cartier as an operator on \(\Omega_F^1/dF\). The correct full normal form is \((\bigoplus_Q\mathbb F_2)\oplus(\bigoplus_{q>0\ odd,Q}k_Q)\).
+
+
+
+**G-4cy local identity:** for \(z=Q(S)\), if \(\Theta(x)=h(z)dz\) and \(\alpha=\operatorname{res}_Q\Theta(x)\), then \(\Theta(x^2)=S Q'(S)h(z)^2dz\). Since \(d(SQ')/dz=1\) in characteristic two, the residue is exactly \(\alpha^2\). This makes the trace-zero kernel step explicit.
