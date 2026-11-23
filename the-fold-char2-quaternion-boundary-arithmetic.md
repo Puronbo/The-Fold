@@ -4130,62 +4130,107 @@ Under \(\Theta([x])=(x/S)dS\), this is also the explicit form of \(F/\sum_{h\ge0
 **Scope.** This classifies the Cartier-nonnilpotent quotient of the *displayed pure-scaling diagonal tower*. It does not yet prove that these classes survive all section-change directions or all syzygies among relations. The full coinvariant quotient \(Q_{\mathcal G}\) remains open.
 
 
-## 98. G-4cy — correct zero-mode invariant as a Cartier coinvariant
+## 98. G-4cy — zero-mode quotient by finite residue traces
 
-Put \(H=\wp(F)+SF^2\), \(F=\mathbb F_2(S)\), and define
+Put \(H=\wp(F)+SF^2\), \(F=\mathbb F_2(S)\), and use
 \[
 \Theta:F/SF^2\xrightarrow{\sim}\Omega_F^1/dF,
 \qquad [a]\longmapsto (a/S)dS.
 \]
-This is an isomorphism because \(dF=F^2dS\): for \(f=u^2+Sv^2\), \(f'=v^2\), and every square \(g^2\) is the derivative of \(Sg^2\).
+This is an isomorphism because \(dF=F^2dS\): if \(f=u^2+Sv^2\), then \(f'=v^2\), and every square \(g^2\) is the derivative of \(Sg^2\).
 
-Let \(C\) be Cartier on \(\Omega_F^1/dF\). It is bijective: under the p-basis decomposition it sends
-\[
-\Theta(u^2+Sv^2)\longmapsto\Theta(u),
-\]
-and its inverse sends \(\Theta(a)\) to \(\Theta(a^2)\). Consequently
-\[
-\Theta(\wp(a))
-=\Theta(a^2+a)
-=(C^{-1}+1)\Theta(a).
-\]
-In characteristic two, \(C^{-1}+1=C^{-1}-1\). Hence
+Define the zero-mode residue-trace map
 \[
 \boxed{
-F/(\wp(F)+SF^2)
-\simeq
-(\Omega_F^1/dF)/(C^{-1}-1)(\Omega_F^1/dF).
-}
-\]
-
-Use the closed-point residue isomorphism from G-4cq:
-\[
-\Omega_F^1/dF\simeq\bigoplus_{Q\ {\rm monic\ irreducible}}k_Q,
-\qquad k_Q=\mathbb F_2[S]/(Q),
-\]
-where the residue at infinity is determined by the global trace relation. Cartier acts on each finite residue coordinate by inverse Frobenius, so \(C^{-1}\) acts by Frobenius square. Therefore
-\[
-F/(\wp(F)+SF^2)
-\simeq
-\bigoplus_Q k_Q/\{z^2+z:z\in k_Q\}
-\xrightarrow{\ \operatorname{Tr}\ }
-\boxed{\bigoplus_Q\mathbb F_2}.
-\]
-For every finite field \(k_Q\), the Artin–Schreier image \(\{z^2+z\}\) is exactly the trace-zero subspace, so the trace map induces the displayed isomorphism.
-
-Explicitly, the zero-mode invariant of \(a\in F\) is
-\[
-\boxed{
-[a]\longmapsto
+\Psi:F\longrightarrow\bigoplus_{Q\ {\rm monic\ irreducible}}\mathbb F_2,
+\quad
+a\longmapsto
 \left(
 \operatorname{Tr}_{k_Q/\mathbb F_2}
 \operatorname{res}_Q((a/S)dS)
 \right)_Q.
 }
 \]
-Thus one independent zero-mode class survives for each finite closed point Q. A representative with nonzero Q-coordinate is \(a=S\alpha Q'/Q\), where \(\alpha\in k_Q\) has trace one. Its differential \((a/S)dS=\alpha Q'/Q\,dS\) has residue \(\alpha\) at Q and no other finite residue.
+The vector has finite support because a rational differential has only finitely many poles.
 
-Combining this with G-4ct gives the corrected full coinvariant normal form
+### 98.1 The map kills H
+
+If \(a=Sb^2\), then
+\[
+\Theta(a)=b^2dS=d(Sb^2),
+\]
+so all residues vanish.
+
+For \(a=\wp(x)=x^2+x\), the local inverse-Cartier formula gives
+\[
+\operatorname{res}_Q\left(\frac{x^2}{S}dS\right)
+=
+\operatorname{res}_Q\left(\frac{x}{S}dS\right)^2.
+\]
+Thus if \(\alpha_Q=\operatorname{res}_Q((x/S)dS)\), then
+\[
+\operatorname{res}_Q(\Theta(\wp(x)))=\alpha_Q^2+\alpha_Q.
+\]
+Its absolute trace is zero. Therefore \(H\subseteq\ker\Psi\).
+
+### 98.2 The nilpotent Cartier tower is already contained in H
+
+Recall the pure-scaling tower
+\[
+I_h=S^{2^h}F^{2^{h+1}},\qquad h\ge0,
+\]
+with \(I_0=SF^2\). For \(h\ge1\), every generator
+\[
+S^{2^h}b^{2^{h+1}}
+\]
+can be written, with \(x=S^{2^{h-1}}b^{2^h}\), as
+\[
+S^{2^h}b^{2^{h+1}}=\wp(x)+x,\qquad x\in I_{h-1}.
+\]
+Induction gives \(I_h\subseteq H\) for every h. By G-4cp, under \(\Theta\) the sum of these \(I_h\) is exactly the Cartier-nilpotent subspace
+\[
+N=\bigcup_{j\ge1}\ker(C^j)\subseteq\Omega_F^1/dF.
+\]
+Hence \(N\subseteq\Theta(H)\).
+
+### 98.3 The kernel is exactly H
+
+Suppose \(\Psi(a)=0\). Write
+\[
+\alpha_Q=\operatorname{res}_Q(\Theta(a)).
+\]
+For every finite Q, \(\operatorname{Tr}(\alpha_Q)=0\). In the finite field \(k_Q\), the image of the Artin–Schreier map \(z\mapsto z^2+z\) is precisely the trace-zero subspace. Choose \(\beta_Q\in k_Q\) such that
+\[
+\beta_Q^2+\beta_Q=\alpha_Q.
+\]
+Only finitely many \(\alpha_Q\) are nonzero. By the residue-surjectivity statement in G-4cq, choose a rational differential \(\eta\) whose finite residues are exactly the \(\beta_Q\). Since \(\Theta\) is onto, write \(\eta=\Theta(x)\) for some \(x\in F\).
+
+The differential
+\[
+\Theta(a)+\Theta(\wp(x))
+\]
+has zero residue at every finite Q. Its residue at infinity is also zero by the global residue theorem. Thus it lies in N by G-4cq. Since \(N\subseteq\Theta(H)\) and \(\Theta(\wp(x))\in\Theta(H)\), we get \(\Theta(a)\in\Theta(H)\), hence \(a\in H\). Therefore
+\[
+\boxed{\ker\Psi=H.}
+\]
+
+The map is surjective: for any finite irreducible Q, choose \(\alpha_Q\in k_Q\) with trace one and take
+\[
+a_Q=S\alpha_Q\,\frac{Q'}{Q}.
+\]
+Then \(\Theta(a_Q)=\alpha_Q(Q'/Q)dS\) has residue \(\alpha_Q\) at Q and zero at every other finite point. Hence \(\Psi(a_Q)\) is the coordinate vector supported at Q.
+
+We conclude
+\[
+\boxed{
+F/(\wp(F)+SF^2)
+\xrightarrow{\sim}
+\bigoplus_{Q\ {\rm monic\ irreducible}}\mathbb F_2
+}
+\]
+by finite-point residue traces. The inverse-Cartier observation above is used only on chosen representatives to compute residues; we do **not** assert that inverse Cartier defines an operator on \(\Omega_F^1/dF\). The Cartier operator itself has a nontrivial nilpotent kernel, which is why the tower argument in 98.2 is essential.
+
+Combining this with G-4ct gives
 \[
 \boxed{
 Q_{\mathcal G}\simeq
@@ -4197,7 +4242,4 @@ Q_{\mathcal G}\simeq
 \right).
 }
 \]
-The second factor is the Frobenius-normalized orbit-residue module from G-4ct. The first is its zero-mode Cartier coinvariant. This replaces the false \(F/\wp(F)\) simplification in 95.4 and the corresponding G-4cu claim.
-
-**Learning consequence.** The zero-mode basis is indexed by finite irreducible Q, with one F₂ coordinate per Q obtained by the residue trace. It is not the Artin–Schreier basis of \(F/\wp(F)\). For each odd exponent root q, the nonzero-orbit block still carries the full residue field \(k_Q\) and its trace-dual readouts.
-
+The zero-mode basis has one trace-one residue generator per finite Q. This replaces the false \(F/\wp(F)\) simplification in 95.4 and the corresponding G-4cu claim.
