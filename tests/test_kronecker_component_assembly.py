@@ -52,6 +52,8 @@ class KroneckerComponentAssemblyTests(unittest.TestCase):
         composition = result["component_witness_composition_audit"]
         self.assertTrue(composition["composition_verified"])
         self.assertTrue(all(composition["checks"].values()))
+        self.assertEqual(len(composition["per_component_replayed_audits"]), 3)
+        self.assertTrue(all(a["strict_equivalence_certified"] for a in composition["per_component_replayed_audits"]))
         self.assertEqual(composition["reconstructed_left_transform_S"], result["left_transform_S"])
         self.assertEqual(composition["reconstructed_right_transform_T"], result["right_transform_T"])
         self.assertTrue(composition["replayed_global_strict_equivalence_audit"]["strict_equivalence_certified"])
@@ -71,6 +73,8 @@ class KroneckerComponentAssemblyTests(unittest.TestCase):
             altered, result["left_transform_S"], result["right_transform_T"],
             result["source_Q"], result["source_K"],
             result["canonical_Q"], result["canonical_K"], 5,
+            [rq, [[1]]], [rk, [[0]]],
+            [right_block(1)[0], [[1]]], [right_block(1)[1], [[0]]],
         )
         self.assertFalse(audit["composition_verified"])
         self.assertFalse(
@@ -93,6 +97,8 @@ class KroneckerComponentAssemblyTests(unittest.TestCase):
                 altered, result["left_transform_S"], result["right_transform_T"],
                 result["source_Q"], result["source_K"],
                 result["canonical_Q"], result["canonical_K"], 5,
+                [rq, [[1]]], [rk, [[0]]],
+                [right_block(1)[0], [[1]]], [right_block(1)[1], [[0]]],
             )
 
     def test_composition_audit_rejects_empty_or_malformed_certificate_lists(self):
@@ -105,6 +111,8 @@ class KroneckerComponentAssemblyTests(unittest.TestCase):
             result["left_transform_S"], result["right_transform_T"],
             result["source_Q"], result["source_K"],
             result["canonical_Q"], result["canonical_K"], 5,
+            [rq, [[1]]], [rk, [[0]]],
+            [right_block(1)[0], [[1]]], [right_block(1)[1], [[0]]],
         )
         with self.assertRaisesRegex(ValueError, "nonempty ordered sequence"):
             _component_witness_composition_audit([], *args)
