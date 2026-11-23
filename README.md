@@ -551,3 +551,6 @@ observer gives the reading. The four zones are the map's legend.
 
 
 **Q/K basis-invariance experiment (G-EP20):** `tools/qk_basis_change.py` tests the coordinated transformation (Q'=QB, K'=KB^{-T}) for integer unimodular B. It verifies the exact inverse identities and checks that (Q'^TK'=B^T(Q^TK)B^{-T}) preserves the full finite-field interaction profile, while separately checking preservation of Q/K ranks. This guarantee applies to the input-space interaction only, not the individual spectra or output-space product. See `research/the-fold-qk-basis-invariance.md`.
+
+
+**Rational canonical classification (G-EP21):** `tools/rational_canonical.py` computes primary nullity growth for every irreducible characteristic factor, recovers elementary divisors (f^e), and assembles the invariant-factor divisibility chain. These invariant factors determine the complete similarity class over the selected prime field. See `research/the-fold-rational-canonical-profiles.md`.
