@@ -539,3 +539,6 @@ observer gives the reading. The four zones are the map's legend.
 
 
 **Synthetic transformer pipeline demo (G-EP16):** `python -m tools.transformer_demo` runs a deterministic transformer-shaped fixture through checkpoint inspection and snapshot sensitivity analysis. It includes square Q/K/V/O attention projections, rectangular MLP up/down matrices, and skipped normalization/bias vectors, with a controlled rank-changing snapshot. The output is explicitly marked synthetic and is not evidence from a trained model. See `tools/transformer_demo.py`, `tests/test_transformer_demo.py`, and `research/the-fold-synthetic-transformer-demo.md`.
+
+
+**Prime-indexed Frobenius-orbit profiles (G-EP17):** `tools/prime_spectral_profile.py` reports modular rank, characteristic factors, Frobenius orbit sizes, and multiplicities across chosen primes. `compare_prime_profiles` explicitly separates rank agreement from orbit-profile agreement. A tested 2×2 example shows that two matrices can have equal rank at every prime but different orbit profiles at some primes. This establishes additional algebraic information, not neural-network predictive value. See `research/the-fold-prime-frobenius-profiles.md`.
