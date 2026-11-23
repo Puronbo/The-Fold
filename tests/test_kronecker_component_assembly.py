@@ -87,7 +87,7 @@ class KroneckerComponentAssemblyTests(unittest.TestCase):
             {"kind": "regular", "q": [[1]], "k": [[0]]},
         ], 5)
         altered = copy.deepcopy(result["component_witness_audits"])
-        altered[0]["left_transform"].append([0, 0, 1])
+        altered[0]["left_transform"].append([0])
         with self.assertRaisesRegex(ValueError, "must be square"):
             _component_witness_composition_audit(
                 altered, result["left_transform_S"], result["right_transform_T"],
@@ -99,6 +99,7 @@ class KroneckerComponentAssemblyTests(unittest.TestCase):
         rq, rk = right_block(1)
         result = assemble_kronecker_components([
             {"kind": "right", "q": rq, "k": rk},
+            {"kind": "regular", "q": [[1]], "k": [[0]]},
         ], 5)
         args = (
             result["left_transform_S"], result["right_transform_T"],
