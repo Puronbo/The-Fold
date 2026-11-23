@@ -3906,7 +3906,7 @@ we obtain the exact differential identity
 \qquad \phi(S)=Z=SW.
 }
 \]
-At every finite closed point Q, \(z=Q(S)\) is carried to \(z'=z+O(p^2)\), while p is fixed. The induced automorphism of \(k_Q((z))((p))\) is continuous and fixes \(k_Q\). The higher-dimensional residue is invariant under continuous automorphisms of iterated Laurent series fields (Gorchinskiy–Osipov, Proposition 5.3, Corollary 5.4 and Remark 5.5). Thus every coefficientwise residue of the differential series above is unchanged. Consequently all orbit sums \(\mathfrak r_{q,Q}\) are invariant.
+At every finite closed point Q, \(z=Q(S)\) is carried to \(z'=z+O(p^2)\), while p is fixed. The induced map on \(k_Q((z))((p))\) is a continuous \(k_Q\)-algebra automorphism. Gorchinskiy–Osipov prove that the two-dimensional residue of a top differential form is invariant under every such automorphism (Proposition 5.3, Corollary 5.4 and Remark 5.5). To extract the residue of the p^n coefficient \(\omega_n\), apply that theorem to \(p^{-n}\omega\wedge d\log p\); the automorphism fixes p, so this is exactly coefficientwise residue invariance, not merely invariance of the p^0 coefficient. Consequently all orbit sums \(\mathfrak r_{q,Q}\) are invariant.
 
 For the zero-mode coordinate, one must account for negative p-powers: although
 \[
@@ -3932,6 +3932,10 @@ The zero-residue theorem G-4cq then places this differential in the Cartier-nilp
 This proves invariance of the zero coordinate without the false claim of literal p⁰ coefficient equality.
 
 The map \(\mathfrak R\) descends to the full group coinvariant \(Q_{\mathcal G}\).
+
+
+
+**Reference for the local residue theorem.** S. O. Gorchinskiy and D. V. Osipov, “Continuous homomorphisms between algebras of iterated Laurent series over a ring,” Trudy Mat. Inst. Steklova 294 (2016), 54–75; English version, Proc. Steklov Inst. Math. 294 (2016), 47–66; arXiv:1604.07005, DOI 10.1134/S0371968516030031. The parameter-image criterion for continuous maps is Theorem 4.7; invariance of the top residue under continuous automorphisms is Corollary 5.4 and Remark 5.5. <https://arxiv.org/abs/1604.07005>
 
 ### 95.3 It is an isomorphism, so the filtered extension is canonically split
 
