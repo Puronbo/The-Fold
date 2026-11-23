@@ -43,7 +43,7 @@ class MixedKroneckerCertificateTests(unittest.TestCase):
         result = verify_mixed_kronecker_decomposition(
             q, k, 5, right_minimal_indices=[1], left_minimal_indices=[1],
             regular_q=regq, regular_k=regk,
-            left_transform=[[1]*0] if False else [[1,0,0,0,0],[0,1,0,0,0],[0,0,1,0,0],[0,0,0,1,0],[0,0,0,0,1]],
+            left_transform=[[1,0,0,0,0],[0,1,0,0,0],[0,0,1,0,0],[0,0,0,1,0],[0,0,0,0,1]],
             right_transform=[[1,0,0,0,0,0],[0,1,0,0,0,0],[0,0,1,0,0,0],[0,0,0,1,0,0],[0,0,0,0,1,0],[0,0,0,0,0,1]],
         )
         self.assertTrue(result["decomposition_certified"])
@@ -56,9 +56,9 @@ class MixedKroneckerCertificateTests(unittest.TestCase):
         q0, k0 = block_pencil([rq, lq, regq], [rk, lk, regk])
         # Apply S^{-1} on rows and T^{-1} on columns, then supply S,T.
         s = [[1,1,0,0],[0,1,1,0],[0,0,1,1],[0,0,0,1]]
-        t = [[1,1,0,0,0],[0,1,1,0,0],[0,0,1,1,0],[0,0,0,1,1],[0,0,0,0,1]]
+        t = [[1,1,0,0],[0,1,1,0],[0,0,1,1],[0,0,0,1]]
         si = [[1,4,1,4],[0,1,4,1],[0,0,1,4],[0,0,0,1]]
-        ti = [[1,4,1,4,1],[0,1,4,1,4],[0,0,1,4,1],[0,0,0,1,4],[0,0,0,0,1]]
+        ti = [[1,4,1,4],[0,1,4,1],[0,0,1,4],[0,0,0,1]]
         def mm(a,b):
             return [[sum(a[i][z]*b[z][j] for z in range(len(b)))%5 for j in range(len(b[0]))] for i in range(len(a))]
         q, k = mm(mm(si,q0),ti), mm(mm(si,k0),ti)
