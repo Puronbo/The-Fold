@@ -76,6 +76,33 @@ class MixedKroneckerRecoveryTests(unittest.TestCase):
         self.assertTrue(result["recovered"], result.get("reason"))
         self.assertTrue(result["verification"]["strict_equivalence_certified"])
 
+
+    def test_exhaustive_mode_finds_exact_witness(self):
+        q, k = self.mixed_pair()
+        result = recover_mixed_kronecker_pencil(
+            q, k, 5, max_degree=2, max_candidates=1000,
+            search_mode="exhaustive",
+        )
+        self.assertTrue(result["recovered"], result.get("reason"))
+        self.assertEqual(result["search_mode"], "exhaustive")
+        self.assertTrue(result["verification"]["strict_equivalence_certified"])
+
+    def test_exhaustive_budget_exhaustion_is_inconclusive(self):
+        q, k = self.mixed_pair()
+        result = recover_mixed_kronecker_pencil(
+            q, k, 5, max_degree=2, max_candidates=1,
+            search_mode="exhaustive",
+        )
+        self.assertFalse(result["recovered"])
+        self.assertFalse(result["decision_complete"])
+
+    def test_rejects_unknown_search_mode(self):
+        q, k = self.mixed_pair()
+        with self.assertRaises(ValueError):
+            recover_mixed_kronecker_pencil(
+                q, k, 5, max_degree=2, search_mode="approximate"
+            )
+
     def test_incomplete_profile_is_not_claimed_as_recovery(self):
         q, k = self.mixed_pair()
         result = recover_mixed_kronecker_pencil(
