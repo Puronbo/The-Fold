@@ -90,7 +90,9 @@ class RegularPencilWitnessTests(unittest.TestCase):
 
     def test_candidate_budget_returns_inconclusive(self):
         q = [[1, 0], [0, 1]]
-        k = [[0, 1], [0, 0]]
+        # Zero operator has two elementary divisors x and x, so a
+        # one-candidate budget cannot assemble both cyclic summands.
+        k = [[0, 0], [0, 0]]
         result = construct_regular_pencil_witness(
             q, k, q, k, 5, max_candidates=1
         )
