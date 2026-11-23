@@ -24,7 +24,7 @@ def _spectral_signature(result: dict) -> dict:
     ]
     extension_profiles = [
         {
-            "factor": item["factor_coefficients_descending"],
+            "factor": item["minimal_polynomial_coefficients_descending"],
             "block_sizes_descending": item["profile"]["block_sizes_descending"],
         }
         for item in result["extension_eigenvalue_classes"]
@@ -61,8 +61,11 @@ def compare_snapshots(
     exported_shapes = {}
     for name, weights in snapshots.items():
         # Validate shape without selecting a particular field.
-        rows = getattr(weights, "tolist", None)
-        raw = rows() if callable(rows) else weights
+        raw = weights
+        for method in ("detach", "cpu", "tolist"):
+            convert = getattr(raw, method, None)
+            if callable(convert):
+                raw = convert()
         try:
             matrix_rows = [list(row) for row in raw]
         except (TypeError, ValueError) as exc:
