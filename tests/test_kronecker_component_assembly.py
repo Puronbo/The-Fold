@@ -209,6 +209,37 @@ class KroneckerComponentAssemblyTests(unittest.TestCase):
         self.assertNotIn("component_witness_audits", result)
         self.assertNotIn("component_witness_composition_audit", result)
 
+    def test_rejects_malformed_component_matrix_containers_and_entries(self):
+        malformed_pairs = [
+            (1, [[0]]),
+            ([[1], [0, 1]], [[0], [0, 0]]),
+            ([[1.5]], [[0]]),
+            ([[True]], [[0]]),
+            ([[1]], [[False]]),
+            ([[1]], [0]),
+            ([[]], [[]]),
+        ]
+        for q, k in malformed_pairs:
+            with self.subTest(q=q, k=k):
+                with self.assertRaises(ValueError):
+                    assemble_kronecker_components(
+                        [{"kind": "regular", "q": q, "k": k}], 5
+                    )
+
+    def test_rejects_invalid_field_parameters_before_component_work(self):
+        for p in (True, 2.5, "5", 1, 9):
+            with self.subTest(p=p):
+                with self.assertRaises(ValueError):
+                    assemble_kronecker_components(
+                        [{"kind": "regular", "q": [[1]], "k": [[0]]}], p
+                    )
+
+    def test_rejects_inconsistent_component_coefficient_dimensions(self):
+        with self.assertRaisesRegex(ValueError, "identical dimensions"):
+            assemble_kronecker_components(
+                [{"kind": "regular", "q": [[1, 0]], "k": [[0]]}], 5
+            )
+
     def test_requires_nonempty_component_list(self):
         with self.assertRaises(ValueError):
             assemble_kronecker_components([], 3)
