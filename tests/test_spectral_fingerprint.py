@@ -1,7 +1,8 @@
 import unittest
 
 from tools.spectral_fingerprint import (
-    automatic_full_spectral_fingerprint, automatic_spectral_fingerprint,\n    characteristic_polynomial, factor_polynomial,
+    automatic_full_spectral_fingerprint, automatic_spectral_fingerprint,
+    characteristic_polynomial, factor_polynomial,
     extension_jordan_profile, is_irreducible_polynomial,
     jordan_profile, rank_mod, spectral_fingerprint,
 )
