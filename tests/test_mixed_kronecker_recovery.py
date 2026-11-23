@@ -61,6 +61,8 @@ class MixedKroneckerRecoveryTests(unittest.TestCase):
         self.assertEqual(result["left_minimal_indices"], [1])
         self.assertEqual(result["regular_dimension"], 1)
         self.assertTrue(result["verification"]["strict_equivalence_certified"])
+        self.assertTrue(result["multi_block_direct_sum_audit"]["verification"]["direct_sum_verified"])
+        self.assertEqual(len(result["canonical_block_shapes"]), 3)
 
     def test_recovers_after_left_basis_shear(self):
         p = 5
