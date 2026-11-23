@@ -567,3 +567,6 @@ observer gives the reading. The four zones are the map's legend.
 
 
 **Transformation-certified polynomial Smith reduction (G-EP28):** `tools/pencil_smith_transform.py` now constructs explicit polynomial matrices (U,V,D) with (U(Q+tK)V=D), tracks every unimodular elementary row/column operation, and verifies the resulting diagonal Smith form and divisibility chain. This is constructive polynomial Smith reduction, not yet a full Kronecker canonical decomposition; left/right minimal-index blocks remain separately certified by G-EP25–G-EP27. See `tests/test_pencil_smith_transform.py` and `research/the-fold-transformation-certified-smith-reduction.md`.
+
+
+**Independent polynomial transform audit (G-EP29):** `tools/pencil_transform_audit.py` independently checks a G-EP28 certificate by recomputing (U(Q+tK)V=D) and calculating (det U,det V) exactly over (mathbb F_p[t]). Both determinants must be nonzero constants, the units of the polynomial ring, for the transforms to be unimodular. A factorial determinant budget prevents unbounded work. This strengthens auditability but does not provide a Kronecker canonical decomposition or convert polynomial equivalence into strict pencil equivalence. See `tests/test_pencil_transform_audit.py` and `research/the-fold-independent-polynomial-transform-audit.md`.
