@@ -246,3 +246,26 @@ override valid algebraic identities.
 component partition and the supplied local witnesses. It establishes the
 claimed direct-sum and strict-equivalence identities, not how the partition
 was discovered, whether it is unique, or whether another decomposition exists.
+
+
+## G-EP70 — Adversarial algebraic certificate boundaries
+
+The G-EP69 algebraic verifier now validates certificate-side matrix content
+before modular arithmetic. Canonical coefficient matrices and all local and
+global transformation matrices must be nonempty rectangular integer matrices;
+booleans and floating-point entries are rejected rather than silently coerced.
+Local witness records are checked as dictionaries before their transform
+fields are read. The verifier returns a negative audit for malformed output
+certificates instead of leaking common nested-structure, indexing, or type
+errors.
+
+The verifier retains explicit input diagnostics: invalid prime-field
+parameters and malformed original component inputs raise `ValueError`,
+because these are invalid verifier arguments rather than a failed certificate.
+A structurally valid but singular local witness is rejected by the exact
+strict-equivalence audit. Tests additionally cover absent certificate fields,
+malformed canonical rows, malformed transforms, and non-dictionary results.
+
+**Boundary:** these checks harden the algebraic verifier's input surface. They
+do not prove that the caller's supplied component partition is complete,
+canonical, uniquely determined, or discoverable from an unsplit pencil.
