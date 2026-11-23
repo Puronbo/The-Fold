@@ -61,6 +61,46 @@ def _matrix_from_vector(vector, n):
     return [vector[i*n:(i+1)*n] for i in range(n)]
 
 
+
+def _matvec(matrix, vector, p):
+    return [sum(int(x) * int(y) for x, y in zip(row, vector)) % p for row in matrix]
+
+def _krylov_matrix(matrix, vector, p):
+    n = len(matrix)
+    columns = []
+    current = [int(x) % p for x in vector]
+    for _ in range(n):
+        columns.append(current)
+        current = _matvec(matrix, current, p)
+    return [[columns[j][i] for j in range(n)] for i in range(n)]
+
+def _find_cyclic_vector(matrix, p, budget):
+    n = len(matrix)
+    examined = 0
+    for vector in product(range(p), repeat=n):
+        if examined >= budget:
+            break
+        examined += 1
+        if not any(vector):
+            continue
+        krylov = _krylov_matrix(matrix, vector, p)
+        if _is_invertible(krylov, p):
+            return list(vector), krylov, examined
+    return None, None, examined
+
+def _cyclic_intertwiner(a, b, p, budget):
+    va, ka, used_a = _find_cyclic_vector(a, p, budget)
+    if va is None:
+        return None, used_a
+    vb, kb, used_b = _find_cyclic_vector(b, p, budget)
+    if vb is None:
+        return None, used_a + used_b
+    candidate = _matmul(kb, _inverse_mod(ka, p), p)
+    if (_matrices_equal(_matmul(candidate, a, p), _matmul(b, candidate, p), p)
+            and _is_invertible(candidate, p)):
+        return candidate, used_a + used_b
+    raise ArithmeticError('cyclic-basis intertwiner failed exact verification')
+
 def _is_invertible(matrix, p):
     try:
         _inverse_mod(matrix, p)
@@ -218,10 +258,18 @@ def construct_regular_pencil_witness(
                 "witness_found": False,
             }
 
-        basis = _intertwiner_space(a, b, p)
+        found = None
+        construction_method = 'linear-intertwiner-space'
+        cyclic_examined = 0
+        if (profile_a['invariant_factor_count'] == 1
+                and profile_b['invariant_factor_count'] == 1):
+            found, cyclic_examined = _cyclic_intertwiner(a, b, p, max_candidates)
+            if found is not None:
+                construction_method = 'cyclic-krylov-bases'
+        basis = [] if found is not None else _intertwiner_space(a, b, p)
         dimension = len(basis)
         candidate_count = p ** dimension
-        if candidate_count > max_candidates:
+        if found is None and candidate_count > max_candidates:
             return {
                 "schema": "the-fold-regular-pencil-witness-v1",
                 "decision_complete": False, "strictly_equivalent": None,
@@ -232,19 +280,18 @@ def construct_regular_pencil_witness(
                 "reason": "intertwiner search exceeds candidate budget; equivalence profile agrees but no witness was constructed",
             }
 
-        found = None
-        examined = 0
-        for coefficients in product(range(p), repeat=dimension):
-            examined += 1
-            vector = [0] * (n*n)
-            for scalar, basis_vector in zip(coefficients, basis):
-                if scalar:
-                    vector = [(x + scalar*y) % p
-                              for x, y in zip(vector, basis_vector)]
-            candidate = _matrix_from_vector(vector, n)
-            if _is_invertible(candidate, p):
-                found = candidate
-                break
+        examined = cyclic_examined
+        if found is None:
+            for coefficients in product(range(p), repeat=dimension):
+                examined += 1
+                vector = [0] * (n*n)
+                for scalar, basis_vector in zip(coefficients, basis):
+                    if scalar:
+                        vector = [(x + scalar*y) % p for x, y in zip(vector, basis_vector)]
+                candidate = _matrix_from_vector(vector, n)
+                if _is_invertible(candidate, p):
+                    found = candidate
+                    break
         if found is None:
             # Similar matrices have an invertible intertwiner; this indicates
             # either an arithmetic bug or inconsistent profile assumptions.
@@ -266,9 +313,11 @@ def construct_regular_pencil_witness(
             "decision_complete": True, "strictly_equivalent": True,
             "witness_found": True, "common_chart": chart,
             "normalized_operator_intertwiner_P": found,
+            "intertwiner_construction_method": construction_method,
             "left_transform_S": s, "right_transform_T": t,
             "intertwiner_space_dimension": dimension,
             "candidates_examined": examined,
+            "cyclic_vector_candidates_examined": cyclic_examined,
             "checks": {
                 "P_times_A_equals_B_times_P": _matrices_equal(
                     _matmul(found, a, p), _matmul(b, found, p), p),
