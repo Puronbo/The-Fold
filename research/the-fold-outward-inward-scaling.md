@@ -294,3 +294,44 @@ Tests include prime powers, representative products of distinct primes, and
 a grid of prime fields 2, 3, 5, 7 against degrees 1 through 80. These finite
 checks exercise the formula and bound; the result for all degrees follows
 from the squarefree-divisor expansion.
+
+
+## G-EP176 — Coprime degrees do not give multiplicative density
+
+A natural composition conjecture is
+\[
+R_p(ab)\stackrel{?}{=}R_p(a)R_p(b),\qquad \gcd(a,b)=1.
+\]
+It fails, even for the smallest nontrivial coprime pair. Over \(\mathbb F_2\),
+\[
+R_2(2)=\frac12,\qquad R_2(3)=\frac34,
+\]
+so their product is \(3/8\). But
+\[
+R_2(6)=1-2^{-3}-2^{-4}+2^{-5}=\frac{27}{32},
+\]
+and therefore
+\[
+\boxed{R_2(6)-R_2(2)R_2(3)=\frac{15}{32}.}
+\]
+The failure is not a small asymptotic correction in this example.
+
+The source is visible in the Möbius expansion:
+\[
+R_p(n)=p^{-n}\sum_{d\mid n}\mu(d)p^{n/d}.
+\]
+For coprime \(a,b\), every squarefree divisor of \(ab\) is a product of a squarefree divisor of \(a\) and one of \(b\). The Möbius signs therefore factor over the two prime-factor sets, but the exponent in the combined term is
+\[
+\frac{ab}{d_a d_b}=\frac{a}{d_a}\frac{b}{d_b},
+\]
+not the sum of the separate exponents \(a/d_a\) and \(b/d_b\). The outer normalization is also \(p^{-ab}\), not \(p^{-a-b}\). Thus the divisor indexing has a product structure, while the numerical weight does not separate into a product of one-variable weights.
+
+### Exact composition audit
+
+G-EP176 adds `irreducible_density_composition(p, left_degree, right_degree)`. It requires positive coprime degrees and returns exact rational values for both inputs, their product, the combined degree, and the composition defect
+\[
+\Delta_p(a,b)=R_p(ab)-R_p(a)R_p(b).
+\]
+It does not assume that the defect has a fixed sign or is nonzero in every case: degree one is an identity case because \(R_p(1)=1\). Tests cover the explicit \((2,3)\) counterexample, the degree-one identity, invalid/non-coprime inputs, and all coprime pairs through 12 over prime fields 2, 3, 5, and 7.
+
+The current conclusion is precise: the normalized irreducible density is not multiplicative over coprime degree products. The factorization of the Möbius divisor set survives, but the exponent/normalization kernel obstructs a direct scalar product law. A useful next step is to characterize the defect's sign and asymptotic size, rather than trying to force multiplicativity.
