@@ -819,3 +819,69 @@ def irreducible_density_convergence_over_field(field_size: int,
         "uniform_bound": (degree - 1) * (2 ** (-degree / 2)),
         "uniform_bound_holds": abs(error) <= uniform_bound,
     }
+
+
+def coprime_composition_excess_asymptotic(degrees: list[int]) -> dict:
+    """Classify the leading large-Q term of E_Q(prod n_i)-prod E_Q(n_i).
+
+    For n>1, write A(n)=n(1-1/q(n)), where q(n) is its smallest
+    prime divisor. The first term of E_Q(n) is Q**(-A(n)). This routine
+    compares A(product(degrees)) with sum(A(degree)); exact spectrum
+    collection resolves the only possible two-factor resonance.
+    """
+    if not isinstance(degrees, list) or len(degrees) < 2:
+        raise ValueError("degrees must be a list containing at least two values")
+    for degree in degrees:
+        if (isinstance(degree, bool) or not isinstance(degree, int)
+                or degree <= 1):
+            raise ValueError("every degree must be an integer greater than one")
+    for index, degree in enumerate(degrees):
+        if any(math.gcd(degree, other) != 1
+               for other in degrees[index + 1:]):
+            raise ValueError("degrees must be pairwise coprime")
+
+    def first_exponent(value: int) -> tuple[int, int]:
+        remaining = value
+        prime = 2
+        while prime * prime <= remaining and remaining % prime:
+            prime += 1 if prime == 2 else 2
+        smallest = prime if remaining % prime == 0 else remaining
+        return value - value // smallest, smallest
+
+    product_degree = math.prod(degrees)
+    product_exponent, product_prime = first_exponent(product_degree)
+    input_data = [first_exponent(value) for value in degrees]
+    input_exponent_sum = sum(item[0] for item in input_data)
+    spectrum_data = None
+    if product_exponent < input_exponent_sum:
+        regime = "positive_without_leading_cancellation"
+        leading_exponent = product_exponent
+        leading_coefficient = 1
+    elif product_exponent > input_exponent_sum:
+        regime = "negative_without_leading_cancellation"
+        leading_exponent = input_exponent_sum
+        leading_coefficient = -1
+    else:
+        regime = "leading_resonance"
+        spectrum_data = coprime_composition_excess_spectrum(degrees)
+        leading_exponent = spectrum_data["leading_exponent"]
+        leading_coefficient = spectrum_data["leading_coefficient"]
+
+    two_factor_resonance = False
+    if len(degrees) == 2:
+        smaller, larger = sorted(degrees)
+        two_factor_resonance = smaller == 2 and _is_prime(larger)
+    return {
+        "schema": "the-fold-coprime-composition-excess-asymptotic-v1",
+        "degrees": degrees,
+        "product_degree": product_degree,
+        "smallest_prime_factor_of_product": product_prime,
+        "input_first_exponents": [item[0] for item in input_data],
+        "product_first_exponent": product_exponent,
+        "sum_of_input_first_exponents": input_exponent_sum,
+        "leading_regime": regime,
+        "leading_exponent_after_cancellation": leading_exponent,
+        "leading_coefficient_after_cancellation": leading_coefficient,
+        "two_factor_resonance_iff_two_and_odd_prime": two_factor_resonance,
+        "exact_spectrum": spectrum_data,
+    }
