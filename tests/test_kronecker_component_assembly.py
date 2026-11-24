@@ -19,6 +19,40 @@ def right_block(e):
     )
 
 
+def random_invertible_matrix(n, p, rng):
+    """Generate an invertible matrix using reproducible elementary row operations."""
+    matrix = [[int(i == j) for j in range(n)] for i in range(n)]
+    for _ in range(max(4, 3 * n)):
+        a, b = rng.sample(range(n), 2) if n > 1 else (0, 0)
+        if n > 1 and rng.randrange(2):
+            matrix[a], matrix[b] = matrix[b], matrix[a]
+        elif n > 1:
+            scale = rng.randrange(1, p)
+            matrix[a] = [
+                (x + scale * y) % p
+                for x, y in zip(matrix[a], matrix[b])
+            ]
+        elif p > 2:
+            scale = rng.randrange(1, p)
+            matrix[0] = [(scale * x) % p for x in matrix[0]]
+    return matrix
+
+
+def matmul_mod(a, b, p):
+    return [
+        [sum(a[i][k] * b[k][j] for k in range(len(b))) % p
+         for j in range(len(b[0]))]
+        for i in range(len(a))
+    ]
+
+
+def scramble_pencil(q, k, p, rng):
+    """Apply independent invertible constant left/right basis changes."""
+    s = random_invertible_matrix(len(q), p, rng)
+    t = random_invertible_matrix(len(q[0]), p, rng)
+    return matmul_mod(matmul_mod(s, q, p), t, p), matmul_mod(matmul_mod(s, k, p), t, p)
+
+
 class KroneckerComponentAssemblyTests(unittest.TestCase):
     def test_assembles_right_left_and_regular_components(self):
         rq, rk = right_block(1)
@@ -496,6 +530,42 @@ class KroneckerComponentAssemblyTests(unittest.TestCase):
                 components, p, altered
             )
             self.assertFalse(audit["verified"], msg=f"p={p}, matrix={matrix_name}")
+
+
+    def test_seeded_randomized_basis_scrambling_of_mixed_components(self):
+        from tools.kronecker_component_assembly import verify_kronecker_component_assembly_algebraically
+
+        rng = random.Random(72072)
+        for p in (2, 3, 5, 7):
+            for case in range(3):
+                right_index = 1 + rng.randrange(2)
+                left_index = 1 + rng.randrange(2)
+                rq, rk = right_block(right_index)
+                lq0, lk0 = right_block(left_index)
+                raw_components = [
+                    ("right", rq, rk),
+                    ("left", transpose(lq0), transpose(lk0)),
+                    ("regular", [[1 + rng.randrange(p - 1)]], [[rng.randrange(p)]]),
+                ]
+                components = []
+                for kind, q, k in raw_components:
+                    scrambled_q, scrambled_k = scramble_pencil(q, k, p, rng)
+                    components.append({
+                        "kind": kind, "q": scrambled_q, "k": scrambled_k
+                    })
+                rng.shuffle(components)
+                result = assemble_kronecker_components(components, p)
+                self.assertTrue(
+                    result["assembly_complete"],
+                    msg=f"p={p}, case={case}, reason={result.get('reason')}",
+                )
+                audit = verify_kronecker_component_assembly_algebraically(
+                    components, p, result
+                )
+                self.assertTrue(
+                    audit["verified"],
+                    msg=f"p={p}, case={case}, checks={audit['checks']}",
+                )
 
 
 if __name__ == "__main__":
