@@ -982,3 +982,53 @@ not. The additive first-order budget remains governed by the sum of
 the leaf errors when all leaf degrees grow, provided the relevant
 composite-to-minimum ratios are controlled by the G-EP182 bound at
 each split.
+
+
+## G-EP191 — Boolean-lattice geometry of the divisor spectrum
+
+Let the distinct prime divisors of \(n\) be
+\(q_1,\ldots,q_k\). Every squarefree divisor corresponds to a subset
+\(S\subseteq\{1,\ldots,k\}\), with
+\(d_S=\prod_{i\in S}q_i\). The exact error spectrum becomes
+\[
+E_Q(n)=
+\sum_{\varnothing\ne S\subseteq[k]}
+(-1)^{|S|+1}
+Q^{-n(1-1/d_S)}.
+\]
+Thus its terms are the vertices of a Boolean lattice, with alternating
+Möbius signs. The exponent map
+\[
+S\longmapsto n\left(1-\frac1{\prod_{i\in S}q_i}\right)
+\]
+is strictly increasing under strict inclusion. The spectrum is
+therefore naturally graded by subset inclusion, but its numerical
+ordering is by the products \(d_S\), not by subset cardinality.
+This explains why pairwise products can appear before a larger
+individual prime factor: for \(\{2,3,7\}\), the subset \(\{2,3\}\)
+has product 6 and precedes the singleton \(\{7\}\).
+
+The defect spectrum is a signed combination of three such Boolean
+lattices and the additive convolution of the two input spectra. This
+gives a concrete combinatorial model for coefficient collisions:
+different lattice vertices, or a convolution vertex, can map to the
+same integer exponent. The exact auditor performs precisely this
+push-forward and coefficient collection.
+
+## G-EP192 — Exact finite-field order, not just prime characteristic
+
+The executable count now includes
+\`count_monic_irreducibles_over_field(Q,n)\` and
+\`irreducible_density_over_field(Q,n)\`. They validate that \(Q\) is a
+prime power and evaluate
+\[
+I_Q(n)=\frac1n\sum_{d\mid n}\mu(d)Q^{n/d}
+\]
+with integer arithmetic. The earlier prime-only API remains unchanged
+for backwards compatibility. The defect-spectrum evaluator accepts any
+integer \(Q\ge2\) as a polynomial evaluation; finite-field
+interpretation is restricted to prime powers.
+
+Regression fixtures include \(\mathbb F_4\), \(\mathbb F_8\), and
+\(\mathbb F_9\). In particular,
+\(I_4(2)=6\) and \(R_4(2)=3/4\), so \(E_4(2)=1/4\).
