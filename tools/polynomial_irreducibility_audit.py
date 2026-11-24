@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import random
+from fractions import Fraction
 from typing import Iterator
 
 from tools.spectral_fingerprint import (
@@ -67,6 +68,72 @@ def count_monic_irreducibles(p: int, degree: int) -> int:
         raise ArithmeticError("irreducible-count formula was not integral")
     return quotient
 
+
+
+def irreducible_density_convergence(p: int, degree: int) -> dict:
+    """Return the exact normalized density error and a uniform analytic bound.
+
+    R_p(n) = n I_p(n) / p**n and
+    |R_p(n) - 1| <= (2**omega(n) - 1) p**(-n/2)
+                  <= (n - 1) 2**(-n/2),
+    where omega(n) counts distinct prime factors. The latter bound is
+    uniform over every prime p.
+    """
+    if isinstance(p, bool) or not isinstance(p, int) or not _is_prime(p):
+        raise ValueError("p must be a prime integer")
+    if (isinstance(degree, bool) or not isinstance(degree, int)
+            or degree < 1):
+        raise ValueError("degree must be a positive integer")
+
+    normalized_density = Fraction(
+        degree * count_monic_irreducibles(p, degree), p ** degree
+    )
+    error = 1 - normalized_density
+    distinct_prime_factors = sum(
+        1 for divisor in range(2, degree + 1)
+        if degree % divisor == 0 and _mobius(divisor) != 0
+        and all(divisor % prime != 0
+                for prime in range(2, divisor)
+                if _mobius(prime) == -1)
+    ) if degree > 1 else 0
+    # Count omega(n) directly by trial division; unlike divisor counting,
+    # this remains transparent for prime powers.
+    remaining = degree
+    omega = 0
+    prime = 2
+    while prime * prime <= remaining:
+        if remaining % prime == 0:
+            omega += 1
+            while remaining % prime == 0:
+                remaining //= prime
+        prime += 1 if prime == 2 else 2
+    if remaining > 1:
+        omega += 1
+
+    divisor_bound = Fraction((2 ** omega - 1), 1) * Fraction(1, p) ** (degree / 2)
+    # Use an exact rational relaxation: p^(-n/2) is represented by
+    # p^(-ceil(n/2)) for odd n only as a stronger-than-needed exponent is
+    # invalid, so retain the square-root expression as a float for reporting.
+    uniform_bound = (degree - 1) * (2 ** (-degree / 2))
+    return {
+        "schema": "the-fold-irreducible-density-convergence-v1",
+        "field_prime": p,
+        "degree": degree,
+        "normalized_irreducible_density_numerator":
+            normalized_density.numerator,
+        "normalized_irreducible_density_denominator":
+            normalized_density.denominator,
+        "normalized_irreducible_density": float(normalized_density),
+        "signed_error_numerator": error.numerator,
+        "signed_error_denominator": error.denominator,
+        "absolute_error": float(abs(error)),
+        "distinct_prime_divisor_count": omega,
+        "divisor_count_bound": float(divisor_bound),
+        "uniform_prime_field_bound": uniform_bound,
+        "uniform_bound_holds": abs(error) <= Fraction.from_float(
+            uniform_bound
+        ),
+    }
 
 def audit_irreducibility_agreement(
     p: int,
