@@ -269,3 +269,6 @@ of its witness.
 
 
 - **G-EP136:** constructs alternative transported row/column projector families by conjugating with coordinate permutations that move the represented subspaces. Each alternative family still satisfies idempotence, pairwise orthogonality, completeness, and the same per-index ranks over F₂/F₃/F₅. Direct comparison with the intended transported projectors detects the changed ordered subspaces. This demonstrates that projector axioms and ranks alone do not uniquely identify the supplied ordered decomposition; test-side finite evidence only.
+
+
+- **G-EP137:** binds transported projector families to both rectangular coefficient matrices. For the intended row/column projectors, summing all diagonal projected blocks reconstructs each transformed coefficient exactly. Alternative projector resolutions from G-EP136 retain idempotence, orthogonality, completeness, and rank data, but produce nonzero off-diagonal projected blocks and fail diagonal-only reconstruction for both coefficients. The full diagonal-plus-off-diagonal sum remains an exact reconstruction control. Finite test-side evidence over F₂/F₃/F₅; no production arbitrary-subspace certificate API is added.
