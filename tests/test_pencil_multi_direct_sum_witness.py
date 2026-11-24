@@ -473,7 +473,7 @@ class MultiDirectSumTests(unittest.TestCase):
 
         shapes = [(1, 1), (1, 1)]
         q0 = [[1, 0], [0, 2]]
-        k0 = [[0, 1], [2, 0]]
+        k0 = [[1, 0], [0, 2]]
         for p in (2, 3, 5, 7):
             # Use a nontrivial but invertible left transform; right is
             # independently invertible as well.
