@@ -663,3 +663,21 @@ coefficient matrices. A deliberately wrong inverse-factor order remains
 dimensionally valid but fails matrix and candidate recovery checks. This is
 finite test-side regression evidence, not a general production certificate
 API or formal proof.
+
+
+## G-EP129: Composed transport of rectangular block partitions
+
+Use the rectangular partition [(1,0), (0,1), (3,2)] on a 4×3
+coefficient pair over F₂, F₃, and F₅. This deliberately retains one
+zero-row block and one zero-column block. Apply four successive row and
+column basis changes: two noncommuting shears, an identity stage, and
+inverse-factor cancellation.
+
+Represent each row/column block by its coordinate projector. Transport row
+projectors by P ↦ U P U⁻¹ and column projectors by Q ↦ V⁻¹ Q V, matching
+the coefficient convention A' = U A V. Compare sequentially transported
+projectors with projectors transported by the final composed U,V. For both
+coefficient matrices, check every projected block against its pullback
+through the original partition. Empty blocks remain zero projectors and
+are not silently dropped. This is finite test-side regression evidence,
+not a generic production mixed-partition API or formal proof.
