@@ -6110,7 +6110,7 @@ class MultiDirectSumTests(unittest.TestCase):
             # the K entry of the third block keeps dimensions and direct-sum
             # structure but changes its projective pencil signature.
             changed_k = [row[:] for row in k]
-            changed_k[2][2] = (changed_k[2][2] + 1) % p
+            changed_k[2][2] = 0
             changed = verify_pencil_multi_direct_sum_witness(
                 q, changed_k, p, ident(m), ident(n), shapes
             )
