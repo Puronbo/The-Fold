@@ -289,5 +289,47 @@ class RationalCanonicalTests(unittest.TestCase):
             self.assertEqual(orbit, set(fibre), msg=f"profile={profile_key}")
 
 
+    def test_g_ep155_compare_three_by_three_profiles_across_f2_and_f3(self):
+        from itertools import product
+
+        profiles_by_field = {}
+        shapes_by_field = {}
+        for p in (2, 3):
+            profiles = set()
+            shapes = set()
+            for flat in product(range(p), repeat=9):
+                matrix = [list(flat[i * 3:(i + 1) * 3]) for i in range(3)]
+                result = rational_canonical_profile(matrix, p)
+                invariant_factors = result["invariant_factors_coefficients_descending"]
+                # Coefficients are canonical residues in the field currently
+                # being enumerated; never interpret them as integers in Z.
+                profile = tuple(tuple(coefficient % p for coefficient in poly)
+                                for poly in invariant_factors)
+                profiles.add(profile)
+                shapes.add(tuple(len(poly) - 1 for poly in invariant_factors))
+            profiles_by_field[p] = profiles
+            shapes_by_field[p] = shapes
+
+        # The degree-partition possibilities are shared, although their
+        # polynomial representatives and irreducibility behavior depend on p.
+        self.assertEqual(shapes_by_field[2], shapes_by_field[3])
+        self.assertEqual(shapes_by_field[2], {(3,), (1, 2), (1, 1, 1)})
+        self.assertTrue(all(profiles_by_field[p] for p in (2, 3)))
+
+        # F_3 admits normalized coefficient 2, which cannot occur in F_2.
+        self.assertTrue(any(
+            coefficient == 2
+            for profile in profiles_by_field[3]
+            for polynomial in profile
+            for coefficient in polynomial
+        ))
+        self.assertFalse(any(
+            coefficient == 2
+            for profile in profiles_by_field[2]
+            for polynomial in profile
+            for coefficient in polynomial
+        ))
+
+
 if __name__ == "__main__":
     unittest.main()
