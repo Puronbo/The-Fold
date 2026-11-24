@@ -425,3 +425,6 @@ G-EP140: distinguishes valid invertible coefficient-space shears that change onl
 
 
 **G-EP204 — finite-family uniform sign persistence:** adds `laurent_spectrum_family_uniform_sign_certificate(spectra)`. For a finite family of exact integer Laurent spectra, it computes each leading-term/tail bound and returns a single integer field-size threshold when all members are nonzero and share the same eventual sign. Mixed signs or a zero member correctly block a common-sign claim. The theorem is finite-family only; infinite-time persistence requires uniform coefficient hypotheses. See `research/the-fold-composition-excess-resonance.md`.
+
+
+**G-EP205–G-EP207 — recursive power feedback:** adds the research note `research/the-fold-recursive-power-feedback.md`. For the recurrence \(x_0=n,\ x_{t+1}=n^{x_t+1}\), it proves a same-height tower sandwich between base-\(n\) and base-\(n^2\) power towers, establishes strict discrete convexity \(x_{t+1}-2x_t+x_{t-1}>0\), and computes the exact order gap between increment-before-power and power-before-increment. These are proved for the stated integer domains; they do not claim a general classification of self-modifying operators.
