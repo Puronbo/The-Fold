@@ -538,8 +538,6 @@ class CompositionExcessSignCertificateTests(unittest.TestCase):
                         [2, 3], field_size
                     )
 
-if __name__ == "__main__":
-    unittest.main()
 
 
 
@@ -645,3 +643,7 @@ class LaurentSpectrumGlobalSignCertificateTests(unittest.TestCase):
                     laurent_spectrum_global_sign_certificate(
                         list(spectrum)
                     )
+
+
+if __name__ == "__main__":
+    unittest.main()
