@@ -202,3 +202,43 @@ This operation is a spectral transformation, not yet a recurrence theorem.
 Its output can be passed to polynomial sign analysis after the generic
 Laurent-polynomial certificate interface is separated from the current
 degree-tuple API.
+
+
+---
+
+## G-EP203 — Generic exact sign certification for Laurent spectra
+
+The G-EP201 Sturm certificate was initially exposed through the degree-tuple
+composition-excess API. G-EP203 extracts the mathematical operation into the
+generic API
+`laurent_spectrum_global_sign_certificate(spectrum)`, so it can certify
+composition spectra, temporal folds, and other finite integer Laurent
+spectra without requiring their origin to be a degree tuple.
+
+Input terms are integer pairs \\( (e,c) \\), represented as dictionaries
+with `exponent` and `coefficient`. Exponents may be negative, zero, or
+positive. Duplicate exponents are combined; zero coefficients are removed.
+If all terms cancel, the API reports the identically zero Laurent polynomial
+rather than assigning it a sign.
+
+For a nonzero spectrum, let \\(e_0\\) be its smallest exponent and put
+\\[
+H(Q)=\\sum_e c_eQ^{-e}
+=x^{e_0}P(x),\\qquad x=1/Q.
+\\]
+The factor \\(x^{e_0}\\) is positive for \\(x>0\\), even when
+\\(e_0\\) is negative. The exact rational Sturm sequence for \\(P\\)
+counts distinct roots on \\(0<x<1/2\\), while an exact endpoint evaluation
+checks \\(x=1/2\\). No roots in \\(0<x\\le1/2\\) certify the sign
+for every real \\(Q\\ge2\\).
+
+The new tests cover:
+- Direct global-sign certification of the G-EP202 temporal fold.
+- A polynomial with a root inside the interval.
+- A root exactly at the endpoint corresponding to Q=2.
+- Duplicate-exponent combination and complete cancellation.
+- Negative Laurent exponents and malformed input.
+
+The certificate is exact and tuple-independent, but it remains a
+per-polynomial result. A failed certificate does not prove sign change; it
+means this root-free criterion did not establish a global sign.
