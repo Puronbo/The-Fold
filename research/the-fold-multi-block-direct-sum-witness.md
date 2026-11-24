@@ -627,3 +627,20 @@ basis vector. Invertibility is not imposed on the linear kernel.
 
 These are deterministic finite test-side regressions, not a production
 arbitrary-subspace certificate API or a general decomposition theorem.
+
+
+## G-EP127: Composed basis transport, order, and inverse recovery
+
+Apply two invertible row and column shears successively to a rectangular 4×3
+coefficient pair over F₂, F₃, and F₅. Check the composed transforms
+U = U₂U₁ and V = V₁V₂ against sequential application to both coefficients.
+Construct the transported simultaneous constraint map using U⁻¹ and V⁻¹,
+map every computed source-kernel basis vector by X′ = V⁻¹XV, substitute
+into the transported equations, and reverse the map to recover each source
+basis vector exactly. Also recover both original coefficient matrices using
+the composed inverse maps.
+
+Adversarial controls omit the second stage or reverse the order of the
+noncommuting column factors. These alternatives retain valid matrix shapes
+but fail the expected composed coefficient identity. This is finite
+test-side evidence, not a general production transport-certificate API.
