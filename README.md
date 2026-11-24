@@ -124,3 +124,14 @@ changes scramble both coefficients over F₂, F₃, F₅, and F₇; the exact in
 witness must recover and verify the original block-diagonal pair. This is
 finite test coverage, not decomposition discovery, uniqueness, or a universal
 recovery theorem.
+
+
+**G-EP91 — adversarial rectangular basis-invariance witnesses:** extends the
+G-EP90 generated rectangular fixture over F₂, F₃, F₅, and F₇. Tests inject
+coupling into each representable directed off-diagonal block independently in
+both Q and K, mutate both coefficients together, and alter left/right
+transforms while keeping them invertible. These well-formed but false
+witnesses must return failed audits. Singular square transforms also return
+failed audits; malformed dimensions or non-integral entries instead raise
+ValueError. This distinction is tested explicitly and does not imply that a
+failed witness rules out another valid decomposition.
