@@ -88,3 +88,8 @@ G-EP166 exhaustively compares the irreducibility predicate with the factorizer's
 ## Degree-seven irreducibility cross-check (G-EP167)
 
 G-EP167 compares the irreducibility predicate with factorizer output for every monic degree-seven polynomial over F₂ (128 inputs) and F₃ (2,187 inputs). This extends the finite comparison through degree seven over these two fields. It is regression evidence over the stated finite domain, not a universal proof.
+
+
+## Degree-eight irreducibility cross-check (G-EP168)
+
+G-EP168 compares the irreducibility predicate with factorizer output for every monic degree-eight polynomial over F₂ (256 inputs) and F₃ (6,561 inputs). This extends the finite-domain comparison through degree eight over these fields; it is regression evidence, not a universal proof.
