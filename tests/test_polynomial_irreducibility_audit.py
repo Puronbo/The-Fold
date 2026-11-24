@@ -361,9 +361,6 @@ class PrimePowerFieldTests(unittest.TestCase):
                     count_monic_irreducibles_over_field(value, 2)
 
 
-if __name__ == "__main__":
-    unittest.main()
-
 
 
 class CoprimeCompositionExcessTests(unittest.TestCase):
@@ -403,3 +400,7 @@ class CoprimeCompositionExcessTests(unittest.TestCase):
             with self.subTest(degrees=degrees):
                 with self.assertRaises(ValueError):
                     coprime_composition_excess_spectrum(degrees)
+
+
+if __name__ == "__main__":
+    unittest.main()
