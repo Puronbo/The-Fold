@@ -348,3 +348,16 @@ The identity Delta_p(a,b)=E_p(a)+E_p(b)-E_p(a)E_p(b)-E_p(ab), where E_p(n)=1-R_p
 G-EP177 adds audit_coprime_density_defect_sign(primes, max_degree), which checks every unordered coprime pair in the requested range using exact fractions. It reports positive, negative, and zero counts, the first nonpositive witness if one exists, and the minimum exact defect. Its interpretation explicitly labels the result as finite-grid evidence and makes no universal theorem claim. Regression coverage includes prime fields 2, 3, and 5 through degree 12 and input validation.
 
 **Current status:** the sign conjecture remains open in this project. A finite sweep cannot establish positivity for all primes and all coprime degrees.
+
+
+## G-EP178 — Reduce defect positivity to bad-proportion ordering
+
+Set E_p(n)=1-R_p(n), the proportion of elements of F_(p^n) whose degree over F_p is smaller than n. Then
+
+Delta_p(a,b)=E_p(a)+E_p(b)-E_p(a)E_p(b)-E_p(ab).
+
+For x,y in [0,1], x+y-xy >= max(x,y). Consequently the strict ordering E_p(ab)<min(E_p(a),E_p(b)) is sufficient for Delta_p(a,b)>0. This is a stronger and more focused target than the original defect inequality, not an equivalent reformulation.
+
+An exact-rational sweep over p in {2,3,5,7,11} and all unordered coprime pairs 2 <= a < b <= 100 found E_p(ab)<min(E_p(a),E_p(b)) in every checked case. G-EP178 adds audit_coprime_bad_proportion_order(primes, max_degree), which reports exact strict-order counts, the first failure witness, and the largest ratio E_p(ab)/min(E_p(a),E_p(b)). Regression tests cover the smaller grid and validation.
+
+**Proof status:** the ordering is a finite-grid observation and remains unproved in general. The field interpretation identifies E_p(n) as the relative size of the union of proper subfields of F_(p^n). A union bound over maximal proper subfields gives E_p(n) <= sum over prime q dividing n of p^(-n(1-1/q)); a lower bound is supplied by any one maximal proper subfield. Comparing these bounds sharply enough for all coprime a,b is the next proof task.
