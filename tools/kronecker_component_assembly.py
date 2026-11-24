@@ -623,6 +623,18 @@ def verify_kronecker_component_assembly_algebraically(
     components: Sequence[dict], p: int, assembly_result: dict
 ) -> dict:
     """Fail closed on malformed certificate structures and replay exceptions."""
+    if not isinstance(components, (list, tuple)) or not components:
+        raise ValueError("components must be a nonempty sequence")
+    if not isinstance(p, int) or isinstance(p, bool) or p < 2:
+        raise ValueError("p must be a prime integer")
+    if not isinstance(assembly_result, dict):
+        raise ValueError("assembly_result must be a dictionary")
+    for component in components:
+        if not isinstance(component, dict):
+            raise ValueError("each component must be a dictionary")
+        if component.get("kind") not in ("right", "left", "regular"):
+            raise ValueError("component kind must be 'right', 'left', or 'regular'")
+        _validate_component_pair(component.get("q"), component.get("k"), p)
     try:
         return _verify_kronecker_component_assembly_algebraically(components, p, assembly_result)
     except (AttributeError, IndexError, KeyError, OverflowError, TypeError, ValueError):
