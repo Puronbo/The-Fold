@@ -377,3 +377,23 @@ the common constraint intersection is the relevant object.
 The experiment is exhaustive for this fixed-left, 2×2 fixture. It is not
 a general transformation-discovery algorithm: the left transform and
 partition are supplied, and larger-field/dimension search is not addressed.
+
+
+## G-EP115: Linear constraint solving with a separate invertibility filter
+
+The simultaneous off-diagonal-zero conditions are assembled as a homogeneous
+linear system in the row-major entries of the unknown right transform T.
+A finite-field RREF solver enumerates the complete nullspace by assigning
+free variables. The test compares that solution set with independent brute
+force over every 2×2 T for F₂, F₃, F₅, and F₇.
+
+For this fixture the linear solution space has dimension two and contains
+p² matrices. Invertibility is a separate determinant filter; exactly
+(p−1)² candidates survive. Every survivor is then passed through the
+production multi-block witness verifier. This separates three distinct
+stages: linear feasibility, nonlinear invertibility, and exact witness
+verification.
+
+This is a test-local bounded solver for a fixed-left, 2×2 fixture. It is not
+a production discovery API, does not search over left transforms or
+partitions, and does not establish completeness for general dimensions.
