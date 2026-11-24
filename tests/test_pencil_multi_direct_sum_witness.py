@@ -603,3 +603,72 @@ class MultiDirectSumTests(unittest.TestCase):
                         bad_q, k, 5, identity, identity, [(1, 1), (1, 1)]
                     )
 
+
+
+    def test_deterministic_mutation_sweep_covers_every_snapshot_field(self):
+        import copy
+        import json
+
+        def exact_tree_equal(a, b):
+            if type(a) is not type(b):
+                return False
+            if isinstance(a, dict):
+                return (a.keys() == b.keys()
+                        and all(exact_tree_equal(a[k], b[k]) for k in a))
+            if isinstance(a, list):
+                return (len(a) == len(b)
+                        and all(exact_tree_equal(x, y) for x, y in zip(a, b)))
+            return a == b
+
+        q = [[1, 0], [0, 2]]
+        k = [[2, 0], [0, 1]]
+        identity = ident(2)
+        baseline = verify_pencil_multi_direct_sum_witness(
+            q, k, 5, identity, identity, [(1, 1), (1, 1)]
+        )
+        snapshot = json.loads(json.dumps(baseline, sort_keys=True))
+
+        # Enumerate every dict field and every list slot recursively. Replace
+        # exactly one location at a time, then require exact replay mismatch.
+        paths = []
+
+        def collect(value, path=()):
+            if isinstance(value, dict):
+                for key, child in value.items():
+                    paths.append(path + (("key", key),))
+                    collect(child, path + (("key", key),))
+            elif isinstance(value, list):
+                for index, child in enumerate(value):
+                    paths.append(path + (("index", index),))
+                    collect(child, path + (("index", index),))
+
+        collect(snapshot)
+        self.assertGreater(len(paths), 20)
+
+        def replace_at(root, path):
+            changed = copy.deepcopy(root)
+            parent = changed
+            for kind, part in path[:-1]:
+                parent = parent[part]
+            kind, part = path[-1]
+            parent[part] = "__G_EP97_MUTATION__"
+            return changed
+
+        for path in paths:
+            with self.subTest(path=path):
+                mutated = replace_at(snapshot, path)
+                encoded = json.dumps(mutated, sort_keys=True)
+                decoded = json.loads(encoded)
+                self.assertFalse(exact_tree_equal(decoded, baseline))
+
+        # The sweep itself must be deterministic and include both the outer
+        # record and nested verification/block-grid structures.
+        self.assertIn((("key", "verification"),), paths)
+        self.assertIn((("key", "Q_blocks"),), paths)
+        self.assertIn((("key", "K_blocks"),), paths)
+        self.assertTrue(any(path[:2] == (("key", "verification"),
+                                         ("key", "direct_sum_verified"))
+                            for path in paths))
+        self.assertTrue(any(path[:2] == (("key", "Q_blocks"),
+                                         ("index", 0)) for path in paths))
+
