@@ -230,3 +230,6 @@ of its witness.
 
 
 - **G-EP122:** extends transported-basis covariance to rectangular m×n coefficient matrices and n×n right-transform unknowns. Full row/column basis changes mix blocks, while the decomposition is transported through the inverse basis maps. Matrix-unit equation construction checks rank invariance over F₂/F₃/F₅, including a 3×4 partition with simultaneous zero-row and zero-column blocks; sampled candidates verify the pullback identity. A fixed-coordinate control confirms rank can change when the partition is not transported. Finite test-side evidence only; no generic mixed-basis production verifier is added.
+
+
+**G-EP123 — transported kernel bijection and singular candidates:** exhaustively enumerates the full 2×2 right-transform matrix space for a rectangular 3×2 pencil over F₂ and F₃. The conjugation map induced by a full mixed column-basis change is checked to be a bijection on all matrices and to preserve the simultaneous off-diagonal constraint predicate after transporting the decomposition. Kernel cardinalities agree, including singular solutions; determinant filtering is kept separate, with the zero matrix explicitly retained in the linear kernel but excluded from invertible witnesses. This is finite test-side evidence, not a production mixed-basis verifier or general discovery algorithm.
