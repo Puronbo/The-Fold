@@ -382,16 +382,17 @@ class RationalCanonicalTests(unittest.TestCase):
                     msg=f"F_{p}: degree-{degree} irreducible inventory",
                 )
 
-        # Degree/multiplicity shapes agree; actual irreducible polynomials
-        # are field-specific and are not compared as cross-field identities.
-        self.assertEqual(patterns[2], patterns[3])
-        self.assertEqual(patterns[2], {
-            ((1, 1), (1, 1), (1, 1)),
+        # F_3, unlike F_2, has enough distinct linear factors for a
+        # cubic to split into three distinct linear factors.
+        common_patterns = {
             ((1, 1), (2, 1)),
             ((1, 3),),
             ((1, 1), (1, 2)),
             ((3, 1),),
-        })
+        }
+        three_distinct_linears = ((1, 1), (1, 1), (1, 1))
+        self.assertEqual(patterns[2], common_patterns)
+        self.assertEqual(patterns[3], common_patterns | {three_distinct_linears})
         self.assertNotEqual(inventories[2], inventories[3])
 
 
