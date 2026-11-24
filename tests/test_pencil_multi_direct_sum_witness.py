@@ -5093,10 +5093,10 @@ class MultiDirectSumTests(unittest.TestCase):
             # the intended ordered rectangular decomposition.
             A=[[0]*n for _ in range(m)]
             K=[[0]*n for _ in range(m)]
-            for i,value in enumerate((1,2,3,4)):
-                A[i][i%3]=value%p
-            for i,value in enumerate((2,3,1,4)):
-                K[i][i%3]=value%p
+            for (r,c),value in zip(((0,0),(1,1),(2,2),(3,2)),(1,2,3,4)):
+                A[r][c]=value%p
+            for (r,c),value in zip(((0,0),(1,1),(2,2),(3,2)),(2,3,1,4)):
+                K[r][c]=value%p
             A2=mm(mm(U,A,p),V,p)
             K2=mm(mm(U,K,p),V,p)
             rows=[mm(mm(U,z,p),Ui,p) for z in projectors(row_sizes,m)]
