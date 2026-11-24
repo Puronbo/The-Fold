@@ -297,3 +297,6 @@ G-EP140: distinguishes valid invertible coefficient-space shears that change onl
 
 
 **G-EP148 — 2×2 internal pencil equivalence and joint-rank obstructions:** extends internal-block testing beyond 1×1 pencils. Over F₂/F₃/F₅, a nontrivial invertible left/right transformation produces a positive 2×2 strict-equivalence witness, checked by the production auditor against both exact coefficient identities. A negative control has matching individual Q- and K-ranks but different rank profiles for Q+λK; at λ=−1 this proves that no common strict-equivalence transforms can relate the two pairs. Finite fixture-specific evidence only; it is not a complete 2×2 classification or a general witness-discovery algorithm. See `research/the-fold-internal-pencil-equivalence-2x2.md`.
+
+
+- **G-EP149:** adds a test-local homogeneous determinant-polynomial audit for 2×2 pencils. A positive nontrivial strict-equivalence witness confirms the expected scalar covariance of \(\det(xQ+yK)\). A negative control compares pairs with matching individual coefficient ranks but nonproportional determinant polynomials, ruling out every common constant strict-equivalence witness. Finite fixture-specific evidence; the determinant polynomial is not claimed to be a complete invariant. See `research/the-fold-determinant-polynomial-invariant.md`.
