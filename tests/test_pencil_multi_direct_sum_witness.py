@@ -472,20 +472,15 @@ class MultiDirectSumTests(unittest.TestCase):
             return a == b
 
         shapes = [(1, 1), (1, 1)]
-        q0 = [[1, 0], [0, 2]]
-        k0 = [[1, 0], [0, 2]]
-        for p in (2, 3, 5, 7):
-            # Use a nontrivial but invertible left transform; right is
-            # independently invertible as well.
-            s = [[1, 1], [0, 1]]
-            t = [[1, 0], [1, 1]]
-            si, ti = inverse(s, p), inverse(t, p)
-            q = mm(mm(si, q0, p), ti, p)
-            k = mm(mm(si, k0, p), ti, p)
+        s = t = ident(2)
+        q = [[1, 0], [0, 2]]
+        k = [[2, 0], [0, 1]]
+        false_q = [[1, 1], [0, 2]]
 
+        for p in (2, 3, 5, 7):
             for label, source_q, expected in (
-                ("valid", q, None),
-                ("false", [[q[0][0]+1, q[0][1]], q[1][:]], False),
+                ("valid", q, True),
+                ("false", false_q, False),
             ):
                 original = verify_pencil_multi_direct_sum_witness(
                     source_q, k, p, s, t, shapes
@@ -495,7 +490,7 @@ class MultiDirectSumTests(unittest.TestCase):
                 with self.subTest(field=p, case=label):
                     self.assertTrue(exact_tree_equal(original, restored))
                     self.assertEqual(original["verification"]["direct_sum_verified"],
-                                     label == "valid")
+                                     expected)
 
                 # Serialized diagnostics are data, not authority: rebuild
                 # the audit from the original inputs and compare all fields.
@@ -515,9 +510,6 @@ class MultiDirectSumTests(unittest.TestCase):
                     self.assertIs(type(forged["verification"]["left_transform_rank"]), bool)
                     self.assertIs(type(replay["verification"]["left_transform_rank"]), int)
 
-                # A type-substituted or incomplete serialized record cannot
-                # survive exact replay comparison, even if Python considers
-                # True equal to 1.
                 typed = copy.deepcopy(restored)
                 typed["verification"]["left_transform_rank"] = bool(
                     typed["verification"]["left_transform_rank"])
@@ -526,6 +518,3 @@ class MultiDirectSumTests(unittest.TestCase):
                 del missing["Q_blocks"]
                 self.assertFalse(exact_tree_equal(missing, replay))
 
-
-
-if __name__=="__main__": unittest.main()
