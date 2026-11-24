@@ -518,3 +518,88 @@ class MultiDirectSumTests(unittest.TestCase):
                 del missing["Q_blocks"]
                 self.assertFalse(exact_tree_equal(missing, replay))
 
+
+
+    def test_json_boundary_rejects_ambiguous_and_malformed_audit_snapshots(self):
+        import copy
+        import json
+
+        def reject_duplicate_keys(pairs):
+            result = {}
+            for key, value in pairs:
+                if key in result:
+                    raise ValueError("duplicate JSON object key")
+                result[key] = value
+            return result
+
+        def reject_nonfinite(token):
+            raise ValueError("non-finite JSON number: " + token)
+
+        def strict_loads(payload):
+            return json.loads(payload, object_pairs_hook=reject_duplicate_keys,
+                              parse_constant=reject_nonfinite)
+
+        def exact_tree_equal(a, b):
+            if type(a) is not type(b):
+                return False
+            if isinstance(a, dict):
+                return (a.keys() == b.keys()
+                        and all(exact_tree_equal(a[k], b[k]) for k in a))
+            if isinstance(a, list):
+                return (len(a) == len(b)
+                        and all(exact_tree_equal(x, y) for x, y in zip(a, b)))
+            return a == b
+
+        q, k = [[1, 0], [0, 2]], [[2, 0], [0, 1]]
+        identity = ident(2)
+        expected = verify_pencil_multi_direct_sum_witness(
+            q, k, 5, identity, identity, [(1, 1), (1, 1)]
+        )
+        payload = json.dumps(expected, sort_keys=True)
+        restored = strict_loads(payload)
+        self.assertTrue(exact_tree_equal(restored, expected))
+
+        # Duplicate keys are ambiguous under ordinary JSON decoding, which
+        # silently keeps one value; the strict boundary must reject them.
+        duplicate = payload[:-1] + ', "schema": "forged-version"}'
+        with self.assertRaisesRegex(ValueError, "duplicate"):
+            strict_loads(duplicate)
+
+        for malformed in ("NaN", "Infinity", "-Infinity"):
+            with self.subTest(nonfinite=malformed):
+                with self.assertRaisesRegex(ValueError, "non-finite"):
+                    strict_loads('{"rank": ' + malformed + '}')
+
+        mutations = []
+        wrong_version = copy.deepcopy(restored)
+        wrong_version["schema"] = "the-fold-pencil-multi-direct-sum-witness-v2"
+        mutations.append(("schema version", wrong_version))
+        malformed_grid = copy.deepcopy(restored)
+        malformed_grid["Q_blocks"] = [[["not-a-row"]]]
+        mutations.append(("nested array", malformed_grid))
+        floating_rank = copy.deepcopy(restored)
+        floating_rank["verification"]["left_transform_rank"] = 2.0
+        mutations.append(("floating numeric", floating_rank))
+        boolean_rank = copy.deepcopy(restored)
+        boolean_rank["verification"]["left_transform_rank"] = True
+        mutations.append(("boolean numeric", boolean_rank))
+        missing_field = copy.deepcopy(restored)
+        del missing_field["right_transform"]
+        mutations.append(("missing required field", missing_field))
+
+        for label, record in mutations:
+            with self.subTest(malformed=label):
+                encoded = json.dumps(record)
+                decoded = strict_loads(encoded)
+                self.assertFalse(exact_tree_equal(decoded, expected))
+
+        # Malformed snapshots are certificate-data failures in this
+        # test-side boundary; malformed original caller inputs remain the
+        # verifier's separate ValueError boundary.
+        for bad_q in (None, [], [[1, 2], [3]]):
+            with self.subTest(caller_input=bad_q):
+                with self.assertRaises(ValueError):
+                    verify_pencil_multi_direct_sum_witness(
+                        bad_q, k, 5, identity, identity, [(1, 1), (1, 1)]
+                    )
+
