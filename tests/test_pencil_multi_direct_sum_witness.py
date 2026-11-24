@@ -1485,22 +1485,20 @@ class MultiDirectSumTests(unittest.TestCase):
         dimensions = copy.deepcopy(baseline)
         dimensions["source_shape"] = [3, 2]
         partition = copy.deepcopy(baseline)
-        partition["block_shapes"] = [[1, 1], [1, 1]]  # reordered labels are observationally symmetric
-        partition["block_shapes"].reverse()
+        partition["block_shapes"] = [[2, 0], [0, 2]]  # reordered row/column partition
         scope = copy.deepcopy(baseline)
         scope["scope"] = "Cryptographically authenticated and unique."
 
         self.assertFalse(schema_ok(schema_version))
         self.assertTrue(schema_ok(field_label))
         self.assertTrue(schema_ok(dimensions) is False)
-        self.assertTrue(schema_ok(partition))
+        self.assertFalse(schema_ok(partition))
         self.assertTrue(schema_ok(scope))
 
         # Schema-valid metadata forgeries are not the same record as a
         # source-bound reconstruction. Scope is descriptive, not algebraic.
         for label, record, changed_keys in (
             ("field label", field_label, ("field",)),
-            ("partition order", partition, ("block_shapes",)),
             ("scope claim", scope, ("scope",)),
         ):
             with self.subTest(metadata=label):
