@@ -165,3 +165,6 @@ of its witness.
 
 
 **G-EP99 — Rectangular schema edge-case grid:** exercises the v1 structural contract across two-, three-, and four-block partitions, including legal zero-row and zero-column rectangular blocks. It verifies exact nested grid dimensions, accepts well-formed false witnesses as structurally valid without treating them as successful algebraic certificates, and rejects malformed nested grid dimensions. Finite deterministic regression coverage only.
+
+
+**G-EP100 — Schema/algebra outcome cross-check:** pairs structural validation with four verifier outcomes: valid structure and valid witness; valid structure and false witness; malformed snapshots rejected independently of witness intent; and well-formed singular-transform records with a negative audit. This explicitly tests that schema validity is not conflated with invertibility or block-diagonal truth.
