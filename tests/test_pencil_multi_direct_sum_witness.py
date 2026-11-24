@@ -3579,6 +3579,8 @@ class MultiDirectSumTests(unittest.TestCase):
         import itertools
 
         def mm(a,b,p):
+            if not a or not b or any(len(row)!=len(a[0]) for row in a) or any(len(row)!=len(b[0]) for row in b) or len(a[0])!=len(b):
+                raise ValueError("incompatible matrix dimensions")
             return [[sum(a[i][k]*b[k][j] for k in range(len(b)))%p
                      for j in range(len(b[0]))] for i in range(len(a))]
 
