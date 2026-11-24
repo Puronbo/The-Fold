@@ -188,3 +188,6 @@ of its witness.
 
 
 **G-EP108 — seeded metamorphic rectangular witness families:** generates deterministic products of elementary invertible matrices for independent left/right basis scramblings, then checks exact recovery of randomly populated rectangular block-diagonal Q/K pairs over F₂/F₃/F₅/F₇. Three partition families include zero-row and zero-column blocks. A transported single-entry cross-block mutation must be rejected in every case. This is reproducible finite regression coverage, not a universal theorem or decomposition-discovery algorithm.
+
+
+**G-EP109 — long composition and partition adversaries:** checks 17-step and 19-step deterministic products of elementary invertible transformations on the left and right over F₂/F₃/F₅/F₇, with reciprocal scalar witness rescaling and exact recovery of both coefficients. A second control changes the rectangular block partition while preserving total dimensions; the supplied transforms must reject that incorrect partition. Finite deterministic regression coverage only.
