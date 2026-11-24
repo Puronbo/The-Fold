@@ -363,3 +363,6 @@ G-EP140: distinguishes valid invertible coefficient-space shears that change onl
 
 
 - **G-EP173:** upgrades the parameterized irreducibility audit with an independent exact Möbius-formula count of monic irreducibles. It reports observed/theoretical densities, degree-normalized densities, the expected irreducible count in the checked subset, and an exact count-match flag only when the full domain has been covered. The audit schema advances to v2; tests cover exact count fixtures, a prime/degree grid, exhaustive comparison, and sampled-mode semantics. See research/the-fold-outward-inward-scaling.md.
+
+
+**Uniform irreducible-density convergence and factorization corrections (G-EP174–G-EP175):** `tools/polynomial_irreducibility_audit.py` now reports exact normalized-density errors, proves a uniform-in-prime-field convergence bound, and resolves the leading correction from the prime factorization of the degree. Prime-power degrees have exactly one nonzero Möbius correction; for degrees with at least two distinct prime factors, the second-smallest prime factor bounds the remainder after the leading term. See `research/the-fold-outward-inward-scaling.md` and `tests/test_polynomial_irreducibility_audit.py`.
