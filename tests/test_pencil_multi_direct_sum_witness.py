@@ -1846,3 +1846,88 @@ class MultiDirectSumTests(unittest.TestCase):
             )
             with self.subTest(field=p, case="omitted inverse"):
                 self.assertFalse(bad["verification"]["direct_sum_verified"], bad)
+
+
+    def test_g_ep108_seeded_metamorphic_rectangular_witness_families(self):
+        # Deterministic pseudo-random products of elementary invertible
+        # matrices generate independent left/right basis scramblings.
+        import random
+
+        rng = random.Random(108_2026)
+
+        def random_invertible(size, p):
+            out = ident(size)
+            for _ in range(5 * max(1, size)):
+                if size < 2:
+                    break
+                i, j = rng.sample(range(size), 2)
+                if rng.randrange(3) == 0:
+                    out[i], out[j] = out[j], out[i]
+                else:
+                    factor = rng.randrange(1, p)
+                    out[i] = [(out[i][k] + factor * out[j][k]) % p
+                              for k in range(size)]
+            return out
+
+        cases = [
+            [(1, 1), (0, 2), (2, 0), (1, 1)],
+            [(2, 1), (1, 0), (0, 2), (1, 2)],
+            [(1, 2), (2, 1), (0, 1), (1, 0)],
+        ]
+        for p in (2, 3, 5, 7):
+            for case_index, shapes in enumerate(cases):
+                m = sum(r for r, _ in shapes)
+                n = sum(c for _, c in shapes)
+                row_offsets, col_offsets = [0], [0]
+                for r, c in shapes:
+                    row_offsets.append(row_offsets[-1] + r)
+                    col_offsets.append(col_offsets[-1] + c)
+
+                q0, k0 = [[0] * n for _ in range(m)], [[0] * n for _ in range(m)]
+                for block, (r, c) in enumerate(shapes):
+                    for i in range(r):
+                        for j in range(c):
+                            q0[row_offsets[block] + i][col_offsets[block] + j] = (
+                                rng.randrange(p)
+                            )
+                            k0[row_offsets[block] + i][col_offsets[block] + j] = (
+                                rng.randrange(p)
+                            )
+
+                left = random_invertible(m, p)
+                right = random_invertible(n, p)
+                left_inv, right_inv = inverse(left, p), inverse(right, p)
+                q = mm(mm(left_inv, q0, p), right_inv, p)
+                k = mm(mm(left_inv, k0, p), right_inv, p)
+
+                out = verify_pencil_multi_direct_sum_witness(
+                    q, k, p, left, right, shapes
+                )
+                with self.subTest(field=p, case=case_index, check="valid scramble"):
+                    self.assertTrue(out["verification"]["direct_sum_verified"], out)
+                    self.assertEqual(out["transformed_Q"], q0)
+                    self.assertEqual(out["transformed_K"], k0)
+
+                # Inject a single coefficient in a known off-diagonal block
+                # after transporting it back to the source coordinates.
+                first_nonempty = next(
+                    i for i, (r, c) in enumerate(shapes) if r and c
+                )
+                second_nonempty = next(
+                    i for i, (r, c) in enumerate(shapes)
+                    if i != first_nonempty and r and c
+                )
+                row = row_offsets[first_nonempty]
+                col = col_offsets[second_nonempty]
+                target = [[0] * n for _ in range(m)]
+                target[row][col] = 1
+                source_delta = mm(mm(left_inv, target, p), right_inv, p)
+                q_bad = [[(q[i][j] + source_delta[i][j]) % p
+                          for j in range(n)] for i in range(m)]
+                bad = verify_pencil_multi_direct_sum_witness(
+                    q_bad, k, p, left, right, shapes
+                )
+                with self.subTest(field=p, case=case_index, check="cross-block mutation"):
+                    self.assertFalse(bad["verification"]["direct_sum_verified"], bad)
+                    self.assertEqual(bad["transformed_Q"][row][col], 1)
+
