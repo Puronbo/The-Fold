@@ -725,3 +725,140 @@ factorization bound for each individual \(E_p(n)\) is exact for every
 assert a fixed multiplicative leading constant; that finer constant
 depends on the remaining prime divisors and on the lower-order
 inclusion-exclusion terms.
+
+
+## G-EP184 — Exact divisor spectrum and the second-order hierarchy
+
+The error term has a finite, exact exponential spectrum. Let
+\[
+\mathcal S(n)=\{d:d\mid n,\ d>1,\ d\text{ squarefree}\},
+\qquad e_n(d)=n\left(1-\frac1d\right).
+\]
+Then
+\[
+\boxed{
+E_p(n)=-\sum_{d\in\mathcal S(n)}\mu(d)p^{-e_n(d)}.
+}
+\]
+This is not an asymptotic expansion: it is an identity for every prime
+\(p\). It exposes all subfield-intersection scales, not only the
+largest maximal proper subfield.
+
+Order the squarefree divisors as
+\(d_1<d_2<\cdots<d_{2^{\omega(n)}-1}\). The first is the smallest prime
+factor \(q_1\), and, when \(n\) has at least two distinct prime factors,
+the second is the next smallest prime factor \(q_2\). Therefore
+\[
+E_p(n)=p^{-e_n(d_1)}+p^{-e_n(d_2)}
+-\mu(d_3)p^{-e_n(d_3)}-\cdots.
+\]
+The displayed second term is absent when \(n\) is a prime power; in
+that case \(E_p(n)=p^{-e_n(q_1)}\) exactly. The third divisor is not
+always the third prime: it is the third-smallest squarefree divisor.
+For example, for prime factors \(2,3,7\), it is \(6\), not \(7\).
+This gives a full hierarchy of correction scales ordered by the
+integer squarefree divisors, with signs fixed by the Möbius function.
+
+### Exact spectrum of the coprime defect
+
+For coprime \(a,b>1\), write \(u_d=e_a(d)\) and \(v_f=e_b(f)\).
+Substitution into
+\(\Delta_p(a,b)=E_p(a)+E_p(b)-E_p(a)E_p(b)-E_p(ab)\) gives
+\[
+\begin{aligned}
+\Delta_p(a,b)={}&
+-\sum_{d\in\mathcal S(a)}\mu(d)p^{-u_d}
+-\sum_{f\in\mathcal S(b)}\mu(f)p^{-v_f}\\
+&-\sum_{\substack{d\in\mathcal S(a)\\f\in\mathcal S(b)}}
+\mu(d)\mu(f)p^{-(u_d+v_f)}
++\sum_{g\in\mathcal S(ab)}\mu(g)p^{-e_{ab}(g)}.
+\end{aligned}
+\]
+Collect terms with equal integer exponents. This produces a unique finite
+integer-coefficient polynomial in \(x=1/p\). It is an exact
+representation, and coefficient collisions must be combined before
+reading off a second-order term.
+
+### G-EP185 — Leading coefficient and resonance
+
+Let \(A_n=e_n(q(n))\), and put \(A=\min(A_a,A_b)\).
+Because \(a,b\) are coprime,
+\[
+A_{ab}> \max(A_a,A_b),\qquad A_a+A_b>\min(A_a,A_b).
+\]
+For the first inequality, suppose \(q(a)\le q(b)\). Then
+\(A_{ab}=bA_a\), while \(A_a=a(1-1/q(a))\ge1\), so
+\(A_{ab}\ge b>A_b\), and also \(A_{ab}>A_a\).
+The other ordering is symmetric.
+
+It follows that neither the product term nor \(E_p(ab)\) can cancel
+the leading input contribution. Thus, for fixed coprime \(a,b\) and
+\(p\to\infty\) through primes,
+\[
+\boxed{
+\Delta_p(a,b)\sim C(a,b)p^{-A},
+\quad
+C(a,b)=
+\begin{cases}
+1,&A_a\ne A_b,\\
+2,&A_a=A_b.
+\end{cases}
+}
+\]
+We call \(A_a=A_b\) a *leading-scale resonance*: both input degrees
+contribute at the same exponential order. This is an exact
+classification of the leading coefficient, not a numerical
+observation.
+
+Examples:
+- \((a,b)=(2,3)\): \(A_2=1,A_3=2\), so
+  \(\Delta_p(2,3)\sim p^{-1}\).
+- \((a,b)=(3,4)\): \(A_3=A_4=2\), so
+  \(\Delta_p(3,4)\sim2p^{-2}\). In fact,
+  \[
+  \Delta_p(3,4)=2p^{-2}-p^{-4}-p^{-6}-p^{-8}+p^{-10}.
+  \]
+
+### G-EP186 — The second nonzero scale is computable exactly
+
+Let \(c_k(a,b)\) be the coefficient of \(x^k\) after collecting the
+finite spectrum above. Then
+\[
+\Delta_p(a,b)=\sum_k c_k(a,b)p^{-k}.
+\]
+The first nonzero coefficient is \(c_A=C(a,b)\). Define
+\(K>A\) to be the smallest exponent with \(c_K\ne0\), if one exists.
+Then
+\[
+\Delta_p(a,b)=C(a,b)p^{-A}+c_Kp^{-K}
++O_{a,b}(p^{-K'}),
+\]
+where \(K'\) is the next exponent with nonzero coefficient, if present.
+If there is no such next exponent, the finite sum terminates. This
+coefficient-collection rule handles all resonances: an apparent
+candidate correction can disappear when contributions from the two
+inputs, their product, and the composite degree land at the same
+exponent. The next scale is therefore determined by the *combined*
+divisor spectra, not by independently taking the second prime factor
+of each input.
+
+### G-EP187 — Two different asymptotic directions
+
+There are now two complementary limits, and they answer different
+questions.
+
+1. **Field-size direction:** keep \(a,b\) fixed and let \(p\to\infty\).
+   G-EP185 gives the exact leading exponent and coefficient, while
+   G-EP184–186 give every subsequent scale.
+2. **Degree direction:** let \(B=\max(a,b)\to\infty\) through coprime
+   pairs, allowing the smaller degree to remain fixed and allowing
+   \(p\) to vary. G-EP182 gives
+   \(\Delta_p(a,b)/(E_p(a)+E_p(b))\to1\) uniformly in prime \(p\);
+   G-EP183 then identifies the leading exponent up to an
+   \(O(\log\log B)\) error.
+
+These are not interchangeable limits. G-EP185 is a fixed-degree
+large-field expansion; G-EP182–183 are uniform large-degree results.
+The exact finite spectrum is the bridge between them and supplies a
+direct route for symbolic or exact-arithmetic computation of
+higher-order terms.
