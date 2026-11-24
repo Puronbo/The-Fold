@@ -706,5 +706,96 @@ class MixedKroneckerRecoveryTests(unittest.TestCase):
                     alternative["left_transform_S"], result["left_transform_S"]
                 )
 
+
+    def test_positive_recovery_replay_rejects_missing_and_type_forged_metadata(self):
+        from copy import deepcopy
+
+        q, k = self.mixed_pair()
+        result = recover_mixed_kronecker_pencil(q, k, 5, max_degree=2)
+        self.assertTrue(verify_mixed_kronecker_recovery_certificate(q, k, 5, result)["verified"])
+        required = (
+            "schema", "field", "source_shape", "profile_max_degree",
+            "profile_max_minors", "max_candidates", "search_mode", "profile",
+            "recovered", "decision_complete", "canonical_Q", "canonical_K",
+            "right_minimal_indices", "left_minimal_indices", "regular_dimension",
+            "canonical_block_shapes", "left_transform_S", "right_transform_T",
+            "verification", "multi_block_direct_sum_audit", "candidates_examined",
+            "method", "scope",
+        )
+        for key in required:
+            with self.subTest(missing=key):
+                forged = deepcopy(result)
+                del forged[key]
+                self.assertFalse(
+                    verify_mixed_kronecker_recovery_certificate(q, k, 5, forged)["verified"]
+                )
+
+        for key, value in (
+            ("schema", True), ("field", 5), ("source_shape", (4, 4)),
+            ("profile_max_degree", True), ("profile_max_minors", False),
+            ("max_candidates", True), ("search_mode", []),
+            ("recovered", 1), ("decision_complete", 1),
+            ("candidates_examined", True), ("method", None), ("scope", {}),
+        ):
+            with self.subTest(key=key, value=value):
+                forged = deepcopy(result)
+                forged[key] = value
+                self.assertFalse(
+                    verify_mixed_kronecker_recovery_certificate(q, k, 5, forged)["verified"]
+                )
+
+    def test_positive_recovery_replay_rejects_nested_audit_type_aliases(self):
+        from copy import deepcopy
+
+        q, k = self.mixed_pair()
+        result = recover_mixed_kronecker_pencil(q, k, 5, max_degree=2)
+        self.assertTrue(verify_mixed_kronecker_recovery_certificate(q, k, 5, result)["verified"])
+        mutations = []
+        forged = deepcopy(result)
+        forged["verification"]["left_transform_rank"] = True
+        mutations.append(("strict rank boolean alias", forged))
+        forged = deepcopy(result)
+        forged["verification"]["constant_strict_equivalence_Q_verified"] = 1
+        mutations.append(("strict flag integer alias", forged))
+        forged = deepcopy(result)
+        forged["verification"]["left_transform_rank"] = (forged["verification"]["left_transform_rank"],)
+        mutations.append(("strict rank container substitution", forged))
+        forged = deepcopy(result)
+        forged["multi_block_direct_sum_audit"]["verification"]["left_transform_rank"] = True
+        mutations.append(("multi-block rank boolean alias", forged))
+        forged = deepcopy(result)
+        forged["multi_block_direct_sum_audit"]["verification"]["direct_sum_verified"] = 1
+        mutations.append(("multi-block flag integer alias", forged))
+        forged = deepcopy(result)
+        forged["multi_block_direct_sum_audit"]["block_shapes"] = tuple(
+            forged["multi_block_direct_sum_audit"]["block_shapes"]
+        )
+        mutations.append(("multi-block shape container substitution", forged))
+        for label, forged in mutations:
+            with self.subTest(label=label):
+                audit = verify_mixed_kronecker_recovery_certificate(q, k, 5, forged)
+                self.assertFalse(audit["verified"], audit)
+
+    def test_positive_recovery_replay_rejects_cross_field_transform_substitution(self):
+        from copy import deepcopy
+
+        q, k = self.mixed_pair()
+        results = {}
+        for p in (3, 5, 7):
+            result = recover_mixed_kronecker_pencil(q, k, p, max_degree=2)
+            self.assertTrue(result["recovered"], result.get("reason"))
+            self.assertTrue(verify_mixed_kronecker_recovery_certificate(q, k, p, result)["verified"])
+            results[p] = result
+
+        for target_p, source_p in ((3, 5), (5, 7), (7, 3)):
+            with self.subTest(target_field=target_p, source_field=source_p):
+                forged = deepcopy(results[target_p])
+                forged["left_transform_S"] = deepcopy(results[source_p]["left_transform_S"])
+                forged["right_transform_T"] = deepcopy(results[source_p]["right_transform_T"])
+                # Keep the original nested audits: the transforms now belong to
+                # a different source-field witness and cannot replay here.
+                audit = verify_mixed_kronecker_recovery_certificate(q, k, target_p, forged)
+                self.assertFalse(audit["verified"], audit)
+
 if __name__ == "__main__":
     unittest.main()
