@@ -6038,3 +6038,82 @@ class MultiDirectSumTests(unittest.TestCase):
             self.assertFalse(rejected["verification"]["Q_off_diagonal_blocks_zero"])
             self.assertFalse(rejected["verification"]["K_off_diagonal_blocks_zero"])
             self.assertFalse(rejected["verification"]["direct_sum_verified"])
+
+
+    def test_g_ep147_equal_shapes_do_not_imply_internal_pencil_equivalence(self):
+        # Four equal 1x1 blocks: two proportional pairs, one pair sharing
+        # only Q with the first, and one pair on a different projective line.
+        shapes = [(1, 1), (1, 1), (1, 1), (1, 1), (0, 1), (1, 0)]
+        m = sum(r for r, _ in shapes)
+        n = sum(c for _, c in shapes)
+        row_offsets, col_offsets = [0], [0]
+        for r, c in shapes:
+            row_offsets.append(row_offsets[-1] + r)
+            col_offsets.append(col_offsets[-1] + c)
+
+        def pair_proportional(left, right, p):
+            # For 1x1 pencils, constant strict equivalence is multiplication
+            # of both coefficients by the same nonzero scalar.
+            return (left[0] * right[1] - left[1] * right[0]) % p == 0
+
+        def permute_square(matrix, order):
+            return [[matrix[i][j] for j in order] for i in order]
+
+        for p in (2, 3, 5):
+            lam = p - 1
+            block_pairs = [(1, 1), (lam, lam), (1, 2 % p), (0, 1)]
+            q, k = [[0] * n for _ in range(m)], [[0] * n for _ in range(m)]
+            for i, (qv, kv) in enumerate(block_pairs):
+                q[row_offsets[i]][col_offsets[i]] = qv % p
+                k[row_offsets[i]][col_offsets[i]] = kv % p
+
+            baseline = verify_pencil_multi_direct_sum_witness(
+                q, k, p, ident(m), ident(n), shapes
+            )
+            self.assertTrue(baseline["verification"]["direct_sum_verified"], baseline)
+
+            # Exact 1x1 strict-equivalence classes are projective coefficient
+            # pairs: the first two agree, while the third shares Q but not K.
+            self.assertTrue(pair_proportional(block_pairs[0], block_pairs[1], p))
+            self.assertFalse(pair_proportional(block_pairs[0], block_pairs[2], p))
+            self.assertEqual(block_pairs[0][0] % p, block_pairs[2][0] % p)
+            self.assertNotEqual(block_pairs[0][1] % p, block_pairs[2][1] % p)
+            self.assertFalse(pair_proportional(block_pairs[0], block_pairs[3], p))
+            self.assertFalse(pair_proportional(block_pairs[2], block_pairs[3], p))
+
+            # Enumerate all 24 equal-shape block relabelings. The verifier's
+            # direct-sum verdict is invariant, while the indexed internal
+            # pencil signatures move with their blocks.
+            permutation_count = 0
+            for order in itertools.permutations(range(4)):
+                permutation_count += 1
+                coordinate_order = list(order) + [4, 5]
+                row_order = [i for block in coordinate_order
+                             for i in range(row_offsets[block], row_offsets[block+1])]
+                col_order = [j for block in coordinate_order
+                             for j in range(col_offsets[block], col_offsets[block+1])]
+                pair = [
+                    [[matrix[i][j] for j in col_order] for i in row_order]
+                    for matrix in (q, k)
+                ]
+                audit = verify_pencil_multi_direct_sum_witness(
+                    pair[0], pair[1], p, ident(m), ident(n), shapes
+                )
+                self.assertTrue(audit["verification"]["direct_sum_verified"], audit)
+                observed = [
+                    (pair[0][i][i], pair[1][i][i]) for i in range(4)
+                ]
+                self.assertEqual(observed, [block_pairs[i] for i in order])
+            self.assertEqual(permutation_count, 24)
+
+            # A Q-only match is not a strict-equivalence match: changing just
+            # the K entry of the third block keeps dimensions and direct-sum
+            # structure but changes its projective pencil signature.
+            changed_k = [row[:] for row in k]
+            changed_k[2][2] = (changed_k[2][2] + 1) % p
+            changed = verify_pencil_multi_direct_sum_witness(
+                q, changed_k, p, ident(m), ident(n), shapes
+            )
+            self.assertTrue(changed["verification"]["direct_sum_verified"], changed)
+            mutated_pair = (q[2][2], changed_k[2][2])
+            self.assertFalse(pair_proportional(block_pairs[0], mutated_pair, p))
