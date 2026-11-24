@@ -540,3 +540,26 @@ the constraint rank.
 This is finite test-side covariance evidence. It does not add arbitrary
 subspace-basis metadata to the production verifier, nor a general mixed-basis
 decomposition discovery routine.
+
+
+## G-EP123: Transported kernel bijection and singular candidates
+
+For a rectangular 3×2 coefficient pair with a two-block partition, the
+regression enumerates every 2×2 right-transform matrix over F₂ and F₃.
+Independent full invertible row and column basis changes mix the original
+coordinate blocks. The transformed candidate is related to the original by
+the induced conjugation map, and the coefficient/decomposition pair is
+pulled back before evaluating the off-diagonal constraints.
+
+The test checks predicate preservation for every matrix, not only invertible
+ones, and verifies that the conjugation map is injective on the complete
+p⁴-element matrix space. Consequently the original and transported linear
+kernels have equal cardinality. Singular candidates, including the zero
+matrix, remain in the linear kernel; determinant-nonzero filtering is a
+separate nonlinear step. The fixture has p² kernel elements, of which
+(p−1)² are invertible and the remainder are singular.
+
+This is exhaustive finite regression evidence for the stated 3×2 fixture
+over two small fields. It does not add arbitrary subspace-basis metadata to
+the production verifier, provide a general witness-discovery algorithm, or
+turn the invertible subset into a vector space.
