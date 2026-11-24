@@ -1,4 +1,5 @@
 import unittest
+import itertools
 from tools.pencil_multi_direct_sum_witness import verify_pencil_multi_direct_sum_witness
 
 def ident(n):
@@ -5815,3 +5816,122 @@ class MultiDirectSumTests(unittest.TestCase):
                             ]
                             self.assertEqual(recovered_grids, source_grids)
             self.assertEqual(gl_count, (p*p-1)*(p*p-p))
+
+
+    def test_g_ep145_partition_permutations_preserve_projected_blocks_and_inverse_order(self):
+        # Reorder all four rectangular summands, including the zero-column
+        # and zero-row blocks. The row and column coordinate permutations are
+        # induced independently by the same block-order permutation.
+        shapes = [(1, 1), (1, 0), (0, 1), (1, 2)]
+        m, n = sum(r for r, c in shapes), sum(c for r, c in shapes)
+
+        def reorder_indices(sizes, order):
+            offsets, cursor = [], 0
+            for size in sizes:
+                offsets.append(list(range(cursor, cursor+size)))
+                cursor += size
+            return [index for block in order for index in offsets[block]]
+
+        def reorder_matrix(matrix, row_order, col_order):
+            return [[matrix[i][j] for j in col_order] for i in row_order]
+
+        def projected(matrix, row_block, col_block, row_order, col_order):
+            out = [[0]*n for _ in range(m)]
+            for i in row_block:
+                for j in col_block:
+                    out[i][j] = matrix[i][j]
+            return out
+
+        for p in (2, 3, 5):
+            q, k = [[0]*n for _ in range(m)], [[0]*n for _ in range(m)]
+            row_blocks = reorder_indices([r for r, _ in shapes], range(4))
+            col_blocks = reorder_indices([c for _, c in shapes], range(4))
+            row_offsets, col_offsets = [0], [0]
+            for r, c in shapes:
+                row_offsets.append(row_offsets[-1]+r)
+                col_offsets.append(col_offsets[-1]+c)
+            for block, (r, c) in enumerate(shapes):
+                for i in range(r):
+                    for j in range(c):
+                        q[row_offsets[block]+i][col_offsets[block]+j] = (1+block+i+2*j) % p
+                        k[row_offsets[block]+i][col_offsets[block]+j] = (2+2*block+3*i+j) % p
+
+            original_grids = []
+            for matrix in (q, k):
+                original_grids.append([
+                    [projected(matrix,
+                               list(range(row_offsets[i], row_offsets[i+1])),
+                               list(range(col_offsets[j], col_offsets[j+1])),
+                               None, None)
+                     for j in range(4)] for i in range(4)
+                ])
+
+            permutation_count = 0
+            for order in __import__("itertools").permutations(range(4)):
+                permutation_count += 1
+                permuted_shapes = [shapes[i] for i in order]
+                row_order = reorder_indices([r for r, _ in shapes], order)
+                col_order = reorder_indices([c for _, c in shapes], order)
+                inverse_order = [order.index(i) for i in range(4)]
+                out_pair = [
+                    reorder_matrix(matrix, row_order, col_order)
+                    for matrix in (q, k)
+                ]
+                audit = verify_pencil_multi_direct_sum_witness(
+                    out_pair[0], out_pair[1], p, ident(m), ident(n), permuted_shapes
+                )
+                self.assertTrue(audit["verification"]["direct_sum_verified"], audit)
+
+                permuted_row_offsets, permuted_col_offsets = [0], [0]
+                for r, c in permuted_shapes:
+                    permuted_row_offsets.append(permuted_row_offsets[-1]+r)
+                    permuted_col_offsets.append(permuted_col_offsets[-1]+c)
+
+                for coefficient_index, matrix in enumerate(out_pair):
+                    grid = []
+                    for i in range(4):
+                        row_indices = list(range(permuted_row_offsets[i],
+                                                  permuted_row_offsets[i+1]))
+                        grid_row = []
+                        for j in range(4):
+                            col_indices = list(range(permuted_col_offsets[j],
+                                                      permuted_col_offsets[j+1]))
+                            block = projected(matrix, row_indices, col_indices, None, None)
+                            grid_row.append(block)
+                            if i != j:
+                                self.assertEqual(block, [[0]*n for _ in range(m)])
+                        grid.append(grid_row)
+
+                    diagonal_sum = [[0]*n for _ in range(m)]
+                    for i in range(4):
+                        for row in range(m):
+                            diagonal_sum[row] = [
+                                (diagonal_sum[row][col]+grid[i][i][row][col]) % p
+                                for col in range(n)
+                            ]
+                    self.assertEqual(diagonal_sum, matrix)
+
+                    # Undo the coordinate reorder on each indexed projected
+                    # block and compare with its original ordered counterpart.
+                    for new_i in range(4):
+                        for new_j in range(4):
+                            old_i, old_j = order[new_i], order[new_j]
+                            block_back = reorder_matrix(
+                                grid[new_i][new_j],
+                                [row_order.index(i) for i in range(m)],
+                                [col_order.index(j) for j in range(n)]
+                            )
+                            self.assertEqual(
+                                block_back, original_grids[coefficient_index][old_i][old_j]
+                            )
+                # Reordering and then applying the inverse block permutation
+                # recovers the complete coefficient pair exactly.
+                inverse_rows = [row_order.index(i) for i in range(m)]
+                inverse_cols = [col_order.index(j) for j in range(n)]
+                recovered = [
+                    reorder_matrix(matrix, inverse_rows, inverse_cols)
+                    for matrix in out_pair
+                ]
+                self.assertEqual(recovered, [q, k])
+                self.assertEqual([permuted_shapes[i] for i in inverse_order], shapes)
+            self.assertEqual(permutation_count, 24)
