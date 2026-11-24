@@ -330,3 +330,6 @@ G-EP140: distinguishes valid invertible coefficient-space shears that change onl
 
 
 - **G-EP159:** exhausts monic quartics over F₂, F₃, F₅, and F₇. It checks exact factor reconstruction and irreducible inventory counts through degree four. The degree/multiplicity pattern catalogue strictly grows from F₂ to F₃ and F₃ to F₅, then is identical over F₅ and F₇. The irreducible polynomial inventories still differ between F₅ and F₇, so stabilization applies to quartic factor shapes, not polynomial coefficients or factor identities.
+
+
+- **G-EP160:** exhausts monic quintics over F₂, F₃, F₅, and F₇. It verifies exact reconstruction and irreducible inventory counts through degree five. The degree/multiplicity pattern catalogue grows from F₂ to F₃ and F₃ to F₅, then agrees over F₅ and F₇ despite different irreducible polynomial inventories. This supports a degree-five threshold at field size five for these tested fields; it is not a theorem for arbitrary polynomial degrees.
