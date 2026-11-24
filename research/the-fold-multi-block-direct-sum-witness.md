@@ -397,3 +397,25 @@ verification.
 This is a test-local bounded solver for a fixed-left, 2×2 fixture. It is not
 a production discovery API, does not search over left transforms or
 partitions, and does not establish completeness for general dimensions.
+
+
+## G-EP116: Rectangular partitions and constraint-space dimension
+
+Generalize the simultaneous right-transform equations beyond square diagonal
+blocks. The regression uses a 3×3 pencil partitioned into rectangular blocks
+of shapes (1,2) and (2,1), with independent invertible left and right basis
+scramblings over F₂, F₃, and F₅. The test constructs all off-diagonal
+coordinate equations for the unknown 3×3 right transform and checks that the
+known witness belongs to the computed nullspace. This larger case is not
+brute-force exhaustive.
+
+For 2×2 controls over F₂ and F₃, the same test-local RREF/nullspace routine is
+compared with complete enumeration of every right transform. It also compares
+the one-coefficient constraint space with the simultaneous two-coefficient
+space: adding coefficient equations cannot increase the nullspace dimension.
+Every invertible candidate in the exhaustively checked common solution set is
+replayed through the production verifier.
+
+These are finite test-side controls for rectangular block partitions. They do
+not provide a production solver, search over left transforms or partitions,
+or establish general-dimensional completeness.
