@@ -156,3 +156,66 @@ and in particular the ratio tends to zero, uniformly for Q>=2.
 ### Interpretation
 
 The tail is not merely monotone and discretely concave (G-EP209–210): it decays toward zero at a scale whose successive leading terms are separated by an exponent growing like 3^k. The ratio theorem quantifies this super-geometric separation. Here “super-geometric” refers to the ratio tending to zero, not to a claim about a single fixed exponential rate.
+
+
+## G-EP212 — Eventual sign law for every fixed-order temporal difference
+
+Define the forward difference
+\[
+\Delta^r H_k(Q)=\sum_{j=0}^{r}(-1)^{r-j}\binom rj H_{k+j}(Q),
+\qquad r\ge1.
+\]
+For every fixed integer r>=1, there is an explicit threshold K_r such that
+\[
+\boxed{(-1)^{r+1}\Delta^r H_k(Q)>0
+\quad(k\ge K_r,\ Q\ge2).}
+\]
+Thus every fixed order has an eventual alternating sign, uniformly over all real Q>=2.
+
+### Proof and explicit threshold
+
+For k>=2, factor
+\[
+H_k(Q)=-Q^{-a_k}B_k(Q),\qquad
+a_k=1+2\cdot3^{k-1},
+\]
+where
+\[
+B_k(Q)=1-Q^{-(3^{k-1}-1)}
+-Q^{-(2\cdot3^{k-1}-1)}
++Q^{-(3^k-1)}.
+\]
+The G-EP208 bound gives
+\[
+23/32 < B_k(Q)<1
+\]
+for k>=2 and Q>=2. Also
+\[
+a_{k+j}-a_k=2\cdot3^{k-1}(3^j-1)
+\ge4\cdot3^{k-1}\quad(j>=1).
+\]
+It follows that
+\[
+0<\frac{|H_{k+j}(Q)|}{|H_k(Q)|}
+\le\frac{32}{23}2^{-4\cdot3^{k-1}}
+\quad(j>=1).
+\]
+
+The j=0 term in the difference is (-1)^r H_k, whose sign is (-1)^(r+1). The total absolute contribution of all j>=1 terms, divided by |H_k|, is at most
+\[
+\frac{32}{23}(2^r-1)2^{-4\cdot3^{k-1}}.
+\]
+Define K_r to be the least integer k>=2 satisfying
+\[
+4\cdot3^{k-1}>
+\log_2\!\left(\frac{32}{23}(2^r-1)\right).
+\]
+Then the displayed tail bound is strictly less than one for every k>=K_r. The leading j=0 term therefore controls the sign, proving the theorem. This threshold is explicit and depends only on r, not on Q.
+
+### Consequences and limits
+
+- r=1 recovers eventual strict increase; G-EP210 proves the stronger all-tail statement k>=2.
+- r=2 recovers eventual strict concavity; G-EP209 proves the stronger all-tail statement k>=3.
+- Every fixed higher order has a predictable eventual sign: odd r gives positive forward differences; even r gives negative forward differences.
+- The threshold is not asserted optimal.
+- The theorem concerns each fixed finite order r. It does not assert a single K that works simultaneously for all orders r, nor does it claim a sign for every k before K_r.
