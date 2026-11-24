@@ -833,11 +833,14 @@ class RationalCanonicalTests(unittest.TestCase):
         # Coefficients are reduced modulo p before factoring.
         self.assertEqual(
             factor_polynomial([7, 7], 5),
-            [{
-                "coefficients_descending": [1, 1],
-                "multiplicity": 1,
-                "degree": 1,
-            }],
+            [
+                {"constant_unit": 2},
+                {
+                    "coefficients_descending": [1, 1],
+                    "multiplicity": 1,
+                    "degree": 1,
+                },
+            ],
         )
         # A nonzero constant has no nonconstant irreducible factors.
         self.assertEqual(factor_polynomial([4], 5), [])
