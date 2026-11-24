@@ -309,3 +309,27 @@ This is deterministic finite regression coverage for invertible parameter
 changes only. It does not claim invariance under singular coefficient
 mixing, discover a decomposition, establish uniqueness, or prove a universal
 classification theorem.
+
+
+## G-EP112: Singular coefficient-space maps and information loss
+
+The regression contrasts invertible coefficient-basis changes with singular
+linear maps on the ordered coefficient pair. For each field F₂, F₃, F₅,
+and F₇, the original pair has block-diagonal Q but a cross-block entry in K,
+so the supplied three-block coordinate witness is rejected.
+
+A rank-one map that sends (Q,K) to (Q,0) erases the offending coefficient;
+the verifier correctly accepts the transformed pair (Q,0), but that result
+does not certify a direct sum for the original pair. A second rank-one map
+collapses the pair to (Q,Q), again reducing the coefficient span to one
+dimension. As a contrast, retaining the coupled combination Q+K in both
+outputs remains rejected because the coupling is still present.
+
+The key scope boundary is semantic: the witness verifier answers whether
+the particular pair it receives is block diagonal under the supplied
+transforms. It does not establish that a singularly transformed pair is
+equivalent to the original pencil, nor does it preserve information erased
+by a rank-deficient coefficient map. Only invertible coefficient-space
+changes preserve the full two-dimensional coefficient span. These are
+finite deterministic regression tests, not a classification theorem or
+decomposition-discovery method.
