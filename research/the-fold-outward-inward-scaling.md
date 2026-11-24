@@ -361,3 +361,49 @@ For x,y in [0,1], x+y-xy >= max(x,y). Consequently the strict ordering E_p(ab)<m
 An exact-rational sweep over p in {2,3,5,7,11} and all unordered coprime pairs 2 <= a < b <= 100 found E_p(ab)<min(E_p(a),E_p(b)) in every checked case. G-EP178 adds audit_coprime_bad_proportion_order(primes, max_degree), which reports exact strict-order counts, the first failure witness, and the largest ratio E_p(ab)/min(E_p(a),E_p(b)). Regression tests cover the smaller grid and validation.
 
 **Proof status:** the ordering is a finite-grid observation and remains unproved in general. The field interpretation identifies E_p(n) as the relative size of the union of proper subfields of F_(p^n). A union bound over maximal proper subfields gives E_p(n) <= sum over prime q dividing n of p^(-n(1-1/q)); a lower bound is supplied by any one maximal proper subfield. Comparing these bounds sharply enough for all coprime a,b is the next proof task.
+
+
+## G-EP179 — A sharp candidate bound for the coprime bad-proportion ratio
+
+For coprime degrees (a,b>1), define
+[
+Q_p(a,b)=\frac{E_p(ab)}{\min(E_p(a),E_p(b))},
+\qquad E_p(n)=1-R_p(n).
+]
+The exploratory finite sweep suggested that the largest ratio occurs at
+((a,b)=(2,3)). In that case,
+[
+E_p(2)=p^{-1},\qquad E_p(3)=p^{-2},
+]
+and
+[
+E_p(6)=p^{-3}+p^{-4}-p^{-5}.
+]
+Since (p^{-2}<p^{-1}), this gives the exact candidate envelope
+[
+\boxed{Q_p(2,3)=\frac{p^2+p-1}{p^3}.}
+]
+
+This motivates the stronger conjecture
+[
+\boxed{
+Q_p(a,b)\le\frac{p^2+p-1}{p^3}
+\quad\text{for every prime }p
+\text{ and coprime }a,b>1.
+}
+]
+If true, it implies the strict ordering from G-EP178 because the right-hand
+side is strictly less than one for every prime (p\ge2). It would also
+quantify a uniform margin in the bad-proportion comparison.
+
+G-EP179 adds
+`audit_coprime_bad_proportion_ratio_bound(primes, max_degree)`. The audit
+checks all unordered coprime pairs in the requested finite range using exact
+fractions, reports the first counterexample if present, counts successful
+comparisons, and identifies the largest observed ratio. Its test fixture
+covers 102 pairs across (p=2,3,5) through degree 12 and checks that the
+maximum is attained at ((2,3)), with ratio (5/8) over (mathbb F_2).
+
+**Proof status:** this remains a conjectured universal bound. The regression
+grid is finite evidence only; no proof for arbitrary prime fields and
+coprime degrees is claimed.
