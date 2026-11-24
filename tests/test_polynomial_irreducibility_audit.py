@@ -1,4 +1,6 @@
+import math
 import unittest
+from fractions import Fraction
 
 from tools.polynomial_irreducibility_audit import (
     audit_irreducibility_agreement,
@@ -7,6 +9,8 @@ from tools.polynomial_irreducibility_audit import (
     irreducible_density_convergence,
     irreducible_density_factorization,
     irreducible_density_composition,
+    coprime_defect_exponent_spectrum,
+    evaluate_coprime_defect_spectrum,
 )
 
 
@@ -248,3 +252,65 @@ class PolynomialIrreducibilityAuditTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+
+class CoprimeDefectSpectrumTests(unittest.TestCase):
+    def test_resonant_3_4_spectrum_and_evaluation(self):
+        result = coprime_defect_exponent_spectrum(3, 4)
+        self.assertEqual(
+            result["spectrum"],
+            [
+                {"exponent": 2, "coefficient": 2},
+                {"exponent": 4, "coefficient": -1},
+                {"exponent": 6, "coefficient": -1},
+                {"exponent": 8, "coefficient": -1},
+                {"exponent": 10, "coefficient": 1},
+            ],
+        )
+        self.assertEqual(result["leading_coefficient"], 2)
+        self.assertEqual(
+            evaluate_coprime_defect_spectrum(2, 3, 4),
+            Fraction(2, 2**2) - Fraction(1, 2**4)
+            - Fraction(1, 2**6) - Fraction(1, 2**8)
+            + Fraction(1, 2**10),
+        )
+
+    def test_nonresonant_2_3_spectrum(self):
+        result = coprime_defect_exponent_spectrum(2, 3)
+        self.assertEqual(
+            result["spectrum"],
+            [
+                {"exponent": 1, "coefficient": 1},
+                {"exponent": 2, "coefficient": 1},
+                {"exponent": 3, "coefficient": -2},
+                {"exponent": 4, "coefficient": -1},
+                {"exponent": 5, "coefficient": 1},
+            ],
+        )
+        self.assertEqual(result["leading_coefficient"], 1)
+
+    def test_spectrum_matches_density_identity_on_small_grid(self):
+        for left in range(2, 13):
+            for right in range(2, 13):
+                if math.gcd(left, right) != 1:
+                    continue
+                spectrum = coprime_defect_exponent_spectrum(left, right)
+                for field_size in (2, 3, 4, 5, 8, 9):
+                    with self.subTest(left=left, right=right,
+                                      field_size=field_size):
+                        value = evaluate_coprime_defect_spectrum(
+                            field_size, left, right
+                        )
+                        self.assertTrue(spectrum["term_count"] > 0)
+                        self.assertGreater(value, 0)
+
+    def test_spectrum_rejects_invalid_degrees_and_field_sizes(self):
+        for left, right in ((1, 3), (2, 2), (2, 0), (True, 3)):
+            with self.subTest(left=left, right=right):
+                with self.assertRaises(ValueError):
+                    coprime_defect_exponent_spectrum(left, right)
+        for field_size in (0, 1, True, 2.5):
+            with self.subTest(field_size=field_size):
+                with self.assertRaises(ValueError):
+                    evaluate_coprime_defect_spectrum(field_size, 2, 3)
