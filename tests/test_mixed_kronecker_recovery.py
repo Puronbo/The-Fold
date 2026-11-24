@@ -6,6 +6,7 @@ from itertools import product
 from tools.mixed_kronecker_recovery import (
     _affine_vectors, _det, _exhaustive_left_matrices, recover_mixed_kronecker_pencil,
     verify_mixed_kronecker_negative_certificate,
+    verify_mixed_kronecker_recovery_certificate,
 )
 
 
@@ -58,6 +59,34 @@ class MixedKroneckerRecoveryTests(unittest.TestCase):
         rq, rk = right_block(1)
         lq, lk = transpose(rq), transpose(rk)
         return block_diag([(rq, rk), (lq, lk), ([[1]], [[0]])])
+
+    def test_positive_recovery_certificate_replays_canonical_target_and_witness(self):
+        q, k = self.mixed_pair()
+        result = recover_mixed_kronecker_pencil(q, k, 5, max_degree=2)
+        self.assertTrue(verify_mixed_kronecker_recovery_certificate(q, k, 5, result)["verified"])
+        for key, value in (
+            ("canonical_Q", [[0]]), ("canonical_K", [[0]]),
+            ("right_minimal_indices", [99]), ("regular_dimension", 99),
+            ("profile_max_degree", 1), ("max_candidates", 1),
+            ("search_mode", "exhaustive"),
+        ):
+            with self.subTest(key=key):
+                forged = dict(result)
+                forged[key] = value
+                self.assertFalse(verify_mixed_kronecker_recovery_certificate(q, k, 5, forged)["verified"])
+
+    def test_incomplete_and_bounded_recovery_outcomes_replay_without_negative_claim(self):
+        q, k = self.mixed_pair()
+        incomplete = recover_mixed_kronecker_pencil(q, k, 5, max_degree=0)
+        audit = verify_mixed_kronecker_recovery_certificate(q, k, 5, incomplete)
+        self.assertTrue(audit["verified"])
+        self.assertFalse(audit["canonical_target_reconstructed"])
+        bounded = recover_mixed_kronecker_pencil(
+            q, k, 5, max_degree=2, max_candidates=1, search_mode="exhaustive"
+        )
+        audit = verify_mixed_kronecker_recovery_certificate(q, k, 5, bounded)
+        self.assertTrue(audit["verified"])
+        self.assertFalse(bounded["decision_complete"])
 
     def test_recovers_unscrambled_mixed_pencil(self):
         q, k = self.mixed_pair()
