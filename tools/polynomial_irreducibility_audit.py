@@ -89,15 +89,8 @@ def irreducible_density_convergence(p: int, degree: int) -> dict:
         degree * count_monic_irreducibles(p, degree), p ** degree
     )
     error = 1 - normalized_density
-    distinct_prime_factors = sum(
-        1 for divisor in range(2, degree + 1)
-        if degree % divisor == 0 and _mobius(divisor) != 0
-        and all(divisor % prime != 0
-                for prime in range(2, divisor)
-                if _mobius(prime) == -1)
-    ) if degree > 1 else 0
-    # Count omega(n) directly by trial division; unlike divisor counting,
-    # this remains transparent for prime powers.
+    # Count omega(n) directly by trial division; this remains transparent
+    # for prime powers and avoids counting squarefree divisors individually.
     remaining = degree
     omega = 0
     prime = 2
@@ -110,11 +103,9 @@ def irreducible_density_convergence(p: int, degree: int) -> dict:
     if remaining > 1:
         omega += 1
 
-    divisor_bound = Fraction((2 ** omega - 1), 1) * Fraction(1, p) ** (degree / 2)
-    # Use an exact rational relaxation: p^(-n/2) is represented by
-    # p^(-ceil(n/2)) for odd n only as a stronger-than-needed exponent is
-    # invalid, so retain the square-root expression as a float for reporting.
-    uniform_bound = (degree - 1) * (2 ** (-degree / 2))
+    divisor_bound = Fraction(2 ** omega - 1, 2 ** (degree // 2))
+    uniform_bound = Fraction(degree - 1, 2 ** (degree // 2))
+    return_float_bound = float(uniform_bound)
     return {
         "schema": "the-fold-irreducible-density-convergence-v1",
         "field_prime": p,
@@ -129,10 +120,8 @@ def irreducible_density_convergence(p: int, degree: int) -> dict:
         "absolute_error": float(abs(error)),
         "distinct_prime_divisor_count": omega,
         "divisor_count_bound": float(divisor_bound),
-        "uniform_prime_field_bound": uniform_bound,
-        "uniform_bound_holds": abs(error) <= Fraction.from_float(
-            uniform_bound
-        ),
+        "uniform_prime_field_bound": return_float_bound,
+        "uniform_bound_holds": abs(error) <= uniform_bound,
     }
 
 def audit_irreducibility_agreement(
