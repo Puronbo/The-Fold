@@ -1,0 +1,311 @@
+# G-EP47 — Composable Kronecker component assembly
+
+## Objective
+
+The preceding milestones provide independent constructive methods for:
+- one pure right singular block;
+- one pure left singular block (by transposition); and
+- a regular square pencil, including a canonical representative and bounded
+  strict-equivalence witness search.
+
+G-EP47 composes these capabilities when a proposed component partition is
+already supplied.
+
+## API
+
+`tools/kronecker_component_assembly.py` exposes
+`assemble_kronecker_components(components, p, ...)`. Each component
+contains source matrices `q`, `k`, and a `kind`:
+- `right`: structurally recover one right singular block;
+- `left`: structurally recover one left singular block;
+- `regular`: canonicalize a regular square component and construct its
+  constant strict-equivalence witness.
+
+For singular components, an optional `minimal_index` is treated as an
+assertion and checked against the recovered index. A failed component stops
+the assembly with its index and recovery report; it is never silently
+accepted.
+
+For component witnesses (S_i,T_i), the global transformations are
+[
+S=operatorname{diag}(S_1,ldots,S_r),qquad
+T=operatorname{diag}(T_1,ldots,T_r).
+]
+The source and target pencils are assembled by direct sums, and the complete
+pair is independently audited:
+[
+S Q T=Q_{m can},qquad S K T=K_{m can}.
+]
+The global certificate is returned only if the strict-equivalence audit
+passes.
+
+## What this establishes
+
+This is an end-to-end constructive assembly path across heterogeneous
+component types. It connects the previously separate regular and singular
+witness tools and provides one global, exact certificate for their direct
+sum. It also gives callers a reusable way to build and audit mixed canonical
+examples over prime fields.
+
+## Boundary: decomposition discovery remains open
+
+The caller must provide the proposed component partition. This milestone
+does not take an arbitrary unsplit pencil and discover all of its Kronecker
+blocks, nor does it prove uniqueness of a supplied partition. In particular,
+it does not yet handle multiple singular blocks coupled by an unknown
+constant basis change as a single recovery problem. The regular component
+witness search and its no-chart fallback retain their existing bounded-search
+limitations.
+
+The distinction is important: G-EP47 assembles and verifies a proposed
+decomposition; it is not yet a complete general Kronecker canonical-form
+algorithm.
+
+## Tests
+
+`tests/test_kronecker_component_assembly.py` covers a mixed right/left/
+regular direct sum, an incorrect declared minimal index, a component that
+fails singular recovery, and empty input rejection.
+
+
+## G-EP60 — Integrated multi-block direct-sum audit
+
+Successful assembly now derives `canonical_block_shapes` directly from the
+canonical component matrices in the same order as the supplied component list.
+It passes the assembled source pair and global block-diagonal transforms to
+the independent G-EP58 `verify_pencil_multi_direct_sum_witness` verifier.
+The returned `multi_block_direct_sum_audit` checks transform invertibility and
+all off-diagonal component blocks in both coefficients. The existing global
+strict-equivalence audit remains independent and unchanged.
+
+The successful result exposes both certificates and a
+`multi_block_direct_sum_verified` check. A failed singular or regular component
+still returns the existing incomplete result before either global success
+audit is emitted. No component discovery, uniqueness, indecomposability, or
+regularity claim is added; the caller still supplies the partition.
+
+Tests now assert the ordered three-block shape list and the independent audit
+for a mixed right/left/regular assembly, and ensure failed recovery does not
+emit a success audit.
+
+
+## G-EP61 — Component-report consistency certificate
+
+Successful assembly now emits `component_consistency_audit`. It checks that
+component report count agrees with all source/target block lists; each source
+coefficient pair matches its reported shape; both canonical coefficients have
+matching block dimensions; right and left singular canonical shapes agree with
+the recovered minimal index; and regular canonical blocks are square. It also
+checks that ordered source and canonical block dimensions sum to the respective
+assembled matrix shapes.
+
+The audit is computed from the concrete component matrices and reports. It is
+independent of the strict-equivalence and multi-block zero-pattern audits, and
+all three are exposed in successful results. This does not reclassify a block,
+discover a partition, or prove uniqueness. Failed component recovery continues
+to return an incomplete result without success certificates.
+
+Tests assert every consistency check for a mixed right/left/regular assembly
+and ensure failed recovery emits no consistency certificate.
+
+
+## G-EP62 — Per-component strict-equivalence certificates
+
+Before placing each component transform into the global block-diagonal matrices, assembly now calls the exact strict-equivalence verifier on that component's original pair, canonical pair, and local transforms. A failed local identity raises an arithmetic error and cannot be hidden by later assembly. Successful results expose the ordered `component_witness_audits` list and an aggregate `all_component_witnesses_verified` check. The existing global strict-equivalence, multi-block direct-sum, and component-report consistency audits remain separate. This strengthens certificate localization; the supplied-partition requirement and bounded regular-witness behavior are unchanged.
+
+Tests assert one passing local certificate per right, left, and regular component, and confirm that failed component recovery emits no local-witness audit list.
+\n\n## G-EP63 — Component witness composition audit\n\nThe assembly path independently reconstructs the global left and right transformations using only the ordered local audit certificates. It compares these reconstructed matrices modulo p with the returned global S and T, then passes the reconstructed transforms to a fresh global strict-equivalence audit against the assembled source and canonical pencils. Successful results expose the reconstructed matrices, three explicit checks, and the replayed audit under `component_witness_composition_audit`; the aggregate check is `component_witness_composition_verified`. A failure prevents a successful assembly result. This verifies the composition layer in addition to each local witness and the existing global/multi-block audits; it does not discover components or prove uniqueness.\n\nTests assert exact reconstruction of both transforms and successful replay for a mixed right/left/regular assembly, and confirm that failed recovery emits no composition certificate.\n
+
+## G-EP64 — Adversarial witness-composition validation
+
+The composition-audit helper now validates its inputs before constructing
+block-diagonal matrices. The local certificate list must be a nonempty ordered
+sequence of dictionaries. Each certificate must contain nonempty, rectangular,
+square left and right transformation matrices. Invalid shapes raise a
+controlled `ValueError` rather than leaking indexing errors from block
+assembly.
+
+Adversarial regression coverage includes:
+
+- modifying one local left transformation while retaining the original
+  certificate metadata; the reconstructed-transform comparison and replayed
+  global strict-equivalence check must both fail;
+- adding an incompatible row to a local transform; validation rejects it
+  before composition; and
+- empty certificate lists and malformed nonsquare transforms; both produce
+  explicit validation errors.
+
+Certificate order remains semantically significant because it defines the
+block ordering, but a permutation is not necessarily detectable or invalid:
+if the relevant transformations are interchangeable (for example, identity
+matrices), reordering can leave the composed transformation unchanged. The
+audit therefore tests actual algebraic consistency rather than asserting that
+every permutation must fail. G-EP64 adds no partition discovery, uniqueness,
+or new Kronecker classification claim.
+
+
+## G-EP65 — Component certificate provenance and binding
+
+The composition audit now receives the ordered source and canonical coefficient blocks in addition to the assembled pencils. Before composing the global transforms, it independently re-runs the strict-equivalence verifier for each local pair using that certificate's own left and right transforms. It validates that all four ordered matrix-block lists have exactly one entry per local certificate and exposes the resulting per_component_replayed_audits.
+
+The new aggregate check every_local_certificate_reverified_against_its_bound_pair is true only when each recomputed local strict-equivalence audit succeeds. The returned assembly also exposes component_witnesses_rebound_to_source_and_target_blocks. This recomputation does not trust the previously stored strict_equivalence_certified field as proof; it checks the actual matrices and transformations afresh. The global reconstructed-transform comparisons and global strict-equivalence replay remain independent checks.
+
+Tests verify successful per-component replay, detect a tampered local transformation, and retain malformed-shape and empty-certificate regressions. This is certificate-to-component binding for the supplied ordered partition, not decomposition discovery, component identity beyond that order, or a uniqueness result.
+
+
+## G-EP66 — Component certificate mutation and replay integrity
+
+The G-EP65 binding checks now preflight all four ordered matrix-block collections
+and validate their cardinalities before indexing any component. This ensures
+missing, extra, or malformed block collections fail with a controlled
+validation error rather than an accidental indexing exception.
+
+Adversarial regressions mutate a component's bound source coefficient block
+and, separately, its bound canonical coefficient block while retaining the
+previous local transforms. Fresh strict-equivalence replay must reject each
+changed pair. The tests also forge the stored local success flag in both
+directions: a forged true value cannot mask a failed recomputation, and a
+forged false value cannot override a valid recomputation. These checks confirm
+that the audit's conclusion is derived from the concrete matrices and
+transformations rather than cached metadata.
+
+The scope remains the supplied ordered partition and its component pairs. The
+audit does not discover components, identify them independently of their
+ordering, or prove uniqueness of a decomposition.
+
+
+## G-EP67 — Component input and dimension integrity
+
+The supplied-component assembly boundary now validates each coefficient matrix
+before calling modular pencil routines. Matrix and row containers must be
+nonempty lists or tuples; rows must have a consistent, nonzero width; and each
+entry must be an integer other than a boolean. The Q and K matrices of one
+component must have identical dimensions. The public field parameter must be
+a genuine integer (not a boolean) and is then checked for primality by the
+existing pair validator.
+
+Regression cases cover non-matrix inputs, malformed row containers, ragged
+and empty matrices, floating-point and boolean entries, invalid/composite
+field parameters, and mismatched Q/K shapes. Rectangular components remain
+supported: the checks require matching dimensions within each coefficient
+pair, not square components except where the component kind is regular.
+
+This is input validation only. It does not alter witness construction,
+component ordering, or the requirement that callers supply the partition.
+
+
+## G-EP68 — Deterministic reconstruction of assembly certificates
+
+The new public function
+`verify_kronecker_component_assembly_certificate(components, p, assembly_result)`
+rebuilds the assembly from the caller's original ordered component inputs by
+rerunning the existing singular recovery and regular canonical-witness
+constructors. It then compares every certificate-bearing result field:
+source and canonical coefficient matrices, dimensions, block shapes, global
+transforms, component reports, local witness audits, composition audit,
+global strict-equivalence audit, multi-block audit, component-consistency
+audit, and aggregate checks.
+
+The verifier does not accept the returned result's own success flags as
+evidence. It derives a fresh assembly and reports a per-field equality map,
+so post-hoc mutation of a matrix, transform, dimension, report, or nested audit
+is detected. Tests exercise a fresh positive result and independently mutate
+each certificate-bearing field.
+
+**Scope limitation:** this is deterministic implementation-level
+reconstruction from the original supplied partition. It deliberately reuses
+the existing constructors and therefore is not a second mathematical
+classification implementation, does not discover an unknown partition, and
+does not establish uniqueness or decomposition provenance beyond the ordered
+inputs. Bounded regular witness search retains its existing inconclusive
+failure semantics.
+
+
+## G-EP69 — Direct algebraic verification of assembly certificates
+
+Added `verify_kronecker_component_assembly_algebraically(components, p, assembly_result)`.
+Unlike G-EP68's deterministic constructor replay, this verifier does not rerun
+singular recovery or regular canonicalization. It reconstructs the source
+block-diagonal coefficient matrices directly from the original component
+inputs, validates the claimed canonical block dimensions and off-block zeros,
+and extracts the canonical component blocks.
+
+For each component it invokes the exact strict-equivalence identity verifier
+on the original input pair, extracted canonical pair, and supplied local
+left/right transforms. It then reconstructs the global block-diagonal
+transforms from those local witnesses, compares them with the returned global
+transforms, and independently replays both global identities
+S Q T = Q_target and S K T = K_target over the finite field.
+
+Regression tests accept a fresh certificate, reject altered source/canonical
+matrices and global transforms, reject a nonzero cross-block entry and malformed
+block dimensions, and confirm that falsified cached audit booleans do not
+override valid algebraic identities.
+
+**Scope limitation:** the check is conditional on the caller's ordered
+component partition and the supplied local witnesses. It establishes the
+claimed direct-sum and strict-equivalence identities, not how the partition
+was discovered, whether it is unique, or whether another decomposition exists.
+
+
+## G-EP70 — Adversarial algebraic certificate boundaries
+
+The G-EP69 algebraic verifier now validates certificate-side matrix content
+before modular arithmetic. Canonical coefficient matrices and all local and
+global transformation matrices must be nonempty rectangular integer matrices;
+booleans and floating-point entries are rejected rather than silently coerced.
+Local witness records are checked as dictionaries before their transform
+fields are read. The verifier returns a negative audit for malformed output
+certificates instead of leaking common nested-structure, indexing, or type
+errors.
+
+The verifier retains explicit input diagnostics: invalid prime-field
+parameters and malformed original component inputs raise `ValueError`,
+because these are invalid verifier arguments rather than a failed certificate.
+A structurally valid but singular local witness is rejected by the exact
+strict-equivalence audit. Tests additionally cover absent certificate fields,
+malformed canonical rows, malformed transforms, and non-dictionary results.
+
+**Boundary:** these checks harden the algebraic verifier's input surface. They
+do not prove that the caller's supplied component partition is complete,
+canonical, uniquely determined, or discoverable from an unsplit pencil.
+
+
+## G-EP71 — Seeded randomized algebraic certificate tests
+
+Added deterministic pseudo-randomized regression coverage for the direct
+algebraic assembly verifier. Fixed seeds generate small mixed component
+assemblies over the prime fields F₂, F₃, F₅, and F₇. Cases vary right and left
+singular minimal indices, regular one-dimensional pencil coefficients, and
+the ordering of the supplied components. Every successfully constructed
+certificate is passed through the independent algebraic verifier and must be
+accepted.
+
+A separate seeded mutation suite changes a selected entry in one of the
+assembled canonical coefficient matrices and requires the verifier to reject
+the altered certificate. The fixed seeds make failures reproducible and
+suitable for ordinary CI.
+
+**Scope:** this is finite, reproducible regression coverage over selected
+small fields and component families. It is not a probabilistic correctness
+proof, a universal field-size result, or a decomposition discovery method.
+
+
+## G-EP72 — Seeded basis-scrambled component recovery
+
+Added deterministic randomized tests that independently scramble each supplied
+component pencil by invertible constant left and right basis changes over
+F₂, F₃, F₅, and F₇. The generated families include right-singular,
+left-singular, and regular components; component order is also randomized.
+The transformed mixed inputs are passed through the existing assembly
+pipeline, and every successful assembly must pass the direct algebraic
+certificate verifier.
+
+The invertible matrices are generated by elementary row operations, so the
+scrambling transformations are nonsingular by construction. Fixed seeds make
+all cases reproducible in CI.
+
+**Scope:** this is finite regression coverage for selected small fields and
+small mixed pencils. It does not prove universal recovery under arbitrary
+basis changes, completeness of the recovery algorithm, or polynomial-time
+complexity.

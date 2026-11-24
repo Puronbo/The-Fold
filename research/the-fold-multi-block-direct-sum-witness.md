@@ -287,3 +287,568 @@ These are deterministic finite regression tests of the supplied-witness
 verifier. They do not establish decomposition discovery, uniqueness, or a
 universal theorem.
 
+
+## G-EP111: Invertible pencil-parameter basis changes
+
+A matrix pencil is an ordered pair of coefficient matrices, but its
+two-dimensional coefficient span is unchanged by an invertible 2-by-2
+change of basis over the base field. The regression constructs rectangular
+block-diagonal Q and K, independently scrambles their row and column
+coordinates, and applies several invertible coefficient-basis changes:
+coefficient swap, one-sided shears, and a determinant-one mixed change.
+
+For every tested change over F₂, F₃, F₅, and F₇, the same supplied left/right
+coordinate witness must recover the correspondingly mixed target matrices
+and verify the same rectangular block partition. Applying the inverse
+2-by-2 parameter change must recover the original ordered source pair
+exactly. Thus the test distinguishes coordinate-basis changes from
+coefficient-basis changes and checks that direct-sum structure is stable
+under a change of basis of the pencil's coefficient space.
+
+This is deterministic finite regression coverage for invertible parameter
+changes only. It does not claim invariance under singular coefficient
+mixing, discover a decomposition, establish uniqueness, or prove a universal
+classification theorem.
+
+
+## G-EP112: Singular coefficient-space maps and information loss
+
+The regression contrasts invertible coefficient-basis changes with singular
+linear maps on the ordered coefficient pair. For each field F₂, F₃, F₅,
+and F₇, the original pair has block-diagonal Q but a cross-block entry in K,
+so the supplied three-block coordinate witness is rejected.
+
+A rank-one map that sends (Q,K) to (Q,0) erases the offending coefficient;
+the verifier correctly accepts the transformed pair (Q,0), but that result
+does not certify a direct sum for the original pair. A second rank-one map
+collapses the pair to (Q,Q), again reducing the coefficient span to one
+dimension. As a contrast, retaining the coupled combination Q+K in both
+outputs remains rejected because the coupling is still present.
+
+The key scope boundary is semantic: the witness verifier answers whether
+the particular pair it receives is block diagonal under the supplied
+transforms. It does not establish that a singularly transformed pair is
+equivalent to the original pencil, nor does it preserve information erased
+by a rank-deficient coefficient map. Only invertible coefficient-space
+changes preserve the full two-dimensional coefficient span. These are
+finite deterministic regression tests, not a classification theorem or
+decomposition-discovery method.
+
+
+## G-EP113: Exhaustive 2×2 coefficient-map rank boundary
+
+For each p in {2, 3, 5, 7}, the test enumerates all p⁴ linear maps on the
+ordered coefficient pair, classifies each 2×2 map by rank, and applies it
+to a fixed pair with block-diagonal Q and a single cross-block entry in K.
+Because Q and K are linearly independent as matrices, the dimension of the
+output coefficient span equals the rank of the parameter map.
+
+The test independently checks both output coefficients' off-diagonal
+conditions and the verifier's aggregate decision. Exactly p² maps pass:
+the zero map and the p²−1 nonzero rank-one maps whose image is the Q-axis.
+No rank-two map passes, because every invertible map retains the full
+coefficient span and therefore retains the offending K coupling in at least
+one output. The rank census is checked against the closed counts:
+one rank-zero map, (p²−1)²/(p−1) rank-one maps, and
+(p²−1)(p²−p) rank-two maps.
+
+This is exhaustive for 2×2 coefficient maps over these four fields and
+this explicit pencil fixture. It is not a universal theorem for arbitrary
+pencils, nor does it discover decompositions or prove uniqueness.
+
+
+## G-EP114: Intersection of simultaneous coefficient constraints
+
+Fix the left coordinate transform and a two-block row/column partition.
+For each coefficient separately, the off-diagonal-zero equations define a
+linear constraint space in the entries of the unknown right transform T.
+The valid common right transforms lie in the intersection of those two
+spaces. The regression enumerates every 2×2 candidate T over F₂, F₃, F₅,
+and F₇ for a nontrivially right-scrambled pencil.
+
+In this fixture, the Q-only constraint space and K-only constraint space
+each contain p² matrices, while their intersection contains exactly p²
+diagonal matrices. The intersection includes invertible witnesses and
+singular solutions; invertibility must therefore be checked separately
+from the linear off-diagonal equations. This demonstrates concretely why
+solving either coefficient's constraints alone is insufficient and why
+the common constraint intersection is the relevant object.
+
+The experiment is exhaustive for this fixed-left, 2×2 fixture. It is not
+a general transformation-discovery algorithm: the left transform and
+partition are supplied, and larger-field/dimension search is not addressed.
+
+
+## G-EP115: Linear constraint solving with a separate invertibility filter
+
+The simultaneous off-diagonal-zero conditions are assembled as a homogeneous
+linear system in the row-major entries of the unknown right transform T.
+A finite-field RREF solver enumerates the complete nullspace by assigning
+free variables. The test compares that solution set with independent brute
+force over every 2×2 T for F₂, F₃, F₅, and F₇.
+
+For this fixture the linear solution space has dimension two and contains
+p² matrices. Invertibility is a separate determinant filter; exactly
+(p−1)² candidates survive. Every survivor is then passed through the
+production multi-block witness verifier. This separates three distinct
+stages: linear feasibility, nonlinear invertibility, and exact witness
+verification.
+
+This is a test-local bounded solver for a fixed-left, 2×2 fixture. It is not
+a production discovery API, does not search over left transforms or
+partitions, and does not establish completeness for general dimensions.
+
+
+## G-EP116: Rectangular partitions and constraint-space dimension
+
+Generalize the simultaneous right-transform equations beyond square diagonal
+blocks. The regression uses a 3×3 pencil partitioned into rectangular blocks
+of shapes (1,2) and (2,1), with independent invertible left and right basis
+scramblings over F₂, F₃, and F₅. The test constructs all off-diagonal
+coordinate equations for the unknown 3×3 right transform and checks that the
+known witness belongs to the computed nullspace. This larger case is not
+brute-force exhaustive.
+
+For 2×2 controls over F₂ and F₃, the same test-local RREF/nullspace routine is
+compared with complete enumeration of every right transform. It also compares
+the one-coefficient constraint space with the simultaneous two-coefficient
+space: adding coefficient equations cannot increase the nullspace dimension.
+Every invertible candidate in the exhaustively checked common solution set is
+replayed through the production verifier.
+
+These are finite test-side controls for rectangular block partitions. They do
+not provide a production solver, search over left transforms or partitions,
+or establish general-dimensional completeness.
+
+
+## G-EP117: Independent rectangular equation-builder cross-checks
+
+A test-local equation builder now encodes each off-diagonal entry of
+\((S C)T\) as a linear form in the row-major entries of the unknown right
+transform. For seeded fixtures, the equation evaluations are compared
+entry-by-entry with direct matrix multiplication for arbitrary candidate
+transforms, not merely the planted witness.
+
+The deterministic cases cover rectangular source matrices, independently
+scrambled left and right bases, and partitions containing zero-row and
+zero-column blocks. Fields are F₂, F₃, F₅, and F₇; each coefficient receives
+multiple arbitrary candidate-transform trials. The planted witness is also
+replayed through the production multi-block verifier.
+
+This is an independent finite cross-check of the test equation construction,
+not a production solver, universal proof, or exhaustive search over witnesses.
+
+
+## G-EP118: Constraint rank, nullity, and redundant equations
+
+For a fixed left basis and two-block scalar partition, compare the rank of
+the simultaneous off-diagonal equation system using two distinct test-side
+methods: finite-field row reduction and explicit construction of the row
+span. The span cardinality is checked to be an exact power of the field size,
+and its exponent supplies an independent rank calculation.
+
+Controls include zero coefficient equations, repeated equations, scalar
+multiple coefficient constraints, and a second coefficient whose support
+adds an independent constraint direction. For each system, direct enumeration
+of all right-transform vectors over F₂, F₃, and F₅ confirms that the solution
+count is p^(4-rank). Appending duplicate and zero rows leaves rank and nullity
+unchanged.
+
+These are exhaustive finite-dimensional test controls for a 2×2 fixed-left
+system, not a general solver or witness-discovery result.
+
+
+## G-EP119: Rectangular constraint rank and nullity
+
+Extend the test-side off-diagonal equation construction to rectangular source
+pencils and square right-transform unknowns. The fixtures include a 2×3
+source, square sources with zero-row and zero-column blocks, and a single
+nonempty block whose off-diagonal region is empty.
+
+For each fixture over F₂ and F₃, compare rank from finite-field elimination
+with rank inferred independently from explicit row-span enumeration. Check
+each linear equation against the corresponding entry of direct multiplication
+(S*C)*T for sampled candidate transforms. Exhaustively enumerate the kernel
+for dimensions up to three and confirm its cardinality is p^(n²-rank).
+
+The single-block case has no equations, rank zero, and nullity n². These are
+finite test-side controls, not a production rectangular solver or a general
+witness-discovery method.
+
+
+## G-EP120: Rank invariance under block-preserving coordinates
+
+For rectangular equation systems, apply independent invertible block-diagonal
+changes of row and column coordinates to the coefficient matrix. The induced
+bijection on unknown right transforms is X' = T⁻¹ X T; consequently
+(S A T)X' = S(AX)T. Since S and T preserve the supplied block subspaces and
+are invertible within each block, every corresponding off-diagonal block is
+zero before the coordinate change exactly when it is zero afterward.
+
+Seeded controls over F₂, F₃, and F₅ cover rectangular and empty-row/empty-column
+block shapes. They compare constraint ranks before and after the coordinate
+change, check the covariance identity for sampled arbitrary X, and compare
+off-diagonal zero status block by block. A separate fixture demonstrates
+that changing the partition is not a coordinate change: its constraint rank
+changes from two to one.
+
+This is finite test-side invariance evidence for block-preserving coordinate
+changes; it does not assert invariance under arbitrary basis changes that mix
+the supplied blocks.
+
+
+## G-EP121: Mixed basis changes with transported block decompositions
+
+Extend the rank-invariance regression beyond block-preserving coordinate
+changes. For a full invertible row basis change U and column basis change V,
+form A' = U A V and transport the original row and column block subspaces
+along with those bases. In the transformed coordinates, the off-diagonal
+constraint map is evaluated as U⁻¹ A' X' V⁻¹, where X' = V⁻¹ X V.
+The test constructs this linear map directly on matrix-unit inputs and
+compares its rank with the original off-diagonal equation system.
+
+The finite controls use full unitriangular changes that mix the first block
+with the second, over F₂, F₃, and F₅. Sampled candidate transforms also check
+the pullback identity entry-by-entry. For the explicit F₂ and F₃ fixtures,
+applying the same mixed basis changes while incorrectly retaining the old
+coordinate partition changes the constraint rank. This is not a
+contradiction: that operation changes the decomposition being constrained.
+
+These are finite test-side covariance controls. The production witness API
+still represents consecutive coordinate block shapes and does not accept
+arbitrary subspace-basis metadata; this milestone does not add a generic
+mixed-basis decomposition verifier or discovery algorithm.
+
+
+## G-EP122: Rectangular transported-basis covariance and empty blocks
+
+Extend the transported-decomposition test to rectangular m×n coefficient
+matrices with n×n right-transform unknowns. Full invertible row and column
+basis changes U and V may mix all supplied blocks; the decomposition is
+transported by pulling the transformed coefficient and candidate back as
+U⁻¹ A' X' V⁻¹. The test constructs the resulting linear equation map on
+matrix-unit inputs and compares its rank with the original rectangular
+off-diagonal system.
+
+The fixtures include a 3×4 split, a partition containing both zero-row and
+zero-column blocks, and a second rectangular split. Finite fields F₂, F₃,
+and F₅ are covered. Sampled arbitrary right transforms check the rectangular
+pullback identity. An explicit F₂ control also confirms that applying the
+mixed basis changes while retaining the old coordinate partition changes
+the constraint rank.
+
+This is finite test-side covariance evidence. It does not add arbitrary
+subspace-basis metadata to the production verifier, nor a general mixed-basis
+decomposition discovery routine.
+
+
+## G-EP123: Transported kernel bijection and singular candidates
+
+For a rectangular 3×2 coefficient pair with a two-block partition, the
+regression enumerates every 2×2 right-transform matrix over F₂ and F₃.
+Independent full invertible row and column basis changes mix the original
+coordinate blocks. The transformed candidate is related to the original by
+the induced conjugation map, and the coefficient/decomposition pair is
+pulled back before evaluating the off-diagonal constraints.
+
+The test checks predicate preservation for every matrix, not only invertible
+ones, and verifies that the conjugation map is injective on the complete
+p⁴-element matrix space. Consequently the original and transported linear
+kernels have equal cardinality. Singular candidates, including the zero
+matrix, remain in the linear kernel; determinant-nonzero filtering is a
+separate nonlinear step. The fixture has p² kernel elements, of which
+(p−1)² are invertible and the remainder are singular.
+
+This is exhaustive finite regression evidence for the stated 3×2 fixture
+over two small fields. It does not add arbitrary subspace-basis metadata to
+the production verifier, provide a general witness-discovery algorithm, or
+turn the invertible subset into a vector space.
+
+
+## G-EP124: Larger transported constraint spaces and inverse maps
+
+Use a rectangular 4×3 coefficient pair and a 3×3 right-transform unknown,
+so the simultaneous homogeneous system has nine scalar unknowns. For each
+coefficient, construct the constraint matrix by applying the actual matrix
+product to every matrix-unit candidate and extracting all off-diagonal
+rectangular block entries. Stack the two coefficient systems.
+
+Apply independently generated invertible 4×4 and 3×3 basis changes, transport
+both coefficients and the candidate coordinates, and reconstruct the
+transported constraint matrix through the inverse row/column maps. Compare
+rank and nullity over F₂, F₃, and F₅. Check the candidate-coordinate map and
+its inverse on every matrix unit and on deterministic general candidates;
+also compare full equation-map evaluations for sampled candidates.
+
+This expands finite regression coverage from four to nine unknown scalar
+coordinates. It remains test-side evidence for the stated fixtures, not a
+general formal proof or a production mixed-basis verifier.
+
+
+## G-EP125: Independent row-span rank and transport mutation controls
+
+Reconstruct the simultaneous 3×3 right-transform constraint matrices for the
+rectangular 4×3 fixture. Compare ordinary finite-field RREF rank before and
+after full basis transport over F₂, F₃, and F₅. For F₂ and F₃, independently
+enumerate the complete row span and infer rank from its exact cardinality,
+cross-checking the elimination result without reusing its pivot procedure.
+The larger F₅ row-span enumeration is intentionally omitted to keep the
+exhaustive control bounded.
+
+Adversarial controls mutate one entry of a transported coefficient matrix
+without changing its dimensions. The resulting constraint matrix remains
+well-shaped but differs from the valid transported map: this is a false
+mathematical transport, not a malformed structure. A separate mutation to
+the supplied inverse row map preserves dimensions but breaks the inverse
+identity. A dimension-incompatible matrix multiplication is checked as a
+distinct malformed-input case.
+
+These are deterministic finite test-side regressions. They do not add a
+production transport-certificate format or prove provenance of supplied
+basis maps.
+
+
+## G-EP126: Kernel-basis transport and rank-deficient controls
+
+For the rectangular 4×3 coefficient pair and two-block partition, construct
+the simultaneous linear constraint matrices on the nine entries of the
+right-transform unknown. Compute nullspace bases independently for the
+original and pulled-back transported systems using finite-field RREF.
+
+Use two deliberately rank-deficient coefficient families over F₂, F₃, and
+F₅: the zero pair (rank zero, nullity nine) and a pair whose second
+coefficient is a scalar multiple of the first (rank strictly below nine).
+Transport candidates by X′ = V⁻¹ X V. Map every original nullspace basis
+vector forward and every transported basis vector backward; substitute all
+mapped vectors into the opposite equation system. Equal dimensions together
+with these inclusions establish equality of the full kernel subspaces, not
+just equality of rank or nullity. Check inverse candidate transport on each
+basis vector. Invertibility is not imposed on the linear kernel.
+
+These are deterministic finite test-side regressions, not a production
+arbitrary-subspace certificate API or a general decomposition theorem.
+
+
+## G-EP127: Composed basis transport, order, and inverse recovery
+
+Apply two invertible row and column shears successively to a rectangular 4×3
+coefficient pair over F₂, F₃, and F₅. Check the composed transforms
+U = U₂U₁ and V = V₁V₂ against sequential application to both coefficients.
+Construct the transported simultaneous constraint map using U⁻¹ and V⁻¹,
+map every computed source-kernel basis vector by X′ = V⁻¹XV, substitute
+into the transported equations, and reverse the map to recover each source
+basis vector exactly. Also recover both original coefficient matrices using
+the composed inverse maps.
+
+Adversarial controls omit the second stage or reverse the order of the
+noncommuting column factors. These alternatives retain valid matrix shapes
+but fail the expected composed coefficient identity. This is finite
+test-side evidence, not a general production transport-certificate API.
+
+
+## G-EP128: Multistage transport with identity and cancellation
+
+Exercise four successive row/column basis-change stages on a rectangular 4×3
+coefficient pair over F₂, F₃, and F₅. Each sequence includes two noncommuting
+shears, an identity stage, and the inverse of the second shear. Under the
+declared conventions, the composed maps reduce to the first shear, while
+sequential application is checked against the composed products on both
+coefficient matrices.
+
+Build the transported simultaneous constraint system from the composed
+inverse maps. Map every source nullspace basis vector by X′ = V⁻¹XV,
+substitute it into the transported equations, and apply the inverse candidate
+map to recover the source basis exactly. Verify recovery of both source
+coefficient matrices. A deliberately wrong inverse-factor order remains
+dimensionally valid but fails matrix and candidate recovery checks. This is
+finite test-side regression evidence, not a general production certificate
+API or formal proof.
+
+
+## G-EP129: Composed transport of rectangular block partitions
+
+Use the rectangular partition [(1,0), (0,1), (3,2)] on a 4×3
+coefficient pair over F₂, F₃, and F₅. This deliberately retains one
+zero-row block and one zero-column block. Apply four successive row and
+column basis changes: two noncommuting shears, an identity stage, and
+inverse-factor cancellation.
+
+Represent each row/column block by its coordinate projector. Transport row
+projectors by P ↦ U P U⁻¹ and column projectors by Q ↦ V⁻¹ Q V, matching
+the coefficient convention A' = U A V. Compare sequentially transported
+projectors with projectors transported by the final composed U,V. For both
+coefficient matrices, check every projected block against its pullback
+through the original partition. Empty blocks remain zero projectors and
+are not silently dropped. This is finite test-side regression evidence,
+not a generic production mixed-partition API or formal proof.
+
+
+**G-EP130 — composed transport preserves projector algebra:** extends the four-stage rectangular basis-transport fixture to verify that every row/column block projector remains idempotent, distinct projectors remain pairwise orthogonal in both multiplication orders, and each family remains complete (its sum is the identity). The checks run over F₂, F₃, and F₅ with a partition containing a zero-row and a zero-column block; those empty blocks remain explicit zero projectors after sequential and directly composed transport. Shape-preserving false-family controls independently violate idempotence, orthogonality, and completeness while retaining square dimensions, and a wrong basis map is rejected. This is finite test-side regression evidence, not a production projector-certificate API or a universal theorem.
+
+
+**G-EP131 — projector rank and nullity under composed transport:** adds an independent test-local finite-field rank calculation for every row and column block projector. It checks that sequential/composed basis transport preserves each projector's rank and complementary kernel dimension, with expected ranks matching the declared rectangular block sizes, including empty blocks. A shape-valid idempotent mutation removes one image direction and is rejected by the rank-to-block-size check. Controls run over F₂, F₃, and F₅. This is finite regression evidence, not a production rank-certificate API.
+\n\n**G-EP132 — rectangular projected coefficient-block transport:** verifies the covariance identity Pᵢ′ A′ Qⱼ′ = U(Pᵢ A Qⱼ)V for both coefficient matrices under four-stage composed row/column basis changes over F₂, F₃, and F₅. Every ordered block pair is checked, including off-diagonal zeros and explicit empty 1×0/0×1 diagonal summands; projected-block ranks are preserved. A shape-valid wrong column-conjugation direction is rejected. Finite test-side regression evidence only; no production projector API is added.\n
+
+**G-EP133 — diagonal projected-block reconstruction and coupling detection:** sums all transported diagonal projected blocks and verifies exact reconstruction of each coefficient matrix, with the off-diagonal sum zero, over F₂/F₃/F₅. A one-entry, shape-valid cross-block coupling is then injected in source coordinates; the diagonal sum no longer reconstructs the full transported matrix, while diagonal plus off-diagonal sums still do. Test-side finite regression evidence only; no production projector-certificate API is added.
+
+
+**G-EP134 — indexed projected-block recovery and shape-preserving index swaps:** for the rectangular partition with one zero-row and one zero-column summand, pull each transported diagonal projected block back through the composed basis maps and compare it with its source-coordinate block for both coefficient matrices over F₂/F₃/F₅. The two empty summands remain explicit full-size zero matrices. A second fixture uses two equal-shaped nonempty blocks so swapping their transported row and column projector indices remains dimensionally valid; the recovered block no longer matches the expected index and the test rejects the false assignment. This is finite test-side regression evidence only; no production projector-certificate API, decomposition discovery, or formal proof is added.
+
+
+**G-EP135 — transported projector image and kernel subspaces:** for every row and column block projector in the rectangular partition with an empty row summand and an empty column summand, independently compute image and nullspace bases over F₂/F₃/F₅. Compare the full spans—not merely their dimensions—with the images of the original subspaces under the induced row map (U) or column map (V^{-1}). Check the expected image and kernel dimensions, including zero and full cases. A shape-preserving mutation that moves a proper nonzero image to a different coordinate subspace is detected. This is finite test-side evidence; it adds no production arbitrary-subspace API or decomposition discovery.
+
+
+## G-EP136: Projector axioms do not determine the ordered decomposition
+
+Construct alternative row and column projector families by conjugating the source coordinate projectors with permutations that move their represented subspaces, then transport those alternatives through the same full row/column basis changes. Over F₂, F₃, and F₅, independently verify idempotence, pairwise orthogonality in both orders, completeness, and each projector's rank. The alternative families satisfy the same algebraic resolution axioms and rank data, but at least one indexed subspace differs from the intended transported family. Therefore those axioms alone do not certify the identity of the intended ordered decomposition; an external binding to the intended subspaces is necessary. Finite test-side regression evidence only; no production arbitrary-subspace verifier or uniqueness theorem is added.
+
+
+## G-EP137: Bind projector families to coefficient reconstruction
+
+Use a rectangular 4×3 coefficient pair with ordered row block sizes (1,1,2) and column block sizes (1,1,1). Under full row and column basis changes, the intended transported projectors reconstruct each transformed coefficient as the sum of its diagonal projected blocks. Construct alternative projector resolutions by permuting source subspaces before the same transport. Although these alternatives retain idempotence, pairwise orthogonality, completeness, and the same ranks, they produce nonzero off-diagonal projected blocks and fail diagonal-only reconstruction for both coefficients. The sum over all projected blocks still reconstructs the coefficient exactly, separating a false decomposition from an arithmetic/reconstruction defect. Finite test-side regression evidence over F₂/F₃/F₅; no production arbitrary-subspace certificate API is added.
+
+
+## G-EP138: Covariance under invertible pencil-coefficient mixing
+
+Starting with a block-diagonal rectangular coefficient pair, apply independent invertible row/column basis changes and an invertible 2×2 coefficient-space transformation with determinant one over F₂, F₃, and F₅. Recover the original ordered pair using the explicit inverse coefficient transformation. The intended transported projectors reconstruct each original and mixed coefficient as the sum of diagonal projected blocks. An alternative valid projector resolution still produces nonzero off-diagonal coupling for both mixed coefficients, while the sum over all projected blocks remains exact. This tests covariance of the coefficient-bound decomposition under invertible pencil mixing; it is finite test-side evidence and does not establish a general production verifier or theorem.
+
+
+## G-EP139: Composition of coefficient-space basis changes
+
+Apply two successive invertible 2×2 coefficient-space basis changes to the transported rectangular pencil pair over F₂, F₃, and F₅. The test compares sequential mixing with the correctly ordered direct product, checks diagonal projected-block reconstruction at the original, intermediate, and final stages using the same row/column projector families, and recovers the original ordered pair both by inverting the composite map and by applying the inverse factors in reverse order. This is finite test-side evidence for composition and covariance, not a production certificate API or a universal theorem.
+\n\n## G-EP140: One-output coefficient shear versus one-coefficient matrix mutation\n\nDistinguish two operations that can look superficially similar. An invertible coefficient-space shear sends the ordered pair (A,K) to (A+K,K): only the first output changes, but the whole pair is transformed by an invertible 2×2 map. Under independent row/column basis changes on a rectangular fixture, the same transported row/column projectors continue to reconstruct both coefficients from diagonal projected blocks, and the inverse shear recovers the original ordered pair.\n\nAs a contrasting control, add a shape-preserving cross-block matrix entry to A alone while leaving K unchanged. This is a matrix-space mutation, not the same coefficient-space basis change. The diagonal projected blocks no longer reconstruct the mutated A and its off-diagonal projected sum is nonzero, while K remains exactly reconstructible. The finite tests run over F₂, F₃, and F₅. They clarify the distinction between a valid one-output shear of the ordered pair and an unrelated one-coefficient alteration; they do not add a production certificate API or a universal theorem.
+\n\n## G-EP141: Rank-one coefficient maps and the surviving pencil direction\n\nFor each field F₂, F₃, and F₅, enumerate every nonzero singular 2×2 coefficient map on a fixed pair (Q,K) whose Q member is block diagonal and whose K member contains a cross-block coupling. Every such map has rank one, so its two output coefficients are scalar multiples of one surviving linear combination of Q and K. Group the maps by the projective direction of their nonzero coefficient rows.\n\nThe exact multi-block verifier's result is constant within each group, even though the rank-one maps have different kernel/preimage data. In this fixture, only the pure-Q direction removes the K coupling; every direction with a nonzero K component retains it and fails diagonal-only reconstruction. This refines the earlier singular-map warning by identifying the surviving coefficient-space direction as the relevant datum. The enumeration is finite and fixture-specific: a successful verdict concerns only the collapsed output pair and does not establish equivalence or a decomposition of the original two-coefficient pencil.
+
+## G-EP142: Rank-zero collapse versus surviving pencil information
+
+Exhaustively enumerate all 2×2 coefficient-space maps over F₂, F₃, and F₅
+on the same 3×3 fixture used for G-EP141. The fixture has a block-diagonal
+Q coefficient and a K coefficient with a cross-block coupling. Classify
+each map by its exact rank and replay its output pair through the production
+multi-block direct-sum verifier.
+
+There are three distinct information states:
+
+- **Rank zero:** both output coefficients are zero. The verifier returns a
+  successful direct-sum verdict for that supplied zero pair, as it should.
+  This is complete information collapse, not evidence that the original
+  Q,K pencil decomposes.
+- **Rank one:** the output pair spans one projective linear combination of
+  Q and K. The verdict is governed by that surviving direction, as G-EP141
+  established.
+- **Rank two:** the coefficient map is invertible and retains the full
+  two-dimensional coefficient-space information. In this fixture the
+  original K-coupling therefore remains visible in at least one output and
+  the direct-sum verdict is false.
+
+The exhaustive census checks one rank-zero map, p³+p²−p−1 rank-one maps,
+and (p²−1)(p²−p) invertible maps for each field. Importantly, the production
+verifier's result schema describes only the supplied output pair; it does
+not carry the coefficient map or its rank. The distinction is therefore
+recorded by a test-side provenance audit, not claimed as metadata inferred
+by the verifier. A successful verification certifies only the exact pair
+that was supplied, including a pair that may have been collapsed to zero.
+
+
+## G-EP143: Direct-sum verdict under invertible coefficient changes
+
+For each field F₂, F₃, and F₅, enumerate every invertible 2×2
+coefficient-space map. Apply each map to two ordered coefficient pairs
+using the same three-block coordinate partition:
+
+1. A positive fixture in which both original coefficients are block
+   diagonal. Every linear combination remains block diagonal, so the
+   supplied identity-coordinate witness must continue to verify.
+2. A negative fixture in which both coefficients contain cross-block
+   coupling, with the two couplings supported in different off-diagonal
+   positions. An invertible coefficient change cannot annihilate both
+   independent coupling directions in both outputs, so the verifier must
+   continue to reject the supplied witness.
+
+For every map, compute its inverse and recover the original ordered
+coefficient pair exactly from the transformed pair. The enumeration checks
+the exact group size |GL(2,F_p)| = (p²−1)(p²−p).
+
+This is exhaustive finite regression evidence for these fixtures and this
+coordinate witness. It is consistent with the general linear-algebra
+observation that an invertible change of basis in the two-dimensional
+coefficient space preserves whether both coefficients lie in the same
+linear subspace of block-diagonal matrices. It does not add a production
+coefficient-change API, discover a decomposition, or establish a universal
+classification result.
+
+- **G-EP144:** exhaustively tests every invertible 2×2 coefficient-space map over F₂/F₃/F₅ on a rectangular 3×4 block partition containing explicit zero-column and zero-row summands. Under independent nontrivial row/column basis changes, every ordered projected block of both mixed coefficients is checked against the corresponding linear combination of the original projected blocks, including exact empty-block shapes. All off-diagonal projected blocks remain zero, diagonal blocks reconstruct each full coefficient, and inverse coefficient maps recover both the ordered matrices and all indexed projected blocks. Finite test-side covariance evidence only; no production projector API or universal theorem is added.
+
+
+## G-EP144: Rectangular coefficient covariance at the projected-block level
+
+Use the rectangular 3×4 partition with ordered shapes (1,1), (1,0), (0,1), and (1,2). This retains both a zero-column summand and a zero-row summand while leaving two nonempty diagonal rectangular blocks. Apply independent nontrivial invertible row and column basis changes and transport the associated row and column projectors.
+
+For every invertible 2×2 coefficient-space map over F₂, F₃, and F₅, form the two transformed pencil coefficients. Check every ordered projected block, not just the final direct-sum verdict: each output block must equal the same coefficient-space linear combination of the corresponding two source blocks. This includes exact 1×0 and 0×1 empty-block shapes. Every off-diagonal projected block remains zero, and summing the diagonal projected blocks reconstructs each full rectangular output coefficient. Applying the inverse coefficient map recovers both original ordered coefficients and their complete indexed projected-block grids.
+
+The production multi-block verifier is replayed for each transformed pair and must accept the supplied transported witness. These are exhaustive finite regression controls for the stated partition and fields. They do not add an arbitrary-subspace projector API, decomposition discovery, or a universal theorem.
+
+- **G-EP145:** checks all 24 reorderings of a four-block rectangular partition containing zero-column and zero-row summands over F₂/F₃/F₅. Row and column coordinate permutations are induced independently from the same block ordering. Every reordered witness is replayed; all off-diagonal projected blocks vanish, diagonal blocks reconstruct each coefficient, and inverse coordinate/block permutations recover the original matrices and every indexed projected block. Finite test-side permutation covariance evidence only; no canonical-order or uniqueness claim is added.
+
+
+## G-EP145: Rectangular partition-order covariance
+
+The four rectangular summands have shapes (1,1), (1,0), (0,1), and (1,2), so the partition includes both zero-column and zero-row blocks. For each field F₂, F₃, and F₅, enumerate all 24 block-order permutations. Apply the induced row-coordinate and column-coordinate permutations independently to both coefficient matrices and permute the declared block shapes in the same order.
+
+Replay the supplied multi-block witness for every reordered pair. Inspect every ordered projected block for both coefficients, require off-diagonal blocks to vanish, and sum diagonal projected blocks to reconstruct each complete matrix. Then undo the row/column coordinate permutations and compare every indexed projected block with the corresponding original block; finally recover the original ordered coefficient pair and shape sequence using the inverse block permutation.
+
+This is exhaustive finite regression coverage for the stated partition and fields. It establishes permutation covariance of the supplied ordered decomposition, not a canonical ordering, uniqueness of decomposition, or automatic discovery of a partition.
+
+
+## G-EP146: Repeated equal-sized summands and assignment controls
+
+Use three repeated 1×1 summands with distinct ordered coefficient pairs,
+together with explicit zero-column and zero-row summands. The repeated
+summands have identical shapes but distinguishable matrix data. Over
+F₂, F₃, and F₅, enumerate all six permutations in S₃.
+
+For each permutation, transport the row and column coordinate intervals
+together while leaving the equal-valued shape sequence unchanged. Replay
+the production multi-block verifier, compare every indexed projected block
+with the correspondingly relabeled original block, and apply the inverse
+coordinate permutation to recover both original coefficient matrices.
+The two empty rectangular summands remain present throughout.
+
+As a shape-preserving adversarial control, permute only the row coordinates
+of two repeated blocks while keeping column coordinates and shape metadata
+fixed. The resulting assignment is not a consistent block relabeling:
+both coefficient matrices acquire off-diagonal projected entries, and the
+production verifier rejects the supplied witness. This tests the distinction
+between a valid simultaneous relabeling and a one-sided subspace assignment.
+It does not establish uniqueness of decompositions or add arbitrary
+projector inputs to the production API; the evidence is finite and
+test-side.
+
+
+## G-EP147: Equal dimensions versus internal pencil equivalence
+
+Use four equal 1×1 summands with coefficient pairs
+(1,1), (λ,λ), (1,2), and (0,1), where λ is the nonzero scalar p−1.
+The first two are proportional over each tested field F₂, F₃, and F₅.
+The third shares its Q coefficient with the first but differs in K, so
+matching one coefficient is insufficient. The fourth supplies another
+distinct projective coefficient direction.
+
+For 1×1 pencils, constant strict equivalence multiplies both coefficients
+by the same nonzero scalar. The test-local determinant criterion therefore
+checks whether two coefficient pairs are proportional. It confirms the
+intended equivalent and non-equivalent cases without extending that
+criterion to larger blocks.
+
+Enumerate all 24 permutations of the four equal-shaped summands. The
+production multi-block verifier accepts each simultaneous row/column
+relabeling, and the ordered internal coefficient signatures follow their
+corresponding blocks. As a separate control, mutate only the K entry of
+the third diagonal block. The overall direct-sum witness remains valid,
+but the internal projective pencil signature changes. This separates
+shape-based decomposition validity from equivalence of the diagonal
+pencil components.
+
+The evidence is finite and test-side. It does not establish a general
+classification of larger diagonal blocks, decomposition uniqueness, or
+a production strict-equivalence API.
