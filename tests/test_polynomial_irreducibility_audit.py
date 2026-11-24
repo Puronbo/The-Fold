@@ -252,9 +252,6 @@ class PolynomialIrreducibilityAuditTests(unittest.TestCase):
                 with self.assertRaises(ValueError):
                     audit_coprime_bad_proportion_ratio_bound(primes, degree)
 
-if __name__ == "__main__":
-    unittest.main()
-
 
 
 class CoprimeDefectSpectrumTests(unittest.TestCase):
@@ -345,3 +342,7 @@ class PrimePowerFieldTests(unittest.TestCase):
             with self.subTest(value=value):
                 with self.assertRaises(ValueError):
                     count_monic_irreducibles_over_field(value, 2)
+
+
+if __name__ == "__main__":
+    unittest.main()
