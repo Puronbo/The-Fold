@@ -919,50 +919,62 @@ uniform bounds apply. The computational evaluator is therefore
 correctly defined for all integer \(Q\ge2\), while field interpretation
 requires \(Q\) to be a prime power.
 
-## G-EP190 — Composition tree and additive defect budget
+## G-EP190 — Multi-factor composition excess and sign resonance
 
-For pairwise-coprime degrees \(n_1,\ldots,n_r>1\), define the
-normalized composite defect
+For pairwise-coprime degrees \(n_1,\ldots,n_r>1\), define
 \[
-\mathcal D_p(n_1,\ldots,n_r)
-=E_p(n_1\cdots n_r)-\prod_{i=1}^r E_p(n_i)
+H_Q(n_1,\ldots,n_r)
+=E_Q(n_1\cdots n_r)-\prod_{i=1}^rE_Q(n_i).
 \]
-and the additive budget
-\(S_r=\sum_i E_p(n_i)\). This quantity is not the same as the
-two-factor defect; it compares the composite bad proportion with the
-product of the individual bad proportions. Since G-EP181 gives
-\(E_p(\prod_{i\in J}n_i)<\min_{i\in J}E_p(n_i)\) for every
-coprime split with at least two factors, the composite bad proportion
-is strictly smaller than every individual bad proportion.
-
-Define \(F_j=E_p(n_1\cdots n_j)\) and
-\(D_j=F_j-\prod_{i=1}^jE_p(n_i)\), with \(D_1=0\).
-The exact recursion is
-
+This is a different quantity from the two-factor defect
+\(\Delta_Q(a,b)=E_Q(a)+E_Q(b)-E_Q(a)E_Q(b)-E_Q(ab)\).
+Its sign is not universally positive. The exact recursion, with
+\(F_j=E_Q(n_1\cdots n_j)\) and
+\(D_j=F_j-\prod_{i=1}^jE_Q(n_i)\), is
 \[
-D_j=F_j-\prod_{i=1}^jE_p(n_i),\qquad
-D_j=\bigl(F_j-F_{j-1}E_p(n_j)\bigr)+E_p(n_j)D_{j-1},
-\quad D_1=0.
+D_1=0,\qquad
+D_j=\bigl(F_j-F_{j-1}E_Q(n_j)\bigr)+E_Q(n_j)D_{j-1}.
 \]
-Each bracket is exactly the two-block defect for the coprime
-degrees \(n_1\cdots n_{j-1}\) and \(n_j\). Hence \(D_j>0\) by
-G-EP181 and induction. This proves
+The bracket is the *composition excess*
+\(E_Q((n_1\cdots n_{j-1})n_j)
+-E_Q(n_1\cdots n_{j-1})E_Q(n_j)\), not the two-factor defect
+\(\Delta_Q\). The recursion is exact, but neither its bracket nor
+\(D_j\) has a universal sign.
+
+For fixed pairwise-coprime degrees, let \(N=\prod_i n_i\) and
+\(A(n)=n(1-1/q(n))\). The leading field-size asymptotics are
 \[
-\boxed{
-E_p(n_1\cdots n_r)>\prod_iE_p(n_i)
-}
+E_Q(N)\sim Q^{-A(N)},\qquad
+\prod_iE_Q(n_i)\sim Q^{-\sum_iA(n_i)}.
 \]
-for every pairwise-coprime family with \(r\ge2\).
+Therefore:
+\[
+\begin{cases}
+H_Q\sim Q^{-A(N)},&A(N)<\sum_iA(n_i),\\
+H_Q\sim -Q^{-\sum_iA(n_i)},&A(N)>\sum_iA(n_i).
+\end{cases}
+\]
+At equality, the leading terms cancel and the exact divisor spectrum
+must be collected to determine the next nonzero term. This is a
+genuine *composition resonance*.
 
-This recursion also gives a composition-tree algorithm: any binary tree
-whose leaves are pairwise-coprime degrees has a positive local
-two-block defect at every internal node. The numerical value of the
-total excess depends on the tree's grouping, but its positivity does
-not. The additive first-order budget remains governed by the sum of
-the leaf errors when all leaf degrees grow, provided the relevant
-composite-to-minimum ratios are controlled by the G-EP182 bound at
-each split.
+Examples:
+\[
+H_Q(2,3)=Q^{-4}-Q^{-5}>0,
+\]
+where the leading exponents tie at 3 and cancel, while
+\[
+H_Q(3,4)=-Q^{-4}+Q^{-6}+Q^{-8}-Q^{-10}<0
+\]
+for \(Q\ge2\). Thus composition excess is tree-decomposable but not
+sign-definite. The two-factor \(\Delta_Q\) positivity theorem remains
+unchanged.
 
+The exact spectrum can be constructed for any pairwise-coprime list:
+take the spectrum of \(E_Q(N)\), subtract the additive convolution of
+the individual \(E_Q(n_i)\) spectra, and collect equal exponents. The
+result is independent of the chosen binary composition tree, although
+the intermediate local terms depend on the tree.
 
 ## G-EP191 — Boolean-lattice geometry of the divisor spectrum
 
