@@ -644,3 +644,84 @@ proper-subfield proportions, while the combined-degree correction is
 lower order. The displayed estimates quantify convergence and cover
 the regime where the smaller degree remains fixed (including \(a=2\));
 the single pair (2,3) does not affect the limit.
+
+
+## G-EP183 — Prime-factorization law for the defect's exponential scale
+
+For \(n>1\), let \(q(n)\) be its smallest prime divisor and define
+\[
+A(n)=n\left(1-\frac1{q(n)}\right).
+\]
+The Möbius expansion of \(E_p(n)=1-R_p(n)\) has leading term
+\(p^{-A(n)}\). The one-maximal-subfield lower bound and the
+maximal-proper-subfield union bound give the exact inequalities
+\[
+\boxed{
+p^{-A(n)}\le E_p(n)\le\omega(n)p^{-A(n)}.
+}
+\]
+Indeed, the smallest prime divisor gives the largest term in the union
+bound, and every other prime divisor contributes no more than that term.
+This estimate is valid for every prime \(p\), without taking a limit in
+\(p\).
+
+For coprime \(a,b>1\), put
+\[
+A_*=\min(A(a),A(b)),\qquad
+S=E_p(a)+E_p(b),\qquad B=\max(a,b).
+\]
+The G-EP182 relative-error estimate gives
+\[
+0\le1-\frac{\Delta_p(a,b)}S
+\le \min(E_p(a),E_p(b))+\frac{Q_p(a,b)}2.
+\]
+Its right-hand side tends to zero uniformly in prime \(p\) as \(B\)
+grows. Hence there is an absolute threshold \(B_0\) such that
+\(\Delta_p(a,b)\ge S/2\) for every prime \(p\) and every coprime pair
+with \(B\ge B_0\).
+
+The factorization bounds imply
+\[
+p^{-A_*}\le S
+\le\bigl(\omega(a)+\omega(b)\bigr)p^{-A_*}.
+\]
+Consequently, for all such sufficiently large pairs,
+\[
+\boxed{
+\frac12p^{-A_*}
+\le\Delta_p(a,b)
+\le\bigl(\omega(a)+\omega(b)\bigr)p^{-A_*}.
+}
+\]
+Since \(\omega(a)+\omega(b)<2\log_2 B\), this yields the explicit
+logarithmic-scale statement
+\[
+\boxed{
+\left|-\log_p\Delta_p(a,b)-A_*\right|
+\le 1+\log_2(2\log_2 B).
+}
+\]
+The bound is uniform over prime fields. In particular,
+\[
+-\log_p\Delta_p(a,b)
+=\min\left\{
+a\left(1-\frac1{q(a)}\right),
+b\left(1-\frac1{q(b)}\right)
+\right\}
++O(\log\log B),
+\]
+with an absolute, field-uniform error bound.
+
+Thus the degree with the smaller subfield exponent controls the defect's
+leading exponential scale. It is not necessarily the smaller degree:
+a larger degree with a smaller prime divisor can dominate a smaller
+degree with a larger smallest prime divisor. This distinction is why
+degree size alone does not determine the leading term.
+
+**Scope:** the result is an asymptotic statement as \(B\to\infty\), with
+an absolute threshold inherited from G-EP182. The two-sided
+factorization bound for each individual \(E_p(n)\) is exact for every
+\(n>1\) and every prime \(p\). The \(O(\log\log B)\) estimate does not
+assert a fixed multiplicative leading constant; that finer constant
+depends on the remaining prime divisors and on the lower-order
+inclusion-exclusion terms.
