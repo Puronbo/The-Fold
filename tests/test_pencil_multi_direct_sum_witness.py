@@ -5518,3 +5518,81 @@ class MultiDirectSumTests(unittest.TestCase):
                         self.assertEqual(
                             tuple(x*inv_pivot % p for x in nonzero), direction
                         )
+
+
+    def test_g_ep142_rank_zero_collapse_is_not_meaningful_direct_sum_evidence(self):
+        # The production verifier only sees its supplied output pair. It
+        # cannot infer whether a coefficient-space map erased all source
+        # information, retained one direction, or was invertible. Keep that
+        # provenance distinction in an explicit test-side audit.
+        shapes = [(1,  1), (1, 1), (1, 1)]
+        for p in (2, 3, 5):
+            q = [[1 % p, 0, 0],
+                 [0, 2 % p, 0],
+                 [0, 0, 3 % p]]
+            k = [[1 % p, 1 % p, 0],
+                 [0, 2 % p, 0],
+                 [0, 0, 3 % p]]
+            counts = {0: 0, 1: 0, 2: 0}
+            for a in range(p):
+                for b in range(p):
+                    for c in range(p):
+                        for d in range(p):
+                            determinant = (a*d - b*c) % p
+                            map_rank = (2 if determinant else
+                                        1 if (a or b or c or d) else 0)
+                            counts[map_rank] += 1
+                            out_q = [[(a*q[i][j] + b*k[i][j]) % p
+                                      for j in range(3)] for i in range(3)]
+                            out_k = [[(c*q[i][j] + d*k[i][j]) % p
+                                      for j in range(3)] for i in range(3)]
+                            audit = verify_pencil_multi_direct_sum_witness(
+                                out_q, out_k, p, ident(3), ident(3), shapes
+                            )
+                            verified = audit["verification"]["direct_sum_verified"]
+
+                            if map_rank == 0:
+                                # Both outputs are zero. The verifier quite
+                                # correctly verifies this collapsed pair,
+                                # but that says nothing about the source Q,K.
+                                self.assertEqual(out_q, [[0]*3 for _ in range(3)])
+                                self.assertEqual(out_k, [[0]*3 for _ in range(3)])
+                                self.assertTrue(verified)
+                                interpretation = "complete information collapse"
+                            elif map_rank == 1:
+                                # A single projective image direction remains.
+                                direction = (a, b) if (a or b) else (c, d)
+                                pivot = next(x for x in direction if x)
+                                scale = pow(pivot, -1, p)
+                                direction = tuple(x*scale % p for x in direction)
+                                self.assertEqual(
+                                    verified, direction[1] == 0
+                                )
+                                interpretation = "one surviving pencil direction"
+                            else:
+                                # Invertible mixing preserves the full
+                                # two-dimensional coefficient information;
+                                # the original K-coupling cannot disappear
+                                # from both outputs.
+                                self.assertFalse(verified)
+                                interpretation = "full coefficient-space information"
+
+                            with self.subTest(field=p, map=(a,b,c,d)):
+                                self.assertEqual(map_rank, map_rank)
+                                self.assertIn(
+                                    interpretation,
+                                    ("complete information collapse",
+                                     "one surviving pencil direction",
+                                     "full coefficient-space information")
+                                )
+                                if map_rank == 0:
+                                    self.assertTrue(
+                                        audit["verification"]["Q_off_diagonal_blocks_zero"]
+                                    )
+                                    self.assertTrue(
+                                        audit["verification"]["K_off_diagonal_blocks_zero"]
+                                    )
+
+            self.assertEqual(counts[0], 1)
+            self.assertEqual(counts[1], p**3 + p**2 - p - 1)
+            self.assertEqual(counts[2], (p**2 - 1) * (p**2 - p))
