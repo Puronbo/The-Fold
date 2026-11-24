@@ -111,3 +111,6 @@
 
 
 **Multi-block witness adversarial verification (G-EP88):** adds regressions ensuring singular left or right transforms produce a failed verification audit rather than being confused with malformed caller data; modularly equivalent integer representatives yield identical normalized audit data; field validation rejects booleans, non-integers, small invalid values, and composites while F₂/F₃ positive controls pass; and malformed nested/ragged matrix inputs raise explicit `ValueError`. This hardens the supplied-witness verifier without changing its discovery scope or treating a failed witness as proof that no decomposition exists.
+
+
+**Generated rectangular partition coverage (G-EP89):** deterministic generated-style fixtures exercise multi-block partitions containing zero-row and zero-column blocks (but no zero-by-zero blocks) over F₂, F₃, F₅, and F₇. Identity transforms verify valid block-diagonal pairs, while injected cross-block coefficients must fail the corresponding zero-block and overall verification checks. Invalid total partitions are also rejected. These are finite regression controls, not a universal proof.
