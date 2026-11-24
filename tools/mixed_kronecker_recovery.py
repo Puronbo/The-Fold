@@ -242,14 +242,29 @@ def verify_mixed_kronecker_negative_certificate(
     q: Sequence[Sequence[int]], k: Sequence[Sequence[int]], p: int,
     result: dict, *, max_degree: int = 8, max_minors: int = 2000,
 ) -> dict:
-    """Independently replay an exhaustive negative-result claim.
+    """Replay an exhaustive negative-result claim, failing closed on bad data.
 
-    The verifier recomputes the complete profile, then independently enumerates
-    every left matrix by Cartesian-product order and every compatible affine
-    right-transform vector. It does not trust the result's completion flag,
-    candidate count, search mode, profile, or explanatory metadata.
+    Caller-supplied pencil inputs are validated first and raise ValueError when
+    malformed. A malformed certificate/result instead returns verified=False.
     """
-    rows, cols = _validate_pair(q, k, p)
+    # Keep invalid caller data distinct from an untrusted/malformed certificate.
+    if (not isinstance(q, Sequence) or isinstance(q, (str, bytes))
+            or not isinstance(k, Sequence) or isinstance(k, (str, bytes))
+            or not q or not k):
+        raise ValueError("Q and K must be non-empty matrix sequences")
+    for matrix in (q, k):
+        for row in matrix:
+            if (not isinstance(row, Sequence) or isinstance(row, (str, bytes))
+                    or not row or any(not isinstance(value, int) or isinstance(value, bool)
+                                      for value in row)):
+                raise ValueError("Q and K must contain non-empty rows of integer entries")
+    try:
+        rows, cols = _validate_pair(q, k, p)
+    except (TypeError, IndexError) as exc:
+        raise ValueError("Q, K, and p are invalid replay inputs") from exc
+
+    if not isinstance(result, dict):
+        return {"verified": False, "reason": "certificate result must be a dictionary"}
     required = {
         "schema": "the-fold-mixed-kronecker-recovery-v1",
         "field": f"F_{p}",
@@ -258,8 +273,7 @@ def verify_mixed_kronecker_negative_certificate(
         "decision_complete": True,
         "search_mode": "exhaustive",
     }
-    if not isinstance(result, dict) or any(result.get(key) != value
-                                          for key, value in required.items()):
+    if any(key not in result or result[key] != value for key, value in required.items()):
         return {"verified": False, "reason": "result metadata does not describe a completed exhaustive negative"}
     budget = result.get("max_candidates")
     claimed_count = result.get("candidates_examined")
@@ -267,43 +281,50 @@ def verify_mixed_kronecker_negative_certificate(
             or not isinstance(claimed_count, int) or isinstance(claimed_count, bool)
             or claimed_count < 0 or claimed_count > budget):
         return {"verified": False, "reason": "candidate budget metadata is invalid"}
+    if not isinstance(result.get("profile"), dict):
+        return {"verified": False, "reason": "certificate profile must be a dictionary"}
 
-    profile = rectangular_pencil_kronecker_profile(
-        q, k, p, max_degree=max_degree, max_minors=max_minors
-    )
-    if not profile.get("complete_kronecker_structure_data") or result.get("profile") != profile:
-        return {"verified": False, "reason": "profile is incomplete or does not match recomputed input profile"}
-    target_q, target_k = _canonical_target(profile, p)
-    if (len(target_q), len(target_q[0])) != (rows, cols):
-        return {"verified": False, "reason": "recomputed canonical target has inconsistent dimensions"}
+    try:
+        profile = rectangular_pencil_kronecker_profile(
+            q, k, p, max_degree=max_degree, max_minors=max_minors
+        )
+        if (not profile.get("complete_kronecker_structure_data")
+                or result["profile"] != profile):
+            return {"verified": False, "reason": "profile is incomplete or does not match recomputed input profile"}
+        target_q, target_k = _canonical_target(profile, p)
+        if (len(target_q), len(target_q[0])) != (rows, cols):
+            return {"verified": False, "reason": "recomputed canonical target has inconsistent dimensions"}
 
-    examined = 0
-    for flat_s in product(range(p), repeat=rows * rows):
-        if examined >= budget:
-            return {"verified": False, "reason": "replay exceeds claimed candidate budget"}
-        s = _matrix_from_flat(list(flat_s), rows)
-        examined += 1
-        if _det(s, p) == 0:
-            continue
-        equations, rhs = _right_transform_equations(s, q, k, target_q, target_k, p)
-        affine = _solve_affine(equations, rhs, cols * cols, p)
-        if affine is None:
-            continue
-        particular, basis = affine
-        for vector in _affine_vectors(particular, basis, p):
+        examined = 0
+        for flat_s in product(range(p), repeat=rows * rows):
             if examined >= budget:
                 return {"verified": False, "reason": "replay exceeds claimed candidate budget"}
+            s = _matrix_from_flat(list(flat_s), rows)
             examined += 1
-            t = _matrix_from_flat(vector, cols)
-            if _det(t, p) != 0:
-                return {"verified": False, "reason": "replay found an invertible strict-equivalence witness"}
+            if _det(s, p) == 0:
+                continue
+            equations, rhs = _right_transform_equations(s, q, k, target_q, target_k, p)
+            affine = _solve_affine(equations, rhs, cols * cols, p)
+            if affine is None:
+                continue
+            particular, basis = affine
+            for vector in _affine_vectors(particular, basis, p):
+                if examined >= budget:
+                    return {"verified": False, "reason": "replay exceeds claimed candidate budget"}
+                examined += 1
+                t = _matrix_from_flat(vector, cols)
+                if _det(t, p) != 0:
+                    return {"verified": False, "reason": "replay found an invertible strict-equivalence witness"}
 
-    if examined != claimed_count:
-        return {"verified": False, "reason": "reported candidate count differs from replay"}
-    if result.get("reason") != "all invertible S and all affine T solutions were exhausted; no strict-equivalence witness exists":
-        return {"verified": False, "reason": "negative-result explanation metadata is inconsistent"}
-    if result.get("scope") != "Complete finite-field non-equivalence decision for the profile-derived canonical target.":
-        return {"verified": False, "reason": "negative-result scope metadata is inconsistent"}
+        if examined != claimed_count:
+            return {"verified": False, "reason": "reported candidate count differs from replay"}
+        if result.get("reason") != "all invertible S and all affine T solutions were exhausted; no strict-equivalence witness exists":
+            return {"verified": False, "reason": "negative-result explanation metadata is inconsistent"}
+        if result.get("scope") != "Complete finite-field non-equivalence decision for the profile-derived canonical target.":
+            return {"verified": False, "reason": "negative-result scope metadata is inconsistent"}
+    except (TypeError, KeyError, IndexError, AttributeError, ArithmeticError, OverflowError):
+        return {"verified": False, "reason": "malformed certificate data could not be replayed"}
+
     return {
         "verified": True,
         "candidates_replayed": examined,
