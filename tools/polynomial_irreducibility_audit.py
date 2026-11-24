@@ -715,3 +715,70 @@ def irreducible_density_over_field(field_size: int,
         "bad_proportion_numerator": (1 - normalized).numerator,
         "bad_proportion_denominator": (1 - normalized).denominator,
     }
+
+
+def coprime_composition_excess_spectrum(degrees: list[int]) -> dict:
+    """Return E_Q(product(degrees)) - product(E_Q(degree_i)) exactly.
+
+    The input must contain at least two pairwise-coprime integers > 1.
+    Coefficients are integer and exponents are nonnegative integers.
+    """
+    if not isinstance(degrees, list) or len(degrees) < 2:
+        raise ValueError("degrees must be a list containing at least two values")
+    for degree in degrees:
+        if (isinstance(degree, bool) or not isinstance(degree, int)
+                or degree <= 1):
+            raise ValueError("every degree must be an integer greater than one")
+    for index, degree in enumerate(degrees):
+        if any(math.gcd(degree, other) != 1
+               for other in degrees[index + 1:]):
+            raise ValueError("degrees must be pairwise coprime")
+
+    def error_terms(degree: int) -> dict[int, int]:
+        terms: dict[int, int] = {}
+        for divisor in range(2, degree + 1):
+            if degree % divisor == 0:
+                mu = _mobius(divisor)
+                if mu:
+                    exponent = degree - degree // divisor
+                    terms[exponent] = terms.get(exponent, 0) - mu
+        return terms
+
+    product_degree = math.prod(degrees)
+    composite_terms = error_terms(product_degree)
+    product_terms = {0: 1}
+    for degree in degrees:
+        next_terms: dict[int, int] = {}
+        for exponent, coefficient in product_terms.items():
+            for error_exponent, error_coefficient in error_terms(degree).items():
+                total_exponent = exponent + error_exponent
+                next_terms[total_exponent] = (
+                    next_terms.get(total_exponent, 0)
+                    + coefficient * error_coefficient
+                )
+        product_terms = next_terms
+
+    coefficients: dict[int, int] = {}
+    for exponent, coefficient in composite_terms.items():
+        coefficients[exponent] = coefficients.get(exponent, 0) + coefficient
+    for exponent, coefficient in product_terms.items():
+        coefficients[exponent] = coefficients.get(exponent, 0) - coefficient
+    spectrum = [
+        {"exponent": exponent, "coefficient": coefficients[exponent]}
+        for exponent in sorted(coefficients)
+        if coefficients[exponent]
+    ]
+    if not spectrum:
+        raise ArithmeticError("composition excess spectrum vanished")
+    return {
+        "schema": "the-fold-coprime-composition-excess-spectrum-v1",
+        "degrees": degrees,
+        "composite_degree": product_degree,
+        "spectrum": spectrum,
+        "leading_exponent": spectrum[0]["exponent"],
+        "leading_coefficient": spectrum[0]["coefficient"],
+        "sign_for_sufficiently_large_field": (
+            "positive" if spectrum[0]["coefficient"] > 0 else "negative"
+        ),
+        "term_count": len(spectrum),
+    }
