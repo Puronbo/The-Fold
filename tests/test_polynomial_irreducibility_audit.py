@@ -658,8 +658,6 @@ class LaurentSpectrumGlobalSignCertificateTests(unittest.TestCase):
                     )
 
 
-if __name__ == "__main__":
-    unittest.main()
 
 
 class LaurentSpectrumFamilyUniformSignTests(unittest.TestCase):
@@ -713,3 +711,7 @@ class LaurentSpectrumFamilyUniformSignTests(unittest.TestCase):
     def test_empty_family_is_rejected(self):
         with self.assertRaises(ValueError):
             laurent_spectrum_family_uniform_sign_certificate([])
+
+
+if __name__ == "__main__":
+    unittest.main()
