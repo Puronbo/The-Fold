@@ -212,5 +212,19 @@ class PolynomialIrreducibilityAuditTests(unittest.TestCase):
                     audit_coprime_density_defect_sign(primes, degree)
 
 
+    def test_coprime_bad_proportion_order_audit(self):
+        from tools.polynomial_irreducibility_audit import audit_coprime_bad_proportion_order
+        result = audit_coprime_bad_proportion_order([2, 3, 5], 12)
+        self.assertEqual(result["coprime_pair_count"], 102)
+        self.assertEqual(result["strict_order_count"], 102)
+        self.assertTrue(result["all_checked_pairs_strict"])
+        self.assertIsNone(result["first_failure"])
+        self.assertIsNotNone(result["largest_product_to_smaller_factor_bad_ratio"])
+        for primes, degree in (([], 4), ([4], 4), ([2, 2], 4), ([2], 2)):
+            with self.subTest(primes=primes, degree=degree):
+                with self.assertRaises(ValueError):
+                    audit_coprime_bad_proportion_order(primes, degree)
+
+
 if __name__ == "__main__":
     unittest.main()
