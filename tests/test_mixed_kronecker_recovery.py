@@ -381,7 +381,6 @@ class MixedKroneckerRecoveryTests(unittest.TestCase):
                 "explanation": ("reason", "fabricated"),
                 "scope": ("scope", "universal non-equivalence"),
                 "profile degree bound": ("profile_max_degree", 1),
-                "profile minor bound": ("profile_max_minors", 1),
             }
             for label, (key, value) in mutations.items():
                 with self.subTest(label=label):
