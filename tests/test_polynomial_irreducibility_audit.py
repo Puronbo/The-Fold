@@ -486,11 +486,13 @@ class CompositionExcessSignCertificateTests(unittest.TestCase):
         )
         self.assertEqual(positive["sufficient_field_size_threshold"], 2)
         self.assertEqual(positive["eventual_sign"], "positive")
+        self.assertEqual(positive["smallest_integer_threshold"], 2)
 
         negative = coprime_composition_excess_sign_certificate([3, 4], 2)
         self.assertEqual(negative["exact_sign"], "negative")
         self.assertEqual(negative["sufficient_field_size_threshold"], 4)
         self.assertEqual(negative["eventual_sign"], "negative")
+        self.assertEqual(negative["smallest_integer_threshold"], 2)
 
     def test_threshold_guarantee_on_prime_power_grid(self):
         for degrees in ([2, 3], [3, 4], [2, 5, 9], [3, 5, 7]):
