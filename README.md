@@ -236,3 +236,6 @@ of its witness.
 
 
 - **G-EP124:** increases the right-transform space to 3×3 (nine variables) for a rectangular 4×3 coefficient pair. Independently constructs the simultaneous constraint matrices from matrix-unit inputs, compares their ranks and nullities after full row/column basis transport over F₂/F₃/F₅, and verifies both directions of the induced candidate-coordinate map on all matrix units plus sampled general candidates. Finite test-side rank/nullity and covariance evidence only; no production mixed-basis API change.
+
+
+- **G-EP125:** independently cross-checks G-EP124's 3×3 transported constraint rank with complete row-span enumeration over F₂/F₃ (and RREF covariance over F₅). Shape-preserving coefficient mutation changes the reconstructed constraint map while retaining dimensions, distinguishing a mathematically false transport from malformed input; a mutated inverse-map entry breaks the inverse identity, with a separate malformed-dimension control. Finite test-side evidence only.
