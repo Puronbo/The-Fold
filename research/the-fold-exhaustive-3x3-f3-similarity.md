@@ -20,6 +20,6 @@ This is not a coefficient-wise field identification. The same integer tuple in t
 
 Every monic cubic over a field is the characteristic polynomial of its companion matrix. The regression therefore enumerates all monic cubics over F₂ and F₃, factors each with the exact finite-field factorizer, and multiplies the returned irreducible factors (with multiplicities) back to the original polynomial.
 
-The factorization degree/multiplicity shapes coincide across these fields: three linear factors (including repeated cases), one linear plus one irreducible quadratic, or one irreducible cubic. The actual monic irreducible inventories are field-dependent. Their counts in degrees one, two, and three are respectively p, (p²−p)/2, and (p³−p)/3, giving distinct catalogs over F₂ and F₃.
+The factorization degree/multiplicity shapes are almost, but not entirely, the same. Both fields admit a triple linear factor, a repeated linear factor times a distinct linear factor, a linear times an irreducible quadratic, and an irreducible cubic. F₃ additionally admits three distinct linear factors; F₂ cannot, because it has only two monic linear irreducibles. The actual monic irreducible inventories are field-dependent. Their counts in degrees one, two, and three are respectively p, (p²−p)/2, and (p³−p)/3.
 
 This is a complete enumeration of monic cubics over the two stated fields, not a claim about higher-degree polynomials or an identification of polynomial coefficients across fields.
