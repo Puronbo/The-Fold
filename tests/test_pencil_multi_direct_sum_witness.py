@@ -2548,3 +2548,100 @@ class MultiDirectSumTests(unittest.TestCase):
                 q, k, p, left, right, shapes
             )
             self.assertTrue(audit["verification"]["direct_sum_verified"], audit)
+
+
+    def test_g_ep117_rectangular_equations_match_direct_matrix_products(self):
+        import random
+
+        def elementary_basis_change(size, p, rng):
+            matrix = ident(size)
+            # Products of elementary row additions are invertible by
+            # construction and independently generated for each side.
+            for _ in range(3*max(1, size)):
+                if size < 2:
+                    break
+                source, target = rng.sample(range(size), 2)
+                matrix[target] = [
+                    (matrix[target][j] + rng.randrange(1, p)*matrix[source][j]) % p
+                    for j in range(size)
+                ]
+            return matrix
+
+        def equation_rows(left, coefficient, shapes, p):
+            m, n = len(left), len(coefficient[0])
+            row_starts, col_starts = [0], [0]
+            for rsize, csize in shapes:
+                row_starts.append(row_starts[-1]+rsize)
+                col_starts.append(col_starts[-1]+csize)
+            left_product = mm(left, coefficient, p)
+            rows, positions = [], []
+            for bi in range(len(shapes)):
+                for bj in range(len(shapes)):
+                    if bi == bj:
+                        continue
+                    for i in range(row_starts[bi], row_starts[bi+1]):
+                        for j in range(col_starts[bj], col_starts[bj+1]):
+                            row = [0]*(n*n)
+                            for z in range(n):
+                                row[z*n+j] = left_product[i][z] % p
+                            rows.append(row)
+                            positions.append((i,j))
+            self.assertEqual(row_starts[-1], m)
+            self.assertEqual(col_starts[-1], n)
+            return rows, positions
+
+        cases = [
+            ([(1, 0), (1, 2), (0, 1), (1, 1)], 3, 4),
+            ([(0, 1), (2, 1), (1, 0), (1, 2)], 4, 4),
+            ([(1, 1), (0, 2), (2, 0), (1, 1)], 4, 4),
+        ]
+        for case_index, (shapes, m, n) in enumerate(cases):
+            for p in (2, 3, 5, 7):
+                rng = random.Random(117000 + 100*case_index + p)
+                left = elementary_basis_change(m, p, rng)
+                right = elementary_basis_change(n, p, rng)
+                left_inv, right_inv = inverse(left, p), inverse(right, p)
+
+                def block_diagonal_pair():
+                    pair = [[0]*n for _ in range(m)]
+                    row_start = col_start = 0
+                    for rsize, csize in shapes:
+                        for i in range(rsize):
+                            for j in range(csize):
+                                pair[row_start+i][col_start+j] = rng.randrange(p)
+                        row_start += rsize
+                        col_start += csize
+                    return pair
+
+                target_q, target_k = block_diagonal_pair(), block_diagonal_pair()
+                q = mm(mm(left_inv, target_q, p), right_inv, p)
+                k = mm(mm(left_inv, target_k, p), right_inv, p)
+
+                for coefficient, target in ((q, target_q), (k, target_k)):
+                    rows, positions = equation_rows(left, coefficient, shapes, p)
+                    # Compare the linear equation evaluation with the actual
+                    # off-diagonal entries of (left * coefficient) * candidate.
+                    for trial in range(5):
+                        candidate = [
+                            [rng.randrange(p) for _ in range(n)]
+                            for _ in range(n)
+                        ]
+                        flattened = [x for row in candidate for x in row]
+                        actual = mm(mm(left, coefficient, p), candidate, p)
+                        predicted = [
+                            sum(a*b for a,b in zip(row, flattened)) % p
+                            for row in rows
+                        ]
+                        self.assertEqual(
+                            predicted, [actual[i][j] for i,j in positions],
+                            (case_index, p, trial, coefficient)
+                        )
+                    self.assertEqual(mm(mm(left, coefficient, p), right, p), target)
+
+                with self.subTest(case=case_index, field=p):
+                    audit = verify_pencil_multi_direct_sum_witness(
+                        q, k, p, left, right, shapes
+                    )
+                    self.assertTrue(audit["verification"]["direct_sum_verified"], audit)
+                    self.assertEqual(audit["transformed_Q"], target_q)
+                    self.assertEqual(audit["transformed_K"], target_k)
