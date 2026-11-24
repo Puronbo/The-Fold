@@ -2324,7 +2324,7 @@ class MultiDirectSumTests(unittest.TestCase):
                      if (x[0]*x[3] - x[1]*x[2]) % p != 0},
                     invertible_common,
                 )
-                self.assertEqual(len(invertible_common), p*(p-1))
+                self.assertEqual(len(invertible_common), (p-1)*(p-1))
                 self.assertIn((1, 0, 0, 1), invertible_common)
                 self.assertIn((1, 0, 0, 0), common)  # singular solution
                 self.assertEqual(mm(q, u, p), target_q)
