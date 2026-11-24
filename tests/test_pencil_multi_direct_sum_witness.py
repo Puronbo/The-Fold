@@ -2425,3 +2425,126 @@ class MultiDirectSumTests(unittest.TestCase):
                 self.assertEqual(mm(q,u,p),target_q)
                 self.assertEqual(mm(k,u,p),target_k)
 
+
+    def test_g_ep116_rectangular_partitions_and_constraint_dimension_monotonicity(self):
+        # Generalize the unknown-right-transform equations to rectangular
+        # block shapes. The total row and column dimensions agree, while
+        # individual diagonal blocks need not be square.
+        def rref_nullspace(rows, nvars, p):
+            work = [[x % p for x in row] for row in rows]
+            pivots, pivot_row = [], 0
+            for col in range(nvars):
+                pivot = next((r for r in range(pivot_row, len(work))
+                              if work[r][col]), None)
+                if pivot is None:
+                    continue
+                work[pivot_row], work[pivot] = work[pivot], work[pivot_row]
+                scale = pow(work[pivot_row][col], -1, p)
+                work[pivot_row] = [x*scale % p for x in work[pivot_row]]
+                for r in range(len(work)):
+                    if r != pivot_row and work[r][col]:
+                        factor = work[r][col]
+                        work[r] = [(x-factor*y) % p
+                                   for x, y in zip(work[r], work[pivot_row])]
+                pivots.append(col)
+                pivot_row += 1
+                if pivot_row == len(work):
+                    break
+            free = [c for c in range(nvars) if c not in pivots]
+            solutions = set()
+            for values in __import__("itertools").product(range(p), repeat=len(free)):
+                vector = [0]*nvars
+                for c, value in zip(free, values):
+                    vector[c] = value
+                for r, pivot in enumerate(pivots):
+                    vector[pivot] = (-sum(work[r][c]*vector[c]
+                                          for c in free)) % p
+                solutions.add(tuple(vector))
+            return solutions, len(free), len(pivots)
+
+        def make_equations(left, coeffs, shapes, p):
+            m = sum(r for r, _ in shapes)
+            n = sum(c for _, c in shapes)
+            row_block = [0]
+            col_block = [0]
+            for r, c in shapes:
+                row_block.append(row_block[-1]+r)
+                col_block.append(col_block[-1]+c)
+            equations = []
+            for coeff in coeffs:
+                a = mm(left, coeff, p)
+                for bi, (rsize, csize) in enumerate(shapes):
+                    for bj, (rj, cj) in enumerate(shapes):
+                        if bi == bj:
+                            continue
+                        for i in range(row_block[bi], row_block[bi+1]):
+                            for j in range(col_block[bj], col_block[bj+1]):
+                                equations.append([
+                                    a[i][z] if col == j else 0
+                                    for z in range(n) for col in range(n)
+                                ])
+            self.assertEqual(m, n)
+            return equations
+
+        # N=2 is small enough for a complete brute-force comparison.
+        for p in (2, 3):
+            shapes = [(1, 1), (1, 1)]
+            left = [[1, 1], [0, 1]]
+            right = [[1, 0], [1, 1]]
+            left_inv, right_inv = inverse(left, p), inverse(right, p)
+            target_q, target_k = [[1, 0], [0, 0]], [[0, 0], [0, 1]]
+            q = mm(mm(left_inv, target_q, p), right_inv, p)
+            k = mm(mm(left_inv, target_k, p), right_inv, p)
+            q_system = make_equations(left, [q], shapes, p)
+            both_system = make_equations(left, [q, k], shapes, p)
+            q_solutions, q_dim, _ = rref_nullspace(q_system, 4, p)
+            solutions, dimension, _ = rref_nullspace(both_system, 4, p)
+            brute = set()
+            for a in range(p):
+                for b in range(p):
+                    for c in range(p):
+                        for d in range(p):
+                            t = [[a, b], [c, d]]
+                            if (all(x == 0 for x in
+                                    [mm(mm(left, q, p), t, p)[0][1],
+                                     mm(mm(left, q, p), t, p)[1][0]]) and
+                                all(x == 0 for x in
+                                    [mm(mm(left, k, p), t, p)[0][1],
+                                     mm(mm(left, k, p), t, p)[1][0]])):
+                                brute.add((a, b, c, d))
+            self.assertEqual(solutions, brute)
+            self.assertEqual(len(solutions), p**dimension)
+            self.assertLessEqual(dimension, q_dim)
+            self.assertEqual(mm(mm(left, q, p), right, p), target_q)
+            self.assertEqual(mm(mm(left, k, p), right, p), target_k)
+            for candidate in solutions:
+                t = [list(candidate[:2]), list(candidate[2:])]
+                if (candidate[0]*candidate[3]-candidate[1]*candidate[2]) % p:
+                    audit = verify_pencil_multi_direct_sum_witness(
+                        q, k, p, left, t, shapes
+                    )
+                    self.assertTrue(audit["verification"]["direct_sum_verified"], audit)
+
+        # N=3 rectangular blocks: independently scrambled left/right bases.
+        # The known witness must lie in the computed nullspace; this larger
+        # case intentionally does not claim exhaustive brute-force coverage.
+        for p in (2, 3, 5):
+            shapes = [(1, 2), (2, 1)]
+            target_q = [[1, 2 % p, 0], [0, 0, 1], [0, 0, 2 % p]]
+            target_k = [[2 % p, 1, 0], [0, 1, 2 % p], [0, 0, 1]]
+            left = [[1, 1, 0], [0, 1, 1], [0, 0, 1]]
+            right = [[1, 0, 1], [0, 1, 1], [0, 0, 1]]
+            left_inv, right_inv = inverse(left, p), inverse(right, p)
+            q = mm(mm(left_inv, target_q, p), right_inv, p)
+            k = mm(mm(left_inv, target_k, p), right_inv, p)
+            equations = make_equations(left, [q, k], shapes, p)
+            solutions, dimension, rank = rref_nullspace(equations, 9, p)
+            known = tuple(x for row in right for x in row)
+            self.assertIn(known, solutions)
+            self.assertEqual(len(solutions), p**dimension)
+            self.assertEqual(dimension + rank, 9)
+            self.assertLessEqual(dimension, 9)
+            audit = verify_pencil_multi_direct_sum_witness(
+                q, k, p, left, right, shapes
+            )
+            self.assertTrue(audit["verification"]["direct_sum_verified"], audit)
