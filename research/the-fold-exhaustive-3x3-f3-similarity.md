@@ -78,3 +78,8 @@ For every monic polynomial of degrees one through four over F₂, F₃, and F₅
 ## Quintic irreducibility cross-check (G-EP165)
 
 The same predicate-versus-factorizer comparison is extended to all 3,400 monic quintics over F₂, F₃, and F₅. Together with G-EP164, this gives exhaustive cross-check coverage for every monic polynomial of degrees one through five over those three prime fields. It remains a finite regression result.
+
+
+## Sextic irreducibility cross-check (G-EP166)
+
+G-EP166 exhaustively compares the irreducibility predicate with the factorizer's one-factor criterion for all 64 monic sextics over F₂ and all 729 over F₃. This extends the degree-one-through-five comparison from G-EP164 and G-EP165 to degree six over the two smaller prime fields. It is finite regression evidence, not a general proof.
