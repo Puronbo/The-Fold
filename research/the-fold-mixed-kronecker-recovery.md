@@ -142,3 +142,12 @@ This is a replay/input-boundary hardening change. It does not change recovery se
 Positive recovery replay reconstructs the profile from the supplied pencil and certificate-bound profile limits, then rebuilds the canonical target and block shapes from that recomputed profile. Certificate comparisons are type-exact and recursive: Python boolean/integer equality can no longer let a forged boolean stand in for an integer in source dimensions, profile entries, canonical matrices, minimal-index data, regular dimensions, or block shapes.
 
 Adversarial tests mutate nested profile integers, source-shape entries, canonical matrix entries, regular dimensions, and block-shape entries into booleans, and alter canonical container types. Each mutation must fail replay while the unmodified positive certificate remains valid. This strengthens deterministic certificate reconstruction and representation integrity; it is not a separate Kronecker classifier, a uniqueness proof, or a claim that canonicalization is independent of the existing exact profile/canonical-target routines.
+
+
+## G-EP84 — Cross-field positive replay and witness non-uniqueness
+
+Added positive recovery replay controls over F₂, F₃, F₅, and F₇ using the same independently invertible left/right elementary basis scramblings. Each recovered certificate must replay against its exact source pencil and field. Adversarial variants forge the field label and insert a boolean into a transform entry; both must fail closed.
+
+A separate F₃/F₅/F₇ control rescales a valid witness by a nonzero scalar, replacing S with cS and T with c⁻¹T. The replay verifier must accept these distinct witnesses because both strict-equivalence products are unchanged. This guards against accidentally treating a particular transform pair as canonical.
+
+**Scope:** these are deterministic finite-field regression cases for the selected 4×4 mixed family. They exercise replay and witness flexibility, not universal recovery completeness, witness uniqueness, or a separate classifier.
