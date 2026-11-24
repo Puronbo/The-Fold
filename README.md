@@ -102,3 +102,6 @@
 
 
 **G-EP85:** expands positive recovery replay adversarial coverage: required metadata omission and type substitutions, boolean/integer aliases and container substitutions in nested strict-equivalence and multi-block audit records, now rejected through recursive type-exact audit comparison, and cross-field S/T transplantation across F₃/F₅/F₇, accepting a transplanted pair only when it satisfies the destination-field identities and rejecting a mutated pair after audit regeneration. Witness provenance is not required. These are deterministic certificate-integrity regressions for the selected fixture, not a universal recovery or uniqueness theorem.
+
+
+**G-EP86:** tests tampering with canonical block order, block dimensions, canonical target entries, and nested multi-block audit matrices. A consistently reordered right/regular/left block decomposition remains valid under the standalone direct-sum witness verifier, while the recovery-certificate verifier rejects it because that certificate uses a fixed profile-derived canonical block order. This distinguishes algebraic direct-sum validity from canonical certificate serialization; the regression uses one 4×4 fixture over F₅.
