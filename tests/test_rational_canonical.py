@@ -680,5 +680,91 @@ class RationalCanonicalTests(unittest.TestCase):
         self.assertIn(((5, 1),), patterns[5])
 
 
+    def test_g_ep161_sextic_factor_patterns_reach_full_catalog_at_f7(self):
+        from itertools import product
+        from tools.spectral_fingerprint import factor_polynomial
+
+        patterns = {}
+        for p in (2, 3, 7):
+            observed_patterns = set()
+            observed_irreducibles = set()
+            for lower in product(range(p), repeat=6):
+                polynomial = (1,) + tuple(lower)
+                factors = factor_polynomial(polynomial, p)
+                reconstructed = [1]
+                pattern = []
+                for factor in factors:
+                    if "degree" not in factor:
+                        continue
+                    coefficients = tuple(
+                        value % p for value in factor["coefficients_descending"]
+                    )
+                    degree = factor["degree"]
+                    multiplicity = factor["multiplicity"]
+                    self.assertEqual(len(coefficients), degree + 1)
+                    self.assertEqual(coefficients[0], 1)
+                    observed_irreducibles.add((degree, coefficients))
+                    pattern.append((degree, multiplicity))
+                    for _ in range(multiplicity):
+                        product_poly = [0] * (
+                            len(reconstructed) + len(coefficients) - 1
+                        )
+                        for i, x in enumerate(reconstructed):
+                            for j, y in enumerate(coefficients):
+                                product_poly[i + j] = (
+                                    product_poly[i + j] + x * y
+                                ) % p
+                        reconstructed = product_poly
+                self.assertEqual(reconstructed, list(polynomial))
+                observed_patterns.add(tuple(sorted(pattern)))
+            patterns[p] = observed_patterns
+
+            expected_counts = {
+                1: p,
+                2: (p ** 2 - p) // 2,
+                3: (p ** 3 - p) // 3,
+                4: (p ** 4 - p ** 2) // 4,
+                5: (p ** 5 - p) // 5,
+                6: (p ** 6 - p ** 3 - p ** 2 + p) // 6,
+            }
+            for degree, expected in expected_counts.items():
+                self.assertEqual(
+                    sum(1 for d, _ in observed_irreducibles if d == degree),
+                    expected,
+                    msg=f"F_{p}: degree-{degree} irreducible inventory",
+                )
+
+        # At p=7 there are at least six distinct linear irreducibles,
+        # enough to realize every degree partition of six. Smaller tested
+        # fields miss the all-distinct-linear pattern.
+        all_sextic_shapes = {
+            ((1, 6),),
+            ((1, 4), (1, 2)),
+            ((1, 3), (1, 3)),
+            ((1, 2), (1, 2), (1, 2)),
+            ((1, 1), (1, 5)),
+            ((1, 1), (1, 1), (1, 4)),
+            ((1, 1), (1, 2), (1, 3)),
+            ((1, 1), (1, 1), (1, 2), (1, 2)),
+            ((1, 1), (1, 1), (1, 1), (1, 3)),
+            ((1, 1), (1, 1), (1, 1), (1, 1), (1, 2)),
+            ((1, 1), (1, 1), (1, 1), (1, 1), (1, 1), (1, 1)),
+            ((1, 1), (2, 1), (3, 1)),
+            ((1, 1), (1, 1), (4, 1)),
+            ((1, 2), (4, 1)),
+            ((2, 1), (2, 1), (2, 1)),
+            ((2, 1), (4, 1)),
+            ((3, 1), (3, 1)),
+            ((6, 1),),
+        }
+        self.assertEqual(patterns[7], all_sextic_shapes)
+        self.assertLess(patterns[2], patterns[3])
+        self.assertLess(patterns[3], patterns[7])
+        self.assertNotIn(
+            ((1, 1), (1, 1), (1, 1), (1, 1), (1, 1), (1, 1)),
+            patterns[3],
+        )
+
+
 if __name__ == "__main__":
     unittest.main()
