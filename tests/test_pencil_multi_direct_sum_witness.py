@@ -206,4 +206,78 @@ class MultiDirectSumTests(unittest.TestCase):
                         verify_pencil_multi_direct_sum_witness(q, k, p, bad_s, bad_t, shapes)
 
 
+    def test_equivalent_representations_preserve_multi_block_audit(self):
+        shapes = [(1, 0), (1, 2), (0, 1), (1, 1)]
+        m, n = sum(r for r, c in shapes), sum(c for r, c in shapes)
+        ro, co = [0], [0]
+        for r, c in shapes:
+            ro.append(ro[-1] + r); co.append(co[-1] + c)
+
+        for p in (2, 3, 5, 7):
+            q0, k0 = [[0] * n for _ in range(m)], [[0] * n for _ in range(m)]
+            for b, (r, c) in enumerate(shapes):
+                for i in range(r):
+                    for j in range(c):
+                        q0[ro[b]+i][co[b]+j] = (b + 2*i + j + 1) % p
+                        k0[ro[b]+i][co[b]+j] = (2*b + i + 3*j + 1) % p
+
+            # Distinct, independently invertible row and column scramblings.
+            left, right = ident(m), ident(n)
+            for i in range(m-1):
+                left[i+1][i] = 1
+            for i in range(n-1):
+                right[i][i+1] = 1
+            li, ri = inverse(left, p), inverse(right, p)
+            q, k = mm(mm(li, q0, p), ri, p), mm(mm(li, k0, p), ri, p)
+
+            baseline = verify_pencil_multi_direct_sum_witness(q, k, p, left, right, shapes)
+            self.assertTrue(baseline["verification"]["direct_sum_verified"])
+
+            # Adding multiples of p changes representatives, not field elements.
+            q_mod, k_mod = [row[:] for row in q], [row[:] for row in k]
+            q_mod[0][0] += 3*p
+            k_mod[-1][-1] -= 2*p
+            modular = verify_pencil_multi_direct_sum_witness(
+                q_mod, k_mod, p, left, right, shapes
+            )
+            self.assertTrue(modular["verification"]["direct_sum_verified"])
+            self.assertEqual(modular["transformed_Q"], baseline["transformed_Q"])
+            self.assertEqual(modular["transformed_K"], baseline["transformed_K"])
+
+            # Reciprocal scalar rescaling leaves S Q T and S K T unchanged.
+            for scalar in range(1, p):
+                scaled_left = [[scalar*x % p for x in row] for row in left]
+                inv_scalar = pow(scalar, -1, p)
+                scaled_right = [[inv_scalar*x % p for x in row] for row in right]
+                scaled = verify_pencil_multi_direct_sum_witness(
+                    q, k, p, scaled_left, scaled_right, shapes
+                )
+                with self.subTest(field=p, scalar=scalar):
+                    self.assertTrue(scaled["verification"]["direct_sum_verified"])
+                    self.assertEqual(scaled["transformed_Q"], baseline["transformed_Q"])
+                    self.assertEqual(scaled["transformed_K"], baseline["transformed_K"])
+
+            # Reorder the diagonal blocks and their row/column coordinate
+            # intervals together. This is a distinct valid ordered partition.
+            order = [3, 1, 2, 0]
+            perm_shapes = [shapes[i] for i in order]
+            perm_q0, perm_k0 = [[0]*n for _ in range(m)], [[0]*n for _ in range(m)]
+            new_ro, new_co = [0], [0]
+            for r, c in perm_shapes:
+                new_ro.append(new_ro[-1]+r); new_co.append(new_co[-1]+c)
+            for new_i, old_i in enumerate(order):
+                r, c = shapes[old_i]
+                for i in range(r):
+                    for j in range(c):
+                        perm_q0[new_ro[new_i]+i][new_co[new_i]+j] = q0[ro[old_i]+i][co[old_i]+j]
+                        perm_k0[new_ro[new_i]+i][new_co[new_i]+j] = k0[ro[old_i]+i][co[old_i]+j]
+            permuted_q = mm(mm(li, perm_q0, p), ri, p)
+            permuted_k = mm(mm(li, perm_k0, p), ri, p)
+            permuted = verify_pencil_multi_direct_sum_witness(
+                permuted_q, permuted_k, p, left, right, perm_shapes
+            )
+            self.assertTrue(permuted["verification"]["direct_sum_verified"])
+            self.assertEqual(permuted["block_shapes"], [list(x) for x in perm_shapes])
+
+
 if __name__=="__main__": unittest.main()
