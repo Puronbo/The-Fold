@@ -1,6 +1,7 @@
 """Bounded exhaustive and deterministic sampled irreducibility audits."""
 from __future__ import annotations
 
+import math
 import random
 from fractions import Fraction
 from typing import Iterator
@@ -201,6 +202,56 @@ def irreducible_density_factorization(p: int, degree: int) -> dict:
         "remainder_absolute_bound_denominator": remainder_bound.denominator,
         "leading_term_is_exact": exact_leading,
         "remainder_bound_holds": abs(remainder) <= remainder_bound,
+    }
+
+
+
+def irreducible_density_composition(p: int, left_degree: int,
+                                    right_degree: int) -> dict:
+    """Audit whether normalized irreducible density composes multiplicatively.
+
+    For coprime positive degrees a,b, compares R_p(ab) with
+    R_p(a) R_p(b). The returned defect is exact; no multiplicative law
+    is assumed.
+    """
+    if isinstance(p, bool) or not isinstance(p, int) or not _is_prime(p):
+        raise ValueError("p must be a prime integer")
+    for name, degree in (("left_degree", left_degree),
+                         ("right_degree", right_degree)):
+        if (isinstance(degree, bool) or not isinstance(degree, int)
+                or degree < 1):
+            raise ValueError(f"{name} must be a positive integer")
+    if math.gcd(left_degree, right_degree) != 1:
+        raise ValueError("degrees must be coprime")
+
+    def normalized(degree: int) -> Fraction:
+        return Fraction(
+            degree * count_monic_irreducibles(p, degree), p ** degree
+        )
+
+    left = normalized(left_degree)
+    right = normalized(right_degree)
+    combined = normalized(left_degree * right_degree)
+    product = left * right
+    defect = combined - product
+    return {
+        "schema": "the-fold-irreducible-density-composition-v1",
+        "field_prime": p,
+        "left_degree": left_degree,
+        "right_degree": right_degree,
+        "combined_degree": left_degree * right_degree,
+        "degrees_coprime": True,
+        "left_density_numerator": left.numerator,
+        "left_density_denominator": left.denominator,
+        "right_density_numerator": right.numerator,
+        "right_density_denominator": right.denominator,
+        "combined_density_numerator": combined.numerator,
+        "combined_density_denominator": combined.denominator,
+        "product_density_numerator": product.numerator,
+        "product_density_denominator": product.denominator,
+        "composition_defect_numerator": defect.numerator,
+        "composition_defect_denominator": defect.denominator,
+        "multiplicative": defect == 0,
     }
 
 
