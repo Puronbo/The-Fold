@@ -381,3 +381,6 @@ G-EP140: distinguishes valid invertible coefficient-space shears that change onl
 
 
 **G-EP180 — Analytic subcase of the coprime ratio conjecture:** proves the proposed bound (Q_p(a,b)\le(p^2+p-1)/p^3) for all coprime pairs with smaller degree 2. Equality occurs at (2,3); the inequality is strict for (2,b) with odd b≥5. The proof uses the maximal-proper-subfield union bound and a one-subfield lower bound. Pairs with both degrees at least 3 remain open. See `research/the-fold-outward-inward-scaling.md`.
+
+
+- **G-EP181:** completes the G-EP179 sharp ratio theorem for every coprime pair (a,b>1). G-EP180 handles smaller degree 2; for (3\le a<b), a lower bound for each denominator term and the maximal-subfield union bound give (Q_p(a,b)\le\omega(ab)p^{-b/2}). Small (b=4,5,6,7) are checked explicitly, and for (b\ge8), (\omega(ab)<2\log_2b\le2^{b/2-1}\le p^{b/2-1}), yielding the strict bound (Q_p(a,b)\le p^{-1}<(p^2+p-1)/p^3). Equality in the full theorem occurs only at (2,3). Therefore (E_p(ab)<\min(E_p(a),E_p(b))) and the coprime-degree defect is always positive. See `research/the-fold-outward-inward-scaling.md`.
