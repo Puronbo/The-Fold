@@ -158,3 +158,12 @@ A separate F₃/F₅/F₇ control rescales a valid witness by a nonzero scalar, 
 Positive replay now compares the complete recomputed strict-equivalence and multi-block audit records with recursive type-exact equality, closing Python boolean/integer aliases inside nested audit dictionaries as well as their matrix/list contents. Expanded adversarial tests remove every required top-level positive field in turn and substitute wrong types or boolean/integer aliases in the recovery metadata. Nested strict-equivalence and multi-block audit records are tested for boolean/integer aliases and container substitutions. Cross-field controls build valid witnesses over F₃, F₅, and F₇, transplant S/T pairs between fields, and freshly recompute the nested audits in the destination field. A transplanted pair is accepted if it independently satisfies the destination-field identities; a subsequent transform-entry mutation is rejected even when its nested audits are freshly recomputed. Witness provenance is not a certificate property—algebraic validity in the supplied field is.
 
 **Scope:** these tests validate fail-closed certificate replay and field binding for the selected mixed-pencil fixture. They do not establish universal recovery completeness, uniqueness of witnesses, or an independent classifier.
+
+
+## G-EP86 — Canonical block-order and nested-matrix replay integrity
+
+Added positive replay mutations for reordered canonical block-shape metadata, altered block dimensions, canonical target matrix entries, and nested transformed/block matrix entries in the multi-block audit. Every mutation must fail against the recomputed canonical target and witness audit.
+
+A separate control consistently permutes the right-singular, regular, and left-singular blocks, including the corresponding row/column transformations and ordered shape list. The standalone multi-block witness verifier accepts this reordered direct-sum presentation because it is algebraically valid. The mixed-recovery certificate verifier rejects the same reordered presentation because its certificate schema binds the profile-derived canonical target to one deterministic block order. Thus algebraic validity of a reordered decomposition is distinguished from conformance to this recovery certificate's canonical serialization.
+
+**Scope:** selected 4×4 mixed fixture and exact constant transformations over F₅. This tests certificate representation integrity and the ordered multi-block witness contract; it is not a uniqueness theorem for decompositions.
