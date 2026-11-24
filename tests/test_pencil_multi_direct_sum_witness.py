@@ -1495,8 +1495,21 @@ class MultiDirectSumTests(unittest.TestCase):
         self.assertFalse(schema_ok(partition))
         self.assertTrue(schema_ok(scope))
 
+        # Metadata binding is a distinct record-consistency check. These
+        # values can be structurally well-typed yet do not match the
+        # source-bound snapshot. Scope is descriptive, not algebraic.
+        def metadata_matches(record):
+            return all(record[key] == baseline[key]
+                       for key in ("schema", "field", "source_shape",
+                                   "block_shapes", "scope"))
+
+        self.assertFalse(metadata_matches(field_label))
+        self.assertFalse(metadata_matches(scope))
+        self.assertFalse(schema_ok(dimensions))
+        self.assertFalse(schema_ok(partition))
+
         # Schema-valid metadata forgeries are not the same record as a
-        # source-bound reconstruction. Scope is descriptive, not algebraic.
+        # source-bound reconstruction. The algebraic verdict is recomputed.
         for label, record, changed_keys in (
             ("field label", field_label, ("field",)),
             ("scope claim", scope, ("scope",)),
