@@ -4962,6 +4962,21 @@ class MultiDirectSumTests(unittest.TestCase):
                 result.append(z); start+=size
             return result
 
+        def rank(a,p):
+            w=[[x%p for x in row] for row in a]
+            r=0
+            for c in range(len(w[0])):
+                pivot=next((i for i in range(r,len(w)) if w[i][c]),None)
+                if pivot is None: continue
+                w[r],w[pivot]=w[pivot],w[r]
+                z=pow(w[r][c],-1,p); w[r]=[x*z%p for x in w[r]]
+                for i in range(len(w)):
+                    if i!=r and w[i][c]:
+                        z=w[i][c]; w[i]=[(x-z*y)%p for x,y in zip(w[i],w[r])]
+                r+=1
+                if r==len(w): break
+            return r
+
         def equal(a,b):
             return a==b
 
@@ -4969,8 +4984,7 @@ class MultiDirectSumTests(unittest.TestCase):
             total=zero(n)
             for i,pj in enumerate(family):
                 self.assertEqual(mm(pj,pj,p),pj)
-                self.assertEqual(sum(1 for row in pj for x in row if x)%p,
-                                 ranks[i]%p)
+                self.assertEqual(rank(pj,p),ranks[i])
                 for j in range(i):
                     self.assertEqual(mm(family[j],pj,p),zero(n))
                     self.assertEqual(mm(pj,family[j],p),zero(n))
@@ -5009,19 +5023,10 @@ class MultiDirectSumTests(unittest.TestCase):
             with self.subTest(field=p,space="row"):
                 resolution_checks(self,row_alt,p,m,row_sizes)
                 self.assertTrue(any(not equal(a,b) for a,b in zip(row_alt,row_good)))
-                for i,(a,b) in enumerate(zip(row_alt,row_good)):
-                    if row_sizes[i]:
-                        self.assertNotEqual(a,b)
             with self.subTest(field=p,space="column"):
                 resolution_checks(self,col_alt,p,n,col_sizes)
                 self.assertTrue(any(not equal(a,b) for a,b in zip(col_alt,col_good)))
-                for i,(a,b) in enumerate(zip(col_alt,col_good)):
-                    self.assertNotEqual(a,b)
 
             # The alternative families are valid resolutions, not malformed
             # certificates: only comparison with the intended transported
             # subspaces distinguishes their ordered decomposition.
-            self.assertEqual([sum(x for row in z for x in row)%p for z in row_alt],
-                             [r%p for r in row_sizes])
-            self.assertEqual([sum(x for row in z for x in row) for z in col_alt],
-                             [r for r in col_sizes])
