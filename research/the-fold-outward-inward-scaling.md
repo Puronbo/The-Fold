@@ -862,3 +862,123 @@ large-field expansion; G-EP182–183 are uniform large-degree results.
 The exact finite spectrum is the bridge between them and supplies a
 direct route for symbolic or exact-arithmetic computation of
 higher-order terms.
+
+
+## G-EP188 — Exact spectrum as an executable invariant
+
+The finite spectrum is now an exact computational object, not merely
+a formal expansion. The audit routine
+\`coprime_defect_exponent_spectrum(a,b)\` validates coprimality,
+constructs the squarefree-divisor contributions to \(E_p(a)\),
+\(E_p(b)\), \(E_p(ab)\), and the product \(E_p(a)E_p(b)\), then
+collects equal integer exponents and removes zero coefficients. Its
+output records the leading exponent and coefficient and the next
+nonzero term. The companion evaluator returns an exact rational value
+at any integer field size \(Q\ge2\).
+
+The evaluator deliberately accepts prime powers as well as primes:
+the algebraic identity is a polynomial identity in the field size, and
+does not depend on primality of the numerical input. A caller wishing
+to interpret the result as a finite-field quantity must, of course,
+supply a prime-power field size.
+
+### Cross-check identities
+
+For \((a,b)=(2,3)\), the auditor returns
+\[
+x+x^2-2x^3-x^4+x^5.
+\]
+For the resonant pair \((3,4)\), it returns
+\[
+2x^2-x^4-x^6-x^8+x^{10}.
+\]
+These are exact rational identities after \(x=1/Q\), not floating-point
+fits. The test suite includes these fixtures, validation cases, and
+small-grid positivity checks.
+
+## G-EP189 — Prime-power base fields
+
+Nothing in the Möbius count or subfield-lattice argument requires the
+base field to have prime order. For every prime power \(Q\), the number
+of monic irreducibles of degree \(n\) over \(\mathbb F_Q\) is
+\[
+I_Q(n)=\frac1n\sum_{d\mid n}\mu(d)Q^{n/d}.
+\]
+Thus
+\[
+R_Q(n)=\frac{nI_Q(n)}{Q^n},\qquad
+E_Q(n)=1-R_Q(n)
+=-\sum_{\substack{d\mid n\\d>1}}\mu(d)Q^{-n(1-1/d)}.
+\]
+Every theorem above that uses only \(Q\ge2\), the divisor lattice, and
+the displayed exact formula extends verbatim with \(p\) replaced by
+\(Q\). This includes the exact spectrum, resonance coefficient,
+uniform degree-direction bounds, and positive coprime defect. The
+smallest admissible field size remains 2, so the same worst-case
+uniform bounds apply. The computational evaluator is therefore
+correctly defined for all integer \(Q\ge2\), while field interpretation
+requires \(Q\) to be a prime power.
+
+## G-EP190 — Composition tree and additive defect budget
+
+For pairwise-coprime degrees \(n_1,\ldots,n_r>1\), define the
+normalized composite defect
+\[
+\mathcal D_p(n_1,\ldots,n_r)
+=E_p(n_1\cdots n_r)-\prod_{i=1}^r E_p(n_i)
+\]
+and the additive budget
+\(S_r=\sum_i E_p(n_i)\). This quantity is not the same as the
+two-factor defect; it compares the composite bad proportion with the
+product of the individual bad proportions. Since G-EP181 gives
+\(E_p(\prod_{i\in J}n_i)<\min_{i\in J}E_p(n_i)\) for every
+coprime split with at least two factors, the composite bad proportion
+is strictly smaller than every individual bad proportion.
+
+A useful exact telescoping identity is
+\[
+\begin{aligned}
+E_p(n_1\cdots n_r)-\prod_iE_p(n_i)
+={}&\sum_{j=1}^{r-1}
+\left[
+E_p(n_1\cdots n_{j+1})
+-E_p(n_1\cdots n_j)E_p(n_{j+1})
+\right]\\
+&+\left[E_p(n_1)-E_p(n_1)\right]
+\end{aligned}
+\]
+only after replacing the final product recursively; more cleanly, define
+\(F_1=E_p(n_1)\) and
+\(F_j=E_p(n_1\cdots n_j)\). Then
+\[
+F_r-\prod_{i=1}^r E_p(n_i)
+=\sum_{j=2}^r
+\left(F_j-F_{j-1}E_p(n_j)\right)
+\prod_{k=j+1}^r E_p(n_k)
++\sum_{j=2}^r
+\left(F_{j-1}-\prod_{i=1}^{j-1}E_p(n_i)\right)
+\]
+is not the simplest recursion. The clean recursive form is
+\[
+D_j=F_j-\prod_{i=1}^jE_p(n_i),\qquad
+D_j=\bigl(F_j-F_{j-1}E_p(n_j)\bigr)+E_p(n_j)D_{j-1},
+\quad D_1=0.
+\]
+Each bracket is exactly the two-block defect for the coprime
+degrees \(n_1\cdots n_{j-1}\) and \(n_j\). Hence \(D_j>0\) by
+G-EP181 and induction. This proves
+\[
+\boxed{
+E_p(n_1\cdots n_r)>\prod_iE_p(n_i)
+}
+\]
+for every pairwise-coprime family with \(r\ge2\).
+
+This recursion also gives a composition-tree algorithm: any binary tree
+whose leaves are pairwise-coprime degrees has a positive local
+two-block defect at every internal node. The numerical value of the
+total excess depends on the tree's grouping, but its positivity does
+not. The additive first-order budget remains governed by the sum of
+the leaf errors when all leaf degrees grow, provided the relevant
+composite-to-minimum ratios are controlled by the G-EP182 bound at
+each split.
