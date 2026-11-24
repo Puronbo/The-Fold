@@ -428,3 +428,6 @@ G-EP140: distinguishes valid invertible coefficient-space shears that change onl
 
 
 **G-EP205–G-EP207 — recursive power feedback:** adds the research note `research/the-fold-recursive-power-feedback.md`. For the recurrence \(x_0=n,\ x_{t+1}=n^{x_t+1}\), it proves a same-height tower sandwich between base-\(n\) and base-\(n^2\) power towers, establishes strict discrete convexity \(x_{t+1}-2x_t+x_{t-1}>0\), and computes the exact order gap between increment-before-power and power-before-increment. These are proved for the stated integer domains; they do not claim a general classification of self-modifying operators.
+
+
+**G-EP208 — recursive degree family with uniform sign:** adds `research/the-fold-recursive-degree-family.md`. For the infinite pairwise-coprime family \((2,3^k)\), it derives the exact Laurent spectrum of composition excess and proves a sign transition: \(H_Q(2,3)>0\), while \(H_Q(2,3^k)<0\) for every \(k\ge2\) and every real \(Q\ge2\). This is an infinite-family theorem with a common field-size domain, not an inference from finitely many computed examples. The sign of the temporal second difference in k is explicitly left open.
