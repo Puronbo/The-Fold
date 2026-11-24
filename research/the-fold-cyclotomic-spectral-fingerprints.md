@@ -132,3 +132,8 @@ The first executable test matrix should be the quarter-turn \(J\), followed by i
 ## 8. G-EP169: degree-nine irreducibility cross-check
 
 The regression suite compares `is_irreducible_polynomial` with the factorizer's exact one-factor criterion for every monic degree-nine polynomial over F₂ (512 inputs) and F₃ (19,683 inputs), 20,195 inputs total. Each case checks exact agreement and reports the field and coefficient tuple on failure. This is an exhaustive finite-domain implementation cross-check; it is not a general proof of the irreducibility algorithm for arbitrary degrees or fields.
+
+
+## 9. G-EP170: degree-ten irreducibility cross-check
+
+The regression suite compares `is_irreducible_polynomial` with the factorizer's exact one-factor criterion for every monic degree-ten polynomial over F₂ (1,024 inputs) and F₃ (59,049 inputs), 60,073 inputs total. Each case checks exact agreement and reports the field and coefficient tuple on failure. This is an exhaustive finite-domain implementation cross-check; it is not a general proof for arbitrary degrees or fields.
