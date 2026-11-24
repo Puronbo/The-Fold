@@ -151,3 +151,10 @@ Added positive recovery replay controls over F₂, F₃, F₅, and F₇ using th
 A separate F₃/F₅/F₇ control rescales a valid witness by a nonzero scalar, replacing S with cS and T with c⁻¹T. The replay verifier accepts these distinct witnesses when the witness-dependent strict-equivalence and multi-block audit records are regenerated for the rescaled S/T pair. Stale nested audit records remain invalid. This guards against treating a particular transform pair as canonical while preserving full audit-to-witness binding.
 
 **Scope:** these are deterministic finite-field regression cases for the selected 4×4 mixed family. They exercise replay and witness flexibility, not universal recovery completeness, witness uniqueness, or a separate classifier.
+
+
+## G-EP85 — Positive replay metadata and nested-audit adversarial coverage
+
+Expanded positive-certificate adversarial tests to remove every required top-level positive field in turn and to substitute wrong types or boolean/integer aliases in the recovery metadata. Nested strict-equivalence and multi-block audit records are tested for boolean/integer aliases and container substitutions. Cross-field controls build valid witnesses over F₃, F₅, and F₇, then substitute S/T pairs between fields while retaining the original source-field audit; replay must reject each substitution.
+
+**Scope:** these tests validate fail-closed certificate replay and field binding for the selected mixed-pencil fixture. They do not establish universal recovery completeness, uniqueness of witnesses, or an independent classifier.
