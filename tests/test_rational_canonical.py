@@ -816,5 +816,37 @@ class RationalCanonicalTests(unittest.TestCase):
         self.assertIn(((1, 1),) * 4 + ((1, 2),), patterns)
         self.assertIn(((1, 1),) * 4 + ((2, 1),), patterns)
 
+
+    def test_g_ep163_factor_polynomial_scalar_units_and_characteristic_multiplicity(self):
+        from tools.spectral_fingerprint import factor_polynomial
+
+        factors = factor_polynomial([2, 0, 0, 2], 3)
+        self.assertEqual(factors[0], {"constant_unit": 2})
+        self.assertEqual(
+            factors[1:],
+            [{
+                "coefficients_descending": [1, 1],
+                "multiplicity": 3,
+                "degree": 1,
+            }],
+        )
+        # Coefficients are reduced modulo p before factoring.
+        self.assertEqual(
+            factor_polynomial([7, 7], 5),
+            [{
+                "coefficients_descending": [1, 1],
+                "multiplicity": 1,
+                "degree": 1,
+            }],
+        )
+        # A nonzero constant has no nonconstant irreducible factors.
+        self.assertEqual(factor_polynomial([4], 5), [])
+        with self.assertRaises(ValueError):
+            factor_polynomial([], 5)
+        with self.assertRaises(ValueError):
+            factor_polynomial([0, 0, 0], 5)
+        with self.assertRaises(ValueError):
+            factor_polynomial([1, 1], 4)
+
 if __name__ == "__main__":
     unittest.main()
