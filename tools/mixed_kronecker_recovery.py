@@ -450,12 +450,14 @@ def verify_mixed_kronecker_recovery_certificate(
                     and valid_square_transform(t, cols)):
                 return {"verified": False, "reason": "positive transform matrices are malformed"}
             audit = strict_pencil_equivalence_audit(q, k, p, target_q, target_k, s, t)
-            if not audit["strict_equivalence_certified"] or result.get("verification") != audit:
+            if (not audit["strict_equivalence_certified"]
+                    or not _certificate_value_equal(result.get("verification"), audit)):
                 return {"verified": False, "reason": "positive strict-equivalence witness failed replay"}
             multi = verify_pencil_multi_direct_sum_witness(
                 q, k, p, s, t, _canonical_block_shapes(profile, p)
             )
-            if result.get("multi_block_direct_sum_audit") != multi or not multi["verification"]["direct_sum_verified"]:
+            if (not _certificate_value_equal(result.get("multi_block_direct_sum_audit"), multi)
+                    or not multi["verification"]["direct_sum_verified"]):
                 return {"verified": False, "reason": "positive multi-block audit failed replay"}
             count = result.get("candidates_examined")
             if not isinstance(count, int) or isinstance(count, bool) or not 1 <= count <= budget:
