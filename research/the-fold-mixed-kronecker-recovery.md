@@ -68,3 +68,12 @@ A separate regression distinguishes two non-success outcomes: an incomplete Kron
 Added direct comparisons between bounded structured recovery and exhaustive finite-field witness search on small mixed pencils. A deliberately one-candidate structured run is required to remain inconclusive, while exhaustive search with a larger explicit budget finds and exactly verifies a witness for the same F₂ pencil. Additional F₂/F₃ positive controls require both search modes to recover certificates with matching right/left minimal-index profiles and independently passing strict-equivalence audits.
 
 The tests compare mathematical outputs, not necessarily the chosen transforms: multiple valid (S,T) witnesses may exist. Exhaustive mode remains exponential. A positive result is an exact witness; a negative result may be called complete only when the implementation actually exhausts all invertible S and all compatible affine T solutions. A budget cutoff, even with a complete Kronecker profile, remains inconclusive. This milestone does not claim to exhibit a genuine mathematical non-equivalence case because the tested profile-derived canonical targets are expected to represent the same pencil class when the profile is correct.
+
+
+## G-EP75 — Exhaustive enumeration integrity
+
+Refactored exhaustive search to use two small, independently testable iterators. The left-matrix iterator emits the identity first and then every remaining flattened matrix in lexicographic finite-field product order, excluding the identity tuple exactly once. The affine-solution iterator enumerates every coefficient tuple for a nullspace basis, including the zero-dimensional singleton case.
+
+New regressions compare the left-matrix stream against the full Cartesian product for F₂ and F₃ at dimensions one and two, checking exact cardinality, set equality, uniqueness, and identity-first ordering. The affine iterator is compared against brute-force solutions of a small linear system over F₃, with separate unique-solution and unconstrained-space checks. These tests establish the iterator combinatorics on the tested finite cases; they do not turn a budget-limited run into an exhaustive decision or prove the separate affine solver correct for all inputs.
+
+The search budget still counts both examined left matrices and tested right-transform matrices. Exhaustive negative status is only returned when both nested streams complete without hitting the budget; positive results remain backed by exact strict-equivalence verification.
