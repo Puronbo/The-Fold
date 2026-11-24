@@ -198,3 +198,18 @@ class PolynomialIrreducibilityAuditTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+    def test_coprime_density_defect_sign_audit_is_exact_and_bounded(self):
+        from tools.polynomial_irreducibility_audit import audit_coprime_density_defect_sign
+        result = audit_coprime_density_defect_sign([2, 3, 5], 12)
+        self.assertEqual(result["coprime_pair_count"], 60)
+        self.assertEqual(result["positive_count"], 60)
+        self.assertEqual(result["negative_count"], 0)
+        self.assertEqual(result["zero_count"], 0)
+        self.assertTrue(result["all_checked_defects_positive"])
+        self.assertIsNone(result["first_nonpositive_defect"])
+        self.assertIn("finite-grid evidence only", result["interpretation"])
+        for primes, degree in (([], 4), ([4], 4), ([2, 2], 4), ([2], 2)):
+            with self.subTest(primes=primes, degree=degree):
+                with self.assertRaises(ValueError):
+                    audit_coprime_density_defect_sign(primes, degree)
