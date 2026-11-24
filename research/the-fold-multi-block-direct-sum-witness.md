@@ -419,3 +419,21 @@ replayed through the production verifier.
 These are finite test-side controls for rectangular block partitions. They do
 not provide a production solver, search over left transforms or partitions,
 or establish general-dimensional completeness.
+
+
+## G-EP117: Independent rectangular equation-builder cross-checks
+
+A test-local equation builder now encodes each off-diagonal entry of
+\((S C)T\) as a linear form in the row-major entries of the unknown right
+transform. For seeded fixtures, the equation evaluations are compared
+entry-by-entry with direct matrix multiplication for arbitrary candidate
+transforms, not merely the planted witness.
+
+The deterministic cases cover rectangular source matrices, independently
+scrambled left and right bases, and partitions containing zero-row and
+zero-column blocks. Fields are F₂, F₃, F₅, and F₇; each coefficient receives
+multiple arbitrary candidate-transform trials. The planted witness is also
+replayed through the production multi-block verifier.
+
+This is an independent finite cross-check of the test equation construction,
+not a production solver, universal proof, or exhaustive search over witnesses.
