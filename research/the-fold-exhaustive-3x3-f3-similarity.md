@@ -30,3 +30,10 @@ This is a complete enumeration of monic cubics over the two stated fields, not a
 The regression exhausts all p⁴ monic quartics over F_p for p in {2, 3}. Each polynomial is factored, and the returned monic irreducible factors with multiplicities are multiplied back to verify exact reconstruction. The test also checks the exact irreducible inventory sizes in degrees one through four: p, (p²−p)/2, (p³−p)/3, and (p⁴−p²)/4.
 
 A concrete field-dependent quartic pattern is the presence of all three distinct monic linear irreducibles with one of them repeated. It occurs over F₃, which has three elements and hence three monic linear irreducibles, but not over F₂, which has only two. This result is exhaustive for monic quartics over these two fields only.
+
+
+## Quartic pattern growth with field size (G-EP158)
+
+This regression exhausts every monic quartic over F₂, F₃, and F₅. For each polynomial it reconstructs the input from the factorizer's monic irreducible factors and multiplicities, and checks the irreducible inventory counts in degrees one through four.
+
+The observed factorization-pattern catalog strictly grows across these fields. Over F₃, three distinct linear irreducibles can occur with one repeated, and two distinct irreducible quadratics can occur as separate factors; neither pattern is possible over F₂, which has only two monic linear irreducibles and only one monic irreducible quadratic. Over F₅, four distinct linear factors become possible. The assertions concern degree/multiplicity patterns, not coefficient-wise identification of polynomials between fields, and the exhaustive scope is limited to the three fields and degree four.
