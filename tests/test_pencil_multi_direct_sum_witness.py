@@ -5577,8 +5577,12 @@ class MultiDirectSumTests(unittest.TestCase):
                                 self.assertFalse(verified)
                                 interpretation = "full coefficient-space information"
 
+                            image = {
+                                ((u*a + v*c) % p, (u*b + v*d) % p)
+                                for u in range(p) for v in range(p)
+                            }
                             with self.subTest(field=p, map=(a,b,c,d)):
-                                self.assertEqual(map_rank, map_rank)
+                                self.assertEqual(len(image), p**map_rank)
                                 self.assertIn(
                                     interpretation,
                                     ("complete information collapse",
