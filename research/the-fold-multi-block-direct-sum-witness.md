@@ -138,3 +138,11 @@ A deterministic cross-check exercises four distinct cases against the v1 structu
 4. A singular left transform produces a structurally valid audit record with an explicit negative invertibility/direct-sum result, not a schema exception.
 
 The test establishes separation of record structure from mathematical witness validity for these fixtures. It is deterministic regression coverage, not a universal proof of the verifier or a provenance/authenticity mechanism.
+
+## G-EP101: Independent audit-record reconstruction
+
+A new test-local reference calculation reconstructs the audit record from the original coefficient matrices, field, supplied left/right transforms, and ordered rectangular partition. It independently multiplies matrices modulo the field, computes transform ranks by Gaussian elimination, slices every rectangular block (including zero-row and zero-column blocks), and derives invertibility, off-diagonal-zero, and aggregate diagnostics.
+
+The regression compares these independently derived values with the verifier output for identity, nontrivial invertible, and singular left transforms. It also mutates transformed coefficients, nested Q/K blocks, rank diagnostics, and the aggregate decision in otherwise shape-preserving snapshots, requiring each changed value to disagree with the independently reconstructed record. False and singular witnesses are deliberately reconstructed as consistent negative records: consistency of the audit data is not the same as a positive direct-sum result.
+
+The routines are test-local and do not call the production verifier's multiplication, rank, or block-splitting helpers. This is finite independent regression evidence, not a production snapshot-ingestion API, a formal proof, or cryptographic provenance/authenticity.
