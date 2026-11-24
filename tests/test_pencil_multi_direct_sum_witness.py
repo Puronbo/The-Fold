@@ -5119,3 +5119,104 @@ class MultiDirectSumTests(unittest.TestCase):
                     self.assertNotEqual(bad_diagonal,coefficient)
                     self.assertNotEqual(bad_off_diagonal,[[0]*n for _ in range(m)])
                     self.assertEqual(add(bad_diagonal,bad_off_diagonal,p),coefficient)
+
+
+    def test_g_ep138_projector_reconstruction_covaries_with_invertible_pencil_mixing(self):
+        def mm(a,b,p):
+            return [[sum(a[i][k]*b[k][j] for k in range(len(b)))%p
+                     for j in range(len(b[0]))] for i in range(len(a))]
+
+        def eye(n):
+            return [[int(i==j) for j in range(n)] for i in range(n)]
+
+        def inv(a,p):
+            n=len(a); w=[[x%p for x in row]+[int(i==j) for j in range(n)]
+                         for i,row in enumerate(a)]
+            for c in range(n):
+                pivot=next((r for r in range(c,n) if w[r][c]),None)
+                if pivot is None: raise AssertionError("singular basis")
+                w[c],w[pivot]=w[pivot],w[c]
+                z=pow(w[c][c],-1,p); w[c]=[x*z%p for x in w[c]]
+                for r in range(n):
+                    if r!=c and w[r][c]:
+                        z=w[r][c]; w[r]=[(x-z*y)%p for x,y in zip(w[r],w[c])]
+            return [row[n:] for row in w]
+
+        def add(a,b,p):
+            return [[(x+y)%p for x,y in zip(ar,br)] for ar,br in zip(a,b)]
+
+        def scale(a,c,p):
+            return [[c*x%p for x in row] for row in a]
+
+        def projectors(sizes,n):
+            out=[]; start=0
+            for size in sizes:
+                z=[[0]*n for _ in range(n)]
+                for i in range(start,start+size): z[i][i]=1
+                out.append(z); start+=size
+            return out
+
+        def blocks(a,rows,cols,p):
+            return [[mm(mm(pi,a,p),qj,p) for qj in cols] for pi in rows]
+
+        def diagonal_sum(grid,p,m,n):
+            out=[[0]*n for _ in range(m)]
+            for i,row in enumerate(grid):
+                out=add(out,row[i],p)
+            return out
+
+        def full_sum(grid,p,m,n):
+            out=[[0]*n for _ in range(m)]
+            for row in grid:
+                for block in row: out=add(out,block,p)
+            return out
+
+        row_sizes=[1,1,2]; col_sizes=[1,1,1]
+        for p in (2,3,5):
+            m=sum(row_sizes); n=sum(col_sizes)
+            U=eye(m); U[0][1]=1; U[2][0]=1; U[3][1]=1
+            V=eye(n); V[0][1]=1; V[1][2]=1
+            Ui,Vi=inv(U,p),inv(V,p)
+            A=[[0]*n for _ in range(m)]
+            K=[[0]*n for _ in range(m)]
+            for (r,c),value in zip(((0,0),(1,1),(2,2),(3,2)),(1,2,3,4)):
+                A[r][c]=value%p
+            for (r,c),value in zip(((0,0),(1,1),(2,2),(3,2)),(2,3,1,4)):
+                K[r][c]=value%p
+            # Invertible coefficient-space mixing: [[1,1],[1,2]], determinant 1.
+            B=add(A,K,p)
+            C=add(A,scale(K,2,p),p)
+            mix=[[1,1],[1,2]]
+            self.assertEqual((mix[0][0]*mix[1][1]-mix[0][1]*mix[1][0])%p,1%p)
+            # Recover A,K from B,C using the exact inverse mixing matrix.
+            mix_inv=[[2,-1],[-1,1]]
+            recovered_A=add(scale(B,mix_inv[0][0],p),scale(C,mix_inv[0][1],p),p)
+            recovered_K=add(scale(B,mix_inv[1][0],p),scale(C,mix_inv[1][1],p),p)
+            self.assertEqual(recovered_A,A)
+            self.assertEqual(recovered_K,K)
+
+            rows=[mm(mm(U,z,p),Ui,p) for z in projectors(row_sizes,m)]
+            cols=[mm(mm(Vi,z,p),V,p) for z in projectors(col_sizes,n)]
+            for label,source in (("A",A),("K",K),("B",B),("C",C)):
+                transformed=mm(mm(U,source,p),V,p)
+                grid=blocks(transformed,rows,cols,p)
+                with self.subTest(field=p,coefficient=label):
+                    self.assertEqual(diagonal_sum(grid,p,m,n),transformed)
+                    self.assertEqual(full_sum(grid,p,m,n),transformed)
+
+            # Mixing the coefficient pair does not rescue a different
+            # decomposition: the same wrong projector family creates coupling.
+            row_swap=eye(m); row_swap[0][0]=row_swap[2][2]=0
+            row_swap[0][2]=row_swap[2][0]=1
+            col_swap=eye(n); col_swap[0][0]=col_swap[1][1]=0
+            col_swap[0][1]=col_swap[1][0]=1
+            alt_rows=[mm(mm(U,mm(mm(row_swap,z,p),row_swap,p),p),Ui,p)
+                      for z in projectors(row_sizes,m)]
+            alt_cols=[mm(mm(Vi,mm(mm(col_swap,z,p),col_swap,p),p),V,p)
+                      for z in projectors(col_sizes,n)]
+            for label,source in (("B",B),("C",C)):
+                transformed=mm(mm(U,source,p),V,p)
+                bad=blocks(transformed,alt_rows,alt_cols,p)
+                with self.subTest(field=p,coefficient=label,alternative="wrong-split"):
+                    self.assertNotEqual(diagonal_sum(bad,p,m,n),transformed)
+                    self.assertEqual(full_sum(bad,p,m,n),transformed)
