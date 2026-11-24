@@ -179,3 +179,6 @@ of its witness.
 
 
 - **G-EP105:** add cross-field rectangular coordinate-permutation regressions over F₂/F₃/F₅/F₇. Simultaneously permuting row and column coordinate intervals, the ordered block list, and the corresponding supplied transforms preserves the exact reordered block-diagonal pair, including zero-row and zero-column blocks. One-sided row or column coordinate permutations are rejected. These are deterministic finite regression tests, not a universal theorem, decomposition discovery method, or uniqueness claim.
+
+
+**G-EP106 — composed equivalence transformations:** tests compositions of two successive, independent left and right source-basis changes, a consistent rectangular block-coordinate permutation, and reciprocal nonzero scalar rescaling. The composite witness must recover the exact reordered Q/K pair over F₂, F₃, F₅, and F₇, including zero-row and zero-column blocks. A mismatched final row transform is rejected. This is finite deterministic regression coverage, not a uniqueness theorem or decomposition-discovery result.
