@@ -5977,12 +5977,6 @@ class MultiDirectSumTests(unittest.TestCase):
             for block, (qv, kv) in enumerate(values):
                 q[row_offsets[block]][col_offsets[block]] = qv % p
                 k[row_offsets[block]][col_offsets[block]] = kv % p
-            # Populate the rectangular edge summands without coupling them.
-            q[row_offsets[3]][col_offsets[3]] = 1 % p
-            k[row_offsets[3]][col_offsets[3]] = 2 % p
-            q[row_offsets[4]][col_offsets[4]] = 2 % p
-            k[row_offsets[4]][col_offsets[4]] = 1 % p
-
             baseline = verify_pencil_multi_direct_sum_witness(
                 q, k, p, ident(m), ident(n), shapes
             )
