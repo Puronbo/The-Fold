@@ -156,3 +156,6 @@ of its witness.
 
 
 **G-EP96 — Strict JSON snapshot boundary regressions:** test-side decoding rejects duplicate object keys and non-finite JSON constants. Restored records with unexpected schema versions, malformed nested block arrays, missing required fields, or boolean/floating-point substitutions in integer diagnostic positions fail recursive type-exact comparison with a fresh audit. Original malformed caller matrices continue to exercise the verifier's separate `ValueError` input boundary. No serialized-record ingestion API is introduced.
+
+
+**G-EP97 — Deterministic serialized-record mutation sweep:** recursively enumerates every dictionary field and list slot in a valid JSON audit snapshot, mutates one location at a time, round-trips each mutation, and confirms exact type-aware comparison rejects every changed record. Coverage explicitly includes top-level metadata, both block grids, and nested verification fields. This is finite regression testing of snapshot integrity, not cryptographic authenticity or provenance.
