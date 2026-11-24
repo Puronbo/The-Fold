@@ -752,13 +752,13 @@ class MixedKroneckerRecoveryTests(unittest.TestCase):
         self.assertTrue(verify_mixed_kronecker_recovery_certificate(q, k, 5, result)["verified"])
         mutations = []
         forged = deepcopy(result)
-        forged["verification"]["left_transform_rank"] = True
+        forged["verification"]["left_determinant_mod_p"] = True
         mutations.append(("strict rank boolean alias", forged))
         forged = deepcopy(result)
         forged["verification"]["constant_strict_equivalence_Q_verified"] = 1
         mutations.append(("strict flag integer alias", forged))
         forged = deepcopy(result)
-        forged["verification"]["left_transform_rank"] = (forged["verification"]["left_transform_rank"],)
+        forged["verification"]["field"] = (forged["verification"]["field"],)
         mutations.append(("strict rank container substitution", forged))
         forged = deepcopy(result)
         forged["multi_block_direct_sum_audit"]["verification"]["left_transform_rank"] = True
@@ -787,15 +787,49 @@ class MixedKroneckerRecoveryTests(unittest.TestCase):
             self.assertTrue(verify_mixed_kronecker_recovery_certificate(q, k, p, result)["verified"])
             results[p] = result
 
+        from tools.strict_pencil_equivalence import strict_pencil_equivalence_audit
+        from tools.pencil_multi_direct_sum_witness import verify_pencil_multi_direct_sum_witness
         for target_p, source_p in ((3, 5), (5, 7), (7, 3)):
             with self.subTest(target_field=target_p, source_field=source_p):
-                forged = deepcopy(results[target_p])
-                forged["left_transform_S"] = deepcopy(results[source_p]["left_transform_S"])
-                forged["right_transform_T"] = deepcopy(results[source_p]["right_transform_T"])
-                # Keep the original nested audits: the transforms now belong to
-                # a different source-field witness and cannot replay here.
-                audit = verify_mixed_kronecker_recovery_certificate(q, k, target_p, forged)
-                self.assertFalse(audit["verified"], audit)
+                transplanted = deepcopy(results[target_p])
+                transplanted["left_transform_S"] = deepcopy(results[source_p]["left_transform_S"])
+                transplanted["right_transform_T"] = deepcopy(results[source_p]["right_transform_T"])
+                # Witness provenance is irrelevant: if the transplanted pair
+                # also satisfies the target-field identities, it is valid.
+                transplanted["verification"] = strict_pencil_equivalence_audit(
+                    q, k, target_p, transplanted["canonical_Q"],
+                    transplanted["canonical_K"], transplanted["left_transform_S"],
+                    transplanted["right_transform_T"],
+                )
+                transplanted["multi_block_direct_sum_audit"] = verify_pencil_multi_direct_sum_witness(
+                    q, k, target_p, transplanted["left_transform_S"],
+                    transplanted["right_transform_T"], transplanted["canonical_block_shapes"],
+                )
+                self.assertTrue(
+                    verify_mixed_kronecker_recovery_certificate(
+                        q, k, target_p, transplanted
+                    )["verified"]
+                )
+
+                # A cross-field witness mutation is rejected even after both
+                # nested audits are freshly recomputed for the target field.
+                mutated = deepcopy(transplanted)
+                mutated["left_transform_S"][0][0] = (
+                    mutated["left_transform_S"][0][0] + 1
+                ) % target_p
+                mutated["verification"] = strict_pencil_equivalence_audit(
+                    q, k, target_p, mutated["canonical_Q"], mutated["canonical_K"],
+                    mutated["left_transform_S"], mutated["right_transform_T"],
+                )
+                mutated["multi_block_direct_sum_audit"] = verify_pencil_multi_direct_sum_witness(
+                    q, k, target_p, mutated["left_transform_S"],
+                    mutated["right_transform_T"], mutated["canonical_block_shapes"],
+                )
+                self.assertFalse(
+                    verify_mixed_kronecker_recovery_certificate(
+                        q, k, target_p, mutated
+                    )["verified"]
+                )
 
 if __name__ == "__main__":
     unittest.main()
