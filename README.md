@@ -212,3 +212,6 @@ of its witness.
 
 
 - **G-EP116:** generalizes test-local simultaneous right-transform equations to rectangular block partitions, including a 3×3 pencil with block shapes (1,2) and (2,1) under independent left/right scramblings. The known witness is checked against the computed nullspace; small 2×2 controls are exhaustively cross-checked against brute force, and adding coefficient constraints is verified not to increase nullspace dimension. Finite test coverage only; no production discovery API or general completeness claim.
+
+
+- **G-EP117:** independently cross-checks test-local rectangular off-diagonal equations against direct matrix multiplication for arbitrary candidate right transforms. Seeded cases span rectangular matrices, independent left/right basis scramblings, zero-row/zero-column blocks, and F₂/F₃/F₅/F₇. The planted witnesses are replayed through the production verifier; this is finite test evidence, not a general solver or completeness claim.
