@@ -105,3 +105,6 @@
 
 
 **G-EP86:** tests tampering with canonical block order, block dimensions, canonical target entries, and nested multi-block audit matrices. A consistently reordered right/regular/left block decomposition remains valid under the standalone direct-sum witness verifier, while the recovery-certificate verifier rejects it because that certificate uses a fixed profile-derived canonical block order. This distinguishes algebraic direct-sum validity from canonical certificate serialization; the regression uses one 4×4 fixture over F₅.
+
+
+**G-EP87:** standalone multi-block witness verification now rejects boolean and non-integral entries in source coefficients and transforms. Tests cover all six consistent permutations of a three-block mixed pencil, plus malformed, incomplete, dimension-inconsistent, and zero-by-zero block partitions. The API represents blocks as consecutive partitions, so overlapping intervals cannot be separately encoded; invalid totals and shapes are rejected.
