@@ -1127,3 +1127,53 @@ def coprime_composition_excess_sign_certificate(
         ),
         "spectrum": terms,
     }
+
+
+def coprime_composition_excess_temporal_fold(
+    two_steps_ago: list[int],
+    one_step_ago: list[int],
+    present: list[int],
+) -> dict:
+    """Return the exact second temporal difference of three excess spectra.
+
+    Inputs are ordered chronologically. If H_t(Q) is the composition excess
+    for the present tuple, the result is H_t - 2 H_(t-1) + H_(t-2).
+    Exponents are aligned before coefficients are combined, and zero
+    coefficients are removed. The zero polynomial is represented explicitly.
+    """
+    states = [
+        coprime_composition_excess_spectrum(degrees)
+        for degrees in (two_steps_ago, one_step_ago, present)
+    ]
+    coefficients: dict[int, int] = {}
+    for multiplier, state in zip((1, -2, 1), states):
+        for term in state["spectrum"]:
+            exponent = term["exponent"]
+            coefficients[exponent] = (
+                coefficients.get(exponent, 0)
+                + multiplier * term["coefficient"]
+            )
+    spectrum = [
+        {"exponent": exponent, "coefficient": coefficients[exponent]}
+        for exponent in sorted(coefficients)
+        if coefficients[exponent]
+    ]
+    return {
+        "schema": "the-fold-composition-excess-temporal-fold-v1",
+        "chronological_degrees": [
+            two_steps_ago, one_step_ago, present
+        ],
+        "temporal_operator": "H_t - 2*H_(t-1) + H_(t-2)",
+        "spectrum": spectrum,
+        "identically_zero": not spectrum,
+        "leading_exponent": spectrum[0]["exponent"] if spectrum else None,
+        "leading_coefficient": (
+            spectrum[0]["coefficient"] if spectrum else 0
+        ),
+        "term_count": len(spectrum),
+        "interpretation": (
+            "exact second temporal difference of the three composition-"
+            "excess Laurent spectra; zero means coefficient-wise affine "
+            "evolution across these three states"
+        ),
+    }
