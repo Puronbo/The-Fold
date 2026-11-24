@@ -344,3 +344,74 @@ def audit_irreducibility_agreement(
         ),
         "sample_count_requested": None if exhaustive else sample_count,
     }
+
+
+def audit_coprime_density_defect_sign(primes, max_degree: int) -> dict:
+    """Exactly survey the sign of R_p(ab)-R_p(a)R_p(b) on a finite grid.
+
+    This is a bounded computational audit, not a proof of a universal sign
+    law. Every unordered coprime pair 2 <= a < b <= max_degree is checked
+    using exact rational arithmetic.
+    """
+    if not isinstance(primes, (list, tuple)) or not primes:
+        raise ValueError("primes must be a non-empty list or tuple")
+    if (isinstance(max_degree, bool) or not isinstance(max_degree, int)
+            or max_degree < 3):
+        raise ValueError("max_degree must be an integer of at least 3")
+    checked_primes = []
+    for p in primes:
+        if isinstance(p, bool) or not isinstance(p, int) or not _is_prime(p):
+            raise ValueError("every entry in primes must be a prime integer")
+        if p in checked_primes:
+            raise ValueError("primes must not contain duplicates")
+        checked_primes.append(p)
+
+    positive = negative = zero = pair_count = 0
+    first_nonpositive = None
+    minimum = None
+    minimum_record = None
+    for p in checked_primes:
+        def normalized(degree: int) -> Fraction:
+            return Fraction(degree * count_monic_irreducibles(p, degree),
+                            p ** degree)
+        for left in range(2, max_degree + 1):
+            for right in range(left + 1, max_degree + 1):
+                if math.gcd(left, right) != 1:
+                    continue
+                defect = normalized(left * right) - normalized(left) * normalized(right)
+                pair_count += 1
+                if defect > 0:
+                    positive += 1
+                elif defect < 0:
+                    negative += 1
+                    if first_nonpositive is None:
+                        first_nonpositive = {"field_prime": p, "left_degree": left,
+                                             "right_degree": right,
+                                             "defect_numerator": defect.numerator,
+                                             "defect_denominator": defect.denominator}
+                else:
+                    zero += 1
+                    if first_nonpositive is None:
+                        first_nonpositive = {"field_prime": p, "left_degree": left,
+                                             "right_degree": right,
+                                             "defect_numerator": 0,
+                                             "defect_denominator": 1}
+                if minimum is None or defect < minimum:
+                    minimum = defect
+                    minimum_record = {"field_prime": p, "left_degree": left,
+                                      "right_degree": right,
+                                      "defect_numerator": defect.numerator,
+                                      "defect_denominator": defect.denominator}
+    return {
+        "schema": "the-fold-coprime-density-defect-sign-audit-v1",
+        "primes": checked_primes,
+        "max_degree": max_degree,
+        "coprime_pair_count": pair_count,
+        "positive_count": positive,
+        "negative_count": negative,
+        "zero_count": zero,
+        "all_checked_defects_positive": pair_count > 0 and positive == pair_count,
+        "first_nonpositive_defect": first_nonpositive,
+        "minimum_defect": minimum_record,
+        "interpretation": "finite-grid evidence only; no universal sign theorem is asserted",
+    }
