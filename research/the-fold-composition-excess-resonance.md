@@ -161,3 +161,44 @@ simple global-sign claim and should trigger exact root isolation or
 integer-field-size analysis; it does not contradict the eventual-sign
 theorems. Regression tests have been added but are not reported as
 executed here.
+
+
+---
+
+## G-EP202 — Exact temporal composition-excess folding
+
+Given three chronological pairwise-coprime degree tuples
+\\(\\mathbf n_{t-2},\\mathbf n_{t-1},\\mathbf n_t\\), let
+\\(H_{t-i}(Q)\\) denote their exact composition-excess Laurent spectra.
+The temporal second difference is
+
+\\[
+K_t(Q)=H_t(Q)-2H_{t-1}(Q)+H_{t-2}(Q).
+\\]
+
+After aligning equal exponents, its coefficient is
+
+\\[
+k_e=c_{t,e}-2c_{t-1,e}+c_{t-2,e}.
+\\]
+
+The new API
+`coprime_composition_excess_temporal_fold(two_steps_ago, one_step_ago, present)`
+computes this operation using integer coefficients, removes exact cancellations,
+and explicitly represents the zero polynomial. It does not sample field sizes
+or infer a sign numerically.
+
+The regression example uses chronological tuples \\((2,3),(3,4),(2,3)\\).
+The resulting spectrum is
+\\[
+4Q^{-4}-2Q^{-5}-2Q^{-6}-2Q^{-8}+2Q^{-10}.
+\\]
+Three identical tuples produce the zero polynomial, as expected from zero
+second difference. The zero result means coefficient-wise affine evolution
+across these three snapshots; it does not imply the underlying tuple sequence
+is globally affine or that future states will remain so.
+
+This operation is a spectral transformation, not yet a recurrence theorem.
+Its output can be passed to polynomial sign analysis after the generic
+Laurent-polynomial certificate interface is separated from the current
+degree-tuple API.
