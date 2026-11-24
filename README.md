@@ -352,3 +352,5 @@ G-EP140: distinguishes valid invertible coefficient-space shears that change onl
 - **G-EP168:** extends the exhaustive irreducibility-predicate/factorizer comparison through degree eight over F₂ and F₃ (6,817 monic polynomials).
 
 - **G-EP169:** exhaustively cross-checks the irreducibility predicate against the factorizer for all 20,195 monic degree-nine polynomials over F₂ and F₃. This is a finite-domain consistency regression, not a proof for arbitrary degrees or fields.
+
+- **G-EP170:** exhaustively cross-checks the irreducibility predicate against the factorizer for all 60,073 monic degree-ten polynomials over F₂ and F₃. This is finite-domain consistency coverage, not a general theorem.
