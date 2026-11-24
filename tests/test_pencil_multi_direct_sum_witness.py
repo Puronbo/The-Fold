@@ -1146,6 +1146,7 @@ class MultiDirectSumTests(unittest.TestCase):
                 self.assertEqual(record[key], value)
 
     def test_g_ep102_seeded_cross_field_rectangular_reconstruction(self):
+        import copy
         import random
 
         def multiply(a, b, p):
