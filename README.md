@@ -387,3 +387,6 @@ G-EP140: distinguishes valid invertible coefficient-space shears that change onl
 
 
 - **G-EP182:** proves a uniform additive asymptotic law for the coprime-degree defect. As the larger degree B grows, Q_p(a,b)=E_p(ab)/min(E_p(a),E_p(b)) tends to zero uniformly in prime p. For a≥3 it is bounded by 2 log₂(B)·2^(−B/2); for a=2,b≥5, by 2^(−B/3)+(log₃ B)·2^(−B/2). Consequently Δ_p(a,b)/(E_p(a)+E_p(b)) tends to 1, including when the smaller degree is fixed. See research/the-fold-outward-inward-scaling.md.
+
+
+- **G-EP183:** identifies the leading exponential scale of the coprime-degree defect from the smallest prime factors. For every n>1, p^(−A(n)) ≤ Eₚ(n) ≤ ω(n)p^(−A(n)), where A(n)=n(1−1/q(n)) and q(n) is the smallest prime divisor. Combining this with G-EP182 yields, uniformly in prime p and for sufficiently large B=max(a,b), a two-sided bound for Δₚ(a,b) and the logarithmic estimate −logₚ Δₚ(a,b)=min(A(a),A(b))+O(log log B). The controlling degree need not be the smaller degree. See research/the-fold-outward-inward-scaling.md.
