@@ -2135,3 +2135,60 @@ class MultiDirectSumTests(unittest.TestCase):
                 self.assertEqual(recovered_q, q)
                 self.assertEqual(recovered_k, k)
 
+
+
+    def test_g_ep112_singular_parameter_maps_can_hide_pencil_coupling(self):
+        # A singular GL(2)-replacement is not an equivalence of pencils:
+        # it can erase one coefficient (or collapse both outputs onto one
+        # linear combination), making a false decomposition appear valid.
+        shapes = [(1, 1), (1, 1), (1, 1)]
+        for p in (2, 3, 5, 7):
+            q = [[1 % p, 0, 0],
+                 [0, 2 % p, 0],
+                 [0, 0, 3 % p]]
+            k = [[1 % p, 1 % p, 0],
+                 [0, 2 % p, 0],
+                 [0, 0, 3 % p]]
+            original = verify_pencil_multi_direct_sum_witness(
+                q, k, p, ident(3), ident(3), shapes
+            )
+            with self.subTest(field=p, case="original paired pencil"):
+                self.assertTrue(original["verification"]["Q_off_diagonal_blocks_zero"])
+                self.assertFalse(original["verification"]["K_off_diagonal_blocks_zero"])
+                self.assertFalse(original["verification"]["direct_sum_verified"])
+
+            # Rank-one parameter map [[1,0],[0,0]] discards K entirely.
+            # Its output pair (Q,0) is block diagonal, but this says nothing
+            # about the erased coefficient of the original pencil.
+            collapsed_q, collapsed_k = q, [[0, 0, 0] for _ in range(3)]
+            erased = verify_pencil_multi_direct_sum_witness(
+                collapsed_q, collapsed_k, p, ident(3), ident(3), shapes
+            )
+            with self.subTest(field=p, case="erase second coefficient"):
+                self.assertTrue(erased["verification"]["direct_sum_verified"])
+                self.assertEqual(erased["transformed_Q"], q)
+                self.assertEqual(erased["transformed_K"], collapsed_k)
+                self.assertFalse(original["verification"]["direct_sum_verified"])
+
+            # Another rank-one map has two identical outputs (Q,Q): the
+            # coefficient pair has collapsed to a one-dimensional span.
+            duplicated = verify_pencil_multi_direct_sum_witness(
+                q, q, p, ident(3), ident(3), shapes
+            )
+            with self.subTest(field=p, case="duplicate coefficient"):
+                self.assertTrue(duplicated["verification"]["direct_sum_verified"])
+                self.assertEqual(duplicated["transformed_Q"], duplicated["transformed_K"])
+
+            # A singular map retaining Q+K in both outputs does not hide
+            # this coupling: the retained linear combination is still
+            # off-block, so the supplied witness correctly rejects it.
+            sum_q = [[(q[i][j] + k[i][j]) % p for j in range(3)]
+                     for i in range(3)]
+            retained = verify_pencil_multi_direct_sum_witness(
+                sum_q, sum_q, p, ident(3), ident(3), shapes
+            )
+            with self.subTest(field=p, case="retained coupled combination"):
+                self.assertFalse(retained["verification"]["Q_off_diagonal_blocks_zero"])
+                self.assertFalse(retained["verification"]["K_off_diagonal_blocks_zero"])
+                self.assertFalse(retained["verification"]["direct_sum_verified"])
+
