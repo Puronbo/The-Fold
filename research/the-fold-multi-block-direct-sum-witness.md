@@ -776,3 +776,14 @@ coefficient space preserves whether both coefficients lie in the same
 linear subspace of block-diagonal matrices. It does not add a production
 coefficient-change API, discover a decomposition, or establish a universal
 classification result.
+
+- **G-EP144:** exhaustively tests every invertible 2×2 coefficient-space map over F₂/F₃/F₅ on a rectangular 3×4 block partition containing explicit zero-column and zero-row summands. Under independent nontrivial row/column basis changes, every ordered projected block of both mixed coefficients is checked against the corresponding linear combination of the original projected blocks, including exact empty-block shapes. All off-diagonal projected blocks remain zero, diagonal blocks reconstruct each full coefficient, and inverse coefficient maps recover both the ordered matrices and all indexed projected blocks. Finite test-side covariance evidence only; no production projector API or universal theorem is added.
+
+
+## G-EP144: Rectangular coefficient covariance at the projected-block level
+
+Use the rectangular 3×4 partition with ordered shapes (1,1), (1,0), (0,1), and (1,2). This retains both a zero-column summand and a zero-row summand while leaving two nonempty diagonal rectangular blocks. Apply independent nontrivial invertible row and column basis changes and transport the associated row and column projectors.
+
+For every invertible 2×2 coefficient-space map over F₂, F₃, and F₅, form the two transformed pencil coefficients. Check every ordered projected block, not just the final direct-sum verdict: each output block must equal the same coefficient-space linear combination of the corresponding two source blocks. This includes exact 1×0 and 0×1 empty-block shapes. Every off-diagonal projected block remains zero, and summing the diagonal projected blocks reconstructs each full rectangular output coefficient. Applying the inverse coefficient map recovers both original ordered coefficients and their complete indexed projected-block grids.
+
+The production multi-block verifier is replayed for each transformed pair and must accept the supplied transported witness. These are exhaustive finite regression controls for the stated partition and fields. They do not add an arbitrary-subspace projector API, decomposition discovery, or a universal theorem.
