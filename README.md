@@ -275,3 +275,5 @@ of its witness.
 
 
 - **G-EP138:** checks projector-bound diagonal reconstruction under invertible coefficient-space mixing of the pencil pair, in addition to independent row/column basis changes. The mixing matrix has determinant one over F₂/F₃/F₅; its inverse recovers the original ordered coefficient pair exactly. The intended projectors reconstruct both mixed coefficients from diagonal projected blocks, while the alternative resolution still fails diagonal-only reconstruction and the full projected-block sum remains exact. Finite test-side covariance evidence only.
+
+- **G-EP139:** composes two successive invertible coefficient-space basis changes and compares sequential mixing with the directly composed map over F₂/F₃/F₅. The same transported projector families reconstruct both coefficients at each stage; the composed map is inverted to recover the original ordered pair, including reverse-order inverse application. Finite test-side composition and covariance evidence only.
