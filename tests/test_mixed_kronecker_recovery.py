@@ -1,6 +1,8 @@
 import unittest
 
-from tools.mixed_kronecker_recovery import recover_mixed_kronecker_pencil
+from tools.mixed_kronecker_recovery import (
+    _affine_vectors, _exhaustive_left_matrices, recover_mixed_kronecker_pencil,
+)
 
 
 def transpose(a):
@@ -199,6 +201,45 @@ class MixedKroneckerRecoveryTests(unittest.TestCase):
                 self.assertEqual(structured["left_minimal_indices"], exhaustive["left_minimal_indices"])
                 self.assertTrue(structured["verification"]["strict_equivalence_certified"])
                 self.assertTrue(exhaustive["verification"]["strict_equivalence_certified"])
+
+
+    def test_exhaustive_left_matrix_enumerator_is_complete_and_duplicate_free(self):
+        for p in (2, 3):
+            for n in (1, 2):
+                with self.subTest(p=p, n=n):
+                    matrices = list(_exhaustive_left_matrices(n, p))
+                    flattened = [tuple(value for row in matrix for value in row)
+                                 for matrix in matrices]
+                    self.assertEqual(len(flattened), p ** (n*n))
+                    self.assertEqual(len(set(flattened)), p ** (n*n))
+                    identity = tuple(int(i == j) for i in range(n) for j in range(n))
+                    self.assertEqual(flattened[0], identity)
+                    self.assertEqual(set(flattened), set(
+                        __import__("itertools").product(range(p), repeat=n*n)
+                    ))
+
+    def test_affine_solution_enumerator_matches_brute_force(self):
+        # x + 2y = 1 and z - y = 2 over F_3.
+        p = 3
+        matrix = [[1, 2, 0], [0, 2, 1]]
+        rhs = [1, 2]
+        from tools.mixed_kronecker_recovery import _solve_affine
+        particular, basis = _solve_affine(matrix, rhs, 3, p)
+        generated = list(_affine_vectors(particular, basis, p))
+        brute_force = [
+            list(candidate)
+            for candidate in __import__("itertools").product(range(p), repeat=3)
+            if all(sum(a*b for a, b in zip(row, candidate)) % p == target
+                   for row, target in zip(matrix, rhs))
+        ]
+        self.assertEqual(len(generated), p ** len(basis))
+        self.assertEqual(len(set(map(tuple, generated))), len(generated))
+        self.assertEqual(set(map(tuple, generated)), set(map(tuple, brute_force)))
+
+    def test_affine_enumerator_handles_unique_and_unconstrained_spaces(self):
+        self.assertEqual(list(_affine_vectors([2, 1], [], 5)), [[2, 1]])
+        generated = list(_affine_vectors([0, 0], [[1, 0], [0, 1]], 2))
+        self.assertEqual(set(map(tuple, generated)), {(0, 0), (0, 1), (1, 0), (1, 1)})
 
 
 if __name__ == "__main__":
