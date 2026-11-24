@@ -340,3 +340,5 @@ G-EP140: distinguishes valid invertible coefficient-space shears that change onl
 - **G-EP162:** exhausts all 15,625 monic sextics over F₅, independently confirming exact factor reconstruction and irreducible inventory counts through degree six. The six-distinct-linear-factor shape is absent, while representative five-linear-factor and four-linear-plus-quadratic shapes occur. This fills the F₅ comparison point between G-EP161's F₃ and F₇ experiments.
 
 - **G-EP163:** tests the general polynomial factor API's scalar-unit convention, coefficient reduction modulo the field, constant-polynomial behavior, zero-polynomial rejection, composite-modulus rejection, and characteristic-three multiplicity — (x^3+1=(x+1)^3) over F₃.
+
+- **G-EP164:** exhaustively cross-checks `is_irreducible_polynomial` against the factorizer's exact one-factor criterion for every monic polynomial of degrees 1–4 over F₂, F₃, and F₅ (930 inputs).
