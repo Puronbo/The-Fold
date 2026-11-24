@@ -68,3 +68,8 @@ G-EP162 exhausts all 15,625 monic sextics over F₅. It verifies exact reconstru
 ## Polynomial factor API edge cases (G-EP163)
 
 The regression covers scalar-unit reporting for nonmonic inputs, coefficient reduction modulo the prime, nonzero constants (empty nonconstant factor list), rejection of empty and zero polynomials, and rejection of composite moduli. It also checks the characteristic-three identity (x^3+1=(x+1)^3), including the reported multiplicity three. This validates selected API contracts and edge cases; it is not a proof of factorization correctness for arbitrary degrees.
+
+
+## Exhaustive irreducibility cross-check (G-EP164)
+
+For every monic polynomial of degrees one through four over F₂, F₃, and F₅ (930 inputs total), the test compares the Rabin-style irreducibility predicate with an independently observed factorizer criterion: exactly one factor, equal to the original monic polynomial, with multiplicity one. Agreement is finite-domain regression evidence across these fields and degrees, not a universal proof.
