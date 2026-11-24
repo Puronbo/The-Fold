@@ -4320,12 +4320,12 @@ class MultiDirectSumTests(unittest.TestCase):
                 idem_status=status(bad_idem,total,p)
                 with self.subTest(field=p,side=side,mutation="idempotence"):
                     self.assertFalse(idem_status[0])
-                    self.assertTrue(idem_status[1] or not idem_status[1])
+                    self.assertIsInstance(idem_status[1], bool)
                     self.assertTrue(all(len(z)==total and all(len(row)==total for row in z)
                                         for z in bad_idem))
 
                 bad_orth=[z[:] for z in baseline]
-                bad_orth[1]=[row[:] for row in bad_orth[0]]
+                bad_orth[0]=[row[:] for row in bad_orth[2]]
                 orth_status=status(bad_orth,total,p)
                 with self.subTest(field=p,side=side,mutation="orthogonality"):
                     self.assertTrue(orth_status[0])
