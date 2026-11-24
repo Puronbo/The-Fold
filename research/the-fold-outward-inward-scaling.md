@@ -479,3 +479,90 @@ family, with equality at (2,3) and strict inequality for odd b≥5. It does
 not settle pairs whose smaller degree is at least 3. The displayed
 logarithmic estimate is handled separately at b=9 and uniformly for b≥15;
 the union-bound argument is analytic, not a finite-grid inference.
+
+
+## G-EP181 — Complete the sharp ratio bound for all coprime degrees
+
+G-EP180 handles the case where the smaller degree is 2. We now prove the
+G-EP179 bound for every remaining pair as well. Let \(3\le a<b\),
+\(\gcd(a,b)=1\), and let \(\omega(m)\) denote the number of distinct prime
+factors of \(m\).
+
+For any \(n>1\), if \(q_n\) is its smallest prime factor, the maximal
+proper-subfield lower bound and union upper bound give
+\[
+E_p(n)\ge p^{-A_n},\quad A_n=n(1-1/q_n),
+\qquad
+E_p(n)\le\sum_{q\mid n,\ q\ {\rm prime}}p^{-n(1-1/q)}.
+\]
+Since \(A_a<a<b\) and \(A_b<b\), we have
+\(\max(A_a,A_b)<b\). Therefore
+\[
+\begin{aligned}
+Q_p(a,b)
+&=\frac{E_p(ab)}{\min(E_p(a),E_p(b))}\\
+&\le \sum_{q\mid ab,\ q\ {\rm prime}}
+p^{\max(A_a,A_b)-ab(1-1/q)}\\
+&\le \omega(ab)p^{b-ab/2}\\
+&\le \omega(ab)p^{-b/2},
+\end{aligned}
+\]
+where the last step uses \(a\ge3\). It remains to control the elementary
+factor \(\omega(ab)\).
+
+If \(b=4\), coprimality and \(3\le a<b\) force \(a=3\), so
+\(\omega(ab)=\omega(12)=2\). Thus
+\[
+Q_p(3,4)\le2p^{-2}
+\le p^{-1}+p^{-2}-p^{-3}
+=\frac{p^2+p-1}{p^3},
+\]
+because \(p^2-p-1>0\) for every prime \(p\ge2\).
+
+For \(b=5,6,7\), the admissible smaller degrees and products are finite:
+\[
+\begin{array}{c|c|c}
+b & a & ab\\ \hline
+5&3,4&15,20\\
+6&5&30\\
+7&3,4,5,6&21,28,35,42
+\end{array}
+\]
+Every listed product has at most three distinct prime factors. Hence
+\(\omega(ab)\le3\le2^{b/2-1}\) in these cases.
+
+For \(b\ge8\), since \(a<b\),
+\[
+\omega(ab)\le\log_2(ab)<2\log_2 b
+\le2^{b/2-1}.
+\]
+The last inequality holds at \(b=8\), where \(6\le8\), and its
+right-minus-left difference is increasing for real \(b\ge8\): the
+exponential term has increasing derivative while the logarithmic
+derivative decreases. Consequently, for every \(b\ge5\),
+\[
+\omega(ab)\le2^{b/2-1}\le p^{b/2-1},
+\]
+and so
+\[
+Q_p(a,b)\le p^{-1}
+< p^{-1}+p^{-2}-p^{-3}.
+\]
+
+Together with the \(b=4\) case, this proves
+\[
+\boxed{
+Q_p(a,b)\le\frac{p^2+p-1}{p^3}
+}
+\]
+for all prime \(p\) and all coprime \(a,b\ge3\), with strict inequality
+throughout this range. G-EP180 supplies the remaining pairs with smaller
+degree 2; equality in the complete theorem occurs exactly at
+\(\{a,b\}=\{2,3\}\).
+
+**Conclusion:** the G-EP179 sharp ratio conjecture is now a theorem for all
+coprime degrees \(a,b>1\). In particular,
+\(E_p(ab)<\min(E_p(a),E_p(b))\), so the coprime-degree defect
+\(\Delta_p(a,b)\) is strictly positive. The proof uses exact
+finite-field subfield bounds and an elementary factor-count estimate;
+the finite computational sweeps remain corroboration, not the proof.
