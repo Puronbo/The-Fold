@@ -266,3 +266,6 @@ of its witness.
 
 
 **G-EP135 — transported projector image and kernel subspaces:** independently compares the actual image and kernel spans of each transported row and column projector with the subspaces induced by the corresponding basis map. The checks use finite-field elimination, preserve zero-dimensional and full-dimensional cases, and verify expected image/kernel dimensions over F₂/F₃/F₅. A dimension-preserving projector mutation that moves a proper nonzero image to a different coordinate subspace is rejected. Finite test-side regression evidence only; no production arbitrary-subspace projector API is added.
+
+
+- **G-EP136:** constructs alternative transported row/column projector families by conjugating with coordinate permutations that move the represented subspaces. Each alternative family still satisfies idempotence, pairwise orthogonality, completeness, and the same per-index ranks over F₂/F₃/F₅. Direct comparison with the intended transported projectors detects the changed ordered subspaces. This demonstrates that projector axioms and ranks alone do not uniquely identify the supplied ordered decomposition; test-side finite evidence only.
