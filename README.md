@@ -395,7 +395,10 @@ G-EP140: distinguishes valid invertible coefficient-space shears that change onl
 - **G-EP184–187:** expands each subfield error into its exact finite squarefree-divisor spectrum; derives the complete finite spectrum for the coprime defect; proves the fixed-degree, large-field law \(\Delta_p(a,b)\sim C(a,b)p^{-A}\), with coefficient 2 precisely when the two input exponents resonate; and specifies exact coefficient collection for the next nonzero scale. It distinguishes the fixed-degree \(p\to\infty\) limit from the uniform large-degree limit of G-EP182–183. See research/the-fold-outward-inward-scaling.md.
 
 
-- **G-EP188–190:** adds an exact integer-coefficient defect-spectrum auditor and rational evaluator; extends the Möbius density and defect results from prime fields to all finite fields of prime-power order; and proves positivity of the multi-factor composite excess for pairwise-coprime degrees by recursive composition. The exact spectra for (2,3) and resonant (3,4) are regression fixtures. See the research note.
+- **G-EP188–190:** adds an exact integer-coefficient defect-spectrum auditor and rational evaluator; extends the Möbius density and defect results from prime fields to all finite fields of prime-power order; and constructs the exact multi-factor composition-excess spectrum, including its sign-resonance criterion. The exact spectra for (2,3) and resonant (3,4) are regression fixtures. See the research note.
 
 
 - **Prime-power field support:** the exact irreducible-count and normalized-density APIs now accept every finite-field order \(Q\), provided \(Q\) is a prime power. The original prime-only API remains available for backwards compatibility.
+
+
+- **G-EP190 correction:** the multi-factor composition excess \(E_Q(\prod n_i)-\prod E_Q(n_i)\) is not sign-definite; (2,3) is positive after leading-term cancellation, while (3,4) is negative. The exact spectrum auditor now handles arbitrary pairwise-coprime degree lists and reports the eventual sign.
