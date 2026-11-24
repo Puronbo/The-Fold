@@ -983,5 +983,95 @@ class MixedKroneckerRecoveryTests(unittest.TestCase):
                 k, 5, s, t, result["canonical_block_shapes"]
             )
 
+
+    def test_multi_block_verifier_returns_failed_audit_for_singular_transforms(self):
+        from tools.pencil_multi_direct_sum_witness import verify_pencil_multi_direct_sum_witness
+
+        q, k = self.mixed_pair()
+        result = recover_mixed_kronecker_pencil(q, k, 5, max_degree=2)
+        s, transform_t = result["left_transform_S"], result["right_transform_T"]
+        singular_s = [row[:] for row in s]
+        singular_s[-1] = [0] * len(singular_s[-1])
+        audit_s = verify_pencil_multi_direct_sum_witness(
+            q, k, 5, singular_s, transform_t, result["canonical_block_shapes"]
+        )
+        self.assertFalse(audit_s["verification"]["left_transform_invertible"])
+        self.assertTrue(audit_s["verification"]["right_transform_invertible"])
+        self.assertFalse(audit_s["verification"]["direct_sum_verified"])
+
+        singular_t = [row[:] for row in transform_t]
+        singular_t[-1] = [0] * len(singular_t[-1])
+        audit_t = verify_pencil_multi_direct_sum_witness(
+            q, k, 5, s, singular_t, result["canonical_block_shapes"]
+        )
+        self.assertTrue(audit_t["verification"]["left_transform_invertible"])
+        self.assertFalse(audit_t["verification"]["right_transform_invertible"])
+        self.assertFalse(audit_t["verification"]["direct_sum_verified"])
+
+    def test_multi_block_verifier_normalizes_modularly_equivalent_inputs(self):
+        from tools.pencil_multi_direct_sum_witness import verify_pencil_multi_direct_sum_witness
+
+        q, k = self.mixed_pair()
+        result = recover_mixed_kronecker_pencil(q, k, 5, max_degree=2)
+        s, t = result["left_transform_S"], result["right_transform_T"]
+        shapes = result["canonical_block_shapes"]
+        baseline = verify_pencil_multi_direct_sum_witness(q, k, 5, s, t, shapes)
+        shift = lambda matrix, amount: [
+            [value + amount * (i + j + 1) for j, value in enumerate(row)]
+            for i, row in enumerate(matrix)
+        ]
+        equivalent = verify_pencil_multi_direct_sum_witness(
+            shift(q, 5), shift(k, 10), 5, shift(s, 15), shift(t, 20), shapes
+        )
+        for key in ("source_shape", "block_shapes", "transformed_Q", "transformed_K",
+                    "Q_blocks", "K_blocks", "verification"):
+            with self.subTest(field=key):
+                self.assertEqual(equivalent[key], baseline[key])
+
+    def test_multi_block_verifier_field_boundaries_and_small_prime_controls(self):
+        from tools.pencil_multi_direct_sum_witness import verify_pencil_multi_direct_sum_witness
+
+        q, k = [[1, 0], [0, 1]], [[0, 0], [0, 1]]
+        identity = [[1, 0], [0, 1]]
+        shapes = [[1, 1], [1, 1]]
+        for bad_p in (True, 2.0, 1, 4, 9):
+            with self.subTest(bad_p=bad_p):
+                with self.assertRaises(ValueError):
+                    verify_pencil_multi_direct_sum_witness(
+                        q, k, bad_p, identity, identity, shapes
+                    )
+        for p in (2, 3):
+            with self.subTest(prime=p):
+                audit = verify_pencil_multi_direct_sum_witness(
+                    q, k, p, identity, identity, shapes
+                )
+                self.assertTrue(audit["verification"]["direct_sum_verified"], audit)
+
+    def test_multi_block_verifier_rejects_malformed_nested_caller_matrices(self):
+        from tools.pencil_multi_direct_sum_witness import verify_pencil_multi_direct_sum_witness
+
+        q, k = self.mixed_pair()
+        result = recover_mixed_kronecker_pencil(q, k, 5, max_degree=2)
+        s, t, shapes = (
+            result["left_transform_S"], result["right_transform_T"],
+            result["canonical_block_shapes"],
+        )
+        malformed = (
+            (None, k, s, t), ([], k, s, t),
+            ([[1, 0], [0]], k, s, t),
+            (q, [[0, 1], [0]], s, t),
+            (q, k, [[1, 0], [0]], t),
+            (q, k, s, [[1, 0], [0]]),
+            (q, k, [[1], [0]], t),
+            (q, k, s, [[1], [0]]),
+        )
+        for bad_q, bad_k, bad_s, bad_t in malformed:
+            with self.subTest(q=bad_q, k=bad_k, s=bad_s, t=bad_t):
+                with self.assertRaises(ValueError):
+                    verify_pencil_multi_direct_sum_witness(
+                        bad_q, bad_k, 5, bad_s, bad_t, shapes
+                    )
+
+
 if __name__ == "__main__":
     unittest.main()
