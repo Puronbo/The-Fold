@@ -17,6 +17,7 @@ from tools.polynomial_irreducibility_audit import (
     irreducible_density_convergence_over_field,
     coprime_composition_excess_asymptotic,
     coprime_composition_excess_sign_certificate,
+    coprime_composition_excess_global_sign_certificate,
 )
 
 
@@ -511,6 +512,22 @@ class CompositionExcessSignCertificateTests(unittest.TestCase):
                 )
                 self.assertEqual(result["exact_sign"], expected)
 
+    def test_sturm_certificate_proves_global_sign_on_q_ge_two(self):
+        expected = (
+            ([2, 3], "positive"),
+            ([3, 4], "negative"),
+            ([2, 3, 5], "negative"),
+            ([2, 5, 9], "negative"),
+            ([3, 5, 7], "negative"),
+        )
+        for degrees, sign in expected:
+            with self.subTest(degrees=degrees):
+                result = coprime_composition_excess_global_sign_certificate(degrees)
+                self.assertEqual(result["sturm_root_count_open_interval"], 0)
+                self.assertFalse(result["q_equals_two_is_root"])
+                self.assertTrue(result["global_sign_certified_for_all_real_q_ge_2"])
+                self.assertEqual(result["certified_sign"], sign)
+                self.assertEqual(result["leading_sign"], sign)
     def test_sign_certificate_rejects_invalid_field_sizes(self):
         for field_size in (0, 1, 6, 10, True, 2.5):
             with self.subTest(field_size=field_size):
