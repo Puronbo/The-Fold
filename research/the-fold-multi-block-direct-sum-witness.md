@@ -146,3 +146,9 @@ A new test-local reference calculation reconstructs the audit record from the or
 The regression compares these independently derived values with the verifier output for identity, nontrivial invertible, and singular left transforms. It also mutates transformed coefficients, nested Q/K blocks, rank diagnostics, and the aggregate decision in otherwise shape-preserving snapshots, requiring each changed value to disagree with the independently reconstructed record. False and singular witnesses are deliberately reconstructed as consistent negative records: consistency of the audit data is not the same as a positive direct-sum result.
 
 The routines are test-local and do not call the production verifier's multiplication, rank, or block-splitting helpers. This is finite independent regression evidence, not a production snapshot-ingestion API, a formal proof, or cryptographic provenance/authenticity.
+
+## G-EP102: Seeded cross-field rectangular reconstruction
+
+Deterministic, field-specific rectangular partitions are exercised over F₂, F₃, F₅, and F₇. For each fixture, test-local seeded elementary row operations produce independently invertible left and right transforms. The source pencil is formed by applying their inverses to independently generated block-diagonal coefficient matrices; the verifier must reconstruct those original matrices exactly. The partitions include zero-row and zero-column blocks without any 0×0 block.
+
+The same source entries are then shifted by different multiples of the field characteristic. The normalized transformed matrices, rectangular block grids, and verification diagnostics must remain unchanged. A shape-preserving transformed-matrix mutation is included as a snapshot-integrity control. These tests add finite cross-field regression coverage; they do not establish a universal theorem, formal proof, or production snapshot-authenticity mechanism.
