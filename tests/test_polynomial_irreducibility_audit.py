@@ -13,6 +13,7 @@ from tools.polynomial_irreducibility_audit import (
     evaluate_coprime_defect_spectrum,
     count_monic_irreducibles_over_field,
     irreducible_density_over_field,
+    coprime_composition_excess_spectrum,
 )
 
 
@@ -362,3 +363,43 @@ class PrimePowerFieldTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+
+class CoprimeCompositionExcessTests(unittest.TestCase):
+    def test_two_three_composition_resonance(self):
+        result = coprime_composition_excess_spectrum([2, 3])
+        self.assertEqual(
+            result["spectrum"],
+            [
+                {"exponent": 4, "coefficient": 1},
+                {"exponent": 5, "coefficient": -1},
+            ],
+        )
+        self.assertEqual(result["sign_for_sufficiently_large_field"],
+                         "positive")
+
+    def test_three_four_composition_excess_is_negative(self):
+        result = coprime_composition_excess_spectrum([3, 4])
+        self.assertEqual(
+            result["spectrum"],
+            [
+                {"exponent": 4, "coefficient": -1},
+                {"exponent": 6, "coefficient": 1},
+                {"exponent": 8, "coefficient": 1},
+                {"exponent": 10, "coefficient": -1},
+            ],
+        )
+        self.assertEqual(result["sign_for_sufficiently_large_field"],
+                         "negative")
+
+    def test_pairwise_coprime_multi_factor_spectrum(self):
+        result = coprime_composition_excess_spectrum([2, 3, 5])
+        self.assertEqual(result["composite_degree"], 30)
+        self.assertGreater(result["term_count"], 0)
+
+    def test_rejects_invalid_composition_degrees(self):
+        for degrees in ([], [2], [2, 2], [2, 3, 6], [1, 3], [True, 3]):
+            with self.subTest(degrees=degrees):
+                with self.assertRaises(ValueError):
+                    coprime_composition_excess_spectrum(degrees)
