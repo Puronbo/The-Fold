@@ -2554,17 +2554,11 @@ class MultiDirectSumTests(unittest.TestCase):
         import random
 
         def elementary_basis_change(size, p, rng):
+            # Random unitriangular matrices are invertible by construction.
             matrix = ident(size)
-            # Products of elementary row additions are invertible by
-            # construction and independently generated for each side.
-            for _ in range(3*max(1, size)):
-                if size < 2:
-                    break
-                source, target = rng.sample(range(size), 2)
-                matrix[target] = [
-                    (matrix[target][j] + rng.randrange(1, p)*matrix[source][j]) % p
-                    for j in range(size)
-                ]
+            for i in range(size):
+                for j in range(i+1, size):
+                    matrix[i][j] = rng.randrange(p)
             return matrix
 
         def equation_rows(left, coefficient, shapes, p):
