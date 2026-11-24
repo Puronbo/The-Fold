@@ -3330,3 +3330,113 @@ class MultiDirectSumTests(unittest.TestCase):
             if any(r==0 or c==0 for r,c in shapes):
                 self.assertEqual(len(transported),len(original))
                 self.assertTrue(all(len(row)==n*n for row in transported))
+
+
+    def test_g_ep123_transported_kernel_bijection_including_singular_candidates(self):
+        import itertools
+
+        def product(a, b, p):
+            return [[sum(a[i][k] * b[k][j] for k in range(len(b))) % p
+                     for j in range(len(b[0]))] for i in range(len(a))]
+
+        def inv(a, p):
+            n = len(a)
+            w = [[x % p for x in row] + [int(i == j) for j in range(n)]
+                 for i, row in enumerate(a)]
+            for c in range(n):
+                pivot = next((r for r in range(c, n) if w[r][c]), None)
+                if pivot is None:
+                    raise AssertionError("basis transform must be invertible")
+                w[c], w[pivot] = w[pivot], w[c]
+                z = pow(w[c][c], -1, p)
+                w[c] = [x * z % p for x in w[c]]
+                for r in range(n):
+                    if r != c and w[r][c]:
+                        f = w[r][c]
+                        w[r] = [(x - f*y) % p for x, y in zip(w[r], w[c])]
+            return [row[n:] for row in w]
+
+        def off_diagonal_zero(a, x, shapes, p):
+            ax = product(a, x, p)
+            row_start = col_start = 0
+            row_ranges, col_ranges = [], []
+            for r, c in shapes:
+                row_ranges.append(range(row_start, row_start+r))
+                col_ranges.append(range(col_start, col_start+c))
+                row_start += r
+                col_start += c
+            return all(
+                ax[i][j] % p == 0
+                for bi, rows in enumerate(row_ranges)
+                for bj, cols in enumerate(col_ranges) if bi != bj
+                for i in rows for j in cols
+            )
+
+        # A genuinely rectangular 3x2 source with two nonempty diagonal
+        # regions. Its common right-transform kernel contains singular and
+        # invertible matrices; invertibility is not part of the linear system.
+        shapes = [(1,  1), (2, 1)]
+        q = [[1, 0], [0, 1], [0, 1]]
+        k = [[2, 0], [0, 1], [0, 2]]
+        for p in (2, 3):
+            # Full invertible changes mix the original coordinate blocks.
+            u = [[1, 1, 1], [0, 1, 1], [0, 0, 1]]
+            v = [[1, 1], [0, 1]]
+            ui, vi = inv(u, p), inv(v, p)
+            q_prime = product(product(u, q, p), v, p)
+            k_prime = product(product(u, k, p), v, p)
+
+            def transported_condition(x_prime, coefficient_prime):
+                pulled = product(
+                    product(product(ui, coefficient_prime, p), x_prime, p),
+                    vi, p
+                )
+                return off_diagonal_zero(pulled, ident(2), shapes, p)
+
+            # Enumerate the entire 2x2 matrix space, not only GL(2).
+            matrices = [
+                [[a, b], [c, d]]
+                for a, b, c, d in itertools.product(range(p), repeat=4)
+            ]
+            mapped = []
+            original_kernel, transported_kernel = [], []
+            for x in matrices:
+                x_prime = product(product(vi, x, p), v, p)
+                mapped.append(tuple(z for row in x_prime for z in row))
+                original_ok = (off_diagonal_zero(q, x, shapes, p)
+                               and off_diagonal_zero(k, x, shapes, p))
+                transported_ok = (
+                    transported_condition(x_prime, q_prime)
+                    and transported_condition(x_prime, k_prime)
+                )
+                self.assertEqual(original_ok, transported_ok, (p, x))
+                if original_ok:
+                    original_kernel.append(tuple(z for row in x for z in row))
+                if transported_ok:
+                    transported_kernel.append(tuple(z for row in x_prime for z in row))
+
+            # Conjugation X -> V^-1 X V is a bijection on the full matrix
+            # vector space, including singular matrices.
+            self.assertEqual(len(set(mapped)), p**4)
+            self.assertEqual(len(original_kernel), len(transported_kernel))
+            self.assertEqual(len(original_kernel), p**2)
+            self.assertEqual(len(transported_kernel), p**2)
+
+            def determinant(x):
+                return (x[0][0]*x[1][1] - x[0][1]*x[1][0]) % p
+
+            original_singular = [x for x in matrices
+                                 if off_diagonal_zero(q, x, shapes, p)
+                                 and off_diagonal_zero(k, x, shapes, p)
+                                 and determinant(x) == 0]
+            original_invertible = [x for x in matrices
+                                   if off_diagonal_zero(q, x, shapes, p)
+                                   and off_diagonal_zero(k, x, shapes, p)
+                                   and determinant(x) != 0]
+            self.assertTrue(original_singular)
+            self.assertEqual(len(original_invertible), (p-1)**2)
+            self.assertEqual(len(original_singular) + len(original_invertible),
+                             len(original_kernel))
+            # The zero matrix is in the linear kernel; it is never an
+            # invertible witness. This keeps the linear/nonlinear boundary explicit.
+            self.assertIn((0, 0, 0, 0), original_kernel)
