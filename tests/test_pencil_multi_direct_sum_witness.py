@@ -1237,3 +1237,168 @@ class MultiDirectSumTests(unittest.TestCase):
                 self.assertEqual(len(forged["transformed_Q"][0]), n)
                 self.assertNotEqual(forged["transformed_Q"], base_q)
                 self.assertEqual(record["field"], f"F_{p}")
+
+    def test_g_ep103_three_layer_audit_pipeline_mutation_matrix(self):
+        import copy
+
+        p = 5
+        q = [[1, 0], [0, 2]]
+        k = [[2, 0], [0, 1]]
+        shapes = [(1, 1), (1, 1)]
+        identity = ident(2)
+
+        def schema_ok(record):
+            required = {
+                "schema", "field", "source_shape", "block_shapes",
+                "left_transform", "right_transform", "transformed_Q",
+                "transformed_K", "Q_blocks", "K_blocks", "verification",
+                "scope",
+            }
+            if type(record) is not dict or set(record) != required:
+                return False
+            if record["schema"] != "the-fold-pencil-multi-direct-sum-witness-v1":
+                return False
+            if type(record["field"]) is not str or record["field"] != "F_5":
+                return False
+            if record["source_shape"] != [2, 2] or type(record["source_shape"]) is not list:
+                return False
+            if record["block_shapes"] != [[1, 1], [1, 1]]:
+                return False
+
+            def matrix(value, rows, cols):
+                return (type(value) is list and len(value) == rows
+                        and all(type(row) is list and len(row) == cols
+                                and all(type(x) is int for x in row)
+                                for row in value))
+            if not matrix(record["left_transform"], 2, 2):
+                return False
+            if not matrix(record["right_transform"], 2, 2):
+                return False
+            if not matrix(record["transformed_Q"], 2, 2):
+                return False
+            if not matrix(record["transformed_K"], 2, 2):
+                return False
+            for name in ("Q_blocks", "K_blocks"):
+                grid = record[name]
+                if type(grid) is not list or len(grid) != 2:
+                    return False
+                if any(type(row) is not list or len(row) != 2 for row in grid):
+                    return False
+                if any(not matrix(block, 1, 1) for row in grid for block in row):
+                    return False
+            v = record["verification"]
+            expected_types = {
+                "left_transform_rank": int, "right_transform_rank": int,
+                "left_transform_invertible": bool, "right_transform_invertible": bool,
+                "Q_off_diagonal_blocks_zero": bool, "K_off_diagonal_blocks_zero": bool,
+                "direct_sum_verified": bool,
+            }
+            return (type(v) is dict and set(v) == set(expected_types)
+                    and all(type(v[key]) is typ for key, typ in expected_types.items())
+                    and 0 <= v["left_transform_rank"] <= 2
+                    and 0 <= v["right_transform_rank"] <= 2
+                    and type(record["scope"]) is str)
+
+        def independent_reconstruction(left, right):
+            def mm(a, b):
+                return [[sum(a[i][z] * b[z][j] for z in range(len(b))) % p
+                         for j in range(len(b[0]))] for i in range(len(a))]
+            tq = mm(mm(left, q), right)
+            tk = mm(mm(left, k), right)
+            qb = [[[[tq[i][j]] for j in range(1)] for i in range(1)],
+                  [[[tq[i][j]] for j in range(1, 2)] for i in range(1, 2)]]
+            # Explicit interval slicing keeps the reference separate from the
+            # production block-splitting routine.
+            def split(matrix):
+                return [[ [row[j:j + 1] for row in matrix[i:i + 1]]
+                          for j in (0, 1)] for i in (0, 1)]
+            qb, kb = split(tq), split(tk)
+
+            def rank2(a):
+                a = [[x % p for x in row] for row in a]
+                if a[0][0]:
+                    return 2 if (a[0][0] * a[1][1] - a[0][1] * a[1][0]) % p else 1
+                return 2 if a[0][1] and a[1][0] else int(any(any(row) for row in a))
+            lr, rr = rank2(left), rank2(right)
+            qzero = all(qb[i][j][0][0] == 0 for i in range(2) for j in range(2) if i != j)
+            kzero = all(kb[i][j][0][0] == 0 for i in range(2) for j in range(2) if i != j)
+            verification = {
+                "left_transform_rank": lr, "right_transform_rank": rr,
+                "left_transform_invertible": lr == 2,
+                "right_transform_invertible": rr == 2,
+                "Q_off_diagonal_blocks_zero": qzero,
+                "K_off_diagonal_blocks_zero": kzero,
+                "direct_sum_verified": lr == 2 and rr == 2 and qzero and kzero,
+            }
+            return {
+                "field": "F_5", "source_shape": [2, 2],
+                "block_shapes": [[1, 1], [1, 1]],
+                "left_transform": [[x % p for x in row] for row in left],
+                "right_transform": [[x % p for x in row] for row in right],
+                "transformed_Q": tq, "transformed_K": tk,
+                "Q_blocks": qb, "K_blocks": kb, "verification": verification,
+            }
+
+        def reconstruction_ok(record, expected):
+            keys = ("field", "source_shape", "block_shapes", "left_transform",
+                    "right_transform", "transformed_Q", "transformed_K",
+                    "Q_blocks", "K_blocks", "verification")
+            return all(record[key] == expected[key] for key in keys)
+
+        good = verify_pencil_multi_direct_sum_witness(
+            q, k, p, identity, identity, shapes
+        )
+        false_left = [[1, 1], [0, 1]]
+        negative = verify_pencil_multi_direct_sum_witness(
+            q, k, p, false_left, identity, shapes
+        )
+        good_expected = independent_reconstruction(identity, identity)
+        negative_expected = independent_reconstruction(false_left, identity)
+
+        # Three checks are reported independently: schema, reconstruction,
+        # and the independently derived mathematical verdict.
+        self.assertTrue(schema_ok(good))
+        self.assertTrue(reconstruction_ok(good, good_expected))
+        self.assertTrue(good_expected["verification"]["direct_sum_verified"])
+
+        self.assertTrue(schema_ok(negative))
+        self.assertTrue(reconstruction_ok(negative, negative_expected))
+        self.assertFalse(negative_expected["verification"]["direct_sum_verified"])
+
+        # Mutation matrix: malformed structure is caught at layer 1;
+        # well-shaped forgeries pass layer 1 but fail layer 2; a consistent
+        # negative witness passes layers 1 and 2 but fails layer 3.
+        cases = []
+        malformed = copy.deepcopy(good)
+        malformed["Q_blocks"].pop()
+        cases.append(("missing block-grid row", malformed, False, False, None))
+
+        inconsistent_matrix = copy.deepcopy(good)
+        inconsistent_matrix["transformed_Q"][0][0] = 4
+        cases.append(("forged transformed coefficient", inconsistent_matrix, True, False, None))
+
+        inconsistent_grid = copy.deepcopy(good)
+        inconsistent_grid["K_blocks"][0][1][0][0] = 3
+        cases.append(("forged nested block", inconsistent_grid, True, False, None))
+
+        inconsistent_diag = copy.deepcopy(good)
+        inconsistent_diag["verification"]["left_transform_rank"] = 1
+        cases.append(("forged rank diagnostic", inconsistent_diag, True, False, None))
+
+        cases.append(("consistent negative witness", negative, True, True, False))
+
+        for label, record, expected_schema, expected_replay, expected_math in cases:
+            with self.subTest(layer_case=label):
+                self.assertEqual(schema_ok(record), expected_schema)
+                if expected_schema:
+                    self.assertEqual(
+                        reconstruction_ok(record, good_expected if label != "consistent negative witness"
+                                          else negative_expected),
+                        expected_replay,
+                    )
+                if expected_math is not None:
+                    self.assertEqual(
+                        (negative_expected if label == "consistent negative witness"
+                         else good_expected)["verification"]["direct_sum_verified"],
+                        expected_math,
+                    )
