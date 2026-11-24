@@ -171,6 +171,27 @@ def _matrix_from_flat(v, n):
     return [v[i*n:(i+1)*n] for i in range(n)]
 
 
+def _exhaustive_left_matrices(n, p):
+    """Yield every n-by-n matrix over F_p exactly once, identity first."""
+    identity = _identity(n)
+    identity_flat = tuple(value for row in identity for value in row)
+    yield identity
+    for values in product(range(p), repeat=n*n):
+        if values != identity_flat:
+            yield _matrix_from_flat(list(values), n)
+
+
+def _affine_vectors(particular, basis, p):
+    """Enumerate every vector in a finite-field affine solution space once."""
+    dimension = len(basis)
+    for coefficients in product(range(p), repeat=dimension):
+        yield [
+            (particular[z] + sum(coefficients[j] * basis[j][z]
+                                 for j in range(dimension))) % p
+            for z in range(len(particular))
+        ]
+
+
 def _left_candidates(n, p, limit):
     """Yield identity, permutations/scalings, then one-shear variants."""
     emitted = 0
@@ -249,14 +270,7 @@ def recover_mixed_kronecker_pencil(
 
     examined = 0
     if search_mode == "exhaustive":
-        identity = _identity(rows)
-        identity_flat = tuple(value for row in identity for value in row)
-        left_iterator = chain(
-            [identity],
-            (_matrix_from_flat(list(values), rows)
-             for values in product(range(p), repeat=rows*rows)
-             if values != identity_flat),
-        )
+        left_iterator = _exhaustive_left_matrices(rows, p)
     else:
         left_iterator = _left_candidates(rows, p, max_candidates)
 
@@ -278,12 +292,7 @@ def recover_mixed_kronecker_pencil(
             vectors = iter([particular])
             fully_enumerated = False
         else:
-            vectors = (
-                [(particular[z] + sum(values[j]*basis[j][z]
-                                      for j in range(len(basis))) ) % p
-                 for z in range(cols*cols)]
-                for values in product(range(p), repeat=len(basis))
-            )
+            vectors = _affine_vectors(particular, basis, p)
             fully_enumerated = True
         for vector in vectors:
             if examined >= max_candidates:
