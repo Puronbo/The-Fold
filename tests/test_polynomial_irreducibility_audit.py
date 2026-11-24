@@ -82,8 +82,8 @@ class PolynomialIrreducibilityAuditTests(unittest.TestCase):
         result = irreducible_density_composition(2, 2, 3)
         self.assertEqual(result["combined_degree"], 6)
         self.assertFalse(result["multiplicative"])
-        self.assertEqual(result["composition_defect_numerator"], -1)
-        self.assertEqual(result["composition_defect_denominator"], 64)
+        self.assertEqual(result["composition_defect_numerator"], 15)
+        self.assertEqual(result["composition_defect_denominator"], 32)
 
         # Degree one is the identity: R_p(1)=1.
         identity = irreducible_density_composition(3, 1, 5)
