@@ -20,6 +20,7 @@ from tools.polynomial_irreducibility_audit import (
     coprime_composition_excess_global_sign_certificate,
     coprime_composition_excess_temporal_fold,
     laurent_spectrum_global_sign_certificate,
+    laurent_spectrum_family_uniform_sign_certificate,
 )
 
 
@@ -659,3 +660,56 @@ class LaurentSpectrumGlobalSignCertificateTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class LaurentSpectrumFamilyUniformSignTests(unittest.TestCase):
+    def test_common_sign_and_threshold_cover_every_member(self):
+        spectra = [
+            [
+                {"exponent": 2, "coefficient": 1},
+                {"exponent": 3, "coefficient": -5},
+            ],
+            [
+                {"exponent": -1, "coefficient": 2},
+                {"exponent": 0, "coefficient": -7},
+            ],
+        ]
+        result = laurent_spectrum_family_uniform_sign_certificate(spectra)
+        self.assertEqual(result["common_eventual_sign"], "positive")
+        self.assertEqual(result["uniform_integer_field_size_threshold"], 6)
+        self.assertTrue(result["all_members_nonzero"])
+
+        threshold = result["uniform_integer_field_size_threshold"]
+        for q in range(threshold, threshold + 20):
+            for spectrum in spectra:
+                value = sum(
+                    Fraction(term["coefficient"], q ** term["exponent"])
+                    if term["exponent"] >= 0 else
+                    Fraction(term["coefficient"] * q ** (-term["exponent"]), 1)
+                    for term in spectrum
+                )
+                self.assertGreater(value, 0)
+
+    def test_mixed_signs_do_not_receive_common_certificate(self):
+        result = laurent_spectrum_family_uniform_sign_certificate([
+            [{"exponent": 0, "coefficient": 1}],
+            [{"exponent": 0, "coefficient": -1}],
+        ])
+        self.assertIsNone(result["common_eventual_sign"])
+        self.assertIsNone(result["uniform_integer_field_size_threshold"])
+
+    def test_zero_member_blocks_common_sign_certificate(self):
+        result = laurent_spectrum_family_uniform_sign_certificate([
+            [{"exponent": 0, "coefficient": 1}],
+            [
+                {"exponent": 2, "coefficient": 3},
+                {"exponent": 2, "coefficient": -3},
+            ],
+        ])
+        self.assertFalse(result["all_members_nonzero"])
+        self.assertIsNone(result["common_eventual_sign"])
+        self.assertIsNone(result["uniform_integer_field_size_threshold"])
+
+    def test_empty_family_is_rejected(self):
+        with self.assertRaises(ValueError):
+            laurent_spectrum_family_uniform_sign_certificate([])
