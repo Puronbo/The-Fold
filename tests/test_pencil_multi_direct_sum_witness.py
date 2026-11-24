@@ -3013,3 +3013,175 @@ class MultiDirectSumTests(unittest.TestCase):
         split_rank=rank(constraints(a,[(1,1),(2,2)],3),9,3)
         merged_rank=rank(constraints(a,[(2,2),(1,1)],3),9,3)
         self.assertNotEqual(split_rank,merged_rank)
+
+
+    def test_g_ep121_mixed_basis_changes_with_transported_partition(self):
+        import random
+
+        def mm_local(a,b,p):
+            return [[sum(a[i][k]*b[k][j] for k in range(len(b))) % p
+                     for j in range(len(b[0]) if b else 0)]
+                    for i in range(len(a))]
+
+        def inverse_local(a,p):
+            n=len(a)
+            work=[[x%p for x in row]+[int(i==j) for j in range(n)]
+                  for i,row in enumerate(a)]
+            pivot=0
+            for col in range(n):
+                found=next((r for r in range(pivot,n)
+                            if work[r][col]),None)
+                if found is None:
+                    raise AssertionError("basis change must be invertible")
+                work[pivot],work[found]=work[found],work[pivot]
+                scale=pow(work[pivot][col],-1,p)
+                work[pivot]=[x*scale%p for x in work[pivot]]
+                for r in range(n):
+                    if r!=pivot and work[r][col]:
+                        factor=work[r][col]
+                        work[r]=[(x-factor*y)%p
+                                 for x,y in zip(work[r],work[pivot])]
+                pivot+=1
+            return [row[n:] for row in work]
+
+        def constraint_rows(coefficient,shapes,p):
+            n=len(coefficient[0])
+            row_starts=[0]
+            col_starts=[0]
+            for rows,cols in shapes:
+                row_starts.append(row_starts[-1]+rows)
+                col_starts.append(col_starts[-1]+cols)
+            equations=[]
+            for bi in range(len(shapes)):
+                for bj in range(len(shapes)):
+                    if bi==bj:
+                        continue
+                    for i in range(row_starts[bi],row_starts[bi+1]):
+                        for j in range(col_starts[bj],col_starts[bj+1]):
+                            equations.append([
+                                coefficient[i][z] % p if col==j else 0
+                                for z in range(n) for col in range(n)
+                            ])
+            return equations
+
+        def transported_rows(coefficient,left_inverse,right_inverse,shapes,p):
+            # Each column of this equation matrix is evaluated on one matrix
+            # unit E_ab. The tested output is the off-diagonal part of
+            # U^-1 * coefficient * X' * V^-1, i.e. the transported split.
+            n=len(coefficient[0])
+            row_starts=[0]
+            col_starts=[0]
+            for rows,cols in shapes:
+                row_starts.append(row_starts[-1]+rows)
+                col_starts.append(col_starts[-1]+cols)
+            locations=[
+                (i,j)
+                for bi in range(len(shapes))
+                for bj in range(len(shapes)) if bi!=bj
+                for i in range(row_starts[bi],row_starts[bi+1])
+                for j in range(col_starts[bj],col_starts[bj+1])
+            ]
+            columns=[]
+            for a in range(n):
+                for b in range(n):
+                    unit=[[int(i==a and j==b) for j in range(n)]
+                          for i in range(n)]
+                    value=mm_local(
+                        mm_local(
+                            mm_local(left_inverse,coefficient,p),
+                            unit,p
+                        ),
+                        right_inverse,p
+                    )
+                    columns.append([value[i][j] % p for i,j in locations])
+            return [
+                [columns[c][r] for c in range(n*n)]
+                for r in range(len(locations))
+            ]
+
+        def rank_local(rows,variables,p):
+            work=[[x%p for x in row] for row in rows]
+            pivot=0
+            for col in range(variables):
+                found=next((r for r in range(pivot,len(work))
+                            if work[r][col]),None)
+                if found is None:
+                    continue
+                work[pivot],work[found]=work[found],work[pivot]
+                scale=pow(work[pivot][col],-1,p)
+                work[pivot]=[x*scale%p for x in work[pivot]]
+                for r in range(len(work)):
+                    if r!=pivot and work[r][col]:
+                        factor=work[r][col]
+                        work[r]=[(x-factor*y)%p
+                                 for x,y in zip(work[r],work[pivot])]
+                pivot+=1
+                if pivot==len(work):
+                    break
+            return pivot
+
+        shapes=[(1,1),(2,2)]
+        # These explicit controls mix the first block with the second.
+        fixtures=[
+            (2,
+             [[0,0,0],[1,1,0],[1,0,1]],
+             [[1,1,1],[0,1,1],[0,0,1]],
+             [[1,0,1],[0,1,1],[0,0,1]],
+             True),
+            (3,
+             [[0,1,0],[0,2,0],[1,1,1]],
+             [[1,1,0],[0,1,0],[0,0,1]],
+             [[1,2,2],[0,1,0],[0,0,1]],
+             True),
+        ]
+        for p,a,u,v,expect_fixed_partition_change in fixtures:
+            ui=inverse_local(u,p)
+            vi=inverse_local(v,p)
+            transformed=mm_local(mm_local(u,a,p),v,p)
+            original_system=constraint_rows(a,shapes,p)
+            transported_system=transported_rows(
+                transformed,ui,vi,shapes,p
+            )
+            original_rank=rank_local(original_system,9,p)
+            transported_rank=rank_local(transported_system,9,p)
+            self.assertEqual(original_rank,transported_rank)
+            # Leaving the coordinate partition fixed after mixing is a
+            # different constraint family; these fixtures expose the change.
+            fixed_rank=rank_local(
+                constraint_rows(transformed,shapes,p),9,p
+            )
+            if expect_fixed_partition_change:
+                self.assertNotEqual(original_rank,fixed_rank)
+
+            rng=random.Random(121000+p)
+            for trial in range(6):
+                xprime=[[rng.randrange(p) for _ in range(3)]
+                        for _ in range(3)]
+                # Pull the candidate back to the original right-transform
+                # coordinates and compare the transported off-diagonal map.
+                x=mm_local(mm_local(v,xprime,p),vi,p)
+                lhs=mm_local(
+                    mm_local(mm_local(ui,transformed,p),xprime,p),
+                    vi,p
+                )
+                rhs=mm_local(a,x,p)
+                self.assertEqual(lhs,rhs,(p,trial))
+
+        # A third field control uses independently seeded full unitriangular
+        # changes; the transported equation matrix still has identical rank.
+        p=5
+        rng=random.Random(121005)
+        a=[[rng.randrange(p) for _ in range(3)] for _ in range(3)]
+        u=ident(3)
+        v=ident(3)
+        for i in range(3):
+            for j in range(i+1,3):
+                u[i][j]=rng.randrange(1,p)
+                v[i][j]=rng.randrange(1,p)
+        ui=inverse_local(u,p)
+        vi=inverse_local(v,p)
+        transformed=mm_local(mm_local(u,a,p),v,p)
+        self.assertEqual(
+            rank_local(constraint_rows(a,shapes,p),9,p),
+            rank_local(transported_rows(transformed,ui,vi,shapes,p),9,p)
+        )
