@@ -798,3 +798,28 @@ The four rectangular summands have shapes (1,1), (1,0), (0,1), and (1,2), so the
 Replay the supplied multi-block witness for every reordered pair. Inspect every ordered projected block for both coefficients, require off-diagonal blocks to vanish, and sum diagonal projected blocks to reconstruct each complete matrix. Then undo the row/column coordinate permutations and compare every indexed projected block with the corresponding original block; finally recover the original ordered coefficient pair and shape sequence using the inverse block permutation.
 
 This is exhaustive finite regression coverage for the stated partition and fields. It establishes permutation covariance of the supplied ordered decomposition, not a canonical ordering, uniqueness of decomposition, or automatic discovery of a partition.
+
+
+## G-EP146: Repeated equal-sized summands and assignment controls
+
+Use three repeated 1×1 summands with distinct ordered coefficient pairs,
+together with explicit zero-column and zero-row summands. The repeated
+summands have identical shapes but distinguishable matrix data. Over
+F₂, F₃, and F₅, enumerate all six permutations in S₃.
+
+For each permutation, transport the row and column coordinate intervals
+together while leaving the equal-valued shape sequence unchanged. Replay
+the production multi-block verifier, compare every indexed projected block
+with the correspondingly relabeled original block, and apply the inverse
+coordinate permutation to recover both original coefficient matrices.
+The two empty rectangular summands remain present throughout.
+
+As a shape-preserving adversarial control, permute only the row coordinates
+of two repeated blocks while keeping column coordinates and shape metadata
+fixed. The resulting assignment is not a consistent block relabeling:
+both coefficient matrices acquire off-diagonal projected entries, and the
+production verifier rejects the supplied witness. This tests the distinction
+between a valid simultaneous relabeling and a one-sided subspace assignment.
+It does not establish uniqueness of decompositions or add arbitrary
+projector inputs to the production API; the evidence is finite and
+test-side.
