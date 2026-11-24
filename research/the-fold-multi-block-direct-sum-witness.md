@@ -211,3 +211,21 @@ verifier rather than relying on a stored success flag.
 This is deterministic finite regression evidence. It does not establish
 uniqueness, decomposition discovery, or universal correctness beyond the
 tested finite fields and fixtures.
+
+
+## G-EP107: Transformation factorization-order invariance
+
+The regression constructs two different ordered factorizations of the same
+composite left and right basis changes. The second path uses conjugated
+factors so that reversing the factor application order preserves the exact
+composite matrices. Both paths therefore produce identical source-coordinate
+pairs before a shared block-coordinate permutation and reciprocal scalar
+rescaling are applied.
+
+The resulting witness is checked over F₂, F₃, F₅, and F₇ using a rectangular
+partition with zero-row and zero-column blocks. The test compares the exact
+transformed coefficients and all reported diagonal block records. A
+negative control omits an inverse basis factor and must fail verification.
+
+This tests equality of two explicit transformation factorizations; it does
+not imply uniqueness of the witness or discover a decomposition.
