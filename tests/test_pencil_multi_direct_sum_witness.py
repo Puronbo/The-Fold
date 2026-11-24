@@ -5749,15 +5749,23 @@ class MultiDirectSumTests(unittest.TestCase):
                             self.assertEqual(audit["transformed_K"], mix(
                                 [q0, k0], change, p)[1])
 
+                            # Projected blocks live in the transported
+                            # coordinates: first apply the supplied row and
+                            # column basis maps to each source coefficient.
+                            source_in_basis = [
+                                mm(mm(u, coefficient, p), v, p)
+                                for coefficient in source
+                            ]
+                            output_in_basis = mix(source_in_basis, change, p)
                             source_grids = [
                                 [[mm(mm(rp, coefficient, p), cp, p)
                                   for cp in col_ps] for rp in row_ps]
-                                for coefficient in source
+                                for coefficient in source_in_basis
                             ]
                             output_grids = [
                                 [[mm(mm(rp, coefficient, p), cp, p)
                                   for cp in col_ps] for rp in row_ps]
-                                for coefficient in transformed
+                                for coefficient in output_in_basis
                             ]
                             for out_index in range(2):
                                 for i, (rsize, csize) in enumerate(shapes):
