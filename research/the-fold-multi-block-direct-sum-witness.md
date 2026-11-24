@@ -110,3 +110,12 @@ The tests separately retain the caller-input boundary: malformed source matrices
 A deterministic recursive traversal enumerates every dictionary field and list slot in a valid multi-block audit snapshot. Each location is replaced independently, serialized and deserialized, and checked against the baseline using recursive type-exact equality. The test asserts that every single-location mutation is detected, and explicitly checks coverage of top-level verification metadata, both coefficient block grids, and nested aggregate verification fields.
 
 This is finite regression coverage for the tested record shape. It does not establish cryptographic authenticity, tamper resistance against a party able to replace both record and expected baseline, or provenance of the original inputs.
+
+
+## G-EP98: Explicit v1 audit schema contract
+
+The test suite now defines a test-side structural validator for the v1 audit record. It checks the exact top-level and verification-field sets; primitive types (including exclusion of booleans from integer slots); positive source dimensions; valid ordered rectangular block shapes and total partition dimensions; left/right transform and transformed-coefficient dimensions; both square block-grid layouts and each rectangular block's expected dimensions; rank ranges; and the scope field.
+
+Crucially, structural validity is separate from algebraic truth. A well-formed record produced from a mathematically false supplied witness must satisfy the schema validator while its direct_sum_verified diagnostic remains false. Adversarial tests cover wrong schema versions, malformed dimensions and grids, invalid primitive types, and unexpected fields.
+
+This is a test-side v1 contract, not a production deserializer, schema migration mechanism, or cryptographic authenticity layer.
