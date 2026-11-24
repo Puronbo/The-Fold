@@ -170,3 +170,23 @@ These are deterministic test-local regressions on a small F₅ fixture, not a pr
 The metadata regression set mutates the schema version, finite-field label, source dimensions, ordered block partition, and descriptive scope. An unsupported schema version, dimension mismatch, or partition whose declared rectangular pieces no longer match the stored block grid fails structural validation. A well-typed but altered field label or scope string can remain structurally valid; the test separately detects that it no longer matches the expected source-bound snapshot. The mathematical verdict is recomputed from the original matrices and transforms rather than accepted from metadata.
 
 The test also supplies a distinct valid witness over F₅ using reciprocal scalar rescaling, S → 2S and T → 3T. Since 2·3 = 1 in F₅, both transformed coefficients remain unchanged even though the transforms differ. This is an equivalent witness, not a forged certificate. These deterministic tests do not provide cryptographic provenance or authenticate who created a snapshot.
+
+
+## G-EP105: Rectangular coordinate-permutation conjugacy
+
+The rectangular multi-block witness tests now distinguish a consistent
+coordinate reindexing from one-sided changes. Over F₂, F₃, F₅, and F₇, the
+fixture contains both zero-row and zero-column blocks. The test simultaneously
+reorders row and column coordinate intervals, reorders the corresponding
+block-shape list, and conjugates the supplied left and right transforms by
+their respective permutation matrices. The verifier must accept the witness
+and reproduce the exactly reordered block-diagonal Q and K coefficients.
+
+Separate controls permute only row coordinates or only column coordinates
+while retaining the incompatible side's coordinates and original partition;
+these witnesses must fail. Empty intervals are retained as ordered block
+slots even though they contribute no coordinate indices.
+
+This is deterministic finite regression coverage of the verifier's supplied
+witness contract. It does not add decomposition discovery, prove uniqueness,
+or imply that failure of one supplied witness excludes another.
