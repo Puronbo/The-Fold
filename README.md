@@ -348,3 +348,5 @@ G-EP140: distinguishes valid invertible coefficient-space shears that change onl
 - **G-EP166:** extends the irreducibility-predicate/factorizer comparison to all 793 monic sextics over F₂ and F₃, checking exact agreement on degree-six inputs.
 
 - **G-EP167:** extends the exhaustive irreducibility-predicate/factorizer comparison to all 2,315 monic degree-seven polynomials over F₂ and F₃.
+
+- **G-EP168:** extends the exhaustive irreducibility-predicate/factorizer comparison through degree eight over F₂ and F₃ (6,817 monic polynomials).
