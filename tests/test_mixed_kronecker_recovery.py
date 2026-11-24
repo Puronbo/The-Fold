@@ -329,8 +329,8 @@ class MixedKroneckerRecoveryTests(unittest.TestCase):
             self.assertEqual(cutoff["candidates_examined"], 1)
 
     def test_exhaustive_budget_counts_left_and_right_candidates(self):
-        # For a 1x1 regular pencil, identity S and identity T are the first
-        # two examined candidates and together suffice for a witness.
+        # On the canonical mixed control, identity S and identity T are the
+        # first two examined candidates and together suffice for a witness.
         q, k = self.mixed_pair()
         result = recover_mixed_kronecker_pencil(
             q, k, 2, max_degree=2, max_candidates=2,
