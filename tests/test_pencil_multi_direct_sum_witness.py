@@ -3976,3 +3976,124 @@ class MultiDirectSumTests(unittest.TestCase):
             # The exact inverse composition recovers source matrices.
             self.assertEqual(mm(mm(Ui,q2,p),Vi,p),q)
             self.assertEqual(mm(mm(Ui,k2,p),Vi,p),k)
+
+
+    def test_g_ep128_multistage_basis_transport_identity_cancellation(self):
+        import random
+
+        def mm(a,b,p):
+            if not a or not b or len(a[0])!=len(b) or any(len(x)!=len(a[0]) for x in a) or any(len(x)!=len(b[0]) for x in b):
+                raise ValueError("incompatible matrix dimensions")
+            return [[sum(a[i][k]*b[k][j] for k in range(len(b)))%p
+                     for j in range(len(b[0]))] for i in range(len(a))]
+
+        def inv(a,p):
+            n=len(a)
+            w=[[x%p for x in row]+[int(i==j) for j in range(n)]
+               for i,row in enumerate(a)]
+            for c in range(n):
+                z=next((z for z in range(c,n) if w[z][c]),None)
+                if z is None: raise AssertionError("singular factor")
+                w[c],w[z]=w[z],w[c]
+                s=pow(w[c][c],-1,p)
+                w[c]=[x*s%p for x in w[c]]
+                for z in range(n):
+                    if z!=c and w[z][c]:
+                        f=w[z][c]
+                        w[z]=[(x-f*y)%p for x,y in zip(w[z],w[c])]
+            return [row[n:] for row in w]
+
+        def nullspace(rows,width,p):
+            a=[[x%p for x in row] for row in rows]
+            piv=[]; r=0
+            for c in range(width):
+                z=next((z for z in range(r,len(a)) if a[z][c]),None)
+                if z is None: continue
+                a[r],a[z]=a[z],a[r]
+                s=pow(a[r][c],-1,p)
+                a[r]=[x*s%p for x in a[r]]
+                for z in range(len(a)):
+                    if z!=r and a[z][c]:
+                        f=a[z][c]
+                        a[z]=[(x-f*y)%p for x,y in zip(a[z],a[r])]
+                piv.append(c); r+=1
+            basis=[]
+            for f in [c for c in range(width) if c not in piv]:
+                x=[0]*width; x[f]=1
+                for z,c in enumerate(piv): x[c]=(-a[z][f])%p
+                basis.append(x)
+            return basis
+
+        def flatten(a): return [x for row in a for x in row]
+        def unflatten(x,n): return [x[i*n:(i+1)*n] for i in range(n)]
+        def conjugate(x,left,right,p):
+            return flatten(mm(mm(left,unflatten(x,len(right)),p),right,p))
+        def equations(coeffs,shapes,p,pull):
+            n=len(coeffs[0][0]); blocks=[]; rr=cc=0
+            for h,w in shapes:
+                blocks.append((range(rr,rr+h),range(cc,cc+w)))
+                rr+=h; cc+=w
+            off=[(i,j) for a,(rs,_) in enumerate(blocks)
+                 for b,(_,cs) in enumerate(blocks) if a!=b
+                 for i in rs for j in cs]
+            cols=[]
+            for i in range(n):
+                for j in range(n):
+                    e=[[int(a==i and b==j) for b in range(n)] for a in range(n)]
+                    vals=[]
+                    for c in coeffs:
+                        z=mm(mm(mm(pull[0],c,p),e,p),pull[1],p)
+                        vals.extend(z[x][y] for x,y in off)
+                    cols.append(vals)
+            return [[cols[c][z] for c in range(n*n)]
+                    for z in range(len(cols[0]))]
+
+        def shear(size,i,j,p):
+            a=[[int(r==c) for c in range(size)] for r in range(size)]
+            a[i][j]=1%p
+            return a
+
+        shapes=[(1,1),(3,2)]
+        for p in (2,3,5):
+            rng=random.Random(128000+p)
+            m,n=4,3
+            q=[[rng.randrange(p) for _ in range(n)] for _ in range(m)]
+            k=[[x%p for x in row] for row in q]
+            row_a,row_b=shear(m,0,1,p),shear(m,2,0,p)
+            col_a,col_b=shear(n,0,1,p),shear(n,1,2,p)
+            row_bi,col_bi=inv(row_b,p),inv(col_b,p)
+            identity_m=[[int(i==j) for j in range(m)] for i in range(m)]
+            identity_n=[[int(i==j) for j in range(n)] for i in range(n)]
+            row_stages=[row_a,row_b,identity_m,row_bi]
+            col_stages=[col_a,col_b,identity_n,col_bi]
+            U=identity_m; V=identity_n
+            q_stage,k_stage=q,k
+            for us,vs in zip(row_stages,col_stages):
+                U=mm(us,U,p)
+                V=mm(V,vs,p)
+                q_stage=mm(mm(us,q_stage,p),vs,p)
+                k_stage=mm(mm(us,k_stage,p),vs,p)
+            self.assertEqual(U,row_a)
+            self.assertEqual(V,col_a)
+            self.assertEqual(q_stage,mm(mm(U,q,p),V,p))
+            self.assertEqual(k_stage,mm(mm(U,k,p),V,p))
+            Ui,Vi=inv(U,p),inv(V,p)
+            original=equations([q,k],shapes,p,(identity_m,identity_n))
+            transported=equations([q_stage,k_stage],shapes,p,(Ui,Vi))
+            basis=nullspace(original,n*n,p)
+            mapped=[conjugate(x,Vi,V,p) for x in basis]
+            self.assertGreater(len(basis),0)
+            for x in mapped:
+                self.assertEqual([sum(a*b for a,b in zip(row,x))%p for row in transported],[0]*len(transported))
+            self.assertEqual([conjugate(x,V,Vi,p) for x in mapped],basis)
+            self.assertEqual(mm(mm(Ui,q_stage,p),Vi,p),q)
+            self.assertEqual(mm(mm(Ui,k_stage,p),Vi,p),k)
+
+            # A wrong inverse order is still dimensionally valid but does not
+            # undo the composed basis map.
+            wrong_ui=mm(mm(inv(row_bi,p),inv(identity_m,p),p),inv(row_b,p),p)
+            wrong_vi=mm(mm(inv(col_bi,p),inv(identity_n,p),p),inv(col_b,p),p)
+            self.assertNotEqual(wrong_ui,Ui)
+            self.assertNotEqual(wrong_vi,Vi)
+            self.assertNotEqual(mm(mm(wrong_ui,q_stage,p),wrong_vi,p),q)
+            self.assertNotEqual([conjugate(x,wrong_vi,inv(wrong_vi,p),p) for x in basis],mapped)
