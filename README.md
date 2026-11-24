@@ -239,3 +239,6 @@ of its witness.
 
 
 - **G-EP125:** independently cross-checks G-EP124's 3×3 transported constraint rank with complete row-span enumeration over F₂/F₃ (and RREF covariance over F₅). Shape-preserving coefficient mutation changes the reconstructed constraint map while retaining dimensions, distinguishing a mathematically false transport from malformed input; a mutated inverse-map entry breaks the inverse identity, with a separate malformed-dimension control. Finite test-side evidence only.
+
+
+- **G-EP126:** transports complete nullspace bases for the 3×3 right-transform constraint system. For zero and scalar-dependent rectangular coefficient pairs over F₂/F₃/F₅, independently computed nullspaces are mapped by X′ = V⁻¹XV and checked in both directions by equation substitution and span-dimension comparisons. Includes rank-zero and nonzero rank-deficient cases; invertibility remains separate from linear-kernel membership. Finite test-side evidence only.
