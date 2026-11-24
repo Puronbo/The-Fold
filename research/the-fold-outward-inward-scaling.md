@@ -179,3 +179,52 @@ The tests include exact count fixtures (for example, six monic irreducible
 quintics over F₂ and eighteen monic irreducible quartics over F₃), a
 cross-field/degree formula grid, exhaustive agreement with the exact count,
 and deterministic sampled-mode reporting.
+
+
+## G-EP174 — Error structure and uniform convergence
+
+Define the signed normalized-density error
+
+\[
+E_p(n)=1-R_p(n)=-\sum_{\substack{d\mid n\\d>1}}\mu(d)p^{-n(1-1/d)}.
+\]
+
+The divisor structure of the degree controls the correction terms. Only squarefree divisors contribute. If \(\omega(n)\) is the number of distinct prime factors of \(n\), there are exactly \(2^{\omega(n)}-1\) nontrivial squarefree divisors. For each such divisor, \(1-1/d\ge1/2\), hence
+
+\[
+|E_p(n)|\le(2^{\omega(n)}-1)p^{-n/2}\le(n-1)p^{-n/2}.
+\]
+
+Since every prime field has \(p\ge2\), this gives the uniform estimate
+
+\[
+\boxed{\sup_{p\text{ prime}}|R_p(n)-1|\le(n-1)2^{-n/2}\longrightarrow0.}
+\]
+
+This is stronger than pointwise convergence for each fixed field: the normalized irreducible density converges to one even if the prime field size is allowed to vary with the degree. The bound is intentionally conservative; the squarefree-divisor bound is often much sharper.
+
+For odd degrees, every nontrivial divisor is at least three, so the same argument sharpens to
+
+\[
+|E_p(n)|\le(2^{\omega(n)}-1)p^{-2n/3}\qquad(n\text{ odd}, n>1).
+\]
+
+For prime degree, there is only one nontrivial Möbius divisor and the exact error is
+
+\[
+E_p(n)=p^{1-n}.
+\]
+
+Composite degrees have signed inclusion-exclusion corrections. For example,
+
+\[
+E_p(6)=p^{-3}+p^{-4}-p^{-5},
+\]
+
+whereas prime powers such as \(n=4\) have \(E_p(4)=p^{-2}\). The signs are inherited from the Möbius function; one should not assume a universal sign pattern from degree size alone.
+
+### Executable audit
+
+G-EP174 adds `irreducible_density_convergence(p, degree)`. It returns the exact rational normalized density and signed error as numerator/denominator pairs, the number of distinct prime factors, a squarefree-divisor bound, and the uniform prime-field bound. Its boolean bound check uses exact rational arithmetic (with a slightly relaxed rational envelope for odd degrees), not floating-point comparison.
+
+Regression coverage includes prime and composite degree identities, invalid inputs, and a cross-grid over prime fields 2, 3, 5, 7, 11 and degrees 1 through 40. This validates the implementation against the theorem on a finite grid; the uniform convergence statement itself follows from the analytic bound above.
