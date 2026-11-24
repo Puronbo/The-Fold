@@ -793,3 +793,127 @@ class MultiDirectSumTests(unittest.TestCase):
             with self.subTest(malformed_schema=label):
                 self.assertFalse(structurally_valid(record))
 
+
+
+    def test_v1_schema_contract_rectangular_edges_and_block_count_grid(self):
+        import copy
+
+        def structural(record):
+            if type(record) is not dict:
+                return False
+            required = {
+                "schema", "field", "source_shape", "block_shapes",
+                "left_transform", "right_transform", "transformed_Q",
+                "transformed_K", "Q_blocks", "K_blocks", "verification",
+                "scope",
+            }
+            if set(record) != required:
+                return False
+            if record["schema"] != "the-fold-pencil-multi-direct-sum-witness-v1":
+                return False
+            if type(record["field"]) is not str or not record["field"].startswith("F_"):
+                return False
+            shape, blocks = record["source_shape"], record["block_shapes"]
+            is_int = lambda x: type(x) is int
+            if (type(shape) is not list or len(shape) != 2
+                    or not all(is_int(x) and x > 0 for x in shape)
+                    or type(blocks) is not list or len(blocks) < 2):
+                return False
+            if any(type(b) is not list or len(b) != 2
+                   or not all(is_int(x) and x >= 0 for x in b)
+                   or b == [0, 0] for b in blocks):
+                return False
+            m, n = shape
+            if sum(b[0] for b in blocks) != m or sum(b[1] for b in blocks) != n:
+                return False
+
+            def matrix(value, rows, cols):
+                return (type(value) is list and len(value) == rows
+                        and all(type(row) is list and len(row) == cols
+                                and all(is_int(x) for x in row) for row in value))
+            if not matrix(record["left_transform"], m, m):
+                return False
+            if not matrix(record["right_transform"], n, n):
+                return False
+            if not matrix(record["transformed_Q"], m, n):
+                return False
+            if not matrix(record["transformed_K"], m, n):
+                return False
+            count = len(blocks)
+            for name in ("Q_blocks", "K_blocks"):
+                grid = record[name]
+                if type(grid) is not list or len(grid) != count:
+                    return False
+                for i, row in enumerate(grid):
+                    if type(row) is not list or len(row) != count:
+                        return False
+                    for j, block in enumerate(row):
+                        if not matrix(block, blocks[i][0], blocks[j][1]):
+                            return False
+            v = record["verification"]
+            types = {
+                "left_transform_rank": int, "right_transform_rank": int,
+                "left_transform_invertible": bool, "right_transform_invertible": bool,
+                "Q_off_diagonal_blocks_zero": bool, "K_off_diagonal_blocks_zero": bool,
+                "direct_sum_verified": bool,
+            }
+            return (type(v) is dict and set(v) == set(types)
+                    and all(type(v[key]) is typ for key, typ in types.items())
+                    and 0 <= v["left_transform_rank"] <= m
+                    and 0 <= v["right_transform_rank"] <= n
+                    and type(record["scope"]) is str)
+
+        fixtures = [
+            ([(1, 1), (1, 1)], 2, 2),
+            ([(0, 1), (1, 0), (1, 1)], 2, 2),
+            ([(1, 0), (0, 1), (1, 1), (0, 1)], 2, 3),
+        ]
+        for shapes, rows, cols in fixtures:
+            with self.subTest(block_count=len(shapes), shapes=shapes):
+                q = [[0] * cols for _ in range(rows)]
+                k = [[0] * cols for _ in range(rows)]
+                # Populate only the final nonempty diagonal block when possible.
+                for i, (r, c) in enumerate(shapes):
+                    if r and c:
+                        r0 = sum(x[0] for x in shapes[:i])
+                        c0 = sum(x[1] for x in shapes[:i])
+                        q[r0][c0] = 1
+                        k[r0][c0] = 2
+                result = verify_pencil_multi_direct_sum_witness(
+                    q, k, 5, ident(rows), ident(cols), shapes
+                )
+                self.assertTrue(structural(result))
+                self.assertTrue(result["verification"]["direct_sum_verified"])
+                # Every represented block has the exact declared rectangular shape,
+                # including legal 0×c and r×0 blocks.
+                for i, (r, _) in enumerate(shapes):
+                    for j, (_, c) in enumerate(shapes):
+                        self.assertEqual(len(result["Q_blocks"][i][j]), r)
+                        self.assertTrue(all(len(line) == c
+                                            for line in result["Q_blocks"][i][j]))
+
+        # Schema validation does not promote a false witness to a valid one.
+        false = verify_pencil_multi_direct_sum_witness(
+            [[1, 0], [0, 2]], [[2, 0], [0, 1]], 5,
+            [[1, 1], [0, 1]], ident(2), [(1, 1), (1, 1)]
+        )
+        self.assertTrue(structural(false))
+        self.assertFalse(false["verification"]["direct_sum_verified"])
+
+        # Nested grid shape errors are structural failures, even if all
+        # scalar diagnostics remain untouched.
+        good = verify_pencil_multi_direct_sum_witness(
+            [[1, 0], [0, 2]], [[2, 0], [0, 1]], 5,
+            ident(2), ident(2), [(1, 1), (1, 1)]
+        )
+        for name, mutate in (
+            ("missing grid row", lambda x: x["Q_blocks"].pop()),
+            ("short grid row", lambda x: x["K_blocks"][0].pop()),
+            ("wrong nested matrix height", lambda x: x["Q_blocks"][0].__setitem__(0, [])),
+            ("wrong nested matrix width", lambda x: x["K_blocks"][0].__setitem__(1, [[0, 0]])),
+        ):
+            changed = copy.deepcopy(good)
+            mutate(changed)
+            with self.subTest(malformed_nested=name):
+                self.assertFalse(structural(changed))
+
