@@ -414,8 +414,15 @@ def verify_mixed_kronecker_recovery_certificate(
             count = result.get("candidates_examined")
             if not isinstance(count, int) or isinstance(count, bool) or not 1 <= count <= budget:
                 return {"verified": False, "reason": "positive candidate count is invalid"}
-            if result.get("search_mode") != mode:
-                return {"verified": False, "reason": "positive search mode metadata is inconsistent"}
+            expected_method = (
+                "exhaustive finite-field S/T witness search"
+                if mode == "exhaustive"
+                else "profile-derived canonical target plus structured S search and exact affine solve for T"
+            )
+            if result.get("method") != expected_method:
+                return {"verified": False, "reason": "positive method metadata does not match its search mode"}
+            if result.get("scope") != "Positive strict-equivalence witnesses are exact and independently verified.":
+                return {"verified": False, "reason": "positive scope metadata is inconsistent"}
             return {
                 "verified": True, "profile_recomputed": True,
                 "canonical_target_reconstructed": True,
