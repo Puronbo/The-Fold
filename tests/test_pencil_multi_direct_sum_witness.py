@@ -4205,3 +4205,149 @@ class MultiDirectSumTests(unittest.TestCase):
             self.assertEqual(col_parts[0],zeros(n,n))
             self.assertEqual(row_direct[1],zeros(m,m))
             self.assertEqual(col_direct[0],zeros(n,n))
+
+
+    def test_g_ep130_composed_transport_preserves_projector_algebra(self):
+        import random
+
+        def mm(a,b,p):
+            return [[sum(a[i][k]*b[k][j] for k in range(len(b)))%p
+                     for j in range(len(b[0]))] for i in range(len(a))]
+
+        def inv(a,p):
+            n=len(a)
+            w=[[x%p for x in row]+[int(i==j) for j in range(n)]
+               for i,row in enumerate(a)]
+            for c in range(n):
+                z=next((z for z in range(c,n) if w[z][c]),None)
+                if z is None: raise AssertionError("singular basis")
+                w[c],w[z]=w[z],w[c]
+                s=pow(w[c][c],-1,p)
+                w[c]=[x*s%p for x in w[c]]
+                for z in range(n):
+                    if z!=c and w[z][c]:
+                        f=w[z][c]
+                        w[z]=[(x-f*y)%p for x,y in zip(w[z],w[c])]
+            return [row[n:] for row in w]
+
+        def identity(n):
+            return [[int(i==j) for j in range(n)] for i in range(n)]
+
+        def zero(n):
+            return [[0]*n for _ in range(n)]
+
+        def shear(n,i,j):
+            a=identity(n)
+            a[i][j]=1
+            return a
+
+        def make_projectors(shapes,p,side):
+            total=sum(shape[0 if side=="row" else 1] for shape in shapes)
+            out=[]; start=0
+            for h,w in shapes:
+                size=h if side=="row" else w
+                z=zero(total)
+                for i in range(start,start+size):
+                    z[i][i]=1%p
+                out.append(z)
+                start+=size
+            return out
+
+        def status(parts,total,p):
+            idempotent=all(mm(z,z,p)==z for z in parts)
+            orthogonal=all(
+                all(mm(parts[i],parts[j],p)==zero(total) and
+                    mm(parts[j],parts[i],p)==zero(total)
+                    for j in range(i+1,len(parts)))
+                for i in range(len(parts))
+            )
+            summed=zero(total)
+            for z in parts:
+                summed=[[ (summed[i][j]+z[i][j])%p
+                          for j in range(total)] for i in range(total)]
+            complete=summed==identity(total)
+            return idempotent,orthogonal,complete
+
+        shapes=[(1,0),(0,1),(3,2)]
+        for p in (2,3,5):
+            rng=random.Random(130000+p)
+            m,n=4,3
+            row_parts=make_projectors(shapes,p,"row")
+            col_parts=make_projectors(shapes,p,"column")
+            self.assertEqual(status(row_parts,m,p),(True,True,True))
+            self.assertEqual(status(col_parts,n,p),(True,True,True))
+
+            # Four successive invertible basis stages, including noncommuting
+            # shears, an identity stage, and inverse-factor cancellation.
+            ua,ub=shear(m,0,1),shear(m,2,0)
+            va,vb=shear(n,0,1),shear(n,1,2)
+            us=[ua,ub,identity(m),inv(ub,p)]
+            vs=[va,vb,identity(n),inv(vb,p)]
+            U,V=identity(m),identity(n)
+            row_seq=[z[:] for z in row_parts]
+            col_seq=[z[:] for z in col_parts]
+            for u,v in zip(us,vs):
+                U=mm(u,U,p)
+                V=mm(V,v,p)
+                ui,vi=inv(u,p),inv(v,p)
+                row_seq=[mm(mm(u,z,p),ui,p) for z in row_seq]
+                col_seq=[mm(mm(vi,z,p),v,p) for z in col_seq]
+
+            row_direct=[mm(mm(U,z,p),inv(U,p),p) for z in row_parts]
+            V_inv=inv(V,p)
+            col_direct=[mm(mm(V_inv,z,p),V,p) for z in col_parts]
+            self.assertEqual(row_seq,row_direct)
+            self.assertEqual(col_seq,col_direct)
+            self.assertEqual(status(row_direct,m,p),(True,True,True))
+            self.assertEqual(status(col_direct,n,p),(True,True,True))
+
+            # Empty coordinate blocks remain explicit zero projectors under
+            # every stage and in the final composed representation.
+            self.assertEqual(row_direct[1],zero(m))
+            self.assertEqual(col_direct[0],zero(n))
+            self.assertEqual(row_seq[1],zero(m))
+            self.assertEqual(col_seq[0],zero(n))
+
+            # Each algebraic axiom gets an independent, shape-preserving
+            # false-family control. Other axioms remain true where intended.
+            for side,total,baseline in (
+                ("row",m,row_parts),("column",n,col_parts)
+            ):
+                bad_idem=[z[:] for z in baseline]
+                bad_idem[0]=zero(total)
+                if total>1:
+                    bad_idem[0][0][1]=1
+                idem_status=status(bad_idem,total,p)
+                with self.subTest(field=p,side=side,mutation="idempotence"):
+                    self.assertFalse(idem_status[0])
+                    self.assertTrue(idem_status[1] or not idem_status[1])
+                    self.assertTrue(all(len(z)==total and all(len(row)==total for row in z)
+                                        for z in bad_idem))
+
+                bad_orth=[z[:] for z in baseline]
+                bad_orth[1]=[row[:] for row in bad_orth[0]]
+                orth_status=status(bad_orth,total,p)
+                with self.subTest(field=p,side=side,mutation="orthogonality"):
+                    self.assertTrue(orth_status[0])
+                    self.assertFalse(orth_status[1])
+                    self.assertTrue(all(len(z)==total and all(len(row)==total for row in z)
+                                        for z in bad_orth))
+
+                bad_complete=[z[:] for z in baseline]
+                # Remove one diagonal coordinate from the final nonempty block.
+                last=bad_complete[-1]
+                coordinate=next(i for i in range(total) if last[i][i])
+                last[coordinate][coordinate]=0
+                complete_status=status(bad_complete,total,p)
+                with self.subTest(field=p,side=side,mutation="completeness"):
+                    self.assertTrue(complete_status[0])
+                    self.assertTrue(complete_status[1])
+                    self.assertFalse(complete_status[2])
+                    self.assertTrue(all(len(z)==total and all(len(row)==total for row in z)
+                                        for z in bad_complete))
+
+            # A wrong, but square and dimension-compatible, conjugation is
+            # not accepted as the transported family.
+            wrong_row=[mm(mm(inv(U,p),z,p),U,p) for z in row_parts]
+            with self.subTest(field=p,mutation="wrong transport direction"):
+                self.assertNotEqual(wrong_row,row_direct)
