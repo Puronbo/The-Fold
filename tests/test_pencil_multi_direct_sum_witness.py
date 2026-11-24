@@ -1733,3 +1733,116 @@ class MultiDirectSumTests(unittest.TestCase):
             )
             with self.subTest(field=p, case="mismatched composed row transform"):
                 self.assertFalse(bad["verification"]["direct_sum_verified"], bad)
+
+
+    def test_g_ep107_equivalent_factorization_orders_reach_same_witness(self):
+        # Two different ordered factorizations of the same composite row and
+        # column basis changes must yield the same final witness and audit.
+        shapes = [(1, 1), (1, 2), (0, 1), (1, 0), (1, 1)]
+        order = [4, 1, 3, 0, 2]
+
+        def transpose(a):
+            return [list(col) for col in zip(*a)]
+
+        def perm_matrix(indices, size):
+            return [[int(indices[i] == j) for j in range(size)]
+                    for i in range(size)]
+
+        def reorder_rows(a, indices):
+            return [a[i][:] for i in indices]
+
+        def reorder_cols(a, indices):
+            return [[row[j] for j in indices] for row in a]
+
+        def scale(a, c, p):
+            return [[(c * x) % p for x in row] for row in a]
+
+        for p in (2, 3, 5, 7):
+            m, n = sum(r for r, _ in shapes), sum(c for _, c in shapes)
+            ro, co = [0], [0]
+            for r, c in shapes:
+                ro.append(ro[-1] + r)
+                co.append(co[-1] + c)
+            q0, k0 = [[0] * n for _ in range(m)], [[0] * n for _ in range(m)]
+            for b, (r, c) in enumerate(shapes):
+                for i in range(r):
+                    for j in range(c):
+                        q0[ro[b] + i][co[b] + j] = (b + 2*i + j + 1) % p
+                        k0[ro[b] + i][co[b] + j] = (2*b + i + 3*j + 1) % p
+
+            s0, t0 = ident(m), ident(n)
+            for i in range(m - 1):
+                s0[i][i + 1] = 1
+            for i in range(n - 1):
+                t0[i + 1][i] = 1
+            si0, ti0 = inverse(s0, p), inverse(t0, p)
+            q, k = mm(mm(si0, q0, p), ti0, p), mm(mm(si0, k0, p), ti0, p)
+
+            # Pick noncommuting elementary factors on each coordinate side.
+            a, b, c, d = ident(m), ident(m), ident(n), ident(n)
+            a[0][1] = 1
+            b[m - 1][0] = 1
+            c[0][n - 1] = 1
+            d[n - 1][0] = 1
+            ai, bi, ci, di = inverse(a, p), inverse(b, p), inverse(c, p), inverse(d, p)
+
+            # Path I applies a then b (left product b*a), c then d
+            # (right product c*d). Path II uses conjugated second factors
+            # so its reversed operation order has exactly the same product.
+            left_total = mm(b, a, p)
+            right_total = mm(c, d, p)
+            a_prime = mm(mm(b, a, p), bi, p)
+            d_prime = mm(mm(d, c, p), di, p)
+            left_total_alt = mm(a_prime, b, p)
+            right_total_alt = mm(c, d_prime, p)
+            self.assertEqual(left_total, left_total_alt)
+            self.assertEqual(right_total, right_total_alt)
+
+            # The two paths therefore produce identical source coordinates.
+            q_changed = mm(mm(left_total, q, p), right_total, p)
+            k_changed = mm(mm(left_total, k, p), right_total, p)
+            q_changed_alt = mm(mm(left_total_alt, q, p), right_total_alt, p)
+            k_changed_alt = mm(mm(left_total_alt, k, p), right_total_alt, p)
+            self.assertEqual(q_changed, q_changed_alt)
+            self.assertEqual(k_changed, k_changed_alt)
+
+            row_indices = [j for block in order for j in range(ro[block], ro[block + 1])]
+            col_indices = [j for block in order for j in range(co[block], co[block + 1])]
+            pr, pc = perm_matrix(row_indices, m), perm_matrix(col_indices, n)
+            pri, pci = transpose(pr), transpose(pc)
+            q_final = mm(mm(pr, q_changed, p), pci, p)
+            k_final = mm(mm(pr, k_changed, p), pci, p)
+
+            left_total_inv = inverse(left_total, p)
+            right_total_inv = inverse(right_total, p)
+            s_pre = mm(s0, left_total_inv, p)
+            t_pre = mm(right_total_inv, t0, p)
+            s_perm = mm(mm(pr, s_pre, p), pri, p)
+            t_perm = mm(mm(pc, t_pre, p), pci, p)
+            scalar = 1 if p == 2 else 2
+            inv_scalar = pow(scalar, -1, p)
+            s_final = scale(s_perm, scalar, p)
+            t_final = scale(t_perm, inv_scalar, p)
+            final_shapes = [shapes[i] for i in order]
+
+            first = verify_pencil_multi_direct_sum_witness(
+                q_final, k_final, p, s_final, t_final, final_shapes
+            )
+            second = verify_pencil_multi_direct_sum_witness(
+                q_final, k_final, p, s_final, t_final, final_shapes
+            )
+            with self.subTest(field=p, case="two factorization orders"):
+                self.assertTrue(first["verification"]["direct_sum_verified"], first)
+                self.assertTrue(second["verification"]["direct_sum_verified"], second)
+                self.assertEqual(first["transformed_Q"], second["transformed_Q"])
+                self.assertEqual(first["transformed_K"], second["transformed_K"])
+                self.assertEqual(first["Q_blocks"], second["Q_blocks"])
+                self.assertEqual(first["K_blocks"], second["K_blocks"])
+
+            # Omitting the inverse of the final left basis change must fail.
+            bad_s = mm(s_final, left_total, p)
+            bad = verify_pencil_multi_direct_sum_witness(
+                q_final, k_final, p, bad_s, t_final, final_shapes
+            )
+            with self.subTest(field=p, case="omitted inverse"):
+                self.assertFalse(bad["verification"]["direct_sum_verified"], bad)
