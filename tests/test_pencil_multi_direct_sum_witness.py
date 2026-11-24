@@ -4351,3 +4351,115 @@ class MultiDirectSumTests(unittest.TestCase):
             wrong_row=[mm(mm(ub,z,p),inv(ub,p),p) for z in row_parts]
             with self.subTest(field=p,mutation="wrong transport direction"):
                 self.assertNotEqual(wrong_row,row_direct)
+
+
+    def test_g_ep131_composed_projector_transport_preserves_rank_and_nullity(self):
+        def mm(a,b,p):
+            return [[sum(a[i][k]*b[k][j] for k in range(len(b)))%p
+                     for j in range(len(b[0]))] for i in range(len(a))]
+
+        def inv(a,p):
+            n=len(a)
+            w=[[x%p for x in row]+[int(i==j) for j in range(n)]
+               for i,row in enumerate(a)]
+            for c in range(n):
+                z=next((z for z in range(c,n) if w[z][c]),None)
+                if z is None: raise AssertionError("singular basis")
+                w[c],w[z]=w[z],w[c]
+                s=pow(w[c][c],-1,p)
+                w[c]=[x*s%p for x in w[c]]
+                for z in range(n):
+                    if z!=c and w[z][c]:
+                        f=w[z][c]
+                        w[z]=[(x-f*y)%p for x,y in zip(w[z],w[c])]
+            return [row[n:] for row in w]
+
+        def rank(a,p):
+            if not a: return 0
+            w=[[x%p for x in row] for row in a]
+            rows,cols=len(w),len(w[0])
+            pivot_row=0
+            for col in range(cols):
+                pivot=next((r for r in range(pivot_row,rows)
+                            if w[r][col]),None)
+                if pivot is None: continue
+                w[pivot_row],w[pivot]=w[pivot],w[pivot_row]
+                scale=pow(w[pivot_row][col],-1,p)
+                w[pivot_row]=[(x*scale)%p for x in w[pivot_row]]
+                for r in range(rows):
+                    if r!=pivot_row and w[r][col]:
+                        factor=w[r][col]
+                        w[r]=[(x-factor*y)%p
+                              for x,y in zip(w[r],w[pivot_row])]
+                pivot_row+=1
+                if pivot_row==rows: break
+            return pivot_row
+
+        def identity(n):
+            return [[int(i==j) for j in range(n)] for i in range(n)]
+
+        def projectors(sizes,p):
+            total=sum(sizes); out=[]; start=0
+            for size in sizes:
+                z=[[0]*total for _ in range(total)]
+                for i in range(start,start+size): z[i][i]=1%p
+                out.append(z); start+=size
+            return out
+
+        shapes=[(1,0),(0,1),(3,2)]
+        for p in (2,3,5):
+            row_sizes=[h for h,_ in shapes]
+            col_sizes=[w for _,w in shapes]
+            row_parts=projectors(row_sizes,p)
+            col_parts=projectors(col_sizes,p)
+            m,n=sum(row_sizes),sum(col_sizes)
+            ua,ub=identity(m),identity(m)
+            va,vb=identity(n),identity(n)
+            ua[0][1]=1
+            ub[2][0]=1
+            va[0][1]=1
+            vb[1][2]=1
+            us=[ua,ub,identity(m),inv(ub,p)]
+            vs=[va,vb,identity(n),inv(vb,p)]
+            U,V=identity(m),identity(n)
+            for u,v in zip(us,vs):
+                U=mm(u,U,p)
+                V=mm(V,v,p)
+
+            row_changed=[mm(mm(U,z,p),inv(U,p),p) for z in row_parts]
+            V_inv=inv(V,p)
+            col_changed=[mm(mm(V_inv,z,p),V,p) for z in col_parts]
+            for side,total,expected,original,changed in (
+                ("row",m,row_sizes,row_parts,row_changed),
+                ("column",n,col_sizes,col_parts,col_changed),
+            ):
+                for index,(before,after,want) in enumerate(
+                    zip(original,changed,expected)
+                ):
+                    before_rank=rank(before,p)
+                    after_rank=rank(after,p)
+                    with self.subTest(field=p,side=side,block=index):
+                        self.assertEqual(before_rank,want)
+                        self.assertEqual(after_rank,want)
+                        self.assertEqual(before_rank,after_rank)
+                        self.assertEqual(total-before_rank,total-want)
+                        self.assertEqual(total-after_rank,total-want)
+                        self.assertEqual(before_rank+total-before_rank,total)
+                        self.assertEqual(after_rank+total-after_rank,total)
+
+                # A shape-valid idempotent with one missing basis direction
+                # remains a projector, but its rank no longer matches the
+                # declared block dimension.
+                mutated=[z[:] for z in changed]
+                nonempty=next(i for i in range(len(expected)-1,-1,-1)
+                              if expected[i]>0)
+                mutated[nonempty]=[row[:] for row in mutated[nonempty]]
+                diagonal=next(i for i in range(total)
+                              if mutated[nonempty][i][i])
+                mutated[nonempty][diagonal][diagonal]=0
+                self.assertEqual(mm(mutated[nonempty],mutated[nonempty],p),
+                                 mutated[nonempty])
+                self.assertEqual(rank(mutated[nonempty],p),expected[nonempty]-1)
+                with self.subTest(field=p,side=side,mutation="rank mismatch"):
+                    self.assertNotEqual(rank(mutated[nonempty],p),
+                                        expected[nonempty])
