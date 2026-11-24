@@ -336,3 +336,5 @@ G-EP140: distinguishes valid invertible coefficient-space shears that change onl
 
 
 - **G-EP161:** exhausts all monic sextics over F₂, F₃, and F₇ (64, 729, and 117,649 polynomials). It checks exact factor reconstruction and irreducible inventory counts through degree six. The complete 34-pattern degree/multiplicity catalogue occurs over F₇; the smaller tested fields have strict subsets. Six distinct linear factors impose the limiting field-size requirement, so seven is the first prime-field size at which the complete sextic shape catalogue can occur.
+
+- **G-EP162:** exhausts all 15,625 monic sextics over F₅, independently confirming exact factor reconstruction and irreducible inventory counts through degree six. The six-distinct-linear-factor shape is absent, while representative five-linear-factor and four-linear-plus-quadratic shapes occur. This fills the F₅ comparison point between G-EP161's F₃ and F₇ experiments.
