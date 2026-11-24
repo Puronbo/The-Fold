@@ -782,3 +782,40 @@ def coprime_composition_excess_spectrum(degrees: list[int]) -> dict:
         ),
         "term_count": len(spectrum),
     }
+
+
+def irreducible_density_convergence_over_field(field_size: int,
+                                                degree: int) -> dict:
+    """Return exact density error and a field-uniform bound over F_Q."""
+    count = count_monic_irreducibles_over_field(field_size, degree)
+    normalized = Fraction(degree * count, field_size ** degree)
+    error = 1 - normalized
+
+    remaining = degree
+    omega = 0
+    divisor = 2
+    while divisor * divisor <= remaining:
+        if remaining % divisor == 0:
+            omega += 1
+            while remaining % divisor == 0:
+                remaining //= divisor
+        divisor += 1 if divisor == 2 else 2
+    if remaining > 1:
+        omega += 1
+
+    divisor_bound = Fraction(2 ** omega - 1, 2 ** (degree // 2))
+    uniform_bound = Fraction(degree - 1, 2 ** (degree // 2))
+    return {
+        "schema": "the-fold-prime-power-density-convergence-v1",
+        "field_size": field_size,
+        "degree": degree,
+        "normalized_density_numerator": normalized.numerator,
+        "normalized_density_denominator": normalized.denominator,
+        "signed_error_numerator": error.numerator,
+        "signed_error_denominator": error.denominator,
+        "absolute_error": float(abs(error)),
+        "distinct_prime_divisor_count": omega,
+        "divisor_bound": float(divisor_bound),
+        "uniform_bound": (degree - 1) * (2 ** (-degree / 2)),
+        "uniform_bound_holds": abs(error) <= uniform_bound,
+    }
