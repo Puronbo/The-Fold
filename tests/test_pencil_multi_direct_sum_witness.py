@@ -1991,3 +1991,74 @@ class MultiDirectSumTests(unittest.TestCase):
             )
             with self.subTest(field=p, check="wrong partition"):
                 self.assertFalse(wrong["verification"]["direct_sum_verified"], wrong)
+
+
+    def test_g_ep110_paired_pencil_partition_boundary_and_cancellation(self):
+        # The verifier must check Q and K independently, not merely their sum.
+        # Opposite off-block perturbations cancel in Q+K but remain visible in
+        # each coefficient, so an aggregate-only check would be unsound.
+        shapes = [(1, 1), (1, 1), (1, 1)]
+        for p in (2, 3, 5, 7):
+            q0 = [[1 % p, 0, 0], [0, 2 % p, 0], [0, 0, 3 % p]]
+            k0 = [[2 % p, 0, 0], [0, 3 % p, 0], [0, 0, 1 % p]]
+
+            # Nontrivial but block-preserving transformations are valid.
+            left = [[1 % p, 0, 0], [0, (2 if p > 2 else 1) % p, 0],
+                    [0, 0, (3 if p > 3 else 1) % p]]
+            right = [[(2 if p > 2 else 1) % p, 0, 0], [0, 1 % p, 0],
+                     [0, 0, (2 if p > 2 else 1) % p]]
+            li, ri = inverse(left, p), inverse(right, p)
+            q = mm(mm(li, q0, p), ri, p)
+            k = mm(mm(li, k0, p), ri, p)
+            baseline = verify_pencil_multi_direct_sum_witness(
+                q, k, p, left, right, shapes
+            )
+            with self.subTest(field=p, case="block-preserving transformations"):
+                self.assertTrue(baseline["verification"]["direct_sum_verified"], baseline)
+                self.assertEqual(baseline["transformed_Q"], q0)
+                self.assertEqual(baseline["transformed_K"], k0)
+
+            # E couples block 0 to block 1. Transport it into source
+            # coordinates so the supplied witness reveals precisely E.
+            e = [[0, 1 % p, 0], [0, 0, 0], [0, 0, 0]]
+            delta = mm(mm(li, e, p), ri, p)
+            q_only = [[(q[i][j] + delta[i][j]) % p for j in range(3)]
+                      for i in range(3)]
+            k_only = [[(k[i][j] + delta[i][j]) % p for j in range(3)]
+                      for i in range(3)]
+            q_audit = verify_pencil_multi_direct_sum_witness(
+                q_only, k, p, left, right, shapes
+            )
+            k_audit = verify_pencil_multi_direct_sum_witness(
+                q, k_only, p, left, right, shapes
+            )
+            with self.subTest(field=p, case="Q-only coupling"):
+                self.assertFalse(q_audit["verification"]["Q_off_diagonal_blocks_zero"])
+                self.assertTrue(q_audit["verification"]["K_off_diagonal_blocks_zero"])
+                self.assertFalse(q_audit["verification"]["direct_sum_verified"])
+            with self.subTest(field=p, case="K-only coupling"):
+                self.assertTrue(k_audit["verification"]["Q_off_diagonal_blocks_zero"])
+                self.assertFalse(k_audit["verification"]["K_off_diagonal_blocks_zero"])
+                self.assertFalse(k_audit["verification"]["direct_sum_verified"])
+
+            # Opposite perturbations cancel in the coefficient-wise sum.
+            # In characteristic two, -E = E and E+E = 0 as required.
+            paired_q = [[(q[i][j] + delta[i][j]) % p for j in range(3)]
+                        for i in range(3)]
+            paired_k = [[(k[i][j] - delta[i][j]) % p for j in range(3)]
+                        for i in range(3)]
+            paired = verify_pencil_multi_direct_sum_witness(
+                paired_q, paired_k, p, left, right, shapes
+            )
+            transformed_sum = [[(paired["transformed_Q"][i][j] +
+                                  paired["transformed_K"][i][j]) % p
+                                 for j in range(3)] for i in range(3)]
+            original_sum = [[(q0[i][j] + k0[i][j]) % p
+                             for j in range(3)] for i in range(3)]
+            with self.subTest(field=p, case="cancelling aggregate"):
+                self.assertEqual(transformed_sum, original_sum)
+                self.assertEqual(paired["transformed_Q"][0][1], 1 % p)
+                self.assertEqual(paired["transformed_K"][0][1], (-1) % p)
+                self.assertFalse(paired["verification"]["Q_off_diagonal_blocks_zero"])
+                self.assertFalse(paired["verification"]["K_off_diagonal_blocks_zero"])
+                self.assertFalse(paired["verification"]["direct_sum_verified"])
