@@ -618,6 +618,12 @@ class LaurentSpectrumGlobalSignCertificateTests(unittest.TestCase):
         )
         self.assertEqual(positive["certified_sign"], "positive")
 
+        negative_power = laurent_spectrum_global_sign_certificate([
+            {"exponent": -3, "coefficient": 5},
+        ])
+        self.assertEqual(negative_power["certified_sign"], "positive")
+        self.assertEqual(negative_power["factored_minimum_exponent"], -3)
+
         zero = laurent_spectrum_global_sign_certificate([
             {"exponent": 1, "coefficient": 2},
             {"exponent": 1, "coefficient": -2},
@@ -628,7 +634,7 @@ class LaurentSpectrumGlobalSignCertificateTests(unittest.TestCase):
     def test_invalid_generic_spectra_are_rejected(self):
         invalid = (
             [],
-            [{"exponent": -1, "coefficient": 1}],
+            [{"exponent": True, "coefficient": 1}],
             [{"exponent": True, "coefficient": 1}],
             [{"exponent": 1, "coefficient": False}],
             [{"exponent": 1.5, "coefficient": 1}],
