@@ -823,3 +823,32 @@ between a valid simultaneous relabeling and a one-sided subspace assignment.
 It does not establish uniqueness of decompositions or add arbitrary
 projector inputs to the production API; the evidence is finite and
 test-side.
+
+
+## G-EP147: Equal dimensions versus internal pencil equivalence
+
+Use four equal 1×1 summands with coefficient pairs
+(1,1), (λ,λ), (1,2), and (0,1), where λ is the nonzero scalar p−1.
+The first two are proportional over each tested field F₂, F₃, and F₅.
+The third shares its Q coefficient with the first but differs in K, so
+matching one coefficient is insufficient. The fourth supplies another
+distinct projective coefficient direction.
+
+For 1×1 pencils, constant strict equivalence multiplies both coefficients
+by the same nonzero scalar. The test-local determinant criterion therefore
+checks whether two coefficient pairs are proportional. It confirms the
+intended equivalent and non-equivalent cases without extending that
+criterion to larger blocks.
+
+Enumerate all 24 permutations of the four equal-shaped summands. The
+production multi-block verifier accepts each simultaneous row/column
+relabeling, and the ordered internal coefficient signatures follow their
+corresponding blocks. As a separate control, mutate only the K entry of
+the third diagonal block. The overall direct-sum witness remains valid,
+but the internal projective pencil signature changes. This separates
+shape-based decomposition validity from equivalence of the diagonal
+pencil components.
+
+The evidence is finite and test-side. It does not establish a general
+classification of larger diagonal blocks, decomposition uniqueness, or
+a production strict-equivalence API.
