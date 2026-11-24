@@ -635,7 +635,6 @@ class LaurentSpectrumGlobalSignCertificateTests(unittest.TestCase):
         invalid = (
             [],
             [{"exponent": True, "coefficient": 1}],
-            [{"exponent": True, "coefficient": 1}],
             [{"exponent": 1, "coefficient": False}],
             [{"exponent": 1.5, "coefficient": 1}],
             [{"exponent": 1, "coefficient": 1, "extra": 0}],
