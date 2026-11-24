@@ -3572,3 +3572,136 @@ class MultiDirectSumTests(unittest.TestCase):
                     pulled=mm(mm(mm(ui,coefficient_prime,p),x_prime,p),vi,p)
                     pulled_value.extend(flatten(pulled))
                 self.assertEqual(pulled_value,original_value,(p,trial))
+
+
+    def test_g_ep125_independent_row_span_rank_and_transport_mutations(self):
+        import random
+        import itertools
+
+        def mm(a,b,p):
+            return [[sum(a[i][k]*b[k][j] for k in range(len(b)))%p
+                     for j in range(len(b[0]))] for i in range(len(a))]
+
+        def inv(a,p):
+            n=len(a)
+            w=[[x%p for x in row]+[int(i==j) for j in range(n)]
+               for i,row in enumerate(a)]
+            for c in range(n):
+                pivot=next((z for z in range(c,n) if w[z][c]),None)
+                if pivot is None:
+                    raise AssertionError("expected invertible basis")
+                w[c],w[pivot]=w[pivot],w[c]
+                scale=pow(w[c][c],-1,p)
+                w[c]=[x*scale%p for x in w[c]]
+                for z in range(n):
+                    if z!=c and w[z][c]:
+                        f=w[z][c]
+                        w[z]=[(x-f*y)%p for x,y in zip(w[z],w[c])]
+            return [row[n:] for row in w]
+
+        def rref_rank(rows,p):
+            a=[[x%p for x in row] for row in rows]
+            pivot=0
+            for c in range(len(a[0]) if a else 0):
+                z=next((z for z in range(pivot,len(a)) if a[z][c]),None)
+                if z is None: continue
+                a[pivot],a[z]=a[z],a[pivot]
+                scale=pow(a[pivot][c],-1,p)
+                a[pivot]=[x*scale%p for x in a[pivot]]
+                for z in range(len(a)):
+                    if z!=pivot and a[z][c]:
+                        f=a[z][c]
+                        a[z]=[(x-f*y)%p for x,y in zip(a[z],a[pivot])]
+                pivot+=1
+                if pivot==len(a): break
+            return pivot
+
+        def span_rank(rows,p):
+            # Independent definition: enumerate the complete row span and
+            # recover its dimension from the exact cardinality p^rank.
+            width=len(rows[0]) if rows else 0
+            span={()}
+            for row in rows:
+                expanded=set()
+                for vector in span:
+                    for scalar in range(p):
+                        expanded.add(tuple((vector[j]+scalar*row[j])%p
+                                           for j in range(width)))
+                span=expanded
+            count=len(span)
+            rank=0
+            size=1
+            while size<count:
+                size*=p
+                rank+=1
+            self.assertEqual(size,count)
+            return rank
+
+        def off_locations(shapes):
+            rr=cc=0
+            blocks=[]
+            for h,w in shapes:
+                blocks.append((range(rr,rr+h),range(cc,cc+w)))
+                rr+=h; cc+=w
+            return [(i,j) for bi,(rows,_) in enumerate(blocks)
+                    for bj,(_,cols) in enumerate(blocks) if bi!=bj
+                    for i in rows for j in cols]
+
+        def constraint_rows(coeffs,shapes,p,pull=None):
+            n=len(coeffs[0][0])
+            loc=off_locations(shapes)
+            columns=[]
+            for i in range(n):
+                for j in range(n):
+                    unit=[[int(a==i and b==j) for b in range(n)]
+                          for a in range(n)]
+                    values=[]
+                    for coefficient in coeffs:
+                        out=(mm(coefficient,unit,p) if pull is None else
+                             mm(mm(mm(pull[0],coefficient,p),unit,p),pull[1],p))
+                        values.extend(out[x][y] for x,y in loc)
+                    columns.append(values)
+            return [[columns[c][z] for c in range(n*n)]
+                    for z in range(len(columns[0]))]
+
+        shapes=[(1,1),(3,2)]
+        m,n=4,3
+        for p in (2,3,5):
+            rng=random.Random(125000+p)
+            q=[[rng.randrange(p) for _ in range(n)] for _ in range(m)]
+            k=[[rng.randrange(p) for _ in range(n)] for _ in range(m)]
+            u=[[int(i==j) if i>=j else rng.randrange(p)
+                for j in range(m)] for i in range(m)]
+            v=[[int(i==j) if i>=j else rng.randrange(p)
+                for j in range(n)] for i in range(n)]
+            ui,vi=inv(u,p),inv(v,p)
+            qp=mm(mm(u,q,p),v,p)
+            kp=mm(mm(u,k,p),v,p)
+            original=constraint_rows([q,k],shapes,p)
+            transported=constraint_rows([qp,kp],shapes,p,(ui,vi))
+            r1,r2=rref_rank(original,p),rref_rank(transported,p)
+            self.assertEqual(r1,r2,p)
+            self.assertEqual(n*n-r1,n*n-r2)
+            # Complete row-span enumeration is deliberately bounded to the
+            # smaller fields; F5 still receives independent RREF covariance.
+            if p in (2,3):
+                self.assertEqual(span_rank(original,p),r1)
+                self.assertEqual(span_rank(transported,p),r2)
+
+            # A shape-preserving mutation is a false transport, not malformed
+            # input: it changes the independently reconstructed constraint map.
+            mutated_qp=[row[:] for row in qp]
+            mutated_qp[0][2]=(mutated_qp[0][2]+1)%p
+            mutated=constraint_rows([mutated_qp,kp],shapes,p,(ui,vi))
+            self.assertNotEqual(mutated,transported)
+            self.assertEqual(len(mutated),len(transported))
+            self.assertTrue(all(len(row)==n*n for row in mutated))
+
+            # Mutating a supplied inverse entry preserves dimensions but
+            # breaks the inverse identity; malformed dimensions are separate.
+            bad_ui=[row[:] for row in ui]
+            bad_ui[0][0]=(bad_ui[0][0]+1)%p
+            self.assertNotEqual(mm(bad_ui,u,p),
+                                [[int(i==j) for j in range(m)] for i in range(m)])
+            with self.assertRaises(ValueError):
+                mm([[1,2]],u,p)
