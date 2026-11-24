@@ -5308,3 +5308,130 @@ class MultiDirectSumTests(unittest.TestCase):
             # Reverse in the opposite order to audit composition direction.
             reverse=mix_pair(mix_pair(sequential,inv(second,p),p),inv(first,p),p)
             self.assertEqual(reverse,original)
+
+
+    def test_g_ep140_valid_one_output_shear_vs_matrix_space_mutation(self):
+        # A coefficient-space shear changes one output coefficient while
+        # retaining the other. It is still an invertible change of the whole
+        # ordered pair; an unrelated matrix-space mutation is not.
+        def product(a, b, p):
+            return [[sum(a[i][z] * b[z][j] for z in range(len(b))) % p
+                     for j in range(len(b[0]))] for i in range(len(a))]
+
+        def inv(a, p):
+            n = len(a)
+            work = [[x % p for x in row] +
+                    [int(i == j) for j in range(n)]
+                    for i, row in enumerate(a)]
+            for col in range(n):
+                pivot = next(r for r in range(col, n) if work[r][col] % p)
+                work[col], work[pivot] = work[pivot], work[col]
+                scale = pow(work[col][col], -1, p)
+                work[col] = [x * scale % p for x in work[col]]
+                for r in range(n):
+                    if r != col and work[r][col]:
+                        factor = work[r][col]
+                        work[r] = [(x - factor*y) % p
+                                   for x, y in zip(work[r], work[col])]
+            return [row[n:] for row in work]
+
+        def eye(n):
+            return [[int(i == j) for j in range(n)] for i in range(n)]
+
+        def projectors(sizes, n):
+            result, offset = [], 0
+            for size in sizes:
+                block = [[0] * n for _ in range(n)]
+                for i in range(size):
+                    block[offset+i][offset+i] = 1
+                result.append(block)
+                offset += size
+            return result
+
+        def mix(pair, c, p):
+            return [[(c[0][0]*pair[0][i][j] +
+                      c[1][0]*pair[1][i][j]) % p
+                     for j in range(len(pair[0][0]))]
+                    for i in range(len(pair[0]))], [
+                    [(c[0][1]*pair[0][i][j] +
+                      c[1][1]*pair[1][i][j]) % p
+                     for j in range(len(pair[0][0]))]
+                    for i in range(len(pair[0]))]
+
+        def diagonal_reconstruction(a, row_ps, col_ps, p):
+            m, n = len(a), len(a[0])
+            total = [[0] * n for _ in range(m)]
+            off_diagonal = [[0] * n for _ in range(m)]
+            for i, rp in enumerate(row_ps):
+                for j, cp in enumerate(col_ps):
+                    block = product(product(rp, a, p), cp, p)
+                    target = total if i == j else off_diagonal
+                    for r in range(m):
+                        for c in range(n):
+                            target[r][c] = (target[r][c] + block[r][c]) % p
+            return total, off_diagonal
+
+        row_sizes, col_sizes = [1, 1, 2], [1, 1, 1]
+        m, n = sum(row_sizes), sum(col_sizes)
+        first_shear = [[1, 0], [1, 1]]
+        for p in (2, 3, 5):
+            # A and K are independently populated on the same rectangular
+            # diagonal block pattern, then transported by full basis maps.
+            a0, k0 = [[0]*n for _ in range(m)], [[0]*n for _ in range(m)]
+            ro = co = 0
+            for b, (rsize, csize) in enumerate(zip(row_sizes, col_sizes)):
+                for i in range(rsize):
+                    for j in range(csize):
+                        a0[ro+i][co+j] = (1+b+i+2*j) % p
+                        k0[ro+i][co+j] = (2+2*b+2*i+j) % p
+                ro += rsize
+                co += csize
+
+            u, v = eye(m), eye(n)
+            u[0][1] = 1
+            u[2][0] = 1
+            u[3][1] = 1
+            v[0][1] = 1
+            v[1][2] = 1
+            ui, vi = inv(u, p), inv(v, p)
+            original = [product(product(u, a0, p), v, p),
+                        product(product(u, k0, p), v, p)]
+            row_ps = [product(product(u, z, p), ui, p)
+                      for z in projectors(row_sizes, m)]
+            col_ps = [product(product(vi, z, p), v, p)
+                      for z in projectors(col_sizes, n)]
+
+            sheared = mix(original, first_shear, p)
+            self.assertEqual(sheared[1], original[1])
+            self.assertEqual(sheared[0],
+                             [[(original[0][i][j]+original[1][i][j]) % p
+                               for j in range(n)] for i in range(m)])
+            self.assertEqual((first_shear[0][0]*first_shear[1][1] -
+                              first_shear[0][1]*first_shear[1][0]) % p, 1 % p)
+            for label, pair in (("before", original), ("after shear", sheared)):
+                for index, coefficient in enumerate(pair):
+                    diagonal, off = diagonal_reconstruction(
+                        coefficient, row_ps, col_ps, p)
+                    with self.subTest(field=p, stage=label, coefficient=index):
+                        self.assertEqual(diagonal, coefficient)
+                        self.assertEqual(off, [[0]*n for _ in range(m)])
+
+            # The inverse shear (A',K') -> (A'-K',K') recovers the pair.
+            inverse_shear = [[1, 0], [p-1, 1]]
+            self.assertEqual(mix(sheared, inverse_shear, p), original)
+
+            # Control: perturb only A in source matrix space by a genuine
+            # cross-block entry, leaving K untouched. This is not the same
+            # as the valid coefficient-space shear above.
+            changed_a0 = [row[:] for row in a0]
+            changed_a0[0][1] = (changed_a0[0][1] + 1) % p
+            changed_a = product(product(u, changed_a0, p), v, p)
+            diagonal, off = diagonal_reconstruction(changed_a, row_ps, col_ps, p)
+            with self.subTest(field=p, case="one-coefficient cross-block mutation"):
+                self.assertNotEqual(diagonal, changed_a)
+                self.assertNotEqual(off, [[0]*n for _ in range(m)])
+                # The unchanged second coefficient remains reconstructible.
+                k_diagonal, k_off = diagonal_reconstruction(
+                    original[1], row_ps, col_ps, p)
+                self.assertEqual(k_diagonal, original[1])
+                self.assertEqual(k_off, [[0]*n for _ in range(m)])
