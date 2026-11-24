@@ -182,3 +182,6 @@ of its witness.
 
 
 **G-EP106 — composed equivalence transformations:** tests compositions of two successive, independent left and right source-basis changes, a consistent rectangular block-coordinate permutation, and reciprocal nonzero scalar rescaling. The composite witness must recover the exact reordered Q/K pair over F₂, F₃, F₅, and F₇, including zero-row and zero-column blocks. A mismatched final row transform is rejected. This is finite deterministic regression coverage, not a uniqueness theorem or decomposition-discovery result.
+
+
+**G-EP107 — transformation factorization-order invariance:** tests two distinct ordered factorizations of identical composite left/right basis changes. Both paths are followed by the same rectangular block-coordinate permutation and reciprocal scalar rescaling, and must produce identical verified transformed matrices and block records over F₂/F₃/F₅/F₇. An omitted inverse factor is rejected. Deterministic finite regression coverage only; no uniqueness or decomposition-discovery claim.
