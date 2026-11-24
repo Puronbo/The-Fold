@@ -246,3 +246,20 @@ transported back to source coordinates. The unchanged supplied witness must
 then expose that exact cross-block coefficient and reject the pair. This
 provides reproducible metamorphic regression coverage, not a universal
 correctness theorem or an automatic decomposition method.
+
+
+## G-EP109: Long composition and partition adversaries
+
+The test builds reproducible noncommuting products of 17 elementary left
+operations and 19 elementary right operations over F₂, F₃, F₅, and F₇.
+It constructs source coefficients by applying the inverse composite
+transformations to a known rectangular block-diagonal pair. The supplied
+witness is then reciprocally rescaled, and verification must recover both
+target coefficients exactly.
+
+A separate adversarial control keeps the total matrix dimensions fixed but
+changes the rectangular block partition and its coordinate cut locations.
+The same witness must reject that incorrect partition. This distinguishes
+a valid but differently represented witness from a wrong proposed
+partition. These are finite deterministic regressions, not a universal
+composition theorem or a decomposition-discovery algorithm.
