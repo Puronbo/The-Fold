@@ -72,3 +72,6 @@
 
 
 **Structured/exhaustive recovery cross-checks (G-EP74):** adds small-field comparisons between bounded structured recovery and exhaustive finite-field witness enumeration. A one-candidate structured search must remain inconclusive, while a larger exhaustive F₂ search resolves the same input with an exact witness. F₂/F₃ positive controls require matching minimal-index profiles and independently verified strict-equivalence witnesses in both modes. Different valid transforms are allowed. Exhaustive negative decisions remain valid only after complete enumeration; budget exhaustion is never a proof of inequivalence. See the G-EP74 section in research/the-fold-mixed-kronecker-recovery.md.
+
+
+**Exhaustive-search enumeration integrity (G-EP75):** factors exhaustive left-matrix and affine right-transform enumeration into testable iterators. Finite regression tests check exact coverage and duplicate freedom of all left matrices over F₂/F₃ at dimensions one and two, and compare affine-space enumeration with brute-force solutions over F₃. The candidate budget counts both left and right candidates; budget cutoffs remain inconclusive. These finite tests audit enumeration mechanics without claiming a universal proof of the affine solver. See G-EP75 in research/the-fold-mixed-kronecker-recovery.md.
