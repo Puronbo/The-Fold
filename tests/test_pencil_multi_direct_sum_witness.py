@@ -917,3 +917,110 @@ class MultiDirectSumTests(unittest.TestCase):
             with self.subTest(malformed_nested=name):
                 self.assertFalse(structural(changed))
 
+
+
+    def test_g_ep100_schema_and_algebraic_outcome_cross_product(self):
+        import copy
+
+        q = [[1, 0], [0, 2]]
+        k = [[2, 0], [0, 1]]
+        blocks = [(1, 1), (1, 1)]
+        eye = ident(2)
+
+        def schema_valid(record):
+            if type(record) is not dict:
+                return False
+            fields = {
+                "schema", "field", "source_shape", "block_shapes",
+                "left_transform", "right_transform", "transformed_Q",
+                "transformed_K", "Q_blocks", "K_blocks", "verification", "scope",
+            }
+            if set(record) != fields:
+                return False
+            if record["schema"] != "the-fold-pencil-multi-direct-sum-witness-v1":
+                return False
+            if type(record["field"]) is not str or not record["field"].startswith("F_"):
+                return False
+            shape, parts = record["source_shape"], record["block_shapes"]
+            if (type(shape) is not list or len(shape) != 2
+                    or any(type(x) is not int or x <= 0 for x in shape)
+                    or type(parts) is not list or len(parts) < 2):
+                return False
+            if any(type(part) is not list or len(part) != 2
+                   or any(type(x) is not int or x < 0 for x in part)
+                   or part == [0, 0] for part in parts):
+                return False
+            m, n = shape
+            if sum(x[0] for x in parts) != m or sum(x[1] for x in parts) != n:
+                return False
+
+            def matrix(value, rows, cols):
+                return (type(value) is list and len(value) == rows
+                        and all(type(row) is list and len(row) == cols
+                                and all(type(x) is int for x in row)
+                                for row in value))
+            if not matrix(record["left_transform"], m, m):
+                return False
+            if not matrix(record["right_transform"], n, n):
+                return False
+            for name in ("transformed_Q", "transformed_K"):
+                if not matrix(record[name], m, n):
+                    return False
+            count = len(parts)
+            for name in ("Q_blocks", "K_blocks"):
+                grid = record[name]
+                if type(grid) is not list or len(grid) != count:
+                    return False
+                for i, row in enumerate(grid):
+                    if type(row) is not list or len(row) != count:
+                        return False
+                    for j, cell in enumerate(row):
+                        if not matrix(cell, parts[i][0], parts[j][1]):
+                            return False
+            v = record["verification"]
+            expected = {
+                "left_transform_rank": int, "right_transform_rank": int,
+                "left_transform_invertible": bool, "right_transform_invertible": bool,
+                "Q_off_diagonal_blocks_zero": bool, "K_off_diagonal_blocks_zero": bool,
+                "direct_sum_verified": bool,
+            }
+            return (type(v) is dict and set(v) == set(expected)
+                    and all(type(v[name]) is typ for name, typ in expected.items())
+                    and 0 <= v["left_transform_rank"] <= m
+                    and 0 <= v["right_transform_rank"] <= n
+                    and type(record["scope"]) is str)
+
+        # 1. Structurally valid and algebraically valid.
+        positive = verify_pencil_multi_direct_sum_witness(
+            q, k, 5, eye, eye, blocks
+        )
+        self.assertTrue(schema_valid(positive))
+        self.assertTrue(positive["verification"]["direct_sum_verified"])
+
+        # 2. Structurally valid, but an invertible shear creates cross-block
+        # entries. This is a mathematical negative, not a schema failure.
+        false_math = verify_pencil_multi_direct_sum_witness(
+            q, k, 5, [[1, 1], [0, 1]], eye, blocks
+        )
+        self.assertTrue(schema_valid(false_math))
+        self.assertFalse(false_math["verification"]["direct_sum_verified"])
+        self.assertFalse(false_math["verification"]["Q_off_diagonal_blocks_zero"])
+
+        # 3. Structurally invalid snapshots are rejected regardless of the
+        # valid witness from which they were copied.
+        malformed = copy.deepcopy(positive)
+        malformed["Q_blocks"][0].pop()
+        self.assertFalse(schema_valid(malformed))
+        malformed = copy.deepcopy(positive)
+        malformed["verification"]["left_transform_rank"] = True
+        self.assertFalse(schema_valid(malformed))
+
+        # 4. Singular transforms remain a well-formed audit record with an
+        # explicit negative algebraic result, rather than a schema exception.
+        singular = verify_pencil_multi_direct_sum_witness(
+            q, k, 5, [[1, 0], [0, 0]], eye, blocks
+        )
+        self.assertTrue(schema_valid(singular))
+        self.assertFalse(singular["verification"]["left_transform_invertible"])
+        self.assertFalse(singular["verification"]["direct_sum_verified"])
+
