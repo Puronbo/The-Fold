@@ -194,3 +194,6 @@ of its witness.
 
 
 **G-EP110 — paired-pencil partition boundary and cancellation adversaries:** adds cross-field controls over F₂/F₃/F₅/F₇ for block-preserving transforms, Q-only and K-only cross-block mutations, and a paired mutation whose opposite off-diagonal entries cancel in Q+K while remaining nonzero in each coefficient separately. The verifier must reject the paired mutation, demonstrating that it checks both pencil coefficients independently rather than only their aggregate. Deterministic finite regression coverage; no decomposition-discovery, uniqueness, or universal-theorem claim. See G-EP110 in `research/the-fold-multi-block-direct-sum-witness.md`.
+
+
+**G-EP111 — invertible pencil-parameter basis changes:** tests coefficient-space changes by invertible 2×2 matrices over F₂, F₃, F₅, and F₇, including coefficient swaps, shears, and mixed determinant-one changes. The same rectangular coordinate witness must verify the transformed pair and recover the expected mixed target coefficients; applying the inverse parameter change recovers the original ordered pair exactly. This finite regression checks direct-sum stability under an invertible change of basis in the pencil coefficient space. It does not cover singular coefficient mixing, decomposition discovery, uniqueness, or universal classification.
