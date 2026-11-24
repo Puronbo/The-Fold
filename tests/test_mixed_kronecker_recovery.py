@@ -1,4 +1,5 @@
 import unittest
+from itertools import product
 
 from tools.mixed_kronecker_recovery import (
     _affine_vectors, _exhaustive_left_matrices, recover_mixed_kronecker_pencil,
@@ -240,6 +241,44 @@ class MixedKroneckerRecoveryTests(unittest.TestCase):
         self.assertEqual(list(_affine_vectors([2, 1], [], 5)), [[2, 1]])
         generated = list(_affine_vectors([0, 0], [[1, 0], [0, 1]], 2))
         self.assertEqual(set(map(tuple, generated)), {(0, 0), (0, 1), (1, 0), (1, 1)})
+
+
+    def test_affine_solver_matches_exhaustive_solution_sets_on_small_system_grid(self):
+        # Exhaust every coefficient matrix and right-hand side for dimensions
+        # 0..2 over F_2 and F_3. The comparison enumerates candidate vectors
+        # independently, rather than relying on the solver's nullspace basis.
+        from tools.mixed_kronecker_recovery import _solve_affine
+
+        checked = 0
+        for p in (2, 3):
+            for rows in range(3):
+                for columns in range(3):
+                    for flat in product(range(p), repeat=rows * columns):
+                        matrix = [
+                            list(flat[i * columns:(i + 1) * columns])
+                            for i in range(rows)
+                        ]
+                        for rhs in product(range(p), repeat=rows):
+                            expected = {
+                                tuple(candidate)
+                                for candidate in product(range(p), repeat=columns)
+                                if all(
+                                    sum(a * x for a, x in zip(row, candidate)) % p == target
+                                    for row, target in zip(matrix, rhs)
+                                )
+                            }
+                            affine = _solve_affine(matrix, rhs, columns, p)
+                            if not expected:
+                                self.assertIsNone(affine, (p, matrix, rhs))
+                            else:
+                                self.assertIsNotNone(affine, (p, matrix, rhs))
+                                particular, basis = affine
+                                actual_vectors = list(_affine_vectors(particular, basis, p))
+                                actual = {tuple(vector) for vector in actual_vectors}
+                                self.assertEqual(len(actual_vectors), len(actual))
+                                self.assertEqual(actual, expected, (p, matrix, rhs))
+                            checked += 1
+        self.assertGreater(checked, 1000)
 
 
 if __name__ == "__main__":
