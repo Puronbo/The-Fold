@@ -83,6 +83,8 @@ import Fold.Doubling
 #check Fold.double_iter
 #check Fold.double_iter_eq_id_of_dvd
 #check Fold.double_iter_eq_id_iff_dvd
+#check Fold.double_iter_one_eq_neg_iff_dvd
+#check Fold.double_iter_not_id_and_neg
 #check Fold.double_fixed
 #check Fold.double_eq_neg_iff
 #check Fold.double_zero_fiber_odd

@@ -49,7 +49,7 @@ counted. Seven definitions, strongest first, with today's readings.
 | prohibition | does it forbid something? | corrugation ≠ mass; a free twist ≠ an unworked twist; the integer line folds but does not double; the real fold is not a branched cover |
 | prompt closure | did a question produce an exact object? | `7` of `7` prompts since the hexagon |
 | redemption | were old rhymes retired? | `0` of `21`; the rhyme share is stable at `31%` |
-| discipline growth | did the gate learn a new kind of error? | `9` rules over `48` notes: `0` |
+| discipline growth | did the gate learn a new kind of error? | `9` rules over `63` notes: `0` |
 
 The citation meter is now runnable:
 
@@ -57,14 +57,15 @@ The citation meter is now runnable:
 python fold_lint.py reuse
 ```
 
-and it prints `369` edges over `48` notes — `7.69` per note — with the notes that nothing cites. Those
-are the newest, so the orphan count is expected; what is not expected is that **no note has yet been
-written that needed them.**
+and it prints `377` edges over `63` notes — `5.98` per note — with the notes that nothing cites.
+Fifteen are uncited: the thirteen research notes outside the zone map, and the two fold-note orphans.
+The research papers are the newest and cite each other rarely, so their count is expected; what is not
+expected is that **no fold note has yet been written that needed them.**
 
 A citation is cheap, though, and this note proved it once: when it was written the orphan count fell
-from three to one, because it cites everything it mentions. The ledger and the void map put the count at
-two, because this note and the integer line are still uncited. So `reuse` measures **attention**, not
-**dependence**. The stronger question is whether a citation could be deleted without breaking the citing
+from three to one, because it cites everything it mentions. At that time the ledger and the void map
+put the count at two, because this note and the integer line were still uncited. So `reuse` measures
+**attention**, not **dependence**. The stronger question is whether a citation could be deleted without breaking the citing
 note: remove `the-fold-sign.md` and the discriminant note loses `w₁`, remove
 `the-fold-discriminant.md` and the network note loses `A_k`. Those are dependencies. The count does not
 yet distinguish them, and that is the honest limit of the meter.

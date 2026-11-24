@@ -195,3 +195,19 @@ Added focused adversarial coverage for the standalone supplied multi-block direc
 Added deterministic generated-style multi-block fixtures over F₂, F₃, F₅, and F₇. The partition grid includes rectangular blocks with zero rows or zero columns, while excluding zero-by-zero blocks; every full source pencil remains nonempty and rectangular. Valid block-diagonal coefficient pairs pass with identity transforms. For partitions containing a cross-block location, an injected nonzero coefficient is rejected by the off-diagonal and aggregate checks. Additional cases reject zero-by-zero blocks and row/column total mismatches.
 
 This covers the verifier's permitted rectangular edge cases, not arbitrary overlapping interval partitions, a decomposition-discovery algorithm, or a universal correctness proof.
+
+## G-EP50 — Exhaustive finite-field witness mode
+
+The recovery API now accepts `search_mode="exhaustive"`. It streams every
+left matrix over the finite field (identity first), rejects singular matrices,
+and for each invertible S solves the coupled equations for T. It enumerates
+the entire affine solution space for T, including singular solutions which
+are discarded by the determinant check. If a valid pair is found, the exact
+strict-equivalence auditor certifies it. If the entire search completes
+without a witness, `decision_complete=true` certifies non-equivalence to the
+profile-derived canonical target. If `max_candidates` is reached at any
+point, the result remains inconclusive.
+
+This is a complete but exponential finite-field method when allowed to finish,
+not a polynomial-time algorithm. It is practical primarily for small
+dimensions/fields. The original structured mode remains the default.

@@ -34,6 +34,8 @@ import Fold
 #print axioms Fold.double_bijective_iff_odd
 #print axioms Fold.double_iter_eq_id_of_dvd
 #print axioms Fold.double_iter_eq_id_iff_dvd
+#print axioms Fold.double_iter_one_eq_neg_iff_dvd
+#print axioms Fold.double_iter_not_id_and_neg
 #print axioms Fold.double_fixed
 #print axioms Fold.double_eq_neg_iff
 #print axioms Fold.double_zero_fiber_odd

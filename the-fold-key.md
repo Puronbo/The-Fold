@@ -623,6 +623,20 @@ pattern. `∮ dk/k = 2πi` is the period of the description, not the age of the 
 | first cosmic loop | recombination; the CMB as bookmark | exact physics; Fold rhyme |
 | descriptive loop | the observer reads the CMB by the same scale | exact inference; not a physical cycle |
 
+## The minimal operation family
+
+A family of scales preserving a character is its kernel, so the cost is the least number of generators
+of that kernel, and the question "how few operations" is a question about `U(n)`. Every level, the
+constant included, costs at most one scale if and only if `U(n)` is cyclic (`n = 1, 2, 4, p^k, 2p^k`);
+the maximum cost is `rank U(n)`, which is unbounded. The fold is not one of the counted operations:
+`χ(−1) = ±1`, so it preserves exactly the even half of the character lattice, and a faithful character
+is odd, so the information the fold preserves never costs zero. On `n = 15` the cheapest odd character
+has kernel `{1, 11}` and blocks `[1,11] [2,7] [4,14] [8,13]`, which the fold exchanges — the cost counts
+the subgroup, the fold acts on the labelling. Doubling's two period sets are `n ∣ 2^k − 1` (the identity)
+and `n ∣ 2^k + 1` (the fold), and they are disjoint for `n > 2`; reaching the fold is not a cyclicity
+test, since `n = 33` and `n = 65` are not cyclic and do reach it. See
+`the-fold-minimal-operations.md`.
+
 ## Key by question
 
 | question | answer | source |
@@ -754,6 +768,10 @@ pattern. `∮ dk/k = 2πi` is the period of the description, not the age of the 
 | Why does the horizon table need two columns? | homothetic family (`M ∝ k`) is not a process; fixed-mass collapse is | horizon |
 | Why is a cone's twist exactly zero? | its fold group is the planes through the axis; a turn about the axis is the identity on the body | cone |
 | What is left at the end? | the orbit space is a point; the invariant ring is constants | invariants, §9 |
+| How few operations preserve a chosen information? | one, iff `U(n)` is cyclic; the cost is the rank of the character's kernel | minimal-operations |
+| What is exact about the four date labels? | `mod 99` is format-invariant by even block lengths; the divisor count is not | date-numbers |
+| Does the fold preserve the cheapest information? | no: an even character costs at least one scale, and a faithful one is odd | minimal-operations |
+| Where does doubling reach the fold? | at `n ∣ 2^k + 1`, disjoint from the identity's `n ∣ 2^k − 1` | minimal-operations, lean |
 
 ## Calibration
 
@@ -816,6 +834,8 @@ No new measurements. These are the existing checks the key rests on:
 | the universal logarithm and the A-type anomaly | `the-fold-logarithm.md` |
 | engineering applications and the limits of transfer | `the-fold-engineering.md` |
 | the whole corpus as one loop, from point to CMB to observer | `the-fold-loop.md` |
+| the arithmetic of the four date labels | `the-fold-date-numbers.md` |
+| how few operations preserve a chosen amount of information | `the-fold-minimal-operations.md` |
 
 ## The key in one sentence
 

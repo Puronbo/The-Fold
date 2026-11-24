@@ -172,6 +172,60 @@ theorem double_iter_eq_id_iff_dvd (n k : Nat) (hn : 1 < n) :
   · intro h
     exact double_iter_eq_id_of_dvd n k (by omega) h
 
+/-- The shifted period: `k` doublings send `1` to the fold exactly when
+`n ∣ 2^k + 1`.  The identity's periods are `n ∣ 2^k - 1`; the fold's are the
+other half of the same test. -/
+theorem double_iter_one_eq_neg_iff_dvd (n k : Nat) (hn : 1 < n) :
+    iterate (double n (by omega)) k ⟨1, by omega⟩ = neg n (by omega) ⟨1, by omega⟩
+      ↔ n ∣ 2 ^ k + 1 := by
+  have hneg : neg n (by omega) (⟨1, by omega⟩ : Fin n) = ⟨n - 1, by omega⟩ := by
+    apply Fin.ext
+    simp [neg, Nat.mod_eq_of_lt (by omega : n - 1 < n)]
+  rw [hneg]
+  constructor
+  · intro h
+    have hval : 2 ^ k % n = n - 1 := by
+      have hv := congrArg Fin.val h
+      rw [double_iter] at hv
+      simpa using hv
+    have hdiv := Nat.mod_add_div (2 ^ k) n
+    rw [hval] at hdiv
+    exact ⟨2 ^ k / n + 1, by
+      rw [Nat.mul_add, Nat.mul_one]
+      omega⟩
+  · rintro ⟨q, hq⟩
+    apply Fin.ext
+    have hqpos : 1 ≤ q := by
+      rcases Nat.eq_zero_or_pos q with h | h
+      · rw [h, Nat.mul_zero] at hq
+        have := Nat.one_le_two_pow (n := k)
+        omega
+      · exact h
+    obtain ⟨q', rfl⟩ : ∃ q', q = q' + 1 := ⟨q - 1, by omega⟩
+    simp only [Nat.mul_add, Nat.mul_one] at hq
+    have hk : 2 ^ k = q' * n + (n - 1) := by
+      rw [Nat.mul_comm q' n]
+      omega
+    rw [double_iter]
+    simp only [Nat.mul_one]
+    rw [hk, Nat.mul_add_mod_of_lt (by omega)]
+
+/-- For `n > 2`, the identity and the fold are never reached at the same step. -/
+theorem double_iter_not_id_and_neg (n k : Nat) (hn : 2 < n) :
+    ¬ (iterate (double n (by omega)) k = id ∧
+       iterate (double n (by omega)) k ⟨1, by omega⟩ = neg n (by omega) ⟨1, by omega⟩) := by
+  rintro ⟨hid, hneg⟩
+  have h1 := (double_iter_eq_id_iff_dvd n k (by omega)).1 hid
+  have h2 := (double_iter_one_eq_neg_iff_dvd n k (by omega)).1 hneg
+  have hsub : (2 : Nat) = (2 ^ k + 1) - (2 ^ k - 1) := by
+    have := Nat.one_le_two_pow (n := k)
+    omega
+  have hdvd : n ∣ 2 := by
+    rw [hsub]
+    exact Nat.dvd_sub h2 h1
+  have hle := Nat.le_of_dvd (by decide : 0 < 2) hdvd
+  omega
+
 /-- When `n` is odd, the only preimage of `0` under doubling is `0`. -/
 theorem double_zero_fiber_odd (n m : Nat) (hn : n = 2 * m + 1) (x : Fin n) :
     double n (by omega) x = ⟨0, by omega⟩ ↔ x = ⟨0, by omega⟩ := by

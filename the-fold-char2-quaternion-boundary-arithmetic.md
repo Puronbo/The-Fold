@@ -17,8 +17,8 @@ The boundary factors through k/k^2. Its vanishing criterion is
 \quad\Longleftrightarrow\quad
 \exists c,d\in k:\ c^2+a d^2+d=\lambda.
 ]
-This equation also constructs the lift torsor explicitly; see
-`the-fold-char2-mixed-torsor-models.md`.
+This equation also constructs the lift torsor explicitly; the mixed-torsor models are a separate
+note, not in this repository.
 
 ## 1. The image
 
