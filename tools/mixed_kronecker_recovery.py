@@ -240,7 +240,7 @@ def _right_transform_equations(s, q, k, q_target, k_target, p):
 
 def verify_mixed_kronecker_negative_certificate(
     q: Sequence[Sequence[int]], k: Sequence[Sequence[int]], p: int,
-    result: dict, *, max_degree: int = 8, max_minors: int = 2000,
+    result: dict,
 ) -> dict:
     """Replay an exhaustive negative-result claim, failing closed on bad data.
 
@@ -275,6 +275,11 @@ def verify_mixed_kronecker_negative_certificate(
     }
     if any(key not in result or result[key] != value for key, value in required.items()):
         return {"verified": False, "reason": "result metadata does not describe a completed exhaustive negative"}
+    max_degree = result.get("profile_max_degree")
+    max_minors = result.get("profile_max_minors")
+    if (not isinstance(max_degree, int) or isinstance(max_degree, bool) or max_degree < 0
+            or not isinstance(max_minors, int) or isinstance(max_minors, bool) or max_minors < 1):
+        return {"verified": False, "reason": "profile-bound metadata is invalid"}
     budget = result.get("max_candidates")
     claimed_count = result.get("candidates_examined")
     if (not isinstance(budget, int) or isinstance(budget, bool) or budget < 1
@@ -359,7 +364,10 @@ def recover_mixed_kronecker_pencil(
         q, k, p, max_degree=max_degree, max_minors=max_minors
     )
     if not profile["complete_kronecker_structure_data"]:
-        return {"recovered": False, "decision_complete": False,
+        return {"schema": "the-fold-mixed-kronecker-recovery-v1",
+                "field": f"F_{p}", "source_shape": [rows, cols],
+                "recovered": False, "decision_complete": False,
+                "profile_max_degree": max_degree, "profile_max_minors": max_minors,
                 "reason": "Kronecker profile is incomplete or its dimension identities failed",
                 "profile": profile}
     target_q, target_k = _canonical_target(profile, p)
@@ -407,6 +415,7 @@ def recover_mixed_kronecker_pencil(
                 return {
                     "schema": "the-fold-mixed-kronecker-recovery-v1",
                     "field": f"F_{p}", "source_shape": [rows, cols],
+                    "profile_max_degree": max_degree, "profile_max_minors": max_minors,
                     "recovered": True, "decision_complete": True,
                     "right_minimal_indices": profile["singular_part"]["right_minimal_indices"],
                     "left_minimal_indices": profile["singular_part"]["left_minimal_indices"],
@@ -433,6 +442,7 @@ def recover_mixed_kronecker_pencil(
     return {
         "schema": "the-fold-mixed-kronecker-recovery-v1",
         "field": f"F_{p}", "source_shape": [rows, cols],
+        "profile_max_degree": max_degree, "profile_max_minors": max_minors,
         "recovered": False, "decision_complete": complete_negative,
         "candidates_examined": examined, "max_candidates": max_candidates,
         "search_mode": search_mode,
