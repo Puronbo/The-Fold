@@ -403,6 +403,23 @@ def verify_mixed_kronecker_recovery_certificate(
                     or result.get("canonical_block_shapes") != [list(x) for x in _canonical_block_shapes(profile, p)]):
                 return {"verified": False, "reason": "positive canonical-target metadata is inconsistent"}
             s, t = result.get("left_transform_S"), result.get("right_transform_T")
+
+            def valid_square_transform(matrix, dimension):
+                return (
+                    isinstance(matrix, (list, tuple))
+                    and len(matrix) == dimension
+                    and all(
+                        isinstance(row, (list, tuple))
+                        and len(row) == dimension
+                        and all(isinstance(value, int) and not isinstance(value, bool)
+                                for value in row)
+                        for row in matrix
+                    )
+                )
+
+            if not (valid_square_transform(s, rows)
+                    and valid_square_transform(t, cols)):
+                return {"verified": False, "reason": "positive transform matrices are malformed"}
             audit = strict_pencil_equivalence_audit(q, k, p, target_q, target_k, s, t)
             if not audit["strict_equivalence_certified"] or result.get("verification") != audit:
                 return {"verified": False, "reason": "positive strict-equivalence witness failed replay"}
@@ -450,7 +467,8 @@ def verify_mixed_kronecker_recovery_certificate(
             "canonical_target_reconstructed": True,
             "reason": None if valid else "bounded-failure metadata is inconsistent",
         }
-    except (TypeError, KeyError, IndexError, AttributeError, ArithmeticError, OverflowError):
+    except (TypeError, ValueError, KeyError, IndexError, AttributeError,
+            ArithmeticError, OverflowError):
         return {"verified": False, "reason": "malformed recovery certificate could not be replayed"}
 
 
