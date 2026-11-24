@@ -711,3 +711,8 @@ Use a rectangular 4×3 coefficient pair with ordered row block sizes (1,1,2) and
 ## G-EP138: Covariance under invertible pencil-coefficient mixing
 
 Starting with a block-diagonal rectangular coefficient pair, apply independent invertible row/column basis changes and an invertible 2×2 coefficient-space transformation with determinant one over F₂, F₃, and F₅. Recover the original ordered pair using the explicit inverse coefficient transformation. The intended transported projectors reconstruct each original and mixed coefficient as the sum of diagonal projected blocks. An alternative valid projector resolution still produces nonzero off-diagonal coupling for both mixed coefficients, while the sum over all projected blocks remains exact. This tests covariance of the coefficient-bound decomposition under invertible pencil mixing; it is finite test-side evidence and does not establish a general production verifier or theorem.
+
+
+## G-EP139: Composition of coefficient-space basis changes
+
+Apply two successive invertible 2×2 coefficient-space basis changes to the transported rectangular pencil pair over F₂, F₃, and F₅. The test compares sequential mixing with the correctly ordered direct product, checks diagonal projected-block reconstruction at the original, intermediate, and final stages using the same row/column projector families, and recovers the original ordered pair both by inverting the composite map and by applying the inverse factors in reverse order. This is finite test-side evidence for composition and covariance, not a production certificate API or a universal theorem.
