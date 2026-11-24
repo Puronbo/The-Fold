@@ -583,3 +583,26 @@ also compare full equation-map evaluations for sampled candidates.
 This expands finite regression coverage from four to nine unknown scalar
 coordinates. It remains test-side evidence for the stated fixtures, not a
 general formal proof or a production mixed-basis verifier.
+
+
+## G-EP125: Independent row-span rank and transport mutation controls
+
+Reconstruct the simultaneous 3×3 right-transform constraint matrices for the
+rectangular 4×3 fixture. Compare ordinary finite-field RREF rank before and
+after full basis transport over F₂, F₃, and F₅. For F₂ and F₃, independently
+enumerate the complete row span and infer rank from its exact cardinality,
+cross-checking the elimination result without reusing its pivot procedure.
+The larger F₅ row-span enumeration is intentionally omitted to keep the
+exhaustive control bounded.
+
+Adversarial controls mutate one entry of a transported coefficient matrix
+without changing its dimensions. The resulting constraint matrix remains
+well-shaped but differs from the valid transported map: this is a false
+mathematical transport, not a malformed structure. A separate mutation to
+the supplied inverse row map preserves dimensions but breaks the inverse
+identity. A dimension-incompatible matrix multiplication is checked as a
+distinct malformed-input case.
+
+These are deterministic finite test-side regressions. They do not add a
+production transport-certificate format or prove provenance of supplied
+basis maps.
