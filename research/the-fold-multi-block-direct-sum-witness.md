@@ -456,3 +456,21 @@ unchanged.
 
 These are exhaustive finite-dimensional test controls for a 2×2 fixed-left
 system, not a general solver or witness-discovery result.
+
+
+## G-EP119: Rectangular constraint rank and nullity
+
+Extend the test-side off-diagonal equation construction to rectangular source
+pencils and square right-transform unknowns. The fixtures include a 2×3
+source, square sources with zero-row and zero-column blocks, and a single
+nonempty block whose off-diagonal region is empty.
+
+For each fixture over F₂ and F₃, compare rank from finite-field elimination
+with rank inferred independently from explicit row-span enumeration. Check
+each linear equation against the corresponding entry of direct multiplication
+(S*C)*T for sampled candidate transforms. Exhaustively enumerate the kernel
+for dimensions up to three and confirm its cardinality is p^(n²-rank).
+
+The single-block case has no equations, rank zero, and nullity n². These are
+finite test-side controls, not a production rectangular solver or a general
+witness-discovery method.
