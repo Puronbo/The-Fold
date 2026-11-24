@@ -1537,3 +1537,102 @@ class MultiDirectSumTests(unittest.TestCase):
         self.assertEqual(equivalent["transformed_Q"], baseline["transformed_Q"])
         self.assertEqual(equivalent["transformed_K"], baseline["transformed_K"])
         self.assertTrue(equivalent["verification"]["direct_sum_verified"])
+
+
+    def test_g_ep105_block_permutation_conjugacy_with_rectangular_empty_blocks(self):
+        # Permute row and column coordinate intervals together with the
+        # ordered block list. The partition includes zero-row and zero-column
+        # blocks, whose empty intervals still occupy meaningful block slots.
+        shapes = [(1, 0), (1, 2), (0, 1), (1, 1)]
+        order = [3, 1, 2, 0]
+
+        def permutation_matrix(indices, size):
+            return [[int(indices[i] == j) for j in range(size)]
+                    for i in range(size)]
+
+        def transpose(a):
+            return [list(col) for col in zip(*a)]
+
+        def permute_rows(a, indices):
+            return [a[i][:] for i in indices]
+
+        def permute_columns(a, indices):
+            return [[row[j] for j in indices] for row in a]
+
+        for p in (2, 3, 5, 7):
+            m = sum(r for r, _ in shapes)
+            n = sum(c for _, c in shapes)
+            row_offsets, col_offsets = [0], [0]
+            for r, c in shapes:
+                row_offsets.append(row_offsets[-1] + r)
+                col_offsets.append(col_offsets[-1] + c)
+
+            q0, k0 = [[0] * n for _ in range(m)], [[0] * n for _ in range(m)]
+            for b, (r, c) in enumerate(shapes):
+                for i in range(r):
+                    for j in range(c):
+                        q0[row_offsets[b] + i][col_offsets[b] + j] = (b + 2*i + j + 1) % p
+                        k0[row_offsets[b] + i][col_offsets[b] + j] = (2*b + i + 3*j + 1) % p
+
+            left, right = ident(m), ident(n)
+            for i in range(m - 1):
+                left[i][i + 1] = 1
+            for i in range(n - 1):
+                right[i + 1][i] = 1
+            left_inv, right_inv = inverse(left, p), inverse(right, p)
+            q = mm(mm(left_inv, q0, p), right_inv, p)
+            k = mm(mm(left_inv, k0, p), right_inv, p)
+            baseline = verify_pencil_multi_direct_sum_witness(
+                q, k, p, left, right, shapes
+            )
+            self.assertTrue(baseline["verification"]["direct_sum_verified"], baseline)
+
+            row_indices = [j for block in order
+                           for j in range(row_offsets[block], row_offsets[block + 1])]
+            col_indices = [j for block in order
+                           for j in range(col_offsets[block], col_offsets[block + 1])]
+            row_perm = permutation_matrix(row_indices, m)
+            col_perm = permutation_matrix(col_indices, n)
+            row_perm_inv, col_perm_inv = transpose(row_perm), transpose(col_perm)
+
+            # Change source coordinates and conjugate each supplied transform
+            # so the resulting transformed pair is the correspondingly
+            # reordered block diagonal pair.
+            q_reordered = permute_columns(permute_rows(q, row_indices), col_indices)
+            k_reordered = permute_columns(permute_rows(k, row_indices), col_indices)
+            left_reordered = mm(mm(row_perm, left, p), row_perm_inv, p)
+            right_reordered = mm(mm(col_perm, right, p), col_perm_inv, p)
+            reordered_shapes = [shapes[i] for i in order]
+            reordered = verify_pencil_multi_direct_sum_witness(
+                q_reordered, k_reordered, p,
+                left_reordered, right_reordered, reordered_shapes,
+            )
+            expected_q = permute_columns(permute_rows(q0, row_indices), col_indices)
+            expected_k = permute_columns(permute_rows(k0, row_indices), col_indices)
+            with self.subTest(field=p, case="consistent row-column-block permutation"):
+                self.assertTrue(reordered["verification"]["direct_sum_verified"], reordered)
+                self.assertEqual(reordered["transformed_Q"], expected_q)
+                self.assertEqual(reordered["transformed_K"], expected_k)
+                self.assertEqual(reordered["block_shapes"], [list(x) for x in reordered_shapes])
+
+            # A row-only source-coordinate permutation is not the same
+            # representation change: retain the original column coordinates
+            # and transforms, then require the original ordered partition.
+            row_only_q = permute_rows(q, row_indices)
+            row_only_k = permute_rows(k, row_indices)
+            row_only = verify_pencil_multi_direct_sum_witness(
+                row_only_q, row_only_k, p,
+                mm(row_perm, left, p), right, shapes,
+            )
+            with self.subTest(field=p, case="one-sided row-coordinate permutation"):
+                self.assertFalse(row_only["verification"]["direct_sum_verified"], row_only)
+
+            # Likewise, permuting only the column coordinates must not pass.
+            col_only_q = permute_columns(q, col_indices)
+            col_only_k = permute_columns(k, col_indices)
+            col_only = verify_pencil_multi_direct_sum_witness(
+                col_only_q, col_only_k, p,
+                left, mm(right, col_perm_inv, p), shapes,
+            )
+            with self.subTest(field=p, case="one-sided column-coordinate permutation"):
+                self.assertFalse(col_only["verification"]["direct_sum_verified"], col_only)
