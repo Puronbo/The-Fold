@@ -4348,6 +4348,6 @@ class MultiDirectSumTests(unittest.TestCase):
 
             # A wrong, but square and dimension-compatible, conjugation is
             # not accepted as the transported family.
-            wrong_row=[mm(mm(inv(U,p),z,p),U,p) for z in row_parts]
+            wrong_row=[mm(mm(ub,z,p),inv(ub,p),p) for z in row_parts]
             with self.subTest(field=p,mutation="wrong transport direction"):
                 self.assertNotEqual(wrong_row,row_direct)
