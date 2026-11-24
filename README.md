@@ -78,3 +78,6 @@
 
 
 **Independent affine-solver verification (G-EP76):** exhaustively compares `_solve_affine` with independently enumerated solution sets for every coefficient matrix and right-hand side with zero through two equations and variables over F₂ and F₃. It checks inconsistency detection, exact affine coverage, and duplicate freedom, including empty equation systems and zero-variable systems. This is exhaustive finite regression coverage for the stated small grid, not a proof for arbitrary dimensions or fields. See G-EP76 in the mixed Kronecker recovery research note.
+
+
+**Exhaustive-search decision and budget integrity (G-EP77):** independently cross-checks modular determinant values against the permutation formula on all matrices through dimension three over F₂/F₃, verifies that exhaustive negative status requires complete left/right candidate enumeration, and confirms the budget counts both S and T candidates. A patched impossible-target fixture exercises search control flow only; it is not a mathematical non-equivalence example. See G-EP77 in the mixed Kronecker recovery research note.
