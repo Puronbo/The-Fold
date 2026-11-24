@@ -5289,7 +5289,7 @@ class MultiDirectSumTests(unittest.TestCase):
 
             stage1=mix_pair(original,first,p)
             sequential=mix_pair(stage1,second,p)
-            composed=mm(second,first,p)
+            composed=mm(first,second,p)
             direct=mix_pair(original,composed,p)
             self.assertEqual(sequential,direct)
             self.assertEqual((composed[0][0]*composed[1][1]-
