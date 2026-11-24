@@ -2742,3 +2742,127 @@ class MultiDirectSumTests(unittest.TestCase):
             # independent constraint direction.
             independent = equation_rows(left, [[0,0],[0,1]], p)
             self.assertGreater(span_rank(q_rows+independent,p), span_rank(q_rows,p))
+
+
+    def test_g_ep119_rectangular_constraint_rank_nullity_and_empty_regions(self):
+        import random
+        from itertools import product
+
+        def equation_system(left, coefficients, shapes, p):
+            m, n = len(left), len(coefficients[0][0]) if coefficients else 0
+            row_starts, col_starts = [0], [0]
+            for rsize, csize in shapes:
+                row_starts.append(row_starts[-1] + rsize)
+                col_starts.append(col_starts[-1] + csize)
+            self.assertEqual(row_starts[-1], m)
+            self.assertEqual(col_starts[-1], n)
+            rows, locations = [], []
+            for coefficient in coefficients:
+                product_left = mm(left, coefficient, p)
+                for bi in range(len(shapes)):
+                    for bj in range(len(shapes)):
+                        if bi == bj:
+                            continue
+                        for i in range(row_starts[bi], row_starts[bi+1]):
+                            for j in range(col_starts[bj], col_starts[bj+1]):
+                                equation = [0]*(n*n)
+                                for z in range(n):
+                                    equation[z*n+j] = product_left[i][z] % p
+                                rows.append(equation)
+                                locations.append((i,j,coefficient))
+            return rows, locations
+
+        def row_reduce_rank(rows, variables, p):
+            a = [[v % p for v in row] for row in rows]
+            pivot = 0
+            for col in range(variables):
+                selected = next((r for r in range(pivot,len(a))
+                                 if a[r][col] % p), None)
+                if selected is None:
+                    continue
+                a[pivot],a[selected] = a[selected],a[pivot]
+                inv = pow(a[pivot][col],-1,p)
+                a[pivot] = [v*inv % p for v in a[pivot]]
+                for r in range(len(a)):
+                    if r != pivot and a[r][col] % p:
+                        factor = a[r][col] % p
+                        a[r] = [(x-factor*y) % p
+                                for x,y in zip(a[r],a[pivot])]
+                pivot += 1
+                if pivot == len(a):
+                    break
+            return pivot
+
+        def enumerate_span_rank(rows, p):
+            dimension = len(rows[0]) if rows else 0
+            span = {tuple([0]*dimension)}
+            for row in rows:
+                v = tuple(x % p for x in row)
+                span = {
+                    tuple((x+c*y) % p for x,y in zip(old,v))
+                    for old in span for c in range(p)
+                }
+            count = len(span)
+            rank = 0
+            while p**rank < count:
+                rank += 1
+            self.assertEqual(p**rank,count)
+            return rank,span
+
+        fixtures = [
+            # One nonempty block: there are no off-diagonal regions at all.
+            ([(3,3)], 3, 3),
+            # Ordinary rectangular split with a 2x3 source pencil.
+            ([(1,1),(1,2)], 2, 3),
+            # Empty column block and empty row block coexist.
+            ([(1,0),(1,2),(1,1)], 3, 3),
+            ([(0,1),(2,1),(1,1)], 3, 3),
+        ]
+        for fixture_index,(shapes,m,n) in enumerate(fixtures):
+            for p in (2,3):
+                rng = random.Random(119000 + 100*fixture_index + p)
+                left = [[rng.randrange(p) for _ in range(m)] for _ in range(m)]
+                # Use a guaranteed invertible unitriangular left basis.
+                left = ident(m)
+                for i in range(m):
+                    for j in range(i+1,m):
+                        left[i][j] = rng.randrange(p)
+                coefficients = [
+                    [[rng.randrange(p) for _ in range(n)] for _ in range(m)]
+                    for _ in range(2)
+                ]
+                rows,locations = equation_system(left,coefficients,shapes,p)
+                rank = row_reduce_rank(rows,n*n,p)
+                span_rank,span = enumerate_span_rank(rows,p)
+                self.assertEqual(rank,span_rank,(fixture_index,p,rows))
+                nullity = n*n-rank
+                self.assertEqual(len(span),p**rank)
+                self.assertLessEqual(rank,n*n)
+                self.assertEqual(nullity+rank,n*n)
+
+                # Directly check every generated equation against the matching
+                # off-diagonal entry for independently sampled rectangular T.
+                for trial in range(4):
+                    candidate = [[rng.randrange(p) for _ in range(n)]
+                                 for _ in range(n)]
+                    flat = [x for row in candidate for x in row]
+                    for equation,(i,j,coefficient) in zip(rows,locations):
+                        actual = mm(mm(left,coefficient,p),candidate,p)[i][j]
+                        predicted = sum(x*y for x,y in zip(equation,flat)) % p
+                        self.assertEqual(predicted,actual,
+                                         (fixture_index,p,trial,i,j))
+
+                # For tiny systems, exhaustive kernel enumeration independently
+                # checks rank-nullity and the exact solution count.
+                if n <= 3:
+                    kernel_count = sum(
+                        1 for vector in product(range(p),repeat=n*n)
+                        if all(sum(x*y for x,y in zip(row,vector)) % p == 0
+                               for row in rows)
+                    )
+                    self.assertEqual(kernel_count,p**nullity,
+                                     (fixture_index,p,rank,nullity))
+                if len(shapes)==1:
+                    self.assertEqual(rows,[])
+                    self.assertEqual(rank,0)
+                    self.assertEqual(nullity,n*n)
