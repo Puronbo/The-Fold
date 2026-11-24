@@ -73,3 +73,8 @@ The regression covers scalar-unit reporting for nonmonic inputs, coefficient red
 ## Exhaustive irreducibility cross-check (G-EP164)
 
 For every monic polynomial of degrees one through four over F₂, F₃, and F₅ (930 inputs total), the test compares the Rabin-style irreducibility predicate with an independently observed factorizer criterion: exactly one factor, equal to the original monic polynomial, with multiplicity one. Agreement is finite-domain regression evidence across these fields and degrees, not a universal proof.
+
+
+## Quintic irreducibility cross-check (G-EP165)
+
+The same predicate-versus-factorizer comparison is extended to all 3,400 monic quintics over F₂, F₃, and F₅. Together with G-EP164, this gives exhaustive cross-check coverage for every monic polynomial of degrees one through five over those three prime fields. It remains a finite regression result.
