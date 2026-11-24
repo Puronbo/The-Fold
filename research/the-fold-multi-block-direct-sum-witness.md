@@ -495,3 +495,26 @@ changes from two to one.
 This is finite test-side invariance evidence for block-preserving coordinate
 changes; it does not assert invariance under arbitrary basis changes that mix
 the supplied blocks.
+
+
+## G-EP121: Mixed basis changes with transported block decompositions
+
+Extend the rank-invariance regression beyond block-preserving coordinate
+changes. For a full invertible row basis change U and column basis change V,
+form A' = U A V and transport the original row and column block subspaces
+along with those bases. In the transformed coordinates, the off-diagonal
+constraint map is evaluated as U⁻¹ A' X' V⁻¹, where X' = V⁻¹ X V.
+The test constructs this linear map directly on matrix-unit inputs and
+compares its rank with the original off-diagonal equation system.
+
+The finite controls use full unitriangular changes that mix the first block
+with the second, over F₂, F₃, and F₅. Sampled candidate transforms also check
+the pullback identity entry-by-entry. For the explicit F₂ and F₃ fixtures,
+applying the same mixed basis changes while incorrectly retaining the old
+coordinate partition changes the constraint rank. This is not a
+contradiction: that operation changes the decomposition being constrained.
+
+These are finite test-side covariance controls. The production witness API
+still represents consecutive coordinate block shapes and does not accept
+arbitrary subspace-basis metadata; this milestone does not add a generic
+mixed-basis decomposition verifier or discovery algorithm.
