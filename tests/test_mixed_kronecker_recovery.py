@@ -158,5 +158,48 @@ class MixedKroneckerRecoveryTests(unittest.TestCase):
         self.assertIn("budget", search_limited["reason"])
 
 
+    def test_structured_budget_failure_is_resolved_by_exhaustive_search(self):
+        q, k = self.mixed_pair()
+        structured = recover_mixed_kronecker_pencil(
+            q, k, 2, max_degree=2, max_candidates=1,
+            search_mode="structured",
+        )
+        self.assertFalse(structured["recovered"])
+        self.assertFalse(structured["decision_complete"])
+        self.assertEqual(structured["search_mode"], "structured")
+
+        exhaustive = recover_mixed_kronecker_pencil(
+            q, k, 2, max_degree=2, max_candidates=5000,
+            search_mode="exhaustive",
+        )
+        self.assertTrue(exhaustive["recovered"], exhaustive.get("reason"))
+        self.assertTrue(exhaustive["decision_complete"])
+        self.assertEqual(exhaustive["search_mode"], "exhaustive")
+        self.assertEqual(
+            exhaustive["profile"]["singular_part"]["right_minimal_indices"],
+            structured["profile"]["singular_part"]["right_minimal_indices"],
+        )
+        self.assertTrue(exhaustive["verification"]["strict_equivalence_certified"])
+
+    def test_small_field_structured_and_exhaustive_agree_on_positive_controls(self):
+        for p in (2, 3):
+            with self.subTest(p=p):
+                q, k = self.mixed_pair()
+                structured = recover_mixed_kronecker_pencil(
+                    q, k, p, max_degree=2, max_candidates=5000,
+                    search_mode="structured",
+                )
+                exhaustive = recover_mixed_kronecker_pencil(
+                    q, k, p, max_degree=2, max_candidates=5000,
+                    search_mode="exhaustive",
+                )
+                self.assertTrue(structured["recovered"], structured.get("reason"))
+                self.assertTrue(exhaustive["recovered"], exhaustive.get("reason"))
+                self.assertEqual(structured["right_minimal_indices"], exhaustive["right_minimal_indices"])
+                self.assertEqual(structured["left_minimal_indices"], exhaustive["left_minimal_indices"])
+                self.assertTrue(structured["verification"]["strict_equivalence_certified"])
+                self.assertTrue(exhaustive["verification"]["strict_equivalence_certified"])
+
+
 if __name__ == "__main__":
     unittest.main()
