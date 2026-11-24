@@ -15,6 +15,7 @@ from tools.polynomial_irreducibility_audit import (
     irreducible_density_over_field,
     coprime_composition_excess_spectrum,
     irreducible_density_convergence_over_field,
+    coprime_composition_excess_asymptotic,
 )
 
 
@@ -425,6 +426,51 @@ class PrimePowerConvergenceTests(unittest.TestCase):
                     irreducible_density_convergence_over_field(
                         field_size, 4
                     )
+
+
+    def test_coprime_composition_leading_resonance_classification(self):
+        for b in (3, 5, 7, 11, 13):
+            with self.subTest(b=b):
+                result = coprime_composition_excess_asymptotic([2, b])
+                self.assertEqual(result["leading_regime"], "leading_resonance")
+                self.assertTrue(result["two_factor_resonance_iff_two_and_odd_prime"])
+                self.assertEqual(
+                    result["exact_spectrum"]["spectrum"],
+                    [
+                        {"exponent": 2 * b - 2, "coefficient": 1},
+                        {"exponent": 2 * b - 1, "coefficient": -1},
+                    ],
+                )
+
+        for b in (9, 15, 21, 25):
+            with self.subTest(b=b):
+                result = coprime_composition_excess_asymptotic([2, b])
+                self.assertEqual(result["leading_regime"],
+                                 "negative_without_leading_cancellation")
+                self.assertFalse(result["two_factor_resonance_iff_two_and_odd_prime"])
+
+        for pair in ((3, 4), (3, 8), (4, 5), (5, 6), (7, 9)):
+            with self.subTest(pair=pair):
+                result = coprime_composition_excess_asymptotic(list(pair))
+                self.assertEqual(result["leading_regime"],
+                                 "negative_without_leading_cancellation")
+
+    def test_multi_factor_composition_excess_is_eventually_negative(self):
+        for degrees in ([2, 3, 5], [2, 3, 7], [3, 4, 5],
+                        [2, 5, 9], [3, 5, 7, 11]):
+            with self.subTest(degrees=degrees):
+                result = coprime_composition_excess_asymptotic(degrees)
+                self.assertEqual(result["leading_regime"],
+                                 "negative_without_leading_cancellation")
+                self.assertGreater(result["product_first_exponent"],
+                                   result["sum_of_input_first_exponents"])
+                self.assertIsNone(result["exact_spectrum"])
+
+    def test_composition_asymptotic_validation(self):
+        for degrees in ([], [2], [2, 2], [2, 3, 6], [2, True], [2, 3.0]):
+            with self.subTest(degrees=degrees):
+                with self.assertRaises(ValueError):
+                    coprime_composition_excess_asymptotic(degrees)
 
 
 if __name__ == "__main__":
