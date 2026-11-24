@@ -333,3 +333,25 @@ by a rank-deficient coefficient map. Only invertible coefficient-space
 changes preserve the full two-dimensional coefficient span. These are
 finite deterministic regression tests, not a classification theorem or
 decomposition-discovery method.
+
+
+## G-EP113: Exhaustive 2×2 coefficient-map rank boundary
+
+For each p in {2, 3, 5, 7}, the test enumerates all p⁴ linear maps on the
+ordered coefficient pair, classifies each 2×2 map by rank, and applies it
+to a fixed pair with block-diagonal Q and a single cross-block entry in K.
+Because Q and K are linearly independent as matrices, the dimension of the
+output coefficient span equals the rank of the parameter map.
+
+The test independently checks both output coefficients' off-diagonal
+conditions and the verifier's aggregate decision. Exactly p² maps pass:
+the zero map and the p²−1 nonzero rank-one maps whose image is the Q-axis.
+No rank-two map passes, because every invertible map retains the full
+coefficient span and therefore retains the offending K coupling in at least
+one output. The rank census is checked against the closed counts:
+one rank-zero map, (p²−1)²/(p−1) rank-one maps, and
+(p²−1)(p²−p) rank-two maps.
+
+This is exhaustive for 2×2 coefficient maps over these four fields and
+this explicit pencil fixture. It is not a universal theorem for arbitrary
+pencils, nor does it discover decompositions or prove uniqueness.
