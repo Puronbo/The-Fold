@@ -263,3 +263,6 @@ of its witness.
 
 
 - **G-EP134:** recovers each indexed diagonal projected coefficient block by pulling transported blocks back through the composed row/column basis maps. Empty row/column summands remain explicit zero blocks. A second equal-dimension fixture swaps two transported projector indices: the mutation remains shape-valid but assigns the wrong subspaces and is detected. Test-side finite regression evidence over F₂/F₃/F₅; no production projector-certificate API is added.
+
+
+**G-EP135 — transported projector image and kernel subspaces:** independently compares the actual image and kernel spans of each transported row and column projector with the subspaces induced by the corresponding basis map. The checks use finite-field elimination, preserve zero-dimensional and full-dimensional cases, and verify expected image/kernel dimensions over F₂/F₃/F₅. A dimension-preserving projector mutation that moves a proper nonzero image to a different coordinate subspace is rejected. Finite test-side regression evidence only; no production arbitrary-subspace projector API is added.
