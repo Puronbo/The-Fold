@@ -203,3 +203,6 @@ of its witness.
 
 
 **G-EP113 — exhaustive coefficient-map rank boundary:** enumerates all p⁴ 2×2 coefficient-space maps over F₂/F₃/F₅/F₇ and checks their rank census, output coefficient-span dimension, individual off-diagonal conditions, and verifier result on a fixed pencil with block-diagonal Q and coupled K. Exactly p² maps pass: the zero map and rank-one maps that erase K. No invertible map passes. Exhaustive for the tested fields and fixture, not a universal result for arbitrary pencils.
+
+
+**G-EP114 — intersecting common block-diagonal constraints:** for a fixed left transform and two-block partition, exhaustively enumerates right transforms over F₂/F₃/F₅/F₇. The Q-only and K-only off-diagonal constraint spaces are checked separately and intersected; only the common intersection satisfies both coefficients. Singular members are retained by the linear equations, so invertibility is checked independently. Fixed-left 2×2 fixture only; not general decomposition discovery.
