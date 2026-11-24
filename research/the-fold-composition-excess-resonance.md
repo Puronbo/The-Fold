@@ -15,7 +15,7 @@ H_Q(n_1,\ldots,n_r)=E_Q(N)-\prod_i E_Q(n_i).
 
 ## G-EP194 — Complete two-factor resonance classification
 
-Assume \(2\le a<b\) and \(\gcd(a,b)=1\), ordering so the smallest prime divisor belongs to \(a\). Then \(A(ab)=bA(a)\), while the product \(E_Q(a)E_Q(b)\) begins at exponent \(A(a)+A(b)\).
+Label the factors so \\(q(a)<q(b)\\), where \\(q(n)\\) is the smallest prime divisor; no ordering by numerical size is required. Then \\(A(ab)=bA(a)\\), while the product \\(E_Q(a)E_Q(b)\\) begins at exponent \\(A(a)+A(b)\\).
 
 If \(A(ab)=A(a)+A(b)\), then
 \[
