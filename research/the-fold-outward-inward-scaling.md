@@ -1024,3 +1024,20 @@ interpretation is restricted to prime powers.
 Regression fixtures include \(\mathbb F_4\), \(\mathbb F_8\), and
 \(\mathbb F_9\). In particular,
 \(I_4(2)=6\) and \(R_4(2)=3/4\), so \(E_4(2)=1/4\).
+
+
+## G-EP193 — Uniform convergence over every finite field
+
+The convergence audit is generalized from prime fields to all finite
+fields. For every prime power \(Q\) and every \(n\ge1\),
+\[
+|R_Q(n)-1|
+\le (2^{\omega(n)}-1)Q^{-n/2}
+\le (n-1)2^{-n/2}.
+\]
+The bound is independent of the characteristic and the extension degree
+of the base field. The new
+\`irreducible_density_convergence_over_field(Q,n)\` routine reports
+the exact rational error, divisor-sensitive bound, and uniform
+field-independent envelope. The test grid covers base-field orders
+\(4,8,9,16,25\) and degrees 1 through 24.
