@@ -4174,8 +4174,8 @@ class MultiDirectSumTests(unittest.TestCase):
 
             row_parts=projectors(shapes,p,"row")
             col_parts=projectors(shapes,p,"column")
-            row_seq=[identity(m) for _ in shapes]
-            col_seq=[identity(n) for _ in shapes]
+            row_seq=[row[:] for row in row_parts]
+            col_seq=[col[:] for col in col_parts]
             for u,v in zip(us,vs):
                 ui,vi=inv(u,p),inv(v,p)
                 row_seq=[mm(mm(u,z,p),ui,p) for z in row_seq]
