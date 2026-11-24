@@ -2,6 +2,7 @@ import unittest
 
 from tools.polynomial_irreducibility_audit import (
     audit_irreducibility_agreement,
+    audit_coprime_bad_proportion_ratio_bound,
     count_monic_irreducibles,
     irreducible_density_convergence,
     irreducible_density_factorization,
@@ -225,6 +226,25 @@ class PolynomialIrreducibilityAuditTests(unittest.TestCase):
                 with self.assertRaises(ValueError):
                     audit_coprime_bad_proportion_order(primes, degree)
 
+
+
+    def test_coprime_bad_proportion_ratio_bound_audit(self):
+        result = audit_coprime_bad_proportion_ratio_bound([2, 3, 5], 12)
+        self.assertEqual(result["coprime_pair_count"], 102)
+        self.assertEqual(result["within_bound_count"], 102)
+        self.assertTrue(result["all_checked_pairs_within_bound"])
+        self.assertIsNone(result["first_failure"])
+        largest = result["largest_observed_ratio"]
+        self.assertEqual((largest["left_degree"], largest["right_degree"]), (2, 3))
+        self.assertTrue(largest["attains_proposed_bound"])
+        self.assertEqual(
+            (largest["ratio_numerator"], largest["ratio_denominator"]),
+            (5, 8),
+        )
+        for primes, degree in (([], 4), ([4], 4), ([2, 2], 4), ([2], 2)):
+            with self.subTest(primes=primes, degree=degree):
+                with self.assertRaises(ValueError):
+                    audit_coprime_bad_proportion_ratio_bound(primes, degree)
 
 if __name__ == "__main__":
     unittest.main()
