@@ -127,3 +127,8 @@ A small formalization should separate:
 The first executable test matrix should be the quarter-turn \(J\), followed by indices \(m\in\{3,4,5,6,8,12\}\). A test suite should include ramified cases, especially \((m,p)=(4,2),(3,3),(5,5)\), as well as split and inert cases.
 
 **Not yet claimed:** this note does not claim a Lean proof, a compiled formalization, or a completed repository test run. The theorem above is a mathematical result; the formalization and code remain implementation work.
+
+
+## 8. G-EP169: degree-nine irreducibility cross-check
+
+The regression suite compares `is_irreducible_polynomial` with the factorizer's exact one-factor criterion for every monic degree-nine polynomial over F₂ (512 inputs) and F₃ (19,683 inputs), 20,195 inputs total. Each case checks exact agreement and reports the field and coefficient tuple on failure. This is an exhaustive finite-domain implementation cross-check; it is not a general proof of the irreducibility algorithm for arbitrary degrees or fields.
