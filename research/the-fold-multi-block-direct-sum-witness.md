@@ -75,3 +75,10 @@ witness.
 These tests establish representation stability for the finite fixtures only.
 They do not establish uniqueness of a block partition or witness, nor do they
 turn failure of one supplied witness into a no-decomposition result.
+
+
+## G-EP93: Adversarial near-equivalence rejection
+
+Over F₂, F₃, F₅, and F₇, the generated rectangular basis-scrambled witness is now subjected to three inconsistent changes: a single source coefficient is altered after scrambling; one entry of the supplied left or right transform is perturbed while preserving invertibility; and only the ordered block-shape list is permuted, without the corresponding row/column coordinate permutation. These correctly shaped but inconsistent witnesses must fail the direct-sum audit.
+
+A dimension-incompatible transform remains a malformed caller input and raises ValueError, distinct from a validly shaped but false witness. This complements G-EP92's acceptance of simultaneous, equivalent block-coordinate permutations. The finite tests do not imply that failure of one witness excludes another decomposition.
