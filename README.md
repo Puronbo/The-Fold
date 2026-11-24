@@ -411,3 +411,6 @@ G-EP140: distinguishes valid invertible coefficient-space shears that change onl
 
 
 **Exact finite-field composition-excess sign certificates (G-EP199):** `coprime_composition_excess_sign_certificate(degrees, field_size)` evaluates the full integer Laurent spectrum as an exact rational at a prime-power field size, reports its exact sign, and derives a conservative threshold above which the leading coefficient certifies the sign for every prime-power field size. The threshold is explicit and proven by bounding the entire coefficient tail; it is not claimed optimal. See `research/the-fold-composition-excess-resonance.md` and the sign-certificate regression tests.
+
+
+**G-EP200 — sharpened sign thresholds:** the composition-excess sign certificate now supplements its analytic coefficient-tail bound with an exact scan of the finite integer interval below that bound. It returns `smallest_integer_threshold`, the minimal integer (Q_0\ge2) such that every integer (Q\ge Q_0) has the eventual sign. This is stronger than the sufficient tail bound and also certifies all prime-power field sizes. The proof combines finite exact rational evaluation with the G-EP199 infinite-tail estimate.
