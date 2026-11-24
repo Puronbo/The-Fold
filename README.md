@@ -333,3 +333,6 @@ G-EP140: distinguishes valid invertible coefficient-space shears that change onl
 
 
 - **G-EP160:** exhausts monic quintics over F₂, F₃, F₅, and F₇. It verifies exact reconstruction and irreducible inventory counts through degree five. The degree/multiplicity pattern catalogue grows from F₂ to F₃ and F₃ to F₅, then agrees over F₅ and F₇ despite different irreducible polynomial inventories. This supports a degree-five threshold at field size five for these tested fields; it is not a theorem for arbitrary polynomial degrees.
+
+
+- **G-EP161:** exhausts all monic sextics over F₂, F₃, and F₇ (64, 729, and 117,649 polynomials). It checks exact factor reconstruction and irreducible inventory counts through degree six. The complete 34-pattern degree/multiplicity catalogue occurs over F₇; the smaller tested fields have strict subsets. Six distinct linear factors impose the limiting field-size requirement, so seven is the first prime-field size at which the complete sextic shape catalogue can occur.
