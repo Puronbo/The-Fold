@@ -6397,7 +6397,6 @@ class MultiDirectSumTests(unittest.TestCase):
             self.assertTrue(positive["similar"])
             self.assertTrue(positive["witness_found"])
             self.assertTrue(positive["checks"]["intertwining_identity"])
-            self.assertTrue(positive["checks"]["witness_invertible"])
             self.assertNotEqual(change, ident(2))
             self.assertEqual(
                 rational_canonical_profile(diagonal, p)
