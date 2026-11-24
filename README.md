@@ -114,3 +114,13 @@
 
 
 **Generated rectangular partition coverage (G-EP89):** deterministic generated-style fixtures exercise multi-block partitions containing zero-row and zero-column blocks (but no zero-by-zero blocks) over F₂, F₃, F₅, and F₇. Identity transforms verify valid block-diagonal pairs, while injected cross-block coefficients must fail the corresponding zero-block and overall verification checks. Invalid total partitions are also rejected. These are finite regression controls, not a universal proof.
+
+
+**G-EP90 — rectangular multi-block basis invariance:** adds generated-style
+regression coverage for an ordered partition containing zero-row and
+zero-column blocks (never a zero-by-zero block), with positive total
+dimensions. Independently invertible unitriangular left and right basis
+changes scramble both coefficients over F₂, F₃, F₅, and F₇; the exact inverse
+witness must recover and verify the original block-diagonal pair. This is
+finite test coverage, not decomposition discovery, uniqueness, or a universal
+recovery theorem.
