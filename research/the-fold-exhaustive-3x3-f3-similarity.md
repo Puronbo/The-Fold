@@ -44,3 +44,10 @@ The observed factorization-pattern catalog strictly grows across these fields. O
 The regression exhausts all monic quartics over F₂, F₃, F₅, and F₇. It verifies factor reconstruction and the irreducible inventory counts in degrees one through four. The degree/multiplicity pattern catalogue grows strictly from F₂ to F₃ and from F₃ to F₅, then the catalogues over F₅ and F₇ agree exactly.
 
 This stabilization concerns only degree/multiplicity shapes for degree-four polynomials. The actual irreducible polynomial inventories differ between F₅ and F₇, as expected from their different coefficient fields. Thus it is not a coefficient-wise or factor-identity equivalence and does not establish stabilization for degrees above four.
+
+
+## Quintic factor-pattern threshold experiment (G-EP160)
+
+This regression exhausts all monic quintics over F₂, F₃, F₅, and F₇. For every polynomial, it verifies exact reconstruction from monic irreducible factors and multiplicities, and checks the exact irreducible inventory counts in degrees one through five.
+
+The degree/multiplicity pattern catalogues grow from F₂ to F₃ and from F₃ to F₅, then agree over F₅ and F₇. The actual irreducible polynomial inventories remain field-dependent. This is evidence for stabilization by field size five in degree five, not a general theorem for all degrees or all finite fields.
