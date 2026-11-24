@@ -3934,7 +3934,7 @@ class MultiDirectSumTests(unittest.TestCase):
             rng=random.Random(127000+p)
             m,n=4,3
             q=[[rng.randrange(p) for _ in range(n)] for _ in range(m)]
-            k=[[rng.randrange(p) for _ in range(n)] for _ in range(m)]
+            k=[[2*x%p for x in row] for row in q]
             # Two individually invertible, generally noncommuting shears.
             u1=[[int(i==j) for j in range(m)] for i in range(m)]
             u2=[[int(i==j) for j in range(m)] for i in range(m)]
