@@ -1121,7 +1121,7 @@ class MultiDirectSumTests(unittest.TestCase):
             ("Q block", lambda x: x["Q_blocks"][1][1][0].__setitem__(0, 4)),
             ("K block", lambda x: x["K_blocks"][1][1][0].__setitem__(0, 4)),
             ("rank diagnostic", lambda x: x["verification"].__setitem__("left_transform_rank", 2)),
-            ("aggregate diagnostic", lambda x: x["verification"].__setitem__("direct_sum_verified", False)),
+            ("aggregate diagnostic", lambda x: x["verification"].__setitem__("direct_sum_verified", True)),
         )
         expected = reference(q, k, p, ident(3), ident(4), shapes)
         for label, mutate in mutations:
