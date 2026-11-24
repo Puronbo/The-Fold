@@ -11,6 +11,8 @@ from tools.polynomial_irreducibility_audit import (
     irreducible_density_composition,
     coprime_defect_exponent_spectrum,
     evaluate_coprime_defect_spectrum,
+    count_monic_irreducibles_over_field,
+    irreducible_density_over_field,
 )
 
 
@@ -314,3 +316,32 @@ class CoprimeDefectSpectrumTests(unittest.TestCase):
             with self.subTest(field_size=field_size):
                 with self.assertRaises(ValueError):
                     evaluate_coprime_defect_spectrum(field_size, 2, 3)
+
+
+
+class PrimePowerFieldTests(unittest.TestCase):
+    def test_irreducible_counts_over_prime_power_fields(self):
+        self.assertEqual(count_monic_irreducibles_over_field(4, 2), 6)
+        self.assertEqual(count_monic_irreducibles_over_field(8, 3), 168)
+        self.assertEqual(count_monic_irreducibles_over_field(9, 2), 36)
+        self.assertEqual(count_monic_irreducibles_over_field(2, 5), 6)
+
+    def test_exact_density_over_prime_power_fields(self):
+        result = irreducible_density_over_field(4, 2)
+        self.assertEqual(result["irreducible_count"], 6)
+        self.assertEqual(
+            (result["normalized_density_numerator"],
+             result["normalized_density_denominator"]),
+            (3, 4),
+        )
+        self.assertEqual(
+            (result["bad_proportion_numerator"],
+             result["bad_proportion_denominator"]),
+            (1, 4),
+        )
+
+    def test_rejects_non_prime_powers(self):
+        for value in (0, 1, 6, 10, 12, True, 2.5):
+            with self.subTest(value=value):
+                with self.assertRaises(ValueError):
+                    count_monic_irreducibles_over_field(value, 2)
