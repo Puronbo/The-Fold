@@ -269,3 +269,23 @@ malformed canonical rows, malformed transforms, and non-dictionary results.
 **Boundary:** these checks harden the algebraic verifier's input surface. They
 do not prove that the caller's supplied component partition is complete,
 canonical, uniquely determined, or discoverable from an unsplit pencil.
+
+
+## G-EP71 — Seeded randomized algebraic certificate tests
+
+Added deterministic pseudo-randomized regression coverage for the direct
+algebraic assembly verifier. Fixed seeds generate small mixed component
+assemblies over the prime fields F₂, F₃, F₅, and F₇. Cases vary right and left
+singular minimal indices, regular one-dimensional pencil coefficients, and
+the ordering of the supplied components. Every successfully constructed
+certificate is passed through the independent algebraic verifier and must be
+accepted.
+
+A separate seeded mutation suite changes a selected entry in one of the
+assembled canonical coefficient matrices and requires the verifier to reject
+the altered certificate. The fixed seeds make failures reproducible and
+suitable for ordinary CI.
+
+**Scope:** this is finite, reproducible regression coverage over selected
+small fields and component families. It is not a probabilistic correctness
+proof, a universal field-size result, or a decomposition discovery method.
