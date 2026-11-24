@@ -6407,3 +6407,83 @@ class MultiDirectSumTests(unittest.TestCase):
             self.assertTrue(cyclic_witnesses(diagonal, p))
             self.assertTrue(cyclic_witnesses(conjugate, p))
 
+    def test_g_ep152_exhaustive_two_by_two_similarity_orbits_over_small_fields(self):
+        def matrix_key(a):
+            return tuple(tuple(value for value in row) for row in a)
+
+        def determinant(a, p):
+            return (a[0][0] * a[1][1] - a[0][1] * a[1][0]) % p
+
+        def cyclic_vector_exists(a, p):
+            for x in range(p):
+                for y in range(p):
+                    av = [
+                        (a[0][0] * x + a[0][1] * y) % p,
+                        (a[1][0] * x + a[1][1] * y) % p,
+                    ]
+                    if determinant([[x, av[0]], [y, av[1]]], p):
+                        return True
+            return False
+
+        for p in (2, 3):
+            all_matrices = [
+                [[a, b], [c, d]]
+                for a in range(p) for b in range(p)
+                for c in range(p) for d in range(p)
+            ]
+            invertibles = [
+                [[a, b], [c, d]]
+                for a in range(p) for b in range(p)
+                for c in range(p) for d in range(p)
+                if determinant([[a, b], [c, d]], p) != 0
+            ]
+            profiles = {}
+            for matrix in all_matrices:
+                profile = rational_canonical_profile(matrix, p)
+                factors = tuple(
+                    tuple(poly)
+                    for poly in profile["invariant_factors_coefficients_descending"]
+                )
+                profiles.setdefault(factors, set()).add(matrix_key(matrix))
+
+                # Independently compute chi_A(t)=t^2-tr(A)t+det(A).
+                trace = (matrix[0][0] + matrix[1][1]) % p
+                characteristic = [1, (-trace) % p, determinant(matrix, p)]
+                self.assertEqual(
+                    profile["characteristic_polynomial_coefficients_descending"],
+                    characteristic
+                )
+                cyclic = cyclic_vector_exists(matrix, p)
+                self.assertEqual(
+                    cyclic,
+                    profile["invariant_factor_count"] == 1
+                )
+
+            # Compare every rational-canonical profile class with the
+            # explicit orbit under all invertible 2x2 conjugating matrices.
+            # For each representative, its orbit must equal its entire
+            # profile fibre, not merely be contained in it.
+            for factors, fibre in profiles.items():
+                representative = [list(row) for row in next(iter(fibre))]
+                representative_profile = rational_canonical_profile(
+                    representative, p
+                )
+                self.assertEqual(
+                    tuple(tuple(poly) for poly in
+                          representative_profile["invariant_factors_coefficients_descending"]),
+                    factors
+                )
+                representative_profile["similarity_class_complete_over_base_field"]
+
+                rep_orbit = set()
+                for change in invertibles:
+                    change_inverse = inverse(change, p)
+                    conjugate = mm(
+                        mm(change_inverse, representative, p), change, p
+                    )
+                    rep_orbit.add(matrix_key(conjugate))
+                self.assertEqual(rep_orbit, fibre)
+
+            self.assertEqual(sum(len(fibre) for fibre in profiles.values()),
+                             p ** 4)
+
