@@ -962,5 +962,33 @@ class RationalCanonicalTests(unittest.TestCase):
                 checked += 1
         self.assertEqual(checked, 128 + 2187)
 
+
+    def test_g_ep168_degree_eight_irreducibility_crosscheck_f2_f3(self):
+        from itertools import product
+        from tools.spectral_fingerprint import (
+            factor_polynomial,
+            is_irreducible_polynomial,
+        )
+
+        checked = 0
+        for p in (2, 3):
+            for lower in product(range(p), repeat=8):
+                polynomial = (1,) + tuple(lower)
+                factors = factor_polynomial(polynomial, p)
+                factorizer_says_irreducible = (
+                    len(factors) == 1
+                    and factors[0]["degree"] == 8
+                    and factors[0]["multiplicity"] == 1
+                    and factors[0]["coefficients_descending"]
+                    == list(polynomial)
+                )
+                self.assertEqual(
+                    is_irreducible_polynomial(polynomial, p),
+                    factorizer_says_irreducible,
+                    msg=f"F_{p}, degree 8, {polynomial}",
+                )
+                checked += 1
+        self.assertEqual(checked, 256 + 6561)
+
 if __name__ == "__main__":
     unittest.main()
