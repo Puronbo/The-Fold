@@ -922,6 +922,26 @@ def coprime_composition_excess_sign_certificate(
     eventual_sign = (
         "positive" if leading["coefficient"] > 0 else "negative"
     )
+
+    # The coefficient-tail bound certifies every integer Q >= threshold.
+    # Inspect the finite interval below it to find the smallest integer
+    # threshold that works for all Q thereafter. This is optimal over all
+    # integers Q >= 2, hence also valid for prime-power field sizes.
+    last_exception = 1
+    for candidate_q in range(2, threshold):
+        candidate_value = sum(
+            (Fraction(term["coefficient"],
+                      candidate_q ** term["exponent"])
+             for term in terms),
+            Fraction(0, 1),
+        )
+        candidate_sign = (
+            "positive" if candidate_value > 0 else
+            "negative" if candidate_value < 0 else "zero"
+        )
+        if candidate_sign != eventual_sign:
+            last_exception = candidate_q
+    exact_integer_threshold = max(2, last_exception + 1)
     return {
         "schema": "the-fold-composition-excess-sign-certificate-v1",
         "degrees": degrees,
@@ -934,6 +954,11 @@ def coprime_composition_excess_sign_certificate(
         "tail_coefficient_l1_bound": tail_l1,
         "eventual_sign": eventual_sign,
         "sufficient_field_size_threshold": threshold,
+        "smallest_integer_threshold": exact_integer_threshold,
+        "threshold_scope": (
+            "smallest integer Q0 >= 2 such that every integer Q >= Q0 "
+            "has the eventual sign; therefore also valid for prime powers"
+        ),
         "threshold_guarantee": (
             "for every prime-power Q >= threshold, the exact sign equals "
             "the leading coefficient sign"
