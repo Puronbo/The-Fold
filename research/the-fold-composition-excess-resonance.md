@@ -109,3 +109,17 @@ Examples:
 - (H_Q(3,4)=-Q^{-4}+Q^{-6}+Q^{-8}-Q^{-10}<0); the simple coefficient-tail certificate gives (Q_0=4), although the exact spectrum can show negativity at smaller field sizes too.
 
 The threshold follows from a triangle-inequality bound and is intentionally conservative. Finding the optimal threshold for each degree tuple is a separate exact inequality problem.
+
+
+## G-EP200 — Optimal integer sign threshold below the analytic tail bound
+
+G-EP199 supplied a simple coefficient-norm threshold. We can sharpen it without weakening the proof. Let (Q_0^{\mathrm{tail}}) be that certified bound. Every integer (Q\ge Q_0^{\mathrm{tail}}) has the leading-coefficient sign. Therefore only the finite interval (2\le Q<Q_0^{\mathrm{tail}}) remains to inspect.
+
+The implementation evaluates the exact rational spectrum at every integer in that interval, records the last integer whose sign is zero or differs from the eventual sign, and returns
+[
+\boxed{Q_0^{\mathrm{int}}=\max(2,1+\max\{Q<Q_0^{\mathrm{tail}}:
+\operatorname{sgn}H_Q\ne\operatorname{sgn}(c_0)\})}.
+]
+If the exceptional set is empty, the maximum convention gives threshold 2. This is the **smallest integer threshold** such that every integer (Q\ge Q_0^{\mathrm{int}}) has the eventual sign. It is consequently also optimal when restricted to prime-power field sizes, though the smallest prime-power-only threshold could be lower.
+
+The API now returns both `sufficient_field_size_threshold` (the short analytic bound) and `smallest_integer_threshold` (the exact sharpened bound). For the examples ((2,3)) and ((3,4)), both thresholds are 2. The scan is finite and exact; the infinite tail remains certified by G-EP199. No unbounded numerical search is involved.
