@@ -3185,3 +3185,148 @@ class MultiDirectSumTests(unittest.TestCase):
             rank_local(constraint_rows(a,shapes,p),9,p),
             rank_local(transported_rows(transformed,ui,vi,shapes,p),9,p)
         )
+
+
+    def test_g_ep122_rectangular_transported_basis_covariance_with_empty_blocks(self):
+        import random
+
+        def mm_local(a,b,p):
+            return [[sum(a[i][k]*b[k][j] for k in range(len(b))) % p
+                     for j in range(len(b[0]) if b else 0)]
+                    for i in range(len(a))]
+
+        def inverse_local(a,p):
+            n=len(a)
+            work=[[x%p for x in row]+[int(i==j) for j in range(n)]
+                  for i,row in enumerate(a)]
+            for col in range(n):
+                pivot=next((r for r in range(col,n)
+                            if work[r][col]),None)
+                if pivot is None:
+                    raise AssertionError("basis change must be invertible")
+                work[col],work[pivot]=work[pivot],work[col]
+                scale=pow(work[col][col],-1,p)
+                work[col]=[x*scale%p for x in work[col]]
+                for r in range(n):
+                    if r!=col and work[r][col]:
+                        factor=work[r][col]
+                        work[r]=[(x-factor*y)%p
+                                 for x,y in zip(work[r],work[col])]
+            return [row[n:] for row in work]
+
+        def equation_locations(shapes):
+            rs=[0]
+            cs=[0]
+            for r,c in shapes:
+                rs.append(rs[-1]+r)
+                cs.append(cs[-1]+c)
+            return [
+                (i,j)
+                for bi in range(len(shapes))
+                for bj in range(len(shapes)) if bi!=bj
+                for i in range(rs[bi],rs[bi+1])
+                for j in range(cs[bj],cs[bj+1])
+            ]
+
+        def equation_rows(a,shapes,p):
+            n=len(a[0])
+            return [
+                [a[i][z]%p if col==j else 0
+                 for z in range(n) for col in range(n)]
+                for i,j in equation_locations(shapes)
+            ]
+
+        def transported_rows(a_prime,u_inverse,v_inverse,shapes,p):
+            n=len(a_prime[0])
+            locations=equation_locations(shapes)
+            columns=[]
+            for row_index in range(n):
+                for col_index in range(n):
+                    unit=[[int(i==row_index and j==col_index)
+                           for j in range(n)] for i in range(n)]
+                    pulled=mm_local(
+                        mm_local(
+                            mm_local(u_inverse,a_prime,p),unit,p
+                        ),
+                        v_inverse,p
+                    )
+                    columns.append([pulled[i][j] for i,j in locations])
+            return [
+                [columns[c][r] for c in range(n*n)]
+                for r in range(len(locations))
+            ]
+
+        def rank_local(rows,nvars,p):
+            work=[[x%p for x in row] for row in rows]
+            pivot=0
+            for col in range(nvars):
+                found=next((r for r in range(pivot,len(work))
+                            if work[r][col]),None)
+                if found is None:
+                    continue
+                work[pivot],work[found]=work[found],work[pivot]
+                scale=pow(work[pivot][col],-1,p)
+                work[pivot]=[x*scale%p for x in work[pivot]]
+                for r in range(len(work)):
+                    if r!=pivot and work[r][col]:
+                        factor=work[r][col]
+                        work[r]=[(x-factor*y)%p
+                                 for x,y in zip(work[r],work[pivot])]
+                pivot+=1
+                if pivot==len(work):
+                    break
+            return pivot
+
+        fixtures=[
+            # Ordinary 3x4 split; this exact F2 control also changes rank
+            # if the mixed basis is applied but the old partition is retained.
+            ([(1,1),(2,3)],2,
+             [[0,0,1,1],[0,0,1,1],[0,0,1,1]],
+             [[1,1,0],[0,1,0],[0,0,1]],
+             [[1,0,1,0],[0,1,0,0],[0,0,1,0],[0,0,0,1]],
+             True),
+            # Empty row and column blocks coexist in a 3x4 partition.
+            ([(0,1),(1,0),(1,2),(1,1)],3,None,None,None,False),
+            ([(1,2),(2,2)],5,None,None,None,False),
+        ]
+        for fixture_index,(shapes,p,a,u,v,expect_fixed_change) in enumerate(fixtures):
+            rng=random.Random(122000+fixture_index*10+p)
+            m=sum(r for r,_ in shapes)
+            n=sum(c for _,c in shapes)
+            if a is None:
+                a=[[rng.randrange(p) for _ in range(n)] for _ in range(m)]
+                u=[[int(i==j) if i>=j else rng.randrange(p)
+                    for j in range(m)] for i in range(m)]
+                v=[[int(i==j) if i>=j else rng.randrange(p)
+                    for j in range(n)] for i in range(n)]
+            ui=inverse_local(u,p)
+            vi=inverse_local(v,p)
+            a_prime=mm_local(mm_local(u,a,p),v,p)
+            original=equation_rows(a,shapes,p)
+            transported=transported_rows(a_prime,ui,vi,shapes,p)
+            original_rank=rank_local(original,n*n,p)
+            transported_rank=rank_local(transported,n*n,p)
+            self.assertEqual(original_rank,transported_rank,
+                             (fixture_index,p,shapes))
+            fixed_rank=rank_local(equation_rows(a_prime,shapes,p),n*n,p)
+            if expect_fixed_change:
+                self.assertNotEqual(original_rank,fixed_rank)
+
+            # Verify the full rectangular pullback identity for arbitrary
+            # right-transform candidates, including the zero-block partition.
+            for trial in range(5):
+                x_prime=[[rng.randrange(p) for _ in range(n)]
+                         for _ in range(n)]
+                x=mm_local(mm_local(v,x_prime,p),vi,p)
+                pulled=mm_local(
+                    mm_local(mm_local(ui,a_prime,p),x_prime,p),vi,p
+                )
+                self.assertEqual(pulled,mm_local(a,x,p),
+                                 (fixture_index,p,trial))
+                flat=[value for row in x_prime for value in row]
+                for equation in transported:
+                    self.assertEqual(len(equation),len(flat))
+
+            if any(r==0 or c==0 for r,c in shapes):
+                self.assertEqual(len(transported),len(original))
+                self.assertTrue(all(len(row)==n*n for row in transported))
