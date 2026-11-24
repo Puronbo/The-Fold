@@ -224,3 +224,6 @@ of its witness.
 
 
 - **G-EP120:** tests constraint-rank invariance under independent invertible block-diagonal row/column coordinate changes on rectangular systems, including empty row/column blocks. The induced map X′ = T⁻¹XT is checked by direct multiplication, and each off-diagonal block's zero status is preserved. A separate control shows that changing the partition can change rank; arbitrary block-mixing basis changes are not covered.
+
+
+- **G-EP121:** extends constraint-rank invariance to full invertible row/column basis changes that mix blocks, provided the block decomposition is transported with the bases. The test builds the transported equation map using matrix-unit inputs and checks its rank against the original system over F₂/F₃/F₅. Explicit F₂/F₃ controls show that mixing the bases but retaining the old coordinate partition can change rank, because that is a different constraint family. Test-side finite covariance evidence only; the production API still accepts consecutive coordinate block shapes, not arbitrary subspace-basis metadata.
