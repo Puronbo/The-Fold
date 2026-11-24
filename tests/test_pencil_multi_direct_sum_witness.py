@@ -5349,14 +5349,16 @@ class MultiDirectSumTests(unittest.TestCase):
             return result
 
         def mix(pair, c, p):
-            return [[(c[0][0]*pair[0][i][j] +
-                      c[1][0]*pair[1][i][j]) % p
-                     for j in range(len(pair[0][0]))]
-                    for i in range(len(pair[0]))], [
-                    [(c[0][1]*pair[0][i][j] +
-                      c[1][1]*pair[1][i][j]) % p
-                     for j in range(len(pair[0][0]))]
-                    for i in range(len(pair[0]))]
+            return [
+                [[(c[0][0]*pair[0][i][j] +
+                   c[1][0]*pair[1][i][j]) % p
+                  for j in range(len(pair[0][0]))]
+                 for i in range(len(pair[0]))],
+                [[(c[0][1]*pair[0][i][j] +
+                   c[1][1]*pair[1][i][j]) % p
+                  for j in range(len(pair[0][0]))]
+                 for i in range(len(pair[0]))],
+            ]
 
         def diagonal_reconstruction(a, row_ps, col_ps, p):
             m, n = len(a), len(a[0])
