@@ -437,3 +437,22 @@ replayed through the production multi-block verifier.
 
 This is an independent finite cross-check of the test equation construction,
 not a production solver, universal proof, or exhaustive search over witnesses.
+
+
+## G-EP118: Constraint rank, nullity, and redundant equations
+
+For a fixed left basis and two-block scalar partition, compare the rank of
+the simultaneous off-diagonal equation system using two distinct test-side
+methods: finite-field row reduction and explicit construction of the row
+span. The span cardinality is checked to be an exact power of the field size,
+and its exponent supplies an independent rank calculation.
+
+Controls include zero coefficient equations, repeated equations, scalar
+multiple coefficient constraints, and a second coefficient whose support
+adds an independent constraint direction. For each system, direct enumeration
+of all right-transform vectors over F₂, F₃, and F₅ confirms that the solution
+count is p^(4-rank). Appending duplicate and zero rows leaves rank and nullity
+unchanged.
+
+These are exhaustive finite-dimensional test controls for a 2×2 fixed-left
+system, not a general solver or witness-discovery result.
