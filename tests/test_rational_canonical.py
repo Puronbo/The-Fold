@@ -782,5 +782,39 @@ class RationalCanonicalTests(unittest.TestCase):
         )
 
 
+
+    def test_g_ep162_f5_sextics_approach_but_do_not_reach_full_catalog(self):
+        from itertools import product
+        from tools.spectral_fingerprint import factor_polynomial
+
+        patterns = set()
+        irreducibles = set()
+        for lower in product(range(5), repeat=6):
+            polynomial = (1,) + tuple(lower)
+            factors = factor_polynomial(polynomial, 5)
+            reconstructed = [1]
+            pattern = []
+            for factor in factors:
+                coefficients = tuple(value % 5 for value in factor["coefficients_descending"])
+                degree = factor["degree"]
+                multiplicity = factor["multiplicity"]
+                irreducibles.add((degree, coefficients))
+                pattern.append((degree, multiplicity))
+                for _ in range(multiplicity):
+                    product_poly = [0] * (len(reconstructed) + len(coefficients) - 1)
+                    for i, x in enumerate(reconstructed):
+                        for j, y in enumerate(coefficients):
+                            product_poly[i + j] = (product_poly[i + j] + x * y) % 5
+                    reconstructed = product_poly
+            self.assertEqual(reconstructed, list(polynomial))
+            patterns.add(tuple(sorted(pattern)))
+
+        expected_counts = {1: 5, 2: 10, 3: 40, 4: 150, 5: 624, 6: 2580}
+        for degree, expected in expected_counts.items():
+            self.assertEqual(sum(1 for d, _ in irreducibles if d == degree), expected)
+        self.assertNotIn(((1, 1),) * 6, patterns)
+        self.assertIn(((1, 1),) * 5 + ((1, 1),), patterns)
+        self.assertIn(((1, 1),) * 4 + ((2, 1),), patterns)
+
 if __name__ == "__main__":
     unittest.main()
