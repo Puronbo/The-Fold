@@ -681,3 +681,6 @@ coefficient matrices, check every projected block against its pullback
 through the original partition. Empty blocks remain zero projectors and
 are not silently dropped. This is finite test-side regression evidence,
 not a generic production mixed-partition API or formal proof.
+
+
+**G-EP130 — composed transport preserves projector algebra:** extends the four-stage rectangular basis-transport fixture to verify that every row/column block projector remains idempotent, distinct projectors remain pairwise orthogonal in both multiplication orders, and each family remains complete (its sum is the identity). The checks run over F₂, F₃, and F₅ with a partition containing a zero-row and a zero-column block; those empty blocks remain explicit zero projectors after sequential and directly composed transport. Shape-preserving false-family controls independently violate idempotence, orthogonality, and completeness while retaining square dimensions, and a wrong conjugation direction is rejected. This is finite test-side regression evidence, not a production projector-certificate API or a universal theorem.
