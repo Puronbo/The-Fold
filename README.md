@@ -215,3 +215,6 @@ of its witness.
 
 
 - **G-EP117:** independently cross-checks test-local rectangular off-diagonal equations against direct matrix multiplication for arbitrary candidate right transforms. Seeded cases span rectangular matrices, independent left/right basis scramblings, zero-row/zero-column blocks, and F₂/F₃/F₅/F₇. The planted witnesses are replayed through the production verifier; this is finite test evidence, not a general solver or completeness claim.
+
+
+- **G-EP118:** cross-checks simultaneous off-diagonal constraint rank using row reduction and an independently enumerated row span. Zero, duplicate, scalar-multiple, overlapping, and rank-increasing coefficient constraints are covered; exhaustive right-transform-vector enumeration confirms the nullity solution count over F₂/F₃/F₅. Fixed-left 2×2 finite controls only.
