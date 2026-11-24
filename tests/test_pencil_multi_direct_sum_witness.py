@@ -1636,3 +1636,100 @@ class MultiDirectSumTests(unittest.TestCase):
             )
             with self.subTest(field=p, case="one-sided column-coordinate permutation"):
                 self.assertFalse(col_only["verification"]["direct_sum_verified"], col_only)
+
+
+    def test_g_ep106_composed_basis_changes_permutations_and_scalar_rescalings(self):
+        # Compose two independent source basis changes on each side, then
+        # reorder the block coordinates and apply reciprocal scalar scaling.
+        shapes = [(1, 1), (1, 2), (0, 1), (1, 0), (1, 1)]
+        order = [4, 1, 3, 0, 2]
+
+        def transpose(a):
+            return [list(col) for col in zip(*a)]
+
+        def row_order(indices, size):
+            return [[int(indices[i] == j) for j in range(size)]
+                    for i in range(size)]
+
+        def reorder_rows(a, indices):
+            return [a[i][:] for i in indices]
+
+        def reorder_cols(a, indices):
+            return [[row[j] for j in indices] for row in a]
+
+        for p in (2, 3, 5, 7):
+            m, n = sum(r for r, _ in shapes), sum(c for _, c in shapes)
+            ro, co = [0], [0]
+            for r, c in shapes:
+                ro.append(ro[-1] + r)
+                co.append(co[-1] + c)
+
+            q0, k0 = [[0] * n for _ in range(m)], [[0] * n for _ in range(m)]
+            for b, (r, c) in enumerate(shapes):
+                for i in range(r):
+                    for j in range(c):
+                        q0[ro[b] + i][co[b] + j] = (b + 2*i + j + 1) % p
+                        k0[ro[b] + i][co[b] + j] = (2*b + i + 3*j + 1) % p
+
+            # Initial witness scrambles both coordinate spaces independently.
+            s0, t0 = ident(m), ident(n)
+            for i in range(m - 1):
+                s0[i][i + 1] = 1
+            for i in range(n - 1):
+                t0[i + 1][i] = 1
+            si0, ti0 = inverse(s0, p), inverse(t0, p)
+            q, k = mm(mm(si0, q0, p), ti0, p), mm(mm(si0, k0, p), ti0, p)
+
+            # Two successive noncommuting elementary basis changes.
+            a1, a2, b1, b2 = ident(m), ident(m), ident(n), ident(n)
+            if m > 1:
+                a1[0][1] = 1
+                a2[m - 1][0] = 1
+            if n > 1:
+                b1[0][n - 1] = 1
+                b2[n - 1][0] = 1
+            ai1, ai2 = inverse(a1, p), inverse(a2, p)
+            bi1, bi2 = inverse(b1, p), inverse(b2, p)
+
+            q1, k1 = mm(mm(a1, q, p), b1, p), mm(mm(a1, k, p), b1, p)
+            q2, k2 = mm(mm(a2, q1, p), b2, p), mm(mm(a2, k1, p), b2, p)
+            a_total, b_total = mm(a2, a1, p), mm(b1, b2, p)
+            a_total_inv, b_total_inv = mm(ai1, ai2, p), mm(bi2, bi1, p)
+
+            row_indices = [j for block in order for j in range(ro[block], ro[block + 1])]
+            col_indices = [j for block in order for j in range(co[block], co[block + 1])]
+            pr, pc = row_order(row_indices, m), row_order(col_indices, n)
+            pri, pci = transpose(pr), transpose(pc)
+            q3, k3 = mm(mm(pr, q2, p), pci, p), mm(mm(pr, k2, p), pci, p)
+
+            # Final witness: same block permutation on both sides, plus
+            # reciprocal scalar rescaling. For F2 the only nonzero scalar is 1.
+            c = 1 if p == 2 else 2
+            ci = pow(c, -1, p)
+            s_pre = mm(s0, a_total_inv, p)
+            t_pre = mm(b_total_inv, t0, p)
+            s_perm = mm(mm(pr, s_pre, p), pri, p)
+            t_perm = mm(mm(pc, t_pre, p), pci, p)
+            s_final = [[(c * x) % p for x in row] for row in s_perm]
+            t_final = [[(ci * x) % p for x in row] for row in t_perm]
+            permuted_shapes = [shapes[i] for i in order]
+
+            out = verify_pencil_multi_direct_sum_witness(
+                q3, k3, p, s_final, t_final, permuted_shapes
+            )
+            expected_q = reorder_cols(reorder_rows(q0, row_indices), col_indices)
+            expected_k = reorder_cols(reorder_rows(k0, row_indices), col_indices)
+            with self.subTest(field=p, case="composed equivalence"):
+                self.assertTrue(out["verification"]["direct_sum_verified"], out)
+                self.assertEqual(out["transformed_Q"], expected_q)
+                self.assertEqual(out["transformed_K"], expected_k)
+                self.assertEqual(out["block_shapes"], [list(x) for x in permuted_shapes])
+
+            # Break the composition by undoing only the final row permutation
+            # in S while leaving the source and right transform unchanged.
+            bad_s = mm(pri, s_final, p)
+            bad = verify_pencil_multi_direct_sum_witness(
+                q3, k3, p, bad_s, t_final, permuted_shapes
+            )
+            with self.subTest(field=p, case="mismatched composed row transform"):
+                self.assertFalse(bad["verification"]["direct_sum_verified"], bad)
