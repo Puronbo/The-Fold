@@ -407,5 +407,72 @@ class MixedKroneckerRecoveryTests(unittest.TestCase):
         self.assertFalse(audit["verified"])
 
 
+    def test_negative_certificate_replay_rejects_malformed_result_containers(self):
+        q, k = [[1]], [[0]]
+        for malformed in (None, [], "certificate", 7):
+            with self.subTest(result=malformed):
+                audit = verify_mixed_kronecker_negative_certificate(q, k, 2, malformed)
+                self.assertFalse(audit["verified"])
+
+    def test_negative_certificate_replay_rejects_missing_and_malformed_fields(self):
+        q, k = [[1]], [[0]]
+        base = {
+            "schema": "the-fold-mixed-kronecker-recovery-v1",
+            "field": "F_2",
+            "source_shape": [1, 1],
+            "recovered": False,
+            "decision_complete": True,
+            "search_mode": "exhaustive",
+            "max_candidates": 10,
+            "candidates_examined": 2,
+            "profile": {},
+            "reason": "all invertible S and all affine T solutions were exhausted; no strict-equivalence witness exists",
+            "scope": "Complete finite-field non-equivalence decision for the profile-derived canonical target.",
+        }
+        for key in ("schema", "field", "source_shape", "recovered",
+                    "decision_complete", "search_mode", "max_candidates",
+                    "candidates_examined", "profile", "reason", "scope"):
+            with self.subTest(missing=key):
+                forged = dict(base)
+                del forged[key]
+                self.assertFalse(
+                    verify_mixed_kronecker_negative_certificate(q, k, 2, forged)["verified"]
+                )
+        for malformed_profile in (None, [], "bad", {"complete_kronecker_structure_data": []}):
+            with self.subTest(profile=malformed_profile):
+                forged = dict(base, profile=malformed_profile)
+                self.assertFalse(
+                    verify_mixed_kronecker_negative_certificate(q, k, 2, forged)["verified"]
+                )
+
+    def test_negative_certificate_replay_validates_caller_matrix_and_field_inputs(self):
+        valid_result = None
+        q, k = [[1]], [[0]]
+        impossible_target = ([[0]], [[1]])
+        with patch(
+            "tools.mixed_kronecker_recovery._canonical_target",
+            return_value=impossible_target,
+        ):
+            valid_result = recover_mixed_kronecker_pencil(
+                q, k, 2, max_degree=0, max_candidates=10,
+                search_mode="exhaustive",
+            )
+            for bad_q, bad_k, bad_p in (
+                (None, k, 2),
+                ([], k, 2),
+                ([[1, 2], [3]], [[0, 0], [0, 0]], 2),
+                ([[True]], [[0]], 2),
+                ([[1.5]], [[0]], 2),
+                ([[1]], [[0, 0]], 2),
+                (q, k, True),
+                (q, k, 4),
+            ):
+                with self.subTest(q=bad_q, k=bad_k, p=bad_p):
+                    with self.assertRaises(ValueError):
+                        verify_mixed_kronecker_negative_certificate(
+                            bad_q, bad_k, bad_p, valid_result, max_degree=0,
+                        )
+
+
 if __name__ == "__main__":
     unittest.main()
