@@ -342,3 +342,5 @@ G-EP140: distinguishes valid invertible coefficient-space shears that change onl
 - **G-EP163:** tests the general polynomial factor API's scalar-unit convention, coefficient reduction modulo the field, constant-polynomial behavior, zero-polynomial rejection, composite-modulus rejection, and characteristic-three multiplicity — (x^3+1=(x+1)^3) over F₃.
 
 - **G-EP164:** exhaustively cross-checks `is_irreducible_polynomial` against the factorizer's exact one-factor criterion for every monic polynomial of degrees 1–4 over F₂, F₃, and F₅ (930 inputs).
+
+- **G-EP165:** extends the exhaustive irreducibility-predicate/factorizer cross-check to all 3,400 monic quintics over F₂, F₃, and F₅.
