@@ -159,3 +159,6 @@ of its witness.
 
 
 **G-EP97 — Deterministic serialized-record mutation sweep:** recursively enumerates every dictionary field and list slot in a valid JSON audit snapshot, mutates one location at a time, round-trips each mutation, and confirms exact type-aware comparison rejects every changed record. Coverage explicitly includes top-level metadata, both block grids, and nested verification fields. This is finite regression testing of snapshot integrity, not cryptographic authenticity or provenance.
+
+
+**G-EP98 — v1 audit schema contract:** test-side structural validation checks exact required fields and types, positive source dimensions, rectangular block partition totals, transform/transformed-matrix dimensions, both nested block-grid dimensions, and verification diagnostic types/ranges. It deliberately accepts well-formed but mathematically false witness records, keeping schema validity distinct from algebraic verification. No production parser or schema migration is introduced.
