@@ -1199,8 +1199,7 @@ def laurent_spectrum_global_sign_certificate(spectrum: list[dict]) -> dict:
             )
         exponent = term["exponent"]
         coefficient = term["coefficient"]
-        if (isinstance(exponent, bool) or not isinstance(exponent, int)
-                ):
+        if isinstance(exponent, bool) or not isinstance(exponent, int):
             raise ValueError("exponents must be integers")
         if (isinstance(coefficient, bool) or not isinstance(coefficient, int)):
             raise ValueError("coefficients must be integers")
