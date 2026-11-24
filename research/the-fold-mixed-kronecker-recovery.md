@@ -119,3 +119,10 @@ Untrusted result objects must be dictionaries with every required schema, field,
 Regressions exercise null/list/string/scalar result containers; each required field missing in turn; malformed profile values; malformed, ragged, mismatched, boolean, and floating-point caller matrices; and boolean/composite field parameters.
 
 **Boundary distinction:** invalid caller inputs raise ValueError; invalid or malformed certificate data returns a negative verification result. This hardening does not expand the mathematical scope of the finite-field replay.
+
+
+## G-EP80 — Profile bounds bound into replay certificates
+
+Exhaustive recovery results now carry profile_max_degree and profile_max_minors, the exact bounds passed to the profile computation. The fields are emitted consistently for incomplete-profile outcomes, positive witnesses, and bounded/exhaustive negative outcomes. The negative-certificate verifier no longer accepts profile-bound overrides from its caller: it validates the certificate's bounds (non-boolean integers, degree at least zero, minor budget positive) and recomputes the profile from those recorded values. Thus replay does not depend on a caller remembering the original configuration, and changing either bound or omitting either field invalidates the certificate.
+
+Tests cover custom non-default bounds, successful replay from metadata alone, mutation of both bound fields, missing bound fields, and malformed boolean, floating-point, negative, or zero-invalid values. Existing exhaustive search-budget and finite-field enumeration semantics are unchanged. The controlled impossible-target fixture remains a replay-control test, not a genuine mathematical non-equivalence example.
