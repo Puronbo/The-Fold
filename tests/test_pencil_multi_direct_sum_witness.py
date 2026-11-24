@@ -1096,10 +1096,10 @@ class MultiDirectSumTests(unittest.TestCase):
             }
 
         shapes = [(1, 0), (1, 2), (0, 1), (1, 1)]
-        p, q, k = 5, [[1, 0, 0], [0, 2, 0], [0, 0, 3]], [[0, 0, 0], [0, 1, 0], [0, 0, 4]]
+        p, q, k = 5, [[1, 0, 0, 0], [0, 2, 0, 0], [0, 0, 3, 0]], [[0, 0, 0, 0], [0, 1, 0, 0], [0, 0, 4, 0]]
         # The first and third blocks exercise zero-width and zero-height slices.
         left = [[1, 1, 0], [0, 1, 1], [0, 0, 1]]
-        right = [[1, 1, 0], [0, 1, 1], [0, 0, 1]]
+        right = [[1, 1, 0, 0], [0, 1, 1, 0], [0, 0, 1, 1], [0, 0, 0, 1]]
         for witness_left in (ident(3), left, [[1, 0, 0], [0, 0, 0], [0, 0, 1]]):
             record = verify_pencil_multi_direct_sum_witness(
                 q, k, p, witness_left, right, shapes
@@ -1113,7 +1113,7 @@ class MultiDirectSumTests(unittest.TestCase):
         # the source inputs and supplied transforms. Each mutation is caught
         # by reconstruction, not merely by the structural schema validator.
         baseline = verify_pencil_multi_direct_sum_witness(
-            q, k, p, ident(3), ident(3), shapes
+            q, k, p, ident(3), ident(4), shapes
         )
         mutations = (
             ("transformed Q", lambda x: x["transformed_Q"][0].__setitem__(0, 4)),
@@ -1123,7 +1123,7 @@ class MultiDirectSumTests(unittest.TestCase):
             ("rank diagnostic", lambda x: x["verification"].__setitem__("left_transform_rank", 2)),
             ("aggregate diagnostic", lambda x: x["verification"].__setitem__("direct_sum_verified", False)),
         )
-        expected = reference(q, k, p, ident(3), ident(3), shapes)
+        expected = reference(q, k, p, ident(3), ident(4), shapes)
         for label, mutate in mutations:
             forged = copy.deepcopy(baseline)
             mutate(forged)
@@ -1138,8 +1138,8 @@ class MultiDirectSumTests(unittest.TestCase):
         false_left = [[1, 1, 0], [0, 1, 0], [0, 0, 1]]
         for witness_left in (false_left, [[1, 0, 0], [0, 0, 0], [0, 0, 1]]):
             record = verify_pencil_multi_direct_sum_witness(
-                q, k, p, witness_left, ident(3), shapes
+                q, k, p, witness_left, ident(4), shapes
             )
-            expected = reference(q, k, p, witness_left, ident(3), shapes)
+            expected = reference(q, k, p, witness_left, ident(4), shapes)
             for key, value in expected.items():
                 self.assertEqual(record[key], value)
