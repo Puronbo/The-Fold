@@ -408,3 +408,6 @@ G-EP140: distinguishes valid invertible coefficient-space shears that change onl
 
 
 **G-EP194–G-EP198 — complete composition-excess resonance and eventual-sign classification:** classifies all two-factor leading resonances as exactly \((2,\ell)\) with \(\ell\) an odd prime, resolves each by the exact identity \(H_Q(2,\ell)=Q^{-(2\ell-2)}-Q^{-(2\ell-1)}>0\), proves every other two-factor case is eventually negative, and proves there is no leading resonance with three or more pairwise-coprime factors (all such excesses are eventually negative). Adds coprime_composition_excess_asymptotic(degrees) as an executable exponent/sign certificate, with exact-spectrum fallback in the resonant case. See research/the-fold-composition-excess-resonance.md.
+
+
+**Exact finite-field composition-excess sign certificates (G-EP199):** `coprime_composition_excess_sign_certificate(degrees, field_size)` evaluates the full integer Laurent spectrum as an exact rational at a prime-power field size, reports its exact sign, and derives a conservative threshold above which the leading coefficient certifies the sign for every prime-power field size. The threshold is explicit and proven by bounding the entire coefficient tail; it is not claimed optimal. See `research/the-fold-composition-excess-resonance.md` and the sign-certificate regression tests.
