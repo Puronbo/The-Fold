@@ -84,3 +84,6 @@
 
 
 **Replayable exhaustive negative certificates (G-EP78):** adds an independent verifier that recomputes the input's complete Kronecker profile, enumerates every left matrix and compatible affine right-transform solution, and checks the reported candidate count and negative-result metadata. It rejects forged completion flags, search modes, counts, budgets, explanations, and budget-limited runs. This is an exact replay for the stated finite field and profile bounds, not a universal polynomial-time method.
+
+
+**Replay-verifier boundary hardening (G-EP79):** validates caller matrices as nonempty rectangular integer sequences and rejects booleans/floats and invalid fields as caller-input errors. Malformed result containers, missing metadata, and malformed profile structures fail closed with a negative verification result. Tests distinguish invalid caller inputs (ValueError) from untrusted certificate data (verified=false).
