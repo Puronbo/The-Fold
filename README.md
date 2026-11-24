@@ -402,3 +402,6 @@ G-EP140: distinguishes valid invertible coefficient-space shears that change onl
 
 
 - **G-EP190 correction:** the multi-factor composition excess \(E_Q(\prod n_i)-\prod E_Q(n_i)\) is not sign-definite; (2,3) is positive after leading-term cancellation, while (3,4) is negative. The exact spectrum auditor now handles arbitrary pairwise-coprime degree lists and reports the eventual sign.
+
+
+- **G-EP193:** generalizes the exact normalized-density convergence audit and its field-independent envelope from prime fields to every prime-power field order. Regression coverage spans \(Q=4,8,9,16,25\) and degrees 1–24.
