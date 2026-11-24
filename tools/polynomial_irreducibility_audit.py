@@ -574,3 +574,88 @@ def audit_coprime_bad_proportion_ratio_bound(primes, max_degree: int) -> dict:
             "is not proved"
         ),
     }
+
+
+def coprime_defect_exponent_spectrum(left_degree: int,
+                                      right_degree: int) -> dict:
+    """Return the exact finite Laurent-polynomial spectrum of the defect.
+
+    With x = 1/p, this returns integer coefficients c_k such that
+    Delta_p(a,b) = sum_k c_k*x**k. Equal exponents are combined and
+    zero coefficients are removed. The degrees must be coprime and > 1.
+    """
+    for name, value in (("left_degree", left_degree),
+                        ("right_degree", right_degree)):
+        if (isinstance(value, bool) or not isinstance(value, int)
+                or value <= 1):
+            raise ValueError(f"{name} must be an integer greater than one")
+    if math.gcd(left_degree, right_degree) != 1:
+        raise ValueError("degrees must be coprime")
+
+    def error_terms(degree: int) -> dict[int, int]:
+        terms: dict[int, int] = {}
+        for divisor in range(2, degree + 1):
+            if degree % divisor == 0:
+                mu = _mobius(divisor)
+                if mu:
+                    exponent = degree - degree // divisor
+                    terms[exponent] = terms.get(exponent, 0) - mu
+        return terms
+
+    left_terms = error_terms(left_degree)
+    right_terms = error_terms(right_degree)
+    product_degree_terms = error_terms(left_degree * right_degree)
+    coefficients: dict[int, int] = {}
+
+    def add(exponent: int, coefficient: int) -> None:
+        coefficients[exponent] = coefficients.get(exponent, 0) + coefficient
+
+    for exponent, coefficient in left_terms.items():
+        add(exponent, coefficient)
+    for exponent, coefficient in right_terms.items():
+        add(exponent, coefficient)
+    for left_exponent, left_coefficient in left_terms.items():
+        for right_exponent, right_coefficient in right_terms.items():
+            add(left_exponent + right_exponent,
+                -left_coefficient * right_coefficient)
+    for exponent, coefficient in product_degree_terms.items():
+        add(exponent, -coefficient)
+
+    spectrum = [
+        {"exponent": exponent, "coefficient": coefficients[exponent]}
+        for exponent in sorted(coefficients)
+        if coefficients[exponent]
+    ]
+    if not spectrum:
+        raise ArithmeticError("the coprime defect spectrum vanished")
+    return {
+        "schema": "the-fold-coprime-defect-exponent-spectrum-v1",
+        "left_degree": left_degree,
+        "right_degree": right_degree,
+        "spectrum": spectrum,
+        "leading_exponent": spectrum[0]["exponent"],
+        "leading_coefficient": spectrum[0]["coefficient"],
+        "second_nonzero_term": spectrum[1] if len(spectrum) > 1 else None,
+        "term_count": len(spectrum),
+        "interpretation": (
+            "exact finite identity: Delta_p(a,b) is the sum of "
+            "coefficient * p**(-exponent) over spectrum entries"
+        ),
+    }
+
+
+def evaluate_coprime_defect_spectrum(field_size: int,
+                                      left_degree: int,
+                                      right_degree: int) -> Fraction:
+    """Evaluate the exact defect spectrum at any integer field size >= 2."""
+    if (isinstance(field_size, bool) or not isinstance(field_size, int)
+            or field_size < 2):
+        raise ValueError("field_size must be an integer at least two")
+    spectrum = coprime_defect_exponent_spectrum(
+        left_degree, right_degree
+    )
+    return sum(
+        (Fraction(term["coefficient"], field_size ** term["exponent"])
+         for term in spectrum["spectrum"]),
+        Fraction(0, 1),
+    )
