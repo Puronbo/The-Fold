@@ -644,3 +644,22 @@ Adversarial controls omit the second stage or reverse the order of the
 noncommuting column factors. These alternatives retain valid matrix shapes
 but fail the expected composed coefficient identity. This is finite
 test-side evidence, not a general production transport-certificate API.
+
+
+## G-EP128: Multistage transport with identity and cancellation
+
+Exercise four successive row/column basis-change stages on a rectangular 4×3
+coefficient pair over F₂, F₃, and F₅. Each sequence includes two noncommuting
+shears, an identity stage, and the inverse of the second shear. Under the
+declared conventions, the composed maps reduce to the first shear, while
+sequential application is checked against the composed products on both
+coefficient matrices.
+
+Build the transported simultaneous constraint system from the composed
+inverse maps. Map every source nullspace basis vector by X′ = V⁻¹XV,
+substitute it into the transported equations, and apply the inverse candidate
+map to recover the source basis exactly. Verify recovery of both source
+coefficient matrices. A deliberately wrong inverse-factor order remains
+dimensionally valid but fails matrix and candidate recovery checks. This is
+finite test-side regression evidence, not a general production certificate
+API or formal proof.
