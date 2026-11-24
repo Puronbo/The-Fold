@@ -257,3 +257,4 @@ of its witness.
 
 
 **G-EP131 — projector rank/nullity invariance:** independently computes finite-field ranks of transported row/column projectors and verifies rank and kernel dimension are preserved and match the rectangular block sizes, including empty blocks. A shape-valid idempotent with one missing image direction is detected. F₂/F₃/F₅ test-side coverage only; no production rank-certificate API is added.
+\n\n**G-EP132 — rectangular projected coefficient-block transport:** verifies the covariance identity Pᵢ′ A′ Qⱼ′ = U(Pᵢ A Qⱼ)V for both coefficient matrices under four-stage composed row/column basis changes over F₂, F₃, and F₅. Every ordered block pair is checked, including off-diagonal zeros and explicit empty 1×0/0×1 diagonal summands; projected-block ranks are preserved. A shape-valid wrong column-conjugation direction is rejected. Finite test-side regression evidence only; no production projector API is added.\n
