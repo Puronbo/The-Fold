@@ -6203,3 +6203,69 @@ class MultiDirectSumTests(unittest.TestCase):
                 (rank_mod(q_false, p), rank_mod(k_nilpotent, p))
             )
 
+    def test_g_ep149_determinant_polynomial_is_projective_strict_equivalence_invariant(self):
+        # For 2x2 pencils, det(xQ+yK) has three coefficients. Under
+        # simultaneous S,T equivalence, all three scale by det(S)det(T).
+        def product(a, b, p):
+            return [[sum(a[i][z] * b[z][j] for z in range(len(b))) % p
+                     for j in range(len(b[0]))] for i in range(len(a))]
+
+        def det2(a, p):
+            return (a[0][0] * a[1][1] - a[0][1] * a[1][0]) % p
+
+        def determinant_polynomial(q, k, p):
+            # det(xQ+yK) = c_xx*x^2 + c_xy*x*y + c_yy*y^2.
+            c_xx = det2(q, p)
+            c_yy = det2(k, p)
+            c_xy = (
+                q[0][0] * k[1][1] + k[0][0] * q[1][1]
+                - q[0][1] * k[1][0] - k[0][1] * q[1][0]
+            ) % p
+            return (c_xx, c_xy, c_yy)
+
+        for p in (2, 3, 5):
+            q = [[1, 0], [0, 1]]
+            k = [[1, 0], [0, 0]]
+            left = [[1, 1], [0, 1]]
+            right = [[1, 0], [1, 1]]
+            q_target = product(product(left, q, p), right, p)
+            k_target = product(product(left, k, p), right, p)
+            audit = strict_pencil_equivalence_audit(
+                q, k, p, q_target, k_target, left, right
+            )
+            self.assertTrue(audit["strict_equivalence_certified"])
+            scale = det2(left, p) * det2(right, p) % p
+            source_poly = determinant_polynomial(q, k, p)
+            target_poly = determinant_polynomial(q_target, k_target, p)
+            self.assertNotEqual(scale, 0)
+            self.assertEqual(
+                target_poly, tuple(scale * coefficient % p
+                                   for coefficient in source_poly)
+            )
+
+            # Two false-friend pairs have equal individual coefficient
+            # ranks (both Q and K are invertible), but nonproportional
+            # determinant polynomials. Their mismatch excludes all common
+            # constant strict-equivalence witnesses.
+            q_a = [[1, 0], [0, 1]]
+            q_b = [[1, 0], [0, 1]]
+            k_a = [[1, 0], [0, 1]]
+            if p == 2:
+                k_b = [[0, 1], [1, 1]]
+            else:
+                k_b = [[1, 0], [0, 2]]
+            self.assertEqual(det2(q_a, p), det2(q_b, p))
+            self.assertNotEqual(det2(q_a, p), 0)
+            self.assertNotEqual(det2(k_a, p), 0)
+            self.assertNotEqual(det2(k_b, p), 0)
+            poly_a = determinant_polynomial(q_a, k_a, p)
+            poly_b = determinant_polynomial(q_b, k_b, p)
+            # The x^2 coefficient is 1 in both, fixing any possible
+            # projective scalar to 1; another coefficient differs.
+            self.assertEqual(poly_a[0], poly_b[0])
+            self.assertNotEqual(poly_a, poly_b)
+            self.assertFalse(any(
+                tuple(scale * value % p for value in poly_a) == poly_b
+                for scale in range(1, p)
+            ))
+
