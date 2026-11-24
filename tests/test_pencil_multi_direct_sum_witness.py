@@ -5437,3 +5437,84 @@ class MultiDirectSumTests(unittest.TestCase):
                     original[1], row_ps, col_ps, p)
                 self.assertEqual(k_diagonal, original[1])
                 self.assertEqual(k_off, [[0]*n for _ in range(m)])
+
+
+    def test_g_ep141_rank_one_maps_reduce_reconstruction_to_surviving_pencil_direction(self):
+        # A rank-one coefficient map does not preserve the original pencil:
+        # both outputs become scalar multiples of one surviving combination.
+        # The decomposition verdict depends on that image direction, not on
+        # which rank-one map (or kernel direction) produced it.
+        shapes = [(1, 1), (1, 1), (1, 1)]
+        for p in (2, 3, 5):
+            q = [[1 % p, 0, 0],
+                 [0, 2 % p, 0],
+                 [0, 0, 3 % p]]
+            k = [[1 % p, 1 % p, 0],
+                 [0, 2 % p, 0],
+                 [0, 0, 3 % p]]
+
+            rank_one_count = 0
+            grouped = {}
+            for a in range(p):
+                for b in range(p):
+                    for c in range(p):
+                        for d in range(p):
+                            if (a*d-b*c) % p:
+                                continue
+                            if a == b == c == d == 0:
+                                continue
+                            rank_one_count += 1
+                            # Rows of C are output coefficient directions.
+                            # A nonzero row represents the image direction
+                            # (alpha,beta) of the surviving pencil member.
+                            direction = (a, b) if (a or b) else (c, d)
+                            first_nonzero = next(x for x in direction if x)
+                            scale = pow(first_nonzero, -1, p)
+                            direction = tuple(x*scale % p for x in direction)
+                            grouped.setdefault(direction, []).append((a,b,c,d))
+
+                            out_q = [[(a*q[i][j]+b*k[i][j]) % p
+                                      for j in range(3)] for i in range(3)]
+                            out_k = [[(c*q[i][j]+d*k[i][j]) % p
+                                      for j in range(3)] for i in range(3)]
+                            audit = verify_pencil_multi_direct_sum_witness(
+                                out_q, out_k, p, ident(3), ident(3), shapes
+                            )
+                            # Since the original Q,K are independent, the
+                            # image direction's K coordinate decides whether
+                            # the unique surviving matrix retains coupling.
+                            expected = direction[1] == 0
+                            with self.subTest(field=p, map=(a,b,c,d)):
+                                self.assertEqual(
+                                    audit["verification"]["direct_sum_verified"],
+                                    expected,
+                                    audit,
+                                )
+                                self.assertEqual(
+                                    audit["verification"]["Q_off_diagonal_blocks_zero"],
+                                    (b == 0),
+                                )
+                                self.assertEqual(
+                                    audit["verification"]["K_off_diagonal_blocks_zero"],
+                                    (d == 0),
+                                )
+
+            # Every projective direction has multiple rank-one maps with
+            # that same image; their kernel/preimage details differ but the
+            # surviving pencil member and verdict are identical.
+            self.assertEqual(rank_one_count, p**3 + p**2 - p - 1)
+            self.assertEqual(len(grouped), p + 1)
+            for direction, maps in grouped.items():
+                with self.subTest(field=p, direction=direction):
+                    self.assertGreater(len(maps), 0)
+                    self.assertEqual(direction[1] == 0,
+                                     all((b == 0 and d == 0) for a,b,c,d in maps))
+                    # All maps in this group have the same projective image.
+                    for a,b,c,d in maps:
+                        rows = [(a,b),(c,d)]
+                        nonzero = next(row for row in rows if row != (0,0))
+                        pivot = next(x for x in nonzero if x)
+                        inv_pivot = pow(pivot, -1, p)
+                        self.assertEqual(
+                            tuple(x*inv_pivot % p for x in nonzero), direction
+                        )
