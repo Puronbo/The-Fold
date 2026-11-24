@@ -335,3 +335,16 @@ G-EP176 adds `irreducible_density_composition(p, left_degree, right_degree)`. It
 It does not assume that the defect has a fixed sign or is nonzero in every case: degree one is an identity case because \(R_p(1)=1\). Tests cover the explicit \((2,3)\) counterexample, the degree-one identity, invalid/non-coprime inputs, and all coprime pairs through 12 over prime fields 2, 3, 5, and 7.
 
 The current conclusion is precise: the normalized irreducible density is not multiplicative over coprime degree products. The factorization of the Möbius divisor set survives, but the exponent/normalization kernel obstructs a direct scalar product law. A useful next step is to characterize the defect's sign and asymptotic size, rather than trying to force multiplicativity.
+
+
+## G-EP177 — Sign survey of the coprime-degree defect
+
+For coprime degrees a,b>1, define Delta_p(a,b)=R_p(ab)-R_p(a)R_p(b). A bounded exact-rational survey over prime fields p in {2,3,5,7,11} and unordered coprime degrees 2 <= a < b <= 100 found no nonpositive defects (5,888 pairs per field). The smallest observed positive defects occurred at (a,b)=(89,97), illustrating how quickly the sign margin can become tiny. This is computational evidence only, not a proof of universal positivity.
+
+The identity Delta_p(a,b)=E_p(a)+E_p(b)-E_p(a)E_p(b)-E_p(ab), where E_p(n)=1-R_p(n), recasts positivity as a comparison between the combined-degree bad-element proportion and the corresponding expression from the two factor degrees. The uniform upper bound from G-EP174 is too coarse by itself to settle every pair and factorization pattern. No monotonicity under divisibility is assumed.
+
+### Executable finite audit
+
+G-EP177 adds audit_coprime_density_defect_sign(primes, max_degree), which checks every unordered coprime pair in the requested range using exact fractions. It reports positive, negative, and zero counts, the first nonpositive witness if one exists, and the minimum exact defect. Its interpretation explicitly labels the result as finite-grid evidence and makes no universal theorem claim. Regression coverage includes prime fields 2, 3, and 5 through degree 12 and input validation.
+
+**Current status:** the sign conjecture remains open in this project. A finite sweep cannot establish positivity for all primes and all coprime degrees.
