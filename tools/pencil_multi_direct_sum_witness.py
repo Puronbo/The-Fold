@@ -10,6 +10,9 @@ def _shape(matrix, name):
     width = len(matrix[0])
     if width == 0 or any(len(row) != width for row in matrix):
         raise ValueError(f"{name} must be nonempty and rectangular")
+    if any(not isinstance(value, int) or isinstance(value, bool)
+           for row in matrix for value in row):
+        raise ValueError(f"{name} entries must be integers (booleans excluded)")
     return len(matrix), width
 
 def _rank(matrix, p):
