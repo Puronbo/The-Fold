@@ -4429,7 +4429,7 @@ class MultiDirectSumTests(unittest.TestCase):
             row_changed=[mm(mm(U,z,p),inv(U,p),p) for z in row_parts]
             V_inv=inv(V,p)
             col_changed=[mm(mm(V_inv,z,p),V,p) for z in col_parts]
-            for side,total,expected,original,changed in (
+            for side,total,expected,original,changed,basis,basis_inv in (
                 ("row",m,row_sizes,row_parts,row_changed,U,inv(U,p)),
                 ("column",n,col_sizes,col_parts,col_changed,V_inv,V),
             ):
