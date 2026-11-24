@@ -96,3 +96,6 @@
 
 
 **G-EP83:** positive-certificate replay now uses type-exact recursive comparisons when matching the recomputed profile, canonical matrices, minimal-index metadata, regular dimension, and canonical block shapes. This prevents Python boolean/integer equality from allowing boolean-forged numerical fields to pass. The verifier reconstructs these values from the supplied pencil and recorded profile bounds; adversarial tests cover nested profile mutation, source-shape forgery, canonical matrix and block-shape boolean aliases, and container-type changes. This is deterministic replay hardening, not an independent classifier or uniqueness claim.
+
+
+**G-EP84:** adds cross-field positive-certificate replay tests over F₂, F₃, F₅, and F₇ using basis-scrambled mixed pencils, plus rejection of forged field metadata and boolean transform entries. Distinct valid S/T witnesses produced by reciprocal nonzero scalar rescaling are accepted, confirming that replay verifies the strict-equivalence identities rather than requiring one canonical witness pair. These are finite regression controls, not a universal recovery or uniqueness theorem.
