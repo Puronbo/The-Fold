@@ -58,3 +58,8 @@ The degree/multiplicity pattern catalogues grow from F₂ to F₃ and from F₃ 
 The test exhausts all monic sextics over F₂, F₃, and F₇: 64, 729, and 117,649 polynomials respectively. It reconstructs every input from the factorizer output and checks the exact irreducible inventory counts in degrees one through six.
 
 The complete degree/multiplicity catalogue contains 34 shapes and is attained over F₇; the catalogues over F₂ and F₃ are strict subsets. The limiting shape consists of six distinct linear factors, requiring at least six distinct monic linear irreducibles. Thus the smallest prime field that can realize the complete degree-six shape catalogue is F₇. This is a finite degree-six result; it does not establish a general threshold formula for arbitrary degrees.
+
+
+## F₅ sextic comparison (G-EP162)
+
+G-EP162 exhausts all 15,625 monic sextics over F₅. It verifies exact reconstruction and the degree-one-through-six irreducible inventory counts. The shape with six distinct linear factors is absent, while examples with five distinct linear factors (one repeated) and four distinct linears plus an irreducible quadratic occur. This supplies the missing intermediate prime-field comparison between F₃ and F₇ in G-EP161; it remains a finite degree-six experiment.
