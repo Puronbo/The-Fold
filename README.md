@@ -327,3 +327,6 @@ G-EP140: distinguishes valid invertible coefficient-space shears that change onl
 
 
 - **G-EP158:** compares all monic quartics over F₂, F₃, and F₅. Exact factor reconstruction and irreducible inventory counts through degree four are checked. The catalog grows with field size: three distinct linear factors with one repeated occur from F₃ onward; four distinct linear factors occur over F₅; and two distinct irreducible quadratics occur from F₃ onward. These are exhaustive degree-four results for the three stated fields.
+
+
+- **G-EP159:** exhausts monic quartics over F₂, F₃, F₅, and F₇. It checks exact factor reconstruction and irreducible inventory counts through degree four. The degree/multiplicity pattern catalogue strictly grows from F₂ to F₃ and F₃ to F₅, then is identical over F₅ and F₇. The irreducible polynomial inventories still differ between F₅ and F₇, so stabilization applies to quartic factor shapes, not polynomial coefficients or factor identities.
