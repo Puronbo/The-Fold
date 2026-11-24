@@ -3843,8 +3843,8 @@ class MultiDirectSumTests(unittest.TestCase):
                 combined_b=basis+pulled
                 _,rank_a=nullspace(combined_a,n*n,p)
                 _,rank_b=nullspace(combined_b,n*n,p)
-                self.assertEqual(n*n-rank_a,len(prime_basis))
-                self.assertEqual(n*n-rank_b,len(basis))
+                self.assertEqual(rank_a,len(prime_basis))
+                self.assertEqual(rank_b,len(basis))
                 # Explicitly verify inverse candidate transport on every basis vector.
                 for z in basis:
                     self.assertEqual(transform(transform(z,(vi,v),p),(v,vi),p),z)
