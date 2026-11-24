@@ -245,3 +245,6 @@ of its witness.
 
 
 - **G-EP127:** composes two independently invertible row/column basis changes on the rectangular 4×3 constraint system over F₂/F₃/F₅. Verifies factor order, composed source recovery, nullspace transport and inverse recovery; omission and reversal controls remain well-shaped but produce incorrect coefficient transports. Finite test-side evidence only.
+
+
+- **G-EP128:** four-stage rectangular basis transport over F₂/F₃/F₅, including identity stages and adjacent inverse-factor cancellation. Checks composed matrix identities, kernel-basis transport and recovery, plus shape-valid wrong-inverse-order controls. Finite test-side evidence only.
