@@ -2297,9 +2297,17 @@ class MultiDirectSumTests(unittest.TestCase):
                             if q_ok and k_ok:
                                 common.add(key)
 
-            expected_q = {(a, 0, c, 0) for a in range(p) for c in range(p)}
-            expected_k = {(0, b, 0, d) for b in range(p) for d in range(p)}
-            expected_common = {(a, 0, 0, d) for a in range(p) for d in range(p)}
+            expected_q = {
+                (a, b, c, d) for a in range(p) for b in range(p)
+                for c in range(p) for d in range(p) if b == d
+            }
+            expected_k = {
+                (a, b, c, d) for a in range(p) for b in range(p)
+                for c in range(p) for d in range(p) if c == 0
+            }
+            expected_common = {
+                (a, b, 0, b) for a in range(p) for b in range(p)
+            }
             invertible_common = {
                 key for key in expected_common
                 if (key[0]*key[3] - key[1]*key[2]) % p != 0
@@ -2308,16 +2316,17 @@ class MultiDirectSumTests(unittest.TestCase):
                 self.assertEqual(q_only, expected_q)
                 self.assertEqual(k_only, expected_k)
                 self.assertEqual(common, expected_common)
-                self.assertEqual(len(q_only), p*p)
-                self.assertEqual(len(k_only), p*p)
+                self.assertEqual(len(q_only), p**3)
+                self.assertEqual(len(k_only), p**3)
                 self.assertEqual(len(common), p*p)
                 self.assertEqual(
                     {x for x in common
                      if (x[0]*x[3] - x[1]*x[2]) % p != 0},
                     invertible_common,
                 )
+                self.assertEqual(len(invertible_common), p*(p-1))
                 self.assertIn((1, 0, 0, 1), invertible_common)
                 self.assertIn((1, 0, 0, 0), common)  # singular solution
-                self.assertEqual(mm(q, [[1, 0], [0, 1]], p), q)
-                self.assertEqual(mm(k, [[1, 0], [0, 1]], p), k)
+                self.assertEqual(mm(q, u, p), target_q)
+                self.assertEqual(mm(k, u, p), target_k)
 
