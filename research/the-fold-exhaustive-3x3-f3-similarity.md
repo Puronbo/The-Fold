@@ -63,3 +63,8 @@ The complete degree/multiplicity catalogue contains 34 shapes and is attained ov
 ## F₅ sextic comparison (G-EP162)
 
 G-EP162 exhausts all 15,625 monic sextics over F₅. It verifies exact reconstruction and the degree-one-through-six irreducible inventory counts. The shape with six distinct linear factors is absent, while examples with five distinct linear factors (one repeated) and four distinct linears plus an irreducible quadratic occur. This supplies the missing intermediate prime-field comparison between F₃ and F₇ in G-EP161; it remains a finite degree-six experiment.
+
+
+## Polynomial factor API edge cases (G-EP163)
+
+The regression covers scalar-unit reporting for nonmonic inputs, coefficient reduction modulo the prime, nonzero constants (empty nonconstant factor list), rejection of empty and zero polynomials, and rejection of composite moduli. It also checks the characteristic-three identity (x^3+1=(x+1)^3), including the reported multiplicity three. This validates selected API contracts and edge cases; it is not a proof of factorization correctness for arbitrary degrees.
