@@ -935,30 +935,10 @@ product of the individual bad proportions. Since G-EP181 gives
 coprime split with at least two factors, the composite bad proportion
 is strictly smaller than every individual bad proportion.
 
-A useful exact telescoping identity is
-\[
-\begin{aligned}
-E_p(n_1\cdots n_r)-\prod_iE_p(n_i)
-={}&\sum_{j=1}^{r-1}
-\left[
-E_p(n_1\cdots n_{j+1})
--E_p(n_1\cdots n_j)E_p(n_{j+1})
-\right]\\
-&+\left[E_p(n_1)-E_p(n_1)\right]
-\end{aligned}
-\]
-only after replacing the final product recursively; more cleanly, define
-\(F_1=E_p(n_1)\) and
-\(F_j=E_p(n_1\cdots n_j)\). Then
-\[
-F_r-\prod_{i=1}^r E_p(n_i)
-=\sum_{j=2}^r
-\left(F_j-F_{j-1}E_p(n_j)\right)
-\prod_{k=j+1}^r E_p(n_k)
-+\sum_{j=2}^r
-\left(F_{j-1}-\prod_{i=1}^{j-1}E_p(n_i)\right)
-\]
-is not the simplest recursion. The clean recursive form is
+Define \(F_j=E_p(n_1\cdots n_j)\) and
+\(D_j=F_j-\prod_{i=1}^jE_p(n_i)\), with \(D_1=0\).
+The exact recursion is
+
 \[
 D_j=F_j-\prod_{i=1}^jE_p(n_i),\qquad
 D_j=\bigl(F_j-F_{j-1}E_p(n_j)\bigr)+E_p(n_j)D_{j-1},
