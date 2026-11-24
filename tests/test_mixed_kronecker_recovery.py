@@ -1,8 +1,10 @@
 import unittest
+from itertools import permutations
+from unittest.mock import patch
 from itertools import product
 
 from tools.mixed_kronecker_recovery import (
-    _affine_vectors, _exhaustive_left_matrices, recover_mixed_kronecker_pencil,
+    _affine_vectors, _det, _exhaustive_left_matrices, recover_mixed_kronecker_pencil,
 )
 
 
@@ -279,6 +281,63 @@ class MixedKroneckerRecoveryTests(unittest.TestCase):
                                 self.assertEqual(actual, expected, (p, matrix, rhs))
                             checked += 1
         self.assertGreater(checked, 900)
+
+
+    def test_determinant_filter_matches_independent_permutation_formula(self):
+        # Compare the elimination determinant's zero/nonzero decision with
+        # the Leibniz formula, independently enumerated over permutations.
+        for p in (2, 3):
+            for n in (1, 2, 3):
+                for flat in product(range(p), repeat=n*n):
+                    matrix = [list(flat[i*n:(i+1)*n]) for i in range(n)]
+                    expected = 0
+                    for perm in permutations(range(n)):
+                        inversions = sum(
+                            perm[i] > perm[j]
+                            for i in range(n) for j in range(i + 1, n)
+                        )
+                        term = (-1 if inversions % 2 else 1)
+                        for i in range(n):
+                            term *= matrix[i][perm[i]]
+                        expected = (expected + term) % p
+                    self.assertEqual(_det(matrix, p), expected, (p, matrix))
+                    self.assertEqual(_det(matrix, p) != 0, expected != 0)
+
+    def test_exhaustive_negative_requires_full_left_and_affine_streams(self):
+        # Force a same-shape but impossible target to exercise the negative
+        # branch: the only invertible 1x1 S yields an inconsistent T system.
+        q, k = [[1]], [[0]]
+        impossible_target = ([[0]], [[1]])
+        with patch(
+            "tools.mixed_kronecker_recovery._canonical_target",
+            return_value=impossible_target,
+        ):
+            complete = recover_mixed_kronecker_pencil(
+                q, k, 2, max_degree=0, max_candidates=10,
+                search_mode="exhaustive",
+            )
+            self.assertFalse(complete["recovered"])
+            self.assertTrue(complete["decision_complete"])
+            self.assertEqual(complete["candidates_examined"], 2)
+
+            cutoff = recover_mixed_kronecker_pencil(
+                q, k, 2, max_degree=0, max_candidates=1,
+                search_mode="exhaustive",
+            )
+            self.assertFalse(cutoff["recovered"])
+            self.assertFalse(cutoff["decision_complete"])
+            self.assertEqual(cutoff["candidates_examined"], 1)
+
+    def test_exhaustive_budget_counts_left_and_right_candidates(self):
+        # For a 1x1 regular pencil, identity S and identity T are the first
+        # two examined candidates and together suffice for a witness.
+        result = recover_mixed_kronecker_pencil(
+            [[1]], [[0]], 2, max_degree=0, max_candidates=2,
+            search_mode="exhaustive",
+        )
+        self.assertTrue(result["recovered"], result.get("reason"))
+        self.assertEqual(result["candidates_examined"], 2)
+        self.assertTrue(result["verification"]["strict_equivalence_certified"])
 
 
 if __name__ == "__main__":
