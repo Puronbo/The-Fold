@@ -908,5 +908,80 @@ class MixedKroneckerRecoveryTests(unittest.TestCase):
             verify_mixed_kronecker_recovery_certificate(q, k, p, alternative)["verified"]
         )
 
+
+    def test_multi_block_verifier_accepts_every_valid_block_permutation(self):
+        from tools.pencil_multi_direct_sum_witness import verify_pencil_multi_direct_sum_witness
+
+        q, k = self.mixed_pair()
+        p = 5
+        result = recover_mixed_kronecker_pencil(q, k, p, max_degree=2)
+        shapes = [tuple(shape) for shape in result["canonical_block_shapes"]]
+        self.assertEqual(len(shapes), 3)
+        row_offsets = [0]
+        col_offsets = [0]
+        for rows, cols in shapes:
+            row_offsets.append(row_offsets[-1] + rows)
+            col_offsets.append(col_offsets[-1] + cols)
+
+        for order in permutations(range(len(shapes))):
+            with self.subTest(order=order):
+                row_order = [
+                    index
+                    for block in order
+                    for index in range(row_offsets[block], row_offsets[block + 1])
+                ]
+                col_order = [
+                    index
+                    for block in order
+                    for index in range(col_offsets[block], col_offsets[block + 1])
+                ]
+                row_perm = [
+                    [int(row_order[i] == j) for j in range(len(row_order))]
+                    for i in range(len(row_order))
+                ]
+                col_perm = [
+                    [int(col_order[i] == j) for i in range(len(col_order))]
+                    for j in range(len(col_order))
+                ]
+                s = mm(row_perm, result["left_transform_S"], p)
+                t = mm(result["right_transform_T"], col_perm, p)
+                ordered_shapes = [list(shapes[i]) for i in order]
+                audit = verify_pencil_multi_direct_sum_witness(
+                    q, k, p, s, t, ordered_shapes
+                )
+                self.assertTrue(audit["verification"]["direct_sum_verified"], audit)
+
+    def test_multi_block_verifier_rejects_overlapping_or_inconsistent_partitions(self):
+        from tools.pencil_multi_direct_sum_witness import verify_pencil_multi_direct_sum_witness
+
+        q, k = self.mixed_pair()
+        result = recover_mixed_kronecker_pencil(q, k, 5, max_degree=2)
+        s, t = result["left_transform_S"], result["right_transform_T"]
+        invalid_partitions = (
+            [], [[1, 2]], [[1, 2], [1, 2], [1, 1]],
+            [[1, 2], [2, 1], [2, 1]],
+            [[1, 2], [2, 1], [0, 0]],
+            [[1, 2], [2, 1], [True, 1]],
+            [[1, 2], [2, 1], [1, 1.0]],
+            [[1, 2], [2, 1], [1]],
+        )
+        for shapes in invalid_partitions:
+            with self.subTest(shapes=shapes):
+                with self.assertRaises(ValueError):
+                    verify_pencil_multi_direct_sum_witness(q, k, 5, s, t, shapes)
+
+        for bad in (
+            [[True, 0, 0, 0]] + [[0, 1, 0, 0]] * 3,
+            [[1.5, 0, 0, 0]] + [[0, 1, 0, 0]] * 3,
+        ):
+            with self.subTest(matrix=bad):
+                with self.assertRaises(ValueError):
+                    verify_pencil_multi_direct_sum_witness(q, k, 5, bad, t, result["canonical_block_shapes"])
+        with self.assertRaises(ValueError):
+            verify_pencil_multi_direct_sum_witness(
+                [[True, 0, 0, 0]] + [[0, 1, 0, 0]] * 3,
+                k, 5, s, t, result["canonical_block_shapes"]
+            )
+
 if __name__ == "__main__":
     unittest.main()
