@@ -331,5 +331,69 @@ class RationalCanonicalTests(unittest.TestCase):
         ))
 
 
+    def test_g_ep156_cubic_irreducible_factor_catalogs_over_f2_and_f3(self):
+        from itertools import product
+        from tools.spectral_fingerprint import factor_polynomial
+
+        inventories = {}
+        patterns = {}
+        for p in (2, 3):
+            observed = set()
+            observed_patterns = set()
+            for lower in product(range(p), repeat=3):
+                # Every monic cubic is a characteristic polynomial: use its
+                # companion matrix, so this exhausts the degree-three cases.
+                polynomial = (1,) + tuple(lower)
+                factors = factor_polynomial(polynomial, p)
+                reconstructed = [1]
+                pattern = []
+                for factor in factors:
+                    if "degree" not in factor:
+                        continue
+                    coefficients = tuple(
+                        value % p for value in factor["coefficients_descending"]
+                    )
+                    degree = factor["degree"]
+                    self.assertEqual(len(coefficients), degree + 1)
+                    self.assertEqual(coefficients[0], 1)
+                    observed.add((degree, coefficients))
+                    pattern.append((degree, factor["multiplicity"]))
+                    for _ in range(factor["multiplicity"]):
+                        product_poly = [0] * (len(reconstructed) + len(coefficients) - 1)
+                        for i, x in enumerate(reconstructed):
+                            for j, y in enumerate(coefficients):
+                                product_poly[i + j] = (
+                                    product_poly[i + j] + x * y
+                                ) % p
+                        reconstructed = product_poly
+                self.assertEqual(reconstructed, list(polynomial))
+                observed_patterns.add(tuple(sorted(pattern)))
+            inventories[p] = observed
+            patterns[p] = observed_patterns
+
+            expected_counts = {
+                1: p,
+                2: (p * p - p) // 2,
+                3: (p ** 3 - p) // 3,
+            }
+            for degree, expected in expected_counts.items():
+                self.assertEqual(
+                    sum(1 for d, _ in observed if d == degree), expected,
+                    msg=f"F_{p}: degree-{degree} irreducible inventory",
+                )
+
+        # Degree/multiplicity shapes agree; actual irreducible polynomials
+        # are field-specific and are not compared as cross-field identities.
+        self.assertEqual(patterns[2], patterns[3])
+        self.assertEqual(patterns[2], {
+            ((1, 1), (1, 1), (1, 1)),
+            ((1, 1), (2, 1)),
+            ((1, 3),),
+            ((1, 1), (1, 2)),
+            ((3, 1),),
+        })
+        self.assertNotEqual(inventories[2], inventories[3])
+
+
 if __name__ == "__main__":
     unittest.main()
