@@ -306,5 +306,30 @@ class SpectralFingerprintTests(unittest.TestCase):
         self.assertEqual(checked, 20195)
 
 
+    def test_degree_ten_irreducibility_matches_factorizer_exhaustively(self):
+        # G-EP170: every monic degree-ten polynomial over F_2 and F_3.
+        from itertools import product
+
+        checked = 0
+        for p, expected_count in ((2, 1024), (3, 59049)):
+            for lower in product(range(p), repeat=10):
+                polynomial = (1,) + lower
+                factors = factor_polynomial(list(polynomial), p)
+                expected = (
+                    len(factors) == 1
+                    and factors[0]["degree"] == 10
+                    and factors[0]["multiplicity"] == 1
+                    and factors[0]["coefficients_descending"] == list(polynomial)
+                )
+                self.assertEqual(
+                    is_irreducible_polynomial(list(polynomial), p),
+                    expected,
+                    msg=f"degree-ten disagreement over F_{p}: {polynomial}",
+                )
+                checked += 1
+            self.assertEqual(expected_count, p ** 10)
+        self.assertEqual(checked, 60073)
+
+
 if __name__ == "__main__":
     unittest.main()
