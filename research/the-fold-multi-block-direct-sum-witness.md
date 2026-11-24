@@ -190,3 +190,24 @@ slots even though they contribute no coordinate indices.
 This is deterministic finite regression coverage of the verifier's supplied
 witness contract. It does not add decomposition discovery, prove uniqueness,
 or imply that failure of one supplied witness excludes another.
+
+
+## G-EP106: Composed equivalence transformations
+
+The new regression composes two successive independent basis changes on
+the source row and column spaces, then applies a common block-order
+permutation and reciprocal scalar rescaling of the supplied transforms.
+The rectangular fixture retains zero-row and zero-column block slots.
+Across F₂, F₃, F₅, and F₇, the composite witness must reproduce the exact
+reordered block-diagonal Q and K coefficients. A negative control changes
+only the final left-transform permutation and must fail verification.
+
+For source updates Q ↦ A Q B, the corresponding witness updates by
+S ↦ S A⁻¹ and T ↦ B⁻¹ T. The test composes these in the stated order,
+then applies the output block-coordinate permutation and reciprocal
+scalars. It checks the resulting algebraic identities through the public
+verifier rather than relying on a stored success flag.
+
+This is deterministic finite regression evidence. It does not establish
+uniqueness, decomposition discovery, or universal correctness beyond the
+tested finite fields and fixtures.
