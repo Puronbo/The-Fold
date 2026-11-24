@@ -4430,8 +4430,8 @@ class MultiDirectSumTests(unittest.TestCase):
             V_inv=inv(V,p)
             col_changed=[mm(mm(V_inv,z,p),V,p) for z in col_parts]
             for side,total,expected,original,changed in (
-                ("row",m,row_sizes,row_parts,row_changed),
-                ("column",n,col_sizes,col_parts,col_changed),
+                ("row",m,row_sizes,row_parts,row_changed,U,inv(U,p)),
+                ("column",n,col_sizes,col_parts,col_changed,V_inv,V),
             ):
                 for index,(before,after,want) in enumerate(
                     zip(original,changed,expected)
@@ -4450,16 +4450,13 @@ class MultiDirectSumTests(unittest.TestCase):
                 # A shape-valid idempotent with one missing basis direction
                 # remains a projector, but its rank no longer matches the
                 # declared block dimension.
-                mutated=[z[:] for z in changed]
                 nonempty=next(i for i in range(len(expected)-1,-1,-1)
                               if expected[i]>0)
-                mutated[nonempty]=[row[:] for row in mutated[nonempty]]
-                diagonal=next(i for i in range(total)
-                              if mutated[nonempty][i][i])
-                mutated[nonempty][diagonal][diagonal]=0
-                self.assertEqual(mm(mutated[nonempty],mutated[nonempty],p),
-                                 mutated[nonempty])
-                self.assertEqual(rank(mutated[nonempty],p),expected[nonempty]-1)
+                reduced=[row[:] for row in original[nonempty]]
+                diagonal=next(i for i in range(total) if reduced[i][i])
+                reduced[diagonal][diagonal]=0
+                mutated=mm(mm(basis,reduced,p),basis_inv,p)
+                self.assertEqual(mm(mutated,mutated,p),mutated)
+                self.assertEqual(rank(mutated,p),expected[nonempty]-1)
                 with self.subTest(field=p,side=side,mutation="rank mismatch"):
-                    self.assertNotEqual(rank(mutated[nonempty],p),
-                                        expected[nonempty])
+                    self.assertNotEqual(rank(mutated,p),expected[nonempty])
