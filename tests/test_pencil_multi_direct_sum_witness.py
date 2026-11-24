@@ -5660,3 +5660,141 @@ class MultiDirectSumTests(unittest.TestCase):
                                             is False
                                         )
             self.assertEqual(gl_count, (p*p - 1) * (p*p - p))
+
+
+    def test_g_ep144_rectangular_coefficient_covariance_reconstructs_every_projected_block(self):
+        # A 3x4 rectangular partition with one zero-column and one zero-row
+        # summand. Coefficient mixing must preserve every ordered projected
+        # block, including the correctly shaped empty blocks.
+        shapes = [(1, 1), (1, 0), (0, 1), (1, 2)]
+        m, n = sum(r for r, c in shapes), sum(c for r, c in shapes)
+
+        def add(a, b, p):
+            return [[(x+y) % p for x, y in zip(ar, br)]
+                    for ar, br in zip(a, b)]
+
+        def scale(a, c, p):
+            return [[c*x % p for x in row] for row in a]
+
+        def mix(pair, change, p):
+            return [
+                add(scale(pair[0], change[0][j], p),
+                    scale(pair[1], change[1][j], p), p)
+                for j in range(2)
+            ]
+
+        def projectors(sizes, dimension):
+            result, offset = [], 0
+            for size in sizes:
+                projector = [[0]*dimension for _ in range(dimension)]
+                for index in range(offset, offset+size):
+                    projector[index][index] = 1
+                result.append(projector)
+                offset += size
+            return result
+
+        row_sizes = [r for r, _ in shapes]
+        col_sizes = [c for _, c in shapes]
+        for p in (2, 3, 5):
+            # Populate only diagonal rectangular blocks. The two empty
+            # summands are represented by genuine 1x0 and 0x1 block shapes.
+            q0, k0 = [[0]*n for _ in range(m)], [[0]*n for _ in range(m)]
+            row_offsets, col_offsets = [0], [0]
+            for r, c in shapes:
+                row_offsets.append(row_offsets[-1]+r)
+                col_offsets.append(col_offsets[-1]+c)
+            for block, (r, c) in enumerate(shapes):
+                for i in range(r):
+                    for j in range(c):
+                        q0[row_offsets[block]+i][col_offsets[block]+j] = (1+block+i+2*j) % p
+                        k0[row_offsets[block]+i][col_offsets[block]+j] = (2+2*block+3*i+j) % p
+
+            # Nontrivial invertible basis maps independently mix row and
+            # column coordinates; projectors are transported with them.
+            u, v = ident(m), ident(n)
+            u[0][1] = 1
+            u[2][0] = 1
+            v[0][1] = 1
+            v[2][3] = 1
+            ui, vi = inverse(u, p), inverse(v, p)
+            source = [mm(mm(ui, q0, p), vi, p),
+                      mm(mm(ui, k0, p), vi, p)]
+            row_ps = [mm(mm(u, z, p), ui, p)
+                      for z in projectors(row_sizes, m)]
+            col_ps = [mm(mm(vi, z, p), v, p)
+                      for z in projectors(col_sizes, n)]
+
+            # Every invertible coefficient-space map is tested. The two
+            # output projected blocks must be exactly the same linear
+            # combinations of the original ordered projected blocks.
+            gl_count = 0
+            for a in range(p):
+                for b in range(p):
+                    for c in range(p):
+                        for d in range(p):
+                            change = [[a, b], [c, d]]
+                            det = (a*d-b*c) % p
+                            if det == 0:
+                                continue
+                            gl_count += 1
+                            transformed = mix(source, change, p)
+                            audit = verify_pencil_multi_direct_sum_witness(
+                                transformed[0], transformed[1], p, u, v, shapes
+                            )
+                            self.assertTrue(
+                                audit["verification"]["direct_sum_verified"], audit
+                            )
+                            self.assertEqual(audit["transformed_Q"], mix(
+                                [q0, k0], change, p)[0])
+                            self.assertEqual(audit["transformed_K"], mix(
+                                [q0, k0], change, p)[1])
+
+                            source_grids = [
+                                [[mm(mm(rp, coefficient, p), cp, p)
+                                  for cp in col_ps] for rp in row_ps]
+                                for coefficient in source
+                            ]
+                            output_grids = [
+                                [[mm(mm(rp, coefficient, p), cp, p)
+                                  for cp in col_ps] for rp in row_ps]
+                                for coefficient in transformed
+                            ]
+                            for out_index in range(2):
+                                for i, (rsize, csize) in enumerate(shapes):
+                                    for j, (_, _) in enumerate(shapes):
+                                        expected = add(
+                                            scale(source_grids[0][i][j],
+                                                  change[0][out_index], p),
+                                            scale(source_grids[1][i][j],
+                                                  change[1][out_index], p), p)
+                                        actual = output_grids[out_index][i][j]
+                                        with self.subTest(field=p, map=(a,b,c,d),
+                                                          output=out_index, block=(i,j)):
+                                            self.assertEqual(len(actual), rsize)
+                                            self.assertTrue(all(len(row) == col_sizes[j]
+                                                                for row in actual))
+                                            self.assertEqual(actual, expected)
+                                            if i != j:
+                                                self.assertEqual(actual,
+                                                    [[0]*col_sizes[j] for _ in range(rsize)])
+
+                                # Summing diagonal projected blocks reconstructs
+                                # the entire rectangular output coefficient.
+                                diagonal_sum = [[0]*n for _ in range(m)]
+                                for i in range(len(shapes)):
+                                    diagonal_sum = add(
+                                        diagonal_sum, output_grids[out_index][i][i], p
+                                    )
+                                self.assertEqual(diagonal_sum, transformed[out_index])
+
+                            # The inverse coefficient map recovers both full
+                            # matrices and each indexed projected block.
+                            recovered = mix(transformed, inverse(change, p), p)
+                            self.assertEqual(recovered, source)
+                            recovered_grids = [
+                                [[mm(mm(rp, coefficient, p), cp, p)
+                                  for cp in col_ps] for rp in row_ps]
+                                for coefficient in recovered
+                            ]
+                            self.assertEqual(recovered_grids, source_grids)
+            self.assertEqual(gl_count, (p*p-1)*(p*p-p))
