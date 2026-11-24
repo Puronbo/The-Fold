@@ -5030,3 +5030,92 @@ class MultiDirectSumTests(unittest.TestCase):
             # The alternative families are valid resolutions, not malformed
             # certificates: only comparison with the intended transported
             # subspaces distinguishes their ordered decomposition.
+
+
+    def test_g_ep137_projector_families_are_bound_by_coefficient_reconstruction(self):
+        def mm(a,b,p):
+            return [[sum(a[i][k]*b[k][j] for k in range(len(b)))%p
+                     for j in range(len(b[0]))] for i in range(len(a))]
+
+        def eye(n):
+            return [[int(i==j) for j in range(n)] for i in range(n)]
+
+        def inv(a,p):
+            n=len(a); w=[[x%p for x in row]+[int(i==j) for j in range(n)]
+                         for i,row in enumerate(a)]
+            for c in range(n):
+                pivot=next((r for r in range(c,n) if w[r][c]),None)
+                if pivot is None: raise AssertionError("singular basis")
+                w[c],w[pivot]=w[pivot],w[c]
+                z=pow(w[c][c],-1,p); w[c]=[x*z%p for x in w[c]]
+                for r in range(n):
+                    if r!=c and w[r][c]:
+                        z=w[r][c]; w[r]=[(x-z*y)%p for x,y in zip(w[r],w[c])]
+            return [row[n:] for row in w]
+
+        def projectors(sizes,n):
+            out=[]; start=0
+            for size in sizes:
+                z=[[0]*n for _ in range(n)]
+                for i in range(start,start+size): z[i][i]=1
+                out.append(z); start+=size
+            return out
+
+        def permute_basis(n,i,j):
+            z=eye(n); z[i][i]=z[j][j]=0; z[i][j]=z[j][i]=1
+            return z
+
+        def add(a,b,p):
+            return [[(x+y)%p for x,y in zip(ar,br)] for ar,br in zip(a,b)]
+
+        def sub(a,b,p):
+            return [[(x-y)%p for x,y in zip(ar,br)] for ar,br in zip(a,b)]
+
+        def projected_blocks(a,rows,cols,p):
+            return [[mm(mm(pi,a,p),qj,p) for qj in cols] for pi in rows]
+
+        def sum_blocks(blocks,p,m,n,diagonal_only):
+            out=[[0]*n for _ in range(m)]
+            for i,row in enumerate(blocks):
+                for j,block in enumerate(row):
+                    if diagonal_only and i!=j: continue
+                    out=add(out,block,p)
+            return out
+
+        row_sizes=[1,1,2]
+        col_sizes=[1,1,1]
+        for p in (2,3,5):
+            m=sum(row_sizes); n=sum(col_sizes)
+            U=eye(m); U[0][1]=1; U[2][0]=1; U[3][1]=1
+            V=eye(n); V[0][1]=1; V[1][2]=1
+            Ui,Vi=inv(U,p),inv(V,p)
+            # Both coefficient matrices are genuinely block diagonal in
+            # the intended ordered rectangular decomposition.
+            A=[[0]*n for _ in range(m)]
+            K=[[0]*n for _ in range(m)]
+            for i,value in enumerate((1,2,3,4)):
+                A[i][i%3]=value%p
+            for i,value in enumerate((2,3,1,4)):
+                K[i][i%3]=value%p
+            A2=mm(mm(U,A,p),V,p)
+            K2=mm(mm(U,K,p),V,p)
+            rows=[mm(mm(U,z,p),Ui,p) for z in projectors(row_sizes,m)]
+            cols=[mm(mm(Vi,z,p),V,p) for z in projectors(col_sizes,n)]
+            row_perm=permute_basis(m,0,2)
+            col_perm=permute_basis(n,0,1)
+            alt_rows=[mm(mm(U,mm(mm(row_perm,z,p),row_perm,p),p),Ui,p)
+                      for z in projectors(row_sizes,m)]
+            alt_cols=[mm(mm(Vi,mm(mm(col_perm,z,p),col_perm,p),p),V,p)
+                      for z in projectors(col_sizes,n)]
+
+            for label,coefficient in (("A",A2),("K",K2)):
+                good=projected_blocks(coefficient,rows,cols,p)
+                self.assertEqual(sum_blocks(good,p,m,n,True),coefficient)
+                self.assertEqual(sum_blocks(good,p,m,n,False),coefficient)
+                bad=projected_blocks(coefficient,alt_rows,alt_cols,p)
+                bad_diagonal=sum_blocks(bad,p,m,n,True)
+                bad_off_diagonal=sub(coefficient,bad_diagonal,p)
+                with self.subTest(field=p,coefficient=label,check="alternative"):
+                    self.assertNotEqual(bad_diagonal,coefficient)
+                    self.assertNotEqual(bad_off_diagonal,[[0]*n for _ in range(m)])
+                    self.assertEqual(add(bad_diagonal,bad_off_diagonal,p),coefficient)
