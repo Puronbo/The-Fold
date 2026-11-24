@@ -206,3 +206,6 @@ of its witness.
 
 
 **G-EP114 — intersecting common block-diagonal constraints:** for a fixed left transform and two-block partition, exhaustively enumerates right transforms over F₂/F₃/F₅/F₇. The Q-only and K-only off-diagonal constraint spaces are checked separately and intersected; only the common intersection satisfies both coefficients. Singular members are retained by the linear equations, so invertibility is checked independently. Fixed-left 2×2 fixture only; not general decomposition discovery.
+
+
+**G-EP115 — simultaneous linear constraint solving:** builds the homogeneous finite-field system for all off-diagonal entries of both coefficients in the unknown right transform. A test-local RREF/nullspace solver is cross-checked against brute force over F₂/F₃/F₅/F₇; invertibility is filtered separately, and every surviving candidate is replayed through the exact witness verifier. Fixed-left 2×2 fixture; not a general discovery API.
