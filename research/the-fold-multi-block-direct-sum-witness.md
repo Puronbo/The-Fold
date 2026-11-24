@@ -152,3 +152,15 @@ The routines are test-local and do not call the production verifier's multiplica
 Deterministic, field-specific rectangular partitions are exercised over F₂, F₃, F₅, and F₇. For each fixture, test-local seeded elementary row operations produce independently invertible left and right transforms. The source pencil is formed by applying their inverses to independently generated block-diagonal coefficient matrices; the verifier must reconstruct those original matrices exactly. The partitions include zero-row and zero-column blocks without any 0×0 block.
 
 The same source entries are then shifted by different multiples of the field characteristic. The normalized transformed matrices, rectangular block grids, and verification diagnostics must remain unchanged. A shape-preserving transformed-matrix mutation is included as a snapshot-integrity control. These tests add finite cross-field regression coverage; they do not establish a universal theorem, formal proof, or production snapshot-authenticity mechanism.
+
+## G-EP103: Three-layer audit pipeline
+
+The new test keeps three questions independent:
+
+1. **Structural schema:** does the record have the required v1 fields, exact primitive types, matrix dimensions, rectangular block-grid dimensions, and bounded rank diagnostics?
+2. **Source consistency:** do the transformed coefficients, both nested block grids, normalized transforms, and verification diagnostics match a test-local reconstruction from the original Q/K matrices, field, and supplied transforms?
+3. **Mathematical verdict:** after reconstruction, are both transforms invertible and are all off-diagonal blocks zero in both coefficients?
+
+A mutation matrix records which layer detects each case. A missing nested grid row fails schema validation. Shape-preserving edits to a transformed coefficient, a nested block, or a rank diagnostic pass the schema check but fail reconstruction. A valid positive witness passes all three layers. A well-formed, reconstruction-consistent false witness passes the first two layers and fails only the mathematical verdict. Thus neither schema validity nor audit-record consistency is treated as proof of decomposition success.
+
+These are deterministic test-local regressions on a small F₅ fixture, not a production ingestion pipeline, formal proof, or cryptographic authenticity mechanism.
