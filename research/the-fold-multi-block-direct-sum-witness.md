@@ -696,3 +696,8 @@ not a generic production mixed-partition API or formal proof.
 
 
 **G-EP135 — transported projector image and kernel subspaces:** for every row and column block projector in the rectangular partition with an empty row summand and an empty column summand, independently compute image and nullspace bases over F₂/F₃/F₅. Compare the full spans—not merely their dimensions—with the images of the original subspaces under the induced row map (U) or column map (V^{-1}). Check the expected image and kernel dimensions, including zero and full cases. A shape-preserving mutation that moves a proper nonzero image to a different coordinate subspace is detected. This is finite test-side evidence; it adds no production arbitrary-subspace API or decomposition discovery.
+
+
+## G-EP136: Projector axioms do not determine the ordered decomposition
+
+Construct alternative row and column projector families by conjugating the source coordinate projectors with permutations that move their represented subspaces, then transport those alternatives through the same full row/column basis changes. Over F₂, F₃, and F₅, independently verify idempotence, pairwise orthogonality in both orders, completeness, and each projector's rank. The alternative families satisfy the same algebraic resolution axioms and rank data, but at least one indexed subspace differs from the intended transported family. Therefore those axioms alone do not certify the identity of the intended ordered decomposition; an external binding to the intended subspaces is necessary. Finite test-side regression evidence only; no production arbitrary-subspace verifier or uniqueness theorem is added.
