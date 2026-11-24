@@ -456,4 +456,76 @@ class MultiDirectSumTests(unittest.TestCase):
                     self.assertEqual(checks["direct_sum_verified"], expected)
 
 
+    def test_json_round_trip_and_replay_reject_forged_audit_metadata(self):
+        import copy
+        import json
+
+        def exact_tree_equal(a, b):
+            if type(a) is not type(b):
+                return False
+            if isinstance(a, dict):
+                return (a.keys() == b.keys()
+                        and all(exact_tree_equal(a[k], b[k]) for k in a))
+            if isinstance(a, list):
+                return (len(a) == len(b)
+                        and all(exact_tree_equal(x, y) for x, y in zip(a, b)))
+            return a == b
+
+        shapes = [(1, 1), (1, 1)]
+        q0 = [[1, 0], [0, 2]]
+        k0 = [[0, 1], [2, 0]]
+        for p in (2, 3, 5, 7):
+            # Use a nontrivial but invertible left transform; right is
+            # independently invertible as well.
+            s = [[1, 1], [0, 1]]
+            t = [[1, 0], [1, 1]]
+            si, ti = inverse(s, p), inverse(t, p)
+            q = mm(mm(si, q0, p), ti, p)
+            k = mm(mm(si, k0, p), ti, p)
+
+            for label, source_q, expected in (
+                ("valid", q, None),
+                ("false", [[q[0][0]+1, q[0][1]], q[1][:]], False),
+            ):
+                original = verify_pencil_multi_direct_sum_witness(
+                    source_q, k, p, s, t, shapes
+                )
+                serialized = json.dumps(original, sort_keys=True)
+                restored = json.loads(serialized)
+                with self.subTest(field=p, case=label):
+                    self.assertTrue(exact_tree_equal(original, restored))
+                    self.assertEqual(original["verification"]["direct_sum_verified"],
+                                     label == "valid")
+
+                # Serialized diagnostics are data, not authority: rebuild
+                # the audit from the original inputs and compare all fields.
+                replay = verify_pencil_multi_direct_sum_witness(
+                    source_q, k, p, s, t, shapes
+                )
+                self.assertTrue(exact_tree_equal(restored, replay))
+
+                forged = copy.deepcopy(restored)
+                forged["verification"]["direct_sum_verified"] = not (
+                    forged["verification"]["direct_sum_verified"])
+                forged["verification"]["left_transform_rank"] = True
+                forged["verification"]["Q_off_diagonal_blocks_zero"] = (
+                    not forged["verification"]["Q_off_diagonal_blocks_zero"])
+                with self.subTest(field=p, case=label+" forged record"):
+                    self.assertFalse(exact_tree_equal(forged, replay))
+                    self.assertIs(type(forged["verification"]["left_transform_rank"]), bool)
+                    self.assertIs(type(replay["verification"]["left_transform_rank"]), int)
+
+                # A type-substituted or incomplete serialized record cannot
+                # survive exact replay comparison, even if Python considers
+                # True equal to 1.
+                typed = copy.deepcopy(restored)
+                typed["verification"]["left_transform_rank"] = bool(
+                    typed["verification"]["left_transform_rank"])
+                self.assertFalse(exact_tree_equal(typed, replay))
+                missing = copy.deepcopy(restored)
+                del missing["Q_blocks"]
+                self.assertFalse(exact_tree_equal(missing, replay))
+
+
+
 if __name__=="__main__": unittest.main()
