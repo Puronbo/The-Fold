@@ -4803,3 +4803,128 @@ class MultiDirectSumTests(unittest.TestCase):
                 expected=product(product(rows[0],source,p),cols[0],p)
                 with self.subTest(field=p,coefficient=label,mutation="equal-shape index swap"):
                     self.assertNotEqual(wrong,expected)
+
+
+    def test_g_ep135_transported_projector_images_and_kernels_match_induced_subspaces(self):
+        def mm(a,b,p):
+            return [[sum(a[i][k]*b[k][j] for k in range(len(b)))%p
+                     for j in range(len(b[0]))] for i in range(len(a))]
+
+        def inv(a,p):
+            n=len(a); w=[[x%p for x in row]+[int(i==j) for j in range(n)]
+                         for i,row in enumerate(a)]
+            for c in range(n):
+                pivot=next((r for r in range(c,n) if w[r][c]),None)
+                if pivot is None: raise AssertionError("singular basis")
+                w[c],w[pivot]=w[pivot],w[c]
+                z=pow(w[c][c],-1,p); w[c]=[x*z%p for x in w[c]]
+                for r in range(n):
+                    if r!=c and w[r][c]:
+                        z=w[r][c]
+                        w[r]=[(x-z*y)%p for x,y in zip(w[r],w[c])]
+            return [row[n:] for row in w]
+
+        def eye(n):
+            return [[int(i==j) for j in range(n)] for i in range(n)]
+
+        def projectors(sizes,n):
+            out=[]; start=0
+            for size in sizes:
+                z=[[0]*n for _ in range(n)]
+                for i in range(start,start+size): z[i][i]=1
+                out.append(z); start+=size
+            return out
+
+        def matvec(a,v,p):
+            return [sum(x*y for x,y in zip(row,v))%p for row in a]
+
+        def span_rank(vectors,p):
+            if not vectors: return 0
+            a=[[x%p for x in row] for row in vectors]
+            r=0
+            for c in range(len(a[0])):
+                pivot=next((i for i in range(r,len(a)) if a[i][c]),None)
+                if pivot is None: continue
+                a[r],a[pivot]=a[pivot],a[r]
+                z=pow(a[r][c],-1,p); a[r]=[x*z%p for x in a[r]]
+                for i in range(len(a)):
+                    if i!=r and a[i][c]:
+                        z=a[i][c]; a[i]=[(x-z*y)%p for x,y in zip(a[i],a[r])]
+                r+=1
+                if r==len(a): break
+            return r
+
+        def image_basis(p):
+            n=len(p); return [[p[i][j] for i in range(n)]
+                              for j in range(n) if any(p[i][j] for i in range(n))]
+
+        def kernel_basis(a,p):
+            n=len(a); w=[[x%p for x in row] for row in a]
+            pivots=[]; r=0
+            for c in range(n):
+                pivot=next((i for i in range(r,n) if w[i][c]),None)
+                if pivot is None: continue
+                w[r],w[pivot]=w[pivot],w[r]
+                z=pow(w[r][c],-1,p); w[r]=[x*z%p for x in w[r]]
+                for i in range(n):
+                    if i!=r and w[i][c]:
+                        z=w[i][c]; w[i]=[(x-z*y)%p for x,y in zip(w[i],w[r])]
+                pivots.append(c); r+=1
+            free=[c for c in range(n) if c not in pivots]
+            basis=[]
+            for f in free:
+                v=[0]*n; v[f]=1
+                for i,c in enumerate(pivots): v[c]=(-w[i][f])%p
+                basis.append(v)
+            return basis
+
+        def assert_same_span(self,actual,expected,p,n,context):
+            self.assertEqual(span_rank(actual,p),span_rank(expected,p),context)
+            self.assertEqual(span_rank(actual+expected,p),span_rank(expected,p),context)
+
+        row_sizes=[1,0,3]
+        col_sizes=[0,1,2]
+        for p in (2,3,5):
+            m=sum(row_sizes); n=sum(col_sizes)
+            U=eye(m); U[0][1]=1; U[2][0]=1; U[3][1]=1
+            V=eye(n); V[0][1]=1; V[1][2]=1
+            Ui,Vi=inv(U,p),inv(V,p)
+            for kind,sizes,change,change_inv in (
+                ("row",row_sizes,U,Ui),
+                ("column",col_sizes,Vi,V),
+            ):
+                for index,source in enumerate(projectors(sizes,len(change))):
+                    transported=mm(mm(change,source,p),change_inv,p)
+                    # The image and kernel are compared as subspaces, not only by dimension.
+                    source_image=image_basis(source)
+                    target_image=image_basis(transported)
+                    expected_image=[matvec(change,v,p) for v in source_image]
+                    source_kernel=kernel_basis(source,p)
+                    target_kernel=kernel_basis(transported,p)
+                    expected_kernel=[matvec(change,v,p) for v in source_kernel]
+                    with self.subTest(field=p,space=kind,block=index,part="image"):
+                        assert_same_span(self,target_image,expected_image,p,len(change),
+                                         "transported image subspace")
+                    with self.subTest(field=p,space=kind,block=index,part="kernel"):
+                        assert_same_span(self,target_kernel,expected_kernel,p,len(change),
+                                         "transported kernel subspace")
+                    self.assertEqual(span_rank(target_image,p),sizes[index])
+                    self.assertEqual(span_rank(target_kernel,p),len(change)-sizes[index])
+
+                    # A dimension-preserving false projector with a shifted image
+                    # must fail the exact image-subspace comparison.
+                    if sizes[index] > 0 and sizes[index] < len(change):
+                        bad=[row[:] for row in transported]
+                        bad[0]=bad[1][:]
+                        bad[1]=bad[0][:]
+                        # The row replacement may be idempotent only accidentally;
+                        # use a conjugated coordinate projector on a different subspace.
+                        alt=projectors([sizes[index],len(change)-sizes[index]],len(change))[0]
+                        swap=eye(len(change))
+                        swap[0][0]=0; swap[1][1]=0
+                        swap[0][1]=1; swap[1][0]=1
+                        bad=mm(mm(change,mm(swap,mm(source,swap,p),p),p),change_inv,p)
+                        bad_image=image_basis(bad)
+                        with self.subTest(field=p,space=kind,block=index,part="wrong-image"):
+                            self.assertNotEqual(span_rank(bad_image+expected_image,p),
+                                                span_rank(expected_image,p))
