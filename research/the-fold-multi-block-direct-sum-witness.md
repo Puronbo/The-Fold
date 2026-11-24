@@ -286,3 +286,26 @@ members of the pencil are independently constrained.
 These are deterministic finite regression tests of the supplied-witness
 verifier. They do not establish decomposition discovery, uniqueness, or a
 universal theorem.
+
+
+## G-EP111: Invertible pencil-parameter basis changes
+
+A matrix pencil is an ordered pair of coefficient matrices, but its
+two-dimensional coefficient span is unchanged by an invertible 2-by-2
+change of basis over the base field. The regression constructs rectangular
+block-diagonal Q and K, independently scrambles their row and column
+coordinates, and applies several invertible coefficient-basis changes:
+coefficient swap, one-sided shears, and a determinant-one mixed change.
+
+For every tested change over F₂, F₃, F₅, and F₇, the same supplied left/right
+coordinate witness must recover the correspondingly mixed target matrices
+and verify the same rectangular block partition. Applying the inverse
+2-by-2 parameter change must recover the original ordered source pair
+exactly. Thus the test distinguishes coordinate-basis changes from
+coefficient-basis changes and checks that direct-sum structure is stable
+under a change of basis of the pencil's coefficient space.
+
+This is deterministic finite regression coverage for invertible parameter
+changes only. It does not claim invariance under singular coefficient
+mixing, discover a decomposition, establish uniqueness, or prove a universal
+classification theorem.
