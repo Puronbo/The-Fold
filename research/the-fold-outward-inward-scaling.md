@@ -407,3 +407,75 @@ maximum is attained at ((2,3)), with ratio (5/8) over (mathbb F_2).
 **Proof status:** this remains a conjectured universal bound. The regression
 grid is finite evidence only; no proof for arbitrary prime fields and
 coprime degrees is claimed.
+
+
+
+## G-EP180 — Prove the sharp ratio bound when one degree is two
+
+The G-EP179 conjecture can be proved for every coprime pair whose smaller
+degree is 2. Write the pair as (2,b), where b is odd and b>1. The case b=3
+is the equality case:
+[
+Q_p(2,3)=\frac{p^2+p-1}{p^3}.
+]
+
+For the remaining cases, use the maximal-proper-subfield union bound
+[
+E_p(n)\le\sum_{q\mid n,\ q\text{ prime}}
+p^{-n(1-1/q)}
+]
+and the one-subfield lower bound
+[
+E_p(n)\ge p^{-n(1-1/q)}
+\quad(q\mid n,\ q\text{ prime}).
+]
+Let r be the smallest prime divisor of odd b and put
+(A=b(1-1/r)). Then (E_p(b)\ge p^{-A}). Also
+(E_p(b)\le\omega(b)p^{-b/2}<p^{-1}=E_p(2)) for odd b≥5, so
+(min(E_p(2),E_p(b))=E_p(b)).
+
+Applying the union bound to 2b, and using q≥r for every prime q|b,
+[
+Q_p(2,b)
+\le p^{-(b-A)}+\omega(b)p^{-A}
+=p^{-b/r}+\omega(b)p^{-A}.
+]
+
+If b is prime and b≥5, this sharpens to
+[
+Q_p(2,b)\le p^{-1}+p^{-(b-1)}
+\le p^{-1}+p^{-2}-p^{-3}
+=\frac{p^2+p-1}{p^3},
+]
+where the middle inequality follows from (p^{-4}\le p^{-2}-p^{-3}).
+
+If b is composite, then b≥9, r≥3, and
+[
+p^{-b/r}\le p^{-3}\le p^{-1}.
+]
+Moreover, distinct prime divisors of b are all at least 3, so
+(omega(b)\le\log_3 b). For b≥9,
+[
+\omega(b)2^{2-b/2}\le
+(\log_3 b)2^{2-b/2}<\frac12.
+]
+The left side decreases for b≥9; its value at b=9 is
+(2^{-1/2}<1/2) is false, so use the sharper integer bound
+(omega(9)=1) at b=9 and for b≥15 use
+((\log_3 b)2^{2-b/2}<1/2).
+Consequently, for every p≥2,
+[
+\omega(b)p^{-A}\le\omega(b)p^{-b/2}
+\le p^{-2}-p^{-3}.
+]
+Combining the two terms proves
+[
+Q_p(2,b)\le p^{-1}+p^{-2}-p^{-3}
+=\frac{p^2+p-1}{p^3}.
+]
+
+**Scope:** this proves the G-EP179 bound for the entire smaller-degree-2
+family, with equality at (2,3) and strict inequality for odd b≥5. It does
+not settle pairs whose smaller degree is at least 3. The displayed
+logarithmic estimate is handled separately at b=9 and uniformly for b≥15;
+the union-bound argument is analytic, not a finite-grid inference.
