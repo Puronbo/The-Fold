@@ -300,3 +300,6 @@ G-EP140: distinguishes valid invertible coefficient-space shears that change onl
 
 
 - **G-EP149:** adds a test-local homogeneous determinant-polynomial audit for 2×2 pencils. A positive nontrivial strict-equivalence witness confirms the expected scalar covariance of \(\det(xQ+yK)\). A negative control compares pairs with matching individual coefficient ranks but nonproportional determinant polynomials, ruling out every common constant strict-equivalence witness. Finite fixture-specific evidence; the determinant polynomial is not claimed to be a complete invariant. See `research/the-fold-determinant-polynomial-invariant.md`.
+
+
+- **G-EP150:** demonstrates that the homogeneous determinant polynomial from G-EP149 is not a complete strict-equivalence invariant. Over F₂/F₃/F₅, a scalar pencil and a nontrivial Jordan pencil have exactly the same \(\det(xQ+yK)=(x+y)^2\), but with Q=I any strict equivalence would force similarity of K. The rank of K−I differs, proving non-equivalence. Finite exact counterexample family; no complete classification is claimed. See `research/the-fold-determinant-polynomial-limit.md`.
