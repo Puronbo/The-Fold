@@ -272,3 +272,6 @@ of its witness.
 
 
 - **G-EP137:** binds transported projector families to both rectangular coefficient matrices. For the intended row/column projectors, summing all diagonal projected blocks reconstructs each transformed coefficient exactly. Alternative projector resolutions from G-EP136 retain idempotence, orthogonality, completeness, and rank data, but produce nonzero off-diagonal projected blocks and fail diagonal-only reconstruction for both coefficients. The full diagonal-plus-off-diagonal sum remains an exact reconstruction control. Finite test-side evidence over F₂/F₃/F₅; no production arbitrary-subspace certificate API is added.
+
+
+- **G-EP138:** checks projector-bound diagonal reconstruction under invertible coefficient-space mixing of the pencil pair, in addition to independent row/column basis changes. The mixing matrix has determinant one over F₂/F₃/F₅; its inverse recovers the original ordered coefficient pair exactly. The intended projectors reconstruct both mixed coefficients from diagonal projected blocks, while the alternative resolution still fails diagonal-only reconstruction and the full projected-block sum remains exact. Finite test-side covariance evidence only.
