@@ -18,6 +18,7 @@ from tools.polynomial_irreducibility_audit import (
     coprime_composition_excess_asymptotic,
     coprime_composition_excess_sign_certificate,
     coprime_composition_excess_global_sign_certificate,
+    coprime_composition_excess_temporal_fold,
 )
 
 
@@ -538,3 +539,33 @@ class CompositionExcessSignCertificateTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+
+class CompositionExcessTemporalFoldTests(unittest.TestCase):
+    def test_temporal_fold_aligns_exponents_and_cancels_exactly(self):
+        result = coprime_composition_excess_temporal_fold(
+            [2, 3], [3, 4], [2, 3]
+        )
+        self.assertFalse(result["identically_zero"])
+        self.assertEqual(
+            result["spectrum"],
+            [
+                {"exponent": 4, "coefficient": 4},
+                {"exponent": 5, "coefficient": -2},
+                {"exponent": 6, "coefficient": -2},
+                {"exponent": 8, "coefficient": -2},
+                {"exponent": 10, "coefficient": 2},
+            ],
+        )
+        self.assertEqual(result["leading_exponent"], 4)
+        self.assertEqual(result["leading_coefficient"], 4)
+
+    def test_temporally_constant_spectrum_has_zero_curvature(self):
+        result = coprime_composition_excess_temporal_fold(
+            [3, 4], [3, 4], [3, 4]
+        )
+        self.assertTrue(result["identically_zero"])
+        self.assertEqual(result["spectrum"], [])
+        self.assertIsNone(result["leading_exponent"])
+        self.assertEqual(result["leading_coefficient"], 0)
