@@ -5,6 +5,7 @@ from tools.polynomial_irreducibility_audit import (
     count_monic_irreducibles,
     irreducible_density_convergence,
     irreducible_density_factorization,
+    irreducible_density_composition,
 )
 
 
@@ -75,6 +76,50 @@ class PolynomialIrreducibilityAuditTests(unittest.TestCase):
                     self.assertTrue(result["remainder_bound_holds"])
                     if result["distinct_prime_factor_count"] <= 1:
                         self.assertTrue(result["leading_term_is_exact"])
+
+    def test_coprime_degree_composition_defect_is_exact(self):
+        # A concrete counterexample: normalized density is not multiplicative.
+        result = irreducible_density_composition(2, 2, 3)
+        self.assertEqual(result["combined_degree"], 6)
+        self.assertFalse(result["multiplicative"])
+        self.assertEqual(result["composition_defect_numerator"], -1)
+        self.assertEqual(result["composition_defect_denominator"], 64)
+
+        # Degree one is the identity: R_p(1)=1.
+        identity = irreducible_density_composition(3, 1, 5)
+        self.assertTrue(identity["multiplicative"])
+        self.assertEqual(identity["composition_defect_numerator"], 0)
+
+        # Sweep small coprime pairs and independently reconstruct the
+        # exact defect from the returned rational components.
+        from fractions import Fraction
+        for p in (2, 3, 5, 7):
+            for left in range(1, 13):
+                for right in range(1, 13):
+                    import math
+                    if math.gcd(left, right) != 1:
+                        continue
+                    with self.subTest(p=p, left=left, right=right):
+                        item = irreducible_density_composition(p, left, right)
+                        a = Fraction(item["left_density_numerator"],
+                                     item["left_density_denominator"])
+                        b = Fraction(item["right_density_numerator"],
+                                     item["right_density_denominator"])
+                        c = Fraction(item["combined_density_numerator"],
+                                     item["combined_density_denominator"])
+                        defect = Fraction(
+                            item["composition_defect_numerator"],
+                            item["composition_defect_denominator"])
+                        self.assertEqual(defect, c - a * b)
+                        self.assertEqual(item["multiplicative"], defect == 0)
+
+    def test_composition_requires_coprime_positive_degrees(self):
+        for p, left, right in ((4, 2, 3), (True, 2, 3),
+                               (3, 0, 1), (3, 2, 4),
+                               (3, 2.0, 3)):
+            with self.subTest(p=p, left=left, right=right):
+                with self.assertRaises(ValueError):
+                    irreducible_density_composition(p, left, right)
 
     def test_factorization_report_validation(self):
         for p, degree in ((4, 2), (True, 2), (3, 0), (3, 1.5)):
