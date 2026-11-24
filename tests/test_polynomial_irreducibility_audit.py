@@ -19,6 +19,7 @@ from tools.polynomial_irreducibility_audit import (
     coprime_composition_excess_sign_certificate,
     coprime_composition_excess_global_sign_certificate,
     coprime_composition_excess_temporal_fold,
+    laurent_spectrum_global_sign_certificate,
 )
 
 
@@ -569,3 +570,73 @@ class CompositionExcessTemporalFoldTests(unittest.TestCase):
         self.assertEqual(result["spectrum"], [])
         self.assertIsNone(result["leading_exponent"])
         self.assertEqual(result["leading_coefficient"], 0)
+
+
+class LaurentSpectrumGlobalSignCertificateTests(unittest.TestCase):
+    def test_temporal_fold_can_be_certified_directly(self):
+        folded = coprime_composition_excess_temporal_fold(
+            [2, 3], [3, 4], [2, 3]
+        )
+        result = laurent_spectrum_global_sign_certificate(
+            folded["spectrum"]
+        )
+        self.assertTrue(
+            result["global_sign_certified_for_all_real_q_ge_2"]
+        )
+        self.assertEqual(result["certified_sign"], "positive")
+        self.assertEqual(result["sturm_root_count_open_interval"], 0)
+
+    def test_root_inside_interval_blocks_global_certificate(self):
+        result = laurent_spectrum_global_sign_certificate([
+            {"exponent": 0, "coefficient": -1},
+            {"exponent": 1, "coefficient": 3},
+        ])
+        self.assertEqual(result["sturm_root_count_open_interval"], 1)
+        self.assertFalse(
+            result["global_sign_certified_for_all_real_q_ge_2"]
+        )
+        self.assertIsNone(result["certified_sign"])
+
+    def test_endpoint_root_is_detected_separately(self):
+        result = laurent_spectrum_global_sign_certificate([
+            {"exponent": 0, "coefficient": -1},
+            {"exponent": 1, "coefficient": 2},
+        ])
+        self.assertEqual(result["sturm_root_count_open_interval"], 0)
+        self.assertTrue(result["q_equals_two_is_root"])
+        self.assertFalse(
+            result["global_sign_certified_for_all_real_q_ge_2"]
+        )
+
+    def test_duplicate_exponents_and_zero_polynomial(self):
+        positive = laurent_spectrum_global_sign_certificate([
+            {"exponent": 2, "coefficient": 3},
+            {"exponent": 2, "coefficient": -1},
+        ])
+        self.assertTrue(
+            positive["global_sign_certified_for_all_real_q_ge_2"]
+        )
+        self.assertEqual(positive["certified_sign"], "positive")
+
+        zero = laurent_spectrum_global_sign_certificate([
+            {"exponent": 1, "coefficient": 2},
+            {"exponent": 1, "coefficient": -2},
+        ])
+        self.assertTrue(zero["identically_zero"])
+        self.assertIsNone(zero["certified_sign"])
+
+    def test_invalid_generic_spectra_are_rejected(self):
+        invalid = (
+            [],
+            [{"exponent": -1, "coefficient": 1}],
+            [{"exponent": True, "coefficient": 1}],
+            [{"exponent": 1, "coefficient": False}],
+            [{"exponent": 1.5, "coefficient": 1}],
+            [{"exponent": 1, "coefficient": 1, "extra": 0}],
+        )
+        for spectrum in invalid:
+            with self.subTest(spectrum=spectrum):
+                with self.assertRaises(ValueError):
+                    laurent_spectrum_global_sign_certificate(
+                        list(spectrum)
+                    )
