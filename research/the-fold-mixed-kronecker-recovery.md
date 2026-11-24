@@ -167,3 +167,12 @@ Added positive replay mutations for reordered canonical block-shape metadata, al
 A separate control consistently permutes the right-singular, regular, and left-singular blocks, including the corresponding row/column transformations and ordered shape list. The standalone multi-block witness verifier accepts this reordered direct-sum presentation because it is algebraically valid. The mixed-recovery certificate verifier rejects the same reordered presentation because its certificate schema binds the profile-derived canonical target to one deterministic block order. Thus algebraic validity of a reordered decomposition is distinguished from conformance to this recovery certificate's canonical serialization.
 
 **Scope:** selected 4×4 mixed fixture and exact constant transformations over F₅. This tests certificate representation integrity and the ordered multi-block witness contract; it is not a uniqueness theorem for decompositions.
+
+
+## G-EP87 — Permutation coverage and malformed partition boundaries
+
+The standalone multi-block direct-sum verifier now rejects boolean and non-integral entries in the source pencil coefficients and both transformation matrices at its matrix-shape validation boundary. This prevents Python's integer coercion from silently accepting booleans or truncating floating-point values during modular arithmetic.
+
+Regression coverage enumerates all six permutations of the three-block mixed fixture (right-singular, left-singular, regular). Each consistently permuted row/column basis and ordered rectangular block-shape list must still verify as a valid direct sum. Negative controls reject missing/underspecified partitions, row or column totals inconsistent with the source dimensions, zero-by-zero blocks, malformed shape entries, and non-integral matrix entries.
+
+**Scope:** exhaustive permutations of one three-block 4×4 fixture over F₅. Shape lists define consecutive, disjoint rectangular partitions by construction; malformed totals and shapes are rejected, but no separate interval-overlap representation exists in this API.
