@@ -188,3 +188,10 @@ Added focused adversarial coverage for the standalone supplied multi-block direc
 - Null, empty, ragged, and dimension-incompatible nested source/transform matrices are rejected with `ValueError`.
 
 **Boundary:** malformed caller inputs remain exceptions; a structurally valid but singular witness is a negative audit. A failed supplied witness says nothing about whether a different witness or decomposition exists. This milestone adds finite regression coverage and does not expand decomposition discovery or establish uniqueness.
+
+
+## G-EP89 — Generated rectangular partition coverage
+
+Added deterministic generated-style multi-block fixtures over F₂, F₃, F₅, and F₇. The partition grid includes rectangular blocks with zero rows or zero columns, while excluding zero-by-zero blocks; every full source pencil remains nonempty and rectangular. Valid block-diagonal coefficient pairs pass with identity transforms. For partitions containing a cross-block location, an injected nonzero coefficient is rejected by the off-diagonal and aggregate checks. Additional cases reject zero-by-zero blocks and row/column total mismatches.
+
+This covers the verifier's permitted rectangular edge cases, not arbitrary overlapping interval partitions, a decomposition-discovery algorithm, or a universal correctness proof.
