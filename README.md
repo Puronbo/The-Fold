@@ -366,3 +366,6 @@ G-EP140: distinguishes valid invertible coefficient-space shears that change onl
 
 
 **Uniform irreducible-density convergence and factorization corrections (G-EP174–G-EP175):** `tools/polynomial_irreducibility_audit.py` now reports exact normalized-density errors, proves a uniform-in-prime-field convergence bound, and resolves the leading correction from the prime factorization of the degree. Prime-power degrees have exactly one nonzero Möbius correction; for degrees with at least two distinct prime factors, the second-smallest prime factor bounds the remainder after the leading term. See `research/the-fold-outward-inward-scaling.md` and `tests/test_polynomial_irreducibility_audit.py`.
+
+
+**Coprime-degree composition defect (G-EP176):** adds an exact audit comparing \(R_p(ab)\) with \(R_p(a)R_p(b)\) for coprime degrees. A concrete counterexample over F₂ at degrees 2 and 3 gives defect 15/32; degree one remains the identity case. The research note explains why the Möbius divisor indexing factors but its exponent weights do not. See `research/the-fold-outward-inward-scaling.md` and the irreducibility-audit tests.
