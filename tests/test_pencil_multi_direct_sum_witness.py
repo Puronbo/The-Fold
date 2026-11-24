@@ -6269,3 +6269,58 @@ class MultiDirectSumTests(unittest.TestCase):
                 for scale in range(1, p)
             ))
 
+    def test_g_ep150_equal_determinant_polynomials_do_not_force_strict_equivalence(self):
+        # With Q=I, strict equivalence forces T=S^{-1}; the K matrices
+        # therefore have to be similar. Determinant polynomials alone do
+        # not distinguish a scalar matrix from its nontrivial Jordan block.
+        def det2(a, p):
+            return (a[0][0] * a[1][1] - a[0][1] * a[1][0]) % p
+
+        def determinant_polynomial(q, k, p):
+            return (
+                det2(q, p),
+                (q[0][0] * k[1][1] + k[0][0] * q[1][1]
+                 - q[0][1] * k[1][0] - k[0][1] * q[1][0]) % p,
+                det2(k, p),
+            )
+
+        def rank2(a, p):
+            work = [[x % p for x in row] for row in a]
+            if work[0][0] == 0:
+                if work[1][0] == 0:
+                    return int(any(work[0])) + int(any(work[1]))
+                work[0], work[1] = work[1], work[0]
+            pivot = work[0][0]
+            if pivot:
+                inv = pow(pivot, -1, p)
+                work[0] = [x * inv % p for x in work[0]]
+                factor = work[1][0]
+                work[1] = [(x - factor*y) % p
+                           for x, y in zip(work[1], work[0])]
+            return 1 + int(any(value % p for value in work[1]))
+
+        for p in (2, 3, 5):
+            q = [[1, 0], [0, 1]]
+            k_scalar = [[1, 0], [0, 1]]
+            k_jordan = [[1, 1], [0, 1]]
+            poly_scalar = determinant_polynomial(q, k_scalar, p)
+            poly_jordan = determinant_polynomial(q, k_jordan, p)
+            self.assertEqual(poly_scalar, poly_jordan)
+            self.assertEqual(poly_scalar, (1, 2 % p, 1))
+
+            # Since Q=I in both pencils, SQT=I implies T=S^{-1}.
+            # Therefore K must transform by similarity, preserving
+            # rank(K-I). The scalar and Jordan matrices have different
+            # ranks after subtracting I, excluding strict equivalence.
+            identity = [[1, 0], [0, 1]]
+            scalar_difference = [
+                [(k_scalar[i][j] - identity[i][j]) % p for j in range(2)]
+                for i in range(2)
+            ]
+            jordan_difference = [
+                [(k_jordan[i][j] - identity[i][j]) % p for j in range(2)]
+                for i in range(2)
+            ]
+            self.assertEqual(rank2(scalar_difference, p), 0)
+            self.assertEqual(rank2(jordan_difference, p), 1)
+
