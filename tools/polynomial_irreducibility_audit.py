@@ -125,6 +125,85 @@ def irreducible_density_convergence(p: int, degree: int) -> dict:
         "uniform_bound_holds": abs(error) <= uniform_bound,
     }
 
+
+def irreducible_density_factorization(p: int, degree: int) -> dict:
+    """Resolve the leading Möbius correction from the prime factors of n.
+
+    If q1 < q2 are the two smallest distinct prime factors, then
+    R_p(n)-1 = -p**(-n(1-1/q1)) + remainder, with
+    |remainder| <= (2**omega(n)-2) p**(-n(1-1/q2)).
+    For a prime-power degree, the leading term is the entire correction.
+    """
+    if isinstance(p, bool) or not isinstance(p, int) or not _is_prime(p):
+        raise ValueError("p must be a prime integer")
+    if (isinstance(degree, bool) or not isinstance(degree, int)
+            or degree < 1):
+        raise ValueError("degree must be a positive integer")
+
+    remaining = degree
+    prime_factors = []
+    candidate = 2
+    while candidate * candidate <= remaining:
+        if remaining % candidate == 0:
+            prime_factors.append(candidate)
+            while remaining % candidate == 0:
+                remaining //= candidate
+        candidate += 1 if candidate == 2 else 2
+    if remaining > 1:
+        prime_factors.append(remaining)
+
+    omega = len(prime_factors)
+    if not prime_factors:
+        # n=1: R_p(1)=1 exactly.
+        leading_exponent = None
+        leading_term = Fraction(0, 1)
+        remainder_bound = Fraction(0, 1)
+        exact_leading = True
+    else:
+        q1 = prime_factors[0]
+        leading_exponent = degree * (q1 - 1) // q1
+        leading_term = -Fraction(1, p ** leading_exponent)
+        exact_leading = omega == 1
+        if exact_leading:
+            remainder_bound = Fraction(0, 1)
+        else:
+            q2 = prime_factors[1]
+            next_exponent = degree * (q2 - 1) // q2
+            remainder_bound = Fraction(
+                2 ** omega - 2, p ** next_exponent
+            )
+
+    normalized = Fraction(
+        degree * count_monic_irreducibles(p, degree), p ** degree
+    )
+    actual_correction = normalized - 1
+    remainder = actual_correction - leading_term
+    return {
+        "schema": "the-fold-irreducible-density-factorization-v1",
+        "field_prime": p,
+        "degree": degree,
+        "distinct_prime_factors": prime_factors,
+        "distinct_prime_factor_count": omega,
+        "smallest_prime_factor": (
+            prime_factors[0] if prime_factors else None
+        ),
+        "second_smallest_prime_factor": (
+            prime_factors[1] if omega > 1 else None
+        ),
+        "leading_correction_exponent": leading_exponent,
+        "leading_correction_numerator": leading_term.numerator,
+        "leading_correction_denominator": leading_term.denominator,
+        "actual_correction_numerator": actual_correction.numerator,
+        "actual_correction_denominator": actual_correction.denominator,
+        "remainder_numerator": remainder.numerator,
+        "remainder_denominator": remainder.denominator,
+        "remainder_absolute_bound_numerator": remainder_bound.numerator,
+        "remainder_absolute_bound_denominator": remainder_bound.denominator,
+        "leading_term_is_exact": exact_leading,
+        "remainder_bound_holds": abs(remainder) <= remainder_bound,
+    }
+
+
 def audit_irreducibility_agreement(
     p: int,
     degree: int,
