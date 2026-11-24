@@ -813,7 +813,7 @@ class RationalCanonicalTests(unittest.TestCase):
         for degree, expected in expected_counts.items():
             self.assertEqual(sum(1 for d, _ in irreducibles if d == degree), expected)
         self.assertNotIn(((1, 1),) * 6, patterns)
-        self.assertIn(((1, 1),) * 5 + ((1, 1),), patterns)
+        self.assertIn(((1, 1),) * 4 + ((1, 2),), patterns)
         self.assertIn(((1, 1),) * 4 + ((2, 1),), patterns)
 
 if __name__ == "__main__":
