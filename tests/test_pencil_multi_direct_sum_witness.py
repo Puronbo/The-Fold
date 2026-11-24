@@ -350,4 +350,110 @@ class MultiDirectSumTests(unittest.TestCase):
                     )
 
 
+    def test_audit_records_match_independent_algebraic_reconstruction(self):
+        # These local routines intentionally do not call the verifier's
+        # private multiplication, splitting, or rank helpers.
+        def independent_product(a, b, p):
+            return [[sum(a[i][z]*b[z][j] for z in range(len(b))) % p
+                     for j in range(len(b[0]))] for i in range(len(a))]
+
+        def independent_rank(a, p):
+            work = [[x % p for x in row] for row in a]
+            rows, cols, pivot_row = len(work), len(work[0]), 0
+            for col in range(cols):
+                pivot = next((r for r in range(pivot_row, rows)
+                              if work[r][col] % p), None)
+                if pivot is None:
+                    continue
+                work[pivot_row], work[pivot] = work[pivot], work[pivot_row]
+                scale = pow(work[pivot_row][col], -1, p)
+                work[pivot_row] = [(x*scale) % p for x in work[pivot_row]]
+                for r in range(rows):
+                    if r != pivot_row:
+                        factor = work[r][col] % p
+                        work[r] = [(x-factor*y) % p
+                                   for x, y in zip(work[r], work[pivot_row])]
+                pivot_row += 1
+                if pivot_row == rows:
+                    break
+            return pivot_row
+
+        shapes = [(1, 0), (1, 2), (0, 1), (1, 1)]
+        m, n = sum(r for r, c in shapes), sum(c for r, c in shapes)
+        row_cuts, col_cuts = [0], [0]
+        for r, c in shapes:
+            row_cuts.append(row_cuts[-1]+r)
+            col_cuts.append(col_cuts[-1]+c)
+
+        for p in (2, 3, 5, 7):
+            q0, k0 = [[0]*n for _ in range(m)], [[0]*n for _ in range(m)]
+            for b, (r, c) in enumerate(shapes):
+                for i in range(r):
+                    for j in range(c):
+                        q0[row_cuts[b]+i][col_cuts[b]+j] = (b+i+2*j+1) % p
+                        k0[row_cuts[b]+i][col_cuts[b]+j] = (2*b+2*i+j+1) % p
+            s, t = ident(m), ident(n)
+            for i in range(m-1):
+                s[i][i+1] = 1
+            for j in range(n-1):
+                t[j+1][j] = 1
+            si, ti = inverse(s, p), inverse(t, p)
+            q = mm(mm(si, q0, p), ti, p)
+            k = mm(mm(si, k0, p), ti, p)
+
+            # Also exercise a false but well-formed witness. The same
+            # independent calculation must explain every reported flag.
+            cases = [("valid", q, k, s, t, True)]
+            bad_q = [row[:] for row in q]
+            bad_q[0][0] += 1
+            cases.append(("mutated source", bad_q, k, s, t, False))
+            bad_s = [row[:] for row in s]
+            bad_s[0][m-1] = (bad_s[0][m-1] + 1) % p
+            cases.append(("perturbed transform", q, k, bad_s, t, False))
+
+            for label, source_q, source_k, left, right, expected in cases:
+                audit = verify_pencil_multi_direct_sum_witness(
+                    source_q, source_k, p, left, right, shapes
+                )
+                transformed_q = independent_product(
+                    independent_product(left, source_q, p), right, p
+                )
+                transformed_k = independent_product(
+                    independent_product(left, source_k, p), right, p
+                )
+                self.assertEqual(audit["transformed_Q"], transformed_q)
+                self.assertEqual(audit["transformed_K"], transformed_k)
+
+                expected_q_blocks, expected_k_blocks = [], []
+                q_off_zero = k_off_zero = True
+                for i in range(len(shapes)):
+                    q_row, k_row = [], []
+                    for j in range(len(shapes)):
+                        qb = [row[col_cuts[j]:col_cuts[j+1]]
+                              for row in transformed_q[row_cuts[i]:row_cuts[i+1]]]
+                        kb = [row[col_cuts[j]:col_cuts[j+1]]
+                              for row in transformed_k[row_cuts[i]:row_cuts[i+1]]]
+                        q_row.append(qb); k_row.append(kb)
+                        if i != j:
+                            q_off_zero &= all(x % p == 0 for row in qb for x in row)
+                            k_off_zero &= all(x % p == 0 for row in kb for x in row)
+                    expected_q_blocks.append(q_row)
+                    expected_k_blocks.append(k_row)
+                self.assertEqual(audit["Q_blocks"], expected_q_blocks)
+                self.assertEqual(audit["K_blocks"], expected_k_blocks)
+
+                sr, tr = independent_rank(left, p), independent_rank(right, p)
+                checks = audit["verification"]
+                self.assertEqual(checks["left_transform_rank"], sr)
+                self.assertEqual(checks["right_transform_rank"], tr)
+                self.assertEqual(checks["left_transform_invertible"], sr == m)
+                self.assertEqual(checks["right_transform_invertible"], tr == n)
+                self.assertEqual(checks["Q_off_diagonal_blocks_zero"], q_off_zero)
+                self.assertEqual(checks["K_off_diagonal_blocks_zero"], k_off_zero)
+                self.assertEqual(checks["direct_sum_verified"],
+                                 sr == m and tr == n and q_off_zero and k_off_zero)
+                with self.subTest(field=p, case=label):
+                    self.assertEqual(checks["direct_sum_verified"], expected)
+
+
 if __name__=="__main__": unittest.main()
