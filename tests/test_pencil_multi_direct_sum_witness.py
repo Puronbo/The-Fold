@@ -85,4 +85,125 @@ class MultiDirectSumTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             verify_pencil_multi_direct_sum_witness(q,k,4,ident(2),ident(2),[(1,1)]*2)
 
+
+    def test_basis_scrambled_rectangular_witness_adversarial_mutations(self):
+        # Reuse the G-EP90 rectangular edge case, but mutate the transformed
+        # coordinates one off-diagonal block at a time before scrambling back.
+        shapes = [(1, 0), (1, 2), (0, 1), (1, 1)]
+        m, n = sum(r for r, c in shapes), sum(c for r, c in shapes)
+        row_offsets, col_offsets = [0], [0]
+        for r, c in shapes:
+            row_offsets.append(row_offsets[-1] + r)
+            col_offsets.append(col_offsets[-1] + c)
+
+        for p in (2, 3, 5, 7):
+            q0 = [[0] * n for _ in range(m)]
+            k0 = [[0] * n for _ in range(m)]
+            for b, (r, c) in enumerate(shapes):
+                for i in range(r):
+                    for j in range(c):
+                        q0[row_offsets[b] + i][col_offsets[b] + j] = (b + i + 2*j + 1) % p
+                        k0[row_offsets[b] + i][col_offsets[b] + j] = (2*b + 3*i + j + 1) % p
+
+            left, right = ident(m), ident(n)
+            for i in range(m - 1):
+                left[i][i + 1] = 1
+            for i in range(n - 1):
+                right[i][i + 1] = 1
+            left_inv, right_inv = inverse(left, p), inverse(right, p)
+            q = mm(mm(left_inv, q0, p), right_inv, p)
+            k = mm(mm(left_inv, k0, p), right_inv, p)
+
+            with self.subTest(field=p, case="valid baseline"):
+                baseline = verify_pencil_multi_direct_sum_witness(
+                    q, k, p, left, right, shapes
+                )
+                self.assertTrue(baseline["verification"]["direct_sum_verified"], baseline)
+
+            # Only blocks with positive row and column dimensions can contain
+            # entries. Exercise each directed off-diagonal block separately
+            # in Q and K, including both directions between the two populated
+            # diagonal blocks.
+            populated = [i for i, (r, c) in enumerate(shapes) if r and c]
+            for source_block in populated:
+                for target_block in populated:
+                    if source_block == target_block:
+                        continue
+                    for coefficient in ("Q", "K"):
+                        changed_q0 = [row[:] for row in q0]
+                        changed_k0 = [row[:] for row in k0]
+                        target = changed_q0 if coefficient == "Q" else changed_k0
+                        target[row_offsets[source_block]][col_offsets[target_block]] = 1 % p
+                        changed_q = mm(mm(left_inv, changed_q0, p), right_inv, p)
+                        changed_k = mm(mm(left_inv, changed_k0, p), right_inv, p)
+                        audit = verify_pencil_multi_direct_sum_witness(
+                            changed_q, changed_k, p, left, right, shapes
+                        )
+                        with self.subTest(field=p, source_block=source_block,
+                                          target_block=target_block, coefficient=coefficient):
+                            self.assertFalse(audit["verification"]["direct_sum_verified"], audit)
+                            if coefficient == "Q":
+                                self.assertFalse(audit["verification"]["Q_off_diagonal_blocks_zero"])
+                                self.assertTrue(audit["verification"]["K_off_diagonal_blocks_zero"])
+                            else:
+                                self.assertTrue(audit["verification"]["Q_off_diagonal_blocks_zero"])
+                                self.assertFalse(audit["verification"]["K_off_diagonal_blocks_zero"])
+
+            # Mutate both source coefficient matrices while preserving all
+            # dimensions and the invertibility of the supplied transforms.
+            changed_q0, changed_k0 = [row[:] for row in q0], [row[:] for row in k0]
+            changed_q0[row_offsets[1]][col_offsets[3]] = 1 % p
+            changed_k0[row_offsets[3]][col_offsets[1]] = 1 % p
+            both = verify_pencil_multi_direct_sum_witness(
+                mm(mm(left_inv, changed_q0, p), right_inv, p),
+                mm(mm(left_inv, changed_k0, p), right_inv, p),
+                p, left, right, shapes,
+            )
+            with self.subTest(field=p, case="both coefficients"):
+                self.assertFalse(both["verification"]["Q_off_diagonal_blocks_zero"])
+                self.assertFalse(both["verification"]["K_off_diagonal_blocks_zero"])
+                self.assertFalse(both["verification"]["direct_sum_verified"])
+
+            # Wrong but still invertible transforms are structured false
+            # witnesses, not malformed inputs.
+            wrong_left = [row[:] for row in left]
+            wrong_left[0][2] = (wrong_left[0][2] + 1) % p
+            wrong_right = [row[:] for row in right]
+            wrong_right[0][2] = (wrong_right[0][2] + 1) % p
+            for label, s, t in (
+                ("wrong invertible left", wrong_left, right),
+                ("wrong invertible right", left, wrong_right),
+                ("wrong invertible pair", wrong_left, wrong_right),
+            ):
+                audit = verify_pencil_multi_direct_sum_witness(q, k, p, s, t, shapes)
+                with self.subTest(field=p, case=label):
+                    self.assertTrue(audit["verification"]["left_transform_invertible"])
+                    self.assertTrue(audit["verification"]["right_transform_invertible"])
+                    self.assertFalse(audit["verification"]["direct_sum_verified"])
+
+            # Singular square transforms are well-formed but mathematically
+            # invalid witnesses: return an audit rather than raising.
+            singular_left = [row[:] for row in left]
+            singular_left[-1] = [0] * m
+            singular_right = [row[:] for row in right]
+            singular_right[-1] = [0] * n
+            for s, t in ((singular_left, right), (left, singular_right),
+                         (singular_left, singular_right)):
+                audit = verify_pencil_multi_direct_sum_witness(q, k, p, s, t, shapes)
+                with self.subTest(field=p, case="singular transform"):
+                    self.assertFalse(audit["verification"]["direct_sum_verified"])
+
+            # Malformed matrices/entries are caller-input errors, distinct
+            # from the failed audits above.
+            for bad_s, bad_t in (
+                ([[1], [0], [0]], right),
+                ([[True, 0, 0], [0, 1, 0], [0, 0, 1]], right),
+                (left, [[1], [0], [0], [0]]),
+                (left, [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1.0]]),
+            ):
+                with self.subTest(field=p, case="malformed transform"):
+                    with self.assertRaises(ValueError):
+                        verify_pencil_multi_direct_sum_witness(q, k, p, bad_s, bad_t, shapes)
+
+
 if __name__=="__main__": unittest.main()
