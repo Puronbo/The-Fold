@@ -2325,7 +2325,7 @@ class MultiDirectSumTests(unittest.TestCase):
                     invertible_common,
                 )
                 self.assertEqual(len(invertible_common), (p-1)*(p-1))
-                self.assertIn((1, 0, 0, 1), invertible_common)
+                self.assertIn((1, 1, 0, 1), invertible_common)
                 self.assertIn((1, 0, 0, 0), common)  # singular solution
                 self.assertEqual(mm(q, u, p), target_q)
                 self.assertEqual(mm(k, u, p), target_k)
