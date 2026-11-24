@@ -196,9 +196,6 @@ class PolynomialIrreducibilityAuditTests(unittest.TestCase):
                     audit_irreducibility_agreement(**kwargs)
 
 
-if __name__ == "__main__":
-    unittest.main()
-
     def test_coprime_density_defect_sign_audit_is_exact_and_bounded(self):
         from tools.polynomial_irreducibility_audit import audit_coprime_density_defect_sign
         result = audit_coprime_density_defect_sign([2, 3, 5], 12)
@@ -213,3 +210,7 @@ if __name__ == "__main__":
             with self.subTest(primes=primes, degree=degree):
                 with self.assertRaises(ValueError):
                     audit_coprime_density_defect_sign(primes, degree)
+
+
+if __name__ == "__main__":
+    unittest.main()
