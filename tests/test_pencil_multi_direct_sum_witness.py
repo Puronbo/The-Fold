@@ -1024,3 +1024,122 @@ class MultiDirectSumTests(unittest.TestCase):
         self.assertFalse(singular["verification"]["left_transform_invertible"])
         self.assertFalse(singular["verification"]["direct_sum_verified"])
 
+    def test_g_ep101_independent_audit_record_reconstruction(self):
+        import copy
+
+        def reference(q, k, p, left, right, shapes):
+            # Deliberately test-local reconstruction: no production verifier
+            # multiplication, rank, or block-splitting helpers are used.
+            def multiply(a, b):
+                return [[sum(a[i][z] * b[z][j] for z in range(len(b))) % p
+                         for j in range(len(b[0]))] for i in range(len(a))]
+
+            def rank(matrix):
+                a = [[x % p for x in row] for row in matrix]
+                r = 0
+                for c in range(len(a[0])):
+                    pivot = next((i for i in range(r, len(a)) if a[i][c]), None)
+                    if pivot is None:
+                        continue
+                    a[r], a[pivot] = a[pivot], a[r]
+                    scale = pow(a[r][c], -1, p)
+                    a[r] = [(x * scale) % p for x in a[r]]
+                    for i in range(len(a)):
+                        if i != r:
+                            factor = a[i][c]
+                            a[i] = [(x - factor * y) % p
+                                    for x, y in zip(a[i], a[r])]
+                    r += 1
+                    if r == len(a):
+                        break
+                return r
+
+            s = [[x % p for x in row] for row in left]
+            t = [[x % p for x in row] for row in right]
+            qn = [[x % p for x in row] for row in q]
+            kn = [[x % p for x in row] for row in k]
+            tq, tk = multiply(multiply(s, qn), t), multiply(multiply(s, kn), t)
+            row_edges, col_edges = [0], [0]
+            for rows, cols in shapes:
+                row_edges.append(row_edges[-1] + rows)
+                col_edges.append(col_edges[-1] + cols)
+
+            def split(matrix):
+                return [[[line[col_edges[j]:col_edges[j + 1]]
+                          for line in matrix[row_edges[i]:row_edges[i + 1]]]
+                         for j in range(len(shapes))]
+                        for i in range(len(shapes))]
+
+            qb, kb = split(tq), split(tk)
+            sr, tr = rank(s), rank(t)
+            qzero = all(x % p == 0 for i in range(len(shapes))
+                        for j in range(len(shapes)) if i != j
+                        for line in qb[i][j] for x in line)
+            kzero = all(x % p == 0 for i in range(len(shapes))
+                        for j in range(len(shapes)) if i != j
+                        for line in kb[i][j] for x in line)
+            return {
+                "field": f"F_{p}", "source_shape": [len(q), len(q[0])],
+                "block_shapes": [list(x) for x in shapes],
+                "left_transform": s, "right_transform": t,
+                "transformed_Q": tq, "transformed_K": tk,
+                "Q_blocks": qb, "K_blocks": kb,
+                "verification": {
+                    "left_transform_rank": sr, "right_transform_rank": tr,
+                    "left_transform_invertible": sr == len(q),
+                    "right_transform_invertible": tr == len(q[0]),
+                    "Q_off_diagonal_blocks_zero": qzero,
+                    "K_off_diagonal_blocks_zero": kzero,
+                    "direct_sum_verified": (sr == len(q) and tr == len(q[0])
+                                            and qzero and kzero),
+                },
+            }
+
+        shapes = [(1, 0), (1, 2), (0, 1), (1, 1)]
+        p, q, k = 5, [[1, 0, 0], [0, 2, 0], [0, 0, 3]], [[0, 0, 0], [0, 1, 0], [0, 0, 4]]
+        # The first and third blocks exercise zero-width and zero-height slices.
+        left = [[1, 1, 0], [0, 1, 1], [0, 0, 1]]
+        right = [[1, 1, 0], [0, 1, 1], [0, 0, 1]]
+        for witness_left in (ident(3), left, [[1, 0, 0], [0, 0, 0], [0, 0, 1]]):
+            record = verify_pencil_multi_direct_sum_witness(
+                q, k, p, witness_left, right, shapes
+            )
+            expected = reference(q, k, p, witness_left, right, shapes)
+            for key, value in expected.items():
+                with self.subTest(transform=witness_left, field=key):
+                    self.assertEqual(record[key], value)
+
+        # The record can remain schema-shaped while being inconsistent with
+        # the source inputs and supplied transforms. Each mutation is caught
+        # by reconstruction, not merely by the structural schema validator.
+        baseline = verify_pencil_multi_direct_sum_witness(
+            q, k, p, ident(3), ident(3), shapes
+        )
+        mutations = (
+            ("transformed Q", lambda x: x["transformed_Q"][0].__setitem__(0, 4)),
+            ("transformed K", lambda x: x["transformed_K"][1].__setitem__(1, 4)),
+            ("Q block", lambda x: x["Q_blocks"][1][1][0].__setitem__(0, 4)),
+            ("K block", lambda x: x["K_blocks"][1][1][0].__setitem__(0, 4)),
+            ("rank diagnostic", lambda x: x["verification"].__setitem__("left_transform_rank", 2)),
+            ("aggregate diagnostic", lambda x: x["verification"].__setitem__("direct_sum_verified", False)),
+        )
+        expected = reference(q, k, p, ident(3), ident(3), shapes)
+        for label, mutate in mutations:
+            forged = copy.deepcopy(baseline)
+            mutate(forged)
+            with self.subTest(forged_field=label):
+                self.assertNotEqual(
+                    {key: forged[key] for key in expected},
+                    expected,
+                )
+
+        # A false witness and a singular witness are reconstructed too:
+        # record consistency does not imply a positive algebraic result.
+        false_left = [[1, 1, 0], [0, 1, 0], [0, 0, 1]]
+        for witness_left in (false_left, [[1, 0, 0], [0, 0, 0], [0, 0, 1]]):
+            record = verify_pencil_multi_direct_sum_witness(
+                q, k, p, witness_left, ident(3), shapes
+            )
+            expected = reference(q, k, p, witness_left, ident(3), shapes)
+            for key, value in expected.items():
+                self.assertEqual(record[key], value)
