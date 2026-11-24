@@ -123,3 +123,41 @@ The implementation evaluates the exact rational spectrum at every integer in tha
 If the exceptional set is empty, the maximum convention gives threshold 2. This is the **smallest integer threshold** such that every integer (Q\ge Q_0^{\mathrm{int}}) has the eventual sign. It is consequently also optimal when restricted to prime-power field sizes, though the smallest prime-power-only threshold could be lower.
 
 The API now returns both `sufficient_field_size_threshold` (the short analytic bound) and `smallest_integer_threshold` (the exact sharpened bound). For the examples ((2,3)) and ((3,4)), both thresholds are 2. The scan is finite and exact; the infinite tail remains certified by G-EP199. No unbounded numerical search is involved.
+
+---
+
+## G-EP201 — Exact global sign certificates by Sturm theory
+
+For the Laurent spectrum
+
+\\[ H_Q=\\sum_j c_jQ^{-e_j}, \\]
+
+put \\(x=1/Q\\), let \\(e_0\\) be the smallest exponent, and form
+
+\\[ H_Q=x^{e_0}P(x),\\qquad P(x)=\\sum_jc_jx^{e_j-e_0}. \\]
+
+Since \\(x^{e_0}>0\\), the sign for every real \\(Q\\ge2\\) is the sign of
+\\(P\\) on \\(0<x\\le1/2\\).
+
+The new API `coprime_composition_excess_global_sign_certificate(degrees)`
+constructs the integer polynomial exactly, builds its Sturm sequence over
+\\(\\mathbb Q\\), and counts roots in the open interval \\((0,1/2)\\).
+One-sided endpoint signs are evaluated exactly, and \\(P(1/2)=0\\) is
+checked separately. A zero root count together with a nonzero endpoint
+value certifies that the polynomial has no zero anywhere on
+\\((0,1/2]\\); continuity then makes its sign equal to its nonzero
+constant coefficient.
+
+Regression fixtures certify:
+- \\((2,3)\\): \\(P(x)=1-x\\), globally positive.
+- \\((3,4)\\): \\(P(x)=-(1-x^2)(1-x^4)\\), globally negative.
+- Multi-factor tuples \\((2,3,5)\\), \\((2,5,9)\\), and \\((3,5,7)\\):
+  exact Sturm root count zero and globally negative.
+
+This is a proof certificate for each supplied tuple, not a universal
+theorem that every admissible tuple has the eventual sign for all
+\\(Q\\ge2\\). A positive Sturm root count is an obstruction to this
+simple global-sign claim and should trigger exact root isolation or
+integer-field-size analysis; it does not contradict the eventual-sign
+theorems. Regression tests have been added but are not reported as
+executed here.
