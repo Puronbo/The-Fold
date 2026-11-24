@@ -3791,7 +3791,7 @@ class MultiDirectSumTests(unittest.TestCase):
             return [v[i*n:(i+1)*n] for i in range(n)]
 
         def transform(v,mat,p):
-            x=unflatten(v,len(mat))
+            x=unflatten(v,len(mat[0]))
             return flatten(mm(mm(mat[0],x,p),mat[1],p))
 
         def eval_rows(rows,v,p):
