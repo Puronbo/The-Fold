@@ -116,5 +116,47 @@ class MixedKroneckerRecoveryTests(unittest.TestCase):
         self.assertFalse(result["decision_complete"])
 
 
+    def test_recovery_boundary_grid_across_indices_and_prime_fields(self):
+        # Canonical inputs provide a positive control at each size. These
+        # cases vary the singular indices and finite field independently.
+        for p in (2, 3, 5):
+            for right_index, left_index in ((1, 1), (2, 1), (2, 2)):
+                with self.subTest(p=p, right_index=right_index, left_index=left_index):
+                    rq, rk = right_block(right_index)
+                    lq, lk = transpose(right_block(left_index)[0]), transpose(right_block(left_index)[1])
+                    q, k = block_diag([
+                        (rq, rk), (lq, lk), ([[1]], [[0]])
+                    ])
+                    result = recover_mixed_kronecker_pencil(
+                        q, k, p, max_degree=3, max_candidates=5000
+                    )
+                    self.assertTrue(result["profile"]["complete_kronecker_structure_data"])
+                    self.assertTrue(result["recovered"], result.get("reason"))
+                    self.assertTrue(result["decision_complete"])
+                    self.assertEqual(result["right_minimal_indices"], [right_index])
+                    self.assertEqual(result["left_minimal_indices"], [left_index])
+                    self.assertTrue(result["verification"]["strict_equivalence_certified"])
+
+    def test_profile_incompleteness_and_search_budget_are_distinct_boundaries(self):
+        q, k = self.mixed_pair()
+        profile_limited = recover_mixed_kronecker_pencil(
+            q, k, 5, max_degree=0, max_candidates=100
+        )
+        self.assertFalse(profile_limited["recovered"])
+        self.assertFalse(profile_limited["decision_complete"])
+        self.assertFalse(profile_limited["profile"]["complete_kronecker_structure_data"])
+        self.assertIn("profile", profile_limited["reason"])
+
+        search_limited = recover_mixed_kronecker_pencil(
+            q, k, 5, max_degree=2, max_candidates=1,
+            search_mode="exhaustive",
+        )
+        self.assertFalse(search_limited["recovered"])
+        self.assertFalse(search_limited["decision_complete"])
+        self.assertTrue(search_limited["profile"]["complete_kronecker_structure_data"])
+        self.assertEqual(search_limited["candidates_examined"], 1)
+        self.assertIn("budget", search_limited["reason"])
+
+
 if __name__ == "__main__":
     unittest.main()
