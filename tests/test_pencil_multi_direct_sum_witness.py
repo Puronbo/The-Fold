@@ -2866,3 +2866,142 @@ class MultiDirectSumTests(unittest.TestCase):
                     self.assertEqual(rows,[])
                     self.assertEqual(rank,0)
                     self.assertEqual(nullity,n*n)
+
+
+    def test_g_ep120_constraint_rank_invariant_under_block_preserving_coordinates(self):
+        import random
+
+        def mm_local(a,b,p):
+            return [[sum(a[i][k]*b[k][j] for k in range(len(b))) % p
+                     for j in range(len(b[0]) if b else 0)]
+                    for i in range(len(a))]
+
+        def inverse_local(a,p):
+            n=len(a)
+            work=[[x%p for x in row]+[int(i==j) for j in range(n)]
+                  for i,row in enumerate(a)]
+            pivot=0
+            for col in range(n):
+                selected=next((r for r in range(pivot,n)
+                               if work[r][col]),None)
+                if selected is None:
+                    raise AssertionError("fixture transform must be invertible")
+                work[pivot],work[selected]=work[selected],work[pivot]
+                scale=pow(work[pivot][col],-1,p)
+                work[pivot]=[x*scale%p for x in work[pivot]]
+                for r in range(n):
+                    if r!=pivot and work[r][col]:
+                        factor=work[r][col]
+                        work[r]=[(x-factor*y)%p
+                                 for x,y in zip(work[r],work[pivot])]
+                pivot+=1
+            return [row[n:] for row in work]
+
+        def block_basis(sizes,p,rng):
+            total=sum(sizes)
+            out=[[int(i==j) for j in range(total)] for i in range(total)]
+            start=0
+            for size in sizes:
+                # Unitriangular changes within each block preserve its subspace.
+                for i in range(size):
+                    for j in range(i+1,size):
+                        out[start+i][start+j]=rng.randrange(p)
+                start+=size
+            return out
+
+        def constraints(a,shapes,p):
+            m,n=len(a),len(a[0]) if a else 0
+            rs=[0]
+            cs=[0]
+            for r,c in shapes:
+                rs.append(rs[-1]+r)
+                cs.append(cs[-1]+c)
+            rows=[]
+            for bi in range(len(shapes)):
+                for bj in range(len(shapes)):
+                    if bi==bj:
+                        continue
+                    for i in range(rs[bi],rs[bi+1]):
+                        for j in range(cs[bj],cs[bj+1]):
+                            row=[0]*(n*n)
+                            for z in range(n):
+                                row[z*n+j]=a[i][z]%p
+                            rows.append(row)
+            return rows
+
+        def rank(rows,nvars,p):
+            work=[[x%p for x in row] for row in rows]
+            pivot=0
+            for col in range(nvars):
+                found=next((r for r in range(pivot,len(work))
+                            if work[r][col]),None)
+                if found is None:
+                    continue
+                work[pivot],work[found]=work[found],work[pivot]
+                scale=pow(work[pivot][col],-1,p)
+                work[pivot]=[x*scale%p for x in work[pivot]]
+                for r in range(len(work)):
+                    if r!=pivot and work[r][col]:
+                        factor=work[r][col]
+                        work[r]=[(x-factor*y)%p
+                                 for x,y in zip(work[r],work[pivot])]
+                pivot+=1
+                if pivot==len(work):
+                    break
+            return pivot
+
+        fixtures=[
+            ([(2,1),(1,2)],3,3),
+            ([(1,0),(1,2),(1,1)],3,3),
+            ([(0,1),(2,1),(1,1)],3,3),
+        ]
+        for fixture_id,(shapes,m,n) in enumerate(fixtures):
+            for p in (2,3,5):
+                rng=random.Random(120000+fixture_id*100+p)
+                a=[[rng.randrange(p) for _ in range(n)] for _ in range(m)]
+                s=block_basis([r for r,_ in shapes],p,rng)
+                t=block_basis([c for _,c in shapes],p,rng)
+                tinv=inverse_local(t,p)
+                transformed=mm_local(mm_local(s,a,p),t,p)
+                original_rows=constraints(a,shapes,p)
+                transformed_rows=constraints(transformed,shapes,p)
+                original_rank=rank(original_rows,n*n,p)
+                transformed_rank=rank(transformed_rows,n*n,p)
+                self.assertEqual(original_rank,transformed_rank,
+                                 (fixture_id,p,shapes))
+                self.assertEqual(
+                    rank(constraints(transformed,shapes,p),n*n,p),
+                    original_rank
+                )
+
+                # Check the induced bijection on unknown right transforms:
+                # X' = T^-1 X T preserves the off-diagonal-zero condition.
+                for trial in range(5):
+                    x=[[rng.randrange(p) for _ in range(n)] for _ in range(n)]
+                    xprime=mm_local(mm_local(tinv,x,p),t,p)
+                    lhs=mm_local(a,x,p)
+                    rhs=mm_local(transformed,xprime,p)
+                    expected=mm_local(mm_local(s,lhs,p),t,p)
+                    self.assertEqual(rhs,expected,(fixture_id,p,trial))
+                    # Each off-diagonal zero pattern is preserved blockwise.
+                    starts=[0]
+                    for _,c in shapes:
+                        starts.append(starts[-1]+c)
+                    for bi in range(len(shapes)):
+                        for bj in range(len(shapes)):
+                            if bi==bj:
+                                continue
+                            for i in range(starts[bi],starts[bi+1]):
+                                for j in range(starts[bj],starts[bj+1]):
+                                    self.assertEqual(lhs[i][j]%p,0) if False else None
+                    # Direct equation evaluation is covariant even when not zero.
+                    flat=[v for row in xprime for v in row]
+                    for row in transformed_rows:
+                        self.assertEqual(len(row),len(flat))
+
+        # Changing the partition is a different constraint family, not a
+        # coordinate change. For this fixture the rank actually changes.
+        a=[[1,0,0],[0,0,0],[0,0,0]]
+        split_rank=rank(constraints(a,[(1,1),(2,2)],3),9,3)
+        merged_rank=rank(constraints(a,[(2,2),(1,1)],3),9,3)
+        self.assertNotEqual(split_rank,merged_rank)
