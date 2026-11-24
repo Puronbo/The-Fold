@@ -58,3 +58,20 @@ dimension-incompatible transforms and boolean/floating-point entries are
 malformed inputs and must raise ValueError. A failed witness invalidates only
 that supplied witness; it does not prove that no alternative decomposition
 exists. The cases are finite regression coverage, not a universal theorem.
+
+
+## G-EP92: Stability under equivalent representations
+
+Regression controls now check equivalent presentations of the same
+multi-block direct sum over F₂, F₃, F₅, and F₇. Adding integer multiples of
+the modulus to source entries leaves the normalized transformed matrices
+unchanged. Independently selected invertible left/right basis scramblings
+remain accepted, as do reciprocal nonzero scalar rescalings
+(S -> cS, T -> c⁻¹T), which preserve both transformed coefficients exactly.
+A simultaneous permutation of the row and column coordinate intervals and
+their ordered rectangular block shapes also remains a valid direct-sum
+witness.
+
+These tests establish representation stability for the finite fixtures only.
+They do not establish uniqueness of a block partition or witness, nor do they
+turn failure of one supplied witness into a no-decomposition result.
