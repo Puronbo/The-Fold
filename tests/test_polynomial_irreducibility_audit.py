@@ -4,6 +4,7 @@ from tools.polynomial_irreducibility_audit import (
     audit_irreducibility_agreement,
     count_monic_irreducibles,
     irreducible_density_convergence,
+    irreducible_density_factorization,
 )
 
 
@@ -44,6 +45,42 @@ class PolynomialIrreducibilityAuditTests(unittest.TestCase):
                         result["divisor_count_bound"] + 1e-15,
                         result["absolute_error"],
                     )
+
+    def test_factorization_identifies_exact_leading_correction(self):
+        # Prime powers have one nontrivial squarefree divisor: the leading
+        # correction is the complete correction, regardless of exponent.
+        for degree, q in ((2, 2), (8, 2), (9, 3), (25, 5)):
+            result = irreducible_density_factorization(3, degree)
+            exponent = degree * (q - 1) // q
+            self.assertEqual(result["distinct_prime_factors"], [q])
+            self.assertTrue(result["leading_term_is_exact"])
+            self.assertEqual(result["leading_correction_exponent"], exponent)
+            self.assertEqual(result["remainder_numerator"], 0)
+            self.assertTrue(result["remainder_bound_holds"])
+
+        # For 6, the q1=2 term leads and the remaining terms are bounded
+        # using q2=3.
+        result = irreducible_density_factorization(2, 6)
+        self.assertEqual(result["distinct_prime_factors"], [2, 3])
+        self.assertEqual(result["leading_correction_exponent"], 3)
+        self.assertEqual(result["leading_correction_numerator"], -1)
+        self.assertEqual(result["leading_correction_denominator"], 8)
+        self.assertTrue(result["remainder_bound_holds"])
+
+    def test_factorization_remainder_bound_grid(self):
+        for p in (2, 3, 5, 7):
+            for degree in range(1, 81):
+                with self.subTest(p=p, degree=degree):
+                    result = irreducible_density_factorization(p, degree)
+                    self.assertTrue(result["remainder_bound_holds"])
+                    if result["distinct_prime_factor_count"] <= 1:
+                        self.assertTrue(result["leading_term_is_exact"])
+
+    def test_factorization_report_validation(self):
+        for p, degree in ((4, 2), (True, 2), (3, 0), (3, 1.5)):
+            with self.subTest(p=p, degree=degree):
+                with self.assertRaises(ValueError):
+                    irreducible_density_factorization(p, degree)
 
     def test_convergence_report_validation(self):
         for p, degree in ((4, 2), (True, 3), (3, 0), (3, 2.5)):
