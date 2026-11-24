@@ -5717,12 +5717,11 @@ class MultiDirectSumTests(unittest.TestCase):
             v[0][1] = 1
             v[2][3] = 1
             ui, vi = inverse(u, p), inverse(v, p)
-            source = [mm(mm(ui, q0, p), vi, p),
-                      mm(mm(ui, k0, p), vi, p)]
-            row_ps = [mm(mm(u, z, p), ui, p)
-                      for z in projectors(row_sizes, m)]
-            col_ps = [mm(mm(vi, z, p), v, p)
-                      for z in projectors(col_sizes, n)]
+            source = [q0, k0]
+            # The canonical-coordinate projector families are used after
+            # the witness transports the scrambled input back by U and V.
+            row_ps = projectors(row_sizes, m)
+            col_ps = projectors(col_sizes, n)
 
             # Every invertible coefficient-space map is tested. The two
             # output projected blocks must be exactly the same linear
@@ -5738,8 +5737,12 @@ class MultiDirectSumTests(unittest.TestCase):
                                 continue
                             gl_count += 1
                             transformed = mix(source, change, p)
+                            scrambled = [
+                                mm(mm(ui, coefficient, p), vi, p)
+                                for coefficient in transformed
+                            ]
                             audit = verify_pencil_multi_direct_sum_witness(
-                                transformed[0], transformed[1], p, u, v, shapes
+                                scrambled[0], scrambled[1], p, u, v, shapes
                             )
                             self.assertTrue(
                                 audit["verification"]["direct_sum_verified"], audit
@@ -5749,23 +5752,18 @@ class MultiDirectSumTests(unittest.TestCase):
                             self.assertEqual(audit["transformed_K"], mix(
                                 [q0, k0], change, p)[1])
 
-                            # Projected blocks live in the transported
-                            # coordinates: first apply the supplied row and
-                            # column basis maps to each source coefficient.
-                            source_in_basis = [
-                                mm(mm(u, coefficient, p), v, p)
-                                for coefficient in source
-                            ]
-                            output_in_basis = mix(source_in_basis, change, p)
+                            # The witness pulls each scrambled pair back
+                            # to these canonical coordinates; projected-block
+                            # identities are therefore checked here directly.
                             source_grids = [
                                 [[mm(mm(rp, coefficient, p), cp, p)
                                   for cp in col_ps] for rp in row_ps]
-                                for coefficient in source_in_basis
+                                for coefficient in source
                             ]
                             output_grids = [
                                 [[mm(mm(rp, coefficient, p), cp, p)
                                   for cp in col_ps] for rp in row_ps]
-                                for coefficient in output_in_basis
+                                for coefficient in transformed
                             ]
                             for out_index in range(2):
                                 for i, (rsize, csize) in enumerate(shapes):
