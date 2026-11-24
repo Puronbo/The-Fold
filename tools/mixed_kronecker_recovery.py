@@ -237,6 +237,83 @@ def _right_transform_equations(s, q, k, q_target, k_target, p):
     return equations, rhs
 
 
+
+def verify_mixed_kronecker_negative_certificate(
+    q: Sequence[Sequence[int]], k: Sequence[Sequence[int]], p: int,
+    result: dict, *, max_degree: int = 8, max_minors: int = 2000,
+) -> dict:
+    """Independently replay an exhaustive negative-result claim.
+
+    The verifier recomputes the complete profile, then independently enumerates
+    every left matrix by Cartesian-product order and every compatible affine
+    right-transform vector. It does not trust the result's completion flag,
+    candidate count, search mode, profile, or explanatory metadata.
+    """
+    rows, cols = _validate_pair(q, k, p)
+    required = {
+        "schema": "the-fold-mixed-kronecker-recovery-v1",
+        "field": f"F_{p}",
+        "source_shape": [rows, cols],
+        "recovered": False,
+        "decision_complete": True,
+        "search_mode": "exhaustive",
+    }
+    if not isinstance(result, dict) or any(result.get(key) != value
+                                          for key, value in required.items()):
+        return {"verified": False, "reason": "result metadata does not describe a completed exhaustive negative"}
+    budget = result.get("max_candidates")
+    claimed_count = result.get("candidates_examined")
+    if (not isinstance(budget, int) or isinstance(budget, bool) or budget < 1
+            or not isinstance(claimed_count, int) or isinstance(claimed_count, bool)
+            or claimed_count < 0 or claimed_count > budget):
+        return {"verified": False, "reason": "candidate budget metadata is invalid"}
+
+    profile = rectangular_pencil_kronecker_profile(
+        q, k, p, max_degree=max_degree, max_minors=max_minors
+    )
+    if not profile.get("complete_kronecker_structure_data") or result.get("profile") != profile:
+        return {"verified": False, "reason": "profile is incomplete or does not match recomputed input profile"}
+    target_q, target_k = _canonical_target(profile, p)
+    if (len(target_q), len(target_q[0])) != (rows, cols):
+        return {"verified": False, "reason": "recomputed canonical target has inconsistent dimensions"}
+
+    examined = 0
+    for flat_s in product(range(p), repeat=rows * rows):
+        if examined >= budget:
+            return {"verified": False, "reason": "replay exceeds claimed candidate budget"}
+        s = _matrix_from_flat(list(flat_s), rows)
+        examined += 1
+        if _det(s, p) == 0:
+            continue
+        equations, rhs = _right_transform_equations(s, q, k, target_q, target_k, p)
+        affine = _solve_affine(equations, rhs, cols * cols, p)
+        if affine is None:
+            continue
+        particular, basis = affine
+        for vector in _affine_vectors(particular, basis, p):
+            if examined >= budget:
+                return {"verified": False, "reason": "replay exceeds claimed candidate budget"}
+            examined += 1
+            t = _matrix_from_flat(vector, cols)
+            if _det(t, p) != 0:
+                return {"verified": False, "reason": "replay found an invertible strict-equivalence witness"}
+
+    if examined != claimed_count:
+        return {"verified": False, "reason": "reported candidate count differs from replay"}
+    if result.get("reason") != "all invertible S and all affine T solutions were exhausted; no strict-equivalence witness exists":
+        return {"verified": False, "reason": "negative-result explanation metadata is inconsistent"}
+    if result.get("scope") != "Complete finite-field non-equivalence decision for the profile-derived canonical target.":
+        return {"verified": False, "reason": "negative-result scope metadata is inconsistent"}
+    return {
+        "verified": True,
+        "candidates_replayed": examined,
+        "profile_recomputed": True,
+        "all_left_matrices_exhausted": True,
+        "all_affine_right_solutions_exhausted": True,
+        "no_invertible_witness_found": True,
+    }
+
+
 def recover_mixed_kronecker_pencil(
     q: Sequence[Sequence[int]], k: Sequence[Sequence[int]], p: int, *,
     max_degree: int = 8, max_minors: int = 2000,
