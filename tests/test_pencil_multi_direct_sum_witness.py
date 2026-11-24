@@ -6473,7 +6473,7 @@ class MultiDirectSumTests(unittest.TestCase):
                           representative_profile["invariant_factors_coefficients_descending"]),
                     factors
                 )
-                representative_profile["similarity_class_complete_over_base_field"]
+                self.assertTrue(representative_profile["similarity_class_complete_over_base_field"])
 
                 rep_orbit = set()
                 for change in invertibles:
