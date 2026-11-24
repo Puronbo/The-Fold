@@ -4928,3 +4928,100 @@ class MultiDirectSumTests(unittest.TestCase):
                         with self.subTest(field=p,space=kind,block=index,part="wrong-image"):
                             self.assertNotEqual(span_rank(bad_image+expected_image,p),
                                                 span_rank(expected_image,p))
+
+
+    def test_g_ep136_projector_axioms_do_not_uniquely_determine_ordered_subspaces(self):
+        def mm(a,b,p):
+            return [[sum(a[i][k]*b[k][j] for k in range(len(b)))%p
+                     for j in range(len(b[0]))] for i in range(len(a))]
+
+        def inv(a,p):
+            n=len(a); w=[[x%p for x in row]+[int(i==j) for j in range(n)]
+                         for i,row in enumerate(a)]
+            for c in range(n):
+                pivot=next((r for r in range(c,n) if w[r][c]),None)
+                if pivot is None: raise AssertionError("singular basis")
+                w[c],w[pivot]=w[pivot],w[c]
+                z=pow(w[c][c],-1,p); w[c]=[x*z%p for x in w[c]]
+                for r in range(n):
+                    if r!=c and w[r][c]:
+                        z=w[r][c]; w[r]=[(x-z*y)%p for x,y in zip(w[r],w[c])]
+            return [row[n:] for row in w]
+
+        def eye(n):
+            return [[int(i==j) for j in range(n)] for i in range(n)]
+
+        def zero(n):
+            return [[0]*n for _ in range(n)]
+
+        def projectors(sizes,n):
+            result=[]; start=0
+            for size in sizes:
+                z=zero(n)
+                for i in range(start,start+size): z[i][i]=1
+                result.append(z); start+=size
+            return result
+
+        def equal(a,b):
+            return a==b
+
+        def resolution_checks(self, family,p,n,ranks):
+            total=zero(n)
+            for i,pj in enumerate(family):
+                self.assertEqual(mm(pj,pj,p),pj)
+                self.assertEqual(sum(1 for row in pj for x in row if x)%p,
+                                 ranks[i]%p)
+                for j in range(i):
+                    self.assertEqual(mm(family[j],pj,p),zero(n))
+                    self.assertEqual(mm(pj,family[j],p),zero(n))
+                total=[[ (total[r][c]+pj[r][c])%p for c in range(n)]
+                       for r in range(n)]
+            self.assertEqual(total,eye(n))
+
+        row_sizes=[1,1,2]
+        col_sizes=[1,1,1]
+        for p in (2,3,5):
+            m=sum(row_sizes); n=sum(col_sizes)
+            U=eye(m); U[0][1]=1; U[2][0]=1; U[3][1]=1
+            V=eye(n); V[0][1]=1; V[1][2]=1
+            Ui,Vi=inv(U,p),inv(V,p)
+            row_source=projectors(row_sizes,m)
+            col_source=projectors(col_sizes,n)
+            row_good=[mm(mm(U,z,p),Ui,p) for z in row_source]
+            col_good=[mm(mm(Vi,z,p),V,p) for z in col_source]
+
+            # Coordinate permutations preserve the complete orthogonal
+            # idempotent family and every individual projector rank, while
+            # moving the represented subspaces to a different ordered split.
+            row_perm=eye(m)
+            row_perm[0][0]=0; row_perm[2][2]=0
+            row_perm[0][2]=1; row_perm[2][0]=1
+            col_perm=eye(n)
+            col_perm[0][0]=0; col_perm[1][1]=0
+            col_perm[0][1]=1; col_perm[1][0]=1
+            row_alt_source=[mm(mm(row_perm,z,p),inv(row_perm,p),p)
+                            for z in row_source]
+            col_alt_source=[mm(mm(col_perm,z,p),inv(col_perm,p),p)
+                            for z in col_source]
+            row_alt=[mm(mm(U,z,p),Ui,p) for z in row_alt_source]
+            col_alt=[mm(mm(Vi,z,p),V,p) for z in col_alt_source]
+
+            with self.subTest(field=p,space="row"):
+                resolution_checks(self,row_alt,p,m,row_sizes)
+                self.assertTrue(any(not equal(a,b) for a,b in zip(row_alt,row_good)))
+                for i,(a,b) in enumerate(zip(row_alt,row_good)):
+                    if row_sizes[i]:
+                        self.assertNotEqual(a,b)
+            with self.subTest(field=p,space="column"):
+                resolution_checks(self,col_alt,p,n,col_sizes)
+                self.assertTrue(any(not equal(a,b) for a,b in zip(col_alt,col_good)))
+                for i,(a,b) in enumerate(zip(col_alt,col_good)):
+                    self.assertNotEqual(a,b)
+
+            # The alternative families are valid resolutions, not malformed
+            # certificates: only comparison with the intended transported
+            # subspaces distinguishes their ordered decomposition.
+            self.assertEqual([sum(x for row in z for x in row)%p for z in row_alt],
+                             [r%p for r in row_sizes])
+            self.assertEqual([sum(x for row in z for x in row) for z in col_alt],
+                             [r for r in col_sizes])
