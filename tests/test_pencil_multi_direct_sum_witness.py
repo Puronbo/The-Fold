@@ -2531,7 +2531,7 @@ class MultiDirectSumTests(unittest.TestCase):
         for p in (2, 3, 5):
             shapes = [(1, 2), (2, 1)]
             target_q = [[1, 2 % p, 0], [0, 0, 1], [0, 0, 2 % p]]
-            target_k = [[2 % p, 1, 0], [0, 1, 2 % p], [0, 0, 1]]
+            target_k = [[2 % p, 1, 0], [0, 0, 2 % p], [0, 0, 1]]
             left = [[1, 1, 0], [0, 1, 1], [0, 0, 1]]
             right = [[1, 0, 1], [0, 1, 1], [0, 0, 1]]
             left_inv, right_inv = inverse(left, p), inverse(right, p)
