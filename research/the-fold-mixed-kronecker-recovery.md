@@ -77,3 +77,12 @@ Refactored exhaustive search to use two small, independently testable iterators.
 New regressions compare the left-matrix stream against the full Cartesian product for F₂ and F₃ at dimensions one and two, checking exact cardinality, set equality, uniqueness, and identity-first ordering. The affine iterator is compared against brute-force solutions of a small linear system over F₃, with separate unique-solution and unconstrained-space checks. These tests establish the iterator combinatorics on the tested finite cases; they do not turn a budget-limited run into an exhaustive decision or prove the separate affine solver correct for all inputs.
 
 The search budget still counts both examined left matrices and tested right-transform matrices. Exhaustive negative status is only returned when both nested streams complete without hitting the budget; positive results remain backed by exact strict-equivalence verification.
+
+
+## G-EP76 — Independent affine-solver verification
+
+Added a deterministic exhaustive cross-check of `_solve_affine` against brute-force solution sets. For each prime field F₂ and F₃, the test visits every coefficient matrix with zero through two rows and zero through two columns, and every right-hand side of the matching row dimension. It independently enumerates all candidate vectors, then checks that the solver returns `None` exactly for inconsistent systems. For consistent systems, the affine iterator must produce the exact brute-force solution set with no duplicates.
+
+The grid includes zero-equation systems, zero-variable systems, rank-deficient systems, unique solutions, redundant equations, and inconsistent systems insofar as they occur in the exhaustive matrix/RHS enumeration. The test checks more than one thousand systems in total.
+
+**Scope:** this is a finite exhaustive regression over the stated dimensions and fields. It does not prove the elimination implementation correct for arbitrary dimensions, arbitrary prime fields, or malformed mismatched matrix/RHS inputs.
