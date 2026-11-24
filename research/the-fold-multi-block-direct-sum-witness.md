@@ -89,3 +89,10 @@ A dimension-incompatible transform remains a malformed caller input and raises V
 A test-only reference calculation independently computes SQT and SKT, slices every ordered rectangular block, and uses a separately implemented Gaussian elimination routine for transform ranks. For valid witnesses and two false-witness controls (a source coefficient mutation and an invertible transform perturbation), it compares the verifier's transformed matrices, complete Q/K block grids, both ranks, both invertibility flags, both off-diagonal-zero flags, and aggregate decision against the reference calculation over F₂, F₃, F₅, and F₇.
 
 The independent routines are test-local and do not call the verifier's private multiplication, split, or rank helpers. This provides finite regression evidence that diagnostics match the algebraic data; it is not a formal proof of the implementation or a decomposition discovery result.
+
+
+## G-EP95: Serialized audit round-trip and replay
+
+Tests JSON serialization/deserialization of both valid and false audit records over F₂, F₃, F₅, and F₇. The restored structure is compared recursively with exact Python types, then compared against a fresh verifier result recomputed from the original source matrices, field, transforms, and partition. Mutations to the aggregate success flag, off-diagonal-zero flag, transform-rank type (including bool-for-int), or required block grid are rejected by this exact replay comparison.
+
+The verifier API accepts source inputs and transforms, not a serialized audit record. Therefore this milestone establishes regression coverage for JSON round-trip stability and an explicit test-side replay discipline; it does not claim to introduce a serialized-certificate ingestion or verification API.
