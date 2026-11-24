@@ -340,6 +340,113 @@ def verify_mixed_kronecker_negative_certificate(
     }
 
 
+
+def verify_mixed_kronecker_recovery_certificate(
+    q: Sequence[Sequence[int]], k: Sequence[Sequence[int]], p: int,
+    result: dict,
+) -> dict:
+    """Replay the profile and canonical target for any recovery outcome.
+
+    Positive witnesses are re-audited algebraically. Negative exhaustive
+    outcomes delegate to the exhaustive search replay. Incomplete or bounded
+    failures are checked as accurately described outcomes, never as negatives.
+    """
+    rows, cols = _validate_pair(q, k, p)
+    if not isinstance(result, dict):
+        return {"verified": False, "reason": "certificate result must be a dictionary"}
+    common = {
+        "schema": "the-fold-mixed-kronecker-recovery-v1",
+        "field": f"F_{p}",
+        "source_shape": [rows, cols],
+    }
+    if any(result.get(key) != value for key, value in common.items()):
+        return {"verified": False, "reason": "recovery metadata does not match the supplied pencil"}
+    degree = result.get("profile_max_degree")
+    minors = result.get("profile_max_minors")
+    budget = result.get("max_candidates")
+    mode = result.get("search_mode")
+    if (not isinstance(degree, int) or isinstance(degree, bool) or degree < 0
+            or not isinstance(minors, int) or isinstance(minors, bool) or minors < 1
+            or not isinstance(budget, int) or isinstance(budget, bool) or budget < 1
+            or mode not in ("structured", "exhaustive")):
+        return {"verified": False, "reason": "recovery parameter metadata is invalid"}
+    if not isinstance(result.get("profile"), dict):
+        return {"verified": False, "reason": "recovery profile must be a dictionary"}
+    try:
+        profile = rectangular_pencil_kronecker_profile(
+            q, k, p, max_degree=degree, max_minors=minors
+        )
+        if result["profile"] != profile:
+            return {"verified": False, "reason": "stored profile differs from recomputed profile"}
+        if not profile["complete_kronecker_structure_data"]:
+            valid = (
+                result.get("recovered") is False
+                and result.get("decision_complete") is False
+                and result.get("reason") == "Kronecker profile is incomplete or its dimension identities failed"
+            )
+            return {
+                "verified": bool(valid),
+                "profile_recomputed": True,
+                "canonical_target_reconstructed": False,
+                "reason": None if valid else "incomplete-profile outcome metadata is inconsistent",
+            }
+        target_q, target_k = _canonical_target(profile, p)
+        if (len(target_q), len(target_q[0])) != (rows, cols):
+            return {"verified": False, "reason": "canonical target dimensions are inconsistent"}
+        if result.get("recovered") is True:
+            if result.get("decision_complete") is not True:
+                return {"verified": False, "reason": "positive witness must be marked decision complete"}
+            if (result.get("canonical_Q") != target_q or result.get("canonical_K") != target_k
+                    or result.get("right_minimal_indices") != profile["singular_part"]["right_minimal_indices"]
+                    or result.get("left_minimal_indices") != profile["singular_part"]["left_minimal_indices"]
+                    or result.get("regular_dimension") != profile["regular_part"]["dimension"]
+                    or result.get("canonical_block_shapes") != [list(x) for x in _canonical_block_shapes(profile, p)]):
+                return {"verified": False, "reason": "positive canonical-target metadata is inconsistent"}
+            s, t = result.get("left_transform_S"), result.get("right_transform_T")
+            audit = strict_pencil_equivalence_audit(q, k, p, target_q, target_k, s, t)
+            if not audit["strict_equivalence_certified"] or result.get("verification") != audit:
+                return {"verified": False, "reason": "positive strict-equivalence witness failed replay"}
+            multi = verify_pencil_multi_direct_sum_witness(
+                q, k, p, s, t, _canonical_block_shapes(profile, p)
+            )
+            if result.get("multi_block_direct_sum_audit") != multi or not multi["verification"]["direct_sum_verified"]:
+                return {"verified": False, "reason": "positive multi-block audit failed replay"}
+            count = result.get("candidates_examined")
+            if not isinstance(count, int) or isinstance(count, bool) or not 1 <= count <= budget:
+                return {"verified": False, "reason": "positive candidate count is invalid"}
+            if result.get("search_mode") != mode:
+                return {"verified": False, "reason": "positive search mode metadata is inconsistent"}
+            return {
+                "verified": True, "profile_recomputed": True,
+                "canonical_target_reconstructed": True,
+                "strict_equivalence_replayed": True,
+                "multi_block_audit_replayed": True,
+            }
+        if result.get("recovered") is not False:
+            return {"verified": False, "reason": "recovery flag is malformed"}
+        if mode == "exhaustive" and result.get("decision_complete") is True:
+            negative = verify_mixed_kronecker_negative_certificate(q, k, p, result)
+            return {
+                **negative,
+                "canonical_target_reconstructed": negative.get("verified", False),
+            }
+        count = result.get("candidates_examined")
+        valid = (
+            result.get("decision_complete") is False
+            and isinstance(count, int) and not isinstance(count, bool)
+            and 0 <= count <= budget
+            and result.get("reason") == "search budget exhausted or structured search family was incomplete"
+        )
+        return {
+            "verified": bool(valid),
+            "profile_recomputed": True,
+            "canonical_target_reconstructed": True,
+            "reason": None if valid else "bounded-failure metadata is inconsistent",
+        }
+    except (TypeError, KeyError, IndexError, AttributeError, ArithmeticError, OverflowError):
+        return {"verified": False, "reason": "malformed recovery certificate could not be replayed"}
+
+
 def recover_mixed_kronecker_pencil(
     q: Sequence[Sequence[int]], k: Sequence[Sequence[int]], p: int, *,
     max_degree: int = 8, max_minors: int = 2000,
@@ -368,6 +475,7 @@ def recover_mixed_kronecker_pencil(
                 "field": f"F_{p}", "source_shape": [rows, cols],
                 "recovered": False, "decision_complete": False,
                 "profile_max_degree": max_degree, "profile_max_minors": max_minors,
+                "max_candidates": max_candidates, "search_mode": search_mode,
                 "reason": "Kronecker profile is incomplete or its dimension identities failed",
                 "profile": profile}
     target_q, target_k = _canonical_target(profile, p)
@@ -416,6 +524,7 @@ def recover_mixed_kronecker_pencil(
                     "schema": "the-fold-mixed-kronecker-recovery-v1",
                     "field": f"F_{p}", "source_shape": [rows, cols],
                     "profile_max_degree": max_degree, "profile_max_minors": max_minors,
+                    "max_candidates": max_candidates,
                     "recovered": True, "decision_complete": True,
                     "right_minimal_indices": profile["singular_part"]["right_minimal_indices"],
                     "left_minimal_indices": profile["singular_part"]["left_minimal_indices"],
