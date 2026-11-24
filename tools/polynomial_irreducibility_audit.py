@@ -105,7 +105,7 @@ def irreducible_density_convergence(p: int, degree: int) -> dict:
 
     divisor_bound = Fraction(2 ** omega - 1, 2 ** (degree // 2))
     uniform_bound = Fraction(degree - 1, 2 ** (degree // 2))
-    return_float_bound = float(uniform_bound)
+    return_float_bound = (degree - 1) * (2 ** (-degree / 2))
     return {
         "schema": "the-fold-irreducible-density-convergence-v1",
         "field_prime": p,
@@ -121,6 +121,7 @@ def irreducible_density_convergence(p: int, degree: int) -> dict:
         "distinct_prime_divisor_count": omega,
         "divisor_count_bound": float(divisor_bound),
         "uniform_prime_field_bound": return_float_bound,
+        "uniform_bound_rational_envelope": str(uniform_bound),
         "uniform_bound_holds": abs(error) <= uniform_bound,
     }
 
