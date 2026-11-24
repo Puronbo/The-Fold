@@ -643,5 +643,58 @@ class MixedKroneckerRecoveryTests(unittest.TestCase):
             )
 
 
+
+    def test_positive_recovery_replay_cross_field_basis_scrambles(self):
+        for p in (2, 3, 5, 7):
+            with self.subTest(p=p):
+                q, k = self.mixed_pair()
+                left = [[1, 1, 0, 0], [0, 1, 0, 0],
+                        [0, 0, 1, 0], [0, 0, 0, 1]]
+                right = [[1, 0, 0, 0], [0, 1, 1, 0],
+                         [0, 0, 1, 0], [0, 0, 0, 1]]
+                q = mm(mm(inverse(left, p), q, p), inverse(right, p), p)
+                k = mm(mm(inverse(left, p), k, p), inverse(right, p), p)
+                result = recover_mixed_kronecker_pencil(
+                    q, k, p, max_degree=2, max_candidates=20000
+                )
+                self.assertTrue(result["recovered"], result.get("reason"))
+                self.assertTrue(
+                    verify_mixed_kronecker_recovery_certificate(q, k, p, result)["verified"]
+                )
+                forged_field = dict(result, field=f"F_{p + 2}")
+                self.assertFalse(
+                    verify_mixed_kronecker_recovery_certificate(q, k, p, forged_field)["verified"]
+                )
+                from copy import deepcopy
+                forged_transform = deepcopy(result)
+                forged_transform["left_transform_S"][0][0] = True
+                self.assertFalse(
+                    verify_mixed_kronecker_recovery_certificate(q, k, p, forged_transform)["verified"]
+                )
+
+    def test_positive_recovery_replay_accepts_distinct_valid_witnesses(self):
+        from copy import deepcopy
+        for p in (3, 5, 7):
+            with self.subTest(p=p):
+                q, k = self.mixed_pair()
+                result = recover_mixed_kronecker_pencil(q, k, p, max_degree=2)
+                self.assertTrue(result["recovered"], result.get("reason"))
+                alternative = deepcopy(result)
+                scalar = p - 1
+                alternative["left_transform_S"] = [
+                    [(scalar * value) % p for value in row]
+                    for row in result["left_transform_S"]
+                ]
+                inverse_scalar = pow(scalar, -1, p)
+                alternative["right_transform_T"] = [
+                    [(inverse_scalar * value) % p for value in row]
+                    for row in result["right_transform_T"]
+                ]
+                audit = verify_mixed_kronecker_recovery_certificate(q, k, p, alternative)
+                self.assertTrue(audit["verified"], audit)
+                self.assertNotEqual(
+                    alternative["left_transform_S"], result["left_transform_S"]
+                )
+
 if __name__ == "__main__":
     unittest.main()
