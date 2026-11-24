@@ -97,6 +97,51 @@ class MixedKroneckerRecoveryTests(unittest.TestCase):
             audit = verify_mixed_kronecker_recovery_certificate(q, k, 5, forged)
             self.assertFalse(audit["verified"], audit)
 
+    def test_positive_recovery_rejects_profile_and_canonical_metadata_type_forgery(self):
+        from copy import deepcopy
+
+        q, k = self.mixed_pair()
+        result = recover_mixed_kronecker_pencil(q, k, 5, max_degree=2)
+        self.assertTrue(verify_mixed_kronecker_recovery_certificate(q, k, 5, result)["verified"])
+
+        def replace_first_integer(value):
+            if isinstance(value, list):
+                for index, item in enumerate(value):
+                    if isinstance(item, int) and not isinstance(item, bool):
+                        value[index] = True
+                        return True
+                    if replace_first_integer(item):
+                        return True
+            elif isinstance(value, dict):
+                for item in value.values():
+                    if replace_first_integer(item):
+                        return True
+            return False
+
+        mutations = []
+        forged = deepcopy(result)
+        self.assertTrue(replace_first_integer(forged["profile"]))
+        mutations.append(("profile integer replaced by boolean", forged))
+        forged = deepcopy(result)
+        forged["source_shape"][0] = True
+        mutations.append(("source shape boolean alias", forged))
+        forged = deepcopy(result)
+        forged["canonical_Q"][0][0] = True
+        mutations.append(("canonical matrix boolean alias", forged))
+        forged = deepcopy(result)
+        forged["regular_dimension"] = True
+        mutations.append(("regular dimension boolean alias", forged))
+        forged = deepcopy(result)
+        forged["canonical_block_shapes"][0][0] = True
+        mutations.append(("canonical block-shape boolean alias", forged))
+        forged = deepcopy(result)
+        forged["right_minimal_indices"] = tuple(forged["right_minimal_indices"])
+        mutations.append(("noncanonical index container", forged))
+        for label, forged in mutations:
+            with self.subTest(label=label):
+                audit = verify_mixed_kronecker_recovery_certificate(q, k, 5, forged)
+                self.assertFalse(audit["verified"], audit)
+
     def test_positive_recovery_replays_and_rejects_forged_nested_audits(self):
         from copy import deepcopy
 
