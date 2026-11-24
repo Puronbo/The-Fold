@@ -218,3 +218,6 @@ of its witness.
 
 
 - **G-EP118:** cross-checks simultaneous off-diagonal constraint rank using row reduction and an independently enumerated row span. Zero, duplicate, scalar-multiple, overlapping, and rank-increasing coefficient constraints are covered; exhaustive right-transform-vector enumeration confirms the nullity solution count over F₂/F₃/F₅. Fixed-left 2×2 finite controls only.
+
+
+- **G-EP119:** extends test-side off-diagonal equation rank/nullity checks to rectangular sources, including a 2×3 pencil, zero-row/zero-column blocks, and an empty off-diagonal region. Elimination rank is cross-checked against explicit row-span enumeration; sampled equations are checked against direct matrix products, and small kernels are exhaustively counted over F₂/F₃. Finite regression coverage only.
