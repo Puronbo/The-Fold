@@ -150,3 +150,6 @@ of its witness.
 
 
 **G-EP94 — independent audit-record cross-checks:** test-only matrix multiplication, Gaussian rank, and block slicing independently reconstruct SQT/SKT and every ordered rectangular block. The tests compare all verifier diagnostic fields, including both transform ranks, invertibility flags, per-coefficient off-diagonal-zero flags, and the aggregate decision, for valid and deliberately false witnesses over F₂/F₃/F₅/F₇.
+
+
+**G-EP95 — serialized audit round-trip and replay:** JSON round-trips valid and false multi-block audit records, then exactly compares the restored data with a fresh audit recomputed from source matrices and transforms. Forged aggregate flags, stale off-diagonal flags, boolean-for-integer rank substitutions, and missing block grids are rejected by type-exact replay comparison. The verifier itself consumes source matrices and transforms, not serialized audit records; this is a test of serialization integrity and replay discipline, not a new certificate-loading API.
