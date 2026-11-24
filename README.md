@@ -63,3 +63,6 @@
 
 
 **Seeded randomized certificate verification (G-EP71):** adds reproducible randomized tests over prime fields F₂, F₃, F₅, and F₇. Generated cases vary right/left singular minimal indices, regular one-dimensional pencil coefficients, and component ordering; every successfully assembled certificate is independently checked by the direct algebraic verifier. A second seeded suite mutates a randomly selected canonical coefficient entry and requires verification to fail. Fixed seeds keep failures reproducible. These tests broaden finite-field and block-layout coverage but are not a probabilistic proof of correctness.
+
+
+**Seeded basis-scrambled component recovery (G-EP72):** extends randomized coverage by independently applying reproducible invertible constant left/right basis changes to each right-singular, left-singular, and regular component before assembly. The transformed mixed components are shuffled and passed through the existing recovery/canonicalization pipeline; every completed result must pass the direct algebraic certificate verifier. Cases span F₂, F₃, F₅, and F₇ with fixed seeds. This is finite regression evidence for basis-scrambled examples, not a universal recovery theorem or a polynomial-time guarantee.
