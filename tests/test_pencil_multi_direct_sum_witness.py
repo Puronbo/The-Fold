@@ -5935,3 +5935,112 @@ class MultiDirectSumTests(unittest.TestCase):
                 self.assertEqual(recovered, [q, k])
                 self.assertEqual([permuted_shapes[i] for i in inverse_order], shapes)
             self.assertEqual(permutation_count, 24)
+
+
+    def test_g_ep146_repeated_equal_blocks_allow_only_consistent_relabeling(self):
+        # Three indistinguishable 1x1 shapes have distinct coefficient data.
+        # The final zero-column and zero-row summands remain explicit.
+        shapes = [(1, 1), (1, 1), (1, 1), (0, 1), (1, 0)]
+        m, n = sum(r for r, c in shapes), sum(c for r, c in shapes)
+
+        def permute_coordinates(matrix, row_order, col_order):
+            return [[matrix[i][j] for j in col_order] for i in row_order]
+
+        def projected_grid(matrix, row_offsets, col_offsets):
+            return [
+                [
+                    [row[col_offsets[j]:col_offsets[j+1]]
+                     for row in matrix[row_offsets[i]:row_offsets[i+1]]]
+                    for j in range(len(shapes))
+                ]
+                for i in range(len(shapes))
+            ]
+
+        def reorder_indices(sizes, order):
+            offsets, cursor = [], 0
+            for size in sizes:
+                offsets.append(list(range(cursor, cursor + size)))
+                cursor += size
+            return [index for block in order for index in offsets[block]]
+
+        row_offsets, col_offsets = [0], [0]
+        for r, c in shapes:
+            row_offsets.append(row_offsets[-1] + r)
+            col_offsets.append(col_offsets[-1] + c)
+
+        for p in (2, 3, 5):
+            q = [[0] * n for _ in range(m)]
+            k = [[0] * n for _ in range(m)]
+            # The repeated square blocks have deliberately different ordered
+            # coefficient pairs, so their indexed identities are observable.
+            values = [(1, 0), (0, 1), (1, 1)]
+            for block, (qv, kv) in enumerate(values):
+                q[row_offsets[block]][col_offsets[block]] = qv % p
+                k[row_offsets[block]][col_offsets[block]] = kv % p
+            # Populate the rectangular edge summands without coupling them.
+            q[row_offsets[3]][col_offsets[3]] = 1 % p
+            k[row_offsets[3]][col_offsets[3]] = 2 % p
+            q[row_offsets[4]][col_offsets[4]] = 2 % p
+            k[row_offsets[4]][col_offsets[4]] = 1 % p
+
+            baseline = verify_pencil_multi_direct_sum_witness(
+                q, k, p, ident(m), ident(n), shapes
+            )
+            self.assertTrue(baseline["verification"]["direct_sum_verified"])
+            original_grids = [
+                projected_grid(matrix, row_offsets, col_offsets)
+                for matrix in (q, k)
+            ]
+
+            # S_3 acts on the three equal-shaped blocks. Transport row and
+            # column coordinates together; shape metadata is unchanged.
+            permutation_count = 0
+            for repeated_order in itertools.permutations(range(3)):
+                permutation_count += 1
+                order = list(repeated_order) + [3, 4]
+                row_order = reorder_indices([r for r, _ in shapes], order)
+                col_order = reorder_indices([c for _, c in shapes], order)
+                pair = [
+                    permute_coordinates(matrix, row_order, col_order)
+                    for matrix in (q, k)
+                ]
+                audit = verify_pencil_multi_direct_sum_witness(
+                    pair[0], pair[1], p, ident(m), ident(n), shapes
+                )
+                self.assertTrue(audit["verification"]["direct_sum_verified"], audit)
+                new_grids = [
+                    projected_grid(matrix, row_offsets, col_offsets)
+                    for matrix in pair
+                ]
+                for coefficient_index in range(2):
+                    for i in range(5):
+                        for j in range(5):
+                            self.assertEqual(
+                                new_grids[coefficient_index][i][j],
+                                original_grids[coefficient_index][order[i]][order[j]]
+                            )
+                inverse_rows = [row_order.index(i) for i in range(m)]
+                inverse_cols = [col_order.index(j) for j in range(n)]
+                recovered = [
+                    permute_coordinates(matrix, inverse_rows, inverse_cols)
+                    for matrix in pair
+                ]
+                self.assertEqual(recovered, [q, k])
+            self.assertEqual(permutation_count, 6)
+
+            # Shape-preserving adversary: move only one row subspace while
+            # leaving the column assignment and the declared equal shapes
+            # untouched. This is not a consistent relabeling. The resulting
+            # off-diagonal entries must be visible in both coefficient grids.
+            wrong_rows = list(range(m))
+            wrong_rows[0], wrong_rows[1] = wrong_rows[1], wrong_rows[0]
+            wrong_pair = [
+                permute_coordinates(matrix, wrong_rows, list(range(n)))
+                for matrix in (q, k)
+            ]
+            rejected = verify_pencil_multi_direct_sum_witness(
+                wrong_pair[0], wrong_pair[1], p, ident(m), ident(n), shapes
+            )
+            self.assertFalse(rejected["verification"]["Q_off_diagonal_blocks_zero"])
+            self.assertFalse(rejected["verification"]["K_off_diagonal_blocks_zero"])
+            self.assertFalse(rejected["verification"]["direct_sum_verified"])
