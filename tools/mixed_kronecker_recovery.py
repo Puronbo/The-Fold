@@ -341,6 +341,20 @@ def verify_mixed_kronecker_negative_certificate(
 
 
 
+def _certificate_value_equal(actual, expected):
+    """Compare certificate data without bool/int equality coercion."""
+    if type(actual) is not type(expected):
+        return False
+    if isinstance(expected, dict):
+        return actual.keys() == expected.keys() and all(
+            _certificate_value_equal(actual[key], expected[key]) for key in expected
+        )
+    if isinstance(expected, (list, tuple)):
+        return len(actual) == len(expected) and all(
+            _certificate_value_equal(a, e) for a, e in zip(actual, expected)
+        )
+    return actual == expected
+
 def verify_mixed_kronecker_recovery_certificate(
     q: Sequence[Sequence[int]], k: Sequence[Sequence[int]], p: int,
     result: dict,
@@ -373,7 +387,7 @@ def verify_mixed_kronecker_recovery_certificate(
         "field": f"F_{p}",
         "source_shape": [rows, cols],
     }
-    if any(result.get(key) != value for key, value in common.items()):
+    if any(not _certificate_value_equal(result.get(key), value) for key, value in common.items()):
         return {"verified": False, "reason": "recovery metadata does not match the supplied pencil"}
     degree = result.get("profile_max_degree")
     minors = result.get("profile_max_minors")
@@ -390,7 +404,7 @@ def verify_mixed_kronecker_recovery_certificate(
         profile = rectangular_pencil_kronecker_profile(
             q, k, p, max_degree=degree, max_minors=minors
         )
-        if result["profile"] != profile:
+        if not _certificate_value_equal(result["profile"], profile):
             return {"verified": False, "reason": "stored profile differs from recomputed profile"}
         if not profile["complete_kronecker_structure_data"]:
             valid = (
@@ -410,11 +424,12 @@ def verify_mixed_kronecker_recovery_certificate(
         if result.get("recovered") is True:
             if result.get("decision_complete") is not True:
                 return {"verified": False, "reason": "positive witness must be marked decision complete"}
-            if (result.get("canonical_Q") != target_q or result.get("canonical_K") != target_k
-                    or result.get("right_minimal_indices") != profile["singular_part"]["right_minimal_indices"]
-                    or result.get("left_minimal_indices") != profile["singular_part"]["left_minimal_indices"]
-                    or result.get("regular_dimension") != profile["regular_part"]["dimension"]
-                    or result.get("canonical_block_shapes") != [list(x) for x in _canonical_block_shapes(profile, p)]):
+            if (not _certificate_value_equal(result.get("canonical_Q"), target_q)
+                    or not _certificate_value_equal(result.get("canonical_K"), target_k)
+                    or not _certificate_value_equal(result.get("right_minimal_indices"), profile["singular_part"]["right_minimal_indices"])
+                    or not _certificate_value_equal(result.get("left_minimal_indices"), profile["singular_part"]["left_minimal_indices"])
+                    or not _certificate_value_equal(result.get("regular_dimension"), profile["regular_part"]["dimension"])
+                    or not _certificate_value_equal(result.get("canonical_block_shapes"), [list(x) for x in _canonical_block_shapes(profile, p)])):
                 return {"verified": False, "reason": "positive canonical-target metadata is inconsistent"}
             s, t = result.get("left_transform_S"), result.get("right_transform_T")
 
