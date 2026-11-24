@@ -1177,3 +1177,104 @@ def coprime_composition_excess_temporal_fold(
             "evolution across these three states"
         ),
     }
+
+
+
+def laurent_spectrum_global_sign_certificate(spectrum: list[dict]) -> dict:
+    """Certify the sign of an integer Laurent spectrum for every real Q >= 2.
+
+    Each term has nonnegative integer exponent and integer coefficient.
+    Duplicate exponents are combined. The polynomial is normalized by
+    factoring out its smallest power of x=1/Q, then an exact rational Sturm
+    sequence counts roots on (0, 1/2). The endpoint x=1/2 is checked
+    separately. The zero polynomial is reported explicitly.
+    """
+    if not isinstance(spectrum, list) or not spectrum:
+        raise ValueError("spectrum must be a nonempty list of terms")
+    coefficients: dict[int, int] = {}
+    for term in spectrum:
+        if not isinstance(term, dict) or set(term) != {"exponent", "coefficient"}:
+            raise ValueError(
+                "each spectrum term must contain exponent and coefficient"
+            )
+        exponent = term["exponent"]
+        coefficient = term["coefficient"]
+        if (isinstance(exponent, bool) or not isinstance(exponent, int)
+                or exponent < 0):
+            raise ValueError("exponents must be nonnegative integers")
+        if (isinstance(coefficient, bool) or not isinstance(coefficient, int)):
+            raise ValueError("coefficients must be integers")
+        coefficients[exponent] = coefficients.get(exponent, 0) + coefficient
+
+    normalized_terms = [
+        {"exponent": exponent, "coefficient": coefficient}
+        for exponent, coefficient in sorted(coefficients.items())
+        if coefficient
+    ]
+    if not normalized_terms:
+        return {
+            "schema": "the-fold-laurent-global-sign-sturm-v1",
+            "normalized_spectrum": [],
+            "identically_zero": True,
+            "global_sign_certified_for_all_real_q_ge_2": False,
+            "certified_sign": None,
+            "sturm_root_count_open_interval": None,
+            "q_equals_two_value_sign": "zero",
+            "q_equals_two_is_root": True,
+            "interpretation": "the Laurent spectrum is identically zero",
+        }
+
+    base_exponent = normalized_terms[0]["exponent"]
+    polynomial = [Fraction(0)] * (
+        normalized_terms[-1]["exponent"] - base_exponent + 1
+    )
+    for term in normalized_terms:
+        polynomial[term["exponent"] - base_exponent] = Fraction(
+            term["coefficient"]
+        )
+    polynomial = _poly_trim(polynomial)
+    endpoint = Fraction(1, 2)
+    endpoint_value = sum(
+        (coefficient * endpoint ** index
+         for index, coefficient in enumerate(polynomial)),
+        Fraction(0),
+    )
+    if len(polynomial) == 1:
+        root_count_open = 0
+    else:
+        sequence = _sturm_sequence(polynomial)
+        root_count_open = (
+            _sturm_variations(sequence, Fraction(0), 1)
+            - _sturm_variations(sequence, endpoint, -1)
+        )
+    endpoint_is_root = endpoint_value == 0
+    certified = root_count_open == 0 and not endpoint_is_root
+    leading_coefficient = normalized_terms[0]["coefficient"]
+    leading_sign = "positive" if leading_coefficient > 0 else "negative"
+    endpoint_sign = (
+        "positive" if endpoint_value > 0 else
+        "negative" if endpoint_value < 0 else "zero"
+    )
+    return {
+        "schema": "the-fold-laurent-global-sign-sturm-v1",
+        "normalized_spectrum": normalized_terms,
+        "factored_minimum_exponent": base_exponent,
+        "polynomial_coefficients_ascending": [
+            value.numerator if value.denominator == 1 else str(value)
+            for value in polynomial
+        ],
+        "polynomial_degree": len(polynomial) - 1,
+        "open_interval": "(0, 1/2)",
+        "sturm_root_count_open_interval": root_count_open,
+        "q_equals_two_value_sign": endpoint_sign,
+        "q_equals_two_is_root": endpoint_is_root,
+        "identically_zero": False,
+        "global_sign_certified_for_all_real_q_ge_2": certified,
+        "certified_sign": leading_sign if certified else None,
+        "leading_sign": leading_sign,
+        "interpretation": (
+            "zero roots on (0,1/2] prove the sign for every real Q >= 2; "
+            "a positive root count or endpoint root means this certificate "
+            "does not establish a global sign"
+        ),
+    }
