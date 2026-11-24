@@ -23,8 +23,9 @@ The audit is exhaustive when \(p^n\) does not exceed its configured
 max_cases. Otherwise it selects a distinct, deterministic pseudorandom
 sample, controlled by sample_count and seed. It reports the domain
 size, checked count, mode, completeness flag, agreement result, mismatch
-count, and up to twenty mismatch examples. A sampled agreement is evidence
-only about the checked sample; it is not a proof for the full domain.
+count, and up to twenty mismatch examples. A sampled agreement is evidence only about the checked sample unless the
+sample happens to cover the entire finite domain, in which case completeness
+is reported as true.
 
 Integer encodings are sampled directly, so the implementation does not
 materialize the full coefficient Cartesian product for large domains.
