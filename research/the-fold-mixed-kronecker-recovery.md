@@ -135,3 +135,10 @@ Positive mixed-recovery replay now validates both returned transform containers 
 Adversarial regressions cover absent/scalar/empty/ragged/wrong-size transforms, boolean and floating-point entries, singular transforms, forged or missing fields in the nested strict-equivalence audit, malformed audit containers, and forged/missing multi-block audit data. The verifier recomputes both audits and compares the complete stored structures, rather than trusting nested success flags. Separate tests preserve the boundary: invalid caller matrices or fields raise ValueError; malformed positive certificate contents fail closed with verified=false.
 
 This is a replay/input-boundary hardening change. It does not change recovery search, prove uniqueness of canonical witnesses, or broaden the mathematical scope of finite-field strict-equivalence verification.
+
+
+## G-EP83 — Type-exact positive profile and canonical reconstruction
+
+Positive recovery replay reconstructs the profile from the supplied pencil and certificate-bound profile limits, then rebuilds the canonical target and block shapes from that recomputed profile. Certificate comparisons are type-exact and recursive: Python boolean/integer equality can no longer let a forged boolean stand in for an integer in source dimensions, profile entries, canonical matrices, minimal-index data, regular dimensions, or block shapes.
+
+Adversarial tests mutate nested profile integers, source-shape entries, canonical matrix entries, regular dimensions, and block-shape entries into booleans, and alter canonical container types. Each mutation must fail replay while the unmodified positive certificate remains valid. This strengthens deterministic certificate reconstruction and representation integrity; it is not a separate Kronecker classifier, a uniqueness proof, or a claim that canonicalization is independent of the existing exact profile/canonical-target routines.
