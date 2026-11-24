@@ -117,3 +117,42 @@ For every fixed real Q>=2:
 - H_k(Q) increases to 0 from below.
 
 Thus after the one-time sign transition, the sequence is increasing and strictly discretely concave, with positive first differences that strictly decrease to zero.
+
+
+## G-EP211 — Exact asymptotic equivalent and super-geometric ratio
+
+For k>=2 write m=3^k and
+\[
+B_k(Q)=1-Q^{-(m/3-1)}-Q^{-(2m/3-1)}+Q^{-(m-1)}.
+\]
+Factoring the exact spectrum gives
+\[
+H_k(Q)=-Q^{-(1+2m/3)}B_k(Q).
+\]
+All three correction exponents tend to infinity, so B_k(Q)->1. In fact this convergence is uniform over real Q>=2, since each correction is bounded by its value at Q=2. Therefore
+\[
+\boxed{H_k(Q)\sim -Q^{-(1+2\cdot3^{k-1})}}
+\]
+for each fixed Q>=2, with a uniform relative asymptotic over Q>=2.
+
+For successive terms, the leading exponents differ by
+\[
+(1+2\cdot3^k)-(1+2\cdot3^{k-1})=4\cdot3^{k-1}.
+\]
+Hence the exact ratio is
+\[
+\frac{H_{k+1}(Q)}{H_k(Q)}
+=Q^{-4\cdot3^{k-1}}\frac{B_{k+1}(Q)}{B_k(Q)}.
+\]
+Because B_k and B_(k+1) both tend uniformly to 1, their quotient tends uniformly to 1. Consequently
+\[
+\boxed{
+\frac{H_{k+1}(Q)}{H_k(Q)}
+\sim Q^{-4\cdot3^{k-1}}
+}
+\]
+and in particular the ratio tends to zero, uniformly for Q>=2.
+
+### Interpretation
+
+The tail is not merely monotone and discretely concave (G-EP209–210): it decays toward zero at a scale whose successive leading terms are separated by an exponent growing like 3^k. The ratio theorem quantifies this super-geometric separation. Here “super-geometric” refers to the ratio tending to zero, not to a claim about a single fixed exponential rate.
