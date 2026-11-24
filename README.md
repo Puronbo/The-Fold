@@ -344,3 +344,5 @@ G-EP140: distinguishes valid invertible coefficient-space shears that change onl
 - **G-EP164:** exhaustively cross-checks `is_irreducible_polynomial` against the factorizer's exact one-factor criterion for every monic polynomial of degrees 1–4 over F₂, F₃, and F₅ (930 inputs).
 
 - **G-EP165:** extends the exhaustive irreducibility-predicate/factorizer cross-check to all 3,400 monic quintics over F₂, F₃, and F₅.
+
+- **G-EP166:** extends the irreducibility-predicate/factorizer comparison to all 793 monic sextics over F₂ and F₃, checking exact agreement on degree-six inputs.
