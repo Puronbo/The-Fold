@@ -99,3 +99,12 @@ Added three independent checks around the exhaustive mixed-recovery decision pat
 The impossible-target test patches only the profile-derived target to create a deterministic search-path control; it is not a claimed mathematical non-equivalence example for a genuine Kronecker canonical target.
 
 **Scope:** these tests audit determinant filtering and search-state/budget semantics on finite controls. They do not establish that every profile-derived target is valid in arbitrary dimensions or that exhaustive search is computationally practical beyond small fields and dimensions.
+
+
+## G-EP78 — Replayable exhaustive negative certificates
+
+Added `verify_mixed_kronecker_negative_certificate(q, k, p, result, ...)`. The verifier does not accept the result's completion flag or candidate count at face value. It validates the negative/exhaustive schema, recomputes the complete Kronecker profile from the supplied pencil and configured profile bounds, reconstructs the canonical target, and independently streams the full Cartesian family of left matrices. For each invertible left matrix it solves the compatible affine right-transform system and enumerates every solution vector, rejecting the claim if any invertible right transform exists.
+
+The replayed candidate count must exactly match the reported count and remain within the reported positive budget. The verifier also checks the field, source shape, search mode, completion/recovery flags, profile, reason, and scope metadata. Regressions cover a controlled completed negative, forged candidate count and budget, changed search mode, forged completion/recovery flags, altered explanatory scope, and a budget-limited result.
+
+The controlled impossible-target fixture patches target construction for the recovery and replay calls; it exercises finite search replay and metadata tamper detection only. It is not evidence of a genuine non-equivalent pencil. The verifier's guarantee is limited to exhaustive finite-field replay with the same configured profile bounds; it does not establish polynomial-time behavior or generalize beyond the supplied field/input.
