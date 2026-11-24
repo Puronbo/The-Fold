@@ -606,3 +606,24 @@ distinct malformed-input case.
 These are deterministic finite test-side regressions. They do not add a
 production transport-certificate format or prove provenance of supplied
 basis maps.
+
+
+## G-EP126: Kernel-basis transport and rank-deficient controls
+
+For the rectangular 4×3 coefficient pair and two-block partition, construct
+the simultaneous linear constraint matrices on the nine entries of the
+right-transform unknown. Compute nullspace bases independently for the
+original and pulled-back transported systems using finite-field RREF.
+
+Use two deliberately rank-deficient coefficient families over F₂, F₃, and
+F₅: the zero pair (rank zero, nullity nine) and a pair whose second
+coefficient is a scalar multiple of the first (rank strictly below nine).
+Transport candidates by X′ = V⁻¹ X V. Map every original nullspace basis
+vector forward and every transported basis vector backward; substitute all
+mapped vectors into the opposite equation system. Equal dimensions together
+with these inclusions establish equality of the full kernel subspaces, not
+just equality of rank or nullity. Check inverse candidate transport on each
+basis vector. Invertibility is not imposed on the linear kernel.
+
+These are deterministic finite test-side regressions, not a production
+arbitrary-subspace certificate API or a general decomposition theorem.
