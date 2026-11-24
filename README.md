@@ -87,3 +87,6 @@
 
 
 **Replay-verifier boundary hardening (G-EP79):** validates caller matrices as nonempty rectangular integer sequences and rejects booleans/floats and invalid fields as caller-input errors. Malformed result containers, missing metadata, and malformed profile structures fail closed with a negative verification result. Tests distinguish invalid caller inputs (ValueError) from untrusted certificate data (verified=false).
+
+
+**Certificate-bound profile parameters (G-EP80):** exhaustive negative results now record the exact max_degree and max_minors used to compute their Kronecker profile. Replay takes these bounds from the certificate rather than requiring remembered caller arguments, validates their types/ranges, and recomputes the profile with those exact values. Tampering with either bound, omitting either field, or supplying boolean/float/negative/zero-invalid values fails closed. Custom non-default bounds are replayed directly from the result metadata.
