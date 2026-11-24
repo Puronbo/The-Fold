@@ -1402,3 +1402,127 @@ class MultiDirectSumTests(unittest.TestCase):
                          else good_expected)["verification"]["direct_sum_verified"],
                         expected_math,
                     )
+
+    def test_g_ep104_adversarial_audit_metadata_and_equivalent_representations(self):
+        import copy
+
+        p = 5
+        q = [[1, 0], [0, 2]]
+        k = [[2, 0], [0, 1]]
+        shapes = [(1, 1), (1, 1)]
+        identity = ident(2)
+        baseline = verify_pencil_multi_direct_sum_witness(
+            q, k, p, identity, identity, shapes
+        )
+
+        def schema_ok(record):
+            required = {
+                "schema", "field", "source_shape", "block_shapes",
+                "left_transform", "right_transform", "transformed_Q",
+                "transformed_K", "Q_blocks", "K_blocks", "verification",
+                "scope",
+            }
+            if type(record) is not dict or set(record) != required:
+                return False
+            if record["schema"] != "the-fold-pencil-multi-direct-sum-witness-v1":
+                return False
+            if type(record["field"]) is not str or not record["field"].startswith("F_"):
+                return False
+            if (type(record["source_shape"]) is not list
+                    or len(record["source_shape"]) != 2
+                    or any(type(x) is not int or x <= 0 for x in record["source_shape"])):
+                return False
+            if type(record["block_shapes"]) is not list or len(record["block_shapes"]) < 2:
+                return False
+            if any(type(x) is not list or len(x) != 2
+                   or any(type(y) is not int or y < 0 for y in x)
+                   or x == [0, 0] for x in record["block_shapes"]):
+                return False
+            m, n = record["source_shape"]
+            blocks = record["block_shapes"]
+            if sum(x[0] for x in blocks) != m or sum(x[1] for x in blocks) != n:
+                return False
+
+            def matrix(value, rows, cols):
+                return (type(value) is list and len(value) == rows
+                        and all(type(row) is list and len(row) == cols
+                                and all(type(x) is int for x in row) for row in value))
+            for key, rows, cols in (
+                ("left_transform", m, m), ("right_transform", n, n),
+                ("transformed_Q", m, n), ("transformed_K", m, n),
+            ):
+                if not matrix(record[key], rows, cols):
+                    return False
+            count = len(blocks)
+            for key in ("Q_blocks", "K_blocks"):
+                grid = record[key]
+                if type(grid) is not list or len(grid) != count:
+                    return False
+                for i, row in enumerate(grid):
+                    if type(row) is not list or len(row) != count:
+                        return False
+                    for j, block in enumerate(row):
+                        if not matrix(block, blocks[i][0], blocks[j][1]):
+                            return False
+            v = record["verification"]
+            types = {
+                "left_transform_rank": int, "right_transform_rank": int,
+                "left_transform_invertible": bool, "right_transform_invertible": bool,
+                "Q_off_diagonal_blocks_zero": bool, "K_off_diagonal_blocks_zero": bool,
+                "direct_sum_verified": bool,
+            }
+            return (type(v) is dict and set(v) == set(types)
+                    and all(type(v[x]) is t for x, t in types.items())
+                    and 0 <= v["left_transform_rank"] <= m
+                    and 0 <= v["right_transform_rank"] <= n
+                    and type(record["scope"]) is str)
+
+        # Metadata mutations are classified by the layer that can detect them.
+        schema_version = copy.deepcopy(baseline)
+        schema_version["schema"] = "the-fold-pencil-multi-direct-sum-witness-v2"
+        field_label = copy.deepcopy(baseline)
+        field_label["field"] = "F_7"
+        dimensions = copy.deepcopy(baseline)
+        dimensions["source_shape"] = [3, 2]
+        partition = copy.deepcopy(baseline)
+        partition["block_shapes"] = [[1, 1], [1, 1]]  # reordered labels are observationally symmetric
+        partition["block_shapes"].reverse()
+        scope = copy.deepcopy(baseline)
+        scope["scope"] = "Cryptographically authenticated and unique."
+
+        self.assertFalse(schema_ok(schema_version))
+        self.assertTrue(schema_ok(field_label))
+        self.assertTrue(schema_ok(dimensions) is False)
+        self.assertTrue(schema_ok(partition))
+        self.assertTrue(schema_ok(scope))
+
+        # Schema-valid metadata forgeries are not the same record as a
+        # source-bound reconstruction. Scope is descriptive, not algebraic.
+        for label, record, changed_keys in (
+            ("field label", field_label, ("field",)),
+            ("partition order", partition, ("block_shapes",)),
+            ("scope claim", scope, ("scope",)),
+        ):
+            with self.subTest(metadata=label):
+                self.assertTrue(schema_ok(record))
+                self.assertTrue(any(record[key] != baseline[key] for key in changed_keys))
+                # The mathematical verdict is independently recomputed from
+                # source inputs and supplied transforms, never trusted from metadata.
+                replay = verify_pencil_multi_direct_sum_witness(
+                    q, k, p, record["left_transform"], record["right_transform"], shapes
+                )
+                self.assertTrue(replay["verification"]["direct_sum_verified"])
+
+        # A different valid witness can encode the same transformed pencil:
+        # reciprocal scalar changes S -> cS and T -> c^-1 T over F_5.
+        scaled_left = [[2, 0], [0, 2]]
+        scaled_right = [[3, 0], [0, 3]]
+        equivalent = verify_pencil_multi_direct_sum_witness(
+            q, k, p, scaled_left, scaled_right, shapes
+        )
+        self.assertTrue(schema_ok(equivalent))
+        self.assertNotEqual(equivalent["left_transform"], baseline["left_transform"])
+        self.assertNotEqual(equivalent["right_transform"], baseline["right_transform"])
+        self.assertEqual(equivalent["transformed_Q"], baseline["transformed_Q"])
+        self.assertEqual(equivalent["transformed_K"], baseline["transformed_K"])
+        self.assertTrue(equivalent["verification"]["direct_sum_verified"])
