@@ -415,3 +415,77 @@ def audit_coprime_density_defect_sign(primes, max_degree: int) -> dict:
         "minimum_defect": minimum_record,
         "interpretation": "finite-grid evidence only; no universal sign theorem is asserted",
     }
+
+
+def audit_coprime_bad_proportion_order(primes, max_degree: int) -> dict:
+    """Check E_p(ab) < min(E_p(a), E_p(b)) on a finite coprime grid.
+
+    Here E_p(n)=1-R_p(n) is the proportion of elements of F_(p^n)
+    contained in proper subfields. All comparisons use exact fractions.
+    This is a finite audit, not a universal theorem.
+    """
+    if not isinstance(primes, (list, tuple)) or not primes:
+        raise ValueError("primes must be a non-empty list or tuple")
+    if (isinstance(max_degree, bool) or not isinstance(max_degree, int)
+            or max_degree < 3):
+        raise ValueError("max_degree must be an integer of at least 3")
+    checked_primes = []
+    for p in primes:
+        if isinstance(p, bool) or not isinstance(p, int) or not _is_prime(p):
+            raise ValueError("every entry in primes must be a prime integer")
+        if p in checked_primes:
+            raise ValueError("primes must not contain duplicates")
+        checked_primes.append(p)
+
+    checked = 0
+    strict_count = 0
+    first_failure = None
+    maximum_ratio = None
+    maximum_ratio_record = None
+    for p in checked_primes:
+        def bad_proportion(degree: int) -> Fraction:
+            return Fraction(p ** degree - degree * count_monic_irreducibles(p, degree),
+                            p ** degree)
+        for left in range(2, max_degree + 1):
+            for right in range(left + 1, max_degree + 1):
+                if math.gcd(left, right) != 1:
+                    continue
+                left_bad = bad_proportion(left)
+                right_bad = bad_proportion(right)
+                product_bad = bad_proportion(left * right)
+                checked += 1
+                smaller = min(left_bad, right_bad)
+                holds = product_bad < smaller
+                if holds:
+                    strict_count += 1
+                elif first_failure is None:
+                    first_failure = {
+                        "field_prime": p, "left_degree": left,
+                        "right_degree": right,
+                        "product_bad_numerator": product_bad.numerator,
+                        "product_bad_denominator": product_bad.denominator,
+                        "left_bad_numerator": left_bad.numerator,
+                        "left_bad_denominator": left_bad.denominator,
+                        "right_bad_numerator": right_bad.numerator,
+                        "right_bad_denominator": right_bad.denominator,
+                    }
+                ratio = product_bad / smaller if smaller else Fraction(0, 1)
+                if maximum_ratio is None or ratio > maximum_ratio:
+                    maximum_ratio = ratio
+                    maximum_ratio_record = {
+                        "field_prime": p, "left_degree": left,
+                        "right_degree": right,
+                        "ratio_numerator": ratio.numerator,
+                        "ratio_denominator": ratio.denominator,
+                    }
+    return {
+        "schema": "the-fold-coprime-bad-proportion-order-v1",
+        "primes": checked_primes,
+        "max_degree": max_degree,
+        "coprime_pair_count": checked,
+        "strict_order_count": strict_count,
+        "all_checked_pairs_strict": checked > 0 and strict_count == checked,
+        "first_failure": first_failure,
+        "largest_product_to_smaller_factor_bad_ratio": maximum_ratio_record,
+        "interpretation": "finite exact evidence only; universal strict order remains unproved",
+    }
