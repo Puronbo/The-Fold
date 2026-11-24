@@ -518,3 +518,25 @@ These are finite test-side covariance controls. The production witness API
 still represents consecutive coordinate block shapes and does not accept
 arbitrary subspace-basis metadata; this milestone does not add a generic
 mixed-basis decomposition verifier or discovery algorithm.
+
+
+## G-EP122: Rectangular transported-basis covariance and empty blocks
+
+Extend the transported-decomposition test to rectangular m×n coefficient
+matrices with n×n right-transform unknowns. Full invertible row and column
+basis changes U and V may mix all supplied blocks; the decomposition is
+transported by pulling the transformed coefficient and candidate back as
+U⁻¹ A' X' V⁻¹. The test constructs the resulting linear equation map on
+matrix-unit inputs and compares its rank with the original rectangular
+off-diagonal system.
+
+The fixtures include a 3×4 split, a partition containing both zero-row and
+zero-column blocks, and a second rectangular split. Finite fields F₂, F₃,
+and F₅ are covered. Sampled arbitrary right transforms check the rectangular
+pullback identity. An explicit F₂ control also confirms that applying the
+mixed basis changes while retaining the old coordinate partition changes
+the constraint rank.
+
+This is finite test-side covariance evidence. It does not add arbitrary
+subspace-basis metadata to the production verifier, nor a general mixed-basis
+decomposition discovery routine.
