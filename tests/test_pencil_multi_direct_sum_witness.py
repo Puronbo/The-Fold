@@ -672,3 +672,124 @@ class MultiDirectSumTests(unittest.TestCase):
         self.assertTrue(any(path[:2] == (("key", "Q_blocks"),
                                          ("index", 0)) for path in paths))
 
+
+
+    def test_v1_audit_snapshot_schema_contract_is_separate_from_algebra(self):
+        import copy
+
+        q, k = [[1, 0], [0, 2]], [[2, 0], [0, 1]]
+        identity = ident(2)
+        valid = verify_pencil_multi_direct_sum_witness(
+            q, k, 5, identity, identity, [(1, 1), (1, 1)]
+        )
+
+        def is_int(value, minimum=None):
+            return (type(value) is int
+                    and (minimum is None or value >= minimum))
+
+        def matrix_shape(value, rows, cols):
+            return (type(value) is list and len(value) == rows
+                    and all(type(row) is list and len(row) == cols
+                            and all(is_int(x) for x in row) for row in value))
+
+        def structurally_valid(record):
+            if type(record) is not dict:
+                return False
+            required = {
+                "schema", "field", "source_shape", "block_shapes",
+                "left_transform", "right_transform", "transformed_Q",
+                "transformed_K", "Q_blocks", "K_blocks", "verification",
+                "scope",
+            }
+            if set(record) != required:
+                return False
+            if record["schema"] != "the-fold-pencil-multi-direct-sum-witness-v1":
+                return False
+            if type(record["field"]) is not str or not record["field"].startswith("F_"):
+                return False
+            shape = record["source_shape"]
+            blocks = record["block_shapes"]
+            if (type(shape) is not list or len(shape) != 2
+                    or not all(is_int(x, 1) for x in shape)
+                    or type(blocks) is not list or len(blocks) < 2):
+                return False
+            if any(type(b) is not list or len(b) != 2
+                   or not all(is_int(x, 0) for x in b)
+                   or b == [0, 0] for b in blocks):
+                return False
+            m, n = shape
+            if sum(b[0] for b in blocks) != m or sum(b[1] for b in blocks) != n:
+                return False
+            count = len(blocks)
+            if not matrix_shape(record["left_transform"], m, m):
+                return False
+            if not matrix_shape(record["right_transform"], n, n):
+                return False
+            if not matrix_shape(record["transformed_Q"], m, n):
+                return False
+            if not matrix_shape(record["transformed_K"], m, n):
+                return False
+            for grid_name in ("Q_blocks", "K_blocks"):
+                grid = record[grid_name]
+                if type(grid) is not list or len(grid) != count:
+                    return False
+                for i, grid_row in enumerate(grid):
+                    if type(grid_row) is not list or len(grid_row) != count:
+                        return False
+                    for j, block in enumerate(grid_row):
+                        if not matrix_shape(block, blocks[i][0], blocks[j][1]):
+                            return False
+            verification = record["verification"]
+            expected_types = {
+                "left_transform_rank": int,
+                "right_transform_rank": int,
+                "left_transform_invertible": bool,
+                "right_transform_invertible": bool,
+                "Q_off_diagonal_blocks_zero": bool,
+                "K_off_diagonal_blocks_zero": bool,
+                "direct_sum_verified": bool,
+            }
+            if type(verification) is not dict or set(verification) != set(expected_types):
+                return False
+            if any(type(verification[key]) is not typ
+                   for key, typ in expected_types.items()):
+                return False
+            if not (0 <= verification["left_transform_rank"] <= m
+                    and 0 <= verification["right_transform_rank"] <= n):
+                return False
+            return type(record["scope"]) is str
+
+        self.assertTrue(structurally_valid(valid))
+        # A correctly shaped but mathematically false witness is still a
+        # structurally valid v1 record: algebraic truth is a separate layer.
+        wrong_left = [[1, 1], [0, 1]]
+        false_witness = verify_pencil_multi_direct_sum_witness(
+            q, k, 5, wrong_left, identity, [(1, 1), (1, 1)]
+        )
+        self.assertTrue(structurally_valid(false_witness))
+        self.assertFalse(false_witness["verification"]["direct_sum_verified"])
+
+        mutations = []
+        for field, value in (
+            ("schema", "unknown-v2"),
+            ("source_shape", [2, True]),
+            ("block_shapes", [[1, 1], [1, 0]]),
+            ("left_transform", [[1, 0.0], [0, 1]]),
+            ("transformed_Q", [[1, 0]]),
+            ("Q_blocks", []),
+            ("K_blocks", [[[1]]]),
+            ("scope", None),
+        ):
+            changed = copy.deepcopy(valid)
+            changed[field] = value
+            mutations.append((field, changed))
+        changed = copy.deepcopy(valid)
+        changed["verification"]["left_transform_rank"] = True
+        mutations.append(("boolean rank", changed))
+        changed = copy.deepcopy(valid)
+        changed["verification"]["unexpected"] = 0
+        mutations.append(("unexpected diagnostic", changed))
+        for label, record in mutations:
+            with self.subTest(malformed_schema=label):
+                self.assertFalse(structurally_valid(record))
+
