@@ -1073,5 +1073,91 @@ class MixedKroneckerRecoveryTests(unittest.TestCase):
                     )
 
 
+
+    def test_multi_block_verifier_generated_rectangular_partitions_across_prime_fields(self):
+        from tools.pencil_multi_direct_sum_witness import verify_pencil_multi_direct_sum_witness
+
+        # Every partition has at least two blocks, positive total dimensions,
+        # and includes zero-row and/or zero-column blocks without any 0x0 block.
+        partitions = (
+            [(0, 1), (1, 0), (1, 1)],
+            [(1, 0), (0, 2), (2, 1)],
+            [(1, 2), (2, 0), (0, 1), (1, 1)],
+            [(2, 1), (0, 1), (1, 0), (1, 2)],
+            [(1, 1), (1, 2), (2, 1)],
+        )
+        for p in (2, 3, 5, 7):
+            for case, shapes in enumerate(partitions):
+                with self.subTest(prime=p, case=case, shapes=shapes):
+                    m, n = sum(r for r, _ in shapes), sum(c for _, c in shapes)
+                    q = [[0] * n for _ in range(m)]
+                    k = [[0] * n for _ in range(m)]
+                    row_offsets, col_offsets = [0], [0]
+                    for rows, cols in shapes:
+                        row_offsets.append(row_offsets[-1] + rows)
+                        col_offsets.append(col_offsets[-1] + cols)
+                    # Populate only within-block entries. Empty row/column
+                    # blocks naturally contribute no entries.
+                    for block, (rows, cols) in enumerate(shapes):
+                        for i in range(rows):
+                            for j in range(cols):
+                                q[row_offsets[block] + i][col_offsets[block] + j] = (
+                                    case + block + i + 2 * j + 1
+                                ) % p
+                                k[row_offsets[block] + i][col_offsets[block] + j] = (
+                                    2 * case + block + i + j + 1
+                                ) % p
+                    identity_m = [[int(i == j) for j in range(m)] for i in range(m)]
+                    identity_n = [[int(i == j) for j in range(n)] for i in range(n)]
+                    audit = verify_pencil_multi_direct_sum_witness(
+                        q, k, p, identity_m, identity_n, shapes
+                    )
+                    self.assertTrue(audit["verification"]["direct_sum_verified"], audit)
+                    self.assertEqual(audit["block_shapes"], [list(x) for x in shapes])
+
+                    # If two blocks both have positive dimensions, injecting
+                    # one cross-block coefficient must invalidate the witness.
+                    cross_pair = next(
+                        ((i, j) for i, (ri, _) in enumerate(shapes)
+                         for j, (_, cj) in enumerate(shapes)
+                         if i != j and ri > 0 and cj > 0),
+                        None,
+                    )
+                    if cross_pair is not None:
+                        i, j = cross_pair
+                        mutated_q = [row[:] for row in q]
+                        mutated_q[row_offsets[i]][col_offsets[j]] = 1 % p
+                        rejected = verify_pencil_multi_direct_sum_witness(
+                            mutated_q, k, p, identity_m, identity_n, shapes
+                        )
+                        self.assertFalse(
+                            rejected["verification"]["Q_off_diagonal_blocks_zero"],
+                            rejected,
+                        )
+                        self.assertFalse(
+                            rejected["verification"]["direct_sum_verified"],
+                            rejected,
+                        )
+
+    def test_multi_block_verifier_generated_partition_shape_rejections(self):
+        from tools.pencil_multi_direct_sum_witness import verify_pencil_multi_direct_sum_witness
+
+        q, k = [[0, 0], [0, 0]], [[0, 0], [0, 0]]
+        identity = [[1, 0], [0, 1]]
+        invalid = (
+            [(0, 0), (2, 2)],
+            [(0, 1), (0, 1)],  # no rows in the total partition
+            [(1, 0), (1, 0)],  # no columns in the total partition
+            [(1, 1), (1, 2)],  # column total mismatch
+            [(1, 1), (2, 1)],  # row total mismatch
+        )
+        for shapes in invalid:
+            with self.subTest(shapes=shapes):
+                with self.assertRaises(ValueError):
+                    verify_pencil_multi_direct_sum_witness(
+                        q, k, 5, identity, identity, shapes
+                    )
+
+
 if __name__ == "__main__":
     unittest.main()
