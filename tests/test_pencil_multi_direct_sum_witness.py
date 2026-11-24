@@ -1931,3 +1931,63 @@ class MultiDirectSumTests(unittest.TestCase):
                     self.assertFalse(bad["verification"]["direct_sum_verified"], bad)
                     self.assertEqual(bad["transformed_Q"][row][col], 1)
 
+
+
+    def test_g_ep109_long_composition_and_wrong_partition_rejection(self):
+        import random
+
+        rng = random.Random(109_2026)
+
+        def elementary_product(size, p, count):
+            total = ident(size)
+            for _ in range(count):
+                op = ident(size)
+                i, j = rng.sample(range(size), 2)
+                if rng.randrange(4) == 0:
+                    op[i], op[j] = op[j], op[i]
+                else:
+                    op[i][j] = (op[i][j] + rng.randrange(1, p)) % p
+                total = mm(op, total, p)
+            return total
+
+        # First, long noncommuting products must still recover the exact
+        # target after independent left/right changes and reciprocal scaling.
+        shapes = [(1, 2), (2, 1), (1, 1)]
+        m = sum(r for r, _ in shapes)
+        n = sum(c for _, c in shapes)
+        ro, co = [0], [0]
+        for r, c in shapes:
+            ro.append(ro[-1] + r)
+            co.append(co[-1] + c)
+
+        for p in (2, 3, 5, 7):
+            q0, k0 = [[0] * n for _ in range(m)], [[0] * n for _ in range(m)]
+            for block, (r, c) in enumerate(shapes):
+                for i in range(r):
+                    for j in range(c):
+                        q0[ro[block] + i][co[block] + j] = (block + i + 2*j + 1) % p
+                        k0[ro[block] + i][co[block] + j] = (2*block + 2*i + j + 1) % p
+
+            left = elementary_product(m, p, 17)
+            right = elementary_product(n, p, 19)
+            left_inv, right_inv = inverse(left, p), inverse(right, p)
+            q = mm(mm(left_inv, q0, p), right_inv, p)
+            k = mm(mm(left_inv, k0, p), right_inv, p)
+            scalar = 1 if p == 2 else p - 1
+            s = [[(scalar * x) % p for x in row] for row in left]
+            inv_scalar = pow(scalar, -1, p)
+            t = [[(inv_scalar * x) % p for x in row] for row in right]
+            out = verify_pencil_multi_direct_sum_witness(q, k, p, s, t, shapes)
+            with self.subTest(field=p, check="long composed witness"):
+                self.assertTrue(out["verification"]["direct_sum_verified"], out)
+                self.assertEqual(out["transformed_Q"], q0)
+                self.assertEqual(out["transformed_K"], k0)
+
+            # A different partition with the same total dimensions is not
+            # interchangeable: it changes the coordinate cut locations.
+            wrong_shapes = [(2, 1), (1, 2), (1, 1)]
+            wrong = verify_pencil_multi_direct_sum_witness(
+                q, k, p, s, t, wrong_shapes
+            )
+            with self.subTest(field=p, check="wrong partition"):
+                self.assertFalse(wrong["verification"]["direct_sum_verified"], wrong)
