@@ -82,3 +82,10 @@ turn failure of one supplied witness into a no-decomposition result.
 Over F₂, F₃, F₅, and F₇, the generated rectangular basis-scrambled witness is now subjected to three inconsistent changes: a single source coefficient is altered after scrambling; one entry of the supplied left or right transform is perturbed while preserving invertibility; and only the ordered block-shape list is permuted, without the corresponding row/column coordinate permutation. These correctly shaped but inconsistent witnesses must fail the direct-sum audit.
 
 A dimension-incompatible transform remains a malformed caller input and raises ValueError, distinct from a validly shaped but false witness. This complements G-EP92's acceptance of simultaneous, equivalent block-coordinate permutations. The finite tests do not imply that failure of one witness excludes another decomposition.
+
+
+## G-EP94: Independent audit-record cross-checks
+
+A test-only reference calculation independently computes SQT and SKT, slices every ordered rectangular block, and uses a separately implemented Gaussian elimination routine for transform ranks. For valid witnesses and two false-witness controls (a source coefficient mutation and an invertible transform perturbation), it compares the verifier's transformed matrices, complete Q/K block grids, both ranks, both invertibility flags, both off-diagonal-zero flags, and aggregate decision against the reference calculation over F₂, F₃, F₅, and F₇.
+
+The independent routines are test-local and do not call the verifier's private multiplication, split, or rank helpers. This provides finite regression evidence that diagnostics match the algebraic data; it is not a formal proof of the implementation or a decomposition discovery result.
