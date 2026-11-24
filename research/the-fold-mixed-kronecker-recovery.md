@@ -52,3 +52,12 @@ independently verified; negative/incomplete search results are inconclusive.
 Tests cover an unsplit direct sum containing a right block, a left block,
 and a regular block; recovery after a nontrivial left-basis shear; and
 explicit rejection of an incomplete bounded profile.
+
+
+## G-EP73 — Recovery boundary analysis
+
+Added a reproducible boundary grid for automatic mixed-pencil recovery. Canonical mixed pencils with right/left minimal-index pairs (1,1), (2,1), and (2,2), plus a one-dimensional regular block, are checked over F₂, F₃, and F₅. Each positive control must have a complete profile, an explicit recovered witness, matching minimal-index lists, and a passing strict-equivalence audit.
+
+A separate regression distinguishes two non-success outcomes: an incomplete Kronecker profile caused by a too-small degree bound, and a complete profile whose witness search is stopped by a one-candidate budget. Both remain inconclusive, but their profile state and diagnostic reasons are distinct. This prevents a bounded-search failure from being presented as a mathematical obstruction.
+
+**Scope:** the grid covers selected small canonical families and is not a universal complexity or completeness result. A positive result is an exact verified witness; incomplete profiles and budget-limited searches remain undecided.
