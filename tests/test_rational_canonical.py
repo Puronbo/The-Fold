@@ -848,5 +848,31 @@ class RationalCanonicalTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             factor_polynomial([1, 1], 4)
 
+
+    def test_g_ep164_irreducibility_predicate_matches_exhaustive_factorization(self):
+        from itertools import product
+        from tools.spectral_fingerprint import (
+            factor_polynomial,
+            is_irreducible_polynomial,
+        )
+
+        for p in (2, 3, 5):
+            for degree in range(1, 5):
+                for lower in product(range(p), repeat=degree):
+                    polynomial = (1,) + tuple(lower)
+                    factors = factor_polynomial(polynomial, p)
+                    reported_irreducible = (
+                        len(factors) == 1
+                        and factors[0]["degree"] == degree
+                        and factors[0]["multiplicity"] == 1
+                        and factors[0]["coefficients_descending"]
+                        == list(polynomial)
+                    )
+                    self.assertEqual(
+                        is_irreducible_polynomial(polynomial, p),
+                        reported_irreducible,
+                        msg=f"F_{p}, degree {degree}, {polynomial}",
+                    )
+
 if __name__ == "__main__":
     unittest.main()
