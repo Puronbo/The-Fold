@@ -748,3 +748,31 @@ not carry the coefficient map or its rank. The distinction is therefore
 recorded by a test-side provenance audit, not claimed as metadata inferred
 by the verifier. A successful verification certifies only the exact pair
 that was supplied, including a pair that may have been collapsed to zero.
+
+
+## G-EP143: Direct-sum verdict under invertible coefficient changes
+
+For each field F₂, F₃, and F₅, enumerate every invertible 2×2
+coefficient-space map. Apply each map to two ordered coefficient pairs
+using the same three-block coordinate partition:
+
+1. A positive fixture in which both original coefficients are block
+   diagonal. Every linear combination remains block diagonal, so the
+   supplied identity-coordinate witness must continue to verify.
+2. A negative fixture in which both coefficients contain cross-block
+   coupling, with the two couplings supported in different off-diagonal
+   positions. An invertible coefficient change cannot annihilate both
+   independent coupling directions in both outputs, so the verifier must
+   continue to reject the supplied witness.
+
+For every map, compute its inverse and recover the original ordered
+coefficient pair exactly from the transformed pair. The enumeration checks
+the exact group size |GL(2,F_p)| = (p²−1)(p²−p).
+
+This is exhaustive finite regression evidence for these fixtures and this
+coordinate witness. It is consistent with the general linear-algebra
+observation that an invertible change of basis in the two-dimensional
+coefficient space preserves whether both coefficients lie in the same
+linear subspace of block-diagonal matrices. It does not add a production
+coefficient-change API, discover a decomposition, or establish a universal
+classification result.
