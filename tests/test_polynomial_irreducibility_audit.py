@@ -16,6 +16,7 @@ from tools.polynomial_irreducibility_audit import (
     coprime_composition_excess_spectrum,
     irreducible_density_convergence_over_field,
     coprime_composition_excess_asymptotic,
+    coprime_composition_excess_sign_certificate,
 )
 
 
@@ -472,6 +473,49 @@ class PrimePowerConvergenceTests(unittest.TestCase):
                 with self.assertRaises(ValueError):
                     coprime_composition_excess_asymptotic(degrees)
 
+
+
+class CompositionExcessSignCertificateTests(unittest.TestCase):
+    def test_exact_finite_field_sign_and_threshold(self):
+        positive = coprime_composition_excess_sign_certificate([2, 3], 2)
+        self.assertEqual(positive["exact_sign"], "positive")
+        self.assertEqual(
+            (positive["exact_value_numerator"],
+             positive["exact_value_denominator"]),
+            (1, 32),
+        )
+        self.assertEqual(positive["sufficient_field_size_threshold"], 2)
+        self.assertEqual(positive["eventual_sign"], "positive")
+
+        negative = coprime_composition_excess_sign_certificate([3, 4], 2)
+        self.assertEqual(negative["exact_sign"], "negative")
+        self.assertEqual(negative["sufficient_field_size_threshold"], 4)
+        self.assertEqual(negative["eventual_sign"], "negative")
+
+    def test_threshold_guarantee_on_prime_power_grid(self):
+        for degrees in ([2, 3], [3, 4], [2, 5, 9], [3, 5, 7]):
+            probe = coprime_composition_excess_sign_certificate(degrees, 2)
+            threshold = probe["sufficient_field_size_threshold"]
+            expected = probe["eventual_sign"]
+            for field_size in range(threshold, threshold + 12):
+                # Restrict to prime powers by testing the shared validator
+                # through the public API; composites with multiple primes
+                # are intentionally skipped.
+                from tools.polynomial_irreducibility_audit import _is_prime_power
+                if not _is_prime_power(field_size):
+                    continue
+                result = coprime_composition_excess_sign_certificate(
+                    degrees, field_size
+                )
+                self.assertEqual(result["exact_sign"], expected)
+
+    def test_sign_certificate_rejects_invalid_field_sizes(self):
+        for field_size in (0, 1, 6, 10, True, 2.5):
+            with self.subTest(field_size=field_size):
+                with self.assertRaises(ValueError):
+                    coprime_composition_excess_sign_certificate(
+                        [2, 3], field_size
+                    )
 
 if __name__ == "__main__":
     unittest.main()
