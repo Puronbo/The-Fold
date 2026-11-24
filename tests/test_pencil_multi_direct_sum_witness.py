@@ -4097,3 +4097,111 @@ class MultiDirectSumTests(unittest.TestCase):
             self.assertNotEqual(wrong_vi,Vi)
             self.assertNotEqual(mm(mm(wrong_ui,q_stage,p),wrong_vi,p),q)
             self.assertNotEqual([conjugate(x,wrong_vi,inv(wrong_vi,p),p) for x in basis],mapped)
+
+
+    def test_g_ep129_composed_transport_of_rectangular_block_partitions(self):
+        import random
+
+        def mm(a,b,p):
+            if not a or not b or len(a[0])!=len(b) or any(len(x)!=len(a[0]) for x in a) or any(len(x)!=len(b[0]) for x in b):
+                raise ValueError("incompatible matrix dimensions")
+            return [[sum(a[i][k]*b[k][j] for k in range(len(b)))%p
+                     for j in range(len(b[0]))] for i in range(len(a))]
+
+        def inv(a,p):
+            n=len(a)
+            w=[[x%p for x in row]+[int(i==j) for j in range(n)]
+               for i,row in enumerate(a)]
+            for c in range(n):
+                z=next((z for z in range(c,n) if w[z][c]),None)
+                if z is None: raise AssertionError("singular basis")
+                w[c],w[z]=w[z],w[c]
+                s=pow(w[c][c],-1,p)
+                w[c]=[x*s%p for x in w[c]]
+                for z in range(n):
+                    if z!=c and w[z][c]:
+                        f=w[z][c]
+                        w[z]=[(x-f*y)%p for x,y in zip(w[z],w[c])]
+            return [row[n:] for row in w]
+
+        def identity(n):
+            return [[int(i==j) for j in range(n)] for i in range(n)]
+
+        def zeros(m,n):
+            return [[0]*n for _ in range(m)]
+
+        def shear(n,i,j,p):
+            a=identity(n); a[i][j]=1%p
+            return a
+
+        def projectors(shapes,p,side):
+            total=sum(shape[0 if side=="row" else 1] for shape in shapes)
+            start=0; out=[]
+            for h,w in shapes:
+                size=h if side=="row" else w
+                z=zeros(total,total)
+                for i in range(start,start+size): z[i][i]=1%p
+                out.append(z); start+=size
+            return out
+
+        def transported_projectors(basis,parts,p):
+            bi=inv(basis,p)
+            return [mm(mm(basis,z,p),bi,p) for z in parts]
+
+        shapes=[(1,0),(0,1),(3,2)]
+        for p in (2,3,5):
+            rng=random.Random(129000+p)
+            m,n=4,3
+            q=[[rng.randrange(p) for _ in range(n)] for _ in range(m)]
+            k=[[rng.randrange(p) for _ in range(n)] for _ in range(m)]
+            ua,ub= shear(m,0,1,p),shear(m,2,0,p)
+            va,vb= shear(n,0,1,p),shear(n,1,2,p)
+            umid,vmid=identity(m),identity(n)
+            ubi,vbi=inv(ub,p),inv(vb,p)
+            us=[ua,ub,umid,ubi]
+            vs=[va,vb,vmid,vbi]
+            U,V=identity(m),identity(n)
+            qcur,kcur=q,k
+            for u,v in zip(us,vs):
+                U=mm(u,U,p)
+                V=mm(V,v,p)
+                qcur=mm(mm(u,qcur,p),v,p)
+                kcur=mm(mm(u,kcur,p),v,p)
+            self.assertEqual(U,ua)
+            self.assertEqual(V,va)
+            self.assertEqual(qcur,mm(mm(U,q,p),V,p))
+            self.assertEqual(kcur,mm(mm(U,k,p),V,p))
+
+            row_parts=projectors(shapes,p,"row")
+            col_parts=projectors(shapes,p,"column")
+            row_seq=[identity(m) for _ in shapes]
+            col_seq=[identity(n) for _ in shapes]
+            for u,v in zip(us,vs):
+                ui,vi=inv(u,p),inv(v,p)
+                row_seq=[mm(mm(u,z,p),ui,p) for z in row_seq]
+                # Column subspaces are transported by the inverse right map.
+                col_seq=[mm(mm(vi,z,p),v,p) for z in col_seq]
+            row_direct=transported_projectors(U,row_parts,p)
+            col_direct=transported_projectors(inv(V,p),col_parts,p)
+            self.assertEqual(row_seq,row_direct)
+            self.assertEqual(col_seq,col_direct)
+
+            # Every transported block projection agrees with pulling the
+            # coefficient pair back to the original coordinate partition.
+            Ui,Vi=inv(U,p),inv(V,p)
+            for original,changed in ((q,qcur),(k,kcur)):
+                pulled=mm(mm(Ui,changed,p),Vi,p)
+                self.assertEqual(pulled,original)
+                for i in range(len(shapes)):
+                    for j in range(len(shapes)):
+                        observed=mm(mm(mm(row_direct[i],changed,p),col_direct[j],p),identity(n),p)
+                        expected=mm(mm(mm(U,row_parts[i],p),original,p),mm(col_parts[j],V,p),p)
+                        self.assertEqual(observed,expected)
+                        self.assertEqual(observed,mm(mm(U,mm(mm(row_parts[i],original,p),col_parts[j],p),p),V,p))
+
+            # Empty row/column blocks are retained as zero projectors rather
+            # than dropped or merged; their transported images remain zero.
+            self.assertEqual(row_parts[1],zeros(m,m))
+            self.assertEqual(col_parts[0],zeros(n,n))
+            self.assertEqual(row_direct[1],zeros(m,m))
+            self.assertEqual(col_direct[0],zeros(n,n))
