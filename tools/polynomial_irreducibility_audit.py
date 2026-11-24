@@ -489,3 +489,88 @@ def audit_coprime_bad_proportion_order(primes, max_degree: int) -> dict:
         "largest_product_to_smaller_factor_bad_ratio": maximum_ratio_record,
         "interpretation": "finite exact evidence only; universal strict order remains unproved",
     }
+
+
+def audit_coprime_bad_proportion_ratio_bound(primes, max_degree: int) -> dict:
+    """Test the proposed sharp ratio bound on a finite coprime-degree grid.
+
+    The conjectured bound is
+        E_p(ab) / min(E_p(a), E_p(b)) <= (p**2+p-1)/p**3.
+    All calculations and comparisons use exact rational arithmetic. A
+    successful finite audit is evidence only, not a universal proof.
+    """
+    if not isinstance(primes, (list, tuple)) or not primes:
+        raise ValueError("primes must be a non-empty list or tuple")
+    if (isinstance(max_degree, bool) or not isinstance(max_degree, int)
+            or max_degree < 3):
+        raise ValueError("max_degree must be an integer of at least 3")
+    checked_primes = []
+    for p in primes:
+        if isinstance(p, bool) or not isinstance(p, int) or not _is_prime(p):
+            raise ValueError("every entry in primes must be a prime integer")
+        if p in checked_primes:
+            raise ValueError("primes must not contain duplicates")
+        checked_primes.append(p)
+
+    checked = 0
+    within_bound = 0
+    first_failure = None
+    maximum_ratio = None
+    maximum_record = None
+    for p in checked_primes:
+        conjectured_bound = Fraction(p * p + p - 1, p ** 3)
+
+        def bad_proportion(degree: int) -> Fraction:
+            return Fraction(
+                p ** degree - degree * count_monic_irreducibles(p, degree),
+                p ** degree,
+            )
+
+        for left in range(2, max_degree + 1):
+            for right in range(left + 1, max_degree + 1):
+                if math.gcd(left, right) != 1:
+                    continue
+                denominator = min(bad_proportion(left), bad_proportion(right))
+                combined = bad_proportion(left * right)
+                ratio = combined / denominator if denominator else Fraction(0, 1)
+                checked += 1
+                holds = ratio <= conjectured_bound
+                if holds:
+                    within_bound += 1
+                elif first_failure is None:
+                    first_failure = {
+                        "field_prime": p,
+                        "left_degree": left,
+                        "right_degree": right,
+                        "ratio_numerator": ratio.numerator,
+                        "ratio_denominator": ratio.denominator,
+                        "bound_numerator": conjectured_bound.numerator,
+                        "bound_denominator": conjectured_bound.denominator,
+                    }
+                if maximum_ratio is None or ratio > maximum_ratio:
+                    maximum_ratio = ratio
+                    maximum_record = {
+                        "field_prime": p,
+                        "left_degree": left,
+                        "right_degree": right,
+                        "ratio_numerator": ratio.numerator,
+                        "ratio_denominator": ratio.denominator,
+                        "bound_numerator": conjectured_bound.numerator,
+                        "bound_denominator": conjectured_bound.denominator,
+                        "attains_proposed_bound": ratio == conjectured_bound,
+                    }
+
+    return {
+        "schema": "the-fold-coprime-bad-proportion-ratio-bound-v1",
+        "primes": checked_primes,
+        "max_degree": max_degree,
+        "coprime_pair_count": checked,
+        "within_bound_count": within_bound,
+        "all_checked_pairs_within_bound": checked > 0 and within_bound == checked,
+        "first_failure": first_failure,
+        "largest_observed_ratio": maximum_record,
+        "interpretation": (
+            "finite exact evidence only; the proposed universal ratio bound "
+            "is not proved"
+        ),
+    }
