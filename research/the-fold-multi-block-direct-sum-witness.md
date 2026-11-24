@@ -263,3 +263,26 @@ The same witness must reject that incorrect partition. This distinguishes
 a valid but differently represented witness from a wrong proposed
 partition. These are finite deterministic regressions, not a universal
 composition theorem or a decomposition-discovery algorithm.
+
+
+## G-EP110: Paired-pencil partition boundary and cancellation adversaries
+
+The new cross-field regression over F₂, F₃, F₅, and F₇ first applies
+nontrivial invertible transformations that preserve each one-dimensional
+block. The verifier must recover both exact diagonal coefficient matrices.
+It then transports a single off-diagonal entry back into source coordinates
+and checks two one-sided controls: coupling Q alone must fail while K remains
+block diagonal, and coupling K alone must fail while Q remains block diagonal.
+
+The decisive paired control adds the same transported coupling to Q and its
+negative to K. After applying the supplied witness, the off-diagonal entries
+cancel in Q+K, so the aggregate sum is exactly unchanged. Nevertheless, each
+coefficient matrix separately contains a nonzero off-diagonal block and the
+verifier must reject the proposed direct sum. In characteristic two the
+negative equals the positive, and the two copies still cancel. This directly
+rules out an aggregate-only check for the tested cases and confirms that both
+members of the pencil are independently constrained.
+
+These are deterministic finite regression tests of the supplied-witness
+verifier. They do not establish decomposition discovery, uniqueness, or a
+universal theorem.
