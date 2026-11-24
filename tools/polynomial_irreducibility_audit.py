@@ -888,6 +888,165 @@ def coprime_composition_excess_asymptotic(degrees: list[int]) -> dict:
 
 
 
+
+def _poly_trim(poly: list[Fraction]) -> list[Fraction]:
+    """Trim trailing zero coefficients from an ascending-order polynomial."""
+    result = list(poly)
+    while len(result) > 1 and result[-1] == 0:
+        result.pop()
+    return result
+
+
+def _poly_derivative(poly: list[Fraction]) -> list[Fraction]:
+    if len(poly) <= 1:
+        return [Fraction(0)]
+    return _poly_trim([
+        Fraction(index) * poly[index]
+        for index in range(1, len(poly))
+    ])
+
+
+def _poly_remainder(
+    dividend: list[Fraction], divisor: list[Fraction]
+) -> list[Fraction]:
+    """Return the exact polynomial remainder over Q."""
+    remainder = _poly_trim(list(dividend))
+    divisor = _poly_trim(list(divisor))
+    if divisor == [0]:
+        raise ZeroDivisionError("polynomial divisor cannot be zero")
+    while len(remainder) >= len(divisor) and remainder != [0]:
+        shift = len(remainder) - len(divisor)
+        factor = remainder[-1] / divisor[-1]
+        for index, coefficient in enumerate(divisor):
+            remainder[index + shift] -= factor * coefficient
+        remainder = _poly_trim(remainder)
+    return remainder
+
+
+def _sturm_sequence(poly: list[Fraction]) -> list[list[Fraction]]:
+    """Build the exact Sturm sequence for a nonconstant polynomial."""
+    first = _poly_trim(list(poly))
+    second = _poly_derivative(first)
+    if first == [0]:
+        raise ValueError("polynomial cannot be zero")
+    sequence = [first]
+    if second == [0]:
+        return sequence
+    sequence.append(second)
+    while sequence[-1] != [0]:
+        remainder = _poly_remainder(sequence[-2], sequence[-1])
+        if remainder == [0]:
+            break
+        sequence.append([-coefficient for coefficient in remainder])
+    return sequence
+
+
+def _poly_one_sided_sign(
+    poly: list[Fraction], point: Fraction, side: int
+) -> int:
+    """Return the polynomial sign infinitesimally to one side of point."""
+    current = poly
+    order = 0
+    while True:
+        value = sum(
+            (coefficient * point ** index
+             for index, coefficient in enumerate(current)),
+            Fraction(0),
+        )
+        if value:
+            sign = 1 if value > 0 else -1
+            return sign if side > 0 or order % 2 == 0 else -sign
+        if len(current) <= 1:
+            return 0
+        current = _poly_derivative(current)
+        order += 1
+
+
+def _sturm_variations(
+    sequence: list[list[Fraction]], point: Fraction, side: int
+) -> int:
+    signs = [
+        _poly_one_sided_sign(poly, point, side)
+        for poly in sequence
+    ]
+    signs = [sign for sign in signs if sign]
+    return sum(
+        signs[index] != signs[index - 1]
+        for index in range(1, len(signs))
+    )
+
+
+def coprime_composition_excess_global_sign_certificate(
+    degrees: list[int],
+) -> dict:
+    """Use an exact Sturm count to certify sign on every real Q >= 2.
+
+    With x=1/Q, factor H_Q=x**e0 P(x), where P has integer
+    coefficients and P(0) is the nonzero leading spectrum coefficient.
+    Sturm's theorem counts roots of P in (0, 1/2). A separate exact
+    endpoint check handles Q=2. If there are no roots in (0, 1/2]
+    then P has the sign of P(0) throughout that interval.
+    """
+    spectrum_data = coprime_composition_excess_spectrum(degrees)
+    terms = spectrum_data["spectrum"]
+    base_exponent = terms[0]["exponent"]
+    polynomial = [Fraction(0)] * (
+        max(term["exponent"] - base_exponent for term in terms) + 1
+    )
+    for term in terms:
+        polynomial[term["exponent"] - base_exponent] = Fraction(
+            term["coefficient"]
+        )
+    polynomial = _poly_trim(polynomial)
+    endpoint = Fraction(1, 2)
+    endpoint_value = sum(
+        (coefficient * endpoint ** index
+         for index, coefficient in enumerate(polynomial)),
+        Fraction(0),
+    )
+    if len(polynomial) == 1:
+        root_count_open = 0
+    else:
+        sequence = _sturm_sequence(polynomial)
+        root_count_open = (
+            _sturm_variations(sequence, Fraction(0), 1)
+            - _sturm_variations(sequence, endpoint, -1)
+        )
+    endpoint_is_root = endpoint_value == 0
+    global_sign_certified = root_count_open == 0 and not endpoint_is_root
+    leading_coefficient = terms[0]["coefficient"]
+    sign = "positive" if leading_coefficient > 0 else "negative"
+    endpoint_sign = (
+        "positive" if endpoint_value > 0 else
+        "negative" if endpoint_value < 0 else "zero"
+    )
+    return {
+        "schema": "the-fold-composition-excess-global-sign-sturm-v1",
+        "degrees": degrees,
+        "polynomial_coefficients_ascending": [
+            coefficient.numerator if coefficient.denominator == 1
+            else str(coefficient)
+            for coefficient in polynomial
+        ],
+        "polynomial_degree": len(polynomial) - 1,
+        "open_interval": "(0, 1/2)",
+        "sturm_root_count_open_interval": root_count_open,
+        "q_equals_two_value_sign": endpoint_sign,
+        "q_equals_two_is_root": endpoint_is_root,
+        "global_sign_certified_for_all_real_q_ge_2":
+            global_sign_certified,
+        "certified_sign": sign if global_sign_certified else None,
+        "leading_sign": sign,
+        "interpretation": (
+            "zero roots on (0,1/2] prove the leading sign for every real "
+            "Q >= 2; a positive root count is an exact obstruction to "
+            "this simple global sign certificate, not a failure of the "
+            "eventual-sign theorem"
+        ),
+        "spectrum": terms,
+    }
+
+
 def coprime_composition_excess_sign_certificate(
     degrees: list[int], field_size: int
 ) -> dict:
