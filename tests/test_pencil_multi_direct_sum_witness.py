@@ -2062,3 +2062,76 @@ class MultiDirectSumTests(unittest.TestCase):
                 self.assertFalse(paired["verification"]["Q_off_diagonal_blocks_zero"])
                 self.assertFalse(paired["verification"]["K_off_diagonal_blocks_zero"])
                 self.assertFalse(paired["verification"]["direct_sum_verified"])
+
+
+    def test_g_ep111_invertible_pencil_parameter_basis_changes(self):
+        # An invertible GL(2, F_p) change of coefficient basis preserves
+        # the two-dimensional span of the pencil coefficients. A common
+        # direct-sum witness must therefore verify every such representation.
+        shapes = [(1, 2), (2, 1), (1, 1)]
+        m = sum(r for r, _ in shapes)
+        n = sum(c for _, c in shapes)
+        ro, co = [0], [0]
+        for r, c in shapes:
+            ro.append(ro[-1] + r)
+            co.append(co[-1] + c)
+
+        def combine(a, x, b, y, p):
+            return [[(a*x[i][j] + b*y[i][j]) % p
+                     for j in range(len(x[0]))] for i in range(len(x))]
+
+        def scale2(x, a, p):
+            return [[(a*v) % p for v in row] for row in x]
+
+        for p in (2, 3, 5, 7):
+            q0 = [[0] * n for _ in range(m)]
+            k0 = [[0] * n for _ in range(m)]
+            for block, (r, c) in enumerate(shapes):
+                for i in range(r):
+                    for j in range(c):
+                        q0[ro[block]+i][co[block]+j] = (block + 2*i + j + 1) % p
+                        k0[ro[block]+i][co[block]+j] = (2*block + i + 3*j + 1) % p
+
+            left = ident(m)
+            right = ident(n)
+            for i in range(m-1):
+                left[i][i+1] = 1
+            for i in range(n-1):
+                right[i+1][i] = 1
+            li, ri = inverse(left, p), inverse(right, p)
+            q = mm(mm(li, q0, p), ri, p)
+            k = mm(mm(li, k0, p), ri, p)
+
+            # Includes coefficient swap, independent shears, and a
+            # nontrivial determinant-one mixing. Every matrix is invertible.
+            parameter_changes = [
+                (0, 1, 1, 0),
+                (1, 1, 0, 1),
+                (1, 0, 1, 1),
+                (1, 1, 1, 2 % p),
+            ]
+            for a, b, c, d in parameter_changes:
+                if (a*d-b*c) % p == 0:
+                    continue
+                mixed_q = combine(a, q, b, k, p)
+                mixed_k = combine(c, q, d, k, p)
+                target_q = combine(a, q0, b, k0, p)
+                target_k = combine(c, q0, d, k0, p)
+                audit = verify_pencil_multi_direct_sum_witness(
+                    mixed_q, mixed_k, p, left, right, shapes
+                )
+                with self.subTest(field=p, parameter_matrix=(a,b,c,d)):
+                    self.assertTrue(audit["verification"]["direct_sum_verified"], audit)
+                    self.assertEqual(audit["transformed_Q"], target_q)
+                    self.assertEqual(audit["transformed_K"], target_k)
+
+                # Invert the 2x2 coefficient-basis change and recover the
+                # original ordered pair exactly, not merely its span.
+                det_inv = pow((a*d-b*c) % p, -1, p)
+                ia, ib = d*det_inv % p, (-b)*det_inv % p
+                ic, id_ = (-c)*det_inv % p, a*det_inv % p
+                recovered_q = combine(ia, mixed_q, ib, mixed_k, p)
+                recovered_k = combine(ic, mixed_q, id_, mixed_k, p)
+                self.assertEqual(recovered_q, q)
+                self.assertEqual(recovered_k, k)
+
