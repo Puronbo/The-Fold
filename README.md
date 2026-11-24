@@ -396,3 +396,6 @@ G-EP140: distinguishes valid invertible coefficient-space shears that change onl
 
 
 - **G-EP188–190:** adds an exact integer-coefficient defect-spectrum auditor and rational evaluator; extends the Möbius density and defect results from prime fields to all finite fields of prime-power order; and proves positivity of the multi-factor composite excess for pairwise-coprime degrees by recursive composition. The exact spectra for (2,3) and resonant (3,4) are regression fixtures. See the research note.
+
+
+- **Prime-power field support:** the exact irreducible-count and normalized-density APIs now accept every finite-field order \(Q\), provided \(Q\) is a prime power. The original prime-only API remains available for backwards compatibility.
