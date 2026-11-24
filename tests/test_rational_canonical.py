@@ -874,5 +874,34 @@ class RationalCanonicalTests(unittest.TestCase):
                         msg=f"F_{p}, degree {degree}, {polynomial}",
                     )
 
+
+    def test_g_ep165_degree_five_irreducibility_crosscheck(self):
+        from itertools import product
+        from tools.spectral_fingerprint import (
+            factor_polynomial,
+            is_irreducible_polynomial,
+        )
+
+        checked = 0
+        for p in (2, 3, 5):
+            for degree in (5,):
+                for lower in product(range(p), repeat=degree):
+                    polynomial = (1,) + tuple(lower)
+                    factors = factor_polynomial(polynomial, p)
+                    expected = (
+                        len(factors) == 1
+                        and factors[0]["degree"] == degree
+                        and factors[0]["multiplicity"] == 1
+                        and factors[0]["coefficients_descending"]
+                        == list(polynomial)
+                    )
+                    self.assertEqual(
+                        is_irreducible_polynomial(polynomial, p),
+                        expected,
+                        msg=f"F_{p}, degree {degree}, {polynomial}",
+                    )
+                    checked += 1
+        self.assertEqual(checked, 3400)
+
 if __name__ == "__main__":
     unittest.main()
