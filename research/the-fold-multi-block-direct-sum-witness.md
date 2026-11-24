@@ -164,3 +164,9 @@ The new test keeps three questions independent:
 A mutation matrix records which layer detects each case. A missing nested grid row fails schema validation. Shape-preserving edits to a transformed coefficient, a nested block, or a rank diagnostic pass the schema check but fail reconstruction. A valid positive witness passes all three layers. A well-formed, reconstruction-consistent false witness passes the first two layers and fails only the mathematical verdict. Thus neither schema validity nor audit-record consistency is treated as proof of decomposition success.
 
 These are deterministic test-local regressions on a small F₅ fixture, not a production ingestion pipeline, formal proof, or cryptographic authenticity mechanism.
+
+## G-EP104: Adversarial metadata and equivalent witnesses
+
+The metadata regression set mutates the schema version, finite-field label, source dimensions, ordered block partition, and descriptive scope. An unsupported schema version, dimension mismatch, or partition whose declared rectangular pieces no longer match the stored block grid fails structural validation. A well-typed but altered field label or scope string can remain structurally valid; the test separately detects that it no longer matches the expected source-bound snapshot. The mathematical verdict is recomputed from the original matrices and transforms rather than accepted from metadata.
+
+The test also supplies a distinct valid witness over F₅ using reciprocal scalar rescaling, S → 2S and T → 3T. Since 2·3 = 1 in F₅, both transformed coefficients remain unchanged even though the transforms differ. This is an equivalent witness, not a forged certificate. These deterministic tests do not provide cryptographic provenance or authenticate who created a snapshot.
