@@ -1792,9 +1792,9 @@ class MultiDirectSumTests(unittest.TestCase):
             left_total = mm(b, a, p)
             right_total = mm(c, d, p)
             a_prime = mm(mm(b, a, p), bi, p)
-            d_prime = mm(mm(d, c, p), di, p)
+            d_prime = mm(mm(c, d, p), ci, p)
             left_total_alt = mm(a_prime, b, p)
-            right_total_alt = mm(c, d_prime, p)
+            right_total_alt = mm(d_prime, c, p)
             self.assertEqual(left_total, left_total_alt)
             self.assertEqual(right_total, right_total_alt)
 
