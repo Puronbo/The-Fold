@@ -108,3 +108,14 @@ Added `verify_mixed_kronecker_negative_certificate(q, k, p, result, ...)`. The v
 The replayed candidate count must exactly match the reported count and remain within the reported positive budget. The verifier also checks the field, source shape, search mode, completion/recovery flags, profile, reason, and scope metadata. Regressions cover a controlled completed negative, forged candidate count and budget, changed search mode, forged completion/recovery flags, altered explanatory scope, and a budget-limited result.
 
 The controlled impossible-target fixture patches target construction for the recovery and replay calls; it exercises finite search replay and metadata tamper detection only. It is not evidence of a genuine non-equivalent pencil. The verifier's guarantee is limited to exhaustive finite-field replay with the same configured profile bounds; it does not establish polynomial-time behavior or generalize beyond the supplied field/input.
+
+
+## G-EP79 — Replay-verifier input and certificate boundary hardening
+
+Hardened verify_mixed_kronecker_negative_certificate at both sides of its trust boundary. Caller-supplied Q/K inputs must be nonempty matrix sequences with nonempty rows and integer entries; booleans and floating-point values are rejected. The shared pair validator checks equal rectangular shapes and the prime field. Invalid caller inputs raise ValueError, rather than being confused with a failed certificate.
+
+Untrusted result objects must be dictionaries with every required schema, field, shape, recovery, decision, search-mode, budget, count, profile, reason, and scope field. Missing or altered metadata, non-dictionary result containers, malformed profile containers, and malformed nested replay data fail closed with verified=false. The replay's internal malformed-data guard prevents ordinary structure/type/index errors from escaping as verifier crashes.
+
+Regressions exercise null/list/string/scalar result containers; each required field missing in turn; malformed profile values; malformed, ragged, mismatched, boolean, and floating-point caller matrices; and boolean/composite field parameters.
+
+**Boundary distinction:** invalid caller inputs raise ValueError; invalid or malformed certificate data returns a negative verification result. This hardening does not expand the mathematical scope of the finite-field replay.
