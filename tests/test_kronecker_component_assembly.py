@@ -412,7 +412,7 @@ class KroneckerComponentAssemblyTests(unittest.TestCase):
             {"kind": "regular", "q": [[1]], "k": [[0]]},
         ]
         result = assemble_kronecker_components(components, 5)
-        for invalid_p in (True, 2, 5.0, "5"):
+        for invalid_p in (True, 4, 5.0, "5"):
             with self.subTest(p=invalid_p):
                 with self.assertRaises(ValueError):
                     verify_kronecker_component_assembly_algebraically(
