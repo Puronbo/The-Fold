@@ -407,7 +407,10 @@ class KroneckerComponentAssemblyTests(unittest.TestCase):
     def test_algebraic_verifier_rejects_invalid_field_and_component_inputs(self):
         from tools.kronecker_component_assembly import verify_kronecker_component_assembly_algebraically
         rq, rk = right_block(1)
-        components = [{"kind": "right", "q": rq, "k": rk}]
+        components = [
+            {"kind": "right", "q": rq, "k": rk},
+            {"kind": "regular", "q": [[1]], "k": [[0]]},
+        ]
         result = assemble_kronecker_components(components, 5)
         for invalid_p in (True, 2, 5.0, "5"):
             with self.subTest(p=invalid_p):
