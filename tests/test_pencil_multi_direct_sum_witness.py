@@ -1096,8 +1096,9 @@ class MultiDirectSumTests(unittest.TestCase):
             }
 
         shapes = [(1, 0), (1, 2), (0, 1), (1, 1)]
-        p, q, k = 5, [[1, 0, 0, 0], [0, 2, 0, 0], [0, 0, 3, 0]], [[0, 0, 0, 0], [0, 1, 0, 0], [0, 0, 4, 0]]
+        p, q, k = 5, [[0, 0, 0, 0], [1, 2, 0, 0], [0, 0, 0, 3]], [[0, 0, 0, 0], [0, 1, 0, 0], [0, 0, 0, 4]]
         # The first and third blocks exercise zero-width and zero-height slices.
+        # Nonzero entries occupy only the second and fourth diagonal blocks.
         left = [[1, 1, 0], [0, 1, 1], [0, 0, 1]]
         right = [[1, 1, 0, 0], [0, 1, 1, 0], [0, 0, 1, 1], [0, 0, 0, 1]]
         for witness_left in (ident(3), left, [[1, 0, 0], [0, 0, 0], [0, 0, 1]]):
@@ -1121,7 +1122,7 @@ class MultiDirectSumTests(unittest.TestCase):
             ("Q block", lambda x: x["Q_blocks"][1][1][0].__setitem__(0, 4)),
             ("K block", lambda x: x["K_blocks"][1][1][0].__setitem__(0, 4)),
             ("rank diagnostic", lambda x: x["verification"].__setitem__("left_transform_rank", 2)),
-            ("aggregate diagnostic", lambda x: x["verification"].__setitem__("direct_sum_verified", True)),
+            ("aggregate diagnostic", lambda x: x["verification"].__setitem__("direct_sum_verified", False)),
         )
         expected = reference(q, k, p, ident(3), ident(4), shapes)
         for label, mutate in mutations:
