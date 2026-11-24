@@ -4538,9 +4538,9 @@ class MultiDirectSumTests(unittest.TestCase):
             K=[[x%p for x in row] for row in K]
 
             ua,ub=identity(m),identity(m)
-            va,vb=identity(n),identity(n)
+            va=[[0,1,0],[0,0,1],[1,0,0]]
+            vb=identity(n)
             ua[0][1]=1; ub[2][0]=1
-            va[0][1]=1; vb[1][2]=1
             us=[ua,ub,identity(m),inv(ub,p)]
             vs=[va,vb,identity(n),inv(vb,p)]
             U,V=identity(m),identity(n)
