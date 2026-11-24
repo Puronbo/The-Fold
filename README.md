@@ -221,3 +221,6 @@ of its witness.
 
 
 - **G-EP119:** extends test-side off-diagonal equation rank/nullity checks to rectangular sources, including a 2×3 pencil, zero-row/zero-column blocks, and an empty off-diagonal region. Elimination rank is cross-checked against explicit row-span enumeration; sampled equations are checked against direct matrix products, and small kernels are exhaustively counted over F₂/F₃. Finite regression coverage only.
+
+
+- **G-EP120:** tests constraint-rank invariance under independent invertible block-diagonal row/column coordinate changes on rectangular systems, including empty row/column blocks. The induced map X′ = T⁻¹XT is checked by direct multiplication, and each off-diagonal block's zero status is preserved. A separate control shows that changing the partition can change rank; arbitrary block-mixing basis changes are not covered.
