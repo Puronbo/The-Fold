@@ -384,3 +384,6 @@ G-EP140: distinguishes valid invertible coefficient-space shears that change onl
 
 
 - **G-EP181:** completes the G-EP179 sharp ratio theorem for every coprime pair (a,b>1). G-EP180 handles smaller degree 2; for (3\le a<b), a lower bound for each denominator term and the maximal-subfield union bound give (Q_p(a,b)\le\omega(ab)p^{-b/2}). Small (b=4,5,6,7) are checked explicitly, and for (b\ge8), (\omega(ab)<2\log_2b\le2^{b/2-1}\le p^{b/2-1}), yielding the strict bound (Q_p(a,b)\le p^{-1}<(p^2+p-1)/p^3). Equality in the full theorem occurs only at (2,3). Therefore (E_p(ab)<\min(E_p(a),E_p(b))) and the coprime-degree defect is always positive. See `research/the-fold-outward-inward-scaling.md`.
+
+
+- **G-EP182:** proves a uniform additive asymptotic law for the coprime-degree defect. As the larger degree B grows, Q_p(a,b)=E_p(ab)/min(E_p(a),E_p(b)) tends to zero uniformly in prime p. For a≥3 it is bounded by 2 log₂(B)·2^(−B/2); for a=2,b≥5, by 2^(−B/3)+(log₃ B)·2^(−B/2). Consequently Δ_p(a,b)/(E_p(a)+E_p(b)) tends to 1, including when the smaller degree is fixed. See research/the-fold-outward-inward-scaling.md.
