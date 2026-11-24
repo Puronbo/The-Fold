@@ -357,3 +357,6 @@ G-EP140: distinguishes valid invertible coefficient-space shears that change onl
 
 
 - **G-EP171:** extracts degree-specific irreducibility-predicate/factorizer comparisons into a parameterized audit over arbitrary prime fields and positive degrees. It exhausts domains within a configurable case budget and otherwise performs reproducible sampling, reporting completeness explicitly (including the edge case where the sample covers the entire domain). The research note separately analyzes the scaling weight n/n^n and its relationship to the actual p^n workload. Finite exhaustive and sampled agreement are computational evidence, not an arbitrary-degree proof.
+
+
+- **G-EP172:** works outward from the full monic-polynomial workload \(p^n\) and inward to the exact irreducible count. It derives the adjacent-degree ratio and turning threshold for the imposed weight \(n(p/n)^n\), then contrasts it with the exact Möbius formula \(I_p(n)=\frac1n\sum_{d\mid n}\mu(d)p^{n/d}\) and the natural normalized irreducible density \(nI_p(n)/p^n\to1\) for fixed \(p\). It explicitly separates workload weighting from irreducible-density normalization and distinguishes exact counts from sampled statistics. See `research/the-fold-outward-inward-scaling.md`.
