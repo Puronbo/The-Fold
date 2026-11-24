@@ -2639,3 +2639,106 @@ class MultiDirectSumTests(unittest.TestCase):
                     self.assertTrue(audit["verification"]["direct_sum_verified"], audit)
                     self.assertEqual(audit["transformed_Q"], target_q)
                     self.assertEqual(audit["transformed_K"], target_k)
+
+
+    def test_g_ep118_constraint_rank_nullity_redundancy_and_overlap(self):
+        from itertools import product
+
+        def equation_rows(left, coefficient, p):
+            # Two scalar blocks: off-diagonal entries of (S*C)*T.
+            a = mm(left, coefficient, p)
+            rows = []
+            for i, j in ((0, 1), (1, 0)):
+                row = [0]*4
+                for z in range(2):
+                    row[2*z+j] = a[i][z] % p
+                rows.append(row)
+            return rows
+
+        def elimination_rank(rows, nvars, p):
+            work = [[x % p for x in row] for row in rows]
+            pivot_row = 0
+            for col in range(nvars):
+                pivot = next((r for r in range(pivot_row, len(work))
+                              if work[r][col]), None)
+                if pivot is None:
+                    continue
+                work[pivot_row], work[pivot] = work[pivot], work[pivot_row]
+                scale = pow(work[pivot_row][col], -1, p)
+                work[pivot_row] = [x*scale % p for x in work[pivot_row]]
+                for r in range(len(work)):
+                    if r != pivot_row and work[r][col]:
+                        factor = work[r][col]
+                        work[r] = [(x-factor*y) % p
+                                   for x,y in zip(work[r],work[pivot_row])]
+                pivot_row += 1
+                if pivot_row == len(work):
+                    break
+            return pivot_row
+
+        def span_rank(rows, p):
+            # Independent rank check: explicitly build the row span and infer
+            # its dimension from its cardinality, rather than row reduction.
+            span = {(0, 0, 0, 0)}
+            for row in rows:
+                vector = tuple(x % p for x in row)
+                span = {
+                    tuple((a + scalar*b) % p for a,b in zip(existing, vector))
+                    for existing in span
+                    for scalar in range(p)
+                }
+            size = len(span)
+            rank = 0
+            while p**rank < size:
+                rank += 1
+            self.assertEqual(p**rank, size)
+            return rank
+
+        left = [[1, 1], [0, 1]]
+        base = [[1, 0], [0, 0]]
+        zero = [[0, 0], [0, 0]]
+        cases = [
+            ("zero-only", [zero]),
+            ("one-constraint", [base]),
+            ("duplicated-constraint", [base, [[2, 0], [0, 0]]]),
+            ("overlapping-constraint", [base, [[1, 0], [0, 0]]]),
+            ("independent-constraints", [base, [[0, 0], [0, 1]]]),
+        ]
+        for p in (2, 3, 5):
+            for label, coefficients in cases:
+                rows = [
+                    row
+                    for coefficient in coefficients
+                    for row in equation_rows(left, coefficient, p)
+                ]
+                rank_elimination = elimination_rank(rows, 4, p)
+                rank_span = span_rank(rows, p)
+                self.assertEqual(rank_elimination, rank_span, (p, label, rows))
+                nullity = 4-rank_elimination
+                solutions = [
+                    vector for vector in product(range(p), repeat=4)
+                    if all(sum(a*b for a,b in zip(row,vector)) % p == 0
+                           for row in rows)
+                ]
+                self.assertEqual(len(solutions), p**nullity, (p, label))
+                self.assertLessEqual(rank_elimination, len(rows))
+
+                # Appending a literal duplicate or zero equation changes
+                # equation count but cannot change rank or nullity.
+                redundant = rows + ([list(rows[0])] if rows else []) + [[0]*4]
+                self.assertEqual(
+                    elimination_rank(redundant, 4, p), rank_elimination,
+                    (p, label, "redundancy")
+                )
+                self.assertEqual(span_rank(redundant, p), rank_span)
+                self.assertEqual(4-elimination_rank(redundant,4,p), nullity)
+
+            # Explicit overlap: K is a scalar multiple of Q, so the
+            # simultaneous system has the same row span as Q alone.
+            q_rows = equation_rows(left, base, p)
+            k_rows = equation_rows(left, [[2,0],[0,0]], p)
+            self.assertEqual(span_rank(q_rows+k_rows,p), span_rank(q_rows,p))
+            # A second coefficient with a different support adds a new
+            # independent constraint direction.
+            independent = equation_rows(left, [[0,0],[0,1]], p)
+            self.assertGreater(span_rank(q_rows+independent,p), span_rank(q_rows,p))
