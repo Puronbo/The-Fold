@@ -718,3 +718,33 @@ Starting with a block-diagonal rectangular coefficient pair, apply independent i
 Apply two successive invertible 2×2 coefficient-space basis changes to the transported rectangular pencil pair over F₂, F₃, and F₅. The test compares sequential mixing with the correctly ordered direct product, checks diagonal projected-block reconstruction at the original, intermediate, and final stages using the same row/column projector families, and recovers the original ordered pair both by inverting the composite map and by applying the inverse factors in reverse order. This is finite test-side evidence for composition and covariance, not a production certificate API or a universal theorem.
 \n\n## G-EP140: One-output coefficient shear versus one-coefficient matrix mutation\n\nDistinguish two operations that can look superficially similar. An invertible coefficient-space shear sends the ordered pair (A,K) to (A+K,K): only the first output changes, but the whole pair is transformed by an invertible 2×2 map. Under independent row/column basis changes on a rectangular fixture, the same transported row/column projectors continue to reconstruct both coefficients from diagonal projected blocks, and the inverse shear recovers the original ordered pair.\n\nAs a contrasting control, add a shape-preserving cross-block matrix entry to A alone while leaving K unchanged. This is a matrix-space mutation, not the same coefficient-space basis change. The diagonal projected blocks no longer reconstruct the mutated A and its off-diagonal projected sum is nonzero, while K remains exactly reconstructible. The finite tests run over F₂, F₃, and F₅. They clarify the distinction between a valid one-output shear of the ordered pair and an unrelated one-coefficient alteration; they do not add a production certificate API or a universal theorem.
 \n\n## G-EP141: Rank-one coefficient maps and the surviving pencil direction\n\nFor each field F₂, F₃, and F₅, enumerate every nonzero singular 2×2 coefficient map on a fixed pair (Q,K) whose Q member is block diagonal and whose K member contains a cross-block coupling. Every such map has rank one, so its two output coefficients are scalar multiples of one surviving linear combination of Q and K. Group the maps by the projective direction of their nonzero coefficient rows.\n\nThe exact multi-block verifier's result is constant within each group, even though the rank-one maps have different kernel/preimage data. In this fixture, only the pure-Q direction removes the K coupling; every direction with a nonzero K component retains it and fails diagonal-only reconstruction. This refines the earlier singular-map warning by identifying the surviving coefficient-space direction as the relevant datum. The enumeration is finite and fixture-specific: a successful verdict concerns only the collapsed output pair and does not establish equivalence or a decomposition of the original two-coefficient pencil.
+
+## G-EP142: Rank-zero collapse versus surviving pencil information
+
+Exhaustively enumerate all 2×2 coefficient-space maps over F₂, F₃, and F₅
+on the same 3×3 fixture used for G-EP141. The fixture has a block-diagonal
+Q coefficient and a K coefficient with a cross-block coupling. Classify
+each map by its exact rank and replay its output pair through the production
+multi-block direct-sum verifier.
+
+There are three distinct information states:
+
+- **Rank zero:** both output coefficients are zero. The verifier returns a
+  successful direct-sum verdict for that supplied zero pair, as it should.
+  This is complete information collapse, not evidence that the original
+  Q,K pencil decomposes.
+- **Rank one:** the output pair spans one projective linear combination of
+  Q and K. The verdict is governed by that surviving direction, as G-EP141
+  established.
+- **Rank two:** the coefficient map is invertible and retains the full
+  two-dimensional coefficient-space information. In this fixture the
+  original K-coupling therefore remains visible in at least one output and
+  the direct-sum verdict is false.
+
+The exhaustive census checks one rank-zero map, p³+p²−p−1 rank-one maps,
+and (p²−1)(p²−p) invertible maps for each field. Importantly, the production
+verifier's result schema describes only the supplied output pair; it does
+not carry the coefficient map or its rank. The distinction is therefore
+recorded by a test-side provenance audit, not claimed as metadata inferred
+by the verifier. A successful verification certifies only the exact pair
+that was supplied, including a pair that may have been collapsed to zero.
