@@ -147,3 +147,6 @@ of its witness.
 
 
 **G-EP93 — near-equivalence rejection:** tests one-entry source-coefficient mutations after a valid rectangular basis scrambling, one-entry perturbations of each supplied invertible transform, and block-shape permutation without the corresponding coordinate permutation. These well-formed near-equivalences must fail the algebraic audit, while malformed transform dimensions continue to raise ValueError. Controls run over F₂, F₃, F₅, and F₇; a failed supplied witness is not a no-decomposition theorem.
+
+
+**G-EP94 — independent audit-record cross-checks:** test-only matrix multiplication, Gaussian rank, and block slicing independently reconstruct SQT/SKT and every ordered rectangular block. The tests compare all verifier diagnostic fields, including both transform ranks, invertibility flags, per-coefficient off-diagonal-zero flags, and the aggregate decision, for valid and deliberately false witnesses over F₂/F₃/F₅/F₇.
