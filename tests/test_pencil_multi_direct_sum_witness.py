@@ -4579,3 +4579,111 @@ class MultiDirectSumTests(unittest.TestCase):
             wrong_cols=[mm(mm(V,z,p),V_inv,p) for z in col_parts]
             with self.subTest(field=p,mutation="wrong column conjugation"):
                 self.assertNotEqual(wrong_cols[1],col_changed[1])
+
+
+    def test_g_ep133_diagonal_projected_blocks_reconstruct_and_detect_cross_coupling(self):
+        def mm(a,b,p):
+            return [[sum(a[i][k]*b[k][j] for k in range(len(b)))%p
+                     for j in range(len(b[0]))] for i in range(len(a))]
+
+        def inv(a,p):
+            n=len(a)
+            w=[[x%p for x in row]+[int(i==j) for j in range(n)]
+               for i,row in enumerate(a)]
+            for c in range(n):
+                pivot=next((r for r in range(c,n) if w[r][c]),None)
+                if pivot is None: raise AssertionError("singular basis")
+                w[c],w[pivot]=w[pivot],w[c]
+                scale=pow(w[c][c],-1,p)
+                w[c]=[x*scale%p for x in w[c]]
+                for r in range(n):
+                    if r!=c and w[r][c]:
+                        factor=w[r][c]
+                        w[r]=[(x-factor*y)%p for x,y in zip(w[r],w[c])]
+            return [row[n:] for row in w]
+
+        def identity(n):
+            return [[int(i==j) for j in range(n)] for i in range(n)]
+
+        def zero(m,n):
+            return [[0]*n for _ in range(m)]
+
+        def add(a,b,p):
+            return [[(x+y)%p for x,y in zip(ar,br)]
+                    for ar,br in zip(a,b)]
+
+        def sub(a,b,p):
+            return [[(x-y)%p for x,y in zip(ar,br)]
+                    for ar,br in zip(a,b)]
+
+        def projectors(sizes,total):
+            out=[]; start=0
+            for size in sizes:
+                z=zero(total,total)
+                for i in range(start,start+size): z[i][i]=1
+                out.append(z); start+=size
+            return out
+
+        shapes=[(1,0),(0,1),(3,2)]
+        row_sizes=[r for r,_ in shapes]
+        col_sizes=[c for _,c in shapes]
+        m,n=sum(row_sizes),sum(col_sizes)
+        for p in (2,3,5):
+            rows=projectors(row_sizes,m)
+            cols=projectors(col_sizes,n)
+            A=zero(m,n); K=zero(m,n)
+            A[1][1:3]=[1,1]; A[2][1:3]=[0,1]; A[3][1:3]=[1,0]
+            K[1][1:3]=[1,0]; K[2][1:3]=[1,1]; K[3][1:3]=[0,1]
+            A=[[x%p for x in row] for row in A]
+            K=[[x%p for x in row] for row in K]
+
+            ua,ub=identity(m),identity(m)
+            va,vb=identity(n),identity(n)
+            ua[0][1]=1; ub[2][0]=1
+            va=[[0,1,0],[0,0,1],[1,0,0]]
+            vb[1][2]=1
+            U,V=identity(m),identity(n)
+            for u,v in ((ua,va),(ub,vb),(identity(m),identity(n)),
+                        (inv(ub,p),inv(vb,p))):
+                U=mm(u,U,p)
+                V=mm(V,v,p)
+            U_inv,V_inv=inv(U,p),inv(V,p)
+            rows_new=[mm(mm(U,z,p),U_inv,p) for z in rows]
+            cols_new=[mm(mm(V_inv,z,p),V,p) for z in cols]
+
+            for label,source in (("A",A),("K",K)):
+                target=mm(mm(U,source,p),V,p)
+                diagonal_sum=zero(m,n)
+                off_diagonal_sum=zero(m,n)
+                for i,pr in enumerate(rows_new):
+                    for j,qc in enumerate(cols_new):
+                        block=mm(mm(pr,target,p),qc,p)
+                        if i==j:
+                            diagonal_sum=add(diagonal_sum,block,p)
+                        else:
+                            off_diagonal_sum=add(off_diagonal_sum,block,p)
+                with self.subTest(field=p,coefficient=label):
+                    self.assertEqual(diagonal_sum,target)
+                    self.assertEqual(off_diagonal_sum,zero(m,n))
+
+                # Inject a single, shape-valid cross-block entry in source
+                # coordinates: row block 0 to column block 1.
+                coupled=[row[:] for row in source]
+                coupled[0][0]=(coupled[0][0]+1)%p
+                coupled_target=mm(mm(U,coupled,p),V,p)
+                coupled_diagonal=zero(m,n)
+                coupled_off_diagonal=zero(m,n)
+                for i,pr in enumerate(rows_new):
+                    for j,qc in enumerate(cols_new):
+                        block=mm(mm(pr,coupled_target,p),qc,p)
+                        if i==j:
+                            coupled_diagonal=add(coupled_diagonal,block,p)
+                        else:
+                            coupled_off_diagonal=add(coupled_off_diagonal,block,p)
+                with self.subTest(field=p,coefficient=label,
+                                  mutation="cross-block coupling"):
+                    self.assertNotEqual(coupled_diagonal,coupled_target)
+                    self.assertNotEqual(coupled_off_diagonal,zero(m,n))
+                    self.assertEqual(add(coupled_diagonal,
+                                         coupled_off_diagonal,p),
+                                     coupled_target)
