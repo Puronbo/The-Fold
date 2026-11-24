@@ -103,3 +103,10 @@ The verifier API accepts source inputs and transforms, not a serialized audit re
 A test-side strict JSON decoder rejects duplicate object keys (which ordinary decoding can silently collapse) and non-finite constants such as NaN and infinities. Adversarial snapshots then exercise unexpected schema versions, malformed nested block arrays, missing required fields, and boolean/floating-point substitutions in integer diagnostic positions. Each decoded mutation fails recursive type-exact comparison with a fresh audit computed from original caller inputs.
 
 The tests separately retain the caller-input boundary: malformed source matrices raise `ValueError` in the verifier. This milestone does not add a production deserializer or serialized-certificate API; malformed snapshot handling is asserted by test-side decoding and replay comparison.
+
+
+## G-EP97: Deterministic serialized-record mutation sweep
+
+A deterministic recursive traversal enumerates every dictionary field and list slot in a valid multi-block audit snapshot. Each location is replaced independently, serialized and deserialized, and checked against the baseline using recursive type-exact equality. The test asserts that every single-location mutation is detected, and explicitly checks coverage of top-level verification metadata, both coefficient block grids, and nested aggregate verification fields.
+
+This is finite regression coverage for the tested record shape. It does not establish cryptographic authenticity, tamper resistance against a party able to replace both record and expected baseline, or provenance of the original inputs.
