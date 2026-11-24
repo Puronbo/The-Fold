@@ -69,3 +69,6 @@
 
 
 **Mixed-recovery boundary grid (G-EP73):** adds deterministic positive controls across right/left minimal-index pairs (1,1), (2,1), and (2,2) over F₂, F₃, and F₅, each with a regular block and exact strict-equivalence verification. Additional regressions explicitly distinguish an incomplete profile (degree bound too small) from a complete profile with an exhausted witness-search budget. Both negative outcomes remain inconclusive; neither is reported as a proof of non-equivalence.
+
+
+**Structured/exhaustive recovery cross-checks (G-EP74):** adds small-field comparisons between bounded structured recovery and exhaustive finite-field witness enumeration. A one-candidate structured search must remain inconclusive, while a larger exhaustive F₂ search resolves the same input with an exact witness. F₂/F₃ positive controls require matching minimal-index profiles and independently verified strict-equivalence witnesses in both modes. Different valid transforms are allowed. Exhaustive negative decisions remain valid only after complete enumeration; budget exhaustion is never a proof of inequivalence. See the G-EP74 section in research/the-fold-mixed-kronecker-recovery.md.
