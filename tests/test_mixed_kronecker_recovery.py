@@ -4,7 +4,8 @@ from unittest.mock import patch
 from itertools import product
 
 from tools.mixed_kronecker_recovery import (
-    _affine_vectors, _det, _exhaustive_left_matrices, recover_mixed_kronecker_pencil,\n    verify_mixed_kronecker_negative_certificate,
+    _affine_vectors, _det, _exhaustive_left_matrices, recover_mixed_kronecker_pencil,
+    verify_mixed_kronecker_negative_certificate,
 )
 
 
