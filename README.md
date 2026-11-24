@@ -153,3 +153,6 @@ of its witness.
 
 
 **G-EP95 — serialized audit round-trip and replay:** JSON round-trips valid and false multi-block audit records, then exactly compares the restored data with a fresh audit recomputed from source matrices and transforms. Forged aggregate flags, stale off-diagonal flags, boolean-for-integer rank substitutions, and missing block grids are rejected by type-exact replay comparison. The verifier itself consumes source matrices and transforms, not serialized audit records; this is a test of serialization integrity and replay discipline, not a new certificate-loading API.
+
+
+**G-EP96 — Strict JSON snapshot boundary regressions:** test-side decoding rejects duplicate object keys and non-finite JSON constants. Restored records with unexpected schema versions, malformed nested block arrays, missing required fields, or boolean/floating-point substitutions in integer diagnostic positions fail recursive type-exact comparison with a fresh audit. Original malformed caller matrices continue to exercise the verifier's separate `ValueError` input boundary. No serialized-record ingestion API is introduced.
