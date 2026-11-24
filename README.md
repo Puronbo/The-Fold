@@ -440,3 +440,6 @@ G-EP140: distinguishes valid invertible coefficient-space shears that change onl
 
 
 **G-EP211 — exact asymptotic equivalent and super-geometric ratio:** extends `research/the-fold-recursive-degree-temporal-curvature.md`. Factoring H_k=-Q^(-(1+2·3^(k−1)))B_k with B_k→1 uniformly for real Q≥2 proves H_k∼−Q^(-(1+2·3^(k−1))). It also gives H_(k+1)/H_k = Q^(-4·3^(k−1))(B_(k+1)/B_k) ∼ Q^(-4·3^(k−1)), uniformly for Q≥2; in particular the successive ratio tends uniformly to zero.
+
+
+**G-EP212 — eventual sign law for every fixed-order temporal difference:** extends `research/the-fold-recursive-degree-temporal-curvature.md`. For each fixed r≥1, the forward difference Δ^r H_k has eventual sign (−1)^(r+1), uniformly for real Q≥2. An explicit threshold K_r is the least k≥2 with 4·3^(k−1) > log₂((32/23)(2^r−1)). The proof bounds every later family term relative to H_k using 23/32 < B_k(Q) < 1. This is a fixed-order theorem; it does not provide one threshold uniform in r.
