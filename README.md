@@ -162,3 +162,6 @@ of its witness.
 
 
 **G-EP98 — v1 audit schema contract:** test-side structural validation checks exact required fields and types, positive source dimensions, rectangular block partition totals, transform/transformed-matrix dimensions, both nested block-grid dimensions, and verification diagnostic types/ranges. It deliberately accepts well-formed but mathematically false witness records, keeping schema validity distinct from algebraic verification. No production parser or schema migration is introduced.
+
+
+**G-EP99 — Rectangular schema edge-case grid:** exercises the v1 structural contract across two-, three-, and four-block partitions, including legal zero-row and zero-column rectangular blocks. It verifies exact nested grid dimensions, accepts well-formed false witnesses as structurally valid without treating them as successful algebraic certificates, and rejects malformed nested grid dimensions. Finite deterministic regression coverage only.
