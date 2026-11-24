@@ -108,3 +108,6 @@
 
 
 **G-EP87:** standalone multi-block witness verification now rejects boolean and non-integral entries in source coefficients and transforms. Tests cover all six consistent permutations of a three-block mixed pencil, plus malformed, incomplete, dimension-inconsistent, and zero-by-zero block partitions. The API represents blocks as consecutive partitions, so overlapping intervals cannot be separately encoded; invalid totals and shapes are rejected.
+
+
+**Multi-block witness adversarial verification (G-EP88):** adds regressions ensuring singular left or right transforms produce a failed verification audit rather than being confused with malformed caller data; modularly equivalent integer representatives yield identical normalized audit data; field validation rejects booleans, non-integers, small invalid values, and composites while F₂/F₃ positive controls pass; and malformed nested/ragged matrix inputs raise explicit `ValueError`. This hardens the supplied-witness verifier without changing its discovery scope or treating a failed witness as proof that no decomposition exists.
