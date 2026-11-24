@@ -659,3 +659,59 @@ def evaluate_coprime_defect_spectrum(field_size: int,
          for term in spectrum["spectrum"]),
         Fraction(0, 1),
     )
+
+
+def _is_prime_power(value: int) -> bool:
+    """Return whether value is a positive power of exactly one prime."""
+    if isinstance(value, bool) or not isinstance(value, int) or value < 2:
+        return False
+    remaining = value
+    distinct_factors = 0
+    divisor = 2
+    while divisor * divisor <= remaining:
+        if remaining % divisor == 0:
+            distinct_factors += 1
+            if distinct_factors > 1:
+                return False
+            while remaining % divisor == 0:
+                remaining //= divisor
+        divisor += 1 if divisor == 2 else 2
+    if remaining > 1:
+        distinct_factors += 1
+    return distinct_factors == 1
+
+
+def count_monic_irreducibles_over_field(field_size: int,
+                                         degree: int) -> int:
+    """Count monic irreducibles over F_Q for any prime-power Q."""
+    if not _is_prime_power(field_size):
+        raise ValueError("field_size must be a prime power")
+    if (isinstance(degree, bool) or not isinstance(degree, int)
+            or degree < 1):
+        raise ValueError("degree must be a positive integer")
+    numerator = sum(
+        _mobius(divisor) * field_size ** (degree // divisor)
+        for divisor in range(1, degree + 1)
+        if degree % divisor == 0
+    )
+    quotient, remainder = divmod(numerator, degree)
+    if remainder:
+        raise ArithmeticError("irreducible-count formula was not integral")
+    return quotient
+
+
+def irreducible_density_over_field(field_size: int,
+                                    degree: int) -> dict:
+    """Return exact normalized irreducible density data over F_Q."""
+    count = count_monic_irreducibles_over_field(field_size, degree)
+    normalized = Fraction(degree * count, field_size ** degree)
+    return {
+        "schema": "the-fold-prime-power-field-density-v1",
+        "field_size": field_size,
+        "degree": degree,
+        "irreducible_count": count,
+        "normalized_density_numerator": normalized.numerator,
+        "normalized_density_denominator": normalized.denominator,
+        "bad_proportion_numerator": (1 - normalized).numerator,
+        "bad_proportion_denominator": (1 - normalized).denominator,
+    }
