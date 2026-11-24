@@ -864,8 +864,8 @@ class MixedKroneckerRecoveryTests(unittest.TestCase):
         mutations.append(("nested transformed matrix entry", forged))
 
         forged = deepcopy(result)
-        forged["multi_block_direct_sum_audit"]["Q_blocks"][0][0][0] = (
-            forged["multi_block_direct_sum_audit"]["Q_blocks"][0][0][0] + 1
+        forged["multi_block_direct_sum_audit"]["Q_blocks"][0][0][0][0] = (
+            forged["multi_block_direct_sum_audit"]["Q_blocks"][0][0][0][0] + 1
         ) % p
         mutations.append(("nested block matrix entry", forged))
 
