@@ -5600,3 +5600,63 @@ class MultiDirectSumTests(unittest.TestCase):
             self.assertEqual(counts[0], 1)
             self.assertEqual(counts[1], p**3 + p**2 - p - 1)
             self.assertEqual(counts[2], (p**2 - 1) * (p**2 - p))
+
+
+    def test_g_ep143_direct_sum_verdict_is_invariant_under_invertible_coefficient_changes(self):
+        shapes = [(1, 1), (1, 1), (1, 1)]
+        for p in (2, 3, 5):
+            fixtures = {
+                "both_block_diagonal": (
+                    [[1 % p, 0, 0], [0, 2 % p, 0], [0, 0, 3 % p]],
+                    [[2 % p, 0, 0], [0, 1 % p, 0], [0, 0, 4 % p]],
+                    True,
+                ),
+                # Each coefficient has its own nonzero cross-block entry.
+                # Their independent supports prevent cancellation from
+                # making both transformed coefficients block diagonal.
+                "both_coupled": (
+                    [[1 % p, 1 % p, 0], [0, 2 % p, 0], [0, 0, 3 % p]],
+                    [[1 % p, 0, 0], [0, 2 % p, 1 % p], [0, 0, 3 % p]],
+                    False,
+                ),
+            }
+            gl_count = 0
+            for a in range(p):
+                for b in range(p):
+                    for c in range(p):
+                        for d in range(p):
+                            det = (a*d - b*c) % p
+                            if det == 0:
+                                continue
+                            gl_count += 1
+                            coeff = [[a, b], [c, d]]
+                            coeff_inv = inverse(coeff, p)
+                            for name, (q, k, expected) in fixtures.items():
+                                out_q = [[(a*q[i][j] + b*k[i][j]) % p
+                                          for j in range(3)] for i in range(3)]
+                                out_k = [[(c*q[i][j] + d*k[i][j]) % p
+                                          for j in range(3)] for i in range(3)]
+                                audit = verify_pencil_multi_direct_sum_witness(
+                                    out_q, out_k, p, ident(3), ident(3), shapes
+                                )
+                                verified = audit["verification"]["direct_sum_verified"]
+                                # Invert the coefficient-space change and
+                                # recover the original ordered pair exactly.
+                                recovered_q = [[(coeff_inv[0][0]*out_q[i][j]
+                                                 + coeff_inv[1][0]*out_k[i][j]) % p
+                                                for j in range(3)] for i in range(3)]
+                                recovered_k = [[(coeff_inv[0][1]*out_q[i][j]
+                                                 + coeff_inv[1][1]*out_k[i][j]) % p
+                                                for j in range(3)] for i in range(3)]
+                                with self.subTest(field=p, map=(a,b,c,d), fixture=name):
+                                    self.assertEqual(verified, expected)
+                                    self.assertEqual(recovered_q, q)
+                                    self.assertEqual(recovered_k, k)
+                                    if not expected:
+                                        self.assertTrue(
+                                            audit["verification"]["Q_off_diagonal_blocks_zero"]
+                                            is False or
+                                            audit["verification"]["K_off_diagonal_blocks_zero"]
+                                            is False
+                                        )
+            self.assertEqual(gl_count, (p*p - 1) * (p*p - p))
