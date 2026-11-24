@@ -40,3 +40,21 @@ This is finite regression coverage for the stated rectangular edge case and
 constant strict-equivalence convention. It does not imply decomposition
 discovery, uniqueness, or a universal invariance theorem beyond the algebraic
 identities checked by the verifier.
+
+
+## G-EP91: Adversarial basis-invariance witness checks
+
+The generated rectangular basis-scrambled fixture from G-EP90 is now tested
+against individual off-diagonal mutations. Each representable directed
+off-diagonal block is injected separately into Q and K over F₂, F₃, F₅, and
+F₇; additional cases mutate both coefficients at once. The audit must identify
+which coefficient contains coupling and reject the combined witness.
+
+The tests also perturb the supplied left and right transforms while keeping
+them invertible, and separately supply singular square transforms. These are
+well-formed but mathematically false witnesses and must produce a negative
+audit rather than a caller-input exception. By contrast, ragged or
+dimension-incompatible transforms and boolean/floating-point entries are
+malformed inputs and must raise ValueError. A failed witness invalidates only
+that supplied witness; it does not prove that no alternative decomposition
+exists. The cases are finite regression coverage, not a universal theorem.
