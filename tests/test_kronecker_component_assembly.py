@@ -1,4 +1,5 @@
 import copy
+import random
 import unittest
 
 from tools.kronecker_component_assembly import (
@@ -437,6 +438,64 @@ class KroneckerComponentAssemblyTests(unittest.TestCase):
                 [{"kind": "right", "q": rq, "k": rk}], 5, []
             )
 
+
+
+    def test_seeded_randomized_valid_certificates_across_small_prime_fields(self):
+        from tools.kronecker_component_assembly import verify_kronecker_component_assembly_algebraically
+
+        rng = random.Random(71071)
+        for p in (2, 3, 5, 7):
+            for case in range(3):
+                right_index = 1 + rng.randrange(2)
+                left_index = 1 + rng.randrange(2)
+                rq, rk = right_block(right_index)
+                lq0, lk0 = right_block(left_index)
+                regular_q = [[1 + rng.randrange(p - 1)]]
+                regular_k = [[rng.randrange(p)]]
+                components = [
+                    {"kind": "right", "q": rq, "k": rk},
+                    {"kind": "left", "q": transpose(lq0), "k": transpose(lk0)},
+                    {"kind": "regular", "q": regular_q, "k": regular_k},
+                ]
+                rng.shuffle(components)
+                result = assemble_kronecker_components(components, p)
+                self.assertTrue(
+                    result["assembly_complete"],
+                    msg=f"p={p}, case={case}, reason={result.get('reason')}",
+                )
+                audit = verify_kronecker_component_assembly_algebraically(
+                    components, p, result
+                )
+                self.assertTrue(
+                    audit["verified"],
+                    msg=f"p={p}, case={case}, checks={audit['checks']}",
+                )
+
+    def test_seeded_randomized_certificate_tampering_is_detected(self):
+        from tools.kronecker_component_assembly import verify_kronecker_component_assembly_algebraically
+
+        rng = random.Random(71072)
+        for p in (2, 3, 5, 7):
+            rq, rk = right_block(1 + rng.randrange(2))
+            lq0, lk0 = right_block(1 + rng.randrange(2))
+            components = [
+                {"kind": "right", "q": rq, "k": rk},
+                {"kind": "left", "q": transpose(lq0), "k": transpose(lk0)},
+                {"kind": "regular", "q": [[1]], "k": [[rng.randrange(p)]]},
+            ]
+            result = assemble_kronecker_components(components, p)
+            self.assertTrue(result["assembly_complete"])
+            altered = copy.deepcopy(result)
+            # Corrupt a canonical coefficient at a deterministic random location.
+            matrix_name = rng.choice(("canonical_Q", "canonical_K"))
+            matrix = altered[matrix_name]
+            row = rng.randrange(len(matrix))
+            col = rng.randrange(len(matrix[0]))
+            matrix[row][col] = (matrix[row][col] + 1) % p
+            audit = verify_kronecker_component_assembly_algebraically(
+                components, p, altered
+            )
+            self.assertFalse(audit["verified"], msg=f"p={p}, matrix={matrix_name}")
 
 
 if __name__ == "__main__":
