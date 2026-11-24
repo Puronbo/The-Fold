@@ -1,0 +1,148 @@
+# G-EP172 — Outward workload scaling and inward irreducible density
+
+## Question
+
+How does the weight
+
+\[
+w(n)=\frac{n}{n^n}=n^{1-n}
+\]
+
+behave when we move outward across field size and degree, and inward from the
+entire polynomial space to the irreducible members?
+
+The two directions answer different questions and must not be conflated.
+
+## Outward: the full search space
+
+There are exactly
+
+\[
+N(p,n)=p^n
+\]
+
+monic degree-\(n\) polynomials over \(\mathbb F_p\). Applying the proposed
+weight gives
+
+\[
+W(p,n)=N(p,n)w(n)=n\left(\frac pn\right)^n.
+\]
+
+For fixed degree, \(W(p,n)\) grows as \(p^n\) when the field grows. Thus
+\(w(n)\) does not normalize across field sizes: it is independent of \(p\).
+
+For fixed prime \(p\), adjacent degrees obey the exact ratio
+
+\[
+\frac{W(p,n+1)}{W(p,n)}
+=\frac pn\left(\frac{n}{n+1}\right)^n.
+\]
+
+Consequently the weighted sequence increases from degree \(n\) to \(n+1\)
+exactly when
+
+\[
+p>n\left(1+\frac1n\right)^n.
+\]
+
+The threshold on the right tends to \(en\). This locates the turning region
+near \(n\approx p/e\), but the exact integer comparison above, not the
+approximation, decides each step. For fixed \(p\), the weighted quantity
+eventually decreases and tends to zero. This is a property of the chosen
+weight, not of the actual enumeration workload, which continues to grow as
+\(p^n\).
+
+## Inward: the irreducible part of the space
+
+Let \(I_p(n)\) be the number of monic irreducible degree-\(n\) polynomials
+over \(\mathbb F_p\). The exact finite-field counting formula is
+
+\[
+I_p(n)=\frac1n\sum_{d\mid n}\mu(d)p^{n/d},
+\]
+
+where \(\mu\) is the Möbius function. Dividing by the full monic domain gives
+the exact irreducible density
+
+\[
+\rho_p(n)=\frac{I_p(n)}{p^n}
+=\frac1n\sum_{d\mid n}\mu(d)p^{-n(1-1/d)}.
+\]
+
+The natural first-order normalization is therefore
+
+\[
+R_p(n)=n\rho_p(n)
+=\frac{nI_p(n)}{p^n}
+=\sum_{d\mid n}\mu(d)p^{-n(1-1/d)}.
+\]
+
+The divisor \(d=1\) contributes exactly one. Every other term tends to zero
+as the degree grows, so for fixed prime \(p\),
+
+\[
+R_p(n)\longrightarrow 1,
+\qquad
+\rho_p(n)\sim\frac1n.
+\]
+
+This explains why multiplying the observed irreducible fraction by \(n\)
+is a meaningful cross-degree normalization. It is fundamentally different
+from multiplying the total workload by \(n/n^n\).
+
+### First exact cases
+
+- If \(n=1\), then \(I_p(1)=p\) and \(R_p(1)=1\).
+- If \(n\) is prime, then
+  \[
+  I_p(n)=\frac{p^n-p}{n},\qquad R_p(n)=1-p^{1-n}.
+  \]
+- For \(n=4\), the divisors with nonzero Möbius value are 1 and 2, so
+  \[
+  I_p(4)=\frac{p^4-p^2}{4},\qquad R_p(4)=1-p^{-2}.
+  \]
+- For \(n=6\),
+  \[
+  I_p(6)=\frac{p^6-p^3-p^2+p}{6},\qquad
+  R_p(6)=1-p^{-3}-p^{-4}+p^{-5}.
+  \]
+
+The correction terms depend on the divisor structure of \(n\), not merely
+on its size. Prime degrees and composite degrees therefore approach the
+limit through different exact correction patterns.
+
+## Connecting the two directions
+
+The two normalized quantities can be placed side by side:
+
+\[
+\underbrace{W(p,n)}_{\text{weighted total domain}}
+=n\left(\frac pn\right)^n,
+\qquad
+\underbrace{R_p(n)}_{\text{normalized irreducible density}}
+=\frac{nI_p(n)}{p^n}.
+\]
+
+The first is an imposed degree weight on computational workload. The second
+is an exact arithmetic statistic whose limit is one for fixed \(p\).
+They answer different questions:
+
+1. How large does a weighted enumeration scale?
+2. What fraction of all monic polynomials are irreducible, after correcting
+   for the leading \(1/n\) density?
+
+A useful audit extension is to report the observed irreducible count
+\(\widehat I\), observed density \(\widehat I/p^n\), and normalized
+density \(n\widehat I/p^n\) alongside predicate/factorizer agreement.
+For a sample, these are sample statistics and must not be labeled exact
+whole-domain counts. The exact formula above supplies an independent
+mathematical benchmark; a production implementation should compare against
+it without treating agreement between two software routines as a proof.
+
+## Boundary
+
+The formula for \(I_p(n)\) is an exact theorem. The asymptotic statement is
+for fixed prime \(p\) as \(n\) grows. If \(p\) and \(n\) both vary, the
+joint regime must be specified; no single-variable limit should be silently
+reused. Likewise, \(W(p,n)\) is not runtime, and a sampled audit is not an
+exhaustive count.
