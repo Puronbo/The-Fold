@@ -228,3 +228,69 @@ whereas prime powers such as \(n=4\) have \(E_p(4)=p^{-2}\). The signs are inher
 G-EP174 adds `irreducible_density_convergence(p, degree)`. It returns the exact rational normalized density and signed error as numerator/denominator pairs, the number of distinct prime factors, a squarefree-divisor bound, and the uniform prime-field bound. Its boolean bound check uses exact rational arithmetic (with a slightly relaxed rational envelope for odd degrees), not floating-point comparison.
 
 Regression coverage includes prime and composite degree identities, invalid inputs, and a cross-grid over prime fields 2, 3, 5, 7, 11 and degrees 1 through 40. This validates the implementation against the theorem on a finite grid; the uniform convergence statement itself follows from the analytic bound above.
+
+
+## G-EP175 — Prime factorization determines the leading correction
+
+The normalized density has the finite expansion
+
+\[
+R_p(n)-1=\sum_{\substack{d\mid n\\d>1}}\mu(d)p^{-n(1-1/d)}.
+\]
+
+Write the distinct prime factors of \(n\) as
+\(q_1<q_2<\cdots<q_k\). Only squarefree divisors contribute. The smallest
+nontrivial squarefree divisor is \(q_1\), and its Möbius coefficient is
+\(-1\). Therefore the leading correction, as the field size grows with the
+degree fixed, is
+
+\[
+R_p(n)-1=-p^{-n(1-1/q_1)}+\text{remainder}.
+\]
+
+If \(k=1\), so \(n\) is a prime power, there is no remainder at all:
+
+\[
+\boxed{R_p(n)=1-p^{-n(1-1/q_1)}\quad(n=q_1^a).}
+\]
+
+This is a stronger structural observation than merely saying that prime
+degrees have a simple formula: every prime-power degree has exactly one
+nonzero Möbius correction, independent of the exponent \(a\) except through
+the outer factor \(n\) in the exponent.
+
+If \(k\ge2\), the smallest squarefree divisor after \(q_1\) is \(q_2\).
+There are \(2^k-2\) remaining nontrivial squarefree divisors, each at least
+\(q_2\). Since \(d\mapsto n(1-1/d)\) is increasing,
+
+\[
+\left|R_p(n)-1+p^{-n(1-1/q_1)}\right|
+\le(2^k-2)p^{-n(1-1/q_2)}.
+\]
+
+Thus the smallest prime factor fixes the leading exponent, while the second
+smallest prime factor controls a bound on the next-order remainder. The
+number of distinct prime factors controls the number of terms in that
+remainder. Prime-power exponents do not create new Möbius terms.
+
+Examples:
+
+- \(n=6=2\cdot3\): leading correction \(-p^{-3}\), remainder
+  \(-p^{-4}+p^{-5}\).
+- \(n=30=2\cdot3\cdot5\): leading correction \(-p^{-15}\); the next
+  correction is \(-p^{-20}\), followed by the terms from divisors 6, 10,
+  15, and 30.
+- \(n=12=2^2\cdot3\): the same two distinct prime factors as 6, but the
+  exponents scale with 12: leading correction \(-p^{-6}\), followed by
+  \(-p^{-8}+p^{-10}\). The prime-power exponent on 2 adds no extra divisor.
+
+### Executable audit
+
+G-EP175 adds `irreducible_density_factorization(p, degree)`. It reports the
+prime factorization, exact leading correction, exact residual correction,
+and the second-prime-factor remainder bound using integer/rational
+arithmetic. For prime-power degrees it marks the leading term as exact.
+Tests include prime powers, representative products of distinct primes, and
+a grid of prime fields 2, 3, 5, 7 against degrees 1 through 80. These finite
+checks exercise the formula and bound; the result for all degrees follows
+from the squarefree-divisor expansion.
