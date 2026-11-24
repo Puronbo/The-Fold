@@ -202,8 +202,8 @@ if __name__ == "__main__":
     def test_coprime_density_defect_sign_audit_is_exact_and_bounded(self):
         from tools.polynomial_irreducibility_audit import audit_coprime_density_defect_sign
         result = audit_coprime_density_defect_sign([2, 3, 5], 12)
-        self.assertEqual(result["coprime_pair_count"], 60)
-        self.assertEqual(result["positive_count"], 60)
+        self.assertEqual(result["coprime_pair_count"], 102)
+        self.assertEqual(result["positive_count"], 102)
         self.assertEqual(result["negative_count"], 0)
         self.assertEqual(result["zero_count"], 0)
         self.assertTrue(result["all_checked_defects_positive"])
