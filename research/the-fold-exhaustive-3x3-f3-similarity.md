@@ -83,3 +83,8 @@ The same predicate-versus-factorizer comparison is extended to all 3,400 monic q
 ## Sextic irreducibility cross-check (G-EP166)
 
 G-EP166 exhaustively compares the irreducibility predicate with the factorizer's one-factor criterion for all 64 monic sextics over F₂ and all 729 over F₃. This extends the degree-one-through-five comparison from G-EP164 and G-EP165 to degree six over the two smaller prime fields. It is finite regression evidence, not a general proof.
+
+
+## Degree-seven irreducibility cross-check (G-EP167)
+
+G-EP167 compares the irreducibility predicate with factorizer output for every monic degree-seven polynomial over F₂ (128 inputs) and F₃ (2,187 inputs). This extends the finite comparison through degree seven over these two fields. It is regression evidence over the stated finite domain, not a universal proof.
