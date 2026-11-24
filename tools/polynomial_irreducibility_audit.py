@@ -94,7 +94,7 @@ def audit_irreducibility_agreement(
         "checked_count": checked,
         "mode": "exhaustive" if exhaustive else "deterministic_sample",
         "seed": None if exhaustive else seed,
-        "complete": exhaustive,
+        "complete": checked == total,
         "agreement": mismatch_count == 0,
         "mismatch_count": mismatch_count,
         "mismatches_first_20": mismatches,
