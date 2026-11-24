@@ -885,3 +885,61 @@ def coprime_composition_excess_asymptotic(degrees: list[int]) -> dict:
         "two_factor_resonance_iff_two_and_odd_prime": two_factor_resonance,
         "exact_spectrum": spectrum_data,
     }
+
+
+
+def coprime_composition_excess_sign_certificate(
+    degrees: list[int], field_size: int
+) -> dict:
+    """Certify the exact finite-Q sign and a conservative eventual threshold.
+
+    The exact Laurent spectrum is evaluated over Fraction arithmetic. If
+    its first nonzero term is c*Q**(-m), and L is the sum of absolute values
+    of all later coefficients, then for Q > L/abs(c) the tail is strictly
+    smaller than the leading term. Thus the leading coefficient determines
+    the sign for every prime-power field size at or above the returned
+    integer threshold.
+    """
+    if not _is_prime_power(field_size):
+        raise ValueError("field_size must be a prime power")
+    spectrum_data = coprime_composition_excess_spectrum(degrees)
+    terms = spectrum_data["spectrum"]
+    leading = terms[0]
+    tail_l1 = sum(abs(term["coefficient"]) for term in terms[1:])
+    threshold = max(
+        2, tail_l1 // abs(leading["coefficient"]) + 1
+    )
+    value = sum(
+        (Fraction(term["coefficient"],
+                  field_size ** term["exponent"])
+         for term in terms),
+        Fraction(0, 1),
+    )
+    exact_sign = (
+        "positive" if value > 0 else
+        "negative" if value < 0 else "zero"
+    )
+    eventual_sign = (
+        "positive" if leading["coefficient"] > 0 else "negative"
+    )
+    return {
+        "schema": "the-fold-composition-excess-sign-certificate-v1",
+        "degrees": degrees,
+        "field_size": field_size,
+        "exact_value_numerator": value.numerator,
+        "exact_value_denominator": value.denominator,
+        "exact_sign": exact_sign,
+        "leading_exponent": leading["exponent"],
+        "leading_coefficient": leading["coefficient"],
+        "tail_coefficient_l1_bound": tail_l1,
+        "eventual_sign": eventual_sign,
+        "sufficient_field_size_threshold": threshold,
+        "threshold_guarantee": (
+            "for every prime-power Q >= threshold, the exact sign equals "
+            "the leading coefficient sign"
+        ),
+        "threshold_proof_condition": (
+            f"Q > {tail_l1}/{abs(leading['coefficient'])}"
+        ),
+        "spectrum": terms,
+    }
