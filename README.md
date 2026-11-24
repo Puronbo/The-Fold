@@ -168,3 +168,5 @@ of its witness.
 
 
 **G-EP100 — Schema/algebra outcome cross-check:** pairs structural validation with four verifier outcomes: valid structure and valid witness; valid structure and false witness; malformed snapshots rejected independently of witness intent; and well-formed singular-transform records with a negative audit. This explicitly tests that schema validity is not conflated with invertibility or block-diagonal truth.
+
+**G-EP101 — independent audit-record reconstruction:** adds test-local matrix multiplication, Gaussian rank, and rectangular block slicing to reconstruct transformed coefficients, both complete block grids, transform ranks, invertibility flags, off-diagonal-zero diagnostics, and the aggregate decision directly from source matrices and supplied transforms. It cross-checks positive, false, and singular witnesses, including zero-row/zero-column partition blocks, and detects schema-shaped mutations to transformed matrices, nested blocks, and diagnostics. This is finite regression evidence; it is not a production snapshot-ingestion API, formal proof, or provenance/authenticity mechanism.
