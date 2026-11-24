@@ -372,3 +372,6 @@ G-EP140: distinguishes valid invertible coefficient-space shears that change onl
 
 
 **Coprime-degree defect sign survey (G-EP177):** adds an exact-rational bounded survey of Delta_p(a,b)=R_p(ab)-R_p(a)R_p(b) over all unordered coprime degree pairs in a requested range. An exploratory sweep found positive defects for 2,944 pairs per field over p=2,3,5,7,11, with degrees through 100; this remains finite evidence, not a universal positivity theorem. The executable audit reports exact sign counts and any counterexample witness. See research/the-fold-outward-inward-scaling.md.
+
+
+**Bad-proportion ordering reduction (G-EP178):** records the sufficient condition E_p(ab)<min(E_p(a),E_p(b)) for positive coprime-degree composition defect, and adds an exact-rational finite-grid audit with counterexample witnesses. The condition held throughout the explored p=2,3,5,7,11 grid through degree 100, but remains unproved universally. See `research/the-fold-outward-inward-scaling.md`.
