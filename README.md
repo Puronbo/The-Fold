@@ -303,3 +303,6 @@ G-EP140: distinguishes valid invertible coefficient-space shears that change onl
 
 
 - **G-EP150:** demonstrates that the homogeneous determinant polynomial from G-EP149 is not a complete strict-equivalence invariant. Over F₂/F₃/F₅, a scalar pencil and a nontrivial Jordan pencil have exactly the same \(\det(xQ+yK)=(x+y)^2\), but with Q=I any strict equivalence would force similarity of K. The rank of K−I differs, proving non-equivalence. Finite exact counterexample family; no complete classification is claimed. See `research/the-fold-determinant-polynomial-limit.md`.
+
+
+- **G-EP151:** distinguishes characteristic-polynomial agreement from 2×2 operator similarity over F₂/F₃/F₅. The identity and a size-two Jordan block share \((t-1)^2\) but have different invariant factors and cyclic-vector behavior; the existing rational-canonical routine decides they are not similar. A nontrivial conjugation of a diagonal operator supplies a positive intertwiner checked by the production witness API. Finite regression fixtures; no new similarity algorithm is introduced. See `research/the-fold-2x2-cyclic-similarity.md`.
