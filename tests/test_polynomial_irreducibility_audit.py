@@ -14,6 +14,7 @@ from tools.polynomial_irreducibility_audit import (
     count_monic_irreducibles_over_field,
     irreducible_density_over_field,
     coprime_composition_excess_spectrum,
+    irreducible_density_convergence_over_field,
 )
 
 
@@ -400,6 +401,30 @@ class CoprimeCompositionExcessTests(unittest.TestCase):
             with self.subTest(degrees=degrees):
                 with self.assertRaises(ValueError):
                     coprime_composition_excess_spectrum(degrees)
+
+
+
+
+class PrimePowerConvergenceTests(unittest.TestCase):
+    def test_prime_power_uniform_density_bound(self):
+        for field_size in (4, 8, 9, 16, 25):
+            for degree in range(1, 25):
+                with self.subTest(field_size=field_size, degree=degree):
+                    result = irreducible_density_convergence_over_field(
+                        field_size, degree
+                    )
+                    self.assertTrue(result["uniform_bound_holds"])
+                    self.assertGreaterEqual(
+                        result["absolute_error"], 0.0
+                    )
+
+    def test_prime_power_convergence_rejects_invalid_fields(self):
+        for field_size in (0, 1, 6, 10, True, 2.5):
+            with self.subTest(field_size=field_size):
+                with self.assertRaises(ValueError):
+                    irreducible_density_convergence_over_field(
+                        field_size, 4
+                    )
 
 
 if __name__ == "__main__":
