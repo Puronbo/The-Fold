@@ -254,3 +254,6 @@ of its witness.
 
 
 **G-EP130 — projector algebra under composed rectangular transport:** verifies idempotence, pairwise orthogonality, and completeness of transported row/column block projectors after four composed basis stages over F₂/F₃/F₅. Zero-row/zero-column blocks remain explicit zero projectors. Independent shape-valid mutations isolate failures of each projector axiom, and a wrong transport direction is rejected. Test-side finite regression evidence only; no production projector-certificate API is added.
+
+
+**G-EP131 — projector rank/nullity invariance:** independently computes finite-field ranks of transported row/column projectors and verifies rank and kernel dimension are preserved and match the rectangular block sizes, including empty blocks. A shape-valid idempotent with one missing image direction is detected. F₂/F₃/F₅ test-side coverage only; no production rank-certificate API is added.
