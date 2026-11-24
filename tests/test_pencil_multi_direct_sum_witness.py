@@ -2330,3 +2330,98 @@ class MultiDirectSumTests(unittest.TestCase):
                 self.assertEqual(mm(q, u, p), target_q)
                 self.assertEqual(mm(k, u, p), target_k)
 
+
+
+    def test_g_ep115_linear_constraint_solver_and_invertible_witness_filter(self):
+        # Solve the simultaneous off-diagonal equations as a homogeneous
+        # linear system in row-major entries of T. Compare its complete
+        # nullspace enumeration with brute-force enumeration, then apply the
+        # nonlinear invertibility filter and replay every surviving witness.
+        shapes = [(1, 1), (1, 1)]
+        for p in (2, 3, 5, 7):
+            u = [[1, 1], [0, 1]]
+            ui = inverse(u, p)
+            target_q = [[1, 0], [0, 0]]
+            target_k = [[0, 0], [0, 1]]
+            q, k = mm(target_q, ui, p), mm(target_k, ui, p)
+            s = ident(2)
+
+            equations = []
+            for coeff in (q, k):
+                a = mm(s, coeff, p)
+                for i, j in ((0, 1), (1, 0)):
+                    equations.append([
+                        (a[i][row] if col == j else 0) % p
+                        for row in range(2) for col in range(2)
+                    ])
+
+            # RREF of the 4-variable homogeneous system.
+            reduced = [[x % p for x in row] for row in equations]
+            pivots, pivot_row = [], 0
+            for col in range(4):
+                pivot = next((z for z in range(pivot_row, len(reduced))
+                              if reduced[z][col]), None)
+                if pivot is None:
+                    continue
+                reduced[pivot_row], reduced[pivot] = reduced[pivot], reduced[pivot_row]
+                scale = pow(reduced[pivot_row][col], -1, p)
+                reduced[pivot_row] = [x*scale % p for x in reduced[pivot_row]]
+                for z in range(len(reduced)):
+                    if z != pivot_row and reduced[z][col]:
+                        factor = reduced[z][col]
+                        reduced[z] = [
+                            (x-factor*y) % p
+                            for x, y in zip(reduced[z], reduced[pivot_row])
+                        ]
+                pivots.append(col)
+                pivot_row += 1
+                if pivot_row == len(reduced):
+                    break
+
+            free = [col for col in range(4) if col not in pivots]
+            solved = set()
+            for values in __import__("itertools").product(range(p), repeat=len(free)):
+                vector = [0]*4
+                for col, value in zip(free, values):
+                    vector[col] = value
+                for row, pivot in enumerate(pivots):
+                    vector[pivot] = (-sum(
+                        reduced[row][col]*vector[col]
+                        for col in free
+                    )) % p
+                solved.add(tuple(vector))
+
+            brute = set()
+            invertible = set()
+            for a in range(p):
+                for b in range(p):
+                    for c in range(p):
+                        for d in range(p):
+                            candidate = [[a,b],[c,d]]
+                            qout, kout = mm(q,candidate,p), mm(k,candidate,p)
+                            if qout[0][1] == qout[1][0] == 0 and kout[0][1] == kout[1][0] == 0:
+                                key = (a,b,c,d)
+                                brute.add(key)
+                                if (a*d-b*c) % p:
+                                    invertible.add(key)
+
+            solved_invertible = {
+                x for x in solved if (x[0]*x[3]-x[1]*x[2]) % p
+            }
+            with self.subTest(field=p):
+                self.assertEqual(solved, brute)
+                self.assertEqual(len(solved), p*p)
+                self.assertEqual(len(free), 2)
+                self.assertEqual(solved_invertible, invertible)
+                self.assertEqual(len(invertible), (p-1)*(p-1))
+                self.assertIn((1,1,0,1), invertible)
+                for a,b,c,d in sorted(invertible):
+                    audit = verify_pencil_multi_direct_sum_witness(
+                        q, k, p, s, [[a,b],[c,d]], shapes
+                    )
+                    self.assertTrue(
+                        audit["verification"]["direct_sum_verified"], audit
+                    )
+                self.assertEqual(mm(q,u,p),target_q)
+                self.assertEqual(mm(k,u,p),target_k)
+
