@@ -375,3 +375,6 @@ G-EP140: distinguishes valid invertible coefficient-space shears that change onl
 
 
 **Bad-proportion ordering reduction (G-EP178):** records the sufficient condition E_p(ab)<min(E_p(a),E_p(b)) for positive coprime-degree composition defect, and adds an exact-rational finite-grid audit with counterexample witnesses. The condition held throughout the explored p=2,3,5,7,11 grid through degree 100, but remains unproved universally. See `research/the-fold-outward-inward-scaling.md`.
+
+
+**G-EP179 — Coprime bad-proportion ratio bound audit:** adds an exact-rational finite-grid audit for the conjecture that (E_p(ab)/\min(E_p(a),E_p(b))\le(p^2+p-1)/p^3) for coprime degrees greater than one. The test grid covers 102 pairs over p=2,3,5 through degree 12 and checks that the maximum is attained at (2,3), with value 5/8 over F₂. This is finite evidence only; the universal bound remains unproved. See `research/the-fold-outward-inward-scaling.md`.
