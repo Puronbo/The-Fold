@@ -369,3 +369,6 @@ G-EP140: distinguishes valid invertible coefficient-space shears that change onl
 
 
 **Coprime-degree composition defect (G-EP176):** adds an exact audit comparing \(R_p(ab)\) with \(R_p(a)R_p(b)\) for coprime degrees. A concrete counterexample over F₂ at degrees 2 and 3 gives defect 15/32; degree one remains the identity case. The research note explains why the Möbius divisor indexing factors but its exponent weights do not. See `research/the-fold-outward-inward-scaling.md` and the irreducibility-audit tests.
+
+
+**Coprime-degree defect sign survey (G-EP177):** adds an exact-rational bounded survey of Delta_p(a,b)=R_p(ab)-R_p(a)R_p(b) over all unordered coprime degree pairs in a requested range. An exploratory sweep found positive defects for 5,888 pairs per field over p=2,3,5,7,11, with degrees through 100; this remains finite evidence, not a universal positivity theorem. The executable audit reports exact sign counts and any counterexample witness. See research/the-fold-outward-inward-scaling.md.
