@@ -595,6 +595,18 @@ class LaurentSpectrumGlobalSignCertificateTests(unittest.TestCase):
         )
         self.assertIsNone(result["certified_sign"])
 
+    def test_repeated_interior_root_is_counted_once(self):
+        # (3x - 1)^2 has one distinct root in (0, 1/2).
+        result = laurent_spectrum_global_sign_certificate([
+            {"exponent": 0, "coefficient": 1},
+            {"exponent": 1, "coefficient": -6},
+            {"exponent": 2, "coefficient": 9},
+        ])
+        self.assertEqual(result["sturm_root_count_open_interval"], 1)
+        self.assertFalse(
+            result["global_sign_certified_for_all_real_q_ge_2"]
+        )
+
     def test_endpoint_root_is_detected_separately(self):
         result = laurent_spectrum_global_sign_certificate([
             {"exponent": 0, "coefficient": -1},
