@@ -1144,3 +1144,95 @@ class MultiDirectSumTests(unittest.TestCase):
             expected = reference(q, k, p, witness_left, ident(4), shapes)
             for key, value in expected.items():
                 self.assertEqual(record[key], value)
+
+    def test_g_ep102_seeded_cross_field_rectangular_reconstruction(self):
+        import random
+
+        def multiply(a, b, p):
+            return [[sum(a[i][z] * b[z][j] for z in range(len(b))) % p
+                     for j in range(len(b[0]))] for i in range(len(a))]
+
+        def inverse(matrix, p):
+            n = len(matrix)
+            a = [[x % p for x in row] + [int(i == j) for j in range(n)]
+                 for i, row in enumerate(matrix)]
+            for col in range(n):
+                pivot = next(i for i in range(col, n) if a[i][col] % p)
+                a[col], a[pivot] = a[pivot], a[col]
+                scale = pow(a[col][col], -1, p)
+                a[col] = [(x * scale) % p for x in a[col]]
+                for i in range(n):
+                    if i != col:
+                        factor = a[i][col]
+                        a[i] = [(x - factor * y) % p
+                                for x, y in zip(a[i], a[col])]
+            return [row[n:] for row in a]
+
+        def random_invertible(rng, n, p):
+            a = [[int(i == j) for j in range(n)] for i in range(n)]
+            for _ in range(12):
+                i, j = rng.sample(range(n), 2)
+                if rng.randrange(2):
+                    a[i], a[j] = a[j], a[i]
+                else:
+                    factor = rng.randrange(p)
+                    a[i] = [(x + factor * y) % p for x, y in zip(a[i], a[j])]
+            return a
+
+        shapes_by_field = {
+            2: [(1, 1), (1, 0), (0, 1), (1, 1)],
+            3: [(2, 1), (0, 1), (1, 0), (1, 1)],
+            5: [(1, 0), (1, 2), (0, 1), (1, 1)],
+            7: [(1, 1), (1, 1), (1, 0), (0, 1)],
+        }
+        for p, shapes in shapes_by_field.items():
+            with self.subTest(field=p):
+                rng = random.Random(10100 + p)
+                m, n = sum(x[0] for x in shapes), sum(x[1] for x in shapes)
+                # Construct two independent block-diagonal rectangular matrices.
+                base_q = [[0] * n for _ in range(m)]
+                base_k = [[0] * n for _ in range(m)]
+                ro = co = 0
+                for rows, cols in shapes:
+                    for i in range(rows):
+                        for j in range(cols):
+                            base_q[ro + i][co + j] = rng.randrange(p)
+                            base_k[ro + i][co + j] = rng.randrange(p)
+                    ro += rows
+                    co += cols
+
+                left = random_invertible(rng, m, p)
+                right = random_invertible(rng, n, p)
+                inv_left, inv_right = inverse(left, p), inverse(right, p)
+                # Present the same pencil in independently scrambled bases.
+                source_q = multiply(multiply(inv_left, base_q, p), inv_right, p)
+                source_k = multiply(multiply(inv_left, base_k, p), inv_right, p)
+                record = verify_pencil_multi_direct_sum_witness(
+                    source_q, source_k, p, left, right, shapes
+                )
+                self.assertEqual(record["transformed_Q"], base_q)
+                self.assertEqual(record["transformed_K"], base_k)
+                self.assertEqual(record["verification"]["direct_sum_verified"], True)
+                self.assertEqual(record["verification"]["left_transform_invertible"], True)
+                self.assertEqual(record["verification"]["right_transform_invertible"], True)
+
+                # Adding multiples of p to source entries is representation-
+                # equivalent and must preserve the normalized audit.
+                shifted_q = [[x + p * (i + j + 1) for j, x in enumerate(row)]
+                             for i, row in enumerate(source_q)]
+                shifted_k = [[x - p * (i + j + 2) for j, x in enumerate(row)]
+                             for i, row in enumerate(source_k)]
+                shifted = verify_pencil_multi_direct_sum_witness(
+                    shifted_q, shifted_k, p, left, right, shapes
+                )
+                for key in ("transformed_Q", "transformed_K", "Q_blocks", "K_blocks", "verification"):
+                    self.assertEqual(shifted[key], record[key])
+
+                # A one-entry snapshot forgery keeps dimensions and primitive
+                # types intact, but no longer matches independent replay.
+                forged = copy.deepcopy(record)
+                forged["transformed_Q"][0][0] = (forged["transformed_Q"][0][0] + 1) % p
+                self.assertEqual(len(forged["transformed_Q"]), m)
+                self.assertEqual(len(forged["transformed_Q"][0]), n)
+                self.assertNotEqual(forged["transformed_Q"], base_q)
+                self.assertEqual(record["field"], f"F_{p}")
