@@ -563,3 +563,23 @@ This is exhaustive finite regression evidence for the stated 3×2 fixture
 over two small fields. It does not add arbitrary subspace-basis metadata to
 the production verifier, provide a general witness-discovery algorithm, or
 turn the invertible subset into a vector space.
+
+
+## G-EP124: Larger transported constraint spaces and inverse maps
+
+Use a rectangular 4×3 coefficient pair and a 3×3 right-transform unknown,
+so the simultaneous homogeneous system has nine scalar unknowns. For each
+coefficient, construct the constraint matrix by applying the actual matrix
+product to every matrix-unit candidate and extracting all off-diagonal
+rectangular block entries. Stack the two coefficient systems.
+
+Apply independently generated invertible 4×4 and 3×3 basis changes, transport
+both coefficients and the candidate coordinates, and reconstruct the
+transported constraint matrix through the inverse row/column maps. Compare
+rank and nullity over F₂, F₃, and F₅. Check the candidate-coordinate map and
+its inverse on every matrix unit and on deterministic general candidates;
+also compare full equation-map evaluations for sampled candidates.
+
+This expands finite regression coverage from four to nine unknown scalar
+coordinates. It remains test-side evidence for the stated fixtures, not a
+general formal proof or a production mixed-basis verifier.
