@@ -354,7 +354,7 @@ class MixedKroneckerRecoveryTests(unittest.TestCase):
                 search_mode="exhaustive",
             )
             audit = verify_mixed_kronecker_negative_certificate(
-                q, k, 2, result, max_degree=0,
+                q, k, 2, result,
             )
         self.assertTrue(audit["verified"], audit.get("reason"))
         self.assertEqual(audit["candidates_replayed"], result["candidates_examined"])
@@ -380,14 +380,16 @@ class MixedKroneckerRecoveryTests(unittest.TestCase):
                 "recovery flag": ("recovered", True),
                 "explanation": ("reason", "fabricated"),
                 "scope": ("scope", "universal non-equivalence"),
+                "profile degree bound": ("profile_max_degree", 1),
+                "profile minor bound": ("profile_max_minors", 1),
             }
             for label, (key, value) in mutations.items():
                 with self.subTest(label=label):
                     forged = dict(original)
                     forged[key] = value
                     audit = verify_mixed_kronecker_negative_certificate(
-                        q, k, 2, forged, max_degree=0,
-                    )
+                        q, k, 2, forged,
+            )
                     self.assertFalse(audit["verified"])
 
     def test_negative_certificate_replay_rejects_budget_limited_result(self):
@@ -402,7 +404,7 @@ class MixedKroneckerRecoveryTests(unittest.TestCase):
                 search_mode="exhaustive",
             )
             audit = verify_mixed_kronecker_negative_certificate(
-                q, k, 2, cutoff, max_degree=0,
+                q, k, 2, cutoff,
             )
         self.assertFalse(audit["verified"])
 
@@ -414,6 +416,30 @@ class MixedKroneckerRecoveryTests(unittest.TestCase):
                 audit = verify_mixed_kronecker_negative_certificate(q, k, 2, malformed)
                 self.assertFalse(audit["verified"])
 
+    def test_negative_certificate_replay_uses_bound_metadata_and_rejects_invalid_bounds(self):
+        q, k = [[1]], [[0]]
+        impossible_target = ([[0]], [[1]])
+        with patch(
+            "tools.mixed_kronecker_recovery._canonical_target",
+            return_value=impossible_target,
+        ):
+            original = recover_mixed_kronecker_pencil(
+                q, k, 2, max_degree=0, max_minors=17, max_candidates=10,
+                search_mode="exhaustive",
+            )
+            self.assertEqual(original["profile_max_degree"], 0)
+            self.assertEqual(original["profile_max_minors"], 17)
+            self.assertTrue(verify_mixed_kronecker_negative_certificate(q, k, 2, original)["verified"])
+            for key, value in (
+                ("profile_max_degree", True), ("profile_max_degree", -1),
+                ("profile_max_degree", 0.5), ("profile_max_minors", False),
+                ("profile_max_minors", 0), ("profile_max_minors", 1.5),
+            ):
+                with self.subTest(key=key, value=value):
+                    forged = dict(original, **{key: value})
+                    self.assertFalse(verify_mixed_kronecker_negative_certificate(q, k, 2, forged)["verified"])
+
+
     def test_negative_certificate_replay_rejects_missing_and_malformed_fields(self):
         q, k = [[1]], [[0]]
         base = {
@@ -424,6 +450,8 @@ class MixedKroneckerRecoveryTests(unittest.TestCase):
             "decision_complete": True,
             "search_mode": "exhaustive",
             "max_candidates": 10,
+            "profile_max_degree": 0,
+            "profile_max_minors": 2000,
             "candidates_examined": 2,
             "profile": {},
             "reason": "all invertible S and all affine T solutions were exhausted; no strict-equivalence witness exists",
@@ -431,7 +459,7 @@ class MixedKroneckerRecoveryTests(unittest.TestCase):
         }
         for key in ("schema", "field", "source_shape", "recovered",
                     "decision_complete", "search_mode", "max_candidates",
-                    "candidates_examined", "profile", "reason", "scope"):
+                    "profile_max_degree", "profile_max_minors", "candidates_examined", "profile", "reason", "scope"):
             with self.subTest(missing=key):
                 forged = dict(base)
                 del forged[key]
@@ -470,8 +498,8 @@ class MixedKroneckerRecoveryTests(unittest.TestCase):
                 with self.subTest(q=bad_q, k=bad_k, p=bad_p):
                     with self.assertRaises(ValueError):
                         verify_mixed_kronecker_negative_certificate(
-                            bad_q, bad_k, bad_p, valid_result, max_degree=0,
-                        )
+                            bad_q, bad_k, bad_p, valid_result,
+            )
 
 
 if __name__ == "__main__":
