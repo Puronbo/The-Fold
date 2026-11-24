@@ -280,4 +280,74 @@ class MultiDirectSumTests(unittest.TestCase):
             self.assertEqual(permuted["block_shapes"], [list(x) for x in perm_shapes])
 
 
+    def test_near_equivalences_are_rejected_without_confusing_input_errors(self):
+        shapes = [(1, 0), (1, 2), (0, 1), (1, 1)]
+        m, n = sum(r for r, c in shapes), sum(c for r, c in shapes)
+        ro, co = [0], [0]
+        for r, c in shapes:
+            ro.append(ro[-1] + r); co.append(co[-1] + c)
+
+        for p in (2, 3, 5, 7):
+            q0, k0 = [[0]*n for _ in range(m)], [[0]*n for _ in range(m)]
+            for b, (r, c) in enumerate(shapes):
+                for i in range(r):
+                    for j in range(c):
+                        q0[ro[b]+i][co[b]+j] = (b + i + j + 1) % p
+                        k0[ro[b]+i][co[b]+j] = (2*b + i + 2*j + 1) % p
+            left, right = ident(m), ident(n)
+            for i in range(m-1):
+                left[i][i+1] = 1
+            for i in range(n-1):
+                right[i+1][i] = 1
+            li, ri = inverse(left, p), inverse(right, p)
+            q, k = mm(mm(li, q0, p), ri, p), mm(mm(li, k0, p), ri, p)
+            valid = verify_pencil_multi_direct_sum_witness(q, k, p, left, right, shapes)
+            self.assertTrue(valid["verification"]["direct_sum_verified"])
+
+            # Change a single source coefficient after the basis change.
+            # Dimensions and entries remain valid, but the supplied witness
+            # no longer maps to the requested direct sum.
+            changed_q = [row[:] for row in q]
+            changed_q[0][0] += 1
+            source_mutation = verify_pencil_multi_direct_sum_witness(
+                changed_q, k, p, left, right, shapes
+            )
+            with self.subTest(field=p, case="source coefficient mutation"):
+                self.assertFalse(source_mutation["verification"]["direct_sum_verified"])
+
+            # Perturb one entry in each transform while retaining invertibility.
+            perturbed_left = [row[:] for row in left]
+            perturbed_left[0][m-1] = (perturbed_left[0][m-1] + 1) % p
+            perturbed_right = [row[:] for row in right]
+            perturbed_right[n-1][0] = (perturbed_right[n-1][0] + 1) % p
+            for label, s, t in (
+                ("left transform entry", perturbed_left, right),
+                ("right transform entry", left, perturbed_right),
+            ):
+                audit = verify_pencil_multi_direct_sum_witness(q, k, p, s, t, shapes)
+                with self.subTest(field=p, case=label):
+                    self.assertTrue(audit["verification"]["left_transform_invertible"])
+                    self.assertTrue(audit["verification"]["right_transform_invertible"])
+                    self.assertFalse(audit["verification"]["direct_sum_verified"])
+
+            # Permute only the block-shape list, leaving the transformed
+            # coordinate matrices in their original order. This is not the
+            # equivalent simultaneous permutation tested in G-EP92.
+            order = [3, 1, 2, 0]
+            one_sided_shapes = [shapes[i] for i in order]
+            one_sided = verify_pencil_multi_direct_sum_witness(
+                q, k, p, left, right, one_sided_shapes
+            )
+            with self.subTest(field=p, case="one-sided block permutation"):
+                self.assertFalse(one_sided["verification"]["direct_sum_verified"])
+
+            # A malformed transform is a caller-input error, not a false
+            # algebraic witness.
+            with self.subTest(field=p, case="malformed transform"):
+                with self.assertRaises(ValueError):
+                    verify_pencil_multi_direct_sum_witness(
+                        q, k, p, [[1, 0], [0, 1]], right, shapes
+                    )
+
+
 if __name__=="__main__": unittest.main()
