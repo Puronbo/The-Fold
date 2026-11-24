@@ -248,3 +248,6 @@ of its witness.
 
 
 - **G-EP128:** four-stage rectangular basis transport over F₂/F₃/F₅, including identity stages and adjacent inverse-factor cancellation. Checks composed matrix identities, kernel-basis transport and recovery, plus shape-valid wrong-inverse-order controls. Finite test-side evidence only.
+
+
+- **G-EP129:** transports rectangular block projectors through a four-stage row/column basis composition over F₂/F₃/F₅. Sequential and directly composed transported partitions agree, including zero-row and zero-column blocks; each projected coefficient block is checked against pullback to the original partition. Finite test-side evidence only.
