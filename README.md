@@ -81,3 +81,6 @@
 
 
 **Exhaustive-search decision and budget integrity (G-EP77):** independently cross-checks modular determinant values against the permutation formula on all matrices through dimension three over F₂/F₃, verifies that exhaustive negative status requires complete left/right candidate enumeration, and confirms the budget counts both S and T candidates. A patched impossible-target fixture exercises search control flow only; it is not a mathematical non-equivalence example. See G-EP77 in the mixed Kronecker recovery research note.
+
+
+**Replayable exhaustive negative certificates (G-EP78):** adds an independent verifier that recomputes the input's complete Kronecker profile, enumerates every left matrix and compatible affine right-transform solution, and checks the reported candidate count and negative-result metadata. It rejects forged completion flags, search modes, counts, budgets, explanations, and budget-limited runs. This is an exact replay for the stated finite field and profile bounds, not a universal polynomial-time method.
