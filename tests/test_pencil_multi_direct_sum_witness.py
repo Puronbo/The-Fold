@@ -1,6 +1,7 @@
 import unittest
 import itertools
 from tools.pencil_multi_direct_sum_witness import verify_pencil_multi_direct_sum_witness
+from tools.strict_pencil_equivalence import strict_pencil_equivalence_audit
 
 def ident(n):
     return [[int(i==j) for j in range(n)] for i in range(n)]
@@ -6117,3 +6118,88 @@ class MultiDirectSumTests(unittest.TestCase):
             self.assertTrue(changed["verification"]["direct_sum_verified"], changed)
             mutated_pair = (q[2][2], changed_k[2][2])
             self.assertFalse(pair_proportional(block_pairs[0], mutated_pair, p))
+
+    def test_g_ep148_two_by_two_internal_equivalence_and_joint_rank_obstruction(self):
+        # A nontrivial common left/right transformation gives an exact
+        # positive strict-equivalence witness for a 2x2 pencil.
+        def product(a, b, p):
+            return [[sum(a[i][z] * b[z][j] for z in range(len(b))) % p
+                     for j in range(len(b[0]))] for i in range(len(a))]
+
+        def rank_mod(matrix, p):
+            work = [[value % p for value in row] for row in matrix]
+            rows, cols, pivot_row = len(work), len(work[0]), 0
+            for col in range(cols):
+                pivot = next((r for r in range(pivot_row, rows)
+                              if work[r][col] % p), None)
+                if pivot is None:
+                    continue
+                work[pivot_row], work[pivot] = work[pivot], work[pivot_row]
+                scale = pow(work[pivot_row][col], -1, p)
+                work[pivot_row] = [(x * scale) % p for x in work[pivot_row]]
+                for r in range(rows):
+                    if r != pivot_row:
+                        factor = work[r][col] % p
+                        work[r] = [(x - factor * y) % p
+                                   for x, y in zip(work[r], work[pivot_row])]
+                pivot_row += 1
+                if pivot_row == rows:
+                    break
+            return pivot_row
+
+        for p in (2, 3, 5):
+            q = [[1, 0], [0, 1]]
+            k = [[1, 0], [0, 0]]
+            left = [[1, 1], [0, 1]]
+            right = [[1, 0], [1, 1]]
+            q_target = product(product(left, q, p), right, p)
+            k_target = product(product(left, k, p), right, p)
+
+            positive = strict_pencil_equivalence_audit(
+                q, k, p, q_target, k_target, left, right
+            )
+            with self.subTest(field=p, case="nontrivial exact witness"):
+                self.assertNotEqual(left, ident(2))
+                self.assertNotEqual(right, ident(2))
+                self.assertTrue(positive["left_transform_invertible"])
+                self.assertTrue(positive["right_transform_invertible"])
+                self.assertTrue(positive["constant_strict_equivalence_Q_verified"])
+                self.assertTrue(positive["constant_strict_equivalence_K_verified"])
+                self.assertTrue(positive["strict_equivalence_certified"])
+                self.assertEqual(product(product(left, q, p), right, p), q_target)
+                self.assertEqual(product(product(left, k, p), right, p), k_target)
+
+            # Matching ranks of Q and K separately are insufficient. The
+            # joint pencil rank profile rank(Q + lambda*K) is invariant
+            # under a common strict-equivalence pair S,T.
+            q_false = [[1, 0], [0, 1]]
+            k_idempotent = [[1, 0], [0, 0]]
+            k_nilpotent = [[0, 1], [0, 0]]
+            self.assertEqual(rank_mod(q, p), rank_mod(q_false, p))
+            self.assertEqual(rank_mod(k_idempotent, p), 1)
+            self.assertEqual(rank_mod(k_nilpotent, p), 1)
+
+            profile_idempotent = [
+                rank_mod([[ (q_false[i][j] + lam * k_idempotent[i][j]) % p
+                            for j in range(2)] for i in range(2)], p)
+                for lam in range(p)
+            ]
+            profile_nilpotent = [
+                rank_mod([[(q_false[i][j] + lam * k_nilpotent[i][j]) % p
+                           for j in range(2)] for i in range(2)], p)
+                for lam in range(p)
+            ]
+            with self.subTest(field=p, case="joint pencil invariant"):
+                self.assertNotEqual(profile_idempotent, profile_nilpotent)
+                self.assertEqual(profile_idempotent[p - 1], 1)
+                self.assertEqual(profile_nilpotent[p - 1], 2)
+
+            # At lambda = -1, the two rank profiles disagree. Since
+            # rank(S(Q+lambda*K)T) is unchanged for invertible S,T, this
+            # obstruction rules out every simultaneous strict-equivalence
+            # witness for these two 2x2 pairs, not merely one failed guess.
+            self.assertEqual(
+                (rank_mod(q_false, p), rank_mod(k_idempotent, p)),
+                (rank_mod(q_false, p), rank_mod(k_nilpotent, p))
+            )
+
