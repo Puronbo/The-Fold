@@ -4687,3 +4687,119 @@ class MultiDirectSumTests(unittest.TestCase):
                     self.assertEqual(add(coupled_diagonal,
                                          coupled_off_diagonal,p),
                                      coupled_target)
+
+
+    def test_g_ep134_individual_projected_blocks_recover_by_index_and_reject_shape_preserving_swaps(self):
+        def product(a,b,p):
+            return [[sum(a[i][k]*b[k][j] for k in range(len(b)))%p
+                     for j in range(len(b[0]))] for i in range(len(a))]
+
+        def inverse(a,p):
+            n=len(a)
+            w=[[x%p for x in row]+[int(i==j) for j in range(n)]
+               for i,row in enumerate(a)]
+            for c in range(n):
+                pivot=next((r for r in range(c,n) if w[r][c]),None)
+                if pivot is None: raise AssertionError("singular basis")
+                w[c],w[pivot]=w[pivot],w[c]
+                scale=pow(w[c][c],-1,p)
+                w[c]=[x*scale%p for x in w[c]]
+                for r in range(n):
+                    if r!=c and w[r][c]:
+                        factor=w[r][c]
+                        w[r]=[(x-factor*y)%p for x,y in zip(w[r],w[c])]
+            return [row[n:] for row in w]
+
+        def zero(m,n):
+            return [[0]*n for _ in range(m)]
+
+        def identity(n):
+            return [[int(i==j) for j in range(n)] for i in range(n)]
+
+        def add(a,b,p):
+            return [[(x+y)%p for x,y in zip(ar,br)]
+                    for ar,br in zip(a,b)]
+
+        def projectors(sizes,total):
+            result=[]; start=0
+            for size in sizes:
+                z=zero(total,total)
+                for i in range(start,start+size): z[i][i]=1
+                result.append(z); start+=size
+            return result
+
+        def block_diagonal(shapes,p,seed):
+            m=sum(r for r,c in shapes); n=sum(c for r,c in shapes)
+            out=zero(m,n); ro=co=0
+            for b,(r,c) in enumerate(shapes):
+                for i in range(r):
+                    for j in range(c):
+                        out[ro+i][co+j]=(seed+3*b+2*i+j+1)%p
+                ro+=r; co+=c
+            return out
+
+        # Empty diagonal summands remain explicit and recover as zero matrices.
+        empty_shapes=[(1,0),(0,1),(3,2)]
+        m=sum(r for r,c in empty_shapes); n=sum(c for r,c in empty_shapes)
+        for p in (2,3,5):
+            U=identity(m); V=identity(n)
+            U[0][1]=1; U[2][0]=1; U[3][1]=1
+            V[0][1]=1; V[1][2]=1
+            A=block_diagonal(empty_shapes,p,1)
+            K=block_diagonal(empty_shapes,p,2)
+            rows=projectors([r for r,c in empty_shapes],m)
+            cols=projectors([c for r,c in empty_shapes],n)
+            Ui,Vi=inverse(U,p),inverse(V,p)
+            A1=product(product(U,A,p),V,p)
+            K1=product(product(U,K,p),V,p)
+            rows1=[product(product(U,z,p),Ui,p) for z in rows]
+            cols1=[product(product(Vi,z,p),V,p) for z in cols]
+            for label,source,target in (("A",A,A1),("K",K,K1)):
+                for i,(pr,qc) in enumerate(zip(rows1,cols1)):
+                    recovered=product(product(product(Ui,
+                        product(product(pr,target,p),qc,p),p),Vi,p),identity(n),p)
+                    expected=product(product(rows[i],source,p),cols[i],p)
+                    with self.subTest(field=p,coefficient=label,block=i):
+                        self.assertEqual(recovered,expected)
+                        if i in (0,1):
+                            self.assertEqual(recovered,zero(m,n))
+
+        # Two equal-shaped blocks make an index swap structurally admissible.
+        # Their distinct coefficient contents ensure the swap is still false.
+        shapes=[(1,1),(1,1),(2,1)]
+        m=sum(r for r,c in shapes); n=sum(c for r,c in shapes)
+        for p in (2,3,5):
+            A=block_diagonal(shapes,p,1)
+            K=block_diagonal(shapes,p,2)
+            # Make the first two block pairs distinguishable in every field.
+            A[0][0]=1%p; A[1][1]=0
+            K[0][0]=0; K[1][1]=1%p
+            rows=projectors([r for r,c in shapes],m)
+            cols=projectors([c for r,c in shapes],n)
+            U=identity(m); V=identity(n)
+            U[0][1]=1; U[2][0]=1
+            V[0][1]=1; V[1][2]=1
+            Ui,Vi=inverse(U,p),inverse(V,p)
+            A1=product(product(U,A,p),V,p)
+            K1=product(product(U,K,p),V,p)
+            rows1=[product(product(U,z,p),Ui,p) for z in rows]
+            cols1=[product(product(Vi,z,p),V,p) for z in cols]
+            for label,target,source in (("A",A1,A),("K",K1,K)):
+                for i in range(len(shapes)):
+                    pulled=product(product(Ui,
+                        product(product(rows1[i],target,p),cols1[i],p),p),Vi,p)
+                    expected=product(product(rows[i],source,p),cols[i],p)
+                    self.assertEqual(pulled,expected)
+
+            # Swap the first two transported row and column projectors together.
+            # All projector dimensions remain valid, but their index meaning changes.
+            swapped_rows=rows1[:]
+            swapped_cols=cols1[:]
+            swapped_rows[0],swapped_rows[1]=swapped_rows[1],swapped_rows[0]
+            swapped_cols[0],swapped_cols[1]=swapped_cols[1],swapped_cols[0]
+            for label,target,source in (("A",A1,A),("K",K1,K)):
+                wrong=product(product(Ui,
+                    product(product(swapped_rows[0],target,p),swapped_cols[0],p),p),Vi,p)
+                expected=product(product(rows[0],source,p),cols[0],p)
+                with self.subTest(field=p,coefficient=label,mutation="equal-shape index swap"):
+                    self.assertNotEqual(wrong,expected)
