@@ -360,3 +360,6 @@ G-EP140: distinguishes valid invertible coefficient-space shears that change onl
 
 
 - **G-EP172:** works outward from the full monic-polynomial workload \(p^n\) and inward to the exact irreducible count. It derives the adjacent-degree ratio and turning threshold for the imposed weight \(n(p/n)^n\), then contrasts it with the exact Möbius formula \(I_p(n)=\frac1n\sum_{d\mid n}\mu(d)p^{n/d}\) and the natural normalized irreducible density \(nI_p(n)/p^n\to1\) for fixed \(p\). It explicitly separates workload weighting from irreducible-density normalization and distinguishes exact counts from sampled statistics. See `research/the-fold-outward-inward-scaling.md`.
+
+
+- **G-EP173:** upgrades the parameterized irreducibility audit with an independent exact Möbius-formula count of monic irreducibles. It reports observed/theoretical densities, degree-normalized densities, the expected irreducible count in the checked subset, and an exact count-match flag only when the full domain has been covered. The audit schema advances to v2; tests cover exact count fixtures, a prime/degree grid, exhaustive comparison, and sampled-mode semantics. See research/the-fold-outward-inward-scaling.md.
