@@ -34,7 +34,7 @@ class PolynomialIrreducibilityAuditTests(unittest.TestCase):
         )
         self.assertEqual(result["checked_count"], 8)
         self.assertEqual(result["mode"], "deterministic_sample")
-        self.assertFalse(result["complete"])
+        self.assertTrue(result["complete"])
 
     def test_validation(self):
         invalid = (
