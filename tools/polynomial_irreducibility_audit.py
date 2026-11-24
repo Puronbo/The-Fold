@@ -1277,3 +1277,87 @@ def laurent_spectrum_global_sign_certificate(spectrum: list[dict]) -> dict:
             "does not establish a global sign"
         ),
     }
+
+
+
+def laurent_spectrum_family_uniform_sign_certificate(
+    spectra: list[list[dict]],
+) -> dict:
+    """Certify one eventual sign for a finite family of integer Laurent spectra.
+
+    Each member is certified by its leading coefficient and an exact L1
+    bound on its remaining coefficients. For a member with leading term
+    c*Q**(-e), its tail has magnitude at most L*Q**(-e-1), where L is the
+    sum of absolute values of all later coefficients. Thus every integer
+    Q >= floor(L/abs(c))+1 (and Q >= 2) has the leading sign.
+
+    A common threshold is the maximum of these exact member thresholds,
+    provided every member is nonzero and all leading signs agree.
+    """
+    if not isinstance(spectra, list) or not spectra:
+        raise ValueError("spectra must be a nonempty list")
+    members = []
+    for index, spectrum in enumerate(spectra):
+        certificate = laurent_spectrum_global_sign_certificate(spectrum)
+        normalized = certificate["normalized_spectrum"]
+        if certificate["identically_zero"]:
+            members.append({
+                "index": index,
+                "identically_zero": True,
+                "eventual_sign": None,
+                "threshold": None,
+                "leading_exponent": None,
+                "leading_coefficient": 0,
+                "tail_coefficient_l1_bound": None,
+            })
+            continue
+        leading = normalized[0]
+        tail_l1 = sum(abs(term["coefficient"]) for term in normalized[1:])
+        threshold = max(2, tail_l1 // abs(leading["coefficient"]) + 1)
+        members.append({
+            "index": index,
+            "identically_zero": False,
+            "eventual_sign": (
+                "positive" if leading["coefficient"] > 0 else "negative"
+            ),
+            "threshold": threshold,
+            "leading_exponent": leading["exponent"],
+            "leading_coefficient": leading["coefficient"],
+            "tail_coefficient_l1_bound": tail_l1,
+        })
+
+    signs = {
+        member["eventual_sign"]
+        for member in members
+        if member["eventual_sign"] is not None
+    }
+    all_nonzero = all(not member["identically_zero"] for member in members)
+    common_sign = (
+        next(iter(signs))
+        if all_nonzero and len(signs) == 1
+        else None
+    )
+    common_threshold = (
+        max(member["threshold"] for member in members)
+        if common_sign is not None
+        else None
+    )
+    return {
+        "schema": "the-fold-laurent-family-uniform-sign-v1",
+        "member_count": len(members),
+        "all_members_nonzero": all_nonzero,
+        "common_eventual_sign": common_sign,
+        "uniform_integer_field_size_threshold": common_threshold,
+        "uniform_guarantee": (
+            "every member has the common_eventual_sign for every real Q "
+            "at or above the returned threshold"
+            if common_sign is not None
+            else None
+        ),
+        "members": members,
+        "interpretation": (
+            "finite-family uniform sign certificate; this proves a common "
+            "sign beyond one threshold for every supplied snapshot, but "
+            "does not by itself certify an infinite future sequence"
+        ),
+    }
