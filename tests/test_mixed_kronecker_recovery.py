@@ -4,7 +4,7 @@ from unittest.mock import patch
 from itertools import product
 
 from tools.mixed_kronecker_recovery import (
-    _affine_vectors, _det, _exhaustive_left_matrices, recover_mixed_kronecker_pencil,
+    _affine_vectors, _det, _exhaustive_left_matrices, recover_mixed_kronecker_pencil,\n    verify_mixed_kronecker_negative_certificate,
 )
 
 
@@ -339,6 +339,71 @@ class MixedKroneckerRecoveryTests(unittest.TestCase):
         self.assertTrue(result["recovered"], result.get("reason"))
         self.assertEqual(result["candidates_examined"], 2)
         self.assertTrue(result["verification"]["strict_equivalence_certified"])
+
+
+    def test_negative_certificate_is_independently_replayed(self):
+        q, k = [[1]], [[0]]
+        impossible_target = ([[0]], [[1]])
+        with patch(
+            "tools.mixed_kronecker_recovery._canonical_target",
+            return_value=impossible_target,
+        ):
+            result = recover_mixed_kronecker_pencil(
+                q, k, 2, max_degree=0, max_candidates=10,
+                search_mode="exhaustive",
+            )
+            audit = verify_mixed_kronecker_negative_certificate(
+                q, k, 2, result, max_degree=0,
+            )
+        self.assertTrue(audit["verified"], audit.get("reason"))
+        self.assertEqual(audit["candidates_replayed"], result["candidates_examined"])
+        self.assertTrue(audit["all_left_matrices_exhausted"])
+        self.assertTrue(audit["all_affine_right_solutions_exhausted"])
+
+    def test_negative_certificate_replay_rejects_metadata_mutations(self):
+        q, k = [[1]], [[0]]
+        impossible_target = ([[0]], [[1]])
+        with patch(
+            "tools.mixed_kronecker_recovery._canonical_target",
+            return_value=impossible_target,
+        ):
+            original = recover_mixed_kronecker_pencil(
+                q, k, 2, max_degree=0, max_candidates=10,
+                search_mode="exhaustive",
+            )
+            mutations = {
+                "candidate count": ("candidates_examined", 1),
+                "budget": ("max_candidates", 1),
+                "search mode": ("search_mode", "structured"),
+                "completion flag": ("decision_complete", False),
+                "recovery flag": ("recovered", True),
+                "explanation": ("reason", "fabricated"),
+                "scope": ("scope", "universal non-equivalence"),
+            }
+            for label, (key, value) in mutations.items():
+                with self.subTest(label=label):
+                    forged = dict(original)
+                    forged[key] = value
+                    audit = verify_mixed_kronecker_negative_certificate(
+                        q, k, 2, forged, max_degree=0,
+                    )
+                    self.assertFalse(audit["verified"])
+
+    def test_negative_certificate_replay_rejects_budget_limited_result(self):
+        q, k = [[1]], [[0]]
+        impossible_target = ([[0]], [[1]])
+        with patch(
+            "tools.mixed_kronecker_recovery._canonical_target",
+            return_value=impossible_target,
+        ):
+            cutoff = recover_mixed_kronecker_pencil(
+                q, k, 2, max_degree=0, max_candidates=1,
+                search_mode="exhaustive",
+            )
+            audit = verify_mixed_kronecker_negative_certificate(
+                q, k, 2, cutoff, max_degree=0,
+            )
+        self.assertFalse(audit["verified"])
 
 
 if __name__ == "__main__":
