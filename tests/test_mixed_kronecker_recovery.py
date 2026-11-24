@@ -690,6 +690,16 @@ class MixedKroneckerRecoveryTests(unittest.TestCase):
                     [(inverse_scalar * value) % p for value in row]
                     for row in result["right_transform_T"]
                 ]
+                from tools.strict_pencil_equivalence import strict_pencil_equivalence_audit
+                from tools.pencil_multi_direct_sum_witness import verify_pencil_multi_direct_sum_witness
+                alternative["verification"] = strict_pencil_equivalence_audit(
+                    q, k, p, alternative["canonical_Q"], alternative["canonical_K"],
+                    alternative["left_transform_S"], alternative["right_transform_T"],
+                )
+                alternative["multi_block_direct_sum_audit"] = verify_pencil_multi_direct_sum_witness(
+                    q, k, p, alternative["left_transform_S"],
+                    alternative["right_transform_T"], alternative["canonical_block_shapes"],
+                )
                 audit = verify_mixed_kronecker_recovery_certificate(q, k, p, alternative)
                 self.assertTrue(audit["verified"], audit)
                 self.assertNotEqual(
