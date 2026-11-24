@@ -66,3 +66,6 @@
 
 
 **Seeded basis-scrambled component recovery (G-EP72):** extends randomized coverage by independently applying reproducible invertible constant left/right basis changes to each right-singular, left-singular, and regular component before assembly. The transformed mixed components are shuffled and passed through the existing recovery/canonicalization pipeline; every completed result must pass the direct algebraic certificate verifier. Cases span F₂, F₃, F₅, and F₇ with fixed seeds. This is finite regression evidence for basis-scrambled examples, not a universal recovery theorem or a polynomial-time guarantee.
+
+
+**Mixed-recovery boundary grid (G-EP73):** adds deterministic positive controls across right/left minimal-index pairs (1,1), (2,1), and (2,2) over F₂, F₃, and F₅, each with a regular block and exact strict-equivalence verification. Additional regressions explicitly distinguish an incomplete profile (degree bound too small) from a complete profile with an exhausted witness-search budget. Both negative outcomes remain inconclusive; neither is reported as a proof of non-equivalence.
