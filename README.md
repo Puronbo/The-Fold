@@ -135,3 +135,12 @@ witnesses must return failed audits. Singular square transforms also return
 failed audits; malformed dimensions or non-integral entries instead raise
 ValueError. This distinction is tested explicitly and does not imply that a
 failed witness rules out another valid decomposition.
+
+
+**G-EP92 — equivalent-representation stability:** verifies that modularly
+equivalent integer representatives, independently chosen invertible row and
+column scramblings, reciprocal nonzero scalar rescalings of the two witness
+transforms, and simultaneous block-coordinate permutations preserve valid
+multi-block audits. Controls run over F₂, F₃, F₅, and F₇. These are exact
+finite regression tests; they do not establish uniqueness of a partition or
+of its witness.
