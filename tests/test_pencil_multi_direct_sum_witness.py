@@ -5643,9 +5643,9 @@ class MultiDirectSumTests(unittest.TestCase):
                                 # Invert the coefficient-space change and
                                 # recover the original ordered pair exactly.
                                 recovered_q = [[(coeff_inv[0][0]*out_q[i][j]
-                                                 + coeff_inv[1][0]*out_k[i][j]) % p
+                                                 + coeff_inv[0][1]*out_k[i][j]) % p
                                                 for j in range(3)] for i in range(3)]
-                                recovered_k = [[(coeff_inv[0][1]*out_q[i][j]
+                                recovered_k = [[(coeff_inv[1][0]*out_q[i][j]
                                                  + coeff_inv[1][1]*out_k[i][j]) % p
                                                 for j in range(3)] for i in range(3)]
                                 with self.subTest(field=p, map=(a,b,c,d), fixture=name):
