@@ -3622,7 +3622,7 @@ class MultiDirectSumTests(unittest.TestCase):
             # Independent definition: enumerate the complete row span and
             # recover its dimension from the exact cardinality p^rank.
             width=len(rows[0]) if rows else 0
-            span={()}
+            span={tuple(0 for _ in range(width))}
             for row in rows:
                 expanded=set()
                 for vector in span:
