@@ -242,3 +242,6 @@ of its witness.
 
 
 - **G-EP126:** transports complete nullspace bases for the 3×3 right-transform constraint system. For zero and scalar-dependent rectangular coefficient pairs over F₂/F₃/F₅, independently computed nullspaces are mapped by X′ = V⁻¹XV and checked in both directions by equation substitution and span-dimension comparisons. Includes rank-zero and nonzero rank-deficient cases; invertibility remains separate from linear-kernel membership. Finite test-side evidence only.
+
+
+- **G-EP127:** composes two independently invertible row/column basis changes on the rectangular 4×3 constraint system over F₂/F₃/F₅. Verifies factor order, composed source recovery, nullspace transport and inverse recovery; omission and reversal controls remain well-shaped but produce incorrect coefficient transports. Finite test-side evidence only.
