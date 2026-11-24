@@ -312,3 +312,6 @@ G-EP140: distinguishes valid invertible coefficient-space shears that change onl
 
 
 **G-EP153 — exhaustive 3×3 similarity-orbit audit over F₂:** exhaustively checks all 512 matrices, independently computes each characteristic polynomial, verifies invariant-factor products and cyclic-vector criteria, and compares every invariant-factor fibre with the complete conjugacy orbit under all 168 invertible basis changes. The finite exhaustive claim is limited to dimension three over F₂; no production similarity algorithm is added. See `research/the-fold-exhaustive-3x3-similarity.md`.
+
+
+**G-EP154 — exhaustive 3×3 similarity-orbit audit over F₃:** exhaustively checks all 19,683 matrices, independently validates characteristic polynomials and invariant-factor products, checks cyclic-vector criteria across all 27 vectors, and compares every invariant-factor fibre with conjugacy under all 11,232 invertible basis changes. The finite exhaustive claim is limited to dimension three over F₃. See `research/the-fold-exhaustive-3x3-f3-similarity.md`.
