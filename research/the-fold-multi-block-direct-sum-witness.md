@@ -787,3 +787,14 @@ Use the rectangular 3×4 partition with ordered shapes (1,1), (1,0), (0,1), and 
 For every invertible 2×2 coefficient-space map over F₂, F₃, and F₅, form the two transformed pencil coefficients. Check every ordered projected block, not just the final direct-sum verdict: each output block must equal the same coefficient-space linear combination of the corresponding two source blocks. This includes exact 1×0 and 0×1 empty-block shapes. Every off-diagonal projected block remains zero, and summing the diagonal projected blocks reconstructs each full rectangular output coefficient. Applying the inverse coefficient map recovers both original ordered coefficients and their complete indexed projected-block grids.
 
 The production multi-block verifier is replayed for each transformed pair and must accept the supplied transported witness. These are exhaustive finite regression controls for the stated partition and fields. They do not add an arbitrary-subspace projector API, decomposition discovery, or a universal theorem.
+
+- **G-EP145:** checks all 24 reorderings of a four-block rectangular partition containing zero-column and zero-row summands over F₂/F₃/F₅. Row and column coordinate permutations are induced independently from the same block ordering. Every reordered witness is replayed; all off-diagonal projected blocks vanish, diagonal blocks reconstruct each coefficient, and inverse coordinate/block permutations recover the original matrices and every indexed projected block. Finite test-side permutation covariance evidence only; no canonical-order or uniqueness claim is added.
+
+
+## G-EP145: Rectangular partition-order covariance
+
+The four rectangular summands have shapes (1,1), (1,0), (0,1), and (1,2), so the partition includes both zero-column and zero-row blocks. For each field F₂, F₃, and F₅, enumerate all 24 block-order permutations. Apply the induced row-coordinate and column-coordinate permutations independently to both coefficient matrices and permute the declared block shapes in the same order.
+
+Replay the supplied multi-block witness for every reordered pair. Inspect every ordered projected block for both coefficients, require off-diagonal blocks to vanish, and sum diagonal projected blocks to reconstruct each complete matrix. Then undo the row/column coordinate permutations and compare every indexed projected block with the corresponding original block; finally recover the original ordered coefficient pair and shape sequence using the inverse block permutation.
+
+This is exhaustive finite regression coverage for the stated partition and fields. It establishes permutation covariance of the supplied ordered decomposition, not a canonical ordering, uniqueness of decomposition, or automatic discovery of a partition.
