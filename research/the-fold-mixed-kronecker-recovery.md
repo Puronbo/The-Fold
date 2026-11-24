@@ -176,3 +176,15 @@ The standalone multi-block direct-sum verifier now rejects boolean and non-integ
 Regression coverage enumerates all six permutations of the three-block mixed fixture (right-singular, left-singular, regular). Each consistently permuted row/column basis and ordered rectangular block-shape list must still verify as a valid direct sum. Negative controls reject missing/underspecified partitions, row or column totals inconsistent with the source dimensions, zero-by-zero blocks, malformed shape entries, and non-integral matrix entries.
 
 **Scope:** exhaustive permutations of one three-block 4×4 fixture over F₅. Shape lists define consecutive, disjoint rectangular partitions by construction; malformed totals and shapes are rejected, but no separate interval-overlap representation exists in this API.
+
+
+## G-EP88 — Multi-block witness adversarial verification
+
+Added focused adversarial coverage for the standalone supplied multi-block direct-sum verifier:
+
+- Singular left and right transforms with otherwise valid dimensions and integer entries return structured audits with the corresponding invertibility flag false and `direct_sum_verified=false`; they do not raise caller-input errors.
+- Adding multiples of the prime to source coefficients and transforms produces identical normalized transformed matrices, block matrices, and verification records.
+- Field-boundary tests reject boolean and floating-point field values, values below two, and composite values; valid identity witnesses pass over F₂ and F₃.
+- Null, empty, ragged, and dimension-incompatible nested source/transform matrices are rejected with `ValueError`.
+
+**Boundary:** malformed caller inputs remain exceptions; a structurally valid but singular witness is a negative audit. A failed supplied witness says nothing about whether a different witness or decomposition exists. This milestone adds finite regression coverage and does not expand decomposition discovery or establish uniqueness.
