@@ -86,3 +86,16 @@ Added a deterministic exhaustive cross-check of `_solve_affine` against brute-fo
 The grid includes zero-equation systems, zero-variable systems, rank-deficient systems, unique solutions, redundant equations, and inconsistent systems insofar as they occur in the exhaustive matrix/RHS enumeration. The test checks more than one thousand systems in total.
 
 **Scope:** this is a finite exhaustive regression over the stated dimensions and fields. It does not prove the elimination implementation correct for arbitrary dimensions, arbitrary prime fields, or malformed mismatched matrix/RHS inputs.
+
+
+## G-EP77 — Exhaustive-search decision and budget integrity
+
+Added three independent checks around the exhaustive mixed-recovery decision path.
+
+1. The modular determinant implementation is compared against an independently evaluated Leibniz permutation formula for every matrix of dimensions one through three over F₂ and F₃. Both the determinant value and its invertible/singular classification must agree.
+2. A controlled same-shape impossible target exercises the exhaustive negative branch. The test confirms that a complete negative is emitted only after the entire left-matrix stream and the relevant affine right-transform search finish. Reducing the candidate budget to one interrupts the stream and must leave `decision_complete=false`.
+3. A one-dimensional positive control confirms that the candidate budget counts both the left-transform candidate and the right-transform candidate: the identity witness is found with exactly two examined candidates.
+
+The impossible-target test patches only the profile-derived target to create a deterministic search-path control; it is not a claimed mathematical non-equivalence example for a genuine Kronecker canonical target.
+
+**Scope:** these tests audit determinant filtering and search-state/budget semantics on finite controls. They do not establish that every profile-derived target is valid in arbitrary dimensions or that exhaustive search is computationally practical beyond small fields and dimensions.
