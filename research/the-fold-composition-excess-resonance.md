@@ -81,3 +81,31 @@ A(N)=\sum_i A(n_i)&\text{collect exact integer coefficients; the first survivor 
 For pairwise-coprime inputs, the equality row occurs exactly for two factors \((2,\ell)\) with \(\ell\) an odd prime; G-EP195 resolves it positively. All other two-factor cases and every case with at least three factors are eventually negative. The new function coprime_composition_excess_asymptotic(degrees) reports the exponent comparison, eventual regime, leading exponent/coefficient after cancellation, and (only in the resonant case) the exact spectrum.
 
 The regression tests include odd-prime resonance fixtures, composite odd controls, pairs with both degrees at least three, and three-/four-factor cases. Tests are finite implementation checks; the proofs above establish the stated general classifications.
+
+
+## G-EP199 — Exact finite-field signs with an explicit threshold
+
+The asymptotic phase rule gives the eventual sign, but a finite field may lie below a convenient analytic threshold. The full exponent spectrum resolves the exact value:
+[
+H_Q=sum_{j=0}^{s}c_jQ^{-e_j},qquad
+e_0<e_1<cdots<e_s,quad c_0
+e0.
+]
+Let (L=sum_{j=1}^{s}|c_j|). For (Qge2),
+[
+left|sum_{j=1}^{s}c_jQ^{-(e_j-e_0)}ight|
+le rac{L}{Q}.
+]
+Therefore, whenever (Q>L/|c_0|), the tail is strictly smaller than the leading coefficient and the exact sign is the sign of (c_0). An integer threshold is
+[
+oxed{Q_0=maxleft(2,leftlfloorrac{L}{|c_0|}ightfloor+1ight).}
+]
+This is a sufficient threshold, not necessarily the smallest threshold.
+
+The new `coprime_composition_excess_sign_certificate(degrees, field_size)` API returns the exact rational value and sign at the requested prime-power field size, the full spectrum, and this guaranteed eventual threshold. It separates two questions that must not be conflated: the exact sign at one finite field, and the sign valid uniformly for every prime-power field size above a proven bound.
+
+Examples:
+- (H_Q(2,3)=Q^{-4}-Q^{-5}>0), with (Q_0=2).
+- (H_Q(3,4)=-Q^{-4}+Q^{-6}+Q^{-8}-Q^{-10}<0); the simple coefficient-tail certificate gives (Q_0=4), although the exact spectrum can show negativity at smaller field sizes too.
+
+The threshold follows from a triangle-inequality bound and is intentionally conservative. Finding the optimal threshold for each degree tuple is a separate exact inequality problem.
