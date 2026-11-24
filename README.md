@@ -251,3 +251,6 @@ of its witness.
 
 
 - **G-EP129:** transports rectangular block projectors through a four-stage row/column basis composition over F₂/F₃/F₅. Sequential and directly composed transported partitions agree, including zero-row and zero-column blocks; each projected coefficient block is checked against pullback to the original partition. Finite test-side evidence only.
+
+
+**G-EP130 — projector algebra under composed rectangular transport:** verifies idempotence, pairwise orthogonality, and completeness of transported row/column block projectors after four composed basis stages over F₂/F₃/F₅. Zero-row/zero-column blocks remain explicit zero projectors. Independent shape-valid mutations isolate failures of each projector axiom, and a wrong transport direction is rejected. Test-side finite regression evidence only; no production projector-certificate API is added.
