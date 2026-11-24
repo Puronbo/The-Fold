@@ -61,3 +61,10 @@ Added a reproducible boundary grid for automatic mixed-pencil recovery. Canonica
 A separate regression distinguishes two non-success outcomes: an incomplete Kronecker profile caused by a too-small degree bound, and a complete profile whose witness search is stopped by a one-candidate budget. Both remain inconclusive, but their profile state and diagnostic reasons are distinct. This prevents a bounded-search failure from being presented as a mathematical obstruction.
 
 **Scope:** the grid covers selected small canonical families and is not a universal complexity or completeness result. A positive result is an exact verified witness; incomplete profiles and budget-limited searches remain undecided.
+
+
+## G-EP74 — Structured versus exhaustive finite-field validation
+
+Added direct comparisons between bounded structured recovery and exhaustive finite-field witness search on small mixed pencils. A deliberately one-candidate structured run is required to remain inconclusive, while exhaustive search with a larger explicit budget finds and exactly verifies a witness for the same F₂ pencil. Additional F₂/F₃ positive controls require both search modes to recover certificates with matching right/left minimal-index profiles and independently passing strict-equivalence audits.
+
+The tests compare mathematical outputs, not necessarily the chosen transforms: multiple valid (S,T) witnesses may exist. Exhaustive mode remains exponential. A positive result is an exact witness; a negative result may be called complete only when the implementation actually exhausts all invertible S and all compatible affine T solutions. A budget cutoff, even with a complete Kronecker profile, remains inconclusive. This milestone does not claim to exhibit a genuine mathematical non-equivalence case because the tested profile-derived canonical targets are expected to represent the same pencil class when the profile is correct.
