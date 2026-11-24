@@ -233,3 +233,6 @@ of its witness.
 
 
 **G-EP123 — transported kernel bijection and singular candidates:** exhaustively enumerates the full 2×2 right-transform matrix space for a rectangular 3×2 pencil over F₂ and F₃. The conjugation map induced by a full mixed column-basis change is checked to be a bijection on all matrices and to preserve the simultaneous off-diagonal constraint predicate after transporting the decomposition. Kernel cardinalities agree, including singular solutions; determinant filtering is kept separate, with the zero matrix explicitly retained in the linear kernel but excluded from invertible witnesses. This is finite test-side evidence, not a production mixed-basis verifier or general discovery algorithm.
+
+
+- **G-EP124:** increases the right-transform space to 3×3 (nine variables) for a rectangular 4×3 coefficient pair. Independently constructs the simultaneous constraint matrices from matrix-unit inputs, compares their ranks and nullities after full row/column basis transport over F₂/F₃/F₅, and verifies both directions of the induced candidate-coordinate map on all matrix units plus sampled general candidates. Finite test-side rank/nullity and covariance evidence only; no production mixed-basis API change.
