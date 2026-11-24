@@ -2192,3 +2192,73 @@ class MultiDirectSumTests(unittest.TestCase):
                 self.assertFalse(retained["verification"]["K_off_diagonal_blocks_zero"])
                 self.assertFalse(retained["verification"]["direct_sum_verified"])
 
+
+
+    def test_g_ep113_exhaustive_two_by_two_parameter_map_rank_boundary(self):
+        # Enumerate every coefficient-space map over each small prime field.
+        # Q is block diagonal; K has exactly one cross-block entry, so the
+        # output pair is a direct sum precisely when the map erases K's
+        # coefficient from both output coordinates.
+        shapes = [(1, 1), (1, 1), (1, 1)]
+        for p in (2, 3, 5, 7):
+            q = [[1 % p, 0, 0],
+                 [0, 2 % p, 0],
+                 [0, 0, 3 % p]]
+            k = [[1 % p, 1 % p, 0],
+                 [0, 2 % p, 0],
+                 [0, 0, 3 % p]]
+
+            counts = {0: 0, 1: 0, 2: 0}
+            accepted_by_rank = {0: 0, 1: 0, 2: 0}
+            for a in range(p):
+                for b in range(p):
+                    for c in range(p):
+                        for d in range(p):
+                            det = (a*d - b*c) % p
+                            rank = 2 if det else (
+                                0 if a == b == c == d == 0 else 1
+                            )
+                            counts[rank] += 1
+
+                            out_q = [[(a*q[i][j] + b*k[i][j]) % p
+                                      for j in range(3)] for i in range(3)]
+                            out_k = [[(c*q[i][j] + d*k[i][j]) % p
+                                      for j in range(3)] for i in range(3)]
+                            audit = verify_pencil_multi_direct_sum_witness(
+                                out_q, out_k, p, ident(3), ident(3), shapes
+                            )
+                            # Since Q,K are linearly independent as matrices,
+                            # the span dimension of the output pair equals
+                            # the rank of the 2x2 parameter map.
+                            expected = (b == 0 and d == 0)
+                            with self.subTest(field=p, matrix=(a,b,c,d)):
+                                self.assertEqual(
+                                    audit["verification"]["direct_sum_verified"],
+                                    expected,
+                                    audit,
+                                )
+                                self.assertEqual(
+                                    audit["verification"]["Q_off_diagonal_blocks_zero"],
+                                    b == 0,
+                                )
+                                self.assertEqual(
+                                    audit["verification"]["K_off_diagonal_blocks_zero"],
+                                    d == 0,
+                                )
+                            accepted_by_rank[rank] += int(expected)
+
+            expected_counts = {
+                0: 1,
+                1: (p*p - 1) * (p*p - 1) // (p - 1),
+                2: (p*p - 1) * (p*p - p),
+            }
+            with self.subTest(field=p, case="complete rank census"):
+                self.assertEqual(counts, expected_counts)
+                self.assertEqual(sum(counts.values()), p**4)
+                # Exactly p^2 maps erase K from both outputs: each output
+                # is an arbitrary scalar multiple of Q.
+                self.assertEqual(sum(accepted_by_rank.values()), p*p)
+                self.assertEqual(accepted_by_rank[0], 1)
+                self.assertEqual(accepted_by_rank[1], p*p - 1)
+                self.assertEqual(accepted_by_rank[2], 0)
+
