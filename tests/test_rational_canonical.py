@@ -396,5 +396,69 @@ class RationalCanonicalTests(unittest.TestCase):
         self.assertNotEqual(inventories[2], inventories[3])
 
 
+    def test_g_ep157_quartic_factorization_catalogs_over_f2_and_f3(self):
+        from itertools import product
+        from tools.spectral_fingerprint import factor_polynomial
+
+        inventories = {}
+        patterns = {}
+        for p in (2, 3):
+            observed = set()
+            observed_patterns = set()
+            for lower in product(range(p), repeat=4):
+                polynomial = (1,) + tuple(lower)
+                factors = factor_polynomial(polynomial, p)
+                reconstructed = [1]
+                pattern = []
+                for factor in factors:
+                    if "degree" not in factor:
+                        continue
+                    coefficients = tuple(
+                        value % p for value in factor["coefficients_descending"]
+                    )
+                    degree = factor["degree"]
+                    multiplicity = factor["multiplicity"]
+                    self.assertEqual(len(coefficients), degree + 1)
+                    self.assertEqual(coefficients[0], 1)
+                    observed.add((degree, coefficients))
+                    pattern.append((degree, multiplicity))
+                    for _ in range(multiplicity):
+                        product_poly = [0] * (
+                            len(reconstructed) + len(coefficients) - 1
+                        )
+                        for i, x in enumerate(reconstructed):
+                            for j, y in enumerate(coefficients):
+                                product_poly[i + j] = (
+                                    product_poly[i + j] + x * y
+                                ) % p
+                        reconstructed = product_poly
+                self.assertEqual(reconstructed, list(polynomial))
+                observed_patterns.add(tuple(sorted(pattern)))
+            inventories[p] = observed
+            patterns[p] = observed_patterns
+
+            # Number of monic irreducibles of degree d over F_p:
+            # (1/d) * sum_{e|d} mu(e) * p^(d/e).
+            expected_counts = {
+                1: p,
+                2: (p ** 2 - p) // 2,
+                3: (p ** 3 - p) // 3,
+                4: (p ** 4 - p ** 2) // 4,
+            }
+            for degree, expected in expected_counts.items():
+                self.assertEqual(
+                    sum(1 for d, _ in observed if d == degree), expected,
+                    msg=f"F_{p}: degree-{degree} irreducible inventory",
+                )
+
+        # F_3 has three distinct monic linear irreducibles; one may repeat
+        # to form a quartic with all three distinct linear factors present.
+        all_three_with_repeat = ((1, 1), (1, 1), (1, 2))
+        self.assertIn(all_three_with_repeat, patterns[3])
+        self.assertNotIn(all_three_with_repeat, patterns[2])
+        self.assertNotEqual(inventories[2], inventories[3])
+        self.assertNotEqual(patterns[2], patterns[3])
+
+
 if __name__ == "__main__":
     unittest.main()
