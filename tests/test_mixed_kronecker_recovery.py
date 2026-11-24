@@ -75,6 +75,74 @@ class MixedKroneckerRecoveryTests(unittest.TestCase):
                 forged[key] = value
                 self.assertFalse(verify_mixed_kronecker_recovery_certificate(q, k, 5, forged)["verified"])
 
+    def test_positive_recovery_rejects_malformed_nested_transforms(self):
+        q, k = self.mixed_pair()
+        result = recover_mixed_kronecker_pencil(q, k, 5, max_degree=2)
+        self.assertTrue(verify_mixed_kronecker_recovery_certificate(q, k, 5, result)["verified"])
+        malformed = (
+            None, 7, [], [[1]], [[1, 0], [1]], [[True]], [[1.0]],
+            [[0, 0, 0, 0]] * 4,
+        )
+        for key in ("left_transform_S", "right_transform_T"):
+            for value in malformed:
+                with self.subTest(key=key, value=value):
+                    forged = dict(result)
+                    forged[key] = value
+                    audit = verify_mixed_kronecker_recovery_certificate(q, k, 5, forged)
+                    self.assertFalse(audit["verified"], audit)
+
+        for key in ("left_transform_S", "right_transform_T"):
+            forged = dict(result)
+            forged[key] = [[0] * 4 for _ in range(4)]
+            audit = verify_mixed_kronecker_recovery_certificate(q, k, 5, forged)
+            self.assertFalse(audit["verified"], audit)
+
+    def test_positive_recovery_replays_and_rejects_forged_nested_audits(self):
+        from copy import deepcopy
+
+        q, k = self.mixed_pair()
+        result = recover_mixed_kronecker_pencil(q, k, 5, max_degree=2)
+        self.assertTrue(verify_mixed_kronecker_recovery_certificate(q, k, 5, result)["verified"])
+        mutations = []
+        forged = deepcopy(result)
+        forged["verification"]["strict_equivalence_certified"] = False
+        mutations.append(("strict success flag", forged))
+        forged = deepcopy(result)
+        del forged["verification"]["constant_strict_equivalence_Q_verified"]
+        mutations.append(("missing strict audit field", forged))
+        forged = deepcopy(result)
+        forged["verification"] = []
+        mutations.append(("strict audit wrong container", forged))
+        forged = deepcopy(result)
+        forged["multi_block_direct_sum_audit"]["verification"]["direct_sum_verified"] = False
+        mutations.append(("multi-block success flag", forged))
+        forged = deepcopy(result)
+        forged["multi_block_direct_sum_audit"]["verification"]["left_transform_rank"] = -1
+        mutations.append(("multi-block forged rank", forged))
+        forged = deepcopy(result)
+        del forged["multi_block_direct_sum_audit"]["Q_blocks"]
+        mutations.append(("missing multi-block matrix data", forged))
+        forged = deepcopy(result)
+        forged["multi_block_direct_sum_audit"] = "verified"
+        mutations.append(("multi-block wrong container", forged))
+        for label, forged in mutations:
+            with self.subTest(label=label):
+                audit = verify_mixed_kronecker_recovery_certificate(q, k, 5, forged)
+                self.assertFalse(audit["verified"], audit)
+
+    def test_positive_recovery_verifier_keeps_caller_input_errors_distinct(self):
+        q, k = self.mixed_pair()
+        result = recover_mixed_kronecker_pencil(q, k, 5, max_degree=2)
+        for bad_q, bad_k, bad_p in (
+            (None, k, 5), ([], k, 5), ([[True]], [[0]], 5),
+            ([[1.5]], [[0]], 5), (q, k, True), (q, k, 4),
+        ):
+            with self.subTest(q=bad_q, k=bad_k, p=bad_p):
+                with self.assertRaises(ValueError):
+                    verify_mixed_kronecker_recovery_certificate(
+                        bad_q, bad_k, bad_p, result
+                    )
+
     def test_incomplete_and_bounded_recovery_outcomes_replay_without_negative_claim(self):
         q, k = self.mixed_pair()
         incomplete = recover_mixed_kronecker_pencil(q, k, 5, max_degree=0)
