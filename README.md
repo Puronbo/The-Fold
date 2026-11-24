@@ -185,3 +185,6 @@ of its witness.
 
 
 **G-EP107 — transformation factorization-order invariance:** tests two distinct ordered factorizations of identical composite left/right basis changes. Both paths are followed by the same rectangular block-coordinate permutation and reciprocal scalar rescaling, and must produce identical verified transformed matrices and block records over F₂/F₃/F₅/F₇. An omitted inverse factor is rejected. Deterministic finite regression coverage only; no uniqueness or decomposition-discovery claim.
+
+
+**G-EP108 — seeded metamorphic rectangular witness families:** generates deterministic products of elementary invertible matrices for independent left/right basis scramblings, then checks exact recovery of randomly populated rectangular block-diagonal Q/K pairs over F₂/F₃/F₅/F₇. Three partition families include zero-row and zero-column blocks. A transported single-entry cross-block mutation must be rejected in every case. This is reproducible finite regression coverage, not a universal theorem or decomposition-discovery algorithm.
