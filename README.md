@@ -200,3 +200,6 @@ of its witness.
 
 
 **G-EP112 — singular coefficient-space maps and information loss:** tests rank-deficient linear maps on the ordered pair (Q,K). Over F₂/F₃/F₅/F₇, the original pair is coupled through K, but a singular map can erase K or duplicate Q and make the collapsed pair pass the direct-sum verifier. A retained coupled combination remains rejected. This documents the crucial boundary: verifier success applies to the supplied transformed pair, not to an original pencil after information-losing singular mixing. See G-EP112 in `research/the-fold-multi-block-direct-sum-witness.md`.
+
+
+**G-EP113 — exhaustive coefficient-map rank boundary:** enumerates all p⁴ 2×2 coefficient-space maps over F₂/F₃/F₅/F₇ and checks their rank census, output coefficient-span dimension, individual off-diagonal conditions, and verifier result on a fixed pencil with block-diagonal Q and coupled K. Exactly p² maps pass: the zero map and rank-one maps that erase K. No invertible map passes. Exhaustive for the tested fields and fixture, not a universal result for arbitrary pencils.
