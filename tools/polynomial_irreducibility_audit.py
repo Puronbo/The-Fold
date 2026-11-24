@@ -1183,7 +1183,7 @@ def coprime_composition_excess_temporal_fold(
 def laurent_spectrum_global_sign_certificate(spectrum: list[dict]) -> dict:
     """Certify the sign of an integer Laurent spectrum for every real Q >= 2.
 
-    Each term has nonnegative integer exponent and integer coefficient.
+    Each term has integer exponent (positive, zero, or negative) and integer coefficient.
     Duplicate exponents are combined. The polynomial is normalized by
     factoring out its smallest power of x=1/Q, then an exact rational Sturm
     sequence counts roots on (0, 1/2). The endpoint x=1/2 is checked
@@ -1200,8 +1200,8 @@ def laurent_spectrum_global_sign_certificate(spectrum: list[dict]) -> dict:
         exponent = term["exponent"]
         coefficient = term["coefficient"]
         if (isinstance(exponent, bool) or not isinstance(exponent, int)
-                or exponent < 0):
-            raise ValueError("exponents must be nonnegative integers")
+                ):
+            raise ValueError("exponents must be integers")
         if (isinstance(coefficient, bool) or not isinstance(coefficient, int)):
             raise ValueError("coefficients must be integers")
         coefficients[exponent] = coefficients.get(exponent, 0) + coefficient
