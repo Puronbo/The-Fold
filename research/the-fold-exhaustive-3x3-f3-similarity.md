@@ -14,3 +14,12 @@ The exhaustive claim is restricted to dimension three over \(\mathbb F_3\). It i
 The companion regression enumerates all 512 matrices over F₂ and all 19,683 matrices over F₃, recording invariant-factor profiles and their degree shapes. It compares degree shapes independently of coefficient tuples: the represented degree patterns agree, while polynomial coefficients are interpreted as residues in their own base field. In particular, coefficient 2 occurs in normalized F₃ profiles and cannot occur in F₂ profiles.
 
 This is not a coefficient-wise field identification. The same integer tuple in two profile records does not by itself assert that the corresponding polynomials have the same algebraic behavior, and irreducibility is field-dependent. The test establishes only the stated finite-dimensional comparison over F₂ and F₃.
+
+
+## Cubic irreducible-factor comparison (G-EP156)
+
+Every monic cubic over a field is the characteristic polynomial of its companion matrix. The regression therefore enumerates all monic cubics over F₂ and F₃, factors each with the exact finite-field factorizer, and multiplies the returned irreducible factors (with multiplicities) back to the original polynomial.
+
+The factorization degree/multiplicity shapes coincide across these fields: three linear factors (including repeated cases), one linear plus one irreducible quadratic, or one irreducible cubic. The actual monic irreducible inventories are field-dependent. Their counts in degrees one, two, and three are respectively p, (p²−p)/2, and (p³−p)/3, giving distinct catalogs over F₂ and F₃.
+
+This is a complete enumeration of monic cubics over the two stated fields, not a claim about higher-degree polynomials or an identification of polynomial coefficients across fields.
