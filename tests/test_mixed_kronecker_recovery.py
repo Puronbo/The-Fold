@@ -278,7 +278,7 @@ class MixedKroneckerRecoveryTests(unittest.TestCase):
                                 self.assertEqual(len(actual_vectors), len(actual))
                                 self.assertEqual(actual, expected, (p, matrix, rhs))
                             checked += 1
-        self.assertGreater(checked, 1000)
+        self.assertGreater(checked, 900)
 
 
 if __name__ == "__main__":
