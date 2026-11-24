@@ -5220,3 +5220,91 @@ class MultiDirectSumTests(unittest.TestCase):
                 with self.subTest(field=p,coefficient=label,alternative="wrong-split"):
                     self.assertNotEqual(diagonal_sum(bad,p,m,n),transformed)
                     self.assertEqual(full_sum(bad,p,m,n),transformed)
+
+    def test_g_ep139_composed_coefficient_basis_changes_preserve_projector_reconstruction(self):
+        def mm(a,b,p):
+            return [[sum(a[i][k]*b[k][j] for k in range(len(b)))%p
+                     for j in range(len(b[0]))] for i in range(len(a))]
+
+        def eye(n):
+            return [[int(i==j) for j in range(n)] for i in range(n)]
+
+        def inv(a,p):
+            n=len(a); w=[[x%p for x in row]+[int(i==j) for j in range(n)]
+                         for i,row in enumerate(a)]
+            for c in range(n):
+                pivot=next((r for r in range(c,n) if w[r][c]),None)
+                if pivot is None: raise AssertionError("singular coefficient map")
+                w[c],w[pivot]=w[pivot],w[c]
+                z=pow(w[c][c],-1,p); w[c]=[x*z%p for x in w[c]]
+                for r in range(n):
+                    if r!=c and w[r][c]:
+                        z=w[r][c]; w[r]=[(x-z*y)%p for x,y in zip(w[r],w[c])]
+            return [row[n:] for row in w]
+
+        def add(a,b,p):
+            return [[(x+y)%p for x,y in zip(ar,br)] for ar,br in zip(a,b)]
+
+        def scale(a,c,p):
+            return [[c*x%p for x in row] for row in a]
+
+        def mix_pair(pair,c,p):
+            return [add(scale(pair[0],c[0][j],p),scale(pair[1],c[1][j],p),p)
+                    for j in range(2)]
+
+        def projectors(sizes,n):
+            out=[]; start=0
+            for size in sizes:
+                z=[[0]*n for _ in range(n)]
+                for i in range(start,start+size): z[i][i]=1
+                out.append(z); start+=size
+            return out
+
+        def blocks(a,rows,cols,p):
+            return [[mm(mm(pi,a,p),qj,p) for qj in cols] for pi in rows]
+
+        def diagonal_sum(grid,p,m,n):
+            out=[[0]*n for _ in range(m)]
+            for i,row in enumerate(grid):
+                out=add(out,row[i],p)
+            return out
+
+        row_sizes=[1,1,2]; col_sizes=[1,1,1]
+        first=[[1,1],[0,1]]
+        second=[[1,0],[1,1]]
+        for p in (2,3,5):
+            m=sum(row_sizes); n=sum(col_sizes)
+            U=eye(m); U[0][1]=1; U[2][0]=1; U[3][1]=1
+            V=eye(n); V[0][1]=1; V[1][2]=1
+            Ui,Vi=inv(U,p),inv(V,p)
+            A=[[0]*n for _ in range(m)]
+            K=[[0]*n for _ in range(m)]
+            for (r,c),value in zip(((0,0),(1,1),(2,2),(3,2)),(1,2,3,4)):
+                A[r][c]=value%p
+            for (r,c),value in zip(((0,0),(1,1),(2,2),(3,2)),(2,3,1,4)):
+                K[r][c]=value%p
+            original=[mm(mm(U,A,p),V,p),mm(mm(U,K,p),V,p)]
+            rows=[mm(mm(U,z,p),Ui,p) for z in projectors(row_sizes,m)]
+            cols=[mm(mm(Vi,z,p),V,p) for z in projectors(col_sizes,n)]
+
+            stage1=mix_pair(original,first,p)
+            sequential=mix_pair(stage1,second,p)
+            composed=mm(second,first,p)
+            direct=mix_pair(original,composed,p)
+            self.assertEqual(sequential,direct)
+            self.assertEqual((composed[0][0]*composed[1][1]-
+                              composed[0][1]*composed[1][0])%p,1%p)
+
+            for stage_name,pair in (("original",original),("first",stage1),
+                                    ("sequential",sequential),("direct",direct)):
+                for index,coefficient in enumerate(pair):
+                    grid=blocks(coefficient,rows,cols,p)
+                    with self.subTest(field=p,stage=stage_name,index=index):
+                        self.assertEqual(diagonal_sum(grid,p,m,n),coefficient)
+
+            # Reverse the composed coefficient-space change exactly.
+            recovered=mix_pair(sequential,inv(composed,p),p)
+            self.assertEqual(recovered,original)
+            # Reverse in the opposite order to audit composition direction.
+            reverse=mix_pair(mix_pair(sequential,inv(second,p),p),inv(first,p),p)
+            self.assertEqual(reverse,original)
