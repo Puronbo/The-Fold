@@ -146,3 +146,36 @@ for fixed prime \(p\) as \(n\) grows. If \(p\) and \(n\) both vary, the
 joint regime must be specified; no single-variable limit should be silently
 reused. Likewise, \(W(p,n)\) is not runtime, and a sampled audit is not an
 exhaustive count.
+
+
+## G-EP173 implementation: theory alongside computation
+
+The parameterized audit now computes the exact theoretical irreducible count
+with an independent Möbius-function implementation:
+
+\[
+I_p(n)=\frac1n\sum_{d\mid n}\mu(d)p^{n/d}.
+\]
+
+It reports both observed and theoretical densities, and their degree-normalized
+forms. It also reports the expected number of irreducibles in the checked
+subset under uniform sampling:
+
+\[
+\mathbb E[X]=m\frac{I_p(n)}{p^n},
+\]
+
+where \(m\) is the number of distinct polynomials checked. This is an
+expectation, not a prediction that the observed sample count must equal it.
+
+When the checked set covers all \(p^n\) monic polynomials, the audit exposes
+an exact theoretical_count_match boolean. For an incomplete sample that
+field is null: the exact whole-domain count is still known from the formula,
+but the sample's observed count cannot be compared to it as if it were a
+complete enumeration. The schema is now
+the-fold-irreducibility-audit-v2.
+
+The tests include exact count fixtures (for example, six monic irreducible
+quintics over F₂ and eighteen monic irreducible quartics over F₃), a
+cross-field/degree formula grid, exhaustive agreement with the exact count,
+and deterministic sampled-mode reporting.
