@@ -229,3 +229,20 @@ negative control omits an inverse basis factor and must fail verification.
 
 This tests equality of two explicit transformation factorizations; it does
 not imply uniqueness of the witness or discover a decomposition.
+
+
+## G-EP108: Seeded metamorphic rectangular witness families
+
+A fixed pseudo-random seed generates products of elementary invertible row
+operations independently on the left and right coordinate spaces. Three
+rectangular block partitions are exercised over F₂, F₃, F₅, and F₇, with
+zero-row and zero-column block slots. Each block receives deterministic
+pseudo-random Q and K coefficients; the source pair is formed by applying
+the inverse basis changes, and the verifier must recover the exact original
+block-diagonal matrices.
+
+For each field and partition, a single-entry off-diagonal perturbation is
+transported back to source coordinates. The unchanged supplied witness must
+then expose that exact cross-block coefficient and reject the pair. This
+provides reproducible metamorphic regression coverage, not a universal
+correctness theorem or an automatic decomposition method.
