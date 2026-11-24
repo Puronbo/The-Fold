@@ -321,3 +321,6 @@ G-EP140: distinguishes valid invertible coefficient-space shears that change onl
 
 
 - **G-EP156:** exhausts all monic cubic polynomials over F₂ and F₃ (each is realized as the characteristic polynomial of its companion matrix), factors them with the exact finite-field factorizer, and checks exact reconstruction. F₃ has one additional degree/multiplicity pattern: three distinct linear factors, impossible over F₂ because it has only two linear monic irreducibles. The irreducible polynomial inventories also differ by field; expected counts in degrees one through three are checked independently. No polynomial coefficients are identified across fields.
+
+
+- **G-EP157:** exhausts all monic quartics over F₂ and F₃, checks exact factor reconstruction, and validates irreducible counts in degrees one through four. It confirms a quartic factor pattern containing all three distinct linear factors with one repeated over F₃, which cannot occur over F₂. This is an exhaustive degree-four comparison over these two fields.
