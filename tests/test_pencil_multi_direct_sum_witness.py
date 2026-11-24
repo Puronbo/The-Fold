@@ -6373,7 +6373,7 @@ class MultiDirectSumTests(unittest.TestCase):
             )
             self.assertEqual(
                 profile_jordan["invariant_factors_coefficients_descending"],
-                [[1, (-1) % p, 1]]
+                [[1, (-2) % p, 1]]
             )
             self.assertEqual(cyclic_witnesses(identity, p), [])
             self.assertTrue(cyclic_witnesses(jordan, p))
