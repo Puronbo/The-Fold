@@ -3707,3 +3707,152 @@ class MultiDirectSumTests(unittest.TestCase):
                                 [[int(i==j) for j in range(m)] for i in range(m)])
             with self.assertRaises(ValueError):
                 mm([[1,2]],u,p)
+
+
+    def test_g_ep126_kernel_basis_transport_and_rank_deficient_controls(self):
+        import random
+
+        def mm(a,b,p):
+            if not a or not b or any(len(row)!=len(a[0]) for row in a) or any(len(row)!=len(b[0]) for row in b) or len(a[0])!=len(b):
+                raise ValueError("incompatible matrix dimensions")
+            return [[sum(a[i][k]*b[k][j] for k in range(len(b)))%p
+                     for j in range(len(b[0]))] for i in range(len(a))]
+
+        def inverse(a,p):
+            n=len(a)
+            w=[[x%p for x in row]+[int(i==j) for j in range(n)]
+               for i,row in enumerate(a)]
+            for c in range(n):
+                pivot=next((z for z in range(c,n) if w[z][c]),None)
+                if pivot is None: raise AssertionError("singular basis")
+                w[c],w[pivot]=w[pivot],w[c]
+                scale=pow(w[c][c],-1,p)
+                w[c]=[x*scale%p for x in w[c]]
+                for z in range(n):
+                    if z!=c and w[z][c]:
+                        f=w[z][c]
+                        w[z]=[(x-f*y)%p for x,y in zip(w[z],w[c])]
+            return [row[n:] for row in w]
+
+        def nullspace(rows,width,p):
+            a=[[x%p for x in row] for row in rows]
+            pivots=[]
+            pivot=0
+            for c in range(width):
+                z=next((z for z in range(pivot,len(a)) if a[z][c]),None)
+                if z is None: continue
+                a[pivot],a[z]=a[z],a[pivot]
+                scale=pow(a[pivot][c],-1,p)
+                a[pivot]=[x*scale%p for x in a[pivot]]
+                for z in range(len(a)):
+                    if z!=pivot and a[z][c]:
+                        f=a[z][c]
+                        a[z]=[(x-f*y)%p for x,y in zip(a[z],a[pivot])]
+                pivots.append(c)
+                pivot+=1
+            free=[c for c in range(width) if c not in pivots]
+            basis=[]
+            for f in free:
+                vector=[0]*width
+                vector[f]=1
+                for row,c in enumerate(pivots):
+                    vector[c]=(-a[row][f])%p
+                basis.append(vector)
+            return basis,len(pivots)
+
+        def equation_rows(coeffs,shapes,p,pull=None):
+            n=len(coeffs[0][0])
+            rr=cc=0
+            blocks=[]
+            for h,w in shapes:
+                blocks.append((range(rr,rr+h),range(cc,cc+w)))
+                rr+=h; cc+=w
+            locations=[(i,j) for bi,(rs,_) in enumerate(blocks)
+                       for bj,(_,cs) in enumerate(blocks) if bi!=bj
+                       for i in rs for j in cs]
+            columns=[]
+            for i in range(n):
+                for j in range(n):
+                    unit=[[int(a==i and b==j) for b in range(n)]
+                          for a in range(n)]
+                    values=[]
+                    for coefficient in coeffs:
+                        out=(mm(coefficient,unit,p) if pull is None else
+                             mm(mm(mm(pull[0],coefficient,p),unit,p),pull[1],p))
+                        values.extend(out[x][y] for x,y in locations)
+                    columns.append(values)
+            return [[columns[c][z] for c in range(n*n)]
+                    for z in range(len(columns[0]))]
+
+        def flatten(a):
+            return [x for row in a for x in row]
+
+        def unflatten(v,n):
+            return [v[i*n:(i+1)*n] for i in range(n)]
+
+        def transform(v,mat,p):
+            x=unflatten(v,len(mat))
+            return flatten(mm(mm(mat[0],x,p),mat[1],p))
+
+        def eval_rows(rows,v,p):
+            return [sum(a*b for a,b in zip(row,v))%p for row in rows]
+
+        shapes=[(1,1),(3,2)]
+        m,n=4,3
+        for p in (2,3,5):
+            rng=random.Random(126000+p)
+            # Zero and scalar-dependent coefficient pairs force rank-deficient
+            # systems with nullity 9 and at least 4, respectively.
+            seed=[[rng.randrange(p) for _ in range(n)] for _ in range(m)]
+            fixtures=[
+                ([[0]*n for _ in range(m)],[[0]*n for _ in range(m)]),
+                (seed,[[2*x%p for x in row] for row in seed]),
+            ]
+            for q,k in fixtures:
+                u=[[int(i==j) if i>=j else rng.randrange(p)
+                    for j in range(m)] for i in range(m)]
+                v=[[int(i==j) if i>=j else rng.randrange(p)
+                    for j in range(n)] for i in range(n)]
+                ui,vi=inverse(u,p),inverse(v,p)
+                qp=mm(mm(u,q,p),v,p)
+                kp=mm(mm(u,k,p),v,p)
+                original=equation_rows([q,k],shapes,p)
+                transported=equation_rows([qp,kp],shapes,p,(ui,vi))
+                basis,rank0=nullspace(original,n*n,p)
+                prime_basis,rank1=nullspace(transported,n*n,p)
+                self.assertEqual(rank0,rank1)
+                self.assertEqual(len(basis),n*n-rank0)
+                self.assertEqual(len(prime_basis),n*n-rank1)
+                self.assertGreater(len(basis),0)
+
+                # X' = V^-1 X V. Every original nullspace basis vector maps
+                # into the transported kernel, and the inverse maps back.
+                mapped=[transform(z,(vi,v),p) for z in basis]
+                pulled=[transform(z,(v,vi),p) for z in prime_basis]
+                for z in mapped:
+                    self.assertEqual(eval_rows(transported,z,p),[0]*len(transported))
+                for z in pulled:
+                    self.assertEqual(eval_rows(original,z,p),[0]*len(original))
+
+                # Both image families span the complete opposite kernel:
+                # independent basis vectors plus equal dimension establish
+                # both inclusions, not merely a matching nullity.
+                self.assertEqual(len({tuple(z) for z in mapped}),len(mapped))
+                self.assertEqual(len({tuple(z) for z in pulled}),len(pulled))
+                combined_a=prime_basis+mapped
+                combined_b=basis+pulled
+                _,rank_a=nullspace(combined_a,n*n,p)
+                _,rank_b=nullspace(combined_b,n*n,p)
+                self.assertEqual(n*n-rank_a,len(prime_basis))
+                self.assertEqual(n*n-rank_b,len(basis))
+                # Explicitly verify inverse candidate transport on every basis vector.
+                for z in basis:
+                    self.assertEqual(transform(transform(z,(vi,v),p),(v,vi),p),z)
+                for z in prime_basis:
+                    self.assertEqual(transform(transform(z,(v,vi),p),(vi,v),p),z)
+
+                if q==[[0]*n for _ in range(m)]:
+                    self.assertEqual(rank0,0)
+                    self.assertEqual(len(basis),n*n)
+                else:
+                    self.assertLess(rank0,n*n)
