@@ -96,3 +96,10 @@ The independent routines are test-local and do not call the verifier's private m
 Tests JSON serialization/deserialization of both valid and false audit records over F₂, F₃, F₅, and F₇. The restored structure is compared recursively with exact Python types, then compared against a fresh verifier result recomputed from the original source matrices, field, transforms, and partition. Mutations to the aggregate success flag, off-diagonal-zero flag, transform-rank type (including bool-for-int), or required block grid are rejected by this exact replay comparison.
 
 The verifier API accepts source inputs and transforms, not a serialized audit record. Therefore this milestone establishes regression coverage for JSON round-trip stability and an explicit test-side replay discipline; it does not claim to introduce a serialized-certificate ingestion or verification API.
+
+
+## G-EP96: Strict JSON snapshot boundary regressions
+
+A test-side strict JSON decoder rejects duplicate object keys (which ordinary decoding can silently collapse) and non-finite constants such as NaN and infinities. Adversarial snapshots then exercise unexpected schema versions, malformed nested block arrays, missing required fields, and boolean/floating-point substitutions in integer diagnostic positions. Each decoded mutation fails recursive type-exact comparison with a fresh audit computed from original caller inputs.
+
+The tests separately retain the caller-input boundary: malformed source matrices raise `ValueError` in the verifier. This milestone does not add a production deserializer or serialized-certificate API; malformed snapshot handling is asserted by test-side decoding and replay comparison.
