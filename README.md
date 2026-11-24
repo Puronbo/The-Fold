@@ -422,3 +422,6 @@ G-EP140: distinguishes valid invertible coefficient-space shears that change onl
 
 
 **G-EP203 — generic Laurent-spectrum sign certification:** adds `laurent_spectrum_global_sign_certificate(spectrum)`, a tuple-independent exact Sturm certificate for finite integer Laurent spectra. It combines duplicate exponents, supports negative powers, detects the zero polynomial, counts roots on the transformed interval, and separately checks the Q=2 endpoint. This allows direct certification of G-EP202 temporal folds. A positive root count means the certificate is inconclusive about global sign, not that a sign change is guaranteed. See `research/the-fold-composition-excess-resonance.md`.
+
+
+**G-EP204 — finite-family uniform sign persistence:** adds `laurent_spectrum_family_uniform_sign_certificate(spectra)`. For a finite family of exact integer Laurent spectra, it computes each leading-term/tail bound and returns a single integer field-size threshold when all members are nonzero and share the same eventual sign. Mixed signs or a zero member correctly block a common-sign claim. The theorem is finite-family only; infinite-time persistence requires uniform coefficient hypotheses. See `research/the-fold-composition-excess-resonance.md`.
