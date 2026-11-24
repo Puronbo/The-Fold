@@ -405,3 +405,6 @@ G-EP140: distinguishes valid invertible coefficient-space shears that change onl
 
 
 - **G-EP193:** generalizes the exact normalized-density convergence audit and its field-independent envelope from prime fields to every prime-power field order. Regression coverage spans \(Q=4,8,9,16,25\) and degrees 1–24.
+
+
+**G-EP194–G-EP198 — complete composition-excess resonance and eventual-sign classification:** classifies all two-factor leading resonances as exactly \((2,\ell)\) with \(\ell\) an odd prime, resolves each by the exact identity \(H_Q(2,\ell)=Q^{-(2\ell-2)}-Q^{-(2\ell-1)}>0\), proves every other two-factor case is eventually negative, and proves there is no leading resonance with three or more pairwise-coprime factors (all such excesses are eventually negative). Adds coprime_composition_excess_asymptotic(degrees) as an executable exponent/sign certificate, with exact-spectrum fallback in the resonant case. See research/the-fold-composition-excess-resonance.md.
