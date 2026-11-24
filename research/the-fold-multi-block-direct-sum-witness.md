@@ -119,3 +119,10 @@ The test suite now defines a test-side structural validator for the v1 audit rec
 Crucially, structural validity is separate from algebraic truth. A well-formed record produced from a mathematically false supplied witness must satisfy the schema validator while its direct_sum_verified diagnostic remains false. Adversarial tests cover wrong schema versions, malformed dimensions and grids, invalid primitive types, and unexpected fields.
 
 This is a test-side v1 contract, not a production deserializer, schema migration mechanism, or cryptographic authenticity layer.
+
+
+## G-EP99: Rectangular schema edge-case grid
+
+The v1 schema contract is exercised over deterministic two-, three-, and four-block fixtures, including partitions containing zero-row and zero-column blocks while forbidding 0×0 blocks. The tests check source-dimension totals, transform dimensions, and every nested block's exact row/column dimensions. They also mutate grid row counts, grid widths, and nested block dimensions to ensure malformed structures are rejected.
+
+A well-formed but mathematically false witness remains structurally valid and retains a false algebraic diagnostic. This preserves the separation between record shape and witness truth. The fixtures are finite regression cases, not a universal schema proof.
