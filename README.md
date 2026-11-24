@@ -431,3 +431,6 @@ G-EP140: distinguishes valid invertible coefficient-space shears that change onl
 
 
 **G-EP208 — recursive degree family with uniform sign:** adds `research/the-fold-recursive-degree-family.md`. For the infinite pairwise-coprime family \((2,3^k)\), it derives the exact Laurent spectrum of composition excess and proves a sign transition: \(H_Q(2,3)>0\), while \(H_Q(2,3^k)<0\) for every \(k\ge2\) and every real \(Q\ge2\). This is an infinite-family theorem with a common field-size domain, not an inference from finitely many computed examples. The sign of the temporal second difference in k is explicitly left open.
+
+
+**G-EP209 — temporal concavity of the recursive degree family:** adds `research/the-fold-recursive-degree-temporal-curvature.md`. For H_k(Q)=H_Q(2,3^k), it proves H_(k+1)-2H_k+H_(k-1)<0 for every integer k≥3 and every real Q≥2. The proof substitutes u=Q^(-3^(k-2)), c=Q^-1, bounds the positive part by <2u^3, and the negative c-weighted part below by >2u^3. Thus H_k is strictly discretely concave on k≥2. This does not by itself claim monotonicity of H_k.
