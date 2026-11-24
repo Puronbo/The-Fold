@@ -2,6 +2,8 @@ import unittest
 import itertools
 from tools.pencil_multi_direct_sum_witness import verify_pencil_multi_direct_sum_witness
 from tools.strict_pencil_equivalence import strict_pencil_equivalence_audit
+from tools.rational_canonical import rational_canonical_profile
+from tools.rational_canonical_basis import construct_operator_similarity_witness
 
 def ident(n):
     return [[int(i==j) for j in range(n)] for i in range(n)]
@@ -6323,4 +6325,86 @@ class MultiDirectSumTests(unittest.TestCase):
             ]
             self.assertEqual(rank2(scalar_difference, p), 0)
             self.assertEqual(rank2(jordan_difference, p), 1)
+
+    def test_g_ep151_characteristic_polynomial_minimal_polynomial_and_cyclic_vectors(self):
+        def det2(a, p):
+            return (a[0][0] * a[1][1] - a[0][1] * a[1][0]) % p
+
+        def cyclic_witnesses(a, p):
+            # For a 2x2 operator, v is cyclic exactly when [v, Av]
+            # is invertible. Enumerate all vectors to keep this check
+            # independent of the production rational-canonical profile.
+            found = []
+            for x in range(p):
+                for y in range(p):
+                    v = [x, y]
+                    av = [
+                        (a[0][0] * x + a[0][1] * y) % p,
+                        (a[1][0] * x + a[1][1] * y) % p,
+                    ]
+                    basis = [[v[0], av[0]], [v[1], av[1]]]
+                    if det2(basis, p) != 0:
+                        found.append(v)
+            return found
+
+        for p in (2, 3, 5):
+            identity = [[1, 0], [0, 1]]
+            jordan = [[1, 1], [0, 1]]
+            profile_identity = rational_canonical_profile(identity, p)
+            profile_jordan = rational_canonical_profile(jordan, p)
+
+            # Same characteristic polynomial, different invariant factors
+            # and minimal-polynomial degree.
+            self.assertEqual(
+                profile_identity["characteristic_polynomial_coefficients_descending"],
+                profile_jordan["characteristic_polynomial_coefficients_descending"]
+            )
+            self.assertEqual(
+                profile_identity["characteristic_polynomial_coefficients_descending"],
+                [1, (-2) % p, 1]
+            )
+            self.assertNotEqual(
+                profile_identity["invariant_factors_coefficients_descending"],
+                profile_jordan["invariant_factors_coefficients_descending"]
+            )
+            self.assertEqual(
+                profile_identity["invariant_factors_coefficients_descending"],
+                [[1, (-1) % p], [1, (-1) % p]]
+            )
+            self.assertEqual(
+                profile_jordan["invariant_factors_coefficients_descending"],
+                [[1, (-1) % p, 1]]
+            )
+            self.assertEqual(cyclic_witnesses(identity, p), [])
+            self.assertTrue(cyclic_witnesses(jordan, p))
+
+            decision = construct_operator_similarity_witness(
+                identity, jordan, p
+            )
+            self.assertFalse(decision["similar"])
+            self.assertTrue(decision["decision_complete"])
+            self.assertFalse(decision["witness_found"])
+
+            # Positive control: conjugate a diagonal operator with
+            # distinct eigenvalues by a nontrivial invertible basis.
+            diagonal = [[1, 0], [0, 2 % p]]
+            change = [[1, 1], [0, 1]]
+            change_inverse = inverse(change, p)
+            conjugate = mm(mm(change_inverse, diagonal, p), change, p)
+            positive = construct_operator_similarity_witness(
+                diagonal, conjugate, p
+            )
+            self.assertTrue(positive["similar"])
+            self.assertTrue(positive["witness_found"])
+            self.assertTrue(positive["checks"]["intertwining_identity"])
+            self.assertTrue(positive["checks"]["witness_invertible"])
+            self.assertNotEqual(change, ident(2))
+            self.assertEqual(
+                rational_canonical_profile(diagonal, p)
+                    ["invariant_factors_coefficients_descending"],
+                rational_canonical_profile(conjugate, p)
+                    ["invariant_factors_coefficients_descending"]
+            )
+            self.assertTrue(cyclic_witnesses(diagonal, p))
+            self.assertTrue(cyclic_witnesses(conjugate, p))
 
