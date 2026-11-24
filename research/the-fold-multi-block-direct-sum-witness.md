@@ -24,3 +24,19 @@ coefficients, singular transforms, composite moduli, and invalid partitions.
 ## G-EP59 integration
 
 Successful results from `recover_mixed_kronecker_pencil` now include an ordered `canonical_block_shapes` list and `multi_block_direct_sum_audit`. The order matches canonical target assembly: right singular blocks, left singular blocks, then the regular canonical blocks. The multi-block verifier independently checks the recovered constant transforms against every cross-block cut in both coefficient matrices. The existing whole-target strict-equivalence audit remains in place, so callers receive both an overall equality certificate and a block-structure certificate. This adds no new search capability and leaves incomplete-profile, structured-budget, and exhaustive-search semantics unchanged.
+
+
+## G-EP90: Rectangular multi-block basis-invariance controls
+
+The multi-block verifier is now exercised on a generated-style partition that
+contains both a zero-row block and a zero-column block while keeping positive
+total row and column dimensions. Over each of F₂, F₃, F₅, and F₇, independent
+invertible unitriangular left and right basis changes scramble both pencil
+coefficients. The supplied inverse basis changes recover the exact block
+diagonal pair, including its empty-width/empty-height diagonal pieces, and the
+verifier must accept the witness with the original ordered block shapes.
+
+This is finite regression coverage for the stated rectangular edge case and
+constant strict-equivalence convention. It does not imply decomposition
+discovery, uniqueness, or a universal invariance theorem beyond the algebraic
+identities checked by the verifier.
