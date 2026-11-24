@@ -3,6 +3,7 @@ import unittest
 from tools.polynomial_irreducibility_audit import (
     audit_irreducibility_agreement,
     count_monic_irreducibles,
+    irreducible_density_convergence,
 )
 
 
@@ -17,6 +18,38 @@ class PolynomialIrreducibilityAuditTests(unittest.TestCase):
                 count = count_monic_irreducibles(p, degree)
                 self.assertGreaterEqual(count, 0)
                 self.assertLessEqual(count, p ** degree)
+
+    def test_normalized_density_error_and_exact_uniform_bound(self):
+        prime_case = irreducible_density_convergence(3, 5)
+        self.assertEqual(prime_case["normalized_irreducible_density"], 1 - 3 ** -4)
+        self.assertEqual(prime_case["signed_error_numerator"], 1)
+        self.assertEqual(prime_case["signed_error_denominator"], 81)
+
+        composite_case = irreducible_density_convergence(2, 6)
+        self.assertAlmostEqual(composite_case["normalized_irreducible_density"],
+                               1 - 2 ** -3 - 2 ** -4 + 2 ** -5)
+        self.assertTrue(composite_case["uniform_bound_holds"])
+        self.assertEqual(composite_case["distinct_prime_divisor_count"], 2)
+
+        for p in (2, 3, 5, 7, 11):
+            for degree in range(1, 41):
+                with self.subTest(p=p, degree=degree):
+                    result = irreducible_density_convergence(p, degree)
+                    self.assertTrue(result["uniform_bound_holds"])
+                    self.assertLessEqual(
+                        result["absolute_error"],
+                        result["uniform_prime_field_bound"] + 1e-15,
+                    )
+                    self.assertGreaterEqual(
+                        result["divisor_count_bound"] + 1e-15,
+                        result["absolute_error"],
+                    )
+
+    def test_convergence_report_validation(self):
+        for p, degree in ((4, 2), (True, 3), (3, 0), (3, 2.5)):
+            with self.subTest(p=p, degree=degree):
+                with self.assertRaises(ValueError):
+                    irreducible_density_convergence(p, degree)
 
     def test_count_formula_validation(self):
         for p, degree in ((4, 2), (True, 2), (3, 0), (3, 2.0)):
