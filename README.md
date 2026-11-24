@@ -419,3 +419,6 @@ G-EP140: distinguishes valid invertible coefficient-space shears that change onl
 
 
 **G-EP202 — exact temporal spectral folding:** adds `coprime_composition_excess_temporal_fold(two_steps_ago, one_step_ago, present)`. It aligns exponents across three exact composition-excess spectra and computes the coefficient-wise second difference \\(H_t-2H_{t-1}+H_{t-2}\\), removing cancellations and representing the zero polynomial explicitly. Regression tests cover a nontrivial fold and a constant-spectrum zero fold. See `research/the-fold-composition-excess-resonance.md`.
+
+
+**G-EP203 — generic Laurent-spectrum sign certification:** adds `laurent_spectrum_global_sign_certificate(spectrum)`, a tuple-independent exact Sturm certificate for finite integer Laurent spectra. It combines duplicate exponents, supports negative powers, detects the zero polynomial, counts roots on the transformed interval, and separately checks the Q=2 endpoint. This allows direct certification of G-EP202 temporal folds. A positive root count means the certificate is inconclusive about global sign, not that a sign change is guaranteed. See `research/the-fold-composition-excess-resonance.md`.
