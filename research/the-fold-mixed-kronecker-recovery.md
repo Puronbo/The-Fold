@@ -148,6 +148,6 @@ Adversarial tests mutate nested profile integers, source-shape entries, canonica
 
 Added positive recovery replay controls over F₂, F₃, F₅, and F₇ using the same independently invertible left/right elementary basis scramblings. Each recovered certificate must replay against its exact source pencil and field. Adversarial variants forge the field label and insert a boolean into a transform entry; both must fail closed.
 
-A separate F₃/F₅/F₇ control rescales a valid witness by a nonzero scalar, replacing S with cS and T with c⁻¹T. The replay verifier must accept these distinct witnesses because both strict-equivalence products are unchanged. This guards against accidentally treating a particular transform pair as canonical.
+A separate F₃/F₅/F₇ control rescales a valid witness by a nonzero scalar, replacing S with cS and T with c⁻¹T. The replay verifier accepts these distinct witnesses when the witness-dependent strict-equivalence and multi-block audit records are regenerated for the rescaled S/T pair. Stale nested audit records remain invalid. This guards against treating a particular transform pair as canonical while preserving full audit-to-witness binding.
 
 **Scope:** these are deterministic finite-field regression cases for the selected 4×4 mixed family. They exercise replay and witness flexibility, not universal recovery completeness, witness uniqueness, or a separate classifier.
