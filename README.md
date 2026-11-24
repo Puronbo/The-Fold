@@ -390,3 +390,6 @@ G-EP140: distinguishes valid invertible coefficient-space shears that change onl
 
 
 - **G-EP183:** identifies the leading exponential scale of the coprime-degree defect from the smallest prime factors. For every n>1, p^(−A(n)) ≤ Eₚ(n) ≤ ω(n)p^(−A(n)), where A(n)=n(1−1/q(n)) and q(n) is the smallest prime divisor. Combining this with G-EP182 yields, uniformly in prime p and for sufficiently large B=max(a,b), a two-sided bound for Δₚ(a,b) and the logarithmic estimate −logₚ Δₚ(a,b)=min(A(a),A(b))+O(log log B). The controlling degree need not be the smaller degree. See research/the-fold-outward-inward-scaling.md.
+
+
+- **G-EP184–187:** expands each subfield error into its exact finite squarefree-divisor spectrum; derives the complete finite spectrum for the coprime defect; proves the fixed-degree, large-field law \(\Delta_p(a,b)\sim C(a,b)p^{-A}\), with coefficient 2 precisely when the two input exponents resonate; and specifies exact coefficient collection for the next nonzero scale. It distinguishes the fixed-degree \(p\to\infty\) limit from the uniform large-degree limit of G-EP182–183. See research/the-fold-outward-inward-scaling.md.
