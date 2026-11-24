@@ -318,3 +318,6 @@ G-EP140: distinguishes valid invertible coefficient-space shears that change onl
 
 
 **G-EP155 — cross-field comparison of 3×3 similarity profiles:** enumerates every 3×3 matrix over both F₂ and F₃ and compares invariant-factor degree patterns separately from coefficient tuples. The observed degree-shape set is shared, while coefficient representatives remain field-valued data (with coefficient 2 appearing over F₃ but not F₂). This comparison does not identify polynomials across fields or claim that the fields have the same irreducible polynomials; the exhaustive scope remains dimension three over these two fields.
+
+
+- **G-EP156:** exhausts all monic cubic polynomials over F₂ and F₃ (each is realized as the characteristic polynomial of its companion matrix), factors them with the exact finite-field factorizer, and checks exact reconstruction. The observed degree/multiplicity factorization patterns agree, while the irreducible polynomial inventories differ by field. The test checks the expected irreducible counts in degrees one through three; it does not identify polynomial coefficients across fields.
