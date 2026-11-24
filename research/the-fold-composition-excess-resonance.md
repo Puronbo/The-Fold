@@ -242,3 +242,45 @@ The new tests cover:
 The certificate is exact and tuple-independent, but it remains a
 per-polynomial result. A failed certificate does not prove sign change; it
 means this root-free criterion did not establish a global sign.
+
+
+---
+
+## G-EP204 — Finite-family uniform sign persistence
+
+For a finite family of nonzero Laurent spectra
+\\[
+H_i(Q)=c_iQ^{-e_i}+\\sum_{j>0}c_{i,j}Q^{-e_{i,j}},
+\\qquad e_{i,j}-e_i\\ge1,
+\\]
+define \\(L_i=\\sum_{j>0}|c_{i,j}|\\). The tail satisfies
+\\[
+\\left|\\sum_{j>0}c_{i,j}Q^{-(e_{i,j}-e_i)}\\right|
+\\le L_i/Q.
+\\]
+Consequently, if \\(Q>L_i/|c_i|\\), the sign of \\(H_i(Q)\\) is
+the sign of \\(c_i\\). An integer threshold valid for member i is
+\\[
+Q_i=\\max\\left(2,\\left\\lfloor
+\\frac{L_i}{|c_i|}\\right\\rfloor+1\\right).
+\\]
+If every member is nonzero and all leading coefficients have the same
+sign, then
+\\[
+Q_{\\mathrm{family}}=\\max_iQ_i
+\\]
+is a single threshold above which every member has that common sign.
+
+The new API `laurent_spectrum_family_uniform_sign_certificate(spectra)`
+computes this bound exactly for a finite family, supports negative Laurent
+exponents, and reports member-level leading terms and thresholds. Mixed
+leading signs or an identically zero member prevent a common-sign claim.
+The tests check a family whose common threshold is 6 and verify positive
+values at a finite grid above that threshold, alongside mixed-sign, zero,
+and empty-family cases.
+
+This is a **finite-family** theorem. It does not automatically certify an
+infinite sequence of future snapshots. For an infinite family, one must
+add uniform hypotheses such as a common leading sign, a positive lower
+bound on the absolute leading coefficient, and a uniform upper bound on
+the coefficient-tail L1 norm.
