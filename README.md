@@ -227,3 +227,6 @@ of its witness.
 
 
 - **G-EP121:** extends constraint-rank invariance to full invertible row/column basis changes that mix blocks, provided the block decomposition is transported with the bases. The test builds the transported equation map using matrix-unit inputs and checks its rank against the original system over F₂/F₃/F₅. Explicit F₂/F₃ controls show that mixing the bases but retaining the old coordinate partition can change rank, because that is a different constraint family. Test-side finite covariance evidence only; the production API still accepts consecutive coordinate block shapes, not arbitrary subspace-basis metadata.
+
+
+- **G-EP122:** extends transported-basis covariance to rectangular m×n coefficient matrices and n×n right-transform unknowns. Full row/column basis changes mix blocks, while the decomposition is transported through the inverse basis maps. Matrix-unit equation construction checks rank invariance over F₂/F₃/F₅, including a 3×4 partition with simultaneous zero-row and zero-column blocks; sampled candidates verify the pullback identity. A fixed-coordinate control confirms rank can change when the partition is not transported. Finite test-side evidence only; no generic mixed-basis production verifier is added.
