@@ -68,3 +68,52 @@ Therefore K_k<0 for every real Q>=2 and k>=3.
 - Hence H_k is strictly discretely concave on the tail k>=2: its first differences strictly decrease for k>=2.
 - Concavity alone does not establish that H_k itself is monotone.
 - The proof is uniform over real Q>=2, hence over all prime-power field sizes. It uses exact spectra and inequalities, not finite sampling.
+
+
+## G-EP210 — Strict monotone convergence to zero
+
+The same substitution proves a stronger shape theorem:
+\[
+\boxed{H_k(Q)<H_{k+1}(Q)<0\quad(k\ge2,\ Q\ge2),}
+\]
+and
+\[
+\boxed{\lim_{k\to\infty}H_k(Q)=0^- .}
+\]
+
+### Proof of strict increase
+
+Fix k>=3 and again put u=Q^(-3^(k-2))<=1/8 and c=Q^-1, so c/u>=4. Then
+\[
+H_k-H_{k-1}
+=c u^2(1-u^4)-u^3-u^4+u^5+u^9+u^{12}-u^{15}.
+\]
+Discarding positive terms gives
+\[
+H_k-H_{k-1}
+\ge c u^2(1-u^4)-u^3-u^4-u^{15}.
+\]
+Since u<=1/8,
+\[
+c u^2(1-u^4)
+\ge4u^3(1-8^{-4}),
+\]
+while
+\[
+u^3+u^4+u^{15}
+\le u^3(1+1/8+8^{-12}).
+\]
+The first coefficient is greater than 3.99, and the second is less than 1.126. Hence H_k-H_(k-1)>0.
+
+G-EP208 already gives H_k<0 for every k>=2. Each term in the exact formula for H_k tends to zero as k tends to infinity, so H_k tends to zero. Since every H_k is negative, the convergence is from below.
+
+### Combined shape theorem
+
+For every fixed real Q>=2:
+- H_1(Q)>0;
+- H_k(Q)<0 for k>=2;
+- H_(k+1)(Q)>H_k(Q) for k>=2;
+- H_(k+1)-2H_k+H_(k-1)<0 for k>=3;
+- H_k(Q) increases to 0 from below.
+
+Thus after the one-time sign transition, the sequence is increasing and strictly discretely concave, with positive first differences that strictly decrease to zero.
