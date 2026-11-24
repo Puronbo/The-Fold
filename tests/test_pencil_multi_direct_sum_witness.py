@@ -2983,17 +2983,25 @@ class MultiDirectSumTests(unittest.TestCase):
                     rhs=mm_local(transformed,xprime,p)
                     expected=mm_local(mm_local(s,lhs,p),t,p)
                     self.assertEqual(rhs,expected,(fixture_id,p,trial))
-                    # Each off-diagonal zero pattern is preserved blockwise.
-                    starts=[0]
-                    for _,c in shapes:
-                        starts.append(starts[-1]+c)
+                    # Block-diagonal coordinate changes preserve whether
+                    # each corresponding off-diagonal block is zero.
+                    row_starts=[0]
+                    col_starts=[0]
+                    for rsize,csize in shapes:
+                        row_starts.append(row_starts[-1]+rsize)
+                        col_starts.append(col_starts[-1]+csize)
                     for bi in range(len(shapes)):
                         for bj in range(len(shapes)):
                             if bi==bj:
                                 continue
-                            for i in range(starts[bi],starts[bi+1]):
-                                for j in range(starts[bj],starts[bj+1]):
-                                    self.assertEqual(lhs[i][j]%p,0) if False else None
+                            old_block=[row[col_starts[bj]:col_starts[bj+1]]
+                                       for row in lhs[row_starts[bi]:row_starts[bi+1]]]
+                            new_block=[row[col_starts[bj]:col_starts[bj+1]]
+                                       for row in expected[row_starts[bi]:row_starts[bi+1]]]
+                            self.assertEqual(
+                                all(v%p==0 for row in old_block for v in row),
+                                all(v%p==0 for row in new_block for v in row)
+                            )
                     # Direct equation evaluation is covariant even when not zero.
                     flat=[v for row in xprime for v in row]
                     for row in transformed_rows:
