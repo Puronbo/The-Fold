@@ -378,3 +378,6 @@ G-EP140: distinguishes valid invertible coefficient-space shears that change onl
 
 
 **G-EP179 — Coprime bad-proportion ratio bound audit:** adds an exact-rational finite-grid audit for the conjecture that (E_p(ab)/\min(E_p(a),E_p(b))\le(p^2+p-1)/p^3) for coprime degrees greater than one. The test grid covers 102 pairs over p=2,3,5 through degree 12 and checks that the maximum is attained at (2,3), with value 5/8 over F₂. This is finite evidence only; the universal bound remains unproved. See `research/the-fold-outward-inward-scaling.md`.
+
+
+**G-EP180 — Analytic subcase of the coprime ratio conjecture:** proves the proposed bound (Q_p(a,b)\le(p^2+p-1)/p^3) for all coprime pairs with smaller degree 2. Equality occurs at (2,3); the inequality is strict for (2,b) with odd b≥5. The proof uses the maximal-proper-subfield union bound and a one-subfield lower bound. Pairs with both degrees at least 3 remain open. See `research/the-fold-outward-inward-scaling.md`.
