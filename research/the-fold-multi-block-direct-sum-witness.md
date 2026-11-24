@@ -126,3 +126,15 @@ This is a test-side v1 contract, not a production deserializer, schema migration
 The v1 schema contract is exercised over deterministic two-, three-, and four-block fixtures, including partitions containing zero-row and zero-column blocks while forbidding 0×0 blocks. The tests check source-dimension totals, transform dimensions, and every nested block's exact row/column dimensions. They also mutate grid row counts, grid widths, and nested block dimensions to ensure malformed structures are rejected.
 
 A well-formed but mathematically false witness remains structurally valid and retains a false algebraic diagnostic. This preserves the separation between record shape and witness truth. The fixtures are finite regression cases, not a universal schema proof.
+
+
+## G-EP100: Schema and algebraic outcome cross-check
+
+A deterministic cross-check exercises four distinct cases against the v1 structural contract and the algebraic verifier:
+
+1. A structurally valid record with invertible transforms and both transformed coefficients block diagonal is accepted by both layers.
+2. A structurally valid record with an invertible shear that introduces cross-block entries passes schema validation but fails the algebraic direct-sum decision.
+3. Malformed nested block-grid dimensions and a boolean substituted for an integer rank are rejected structurally, independent of any underlying witness intent.
+4. A singular left transform produces a structurally valid audit record with an explicit negative invertibility/direct-sum result, not a schema exception.
+
+The test establishes separation of record structure from mathematical witness validity for these fixtures. It is deterministic regression coverage, not a universal proof of the verifier or a provenance/authenticity mechanism.
