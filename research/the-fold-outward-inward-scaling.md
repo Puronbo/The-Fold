@@ -566,3 +566,81 @@ coprime degrees \(a,b>1\). In particular,
 \(\Delta_p(a,b)\) is strictly positive. The proof uses exact
 finite-field subfield bounds and an elementary factor-count estimate;
 the finite computational sweeps remain corroboration, not the proof.
+
+
+## G-EP182 — The coprime-degree defect is asymptotically additive
+
+The exact identity from G-EP178 is
+\[
+\Delta_p(a,b)=E_p(a)+E_p(b)-E_p(a)E_p(b)-E_p(ab).
+\]
+G-EP181 proves that \(E_p(ab)<\min(E_p(a),E_p(b))\). We now sharpen this:
+the combined-degree term is negligible relative to the smaller input
+bad-proportion as the larger degree grows.
+
+Assume \(2\le a<b\), \(\gcd(a,b)=1\), and write
+\[
+Q_p(a,b)=\frac{E_p(ab)}{\min(E_p(a),E_p(b))}.
+\]
+For \(a\ge3\), the union-bound/lower-bound argument in G-EP181 gives
+\[
+Q_p(a,b)\le\omega(ab)p^{-b/2}
+<2\log_2(b)\,p^{-b/2}
+\le2\log_2(b)\,2^{-b/2}.
+\]
+For \(a=2\), \(b\) is odd. If \(b\ge5\), let \(r\ge3\) be its smallest
+prime factor and \(A=b(1-1/r)\). The G-EP180 estimate gives
+\[
+Q_p(2,b)\le p^{-b/r}+\omega(b)p^{-A}
+\le2^{-b/3}+(\log_3 b)2^{-b/2}.
+\]
+The exceptional pair \((2,3)\) is isolated and has the exact ratio
+\((p^2+p-1)/p^3\).
+
+Thus, uniformly over every prime field,
+\[
+\boxed{
+\sup_{\substack{a,b>1,\ \gcd(a,b)=1\\\max(a,b)=B}}
+Q_p(a,b)\longrightarrow0
+\quad(B\to\infty).
+}
+\]
+More explicitly, for \(B\ge5\) the ratio is bounded by the larger of
+\[
+2\log_2(B)\,2^{-B/2}
+\quad\hbox{and}\quad
+2^{-B/3}+(\log_3 B)2^{-B/2},
+\]
+both of which tend to zero. (For the first expression the \(a\ge3\)
+case applies; for the second, the \(a=2\) case.)
+
+Now put \(S=E_p(a)+E_p(b)\), \(m=\min(E_p(a),E_p(b))\), and
+\(M=\max(E_p(a),E_p(b))\). Since
+\[
+\frac{E_p(a)E_p(b)}S\le m,\qquad
+\frac{E_p(ab)}S
+=Q_p(a,b)\frac mS\le\frac{Q_p(a,b)}2,
+\]
+we obtain the explicit relative-error estimate
+\[
+0\le1-\frac{\Delta_p(a,b)}S
+\le m+\frac{Q_p(a,b)}2.
+\]
+Also, the uniform convergence estimate from G-EP174 gives
+\[
+m\le E_p(b)\le(b-1)2^{-b/2}\longrightarrow0.
+\]
+Combining these estimates proves
+\[
+\boxed{
+\frac{\Delta_p(a,b)}{E_p(a)+E_p(b)}\to1
+}
+\]
+as \(\max(a,b)\to\infty\) through coprime pairs, uniformly in prime \(p\).
+
+This is an additive asymptotic law, not a multiplicative law for
+\(R_p\): the defect is asymptotically the sum of the two input
+proper-subfield proportions, while the combined-degree correction is
+lower order. The displayed estimates quantify convergence and cover
+the regime where the smaller degree remains fixed (including \(a=2\));
+the single pair (2,3) does not affect the limit.
