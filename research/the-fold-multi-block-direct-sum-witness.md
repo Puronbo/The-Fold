@@ -355,3 +355,25 @@ one rank-zero map, (p²−1)²/(p−1) rank-one maps, and
 This is exhaustive for 2×2 coefficient maps over these four fields and
 this explicit pencil fixture. It is not a universal theorem for arbitrary
 pencils, nor does it discover decompositions or prove uniqueness.
+
+
+## G-EP114: Intersection of simultaneous coefficient constraints
+
+Fix the left coordinate transform and a two-block row/column partition.
+For each coefficient separately, the off-diagonal-zero equations define a
+linear constraint space in the entries of the unknown right transform T.
+The valid common right transforms lie in the intersection of those two
+spaces. The regression enumerates every 2×2 candidate T over F₂, F₃, F₅,
+and F₇ for a nontrivially right-scrambled pencil.
+
+In this fixture, the Q-only constraint space and K-only constraint space
+each contain p² matrices, while their intersection contains exactly p²
+diagonal matrices. The intersection includes invertible witnesses and
+singular solutions; invertibility must therefore be checked separately
+from the linear off-diagonal equations. This demonstrates concretely why
+solving either coefficient's constraints alone is insufficient and why
+the common constraint intersection is the relevant object.
+
+The experiment is exhaustive for this fixed-left, 2×2 fixture. It is not
+a general transformation-discovery algorithm: the left transform and
+partition are supplied, and larger-field/dimension search is not addressed.
