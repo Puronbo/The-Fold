@@ -4460,3 +4460,124 @@ class MultiDirectSumTests(unittest.TestCase):
                 self.assertEqual(rank(mutated,p),expected[nonempty]-1)
                 with self.subTest(field=p,side=side,mutation="rank mismatch"):
                     self.assertNotEqual(rank(mutated,p),expected[nonempty])
+
+
+    def test_g_ep132_composed_transport_preserves_rectangular_projected_coefficient_blocks(self):
+        def mm(a,b,p):
+            return [[sum(a[i][k]*b[k][j] for k in range(len(b)))%p
+                     for j in range(len(b[0]))] for i in range(len(a))]
+
+        def inv(a,p):
+            n=len(a)
+            w=[[x%p for x in row]+[int(i==j) for j in range(n)]
+               for i,row in enumerate(a)]
+            for c in range(n):
+                pivot=next((r for r in range(c,n) if w[r][c]),None)
+                if pivot is None: raise AssertionError("singular basis")
+                w[c],w[pivot]=w[pivot],w[c]
+                scale=pow(w[c][c],-1,p)
+                w[c]=[x*scale%p for x in w[c]]
+                for r in range(n):
+                    if r!=c and w[r][c]:
+                        factor=w[r][c]
+                        w[r]=[(x-factor*y)%p for x,y in zip(w[r],w[c])]
+            return [row[n:] for row in w]
+
+        def rank(a,p):
+            if not a or not a[0]: return 0
+            w=[[x%p for x in row] for row in a]
+            rows,cols=len(w),len(w[0])
+            pivot_row=0
+            for col in range(cols):
+                pivot=next((r for r in range(pivot_row,rows)
+                            if w[r][col]),None)
+                if pivot is None: continue
+                w[pivot_row],w[pivot]=w[pivot],w[pivot_row]
+                scale=pow(w[pivot_row][col],-1,p)
+                w[pivot_row]=[x*scale%p for x in w[pivot_row]]
+                for r in range(rows):
+                    if r!=pivot_row and w[r][col]:
+                        factor=w[r][col]
+                        w[r]=[(x-factor*y)%p
+                              for x,y in zip(w[r],w[pivot_row])]
+                pivot_row+=1
+                if pivot_row==rows: break
+            return pivot_row
+
+        def identity(n):
+            return [[int(i==j) for j in range(n)] for i in range(n)]
+
+        def zero(m,n):
+            return [[0]*n for _ in range(m)]
+
+        def projectors(sizes,total):
+            out=[]; start=0
+            for size in sizes:
+                z=zero(total,total)
+                for i in range(start,start+size): z[i][i]=1
+                out.append(z); start+=size
+            return out
+
+        shapes=[(1,0),(0,1),(3,2)]
+        row_sizes=[r for r,_ in shapes]
+        col_sizes=[c for _,c in shapes]
+        m,n=sum(row_sizes),sum(col_sizes)
+        for p in (2,3,5):
+            row_parts=projectors(row_sizes,m)
+            col_parts=projectors(col_sizes,n)
+            A=zero(m,n); K=zero(m,n)
+            A[1:4][0:0] if False else None
+            # Only the final 3x2 diagonal block is nonempty.
+            A[1][1],A[1][2]=1,1
+            A[2][1],A[2][2]=0,1
+            A[3][1],A[3][2]=1,0
+            K[1][1],K[1][2]=1,0
+            K[2][1],K[2][2]=1,1
+            K[3][1],K[3][2]=0,1
+            A=[[x%p for x in row] for row in A]
+            K=[[x%p for x in row] for row in K]
+
+            ua,ub=identity(m),identity(m)
+            va,vb=identity(n),identity(n)
+            ua[0][1]=1; ub[2][0]=1
+            va[0][1]=1; vb[1][2]=1
+            us=[ua,ub,identity(m),inv(ub,p)]
+            vs=[va,vb,identity(n),inv(vb,p)]
+            U,V=identity(m),identity(n)
+            for u,v in zip(us,vs):
+                U=mm(u,U,p)
+                V=mm(V,v,p)
+            U_inv,V_inv=inv(U,p),inv(V,p)
+            A_changed=mm(mm(U,A,p),V,p)
+            K_changed=mm(mm(U,K,p),V,p)
+            row_changed=[mm(mm(U,z,p),U_inv,p) for z in row_parts]
+            col_changed=[mm(mm(V_inv,z,p),V,p) for z in col_parts]
+
+            for label,source,target in (("A",A,A_changed),("K",K,K_changed)):
+                for i,(pr,pr_new) in enumerate(zip(row_parts,row_changed)):
+                    for j,(qc,qc_new) in enumerate(zip(col_parts,col_changed)):
+                        before=mm(mm(pr,source,p),qc,p)
+                        after=mm(mm(pr_new,target,p),qc_new,p)
+                        expected=mm(mm(U,before,p),V,p)
+                        with self.subTest(field=p,coefficient=label,row_block=i,
+                                          column_block=j):
+                            self.assertEqual(after,expected)
+                            if i!=j:
+                                self.assertEqual(after,zero(m,n))
+                            self.assertEqual(rank(after,p),rank(before,p))
+
+            # Empty diagonal blocks are still present as 1x0 and 0x1
+            # summands; their projected full-size matrices are exactly zero.
+            for i in (0,1):
+                self.assertEqual(mm(mm(row_changed[i],A_changed,p),
+                                    col_changed[i],p),zero(m,n))
+                self.assertEqual(mm(mm(row_changed[i],K_changed,p),
+                                    col_changed[i],p),zero(m,n))
+
+            # A shape-valid but incorrectly transported column family breaks
+            # the projected-block covariance identity.
+            wrong_cols=[mm(mm(V,z,p),V_inv,p) for z in col_parts]
+            wrong=mm(mm(row_changed[2],A_changed,p),wrong_cols[2],p)
+            correct=mm(mm(U,mm(mm(row_parts[2],A,p),col_parts[2],p),p),V,p)
+            with self.subTest(field=p,mutation="wrong column conjugation"):
+                self.assertNotEqual(wrong,correct)
