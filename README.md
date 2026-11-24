@@ -197,3 +197,6 @@ of its witness.
 
 
 **G-EP111 — invertible pencil-parameter basis changes:** tests coefficient-space changes by invertible 2×2 matrices over F₂, F₃, F₅, and F₇, including coefficient swaps, shears, and mixed determinant-one changes. The same rectangular coordinate witness must verify the transformed pair and recover the expected mixed target coefficients; applying the inverse parameter change recovers the original ordered pair exactly. This finite regression checks direct-sum stability under an invertible change of basis in the pencil coefficient space. It does not cover singular coefficient mixing, decomposition discovery, uniqueness, or universal classification.
+
+
+**G-EP112 — singular coefficient-space maps and information loss:** tests rank-deficient linear maps on the ordered pair (Q,K). Over F₂/F₃/F₅/F₇, the original pair is coupled through K, but a singular map can erase K or duplicate Q and make the collapsed pair pass the direct-sum verifier. A retained coupled combination remains rejected. This documents the crucial boundary: verifier success applies to the supplied transformed pair, not to an original pencil after information-losing singular mixing. See G-EP112 in `research/the-fold-multi-block-direct-sum-witness.md`.
