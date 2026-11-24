@@ -3440,3 +3440,135 @@ class MultiDirectSumTests(unittest.TestCase):
             # The zero matrix is in the linear kernel; it is never an
             # invertible witness. This keeps the linear/nonlinear boundary explicit.
             self.assertIn((0, 0, 0, 0), original_kernel)
+
+
+    def test_g_ep124_three_dimensional_rectangular_constraint_rank_nullity_transport(self):
+        import random
+
+        def mm(a,b,p):
+            return [[sum(a[i][k]*b[k][j] for k in range(len(b)))%p
+                     for j in range(len(b[0]))] for i in range(len(a))]
+
+        def inverse(a,p):
+            n=len(a)
+            w=[[x%p for x in row]+[int(i==j) for j in range(n)]
+               for i,row in enumerate(a)]
+            for c in range(n):
+                pivot=next((r for r in range(c,n) if w[r][c]),None)
+                if pivot is None:
+                    raise AssertionError("basis matrix is singular")
+                w[c],w[pivot]=w[pivot],w[c]
+                scale=pow(w[c][c],-1,p)
+                w[c]=[x*scale%p for x in w[c]]
+                for r in range(n):
+                    if r!=c and w[r][c]:
+                        f=w[r][c]
+                        w[r]=[(x-f*y)%p for x,y in zip(w[r],w[c])]
+            return [row[n:] for row in w]
+
+        def locations(shapes):
+            rr=cc=0
+            blocks=[]
+            for r,c in shapes:
+                blocks.append((range(rr,rr+r),range(cc,cc+c)))
+                rr+=r
+                cc+=c
+            return [(i,j) for bi,(rows,_) in enumerate(blocks)
+                    for bj,(_,cols) in enumerate(blocks) if bi!=bj
+                    for i in rows for j in cols]
+
+        def flatten(a):
+            return [x for row in a for x in row]
+
+        def rank(rows,nvars,p):
+            work=[[x%p for x in row] for row in rows]
+            pivot=0
+            for col in range(nvars):
+                found=next((r for r in range(pivot,len(work))
+                            if work[r][col]),None)
+                if found is None:
+                    continue
+                work[pivot],work[found]=work[found],work[pivot]
+                scale=pow(work[pivot][col],-1,p)
+                work[pivot]=[x*scale%p for x in work[pivot]]
+                for r in range(len(work)):
+                    if r!=pivot and work[r][col]:
+                        f=work[r][col]
+                        work[r]=[(x-f*y)%p
+                                 for x,y in zip(work[r],work[pivot])]
+                pivot+=1
+                if pivot==len(work):
+                    break
+            return pivot
+
+        def equation_matrix(coefficients, shapes, p, pullback=None):
+            # Construct each column by applying the actual matrix operation
+            # to a matrix-unit candidate; no symbolic coefficient shortcut.
+            n=len(coefficients[0][0])
+            loc=locations(shapes)
+            columns=[]
+            for i in range(n):
+                for j in range(n):
+                    unit=[[int(r==i and c==j) for c in range(n)]
+                          for r in range(n)]
+                    values=[]
+                    for coefficient in coefficients:
+                        if pullback is None:
+                            output=mm(coefficient,unit,p)
+                        else:
+                            ui,vi= pullback
+                            output=mm(mm(mm(ui,coefficient,p),unit,p),vi,p)
+                        values.extend(output[x][y] for x,y in loc)
+                    columns.append(values)
+            return [[columns[c][r] for c in range(n*n)]
+                    for r in range(len(columns[0]))]
+
+        # 4x3 coefficient pair, two rectangular diagonal regions,
+        # and a 3x3 right-transform unknown (nine variables).
+        shapes=[(1,1),(3,2)]
+        m,n=4,3
+        for p in (2,3,5):
+            rng=random.Random(124000+p)
+            q=[[rng.randrange(p) for _ in range(n)] for _ in range(m)]
+            k=[[rng.randrange(p) for _ in range(n)] for _ in range(m)]
+            # Independently constructed invertible upper-unitriangular maps.
+            u=[[int(i==j) if i>=j else rng.randrange(p)
+                for j in range(m)] for i in range(m)]
+            v=[[int(i==j) if i>=j else rng.randrange(p)
+                for j in range(n)] for i in range(n)]
+            ui,vi=inverse(u,p),inverse(v,p)
+            q_prime=mm(mm(u,q,p),v,p)
+            k_prime=mm(mm(u,k,p),v,p)
+
+            original=equation_matrix([q,k],shapes,p)
+            transported=equation_matrix([q_prime,k_prime],shapes,p,
+                                        pullback=(ui,vi))
+            original_rank=rank(original,n*n,p)
+            transported_rank=rank(transported,n*n,p)
+            self.assertEqual(original_rank,transported_rank,p)
+            self.assertEqual(n*n-original_rank,n*n-transported_rank)
+            self.assertEqual(len(original),len(transported))
+            self.assertTrue(all(len(row)==n*n for row in original))
+            self.assertTrue(all(len(row)==n*n for row in transported))
+
+            # Explicitly check both directions of the candidate-coordinate map
+            # on every matrix unit and on deterministic general candidates.
+            for i in range(n):
+                for j in range(n):
+                    unit=[[int(r==i and c==j) for c in range(n)]
+                          for r in range(n)]
+                    prime=mm(mm(vi,unit,p),v,p)
+                    recovered=mm(mm(v,prime,p),vi,p)
+                    self.assertEqual(recovered,unit,(p,i,j))
+            for trial in range(8):
+                x=[[rng.randrange(p) for _ in range(n)] for _ in range(n)]
+                x_prime=mm(mm(vi,x,p),v,p)
+                self.assertEqual(mm(mm(v,x_prime,p),vi,p),x)
+                # The equation-map evaluations agree as vectors, not just ranks.
+                original_value=[z for row in mm(q,x,p) for z in row]
+                original_value += [z for row in mm(k,x,p) for z in row]
+                pulled_value=[]
+                for coefficient_prime in (q_prime,k_prime):
+                    pulled=mm(mm(mm(ui,coefficient_prime,p),x_prime,p),vi,p)
+                    pulled_value.extend(flatten(pulled))
+                self.assertEqual(pulled_value,original_value,(p,trial))
