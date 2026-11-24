@@ -385,7 +385,8 @@ class RationalCanonicalTests(unittest.TestCase):
         # F_3, unlike F_2, has enough distinct linear factors for a
         # cubic to split into three distinct linear factors.
         common_patterns = {
-            ((1, 1), (2, 1)),
+            ((1, 1), (1, 1), (2, 1)),
+            ((1, 2), (2, 1)),
             ((1, 3),),
             ((1, 1), (1, 2)),
             ((3, 1),),
