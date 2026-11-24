@@ -437,3 +437,6 @@ G-EP140: distinguishes valid invertible coefficient-space shears that change onl
 
 
 **G-EP210 — monotone convergence of the recursive degree family:** extends `research/the-fold-recursive-degree-temporal-curvature.md`. For each fixed real Q≥2, it proves H_(k+1)(Q)>H_k(Q) for every k≥2, while G-EP208 gives H_k<0 and the exact formula gives H_k→0. Combined with G-EP209, the tail increases strictly and is strictly discretely concave, converging to zero from below with decreasing positive increments.
+
+
+**G-EP211 — exact asymptotic equivalent and super-geometric ratio:** extends `research/the-fold-recursive-degree-temporal-curvature.md`. Factoring H_k=-Q^(-(1+2·3^(k−1)))B_k with B_k→1 uniformly for real Q≥2 proves H_k∼−Q^(-(1+2·3^(k−1))). It also gives H_(k+1)/H_k = Q^(-4·3^(k−1))(B_(k+1)/B_k) ∼ Q^(-4·3^(k−1)), uniformly for Q≥2; in particular the successive ratio tends uniformly to zero.
