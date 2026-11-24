@@ -351,6 +351,20 @@ def verify_mixed_kronecker_recovery_certificate(
     outcomes delegate to the exhaustive search replay. Incomplete or bounded
     failures are checked as accurately described outcomes, never as negatives.
     """
+    def validate_caller_matrix(matrix, name):
+        if not isinstance(matrix, (list, tuple)) or not matrix:
+            raise ValueError(f"{name} must be a nonempty matrix sequence")
+        if not all(isinstance(row, (list, tuple)) and row for row in matrix):
+            raise ValueError(f"{name} must contain nonempty row sequences")
+        width = len(matrix[0])
+        if any(len(row) != width for row in matrix):
+            raise ValueError(f"{name} must be rectangular")
+        if any(not isinstance(value, int) or isinstance(value, bool)
+               for row in matrix for value in row):
+            raise ValueError(f"{name} entries must be integers (excluding booleans)")
+
+    validate_caller_matrix(q, "q")
+    validate_caller_matrix(k, "k")
     rows, cols = _validate_pair(q, k, p)
     if not isinstance(result, dict):
         return {"verified": False, "reason": "certificate result must be a dictionary"}
