@@ -5768,15 +5768,26 @@ class MultiDirectSumTests(unittest.TestCase):
                                             scale(source_grids[1][i][j],
                                                   change[1][out_index], p), p)
                                         actual = output_grids[out_index][i][j]
+                                        # Projected blocks are represented as
+                                        # full m×n matrices P_i A Q_j. Extract
+                                        # their local rectangular window to
+                                        # audit the declared (possibly empty)
+                                        # block shape separately.
+                                        local = [row[col_offsets[j]:col_offsets[j+1]]
+                                                 for row in actual[row_offsets[i]:row_offsets[i+1]]]
+                                        expected_local = [
+                                            row[col_offsets[j]:col_offsets[j+1]]
+                                            for row in expected[row_offsets[i]:row_offsets[i+1]]
+                                        ]
                                         with self.subTest(field=p, map=(a,b,c,d),
                                                           output=out_index, block=(i,j)):
-                                            self.assertEqual(len(actual), rsize)
+                                            self.assertEqual(len(local), rsize)
                                             self.assertTrue(all(len(row) == col_sizes[j]
-                                                                for row in actual))
+                                                                for row in local))
                                             self.assertEqual(actual, expected)
+                                            self.assertEqual(local, expected_local)
                                             if i != j:
-                                                self.assertEqual(actual,
-                                                    [[0]*col_sizes[j] for _ in range(rsize)])
+                                                self.assertEqual(actual, [[0]*n for _ in range(m)])
 
                                 # Summing diagonal projected blocks reconstructs
                                 # the entire rectangular output coefficient.
