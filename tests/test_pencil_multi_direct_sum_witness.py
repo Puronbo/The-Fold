@@ -2262,3 +2262,62 @@ class MultiDirectSumTests(unittest.TestCase):
                 self.assertEqual(accepted_by_rank[1], p*p - 1)
                 self.assertEqual(accepted_by_rank[2], 0)
 
+
+
+    def test_g_ep114_intersection_of_both_coefficient_constraints(self):
+        # With the left transform fixed, enumerate the linear space of right
+        # transforms satisfying each coefficient's off-diagonal equations.
+        # Their intersection, not either individual constraint space, is the
+        # simultaneous pencil decomposition condition.
+        shapes = [(1, 1), (1, 1)]
+        for p in (2, 3, 5, 7):
+            # A nontrivial invertible right-coordinate scrambling.
+            u = [[1, 1], [0, 1]]
+            ui = inverse(u, p)
+            target_q = [[1, 0], [0, 0]]
+            target_k = [[0, 0], [0, 1]]
+            q = mm(target_q, ui, p)
+            k = mm(target_k, ui, p)
+
+            q_only, k_only, common = set(), set(), set()
+            for a in range(p):
+                for b in range(p):
+                    for c in range(p):
+                        for d in range(p):
+                            candidate = [[a, b], [c, d]]
+                            qout = mm(q, candidate, p)
+                            kout = mm(k, candidate, p)
+                            q_ok = qout[0][1] % p == 0 and qout[1][0] % p == 0
+                            k_ok = kout[0][1] % p == 0 and kout[1][0] % p == 0
+                            key = (a, b, c, d)
+                            if q_ok:
+                                q_only.add(key)
+                            if k_ok:
+                                k_only.add(key)
+                            if q_ok and k_ok:
+                                common.add(key)
+
+            expected_q = {(a, 0, c, 0) for a in range(p) for c in range(p)}
+            expected_k = {(0, b, 0, d) for b in range(p) for d in range(p)}
+            expected_common = {(a, 0, 0, d) for a in range(p) for d in range(p)}
+            invertible_common = {
+                key for key in expected_common
+                if (key[0]*key[3] - key[1]*key[2]) % p != 0
+            }
+            with self.subTest(field=p):
+                self.assertEqual(q_only, expected_q)
+                self.assertEqual(k_only, expected_k)
+                self.assertEqual(common, expected_common)
+                self.assertEqual(len(q_only), p*p)
+                self.assertEqual(len(k_only), p*p)
+                self.assertEqual(len(common), p*p)
+                self.assertEqual(
+                    {x for x in common
+                     if (x[0]*x[3] - x[1]*x[2]) % p != 0},
+                    invertible_common,
+                )
+                self.assertIn((1, 0, 0, 1), invertible_common)
+                self.assertIn((1, 0, 0, 0), common)  # singular solution
+                self.assertEqual(mm(q, [[1, 0], [0, 1]], p), q)
+                self.assertEqual(mm(k, [[1, 0], [0, 1]], p), k)
+
