@@ -301,7 +301,23 @@ class CoprimeDefectSpectrumTests(unittest.TestCase):
                         value = evaluate_coprime_defect_spectrum(
                             field_size, left, right
                         )
+                        def bad_proportion(degree):
+                            count = count_monic_irreducibles_over_field(
+                                field_size, degree
+                            )
+                            normalized = Fraction(
+                                degree * count, field_size ** degree
+                            )
+                            return 1 - normalized
+
+                        expected = (
+                            bad_proportion(left)
+                            + bad_proportion(right)
+                            - bad_proportion(left) * bad_proportion(right)
+                            - bad_proportion(left * right)
+                        )
                         self.assertTrue(spectrum["term_count"] > 0)
+                        self.assertEqual(value, expected)
                         self.assertGreater(value, 0)
 
     def test_spectrum_rejects_invalid_degrees_and_field_sizes(self):
