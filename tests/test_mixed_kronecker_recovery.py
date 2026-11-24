@@ -831,5 +831,82 @@ class MixedKroneckerRecoveryTests(unittest.TestCase):
                     )["verified"]
                 )
 
+
+    def test_positive_replay_rejects_canonical_block_order_dimension_and_matrix_tampering(self):
+        from copy import deepcopy
+        from tools.strict_pencil_equivalence import strict_pencil_equivalence_audit
+        from tools.pencil_multi_direct_sum_witness import verify_pencil_multi_direct_sum_witness
+
+        q, k = self.mixed_pair()
+        p = 5
+        result = recover_mixed_kronecker_pencil(q, k, p, max_degree=2)
+        self.assertTrue(verify_mixed_kronecker_recovery_certificate(q, k, p, result)["verified"])
+        mutations = []
+
+        forged = deepcopy(result)
+        forged["canonical_block_shapes"][0], forged["canonical_block_shapes"][1] = (
+            forged["canonical_block_shapes"][1], forged["canonical_block_shapes"][0]
+        )
+        mutations.append(("block-order swap", forged))
+
+        forged = deepcopy(result)
+        forged["canonical_block_shapes"][0][1] += 1
+        mutations.append(("block dimension change", forged))
+
+        forged = deepcopy(result)
+        forged["canonical_Q"][0][0] = (forged["canonical_Q"][0][0] + 1) % p
+        mutations.append(("canonical matrix entry", forged))
+
+        forged = deepcopy(result)
+        forged["multi_block_direct_sum_audit"]["transformed_Q"][0][0] = (
+            forged["multi_block_direct_sum_audit"]["transformed_Q"][0][0] + 1
+        ) % p
+        mutations.append(("nested transformed matrix entry", forged))
+
+        forged = deepcopy(result)
+        forged["multi_block_direct_sum_audit"]["Q_blocks"][0][0][0] = (
+            forged["multi_block_direct_sum_audit"]["Q_blocks"][0][0][0] + 1
+        ) % p
+        mutations.append(("nested block matrix entry", forged))
+
+        for label, forged in mutations:
+            with self.subTest(label=label):
+                audit = verify_mixed_kronecker_recovery_certificate(q, k, p, forged)
+                self.assertFalse(audit["verified"], audit)
+
+        # A block permutation is a valid direct-sum presentation when its
+        # transforms and ordered block-shape list are permuted consistently.
+        # The recovery certificate intentionally retains one canonical order.
+        row_order = [0, 3, 1, 2]       # right, regular, left
+        col_order = [0, 1, 3, 2]
+        row_perm = [[int(row_order[i] == j) for j in range(4)] for i in range(4)]
+        col_perm = [[int(col_order[i] == j) for j in range(4)] for i in range(4)]
+        reordered_s = mm(row_perm, result["left_transform_S"], p)
+        reordered_t = mm(result["right_transform_T"], col_perm, p)
+        reordered_shapes = [
+            result["canonical_block_shapes"][0],
+            result["canonical_block_shapes"][2],
+            result["canonical_block_shapes"][1],
+        ]
+        reordered_audit = verify_pencil_multi_direct_sum_witness(
+            q, k, p, reordered_s, reordered_t, reordered_shapes
+        )
+        self.assertTrue(reordered_audit["verification"]["direct_sum_verified"])
+        reordered_q = mm(mm(row_perm, result["canonical_Q"], p), col_perm, p)
+        reordered_k = mm(mm(row_perm, result["canonical_K"], p), col_perm, p)
+        alternative = deepcopy(result)
+        alternative["canonical_Q"] = reordered_q
+        alternative["canonical_K"] = reordered_k
+        alternative["canonical_block_shapes"] = reordered_shapes
+        alternative["left_transform_S"] = reordered_s
+        alternative["right_transform_T"] = reordered_t
+        alternative["verification"] = strict_pencil_equivalence_audit(
+            q, k, p, reordered_q, reordered_k, reordered_s, reordered_t
+        )
+        alternative["multi_block_direct_sum_audit"] = reordered_audit
+        self.assertFalse(
+            verify_mixed_kronecker_recovery_certificate(q, k, p, alternative)["verified"]
+        )
+
 if __name__ == "__main__":
     unittest.main()
