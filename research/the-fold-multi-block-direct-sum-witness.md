@@ -474,3 +474,24 @@ for dimensions up to three and confirm its cardinality is p^(n²-rank).
 The single-block case has no equations, rank zero, and nullity n². These are
 finite test-side controls, not a production rectangular solver or a general
 witness-discovery method.
+
+
+## G-EP120: Rank invariance under block-preserving coordinates
+
+For rectangular equation systems, apply independent invertible block-diagonal
+changes of row and column coordinates to the coefficient matrix. The induced
+bijection on unknown right transforms is X' = T⁻¹ X T; consequently
+(S A T)X' = S(AX)T. Since S and T preserve the supplied block subspaces and
+are invertible within each block, every corresponding off-diagonal block is
+zero before the coordinate change exactly when it is zero afterward.
+
+Seeded controls over F₂, F₃, and F₅ cover rectangular and empty-row/empty-column
+block shapes. They compare constraint ranks before and after the coordinate
+change, check the covariance identity for sampled arbitrary X, and compare
+off-diagonal zero status block by block. A separate fixture demonstrates
+that changing the partition is not a coordinate change: its constraint rank
+changes from two to one.
+
+This is finite test-side invariance evidence for block-preserving coordinate
+changes; it does not assert invariance under arbitrary basis changes that mix
+the supplied blocks.
