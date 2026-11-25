@@ -452,8 +452,8 @@ Its periodic numerator is
 D=729+243\cdot2^{a_0}+81\cdot2^{a_0+a_1}
  +27\cdot2^{a_0+a_1+a_2}
  +9\cdot2^{a_0+a_1+a_2+a_3}
- +3\cdot2^{a_0+cdots+a_4}
- +2^{a_0+cdots+a_5}.
+ +3\cdot2^{a_0+\cdots+a_4}
+ +2^{a_0+\cdots+a_5}.
 \]
 As all valuations are positive,
 \[
@@ -492,3 +492,65 @@ For \(A=12,13,14,15\), the numbers of positive ordered seven-part compositions a
 The exact-integer certificate certificates/collatz_period7_exact.py checks all 6,105 words. Its unique divisibility hit is \(A=14\), word \((2,2,2,2,2,2,2)\), with \(D=q=14197\) and \(n=1\).
 
 **Theorem.** The only positive-integer accelerated Collatz orbit satisfying \(S^7(n)=n\) is \(n=1\). Hence no nontrivial accelerated cycle has valuation-word period seven. Combined with the previous sections, no nontrivial accelerated cycle has period at most seven. This does not prove global termination.
+
+
+## 15. Exact exclusion of accelerated period eight
+
+For an eight-step valuation word \((a_0,\ldots,a_7)\), put
+\[
+A=\sum_{i=0}^{7}a_i,\qquad q=2^A-3^8=2^A-6561.
+\]
+The periodic numerator is
+\[
+\begin{aligned}
+D={}&2187+729\cdot2^{a_0}+243\cdot2^{a_0+a_1}
+ +81\cdot2^{a_0+a_1+a_2}\\
+&+27\cdot2^{a_0+a_1+a_2+a_3}
+ +9\cdot2^{a_0+\cdots+a_4}
+ +3\cdot2^{a_0+\cdots+a_5}
+ +2^{a_0+\cdots+a_6}.
+\end{aligned}
+\]
+A positive integer orbit satisfying \(S^8(n)=n\) requires \(q>0\), \(q\mid D\), and \(n=D/q\). In particular, \(A\ge13\).
+
+As every valuation is positive, the first \(j\) valuations have sum at most \(A-(8-j)\). Therefore
+\[
+D=\sum_{j=0}^{7}2^{A_j}3^{7-j}
+\le2^{A-8}\sum_{j=0}^{7}2^j3^{7-j}
+=6305\cdot2^{A-8}.
+\]
+Both \(D\) and \(q\) are odd, so \(n\) is odd. For \(A\ge18\), the bound is decreasing in \(A\), and
+\[
+0<n\le\frac{6305\cdot2^{A-8}}{2^A-6561}
+\le\frac{6305\cdot2^{10}}{2^{18}-6561}
+=\frac{6,456,320}{255,583}<26.
+\]
+Thus \(n\in\{1,3,5,7,9,11,13,15,17,19,21,23,25\}\). Every candidate above 1 reaches 1 before returning:
+\[
+\begin{gathered}
+3\to5\to1,\quad 5\to1,\quad
+7\to11\to17\to13\to5\to1,\\
+9\to7\to11\to17\to13\to5\to1,\quad
+11\to17\to13\to5\to1,\\
+13\to5\to1,\quad
+15\to23\to35\to53\to5\to1,\quad
+17\to13\to5\to1,\\
+19\to29\to11\to17\to13\to5\to1,\quad
+21\to1,\\
+23\to35\to53\to5\to1,\quad
+25\to19\to29\to11\to17\to13\to5\to1.
+\end{gathered}
+\]
+The fixed point 1 has valuation 2 at every step and hence total valuation \(A=16\), outside this range. No nontrivial eight-cycle is possible for \(A\ge18\).
+
+The remaining totals are \(A=13,14,15,16,17\). Their numbers of positive ordered eight-part compositions are
+\[
+\binom{12}{7}=792,\quad
+\binom{13}{7}=1716,\quad
+\binom{14}{7}=3432,\quad
+\binom{15}{7}=6435,\quad
+\binom{16}{7}=11440.
+\]
+The exact-integer certificate `certificates/collatz_period8_exact.py` checks all 23,815 words. Its unique divisibility hit is \(A=16\), word \((2,2,2,2,2,2,2,2)\), with \(D=q=58,975\) and \(n=1\).
+
+**Theorem.** The only positive-integer accelerated Collatz orbit satisfying \(S^8(n)=n\) is \(n=1\). Hence no nontrivial accelerated cycle has period eight. Combined with the preceding sections, no nontrivial accelerated cycle has period at most eight. This finite-period exclusion does not prove global termination.
