@@ -440,3 +440,55 @@ The exact-integer certificate certificates/collatz_period6_exact.py checks all 3
 **Theorem.** The only positive-integer accelerated Collatz orbit satisfying \(S^6(n)=n\) is \(n=1\). Thus no nontrivial accelerated cycle has valuation-word period six.
 
 Combined with the previous results, no nontrivial accelerated cycle has valuation-word period at most six. Longer periods and global termination remain open.
+
+## 14. Exact exclusion of accelerated period seven
+
+For a seven-step valuation word \((a_0,\ldots,a_6)\), put
+\[
+A=\sum_{i=0}^{6}a_i,\qquad q=2^A-3^7=2^A-2187.
+\]
+Its periodic numerator is
+\[
+D=729+243\cdot2^{a_0}+81\cdot2^{a_0+a_1}
+ +27\cdot2^{a_0+a_1+a_2}
+ +9\cdot2^{a_0+a_1+a_2+a_3}
+ +3\cdot2^{a_0+cdots+a_4}
+ +2^{a_0+cdots+a_5}.
+\]
+As all valuations are positive,
+\[
+D=\sum_{j=0}^{6}2^{A_j}3^{6-j}
+\le2^{A-7}(729+486+324+216+144+96+64)
+=2059\cdot2^{A-7}.
+\]
+A positive seven-cycle requires \(q>0\), hence \(A\ge12\). The quotient \(n=D/q\) is odd because both numerator and denominator are odd. For \(A\ge16\),
+\[
+0<n\le\frac{2059\cdot2^{A-7}}{2^A-2187}
+\le\frac{2059\cdot2^9}{2^{16}-2187}
+=\frac{1,054,208}{63,349}<17.
+\]
+The bound decreases with \(A\), so \(n\in\{1,3,5,7,9,11,13,15\}\). Their accelerated trajectories, other than the fixed point 1, all reach 1 before returning to their starting value:
+\[
+3\mapsto5\mapsto1,\quad 5\mapsto1,\quad
+7\mapsto11\mapsto17\mapsto13\mapsto5\mapsto1,
+\]
+\[
+9\mapsto7,\quad
+11\mapsto17\mapsto13\mapsto5\mapsto1,\quad
+13\mapsto5,
+\]
+\[
+15\mapsto23\mapsto35\mapsto53\mapsto5\mapsto1.
+\]
+Thus no nontrivial seven-cycle is possible for \(A\ge16\). The fixed point 1 has valuation 2 at every step, so its seven-step total is \(A=14\), not in this large-total range.
+
+For \(A=12,13,14,15\), the numbers of positive ordered seven-part compositions are respectively
+\[
+\binom{11}{6}=462,\quad
+\binom{12}{6}=924,\quad
+\binom{13}{6}=1716,\quad
+\binom{14}{6}=3003.
+\]
+The exact-integer certificate certificates/collatz_period7_exact.py checks all 6,105 words. Its unique divisibility hit is \(A=14\), word \((2,2,2,2,2,2,2)\), with \(D=q=14197\) and \(n=1\).
+
+**Theorem.** The only positive-integer accelerated Collatz orbit satisfying \(S^7(n)=n\) is \(n=1\). Hence no nontrivial accelerated cycle has valuation-word period seven. Combined with the previous sections, no nontrivial accelerated cycle has period at most seven. This does not prove global termination.
