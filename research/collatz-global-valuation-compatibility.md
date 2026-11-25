@@ -2000,3 +2000,49 @@ where \(M_T=107,47,11\) for \(T=3,\{4,5\},\{6,7\}\), respectively. For \(T\ge8\)
 These inequalities give a compact exact filter on \((p,A,T)\). They do not eliminate every period: for sufficiently large \(p\), the lower and upper average bounds can overlap. The remaining work is to use the actual ordered suffix triple, and then longer suffixes, rather than only its sum.
 
 **Scope and correction:** the \(T\ge8\) row is supported by Section 49, not by a claim that every three-step CRT minimum is at least seven. The example \((2,2,4)\) in Section 51 shows that this distinction is necessary.
+
+
+## 53. Exact classification of the weakest three-step CRT case
+
+The three-step CRT minimum is always at least seven: the suffix residue is nonzero modulo three, while minimality gives \(m\equiv3\pmod4\). The smallest positive integer satisfying both is seven.
+
+We can characterize exactly when the three-step test attains this weakest value. Since \(2\) has order 18 modulo 27, the condition depends only on \(d\bmod2\), \(c\bmod6\), and \(b\bmod18\). Solving
+\[
+2^{d+c+b}\,7\equiv9+3\cdot2^d+2^{d+c}\pmod{27}
+\]
+gives:
+
+\[
+\begin{array}{c|rrrrrr}
+&c\equiv1&2&3&4&5&0\pmod6\\ \hline
+d\text{ odd}&12&10&18&4&6&16\\
+d\text{ even}&18&4&6&16&12&10
+\end{array}
+\]
+where each table entry is the required residue of \(b\pmod{18}\).
+
+Therefore
+\[
+\boxed{
+M_3(d,c,b)=7
+\iff
+b\equiv f(d\bmod2,c\bmod6)\pmod{18},
+}
+\]
+with \(f\) given by the table. For all other residue classes, \(M_3\ge11\).
+
+This is an exact ordered-suffix classification, stronger than the sum-only table in Sections 51–52. It shows that the weak three-step cases occupy a specific congruence pattern, rather than all triples with large sum.
+
+### Correction to the decimal table in Section 52
+
+The exact value is
+\[
+\log_2(3+1/47)\approx1.5951583,
+\]
+not \(1.5999\). The other displayed thresholds are
+\[
+\log_2(3+1/107)\approx1.5894499,\quad
+\log_2(34/11)\approx1.6280312,\quad
+\log_2(22/7)\approx1.6520767.
+\]
+The symbolic inequalities in Section 52 are unchanged; this paragraph corrects only its decimal approximation.
