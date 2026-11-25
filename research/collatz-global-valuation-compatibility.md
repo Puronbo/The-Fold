@@ -1417,3 +1417,26 @@ Since every \(\kappa_{p,b}\) is a positive odd integer, this proves the uniform 
 This sharpens the interpretation of the low-bit table: the \(b=2,\ p\) odd class is not merely a weak lower-bound class. It contains the only possible cases where the exact CRT representative equals one. For all other terminal valuations and periods, the exact representative is at least three.
 
 The classification does not by itself prove (35.3). It reduces any attempt to use the crude universal replacement \(\kappa\ge3\) to the exceptional class \(b=2,\ p\equiv3\pmod4\), where the exact representative may be one and must be retained. This is an exact all-period statement, independent of finite computation.
+
+
+## 38. Reduction using the unit-representative classification
+
+Section 37 shows that \(\kappa_{p,b}\ge3\) except possibly when \(b=2\) and \(p\equiv3\pmod4\). For the ordinary classes \(b\ne2\) or \(p\not\equiv3\pmod4\), a sufficient replacement in (35.3) is therefore \(K=3\).
+
+For fixed \((p,A)\), the right side of (35.3) increases with \(b\). Hence, among \(3\le b\le A-p+1\), it is enough to test the endpoint \(b=A-p+1\). The resulting sufficient inequality is
+\[
+3^{2p}(2^A-3^p)\ge
+3\cdot2^{A-p+1}(10^p-3^{2p}).
+\tag{38.1}
+\]
+Equivalently,
+\[
+2^A\left(3^{2p}-\frac{3(10^p-3^{2p})}{2^{p-1}}\right)
+\ge3^{3p}.
+\tag{38.2}
+\]
+This is a useful structural reduction: for fixed \(p\), the coarse ordinary-class test is linear in \(2^A\). If the coefficient in parentheses is positive, it is enough to test the smallest admissible \(A\). If it is nonpositive, this particular coarse replacement cannot prove the claim for any \(A\).
+
+The exceptional class \(b=2,\ p\equiv3\pmod4\) must still use the exact \(\kappa_{p,2}\), rather than \(K=3\). The case \(b=1\) is also checked separately, with its exact universal lower bound \(\kappa_{p,1}\ge5\) (indeed \(\ge7\) for odd \(p\)).
+
+As a finite diagnostic, the reduced endpoint tests (ordinary \(b\ge3\)), the \(b=1\) test, and the exact exceptional \(b=2\) test were checked for every admissible \((p,A)\) with \(3\le p\le300\). All 20,595 comparisons passed. This is a finite check, not a proof that (38.1) holds for every period. In particular, positivity of the coefficient in (38.2) and the smallest-admissible-\(A\) test still require an all-period argument.
