@@ -392,3 +392,51 @@ Since \(q>0\) forces \(A\ge8\), the remaining totals are \(A=8,9\). They have re
 **Theorem.** The only positive-integer accelerated Collatz orbit satisfying \(S^5(n)=n\) is \(n=1\). Equivalently, no nontrivial accelerated cycle has valuation-word period five.
 
 Together with the previous sections, no nontrivial accelerated cycle has valuation-word period at most five. This is a cycle exclusion result, not a proof that every positive integer orbit terminates.
+
+## 13. Exact exclusion of accelerated period six
+
+For a six-step valuation word \((a,b,c,d,e,f)\), write
+\[
+A=a+b+c+d+e+f,\qquad q=2^A-3^6=2^A-729.
+\]
+The periodic numerator is
+\[
+D=243+81\cdot2^a+27\cdot2^{a+b}
+ +9\cdot2^{a+b+c}+3\cdot2^{a+b+c+d}
+ +2^{a+b+c+d+e}.
+\]
+A positive integer six-cycle requires \(q>0\), \(q\mid D\), and \(n=D/q\).
+
+Positivity of all six valuations gives
+\[
+D=\sum_{j=0}^{5}2^{A_j}3^{5-j}
+\le 2^{A-6}(243+162+108+72+48+32)
+=665\cdot2^{A-6}.
+\]
+The numerator and denominator are odd, so \(n\) is odd. For \(A\ge12\),
+\[
+0<n\le\frac{665\cdot2^{A-6}}{2^A-729}
+\le\frac{665\cdot2^6}{2^{12}-729}
+=\frac{42560}{3367}<13.
+\]
+The bound decreases with \(A\). Thus \(n\in\{1,3,5,7,9,11\}\). The accelerated trajectories of the nontrivial candidates are
+\[
+3\mapsto5\mapsto1,\quad
+5\mapsto1,\quad
+7\mapsto11\mapsto17\mapsto13\mapsto5\mapsto1,
+\]
+\[
+9\mapsto7,\qquad
+11\mapsto17\mapsto13\mapsto5\mapsto1.
+\]
+Every candidate above 1 reaches 1 before returning to itself. The candidate \(n=1\) has valuation 2 at every step, hence total valuation \(A=12\). Therefore no nontrivial six-cycle exists when \(A\ge12\).
+
+The condition \(q>0\) forces \(A\ge10\), leaving totals \(A=10,11\). The numbers of positive ordered six-part compositions are respectively
+\[
+\binom{9}{5}=126,\qquad \binom{10}{5}=252.
+\]
+The exact-integer certificate certificates/collatz_period6_exact.py checks all 378 words and finds no divisibility hits (the denominators are 295 and 1319, respectively).
+
+**Theorem.** The only positive-integer accelerated Collatz orbit satisfying \(S^6(n)=n\) is \(n=1\). Thus no nontrivial accelerated cycle has valuation-word period six.
+
+Combined with the previous results, no nontrivial accelerated cycle has valuation-word period at most six. Longer periods and global termination remain open.
