@@ -2221,3 +2221,53 @@ m\equiv43,55\pmod{64}.
 Among the eight admissible classes modulo 64 (those congruent to 3 modulo 4), this covers four classes: \(3,19,43,55\pmod{64}\).
 
 This is a sufficient descent partition, not a complete classification. The remaining admissible classes modulo 64 require further analysis; no conclusion about their eventual descent follows merely from their absence here.
+
+
+## 58. Two further three-step descent classes modulo 128
+
+Refining the remaining classes modulo 64 gives two more exact infinite families.
+
+### Family C: \(m=128q+11\)
+
+The accelerated trajectory is
+\[
+128q+11\longmapsto192q+17
+\longmapsto144q+13
+\longmapsto54q+5.
+\]
+The successive valuations are exactly \(1,2,3\), since the displayed outputs are odd and the corresponding numerators have precisely those powers of two. Finally,
+\[
+54q+5<128q+11
+\]
+for every \(q\ge0\).
+
+### Family D: \(m=128q+87\)
+
+Here the exact trajectory is
+\[
+128q+87\longmapsto192q+131
+\longmapsto288q+197
+\longmapsto54q+37.
+\]
+The successive valuations are exactly \(1,1,4\), and
+\[
+54q+37<128q+87
+\]
+for every \(q\ge0\).
+
+Therefore
+\[
+\boxed{
+m\equiv11\text{ or }87\pmod{128}
+\implies S^3(m)<m.
+}
+\tag{58.1}
+\]
+
+The first class refines the \(11\pmod{64}\) family; the second refines the \(23\pmod{64}\) family. Together with Sections 56–57, the explicit descent classes modulo 128 include
+\[
+3,19,43,55,11,87\pmod{128}.
+\]
+The classes \(3,19,43,55\) here are understood as their corresponding full residue families modulo 128 inherited from the earlier congruences, not as a complete list of all lifts modulo 128.
+
+This remains a partial residue cover. No conclusion is asserted for the uncovered lifts.
