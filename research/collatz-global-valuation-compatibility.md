@@ -297,3 +297,55 @@ D=27+9\cdot2^a+3\cdot2^{a+b}+2^{a+b+c},
 q=2^{a+b+c+d}-81.
 \]
 A positive cycle requires \(q>0\) and \(q\mid D\). An exhaustive finite search over \(1\le a,b,c,d\le20\) finds only \((2,2,2,2)\), yielding \(n=1\). This is a bounded computational check only: it is not an exclusion theorem for all positive quadruples, because the valuation variables have not been bounded by a proof. The period-four theorem therefore remains open.
+
+## 11. Exact exclusion of accelerated period four
+
+Let the four positive valuations be \((a,b,c,d)\), with total
+\[
+A=a+b+c+d.
+\]
+The periodic formula specializes to
+\[
+q=2^A-81,
+\qquad
+D=27+9\cdot2^a+3\cdot2^{a+b}+2^{a+b+c}.
+\]
+A positive integer cycle requires \(q>0\), \(q\mid D\), and its starting odd integer is \(n=D/q\).
+
+Write \(A_j=a_0+\cdots+a_{j-1}\), with \(A_0=0\). Since the four valuations are positive, the remaining \(4-j\) terms have sum at least \(4-j\), so
+\[
+A_j\le A-(4-j).
+\]
+Consequently,
+\[
+D=\sum_{j=0}^{3}2^{A_j}3^{3-j}
+\le 2^{A-4}\sum_{j=0}^{3}2^j3^{3-j}
+=65\cdot2^{A-4}.
+\]
+For \(A\ge9\), this gives
+\[
+0<n=\frac Dq
+\le\frac{65\cdot2^{A-4}}{2^A-81}
+=\frac{65/16}{1-81/2^A}
+\le\frac{65/16}{1-81/512}
+<5.
+\]
+Both \(D\) and \(q\) are odd, hence \(n\) is odd. Thus \(n\in\{1,3\}\). The value \(n=3\) cannot be periodic, since its accelerated trajectory is \(3\mapsto5\mapsto1\mapsto1\). The value \(n=1\) is the known fixed point.
+
+It remains to handle \(A<9\). The condition \(q>0\) gives \(2^A>81\), hence \(A\ge7\); therefore only \(A=7,8\) remain. There are respectively
+\[
+\binom{6}{3}=20,\qquad \binom{7}{3}=35
+\]
+positive compositions of these totals into four ordered parts. Direct substitution into the displayed formula for \(D\) gives the following complete residue check (words are in lexicographic order):
+\[
+\begin{array}{c|l}
+A & D\bmod q\text{ in lexicographic word order}\\\hline
+7 & 18,26,42,27,38,7,39,31,16,17,9,25,10,2,34,35,38,23,24,2\\
+8 & 65,73,89,121,10,85,101,133,22,125,157,46,30,94,15,103,119,151,40,143,0,64,48,112,33,4,36,100,84,148,69,156,45,141,110
+\end{array}
+\]
+For \(A=7\), none of the residues is zero. For \(A=8\), the unique zero residue occurs at \((a,b,c,d)=(2,2,2,2)\), for which \(D=q=175\) and \(n=1\).
+
+**Theorem.** The only positive-integer accelerated Collatz cycle whose valuation word has period four is the fixed point \(1\), with valuation word \((2,2,2,2)\).
+
+Together with the period-one, period-two, and period-three exclusions above, this proves that no nontrivial accelerated cycle can have a valuation word of period at most four. It does not exclude cycles with longer valuation periods and does not prove global termination.
