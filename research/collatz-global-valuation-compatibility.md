@@ -1296,3 +1296,54 @@ Since the average-valuation window gives \(x<10/3\), every term in the sum is le
 where \(q_{\min}(p)\) may be taken from (34.1), or from (34.2) when \(p\ge4\).
 
 This is a rigorous period-dependent lower bound on the denominator gap. It is not yet strong enough, by itself, to prove the CRT obstruction (29.1) uniformly: the geometric-sum estimate is deliberately coarse. The next step is to exploit the actual powers \(x^{p-1-j}3^j\), rather than replacing every term by the same worst-case bound.
+
+
+## 35. Exact geometric-sum sharpening
+
+The denominator in (34.3) was bounded termwise. The sum has an exact closed form:
+\[
+G_p(x)=\sum_{j=0}^{p-1}x^{p-1-j}3^j
+=\frac{x^p-3^p}{x-3}.
+\]
+For fixed \(p\), \(G_p(x)\) is strictly increasing for \(x>0\), since it is a polynomial with positive coefficients. The average-valuation window gives \(3<x<10/3\), and hence
+\[
+G_p(x)<G_p(10/3)
+=3\left((10/3)^p-3^p\right).
+\]
+Combining \(q=(x-3)G_p(x)\) with this strict upper bound gives
+\[
+\boxed{
+2^{A/p}-3>
+\frac{2^A-3^p}
+{3\left((10/3)^p-3^p\right)}.
+}
+\tag{35.1}
+\]
+This improves (34.3) for every \(p>1\): indeed
+\[
+G_p(10/3)
+=(10/3)^{p-1}\sum_{j=0}^{p-1}(9/10)^j
+<p(10/3)^{p-1}.
+\]
+
+Substitution into the sufficient CRT obstruction (29.1) yields the explicit rational sufficient condition
+\[
+\boxed{
+\kappa_{p,b}3^p(2^A-3^p)
+\ge
+3\cdot2^b\left((10/3)^p-3^p\right).
+}
+\tag{35.2}
+\]
+Equivalently, after multiplying by \(3^p\), this is the integer comparison
+\[
+\boxed{
+\kappa_{p,b}3^{2p}(2^A-3^p)
+\ge
+3\cdot2^b\left(10^p-3^{2p}\right).
+}
+\tag{35.3}
+\]
+Whenever (35.3) holds, (29.1) follows, and the corresponding cycle itinerary is excluded.
+
+The implication is one-way: failure of (35.3) does not imply a cycle exists. This reformulation converts the remaining analytic gap into a direct integer inequality involving the exact CRT representative and the exact difference of powers. It remains to prove (35.3) uniformly or identify and handle its exceptional triples.
