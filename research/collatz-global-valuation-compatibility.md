@@ -255,3 +255,45 @@ hence \(2^a\le21\), and therefore \(a\le4\). Positivity gives \(a\ge3\). The two
 **Theorem.** The only positive-integer accelerated Collatz cycle whose valuation word has period three is again the fixed point \(n=1\), with word \((2,2,2)\). \(\square\)
 
 Together with the period-one and period-two results, this excludes every nontrivial accelerated cycle whose valuation word has period at most three. The argument is exact and finite, but its bounds do not yet provide a uniform exclusion for arbitrary periods.
+
+## 10. A period-uniform valuation-pressure bound
+
+The periodic-cycle formula yields a necessary condition independent of the order of the valuations.
+
+For a positive accelerated cycle with valuation word of length \(p\), let
+\[
+A=\sum_{i=0}^{p-1}a_i.
+\]
+Its cycle denominator is \(2^A-3^p\). Since the cycle value is a positive integer, this denominator must be positive. Therefore
+\[
+2^A>3^p
+\quad\Longleftrightarrow\quad
+A>p\log_2 3.
+\]
+Writing the *excess valuation* as
+\[
+E=\sum_{i=0}^{p-1}(a_i-1)=A-p,
+\]
+we obtain the exact integer bound
+\[
+\boxed{E\ge\lfloor p(\log_2 3-1)\rfloor+1.}
+\tag{8}
+\]
+
+Thus every periodic accelerated orbit must accumulate strictly more than \(0.58496\ldots\) units of valuation excess per step on average. In particular, the all-ones word is impossible at every period, and the required total excess grows linearly with the period.
+
+This is a genuine period-uniform restriction, but it is only a necessary condition. It does not force the excess to occur at any particular positions, does not bound individual valuations, and does not prove that the divisibility condition
+\[
+2^A-3^p\mid D
+\]
+fails for all nontrivial words. The known fixed point has \(a_i=2\), so its excess per step is exactly one and comfortably satisfies (8).
+
+### Period-four frontier (computation, not theorem)
+
+For \((a,b,c,d)\), the exact numerator and denominator are
+\[
+D=27+9\cdot2^a+3\cdot2^{a+b}+2^{a+b+c},
+\qquad
+q=2^{a+b+c+d}-81.
+\]
+A positive cycle requires \(q>0\) and \(q\mid D\). An exhaustive finite search over \(1\le a,b,c,d\le20\) finds only \((2,2,2,2)\), yielding \(n=1\). This is a bounded computational check only: it is not an exclusion theorem for all positive quadruples, because the valuation variables have not been bounded by a proof. The period-four theorem therefore remains open.
