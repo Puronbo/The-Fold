@@ -1076,25 +1076,25 @@ For \(3\le p\le100\), an exact integer sweep over every admissible total \(A\) a
 
 ## 29. Exact reduction and audit of the finite CRT sweep
 
-The sufficient obstruction in (28.3) has a simpler equivalent form. All quantities are positive, so taking the positive real (p)-th root shows that (28.3) is equivalent to
-[
-oxed{
-kappa_{p,b}3^pigl(2^{A/p}-3igr)ge 2^b.
+The sufficient obstruction in (28.3) has a simpler equivalent form. All quantities are positive, so taking the positive real \(p\)-th root shows that (28.3) is equivalent to
+\[
+\boxed{
+\kappa_{p,b}3^p\bigl(2^{A/p}-3\bigr)\ge 2^b.
 }
-	ag{29.1}
-]
+\tag{29.1}
+\]
 This equivalence is algebraic; it does not approximate the fractional power. The integer-power form (28.3) remains preferable for a fully exact computational check.
 
-Since (ble A-p+1) and (kappa_{p,b}ge1), a simpler sufficient condition for a pair ((p,A,b)) is
-[
-3^pigl(2^{A/p}-3igr)ge2^{A-p+1}.
-	ag{29.2}
-]
+Since \(b\le A-p+1\) and \(\kappa_{p,b}\ge1\), a simpler sufficient condition for a pair \((p,A,b)\) is
+\[
+3^p\bigl(2^{A/p}-3\bigr)\ge2^{A-p+1}.
+\tag{29.2}
+\]
 However, (29.2) is not established here uniformly over all admissible periods. In particular, the fact that (28.3) holds in the finite sweep does not justify replacing the sweep by an unproved asymptotic claim.
 
-The certificate certificates/collatz_crt_minimum_filter.py was independently rerun with Python. It completed all loops for (3le ple100), verified (28.3) for every admissible ((p,A,b)), and reproduced the count 34,838. All calculations use integer modular inverses and integer powers; no floating-point comparison is used in the certificate.
+The certificate certificates/collatz_crt_minimum_filter.py was independently rerun with Python. It completed all loops for \(3\le p\le100\), verified (28.3) for every admissible \((p,A,b)\), and reproduced the count 34,838. All calculations use integer modular inverses and integer powers; no floating-point comparison is used in the certificate.
 
-**Scope.** The verified statement is precisely the finite-range assertion (3le ple100). The CRT congruence, the reduction (29.1), and the sufficient condition (29.2) are general. No period-uniform inequality has been proved, and no global Collatz conclusion follows from this finite sweep.
+**Scope.** The verified statement is precisely the finite-range assertion \(3\le p\le100\). The CRT congruence, the reduction (29.1), and the sufficient condition (29.2) are general. No period-uniform inequality has been proved, and no global Collatz conclusion follows from this finite sweep.
 
 
 ## 30. Audit of the simplified CRT bound: two exceptional pairs
@@ -1126,3 +1126,46 @@ and (28.3) holds for all four.
 The full exact sweep was rerun: all 34,838 admissible triples \((p,A,b)\) for \(3\le p\le100\) satisfy (28.3). Thus the exact CRT representative repairs both exceptions. The result remains finite-range computational evidence; it is not a proof of the all-period inequality.
 
 **Methodological correction.** Any future attempt to prove (29.2) uniformly must first account for these two exceptions, and any claim that the coarse bound follows merely from the average-valuation window is false. The exact residue \(\kappa_{p,b}\), not just its positivity, is essential in the presently verified finite sweep.
+
+## 31. Low-modulus structure of the exact CRT representative
+
+The defining congruence for the least positive CRT representative is
+\[
+\kappa_{p,b}3^p\equiv3\cdot2^b-1\pmod{2^{b+2}}.
+\tag{31.1}
+\]
+Because the right side and \(3^p\) are odd, \(\kappa_{p,b}\) is always odd.
+
+Reducing (31.1) modulo four gives a further exact restriction. If \(b=1\), then \(3\cdot2^b-1=5\equiv1\pmod4\), and therefore
+\[
+\boxed{\kappa_{p,1}\equiv
+\begin{cases}
+3\pmod4,&p\text{ odd},\\
+1\pmod4,&p\text{ even}.
+\end{cases}}
+\tag{31.2}
+\]
+If \(b\ge2\), then \(3\cdot2^b-1\equiv3\pmod4\), so
+\[
+\boxed{\kappa_{p,b}\equiv
+\begin{cases}
+1\pmod4,&p\text{ odd},\\
+3\pmod4,&p\text{ even}.
+\end{cases}}
+\qquad (b\ge2).
+\tag{31.3}
+\]
+In particular, the least representative cannot equal one when \(b=1\) and \(p\) is odd, or when \(b\ge2\) and \(p\) is even. This is a genuine improvement over the coarse estimate \(\kappa_{p,b}\ge1\), but it is not by itself strong enough to establish (28.3) uniformly.
+
+For clarity, the two failures of the coarsened sufficient condition (29.2) in the finite range \(3\le p\le100\) were found by an exact comparison. Raising its positive sides to the \(p\)-th power gives the integer test
+\[
+3^{p^2}2^A
+\mathrel{\ge}
+\left(3^{p+1}+2^{A-p+1}\right)^p.
+\tag{31.4}
+\]
+The only admissible pairs failing this test in that range are \((3,5)\) and \((5,8)\). The exact CRT test (28.3), which retains \(\kappa_{p,b}\), passes every admissible triple in the same range.
+
+**Status.** Equations (31.1)–(31.4) are exact. The finite exception list is range-limited to \(p\le100\). A general lower bound for \(\kappa_{p,b}\) strong enough to prove the obstruction for all periods remains open.
+
+
