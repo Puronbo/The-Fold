@@ -1667,3 +1667,33 @@ In particular, if \(t_{p,b}\ge1\), then \(\kappa_{p,b}\ge2^b\), a strong bound r
 3^p\rho_b(p)\equiv3\cdot2^b-1\pmod{2^{b+2}},
 \]
 which is precisely the original CRT condition with \(\kappa=\rho_b(p)\). The next problem is to bound the size of this least residue in the \(t=0\) cases, rather than assuming that the correction digit is nonzero.
+
+
+## 45. The zero-correction branch can have a very small representative
+
+The decomposition (44.1) shows that a tempting strengthening, \(\kappa_{p,b}\ge c\,2^b\) for a fixed positive constant \(c\) and all \(p,b\), cannot be inferred merely from the fact that the correction digit is zero or from the low-bit hierarchy.
+
+For example, direct exact modular evaluation gives
+\[
+\begin{array}{c|rrrrrrrr}
+b&3&4&5&6&7&8&9&10\\ \hline
+p&7&9&29&5&21&53&373&1013\\
+\kappa_{p,b}&5&5&5&5&5&5&5&5
+\end{array}
+\]
+and each row satisfies
+\[
+5\cdot3^p\equiv3\cdot2^b-1\pmod{2^{b+2}}.
+\]
+Thus the exact representative can remain equal to five while the modulus grows substantially. These examples disprove any proposed pointwise lower bound that grows with \(2^b\) uniformly over unrestricted \(p\).
+
+They do **not** disprove the cycle obstruction: the period \(p\), total valuation \(A\), and terminal valuation \(b\) in a genuine cycle are coupled by the admissible-window and itinerary constraints. The examples above are modular examples, not asserted cycle triples.
+
+The right target is therefore not a bound on \(\kappa_{p,b}\) uniform in all \(p\) at fixed \(b\). It is a bound on \(\kappa_{p,b}\) under the simultaneous constraints
+\[
+3^p<2^A<\frac{10^p}{3^p},
+\qquad 1\le b\le A-p+1,
+\]
+possibly combined with the other suffix congruences from Section 26. Those additional constraints retain information discarded by the isolated CRT representative.
+
+**Research correction.** A block-average estimate cannot be assumed to follow from the lift recurrence. The explicit small-representative examples show why a proof must use the coupling to \(A\) or the higher suffix congruences, not just the modulus-doubling process.
