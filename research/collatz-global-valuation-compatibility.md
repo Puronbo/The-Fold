@@ -2091,3 +2091,37 @@ gives the unconditional all-period restriction
 This improves the universal average-valuation ceiling from Section 49. It does not depend on the three-step CRT classification or on a computational search.
 
 **Scope:** this is a rigorous exclusion of minimum values \(3\) and \(7\), and a stronger necessary average-valuation bound. It does not eliminate possible cycles whose minimum is at least 11.
+
+
+## 55. Finite audit of candidate minima through 10,000
+
+Section 54 eliminates the first two admissible minima, \(m=3\) and \(m=7\). The next candidates are \(m\equiv3\pmod4\). Their initial accelerated trajectories include
+\[
+11\to17\to13\to5,
+\]
+\[
+15\to23\to35\to53\to5,
+\]
+\[
+19\to29\to11,
+\]
+\[
+23\to35\to53\to5.
+\]
+Each reaches a value below its starting minimum, so none can be a nontrivial cycle minimum.
+
+An exact finite computation extends this observation: for every
+\[
+m\in\{3,7,11,\ldots,9999\},
+\]
+iteration of
+\[
+S(n)=(3n+1)/2^{v_2(3n+1)}
+\]
+reaches a value below \(m\) within at most 51 accelerated steps. The maximum first-drop time in this range is 51, attained at \(m=703\), whose first value below its starting point is 157.
+
+This is a finite verification only. It does not establish that every admissible minimum eventually drops below itself, which would be a Collatz-type global assertion. Its rigorous consequence is limited to the checked range: no nontrivial odd cycle can have minimum \(m\le9999\).
+
+**Reproducibility:** enumerate \(m=3+4j\le9999\); repeatedly compute \(x\leftarrow S(x)\), stopping as soon as \(x<m\). The valuation is obtained exactly by counting factors of two in \(3x+1\). No floating-point arithmetic is involved.
+
+The remaining theoretical problem is now explicit: prove that every \(m\equiv3\pmod4\), \(m>1\), eventually has an accelerated iterate below \(m\), or find a different argument that excludes all sufficiently large minima. The finite audit supplies evidence, not that missing proof.
