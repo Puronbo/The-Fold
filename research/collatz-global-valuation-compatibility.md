@@ -80,7 +80,54 @@ Equivalently, writing \(r_t\) for the least nonnegative residue representative m
 
 This pinpoints the gap between finite and infinite integer realizability: every finite prefix has infinitely many positive integer realizations, but the nested intersection over all prefixes is either empty or a singleton.
 
-## 4. Exact Haar independence—and its limitation
+## 4. An explicit 2-adic series and the periodic-word test
+
+The unique 2-adic point can be written directly from the itinerary. From the affine iterate identity,
+\[
+2^{A_t}n_t
+=3^t n_0+\sum_{j=0}^{t-1}3^{t-1-j}2^{A_j},
+\]
+divide by \(3^t\) and rearrange:
+\[
+n_0
+=-\sum_{j=0}^{t-1}\frac{2^{A_j}}{3^{j+1}}
++\frac{2^{A_t}}{3^t}n_t.
+\]
+Because \(A_t\to\infty\), the final term tends to zero 2-adically whenever \(n_t\in\mathbb Z_2\). Thus the coding map is
+\[
+\boxed{x(\mathbf a)=-\sum_{j=0}^{\infty}\frac{2^{A_j}}{3^{j+1}}\in\mathbb Z_2.}
+\tag{5}
+\]
+The series converges 2-adically since the valuation of its \(j\)-th term is \(A_j\to\infty\). This is an explicit formula for the same unique point, not an additional assumption.
+
+Now suppose the itinerary is periodic with period \(p\):
+\[
+(a_0,\ldots,a_{p-1},a_0,\ldots,a_{p-1},\ldots).
+\]
+Put \(A=\sum_{i=0}^{p-1}a_i\), \(A_j=\sum_{i<j}a_i\), and
+\[
+D=\sum_{j=0}^{p-1}2^{A_j}3^{p-1-j}.
+\]
+Grouping the series (5) into blocks of length \(p\) gives the rational value
+\[
+\boxed{x(\mathbf a)=\frac{D}{2^A-3^p}.}
+\tag{6}
+\]
+Indeed, each successive block is the preceding block multiplied by \(2^A/3^p\), and the geometric series converges 2-adically because \(A\ge p\).
+
+**Periodic-itinerary criterion.** A periodic positive-valuation word is realized by a positive odd integer if and only if
+\[
+2^A>3^p
+\quad\text{and}\quad
+2^A-3^p\mid D.
+\]
+When these conditions hold, its unique positive integer realization is \(n=D/(2^A-3^p)\), and the accelerated orbit of \(n\) is periodic with that valuation word. Conversely, every positive integer accelerated cycle yields a periodic valuation word satisfying this divisibility criterion.
+
+The forward implication follows from (6): positivity requires a positive denominator, and integrality requires divisibility. The itinerary coding theorem then guarantees that the integer has exactly the prescribed valuations at every step. Periodicity of the word makes the state after \(p\) steps have the same itinerary as the initial state; more directly, the unique 2-adic point for the shifted periodic word is the same point, so \(S^p(n)=n\). Conversely, a positive integer cycle repeats its valuations, and (6) applies.
+
+For the trivial cycle \(n=1\), the word is constantly \(2\), so \(p=1,A=2,D=1\) and (6) gives \(x=1\). The criterion is exact but does not by itself rule out other periods: doing so requires proving that no other periodic word satisfies the divisibility condition.
+
+## 5. Exact Haar independence—and its limitation
 
 Normalize Haar measure on the compact group of odd 2-adic integers to have total mass one. The cylinder theorem gives
 \[
@@ -98,7 +145,7 @@ The distinction is decisive. Positive odd integers embed into \(\mathbb Z_2\), b
 
 Therefore the cylinder tree has no further finite-prefix obstruction: **every finite or infinite valuation word is 2-adically compatible**. Any successful integer-orbit argument must use the extra condition that the starting point is a positive ordinary integer, together with the arithmetic growth identity—not merely compatibility of residues or Haar statistics.
 
-## 4. What this rules out, and what remains
+## 6. What this rules out, and what remains
 
 This result sharpens the previous finite-itinerary theorem in two opposite directions:
 
@@ -113,11 +160,13 @@ A viable next step must exploit an integer-specific constraint: for example, com
 \]
 with the requirement that every \(n_t\) is a positive ordinary integer. The 2-adic coding theorem supplies the exact symbolic side; it does not supply this missing Archimedean control.
 
-## 5. Status
+## 7. Status
 
 - Nested-cylinder compatibility: **proved**.
 - Exact partition of each cylinder by its next valuation: **proved**.
 - Unique 2-adic realization of every infinite valuation word: **proved**.
+- Explicit 2-adic series for the coding map: **proved**.
+- Rational formula and divisibility criterion for periodic-word integer realizations: **proved**.
 - Haar geometric product law for valuation coordinates: **proved**.
 - Transfer of Haar-generic behavior to a specified positive integer orbit: **not proved and not implied**.
 - Collatz termination: **open**.
