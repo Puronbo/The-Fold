@@ -349,3 +349,46 @@ For \(A=7\), none of the residues is zero. For \(A=8\), the unique zero residue 
 **Theorem.** The only positive-integer accelerated Collatz cycle whose valuation word has period four is the fixed point \(1\), with valuation word \((2,2,2,2)\).
 
 Together with the period-one, period-two, and period-three exclusions above, this proves that no nontrivial accelerated cycle can have a valuation word of period at most four. It does not exclude cycles with longer valuation periods and does not prove global termination.
+
+## 12. Exact exclusion of accelerated period five
+
+For a five-step valuation word \((a,b,c,d,e)\), put
+\[
+A=a+b+c+d+e,\qquad q=2^A-3^5=2^A-243.
+\]
+The periodic numerator is
+\[
+D=81+27\cdot2^a+9\cdot2^{a+b}
+  +3\cdot2^{a+b+c}+2^{a+b+c+d}.
+\]
+A positive integer five-cycle requires \(q>0\), \(q\mid D\), and \(n=D/q\).
+
+As all five valuations are positive, the partial sums obey
+\[
+A_j\le A-(5-j)\qquad(0\le j\le4).
+\]
+Hence
+\[
+D=\sum_{j=0}^4 2^{A_j}3^{4-j}
+\le 2^{A-5}(81+54+36+24+16)
+=211\cdot2^{A-5}.
+\]
+Also \(D\) and \(q\) are odd, so \(n\) is odd. For \(A\ge10\),
+\[
+0<n\le\frac{211\cdot2^{A-5}}{2^A-243}
+\le\frac{211\cdot2^5}{2^{10}-243}
+=\frac{6752}{781}<9.
+\]
+The fraction decreases as \(A\) increases. Thus \(n\in\{1,3,5,7\}\). Under the accelerated map,
+\[
+3\mapsto5\mapsto1,\qquad
+5\mapsto1,\qquad
+7\mapsto11\mapsto17\mapsto13\mapsto5\mapsto1.
+\]
+None of \(3,5,7\) returns to itself after five steps. The only candidate is \(n=1\), whose valuation is 2 at every step; its five-step valuation total is exactly \(A=10\). Therefore the only five-step cycle in the range \(A\ge10\) is the fixed point.
+
+Since \(q>0\) forces \(A\ge8\), the remaining totals are \(A=8,9\). They have respectively 35 and 70 positive ordered compositions into five parts. The accompanying exact-integer certificate checks every composition: for \(A=8\), \(q=13\) and there are zero divisibility hits; for \(A=9\), \(q=269\) and there are zero hits. The reproducible script is certificates/collatz_period5_exact.py.
+
+**Theorem.** The only positive-integer accelerated Collatz orbit satisfying \(S^5(n)=n\) is \(n=1\). Equivalently, no nontrivial accelerated cycle has valuation-word period five.
+
+Together with the previous sections, no nontrivial accelerated cycle has valuation-word period at most five. This is a cycle exclusion result, not a proof that every positive integer orbit terminates.
