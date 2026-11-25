@@ -693,3 +693,44 @@ m\le
 Thus a hypothetical cycle whose average valuation lies noticeably above \(\log_2 3\) must contain a relatively small element. This is a necessary condition only; by itself it does not exclude cycles, because the excess can be arbitrarily close to zero as p varies.
 
 **Research use.** Combine this multiplicative balance with the affine divisibility condition and the cyclic rotation constraints on the valuation word. The former records the exact product of local expansion factors; the latter records the exact additive contributions of the (+1) terms. A cycle-exclusion argument may need both simultaneously.
+
+
+## 19. Exact exclusion of accelerated period ten
+
+A useful refinement of the period-by-period argument is that a nontrivial cycle has a distinguished cyclic starting point. Let (m>1) be the smallest odd member of a hypothetical cycle. Since its successor is at least (m),
+[
+2^{a(m)}m\le 3m+1,
+]
+and (m\ge3) forces (2^{a(m)}<4). Thus (a(m)=1). Every nontrivial period-ten valuation word can therefore be cyclically rotated so that its first entry is 1 and its initial integer is the cycle minimum.
+
+For a ten-step word, put
+[
+A=\sum_{i=0}^{9}a_i,\qquad
+D=\sum_{j=0}^{9}3^{9-j}2^{A_j},\qquad
+q=2^A-3^{10}=2^A-59049.
+]
+A positive integer cycle requires (q>0), (q\mid D), and
+[
+n=\frac Dq.
+]
+Since (D\le(3^{10}-2^{10})2^{A-10}=58025\,2^{A-10}), for every (A\ge24),
+[
+n\le\frac{58025\,2^{A-10}}{2^A-59049}
+\le\frac{58025\,2^{14}}{2^{24}-59049}
+<57.
+]
+The middle expression decreases with (A). Since the initial member is the cycle minimum and is odd, it must be one of
+[
+3,5,7,\ldots,55.
+]
+Direct accelerated trajectories from each of these 27 candidates reach 1 (the longest listed here is 27, which reaches 1 in 41 accelerated steps). Hence no nontrivial period-ten cycle can have (A\ge24).
+
+It remains to check (16\le A\le23), because (2^{15}<3^{10}<2^{16}). The minimum-element rotation lets us enumerate only positive compositions with (a_0=1). Their counts are
+[
+\binom{14}{8},\binom{15}{8},\ldots,\binom{21}{8}
+=
+3003,6435,12870,24310,43758,75582,125970,203490,
+]
+for a total of 495,418 words. The exact-integer certificate `certificates/collatz_period10_exact.py` checks (q\mid D) for every such word; there are no divisibility hits.
+
+**Theorem.** The only positive integer satisfying (S^{10}(n)=n) is (n=1). Thus there is no nontrivial accelerated Collatz cycle of period ten. Together with the preceding period results, nontrivial periods through ten are excluded. This remains a finite-period theorem, not a proof of global Collatz termination.
