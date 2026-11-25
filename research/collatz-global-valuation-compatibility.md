@@ -2046,3 +2046,48 @@ not \(1.5999\). The other displayed thresholds are
 \log_2(22/7)\approx1.6520767.
 \]
 The symbolic inequalities in Section 52 are unchanged; this paragraph corrects only its decimal approximation.
+
+
+## 54. Eliminate the two smallest minimum candidates directly
+
+The congruence \(m\equiv3\pmod4\) implies that a nontrivial cycle minimum \(m>1\) must be one of
+\[
+3,7,11,15,19,\ldots.
+\]
+The two smallest candidates can be eliminated by their exact forward trajectories under the accelerated odd map
+\[
+S(n)=\frac{3n+1}{2^{v_2(3n+1)}}.
+\]
+
+For \(m=3\),
+\[
+3\longmapsto5\longmapsto1.
+\]
+For \(m=7\),
+\[
+7\longmapsto11\longmapsto17\longmapsto13
+\longmapsto5\longmapsto1.
+\]
+Neither trajectory returns to its starting value, and each reaches the fixed point \(1\). Since the map is deterministic, neither 3 nor 7 can belong to a nontrivial periodic orbit.
+
+It follows that every nontrivial odd cycle would have to satisfy
+\[
+\boxed{m\ge11.}
+\tag{54.1}
+\]
+
+Combining (54.1) with the strict product estimate
+\[
+m<\frac1{2^{A/p}-3}
+\]
+gives the unconditional all-period restriction
+\[
+\boxed{
+\frac Ap<\log_2\!\left(\frac{34}{11}\right).
+}
+\tag{54.2}
+\]
+
+This improves the universal average-valuation ceiling from Section 49. It does not depend on the three-step CRT classification or on a computational search.
+
+**Scope:** this is a rigorous exclusion of minimum values \(3\) and \(7\), and a stronger necessary average-valuation bound. It does not eliminate possible cycles whose minimum is at least 11.
