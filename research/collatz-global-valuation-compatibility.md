@@ -59,7 +59,28 @@ where \(x_i\) is the corresponding 2-adic iterate. This is precisely the asserti
 
 Conversely, a nonsingular odd 2-adic orbit has a finite valuation at every stage, and those valuations define its unique itinerary. The only excluded case at a stage is \(3x_i+1=0\), namely \(x_i=-1/3\). \(\square\)
 
-## 3. Exact Haar independence—and its limitation
+## 3. The exact integer-realization criterion
+
+The same nested-cylinder argument gives a sharp criterion for when an infinite word is the itinerary of an ordinary positive integer.
+
+**Theorem.** Let \(x\in\mathbb Z_2\) be the unique 2-adic realization of an infinite word \(\mathbf a\). Then
+\[
+\bigcap_{t\ge0} C_{w_t}
+=
+\begin{cases}
+\{n\},&x=n\text{ for a positive odd integer }n,\\
+\varnothing,&x\notin\mathbb Z_{>0}.
+\end{cases}
+\]
+In particular, an infinite word is the itinerary of a positive integer if and only if its 2-adic realization is a positive odd integer.
+
+**Proof.** If a positive odd integer \(n\) belongs to every prefix cylinder, then its image in \(\mathbb Z_2\) belongs to every corresponding residue class. By uniqueness of the 2-adic limit, \(n=x\). There can therefore be at most one such integer. Conversely, if \(x=n\) is a positive odd integer, the defining congruences at every finite stage say exactly that \(n\) has all the prescribed valuations, so it belongs to every cylinder. \(\square\)
+
+Equivalently, writing \(r_t\) for the least nonnegative residue representative modulo \(2^{A_t+1}\), the word is an ordinary positive-integer itinerary exactly when these representatives eventually stabilize to one fixed positive odd integer. Since the moduli tend to infinity, stabilization is equivalent to the 2-adic limit having an ordinary finite binary expansion.
+
+This pinpoints the gap between finite and infinite integer realizability: every finite prefix has infinitely many positive integer realizations, but the nested intersection over all prefixes is either empty or a singleton.
+
+## 4. Exact Haar independence—and its limitation
 
 Normalize Haar measure on the compact group of odd 2-adic integers to have total mass one. The cylinder theorem gives
 \[
