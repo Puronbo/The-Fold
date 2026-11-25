@@ -1095,3 +1095,34 @@ However, (29.2) is not established here uniformly over all admissible periods. I
 The certificate certificates/collatz_crt_minimum_filter.py was independently rerun with Python. It completed all loops for (3le ple100), verified (28.3) for every admissible ((p,A,b)), and reproduced the count 34,838. All calculations use integer modular inverses and integer powers; no floating-point comparison is used in the certificate.
 
 **Scope.** The verified statement is precisely the finite-range assertion (3le ple100). The CRT congruence, the reduction (29.1), and the sufficient condition (29.2) are general. No period-uniform inequality has been proved, and no global Collatz conclusion follows from this finite sweep.
+
+
+## 30. Audit of the simplified CRT bound: two exceptional pairs
+
+The sufficient condition (29.2), obtained by replacing the exact CRT representative by the coarse bound \(\kappa_{p,b}\ge1\), is not valid for every admissible pair. In the range \(3\le p\le100\), its only failures are
+\[
+\boxed{(p,A)=(3,5)\quad\text{and}\quad(p,A)=(5,8).}
+\]
+This was checked over every admissible total using the exact strict-window inequalities. The two failures are not counterexamples to the stronger obstruction (28.3); they show that the coarse replacement loses useful information.
+
+For \((p,A)=(3,5)\), the admissible terminal valuations and exact least CRT representatives are
+\[
+\begin{array}{c|ccc}
+b&1&2&3\\ \hline
+\kappa_{3,b}&7&1&21
+\end{array}
+\]
+and the integer inequality (28.3) holds for all three.
+
+For \((p,A)=(5,8)\), they are
+\[
+\begin{array}{c|cccc}
+b&1&2&3&4\\ \hline
+\kappa_{5,b}&7&9&13&21
+\end{array}
+\]
+and (28.3) holds for all four.
+
+The full exact sweep was rerun: all 34,838 admissible triples \((p,A,b)\) for \(3\le p\le100\) satisfy (28.3). Thus the exact CRT representative repairs both exceptions. The result remains finite-range computational evidence; it is not a proof of the all-period inequality.
+
+**Methodological correction.** Any future attempt to prove (29.2) uniformly must first account for these two exceptions, and any claim that the coarse bound follows merely from the average-valuation window is false. The exact residue \(\kappa_{p,b}\), not just its positivity, is essential in the presently verified finite sweep.
