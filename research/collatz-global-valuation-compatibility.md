@@ -330,7 +330,7 @@ For \(A\ge9\), this gives
 \le\frac{65/16}{1-81/512}
 <5.
 \]
-Both \(D\) and \(q\) are odd, hence \(n\) is odd. Thus \(n\in\{1,3\}\). The value \(n=3\) cannot be periodic, since its accelerated trajectory is \(3\mapsto5\mapsto1\mapsto1\). The value \(n=1\) is the known fixed point.
+Both \\(D\\) and \\(q\\) are odd, hence \\(n\\) is odd. Thus \\(n\\in\\{1,3\\}\\). The value \\(n=3\\) cannot be periodic, since its accelerated trajectory is \\(3\\mapsto5\\mapsto1\\mapsto1\\). If \\(n=1\\), every step has valuation \\(v_2(3\\cdot1+1)=2\\), so the four-step total is necessarily \\(A=8\\), contradicting \\(A\\ge9\\). Hence no cycle with \\(A\\ge9\\) exists.
 
 It remains to handle \(A<9\). The condition \(q>0\) gives \(2^A>81\), hence \(A\ge7\); therefore only \(A=7,8\) remain. There are respectively
 \[
