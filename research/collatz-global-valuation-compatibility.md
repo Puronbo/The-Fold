@@ -653,3 +653,43 @@ For fixed \(p\), the right-hand side decreases as \(E\) increases. But it does n
 This pinpoints the limitation of the finite-period strategy. It supplies a finite starting-value search for each fixed period after choosing a sufficiently large total valuation, but the search range is not uniformly bounded as \(p\to\infty\). Consequently, the period-by-period argument cannot by itself exclude all periods.
 
 **Next structural target.** Improve the numerator estimate by exploiting the divisibility condition \(2^A-3^p\mid D\), the exact valuation constraints along the orbit, or correlations between consecutive valuations. Any successful uniform argument must use information beyond positivity of the individual \(a_i\). This section is a bound and a diagnosis of its limitation, not a new Collatz theorem.
+
+
+## 18. Exact multiplicative balance along a hypothetical cycle
+
+Let \(n_0,\ldots,n_{p-1}\) be a positive accelerated cycle, with indices read cyclically and
+\[
+2^{a_i}n_{i+1}=3n_i+1.
+\]
+Multiplying all p equations cancels the cyclic product of the \(n_i\):
+\[
+2^A=\prod_{i=0}^{p-1}\left(3+\frac1{n_i}\right).
+\]
+Equivalently,
+\[
+\boxed{
+A\log2-p\log3
+=\sum_{i=0}^{p-1}\log\left(1+\frac1{3n_i}\right).
+}
+\]
+This is an exact identity, not an asymptotic estimate.
+
+It immediately gives
+\[
+p\log_2 3<A<2p
+\]
+for every nontrivial positive cycle. The lower inequality follows because every summand on the right is positive. For the upper inequality, each summand is at most \(\log(4/3)\), with strict inequality at any cycle element greater than 1; a nontrivial cycle has such an element. Since \(\log3+\log(4/3)=\log4=2\log2\), the upper bound follows. The all-one cycle is the exceptional fixed point, with \(A=2p\).
+
+There is also a minimum-element constraint. If \(m=\min_i n_i\), then
+\[
+0<A\log2-p\log3
+\le p\log\left(1+\frac1{3m}\right),
+\]
+and hence
+\[
+m\le
+\frac{1}{3\left(\exp((A\log2-p\log3)/p)-1\right)}.
+\]
+Thus a hypothetical cycle whose average valuation lies noticeably above \(\log_2 3\) must contain a relatively small element. This is a necessary condition only; by itself it does not exclude cycles, because the excess can be arbitrarily close to zero as p varies.
+
+**Research use.** Combine this multiplicative balance with the affine divisibility condition and the cyclic rotation constraints on the valuation word. The former records the exact product of local expansion factors; the latter records the exact additive contributions of the (+1) terms. A cycle-exclusion argument may need both simultaneously.
