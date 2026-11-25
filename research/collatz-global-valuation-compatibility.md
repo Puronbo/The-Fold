@@ -1489,10 +1489,10 @@ The failures are exact:
 \begin{array}{c|r|r}
 (p,A)&9^p(2^A-3^p)&3\cdot2^{A-p+1}(10^p-9^p)\\ \hline
 (3,5)&3645&6504\\
-(5,8)&\text{left side}&\text{right side}
+(5,8)&767637&1965648
 \end{array}
 \]
-For the second row, the exact integers are to be computed directly by the certificate rather than abbreviated in this note.
+The second row has difference \(-1198011\).
 
 This does **not** produce a cycle or a counterexample to Collatz. It only shows that the uniform substitution \(\kappa\ge3\) loses too much information in these two cases. The exact representatives are larger: \(\kappa_{3,3}=21\) and \(\kappa_{5,4}=21\), so the original exact condition (35.3) can still succeed.
 
