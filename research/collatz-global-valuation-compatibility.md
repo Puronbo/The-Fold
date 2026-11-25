@@ -1374,3 +1374,46 @@ The reproducible arbitrary-precision Python certificate is
 certificates/collatz_geometric_sum_obstruction_3_200.py. It asserts the exact count and stops at the first failing triple. The finite computation is evidence only for the stated range. In particular, it does not establish (35.3) for all periods, and it does not by itself prove the Collatz conjecture.
 
 **Current frontier.** The remaining task is now sharply isolated: prove (35.3) for every admissible \((p,A,b)\), or find a general argument that handles the cases where this sufficient inequality fails. A proof of this inequality for all admissible triples would combine with Sections 20, 27, and 35 to exclude every nontrivial odd cycle.
+
+
+## 37. The only possible unit CRT representative
+
+A useful structural question is when the least positive CRT representative can be the smallest odd integer, \(\kappa_{p,b}=1\). By its defining congruence, this happens exactly when
+\[
+3^p+1\equiv3\cdot2^b\pmod{2^{b+2}}.
+\tag{37.1}
+\]
+
+This congruence can be classified completely.
+
+- If \(b=1\), (37.1) would require \(3^p+1\equiv6\pmod8\). But \(3^p+1\equiv4\pmod8\) for odd \(p\), and \(2\pmod8\) for even \(p\). Impossible.
+- If \(b=2\), (37.1) requires \(3^p+1\equiv12\pmod{16}\). The powers of \(3\) modulo \(16\) show this occurs exactly when \(p\equiv3\pmod4\).
+- If \(b\ge3\), the right side of (37.1) has exact 2-adic valuation \(b\), so (37.1) would force \(v_2(3^p+1)=b\). The elementary LTE identity gives
+  \[
+  v_2(3^p+1)=
+  \begin{cases}
+  2,&p\text{ odd},\\
+  1,&p\text{ even},
+  \end{cases}
+  \]
+  contradicting \(b\ge3\).
+
+Therefore
+\[
+\boxed{\kappa_{p,b}=1
+\quad\Longleftrightarrow\quad
+b=2\ \text{and}\ p\equiv3\pmod4.}
+\tag{37.2}
+\]
+Since every \(\kappa_{p,b}\) is a positive odd integer, this proves the uniform dichotomy
+\[
+\boxed{
+\kappa_{p,b}\ge3
+\quad\text{unless }b=2,\ p\equiv3\pmod4.
+}
+\tag{37.3}
+\]
+
+This sharpens the interpretation of the low-bit table: the \(b=2,\ p\) odd class is not merely a weak lower-bound class. It contains the only possible cases where the exact CRT representative equals one. For all other terminal valuations and periods, the exact representative is at least three.
+
+The classification does not by itself prove (35.3). It reduces any attempt to use the crude universal replacement \(\kappa\ge3\) to the exceptional class \(b=2,\ p\equiv3\pmod4\), where the exact representative may be one and must be retained. This is an exact all-period statement, independent of finite computation.
