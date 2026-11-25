@@ -734,3 +734,38 @@ It remains to check (16\le A\le23), because (2^{15}<3^{10}<2^{16}). The minimum-
 for a total of 495,418 words. The exact-integer certificate `certificates/collatz_period10_exact.py` checks (q\mid D) for every such word; there are no divisibility hits.
 
 **Theorem.** The only positive integer satisfying (S^{10}(n)=n) is (n=1). Thus there is no nontrivial accelerated Collatz cycle of period ten. Together with the preceding period results, nontrivial periods through ten are excluded. This remains a finite-period theorem, not a proof of global Collatz termination.
+
+
+## 20. Minimum-residue constraint and a sharper average-valuation window
+
+Let (m>1) be the smallest odd member of a hypothetical nontrivial accelerated cycle. The minimum-element argument in Section 19 gives (a(m)=1). Exact valuation one means
+[
+3m+1\equiv2\pmod4,
+]
+so
+[
+\boxed{m\equiv3\pmod4.}
+]
+In particular, (m\ge3).
+
+For every cycle member (n_i\ge m), and the exact multiplicative balance from Section 18 yields
+[
+2^A
+=\prod_{i=0}^{p-1}\left(3+\frac1{n_i}\right)
+\le\left(3+\frac1m\right)^p
+\le\left(\frac{10}{3}\right)^p.
+]
+Together with (2^A>3^p), this proves the sharper necessary window
+[
+\boxed{
+p\log_2 3<A\le p\log_2\left(3+\frac1m\right)
+\le p\log_2\frac{10}{3}.
+}
+]
+Thus every nontrivial cycle has average valuation in
+[
+1.5849625\ldots<\frac Ap\le1.7369656\ldots.
+]
+The upper endpoint is strict for a nontrivial cycle if at least one cycle member exceeds (m=3); the weak inequality above is sufficient and avoids needing a separate case split.
+
+This is a period-uniform restriction on the total valuation, and it sharpens the crude upper bound (A<2p). It does not bound (p), nor does it exclude cycles: the interval still contains admissible integer totals for arbitrarily large periods. Its value is as a pruning condition for exact searches and as a constraint to combine with the affine divisibility condition.
