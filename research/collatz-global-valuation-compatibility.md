@@ -769,3 +769,34 @@ Thus every nontrivial cycle has average valuation in
 The upper endpoint is strict for a nontrivial cycle if at least one cycle member exceeds (m=3); the weak inequality above is sufficient and avoids needing a separate case split.
 
 This is a period-uniform restriction on the total valuation, and it sharpens the crude upper bound (A<2p). It does not bound (p), nor does it exclude cycles: the interval still contains admissible integer totals for arbitrarily large periods. Its value is as a pruning condition for exact searches and as a constraint to combine with the affine divisibility condition.
+
+
+## 21. Exact exclusion of accelerated period eleven
+
+The strict average-valuation window from Section 20 is particularly effective at period eleven:
+\[
+11\log_2 3<A<11\log_2\left(\frac{10}{3}\right).
+\]
+Numerically, the endpoints lie strictly between 17 and 18, and between 19 and 20, respectively. Since \(A\) is an integer,
+\[
+\boxed{A\in\{18,19\}.}
+\]
+This eliminates every other total valuation before any word enumeration.
+
+Rotate a hypothetical nontrivial cycle to its smallest odd member. Its first valuation is 1, and the periodic-point identity becomes
+\[
+q=2^A-3^{11},\qquad
+D=\sum_{j=0}^{10}3^{10-j}2^{A_j},\qquad
+q\mid D.
+\]
+For \(A=18\), there are
+\[
+\binom{16}{9}=11,440
+\]
+positive ten-part tails after fixing \(a_0=1\). For \(A=19\), there are
+\[
+\binom{17}{9}=24,310.
+\]
+The exact-integer certificate certificates/collatz_period11_exact.py checks all 35,750 words. No word satisfies \(q\mid D\).
+
+**Theorem.** The only positive integer satisfying \(S^{11}(n)=n\) is \(n=1\). Hence there is no nontrivial accelerated cycle of period eleven. The proof uses the minimum-element valuation constraint, the strict average-valuation window, and a finite exact divisibility check. It does not establish global termination.
