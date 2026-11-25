@@ -1347,3 +1347,30 @@ Equivalently, after multiplying by \(3^p\), this is the integer comparison
 Whenever (35.3) holds, (29.1) follows, and the corresponding cycle itinerary is excluded.
 
 The implication is one-way: failure of (35.3) does not imply a cycle exists. This reformulation converts the remaining analytic gap into a direct integer inequality involving the exact CRT representative and the exact difference of powers. It remains to prove (35.3) uniformly or identify and handle its exceptional triples.
+
+
+## 36. Exact sweep of the sharpened integer obstruction
+
+The integer sufficient condition (35.3) was checked over every admissible triple
+\[
+3\le p\le200,\qquad
+3^p<2^A,\qquad
+2^A3^p<10^p,\qquad
+1\le b\le A-p+1.
+\]
+For each triple, the least positive representative was computed directly as
+\[
+\kappa_{p,b}
+=\operatorname{leastpos}\left((3\cdot2^b-1)(3^p)^{-1}
+\pmod{2^{b+2}}\right),
+\]
+and both sides of (35.3) were compared as integers. All
+\[
+\boxed{273\,119}
+\]
+triples passed; there were no failures.
+
+The reproducible arbitrary-precision Python certificate is
+certificates/collatz_geometric_sum_obstruction_3_200.py. It asserts the exact count and stops at the first failing triple. The finite computation is evidence only for the stated range. In particular, it does not establish (35.3) for all periods, and it does not by itself prove the Collatz conjecture.
+
+**Current frontier.** The remaining task is now sharply isolated: prove (35.3) for every admissible \((p,A,b)\), or find a general argument that handles the cases where this sufficient inequality fails. A proof of this inequality for all admissible triples would combine with Sections 20, 27, and 35 to exclude every nontrivial odd cycle.
