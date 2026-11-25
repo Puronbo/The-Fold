@@ -170,3 +170,41 @@ with the requirement that every \(n_t\) is a positive ordinary integer. The 2-ad
 - Haar geometric product law for valuation coordinates: **proved**.
 - Transfer of Haar-generic behavior to a specified positive integer orbit: **not proved and not implied**.
 - Collatz termination: **open**.
+
+## 8. Exact exclusion of accelerated periods one and two
+
+The periodic-word criterion immediately gives a small, fully arithmetic cycle exclusion.
+
+For a period-(p) valuation word, retain
+\[
+A=\sum_{i=0}^{p-1}a_i,\qquad
+D=\sum_{j=0}^{p-1}2^{A_j}3^{p-1-j}.
+\]
+A positive integer cycle requires
+\[
+2^A>3^p,\qquad 2^A-3^p\mid D,
+\]
+and its starting integer is (n=D/(2^A-3^p)).
+
+**Theorem.** The only positive-integer accelerated Collatz cycles whose valuation word has period one or two are the fixed point (n=1), with valuation word ((2)) or its repetition ((2,2)).
+
+**Proof for period one.** Here (D=1). The denominator (2^a-3) must be a positive divisor of 1, hence it equals 1. Thus (2^a=4), so (a=2), and (n=1).
+
+**Proof for period two.** Let the word be ((a,b)), with (a,b\ge1). Then
+\[
+D=3+2^a,\qquad d=2^{a+b}-9.
+\]
+A positive cycle requires (d>0) and (d\mid D). In particular (d\le D), so
+\[
+2^{a+b}-9\le 2^a+3,
+\quad\text{hence}\quad
+2^a(2^b-1)\le12.
+\]
+Since (b\ge1), this forces (2^a\le12), hence (a\in\{1,2,3\}). The positivity condition (2^{a+b}>9), together with the displayed bound, leaves only:
+- (a=1): (b\ge3), but then (d\ge7>D=5), impossible;
+- (a=2): (b\ge2), and the bound forces (b=2). Then (d=7=D), giving (n=1);
+- (a=3): (b\ge1). For (b=1), (d=7) does not divide (D=11); for (b\ge2), (d\ge23>D=11).
+
+Thus only ((a,b)=(2,2)) occurs, and it gives (n=1). \(\square\)
+
+This is an exact exclusion of nontrivial accelerated cycles with valuation period at most two. It does **not** exclude cycles with longer periods, nor does it establish that all trajectories reach the fixed point. The divisibility criterion remains a possible route for each fixed period, but a proof for arbitrary periods would need a uniform argument rather than a finite enumeration.
