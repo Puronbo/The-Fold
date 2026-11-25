@@ -1225,3 +1225,20 @@ These bounds are valid for every period and terminal valuation. They improve the
 The bounds are only lower bounds: the least representative modulo \(2^{b+2}\) can be larger than its residue modulo eight. Thus (32.4) is a safe input to (28.3), but it does not by itself establish (28.3) for every \((p,A,b)\). The remaining challenge is to combine the forced low bits with the higher-bit constraints without assuming that the least representative equals its residue modulo eight.
 
 **Status.** The congruences (32.1)–(32.3) are direct consequences of the exact CRT equation and hold uniformly. They provide a period-uniform lower bound on \(\kappa_{p,b}\), not a period-uniform cycle exclusion.
+
+
+## 33. Testing the uniform modulo-eight lower bound
+
+Let \(K_{p,b}\) denote the lower bound in (32.4). For \(b\ge3\), it depends on \(p\) but not on \(b\). The left side of (29.1) is therefore fixed as \(b\) varies over \(3\le b\le A-p+1\), while its right side \(2^b\) increases. It follows that, for each fixed \((p,A)\), it is enough to test \(b=A-p+1\) in this range. The cases \(b=1\) and \(b=2\), when admissible, must be tested separately.
+
+Using this monotonicity, an exact integer check was reduced to at most three tests for each admissible \((p,A)\). For every \(3\le p\le200\), every admissible total \(A\), and the relevant terminal valuations \(b\in\{1,2,A-p+1\}\), the integer form
+\[
+2^A(K_{p,b}3^p)^p
+\ge (3K_{p,b}3^p+2^b)^p
+\tag{33.1}
+\]
+holds. The reduced check comprised 9,171 exact comparisons, with no failures.
+
+This is a finite-range verification of the modulo-eight lower bounds as inputs to the sufficient obstruction. It does not prove (33.1) for all periods. In particular, the small residue classes modulo eight do not control how close \(2^A\) can be to \(3^p\) as \(p\) grows; a uniform proof must address that approximation issue rather than extrapolate from the finite sweep.
+
+**Next precise target.** Obtain an effective lower bound for \(2^A-3^p\) over the admissible integer pairs \(p\log_2 3<A<p\log_2(10/3)\), strong enough to control \(2^{A/p}-3\). Without such a bound, the low-bit CRT estimates alone do not close the argument.
