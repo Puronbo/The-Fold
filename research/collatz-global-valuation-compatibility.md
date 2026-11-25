@@ -1169,3 +1169,59 @@ The only admissible pairs failing this test in that range are \((3,5)\) and \((5
 **Status.** Equations (31.1)–(31.4) are exact. The finite exception list is range-limited to \(p\le100\). A general lower bound for \(\kappa_{p,b}\) strong enough to prove the obstruction for all periods remains open.
 
 
+
+
+## 32. Modulo-eight lower bounds for the CRT representative
+
+The congruence (31.1) can be reduced modulo eight for every \(b\ge1\). Since
+\[
+3^p\equiv\begin{cases}3\pmod8,&p\text{ odd},\\1\pmod8,&p\text{ even},\end{cases}
+\]
+and its inverse is itself modulo eight, the residue of \(\kappa_{p,b}\) is explicit.
+
+For \(b=1\), the right side \(3\cdot2^b-1\) is \(5\pmod8\), hence
+\[
+\boxed{\kappa_{p,1}\equiv
+\begin{cases}
+7\pmod8,&p\text{ odd},\\
+5\pmod8,&p\text{ even}.
+\end{cases}}
+\tag{32.1}
+\]
+For \(b=2\), the right side is \(3\pmod8\), so
+\[
+\boxed{\kappa_{p,2}\equiv
+\begin{cases}
+1\pmod8,&p\text{ odd},\\
+3\pmod8,&p\text{ even}.
+\end{cases}}
+\tag{32.2}
+\]
+For \(b\ge3\), the right side is \(-1\equiv7\pmod8\), giving
+\[
+\boxed{\kappa_{p,b}\equiv
+\begin{cases}
+5\pmod8,&p\text{ odd},\\
+7\pmod8,&p\text{ even}.
+\end{cases}}
+\qquad(b\ge3).
+\tag{32.3}
+\]
+Because \(\kappa_{p,b}\) is the least positive representative of its residue modulo \(2^{b+2}\), these congruences imply the lower bounds
+\[
+\kappa_{p,1}\ge
+\begin{cases}7,&p\text{ odd},\\5,&p\text{ even},\end{cases}
+\quad
+\kappa_{p,2}\ge
+\begin{cases}1,&p\text{ odd},\\3,&p\text{ even},\end{cases}
+\quad
+\kappa_{p,b}\ge
+\begin{cases}5,&p\text{ odd},\\7,&p\text{ even}\end{cases}
+\ (b\ge3).
+\tag{32.4}
+\]
+These bounds are valid for every period and terminal valuation. They improve the universal estimate \(\kappa_{p,b}\ge1\) except in the class \(b=2\), \(p\) odd.
+
+The bounds are only lower bounds: the least representative modulo \(2^{b+2}\) can be larger than its residue modulo eight. Thus (32.4) is a safe input to (28.3), but it does not by itself establish (28.3) for every \((p,A,b)\). The remaining challenge is to combine the forced low bits with the higher-bit constraints without assuming that the least representative equals its residue modulo eight.
+
+**Status.** The congruences (32.1)–(32.3) are direct consequences of the exact CRT equation and hold uniformly. They provide a period-uniform lower bound on \(\kappa_{p,b}\), not a period-uniform cycle exclusion.
