@@ -1506,3 +1506,40 @@ u-1\ge 6u\left((5/9)^p-2^{-p}\right).
 Thus the coarse endpoint test asks for a quantitative lower bound on the relative gap \(u-1=(2^A-3^p)/3^p\). The elementary congruence bounds on \(2^A-3^p\) from Section 34 do not by themselves provide a strong enough uniform estimate. The exact CRT representative, especially its growth with \(b\), remains essential.
 
 **Status correction.** The coefficient positivity proved in Section 39 is valid, but it does not settle the endpoint inequality. The two small-period failures above must be handled with their exact CRT representatives, and an all-period proof for the remaining endpoint cases is still open.
+
+
+## 41. A lift recurrence for the CRT representative
+
+For fixed \(p\), write
+\[
+\kappa_{p,b}3^p\equiv3\cdot2^b-1\pmod{2^{b+2}},
+\qquad 1\le\kappa_{p,b}<2^{b+2}.
+\]
+The target numerator at level \(b+1\) differs from that at level \(b\) by \(3\cdot2^b\). Reducing the level-\((b+1)\) congruence modulo \(2^{b+2}\) therefore gives
+\[
+\kappa_{p,b+1}
+\equiv \kappa_{p,b}+3\cdot2^b(3^p)^{-1}
+\pmod{2^{b+2}}.
+\]
+Since \((3^p)^{-1}\equiv3\pmod4\) for odd \(p\), and is congruent to \(1\pmod4\) for even \(p\), this simplifies to
+\[
+\boxed{
+\kappa_{p,b+1}\equiv
+\begin{cases}
+\kappa_{p,b}+2^b\pmod{2^{b+2}},&p\text{ odd},\\
+\kappa_{p,b}+3\cdot2^b\pmod{2^{b+2}},&p\text{ even}.
+\end{cases}}
+\tag{41.1}
+\]
+The least positive representative at level \(b+1\) is the unique representative of this residue in \(\{1,\ldots,2^{b+2}\}\).
+
+This recurrence is exact, but it does not imply that \(\kappa_{p,b}\) is monotone in \(b\): the residue must be reduced modulo the old modulus, and can wrap around. It does, however, reduce the transition to a simple addition followed by a modular reduction. In particular, for fixed parity of \(p\), each step is controlled by one of two explicit shifts.
+
+**Use in the cycle inequality.** The exact obstruction (35.3) contains both \(\kappa_{p,b}\) and \(2^b\). Recurrence (41.1) makes it possible to compare successive values of the ratio
+\[
+T_{p,A}(b)=
+\frac{\kappa_{p,b}}{2^b}
+\]
+without recomputing a modular inverse from scratch. A uniform lower bound for this ratio is not asserted here: modular wraparound prevents such a conclusion from the recurrence alone. The next step is to derive a sharp two-step or block estimate that accounts for the wraparound and can be inserted into (35.3).
+
+This is an all-period identity, not an all-period cycle exclusion.
