@@ -1072,3 +1072,26 @@ Consequently, the exact inequality
 is sufficient to rule out that pair \((A,b)\). This is an integer-only test: it is equivalent to saying that the least permitted positive \(k\) is already at least the upper bound forced by the minimum-member estimate.
 
 For \(3\le p\le100\), an exact integer sweep over every admissible total \(A\) and every \(1\le b\le A-p+1\) verified (28.3) in every case. The reproducible finite-range check is in certificates/collatz_crt_minimum_filter.py. This is computational evidence for a useful obstruction, not a proof that (28.3) holds for every period. Establishing that uniform inequality—or finding a different uniform argument—remains open.
+
+
+## 29. Exact reduction and audit of the finite CRT sweep
+
+The sufficient obstruction in (28.3) has a simpler equivalent form. All quantities are positive, so taking the positive real (p)-th root shows that (28.3) is equivalent to
+[
+oxed{
+kappa_{p,b}3^pigl(2^{A/p}-3igr)ge 2^b.
+}
+	ag{29.1}
+]
+This equivalence is algebraic; it does not approximate the fractional power. The integer-power form (28.3) remains preferable for a fully exact computational check.
+
+Since (ble A-p+1) and (kappa_{p,b}ge1), a simpler sufficient condition for a pair ((p,A,b)) is
+[
+3^pigl(2^{A/p}-3igr)ge2^{A-p+1}.
+	ag{29.2}
+]
+However, (29.2) is not established here uniformly over all admissible periods. In particular, the fact that (28.3) holds in the finite sweep does not justify replacing the sweep by an unproved asymptotic claim.
+
+The certificate certificates/collatz_crt_minimum_filter.py was independently rerun with Python. It completed all loops for (3le ple100), verified (28.3) for every admissible ((p,A,b)), and reproduced the count 34,838. All calculations use integer modular inverses and integer powers; no floating-point comparison is used in the certificate.
+
+**Scope.** The verified statement is precisely the finite-range assertion (3le ple100). The CRT congruence, the reduction (29.1), and the sufficient condition (29.2) are general. No period-uniform inequality has been proved, and no global Collatz conclusion follows from this finite sweep.
