@@ -979,3 +979,35 @@ Equivalently, for some positive integer \(k\),
 The positivity of \(k\) follows because the left side is an integer greater than one and is congruent to one modulo \(3^p\).
 
 **Interpretation.** The terminal valuation determines the residue class of the cycle's starting member modulo \(3^p\). The shorter suffix congruences then constrain the preceding terminal valuations successively. These are necessary conditions, not yet a contradiction: the valuation word itself can satisfy all of them in the 2-adic setting. A period-uniform exclusion still requires combining this 3-adic suffix structure with the minimum-member and total-valuation bounds.
+
+
+## 27. CRT restriction on the minimum cycle member
+
+Let \(m>1\) be the smallest odd member of a hypothetical accelerated cycle of length \(p\), and let \(b=a_{p-1}\) be the final valuation in the chosen cyclic ordering. The minimum-member argument gives
+\[
+m\equiv3\pmod4,
+\]
+while the full suffix congruence gives
+\[
+2^b m\equiv1\pmod{3^p}.
+\]
+Thus
+\[
+m\equiv 2^{-b}\pmod{3^p}.
+\]
+
+Because \(4\) and \(3^p\) are coprime, the Chinese remainder theorem gives a unique residue class
+\[
+\boxed{m\equiv M_{p,b}\pmod{4\cdot3^p},}
+\]
+where \(M_{p,b}\) is the unique class satisfying
+\[
+M_{p,b}\equiv3\pmod4,
+\qquad
+2^bM_{p,b}\equiv1\pmod{3^p}.
+\]
+The representative can be computed exactly: first take the least positive residue \(u\equiv(2^b)^{-1}\pmod{3^p}\), then choose the unique one of \(u,u+3^p,u+2\cdot3^p,u+3\cdot3^p\) congruent to 3 modulo 4.
+
+Consequently, any independent upper bound \(m<4\cdot3^p\) would force \(m=M_{p,b}\) (with the representative chosen in \([1,4\cdot3^p]\)); a stronger bound can eliminate the candidate outright if \(M_{p,b}\) is too large. This is a finite exact test once \(b\) is bounded by the total valuation \(A\).
+
+**Status.** This is a necessary CRT filter, not a new cycle exclusion theorem. The outstanding step is to prove a sufficiently strong upper bound for the minimum member, or to combine this residue with the earlier itinerary divisibility equation in a way that rules out all possible \(b\) uniformly.
