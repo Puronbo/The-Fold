@@ -800,3 +800,37 @@ positive ten-part tails after fixing \(a_0=1\). For \(A=19\), there are
 The exact-integer certificate certificates/collatz_period11_exact.py checks all 35,750 words. No word satisfies \(q\mid D\).
 
 **Theorem.** The only positive integer satisfying \(S^{11}(n)=n\) is \(n=1\). Hence there is no nontrivial accelerated cycle of period eleven. The proof uses the minimum-element valuation constraint, the strict average-valuation window, and a finite exact divisibility check. It does not establish global termination.
+
+
+## 22. Exact exclusion of accelerated period twelve
+
+For a nontrivial period-twelve cycle, Section 20 gives
+\[
+12\log_2 3<A<12\log_2(10/3).
+\]
+The exact integer comparisons
+\[
+2^{19}<3^{12}<2^{20},
+\\qquad
+2^{20}3^{12}<10^{12}<2^{21}3^{12}
+\]
+show that the lower endpoint is greater than 19 and the upper endpoint is less than 21. Hence
+\[
+\boxed{A=20.}
+\]
+
+Rotate the cycle to its smallest odd member, so that \(a_0=1\). Then the periodic-point denominator is
+\[
+q=2^{20}-3^{12}=517135,
+\]
+and the numerator is
+\[
+D=\sum_{j=0}^{11}3^{11-j}2^{A_j}.
+\]
+There are
+\[
+\binom{18}{10}=43,758
+\]
+positive eleven-part tails with total 19. The exact-integer certificate certificates/collatz_period12_exact.py checks all 43,758 resulting valuation words and finds no divisibility hit \(q\mid D\).
+
+**Theorem.** The only positive integer satisfying \(S^{12}(n)=n\) is \(n=1\). Thus no nontrivial accelerated cycle has period twelve. This is a finite-period exclusion, not a proof of global termination.
