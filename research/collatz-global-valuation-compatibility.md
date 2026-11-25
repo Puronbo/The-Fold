@@ -622,3 +622,34 @@ For \(A=15,16,17,18\), the numbers of positive ordered nine-part compositions ar
 The exact-integer certificate `certificates/collatz_period9_exact.py` checks all 46,618 words. Its unique divisibility hit is \(A=18\), word \((2,2,2,2,2,2,2,2,2)\), with \(D=q=242461\) and \(n=1\).
 
 **Theorem.** The only positive-integer accelerated Collatz orbit satisfying \(S^9(n)=n\) is \(n=1\). Thus no nontrivial accelerated cycle has period nine. Together with the preceding results, all nontrivial accelerated cycles of periods at most nine are excluded. This does not prove global termination.
+
+
+## 17. A period-uniform numerator bound and its limitation
+
+The periodic-point identity has a closed-form bound for every period. Let
+\[
+A=\sum_{i=0}^{p-1}a_i,\qquad
+A_j=\sum_{i=0}^{j-1}a_i,\qquad
+D=\sum_{j=0}^{p-1}3^{p-1-j}2^{A_j}.
+\]
+Since every \(a_i\ge1\), one has \(A_j\le A-p+j\). Thus
+\[
+\begin{aligned}
+D
+&\le 2^{A-p}\sum_{j=0}^{p-1}2^j3^{p-1-j}\\
+&=2^{A-p}(3^p-2^p).
+\end{aligned}
+\]
+The denominator is \(q=2^A-3^p\), and a positive integer cycle requires \(q>0\). Writing the excess valuation as \(E=A-p\), this yields
+\[
+\boxed{
+n\le
+\frac{(3/2)^p-1}{1-(3/2)^p/2^E}
+},\qquad
+E>p\log_2(3/2).
+\]
+For fixed \(p\), the right-hand side decreases as \(E\) increases. But it does not provide a period-independent bound on \(n\): even when \(E\) is much larger than its required threshold, the numerator scale is \((3/2)^p\). Near the threshold, the denominator can also be small.
+
+This pinpoints the limitation of the finite-period strategy. It supplies a finite starting-value search for each fixed period after choosing a sufficiently large total valuation, but the search range is not uniformly bounded as \(p\to\infty\). Consequently, the period-by-period argument cannot by itself exclude all periods.
+
+**Next structural target.** Improve the numerator estimate by exploiting the divisibility condition \(2^A-3^p\mid D\), the exact valuation constraints along the orbit, or correlations between consecutive valuations. Any successful uniform argument must use information beyond positivity of the individual \(a_i\). This section is a bound and a diagnosis of its limitation, not a new Collatz theorem.
