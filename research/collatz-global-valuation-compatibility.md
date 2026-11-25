@@ -1906,3 +1906,51 @@ H_r\not\equiv0\pmod3
 for every suffix length \(r\). Consequently every suffix congruence implies \(3\nmid m\), but this observation alone cannot raise \(m\ge7\).
 
 **Next target:** seek valuation-dependent CRT minima \(M_r(c_0,\ldots,c_{r-1})\), rather than a uniform lower bound over all suffix words. The valuation word and total valuation must remain coupled throughout that analysis.
+
+
+## 51. Three-step CRT minima when the suffix valuation sum is small
+
+The three-step congruence (50.1) gives more information when the sum
+\[
+T=d+c+b
+\]
+of the final three valuations is small. For fixed \(T\), there are only finitely many positive triples \((d,c,b)\), so the CRT minimum can be checked exactly.
+
+For each triple, compute
+\[
+R(d,c,b)\equiv
+2^{-T}\left(9+3\cdot2^d+2^{d+c}\right)\pmod{27},
+\]
+then combine \(m\equiv R(d,c,b)\pmod{27}\) with \(m\equiv3\pmod4\). The least positive solution is the corresponding \(M_3(d,c,b)\).
+
+Exhausting the positive compositions for \(3\le T\le7\) gives:
+
+\[
+\begin{array}{c|c|c|c}
+T&\#\{(d,c,b)\}&\min M_3&\text{one minimizing triple}\\ \hline
+3&1&107&(1,1,1)\\
+4&3&47&(1,2,1)\\
+5&6&47&(1,1,3)\\
+6&10&11&(2,1,3)\\
+7&15&11&(1,3,3)
+\end{array}
+\]
+
+Consequently, if the final three valuations have total at most seven, then
+\[
+\boxed{m\ge11.}
+\]
+Combining this with (48.3) yields the conditional average-valuation exclusion
+\[
+\boxed{
+T\le7
+\quad\Longrightarrow\quad
+\frac Ap<\log_2\!\left(\frac{34}{11}\right).
+}
+\tag{51.1}
+\]
+Equivalently, a hypothetical cycle with \(A/p\ge\log_2(34/11)\) must have its final three valuations summing to at least eight.
+
+This is a conditional strengthening, not a universal improvement: when \(T\ge8\), the three-step CRT minimum can already be seven. For example, the triple \((d,c,b)=(2,2,4)\), with \(T=8\), gives \(M_3=7\). Thus no unconditional bound \(m\ge11\) follows from the three-step suffix alone.
+
+**Method note:** the table is an exact enumeration of the 35 positive compositions with \(T\le7\), not a numerical approximation. The residues depend only on the displayed integer powers modulo 27, and the CRT modulus is 108.
