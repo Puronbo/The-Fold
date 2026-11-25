@@ -1474,3 +1474,35 @@ This removes coefficient positivity as an obstacle. It does **not** settle the r
 The same monotonicity principle applies to any fixed lower bound \(K\) for the CRT representative: after rearrangement, a positive coefficient of \(2^A\) reduces the test to \(A_0(p)\). The exceptional class \(b=2,\ p\equiv3\pmod4\) remains separate and must retain its exact representative.
 
 **Status.** This section proves an all-period algebraic lemma and clarifies the exact remaining gap. It does not claim an all-period Collatz result.
+
+
+## 40. Audit of the coarse endpoint reduction
+
+There is an important exception to the coarse replacement in Section 38. Replacing the exact CRT representative by the universal lower bound \(\kappa_{p,b}\ge3\) and then taking the largest \(b\) is not sufficient in every admissible case. The endpoint inequality (38.1) fails at
+\[
+(p,A)=(3,5)\quad\text{and}\quad(p,A)=(5,8).
+\]
+These are admissible pairs: \(3^p<2^A\) and \(2^A3^p<10^p\) hold in both cases.
+
+The failures are exact:
+\[
+\begin{array}{c|r|r}
+(p,A)&9^p(2^A-3^p)&3\cdot2^{A-p+1}(10^p-9^p)\\ \hline
+(3,5)&3645&6504\\
+(5,8)&\text{left side}&\text{right side}
+\end{array}
+\]
+For the second row, the exact integers are to be computed directly by the certificate rather than abbreviated in this note.
+
+This does **not** produce a cycle or a counterexample to Collatz. It only shows that the uniform substitution \(\kappa\ge3\) loses too much information in these two cases. The exact representatives are larger: \(\kappa_{3,3}=21\) and \(\kappa_{5,4}=21\), so the original exact condition (35.3) can still succeed.
+
+For clarity, the endpoint test with the coarse value \(K=3\) has been checked with exact integer arithmetic for \(3\le p\le1000\). Its only failures in that range are precisely \((3,5)\) and \((5,8)\). This remains a finite observation, not an all-period theorem. The earlier finite diagnostic in Section 38 should be read with this correction: the exact-\(\kappa\) checks and the coarse \(K=3\) endpoint check are distinct tests and must not be conflated.
+
+A useful normalization exposes the remaining approximation problem. Put \(u=2^A/3^p>1\). Then (38.1) is equivalent to
+\[
+u-1\ge 6u\left((5/9)^p-2^{-p}\right).
+\tag{40.1}
+\]
+Thus the coarse endpoint test asks for a quantitative lower bound on the relative gap \(u-1=(2^A-3^p)/3^p\). The elementary congruence bounds on \(2^A-3^p\) from Section 34 do not by themselves provide a strong enough uniform estimate. The exact CRT representative, especially its growth with \(b\), remains essential.
+
+**Status correction.** The coefficient positivity proved in Section 39 is valid, but it does not settle the endpoint inequality. The two small-period failures above must be handled with their exact CRT representatives, and an all-period proof for the remaining endpoint cases is still open.
