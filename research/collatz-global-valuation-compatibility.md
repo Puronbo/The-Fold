@@ -2125,3 +2125,48 @@ This is a finite verification only. It does not establish that every admissible 
 **Reproducibility:** enumerate \(m=3+4j\le9999\); repeatedly compute \(x\leftarrow S(x)\), stopping as soon as \(x<m\). The valuation is obtained exactly by counting factors of two in \(3x+1\). No floating-point arithmetic is involved.
 
 The remaining theoretical problem is now explicit: prove that every \(m\equiv3\pmod4\), \(m>1\), eventually has an accelerated iterate below \(m\), or find a different argument that excludes all sufficiently large minima. The finite audit supplies evidence, not that missing proof.
+
+
+## 56. A residue-class family that drops in two accelerated steps
+
+The finite audit suggests looking for residue classes whose first few accelerated iterates can be bounded symbolically.
+
+Write every admissible minimum as
+\[
+m=4k+3.
+\]
+Then \(3m+1=12k+10=2(6k+5)\), and \(6k+5\) is odd. Therefore the first accelerated step is exact:
+\[
+S(m)=6k+5.
+\]
+
+The next numerator is
+\[
+3S(m)+1=18k+16=2(9k+8),
+\]
+so
+\[
+S^2(m)=\operatorname{oddpart}(9k+8),
+\]
+where \(\operatorname{oddpart}(x)=x/2^{v_2(x)}\).
+
+Now suppose \(k\equiv0\pmod4\), so \(k=4q\). Then
+\[
+9k+8=36q+8=4(9q+2),
+\]
+and hence
+\[
+S^2(m)=\operatorname{oddpart}(9q+2)
+\le 9q+2
+<16q+3=m.
+\]
+
+Thus we have the exact infinite-family result
+\[
+\boxed{m\equiv3\pmod{16}\implies S^2(m)<m.}
+\tag{56.1}
+\]
+
+Every such value is excluded as the minimum of a nontrivial odd cycle. This covers one quarter of the admissible residue classes \(m\equiv3\pmod4\), without a finite bound or numerical search.
+
+The other three residue classes modulo 16 are not settled by this two-step argument. In particular, failure of this sufficient condition is not evidence that their trajectories fail to drop; it only means a longer argument is needed.
