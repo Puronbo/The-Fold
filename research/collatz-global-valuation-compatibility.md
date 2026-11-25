@@ -904,3 +904,39 @@ A cycle requires \(q_A\mid D\). Exact enumeration of all positive thirteen-part 
 The companion certificate certificates/collatz_period14_exact.py generates all these words and tests divisibility using integer arithmetic.
 
 **Theorem.** The only positive integer satisfying \(S^{14}(n)=n\) is \(n=1\). Hence no nontrivial accelerated cycle has period fourteen. This remains a finite-period exclusion, not a proof of global termination.
+
+
+## 25. Exact exclusion of accelerated period fifteen
+
+The strict average-valuation window gives
+\[
+15\log_2 3<A<15\log_2(10/3).
+\]
+Exact comparisons
+\[
+2^{23}<3^{15}<2^{24},
+\\qquad
+2^{26}3^{15}<10^{15}<2^{27}3^{15}
+\]
+force
+\[
+\boxed{A\in\{24,25,26\}.}
+\]
+
+Rotate a hypothetical nontrivial cycle to its smallest odd member, giving \(a_0=1\). Set
+\[
+q_A=2^A-3^{15},\qquad
+D=\sum_{j=0}^{14}3^{14-j}2^{A_j}.
+\]
+The cycle condition requires \(q_A\mid D\). The exact enumeration gives:
+
+| \(A\) | \(q_A\) | Words checked | Divisibility hits |
+|---:|---:|---:|---:|
+| 24 | 2,428,309 | 497,420 | 0 |
+| 25 | 19,205,525 | 1,144,066 | 0 |
+| 26 | 52,759,957 | 2,496,144 | 0 |
+| **Total** | — | **4,137,630** | **0** |
+
+The certificate certificates/collatz_period15_exact.py uses the recurrence \(D_{j+1}=3D_j+2^{A_j}\), so every divisibility test is performed with exact integers.
+
+**Theorem.** The only positive integer satisfying \(S^{15}(n)=n\) is \(n=1\). Thus there is no nontrivial accelerated cycle of period fifteen. This does not establish global termination.
