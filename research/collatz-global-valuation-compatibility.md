@@ -1871,3 +1871,38 @@ Section 49 removes its upper portion, leaving only
 The remaining interval is narrow but nonempty. Longer suffixes \(r\ge3\) are the natural next step: compute their CRT minima and seek a sequence of stronger lower bounds on \(m\).
 
 **Scope:** this is a necessary-condition exclusion for the stated average-valuation range, not a proof that all nontrivial cycles are impossible.
+
+
+## 50. Three-step suffix: a universal nondivisibility invariant
+
+For the final three valuations, write
+\[
+d=a_{p-3},\qquad c=a_{p-2},\qquad b=a_{p-1}.
+\]
+The suffix identity gives
+\[
+\boxed{
+2^{d+c+b}m
+\equiv9+3\cdot2^d+2^{d+c}\pmod{27}.
+}
+\tag{50.1}
+\]
+The right-hand side is nonzero modulo three: its first two terms vanish modulo three, while \(2^{d+c}\not\equiv0\pmod3\). Since the power of two on the left is invertible modulo three, this confirms
+\[
+3\nmid m.
+\]
+Together with \(m\equiv3\pmod4\), it follows again that \(m\ge7\).
+
+This does not improve the universal lower bound from Section 49. It identifies why: the suffix hierarchy automatically preserves nondivisibility modulo three, but a stronger universal bound requires control of the actual residue modulo \(3^r\), not merely its divisibility.
+
+More generally, in
+\[
+H_r=\sum_{\ell=0}^{r-1}3^{r-1-\ell}2^{C_\ell},
+\]
+all terms except the final one vanish modulo three, and the final term is a power of two. Thus
+\[
+H_r\not\equiv0\pmod3
+\]
+for every suffix length \(r\). Consequently every suffix congruence implies \(3\nmid m\), but this observation alone cannot raise \(m\ge7\).
+
+**Next target:** seek valuation-dependent CRT minima \(M_r(c_0,\ldots,c_{r-1})\), rather than a uniform lower bound over all suffix words. The valuation word and total valuation must remain coupled throughout that analysis.
