@@ -834,3 +834,38 @@ There are
 positive eleven-part tails with total 19. The exact-integer certificate certificates/collatz_period12_exact.py checks all 43,758 resulting valuation words and finds no divisibility hit \(q\mid D\).
 
 **Theorem.** The only positive integer satisfying \(S^{12}(n)=n\) is \(n=1\). Thus no nontrivial accelerated cycle has period twelve. This is a finite-period exclusion, not a proof of global termination.
+
+
+## 23. Exact exclusion of accelerated period thirteen
+
+The strict average-valuation window gives
+\[
+13\log_2 3<A<13\log_2(10/3).
+\]
+Exact integer comparisons
+\[
+2^{20}<3^{13}<2^{21},
+\\qquad
+2^{22}3^{13}<10^{13}<2^{23}3^{13}
+\]
+force
+\[
+\boxed{A\in\{21,22\}.}
+\]
+
+Rotate a hypothetical nontrivial cycle to its smallest odd member, so \(a_0=1\). For each admissible total, define
+\[
+q_A=2^A-3^{13},\qquad
+D=\sum_{j=0}^{12}3^{12-j}2^{A_j}.
+\]
+The cycle condition requires \(q_A\mid D\). The two exact searches are:
+
+| \(A\) | \(q_A\) | Words checked | Divisibility hits |
+|---:|---:|---:|---:|
+| 21 | 502,829 | 75,582 | 0 |
+| 22 | 2,599,981 | 167,960 | 0 |
+| **Total** | — | **243,542** | **0** |
+
+The certificate certificates/collatz_period13_exact.py enumerates every positive twelve-part tail after fixing \(a_0=1\), and performs the divisibility tests with integer arithmetic only.
+
+**Theorem.** The only positive integer satisfying \(S^{13}(n)=n\) is \(n=1\). Thus there is no nontrivial accelerated cycle of period thirteen. This finite-period result is not a proof of global termination.
