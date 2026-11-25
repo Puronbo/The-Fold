@@ -1576,3 +1576,50 @@ The quotient is an integer because \(r_{p,b}\) satisfies the reduced congruence 
 This repairs the interpretation of Section 41. The modular addition there is correct, but it does not alone determine the next least positive representative. In particular, neither monotonicity nor a growth bound follows without controlling the lift bit.
 
 **Consequence for the proposed block estimate.** Any two-step or longer recurrence must track these high bits, or equivalently work directly with the inverse modulo the full power of two. A block estimate that ignores them would be incomplete. The exact formula (42.2) provides a finite arithmetic rule for each lift, but a useful uniform lower bound for \(\kappa_{p,b}/2^b\) remains unproved.
+
+
+## 43. A valuation-dependent hierarchy of low-bit lower bounds
+
+The defining congruence can be reduced modulo any \(2^s\) with \(1\le s\le b\). In that range, \(3\cdot2^b\equiv0\pmod{2^s}\), so
+\[
+3^p\kappa_{p,b}\equiv-1\pmod{2^s}.
+\]
+Define
+\[
+\rho_s(p)=\operatorname{leastpos}\bigl(- (3^p)^{-1}\pmod{2^s}\bigr),
+\qquad 1\le s\le b.
+\]
+Then
+\[
+\boxed{\kappa_{p,b}\ge \rho_s(p)\quad\text{for every }s\le b.}
+\tag{43.1}
+\]
+The strongest bound available from this nested family is
+\[
+\boxed{\kappa_{p,b}\ge\max_{1\le s\le b}\rho_s(p).}
+\tag{43.2}
+\]
+This is an all-period statement. It is stronger in scope than fixing a single modulus such as eight, although the maximum need not increase with \(b\).
+
+For \(s=4\), the residues are especially simple:
+\[
+\begin{array}{c|rrrr}
+p\bmod4&0&1&2&3\\ \hline
+\rho_4(p)&15&5&7&13
+\end{array}
+\]
+and therefore, whenever \(b\ge4\),
+\[
+\boxed{
+\kappa_{p,b}\ge
+\begin{cases}
+15,&p\equiv0\pmod4,\\
+5,&p\equiv1\pmod4,\\
+7,&p\equiv2\pmod4,\\
+13,&p\equiv3\pmod4.
+\end{cases}}
+\tag{43.3}
+\]
+For larger \(b\), one may choose \(s=5,6,\ldots,b\) and calculate the corresponding inverse residue. This supplies a period-sensitive and valuation-sensitive lower bound without assuming monotonicity of the full representatives.
+
+**Limitation.** The bound (43.2) is a lower bound on each individual representative. It does not establish a block-average estimate, because the residues \(\rho_s(p)\) can vary with \(s\), and the maximum may be far below \(2^b\). The next step is to understand the sequence of binary prefixes of \(-3^{-p}\) and determine whether its largest positive residue among the first \(b\) moduli is quantitatively large often enough to force (35.3).
