@@ -1623,3 +1623,47 @@ and therefore, whenever \(b\ge4\),
 For larger \(b\), one may choose \(s=5,6,\ldots,b\) and calculate the corresponding inverse residue. This supplies a period-sensitive and valuation-sensitive lower bound without assuming monotonicity of the full representatives.
 
 **Limitation.** The bound (43.2) is a lower bound on each individual representative. It does not establish a block-average estimate, because the residues \(\rho_s(p)\) can vary with \(s\), and the maximum may be far below \(2^b\). The next step is to understand the sequence of binary prefixes of \(-3^{-p}\) and determine whether its largest positive residue among the first \(b\) moduli is quantitatively large often enough to force (35.3).
+
+
+## 44. Exact four-lift decomposition over the terminal modulus
+
+The hierarchy in Section 43 can be made exact at its largest level \(s=b\). Let
+\[
+\rho_b(p)=\operatorname{leastpos}(-3^{-p}\bmod 2^b),
+\qquad 1\le\rho_b(p)<2^b.
+\]
+Because \(\kappa_{p,b}\equiv\rho_b(p)\pmod{2^b}\) and \(1\le\kappa_{p,b}<2^{b+2}\), there is a unique \(t_{p,b}\in\{0,1,2,3\}\) such that
+\[
+\boxed{\kappa_{p,b}=\rho_b(p)+t_{p,b}2^b.}
+\tag{44.1}
+\]
+Set
+\[
+h_{p,b}=\frac{3^p\rho_b(p)+1}{2^b}\in\mathbb Z.
+\]
+Substituting (44.1) into the defining congruence and dividing by \(2^b\) gives
+\[
+h_{p,b}+3^p t_{p,b}\equiv3\pmod4.
+\]
+Since \(3^p\) is invertible modulo four,
+\[
+\boxed{
+t_{p,b}\equiv(3-h_{p,b})(3^p)^{-1}\pmod4,
+\qquad t_{p,b}\in\{0,1,2,3\}.
+}
+\tag{44.2}
+\]
+Thus the full CRT representative is exactly determined by the \(b\)-bit residue \(\rho_b(p)\) and one additional two-bit correction.
+
+This decomposition is equivalent to the original CRT definition, but it separates two sources of size:
+\[
+\frac{\kappa_{p,b}}{2^b}
+=\frac{\rho_b(p)}{2^b}+t_{p,b}.
+\]
+In particular, if \(t_{p,b}\ge1\), then \(\kappa_{p,b}\ge2^b\), a strong bound relative to the terminal factor \(2^b\) in (35.3). The difficult cases are exactly those with \(t_{p,b}=0\), where the full representative is the least positive residue \(\rho_b(p)\) itself.
+
+**Limitation and next target.** Formula (44.2) does not prove that \(t_{p,b}\ge1\) uniformly. The case \(t=0\) is equivalent to the additional congruence \(h_{p,b}\equiv3\pmod4\), or
+\[
+3^p\rho_b(p)\equiv3\cdot2^b-1\pmod{2^{b+2}},
+\]
+which is precisely the original CRT condition with \(\kappa=\rho_b(p)\). The next problem is to bound the size of this least residue in the \(t=0\) cases, rather than assuming that the correction digit is nonzero.
