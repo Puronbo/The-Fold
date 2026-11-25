@@ -944,42 +944,40 @@ The certificate certificates/collatz_period15_exact.py uses the recurrence \(D_{
 
 ## 26. Suffix congruences modulo powers of three
 
-For a periodic accelerated itinerary of length \(p\), let
+Use the exclusive prefix sums
 \[
-A_j=\sum_{i=0}^{j}a_i,\qquad A=A_{p-1},
-\qquad
-D=\sum_{j=0}^{p-1}3^{p-1-j}2^{A_j},
-\qquad q=2^A-3^p.
+B_0=0,\qquad B_j=\sum_{i=0}^{j-1}a_i\ (1\le j\le p),
+\qquad B_p=A.
 \]
-A positive integer cycle member \(n\) must satisfy \(qn=D\).
-
-For every integer \(r\) with \(1\le r\le p\), reduce this identity modulo \(3^r\). All terms with \(j<p-r\) vanish, giving the suffix identity
+The exact periodic identity from Section 4 is
+\[
+(2^A-3^p)n
+=\sum_{j=0}^{p-1}3^{p-1-j}2^{B_j}.
+\]
+For \(1\le r\le p\), reduction modulo \(3^r\) removes precisely the terms with \(j<p-r\):
 \[
 \boxed{
 2^A n\equiv
-\sum_{j=p-r}^{p-1}3^{p-1-j}2^{A_j}
+\sum_{j=p-r}^{p-1}3^{p-1-j}2^{B_j}
 \pmod{3^r}.}
 \tag{26.1}
 \]
-This is a nested family: the congruence modulo \(3^{r+1}\) reduces to the one modulo \(3^r\).
+The family is nested under reduction from \(3^{r+1}\) to \(3^r\).
 
-At the endpoint \(r=p\), only the final summand survives:
+At \(r=1\), only the final summand remains:
 \[
-2^A n\equiv2^{A_{p-1}}\pmod{3^p},
+2^A n\equiv2^{B_{p-1}}\pmod3,
 \]
-hence
+so, writing \(b=a_{p-1}=A-B_{p-1}\),
 \[
-\boxed{2^{a_{p-1}}n\equiv1\pmod{3^p}.}
+\boxed{2^b n\equiv1\pmod3.}
 \tag{26.2}
 \]
-Equivalently, for some positive integer \(k\),
-\[
-2^{a_{p-1}}n=1+k3^p.
-\]
-The positivity of \(k\) follows because the left side is an integer greater than one and is congruent to one modulo \(3^p\).
+This is a congruence modulo \(3\), not modulo \(3^p\).
 
-**Interpretation.** The terminal valuation determines the residue class of the cycle's starting member modulo \(3^p\). The shorter suffix congruences then constrain the preceding terminal valuations successively. These are necessary conditions, not yet a contradiction: the valuation word itself can satisfy all of them in the 2-adic setting. A period-uniform exclusion still requires combining this 3-adic suffix structure with the minimum-member and total-valuation bounds.
+At the other endpoint \(r=p\), all \(p\) summands remain; there is no single-term simplification. The full congruence is simply the original cycle identity reduced modulo \(3^p\).
 
+**Interpretation.** The terminal valuation determines the starting member modulo \(3\), while longer suffixes provide progressively more detailed constraints involving several terminal valuations. They do not yield \(2^b n\equiv1\pmod{3^p}\).
 
 ## 27. CRT restriction on the minimum cycle member
 
@@ -1699,55 +1697,39 @@ possibly combined with the other suffix congruences from Section 26. Those addit
 **Research correction.** A block-average estimate cannot be assumed to follow from the lift recurrence. The explicit small-representative examples show why a proof must use the coupling to \(A\) or the higher suffix congruences, not just the modulus-doubling process.
 
 
-## 46. Every valuation in a periodic odd cycle must be even
+## 46. Correction: the even-valuation claim is withdrawn
 
-The first member of the suffix-congruence hierarchy already yields a stronger restriction than the terminal CRT estimate.
+The claimed theorem that every valuation in a periodic odd cycle is even was based on an indexing error in the cycle numerator. The correct numerator uses exclusive prefix sums \(B_j=\sum_{i<j}a_i\), so its final term modulo three is \(2^{A-a_{p-1}}\), not \(2^A\).
 
-For a periodic accelerated itinerary, the exact cycle equation is
+The correct reduction is
 \[
-(2^A-3^p)n_0
-=\sum_{j=0}^{p-1}3^{p-1-j}2^{A_j}.
+(2^A-3^p)n
+=\sum_{j=0}^{p-1}3^{p-1-j}2^{B_j}
+\quad\Longrightarrow\quad
+2^A n\equiv2^{A-b}\pmod3.
 \]
-Reduce modulo three. Every summand except the final one vanishes, so
+Equivalently,
 \[
-2^A n_0\equiv2^A\pmod3.
+\boxed{2^b n\equiv1\pmod3.}
 \]
-Since \(2^A\) is invertible modulo three,
-\[
-\boxed{n_0\equiv1\pmod3.}
-\tag{46.1}
-\]
-The starting point can be any point of the same periodic orbit: cyclically rotate the itinerary and repeat the argument. Hence every odd member of a periodic orbit satisfies
-\[
-\boxed{n_i\equiv1\pmod3\quad\text{for every }i.}
-\tag{46.2}
-\]
+This is consistent with either parity of \(b\): it says \(n\equiv1\pmod3\) when \(b\) is even and \(n\equiv2\pmod3\) when \(b\) is odd. It does not imply that \(b\) is even.
 
-Now use one transition:
+The transition relation gives no additional parity restriction: the residue of the next member modulo three is exactly what makes \(2^{a_i}n_{i+1}\equiv1\pmod3\) hold.
+
+**Status:** the assertions in the former version of Section 46 that all cycle members are \(1\pmod3\), all valuations are even, \(A\ge2p\), and \(b\) is even are withdrawn. They must not be used in subsequent arguments.
+
+## 47. Audit notice: Sections 27–45 are not established
+
+The correction to Section 26 also invalidates the main CRT chain in Sections 27–45. Those sections used the false congruence
 \[
-2^{a_i}n_{i+1}=3n_i+1.
+2^b m\equiv1\pmod{3^p}
 \]
-Modulo three, (46.2) gives
+and consequently the equation \(2^b m=1+k3^p\). The valid consequence from the \(r=1\) suffix congruence is only
 \[
-2^{a_i}\equiv1\pmod3.
+2^b m\equiv1\pmod3.
 \]
-As \(2\equiv-1\pmod3\), this forces
-\[
-\boxed{a_i\equiv0\pmod2\quad\text{for every }i.}
-\tag{46.3}
-\]
+Therefore the CRT representatives \(\kappa_{p,b}\), their lower bounds, the finite obstruction sweeps, and the later lift decompositions in Sections 27–45 do not currently establish necessary conditions for Collatz cycles. Their calculations may be arithmetically correct for the stated modular congruence, but that congruence was not derived from the cycle equation.
 
-**Consequences.**
+This is a mathematical correction, not a cosmetic change. Treat Sections 27–45 as withdrawn pending a fresh derivation from the correctly indexed identity. The valid general foundation remains the periodic criterion in Section 4 and the corrected suffix family in Section 26.
 
-1. Every valuation in a periodic odd cycle is at least two.
-2. The total valuation satisfies \(A\ge2p\), rather than merely \(A\ge p\).
-3. The terminal valuation \(b\) is even.
-4. The admissible average window sharpens to
-   \[
-   2\le \frac Ap <\log_2(10/3),
-   \]
-   with the same strict upper bound for a nontrivial cycle.
-
-The lower endpoint \(A/p\ge2\) is compatible with the upper endpoint because \(2<\log_2(10/3)\). Thus this parity theorem alone does not rule out nontrivial cycles. It does, however, eliminate every itinerary containing an odd valuation and halves the terminal-valuation candidates in any finite search.
-
-**Scope.** The argument uses only the exact periodic affine identity and reduction modulo three. It applies to every positive periodic orbit of the accelerated odd map, including the fixed point \(1\). It is a necessary structural theorem, not a proof that no other periodic orbit exists.
+**Next research direction:** retain the full nested congruences (26.1), where \(r>1\) couples several terminal valuations, and derive any CRT restrictions directly from those identities. No parity theorem or nontrivial-cycle exclusion is claimed here.
