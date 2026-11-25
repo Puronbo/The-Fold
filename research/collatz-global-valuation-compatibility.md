@@ -1440,3 +1440,37 @@ This is a useful structural reduction: for fixed \(p\), the coarse ordinary-clas
 The exceptional class \(b=2,\ p\equiv3\pmod4\) must still use the exact \(\kappa_{p,2}\), rather than \(K=3\). The case \(b=1\) is also checked separately, with its exact universal lower bound \(\kappa_{p,1}\ge5\) (indeed \(\ge7\) for odd \(p\)).
 
 As a finite diagnostic, the reduced endpoint tests (ordinary \(b\ge3\)), the \(b=1\) test, and the exact exceptional \(b=2\) test were checked for every admissible \((p,A)\) with \(3\le p\le300\). All 20,595 comparisons passed. This is a finite check, not a proof that (38.1) holds for every period. In particular, positivity of the coefficient in (38.2) and the smallest-admissible-\(A\) test still require an all-period argument.
+
+
+## 39. Positivity of the reduced coefficient
+
+The coefficient in (38.2) is
+\[
+C_p=3^{2p}-\frac{3(10^p-3^{2p})}{2^{p-1}}.
+\]
+It is positive for every integer \(p\ge3\). Indeed,
+\[
+C_p>0
+\quad\Longleftrightarrow\quad
+R_p:=\frac{(2^{p-1}+3)9^p}{3\cdot10^p}>1.
+\]
+At \(p=3\), \(R_3=8019/3000>1\). Moreover,
+\[
+\frac{R_{p+1}}{R_p}
+=\frac9{10}\frac{2^p+3}{2^{p-1}+3}>1
+\qquad(p\ge3),
+\]
+because the last inequality is equivalent to
+\(2^{p-1}>3/4\). Thus \(R_p\) is increasing from a value greater than one, proving \(C_p>0\) for all \(p\ge3\).
+
+Consequently, for each fixed period \(p\), the left side of (38.2) is strictly increasing in \(2^A\). Therefore the coarse ordinary-class inequality (38.1), if true at the smallest admissible integer
+\[
+A_0(p)=\lfloor p\log_2 3\rfloor+1,
+\]
+is true for every admissible \(A\) at that period.
+
+This removes coefficient positivity as an obstacle. It does **not** settle the remaining endpoint inequality: positivity of \(C_p\) alone does not imply \(2^{A_0(p)}C_p\ge3^{3p}\). That last comparison still involves the fine approximation of \(p\log_2 3\) by integers and must be proved separately (or bypassed with a stronger bound).
+
+The same monotonicity principle applies to any fixed lower bound \(K\) for the CRT representative: after rearrangement, a positive coefficient of \(2^A\) reduces the test to \(A_0(p)\). The exceptional class \(b=2,\ p\equiv3\pmod4\) remains separate and must retain its exact representative.
+
+**Status.** This section proves an all-period algebraic lemma and clarifies the exact remaining gap. It does not claim an all-period Collatz result.
