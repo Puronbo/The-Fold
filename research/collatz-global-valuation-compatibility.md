@@ -554,3 +554,71 @@ The remaining totals are \(A=13,14,15,16,17\). Their numbers of positive ordered
 The exact-integer certificate `certificates/collatz_period8_exact.py` checks all 23,815 words. Its unique divisibility hit is \(A=16\), word \((2,2,2,2,2,2,2,2)\), with \(D=q=58,975\) and \(n=1\).
 
 **Theorem.** The only positive-integer accelerated Collatz orbit satisfying \(S^8(n)=n\) is \(n=1\). Hence no nontrivial accelerated cycle has period eight. Combined with the preceding sections, no nontrivial accelerated cycle has period at most eight. This finite-period exclusion does not prove global termination.
+
+
+## 16. Exact exclusion of accelerated period nine
+
+For a nine-step valuation word \((a_0,\ldots,a_8)\), put
+\[
+A=\sum_{i=0}^{8}a_i,\qquad q=2^A-3^9=2^A-19683.
+\]
+The periodic numerator is
+\[
+D=\sum_{j=0}^{8}3^{8-j}2^{A_j},\qquad
+A_0=0,\quad A_j=\sum_{i=0}^{j-1}a_i.
+\]
+Explicitly its coefficients are \(6561,2187,729,243,81,27,9,3,1\). A positive integer orbit satisfying \(S^9(n)=n\) requires \(q>0\), \(q\mid D\), and \(n=D/q\); hence \(A\ge15\).
+
+Since each valuation is positive, \(A_j\le A-9+j\), and therefore
+\[
+D\le2^{A-9}\sum_{j=0}^{8}2^j3^{8-j}
+=19171\cdot2^{A-9}.
+\]
+Both \(D\) and \(q\) are odd, so \(n\) is odd. For \(A\ge19\), the quotient bound decreases with \(A\), giving
+\[
+0<n\le\frac{19171\cdot2^{A-9}}{2^A-19683}
+\le\frac{19171\cdot2^{10}}{2^{19}-19683}
+=\frac{19,631,104}{504,605}<39.
+\]
+Thus \(n\in\{1,3,5,\ldots,37\}\). Every candidate above 1 reaches 1 under the accelerated map:
+\[
+\begin{aligned}
+3&\to5\to1, &5&\to1,\\
+7&\to11\to17\to13\to5\to1, &
+9&\to7\to11\to17\to13\to5\to1,\\
+11&\to17\to13\to5\to1, &
+13&\to5\to1,\\
+15&\to23\to35\to53\to5\to1, &
+17&\to13\to5\to1,\\
+19&\to29\to11\to17\to13\to5\to1, &
+21&\to1,\\
+23&\to35\to53\to5\to1, &
+25&\to19\to29\to11\to17\to13\to5\to1,\\
+27&\to41\to31\to47\to71\to107\to161\to121\to91\to137
+\to103\to155\to233\to175\to263\to395\to593\to445\to167
+\to251\to377\to283\to425\to319\to479\to719\to1079
+\to1619\to2429\to911\to1367\to2051\to3077\to577\to433
+\to325\to61\to23\to35\to53\to5\to1,\\
+29&\to11\to17\to13\to5\to1, &
+31&\to47\to71\to107\to161\to121\to91\to137\to103
+\to155\to233\to175\to263\to395\to593\to445\to167
+\to251\to377\to283\to425\to319\to479\to719\to1079
+\to1619\to2429\to911\to1367\to2051\to3077\to577\to433
+\to325\to61\to23\to35\to53\to5\to1,\\
+33&\to25\to19\to29\to11\to17\to13\to5\to1, &
+35&\to53\to5\to1,\\
+37&\to7\to11\to17\to13\to5\to1.
+\end{aligned}
+\]
+The fixed point 1 has valuation 2 at every step, so its nine-step total is \(A=18\), not in this large-total range. Hence no nontrivial nine-cycle exists for \(A\ge19\).
+
+For \(A=15,16,17,18\), the numbers of positive ordered nine-part compositions are
+\[
+\binom{14}{8}=3003,\quad
+\binom{15}{8}=6435,\quad
+\binom{16}{8}=12870,\quad
+\binom{17}{8}=24310.
+\]
+The exact-integer certificate `certificates/collatz_period9_exact.py` checks all 46,618 words. Its unique divisibility hit is \(A=18\), word \((2,2,2,2,2,2,2,2,2)\), with \(D=q=242461\) and \(n=1\).
+
+**Theorem.** The only positive-integer accelerated Collatz orbit satisfying \(S^9(n)=n\) is \(n=1\). Thus no nontrivial accelerated cycle has period nine. Together with the preceding results, all nontrivial accelerated cycles of periods at most nine are excluded. This does not prove global termination.
