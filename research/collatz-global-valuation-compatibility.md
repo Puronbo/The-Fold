@@ -1027,3 +1027,48 @@ Here \((-1)^p\) is interpreted modulo 4. Also, because every valuation is at lea
 < p\log_2(10/3)-p+1.
 \]
 Thus for each fixed period there are only linearly many terminal-valuation CRT candidates to test, before any of the interior itinerary constraints are applied.
+
+
+## 28. A second-modulus obstruction for the minimum member
+
+The terminal suffix congruence says
+\[
+2^b m\equiv1\pmod{3^p},\qquad b=a_{p-1}.
+\]
+Thus there is a positive integer \(k\) with
+\[
+2^b m=1+k3^p.
+\tag{28.1}
+\]
+For a nontrivial cycle, the minimum member satisfies \(m\equiv3\pmod4\). Substituting this into (28.1) modulo \(2^{b+2}\) yields
+\[
+\boxed{k3^p\equiv3\cdot2^b-1\pmod{2^{b+2}}.}
+\tag{28.2}
+\]
+Since \(3^p\) is invertible modulo \(2^{b+2}\), this fixes \(k\) to one residue class. Let \(\kappa_{p,b}\) be its least positive representative:
+\[
+\kappa_{p,b}
+=\operatorname{leastpos}\left((3\cdot2^b-1)(3^p)^{-1}
+\bmod 2^{b+2}\right).
+\]
+Every possible cycle therefore has \(k\ge\kappa_{p,b}\).
+
+The minimum-member product bound gives
+\[
+m<\frac1{2^{A/p}-3},
+\]
+so (28.1) also gives
+\[
+k<\frac{2^b}{3^p(2^{A/p}-3)}.
+\]
+Consequently, the exact inequality
+\[
+\boxed{
+2^A(\kappa_{p,b}3^p)^p
+\ge (3\kappa_{p,b}3^p+2^b)^p
+}
+\tag{28.3}
+\]
+is sufficient to rule out that pair \((A,b)\). This is an integer-only test: it is equivalent to saying that the least permitted positive \(k\) is already at least the upper bound forced by the minimum-member estimate.
+
+For \(3\le p\le100\), an exact integer sweep over every admissible total \(A\) and every \(1\le b\le A-p+1\) verified (28.3) in every case. The reproducible finite-range check is in certificates/collatz_crt_minimum_filter.py. This is computational evidence for a useful obstruction, not a proof that (28.3) holds for every period. Establishing that uniform inequality—or finding a different uniform argument—remains open.
