@@ -116,7 +116,41 @@ Indeed, applying this to the self-loop gives \(V(0)<V(0)\), a contradiction.
 
 This rules out a particularly simple proof strategy: a strict ranking depending only on the fixed residue state. It does **not** rule out rankings that also retain scale, valuation, a bounded-but-renewable precision counter, or other history.
 
-## 6. What a stronger abstraction must do
+## 6. A stronger finite-state no-go theorem
+
+The self-loop obstruction above is specific to the residue partition. There is also a partition-independent obstruction.
+
+**Theorem.** Let \(S\) be any finite set and let
+\[
+\alpha:\mathbb N_{>0}\to S
+\]
+be any abstraction. Let \(R\subseteq S\times S\) be any abstract transition relation that simulates every concrete Collatz step:
+\[
+(\alpha(n),\alpha(C(n)))\in R
+\qquad(n\ge1).
+\]
+There is no map \(V:S\to W\) into a strictly well-ordered set \(W\) such that
+\[
+V(t)<V(s)\qquad\text{for every }(s,t)\in R.
+\]
+
+**Proof.** Since \(S\) is finite, the image \(V(S)\) has at most \(|S|\) elements. Choose \(j\ge |S|\). The concrete Collatz orbit beginning at \(2^j\) contains the \(j+1\) states
+\[
+2^j\to2^{j-1}\to\cdots\to2\to1.
+\]
+By simulation, their abstract images form an \(R\)-path of length \(j\). The proposed ranking would therefore give a strictly descending chain of \(j+1>|S|\) values in \(V(S)\), which is impossible because \(V(S)\) has at most \(|S|\) distinct values. \(\square\)
+
+This theorem does not depend on congruence classes, 2-adic precision, or the particular design of the finite abstraction. It rules out every **finite-state, per-step strict ranking** that is required to cover all positive integers.
+
+It does not rule out:
+- a ranking with an unbounded scale or valuation coordinate;
+- a ranking that decreases only after a controlled, possibly state-dependent number of steps, provided the control mechanism itself is proved;
+- a non-ranking proof, such as a global estimate or a structural argument excluding divergent orbits.
+
+The long halving chains explain why an unbounded coordinate is not an implementation detail: any proof measure that decreases at every individual step must be capable of representing arbitrarily long finite descent.
+
+## 7. What a stronger abstraction must do
+
 
 The obstruction identifies the missing coordinate. A useful state must distinguish not only the residue but also some measure of scale lost during division. Candidate designs include:
 
@@ -132,11 +166,12 @@ Any proposed design must satisfy two separate obligations:
 
 A finite sound over-approximation alone cannot establish termination when its graph contains spurious cycles.
 
-## 7. Status and next theorem target
+## 8. Status and next theorem target
 
 - Exact set-valued residue transformer (1): **proved**.
 - One-step soundness and edge-witness exactness: **proved**.
 - Fixed-residue strict ranking obstruction: **proved**.
+- No finite-state per-step strict ranking for all positive integers: **proved**.
 - A finite abstraction with enough scale information to transfer a global termination proof: **open**.
 - Collatz conjecture: **not solved**.
 
