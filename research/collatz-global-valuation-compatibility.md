@@ -1954,3 +1954,49 @@ Equivalently, a hypothetical cycle with \(A/p\ge\log_2(34/11)\) must have its fi
 This is a conditional strengthening, not a universal improvement: when \(T\ge8\), the three-step CRT minimum can already be seven. For example, the triple \((d,c,b)=(2,2,4)\), with \(T=8\), gives \(M_3=7\). Thus no unconditional bound \(m\ge11\) follows from the three-step suffix alone.
 
 **Method note:** the table is an exact enumeration of the 35 positive compositions with \(T\le7\), not a numerical approximation. The residues depend only on the displayed integer powers modulo 27, and the CRT modulus is 108.
+
+
+## 52. Piecewise average-valuation bounds from the three-step CRT
+
+The table in Section 51 contains more information than the single uniform conclusion \(m\ge11\). For each fixed suffix sum \(T\le7\), its minimum CRT representative gives a separate lower bound on \(m\). Applying (48.3) yields:
+
+\[
+\begin{array}{c|c|c}
+T&\text{CRT lower bound on }m&\text{necessary upper bound on }A/p\\ \hline
+3&107&A/p<\log_2(3+1/107)\\
+4&47&A/p<\log_2(3+1/47)\\
+5&47&A/p<\log_2(3+1/47)\\
+6&11&A/p<\log_2(34/11)\\
+7&11&A/p<\log_2(34/11)\\
+T\ge8&7&A/p<\log_2(22/7)
+\end{array}
+\]
+
+The last row uses the universal two-step bound from Section 49; the three-step CRT alone does not guarantee \(m\ge7\) for every larger \(T\).
+
+For reference, the numerical thresholds are approximately
+\[
+\begin{aligned}
+\log_2(3+1/107)&\approx1.5891,\\
+\log_2(3+1/47)&\approx1.5999,\\
+\log_2(34/11)&\approx1.6280,\\
+\log_2(22/7)&\approx1.6521.
+\end{aligned}
+\]
+
+There is also a simple coupling to the full valuation sum. Since the \(p-3\) valuations preceding the final triple are each at least one,
+\[
+A\ge T+(p-3)=p+T-3.
+\]
+Thus a candidate with a specified final-three sum \(T\) must satisfy both
+\[
+\boxed{
+1+\frac{T-3}{p}\le\frac Ap
+<\log_2\!\left(3+\frac1{M_T}\right),
+}
+\]
+where \(M_T=107,47,11\) for \(T=3,\{4,5\},\{6,7\}\), respectively. For \(T\ge8\), use the universal upper bound \(\log_2(22/7)\) and the lower bound \(A/p\ge1+5/p\).
+
+These inequalities give a compact exact filter on \((p,A,T)\). They do not eliminate every period: for sufficiently large \(p\), the lower and upper average bounds can overlap. The remaining work is to use the actual ordered suffix triple, and then longer suffixes, rather than only its sum.
+
+**Scope and correction:** the \(T\ge8\) row is supported by Section 49, not by a claim that every three-step CRT minimum is at least seven. The example \((2,2,4)\) in Section 51 shows that this distinction is necessary.
