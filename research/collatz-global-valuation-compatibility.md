@@ -2170,3 +2170,54 @@ Thus we have the exact infinite-family result
 Every such value is excluded as the minimum of a nontrivial odd cycle. This covers one quarter of the admissible residue classes \(m\equiv3\pmod4\), without a finite bound or numerical search.
 
 The other three residue classes modulo 16 are not settled by this two-step argument. In particular, failure of this sufficient condition is not evidence that their trajectories fail to drop; it only means a longer argument is needed.
+
+
+## 57. Two more infinite residue families with three-step descent
+
+The two-step result in Section 56 covers \(m\equiv3\pmod{16}\). We can extend the explicit descent partition to two further classes modulo 64.
+
+### Family A: \(m=64q+43\)
+
+The exact accelerated itinerary has valuations \((1,2,2)\):
+\[
+64q+43\longmapsto96q+65
+\longmapsto72q+49
+\longmapsto54q+37.
+\]
+At each step the displayed quotient is odd, so the valuations are exact. Since
+\[
+54q+37<64q+43
+\]
+for every integer \(q\ge0\), this family descends below its starting value in three steps.
+
+### Family B: \(m=64q+55\)
+
+The exact valuation itinerary is \((1,1,3)\):
+\[
+64q+55\longmapsto96q+83
+\longmapsto144q+125
+\longmapsto54q+47.
+\]
+Again, each displayed output is odd, confirming the exact valuations. Moreover,
+\[
+54q+47<64q+55
+\]
+for every \(q\ge0\).
+
+Consequently,
+\[
+\boxed{
+m\equiv43\text{ or }55\pmod{64}
+\implies \exists t\le3:\ S^t(m)<m.
+}
+\tag{57.1}
+\]
+
+These are two additional infinite families of impossible cycle minima. Together with Section 56, the explicit residue classes now include
+\[
+m\equiv3\pmod{16},\qquad
+m\equiv43,55\pmod{64}.
+\]
+Among the eight admissible classes modulo 64 (those congruent to 3 modulo 4), this covers four classes: \(3,19,43,55\pmod{64}\).
+
+This is a sufficient descent partition, not a complete classification. The remaining admissible classes modulo 64 require further analysis; no conclusion about their eventual descent follows merely from their absence here.
