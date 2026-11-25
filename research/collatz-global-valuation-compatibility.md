@@ -1543,3 +1543,36 @@ T_{p,A}(b)=
 without recomputing a modular inverse from scratch. A uniform lower bound for this ratio is not asserted here: modular wraparound prevents such a conclusion from the recurrence alone. The next step is to derive a sharp two-step or block estimate that accounts for the wraparound and can be inserted into (35.3).
 
 This is an all-period identity, not an all-period cycle exclusion.
+
+
+## 42. Correct two-branch lift and the missing high bit
+
+The modulus in the definition of \(\kappa_{p,b}\) is \(M_b=2^{b+2}\), so \(M_{b+1}=2M_b\). The reduction in (41.1) determines \(\kappa_{p,b+1}\) only modulo \(M_b\), not modulo \(M_{b+1}\).
+
+Define the odd residue
+\[
+r_{p,b}=\operatorname{leastpos}\left(
+\kappa_{p,b}+c_p2^b\pmod{M_b}
+\right),\qquad
+c_p=\begin{cases}1,&p\text{ odd},\\3,&p\text{ even}.\end{cases}
+\]
+Then the exact level-\((b+1)\) representative has the form
+\[
+\boxed{\kappa_{p,b+1}=r_{p,b}+\varepsilon_{p,b}M_b,\qquad
+\varepsilon_{p,b}\in\{0,1\}.}
+\tag{42.1}
+\]
+The bit \(\varepsilon_{p,b}\) is fixed by the original congruence modulo \(2M_b\):
+\[
+\boxed{
+\varepsilon_{p,b}\equiv
+\frac{(3\cdot2^{b+1}-1)-3^p r_{p,b}}{M_b}
+\pmod2.
+}
+\tag{42.2}
+\]
+The quotient is an integer because \(r_{p,b}\) satisfies the reduced congruence modulo \(M_b\). Taking its parity selects the unique one of the two lifts that satisfies the full congruence modulo \(2M_b\).
+
+This repairs the interpretation of Section 41. The modular addition there is correct, but it does not alone determine the next least positive representative. In particular, neither monotonicity nor a growth bound follows without controlling the lift bit.
+
+**Consequence for the proposed block estimate.** Any two-step or longer recurrence must track these high bits, or equivalently work directly with the inverse modulo the full power of two. A block estimate that ignores them would be incomplete. The exact formula (42.2) provides a finite arithmetic rule for each lift, but a useful uniform lower bound for \(\kappa_{p,b}/2^b\) remains unproved.
