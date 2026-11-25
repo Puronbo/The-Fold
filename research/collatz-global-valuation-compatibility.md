@@ -940,3 +940,42 @@ The cycle condition requires \(q_A\mid D\). The exact enumeration gives:
 The certificate certificates/collatz_period15_exact.py uses the recurrence \(D_{j+1}=3D_j+2^{A_j}\), so every divisibility test is performed with exact integers.
 
 **Theorem.** The only positive integer satisfying \(S^{15}(n)=n\) is \(n=1\). Thus there is no nontrivial accelerated cycle of period fifteen. This does not establish global termination.
+
+
+## 26. Suffix congruences modulo powers of three
+
+For a periodic accelerated itinerary of length \(p\), let
+\[
+A_j=\sum_{i=0}^{j}a_i,\qquad A=A_{p-1},
+\qquad
+D=\sum_{j=0}^{p-1}3^{p-1-j}2^{A_j},
+\qquad q=2^A-3^p.
+\]
+A positive integer cycle member \(n\) must satisfy \(qn=D\).
+
+For every integer \(r\) with \(1\le r\le p\), reduce this identity modulo \(3^r\). All terms with \(j<p-r\) vanish, giving the suffix identity
+\[
+\boxed{
+2^A n\equiv
+\sum_{j=p-r}^{p-1}3^{p-1-j}2^{A_j}
+\pmod{3^r}.}
+\tag{26.1}
+\]
+This is a nested family: the congruence modulo \(3^{r+1}\) reduces to the one modulo \(3^r\).
+
+At the endpoint \(r=p\), only the final summand survives:
+\[
+2^A n\equiv2^{A_{p-1}}\pmod{3^p},
+\]
+hence
+\[
+\boxed{2^{a_{p-1}}n\equiv1\pmod{3^p}.}
+\tag{26.2}
+\]
+Equivalently, for some positive integer \(k\),
+\[
+2^{a_{p-1}}n=1+k3^p.
+\]
+The positivity of \(k\) follows because the left side is an integer greater than one and is congruent to one modulo \(3^p\).
+
+**Interpretation.** The terminal valuation determines the residue class of the cycle's starting member modulo \(3^p\). The shorter suffix congruences then constrain the preceding terminal valuations successively. These are necessary conditions, not yet a contradiction: the valuation word itself can satisfy all of them in the 2-adic setting. A period-uniform exclusion still requires combining this 3-adic suffix structure with the minimum-member and total-valuation bounds.
