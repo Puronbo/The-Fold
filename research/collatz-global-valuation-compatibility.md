@@ -1011,3 +1011,19 @@ The representative can be computed exactly: first take the least positive residu
 Consequently, any independent upper bound \(m<4\cdot3^p\) would force \(m=M_{p,b}\) (with the representative chosen in \([1,4\cdot3^p]\)); a stronger bound can eliminate the candidate outright if \(M_{p,b}\) is too large. This is a finite exact test once \(b\) is bounded by the total valuation \(A\).
 
 **Status.** This is a necessary CRT filter, not a new cycle exclusion theorem. The outstanding step is to prove a sufficiently strong upper bound for the minimum member, or to combine this residue with the earlier itinerary divisibility equation in a way that rules out all possible \(b\) uniformly.
+
+
+The CRT representative has the explicit formula
+\[
+u=\operatorname{leastpos}(2^{-b}\bmod 3^p),\qquad
+k\equiv(-1)^p(3-u)\pmod4,\quad 0\le k\le3,
+\]
+\[
+\boxed{M_{p,b}=u+k3^p.}
+\]
+Here \((-1)^p\) is interpreted modulo 4. Also, because every valuation is at least one,
+\[
+1\le b\le A-p+1
+< p\log_2(10/3)-p+1.
+\]
+Thus for each fixed period there are only linearly many terminal-valuation CRT candidates to test, before any of the interior itinerary constraints are applied.
