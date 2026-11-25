@@ -1733,3 +1733,73 @@ Therefore the CRT representatives \(\kappa_{p,b}\), their lower bounds, the fini
 This is a mathematical correction, not a cosmetic change. Treat Sections 27–45 as withdrawn pending a fresh derivation from the correctly indexed identity. The valid general foundation remains the periodic criterion in Section 4 and the corrected suffix family in Section 26.
 
 **Next research direction:** retain the full nested congruences (26.1), where \(r>1\) couples several terminal valuations, and derive any CRT restrictions directly from those identities. No parity theorem or nontrivial-cycle exclusion is claimed here.
+
+
+## 48. A valid suffix-CRT filter from the full hierarchy
+
+The corrected suffix identity does yield a CRT restriction, but it depends on the entire chosen terminal block rather than on the final valuation alone.
+
+Rotate a hypothetical nontrivial cycle so that \(n_0=m\) is its smallest odd member. Write the last \(r\) valuations as
+\[
+c_0=a_{p-r},\ c_1=a_{p-r+1},\ldots,c_{r-1}=a_{p-1},
+\]
+and let
+\[
+T_r=\sum_{i=0}^{r-1}c_i,\qquad
+C_0=0,\quad C_\ell=\sum_{i=0}^{\ell-1}c_i.
+\]
+Factor \(2^{B_{p-r}}\) out of the corrected suffix congruence (26.1). Since \(A-B_{p-r}=T_r\), this gives
+\[
+2^{T_r}m\equiv
+H_r:=\sum_{\ell=0}^{r-1}3^{r-1-\ell}2^{C_\ell}
+\pmod{3^r}.
+\]
+As \(2\) is invertible modulo \(3^r\),
+\[
+\boxed{m\equiv R_r:=2^{-T_r}H_r\pmod{3^r}.}
+\tag{48.1}
+\]
+This is the valid \(3^r\)-adic residue of the minimum member determined by the final \(r\) valuations.
+
+For a nontrivial cycle, minimality forces the first valuation to be \(a_0=1\): if \(a_0\ge2\), then
+\[
+S(m)\le\frac{3m+1}{4}<m
+\]
+for \(m>1\), a contradiction. Hence \(3m+1\) is divisible by \(2\) but not \(4\), so
+\[
+m\equiv3\pmod4.
+\]
+Combining this with (48.1), the Chinese remainder theorem determines one residue
+\[
+\boxed{m\equiv M_r\pmod{4\cdot3^r},\qquad
+M_r\in\{1,\ldots,4\cdot3^r\}.}
+\tag{48.2}
+\]
+The least positive representative \(M_r\) is an exact lower bound: \(m\ge M_r\).
+
+The minimum-member product estimate supplies the opposing upper bound. Since every cycle member \(n_i\ge m\),
+\[
+2^A=\prod_{i=0}^{p-1}\left(3+\frac1{n_i}\right)
+\le\left(3+\frac1m\right)^p.
+\]
+For a nontrivial cycle at least one member exceeds \(m\), so the inequality is strict. As \(2^{A/p}>3\),
+\[
+\boxed{m<\frac1{2^{A/p}-3}.}
+\tag{48.3}
+\]
+Consequently, the exact suffix block rules out the cycle whenever
+\[
+\boxed{M_r\ge\frac1{2^{A/p}-3}.}
+\tag{48.4}
+\]
+
+### The first nontrivial suffix test
+
+For \(r=2\), put \(c=a_{p-2}\), \(b=a_{p-1}\). Then \(T_2=c+b\), \(H_2=3+2^c\), and
+\[
+\boxed{2^{c+b}m\equiv3+2^c\pmod9.}
+\tag{48.5}
+\]
+This is already different from the invalid terminal-only congruence modulo \(3^p\): it uses both final valuations and is genuinely modulo \(9\).
+
+**Scope.** Equations (48.1)–(48.4) are necessary conditions and a valid sufficient exclusion test for any selected suffix length \(r\). No all-period contradiction is claimed. The practical next step is to compute these suffix-CRT representatives while respecting the actual valuation word and total \(A\), then determine whether the hierarchy forces an obstruction.
