@@ -208,3 +208,50 @@ Since (b\ge1), this forces (2^a\le12), hence (a\in\{1,2,3\}). The positivity con
 Thus only ((a,b)=(2,2)) occurs, and it gives (n=1). \(\square\)
 
 This is an exact exclusion of nontrivial accelerated cycles with valuation period at most two. It does **not** exclude cycles with longer periods, nor does it establish that all trajectories reach the fixed point. The divisibility criterion remains a possible route for each fixed period, but a proof for arbitrary periods would need a uniform argument rather than a finite enumeration.
+
+## 9. Exact exclusion of accelerated period three
+
+The same divisibility criterion can be pushed one period further without an unbounded search.
+
+Let the period-three valuation word be \((a,b,c)\), with all entries positive. Then
+\[
+A=a+b+c,\qquad D=9+3\cdot2^a+2^{a+b},\qquad d=2^{a+b+c}-27.
+\]
+A positive integer cycle requires \(d>0\) and \(d\mid D\), hence \(d\le D\). Rearranging the latter gives
+\[
+2^a\big(2^b(2^c-1)-3\big)\le36.
+\tag{7}
+\]
+Write \(K=2^b(2^c-1)-3\).
+
+If \(K>0\), then (7) and \(a\ge1\) imply \(K\le18\). The only positive pairs \((b,c)\) satisfying this are
+\[
+(1,2),(1,3),(2,1),(2,2),(3,1),(4,1).
+\]
+For each pair, (7) bounds \(a\), leaving the following finite list of positive-denominator cases. The entries show \((a,b,c;d,D)\):
+\[
+\begin{array}{c|c|c}
+(b,c)&\text{allowed }a& (a;d,D)\\\hline
+(1,2)&2,3&(2;5,29),\ (3;37,49)\\
+(1,3)&1&(1;5,19)\\
+(2,1)&2,3,4,5&(2;5,37),\ (3;37,65),\ (4;101,121),\ (5;229,233)\\
+(2,2)&1,2&(1;5,23),\ (2;37,37)\\
+(3,1)&1,2&(1;5,31),\ (2;37,53)\\
+(4,1)&1&(1;37,47)
+\end{array}
+\]
+Among these, the only divisibility \(d\mid D\) is \((a,b,c)=(2,2,2)\), where \(d=D=37\).
+
+If \(K\le0\), positivity of \(b,c\) forces \((b,c)=(1,1)\), for which \(K=-1\). In this case
+\[
+d=2^{a+2}-27,\qquad D=9+5\cdot2^a.
+\]
+The conditions \(d>0\) and \(d\mid D\) imply \(d\mid(D-d)=2^a+36\), so
+\[
+4\cdot2^a-27\le2^a+36,
+\]
+hence \(2^a\le21\), and therefore \(a\le4\). Positivity gives \(a\ge3\). The two cases are \(a=3\), with \((d,D)=(5,49)\), and \(a=4\), with \((d,D)=(37,89)\); neither has \(d\mid D\).
+
+**Theorem.** The only positive-integer accelerated Collatz cycle whose valuation word has period three is again the fixed point \(n=1\), with word \((2,2,2)\). \(\square\)
+
+Together with the period-one and period-two results, this excludes every nontrivial accelerated cycle whose valuation word has period at most three. The argument is exact and finite, but its bounds do not yet provide a uniform exclusion for arbitrary periods.
