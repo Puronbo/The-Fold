@@ -1697,3 +1697,57 @@ The right target is therefore not a bound on \(\kappa_{p,b}\) uniform in all \(p
 possibly combined with the other suffix congruences from Section 26. Those additional constraints retain information discarded by the isolated CRT representative.
 
 **Research correction.** A block-average estimate cannot be assumed to follow from the lift recurrence. The explicit small-representative examples show why a proof must use the coupling to \(A\) or the higher suffix congruences, not just the modulus-doubling process.
+
+
+## 46. Every valuation in a periodic odd cycle must be even
+
+The first member of the suffix-congruence hierarchy already yields a stronger restriction than the terminal CRT estimate.
+
+For a periodic accelerated itinerary, the exact cycle equation is
+\[
+(2^A-3^p)n_0
+=\sum_{j=0}^{p-1}3^{p-1-j}2^{A_j}.
+\]
+Reduce modulo three. Every summand except the final one vanishes, so
+\[
+2^A n_0\equiv2^A\pmod3.
+\]
+Since \(2^A\) is invertible modulo three,
+\[
+\boxed{n_0\equiv1\pmod3.}
+\tag{46.1}
+\]
+The starting point can be any point of the same periodic orbit: cyclically rotate the itinerary and repeat the argument. Hence every odd member of a periodic orbit satisfies
+\[
+\boxed{n_i\equiv1\pmod3\quad\text{for every }i.}
+\tag{46.2}
+\]
+
+Now use one transition:
+\[
+2^{a_i}n_{i+1}=3n_i+1.
+\]
+Modulo three, (46.2) gives
+\[
+2^{a_i}\equiv1\pmod3.
+\]
+As \(2\equiv-1\pmod3\), this forces
+\[
+\boxed{a_i\equiv0\pmod2\quad\text{for every }i.}
+\tag{46.3}
+\]
+
+**Consequences.**
+
+1. Every valuation in a periodic odd cycle is at least two.
+2. The total valuation satisfies \(A\ge2p\), rather than merely \(A\ge p\).
+3. The terminal valuation \(b\) is even.
+4. The admissible average window sharpens to
+   \[
+   2\le \frac Ap <\log_2(10/3),
+   \]
+   with the same strict upper bound for a nontrivial cycle.
+
+The lower endpoint \(A/p\ge2\) is compatible with the upper endpoint because \(2<\log_2(10/3)\). Thus this parity theorem alone does not rule out nontrivial cycles. It does, however, eliminate every itinerary containing an odd valuation and halves the terminal-valuation candidates in any finite search.
+
+**Scope.** The argument uses only the exact periodic affine identity and reduction modulo three. It applies to every positive periodic orbit of the accelerated odd map, including the fixed point \(1\). It is a necessary structural theorem, not a proof that no other periodic orbit exists.
