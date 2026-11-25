@@ -869,3 +869,38 @@ The cycle condition requires \(q_A\mid D\). The two exact searches are:
 The certificate certificates/collatz_period13_exact.py enumerates every positive twelve-part tail after fixing \(a_0=1\), and performs the divisibility tests with integer arithmetic only.
 
 **Theorem.** The only positive integer satisfying \(S^{13}(n)=n\) is \(n=1\). Thus there is no nontrivial accelerated cycle of period thirteen. This finite-period result is not a proof of global termination.
+
+
+## 24. Exact exclusion of accelerated period fourteen
+
+The strict average-valuation window gives
+\[
+14\log_2 3<A<14\log_2(10/3).
+\]
+Exact integer comparisons
+\[
+2^{22}<3^{14}<2^{23},
+\\qquad
+2^{24}3^{14}<10^{14}<2^{25}3^{14}
+\]
+force
+\[
+\boxed{A\in\{23,24\}.}
+\]
+
+Rotate a hypothetical nontrivial cycle to its smallest odd member, so \(a_0=1\). Put
+\[
+q_A=2^A-3^{14},\qquad
+D=\sum_{j=0}^{13}3^{13-j}2^{A_j}.
+\]
+A cycle requires \(q_A\mid D\). Exact enumeration of all positive thirteen-part tails gives:
+
+| \(A\) | \(q_A\) | Words checked | Divisibility hits |
+|---:|---:|---:|---:|
+| 23 | 3,605,639 | 293,930 | 0 |
+| 24 | 11,994,247 | 646,646 | 0 |
+| **Total** | — | **940,576** | **0** |
+
+The companion certificate certificates/collatz_period14_exact.py generates all these words and tests divisibility using integer arithmetic.
+
+**Theorem.** The only positive integer satisfying \(S^{14}(n)=n\) is \(n=1\). Hence no nontrivial accelerated cycle has period fourteen. This remains a finite-period exclusion, not a proof of global termination.
