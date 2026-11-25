@@ -1803,3 +1803,71 @@ For \(r=2\), put \(c=a_{p-2}\), \(b=a_{p-1}\). Then \(T_2=c+b\), \(H_2=3+2^c\), 
 This is already different from the invalid terminal-only congruence modulo \(3^p\): it uses both final valuations and is genuinely modulo \(9\).
 
 **Scope.** Equations (48.1)–(48.4) are necessary conditions and a valid sufficient exclusion test for any selected suffix length \(r\). No all-period contradiction is claimed. The practical next step is to compute these suffix-CRT representatives while respecting the actual valuation word and total \(A\), then determine whether the hierarchy forces an obstruction.
+
+
+## 49. Explicit two-step suffix table and an average-valuation exclusion
+
+The two-step congruence (48.5) can be solved completely modulo \(36\). Write
+\[
+c=a_{p-2},\qquad b=a_{p-1}.
+\]
+Since \(2\) has order six modulo nine, the residue depends only on \(c\bmod 2\) and \(b\bmod6\). Combining
+\[
+2^{c+b}m\equiv3+2^c\pmod9
+\]
+with \(m\equiv3\pmod4\) gives the following least positive CRT representative \(M_2\):
+
+\[
+\begin{array}{c|rrrrrr}
+ &b\equiv1&2&3&4&5&0\pmod6\\ \hline
+c\text{ odd}&35&31&11&19&23&7\\
+c\text{ even}&11&19&23&7&35&31
+\end{array}
+\]
+
+Every entry is at least seven. Therefore every hypothetical nontrivial cycle satisfies
+\[
+\boxed{m\ge7.}
+\]
+
+Combining this with the strict minimum-member estimate (48.3),
+\[
+7\le m<\frac{1}{2^{A/p}-3}.
+\]
+A necessary condition is consequently
+\[
+\frac{1}{2^{A/p}-3}>7,
+\]
+or equivalently
+\[
+\boxed{\frac Ap<\log_2\!\left(\frac{22}{7}\right).}
+\tag{49.1}
+\]
+
+Thus we obtain a genuine partial exclusion theorem:
+
+\[
+\boxed{
+\frac Ap\ge\log_2(22/7)
+\quad\Longrightarrow\quad
+\text{no nontrivial odd cycle with that average valuation}.
+}
+\]
+
+This is an all-period statement: it uses only the exact two-step suffix congruence, the minimum-member condition, and the product identity. It does not depend on a finite computational sweep.
+
+### What remains
+
+The admissible average window is
+\[
+\log_2 3<\frac Ap<\log_2(10/3).
+\]
+Section 49 removes its upper portion, leaving only
+\[
+\boxed{
+\log_2 3<\frac Ap<\log_2(22/7).
+}
+\]
+The remaining interval is narrow but nonempty. Longer suffixes \(r\ge3\) are the natural next step: compute their CRT minima and seek a sequence of stronger lower bounds on \(m\).
+
+**Scope:** this is a necessary-condition exclusion for the stated average-valuation range, not a proof that all nontrivial cycles are impossible.
