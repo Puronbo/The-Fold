@@ -1242,3 +1242,57 @@ holds. The reduced check comprised 9,171 exact comparisons, with no failures.
 This is a finite-range verification of the modulo-eight lower bounds as inputs to the sufficient obstruction. It does not prove (33.1) for all periods. In particular, the small residue classes modulo eight do not control how close \(2^A\) can be to \(3^p\) as \(p\) grows; a uniform proof must address that approximation issue rather than extrapolate from the finite sweep.
 
 **Next precise target.** Obtain an effective lower bound for \(2^A-3^p\) over the admissible integer pairs \(p\log_2 3<A<p\log_2(10/3)\), strong enough to control \(2^{A/p}-3\). Without such a bound, the low-bit CRT estimates alone do not close the argument.
+
+
+## 34. A uniform congruence lower bound for the denominator gap
+
+Write
+\[
+q=2^A-3^p.
+\]
+For every admissible nontrivial-cycle pair, \(A>p\log_2 3\), hence \(A\ge p+1\ge4\). Therefore \(16\mid2^A\), and
+\[
+q\equiv-3^p\pmod{16}.
+\]
+The powers of \(3\) modulo \(16\) have period four. Since \(q>0\), this gives the exact residue-class lower bound
+\[
+\boxed{
+q\ge
+\begin{cases}
+13,&p\equiv1\pmod4,\\
+7,&p\equiv2\pmod4,\\
+5,&p\equiv3\pmod4,\\
+15,&p\equiv0\pmod4.
+\end{cases}}
+\tag{34.1}
+\]
+In particular, \(q\ge5\) for every \(p\ge3\). This rules out not only \(q=1\), but every positive gap below five, without invoking a theorem on linear forms in logarithms.
+
+For \(p\ge4\), we have \(A\ge5\), so the same argument modulo \(32\) yields the sharper eight-class table
+\[
+\boxed{
+\begin{array}{c|rrrrrrrr}
+p\bmod8&0&1&2&3&4&5&6&7\\ \hline
+q\text{ lower bound}&31&29&23&5&15&13&7&21
+\end{array}}
+\tag{34.2}
+\]
+These are lower bounds, not equalities: the actual \(q\) is the positive integer in the indicated residue class modulo \(32\).
+
+The gap also gives an exact factorization useful for quantitative estimates. Put \(x=2^{A/p}>3\). Then
+\[
+q=x^p-3^p=(x-3)\sum_{j=0}^{p-1}x^{p-1-j}3^j.
+\]
+Since the average-valuation window gives \(x<10/3\), every term in the sum is less than \((10/3)^{p-1}\). Consequently
+\[
+\boxed{
+2^{A/p}-3>
+\frac{q}{p(10/3)^{p-1}}
+\ge
+\frac{q_{\min}(p)}{p(10/3)^{p-1}},
+}
+\tag{34.3}
+\]
+where \(q_{\min}(p)\) may be taken from (34.1), or from (34.2) when \(p\ge4\).
+
+This is a rigorous period-dependent lower bound on the denominator gap. It is not yet strong enough, by itself, to prove the CRT obstruction (29.1) uniformly: the geometric-sum estimate is deliberately coarse. The next step is to exploit the actual powers \(x^{p-1-j}3^j\), rather than replacing every term by the same worst-case bound.
