@@ -1,0 +1,24 @@
+name: Fold AI prototypes
+
+on:
+  push:
+    branches:
+      - "foldproof/**"
+  pull_request:
+    paths:
+      - "tools/FoldConcept.py"
+      - "tools/FoldLoop.py"
+      - ".github/workflows/fold-ai-prototypes.yml"
+
+jobs:
+  prototype-regressions:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Test concept learner
+        run: python tools/FoldConcept.py
+      - name: Test feedback loop
+        run: python tools/FoldLoop.py
