@@ -37,10 +37,8 @@ class CompoundUnitTests(unittest.TestCase):
             ({"value": 1, "unit": "Pa"}, {"value": 1, "unit": "N/m^2"}),
             ({"value": 1, "unit": "Hz"}, {"value": 1, "unit": "1/s"}),
         ]
-        # The grammar intentionally has no standalone scalar '1' token.
-        for left, right in cases[:-1]:
+        for left, right in cases:
             self.assertEqual(parse_quantity(left), parse_quantity(right))
-        self.assertIsNone(parse_quantity(cases[-1][1]))
 
     def test_inverse_and_repeated_unit_powers(self):
         self.assertEqual(
@@ -88,6 +86,36 @@ class CompoundUnitTests(unittest.TestCase):
         UnitQuantityProposer().apply(learner)
         self.assertFalse(learner.equivalent("one_metre", "one_second"))
 
+
+
+class StageNineRegressionTests(unittest.TestCase):
+    def test_single_unit_equivalence_and_hard_negative(self):
+        learner = ConceptLearner("physical quantity equality")
+        learner.add_instance("m", {"value": 1, "unit": "m"})
+        learner.add_instance("cm", {"value": 100, "unit": "cm"})
+        learner.add_instance("s", {"value": 1, "unit": "s"})
+        batch = UnitQuantityProposer().apply(learner)
+        self.assertTrue(learner.equivalent("m", "cm"))
+        self.assertFalse(learner.equivalent("m", "s"))
+        self.assertTrue(batch.counterexamples)
+
+    def test_unknown_units_and_invalid_numeric_values_are_skipped(self):
+        for payload in (
+            {"value": 1, "unit": "parsec"},
+            {"value": 0.1, "unit": "m"},
+            {"value": True, "unit": "m"},
+            {"value": Decimal("NaN"), "unit": "m"},
+            {"value": Decimal("Infinity"), "unit": "m"},
+            {"value": "1", "unit": "m"},
+            ["1", "m"],
+        ):
+            self.assertIsNone(parse_quantity(payload))
+
+    def test_wrong_context_is_rejected(self):
+        learner = ConceptLearner("visual similarity")
+        learner.add_instance("a", {"value": 1, "unit": "m"})
+        with self.assertRaises(ValueError):
+            UnitQuantityProposer().propose(learner)
 
 if __name__ == "__main__":
     unittest.main()
