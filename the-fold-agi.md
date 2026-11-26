@@ -112,6 +112,12 @@ The stage is a proposed evaluation target, not evidence that the corpus or the a
 
 A first deterministic prototype now lives in `agi/concept_learner.py`, with tests in `agi/test_concept_learner.py`. It accepts scored candidate equivalences and explicit counterexamples, rebuilds task-specific partitions, and preserves the original instance payloads. It does not discover concepts autonomously; the evidence is supplied to it. This isolates the consistency and revision problem before adding a learned proposal mechanism.
 
+## Stage 9: evidence-based proposal generation
+
+`agi/concept_proposer.py` adds a deterministic proposal mechanism for the narrow task of physical-quantity equality. It normalizes supported metric units using exact rational arithmetic, proposes equivalence when dimension and canonical value agree, and emits hard negatives when canonical numerals agree but dimensions differ. The proposal batch can be inspected before it is applied to the Stage 8 learner. Tests are in `agi/test_concept_proposer.py`; the design and limits are in `agi/stage-9-proposal-generation.md`.
+
+This is a real but narrow increase in autonomy: proposals are generated from structured observations rather than supplied manually. The unit table and task context remain explicit, so this is not open-domain semantic discovery or evidence of AGI.
+
 ## Failure modes
 
 - **Rhyme inflation.** The measured fraction is flat: `0.692 ± 0.011` exact, `31%` rhyme or false
