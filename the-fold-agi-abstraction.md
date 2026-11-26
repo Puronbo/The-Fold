@@ -293,3 +293,27 @@ The system should maintain multiple abstractions of the same instance when diffe
 **A useful concept is a task-scoped abstraction that groups what can be treated alike, preserves the relationships needed for reasoning, and records what it has deliberately forgotten.**
 
 The next test is not to add more definitions. It is to implement one small concept learner that proposes equivalence classes, checks their laws, preserves residual information, and revises a class when a counterexample appears.
+
+
+## 14. Executable prototype: FoldConcept
+
+The first small learner is implemented in `tools/FoldConcept.py` (standard library only).
+
+It provides:
+- records with stable identifiers, feature values, and provenance;
+- explicit task contexts listing the features relevant to a task;
+- a quotient classifier induced by equality of projected feature signatures;
+- finite exhaustive checks of reflexivity, symmetry, and transitivity;
+- concept views that retain the original source record and identify features omitted from the current projection;
+- counterexample-driven context refinement, which adds a feature only when it actually separates a pair previously grouped together;
+- a held-out-instance check showing that a new record can map to an existing task-relative class.
+
+Run it with:
+
+```sh
+python tools/FoldConcept.py
+```
+
+The regression suite contains nine checks. The implementation is intentionally explicit: it does not infer features, choose a task context, or discover semantic equivalence by itself. The equivalence classes are exact relative to the supplied feature projection; whether those features are appropriate is an empirical and task-dependent question.
+
+This prototype demonstrates a narrow executable loop — project, group, preserve residual, test, refine — not autonomous concept discovery, general reasoning, or AGI. The next engineering step is to let a model propose candidate features and contexts, while an independent verifier checks the resulting partitions and records counterexamples.
