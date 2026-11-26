@@ -224,7 +224,22 @@ Here X is the instance domain; C is the set of task contexts; \sim_c is context-
 
 The system should maintain multiple abstractions of the same instance when different tasks require different distinctions. A single irreversible compression is not a sufficient universal memory.
 
-## 13. Zones and status
+## 13. Executable prototype
+
+The first deterministic prototype is in `agi/concept_learner.py`, with standard-library tests in `agi/test_concept_learner.py`.
+
+Run from the repository root:
+
+```sh
+python -m unittest agi.test_concept_learner
+python agi/concept_learner.py
+```
+
+The learner stores original instance payloads, accepts scored candidate-equivalence links, and accepts explicit counterexamples. It rebuilds a partition in descending confidence order, rejecting a proposed merge if it would violate a counterexample. Thus a new counterexample can split a previously formed class without deleting the observations or evidence.
+
+This is **not** autonomous concept discovery: the candidate links and counterexamples are supplied explicitly. Confidence is a prioritization heuristic, not a calibrated probability. The prototype is a controlled test bed for partition consistency, evidence conflict, and preservation of residual data.
+
+## 14. Zones and status
 
 - The quotient construction, equivalence-relation requirements, partial orders, and functor laws are **exact** mathematics.
 - The Fold orbit quotient is an **exact** existing formal instance.
