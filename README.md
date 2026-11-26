@@ -246,7 +246,7 @@ author. The CMB enters as a rhyme; the exact physics is standard cosmology. See 
 | the crease moved into the parameter: the discriminant | `the-fold-discriminant.md` |
 | what "mathematics is physical" can mean | `the-fold-realization.md` |
 | the gate, and what a system would have to say | `the-fold-agi.md` |
-| abstraction, concepts, and the first executable task-scoped concept learner | [agi/abstraction-and-concepts.md](agi/abstraction-and-concepts.md); `agi/concept_learner.py`; `agi/test_concept_learner.py` |
+| abstraction, concepts, and executable proposal generation | [agi/abstraction-and-concepts.md](agi/abstraction-and-concepts.md); [Stage 9 proposal generation](agi/stage-9-proposal-generation.md); `agi/concept_learner.py`; `agi/concept_proposer.py`; tests in `agi/test_concept_*.py` |
 | what counts as value, and what the meters read | `the-fold-value.md` |
 | which theorems already have every premise | `the-fold-theorems.md` |
 | where the physical words have no object | `the-fold-void.md` |
@@ -298,6 +298,7 @@ author. The CMB enters as a rhyme; the exact physics is standard cosmology. See 
 | `the-fold-realization.md` | follow-up note: realization - three readings of "mathematics is physical", the three classes, four ceilings, and the measured exact fraction |
 | `the-fold-agi.md` | follow-up note: the gate - premise closure as the criterion, the four-valued type, the stages, and the four adjunctions |
 | [agi/abstraction-and-concepts.md](agi/abstraction-and-concepts.md) | AGI research note: task-relative concepts, quotient abstraction, typed relations, invariants, and counterexample-driven revision |
+| [agi/stage-9-proposal-generation.md](agi/stage-9-proposal-generation.md) | Stage 9: exact unit-aware concept proposals, hard negatives, and scope limits |
 | `the-fold-value.md` | follow-up note: value - physics as the model supply, seven meters, and the orphan test |
 | `the-fold-theorems.md` | follow-up note: the theorem ledger - twelve theorems read for premise closure, the six that close, and what the five earlier notes actually did |
 | `the-fold-void.md` | follow-up note: the void map - ten physical words, the nearest exact object, the six hosts, the order of the gaps, and the probability row's first move |
