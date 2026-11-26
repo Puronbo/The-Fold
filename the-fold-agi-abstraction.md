@@ -366,3 +366,27 @@ The module uses only the Python standard library. Its tests cover provenance, ta
 The memory is a local prototype. It does not provide encryption, access control, multi-process locking, semantic retrieval, or protection if an attacker can alter both the ledger and its trusted head. Confidence is recorded metadata, not a calibrated probability.
 
 The intended architecture now has three separable layers: concept projection (`FoldConcept`), constraint/counterexample refinement (`FoldLoop`), and auditable persistent history (`FoldMemory`). A future model can propose memories and abstractions, but it must not be allowed to rewrite the evidence or certify its own claims.
+
+
+## 17. FoldMind: integrated model-independent cycle
+
+`tools/FoldMind.py` orchestrates the three existing components in one deterministic cycle:
+
+1. Validate and record incoming observations with their source provenance.
+2. Construct the initial task-relative abstraction with `FoldConcept`.
+3. Pass candidate features and pair constraints to `FoldLoop`.
+4. Record each selected refinement as a separate memory event.
+5. Rebuild the final concept classes and independently audit the constraints.
+6. Check the finite equivalence laws and append a cycle report to `FoldMemory`.
+
+The model-facing boundary is the data-only `FoldProposal` structure. An AI model could propose a task, features, and must-link/cannot-link constraints, but FoldMind validates those proposals and never executes generated code. Contradictory constraints are reported as unresolved and marked `needs-review`; they are not treated as successful learning.
+
+Run:
+
+```sh
+python tools/FoldMind.py
+```
+
+The integrated regression checks verify observation retention, refinement history, final reports, equivalence laws, memory-chain integrity, contradiction handling, and rejection of invalid proposals before memory writes.
+
+This is an integrated symbolic learning workflow, not yet a complete AI agent. It does not itself perceive raw sensory data, invent grounded features, train a neural model, plan actions, or autonomously decide whether its constraints are correct. Those are explicit next research problems. Its contribution is a testable boundary between model proposals and deterministic, auditable operations.
