@@ -317,3 +317,25 @@ python tools/FoldConcept.py
 The regression suite contains nine checks. The implementation is intentionally explicit: it does not infer features, choose a task context, or discover semantic equivalence by itself. The equivalence classes are exact relative to the supplied feature projection; whether those features are appropriate is an empirical and task-dependent question.
 
 This prototype demonstrates a narrow executable loop — project, group, preserve residual, test, refine — not autonomous concept discovery, general reasoning, or AGI. The next engineering step is to let a model propose candidate features and contexts, while an independent verifier checks the resulting partitions and records counterexamples.
+
+
+## 15. Constraint-guided Fold feedback loop
+
+`tools/FoldLoop.py` adds a deterministic feedback controller around the concept learner.
+
+The caller supplies:
+- observations with stable identifiers and preserved provenance;
+- a starting task context;
+- candidate features proposed by an upstream model or researcher;
+- pair constraints, each explicitly marked as must-link (same concept) or cannot-link (different concepts), with an optional reason.
+
+The loop audits the current abstraction, then greedily selects a candidate feature that separates the largest number of currently violated cannot-link pairs without splitting any must-link pair. Every selected feature and the pairs it separates are recorded. If the constraints conflict or the available features cannot resolve them, the loop returns the remaining violations instead of pretending success.
+
+Run from the repository root:
+
+```sh
+python tools/FoldConcept.py
+python tools/FoldLoop.py
+```
+
+The loop is deterministic and does not execute model-generated code. It is a constrained feature-selection baseline, not semantic understanding. In particular, correctness depends on the quality and consistency of the supplied pair constraints; the greedy strategy is not guaranteed to find a solution whenever one exists. Its value is that a model's proposed abstraction becomes inspectable and falsifiable before it is accepted.
