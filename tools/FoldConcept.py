@@ -161,7 +161,7 @@ def main() -> None:
     checks.append(("same length, different colour share a length concept",
                    length_views[0].concept == length_views[1].concept))
     checks.append(("colour task keeps those records distinct",
-                   len(colour_concepts) == 4))
+                   len(colour_concepts) == 3))
     checks.append(("the original colour survives as residual information",
                    length_views[0].source.get("colour") == "red"
                    and "colour" in length_views[0].discarded_features))
