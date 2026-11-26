@@ -246,7 +246,7 @@ author. The CMB enters as a rhyme; the exact physics is standard cosmology. See 
 | the crease moved into the parameter: the discriminant | `the-fold-discriminant.md` |
 | what "mathematics is physical" can mean | `the-fold-realization.md` |
 | the gate, and what a system would have to say | `the-fold-agi.md` |
-| abstraction and concepts: task-relative equivalence, invariants, and concept formation | [agi/abstraction-and-concepts.md](agi/abstraction-and-concepts.md) |
+| abstraction, concepts, and the first executable task-scoped concept learner | [agi/abstraction-and-concepts.md](agi/abstraction-and-concepts.md); `agi/concept_learner.py`; `agi/test_concept_learner.py` |
 | what counts as value, and what the meters read | `the-fold-value.md` |
 | which theorems already have every premise | `the-fold-theorems.md` |
 | where the physical words have no object | `the-fold-void.md` |
