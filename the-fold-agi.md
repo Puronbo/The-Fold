@@ -108,6 +108,10 @@ The formal proposal is in `agi/abstraction-and-concepts.md`. It uses quotient ma
 
 The stage is a proposed evaluation target, not evidence that the corpus or the architecture is AGI.
 
+## Stage 8: executable concept learner
+
+A first deterministic prototype now lives in `agi/concept_learner.py`, with tests in `agi/test_concept_learner.py`. It accepts scored candidate equivalences and explicit counterexamples, rebuilds task-specific partitions, and preserves the original instance payloads. It does not discover concepts autonomously; the evidence is supplied to it. This isolates the consistency and revision problem before adding a learned proposal mechanism.
+
 ## Failure modes
 
 - **Rhyme inflation.** The measured fraction is flat: `0.692 ± 0.011` exact, `31%` rhyme or false
