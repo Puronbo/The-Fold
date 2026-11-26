@@ -140,3 +140,10 @@ This is a real but narrow increase in autonomy: proposals are generated from str
 
 The one sentence: an AGI is not a bigger corpus, it is a corpus that can say what it does not have —
 and the gate that makes that sentence checkable already exists.
+
+
+## Stage 10: compound-unit abstraction
+
+`agi/concept_proposer.py` now parses products, quotients, and bounded integer powers of declared SI units into exact rational conversion factors and `(length, mass, time)` dimension vectors. It proposes equivalence only when both the normalized value and dimension vector agree, and produces hard negatives when equal numerals have incompatible dimensions. The Stage 10 note and expanded regression suite are in `agi/stage-10-compound-units.md` and `agi/test_concept_proposer.py`.
+
+The existing GitHub Actions Python workflow now runs the concept learner and proposer tests on changes under `agi/`. This makes regressions observable in CI; it does not establish general semantic learning or AGI.
