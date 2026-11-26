@@ -8,7 +8,7 @@ multiplication are deliberately unsupported.
 from __future__ import annotations
 
 import re
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from decimal import Decimal
 from fractions import Fraction
 from typing import Any
@@ -24,7 +24,7 @@ _ZERO: Dimension = (0, 0, 0)
 class Quantity:
     dimension: Dimension
     base_value: Fraction
-    unit: str
+    unit: str = field(compare=False)
 
 
 @dataclass(frozen=True)
