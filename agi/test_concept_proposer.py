@@ -51,6 +51,8 @@ class UnitQuantityProposerTests(unittest.TestCase):
         self.assertIsNone(parse_quantity({"value": 1, "unit": "parsec"}))
         self.assertIsNone(parse_quantity({"value": 0.1, "unit": "m"}))
         self.assertIsNone(parse_quantity({"value": True, "unit": "m"}))
+        self.assertIsNone(parse_quantity({"value": Decimal("NaN"), "unit": "m"}))
+        self.assertIsNone(parse_quantity({"value": Decimal("Infinity"), "unit": "m"}))
 
     def test_malformed_payload_is_skipped(self):
         self.assertIsNone(parse_quantity(["1", "m"]))
