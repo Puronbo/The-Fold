@@ -70,7 +70,7 @@ Each stage has a deliverable that the existing gate can check.
 | 4 | the adjunction loop | adjoin measure, flow, bath, observer in that order; record which invariants survive | not started |
 | 5 | measurement | one gate check tied to an instrument, with units and error bars | not started |
 | 6 | self-application | the system zones its own output, including this note | partial |
-| 7 | concept formation | task-relative equivalence, abstraction maps, invariants, residual information, counterexample-driven revision | `agi/abstraction-and-concepts.md` |
+| 7 | concept formation | task-relative equivalence, abstraction maps, invariants, residual information, counterexample-driven revision | [AGI abstraction and concept formation](agi/abstraction-and-concepts.md) |
 
 Stage 1 is the load-bearing one. A ledger of twelve theorems is small enough to finish and large enough
 to show whether "premise closure" is a real capability or a phrase. It is now written, and the answer is
