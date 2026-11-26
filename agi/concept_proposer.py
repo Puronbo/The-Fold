@@ -52,7 +52,8 @@ _UNITS: dict[str, tuple[Dimension, Fraction]] = {
     "Hz": ((0, 0, -1), Fraction(1)),
 }
 
-_TOKEN = re.compile(r"[A-Za-z]+(?:\^-?\d+)?|[*/]")
+_ZERO_DIMENSION: Dimension = (0, 0, 0)
+_TOKEN = re.compile(r"1|[A-Za-z]+(?:\^-?\d+)?|[*/]")
 
 
 def _exact_fraction(value: Any) -> Fraction | None:
@@ -86,14 +87,18 @@ def parse_unit_expression(expression: Any) -> tuple[Dimension, Fraction] | None:
         if expect_unit:
             if token in ("*", "/"):
                 return None
-            if "^" in token:
-                symbol, power_text = token.split("^", 1)
-                power = int(power_text)
+            if token == "1":
+                symbol, power = "1", 1
+                dimension, unit_factor = _ZERO_DIMENSION, Fraction(1)
             else:
-                symbol, power = token, 1
-            if abs(power) > 12 or symbol not in _UNITS:
-                return None
-            dimension, unit_factor = _UNITS[symbol]
+                if "^" in token:
+                    symbol, power_text = token.split("^", 1)
+                    power = int(power_text)
+                else:
+                    symbol, power = token, 1
+                if abs(power) > 12 or symbol not in _UNITS:
+                    return None
+                dimension, unit_factor = _UNITS[symbol]
             effective_power = sign * power
             for index in range(3):
                 dimensions[index] += dimension[index] * effective_power
