@@ -251,4 +251,4 @@ This is **not** autonomous concept discovery: the candidate links and counterexa
 
 **A useful concept is a task-scoped abstraction that groups what can be treated alike, preserves the relationships needed for reasoning, and records what it has deliberately forgotten.**
 
-The next test is implementation: build a small concept learner that proposes equivalence classes, checks their laws, preserves residual information, and revises a class when a counterexample appears.
+The next test is proposal generation: move from manually supplied equivalence edges to deterministic proposals from structured observations, while retaining the same counterexample-aware verification gate. The first narrow implementation is documented in `agi/stage-9-proposal-generation.md`.
