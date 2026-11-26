@@ -1,0 +1,25 @@
+name: AGI concept learner tests
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "agi/**"
+      - ".github/workflows/agi-concepts.yml"
+  pull_request:
+    paths:
+      - "agi/**"
+      - ".github/workflows/agi-concepts.yml"
+
+jobs:
+  concept-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Test concept learner and compound-unit proposer
+        run: python -m unittest agi.test_concept_learner agi.test_concept_proposer -v
+      - name: Run learner self-test
+        run: python agi/concept_learner.py
