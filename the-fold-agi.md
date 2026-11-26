@@ -147,3 +147,9 @@ and the gate that makes that sentence checkable already exists.
 `agi/concept_proposer.py` now parses products, quotients, and bounded integer powers of declared SI units into exact rational conversion factors and `(length, mass, time)` dimension vectors. It proposes equivalence only when both the normalized value and dimension vector agree, and produces hard negatives when equal numerals have incompatible dimensions. The Stage 10 note and expanded regression suite are in `agi/stage-10-compound-units.md` and `agi/test_concept_proposer.py`.
 
 The existing GitHub Actions Python workflow now runs the concept learner and proposer tests on changes under `agi/`. This makes regressions observable in CI; it does not establish general semantic learning or AGI.
+
+## Stage 11: typed quantities and affine units
+
+The proposer now extends dimension vectors to `(length, mass, time, temperature)`, accepts optional semantic quantity kinds, and requires dimension, normalized value, and kind to agree before proposing equivalence. This prevents explicitly typed energy and torque from collapsing merely because they share dimensions. It also handles absolute Kelvin/Celsius/Fahrenheit using exact affine offsets, while treating temperature intervals as separate multiplicative units. Tests are in `agi/test_concept_proposer.py`; the design and limits are in `agi/stage-11-typed-affine-quantities.md`.
+
+Kinds are supplied by the caller rather than learned. This remains a deterministic symbolic subsystem; it does not infer physical semantics or establish AGI.
