@@ -8,6 +8,8 @@ on:
     paths:
       - "tools/FoldConcept.py"
       - "tools/FoldLoop.py"
+      - "tools/FoldMemory.py"
+      - "tools/FoldMind.py"
       - ".github/workflows/fold-ai-prototypes.yml"
 
 jobs:
@@ -24,3 +26,5 @@ jobs:
         run: python tools/FoldLoop.py
       - name: Test append-only memory
         run: python tools/FoldMemory.py
+      - name: Test integrated FoldMind cycle
+        run: python tools/FoldMind.py
