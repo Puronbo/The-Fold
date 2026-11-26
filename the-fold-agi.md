@@ -70,6 +70,7 @@ Each stage has a deliverable that the existing gate can check.
 | 4 | the adjunction loop | adjoin measure, flow, bath, observer in that order; record which invariants survive | not started |
 | 5 | measurement | one gate check tied to an instrument, with units and error bars | not started |
 | 6 | self-application | the system zones its own output, including this note | partial |
+| 7 | concept formation | task-relative equivalence, abstraction maps, invariants, residual information, counterexample-driven revision | `the-fold-agi-abstraction.md` |
 
 Stage 1 is the load-bearing one. A ledger of twelve theorems is small enough to finish and large enough
 to show whether "premise closure" is a real capability or a phrase. It is now written, and the answer is
@@ -98,6 +99,14 @@ The four are not the whole list. `the-fold-void.md` reads ten physical words and
 hosts: these four, plus a **bundle** (for charge and field) and an **inertia** (for mass). A gauge theory
 is not a measure, a flow, a bath, or an observer, so the four-stage programme is the first four nodes of a
 six-node graph, not the graph.
+
+## Stage 7: concept formation
+
+The next capability is not a larger vocabulary. It is a system that can construct a task-scoped concept from varied instances, state which transformations preserve it, retain distinctions that another task may need, and revise the concept when a counterexample appears.
+
+The formal proposal is in `the-fold-agi-abstraction.md`. It uses quotient maps for task-relative equivalence, typed relations for concept structure, and commuting diagrams to test whether abstraction is consistent with representation changes. The Fold's existing orbit quotient is an exact small model; discovering useful equivalences from experience remains an engineering problem.
+
+The stage is a proposed evaluation target, not evidence that the corpus or the architecture is AGI.
 
 ## Failure modes
 
