@@ -339,3 +339,30 @@ python tools/FoldLoop.py
 ```
 
 The loop is deterministic and does not execute model-generated code. It is a constrained feature-selection baseline, not semantic understanding. In particular, correctness depends on the quality and consistency of the supplied pair constraints; the greedy strategy is not guaranteed to find a solution whenever one exists. Its value is that a model's proposed abstraction becomes inspectable and falsifiable before it is accepted.
+
+
+## 16. Append-only, auditable memory
+
+`tools/FoldMemory.py` adds a persistent JSONL event ledger.
+
+Each event records:
+- event type and subject;
+- content, task, and source provenance;
+- confidence in the range 0–1;
+- tags for retrieval;
+- an optional reference to the event it supersedes;
+- the previous event digest and its own SHA-256 digest.
+
+Corrections append a new event; they do not erase the earlier claim. Normal recall hides superseded claims by default, while audit recall can include the full history. The verifier checks sequence numbers, the digest chain, and optionally a separately retained expected head digest. Retaining that expected head is important: a hash chain alone cannot detect an attacker who rewrites the entire ledger and recomputes every digest.
+
+Run:
+
+```sh
+python tools/FoldMemory.py
+```
+
+The module uses only the Python standard library. Its tests cover provenance, task/tag retrieval, append-only correction, audit history, chain validation, truncation detection against a trusted head, and tamper detection.
+
+The memory is a local prototype. It does not provide encryption, access control, multi-process locking, semantic retrieval, or protection if an attacker can alter both the ledger and its trusted head. Confidence is recorded metadata, not a calibrated probability.
+
+The intended architecture now has three separable layers: concept projection (`FoldConcept`), constraint/counterexample refinement (`FoldLoop`), and auditable persistent history (`FoldMemory`). A future model can propose memories and abstractions, but it must not be allowed to rewrite the evidence or certify its own claims.
