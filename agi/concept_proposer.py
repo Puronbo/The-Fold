@@ -46,8 +46,13 @@ def _exact_fraction(value: Any) -> Fraction | None:
     """Accept exact numeric inputs only; reject floats and booleans."""
     if isinstance(value, bool) or isinstance(value, float):
         return None
+    if isinstance(value, Decimal) and not value.is_finite():
+        return None
     if isinstance(value, (int, Fraction, Decimal)):
-        return Fraction(value)
+        try:
+            return Fraction(value)
+        except (ValueError, OverflowError, ZeroDivisionError):
+            return None
     return None
 
 
