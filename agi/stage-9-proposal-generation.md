@@ -61,4 +61,4 @@ python agi/concept_learner.py
 
 ## Next falsifiable extension
 
-Add compound-unit parsing and dimensional exponent vectors (for example, m/s and km/h), then test that normalization is invariant under equivalent unit rewrites while rejecting dimensionally incompatible quantities. Keep measured uncertainty separate from exact symbolic equality.
+Stage 10 implements compound-unit parsing and dimensional exponent vectors. The next test is typed quantity kinds and affine-unit handling, with measured uncertainty kept separate from exact symbolic equality.
