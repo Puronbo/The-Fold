@@ -77,4 +77,4 @@ The dimension vector is a useful invariant, not a complete description of a phys
 
 ## Next test
 
-Add typed quantity kinds and affine-unit handling, then evaluate whether the system can distinguish equal dimensions that denote different physical concepts. Preserve uncertainty as data rather than rounding it away.
+Stage 11 adds explicit quantity kinds and affine temperature handling. The next test is to preserve measurement uncertainty and calibration metadata rather than rounding them away or treating every observation as exact.
