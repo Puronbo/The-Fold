@@ -22,3 +22,5 @@ jobs:
         run: python tools/FoldConcept.py
       - name: Test feedback loop
         run: python tools/FoldLoop.py
+      - name: Test append-only memory
+        run: python tools/FoldMemory.py
