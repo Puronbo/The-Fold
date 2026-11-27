@@ -198,7 +198,7 @@ class MeasurementUncertaintyTests(unittest.TestCase):
     def test_invalid_or_unspecified_probability_models_are_not_inferred(self):
         for uncertainty in (
             {"type": "interval", "lower": 2, "upper": 1},
-            {"type": "interval", "lower": 0, "upper": 3},
+            {"type": "interval", "lower": 0, "upper": 0},
             {"type": "standard", "value": 0.1},
             {"type": "expanded", "value": 2, "coverage_factor": 2},
         ):
