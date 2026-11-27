@@ -153,3 +153,11 @@ The existing GitHub Actions Python workflow now runs the concept learner and pro
 The proposer now extends dimension vectors to `(length, mass, time, temperature)`, accepts optional semantic quantity kinds, and requires dimension, normalized value, and kind to agree before proposing equivalence. This prevents explicitly typed energy and torque from collapsing merely because they share dimensions. It also handles absolute Kelvin/Celsius/Fahrenheit using exact affine offsets, while treating temperature intervals as separate multiplicative units. Tests are in `agi/test_concept_proposer.py`; the design and limits are in `agi/stage-11-typed-affine-quantities.md`.
 
 Kinds are supplied by the caller rather than learned. This remains a deterministic symbolic subsystem; it does not infer physical semantics or establish AGI.
+
+## Stage 12: measurement intervals and calibration corrections
+
+`agi/concept_proposer.py` now parses exact nominal quantities with optional closed measurement intervals and signed, caller-supplied calibration corrections. It normalizes nominal values and interval endpoints through the Stage 11 unit system, including affine temperature scales. The proposer keeps exact equivalence separate from interval compatibility: overlap is recorded as a separate relation and is never merged into the learner's equivalence classes. Disjoint intervals produce no compatibility proposal, not an automatic semantic counterexample.
+
+The parser deliberately rejects unsupported statistical uncertainty types rather than assuming a probability distribution or coverage factor. It does not estimate calibration bias, propagate covariance, or infer measurement traceability. The implementation and limitations are documented in `agi/stage-12-measurement-uncertainty.md`; regression tests remain in `agi/test_concept_proposer.py`.
+
+This stage adds explicit handling of measurement uncertainty to a narrow symbolic quantity task. It is not full metrology, statistical inference, autonomous scientific discovery, or evidence that AGI has been achieved.
