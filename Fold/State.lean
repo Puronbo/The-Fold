@@ -132,4 +132,30 @@ theorem comp_injective_of_injective
   apply hg
   exact h
 
+/-- Restore the one field erased by collapse, using a retained value. -/
+def restoreValue (s : State) (originalValue : Int) : State :=
+  { s with value := originalValue }
+
+/-- The collapsed state plus its original value reconstructs the full state. -/
+theorem restoreValue_collapse (s : State) :
+    restoreValue (collapse s) s.value = s := by
+  cases s
+  rfl
+
+/-- Retaining the erased value makes the collapse encoding injective. -/
+def collapseWithValue (s : State) : State × Int :=
+  (collapse s, s.value)
+
+theorem collapseWithValue_injective :
+    Function.Injective collapseWithValue := by
+  intro s t h
+  have hs : collapse s = collapse t := congrArg Prod.fst h
+  have hv : s.value = t.value := congrArg Prod.snd h
+  cases s with
+  | mk sv sr sd sh =>
+    cases t with
+    | mk tv tr td th =>
+      simp [collapse] at hs
+      simp_all
+
 end Fold
