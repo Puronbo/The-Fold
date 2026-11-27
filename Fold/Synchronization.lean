@@ -320,3 +320,34 @@ theorem variable_rates_distinct_but_synchronized :
     variableRateA_firstArrival, variableRateB_firstArrival⟩
 
 end Fold
+
+
+/-- A trajectory may pause for a tick and still have a well-defined
+    first-arrival time. -/
+def pausedRate (n : Nat) : Nat :=
+  if n = 0 then 1 else if n = 1 then 0 else if n = 2 then 2 else 0
+
+/-- The paused trajectory has cumulative positions 0, 1, 1, 3. -/
+theorem pausedRate_firstArrival :
+    FirstArrival (fun _ t => cumulativeProgress pausedRate t = 3) 0 3 := by
+  change cumulativeProgress pausedRate 3 = 3 ∧
+    ∀ earlier, earlier < 3 → cumulativeProgress pausedRate earlier ≠ 3
+  constructor
+  · simp [cumulativeProgress, pausedRate]
+  · intro earlier hearlier hreach
+    have hcases : earlier = 0 ∨ earlier = 1 ∨ earlier = 2 := by omega
+    rcases hcases with h0 | h1 | h2
+    · subst earlier
+      simp [cumulativeProgress, pausedRate] at hreach
+    · subst earlier
+      simp [cumulativeProgress, pausedRate] at hreach
+    · subst earlier
+      simp [cumulativeProgress, pausedRate] at hreach
+
+/-- A zero-rate transition (a pause) does not invalidate first arrival;
+    it simply changes the common arrival time when it occurs before the target. -/
+theorem pause_preserves_first_arrival :
+    pausedRate 1 = 0 ∧
+    cumulativeProgress pausedRate 1 = cumulativeProgress pausedRate 2 ∧
+    pausedRate_firstArrival := by
+  exact ⟨by decide, by decide, pausedRate_firstArrival⟩
