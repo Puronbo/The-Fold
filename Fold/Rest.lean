@@ -81,7 +81,7 @@ def DifferentialRest (before after : RestContextState) : Prop :=
 /-- A transition may update only the condition while the kinematic state rests. -/
 def conditionOnlyStep (update : Int → Int) (s : RestContextState) :
     RestContextState :=
-  if h : ContextAtRest s then
+  if h : s.velocity = 0 then
     { s with condition := update s.condition }
   else s
 
