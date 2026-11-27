@@ -52,12 +52,12 @@ theorem rest_state_fixed
     transition, while rest states are fixed. -/
 def holdAtRest (movingStep : MotionState → MotionState)
     (s : MotionState) : MotionState :=
-  if h : AtRest s then s else movingStep s
+  if s.velocity == 0 then s else movingStep s
 
 /-- The hold-at-rest construction satisfies the stated invariant. -/
 theorem holdAtRest_invariant (movingStep : MotionState → MotionState) :
     RestInvariant (holdAtRest movingStep) := by
   intro s hrest
-  simp [holdAtRest, hrest]
+  simp [holdAtRest, AtRest, hrest]
 
 end Fold
