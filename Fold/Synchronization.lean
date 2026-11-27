@@ -348,7 +348,7 @@ theorem pausedRate_firstArrival :
 theorem pause_preserves_first_arrival :
     pausedRate 1 = 0 ∧
     cumulativeProgress pausedRate 1 = cumulativeProgress pausedRate 2 ∧
-    pausedRate_firstArrival := by
+    FirstArrival (fun _ t => cumulativeProgress pausedRate t = 3) 0 3 := by
   exact ⟨by decide, by decide, pausedRate_firstArrival⟩
 
 
