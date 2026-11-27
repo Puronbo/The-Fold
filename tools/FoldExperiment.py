@@ -106,7 +106,7 @@ def _self_test() -> None:
 
     h1 = Hypothesis("h-sun", "weather", "weather", "sun", "play", "yes",
                     2, ("t1", "t2"), (), None, "candidate")
-    h2 = Hypothesis("h-rain", "weather", "weather", "rain", "play", "yes",
+    h2 = Hypothesis("h-rain", "weather", "weather", "sun", "play", "no",
                     2, ("t3", "t4"), (), None, "candidate")
     h3 = Hypothesis("h-cloud", "weather", "weather", "cloud", "play", "no",
                     1, ("t5",), (), None, "candidate")
@@ -114,7 +114,7 @@ def _self_test() -> None:
         Example.make("try-sun", {"weather": "sun", "play": "yes"}), 1.0
     )
     costlier = ExperimentCandidate(
-        Example.make("try-rain", {"weather": "rain", "play": "yes"}), 2.0
+        Example.make("try-rain", {"weather": "sun", "play": "yes"}), 2.0
     )
     checks = []
     scored = score_candidate((h1, h2), balanced)
