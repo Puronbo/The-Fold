@@ -51,6 +51,17 @@ a three-state orbit needs two fixed-width bits. The ideal information
 content \(\log_2 m\) need not be an integer and is not the same as a
 fixed-width code length.
 
+If, separately, the orbit members are assigned equal normalized shares,
+each receives \(1/m\). The two-member case is the familiar
+
+\[
+\frac{n}{n+n}=\frac12\qquad(n\ne0).
+\]
+
+This equal-share normalization is not the selector bit count: \(1/m\)
+measures a share, while \(\lceil\log_2 m\rceil\) measures the fixed-width
+binary capacity needed to distinguish the orbit members.
+
 For a finite permutation group, the module agi/symmetry_actions.py now
 computes an OrbitReconstructionProfile for every state. It reports the orbit size,
 stabilizer, group size, selector redundancy, and exact minimum fixed-width
