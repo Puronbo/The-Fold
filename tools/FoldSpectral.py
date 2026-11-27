@@ -163,3 +163,68 @@ def cyclotomic_root_primes(order: int, limit: int) -> tuple[int, ...]:
         and any(_evaluate_mod(coefficients, value, prime) == 0
                 for value in range(prime))
     )
+
+
+def _is_prime(value: int) -> bool:
+    if value < 2:
+        return False
+    return all(value % divisor for divisor in range(2, int(value ** 0.5) + 1))
+
+
+def _euler_totient(value: int) -> int:
+    result = value
+    remaining = value
+    divisor = 2
+    while divisor * divisor <= remaining:
+        if remaining % divisor == 0:
+            while remaining % divisor == 0:
+                remaining //= divisor
+            result -= result // divisor
+        divisor += 1
+    if remaining > 1:
+        result -= result // remaining
+    return result
+
+
+def multiplicative_order(base: int, modulus: int) -> int:
+    """Least positive k with base**k == 1 (mod modulus)."""
+    if modulus < 1:
+        raise ValueError("modulus must be positive")
+    if modulus == 1:
+        return 1
+    base %= modulus
+    if _gcd(base, modulus) != 1:
+        raise ValueError("base and modulus must be coprime")
+    value = 1
+    for exponent in range(1, modulus + 1):
+        value = value * base % modulus
+        if value == 1:
+            return exponent
+    raise ArithmeticError("multiplicative order was not found")
+
+
+def _gcd(left: int, right: int) -> int:
+    while right:
+        left, right = right, left % right
+    return abs(left)
+
+
+def cyclotomic_spectral_degree(order: int, prime: int) -> int:
+    """Degree over F_p of a primitive order-th root, when p does not divide order.
+
+    This equals ord_order(p), the Frobenius orbit length. The prime must
+    be prime and coprime to order; the ramified case p | order is excluded.
+    """
+    if order < 1:
+        raise ValueError("order must be positive")
+    if not _is_prime(prime):
+        raise ValueError("prime must be prime")
+    if _gcd(order, prime) != 1:
+        raise ValueError("prime must not divide the cyclotomic order")
+    return multiplicative_order(prime, order)
+
+
+def cyclotomic_factor_count(order: int, prime: int) -> int:
+    """Number of irreducible factors of Phi_order over F_p for p not dividing order."""
+    degree = cyclotomic_spectral_degree(order, prime)
+    return _euler_totient(order) // degree
