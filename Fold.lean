@@ -185,3 +185,7 @@ import Fold.Complexity.Reduction
 
 #check Fold.positiveSpeed_firstArrival
 #check Fold.positive_speeds_synchronized_first_arrival
+
+#check Fold.firstArrival_unique
+#check Fold.SynchronizedBoundary
+#check Fold.synchronizedBoundary_unique
