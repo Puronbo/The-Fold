@@ -406,3 +406,34 @@ theorem firstArrival_reconstruction_exact
   rw [exact process t]
 
 end Fold
+
+
+/-- The two selector choices reconstruct the same state exactly on the
+    fixed set. Away from the crease, choosing the representative or its
+    folded partner gives genuinely different states. -/
+theorem reconstructState_choices_equal_iff_fixed {X : Type}
+    (F : Fold X) (representative : Chart F → X)
+    (q : Chart F) :
+    reconstructState F representative false q =
+      reconstructState F representative true q ↔
+        Fix F (representative q) := by
+  simp [reconstructState, Fix, eq_comm]
+
+/-- Off the fixed set, the Boolean selector is uniquely determined by
+    the reconstructed state. -/
+theorem reconstructState_selector_unique_off_crease {X : Type}
+    (F : Fold X) (representative : Chart F → X)
+    (q : Chart F) (hnotFixed : ¬ Fix F (representative q))
+    (b₁ b₂ : Bool)
+    (heq : reconstructState F representative b₁ q =
+      reconstructState F representative b₂ q) :
+    b₁ = b₂ := by
+  cases b₁ <;> cases b₂
+  · rfl
+  · have hfix := (reconstructState_choices_equal_iff_fixed
+      F representative q).2 (heq.symm)
+    exact False.elim (hnotFixed hfix)
+  · have hfix := (reconstructState_choices_equal_iff_fixed
+      F representative q).2 heq
+    exact False.elim (hnotFixed hfix)
+  · rfl
