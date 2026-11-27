@@ -345,3 +345,22 @@ available here: a common translation preserves equality and therefore
 preserves first arrival. It does not say that arbitrary rescaling,
 non-injective collapse, or a change in the trajectory's increments
 preserves arrival times.
+
+
+## 17. Process-specific targets and reversible fold transport
+
+A synchronized family need not share one numerical target or even one fold. Let each process (a) have its own state path (P_a(t)), target predicate (H_a), and involution (f_a). Define the transported target by
+
+\\[
+H'_a(x)\\;\\Longleftrightarrow\\;H_a(f_a(x)).
+\\]
+
+Then, at every tick, (H_a(f_a(P_a(t)))) and (H'_a(P_a(t))) are definitionally the same event. Consequently, the family has the same synchronized first-arrival time before and after this change of description. No assumption that the original targets are individually fold-invariant is needed: the target is moved along with the state transformation.
+
+Because each (f_a) is an involution, transporting each target a second time restores it:
+
+\\[
+H''_a(x)=H_a(f_a(f_a(x)))=H_a(x).
+\\]
+
+The Lean declarations `foldTransportFamilyTarget`, `synchronizedBoundary_fold_target_transport`, and `foldTransportFamilyTarget_involutive` formalize this process-by-process result. The conclusion is exact but conditional: it preserves arrival under a coordinated change of representation, not under an arbitrary fold while holding a non-invariant target fixed.
