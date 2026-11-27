@@ -23,7 +23,7 @@ from FoldHypothesis import Example as HypothesisExample, generate, evaluate, ret
 from FoldHypothesis import Hypothesis
 from FoldExperiment import ExperimentCandidate, ExperimentSelection, choose_experiment as rank_experiments
 try:
-    from .FoldRetention import RetentionPlan, minimum_retention_features, verify_retention_plan
+    from .FoldRetention import RetentionPlan, minimum_retention_features, verify_retention_plan, retention_plan_proves_optimality
 except ImportError:  # pragma: no cover - direct script execution
     from FoldRetention import RetentionPlan, minimum_retention_features, verify_retention_plan
 
@@ -268,6 +268,13 @@ class FoldMind:
                 instances, plan, tuple(must_link_pairs), tuple(cannot_link_pairs)
             )
         )
+        optimality_certified = (
+            plan is not None
+            and retention_plan_proves_optimality(
+                instances, context, tuple(candidate_features),
+                tuple(must_link_pairs), tuple(cannot_link_pairs), plan,
+            )
+        )
         payload = {
             "base_features": list(base_features),
             "candidate_features": list(candidate_features),
@@ -275,15 +282,20 @@ class FoldMind:
             "final_features": list(plan.final_features) if plan else None,
             "minimum_cardinality": len(plan.retained_features) if plan else None,
             "independently_verified": verified,
-            "status": "verified" if verified else "no-safe-plan",
+            "lower_bound_pairs": [list(pair) for pair in plan.lower_bound_pairs] if plan else [],
+            "lower_bound": len(plan.lower_bound_pairs) if plan else 0,
+            "optimality_certified": optimality_certified,
+            "status": ("optimality-certified" if optimality_certified else
+                       "feasible-only" if verified else "no-safe-plan"),
             "scope": "finite supplied observations and candidate features",
         }
         self.memory.append(
             "retention-plan", f"retention:{task}",
             json.dumps(payload, sort_keys=True, ensure_ascii=False),
             source="FoldMind/FoldRetention", task=task,
-            confidence=1.0 if verified else 0.0,
+            confidence=1.0 if optimality_certified else 0.5 if verified else 0.0,
             tags=("foldmind", "minimum-retention",
+                  "optimality-certified" if optimality_certified else
                   "verified" if verified else "needs-review"),
         )
         if plan is not None and not verified:
