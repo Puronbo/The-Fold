@@ -249,7 +249,7 @@ def diagonalCut : Cut diagonalReflection where
     rcases p with ⟨x, y⟩
     have hxy : x = y := (diagonalReflection_fix_iff (x, y)).mp hp
     subst y
-    simp [diagonalProjection]
+    simp [diagonalProjection, diagonalValue]
   orbit_eq := by
     intro p
     rcases p with ⟨x, y⟩
