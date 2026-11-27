@@ -483,3 +483,20 @@ python tools/FoldAgent.py
 The regression checks cover forward navigation, stopping at the goal, turning before reverse-direction travel, denied approval, exhausted budget, invalid goals, and audit integrity.
 
 This is a one-dimensional deterministic policy with a known goal and known state. It does not learn a world model, infer goals, handle uncertainty, or provide general planning. The user or an upstream model supplies the goal and approval. The next meaningful evaluation is to compare the controller's chosen action with an independent planner across varied worlds and adversarial boundary cases.
+
+
+## 23. FoldAgent shortest-path planning and replanning
+
+FoldAgent now uses breadth-first search over the finite state graph `(position, direction)`. The planner returns a minimum-action sequence using only the legal `step` and `turn` transitions. A turn changes direction without changing position; a step changes position only in the current direction.
+
+The controller does not execute a whole plan as an unchecked batch. It records the complete proposed plan, submits only its first action through FoldEnvironment's approval, budget, and revision checks, then computes a fresh plan from the next observed state on the next call. A denied action leaves the state unchanged and therefore leaves the next plan reproducible. This is receding-horizon execution with a one-action approval boundary.
+
+The regression suite compares planner lengths against an independent closed-form shortest-distance oracle for every position, direction, and goal in worlds of sizes 1 through 7. It also simulates each returned route to ensure every step is legal and the goal is reached, then checks approval denial and replanning after turns.
+
+Run:
+
+```sh
+python tools/FoldAgent.py
+```
+
+This improves the previous hand-coded directional rule by making action sequences explicit and exhaustively checking optimality over the tested finite state spaces. It remains a tiny deterministic world with a known transition model. It does not establish planning under uncertainty, learned dynamics, general problem solving, or AGI. The next high-value step is a partially observable environment where the agent must infer state from observations and detect when its predicted transition differs from what the environment reports.
