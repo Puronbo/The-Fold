@@ -265,3 +265,25 @@ Two exact examples reach the same target, 3, at tick 2:
 Their rate histories differ at every transition, yet each has first-arrival time 2. The Lean declarations `variableRateA_firstArrival`, `variableRateB_firstArrival`, and `variable_rates_distinct_but_synchronized` check this finite example directly.
 
 This demonstrates a precise separation: **equal arrival time does not require equal instantaneous rates or identical histories**. The general sufficient condition remains that each trajectory is strictly short of its target at every earlier tick and exactly at the target at the shared tick. This is a discrete mathematical model, not evidence that arbitrary physical processes synchronize spontaneously.
+
+
+## 14. Pauses, reversals, and first arrival
+
+A zero increment is a pause, not an arrival. For example, the nonnegative rate sequence (1, 0, 2) produces cumulative positions (0, 1, 1, 3). The target 3 is first reached at tick 3. The Lean result `pausedRate_firstArrival` verifies that no earlier tick reaches the target.
+
+To model retreats, allow signed increments and define
+
+\\[
+P(0)=0,\\qquad P(n+1)=P(n)+s(n),\\quad s(n)\\in\\mathbb Z.
+\\]
+
+The sequence (2, -1, 2) produces positions (0, 2, 1, 3). It moves backward on the second transition, then reaches 3 for the first time at tick 3. The Lean results `reversalRate_firstArrival` and `reversal_still_has_first_arrival` verify this finite trajectory.
+
+For signed or otherwise non-monotone paths, the exact first-arrival condition is
+
+\\[
+P(T)=G\\quad\\text{and}\\quad
+\\forall t<T,\\;P(t)\\ne G.
+\\]
+
+It is not generally equivalent to requiring every earlier position to be below the target: a path may overshoot and return without hitting the target exactly. First arrival is about the first equality with the target, not monotonicity. These examples formalize discrete trajectories only; they do not establish a universal law of physical synchronization.
