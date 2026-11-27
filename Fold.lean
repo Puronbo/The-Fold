@@ -274,3 +274,12 @@ import Fold.Complexity.Reduction
 #check Fold.rest_motion_unchanged
 #check Fold.rest_state_fixed
 #check Fold.holdAtRest_invariant
+
+#check Fold.RestContextState
+#check Fold.ContextAtRest
+#check Fold.DifferentialRest
+#check Fold.conditionOnlyStep
+#check Fold.conditionOnlyStep_position
+#check Fold.conditionOnlyStep_velocity
+#check Fold.conditionOnlyStep_differentialRest
+#check Fold.differentialRest_states_differ
