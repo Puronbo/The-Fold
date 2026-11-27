@@ -193,8 +193,8 @@ def _self_test() -> None:
         checks.append(("non-allowlisted action is rejected", unknown_rejected))
         events = memory.recall(task="toy-world", include_superseded=True)
         checks.append(("proposals and outcomes are retained",
-                       sum(e.event_type == "action-proposed" for e in events) == 5
-                       and sum(e.event_type == "observation-result" for e in events) == 3))
+                       sum(e.event_type == "action-proposed" for e in events) == 6
+                       and sum(e.event_type == "observation-result" for e in events) == 4))
         checks.append(("memory hash chain verifies", memory.verify()))
         print("\n".join(f"{'PASS' if ok else 'FAIL'}  {name}" for name, ok in checks))
         print(f"{sum(ok for _, ok in checks)}/{len(checks)} checks passed")
