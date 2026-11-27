@@ -303,3 +303,23 @@ The exact predicate remains: the target is attained at time T and is not
 attained at any earlier sampled time. Numeric overshoot alone does not
 invalidate first arrival.
 
+
+
+## 15. Overshoot and return
+
+A signed trajectory can pass numerically beyond a target without hitting the target exactly, then reverse and hit it later. The increment sequence (4, -2, 1) produces positions (0, 4, 2, 3). For target 3, the first sampled equality occurs at tick 3: tick 1 is an overshoot, not an arrival, and tick 2 is a retreat but still not an arrival.
+
+The Lean results `overshootRate_firstArrival` and `overshoot_and_return_first_arrival` verify this example. It makes the distinction precise: first arrival is the first time the state satisfies the target predicate, not the first time a numerical threshold is crossed. If the target is instead defined as crossing a boundary (for example, position greater than or equal to 3), this trajectory's first crossing is tick 1. The event predicate must therefore be stated before an arrival theorem can be interpreted.
+
+## 16. General synchronized first-arrival theorem
+
+Let a family of processes be indexed by a type (A), with a shared natural-number clock and an arbitrary reach predicate (H : A → ℕ → Prop). The exact synchronized-first-arrival condition at time (T) is
+
+\\[
+\\forall a\\in A,\\quad H(a,T)\\quad\\text{and}\\quad
+\\forall t<T,\\;\\neg H(a,t).
+\\]
+
+No shared rate, monotonicity, or common trajectory shape is required. This is formalized by `SynchronizedBoundary` and `synchronizedBoundary_unique`: if the family is nonempty and every member has first-arrival time (T), then that common time is unique. For nonnegative gap models, `synchronized_of_positive_gaps` gives a sufficient certificate: each gap is zero at (T) and strictly positive at every earlier tick. For signed paths, use exact target equality and the no-earlier-hit condition instead; a positive-gap argument alone does not cover reversals or overshoots.
+
+This is a conditional theorem about a specified family, clock, and event predicate. It does not assert that every process in nature shares a clock or synchronizes.
