@@ -95,6 +95,10 @@ import Fold.Doubling
 #check Fold.double7_iter_three
 
 #check Fold.collapse_sets_value_to_zero
+#check Fold.flipDirection_involutive
+#check Fold.flipDirection_injective
+#check Fold.collapse_not_injective
+#check Fold.turn_history_length
 #check Fold.collapse_preserves_reference
 #check Fold.collapse_preserves_signature
 #check Fold.collapse_idempotent
