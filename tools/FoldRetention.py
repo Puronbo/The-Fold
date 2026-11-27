@@ -1,0 +1,159 @@
+"""FoldRetention: find the smallest safe residual feature set for an abstraction.
+
+Given a task's must-link and cannot-link pairs, search candidate residual
+features for a minimum-cardinality set that separates every required
+cannot-link pair without splitting any must-link pair. Exhaustive search is
+exact for the finite candidate set, but exponential in its size.
+"""
+from __future__ import annotations
+
+from dataclasses import dataclass
+from itertools import combinations
+from typing import Sequence
+
+from FoldConcept import Context, Instance, equivalent
+
+
+@dataclass(frozen=True)
+class RetentionPlan:
+    task: str
+    base_features: tuple[str, ...]
+    retained_features: tuple[str, ...]
+    final_features: tuple[str, ...]
+    separated_pairs: tuple[tuple[str, str], ...]
+    impossible_pairs: tuple[tuple[str, str], ...]
+
+
+def minimum_retention_features(
+    instances: Sequence[Instance],
+    context: Context,
+    candidate_features: Sequence[str],
+    must_link_pairs: Sequence[tuple[str, str]],
+    cannot_link_pairs: Sequence[tuple[str, str]],
+) -> RetentionPlan | None:
+    """Return an exact minimum safe feature set, or None if none exists.
+
+    A candidate feature is safe only if it agrees across every must-link
+    pair. The selected candidates must collectively distinguish each
+    cannot-link pair that the base context currently merges.
+    """
+    by_id = {item.identifier: item for item in instances}
+    if len(by_id) != len(instances):
+        raise ValueError("instance identifiers must be unique")
+    if len(set(candidate_features)) != len(candidate_features):
+        raise ValueError("candidate features must be unique")
+    if set(candidate_features) & set(context.relevant_features):
+        raise ValueError("candidate features must be residual to the context")
+
+    pairs = tuple(must_link_pairs) + tuple(cannot_link_pairs)
+    for left, right in pairs:
+        if left not in by_id or right not in by_id:
+            raise KeyError(f"unknown instance in pair: {(left, right)}")
+    for item in instances:
+        for feature in candidate_features:
+            item.get(feature)
+
+    required = tuple(
+        (a, b) for a, b in cannot_link_pairs
+        if equivalent(by_id[a], by_id[b], context)
+    )
+    if not required:
+        return RetentionPlan(
+            context.name, context.relevant_features, (), context.relevant_features,
+            (), (),
+        )
+
+    safe = tuple(
+        feature for feature in candidate_features
+        if all(by_id[a].get(feature) == by_id[b].get(feature)
+               for a, b in must_link_pairs)
+    )
+
+    # Lexicographic combinations make ties deterministic and reproducible.
+    for size in range(1, len(safe) + 1):
+        for selected in combinations(safe, size):
+            separated = tuple(
+                (a, b) for a, b in required
+                if any(by_id[a].get(f) != by_id[b].get(f) for f in selected)
+            )
+            if len(separated) == len(required):
+                final = context.relevant_features + selected
+                return RetentionPlan(
+                    context.name, context.relevant_features, selected, final,
+                    separated, (),
+                )
+
+    return None
+
+
+def verify_retention_plan(
+    instances: Sequence[Instance],
+    plan: RetentionPlan,
+    must_link_pairs: Sequence[tuple[str, str]],
+    cannot_link_pairs: Sequence[tuple[str, str]],
+) -> bool:
+    """Independently check that the final projection satisfies all constraints."""
+    by_id = {item.identifier: item for item in instances}
+    if len(by_id) != len(instances):
+        return False
+    context = Context(plan.task, plan.final_features)
+    try:
+        for a, b in must_link_pairs:
+            if not equivalent(by_id[a], by_id[b], context):
+                return False
+        for a, b in cannot_link_pairs:
+            if equivalent(by_id[a], by_id[b], context):
+                return False
+    except (KeyError, ValueError):
+        return False
+    return True
+
+
+def _self_test() -> None:
+    items = (
+        Instance.make("a", {"shape": "round", "colour": "red",
+                            "material": "rubber", "weight": 1}),
+        Instance.make("b", {"shape": "round", "colour": "blue",
+                            "material": "rubber", "weight": 1}),
+        Instance.make("c", {"shape": "round", "colour": "red",
+                            "material": "metal", "weight": 2}),
+        Instance.make("d", {"shape": "square", "colour": "red",
+                            "material": "cardboard", "weight": 3}),
+    )
+    base = Context("object-task", ("shape",))
+    must = (("a", "c"),)
+    cannot = (("a", "b"), ("a", "d"))
+    plan = minimum_retention_features(
+        items, base, ("colour", "material", "weight"), must, cannot
+    )
+    assert plan is not None
+    assert plan.retained_features == ("colour", "material")
+    assert verify_retention_plan(items, plan, must, cannot)
+
+    # One feature is insufficient: colour splits a/b but not a/d; material
+    # splits a/d but not a/b. The minimum safe set therefore has size two.
+    assert len(plan.retained_features) == 2
+
+    # A candidate that splits a must-link pair is unsafe and cannot be used.
+    impossible = minimum_retention_features(
+        items, base, ("colour", "weight"), must, (("a", "b"), ("a", "d"))
+    )
+    assert impossible is None
+
+    already_separated = minimum_retention_features(
+        items, Context("shape-colour", ("shape", "colour")),
+        ("material", "weight"), must, (("a", "b"),)
+    )
+    assert already_separated is not None
+    assert already_separated.retained_features == ()
+
+    print("PASS  minimum safe residual feature set is exact")
+    print("PASS  must-link pairs remain equivalent")
+    print("PASS  cannot-link collisions are separated")
+    print("PASS  unsafe residual feature is rejected")
+    print("PASS  already-separated pairs need no extra memory")
+    print("5/5 checks passed")
+
+
+if __name__ == "__main__":
+    _self_test()
