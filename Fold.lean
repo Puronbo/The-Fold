@@ -127,4 +127,8 @@ import Fold.Doubling
 #check Fold.LinearArrival
 #check Fold.linear_arrivals_synchronize_iff
 #check Fold.different_speeds_give_different_linear_distances
+#check Fold.ThresholdReached
+#check Fold.FirstThresholdCrossing
+#check Fold.first_threshold_crossing_unique
+#check Fold.first_threshold_crossing_boundary
 #check Fold.synchronized_linear_cross_product
