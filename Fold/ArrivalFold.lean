@@ -78,3 +78,39 @@ theorem noninvariant_target_can_change_first_arrival :
   simp [FirstArrival, constantTrueTrajectory, booleanFlip]
 
 end Fold
+
+
+/-- Transport a target backwards through a fold. A state x belongs to
+    the transported target precisely when its folded image belongs to
+    the original target. -/
+def foldTransportTarget {X : Type} (F : Fold X)
+    (hit : X → Prop) : X → Prop :=
+  fun x => hit (F.f x)
+
+/-- Transporting a target twice through an involution returns the
+    original target. This is the target-side counterpart of F² = id. -/
+theorem foldTransportTarget_involutive {X : Type} (F : Fold X)
+    (hit : X → Prop) :
+    foldTransportTarget F (foldTransportTarget F hit) = hit := by
+  funext x
+  change hit (F.f (F.f x)) ↔ hit x
+  rw [F.invol x]
+
+/-- Exact first-arrival transport: folding the trajectory while keeping
+    the target fixed is equivalent to keeping the trajectory and
+    transporting the target backwards through the fold. No invariance
+    assumption is needed because the target is transformed as well. -/
+theorem firstArrival_fold_target_transport
+    {X : Type} (F : Fold X) (path : X → Nat → X)
+    (hit : X → Prop) (process : X) (time : Nat) :
+    FirstArrival (fun p t => hit (F.f (path p t))) process time ↔
+      FirstArrival (fun p t => foldTransportTarget F hit (path p t))
+        process time := Iff.rfl
+
+/-- For an involution, transporting a target twice is identity, so the
+    correspondence between folded trajectories and transformed targets
+    is reversible. -/
+theorem fold_target_transport_round_trip
+    {X : Type} (F : Fold X) (hit : X → Prop) :
+    foldTransportTarget F (foldTransportTarget F hit) = hit :=
+  foldTransportTarget_involutive F hit
