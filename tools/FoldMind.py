@@ -25,7 +25,7 @@ from FoldExperiment import ExperimentCandidate, ExperimentSelection, choose_expe
 try:
     from .FoldRetention import RetentionPlan, minimum_retention_features, verify_retention_plan, retention_plan_proves_optimality
 except ImportError:  # pragma: no cover - direct script execution
-    from FoldRetention import RetentionPlan, minimum_retention_features, verify_retention_plan
+    from FoldRetention import RetentionPlan, minimum_retention_features, verify_retention_plan, retention_plan_proves_optimality
 
 
 @dataclass(frozen=True)
