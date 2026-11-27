@@ -168,6 +168,22 @@ def retainPair {α β γ : Type} (f : α → β) (r : α → γ) :
     α → β × γ :=
   fun x => (f x, r x)
 
+/-- Equality of augmented representations is componentwise equality. -/
+theorem retainPair_eq_iff {α β γ : Type}
+    (f : α → β) (r : α → γ) (x y : α) :
+    retainPair f r x = retainPair f r y ↔
+      f x = f y ∧ r x = r y := by
+  simp [retainPair]
+
+/-- An injective primary representation stays injective after augmentation. -/
+theorem retainPair_injective_of_primary_injective
+    {α β γ : Type} (f : α → β) (r : α → γ)
+    (hf : Function.Injective f) :
+    Function.Injective (retainPair f r) := by
+  intro x y h
+  apply hf
+  exact congrArg Prod.fst h
+
 /--
 The augmented representation is injective exactly when the retained
 channel separates every collision left by the primary transformation.
