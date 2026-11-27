@@ -1058,3 +1058,6 @@ G-EP140: distinguishes valid invertible coefficient-space shears that change onl
 
 
 **Affine relationship discovery (Stage 23):** The prototype now compares supplied affine transformations pairwise, identifying commuting pairs, order-dependent compositions, and shared fixed-point sets with exact rational arithmetic. See `agi/affine_relationships.py` and `agi/stage-23-affine-relationships.md`.
+
+
+**Finite transformation-group recognition (Stage 24):** The prototype now checks whether a finite supplied set of scalar affine bijections forms a group under composition, auditing identity, closure, and inverses with exact rational arithmetic. Associativity is inherited from function composition. See `agi/affine_group.py` and `agi/stage-24-affine-groups.md`.
