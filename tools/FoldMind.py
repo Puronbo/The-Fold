@@ -270,7 +270,8 @@ def _self_test() -> None:
         checks.append(("overlapping train/test split is rejected", split_rejected))
         checks.append(("invalid hypothesis split causes no memory writes",
                        len(memory._read()) == before_hypothesis_error))
-\n        for name, passed in checks:
+
+        for name, passed in checks:
             print(f"{'PASS' if passed else 'FAIL'}  {name}")
         print(f"{sum(p for _, p in checks)}/{len(checks)} checks passed")
         if not all(p for _, p in checks):
