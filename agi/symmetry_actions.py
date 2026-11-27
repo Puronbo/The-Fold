@@ -120,3 +120,57 @@ def analyze_finite_group_action(
         True, "finite_group_action_verified", tuple(orbits), stabilizers,
         preserved, tuple(violations), n, len(perms),
     )
+
+@dataclass(frozen=True)
+class OrbitReconstructionProfile:
+    """Minimal selector capacity for reconstructing a state in one orbit."""
+
+    state: Hashable
+    orbit: tuple[Hashable, ...]
+    orbit_size: int
+    stabilizer: tuple[str, ...]
+    stabilizer_size: int
+    group_size: int
+    selector_redundancy: int
+    minimum_fixed_length_bits: int
+
+
+def orbit_reconstruction_profiles(
+    states: Sequence[Hashable],
+    transformations: Sequence[tuple[str, Sequence[int]]],
+) -> tuple[OrbitReconstructionProfile, ...]:
+    """Compute orbit/stabilizer selector costs for a finite permutation group.
+
+    The supplied transformations are treated as the group itself (a
+    faithful permutation representation). For a chosen representative x,
+    exactly |Stab(x)| transformations produce each given orbit point, while
+    the number of distinct states that must be distinguished is |G.x|.
+    The fixed-width selector cost is ceil(log2(|G.x|)), computed exactly.
+    """
+    report = analyze_finite_group_action(states, transformations)
+    if not report.is_group_action:
+        raise ValueError(f"transformations do not form a finite group: {report.status}")
+
+    group_size = report.transformation_count
+    profiles = []
+    for state in states:
+        orbit = next(orbit for orbit in report.orbits if state in orbit)
+        stabilizer = dict(report.stabilizers)[state]
+        orbit_size = len(orbit)
+        stabilizer_size = len(stabilizer)
+        if group_size != orbit_size * stabilizer_size:
+            raise AssertionError("orbit-stabilizer identity failed")
+        profiles.append(
+            OrbitReconstructionProfile(
+                state=state,
+                orbit=orbit,
+                orbit_size=orbit_size,
+                stabilizer=stabilizer,
+                stabilizer_size=stabilizer_size,
+                group_size=group_size,
+                selector_redundancy=stabilizer_size,
+                minimum_fixed_length_bits=(orbit_size - 1).bit_length(),
+            )
+        )
+    return tuple(profiles)
+
