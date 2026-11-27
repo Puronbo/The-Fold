@@ -6,6 +6,7 @@
 -/
 import Fold.Basic
 import Fold.Scale
+import Fold.Origin
 import Fold.Chi
 import Fold.Arithmetic
 import Fold.Wheel
@@ -44,6 +45,14 @@ import Fold.Complexity.Reduction
 #check Fold.affineScale_neg_one
 #check Fold.affineScale_comp
 #check Fold.pointReflect_invol
+
+#check Fold.scaleState_preserves_reference
+#check Fold.recoverReference_idempotent
+#check Fold.normalized_reference_roundtrip
+#check Fold.collapse_forgets_value
+#check Fold.original_states_are_distinct
+#check Fold.reverseDirection_invol
+#check Fold.turn_invol
 
 #check Fold.uncap_cap
 #check Fold.fill_puncture
