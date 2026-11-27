@@ -8,6 +8,7 @@ exact for the finite candidate set, but exponential in its size.
 from __future__ import annotations
 
 from dataclasses import dataclass
+from fractions import Fraction
 from typing import Sequence
 
 try:  # Support both script execution and package imports.
@@ -26,6 +27,7 @@ class RetentionPlan:
     impossible_pairs: tuple[tuple[str, str], ...]
     lower_bound_pairs: tuple[tuple[str, str], ...] = ()
     dual_denominator: int = 0
+    dual_weights: tuple[tuple[int, int], ...] = ()
 
 
 def minimum_retention_features(
