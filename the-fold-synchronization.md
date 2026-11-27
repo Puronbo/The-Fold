@@ -148,3 +148,23 @@ The Lean theorem `firstArrival_sampled_characterization` states this condition e
 A concrete counterexample uses the constant clock \(c(t)=3\). The original predicate \(R(n)\equiv(n=3)\) first holds at tick 3, but its sampled version holds at every index, including index 0. Thus the sampled path does not first arrive at index 3.
 
 **Conclusion:** strict order preservation prevents earlier sampled indices from being mapped to the same or a later event time. To recover a two-way equivalence for arbitrary predicates, sampling must also retain all potentially earlier event times; strict increase alone does not supply that coverage.
+
+
+## First arrival on the quotient chart
+
+The orbit chart forgets which representative of a Fold-orbit was selected. A target predicate on states can therefore define a target on the chart only if it gives the same answer for both representatives.
+
+The exact criterion is
+
+\[
+H(F(x))\iff H(x).
+\]
+
+If this holds, the state-level predicate descends to a predicate on the quotient chart. A trajectory's first arrival at that chart target is then equivalent to its first arrival at the original state-level target. The Lean development proves both directions:
+
+- `target_descends_iff`: a chart predicate whose pullback is the given state predicate exists if and only if the state predicate is Fold-invariant.
+- `firstArrival_descended_target`: the full first-arrival predicate is preserved when evaluated on the quotient chart.
+
+This identifies exactly which target questions survive forgetting the representative.
+
+**Boundary:** a non-invariant target cannot be a well-defined property of an orbit. One can still ask about it after choosing a representative, or transport the target together with the fold as in the preceding section, but that is not an intrinsic chart-level predicate.
