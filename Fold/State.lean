@@ -334,12 +334,11 @@ travelled distances under the exact linear travel law.
 -/
 theorem different_speeds_give_different_linear_distances
     (speed₁ speed₂ time : Nat)
-    (hTime : 0 < time)
+    (hInjective : Function.Injective (fun speed : Nat => speed * time))
     (hSpeed : speed₁ ≠ speed₂) :
     speed₁ * time ≠ speed₂ * time := by
   intro h
-  apply hSpeed
-  exact Nat.mul_right_cancel (by simpa [Nat.mul_comm] using h)
+  exact hSpeed (hInjective h)
 
 /--
 The rate-distance scaling law: at a common positive tick, the distance
@@ -351,6 +350,43 @@ theorem synchronized_linear_cross_product
     (h₂ : LinearArrival speed₂ distance₂ time) :
     distance₁ * speed₂ = distance₂ * speed₁ := by
   rw [h₁, h₂]
-  simp [Nat.mul_assoc, Nat.mul_left_comm, Nat.mul_comm]
+  simp [Nat.mul_left_comm, Nat.mul_comm]
+
+/-- A process has reached or passed a target by a given discrete tick. -/
+def ThresholdReached (speed target time : Nat) : Prop :=
+  target ≤ speed * time
+
+/--
+A first threshold crossing is the earliest tick at which linear progress
+reaches or passes the target. The target may be crossed rather than hit
+exactly, which models discrete-time overshoot.
+-/
+def FirstThresholdCrossing (speed target time : Nat) : Prop :=
+  FirstArrival (fun (_ : Unit) tick =>
+    ThresholdReached speed target tick) () time
+
+/-- A process has at most one first threshold-crossing tick. -/
+theorem first_threshold_crossing_unique
+    (speed target t u : Nat)
+    (ht : FirstThresholdCrossing speed target t)
+    (hu : FirstThresholdCrossing speed target u) :
+    t = u :=
+  firstArrival_unique
+    (fun (_ : Unit) tick => ThresholdReached speed target tick)
+    () t u ht hu
+
+/--
+At its first threshold crossing, a process is at or beyond the target;
+every earlier tick remains strictly below it.
+-/
+theorem first_threshold_crossing_boundary
+    (speed target time : Nat)
+    (h : FirstThresholdCrossing speed target time) :
+    target ≤ speed * time ∧
+      ∀ earlier, earlier < time → speed * earlier < target := by
+  constructor
+  · exact h.1
+  · intro earlier hEarlier
+    exact Nat.not_le.mp (h.2 earlier hEarlier)
 
 end Fold
