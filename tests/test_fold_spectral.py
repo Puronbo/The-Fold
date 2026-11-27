@@ -40,6 +40,27 @@ class FoldSpectralTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             quarter_turn_root_primes(-1)
 
+    def test_cyclotomic_polynomials(self):
+        from tools.FoldSpectral import cyclotomic_polynomial
+
+        self.assertEqual(cyclotomic_polynomial(1), (-1, 1))
+        self.assertEqual(cyclotomic_polynomial(4), (1, 0, 1))
+        self.assertEqual(cyclotomic_polynomial(6), (1, -1, 1))
+        self.assertEqual(cyclotomic_polynomial(8), (1, 0, 0, 0, 1))
+
+    def test_general_cyclotomic_roots(self):
+        from tools.FoldSpectral import (
+            cyclotomic_root_primes,
+            cyclotomic_root_residues,
+        )
+
+        self.assertEqual(cyclotomic_root_residues(3, 7), (2, 4))
+        self.assertEqual(cyclotomic_root_residues(4, 5), (2, 3))
+        self.assertEqual(cyclotomic_root_primes(3, 20), (2, 3, 7, 13, 19))
+        self.assertEqual(cyclotomic_root_primes(4, 20), (2, 5, 13, 17))
+        with self.assertRaises(ValueError):
+            cyclotomic_root_residues(4, 9)
+
     def test_rejects_zero_vector_and_invalid_modulus(self):
         self.assertFalse(verify_quarter_turn_eigenpair(
             ModularEigenpair(0, (0, 0)), 5
