@@ -408,6 +408,8 @@ theorem firstArrival_reconstruction_exact
 end Fold
 
 
+namespace Fold
+
 /-- The two selector choices reconstruct the same state exactly on the
     fixed set. Away from the crease, choosing the representative or its
     folded partner gives genuinely different states. -/
@@ -437,3 +439,5 @@ theorem reconstructState_selector_unique_off_crease {X : Type}
       F representative q).2 heq
     exact False.elim (hnotFixed hfix)
   · rfl
+
+end Fold
