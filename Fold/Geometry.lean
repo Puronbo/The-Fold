@@ -218,7 +218,7 @@ theorem diagonalReflection_fix_iff (p : Int × Int) :
 
 /-- An integer-valued retraction onto x = y, not the Euclidean nearest-point map. -/
 def diagonalProjection (p : Int × Int) : Int × Int :=
-  (p.1 + p.2, p.1 + p.2)
+  (max p.1 p.2, max p.1 p.2)
 
 theorem diagonalProjection_fix (p : Int × Int) :
     Fix diagonalReflection (diagonalProjection p) := by
@@ -237,12 +237,11 @@ def diagonalCut : Cut diagonalReflection where
   orbit_eq := by
     intro p
     rcases p with ⟨x, y⟩
-    simp [diagonalProjection, diagonalReflection, swapCoordinates, add_comm]
+    simp [diagonalProjection, diagonalReflection, swapCoordinates, max_comm]
 
 theorem diagonalProjection_idempotent (p : Int × Int) :
     diagonalProjection (diagonalProjection p) = diagonalProjection p := by
   rcases p with ⟨x, y⟩
   simp [diagonalProjection]
-  omega
 
 end Fold
