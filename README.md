@@ -1025,3 +1025,6 @@ G-EP140: distinguishes valid invertible coefficient-space shears that change onl
 
 
 **AGI concept-learning prototype (Stages 9–12):** `agi/concept_proposer.py` now handles exact compound-unit conversions, typed quantities, affine temperatures, and explicit measurement intervals with calibration corrections. Crucially, overlapping uncertainty intervals are reported as *compatible*, not merged as equivalent. Unsupported statistical models are rejected rather than guessed. See `agi/stage-12-measurement-uncertainty.md` and the [AGI roadmap](the-fold-agi.md). This remains a narrow deterministic prototype, not an AGI system.
+
+
+**AGI concept-learning prototype (Stages 9–13):** In addition to exact typed quantity and measurement-uncertainty handling, the prototype now proposes proportional, inverse, and affine relationships from paired observations. It retains counterexamples and keeps relational hypotheses separate from equivalence classes. See [Stage 13](agi/stage-13-relational-concept-discovery.md) and the [AGI roadmap](the-fold-agi.md). These are narrow deterministic capabilities, not an AGI system.
