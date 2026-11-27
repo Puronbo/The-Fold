@@ -319,7 +319,6 @@ theorem variable_rates_distinct_but_synchronized :
   exact ⟨by decide, by decide,
     variableRateA_firstArrival, variableRateB_firstArrival⟩
 
-end Fold
 
 
 /-- A trajectory may pause for a tick and still have a well-defined
@@ -351,3 +350,5 @@ theorem pause_preserves_first_arrival :
     cumulativeProgress pausedRate 1 = cumulativeProgress pausedRate 2 ∧
     pausedRate_firstArrival := by
   exact ⟨by decide, by decide, pausedRate_firstArrival⟩
+
+end Fold
