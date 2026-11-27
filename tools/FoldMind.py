@@ -20,6 +20,8 @@ from FoldConcept import Context, Instance, build_concepts, check_equivalence_law
 from FoldLoop import PairConstraint, audit, refine_until_consistent
 from FoldMemory import FoldMemory
 from FoldHypothesis import Example as HypothesisExample, generate, evaluate, retain_audit
+from FoldHypothesis import Hypothesis
+from FoldExperiment import ExperimentCandidate, ExperimentSelection, choose_experiment as rank_experiments
 
 
 @dataclass(frozen=True)
@@ -229,6 +231,38 @@ class FoldMind:
         )
 
 
+
+    def select_experiment(
+        self,
+        hypotheses: Sequence[Hypothesis],
+        candidates: Sequence[ExperimentCandidate],
+        *,
+        task: str,
+    ) -> ExperimentSelection | None:
+        """Select a supplied candidate that best separates current hypotheses."""
+        if not task:
+            raise ValueError("task must be nonempty")
+        if not self.memory.verify():
+            raise ValueError("memory integrity check failed; refusing experiment selection")
+        selection = rank_experiments(hypotheses, candidates)
+        payload = {
+            "selection": asdict(selection) if selection is not None else None,
+            "candidate_pool": [item.example.identifier for item in candidates],
+            "method": "disagreement-entropy-per-cost",
+            "interpretation": "heuristic ranking, not Bayesian information gain",
+        }
+        subject = (f"experiment:{selection.candidate_id}"
+                   if selection is not None else f"experiment:none:{task}")
+        self.memory.append(
+            "experiment-selection", subject,
+            json.dumps(payload, sort_keys=True, ensure_ascii=False),
+            source="FoldMind/FoldExperiment", task=task,
+            tags=("foldmind", "active-experiment-selection",
+                  "selected" if selection is not None else "no-discriminating-candidate"),
+        )
+        return selection
+
+
 def _self_test() -> None:
     with tempfile.TemporaryDirectory() as directory:
         memory = FoldMemory(Path(directory) / "mind.jsonl")
@@ -330,6 +364,36 @@ def _self_test() -> None:
         checks.append(("overlapping train/test split is rejected", split_rejected))
         checks.append(("invalid hypothesis split causes no memory writes",
                        len(memory._read()) == before_hypothesis_error))
+
+
+        # Select the next supplied experiment that most separates hypotheses.
+        h_sun = Hypothesis("h-sun", "weather-play", "weather", "sun",
+                           "play", "yes", 2, ("t1", "t2"), (), None, "candidate")
+        h_rain = Hypothesis("h-rain", "weather-play", "weather", "rain",
+                            "play", "yes", 2, ("t3", "t4"), (), None, "candidate")
+        experiment_pool = (
+            ExperimentCandidate(HypothesisExample.make(
+                "candidate-sun", {"weather": "sun", "play": "yes"}), 1.0),
+            ExperimentCandidate(HypothesisExample.make(
+                "candidate-rain", {"weather": "rain", "play": "yes"}), 2.0),
+        )
+        selected_experiment = mind.select_experiment(
+            (h_sun, h_rain), experiment_pool, task="weather-play"
+        )
+        checks.append(("FoldMind selects the best discriminating experiment",
+                       selected_experiment is not None
+                       and selected_experiment.candidate_id == "candidate-sun"))
+        checks.append(("experiment choice is retained in memory",
+                       any(e.event_type == "experiment-selection"
+                           for e in memory.recall(task="weather-play"))))
+        no_choice = mind.select_experiment(
+            (h_sun,), experiment_pool, task="single-hypothesis"
+        )
+        checks.append(("no-disagreement pool is explicitly left unselected",
+                       no_choice is None and any(
+                           "no-discriminating-candidate" in e.tags
+                           for e in memory.recall(task="single-hypothesis")
+                       )))
 
         for name, passed in checks:
             print(f"{'PASS' if passed else 'FAIL'}  {name}")
