@@ -1,10 +1,11 @@
 import unittest
+from dataclasses import replace
 from fractions import Fraction
 
 from tools.FoldConcept import Context, Instance
 from tools.FoldRetention import (
     minimum_retention_features, retention_plan_proves_optimality,
-    verify_retention_plan,
+    verify_retention_plan, verify_search_certificate,
 )
 
 
@@ -78,6 +79,26 @@ class FoldRetentionTests(unittest.TestCase):
         self.assertEqual(len(plan.retained_features), 2)
         self.assertTrue(retention_plan_proves_optimality(
             instances, self.base, ("fa", "fb", "fc"), (), cannot, plan
+        ))
+
+    def test_exhaustive_search_certificate_is_independently_checked(self):
+        plan = minimum_retention_features(
+            self.instances, self.base, ("colour", "material", "weight"),
+            self.must, self.cannot,
+        )
+        self.assertIsNotNone(plan)
+        self.assertTrue(verify_search_certificate(
+            self.instances, self.base, ("colour", "material", "weight"),
+            self.must, self.cannot, plan,
+        ))
+        corrupted = replace(plan, search_certificate=("depth",))
+        self.assertFalse(verify_search_certificate(
+            self.instances, self.base, ("colour", "material", "weight"),
+            self.must, self.cannot, corrupted,
+        ))
+        self.assertTrue(retention_plan_proves_optimality(
+            self.instances, self.base, ("colour", "material", "weight"),
+            self.must, self.cannot, plan,
         ))
 
     def test_returns_none_when_no_safe_feature_set_exists(self):
