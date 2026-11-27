@@ -8,6 +8,7 @@ import Fold.Basic
 import Fold.Scale
 import Fold.Origin
 import Fold.Geometry
+import Fold.Synchronization
 import Fold.Counterexamples
 import Fold.Chi
 import Fold.Arithmetic
@@ -174,3 +175,8 @@ import Fold.Complexity.Reduction
 
 #check Fold.booleanSwap_no_fixed
 #check Fold.booleanSwap_no_cut
+
+#check Fold.synchronizedPath_arrives
+#check Fold.discreteRate_injective
+#check Fold.distinct_rates_same_arrival
+#check Fold.faster_has_larger_remaining_displacement
