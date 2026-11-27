@@ -467,7 +467,8 @@ theorem signed_firstArrival_translation_invariant
 theorem firstArrival_strict_time_reindex
     {α : Type} (reaches : α → Nat → Prop)
     (process : α) (clock : Nat → Nat)
-    (hclock : StrictMono clock) (time : Nat) :
+    (hclock : ∀ {a b : Nat}, a < b → clock a < clock b)
+    (time : Nat) :
     FirstArrival reaches process (clock time) →
       FirstArrival (fun p t => reaches p (clock t)) process time := by
   intro h
