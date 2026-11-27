@@ -348,3 +348,61 @@ theorem chartPath_property_representative_independent
   rw [hpath]
 
 end Fold
+
+
+namespace Fold
+
+/-- Reconstruct a state from its quotient class and one bit recording
+    whether to use the chosen representative or its folded partner. -/
+def reconstructState {X : Type} (F : Fold X)
+    (representative : Chart F → X) (folded : Bool) (q : Chart F) : X :=
+  if folded then F.f (representative q) else representative q
+
+/-- Reconstruction always returns to the supplied quotient class. -/
+theorem chart_reconstructState {X : Type} (F : Fold X)
+    (representative : Chart F → X)
+    (representative_chart : ∀ q, chart F (representative q) = q)
+    (folded : Bool) (q : Chart F) :
+    chart F (reconstructState F representative folded q) = q := by
+  cases folded <;> simp [reconstructState, representative_chart, chart_fold]
+
+/-- Every state in a quotient class can be recovered from a chosen
+    representative and at most one binary choice: keep it or fold it.
+    At fixed points, either choice may represent the same state. -/
+theorem reconstructState_exists_selector {X : Type} (F : Fold X)
+    (representative : Chart F → X)
+    (representative_chart : ∀ q, chart F (representative q) = q)
+    (q : Chart F) (x : X) (hchart : chart F x = q) :
+    ∃ folded : Bool, reconstructState F representative folded q = x := by
+  have hsame : chart F (representative q) = chart F x := by
+    rw [representative_chart q, hchart]
+  have horbit : Orbit F (representative q) x :=
+    (chart_eq_iff F (representative q) x).1 hsame
+  rcases horbit with hx | hx
+  · refine ⟨false, ?_⟩
+    simp [reconstructState, hx]
+  · refine ⟨true, ?_⟩
+    simp [reconstructState, hx]
+
+/-- If the selector reconstructs the original state at every tick,
+    then the reconstructed and original trajectories have exactly the
+    same first-arrival predicate, for every state-level target. -/
+theorem firstArrival_reconstruction_exact
+    {α X : Type} (F : Fold X)
+    (representative : Chart F → X)
+    (selector : α → Nat → Bool)
+    (chartTrajectory : α → Nat → Chart F)
+    (path : α → Nat → X)
+    (hit : X → Prop) (process : α) (time : Nat)
+    (exact : ∀ p t,
+      reconstructState F representative (selector p t)
+        (chartTrajectory p t) = path p t) :
+    FirstArrival
+        (fun p t => hit (reconstructState F representative
+          (selector p t) (chartTrajectory p t))) process time ↔
+      FirstArrival (fun p t => hit (path p t)) process time := by
+  apply firstArrival_congr
+  intro t
+  rw [exact process t]
+
+end Fold
