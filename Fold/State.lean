@@ -51,7 +51,7 @@ theorem collapse_not_injective :
     simp [s, t, collapse]
   have hst : s = t := hinj heq
   have hv := congrArg State.value hst
-  norm_num [s, t] at hv
+  simp [s, t] at hv
 
 /-- A logged turn grows history by exactly one entry. -/
 theorem turn_history_length (s : State) :
