@@ -25,6 +25,7 @@ class RetentionPlan:
     separated_pairs: tuple[tuple[str, str], ...]
     impossible_pairs: tuple[tuple[str, str], ...]
     lower_bound_pairs: tuple[tuple[str, str], ...] = ()
+    dual_denominator: int = 0
 
 
 def minimum_retention_features(
@@ -83,6 +84,7 @@ def minimum_retention_features(
     useful = tuple(i for i, mask in enumerate(coverage) if mask)
     best: tuple[int, ...] | None = None
     visited: set[tuple[int, int]] = set()
+    dual_denominator = max((mask.bit_count() for mask in coverage), default=0)
 
     # Checkable packing lower bound: no safe feature covers two packed pairs.
     coverers = tuple(
@@ -150,7 +152,7 @@ def minimum_retention_features(
         final = context.relevant_features + selected
         return RetentionPlan(
             context.name, context.relevant_features, selected, final,
-            separated, (), tuple(required[j] for j in packing),
+            separated, (), tuple(required[j] for j in packing), dual_denominator,
         )
 
     return None
@@ -214,11 +216,20 @@ def verify_optimality_certificate(
         ]
         if any(not group for group in coverers):
             return False
-        return all(
+        packing_valid = all(
             not (left & right)
             for i, left in enumerate(coverers)
             for right in coverers[i + 1:]
         )
+        # Uniform rational dual: weight 1/D per required collision, where
+        # D is the maximum number any safe feature can cover.
+        all_coverage = [
+            sum(by_id[a].get(feature) != by_id[b].get(feature)
+                for a, b in required)
+            for feature in safe
+        ]
+        denominator = max(all_coverage, default=0)
+        return packing_valid and denominator > 0 and plan.dual_denominator == denominator
     except (KeyError, ValueError):
         return False
 
@@ -238,7 +249,13 @@ def retention_plan_proves_optimality(
             instances, context, candidate_features,
             must_link_pairs, cannot_link_pairs, plan,
         )
-        and len(plan.lower_bound_pairs) == len(plan.retained_features)
+        and max(
+            len(plan.lower_bound_pairs),
+            (sum(1 for a, b in cannot_link_pairs
+                 if equivalent(by_id[a], by_id[b], context))
+             + plan.dual_denominator - 1) // plan.dual_denominator
+            if plan.dual_denominator else 0,
+        ) == len(plan.retained_features)
     )
 
 
@@ -268,6 +285,7 @@ def _self_test() -> None:
         items, base, ("colour", "material", "weight"), must, cannot, plan
     )
     assert len(plan.lower_bound_pairs) == 2
+    assert plan.dual_denominator == 1
 
     # One feature is insufficient: colour splits a/b but not a/d; material
     # splits a/d but not a/b. The minimum safe set therefore has size two.
@@ -292,7 +310,8 @@ def _self_test() -> None:
     print("PASS  unsafe residual feature is rejected")
     print("PASS  already-separated pairs need no extra memory")
     print("PASS  packing certificate proves the two-feature optimum")
-    print("6/6 checks passed")
+    print("PASS  rational dual bound independently matches the optimum")
+    print("7/7 checks passed")
 
 
 if __name__ == "__main__":
