@@ -164,6 +164,36 @@ class FoldSpectralTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             cyclotomic_factorization_mod(4, 2)
 
+
+    def test_factorization_matches_frobenius_degrees(self):
+        from tools.FoldSpectral import (
+            _is_irreducible_mod,
+            cyclotomic_factorization_mod,
+            cyclotomic_polynomial,
+            cyclotomic_spectral_degree,
+            verify_cyclotomic_factorization,
+        )
+
+        primes = (2, 3, 5, 7, 11, 13)
+        for order in range(1, 25):
+            for prime in primes:
+                if order % prime == 0:
+                    continue
+                factors = cyclotomic_factorization_mod(order, prime)
+                expected_degree = cyclotomic_spectral_degree(order, prime)
+                self.assertTrue(verify_cyclotomic_factorization(order, prime))
+                self.assertTrue(all(
+                    len(factor) - 1 == expected_degree for factor in factors
+                ))
+                self.assertEqual(
+                    len(factors) * expected_degree,
+                    len(cyclotomic_polynomial(order)) - 1,
+                )
+
+        self.assertTrue(_is_irreducible_mod([1, 1, 1], 2))
+        self.assertFalse(_is_irreducible_mod([1, 0, 1], 2))
+        self.assertFalse(_is_irreducible_mod([1, 0, 0, 1], 2))
+
     def test_rejects_zero_vector_and_invalid_modulus(self):
         self.assertFalse(verify_quarter_turn_eigenpair(
             ModularEigenpair(0, (0, 0)), 5
