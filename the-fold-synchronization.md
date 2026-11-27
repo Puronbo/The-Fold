@@ -130,3 +130,21 @@ A path \(p(t)\) hits \(e^{-1}(H)\) at exactly the ticks when the mapped path \(e
 If \(e\) is bijective with inverse \(e^{-1}\), target transport is reversible: pulling the target back and then pushing it forward recovers the original target. The Lean development records this as `coordinateTransportTarget_round_trip` and checks the first-arrival equivalence in `firstArrival_bijective_coordinate_change`.
 
 **Interpretation:** a change of coordinates does not itself create synchronization. It preserves the event structure when the path and target are transformed consistently. A Fold is a special case, with its involution supplying its own inverse.
+
+
+## First arrival under discrete time sampling
+
+A clock \(c:\mathbb N\to\mathbb N\) samples an original trajectory only at times \(c(t)\). The exact first-arrival condition for the sampled path is
+
+\[
+R(c(T))\quad\text{and}\quad
+\forall t<T,\;\neg R(c(t)).
+\]
+
+It excludes earlier **sampled** hits, not every earlier hit on the original time axis. This distinction matters: a clock can skip an earlier hit or collapse multiple indices onto the same sampled time.
+
+The Lean theorem `firstArrival_sampled_characterization` states this condition exactly. The strict-clock theorem gives a useful sufficient direction: if \(c\) is strictly increasing and the original path first hits at \(c(T)\), then the sampled path first hits at index \(T\). The converse is not automatic because a sampled clock may skip an earlier hit.
+
+A concrete counterexample uses the constant clock \(c(t)=3\). The original predicate \(R(n)\equiv(n=3)\) first holds at tick 3, but its sampled version holds at every index, including index 0. Thus the sampled path does not first arrive at index 3.
+
+**Conclusion:** strict order preservation prevents earlier sampled indices from being mapped to the same or a later event time. To recover a two-way equivalence for arbitrary predicates, sampling must also retain all potentially earlier event times; strict increase alone does not supply that coverage.
