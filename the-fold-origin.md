@@ -404,3 +404,34 @@ re-indexed sequence may skip intermediate original samples, so its first
 arrival does not by itself determine what happened at skipped times.
 The Lean declarations are `firstArrival_strict_time_reindex` and
 `firstArrival_nat_mul_time_reindex`.
+
+
+## 12. Rest as a fixed-state condition
+
+Let a kinematic state in a chosen reference frame be
+
+\[
+S=(x,v),
+\]
+
+where \(x\) is position and \(v\) is the declared motion variable (for example, signed velocity). Define rest by
+
+\[
+\operatorname{Rest}(S)\iff v=0.
+\]
+
+The precise rest-invariance principle is a condition on the evolution map \(E\):
+
+\[
+\operatorname{Rest}(S)\Longrightarrow E(S)=S.
+\]
+
+Consequently, both components are unchanged:
+
+\[
+x(E(S))=x(S),\qquad v(E(S))=v(S).
+\]
+
+This is stronger than observing zero displacement at one instant: it says the complete state is a fixed point of the specified evolution. In the Lean module `Fold/Rest.lean`, `RestInvariant E` names this condition and theorems derive unchanged position, unchanged motion, and unchanged full state. A helper evolution `holdAtRest` demonstrates one construction that satisfies the condition while leaving moving-state behavior to a supplied transition.
+
+**Scope:** “at rest” is relative to a chosen frame and a chosen definition of motion. The formal result is conditional: if the evolution preserves rest in the stated sense, then the state is fixed. It does not establish that every physical system has a universal absolute rest frame, nor that every force-free or zero-velocity situation is dynamically static under every model.
