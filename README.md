@@ -1064,3 +1064,8 @@ G-EP140: distinguishes valid invertible coefficient-space shears that change onl
 
 
 **Finite symmetry discovery (Stage 25):** The prototype now analyzes finite permutation-group actions, deriving orbits and stabilizers and checking preservation of supplied binary relations. See `agi/symmetry_actions.py` and `agi/stage-25-symmetry-actions.md`.
+
+
+### Stage 27 — quotient homomorphisms
+
+The AGI concept-learning prototype now checks congruence of finite operations against Stage 26 orbit quotients and constructs induced quotient operation tables only when they are well-defined. It distinguishes an equivalence partition from a congruence compatible with a chosen operation signature. See agi/structure_descent.py, agi/test_structure_descent.py, and agi/stage-27-structure-descent.md.
