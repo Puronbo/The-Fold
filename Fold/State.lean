@@ -422,8 +422,31 @@ theorem synchronized_threshold_intervals
       speed₂ * previous < target₂ ∧ target₂ ≤ speed₂ * time := by
   obtain ⟨previous, hTime, hLower₁, hUpper₁⟩ :=
     first_threshold_crossing_interval speed₁ target₁ time hPositiveTick h₁
-  obtain ⟨_, _, hLower₂, hUpper₂⟩ :=
+  obtain ⟨previous₂, hTime₂, hLower₂, hUpper₂⟩ :=
     first_threshold_crossing_interval speed₂ target₂ time hPositiveTick h₂
-  exact ⟨previous, hTime, hLower₁, hUpper₁, hLower₂, hUpper₂⟩
+  have hPrevious : previous₂ = previous :=
+    Nat.add_right_cancel (hTime₂.symm.trans hTime)
+  exact ⟨previous, hTime, hLower₁, hUpper₁,
+    by simpa [hPrevious] using hLower₂,
+    by simpa [hTime₂, hTime] using hUpper₂⟩
+
+/--
+Concrete synchronized first crossing: rates 2 and 3 both first reach
+target 4 at tick 2, despite moving at different speeds.
+-/
+theorem distinct_speeds_can_synchronize :
+    FirstThresholdCrossing 2 4 2 ∧
+      FirstThresholdCrossing 3 4 2 := by
+  norm_num [FirstThresholdCrossing, FirstArrival, ThresholdReached]
+
+/--
+For this example the first crossing is simultaneous, not merely an
+eventual coincidence: both processes are below 4 at tick 1 and at or
+above 4 at tick 2.
+-/
+theorem distinct_speeds_shared_first_tick :
+    2 * 1 < 4 ∧ 4 ≤ 2 * 2 ∧
+      3 * 1 < 4 ∧ 4 ≤ 3 * 2 := by
+  norm_num
 
 end Fold
