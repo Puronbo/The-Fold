@@ -244,3 +244,8 @@ import Fold.Complexity.Reduction
 #check Fold.original_hit_at_three_first
 #check Fold.collapsed_clock_destroys_later_first_index
 #check Fold.firstArrival_strict_reindex_forward
+
+#check Fold.descendTarget
+#check Fold.descendTarget_chart
+#check Fold.target_descends_iff
+#check Fold.firstArrival_descended_target
