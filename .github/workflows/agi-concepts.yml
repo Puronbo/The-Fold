@@ -19,7 +19,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-      - name: Test concept learner, quantity proposer, and relational discovery
-        run: python -m unittest agi.test_concept_learner agi.test_concept_proposer agi.test_relation_discovery -v
+      - name: Test concept learner, quantity proposer, relational discovery, and composition
+        run: python -m unittest agi.test_concept_learner agi.test_concept_proposer agi.test_relation_discovery agi.test_relation_composition -v
       - name: Run learner self-test
         run: python agi/concept_learner.py
