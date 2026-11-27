@@ -204,4 +204,45 @@ theorem swap_horizontal_projection (c : Int) (p : Int × Int) :
       swapCoordinates (horizontalProjectionAt c p) := by
   rfl
 
+
+/-- Reflection across the diagonal x = y, implemented by coordinate exchange. -/
+def diagonalReflection : Fold (Int × Int) where
+  f := swapCoordinates
+  invol := swapCoordinates_invol
+
+theorem diagonalReflection_fix_iff (p : Int × Int) :
+    Fix diagonalReflection p ↔ p.1 = p.2 := by
+  rcases p with ⟨x, y⟩
+  change (y, x) = (x, y) ↔ x = y
+  simp [eq_comm]
+
+/-- An integer-valued retraction onto x = y, not the Euclidean nearest-point map. -/
+def diagonalProjection (p : Int × Int) : Int × Int :=
+  (p.1 + p.2, p.1 + p.2)
+
+theorem diagonalProjection_fix (p : Int × Int) :
+    Fix diagonalReflection (diagonalProjection p) := by
+  apply (diagonalReflection_fix_iff (diagonalProjection p)).2
+  rfl
+
+/-- The diagonal retraction is a cut for coordinate-swap reflection. -/
+def diagonalCut : Cut diagonalReflection where
+  p := diagonalProjection
+  image_fix := diagonalProjection_fix
+  fix_eq := by
+    intro p hp
+    rcases p with ⟨x, y⟩
+    have hxy : x = y := (diagonalReflection_fix_iff (x, y)).mp hp
+    simp [diagonalProjection, hxy]
+  orbit_eq := by
+    intro p
+    rcases p with ⟨x, y⟩
+    simp [diagonalProjection, diagonalReflection, swapCoordinates, add_comm]
+
+theorem diagonalProjection_idempotent (p : Int × Int) :
+    diagonalProjection (diagonalProjection p) = diagonalProjection p := by
+  rcases p with ⟨x, y⟩
+  simp [diagonalProjection]
+  omega
+
 end Fold
