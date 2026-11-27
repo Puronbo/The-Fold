@@ -228,3 +228,92 @@ def cyclotomic_factor_count(order: int, prime: int) -> int:
     """Number of irreducible factors of Phi_order over F_p for p not dividing order."""
     degree = cyclotomic_spectral_degree(order, prime)
     return _euler_totient(order) // degree
+
+
+def cyclotomic_rotation_matrix(order: int) -> tuple[tuple[int, ...], ...]:
+    """Return the integer companion matrix for multiplication by x mod Phi_order.
+
+    In the power basis (1, x, ..., x^(phi(order)-1)), this matrix has
+    characteristic and minimal polynomial Phi_order over Q. It satisfies
+    A^order = I, so it is an exact finite-order Fold rotation representation.
+    """
+    coefficients = cyclotomic_polynomial(order)
+    degree = len(coefficients) - 1
+    if degree < 1:
+        raise ArithmeticError("cyclotomic polynomial must have positive degree")
+    matrix = [[0] * degree for _ in range(degree)]
+    for column in range(degree - 1):
+        matrix[column + 1][column] = 1
+    for row in range(degree):
+        matrix[row][degree - 1] = -coefficients[row]
+    return tuple(tuple(row) for row in matrix)
+
+
+def _matrix_multiply(
+    left: tuple[tuple[int, ...], ...],
+    right: tuple[tuple[int, ...], ...],
+) -> tuple[tuple[int, ...], ...]:
+    size = len(left)
+    if size == 0 or len(right) != size:
+        raise ValueError("matrices must be nonempty and square")
+    if any(len(row) != size for row in left + right):
+        raise ValueError("matrices must be square and have equal dimensions")
+    return tuple(
+        tuple(sum(left[i][k] * right[k][j] for k in range(size))
+              for j in range(size))
+        for i in range(size)
+    )
+
+
+def _matrix_identity(size: int) -> tuple[tuple[int, ...], ...]:
+    return tuple(
+        tuple(1 if row == column else 0 for column in range(size))
+        for row in range(size)
+    )
+
+
+def _matrix_power(
+    matrix: tuple[tuple[int, ...], ...], exponent: int
+) -> tuple[tuple[int, ...], ...]:
+    if exponent < 0:
+        raise ValueError("exponent must be nonnegative")
+    result = _matrix_identity(len(matrix))
+    factor = matrix
+    while exponent:
+        if exponent & 1:
+            result = _matrix_multiply(result, factor)
+        factor = _matrix_multiply(factor, factor)
+        exponent >>= 1
+    return result
+
+
+def _evaluate_polynomial_at_matrix(
+    coefficients: tuple[int, ...],
+    matrix: tuple[tuple[int, ...], ...],
+) -> tuple[tuple[int, ...], ...]:
+    """Evaluate an integer polynomial at a square matrix by Horner's rule."""
+    size = len(matrix)
+    result = tuple(tuple(0 for _ in range(size)) for _ in range(size))
+    identity = _matrix_identity(size)
+    for coefficient in reversed(coefficients):
+        result = _matrix_multiply(result, matrix)
+        result = tuple(
+            tuple(result[i][j] + coefficient * identity[i][j]
+                  for j in range(size))
+            for i in range(size)
+        )
+    return result
+
+
+def verify_cyclotomic_rotation_matrix(order: int) -> bool:
+    """Check A^order=I and Phi_order(A)=0 for the canonical companion matrix."""
+    if order < 1:
+        return False
+    matrix = cyclotomic_rotation_matrix(order)
+    identity = _matrix_identity(len(matrix))
+    return (
+        _matrix_power(matrix, order) == identity
+        and _evaluate_polynomial_at_matrix(
+            cyclotomic_polynomial(order), matrix
+        ) == tuple(tuple(0 for _ in row) for row in matrix)
+    )
