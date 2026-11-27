@@ -252,3 +252,8 @@ import Fold.Complexity.Reduction
 
 #check Fold.firstArrival_chart_path_congr
 #check Fold.firstArrival_orbit_representative_independent
+
+#check Fold.chartPath
+#check Fold.chartPath_eq_iff_pointwise_orbit
+#check Fold.chart_step_eq_iff_orbit
+#check Fold.chartPath_property_representative_independent
