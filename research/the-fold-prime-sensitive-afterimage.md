@@ -11,7 +11,7 @@ h_n=\left(n,p_n,\ p_n-p_{n-1},\
 (p_n\bmod m_j)_{j=1}^k,\ \sigma_A(p_n)\right).
 \]
 
-The first gap is null. The residue signature is explicit and depends on the selected moduli. The optional spectral fingerprint \(\sigma_A(p_n)\) is the existing exact finite-field Frobenius profile of \(A\) reduced modulo \(p_n\). It depends on the matrix and reduction convention; it is not an intrinsic attribute of the prime.
+The first gap is null. Each later gap is the difference from the previous **supplied** prime. It is a consecutive-prime gap only if the input list contains consecutive primes; the function does not fill omitted primes. The residue signature is explicit and depends on the selected moduli. The optional spectral fingerprint \(\sigma_A(p_n)\) is the existing exact finite-field Frobenius profile of \(A\) reduced modulo \(p_n\). It depends on the matrix and reduction convention; it is not an intrinsic attribute of the prime.
 
 ## Exact afterimage update
 
@@ -33,7 +33,7 @@ The ordered path is lossless for the listed fields. The afterimage is generally 
 
 ## Executable interface
 
-The module tools/prime_memory_afterimage.py exposes prime_sensitive_memory_path. It validates primality, strict ordering, distinct moduli, and the decay range. With a matrix, it calls prime_spectral_profile once per listed prime and records modular rank, Frobenius orbit-degree histogram, and completeness flags.
+The module tools/prime_memory_afterimage.py exposes prime_sensitive_memory_path. It validates primality, strict ordering, distinct moduli, and the decay range. It accepts prime subsequences as well as consecutive prime prefixes, so gap values must be interpreted relative to the supplied sequence. With a matrix, it calls prime_spectral_profile once per listed prime and records modular rank, Frobenius orbit-degree histogram, and completeness flags.
 
 Example:
 
