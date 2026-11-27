@@ -317,3 +317,117 @@ def verify_cyclotomic_rotation_matrix(order: int) -> bool:
             cyclotomic_polynomial(order), matrix
         ) == tuple(tuple(0 for _ in row) for row in matrix)
     )
+
+
+def cyclotomic_rotation_matrix_mod(
+    order: int, prime: int
+) -> tuple[tuple[int, ...], ...]:
+    """Reduce the exact cyclotomic companion matrix modulo a prime."""
+    if not _is_prime(prime):
+        raise ValueError("prime must be prime")
+    matrix = cyclotomic_rotation_matrix(order)
+    return tuple(tuple(value % prime for value in row) for row in matrix)
+
+
+def _matrix_rank_mod(
+    matrix: tuple[tuple[int, ...], ...], prime: int
+) -> int:
+    """Compute row rank by Gaussian elimination over F_prime."""
+    if not _is_prime(prime):
+        raise ValueError("prime must be prime")
+    if not matrix:
+        return 0
+    width = len(matrix[0])
+    if any(len(row) != width for row in matrix):
+        raise ValueError("matrix rows must have equal length")
+    work = [[value % prime for value in row] for row in matrix]
+    pivot_row = 0
+    for column in range(width):
+        pivot = next(
+            (row for row in range(pivot_row, len(work))
+             if work[row][column] % prime),
+            None,
+        )
+        if pivot is None:
+            continue
+        work[pivot_row], work[pivot] = work[pivot], work[pivot_row]
+        inverse = pow(work[pivot_row][column], -1, prime)
+        work[pivot_row] = [
+            value * inverse % prime for value in work[pivot_row]
+        ]
+        for row in range(len(work)):
+            if row == pivot_row:
+                continue
+            factor = work[row][column]
+            if factor:
+                work[row] = [
+                    (work[row][index] - factor * work[pivot_row][index]) % prime
+                    for index in range(width)
+                ]
+        pivot_row += 1
+        if pivot_row == len(work):
+            break
+    return pivot_row
+
+
+def cyclotomic_eigenvalue_multiplicities(
+    order: int, prime: int
+) -> tuple[tuple[int, int], ...]:
+    """Return (eigenvalue, geometric multiplicity) pairs over F_p.
+
+    For p not dividing order, Phi_order is separable, so every eigenvalue
+    in F_p has algebraic multiplicity one. The nullity computation checks
+    the eigenspace dimension directly from the reduced companion matrix.
+    """
+    if not _is_prime(prime):
+        raise ValueError("prime must be prime")
+    if _gcd(order, prime) != 1:
+        raise ValueError("prime must not divide the cyclotomic order")
+    matrix = cyclotomic_rotation_matrix_mod(order, prime)
+    size = len(matrix)
+    result = []
+    for eigenvalue in cyclotomic_root_residues(order, prime):
+        shifted = tuple(
+            tuple((matrix[row][column] -
+                   (eigenvalue if row == column else 0)) % prime
+                  for column in range(size))
+            for row in range(size)
+        )
+        multiplicity = size - _matrix_rank_mod(shifted, prime)
+        result.append((eigenvalue, multiplicity))
+    return tuple(result)
+
+
+def cyclotomic_spectral_profile(order: int, prime: int) -> dict[str, int]:
+    """Return the predicted irreducible-factor profile over F_p.
+
+    Valid for prime p not dividing order. Since the p-Frobenius acts on
+    primitive order-th roots with orbit length ord_order(p), every
+    irreducible factor has that degree and there are phi(order)/degree
+    factors.
+    """
+    degree = cyclotomic_spectral_degree(order, prime)
+    factor_count = _euler_totient(order) // degree
+    roots = cyclotomic_eigenvalue_multiplicities(order, prime)
+    return {
+        "dimension": _euler_totient(order),
+        "factor_degree": degree,
+        "factor_count": factor_count,
+        "base_field_eigenvalue_count": len(roots),
+        "base_field_eigenspace_dimension_sum": sum(
+            multiplicity for _, multiplicity in roots
+        ),
+    }
+
+
+def verify_cyclotomic_spectral_profile(order: int, prime: int) -> bool:
+    """Cross-check Frobenius prediction against exact matrix eigenspaces."""
+    profile = cyclotomic_spectral_profile(order, prime)
+    if profile["base_field_eigenvalue_count"] != (
+        profile["factor_count"] if profile["factor_degree"] == 1 else 0
+    ):
+        return False
+    return all(
+        multiplicity == 1
+        for _, multiplicity in cyclotomic_eigenvalue_multiplicities(order, prime)
+    )
