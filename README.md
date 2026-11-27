@@ -1069,3 +1069,8 @@ G-EP140: distinguishes valid invertible coefficient-space shears that change onl
 ### Stage 27 — quotient homomorphisms
 
 The AGI concept-learning prototype now checks congruence of finite operations against Stage 26 orbit quotients and constructs induced quotient operation tables only when they are well-defined. It distinguishes an equivalence partition from a congruence compatible with a chosen operation signature. See agi/structure_descent.py, agi/test_structure_descent.py, and agi/stage-27-structure-descent.md.
+
+
+### Restricted P vs NP track
+
+A first restricted decision task is now specified and implemented: 3-colourability with a supplied tree decomposition whose bags have size at most four. The deterministic dynamic program and certificate verifier accept exactly the same valid instances. This establishes a restricted polynomial-time result, not unrestricted `P = NP` or `P != NP`. See `the-fold-pnp-restricted.md`, `agi/restricted_three_colouring.py`, and its tests.
