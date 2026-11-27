@@ -182,3 +182,6 @@ import Fold.Complexity.Reduction
 #check Fold.faster_has_larger_remaining_displacement
 #check Fold.remainingDisplacement_pos_before_arrival
 #check Fold.remainingDisplacement_zero_at_arrival
+
+#check Fold.positiveSpeed_firstArrival
+#check Fold.positive_speeds_synchronized_first_arrival
