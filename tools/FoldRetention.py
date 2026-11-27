@@ -119,9 +119,11 @@ def _self_test() -> None:
                             "material": "metal", "weight": 2}),
         Instance.make("d", {"shape": "square", "colour": "red",
                             "material": "cardboard", "weight": 3}),
+        Instance.make("e", {"shape": "round", "colour": "red",
+                            "material": "rubber", "weight": 9}),
     )
     base = Context("object-task", ("shape",))
-    must = (("a", "c"),)
+    must = (("a", "e"),)
     cannot = (("a", "b"), ("a", "d"))
     plan = minimum_retention_features(
         items, base, ("colour", "material", "weight"), must, cannot
