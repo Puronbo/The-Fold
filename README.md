@@ -1074,3 +1074,6 @@ The AGI concept-learning prototype now checks congruence of finite operations ag
 ### Restricted P vs NP track
 
 A first restricted decision task is now specified and implemented: 3-colourability with a supplied tree decomposition whose bags have size at most four. The deterministic dynamic program and certificate verifier accept exactly the same valid instances. This establishes a restricted polynomial-time result, not unrestricted `P = NP` or `P != NP`. See `the-fold-pnp-restricted.md`, `agi/restricted_three_colouring.py`, and its tests.
+
+
+**P versus NP zero-residual analysis:** The standard class NP is not a number, so `NP = 0` needs an explicit new definition. The canonical residual `NP \\ P` is empty exactly when the classes are equal and nonempty exactly when they differ. A Lean module proves these abstract equivalences and defines a 0/1 collapse indicator; it does not resolve the open problem. See `the-fold-np-zero.md` and `Fold/Complexity/ZeroResidual.lean`.
