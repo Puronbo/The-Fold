@@ -55,6 +55,8 @@ theorem firstArrival_at_crease_preserved
 end Fold
 
 
+namespace Fold
+
 /-- A concrete involution showing why target invariance is necessary:
     the Boolean flip sends the target value true to false. -/
 def booleanFlip : Fold Bool where
@@ -74,3 +76,5 @@ theorem noninvariant_target_can_change_first_arrival :
       ¬ FirstArrival
         (fun _ t => booleanFlip.f (constantTrueTrajectory () t) = true) () 0 := by
   simp [FirstArrival, constantTrueTrajectory, booleanFlip]
+
+end Fold
