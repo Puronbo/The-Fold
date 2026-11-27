@@ -42,3 +42,21 @@ Fold/Synchronization.lean proves:
 - a larger rate gives a larger remaining displacement for positive remaining time.
 
 These are exact statements about the declared discrete model, not empirical claims about all physical processes.
+
+
+## Beyond constant-rate paths
+
+The generalization uses a gap function (g_p(t)\in\mathbb N), measuring the remaining distance of process (p) from its target. No linearity or constant-speed assumption is imposed.
+
+A process first arrives at (T) if
+
+\[
+g_p(T)=0
+\quad\text{and}\quad
+\forall t<T,\;g_p(t)>0.
+\]
+
+For a family (P), simultaneous first arrival at (T) follows if these two conditions hold for every (p\in P). If (P) is nonempty, the common first-arrival time is unique.
+
+This is a general criterion for discrete trajectories, not a prediction that arbitrary trajectories will satisfy it. The trajectories may have unrelated rates, acceleration patterns, pauses, or nonlinear changes; the theorem only applies when each gap is positive before the common time and zero at that time.
+
