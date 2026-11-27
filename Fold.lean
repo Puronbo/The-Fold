@@ -222,6 +222,8 @@ import Fold.Complexity.Reduction
 #check Fold.overshoot_and_return_first_arrival
 #check Fold.firstArrival_congr
 #check Fold.signed_firstArrival_translation_invariant
+#check Fold.firstArrival_strict_time_reindex
+#check Fold.firstArrival_nat_mul_time_reindex
 
 #check Fold.foldTransportTarget
 #check Fold.foldTransportTarget_involutive
