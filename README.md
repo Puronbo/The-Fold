@@ -1061,3 +1061,6 @@ G-EP140: distinguishes valid invertible coefficient-space shears that change onl
 
 
 **Finite transformation-group recognition (Stage 24):** The prototype now checks whether a finite supplied set of scalar affine bijections forms a group under composition, auditing identity, closure, and inverses with exact rational arithmetic. Associativity is inherited from function composition. See `agi/affine_group.py` and `agi/stage-24-affine-groups.md`.
+
+
+**Finite symmetry discovery (Stage 25):** The prototype now analyzes finite permutation-group actions, deriving orbits and stabilizers and checking preservation of supplied binary relations. See `agi/symmetry_actions.py` and `agi/stage-25-symmetry-actions.md`.
