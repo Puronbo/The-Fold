@@ -390,4 +390,37 @@ theorem reversal_still_has_first_arrival :
     FirstArrival (fun _ t => cumulativeSignedProgress reversalRate t = 3) 0 3 := by
   exact ⟨by decide, by decide, reversalRate_firstArrival⟩
 
+
+/-- A discrete path can overshoot a target without landing on it, then
+    return and hit it exactly.  The sampled positions are 0, 4, 2, 3. -/
+def overshootRate (n : Nat) : Int :=
+  if n = 0 then 4 else if n = 1 then -2 else if n = 2 then 1 else 0
+
+/-- The overshoot trajectory first reaches 3 at tick 3, despite being
+    strictly above 3 at tick 1. -/
+theorem overshootRate_firstArrival :
+    FirstArrival (fun _ t => cumulativeSignedProgress overshootRate t = 3) 0 3 := by
+  change cumulativeSignedProgress overshootRate 3 = 3 ∧
+    ∀ earlier, earlier < 3 →
+      ¬ cumulativeSignedProgress overshootRate earlier = 3
+  constructor
+  · simp [cumulativeSignedProgress, overshootRate]
+  · intro earlier hearlier hreach
+    have hcases : earlier = 0 ∨ earlier = 1 ∨ earlier = 2 := by omega
+    rcases hcases with h0 | h1 | h2
+    · subst earlier
+      simp [cumulativeSignedProgress, overshootRate] at hreach
+    · subst earlier
+      simp [cumulativeSignedProgress, overshootRate] at hreach
+    · subst earlier
+      simp [cumulativeSignedProgress, overshootRate] at hreach
+
+/-- Overshooting the target's numeric level is compatible with first
+    arrival when the discrete path does not equal the target at that tick. -/
+theorem overshoot_and_return_first_arrival :
+    cumulativeSignedProgress overshootRate 1 > 3 ∧
+    cumulativeSignedProgress overshootRate 2 = 2 ∧
+    FirstArrival (fun _ t => cumulativeSignedProgress overshootRate t = 3) 0 3 := by
+  exact ⟨by decide, by decide, overshootRate_firstArrival⟩
+
 end Fold
