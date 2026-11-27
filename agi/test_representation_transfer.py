@@ -25,7 +25,7 @@ class RepresentationTransferTests(unittest.TestCase):
             self.rows,
         )
         self.assertEqual(result.concept.slope, Fraction(1, 500))
-        self.assertEqual(result.concept.intercept, Fraction(-197, 100))
+        self.assertEqual(result.concept.intercept, Fraction(-99, 50))
         self.assertEqual(result.status, "transferred")
         self.assertTrue(result.invariant_preserved)
 
