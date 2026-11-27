@@ -114,3 +114,42 @@ theorem fold_target_transport_round_trip
     {X : Type} (F : Fold X) (hit : X → Prop) :
     foldTransportTarget F (foldTransportTarget F hit) = hit :=
   foldTransportTarget_involutive F hit
+
+
+namespace Fold
+
+/-- Transport each process's own target backwards through its own
+    involution. The family may use different folds and different targets. -/
+def foldTransportFamilyTarget {α X : Type}
+    (fold : α → Fold X) (hit : α → X → Prop) : α → X → Prop :=
+  fun process state => hit process ((fold process).f state)
+
+/-- Synchronization is exactly preserved when every process target is
+    transported along that process's fold. This requires no common target,
+    common fold, or target-invariance assumption. -/
+theorem synchronizedBoundary_fold_target_transport
+    {α X : Type} (processes : List α)
+    (fold : α → Fold X) (path : α → Nat → X)
+    (hit : α → X → Prop) (time : Nat) :
+    SynchronizedBoundary
+        (fun process t => hit process ((fold process).f (path process t)))
+        processes time ↔
+      SynchronizedBoundary
+        (fun process t =>
+          foldTransportFamilyTarget fold hit process (path process t))
+        processes time := Iff.rfl
+
+/-- Transporting every process target twice restores the original family
+    of targets, process by process. -/
+theorem foldTransportFamilyTarget_involutive
+    {α X : Type} (fold : α → Fold X) (hit : α → X → Prop) :
+    foldTransportFamilyTarget fold
+      (foldTransportFamilyTarget fold hit) = hit := by
+  funext process
+  funext state
+  apply propext
+  change hit process ((fold process).f ((fold process).f state)) ↔
+    hit process state
+  rw [(fold process).invol state]
+
+end Fold
