@@ -18,7 +18,7 @@ class CompositionalAbstractionTests(unittest.TestCase):
         self.assertEqual(self.path.evaluate_path(2), (F(7), F(20), F(14)))
 
     def test_different_paths_can_have_same_endpoint_function(self):
-        direct = CompositionalAffineConcept((Law(3, F(11, 2)),))
+        direct = CompositionalAffineConcept((Law(3, 8),))
         self.assertEqual(
             compare_compositional_structure(self.path, direct),
             "endpoint_equivalent_only",
