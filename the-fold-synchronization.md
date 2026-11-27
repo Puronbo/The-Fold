@@ -73,3 +73,14 @@ g_1(t)=r^2,\qquad g_2(t)=r(r+1).
 They are different before arrival (one tick before, their gaps are (1) and (2)), but both are zero at (T) and positive at every earlier tick. Thus both have the same unique first-arrival time despite having different, nonlinear gap profiles.
 
 This is an existence example inside the discrete model. It demonstrates that constant-rate motion is not necessary for synchronization; the necessary condition used by the theorem is positivity of each gap before the shared boundary and zero gap at that boundary.
+
+
+### Explicit variable-rate example
+
+The Lean module also constructs two cumulative-progress paths whose per-tick rates are
+
+\[
+(1,2)\qquad\text{and}\qquad(2,1).
+\]
+
+Both accumulate total progress (3) for the first time at tick (2), although their rate histories differ at each tick. This is a stronger example than the two gap profiles: it builds the paths from distinct, time-varying rates and verifies their common first hit.
