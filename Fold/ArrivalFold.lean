@@ -263,6 +263,9 @@ theorem firstArrival_descended_target
 end Fold
 
 
+
+namespace Fold
+
 /-- Two state trajectories that induce the same orbit-chart trajectory
     have identical first-arrival behavior for every chart-level target.
     This is the precise information retained by quotienting: chart
@@ -310,3 +313,6 @@ theorem firstArrival_orbit_representative_independent
   apply firstArrival_chart_path_congr F path₁ path₂
   · intro p t
     exact (chart_eq_iff F (path₁ p t) (path₂ p t)).2 (sameOrbit p t)
+
+
+end Fold
