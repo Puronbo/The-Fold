@@ -1043,3 +1043,6 @@ G-EP140: distinguishes valid invertible coefficient-space shears that change onl
 
 
 **AGI concept-learning prototype (Stages 9–18):** Stage 18 adds exact finite active experiment design: given fixed candidate relation paths and a caller-supplied input domain, it selects an input with high pairwise prediction disagreement while reporting domain coverage. This proposes mathematical queries only; it does not execute physical experiments or establish AGI. See `agi/active_experiment.py` and `agi/stage-18-active-experiment-design.md`.
+
+
+**AGI concept-learning prototype (Stages 9–19):** Stage 19 adds an immutable evidence ledger that checks new observations against fixed candidates, preserves historical predictions, and proposes fresh exact proportional/inverse/affine candidates from accumulated evidence. Proposals are not automatically accepted. See `agi/evidence_revision.py` and `agi/stage-19-evidence-revision.md`. This is bounded symbolic learning, not AGI.
