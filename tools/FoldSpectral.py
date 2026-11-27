@@ -431,3 +431,231 @@ def verify_cyclotomic_spectral_profile(order: int, prime: int) -> bool:
         multiplicity == 1
         for _, multiplicity in cyclotomic_eigenvalue_multiplicities(order, prime)
     )
+
+
+def _poly_trim_mod(poly: list[int], prime: int) -> list[int]:
+    while len(poly) > 1 and poly[-1] % prime == 0:
+        poly.pop()
+    return [value % prime for value in poly]
+
+
+def _poly_add_mod(left: list[int], right: list[int], prime: int) -> list[int]:
+    size = max(len(left), len(right))
+    return _poly_trim_mod([
+        ((left[i] if i < len(left) else 0)
+         + (right[i] if i < len(right) else 0)) % prime
+        for i in range(size)
+    ], prime)
+
+
+def _poly_sub_mod(left: list[int], right: list[int], prime: int) -> list[int]:
+    size = max(len(left), len(right))
+    return _poly_trim_mod([
+        ((left[i] if i < len(left) else 0)
+         - (right[i] if i < len(right) else 0)) % prime
+        for i in range(size)
+    ], prime)
+
+
+def _poly_mul_mod(left: list[int], right: list[int], prime: int) -> list[int]:
+    result = [0] * (len(left) + len(right) - 1)
+    for i, a in enumerate(left):
+        for j, b in enumerate(right):
+            result[i + j] = (result[i + j] + a * b) % prime
+    return _poly_trim_mod(result, prime)
+
+
+def _poly_divmod_field(
+    dividend: list[int], divisor: list[int], prime: int
+) -> tuple[list[int], list[int]]:
+    divisor = _poly_trim_mod(divisor[:], prime)
+    remainder = _poly_trim_mod(dividend[:], prime)
+    if divisor == [0]:
+        raise ZeroDivisionError("polynomial division by zero")
+    quotient = [0] * max(1, len(remainder) - len(divisor) + 1)
+    inverse = pow(divisor[-1], -1, prime)
+    while remainder != [0] and len(remainder) >= len(divisor):
+        degree = len(remainder) - len(divisor)
+        coefficient = remainder[-1] * inverse % prime
+        quotient[degree] = coefficient
+        for index, value in enumerate(divisor):
+            remainder[degree + index] = (
+                remainder[degree + index] - coefficient * value
+            ) % prime
+        remainder = _poly_trim_mod(remainder, prime)
+    return _poly_trim_mod(quotient, prime), remainder
+
+
+def _poly_mod_field(poly: list[int], modulus: list[int], prime: int) -> list[int]:
+    return _poly_divmod_field(poly, modulus, prime)[1]
+
+
+def _poly_gcd_field(left: list[int], right: list[int], prime: int) -> list[int]:
+    while right != [0]:
+        _, remainder = _poly_divmod_field(left, right, prime)
+        left, right = right, remainder
+    inverse = pow(left[-1], -1, prime)
+    return _poly_trim_mod([value * inverse for value in left], prime)
+
+
+def _poly_pow_mod_field(
+    base: list[int], exponent: int, modulus: list[int], prime: int
+) -> list[int]:
+    result = [1]
+    factor = _poly_mod_field(base, modulus, prime)
+    while exponent:
+        if exponent & 1:
+            result = _poly_mod_field(
+                _poly_mul_mod(result, factor, prime), modulus, prime
+            )
+        factor = _poly_mod_field(
+            _poly_mul_mod(factor, factor, prime), modulus, prime
+        )
+        exponent >>= 1
+    return result
+
+
+def _nullspace_mod(
+    matrix: list[list[int]], prime: int
+) -> list[list[int]]:
+    """Return a basis for the right nullspace over F_prime."""
+    if not matrix:
+        return []
+    rows, columns = len(matrix), len(matrix[0])
+    work = [[value % prime for value in row] for row in matrix]
+    pivots: list[int] = []
+    pivot_row = 0
+    for column in range(columns):
+        pivot = next(
+            (r for r in range(pivot_row, rows) if work[r][column]),
+            None,
+        )
+        if pivot is None:
+            continue
+        work[pivot_row], work[pivot] = work[pivot], work[pivot_row]
+        inv = pow(work[pivot_row][column], -1, prime)
+        work[pivot_row] = [v * inv % prime for v in work[pivot_row]]
+        for r in range(rows):
+            if r != pivot_row and work[r][column]:
+                factor = work[r][column]
+                work[r] = [
+                    (work[r][c] - factor * work[pivot_row][c]) % prime
+                    for c in range(columns)
+                ]
+        pivots.append(column)
+        pivot_row += 1
+        if pivot_row == rows:
+            break
+    free_columns = [c for c in range(columns) if c not in pivots]
+    basis = []
+    for free in free_columns:
+        vector = [0] * columns
+        vector[free] = 1
+        for r, pivot in enumerate(pivots):
+            vector[pivot] = (-work[r][free]) % prime
+        basis.append(vector)
+    return basis
+
+
+def _berlekamp_basis(poly: list[int], prime: int) -> list[list[int]]:
+    """Compute the Berlekamp nullspace basis for a monic squarefree polynomial."""
+    degree = len(poly) - 1
+    columns = []
+    x = [0, 1]
+    for j in range(degree):
+        columns.append(_poly_pow_mod_field(x, prime * j, poly, prime))
+    q_minus_i = [
+        [
+            ((columns[column][row] if row < len(columns[column]) else 0)
+             - (1 if row == column else 0)) % prime
+            for column in range(degree)
+        ]
+        for row in range(degree)
+    ]
+    return _nullspace_mod(q_minus_i, prime)
+
+
+def _berlekamp_factor_squarefree(poly: list[int], prime: int) -> list[list[int]]:
+    """Factor a monic squarefree polynomial over F_p by Berlekamp's algorithm."""
+    factors = [poly]
+    for vector in _berlekamp_basis(poly, prime):
+        splitter = _poly_trim_mod(vector[:], prime)
+        if len(splitter) == 1:
+            continue
+        refined = []
+        for factor in factors:
+            if len(factor) == 2:
+                refined.append(factor)
+                continue
+            pieces = [factor]
+            for residue in range(prime):
+                next_pieces = []
+                for piece in pieces:
+                    if len(piece) == 2:
+                        next_pieces.append(piece)
+                        continue
+                    difference = _poly_sub_mod(splitter, [residue], prime)
+                    common = _poly_gcd_field(piece, difference, prime)
+                    if common != [1] and common != piece:
+                        quotient, remainder = _poly_divmod_field(piece, common, prime)
+                        if remainder != [0]:
+                            raise ArithmeticError("Berlekamp split was inexact")
+                        next_pieces.extend((common, quotient))
+                    else:
+                        next_pieces.append(piece)
+                pieces = next_pieces
+            refined.extend(pieces)
+        factors = refined
+        if len(factors) == len(_berlekamp_basis(poly, prime)):
+            # No early mathematical assumption: later basis vectors may still split.
+            pass
+    return sorted(
+        (_poly_trim_mod(factor, prime) for factor in factors),
+        key=lambda factor: (len(factor), tuple(factor)),
+    )
+
+
+def cyclotomic_factorization_mod(
+    order: int, prime: int
+) -> tuple[tuple[int, ...], ...]:
+    """Return monic irreducible factors of Phi_order over F_p.
+
+    Coefficients are low-degree first. Uses Berlekamp factorization and
+    requires p not to divide order, ensuring Phi_order is squarefree.
+    """
+    if order < 1:
+        raise ValueError("order must be positive")
+    if not _is_prime(prime):
+        raise ValueError("prime must be prime")
+    if _gcd(order, prime) != 1:
+        raise ValueError("prime must not divide the cyclotomic order")
+    polynomial = _poly_trim_mod(list(cyclotomic_polynomial(order)), prime)
+    if polynomial[-1] != 1:
+        inverse = pow(polynomial[-1], -1, prime)
+        polynomial = [value * inverse % prime for value in polynomial]
+    factors = _berlekamp_factor_squarefree(polynomial, prime)
+    return tuple(tuple(factor) for factor in factors)
+
+
+def verify_cyclotomic_factorization(order: int, prime: int) -> bool:
+    """Verify returned factors are monic, irreducible, and multiply to Phi_order."""
+    factors = cyclotomic_factorization_mod(order, prime)
+    product = [1]
+    for factor in factors:
+        if len(factor) < 2 or factor[-1] != 1:
+            return False
+        # An irreducible polynomial has no proper monic divisor of degree <= n/2.
+        for degree in range(1, (len(factor) - 1) // 2 + 1):
+            for coefficients in __import__("itertools").product(
+                range(prime), repeat=degree
+            ):
+                candidate = list(coefficients) + [1]
+                _, remainder = _poly_divmod_field(list(factor), candidate, prime)
+                if remainder == [0]:
+                    return False
+        product = _poly_mul_mod(product, list(factor), prime)
+    target = _poly_trim_mod(list(cyclotomic_polynomial(order)), prime)
+    if target[-1] != 1:
+        inverse = pow(target[-1], -1, prime)
+        target = [value * inverse % prime for value in target]
+    return product == target
