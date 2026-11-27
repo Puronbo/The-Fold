@@ -54,3 +54,4 @@ import Fold
 #print axioms Fold.distinct_references_survive_collapse
 #print axioms Fold.comp_not_injective_of_not_injective
 #print axioms Fold.postprocess_cannot_restore_collapse_injectivity
+#print axioms Fold.comp_injective_of_injective
