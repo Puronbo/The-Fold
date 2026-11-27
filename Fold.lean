@@ -163,5 +163,14 @@ import Fold.Complexity.Reduction
 #check Fold.obliqueProjection_idempotent
 #check Fold.obliqueCut
 
+#check Fold.obliqueReflectionA_fix_iff
+#check Fold.obliqueProjectionA_fix
+#check Fold.obliqueProjectionA_idempotent
+#check Fold.obliqueCutA
+#check Fold.translatedObliqueReflection_fix_iff
+#check Fold.translatedObliqueProjection_fix
+#check Fold.translatedObliqueProjection_idempotent
+#check Fold.translatedObliqueCut
+
 #check Fold.booleanSwap_no_fixed
 #check Fold.booleanSwap_no_cut
