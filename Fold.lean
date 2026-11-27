@@ -118,3 +118,7 @@ import Fold.Doubling
 #check Fold.retainPair_injective_of_primary_injective
 #check Fold.retainPair_injective_of_separates_collisions
 #check Fold.different_speeds_require_different_distances
+#check Fold.FirstArrival
+#check Fold.firstArrival_le_any_arrival
+#check Fold.SynchronizedFirstArrival
+#check Fold.synchronized_first_arrival_is_common_lower_bound
