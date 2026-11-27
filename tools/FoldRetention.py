@@ -229,6 +229,8 @@ def verify_optimality_certificate(
             for feature in safe
         ]
         denominator = max(all_coverage, default=0)
+        if not required:
+            return not certificate and plan.dual_denominator == 0
         return packing_valid and denominator > 0 and plan.dual_denominator == denominator
     except (KeyError, ValueError):
         return False
@@ -242,7 +244,14 @@ def retention_plan_proves_optimality(
     cannot_link_pairs: Sequence[tuple[str, str]],
     plan: RetentionPlan,
 ) -> bool:
-    """A feasible plan plus matching packing bound certifies global minimum."""
+    """A feasible plan plus matching packing/dual bounds certifies minimum."""
+    by_id = {item.identifier: item for item in instances}
+    required_count = sum(
+        1 for a, b in cannot_link_pairs
+        if a in by_id and b in by_id and equivalent(by_id[a], by_id[b], context)
+    )
+    dual_bound = ((required_count + plan.dual_denominator - 1) // plan.dual_denominator
+                  if plan.dual_denominator else 0)
     return (
         verify_retention_plan(instances, plan, must_link_pairs, cannot_link_pairs)
         and verify_optimality_certificate(
@@ -251,10 +260,7 @@ def retention_plan_proves_optimality(
         )
         and max(
             len(plan.lower_bound_pairs),
-            (sum(1 for a, b in cannot_link_pairs
-                 if equivalent(by_id[a], by_id[b], context))
-             + plan.dual_denominator - 1) // plan.dual_denominator
-            if plan.dual_denominator else 0,
+            dual_bound,
         ) == len(plan.retained_features)
     )
 
