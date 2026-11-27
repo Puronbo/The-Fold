@@ -102,10 +102,15 @@ theorem firstArrival_unique {α : Type} (reaches : α → Nat → Prop)
     (ha : FirstArrival reaches process a)
     (hb : FirstArrival reaches process b) :
     a = b := by
-  by_contra hne
-  rcases Nat.lt_or_gt_of_ne hne with hab | hba
-  · exact (ha.2 b hab) hb.1
-  · exact (hb.2 a hba) ha.1
+  have hab : a ≤ b := by
+    by_cases h : a ≤ b
+    · exact h
+    · exact False.elim ((ha.2 b (Nat.lt_of_not_ge h)) hb.1)
+  have hba : b ≤ a := by
+    by_cases h : b ≤ a
+    · exact h
+    · exact False.elim ((hb.2 a (Nat.lt_of_not_ge h)) ha.1)
+  exact Nat.le_antisymm hab hba
 
 /-- Any member of a family determines the unique synchronized boundary
     when its reach predicate is independent of that boundary. -/
