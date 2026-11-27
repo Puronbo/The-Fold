@@ -82,6 +82,18 @@ theorem positiveSpeed_firstArrival (speed arrival : Nat)
     unfold reachesDestination at hzero
     omega
 
+
+/-- Positive speed is essential: a zero-speed path is already at the
+    target in this remaining-distance encoding at every tick, so a
+    positive designated arrival cannot be its first arrival. -/
+theorem zeroSpeed_not_firstArrival (arrival : Nat) (harrival : 0 < arrival) :
+    ¬ FirstArrival
+      (fun v t => reachesDestination v arrival t) 0 arrival := by
+  intro hfirst
+  have hearly := hfirst.2 0 harrival
+  apply hearly
+  simp [reachesDestination, remainingDisplacement]
+
 /-- A list of positive-speed paths is synchronized at their common first
     arrival time. -/
 def SynchronizedFirstArrival (arrival : Nat) (speeds : List Nat) : Prop :=
