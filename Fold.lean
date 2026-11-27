@@ -198,3 +198,8 @@ import Fold.Complexity.Reduction
 #check Fold.SynchronizedGapArrival
 #check Fold.synchronized_of_positive_gaps
 #check Fold.synchronizedGapArrival_unique
+
+#check Fold.nonlinearExampleGap_zero
+#check Fold.nonlinearExampleGap_positive
+#check Fold.nonlinear_examples_synchronize
+#check Fold.nonlinear_profiles_differ_one_tick
