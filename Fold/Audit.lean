@@ -74,6 +74,7 @@ import Fold
 #print axioms Fold.first_threshold_crossing_iff_boundary
 #print axioms Fold.first_threshold_crossing_interval
 #print axioms Fold.synchronized_threshold_intervals
+#print axioms Fold.synchronized_threshold_intervals_iff
 #print axioms Fold.distinct_speeds_can_synchronize
 #print axioms Fold.distinct_speeds_shared_first_tick
 #print axioms Fold.synchronized_linear_cross_product
