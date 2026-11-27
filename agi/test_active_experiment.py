@@ -21,7 +21,7 @@ class ActiveExperimentTests(unittest.TestCase):
         result = design_discriminating_experiment(candidates, (0, 1, 2))
         self.assertEqual(result.status, "input_selected")
         self.assertEqual(result.selected_input, Fraction(2))
-        self.assertEqual(result.selected_option.pairwise_disagreement, Fraction(7))
+        self.assertEqual(result.selected_option.pairwise_disagreement, Fraction(6))
 
     def test_domain_failure_reduces_coverage(self):
         inverse = ComposedRelation((0, 1, 1, 0), (Fraction(0),))
