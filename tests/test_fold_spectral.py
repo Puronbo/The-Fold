@@ -194,6 +194,34 @@ class FoldSpectralTests(unittest.TestCase):
         self.assertFalse(_is_irreducible_mod([1, 0, 1], 2))
         self.assertFalse(_is_irreducible_mod([1, 0, 0, 1], 2))
 
+
+    def test_ramified_cyclotomic_factorization(self):
+        from tools.FoldSpectral import (
+            cyclotomic_factorization_with_multiplicity_mod,
+            verify_cyclotomic_factorization_with_multiplicity,
+        )
+
+        self.assertEqual(
+            cyclotomic_factorization_with_multiplicity_mod(12, 2),
+            (((1, 1, 1), 2),),
+        )
+        self.assertEqual(
+            cyclotomic_factorization_with_multiplicity_mod(12, 3),
+            (((1, 0, 1), 2),),
+        )
+        self.assertEqual(
+            cyclotomic_factorization_with_multiplicity_mod(18, 3),
+            (((1, 1, 1), 6),),
+        )
+        for order in range(1, 31):
+            for prime in (2, 3, 5, 7):
+                if order % prime == 0:
+                    self.assertTrue(
+                        verify_cyclotomic_factorization_with_multiplicity(
+                            order, prime
+                        )
+                    )
+
     def test_rejects_zero_vector_and_invalid_modulus(self):
         self.assertFalse(verify_quarter_turn_eigenpair(
             ModularEigenpair(0, (0, 0)), 5
