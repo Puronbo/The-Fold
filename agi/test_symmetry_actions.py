@@ -1,7 +1,7 @@
 """Tests for finite group actions and symmetry discovery."""
 import unittest
 
-from agi.symmetry_actions import analyze_finite_group_action
+from agi.symmetry_actions import analyze_finite_group_action, orbit_reconstruction_profiles
 
 
 class SymmetryActionTests(unittest.TestCase):
@@ -70,6 +70,53 @@ class SymmetryActionTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             analyze_finite_group_action(
                 ("a", "b"), (("e", (0, 1)),), (("a", "outside"),),
+            )
+
+
+    def test_orbit_stabilizer_and_selector_bits_for_s3_action(self):
+        profiles = orbit_reconstruction_profiles(
+            (0, 1, 2),
+            (
+                ("e", (0, 1, 2)),
+                ("t01", (1, 0, 2)),
+                ("t12", (0, 2, 1)),
+                ("t02", (2, 1, 0)),
+                ("r", (1, 2, 0)),
+                ("r2", (2, 0, 1)),
+            ),
+        )
+        for profile in profiles:
+            self.assertEqual(profile.group_size, 6)
+            self.assertEqual(profile.orbit_size, 3)
+            self.assertEqual(profile.stabilizer_size, 2)
+            self.assertEqual(profile.group_size,
+                             profile.orbit_size * profile.stabilizer_size)
+            self.assertEqual(profile.selector_redundancy, 2)
+            self.assertEqual(profile.minimum_fixed_length_bits, 2)
+
+    def test_fixed_point_needs_zero_selector_bits(self):
+        profiles = orbit_reconstruction_profiles(
+            ("a", "b"),
+            (("e", (0, 1)), ("s", (1, 0))),
+        )
+        # This action swaps the two states, so neither is fixed.
+        self.assertEqual({p.minimum_fixed_length_bits for p in profiles}, {1})
+        fixed_profiles = orbit_reconstruction_profiles(
+            ("fixed", "a", "b"),
+            (
+                ("e", (0, 1, 2)),
+                ("s", (0, 2, 1)),
+            ),
+        )
+        fixed = next(p for p in fixed_profiles if p.state == "fixed")
+        self.assertEqual(fixed.orbit_size, 1)
+        self.assertEqual(fixed.stabilizer_size, 2)
+        self.assertEqual(fixed.minimum_fixed_length_bits, 0)
+
+    def test_reconstruction_profile_rejects_non_group(self):
+        with self.assertRaises(ValueError):
+            orbit_reconstruction_profiles(
+                (0, 1, 2), (("e", (0, 1, 2)), ("r", (1, 2, 0))),
             )
 
 
