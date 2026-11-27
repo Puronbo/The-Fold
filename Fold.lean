@@ -117,3 +117,4 @@ import Fold.Doubling
 #check Fold.retainPair_eq_iff
 #check Fold.retainPair_injective_of_primary_injective
 #check Fold.retainPair_injective_of_separates_collisions
+#check Fold.different_speeds_require_different_distances
