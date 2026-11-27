@@ -210,3 +210,8 @@ The new agi/relation_selection.py compares caller-supplied composed paths on the
 ## Stage 21: compositional abstraction
 
 `agi/compositional_abstraction.py` represents an affine concept as an immutable ordered path, retains intermediate structure while deriving its endpoint map, distinguishes structural equivalence from endpoint-only equivalence, and transfers every edge through a separate invertible coordinate map for each layer. Each commuting square is checked exactly on supplied inputs. See `agi/stage-21-compositional-abstraction.md`.
+
+
+## Stage 22: exact invariant discovery
+
+`agi/invariant_discovery.py` extracts the multiplier, identity/nonzero-translation class, and fixed-point structure of scalar affine self-maps. It derives conjugates under invertible affine coordinate changes and verifies exact preservation of the multiplier and covariance of fixed points. The scope is deliberately limited to rational affine maps. See `agi/stage-22-invariant-discovery.md`.
