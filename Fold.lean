@@ -233,3 +233,8 @@ import Fold.Complexity.Reduction
 #check Fold.foldTransportFamilyTarget
 #check Fold.synchronizedBoundary_fold_target_transport
 #check Fold.foldTransportFamilyTarget_involutive
+
+#check Fold.coordinateTransportTarget
+#check Fold.firstArrival_coordinate_transport
+#check Fold.coordinateTransportTarget_round_trip
+#check Fold.firstArrival_bijective_coordinate_change
