@@ -152,3 +152,46 @@ theorem foldTransportFamilyTarget_involutive
   rw [(fold process).invol state]
 
 end Fold
+
+
+/-- Pull a target predicate on Y back to X along a coordinate map e.
+    This is the target-side operation paired with mapping states by e. -/
+def coordinateTransportTarget {X Y : Type}
+    (e : X → Y) (hit : Y → Prop) : X → Prop :=
+  fun x => hit (e x)
+
+/-- First arrival is unchanged by a coordinate map when the trajectory
+    and target are transported together. No injectivity or surjectivity
+    is needed for this forward comparison. -/
+theorem firstArrival_coordinate_transport
+    {α X Y : Type} (e : X → Y) (path : α → Nat → X)
+    (hit : Y → Prop) (process : α) (time : Nat) :
+    FirstArrival (fun p t => hit (e (path p t))) process time ↔
+      FirstArrival
+        (fun p t => coordinateTransportTarget e hit (path p t))
+        process time := Iff.rfl
+
+/-- If e and eInv are inverse coordinate maps, pulling a target back
+    along e and then along eInv restores the original target on Y. -/
+theorem coordinateTransportTarget_round_trip
+    {X Y : Type} (e : X → Y) (eInv : Y → X)
+    (rightInv : ∀ y, e (eInv y) = y) (hit : Y → Prop) :
+    coordinateTransportTarget eInv
+      (coordinateTransportTarget e hit) = hit := by
+  funext y
+  change hit (e (eInv y)) = hit y
+  rw [rightInv y]
+
+/-- A bijective coordinate change gives a reversible correspondence
+    between first-arrival statements, with the target pulled back. -/
+theorem firstArrival_bijective_coordinate_change
+    {α X Y : Type} (e : X → Y) (eInv : Y → X)
+    (leftInv : ∀ x, eInv (e x) = x)
+    (rightInv : ∀ y, e (eInv y) = y)
+    (path : α → Nat → X) (hit : Y → Prop)
+    (process : α) (time : Nat) :
+    FirstArrival (fun p t => hit (e (path p t))) process time ↔
+      FirstArrival
+        (fun p t => coordinateTransportTarget e hit (path p t))
+        process time := by
+  exact firstArrival_coordinate_transport e path hit process time
