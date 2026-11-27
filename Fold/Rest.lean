@@ -195,3 +195,82 @@ theorem differentialRateRest_states_differ
   exact congrArg RateRestState.conditionRate heq
 
 end Fold
+
+/-- A rest state with a second discrete derivative of its internal condition. -/
+structure AccelRestState where
+  position : Int
+  velocity : Int
+  condition : Int
+  conditionRate : Int
+  conditionAcceleration : Int
+  deriving DecidableEq, Repr
+
+/-- Kinematic rest remains a statement only about velocity. -/
+def AccelContextAtRest (s : AccelRestState) : Prop :=
+  s.velocity = 0
+
+/-- Differential-acceleration rest changes the internal acceleration
+    while position and zero velocity persist. -/
+def DifferentialAccelerationRest
+    (before after : AccelRestState) : Prop :=
+  before.position = after.position ∧
+  before.velocity = 0 ∧ after.velocity = 0 ∧
+  before.conditionAcceleration ≠ after.conditionAcceleration
+
+/-- Advance the internal condition and its rate, then update acceleration;
+    position and velocity are held fixed at kinematic rest. -/
+def conditionAccelerationStep
+    (nextAcceleration : Int → Int) (s : AccelRestState) :
+    AccelRestState :=
+  if h : s.velocity = 0 then
+    { s with
+      condition := s.condition + s.conditionRate
+      conditionRate := s.conditionRate + s.conditionAcceleration
+      conditionAcceleration := nextAcceleration s.conditionAcceleration }
+  else s
+
+/-- Higher-order internal evolution preserves position at rest. -/
+theorem conditionAccelerationStep_position
+    (nextAcceleration : Int → Int) (s : AccelRestState)
+    (hrest : AccelContextAtRest s) :
+    (conditionAccelerationStep nextAcceleration s).position = s.position := by
+  simp [conditionAccelerationStep, AccelContextAtRest, hrest]
+
+/-- Higher-order internal evolution leaves velocity zero. -/
+theorem conditionAccelerationStep_velocity
+    (nextAcceleration : Int → Int) (s : AccelRestState)
+    (hrest : AccelContextAtRest s) :
+    (conditionAccelerationStep nextAcceleration s).velocity = 0 := by
+  simp [conditionAccelerationStep, AccelContextAtRest, hrest]
+
+/-- If the acceleration update differs, the transition is
+    differential-acceleration rest. -/
+theorem conditionAccelerationStep_differentialAccelerationRest
+    (nextAcceleration : Int → Int) (s : AccelRestState)
+    (hrest : AccelContextAtRest s)
+    (haccel :
+      nextAcceleration s.conditionAcceleration ≠ s.conditionAcceleration) :
+    DifferentialAccelerationRest s
+      (conditionAccelerationStep nextAcceleration s) := by
+  simp [DifferentialAccelerationRest, conditionAccelerationStep,
+    AccelContextAtRest, hrest, haccel]
+
+/-- A change in internal acceleration makes the augmented states distinct. -/
+theorem differentialAccelerationRest_states_differ
+    (before after : AccelRestState)
+    (h : DifferentialAccelerationRest before after) :
+    before ≠ after := by
+  intro heq
+  apply h.2.2.2
+  exact congrArg AccelRestState.conditionAcceleration heq
+
+/-- A nonzero internal acceleration changes the next condition rate. -/
+theorem conditionAccelerationStep_rate_changes
+    (nextAcceleration : Int → Int) (s : AccelRestState)
+    (hrest : AccelContextAtRest s)
+    (hnonzero : s.conditionAcceleration ≠ 0) :
+    (conditionAccelerationStep nextAcceleration s).conditionRate ≠
+      s.conditionRate := by
+  simp [conditionAccelerationStep, AccelContextAtRest, hrest]
+  exact hnonzero
+
