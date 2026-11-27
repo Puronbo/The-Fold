@@ -14,7 +14,7 @@ class CompositionalAbstractionTests(unittest.TestCase):
         self.path = CompositionalAffineConcept((Law(2, 3), Law(3, -1), Law(F(1, 2), 4)))
 
     def test_composes_steps_in_execution_order(self):
-        self.assertEqual(self.path.endpoint_signature, (F(3), F(11, 2)))
+        self.assertEqual(self.path.endpoint_signature, (F(3), F(8)))
         self.assertEqual(self.path.evaluate_path(2), (F(7), F(20), F(14)))
 
     def test_different_paths_can_have_same_endpoint_function(self):
@@ -47,8 +47,8 @@ class CompositionalAbstractionTests(unittest.TestCase):
     def test_transfer_is_derived_not_refit(self):
         maps = (Map(3, 1), Map(2, -1), Map(5, 4), Map(-2, 7))
         result = transfer_compositional_concept(self.path, maps, (("x", 4),))
-        for source_step, target_step in zip(self.path.steps, result.mapped_path.steps):
-            self.assertEqual(target_step.slope, source_step.slope * maps[result.mapped_path.steps.index(target_step)+1].scale / maps[result.mapped_path.steps.index(target_step)].scale)
+        for index, (source_step, target_step) in enumerate(zip(self.path.steps, result.mapped_path.steps)):
+            self.assertEqual(target_step.slope, source_step.slope * maps[index + 1].scale / maps[index].scale)
 
     def test_requires_one_map_per_layer(self):
         with self.assertRaises(ValueError):
