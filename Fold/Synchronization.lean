@@ -41,4 +41,21 @@ theorem faster_has_larger_remaining_displacement
     a * remaining < b * remaining := by
   exact Nat.mul_lt_mul_of_pos_right hab hremaining
 
+
+/-- Remaining distance in the discrete constant-rate model. -/
+def remainingDisplacement (speed arrival t : Nat) : Nat :=
+  speed * (arrival - t)
+
+/-- Positive speed implies strictly positive remaining distance before arrival. -/
+theorem remainingDisplacement_pos_before_arrival
+    (speed arrival t : Nat) (hspeed : 0 < speed) (ht : t < arrival) :
+    0 < remainingDisplacement speed arrival t := by
+  exact Nat.mul_pos hspeed (Nat.sub_pos_of_lt ht)
+
+/-- At the designated arrival time, remaining distance is zero. -/
+theorem remainingDisplacement_zero_at_arrival
+    (speed arrival : Nat) :
+    remainingDisplacement speed arrival arrival = 0 := by
+  simp [remainingDisplacement]
+
 end Fold
