@@ -492,7 +492,6 @@ theorem firstArrival_nat_mul_time_reindex
       exact Nat.mul_lt_mul_of_pos_left hab hfactor)
     time
 
-end Fold
 
 
 /-- Exact characterization of first arrival after sampling a trajectory
@@ -535,3 +534,6 @@ theorem firstArrival_strict_reindex_forward
     FirstArrival reaches process (clock time) →
       FirstArrival (fun p t => reaches p (clock t)) process time := by
   exact firstArrival_strict_time_reindex reaches process clock hclock time
+
+
+end Fold
