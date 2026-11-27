@@ -28,9 +28,27 @@ class Quantity:
 
 
 @dataclass(frozen=True)
+class Compatibility:
+    """Overlapping measurement ranges; not an equivalence or probability."""
+    left: str
+    right: str
+    overlap_lower: Fraction
+    overlap_upper: Fraction
+    source: str
+
+
+@dataclass(frozen=True)
+class Measurement:
+    quantity: Quantity
+    lower: Fraction | None = None
+    upper: Fraction | None = None
+
+
+@dataclass(frozen=True)
 class ProposalBatch:
     equivalences: tuple[Candidate, ...]
     counterexamples: tuple[Counterexample, ...]
+    compatibilities: tuple[Compatibility, ...] = ()
 
 
 # Multiplicative conversions to SI base units.
@@ -156,6 +174,54 @@ def parse_quantity(payload: Any) -> Quantity | None:
     return Quantity(dimension, value * factor, inferred_kind, unit)
 
 
+def parse_measurement(payload: Any) -> Measurement | None:
+    """Parse an exact quantity plus optional explicit interval and calibration correction.
+
+    Schema:
+      uncertainty: {"type": "interval", "lower": x, "upper": y}
+    Bounds are absolute readings in the stated unit, before calibration correction.
+    calibration_correction is a signed additive correction in that unit's scale.
+    No probability distribution is inferred from an interval.
+    """
+    if not isinstance(payload, dict):
+        return None
+    nominal = parse_quantity(payload)
+    if nominal is None:
+        return None
+    correction = _exact_fraction(payload.get("calibration_correction", 0))
+    if correction is None:
+        return None
+    unit = payload.get("unit")
+    uncertainty = payload.get("uncertainty")
+    if uncertainty is None:
+        corrected_payload = dict(payload, value=_exact_fraction(payload["value"]) + correction)
+        corrected_payload.pop("calibration_correction", None)
+        corrected = parse_quantity(corrected_payload)
+        return Measurement(corrected) if corrected is not None else None
+    if not isinstance(uncertainty, dict) or uncertainty.get("type") != "interval":
+        return None
+    lower = _exact_fraction(uncertainty.get("lower"))
+    upper = _exact_fraction(uncertainty.get("upper"))
+    value = _exact_fraction(payload.get("value"))
+    if lower is None or upper is None or value is None or lower > value or value > upper:
+        return None
+    def normalize(reading: Fraction) -> Quantity | None:
+        item = dict(payload, value=reading + correction)
+        item.pop("uncertainty", None)
+        item.pop("calibration_correction", None)
+        return parse_quantity(item)
+    q_lower, q_upper, q_nominal = normalize(lower), normalize(upper), normalize(value)
+    if q_lower is None or q_upper is None or q_nominal is None:
+        return None
+    if not (q_lower.dimension == q_upper.dimension == q_nominal.dimension):
+        return None
+    if not (q_lower.kind == q_upper.kind == q_nominal.kind):
+        return None
+    if q_lower.base_value > q_upper.base_value:
+        return None
+    return Measurement(q_nominal, q_lower.base_value, q_upper.base_value)
+
+
 class UnitQuantityProposer:
     """Propose relations for exact, typed physical-quantity equality."""
 
@@ -166,33 +232,55 @@ class UnitQuantityProposer:
             raise ValueError(f"proposer requires context: {self.CONTEXT}")
 
         parsed = {
-            key: quantity
+            key: measurement
             for key, instance in learner.instances.items()
-            if (quantity := parse_quantity(instance.payload)) is not None
+            if (measurement := parse_measurement(instance.payload)) is not None
         }
         equivalences: list[Candidate] = []
         counterexamples: list[Counterexample] = []
+        compatibilities: list[Compatibility] = []
         keys = sorted(parsed)
 
         for index, left in enumerate(keys):
-            q_left = parsed[left]
+            m_left = parsed[left]
+            q_left = m_left.quantity
             for right in keys[index + 1:]:
-                q_right = parsed[right]
+                m_right = parsed[right]
+                q_right = m_right.quantity
                 same_dimension = q_left.dimension == q_right.dimension
                 same_kind = q_left.kind == q_right.kind
-                same_value = q_left.base_value == q_right.base_value
-                if same_dimension and same_kind and same_value:
+                if not same_dimension or not same_kind:
+                    if q_left.base_value == q_right.base_value:
+                        counterexamples.append(Counterexample(
+                            left, right,
+                            "equal canonical numeral but incompatible dimension or quantity kind",
+                        ))
+                    continue
+                # Equality is asserted only for exact observations, never merely
+                # because two uncertainty ranges overlap or nominal values match.
+                if (m_left.lower is None and m_right.lower is None
+                        and q_left.base_value == q_right.base_value):
                     equivalences.append(Candidate(
                         left, right, 1.0,
                         "exact normalization, dimension-vector and quantity-kind match",
                     ))
-                elif same_value and (not same_dimension or not same_kind):
-                    counterexamples.append(Counterexample(
-                        left, right,
-                        "equal canonical numeral but incompatible dimension or quantity kind",
+                    continue
+                lo_left = q_left.base_value if m_left.lower is None else m_left.lower
+                hi_left = q_left.base_value if m_left.upper is None else m_left.upper
+                lo_right = q_right.base_value if m_right.lower is None else m_right.lower
+                hi_right = q_right.base_value if m_right.upper is None else m_right.upper
+                overlap_lower, overlap_upper = max(lo_left, lo_right), min(hi_left, hi_right)
+                if overlap_lower <= overlap_upper and (
+                    m_left.lower is not None or m_right.lower is not None
+                ):
+                    compatibilities.append(Compatibility(
+                        left, right, overlap_lower, overlap_upper,
+                        "normalized measurement intervals overlap; compatibility only",
                     ))
 
-        return ProposalBatch(tuple(equivalences), tuple(counterexamples))
+        return ProposalBatch(
+            tuple(equivalences), tuple(counterexamples), tuple(compatibilities)
+        )
 
     def apply(self, learner: ConceptLearner) -> ProposalBatch:
         """Generate proposals and submit them to the learner's evidence gate."""
