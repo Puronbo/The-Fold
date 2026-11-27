@@ -239,14 +239,17 @@ theorem nonlinearExampleGap_positive (profile : Bool) (arrival t : Nat)
     (ht : t < arrival) :
     0 < nonlinearExampleGap profile arrival t := by
   have hr : 0 < arrival - t := Nat.sub_pos_of_lt ht
-  cases profile <;> simp [nonlinearExampleGap]
-  · exact Nat.mul_pos hr hr
-  · exact Nat.mul_pos hr (Nat.succ_pos _)
+  cases profile
+  · change 0 < (arrival - t) * ((arrival - t) + 1)
+    exact Nat.mul_pos hr (by omega)
+  · change 0 < (arrival - t) * (arrival - t)
+    exact Nat.mul_pos hr hr
 
 /-- These distinct nonlinear profiles have the same unique first-arrival
     time, without being constant-rate paths. -/
 theorem nonlinear_examples_synchronize (arrival : Nat) :
-    SynchronizedGapArrival nonlinearExampleGap [true, false] arrival := by
+    SynchronizedGapArrival (fun profile t => nonlinearExampleGap profile arrival t)
+      [true, false] arrival := by
   intro profile hmem
   apply firstArrival_of_positive_gap
   · exact nonlinearExampleGap_zero profile arrival
