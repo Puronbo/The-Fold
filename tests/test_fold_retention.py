@@ -58,6 +58,28 @@ class FoldRetentionTests(unittest.TestCase):
             instances, self.base, ("f1", "f2", "f3", "f4"), (), cannot, plan
         ))
 
+    def test_fractional_dual_certifies_beyond_pair_packing(self):
+        instances = (
+            Instance.make("t0", {"shape": "round", "fa": 0, "fb": 0, "fc": 0}),
+            Instance.make("t1", {"shape": "round", "fa": 1, "fb": 0, "fc": 1}),
+            Instance.make("t2", {"shape": "round", "fa": 1, "fb": 1, "fc": 0}),
+            Instance.make("t3", {"shape": "round", "fa": 0, "fb": 1, "fc": 1}),
+        )
+        cannot = (("t0", "t1"), ("t0", "t2"), ("t0", "t3"))
+        plan = minimum_retention_features(
+            instances, self.base, ("fa", "fb", "fc"), (), cannot
+        )
+        self.assertIsNotNone(plan)
+        objective = sum(
+            (Fraction(n, d) for n, d in plan.dual_weights), Fraction(0)
+        )
+        self.assertEqual(objective, Fraction(3, 2))
+        self.assertEqual(len(plan.lower_bound_pairs), 1)
+        self.assertEqual(len(plan.retained_features), 2)
+        self.assertTrue(retention_plan_proves_optimality(
+            instances, self.base, ("fa", "fb", "fc"), (), cannot, plan
+        ))
+
     def test_returns_none_when_no_safe_feature_set_exists(self):
         plan = minimum_retention_features(
             self.instances, self.base, ("colour", "weight"),
