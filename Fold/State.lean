@@ -530,6 +530,24 @@ theorem synchronized_threshold_family_iff
       exact Nat.lt_of_le_of_lt hProgress hLower
 
 /--
+Specialization to one shared target: an indexed family with different
+speeds can first cross the same target at the same positive tick exactly
+when every process lies below it at the preceding tick and reaches it
+at the crossing tick.
+-/
+theorem synchronized_common_target_family_iff
+    {α : Type} (speed : α → Nat) (target time : Nat)
+    (hPositiveTick : ∃ previous, time = previous + 1) :
+    (∀ process, FirstThresholdCrossing (speed process) target time) ↔
+      ∃ previous, time = previous + 1 ∧
+        ∀ process,
+          speed process * previous < target ∧
+            target ≤ speed process * time := by
+  simpa using
+    (synchronized_threshold_family_iff
+      (speed := speed) (target := fun _ => target) time hPositiveTick)
+
+/--
 Concrete synchronized first crossing: rates 2 and 3 both first reach
 target 4 at tick 2, despite moving at different speeds.
 -/
