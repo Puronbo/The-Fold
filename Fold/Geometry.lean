@@ -75,4 +75,57 @@ theorem horizontalChart_reflection (p : Int × Int) :
       chart horizontalReflection p :=
   chart_fold horizontalReflection p
 
+/-- Reflection across the translated horizontal line y = c. -/
+def horizontalReflectionAt (c : Int) : Fold (Int × Int) where
+  f := fun p => (p.1, 2 * c - p.2)
+  invol := by
+    intro p
+    rcases p with ⟨x, y⟩
+    simp
+    omega
+
+/-- The crease of the translated reflection is exactly y = c. -/
+theorem horizontalReflectionAt_fix_iff (c : Int) (p : Int × Int) :
+    Fix (horizontalReflectionAt c) p ↔ p.2 = c := by
+  change (p.1, 2 * c - p.2) = p ↔ p.2 = c
+  constructor
+  · intro h
+    have hs := congrArg Prod.snd h
+    omega
+  · intro h
+    rcases p with ⟨x, y⟩
+    simp at h
+    subst y
+    simp
+
+/-- Projection onto the translated crease y = c. -/
+def horizontalProjectionAt (c : Int) (p : Int × Int) : Int × Int :=
+  (p.1, c)
+
+/-- Projection lands on the translated crease. -/
+theorem horizontalProjectionAt_fix (c : Int) (p : Int × Int) :
+    Fix (horizontalReflectionAt c) (horizontalProjectionAt c p) := by
+  apply (horizontalReflectionAt_fix_iff c _).2
+  rfl
+
+/-- Projection onto y = c is a cut for reflection across y = c. -/
+def horizontalCutAt (c : Int) : Cut (horizontalReflectionAt c) where
+  p := horizontalProjectionAt c
+  image_fix := horizontalProjectionAt_fix c
+  fix_eq := by
+    intro p hp
+    rcases p with ⟨x, y⟩
+    have hy : y = c := (horizontalReflectionAt_fix_iff c (x, y)).mp hp
+    simp [horizontalProjectionAt, hy]
+  orbit_eq := by
+    intro p
+    rcases p with ⟨x, y⟩
+    simp [horizontalProjectionAt, horizontalReflectionAt]
+
+/-- The translated projection is idempotent. -/
+theorem horizontalProjectionAt_idempotent (c : Int) (p : Int × Int) :
+    horizontalProjectionAt c (horizontalProjectionAt c p) =
+      horizontalProjectionAt c p := by
+  rfl
+
 end Fold
