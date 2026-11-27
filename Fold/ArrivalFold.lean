@@ -80,6 +80,8 @@ theorem noninvariant_target_can_change_first_arrival :
 end Fold
 
 
+namespace Fold
+
 /-- Transport a target backwards through a fold. A state x belongs to
     the transported target precisely when its folded image belongs to
     the original target. -/
@@ -93,6 +95,7 @@ theorem foldTransportTarget_involutive {X : Type} (F : Fold X)
     (hit : X → Prop) :
     foldTransportTarget F (foldTransportTarget F hit) = hit := by
   funext x
+  apply propext
   change hit (F.f (F.f x)) ↔ hit x
   rw [F.invol x]
 
@@ -151,5 +154,7 @@ theorem foldTransportFamilyTarget_involutive
   change hit process ((fold process).f ((fold process).f state)) ↔
     hit process state
   rw [(fold process).invol state]
+
+end Fold
 
 end Fold
