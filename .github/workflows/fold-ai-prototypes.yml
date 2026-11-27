@@ -32,3 +32,5 @@ jobs:
         run: python tools/FoldMind.py
       - name: Test hypothesis generation, falsification, and memory audit
         run: python tools/FoldHypothesis.py
+      - name: Test disagreement-based experiment selection
+        run: python tools/FoldExperiment.py
