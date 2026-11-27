@@ -22,6 +22,10 @@ from FoldMemory import FoldMemory
 from FoldHypothesis import Example as HypothesisExample, generate, evaluate, retain_audit
 from FoldHypothesis import Hypothesis
 from FoldExperiment import ExperimentCandidate, ExperimentSelection, choose_experiment as rank_experiments
+try:
+    from .FoldRetention import RetentionPlan, minimum_retention_features, verify_retention_plan
+except ImportError:  # pragma: no cover - direct script execution
+    from FoldRetention import RetentionPlan, minimum_retention_features, verify_retention_plan
 
 
 @dataclass(frozen=True)
@@ -232,6 +236,60 @@ class FoldMind:
 
 
 
+    def plan_retention(
+        self,
+        observations: Sequence[Observation],
+        *,
+        task: str,
+        base_features: Sequence[str],
+        candidate_features: Sequence[str],
+        must_link_pairs: Sequence[tuple[str, str]],
+        cannot_link_pairs: Sequence[tuple[str, str]],
+    ) -> RetentionPlan | None:
+        """Find and audit a minimum safe residual feature set, then retain the plan."""
+        if not task:
+            raise ValueError("task must be nonempty")
+        instances = tuple(
+            Instance.make(item.identifier, dict(item.features), item.source)
+            for item in observations
+        )
+        if len({item.identifier for item in instances}) != len(instances):
+            raise ValueError("observation identifiers must be unique")
+        if not self.memory.verify():
+            raise ValueError("memory integrity check failed; refusing retention planning")
+        context = Context(task, tuple(base_features))
+        plan = minimum_retention_features(
+            instances, context, tuple(candidate_features),
+            tuple(must_link_pairs), tuple(cannot_link_pairs),
+        )
+        verified = (
+            plan is not None
+            and verify_retention_plan(
+                instances, plan, tuple(must_link_pairs), tuple(cannot_link_pairs)
+            )
+        )
+        payload = {
+            "base_features": list(base_features),
+            "candidate_features": list(candidate_features),
+            "retained_features": list(plan.retained_features) if plan else None,
+            "final_features": list(plan.final_features) if plan else None,
+            "minimum_cardinality": len(plan.retained_features) if plan else None,
+            "independently_verified": verified,
+            "status": "verified" if verified else "no-safe-plan",
+            "scope": "finite supplied observations and candidate features",
+        }
+        self.memory.append(
+            "retention-plan", f"retention:{task}",
+            json.dumps(payload, sort_keys=True, ensure_ascii=False),
+            source="FoldMind/FoldRetention", task=task,
+            confidence=1.0 if verified else 0.0,
+            tags=("foldmind", "minimum-retention",
+                  "verified" if verified else "needs-review"),
+        )
+        if plan is not None and not verified:
+            raise RuntimeError("retention plan failed independent verification")
+        return plan
+
     def select_experiment(
         self,
         hypotheses: Sequence[Hypothesis],
@@ -365,6 +423,38 @@ def _self_test() -> None:
         checks.append(("invalid hypothesis split causes no memory writes",
                        len(memory._read()) == before_hypothesis_error))
 
+
+        # Minimum retention is integrated into the audited memory cycle.
+        retention_observations = (
+            Observation.make("retain-a", {"shape": "round", "colour": "red",
+                                          "material": "rubber", "weight": 1}, "fixture"),
+            Observation.make("retain-b", {"shape": "round", "colour": "blue",
+                                          "material": "rubber", "weight": 1}, "fixture"),
+            Observation.make("retain-c", {"shape": "round", "colour": "red",
+                                          "material": "cardboard", "weight": 3}, "fixture"),
+            Observation.make("retain-e", {"shape": "round", "colour": "red",
+                                          "material": "rubber", "weight": 9}, "fixture"),
+        )
+        retention_plan = mind.plan_retention(
+            retention_observations, task="retention-demo",
+            base_features=("shape",),
+            candidate_features=("colour", "material", "weight"),
+            must_link_pairs=(("retain-a", "retain-e"),),
+            cannot_link_pairs=(("retain-a", "retain-b"), ("retain-a", "retain-c")),
+        )
+        retention_events = memory.recall(task="retention-demo")
+        checks.append(("FoldMind finds the minimum two-feature memory",
+                       retention_plan is not None
+                       and retention_plan.retained_features == ("colour", "material")))
+        checks.append(("minimum retention plan is independently verified",
+                       retention_plan is not None and verify_retention_plan(
+                           tuple(Instance.make(o.identifier, dict(o.features), o.source)
+                                 for o in retention_observations),
+                           retention_plan, (("retain-a", "retain-e"),),
+                           (("retain-a", "retain-b"), ("retain-a", "retain-c")),
+                       )))
+        checks.append(("retention plan is appended to auditable memory",
+                       any(e.event_type == "retention-plan" for e in retention_events)))
 
         # Select the next supplied experiment that most separates hypotheses.
         h_sun = Hypothesis("h-sun", "weather-play", "weather", "sun",
