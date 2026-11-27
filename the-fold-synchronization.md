@@ -182,3 +182,10 @@ This separates two cases:
 - **Not recoverable from the quotient alone:** a representative-specific event that distinguishes two states in the same orbit. Such a predicate is not well-defined on the quotient unless additional representative data is retained.
 
 Thus quotienting does not erase all event timing. It erases exactly the distinctions that the quotient identifies.
+
+
+## Trajectory histories and representative independence
+
+A state trajectory induces a chart trajectory by projecting every state to its Fold-orbit. Two state trajectories have exactly the same chart history if and only if their states are orbit-equivalent at every process and time (`chartPath_eq_iff_pointwise_orbit`). This is an exact characterization of the information discarded by the quotient, not an approximation.
+
+Consequently, every property formulated solely in terms of the chart trajectory is independent of the chosen representatives (`chartPath_property_representative_independent`). At a single step, the chart does not change precisely when the next state lies in the same two-point orbit as the current state (`chart_step_eq_iff_orbit`). This does not say the underlying state is stationary: it may have moved from one representative to the other.
