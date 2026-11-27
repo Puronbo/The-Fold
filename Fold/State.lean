@@ -556,11 +556,12 @@ theorem first_threshold_crossing_speed_pos
     (hTarget : 0 < target)
     (hCross : FirstThresholdCrossing speed target time) :
     0 < speed := by
-  by_contra hNotPositive
-  have hZero : speed = 0 := Nat.eq_zero_of_not_pos hNotPositive
-  have hReached := hCross.1
-  simp [hZero] at hReached
-  exact (Nat.not_lt_of_ge hReached) hTarget
+  cases speed with
+  | zero =>
+      have hReached := hCross.1
+      simp at hReached
+      exact False.elim ((Nat.not_lt_of_ge hReached) hTarget)
+  | succ n => exact Nat.zero_lt_succ n
 
 /--
 A positive target cannot have its first crossing at tick zero:
@@ -571,11 +572,12 @@ theorem first_threshold_crossing_time_pos
     (hTarget : 0 < target)
     (hCross : FirstThresholdCrossing speed target time) :
     0 < time := by
-  by_contra hNotPositive
-  have hZero : time = 0 := Nat.eq_zero_of_not_pos hNotPositive
-  have hReached := hCross.1
-  simp [hZero] at hReached
-  omega
+  cases time with
+  | zero =>
+      have hReached := hCross.1
+      simp at hReached
+      exact False.elim ((Nat.not_lt_of_ge hReached) hTarget)
+  | succ n => exact Nat.zero_lt_succ n
 
 /--
 For a family sharing a positive target, every synchronizing process
