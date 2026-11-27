@@ -18,7 +18,7 @@ from typing import Sequence
 
 from FoldConcept import Context, Instance, build_concepts, check_equivalence_laws
 from FoldLoop import PairConstraint, audit, refine_until_consistent
-from FoldMemory import FoldMemory
+from FoldMemory import FoldMemory\nfrom FoldHypothesis import Example as HypothesisExample, generate, evaluate, retain_audit
 
 
 @dataclass(frozen=True)
@@ -237,7 +237,39 @@ def _self_test() -> None:
         checks.append(("pre-validation prevents partial memory writes",
                        len(memory._read()) == before))
 
-        for name, passed in checks:
+
+        # Hypothesis proposals must train and evaluate on disjoint observations.
+        hypothesis_observations = (
+            Observation.make("train-sun", {"weather": "sun", "play": "yes"}, "train:v1"),
+            Observation.make("train-rain", {"weather": "rain", "play": "no"}, "train:v1"),
+            Observation.make("test-sun", {"weather": "sun", "play": "yes"}, "test:v1"),
+            Observation.make("test-rain-counterexample", {"weather": "rain", "play": "yes"}, "test:v1"),
+        )
+        hypothesis_report = mind.test_hypotheses(
+            hypothesis_observations, task="weather-play",
+            training_ids=("train-sun", "train-rain"),
+            held_out_ids=("test-sun", "test-rain-counterexample"),
+        )
+        hypothesis_events = memory.recall(task="weather-play")
+        checks.append(("FoldMind generates and evaluates hypotheses",
+                       hypothesis_report.candidates > 0))
+        checks.append(("FoldMind exposes held-out falsifications",
+                       hypothesis_report.falsified > 0))
+        checks.append(("FoldMind retains hypothesis audit events",
+                       len(hypothesis_events) == hypothesis_report.candidates))
+        before_hypothesis_error = len(memory._read())
+        try:
+            mind.test_hypotheses(
+                hypothesis_observations, task="invalid-split",
+                training_ids=("train-sun",), held_out_ids=("train-sun",),
+            )
+            split_rejected = False
+        except ValueError:
+            split_rejected = True
+        checks.append(("overlapping train/test split is rejected", split_rejected))
+        checks.append(("invalid hypothesis split causes no memory writes",
+                       len(memory._read()) == before_hypothesis_error))
+\n        for name, passed in checks:
             print(f"{'PASS' if passed else 'FAIL'}  {name}")
         print(f"{sum(p for _, p in checks)}/{len(checks)} checks passed")
         if not all(p for _, p in checks):
