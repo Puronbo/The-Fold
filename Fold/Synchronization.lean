@@ -475,7 +475,7 @@ theorem firstArrival_strict_time_reindex
   constructor
   · exact h.1
   · intro earlier hearlier hhit
-    exact h.2 (clock earlier) (hclock earlier time hearlier) hhit
+    exact h.2 (clock earlier) (hclock (a := earlier) (b := time) hearlier) hhit
 
 /-- For a positive integer clock multiplier, scaling discrete time
     preserves the first-arrival index after translating the target index
