@@ -89,6 +89,58 @@ def compare_spiral_arithmetic_recurrence(
             ):
                 if matched:
                     counts[key] += 1
+    geometric_pairs = [
+        (i, j) for i in range(len(primes)) for j in range(i + 1, len(primes))
+        if abs(math.atan2(
+            math.sin((j - i) * omega), math.cos((j - i) * omega)
+        )) <= angle_tolerance
+        and (j - i) / j <= radial_relative_tolerance
+    ]
+    cyclic_shifts = []
+    for shift in range(1, len(primes)):
+        shifted_gaps = [gaps[(i + shift) % len(primes)] for i in range(len(primes))]
+        shifted_residues = [
+            tuple(primes[(i + shift) % len(primes)] % m for m in residue_moduli)
+            for i in range(len(primes))
+        ]
+        shifted_spectral = None
+        if spectral_profiles is not None:
+            shifted_spectral = []
+            for i in range(len(primes)):
+                profile_item = spectral_profiles[(i + shift) % len(primes)]
+                shifted_spectral.append(
+                    (profile_item["rank"], profile_item["frobenius_orbit_degree_histogram"])
+                    if profile_item["factorization_complete"] else None
+                )
+        baseline_counts = {"gap": 0, "residue": 0, "spectral": 0}
+        baseline_eligible = {"gap": 0, "residue": len(geometric_pairs), "spectral": 0}
+        for i, j in geometric_pairs:
+            left_gap, right_gap = shifted_gaps[i], shifted_gaps[j]
+            if left_gap is not None and right_gap is not None:
+                baseline_eligible["gap"] += 1
+                if abs(left_gap - right_gap) / max(left_gap, right_gap) <= gap_relative_tolerance:
+                    baseline_counts["gap"] += 1
+            if shifted_residues[i] == shifted_residues[j]:
+                baseline_counts["residue"] += 1
+            if shifted_spectral is not None:
+                left_s, right_s = shifted_spectral[i], shifted_spectral[j]
+                if left_s is not None and right_s is not None:
+                    baseline_eligible["spectral"] += 1
+                    if left_s == right_s:
+                        baseline_counts["spectral"] += 1
+        cyclic_shifts.append({
+            "shift": shift,
+            "eligible_geometric_pairs": len(geometric_pairs),
+            "eligible_gap_pairs": baseline_eligible["gap"],
+            "eligible_spectral_pairs": baseline_eligible["spectral"],
+            "matches": baseline_counts,
+        })
+
+    baseline_means = {}
+    for channel in ("gap", "residue", "spectral"):
+        values = [item["matches"][channel] for item in cyclic_shifts]
+        baseline_means[channel] = (sum(values) / len(values)) if values else None
+
     return {
         "schema": "the-fold-spiral-arithmetic-recurrence-comparison-v1",
         "prime_count": len(primes), "pair_count": len(pairs),
@@ -101,6 +153,12 @@ def compare_spiral_arithmetic_recurrence(
             "spectral_matrix_supplied": matrix is not None,
         },
         "match_counts": counts, "pairwise_results": pairs,
+        "cyclic_shift_baseline": {
+            "method": "Rotate arithmetic feature records relative to fixed spiral indices by each nonzero cyclic shift.",
+            "shifts": cyclic_shifts,
+            "mean_geometric_pair_matches": baseline_means,
+            "warning": "This is a finite cyclic-shift control, not an independent randomization test or a statistical p-value."
+        },
         "interpretation": (
             "Geometric recurrence is angular and radial proximity in the "
             "chosen index spiral. Gap and residue recurrence are independent "
