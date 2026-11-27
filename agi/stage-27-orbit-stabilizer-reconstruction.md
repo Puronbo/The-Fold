@@ -75,9 +75,9 @@ each state and rejects transformation collections that are not groups.
 The quotient class determines the orbit, not the particular member. A
 representative section plus an orbit-member selector reconstructs a state.
 For a group action, choosing a group element is one possible encoding, but
-it is redundant by the stabilizer. The quotient of the group by that
-stabilizer is the natural selector space (with left/right coset convention
-fixed by the action convention).
+it is redundant by the stabilizer. The right-coset space \(G/\operatorname{Stab}_G(x)\) is the natural
+selector space for the left-action convention used here. This is a coset
+space, not necessarily a quotient group: the stabilizer need not be normal.
 
 The existing Lean Fold development proves the two-element involution case.
 The new Python profile generalizes the finite computational audit to
