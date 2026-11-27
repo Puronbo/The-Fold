@@ -22,9 +22,7 @@ theorem booleanSwap_no_fixed (b : Bool) : ¬ Fix booleanSwap b := by
   cases b <;> simp [Fix, booleanSwap]
 
 /-- No cut can retract this fold onto its empty fixed set. -/
-theorem booleanSwap_no_cut : ¬ Nonempty (Cut booleanSwap) := by
-  intro h
-  rcases h with ⟨C⟩
-  exact (booleanSwap_no_fixed (C.p false)) (C.image_fix false)
+theorem booleanSwap_no_cut : ¬ Nonempty (Cut booleanSwap) :=
+  noCut_of_noFix booleanSwap false booleanSwap_no_fixed
 
 end Fold
