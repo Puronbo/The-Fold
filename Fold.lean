@@ -155,5 +155,13 @@ import Fold.Complexity.Reduction
 #check Fold.conjugate
 #check Fold.conjugate_intertwines
 
+#check Fold.shearCoordinates_left
+#check Fold.shearCoordinates_right
+#check Fold.obliqueReflection_map
+#check Fold.obliqueReflection_fix_iff
+#check Fold.obliqueProjection_fix
+#check Fold.obliqueProjection_idempotent
+#check Fold.obliqueCut
+
 #check Fold.booleanSwap_no_fixed
 #check Fold.booleanSwap_no_cut
