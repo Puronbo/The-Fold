@@ -1,0 +1,23 @@
+name: Fold Lean proofs
+
+on:
+  push:
+    branches:
+      - "foldproof/**"
+  pull_request:
+    paths:
+      - "lean/**"
+      - "lean-toolchain"
+      - "lakefile.lean"
+      - ".github/workflows/fold-lean.yml"
+  workflow_dispatch:
+
+jobs:
+  lean-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: leanprover/lean-action@v1
+        with:
+          build: true
+          test: false
