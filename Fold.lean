@@ -114,4 +114,6 @@ import Fold.Doubling
 #check Fold.restoreValue_collapse
 #check Fold.collapseWithValue_injective
 #check Fold.retainPair_injective_iff
+#check Fold.retainPair_eq_iff
+#check Fold.retainPair_injective_of_primary_injective
 #check Fold.retainPair_injective_of_separates_collisions
