@@ -149,7 +149,7 @@ def _self_test() -> None:
     )
     test = (
         Example.make("h1", {"weather": "sun", "play": "yes"}),
-        Example.make("h2", {"weather": "rain", "play": "yes"}),
+        Example.make("h2", {"weather": "sun", "play": "no"}),
         Example.make("h3", {"weather": "cloud", "play": "no"}),
     )
     candidates = generate(train, "outdoor-play")
