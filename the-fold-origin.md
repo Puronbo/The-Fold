@@ -494,3 +494,41 @@ while \(x_{t+1}=x_t\) and \(v_t=v_{t+1}=0\). If \(G(\rho_t)\ne\rho_t\), the cond
 `Fold/Rest.lean` adds `RateRestState`, `DifferentialRateRest`, and `conditionRateStep`, with proofs that position and zero velocity persist and that a changed rate makes the augmented states distinct. This is a discrete model definition; it does not imply that physical time or every resting system behaves this way.
 
 The hierarchy is now: fixed-state rest; differential rest (condition changes); differential-rate rest (the condition's rate changes). Each layer adds a coordinate and therefore makes explicit which kind of change is being discussed.
+
+## 15. Differential-acceleration rest
+
+The hierarchy can be extended one order further by tracking the discrete
+acceleration of the internal condition. Let
+
+\[
+S_t=(x_t,v_t,\theta_t,\rho_t,\alpha_t),
+\]
+
+where \(\rho_t\) is the condition's rate and \(\alpha_t\) is its
+rate-of-rate. During kinematic rest, use the update
+
+\[
+x_{t+1}=x_t,\qquad v_{t+1}=0,
+\]
+\[
+\theta_{t+1}=\theta_t+\rho_t,\qquad
+\rho_{t+1}=\rho_t+\alpha_t,\qquad
+\alpha_{t+1}=A(\alpha_t).
+\]
+
+If \(A(\alpha_t)\ne\alpha_t\), the internal acceleration changes while
+position and velocity remain fixed. This is **differential-acceleration
+rest**. If \(\alpha_t\ne0\), the rate also changes on that step. The
+Lean model adds AccelRestState, conditionAccelerationStep, and proofs
+of position preservation, zero-velocity preservation, distinct augmented
+states, and changed rate under nonzero acceleration.
+
+This is a discrete hierarchy of model variables, not a claim that
+acceleration is changing in every physical rest state. The labels
+condition, rate, and acceleration refer to the chosen internal sequence;
+they should not be confused with spatial velocity and acceleration.
+
+The sequence of refinements is: fixed kinematic rest; condition-changing
+rest; rate-changing rest; acceleration-changing rest. Each successive
+layer adds a distinct coordinate for a higher-order internal change.
+
