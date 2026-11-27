@@ -286,3 +286,12 @@ import Fold.Complexity.Reduction
 
 #check Fold.predictedVelocity
 #check Fold.differentialRest_changes_prediction
+
+#check Fold.RateRestState
+#check Fold.RateContextAtRest
+#check Fold.DifferentialRateRest
+#check Fold.conditionRateStep
+#check Fold.conditionRateStep_position
+#check Fold.conditionRateStep_velocity
+#check Fold.conditionRateStep_differentialRateRest
+#check Fold.differentialRateRest_states_differ
