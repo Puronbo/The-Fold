@@ -259,10 +259,8 @@ theorem firstArrival_le_any_arrival
     (process : α) (first later : Nat)
     (hFirst : FirstArrival reaches process first)
     (hLater : reaches process later) :
-    first ≤ later := by
-  by_contra hNotLe
-  have hEarlier : later < first := Nat.lt_of_not_ge hNotLe
-  exact (hFirst.2 later hEarlier) hLater
+    first ≤ later :=
+  Nat.le_of_not_gt (fun hEarlier => (hFirst.2 later hEarlier) hLater)
 
 /--
 A family is synchronized at its first-arrival boundary when every member
