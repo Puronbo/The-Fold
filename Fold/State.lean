@@ -437,7 +437,7 @@ target 4 at tick 2, despite moving at different speeds.
 theorem distinct_speeds_can_synchronize :
     FirstThresholdCrossing 2 4 2 ∧
       FirstThresholdCrossing 3 4 2 := by
-  norm_num [FirstThresholdCrossing, FirstArrival, ThresholdReached]
+  decide [FirstThresholdCrossing, FirstArrival, ThresholdReached]
 
 /--
 For this example the first crossing is simultaneous, not merely an
@@ -447,6 +447,6 @@ above 4 at tick 2.
 theorem distinct_speeds_shared_first_tick :
     2 * 1 < 4 ∧ 4 ≤ 2 * 2 ∧
       3 * 1 < 4 ∧ 4 ≤ 3 * 2 := by
-  norm_num
+  decide
 
 end Fold
