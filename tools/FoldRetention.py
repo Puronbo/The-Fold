@@ -8,7 +8,6 @@ exact for the finite candidate set, but exponential in its size.
 from __future__ import annotations
 
 from dataclasses import dataclass
-from itertools import combinations
 from typing import Sequence
 
 try:  # Support both script execution and package imports.
@@ -72,19 +71,74 @@ def minimum_retention_features(
                for a, b in must_link_pairs)
     )
 
-    # Lexicographic combinations make ties deterministic and reproducible.
-    for size in range(1, len(safe) + 1):
-        for selected in combinations(safe, size):
-            separated = tuple(
-                (a, b) for a, b in required
-                if any(by_id[a].get(f) != by_id[b].get(f) for f in selected)
-            )
-            if len(separated) == len(required):
-                final = context.relevant_features + selected
-                return RetentionPlan(
-                    context.name, context.relevant_features, selected, final,
-                    separated, (),
+    # Encode each required collision as one bit. A safe feature covers the
+    # collisions it separates, reducing the search to exact set cover.
+    coverage = tuple(
+        sum(1 << i for i, (a, b) in enumerate(required)
+            if by_id[a].get(feature) != by_id[b].get(feature))
+        for feature in safe
+    )
+    full = (1 << len(required)) - 1
+    useful = tuple(i for i, mask in enumerate(coverage) if mask)
+    best: tuple[int, ...] | None = None
+    visited: set[tuple[int, int]] = set()
+
+    def search(chosen_mask: int, covered: int) -> None:
+        nonlocal best
+        chosen_count = chosen_mask.bit_count()
+        if covered == full:
+            selected = tuple(i for i in useful if chosen_mask & (1 << i))
+            if best is None or (len(selected), selected) < (len(best), best):
+                best = selected
+            return
+        if best is not None and chosen_count >= len(best):
+            return
+        state = (chosen_mask, covered)
+        if state in visited:
+            return
+        visited.add(state)
+
+        uncovered = full & ~covered
+        # A valid lower bound: even the feature with maximum new coverage
+        # would need at least this many additional selections.
+        max_gain = max(
+            ((coverage[i] & uncovered).bit_count()
+             for i in useful if not chosen_mask & (1 << i)),
+            default=0,
+        )
+        if max_gain == 0:
+            return
+        lower_bound = (uncovered.bit_count() + max_gain - 1) // max_gain
+        if best is not None and chosen_count + lower_bound > len(best):
+            return
+
+        # Branch on the hardest uncovered collision (fewest available
+        # features). Every valid cover must choose one of these features.
+        options_by_pair = []
+        bit = 1
+        while bit <= full:
+            if uncovered & bit:
+                options = tuple(
+                    i for i in useful
+                    if not chosen_mask & (1 << i) and coverage[i] & bit
                 )
+                if not options:
+                    return
+                options_by_pair.append(options)
+            bit <<= 1
+        options = min(options_by_pair, key=lambda group: (len(group), group))
+        for i in options:
+            search(chosen_mask | (1 << i), covered | coverage[i])
+
+    search(0, 0)
+    if best is not None:
+        selected = tuple(safe[i] for i in best)
+        separated = required
+        final = context.relevant_features + selected
+        return RetentionPlan(
+            context.name, context.relevant_features, selected, final,
+            separated, (),
+        )
 
     return None
 
