@@ -52,3 +52,5 @@ import Fold
 #print axioms Fold.turn_twice_restores_direction
 #print axioms Fold.observation_only_classifier_cannot_recover_reference
 #print axioms Fold.distinct_references_survive_collapse
+#print axioms Fold.comp_not_injective_of_not_injective
+#print axioms Fold.postprocess_cannot_restore_collapse_injectivity
