@@ -217,3 +217,6 @@ import Fold.Complexity.Reduction
 
 #check Fold.booleanFlip
 #check Fold.noninvariant_target_can_change_first_arrival
+
+#check Fold.overshootRate_firstArrival
+#check Fold.overshoot_and_return_first_arrival
