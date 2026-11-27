@@ -25,6 +25,39 @@ def turn (s : State) : State :=
 def observe (s : State) : Int :=
   s.value
 
+/-- A pure direction reversal, without appending an event to history. -/
+def flipDirection (s : State) : State :=
+  { s with direction := -s.direction }
+
+/-- A logged turn records the previous direction, so it is not a pure flip. -/
+theorem flipDirection_involutive (s : State) :
+    flipDirection (flipDirection s) = s := by
+  cases s
+  simp [flipDirection]
+
+theorem flipDirection_injective :
+    Function.Injective flipDirection := by
+  intro s t h
+  have := congrArg flipDirection h
+  simpa [flipDirection] using this
+
+/-- Collapse is not injective: different values can have the same image. -/
+theorem collapse_not_injective :
+    ¬ Function.Injective collapse := by
+  intro hinj
+  let s : State := ⟨1, 7, 1, []⟩
+  let t : State := ⟨2, 7, 1, []⟩
+  have heq : collapse s = collapse t := by
+    simp [s, t, collapse]
+  have hst : s = t := hinj heq
+  have hv := congrArg State.value hst
+  norm_num [s, t] at hv
+
+/-- A logged turn grows history by exactly one entry. -/
+theorem turn_history_length (s : State) :
+    (turn s).history.length = s.history.length + 1 := by
+  simp [turn]
+
 /-- The metadata that collapse leaves untouched. -/
 def retainedSignature (s : State) : Int × Int × List Int :=
   (s.reference, s.direction, s.history)
