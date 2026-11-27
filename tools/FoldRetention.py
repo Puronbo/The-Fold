@@ -2,8 +2,8 @@
 
 Given a task's must-link and cannot-link pairs, search candidate residual
 features for a minimum-cardinality set that separates every required
-cannot-link pair without splitting any must-link pair. Exhaustive search is
-exact for the finite candidate set, but exponential in its size.
+cannot-link pair without splitting any must-link pair. Branch-and-bound search is exact for the finite candidate set, but can be
+exponential in its size.
 """
 from __future__ import annotations
 
@@ -366,14 +366,6 @@ def _self_test() -> None:
         (Fraction(n, d) for n, d in weighted_plan.dual_weights), Fraction(0)
     )
     assert weighted_objective == 2
-    print("DEBUG weighted", weighted_plan.retained_features,
-          weighted_plan.lower_bound_pairs, weighted_plan.dual_denominator,
-          weighted_plan.dual_weights,
-          verify_retention_plan(weighted_items, weighted_plan, (),
-                                (("w0", "w1"), ("w0", "w2"), ("w0", "w3"))),
-          verify_optimality_certificate(
-              weighted_items, base, ("f1", "f2", "f3", "f4"), (),
-              (("w0", "w1"), ("w0", "w2"), ("w0", "w3")), weighted_plan))
     assert retention_plan_proves_optimality(
         weighted_items, base, ("f1", "f2", "f3", "f4"), (),
         (("w0", "w1"), ("w0", "w2"), ("w0", "w3")), weighted_plan
