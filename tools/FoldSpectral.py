@@ -48,3 +48,27 @@ def verify_quarter_turn_eigenpair(
     turned = quarter_turn((x, y), modulus)
     scaled = (eigenvalue * x % modulus, eigenvalue * y % modulus)
     return turned == scaled
+
+
+def quarter_turn_root_primes(limit: int) -> tuple[int, ...]:
+    """Return primes p <= limit for which x² + 1 has a root modulo p.
+
+    By the finite-field criterion, these are exactly p=2 and primes
+    p congruent to 1 modulo 4.  A sieve keeps the implementation simple
+    and makes the primality condition explicit.
+    """
+    if limit < 0:
+        raise ValueError("limit must be nonnegative")
+    if limit < 2:
+        return ()
+    is_prime = bytearray(b"\\x01") * (limit + 1)
+    is_prime[0:2] = b"\\x00\\x00"
+    for candidate in range(2, int(limit ** 0.5) + 1):
+        if is_prime[candidate]:
+            start = candidate * candidate
+            count = ((limit - start) // candidate) + 1
+            is_prime[start:limit + 1:candidate] = b"\\x00" * count
+    return tuple(
+        p for p in range(2, limit + 1)
+        if is_prime[p] and (p == 2 or p % 4 == 1)
+    )
