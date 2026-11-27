@@ -9,7 +9,7 @@ on:
       - "tools/FoldConcept.py"
       - "tools/FoldLoop.py"
       - "tools/FoldMemory.py"
-      - "tools/FoldMind.py"
+      - "tools/FoldMind.py"\n      - "tools/FoldHypothesis.py"
       - ".github/workflows/fold-ai-prototypes.yml"
 
 jobs:
