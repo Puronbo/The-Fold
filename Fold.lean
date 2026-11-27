@@ -105,6 +105,7 @@ import Fold.Doubling
 #check Fold.turn_twice_restores_direction
 #check Fold.collapsed_observation_independent
 #check Fold.collapse_eq_iff_retained_signature_eq
+#check Fold.state_eq_iff_value_and_signature
 #check Fold.observation_only_classifier_cannot_recover_reference
 #check Fold.distinct_references_survive_collapse
 #check Fold.comp_not_injective_of_not_injective
