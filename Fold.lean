@@ -5,6 +5,7 @@
   dependency-free and imports only `Init`.
 -/
 import Fold.Basic
+import Fold.State
 import Fold.Scale
 import Fold.Chi
 import Fold.Arithmetic
@@ -92,3 +93,11 @@ import Fold.Doubling
 #check Fold.double7_orbits
 #check Fold.double7_one_period
 #check Fold.double7_iter_three
+
+#check Fold.collapse_sets_value_to_zero
+#check Fold.collapse_preserves_reference
+#check Fold.collapse_idempotent
+#check Fold.turn_twice_restores_direction
+#check Fold.collapsed_observation_independent
+#check Fold.observation_only_classifier_cannot_recover_reference
+#check Fold.distinct_references_survive_collapse
