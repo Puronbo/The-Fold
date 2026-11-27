@@ -15,10 +15,10 @@ import Init
 
 /-- A fold on a type `X`: an operation `f` with `f (f x) = x`.
 
-The same structure carries the geometric fold, the navel inversion
-`z ↦ ρ²/z̄` (on the appropriate domain), the conjugation `z ↦ z̄`, and
-the reflection `k ↦ 1/k` on the completed parameter.  What changes
-between instances is the space and the fixed set, not the shape. -/
+This is an abstract algebraic interface only. Geometric reflection,
+complex inversion, conjugation, and parameter inversion can instantiate
+it only after their domains and involution laws are specified and proved.
+Those examples are not consequences of this definition alone. -/
 structure Fold (X : Type) where
   f : X → X
   invol : ∀ x : X, f (f x) = x
