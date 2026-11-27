@@ -37,11 +37,9 @@ theorem horizontalReflection_fix_iff (p : Int × Int) :
 def horizontalCrease (p : Int × Int) : Prop :=
   p.2 = 0
 
-theorem horizontalCrease_eq_fix :
-    horizontalCrease = fun p => Fix horizontalReflection p := by
-  funext p
-  apply propext
-  exact (horizontalReflection_fix_iff p).symm
+theorem horizontalCrease_eq_fix (p : Int × Int) :
+    horizontalCrease p ↔ Fix horizontalReflection p :=
+  (horizontalReflection_fix_iff p).symm
 
 /-- Orthogonal projection to the horizontal axis. -/
 def horizontalProjection (p : Int × Int) : Int × Int := (p.1, 0)
@@ -49,7 +47,8 @@ def horizontalProjection (p : Int × Int) : Int × Int := (p.1, 0)
 /-- Projection lands on the crease. -/
 theorem horizontalProjection_fix (p : Int × Int) :
     Fix horizontalReflection (horizontalProjection p) := by
-  exact (horizontalReflection_fix_iff (horizontalProjection p)).2 rfl
+  change (p.1, -(0 : Int)) = (p.1, 0)
+  simp
 
 /-- The geometric projection is a valid abstract cut for this fold. -/
 def horizontalCut : Cut horizontalReflection where
