@@ -9,6 +9,7 @@ import Fold.Scale
 import Fold.Origin
 import Fold.Geometry
 import Fold.Synchronization
+import Fold.Rest
 import Fold.ArrivalFold
 import Fold.Counterexamples
 import Fold.Chi
@@ -265,3 +266,11 @@ import Fold.Complexity.Reduction
 
 #check Fold.reconstructState_choices_equal_iff_fixed
 #check Fold.reconstructState_selector_unique_off_crease
+
+#check Fold.MotionState
+#check Fold.AtRest
+#check Fold.RestInvariant
+#check Fold.rest_position_unchanged
+#check Fold.rest_motion_unchanged
+#check Fold.rest_state_fixed
+#check Fold.holdAtRest_invariant
