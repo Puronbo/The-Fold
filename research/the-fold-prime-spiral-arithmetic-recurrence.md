@@ -67,3 +67,7 @@ This intentionally simple example demonstrates that geometric matches, gap match
 A high geometric match count does not imply a high arithmetic match count. Nor does either count establish a general law. To investigate an apparent pattern, vary omega, tolerances, radial encoding, moduli, and prime window; compare against label-shuffled or other explicitly defined baselines; and report the full parameters alongside counts. Do not select thresholds after inspecting the desired pair.
 
 The comparison is a diagnostic bridge between the prime spiral and its arithmetic afterimage: geometry asks whether encoded positions recur; arithmetic asks whether independent prime features recur.
+
+## Cyclic-shift alignment control
+
+The executable comparison also rotates the arithmetic feature records relative to the fixed spiral indices by every nonzero cyclic shift. For each shift it counts gap, residue, and (when available) spectral matches among the index pairs that meet the geometric recurrence criterion. It reports the mean match count across these shifts. This preserves the observed feature records while changing their alignment to the geometric positions. It is a finite alignment control, not an independent randomization test and not a statistical p-value; it is useful for detecting whether the observed alignment is unusual among these particular cyclic offsets.
