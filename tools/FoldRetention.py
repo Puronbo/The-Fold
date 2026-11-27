@@ -292,9 +292,16 @@ def retention_plan_proves_optimality(
         1 for a, b in cannot_link_pairs
         if a in by_id and b in by_id and equivalent(by_id[a], by_id[b], context)
     )
-    dual_bound = (
+    uniform_bound = (
         (required_count + plan.dual_denominator - 1) // plan.dual_denominator
         if plan.dual_denominator else 0
+    )
+    dual_sum = sum(
+        (Fraction(n, d) for n, d in plan.dual_weights), Fraction(0)
+    )
+    weighted_bound = (
+        (dual_sum.numerator + dual_sum.denominator - 1) // dual_sum.denominator
+        if dual_sum else 0
     )
     return (
         verify_retention_plan(instances, plan, must_link_pairs, cannot_link_pairs)
@@ -302,7 +309,7 @@ def retention_plan_proves_optimality(
             instances, context, candidate_features,
             must_link_pairs, cannot_link_pairs, plan,
         )
-        and max(len(plan.lower_bound_pairs), dual_bound) == len(plan.retained_features)
+        and max(len(plan.lower_bound_pairs), uniform_bound, weighted_bound) == len(plan.retained_features)
     )
 
 
@@ -333,6 +340,8 @@ def _self_test() -> None:
     )
     assert len(plan.lower_bound_pairs) == 2
     assert plan.dual_denominator == 1
+    assert len(plan.dual_weights) == len(plan.separated_pairs)
+    assert sum((Fraction(n, d) for n, d in plan.dual_weights), Fraction(0)) == 2
 
     # One feature is insufficient: colour splits a/b but not a/d; material
     # splits a/d but not a/b. The minimum safe set therefore has size two.
