@@ -228,3 +228,22 @@ This gives three distinct claims:
 - **Universal reading (“everything”):** not established by the equations. It is a proposed global principle that would require a defined system boundary, target, clock, and evidence that every included process satisfies the synchronization condition.
 
 In the Origin → Fold development, this is a shared terminal event with distinct rates—not a claim that speeds become equal, that paths are identical, or that the terminal event causes the motion. The common time is an invariant of the synchronized family; each process retains its own rate and path.
+
+
+## 12. The shared time-factor invariant
+
+The discrete constant-rate model gives a stronger statement than common arrival alone. At any fixed observation tick (t), every path's remaining displacement factors as
+
+\\[
+R_i(t)=s_i(T-t).
+\\]
+
+The rate (s_i) is path-specific, while the time-to-arrival factor (T-t) is common to the whole synchronized family. Consequently, for any two rates (a,b),
+
+\\[
+R_a(t)\\,b=R_b(t)\\,a.
+\\]
+
+This cross-multiplied identity is the division-free form of proportional remaining displacement. It remains meaningful over natural-number arithmetic, including when a rate is zero; positive rates are separately required for strict first arrival. The Lean theorem `remainingDisplacement_cross_scale` formalizes this identity, and `remainingDisplacement_factors` records the shared factorization.
+
+This is a **within-model invariant**, not a claim that arbitrary real-world processes share a clock or obey constant-rate motion. The common terminal time is one property; proportional remaining displacement at every shared observation tick is a stronger property supplied by the constant-rate model.
