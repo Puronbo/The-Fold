@@ -131,6 +131,7 @@ import Fold.Doubling
 #check Fold.FirstThresholdCrossing
 #check Fold.first_threshold_crossing_unique
 #check Fold.first_threshold_crossing_boundary
+#check Fold.first_threshold_crossing_iff_boundary
 #check Fold.first_threshold_crossing_interval
 #check Fold.synchronized_threshold_intervals
 #check Fold.distinct_speeds_can_synchronize
