@@ -75,7 +75,7 @@ theorem noninvariant_target_can_change_first_arrival :
         (fun _ t => constantTrueTrajectory () t = true) () 0 ∧
       ¬ _root_.Fold.FirstArrival
         (fun _ t => booleanFlip.f (constantTrueTrajectory () t) = true) () 0 := by
-  simp [FirstArrival, constantTrueTrajectory, booleanFlip]
+  simp [_root_.Fold.FirstArrival, constantTrueTrajectory, booleanFlip]
 
 end Fold
 
@@ -95,8 +95,7 @@ theorem foldTransportTarget_involutive {X : Type} (F : Fold X)
     (hit : X → Prop) :
     foldTransportTarget F (foldTransportTarget F hit) = hit := by
   funext x
-  apply propext
-  change hit (F.f (F.f x)) ↔ hit x
+  change hit (F.f (F.f x)) = hit x
   rw [F.invol x]
 
 /-- Exact first-arrival transport: folding the trajectory while keeping
@@ -148,8 +147,7 @@ theorem foldTransportFamilyTarget_involutive
       (foldTransportFamilyTarget fold hit) = hit := by
   funext process
   funext state
-  apply propext
-  change hit process ((fold process).f ((fold process).f state)) ↔
+  change hit process ((fold process).f ((fold process).f state)) =
     hit process state
   rw [(fold process).invol state]
 
