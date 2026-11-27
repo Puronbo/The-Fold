@@ -117,4 +117,20 @@ theorem common_first_arrival_unique
     a = b :=
   firstArrival_unique reaches process a b ha hb
 
+
+/-- Generic synchronized first-arrival condition for a fixed reach relation. -/
+def SynchronizedBoundary {α : Type} (reaches : α → Nat → Prop)
+    (processes : List α) (time : Nat) : Prop :=
+  ∀ process, process ∈ processes → FirstArrival reaches process time
+
+/-- A nonempty synchronized family has at most one common first-arrival time. -/
+theorem synchronizedBoundary_unique
+    {α : Type} (reaches : α → Nat → Prop)
+    (processes : List α) (process : α) (a b : Nat)
+    (hmem : process ∈ processes)
+    (ha : SynchronizedBoundary reaches processes a)
+    (hb : SynchronizedBoundary reaches processes b) :
+    a = b :=
+  firstArrival_unique reaches process a b (ha process hmem) (hb process hmem)
+
 end Fold
