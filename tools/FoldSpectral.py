@@ -606,9 +606,6 @@ def _berlekamp_factor_squarefree(poly: list[int], prime: int) -> list[list[int]]
                 pieces = next_pieces
             refined.extend(pieces)
         factors = refined
-        if len(factors) == len(_berlekamp_basis(poly, prime)):
-            # No early mathematical assumption: later basis vectors may still split.
-            pass
     return sorted(
         (_poly_trim_mod(factor, prime) for factor in factors),
         key=lambda factor: (len(factor), tuple(factor)),
@@ -637,23 +634,56 @@ def cyclotomic_factorization_mod(
     return tuple(tuple(factor) for factor in factors)
 
 
+def _prime_divisors(value: int) -> tuple[int, ...]:
+    """Return the distinct prime divisors of a positive integer."""
+    result = []
+    divisor = 2
+    while divisor * divisor <= value:
+        if value % divisor == 0:
+            result.append(divisor)
+            while value % divisor == 0:
+                value //= divisor
+        divisor += 1
+    if value > 1:
+        result.append(value)
+    return tuple(result)
+
+
+def _is_irreducible_mod(poly: list[int], prime: int) -> bool:
+    """Apply Rabin's criterion to a monic polynomial over F_p."""
+    polynomial = _poly_trim_mod(poly[:], prime)
+    degree = len(polynomial) - 1
+    if degree < 1 or polynomial[-1] != 1:
+        return False
+    x = _poly_mod_field([0, 1], polynomial, prime)
+    frobenius = x
+    for _ in range(degree):
+        frobenius = _poly_pow_mod_field(
+            frobenius, prime, polynomial, prime
+        )
+    if frobenius != x:
+        return False
+    for divisor in _prime_divisors(degree):
+        test = x
+        for _ in range(degree // divisor):
+            test = _poly_pow_mod_field(test, prime, polynomial, prime)
+        difference = _poly_sub_mod(test, x, prime)
+        if _poly_gcd_field(polynomial, difference, prime) != [1]:
+            return False
+    return True
+
+
 def verify_cyclotomic_factorization(order: int, prime: int) -> bool:
-    """Verify returned factors are monic, irreducible, and multiply to Phi_order."""
+    """Verify factors are monic, Rabin-irreducible, and multiply to Phi_order."""
     factors = cyclotomic_factorization_mod(order, prime)
     product = [1]
     for factor in factors:
-        if len(factor) < 2 or factor[-1] != 1:
+        factor_list = list(factor)
+        if len(factor_list) < 2 or factor_list[-1] != 1:
             return False
-        # An irreducible polynomial has no proper monic divisor of degree <= n/2.
-        for degree in range(1, (len(factor) - 1) // 2 + 1):
-            for coefficients in __import__("itertools").product(
-                range(prime), repeat=degree
-            ):
-                candidate = list(coefficients) + [1]
-                _, remainder = _poly_divmod_field(list(factor), candidate, prime)
-                if remainder == [0]:
-                    return False
-        product = _poly_mul_mod(product, list(factor), prime)
+        if not _is_irreducible_mod(factor_list, prime):
+            return False
+        product = _poly_mul_mod(product, factor_list, prime)
     target = _poly_trim_mod(list(cyclotomic_polynomial(order)), prime)
     if target[-1] != 1:
         inverse = pow(target[-1], -1, prime)
