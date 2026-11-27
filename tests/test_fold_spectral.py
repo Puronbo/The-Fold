@@ -95,6 +95,47 @@ class FoldSpectralTests(unittest.TestCase):
         for order in range(1, 13):
             self.assertTrue(verify_cyclotomic_rotation_matrix(order))
 
+    def test_modular_cyclotomic_spectral_profiles(self):
+        from tools.FoldSpectral import (
+            cyclotomic_eigenvalue_multiplicities,
+            cyclotomic_rotation_matrix_mod,
+            cyclotomic_spectral_profile,
+            verify_cyclotomic_spectral_profile,
+        )
+
+        self.assertEqual(
+            cyclotomic_rotation_matrix_mod(4, 5),
+            ((0, 4), (1, 0)),
+        )
+        self.assertEqual(
+            cyclotomic_eigenvalue_multiplicities(4, 5),
+            ((2, 1), (3, 1)),
+        )
+        self.assertEqual(
+            cyclotomic_spectral_profile(4, 3),
+            {
+                "dimension": 2,
+                "factor_degree": 2,
+                "factor_count": 1,
+                "base_field_eigenvalue_count": 0,
+                "base_field_eigenspace_dimension_sum": 0,
+            },
+        )
+        self.assertEqual(
+            cyclotomic_spectral_profile(4, 5),
+            {
+                "dimension": 2,
+                "factor_degree": 1,
+                "factor_count": 2,
+                "base_field_eigenvalue_count": 2,
+                "base_field_eigenspace_dimension_sum": 2,
+            },
+        )
+        for order, prime in ((3, 2), (3, 7), (4, 3), (4, 5), (5, 2), (8, 3)):
+            self.assertTrue(verify_cyclotomic_spectral_profile(order, prime))
+        with self.assertRaises(ValueError):
+            cyclotomic_eigenvalue_multiplicities(4, 2)
+
     def test_rejects_zero_vector_and_invalid_modulus(self):
         self.assertFalse(verify_quarter_turn_eigenpair(
             ModularEigenpair(0, (0, 0)), 5
