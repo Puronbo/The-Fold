@@ -475,7 +475,7 @@ theorem firstArrival_strict_time_reindex
   constructor
   · exact h.1
   · intro earlier hearlier hhit
-    exact h.2 (clock earlier) (hclock hearlier) hhit
+    exact h.2 (clock earlier) (hclock earlier time hearlier) hhit
 
 /-- For a positive integer clock multiplier, scaling discrete time
     preserves the first-arrival index after translating the target index
@@ -486,8 +486,10 @@ theorem firstArrival_nat_mul_time_reindex
     FirstArrival reaches process (factor * time) →
       FirstArrival (fun p t => reaches p (factor * t)) process time := by
   apply firstArrival_strict_time_reindex reaches process
-    (fun t => factor * t) _ time
-  · intro a b hab
-    exact Nat.mul_lt_mul_of_pos_left hab hfactor
+    (fun t => factor * t)
+    (by
+      intro a b hab
+      exact Nat.mul_lt_mul_of_pos_left hab hfactor)
+    time
 
 end Fold
