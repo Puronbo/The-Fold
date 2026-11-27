@@ -59,8 +59,12 @@ theorem collapse_bit_zero_iff
       (∀ L, PClass L ↔ NPClass L) := by
   unfold CollapseBit
   by_cases hz : ResidualZero PClass NPClass
-  · simp [hz, (class_eq_iff_residual_zero PClass NPClass hsub).2 hz]
-  · simp [hz, (class_eq_iff_residual_zero PClass NPClass hsub).not.mpr hz]
+  · have heq := (class_eq_iff_residual_zero PClass NPClass hsub).2 hz
+    simp [hz, heq]
+  · have hne : ¬ (∀ L, PClass L ↔ NPClass L) := by
+      intro heq
+      exact hz ((class_eq_iff_residual_zero PClass NPClass hsub).mp heq)
+    simp [hz, hne]
 
 theorem collapse_bit_one_iff
     (PClass NPClass : Lang → Prop)
@@ -69,7 +73,11 @@ theorem collapse_bit_one_iff
       ¬ (∀ L, PClass L ↔ NPClass L) := by
   unfold CollapseBit
   by_cases hz : ResidualZero PClass NPClass
-  · simp [hz, (class_eq_iff_residual_zero PClass NPClass hsub).2 hz]
-  · simp [hz, (class_eq_iff_residual_zero PClass NPClass hsub).not.mpr hz]
+  · have heq := (class_eq_iff_residual_zero PClass NPClass hsub).2 hz
+    simp [hz, heq]
+  · have hne : ¬ (∀ L, PClass L ↔ NPClass L) := by
+      intro heq
+      exact hz ((class_eq_iff_residual_zero PClass NPClass hsub).mp heq)
+    simp [hz, hne]
 
 end Fold.Complexity
