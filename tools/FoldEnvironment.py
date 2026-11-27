@@ -10,6 +10,7 @@ from __future__ import annotations
 from dataclasses import asdict, dataclass
 from enum import Enum
 import json
+import math
 from typing import Literal
 
 from FoldMemory import FoldMemory
@@ -65,8 +66,24 @@ class FoldEnvironment:
             raise ValueError("action is not in the allowlist")
         if proposal.expected_revision != self.state.revision:
             raise ValueError("stale action: expected revision does not match")
-        if proposal.cost < 0 or budget < 0:
-            raise ValueError("cost and budget must be nonnegative")
+        if (not isinstance(proposal.cost, (int, float))
+                or isinstance(proposal.cost, bool)
+                or not math.isfinite(proposal.cost)
+                or proposal.cost < 0):
+            raise ValueError("cost must be a finite nonnegative number")
+        if (not isinstance(budget, (int, float))
+                or isinstance(budget, bool)
+                or not math.isfinite(budget)
+                or budget < 0):
+            raise ValueError("budget must be a finite nonnegative number")
+        if (not isinstance(self.state.position, int)
+                or isinstance(self.state.position, bool)
+                or not 0 <= self.state.position <= self.maximum_position
+                or self.state.direction not in (-1, 1)
+                or not isinstance(self.state.revision, int)
+                or isinstance(self.state.revision, bool)
+                or self.state.revision < 0):
+            raise ValueError("environment state invariant failed")
         if not self.memory.verify():
             raise ValueError("memory integrity check failed")
 
@@ -154,6 +171,22 @@ def _self_test() -> None:
             approved=True, budget=1,
         )
         checks.append(("budget limit blocks action", over_budget.reason == "budget-exceeded"))
+        invalid_numeric_inputs = []
+        for bad_cost, bad_budget in (
+            (float("nan"), 1.0), (float("inf"), 1.0),
+            (1.0, float("nan")), (1.0, float("inf")),
+            (True, 1.0), (1.0, True),
+        ):
+            try:
+                world.execute(
+                    ActionProposal("invalid-numeric", ActionKind.STEP, 0, bad_cost),
+                    approved=True, budget=bad_budget,
+                )
+                invalid_numeric_inputs.append(False)
+            except ValueError:
+                invalid_numeric_inputs.append(True)
+        checks.append(("NaN, infinity, and boolean costs/budgets are rejected",
+                       all(invalid_numeric_inputs) and world.state == WorldState()))
         moved = world.execute(
             ActionProposal("forward", ActionKind.STEP, 0),
             approved=True, budget=1,
