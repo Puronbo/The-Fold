@@ -223,4 +223,28 @@ theorem noCut_of_noFix (F : Fold X) (x : X)
   rcases hC with ⟨C⟩
   exact h (C.p x) (C.image_fix x)
 
+
+/-- Transport a fold across an explicitly specified bijective change of
+coordinates. The inverse laws are hypotheses, so no geometric or
+topological assumptions are hidden in the construction. -/
+def conjugate {Y : Type} (F : Fold X) (e : X → Y) (eInv : Y → X)
+    (leftInv : ∀ x, eInv (e x) = x)
+    (rightInv : ∀ y, e (eInv y) = y) : Fold Y where
+  f := fun y => e (F.f (eInv y))
+  invol := by
+    intro y
+    calc
+      e (F.f (eInv (e (F.f (eInv y))))) =
+          e (F.f (F.f (eInv y))) := by rw [leftInv]
+      _ = e (eInv y) := by rw [F.invol]
+      _ = y := rightInv y
+
+/-- The transported fold is conjugate to the original operation. -/
+theorem conjugate_intertwines {Y : Type} (F : Fold X)
+    (e : X → Y) (eInv : Y → X)
+    (leftInv : ∀ x, eInv (e x) = x)
+    (rightInv : ∀ y, e (eInv y) = y) (x : X) :
+    (conjugate F e eInv leftInv rightInv).f (e x) = e (F.f x) := by
+  simp [conjugate, leftInv]
+
 end Fold
