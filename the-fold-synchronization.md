@@ -115,3 +115,18 @@ This separates two cases cleanly:
 - Otherwise, the first-arrival time is still preserved under the paired transformation of trajectory and target; comparing against the untransformed target would be incorrect.
 
 The Lean module `Fold/ArrivalFold.lean` formalizes target transport, its involutive round trip, and the first-arrival equivalence without assuming target invariance.
+
+
+## First arrival under coordinate changes
+
+The same argument extends beyond involutions. Let \(e:X\to Y\) be any coordinate map and let \(H\subseteq Y\) be a target. The corresponding target in the original coordinates is the preimage
+
+\[
+e^{-1}(H)=\{x\in X:e(x)\in H\}.
+\]
+
+A path \(p(t)\) hits \(e^{-1}(H)\) at exactly the ticks when the mapped path \(e(p(t))\) hits \(H\). Therefore the full first-arrival predicate—not only the arrival tick—is equivalent in the two coordinate descriptions. This forward result does not require the coordinate map to be injective or surjective.
+
+If \(e\) is bijective with inverse \(e^{-1}\), target transport is reversible: pulling the target back and then pushing it forward recovers the original target. The Lean development records this as `coordinateTransportTarget_round_trip` and checks the first-arrival equivalence in `firstArrival_bijective_coordinate_change`.
+
+**Interpretation:** a change of coordinates does not itself create synchronization. It preserves the event structure when the path and target are transformed consistently. A Fold is a special case, with its involution supplying its own inverse.
