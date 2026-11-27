@@ -390,3 +390,30 @@ python tools/FoldMind.py
 The integrated regression checks verify observation retention, refinement history, final reports, equivalence laws, memory-chain integrity, contradiction handling, and rejection of invalid proposals before memory writes.
 
 This is an integrated symbolic learning workflow, not yet a complete AI agent. It does not itself perceive raw sensory data, invent grounded features, train a neural model, plan actions, or autonomously decide whether its constraints are correct. Those are explicit next research problems. Its contribution is a testable boundary between model proposals and deterministic, auditable operations.
+
+
+## 18. FoldHypothesis: candidate generation and falsification
+
+`tools/FoldHypothesis.py` adds a deliberately small hypothesis engine. It generates declarative rules of the form
+
+[
+\text{if feature }a=v,\quad\text{then feature }b=w.
+]
+
+The candidate rules are derived only from a training set. A separate held-out set evaluates each rule:
+- supporting observations satisfy both antecedent and prediction;
+- counterexamples satisfy the antecedent but violate the prediction;
+- rules with no applicable held-out examples remain untested;
+- falsified candidates are retained in the append-only FoldMemory audit log.
+
+Each rule has a stable SHA-256-derived identifier. The rule language is restricted to feature equality; no model-generated code is executed. The reported score is the fraction of applicable held-out examples that support the rule. It is descriptive evidence for this finite sample, not a calibrated probability, causal claim, or proof.
+
+Run:
+
+```sh
+python tools/FoldHypothesis.py
+```
+
+The regression suite checks deterministic candidate generation, prediction, abstention, held-out support, counterexample detection, scoring, untested status, and retention of rejected hypotheses.
+
+This is a meaningful next step beyond grouping: the prototype can propose a small rule, expose a prediction, and preserve a counterexample that defeats it. It still does not autonomously choose meaningful features, discover causal structure, plan experiments, or establish AGI. Its next challenge is to generate more expressive hypotheses while preserving a strict separation between proposal, evidence, and verification.
