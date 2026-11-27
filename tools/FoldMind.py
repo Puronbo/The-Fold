@@ -61,6 +61,18 @@ class CycleReport:
     memory_head: str
 
 
+
+@dataclass(frozen=True)
+class HypothesisCycleReport:
+    task: str
+    training_ids: tuple[str, ...]
+    held_out_ids: tuple[str, ...]
+    candidates: int
+    falsified: int
+    supported: int
+    untested: int
+    memory_head: str
+
 class FoldMind:
     """A single auditable cycle joining FoldConcept, FoldLoop, and FoldMemory."""
 
