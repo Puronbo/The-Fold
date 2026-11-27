@@ -15,6 +15,9 @@ A rhyme is a place to look, never a proof; a rhyme written as a proof is the one
 The full statement is in `the-fold-problems.md`, and the engineering instance is in
 `the-fold-engineering.md`.
 
+
+**Prime spiral as memory:** `the-fold-prime-afterimage.md` separates prime labels, spiral positions, ordered memory paths, and afterimage observations. It distinguishes orbit-level traces from representative-sensitive histories and states the exact information needed for reconstruction.
+
 **Synchronized arrival:** `the-fold-synchronization.md` formalizes a shared destination and arrival time for trajectories with distinct discrete rates. It is a model-specific result, not a universal synchronization law.\n\n**Start at the origin:** `the-fold-origin.md` — derives the datum, displacement, scale family, collapse, involution, crease, orbit quotient, optional observer cut, and direction state in dependency order. Then use `the-fold-key.md` as the master key. Give it a value of `k`; it returns the stage,
 the operation, what appears, what survives, and the note that proves it.
 
