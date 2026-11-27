@@ -25,7 +25,7 @@ class RelationCompositionTests(unittest.TestCase):
         first = ComposedRelation.from_hypothesis(hypothesis("affine", [("a",0,2),("b",1,3),("c",2,4)]))
         second = ComposedRelation.from_hypothesis(hypothesis("proportional", [("a",1,5),("b",2,10)]))
         combined = first.then(second)
-        self.assertEqual(combined.evaluate(3), F(20))
+        self.assertEqual(combined.evaluate(3), F(25))
         self.assertEqual(combined.coefficients, (F(5), F(10), F(0), F(1)))
 
     def test_inverse_composition_tracks_intermediate_pole(self):
