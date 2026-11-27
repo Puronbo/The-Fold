@@ -389,4 +389,41 @@ theorem first_threshold_crossing_boundary
   · intro earlier hEarlier
     exact Nat.not_le.mp (h.2 earlier hEarlier)
 
+/--
+At a positive first-crossing tick, the target lies in the one-tick
+progress interval: progress at the preceding tick is below the target,
+while progress at the crossing tick reaches or exceeds it.
+-/
+theorem first_threshold_crossing_interval
+    (speed target time : Nat)
+    (hPositiveTick : ∃ previous, time = previous + 1)
+    (h : FirstThresholdCrossing speed target time) :
+    ∃ previous, time = previous + 1 ∧
+      speed * previous < target ∧ target ≤ speed * time := by
+  obtain ⟨previous, hTime⟩ := hPositiveTick
+  refine ⟨previous, hTime, ?_, h.1⟩
+  have hEarlier : previous < time := by
+    rw [hTime]
+    exact Nat.lt_succ_self previous
+  exact Nat.not_le.mp (h.2 previous hEarlier)
+
+/--
+Two processes synchronize at a positive first-crossing tick exactly
+within their respective one-tick progress intervals. Their speeds may
+differ; each target is constrained by its own rate over the same tick.
+-/
+theorem synchronized_threshold_intervals
+    (speed₁ target₁ speed₂ target₂ time : Nat)
+    (hPositiveTick : ∃ previous, time = previous + 1)
+    (h₁ : FirstThresholdCrossing speed₁ target₁ time)
+    (h₂ : FirstThresholdCrossing speed₂ target₂ time) :
+    ∃ previous, time = previous + 1 ∧
+      speed₁ * previous < target₁ ∧ target₁ ≤ speed₁ * time ∧
+      speed₂ * previous < target₂ ∧ target₂ ≤ speed₂ * time := by
+  obtain ⟨previous, hTime, hLower₁, hUpper₁⟩ :=
+    first_threshold_crossing_interval speed₁ target₁ time hPositiveTick h₁
+  obtain ⟨_, _, hLower₂, hUpper₂⟩ :=
+    first_threshold_crossing_interval speed₂ target₂ time hPositiveTick h₂
+  exact ⟨previous, hTime, hLower₁, hUpper₁, hLower₂, hUpper₂⟩
+
 end Fold
