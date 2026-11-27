@@ -200,3 +200,8 @@ The new agi/relation_selection.py compares caller-supplied composed paths on the
 ## Stage 19: append-only evidence feedback and hypothesis revision
 
 `agi/evidence_revision.py` adds an immutable evidence ledger. Each newly observed exact input/output pair is checked against every supplied candidate; matches are retained, mismatches and domain failures are recorded as refutations, and earlier predictions remain unchanged. The accumulated observations are then passed to the existing exact relational proposer. Newly supported proportional, inverse, or affine hypotheses are returned as unselected candidates, not installed automatically. This is a narrow scalar feedback loop; it does not infer noise, causality, arbitrary programs, or AGI.
+
+
+## Stage 20: reusable concepts across representations
+
+`agi/representation_transfer.py` adds exact transfer for scalar affine relations under caller-declared invertible affine coordinate maps. It analytically transforms coefficients rather than refitting target examples and verifies that residual zero/nonzero status is preserved. The supported family is deliberately narrow; no general semantic transfer or AGI claim follows. See `agi/stage-20-representation-transfer.md`.
