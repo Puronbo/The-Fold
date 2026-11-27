@@ -61,13 +61,13 @@ def quarter_turn_root_primes(limit: int) -> tuple[int, ...]:
         raise ValueError("limit must be nonnegative")
     if limit < 2:
         return ()
-    is_prime = bytearray(b"\\x01") * (limit + 1)
-    is_prime[0:2] = b"\\x00\\x00"
+    is_prime = bytearray([1]) * (limit + 1)
+    is_prime[0:2] = [0, 0]
     for candidate in range(2, int(limit ** 0.5) + 1):
         if is_prime[candidate]:
             start = candidate * candidate
             count = ((limit - start) // candidate) + 1
-            is_prime[start:limit + 1:candidate] = b"\\x00" * count
+            is_prime[start:limit + 1:candidate] = [0] * count
     return tuple(
         p for p in range(2, limit + 1)
         if is_prime[p] and (p == 2 or p % 4 == 1)
