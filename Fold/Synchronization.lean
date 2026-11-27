@@ -281,29 +281,33 @@ def variableRateB (n : Nat) : Nat :=
     the first time at tick 2. -/
 theorem variableRateA_firstArrival :
     FirstArrival (fun _ t => cumulativeProgress variableRateA t = 3) 0 2 := by
+  change cumulativeProgress variableRateA 2 = 3 ∧
+    ∀ earlier, earlier < 2 → cumulativeProgress variableRateA earlier ≠ 3
   constructor
-  · norm_num [cumulativeProgress, variableRateA]
+  · simp [cumulativeProgress, variableRateA]
   · intro earlier hearlier hreach
     have hcases : earlier = 0 ∨ earlier = 1 := by omega
     rcases hcases with h0 | h1
     · subst earlier
-      norm_num [cumulativeProgress, variableRateA] at hreach
+      simp [cumulativeProgress, variableRateA] at hreach
     · subst earlier
-      norm_num [cumulativeProgress, variableRateA] at hreach
+      simp [cumulativeProgress, variableRateA] at hreach
 
 /-- The second variable-rate trajectory also reaches total progress 3
     for the first time at tick 2, despite having a different rate history. -/
 theorem variableRateB_firstArrival :
     FirstArrival (fun _ t => cumulativeProgress variableRateB t = 3) 0 2 := by
+  change cumulativeProgress variableRateB 2 = 3 ∧
+    ∀ earlier, earlier < 2 → cumulativeProgress variableRateB earlier ≠ 3
   constructor
-  · norm_num [cumulativeProgress, variableRateB]
+  · simp [cumulativeProgress, variableRateB]
   · intro earlier hearlier hreach
     have hcases : earlier = 0 ∨ earlier = 1 := by omega
     rcases hcases with h0 | h1
     · subst earlier
-      norm_num [cumulativeProgress, variableRateB] at hreach
+      simp [cumulativeProgress, variableRateB] at hreach
     · subst earlier
-      norm_num [cumulativeProgress, variableRateB] at hreach
+      simp [cumulativeProgress, variableRateB] at hreach
 
 /-- The rate histories differ at both ticks, while their first-arrival
     times coincide. -/
