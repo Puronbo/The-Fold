@@ -153,7 +153,7 @@ class FoldSpectralTests(unittest.TestCase):
         )
         self.assertEqual(
             cyclotomic_factorization_mod(3, 7),
-            ((2, 1), (4, 1)),
+            ((3, 1), (5, 1)),
         )
         self.assertEqual(
             cyclotomic_factorization_mod(5, 2),
