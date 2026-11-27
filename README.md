@@ -1028,3 +1028,6 @@ G-EP140: distinguishes valid invertible coefficient-space shears that change onl
 
 
 **AGI concept-learning prototype (Stages 9–13):** In addition to exact typed quantity and measurement-uncertainty handling, the prototype now proposes proportional, inverse, and affine relationships from paired observations. It retains counterexamples and keeps relational hypotheses separate from equivalence classes. See [Stage 13](agi/stage-13-relational-concept-discovery.md) and the [AGI roadmap](the-fold-agi.md). These are narrow deterministic capabilities, not an AGI system.
+
+
+**AGI concept-learning prototype (Stages 9–14):** The relational proposer now has an exact composition layer: proportional, inverse, and affine relations are represented as fractional-linear maps and composed by rational matrix multiplication. Intermediate domain exclusions and provenance are retained; refuted hypotheses are rejected. See agi/stage-14-relational-composition.md and agi/relation_composition.py. This is bounded symbolic composition, not general program synthesis or AGI.
