@@ -431,3 +431,14 @@ The cycle then:
 5. Returns a report containing split membership, counts, and the resulting memory head.
 
 The train/test split is supplied by the caller; FoldMind does not yet choose statistically sound splits or establish that observations are independent. The current rule grammar remains intentionally narrow. This makes the integration auditable, but not a general scientific discovery system.
+
+
+## 20. FoldExperiment: disagreement-guided experiment selection
+
+`tools/FoldExperiment.py` selects among a caller-supplied pool of candidate observations. For each candidate, it evaluates the predictions of the current hypotheses and measures the balance of predicted True/False outcomes.
+
+The selection heuristic is binary disagreement entropy divided by the candidate's declared cost. It favors candidates that split applicable hypotheses evenly, while preferring lower-cost candidates when their disagreement is otherwise comparable. Ties are resolved deterministically by candidate identifier.
+
+FoldMind exposes this through `select_experiment` and records the selected candidate, the pool, and the method in FoldMemory. If no supplied candidate separates the hypotheses, the method records that no discriminating candidate was found rather than fabricating a choice.
+
+This is not Bayesian information gain: there are no calibrated hypothesis probabilities, likelihood models, or posterior updates. The component also does not invent candidate experiments or execute real-world actions. It is a transparent active-testing policy over an explicit candidate pool.
