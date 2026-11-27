@@ -1055,3 +1055,6 @@ G-EP140: distinguishes valid invertible coefficient-space shears that change onl
 
 
 **Invariant discovery (Stage 22):** The prototype now extracts exact structural invariants of scalar affine self-transformations and verifies them under declared affine conjugacies. It distinguishes invariant properties from covariant coordinates such as the numerical location of a fixed point. See `agi/invariant_discovery.py` and `agi/stage-22-invariant-discovery.md`.
+
+
+**Affine relationship discovery (Stage 23):** The prototype now compares supplied affine transformations pairwise, identifying commuting pairs, order-dependent compositions, and shared fixed-point sets with exact rational arithmetic. See `agi/affine_relationships.py` and `agi/stage-23-affine-relationships.md`.
