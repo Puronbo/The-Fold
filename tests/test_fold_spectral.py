@@ -32,6 +32,14 @@ class FoldSpectralTests(unittest.TestCase):
         self.assertEqual(pairs, (ModularEigenpair(1, (1, 1)),))
         self.assertTrue(verify_quarter_turn_eigenpair(pairs[0], 2))
 
+    def test_root_primes_up_to_30(self):
+        from tools.FoldSpectral import quarter_turn_root_primes
+
+        self.assertEqual(quarter_turn_root_primes(30), (2, 5, 13, 17, 29))
+        self.assertEqual(quarter_turn_root_primes(1), ())
+        with self.assertRaises(ValueError):
+            quarter_turn_root_primes(-1)
+
     def test_rejects_zero_vector_and_invalid_modulus(self):
         self.assertFalse(verify_quarter_turn_eigenpair(
             ModularEigenpair(0, (0, 0)), 5
