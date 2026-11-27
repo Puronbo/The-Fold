@@ -38,7 +38,7 @@ class PrimeMemoryAfterimageTests(unittest.TestCase):
         self.assertTrue(result["spectral_matrix_dependent"])
         # Zero decay leaves exactly the last record's spectral features.
         self.assertEqual(
-            result["afterimage"]["spectral_orbit_degree_1"],
+            result["afterimage"]["spectral_orbit_degree_2"],
             {"numerator": 2, "denominator": 1},
         )
 
