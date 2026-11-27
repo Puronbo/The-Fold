@@ -548,6 +548,49 @@ theorem synchronized_common_target_family_iff
       (speed := speed) (target := fun _ => target) time hPositiveTick)
 
 /--
+A positive target cannot be first-crossed by a zero-speed process.
+This follows directly from the current-tick threshold condition.
+-/
+theorem first_threshold_crossing_speed_pos
+    (speed target time : Nat)
+    (hTarget : 0 < target)
+    (hCross : FirstThresholdCrossing speed target time) :
+    0 < speed := by
+  by_contra hNotPositive
+  have hZero : speed = 0 := Nat.eq_zero_of_not_pos hNotPositive
+  have hReached := hCross.1
+  simp [hZero] at hReached
+  omega
+
+/--
+A positive target cannot have its first crossing at tick zero:
+the initial progress is zero, below the target.
+-/
+theorem first_threshold_crossing_time_pos
+    (speed target time : Nat)
+    (hTarget : 0 < target)
+    (hCross : FirstThresholdCrossing speed target time) :
+    0 < time := by
+  by_contra hNotPositive
+  have hZero : time = 0 := Nat.eq_zero_of_not_pos hNotPositive
+  have hReached := hCross.1
+  simp [hZero] at hReached
+  omega
+
+/--
+For a family sharing a positive target, every synchronizing process
+must have positive speed.
+-/
+theorem synchronized_common_target_speeds_pos
+    {α : Type} (speed : α → Nat) (target time : Nat)
+    (hTarget : 0 < target)
+    (hFamily : ∀ process, FirstThresholdCrossing (speed process) target time) :
+    ∀ process, 0 < speed process := by
+  intro process
+  exact first_threshold_crossing_speed_pos
+    (speed process) target time hTarget (hFamily process)
+
+/--
 Concrete synchronized first crossing: rates 2 and 3 both first reach
 target 4 at tick 2, despite moving at different speeds.
 -/
