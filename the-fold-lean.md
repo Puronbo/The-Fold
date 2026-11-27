@@ -33,6 +33,7 @@ The toolchain is pinned in `lean-toolchain` to `leanprover/lean4:v4.35.0`. The L
 | `Fold/Wheel.lean` | the combinatorial wheel and its closure after `m` turns |
 | `Fold/Problems.lean` | Simpson, tolerance, contraposition, Monty Hall |
 | `Fold/Pressure.lean` | the linear hydrostatic law; monotone, unbounded, gauge |
+| `Fold/Complexity/ZeroResidual.lean` | the NP-over-P residual; class equality iff the residual is empty; separation iff it is nonempty; a 0/1 collapse indicator (abstract predicates only) |
 | `Fold/Doubling.lean` | the scale action at `k = 2`: doubling on `ℤ/n`, its inverse, cycles, and the `n ∣ 3` coincidence |
 | `Fold/Examples.lean` | a non-vacuous descent on `Option Bool`; the `m = 2` dessin's Euler characteristic and monodromy; the `A1` node quotient |
 | `Fold/Audit.lean` | the `#print axioms` audit |
@@ -412,3 +413,8 @@ and arithmetic alongside.
 **The Lean file proves the skeleton — an involution, its fixed set, its quotient, its cut, and the
 exact arithmetic — and it leaves the flesh to the prose: the analytic closure, the measure, and the
 consciousness.**
+
+
+### Zero residual and P versus NP
+
+The abstract module `Fold/Complexity/ZeroResidual.lean` proves that, assuming P is contained in NP, equality is equivalent to an empty NP-over-P residual, while inequality is equivalent to a nonempty residual. Its collapse indicator is 0 for equality and 1 for separation. It does not decide which case holds or prove a lower bound. See `the-fold-np-zero.md`.
