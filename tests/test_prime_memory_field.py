@@ -23,6 +23,10 @@ class PrimeMemoryFieldTests(unittest.TestCase):
             result["alignment"]["channel_totals"]["geometry_residue_alignment"],
             {"numerator": 1, "denominator": 1},
         )
+        self.assertEqual(
+            result["alignment"]["memory"]["geometry_gap_alignment"],
+            {"numerator": 1, "denominator": 4},
+        )
         self.assertIn("shifts", result["controls"])
 
     def test_matrix_spectral_alignment_is_optional(self):
