@@ -117,4 +117,20 @@ theorem differentialRest_states_differ
   apply hcond
   exact congrArg RestContextState.condition heq
 
+
+/-- The predicted next velocity may depend on the internal condition. -/
+def predictedVelocity (law : Int → Int) (s : RestContextState) : Int :=
+  law s.condition
+
+/-- A changed condition can alter the next-step prediction without moving now. -/
+theorem differentialRest_changes_prediction
+    (law : Int → Int) (update : Int → Int) (s : RestContextState)
+    (hrest : ContextAtRest s)
+    (hprediction :
+      law (update s.condition) ≠ law s.condition) :
+    predictedVelocity law (conditionOnlyStep update s) ≠
+      predictedVelocity law s := by
+  simp [predictedVelocity, conditionOnlyStep, ContextAtRest, hrest,
+    hprediction]
+
 end Fold
