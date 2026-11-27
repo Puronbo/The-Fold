@@ -61,6 +61,23 @@ class FoldSpectralTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             cyclotomic_root_residues(4, 9)
 
+    def test_cyclotomic_spectral_degrees(self):
+        from tools.FoldSpectral import (
+            cyclotomic_factor_count,
+            cyclotomic_spectral_degree,
+            multiplicative_order,
+        )
+
+        self.assertEqual(cyclotomic_spectral_degree(3, 2), 2)
+        self.assertEqual(cyclotomic_spectral_degree(3, 7), 1)
+        self.assertEqual(cyclotomic_spectral_degree(4, 3), 2)
+        self.assertEqual(cyclotomic_spectral_degree(4, 5), 1)
+        self.assertEqual(cyclotomic_factor_count(3, 2), 1)
+        self.assertEqual(cyclotomic_factor_count(3, 7), 2)
+        self.assertEqual(multiplicative_order(7, 3), 1)
+        with self.assertRaises(ValueError):
+            cyclotomic_spectral_degree(4, 2)
+
     def test_rejects_zero_vector_and_invalid_modulus(self):
         self.assertFalse(verify_quarter_turn_eigenpair(
             ModularEigenpair(0, (0, 0)), 5
