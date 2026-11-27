@@ -56,7 +56,7 @@ class FoldSpectralTests(unittest.TestCase):
 
         self.assertEqual(cyclotomic_root_residues(3, 7), (2, 4))
         self.assertEqual(cyclotomic_root_residues(4, 5), (2, 3))
-        self.assertEqual(cyclotomic_root_primes(3, 20), (2, 3, 7, 13, 19))
+        self.assertEqual(cyclotomic_root_primes(3, 20), (3, 7, 13, 19))
         self.assertEqual(cyclotomic_root_primes(4, 20), (2, 5, 13, 17))
         with self.assertRaises(ValueError):
             cyclotomic_root_residues(4, 9)
