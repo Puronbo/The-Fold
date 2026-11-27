@@ -298,8 +298,7 @@ def verify_optimality_certificate(
             for i, left in enumerate(coverers)
             for right in coverers[i + 1:]
         )
-        # Uniform rational dual: weight 1/D per required collision, where
-        # D is the maximum number any safe feature can cover.
+        # Check the recorded rational dual against every safe-feature constraint.
         all_coverage = [
             sum(by_id[a].get(feature) != by_id[b].get(feature)
                 for a, b in required)
@@ -426,6 +425,30 @@ def _self_test() -> None:
         (("w0", "w1"), ("w0", "w2"), ("w0", "w3")), weighted_plan
     )
 
+    # Triangle incidence: each feature separates two of three collisions.
+    # The fractional dual optimum is 3/2; its ceiling proves the integer
+    # minimum of two, while the disjoint-pair packing bound is only one.
+    triangle_items = (
+        Instance.make("t0", {"shape": "round", "fa": 0, "fb": 0, "fc": 0}),
+        Instance.make("t1", {"shape": "round", "fa": 1, "fb": 0, "fc": 1}),
+        Instance.make("t2", {"shape": "round", "fa": 1, "fb": 1, "fc": 0}),
+        Instance.make("t3", {"shape": "round", "fa": 0, "fb": 1, "fc": 1}),
+    )
+    triangle_pairs = (("t0", "t1"), ("t0", "t2"), ("t0", "t3"))
+    triangle_plan = minimum_retention_features(
+        triangle_items, base, ("fa", "fb", "fc"), (), triangle_pairs
+    )
+    assert triangle_plan is not None
+    triangle_objective = sum(
+        (Fraction(n, d) for n, d in triangle_plan.dual_weights), Fraction(0)
+    )
+    assert triangle_objective == Fraction(3, 2)
+    assert len(triangle_plan.lower_bound_pairs) == 1
+    assert len(triangle_plan.retained_features) == 2
+    assert retention_plan_proves_optimality(
+        triangle_items, base, ("fa", "fb", "fc"), (), triangle_pairs, triangle_plan
+    )
+
     # A candidate that splits a must-link pair is unsafe and cannot be used.
     impossible = minimum_retention_features(
         items, base, ("colour", "weight"), must, (("a", "b"), ("a", "d"))
@@ -447,7 +470,8 @@ def _self_test() -> None:
     print("PASS  packing certificate proves the two-feature optimum")
     print("PASS  rational dual bound independently matches the optimum")
     print("PASS  nonuniform rational weights certify a weighted optimum")
-    print("8/8 checks passed")
+    print("PASS  fractional triangle dual proves a bound beyond packing")
+    print("9/9 checks passed")
 
 
 if __name__ == "__main__":
