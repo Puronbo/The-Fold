@@ -85,6 +85,8 @@ theorem negFold_fix (x : Int) : Fix negFold x ↔ x = 0 := by
 end Fold
 
 
+namespace Fold
+
 /-- Affine scaling about an arbitrary datum: g_k(p) = p₀ + k(p - p₀). -/
 def affineScale (k p0 p : Int) : Int := p0 + k * (p - p0)
 
@@ -100,14 +102,14 @@ theorem affineScale_zero (p0 p : Int) : affineScale 0 p0 p = p0 := by
 theorem affineScale_neg_one (p0 p : Int) :
     affineScale (-1) p0 p = 2 * p0 - p := by
   simp [affineScale]
-  ring
+  omega
 
 /-- Scales about the same datum compose by multiplying their parameters. -/
 theorem affineScale_comp (k l p0 p : Int) :
     affineScale k p0 (affineScale l p0 p) =
       affineScale (k * l) p0 p := by
   simp [affineScale]
-  ring
+  omega
 
 /-- Point reflection through p₀ is an involution. -/
 def pointReflect (p0 p : Int) : Int := 2 * p0 - p
@@ -115,4 +117,6 @@ def pointReflect (p0 p : Int) : Int := 2 * p0 - p
 theorem pointReflect_invol (p0 p : Int) :
     pointReflect p0 (pointReflect p0 p) = p := by
   simp [pointReflect]
-  ring
+  omega
+
+end Fold
