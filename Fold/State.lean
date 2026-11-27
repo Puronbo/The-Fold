@@ -122,4 +122,14 @@ theorem postprocess_cannot_restore_collapse_injectivity
     ¬ Function.Injective (g ∘ collapse) := by
   exact comp_not_injective_of_not_injective collapse g collapse_not_injective
 
+/-- Composition of injective transitions remains injective. -/
+theorem comp_injective_of_injective
+    {α β γ : Type} (f : α → β) (g : β → γ)
+    (hf : Function.Injective f) (hg : Function.Injective g) :
+    Function.Injective (g ∘ f) := by
+  intro x y h
+  apply hf
+  apply hg
+  exact h
+
 end Fold
