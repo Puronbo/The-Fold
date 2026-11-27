@@ -107,3 +107,5 @@ import Fold.Doubling
 #check Fold.collapse_eq_iff_retained_signature_eq
 #check Fold.observation_only_classifier_cannot_recover_reference
 #check Fold.distinct_references_survive_collapse
+#check Fold.comp_not_injective_of_not_injective
+#check Fold.postprocess_cannot_restore_collapse_injectivity
