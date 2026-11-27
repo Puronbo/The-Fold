@@ -216,9 +216,24 @@ theorem diagonalReflection_fix_iff (p : Int × Int) :
   change (y, x) = (x, y) ↔ x = y
   simp [eq_comm]
 
+/-- A symmetric integer selector for a pair of coordinates. -/
+def diagonalValue (x y : Int) : Int := if x ≤ y then x else y
+
+theorem diagonalValue_swap (x y : Int) :
+    diagonalValue y x = diagonalValue x y := by
+  unfold diagonalValue
+  by_cases hxy : x ≤ y
+  · by_cases hyx : y ≤ x
+    · have h : x = y := by omega
+      subst y
+      simp
+    · simp [hxy, hyx]
+  · have hyx : y ≤ x := by omega
+    simp [hxy, hyx]
+
 /-- A symmetric integer retraction onto x = y (not Euclidean projection). -/
 def diagonalProjection (p : Int × Int) : Int × Int :=
-  (min p.1 p.2, min p.1 p.2)
+  (diagonalValue p.1 p.2, diagonalValue p.1 p.2)
 
 theorem diagonalProjection_fix (p : Int × Int) :
     Fix diagonalReflection (diagonalProjection p) := by
@@ -238,11 +253,11 @@ def diagonalCut : Cut diagonalReflection where
   orbit_eq := by
     intro p
     rcases p with ⟨x, y⟩
-    simp [diagonalProjection, diagonalReflection, swapCoordinates, min_comm]
+    simp [diagonalProjection, diagonalReflection, swapCoordinates, diagonalValue_swap]
 
 theorem diagonalProjection_idempotent (p : Int × Int) :
     diagonalProjection (diagonalProjection p) = diagonalProjection p := by
   rcases p with ⟨x, y⟩
-  simp [diagonalProjection]
+  simp [diagonalProjection, diagonalValue]
 
 end Fold
