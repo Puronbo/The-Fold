@@ -117,7 +117,7 @@ def _self_test() -> None:
                             "material": "rubber", "weight": 1}),
         Instance.make("c", {"shape": "round", "colour": "red",
                             "material": "metal", "weight": 2}),
-        Instance.make("d", {"shape": "square", "colour": "red",
+        Instance.make("d", {"shape": "round", "colour": "red",
                             "material": "cardboard", "weight": 3}),
         Instance.make("e", {"shape": "round", "colour": "red",
                             "material": "rubber", "weight": 9}),
