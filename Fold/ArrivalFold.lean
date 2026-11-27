@@ -11,7 +11,7 @@ namespace Fold
 
 /-- A target predicate is fold-invariant when folding a state neither
     creates nor destroys target membership. -/
-def FoldInvariantTarget (F : Fold X) (hit : X → Prop) : Prop :=
+def FoldInvariantTarget {X : Type} (F : Fold X) (hit : X → Prop) : Prop :=
   ∀ x, hit (F.f x) ↔ hit x
 
 /-- Folding every state along a trajectory preserves its first-arrival
@@ -37,7 +37,7 @@ theorem firstArrival_preserved_by_fold
 
 /-- The fixed-point target (the crease) is invariant under the fold:
     folding a state cannot change whether that state is fixed. -/
-theorem fixedTarget_fold_invariant (F : Fold X) :
+theorem fixedTarget_fold_invariant {X : Type} (F : Fold X) :
     FoldInvariantTarget F (Fix F) := by
   intro x
   exact fix_iff F x
@@ -45,7 +45,7 @@ theorem fixedTarget_fold_invariant (F : Fold X) :
 /-- A trajectory and its pointwise-folded image have the same first
     arrival at the crease. -/
 theorem firstArrival_at_crease_preserved
-    (F : Fold X) (path : X → Nat → X) (process : X) (time : Nat) :
+    {X : Type} (F : Fold X) (path : X → Nat → X) (process : X) (time : Nat) :
     FirstArrival
         (fun p t => Fix F (F.f (path p t))) process time ↔
       FirstArrival (fun p t => Fix F (path p t)) process time :=
