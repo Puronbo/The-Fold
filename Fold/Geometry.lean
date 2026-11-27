@@ -9,6 +9,24 @@ import Fold.Basic
 
 namespace Fold
 
+/-- A fixed-point-free involution, showing that a fold need not have a
+crease or a cut. -/
+def boolSwap : Fold Bool where
+  f := Bool.not
+  invol := by
+    intro b
+    cases b <;> rfl
+
+theorem boolSwap_no_fixed (b : Bool) : ¬ Fix boolSwap b := by
+  cases b <;> simp [Fix, boolSwap]
+
+/-- No cut exists for a fixed-point-free fold: every cut must land
+inside the fixed set. -/
+theorem boolSwap_no_cut : ¬ Nonempty (Cut boolSwap) := by
+  intro h
+  rcases h with ⟨C⟩
+  exact boolSwap_no_fixed (C.p false) (C.image_fix false)
+
 /-- Reflection across the horizontal axis: (x,y) ↦ (x,-y). -/
 def horizontalReflection : Fold (Int × Int) where
   f := fun p => (p.1, -p.2)
