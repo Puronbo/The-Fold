@@ -222,6 +222,46 @@ class FoldSpectralTests(unittest.TestCase):
                         )
                     )
 
+
+    def test_unified_cyclotomic_factorization_profiles(self):
+        from tools.FoldSpectral import (
+            cyclotomic_factorization_profile,
+            verify_cyclotomic_factorization_profile,
+        )
+
+        ramified = cyclotomic_factorization_profile(18, 3)
+        self.assertEqual(ramified["dimension"], 6)
+        self.assertEqual(ramified["reduced_order"], 2)
+        self.assertEqual(ramified["p_power"], 9)
+        self.assertEqual(ramified["frobenius_degree"], 1)
+        self.assertEqual(ramified["factor_degrees"], (1,))
+        self.assertEqual(ramified["factor_multiplicities"], (6,))
+        self.assertEqual(ramified["total_factor_degree"], 6)
+        self.assertFalse(ramified["squarefree"])
+
+        unramified = cyclotomic_factorization_profile(12, 5)
+        self.assertEqual(unramified["dimension"], 4)
+        self.assertEqual(unramified["reduced_order"], 12)
+        self.assertEqual(unramified["p_power"], 1)
+        self.assertEqual(unramified["frobenius_degree"], 2)
+        self.assertEqual(unramified["distinct_factor_count"], 2)
+        self.assertEqual(unramified["factor_degrees"], (2, 2))
+        self.assertEqual(unramified["factor_multiplicities"], (1, 1))
+        self.assertEqual(unramified["total_factor_degree"], 4)
+        self.assertTrue(unramified["squarefree"])
+
+        for order in range(1, 41):
+            for prime in (2, 3, 5, 7, 11):
+                self.assertTrue(
+                    verify_cyclotomic_factorization_profile(order, prime),
+                    (order, prime),
+                )
+
+        with self.assertRaises(ValueError):
+            cyclotomic_factorization_profile(0, 3)
+        with self.assertRaises(ValueError):
+            cyclotomic_factorization_profile(12, 9)
+
     def test_rejects_zero_vector_and_invalid_modulus(self):
         self.assertFalse(verify_quarter_turn_eigenpair(
             ModularEigenpair(0, (0, 0)), 5
