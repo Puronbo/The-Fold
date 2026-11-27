@@ -158,4 +158,31 @@ theorem collapseWithValue_injective :
       simp [collapse] at hs
       simp_all
 
+/-- Pair a transformed observation with auxiliary retained memory. -/
+def retainPair {α β γ : Type} (f : α → β) (r : α → γ) :
+    α → β × γ :=
+  fun x => (f x, r x)
+
+/--
+The augmented representation is injective exactly when the retained
+channel separates every collision left by the primary transformation.
+-/
+theorem retainPair_injective_iff {α β γ : Type}
+    (f : α → β) (r : α → γ) :
+    Function.Injective (retainPair f r) ↔
+      ∀ x y, f x = f y → r x = r y → x = y := by
+  constructor
+  · intro h x y hf hr
+    apply h
+    exact Prod.ext hf hr
+  · intro h x y hp
+    exact h x y (congrArg Prod.fst hp) (congrArg Prod.snd hp)
+
+/-- A sufficient-memory condition guarantees exact reconstruction. -/
+theorem retainPair_injective_of_separates_collisions
+    {α β γ : Type} (f : α → β) (r : α → γ)
+    (h : ∀ x y, f x = f y → r x = r y → x = y) :
+    Function.Injective (retainPair f r) :=
+  retainPair_injective_iff f r |>.2 h
+
 end Fold
