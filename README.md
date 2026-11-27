@@ -1049,3 +1049,6 @@ G-EP140: distinguishes valid invertible coefficient-space shears that change onl
 
 
 **AGI concept-learning prototype (Stages 9–20):** Stage 20 adds exact transfer of affine relational concepts across declared invertible coordinate changes. It transforms model coefficients algebraically and verifies preservation of residual zero/nonzero status without refitting target data. See `agi/representation_transfer.py` and `agi/stage-20-representation-transfer.md`. This is narrow symbolic transfer, not general intelligence.
+
+
+**Compositional abstraction (Stage 21):** The prototype now retains ordered affine concept paths, distinguishes structurally identical paths from paths with only the same endpoint function, and transfers each edge across a layer-specific coordinate change. Intermediate commuting identities are tested exactly. See `agi/compositional_abstraction.py` and `agi/stage-21-compositional-abstraction.md`.
