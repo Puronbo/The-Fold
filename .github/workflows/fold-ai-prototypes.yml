@@ -28,7 +28,7 @@ jobs:
         run: python tools/FoldLoop.py
       - name: Test append-only memory
         run: python tools/FoldMemory.py
-      - name: Test integrated FoldMind cycle and hypothesis feedback
+      - name: Test integrated FoldMind hypothesis and experiment cycle
         run: python tools/FoldMind.py
       - name: Test hypothesis generation, falsification, and memory audit
         run: python tools/FoldHypothesis.py
