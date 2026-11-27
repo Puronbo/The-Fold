@@ -34,13 +34,14 @@ theorem horizontalReflection_fix_iff (p : Int × Int) :
       rfl
 
 /-- The fixed set is the horizontal axis, represented by y = 0. -/
-def horizontalCrease : Set (Int × Int) :=
-  {p | p.2 = 0}
+def horizontalCrease (p : Int × Int) : Prop :=
+  p.2 = 0
 
 theorem horizontalCrease_eq_fix :
-    horizontalCrease = {p | Fix horizontalReflection p} := by
-  ext p
-  simp [horizontalCrease, horizontalReflection_fix_iff]
+    horizontalCrease = fun p => Fix horizontalReflection p := by
+  funext p
+  apply propext
+  exact horizontalReflection_fix_iff p
 
 /-- Orthogonal projection to the horizontal axis. -/
 def horizontalProjection (p : Int × Int) : Int × Int := (p.1, 0)
