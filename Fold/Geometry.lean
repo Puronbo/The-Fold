@@ -96,6 +96,7 @@ theorem horizontalReflectionAt_fix_iff (c : Int) (p : Int × Int) :
     rcases p with ⟨x, y⟩
     simp at h
     subst y
+    change 2 * c - c = c
     omega
 
 /-- Projection onto the translated crease y = c. -/
@@ -150,6 +151,7 @@ theorem verticalReflectionAt_fix_iff (c : Int) (p : Int × Int) :
     rcases p with ⟨x, y⟩
     simp at h
     subst x
+    change 2 * c - c = c
     omega
 
 /-- Projection onto the translated vertical crease x = c. -/
