@@ -139,5 +139,10 @@ import Fold.Complexity.Reduction
 #check Fold.horizontalProjectionAt_idempotent
 #check Fold.horizontalCutAt
 
+#check Fold.verticalReflectionAt_fix_iff
+#check Fold.verticalProjectionAt_fix
+#check Fold.verticalProjectionAt_idempotent
+#check Fold.verticalCutAt
+
 #check Fold.booleanSwap_no_fixed
 #check Fold.booleanSwap_no_cut
