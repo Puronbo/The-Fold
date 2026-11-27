@@ -30,6 +30,75 @@ class RetentionPlan:
     dual_weights: tuple[tuple[int, int], ...] = ()
 
 
+
+def _maximum_fractional_dual(
+    coverage: Sequence[int],
+    useful: Sequence[int],
+    collision_count: int,
+) -> tuple[Fraction, ...]:
+    """Solve the set-cover dual exactly with a Bland-rule rational simplex."""
+    variable_count = collision_count
+    constraint_count = len(useful)
+    if variable_count == 0:
+        return ()
+    if constraint_count == 0:
+        return tuple(Fraction(0) for _ in range(variable_count))
+
+    tableau: list[list[Fraction]] = []
+    for row_index, feature_index in enumerate(useful):
+        row = [
+            Fraction(1 if coverage[feature_index] & (1 << j) else 0)
+            for j in range(variable_count)
+        ]
+        row.extend(
+            Fraction(1 if slack_index == row_index else 0)
+            for slack_index in range(constraint_count)
+        )
+        row.append(Fraction(1))
+        tableau.append(row)
+
+    tableau.append(
+        [Fraction(-1) for _ in range(variable_count)]
+        + [Fraction(0) for _ in range(constraint_count + 1)]
+    )
+    basis = [variable_count + i for i in range(constraint_count)]
+    column_count = variable_count + constraint_count
+
+    while True:
+        entering = next(
+            (j for j in range(column_count) if tableau[-1][j] < 0),
+            None,
+        )
+        if entering is None:
+            break
+        eligible = [
+            (tableau[i][-1] / tableau[i][entering], basis[i], i)
+            for i in range(constraint_count)
+            if tableau[i][entering] > 0
+        ]
+        if not eligible:
+            raise ValueError("fractional dual is unbounded; a collision is uncovered")
+        _, _, leaving = min(eligible)
+        pivot = tableau[leaving][entering]
+        tableau[leaving] = [value / pivot for value in tableau[leaving]]
+        for i in range(constraint_count + 1):
+            if i == leaving:
+                continue
+            factor = tableau[i][entering]
+            if factor:
+                tableau[i] = [
+                    value - factor * pivot_value
+                    for value, pivot_value in zip(tableau[i], tableau[leaving])
+                ]
+        basis[leaving] = entering
+
+    solution = [Fraction(0) for _ in range(variable_count)]
+    for i, basic_variable in enumerate(basis):
+        if basic_variable < variable_count:
+            solution[basic_variable] = tableau[i][-1]
+    return tuple(solution)
+
+
 def minimum_retention_features(
     instances: Sequence[Instance],
     context: Context,
@@ -100,24 +169,8 @@ def minimum_retention_features(
             packing.append(j)
             used_coverers.update(coverers[j])
 
-    # Generate exact rational dual candidates. Inverse-degree weights favor
-    # collisions with fewer separating features; normalize to dual feasibility.
-    degrees = tuple(max(1, len(group)) for group in coverers)
-    dual_candidates: list[tuple[Fraction, ...]] = []
-    for power in (0, 1, 2, 3):
-        raw = tuple(Fraction(1, degree ** power) for degree in degrees)
-        loads = tuple(
-            sum((raw[j] for j in range(len(required)) if i in coverers[j]), Fraction(0))
-            for i in useful
-        )
-        scale = max(loads, default=Fraction(0))
-        if scale > 0:
-            dual_candidates.append(tuple(weight / scale for weight in raw))
-    best_dual = max(
-        dual_candidates,
-        key=lambda weights: (sum(weights, Fraction(0)), tuple(weights)),
-        default=(),
-    )
+    # Solve the fractional set-cover dual exactly over safe features.
+    best_dual = _maximum_fractional_dual(coverage, useful, len(required))
     dual_weights = tuple((weight.numerator, weight.denominator) for weight in best_dual)
 
     def search(chosen_mask: int, covered: int) -> None:
