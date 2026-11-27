@@ -180,3 +180,5 @@ import Fold.Complexity.Reduction
 #check Fold.discreteRate_injective
 #check Fold.distinct_rates_same_arrival
 #check Fold.faster_has_larger_remaining_displacement
+#check Fold.remainingDisplacement_pos_before_arrival
+#check Fold.remainingDisplacement_zero_at_arrival
