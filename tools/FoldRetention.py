@@ -227,7 +227,7 @@ def verify_optimality_certificate(
             if equivalent(by_id[a], by_id[b], context)
         )
         certificate = plan.lower_bound_pairs
-        if len(set(certificate)) != len(certificate):
+        if plan.separated_pairs != required or len(set(certificate)) != len(certificate):
             return False
         if any(pair not in required for pair in certificate):
             return False
