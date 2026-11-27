@@ -18,7 +18,8 @@ from typing import Sequence
 
 from FoldConcept import Context, Instance, build_concepts, check_equivalence_laws
 from FoldLoop import PairConstraint, audit, refine_until_consistent
-from FoldMemory import FoldMemory\nfrom FoldHypothesis import Example as HypothesisExample, generate, evaluate, retain_audit
+from FoldMemory import FoldMemory
+from FoldHypothesis import Example as HypothesisExample, generate, evaluate, retain_audit
 
 
 @dataclass(frozen=True)
