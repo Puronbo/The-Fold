@@ -38,8 +38,11 @@ theorem flipDirection_involutive (s : State) :
 theorem flipDirection_injective :
     Function.Injective flipDirection := by
   intro s t h
-  have := congrArg flipDirection h
-  simpa [flipDirection] using this
+  cases s with
+  | mk sv sr sd sh =>
+    cases t with
+    | mk tv tr td th =>
+      simp [flipDirection] at h ⊢
 
 /-- Collapse is not injective: different values can have the same image. -/
 theorem collapse_not_injective :
