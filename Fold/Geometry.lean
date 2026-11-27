@@ -337,7 +337,7 @@ theorem twice_sub_eq_iff (c v : Int) : 2 * c - v = v ↔ v = c := by
 
 /-- Integer-preserving reflection across every crease v = a*u. -/
 def obliqueReflectionA (a : Int) : Fold (Int × Int) where
-  f := fun p => (p.1, 2 * a * p.1 - p.2)
+  f := fun p => (p.1, 2 * (a * p.1) - p.2)
   invol := by
     intro p
     rcases p with ⟨u, v⟩
@@ -347,13 +347,14 @@ def obliqueReflectionA (a : Int) : Fold (Int × Int) where
 theorem obliqueReflectionA_fix_iff (a : Int) (p : Int × Int) :
     Fix (obliqueReflectionA a) p ↔ p.2 = a * p.1 := by
   rcases p with ⟨u, v⟩
-  change (u, 2 * a * u - v) = (u, v) ↔ v = a * u
+  change (u, 2 * (a * u) - v) = (u, v) ↔ v = a * u
   constructor
   · intro h
     have hs := congrArg Prod.snd h
-    exact (twice_sub_eq_iff (a * u) v).mp (by omega)
+    change 2 * (a * u) - v = v at hs
+    exact (twice_sub_eq_iff (a * u) v).mp hs
   · intro h
-    subst v
+    rw [h]
     omega
 
 /-- Algebraic retraction onto v = a*u. -/
@@ -397,9 +398,10 @@ theorem translatedObliqueReflection_fix_iff (a b : Int) (p : Int × Int) :
   constructor
   · intro h
     have hs := congrArg Prod.snd h
-    exact (twice_sub_eq_iff (a * u + b) v).mp (by omega)
+    change 2 * (a * u + b) - v = v at hs
+    exact (twice_sub_eq_iff (a * u + b) v).mp hs
   · intro h
-    subst v
+    rw [h]
     omega
 
 def translatedObliqueProjection (a b : Int) (p : Int × Int) : Int × Int :=
