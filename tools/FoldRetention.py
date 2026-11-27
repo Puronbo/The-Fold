@@ -100,6 +100,26 @@ def minimum_retention_features(
             packing.append(j)
             used_coverers.update(coverers[j])
 
+    # Generate exact rational dual candidates. Inverse-degree weights favor
+    # collisions with fewer separating features; normalize to dual feasibility.
+    degrees = tuple(max(1, len(group)) for group in coverers)
+    dual_candidates: list[tuple[Fraction, ...]] = []
+    for power in (0, 1, 2, 3):
+        raw = tuple(Fraction(1, degree ** power) for degree in degrees)
+        loads = tuple(
+            sum((raw[j] for j in range(len(required)) if i in coverers[j]), Fraction(0))
+            for i in useful
+        )
+        scale = max(loads, default=Fraction(0))
+        if scale > 0:
+            dual_candidates.append(tuple(weight / scale for weight in raw))
+    best_dual = max(
+        dual_candidates,
+        key=lambda weights: (sum(weights, Fraction(0)), tuple(weights)),
+        default=(),
+    )
+    dual_weights = tuple((weight.numerator, weight.denominator) for weight in best_dual)
+
     def search(chosen_mask: int, covered: int) -> None:
         nonlocal best
         chosen_count = chosen_mask.bit_count()
@@ -154,7 +174,7 @@ def minimum_retention_features(
         final = context.relevant_features + selected
         return RetentionPlan(
             context.name, context.relevant_features, selected, final,
-            separated, (), tuple(required[j] for j in packing), dual_denominator,
+            separated, (), tuple(required[j] for j in packing), dual_denominator, dual_weights,
         )
 
     return None
