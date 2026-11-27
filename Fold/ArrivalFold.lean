@@ -199,3 +199,65 @@ theorem firstArrival_bijective_coordinate_change
   exact firstArrival_coordinate_transport e path hit process time
 
 end Fold
+
+
+namespace Fold
+
+/-- A target predicate descends to the orbit chart exactly when it is
+    invariant under the fold. The descended predicate is defined on
+    quotient classes, not on a chosen representative. -/
+def descendTarget {X : Type} (F : Fold X) (hit : X → Prop)
+    (hinv : FoldInvariantTarget F hit) : Chart F → Prop :=
+  desc F hit (fun x => propext (hinv x))
+
+/-- On a chart projection, the descended target agrees with the original
+    state-level target. -/
+theorem descendTarget_chart {X : Type} (F : Fold X)
+    (hit : X → Prop) (hinv : FoldInvariantTarget F hit) (x : X) :
+    descendTarget F hit hinv (chart F x) ↔ hit x := by
+  change desc F hit (fun y => propext (hinv y)) (chart F x) ↔ hit x
+  rw [desc_chart]
+
+/-- Exact descent criterion: a predicate on states is the pullback of
+    some predicate on Fold-orbits iff it is invariant under the fold. -/
+theorem target_descends_iff {X : Type} (F : Fold X)
+    (hit : X → Prop) :
+    (∃ chartHit : Chart F → Prop,
+      ∀ x, chartHit (chart F x) ↔ hit x) ↔
+        FoldInvariantTarget F hit := by
+  constructor
+  · rintro ⟨chartHit, hchart⟩ x
+    calc
+      hit (F.f x) ↔ chartHit (chart F (F.f x)) := (hchart (F.f x)).symm
+      _ ↔ chartHit (chart F x) := by rw [chart_fold]
+      _ ↔ hit x := hchart x
+  · intro hinv
+    refine ⟨descendTarget F hit hinv, ?_⟩
+    intro x
+    exact descendTarget_chart F hit hinv x
+
+/-- First arrival at a descended chart target is equivalent to first
+    arrival at its invariant state-level predicate. Thus first-arrival
+    time is a well-defined property of Fold-orbits in precisely this
+    invariant-target case. -/
+theorem firstArrival_descended_target
+    {α X : Type} (F : Fold X) (path : α → Nat → X)
+    (hit : X → Prop) (hinv : FoldInvariantTarget F hit)
+    (process : α) (time : Nat) :
+    FirstArrival
+        (fun p t => descendTarget F hit hinv (chart F (path p t)))
+        process time ↔
+      FirstArrival (fun p t => hit (path p t)) process time := by
+  constructor
+  · rintro ⟨hnow, hbefore⟩
+    refine ⟨(descendTarget_chart F hit hinv (path process time)).mp hnow, ?_⟩
+    intro earlier hearlier hhit
+    exact hbefore earlier hearlier
+      ((descendTarget_chart F hit hinv (path process earlier)).mpr hhit)
+  · rintro ⟨hnow, hbefore⟩
+    refine ⟨(descendTarget_chart F hit hinv (path process time)).mpr hnow, ?_⟩
+    intro earlier hearlier hhit
+    exact hbefore earlier hearlier
+      ((descendTarget_chart F hit hinv (path process earlier)).mp hhit)
+
+end Fold
