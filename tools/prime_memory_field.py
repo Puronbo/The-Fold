@@ -89,15 +89,27 @@ def prime_memory_field(
                 "spectral": spectral,
             })
 
-    # One observation is added per prime-field update; the pairwise counts
-    # are then folded into a separate alignment memory with the same decay.
-    # This intentionally keeps pair-count channels distinct from per-prime
-    # feature sums, whose units and scales differ.
-    alignment_memory = {
-        name: decay * value + count
-        for name, value in channels.items()
-        for count in [Fraction(value)]
-    }
+    # Fold each pairwise observation in order. This afterimage is a
+    # fading memory over pair events, not over prime-index records.
+    alignment_memory = {name: Fraction(0) for name in channels}
+    for pair in comparison["pairwise_results"]:
+        geometric = pair["geometric_recurrence"]
+        gap = pair["gap_recurrence"] is True
+        residue = pair["residue_recurrence"] is True
+        spectral = pair.get("spectral_recurrence") is True
+        emitted = {
+            "geometric_pair_recurrence": geometric,
+            "arithmetic_gap_recurrence": gap,
+            "arithmetic_residue_recurrence": residue,
+            "arithmetic_spectral_recurrence": spectral,
+            "geometry_gap_alignment": geometric and gap,
+            "geometry_residue_alignment": geometric and residue,
+            "geometry_spectral_alignment": geometric and spectral,
+        }
+        alignment_memory = {
+            name: decay * value + int(emitted[name])
+            for name, value in alignment_memory.items()
+        }
     return {
         "schema": "the-fold-prime-memory-field-v1",
         "geometry": {
