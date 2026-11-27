@@ -63,3 +63,5 @@ import Fold
 #print axioms Fold.retainPair_injective_of_primary_injective
 #print axioms Fold.retainPair_injective_of_separates_collisions
 #print axioms Fold.different_speeds_require_different_distances
+#print axioms Fold.firstArrival_le_any_arrival
+#print axioms Fold.synchronized_first_arrival_is_common_lower_bound
