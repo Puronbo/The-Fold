@@ -283,7 +283,9 @@ class FoldMind:
             "minimum_cardinality": len(plan.retained_features) if plan else None,
             "independently_verified": verified,
             "lower_bound_pairs": [list(pair) for pair in plan.lower_bound_pairs] if plan else [],
-            "lower_bound": len(plan.lower_bound_pairs) if plan else 0,
+            "packing_lower_bound": len(plan.lower_bound_pairs) if plan else 0,
+            "dual_denominator": plan.dual_denominator if plan else 0,
+            "dual_lower_bound": ((len(plan.separated_pairs) + plan.dual_denominator - 1) // plan.dual_denominator if plan and plan.dual_denominator else 0),
             "optimality_certified": optimality_certified,
             "status": ("optimality-certified" if optimality_certified else
                        "feasible-only" if verified else "no-safe-plan"),
