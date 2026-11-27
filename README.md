@@ -1037,3 +1037,6 @@ G-EP140: distinguishes valid invertible coefficient-space shears that change onl
 
 
 **AGI concept-learning prototype (Stages 9–16):** Stage 16 compares competing composed relation paths on common held-out observations, keeps endpoint and intermediate errors separate, counts domain failures, groups exactly equivalent composed maps, and uses a transparent complexity tie-breaker. It does not refit candidates or claim generalization beyond the evaluation sample. See agi/stage-16-model-comparison.md and agi/relation_selection.py.
+
+
+**AGI concept-learning prototype (Stages 9–17):** Stage 17 adds a three-way discovery/validation/test protocol. Candidate provenance is tied to discovery keys, model selection uses validation only, and the untouched test set evaluates only the frozen winner. See `agi/three_way_evaluation.py` and `agi/stage-17-three-way-evaluation.md`. This improves evaluation discipline but does not prove generalization or AGI.
