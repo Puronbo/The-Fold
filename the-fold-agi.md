@@ -220,3 +220,8 @@ The new agi/relation_selection.py compares caller-supplied composed paths on the
 ## Stage 23: relationships between affine transformations
 
 `agi/affine_relationships.py` compares every unordered pair in a finite supplied collection of scalar affine maps. It derives exact ordered compositions, detects commutation via the intercept difference, and compares fixed-point sets (empty, singleton, or all points). See `agi/stage-23-affine-relationships.md`.
+
+
+## Stage 24: finite affine transformation groups
+
+`agi/affine_group.py` recognizes whether a finite supplied collection of scalar affine maps is a group under composition. It checks identity, bijectivity, closure, and inverses exactly; associativity is inherited from function composition. The documentation also records the classification that finite subgroups of the real affine group have at most two elements. See `agi/stage-24-affine-groups.md`.
