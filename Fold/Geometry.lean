@@ -331,6 +331,10 @@ theorem obliqueProjection_idempotent (p : Int × Int) :
   rfl
 
 
+/-- Cancellation lemma for reflection's fixed-coordinate equation. -/
+theorem twice_sub_eq_iff (c v : Int) : 2 * c - v = v ↔ v = c := by
+  omega
+
 /-- Integer-preserving reflection across every crease v = a*u. -/
 def obliqueReflectionA (a : Int) : Fold (Int × Int) where
   f := fun p => (p.1, 2 * a * p.1 - p.2)
@@ -344,8 +348,14 @@ theorem obliqueReflectionA_fix_iff (a : Int) (p : Int × Int) :
     Fix (obliqueReflectionA a) p ↔ p.2 = a * p.1 := by
   rcases p with ⟨u, v⟩
   change (u, 2 * a * u - v) = (u, v) ↔ v = a * u
-  simp
-  omega
+  constructor
+  · intro h
+    have hs := congrArg Prod.snd h
+    have hs' : 2 * (a * u) - v = v := by simpa [mul_assoc] using hs
+    exact (twice_sub_eq_iff (a * u) v).mp hs'
+  · intro h
+    subst v
+    simp [mul_assoc]
 
 /-- Algebraic retraction onto v = a*u. -/
 def obliqueProjectionA (a : Int) (p : Int × Int) : Int × Int :=
@@ -367,7 +377,6 @@ def obliqueCutA (a : Int) : Cut (obliqueReflectionA a) where
     intro p
     rcases p with ⟨u, v⟩
     simp [obliqueProjectionA, obliqueReflectionA]
-    omega
 
 theorem obliqueProjectionA_idempotent (a : Int) (p : Int × Int) :
     obliqueProjectionA a (obliqueProjectionA a p) = obliqueProjectionA a p := by
@@ -386,8 +395,13 @@ theorem translatedObliqueReflection_fix_iff (a b : Int) (p : Int × Int) :
     Fix (translatedObliqueReflection a b) p ↔ p.2 = a * p.1 + b := by
   rcases p with ⟨u, v⟩
   change (u, 2 * (a * u + b) - v) = (u, v) ↔ v = a * u + b
-  simp
-  omega
+  constructor
+  · intro h
+    have hs := congrArg Prod.snd h
+    exact (twice_sub_eq_iff (a * u + b) v).mp (by simpa [mul_assoc] using hs)
+  · intro h
+    subst v
+    simp [mul_assoc]
 
 def translatedObliqueProjection (a b : Int) (p : Int × Int) : Int × Int :=
   (p.1, a * p.1 + b)
@@ -408,7 +422,6 @@ def translatedObliqueCut (a b : Int) : Cut (translatedObliqueReflection a b) whe
     intro p
     rcases p with ⟨u, v⟩
     simp [translatedObliqueProjection, translatedObliqueReflection]
-    omega
 
 theorem translatedObliqueProjection_idempotent (a b : Int) (p : Int × Int) :
     translatedObliqueProjection a b (translatedObliqueProjection a b p) =
