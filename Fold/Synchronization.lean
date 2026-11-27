@@ -507,10 +507,10 @@ theorem firstArrival_sampled_characterization
 /-- A constant clock can collapse distinct event times: a path whose
     original first hit is at tick 3 is already at the sampled target
     from tick 0. -/
-def collapsedClock (t : Nat) : Nat := 0
+def collapsedClock (t : Nat) : Nat := 3
 
 theorem original_hit_at_three_first :
-    FirstArrival (fun _ t => t = 0) () 0 := by
+    FirstArrival (fun _ t => t = 3) () 3 := by
   constructor
   · rfl
   · intro earlier hearlier hhit
@@ -518,7 +518,7 @@ theorem original_hit_at_three_first :
 
 theorem collapsed_clock_destroys_later_first_index :
     ¬ FirstArrival
-      (fun _ t => collapsedClock t = 0) () 3 := by
+      (fun _ t => collapsedClock t = 3) () 3 := by
   intro h
   have hnot := h.2 0 (by omega)
   apply hnot
