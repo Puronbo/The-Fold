@@ -98,6 +98,11 @@ theorem collapse_eq_iff_retained_signature_eq (s t : State) :
     collapse s = collapse t ↔ retainedSignature s = retainedSignature t := by
   cases s <;> cases t <;> simp [collapse, retainedSignature]
 
+/-- Full states agree exactly when both the erased value and retained metadata agree. -/
+theorem state_eq_iff_value_and_signature (s t : State) :
+    s = t ↔ s.value = t.value ∧ retainedSignature s = retainedSignature t := by
+  cases s <;> cases t <;> simp [retainedSignature]
+
 theorem distinct_references_survive_collapse
     (s t : State) (h : s.reference ≠ t.reference) :
     collapse s ≠ collapse t := by
