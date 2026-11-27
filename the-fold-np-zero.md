@@ -149,3 +149,22 @@ and, for the defined indicator,
 If the intended zero is the vanishing of the NP-over-P residual, then it characterizes P = NP, not P != NP.
 
 The next substantive breakthrough would not be a new name for the residual. It would be a proved lower bound showing that at least one language in NP lies outside P, or a polynomial-time section construction for every NP verifier.
+
+
+## Explicit many-one reductions
+
+The Lean module `Fold/Complexity/Reduction.lean` makes the reduction interface more precise.
+A `PolyManyOneReduction` contains three separate pieces:
+
+1. a map from source instances to target instances;
+2. a proof that source membership is equivalent to target membership after mapping;
+3. a proof that the map satisfies a supplied polynomial-time predicate.
+
+The composition theorem constructs a reduction from A to C out of reductions A to B and B to C.
+Its runtime conclusion is conditional on an explicit closure premise for the chosen runtime
+predicates under function composition. This avoids treating arbitrary membership-preserving
+functions as polynomial-time reductions.
+
+This is an abstract interface, not yet a concrete Turing-machine cost semantics. The next formal
+step is to instantiate the runtime predicate with a machine model and prove the composition bound
+there. No Cook–Levin theorem or unrestricted P-versus-NP result is claimed.
