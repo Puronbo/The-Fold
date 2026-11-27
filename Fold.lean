@@ -124,3 +124,7 @@ import Fold.Doubling
 #check Fold.synchronized_first_arrival_is_common_lower_bound
 #check Fold.firstArrival_unique
 #check Fold.synchronized_of_common_first_arrival
+#check Fold.LinearArrival
+#check Fold.linear_arrivals_synchronize_iff
+#check Fold.different_speeds_give_different_linear_distances
+#check Fold.synchronized_linear_cross_product
