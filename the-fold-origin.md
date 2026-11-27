@@ -435,3 +435,37 @@ x(E(S))=x(S),\qquad v(E(S))=v(S).
 This is stronger than observing zero displacement at one instant: it says the complete state is a fixed point of the specified evolution. In the Lean module `Fold/Rest.lean`, `RestInvariant E` names this condition and theorems derive unchanged position, unchanged motion, and unchanged full state. A helper evolution `holdAtRest` demonstrates one construction that satisfies the condition while leaving moving-state behavior to a supplied transition.
 
 **Scope:** “at rest” is relative to a chosen frame and a chosen definition of motion. The formal result is conditional: if the evolution preserves rest in the stated sense, then the state is fixed. It does not establish that every physical system has a universal absolute rest frame, nor that every force-free or zero-velocity situation is dynamically static under every model.
+
+
+## 13. The next state: differential rest
+
+The next refinement separates kinematic rest from the internal condition that determines what may happen next. Use an augmented state
+
+\[
+S=(x,v,\theta),
+\]
+
+where \(x\) is position, \(v\) is the declared velocity in a chosen frame, and \(\theta\) is an internal condition, configuration, or environment variable.
+
+A transition from \(S_t\) to \(S_{t+1}\) is **differential rest** when
+
+\[
+x_{t+1}=x_t,\qquad v_t=v_{t+1}=0,
+\qquad \theta_{t+1}\ne\theta_t.
+\]
+
+Thus the kinematic state remains fixed while the condition changes. This is not a contradiction: the original two-component state \((x,v)\) would be unchanged, but the augmented state is not. The change belongs to the added condition coordinate, not to hidden position or velocity.
+
+One explicit transition updates only the condition while velocity is zero:
+
+\[
+E(x,v,\theta)=
+\begin{cases}
+(x,0,\phi(\theta)),&v=0,\\
+(x,v,\theta),&v\ne0.
+\end{cases}
+\]
+
+When \(\phi(\theta)\ne\theta\), this transition realizes differential rest. The Lean module Fold/Rest.lean defines RestContextState, DifferentialRest, and conditionOnlyStep, and proves position preservation, zero-velocity preservation, and state inequality when the condition update differs.
+
+**Interpretation:** the current kinematic state can be at rest while its next-transition conditions evolve. This gives a precise meaning to “the next state of rest where change differs.” It does not assert that every resting physical system changes internally; the condition update is an explicit model assumption.
