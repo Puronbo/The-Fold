@@ -192,3 +192,9 @@ import Fold.Complexity.Reduction
 #check Fold.firstArrival_unique
 #check Fold.SynchronizedBoundary
 #check Fold.synchronizedBoundary_unique
+
+#check Fold.GapFirstArrival
+#check Fold.firstArrival_of_positive_gap
+#check Fold.SynchronizedGapArrival
+#check Fold.synchronized_of_positive_gaps
+#check Fold.synchronizedGapArrival_unique
