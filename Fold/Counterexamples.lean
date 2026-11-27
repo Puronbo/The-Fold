@@ -1,3 +1,5 @@
+import Fold.Basic
+
 /-!
   Fold/Counterexamples.lean
 
@@ -5,7 +7,6 @@
   a cut/retraction onto its fixed set. This separates the quotient-orbit
   construction from the extra structure required by an observer cut.
 -/
-import Fold.Basic
 
 namespace Fold
 
