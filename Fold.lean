@@ -110,3 +110,5 @@ import Fold.Doubling
 #check Fold.comp_not_injective_of_not_injective
 #check Fold.postprocess_cannot_restore_collapse_injectivity
 #check Fold.comp_injective_of_injective
+#check Fold.restoreValue_collapse
+#check Fold.collapseWithValue_injective
