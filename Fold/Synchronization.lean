@@ -493,3 +493,45 @@ theorem firstArrival_nat_mul_time_reindex
     time
 
 end Fold
+
+
+/-- Exact characterization of first arrival after sampling a trajectory
+    along a clock: only the sampled earlier indices must be excluded. -/
+theorem firstArrival_sampled_characterization
+    {α : Type} (reaches : α → Nat → Prop)
+    (process : α) (clock : Nat → Nat) (time : Nat) :
+    FirstArrival (fun p t => reaches p (clock t)) process time ↔
+      (reaches process (clock time) ∧
+        ∀ earlier, earlier < time → ¬ reaches process (clock earlier)) := Iff.rfl
+
+/-- A constant clock can collapse distinct event times: a path whose
+    original first hit is at tick 3 is already at the sampled target
+    from tick 0. -/
+def collapsedClock (t : Nat) : Nat := 0
+
+theorem original_hit_at_three_first :
+    FirstArrival (fun _ t => t = 0) () 0 := by
+  constructor
+  · rfl
+  · intro earlier hearlier hhit
+    omega
+
+theorem collapsed_clock_destroys_later_first_index :
+    ¬ FirstArrival
+      (fun _ t => collapsedClock t = 0) () 3 := by
+  intro h
+  have hnot := h.2 0 (by omega)
+  apply hnot
+  rfl
+
+/-- Strictly increasing clocks preserve first arrival from the original
+    clock-time scale to the sampled index scale. The reverse implication
+    needs additional coverage assumptions: sampling can skip earlier hits. -/
+theorem firstArrival_strict_reindex_forward
+    {α : Type} (reaches : α → Nat → Prop)
+    (process : α) (clock : Nat → Nat)
+    (hclock : ∀ {a b : Nat}, a < b → clock a < clock b)
+    (time : Nat) :
+    FirstArrival reaches process (clock time) →
+      FirstArrival (fun p t => reaches p (clock t)) process time := by
+  exact firstArrival_strict_time_reindex reaches process clock hclock time
