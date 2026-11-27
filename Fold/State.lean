@@ -43,7 +43,8 @@ theorem flipDirection_injective :
     cases t with
     | mk tv tr td th =>
       simp [flipDirection] at h
-      exact h
+      rcases h with ⟨rfl, rfl, rfl, rfl⟩
+      rfl
 
 /-- Collapse is not injective: different values can have the same image. -/
 theorem collapse_not_injective :
