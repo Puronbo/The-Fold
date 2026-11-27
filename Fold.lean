@@ -8,6 +8,7 @@ import Fold.Basic
 import Fold.Scale
 import Fold.Origin
 import Fold.Geometry
+import Fold.Counterexamples
 import Fold.Chi
 import Fold.Arithmetic
 import Fold.Wheel
@@ -131,3 +132,6 @@ import Fold.Complexity.Reduction
 #check Fold.horizontalProjection_fix
 #check Fold.horizontalProjection_idempotent
 #check Fold.horizontalChart_reflection
+
+#check Fold.booleanSwap_no_fixed
+#check Fold.booleanSwap_no_cut
