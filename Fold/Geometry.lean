@@ -351,11 +351,11 @@ theorem obliqueReflectionA_fix_iff (a : Int) (p : Int × Int) :
   constructor
   · intro h
     have hs := congrArg Prod.snd h
-    have hs' : 2 * (a * u) - v = v := by simpa [mul_assoc] using hs
+    have hs' : 2 * (a * u) - v = v := by simpa [Int.mul_assoc] using hs
     exact (twice_sub_eq_iff (a * u) v).mp hs'
   · intro h
     subst v
-    simp [mul_assoc]
+    simp [Int.mul_assoc]
 
 /-- Algebraic retraction onto v = a*u. -/
 def obliqueProjectionA (a : Int) (p : Int × Int) : Int × Int :=
@@ -398,10 +398,10 @@ theorem translatedObliqueReflection_fix_iff (a b : Int) (p : Int × Int) :
   constructor
   · intro h
     have hs := congrArg Prod.snd h
-    exact (twice_sub_eq_iff (a * u + b) v).mp (by simpa [mul_assoc] using hs)
+    exact (twice_sub_eq_iff (a * u + b) v).mp (by simpa [Int.mul_assoc] using hs)
   · intro h
     subst v
-    simp [mul_assoc]
+    simp [Int.mul_assoc]
 
 def translatedObliqueProjection (a b : Int) (p : Int × Int) : Int × Int :=
   (p.1, a * p.1 + b)
