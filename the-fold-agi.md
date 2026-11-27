@@ -239,3 +239,10 @@ Stage 26 adds \`agi/quotient_spaces.py\`, which constructs the orbit quotient \(
 For supplied binary relations, the implementation separates diagonal group invariance from quotient well-definedness. A relation descends only when membership is constant on every product of two orbits. The equality relation on a two-state swap orbit is a regression counterexample: it is preserved by simultaneous swapping but does not define a relation on the one-class quotient. The stage reports cardinality compression, not an entropy measure or universal information metric. See \`agi/stage-26-quotient-spaces.md\` and \`agi/test_quotient_spaces.py\`.
 
 This is exact finite abstraction machinery; it does not discover task-relevant symmetries from raw data or establish AGI.
+
+
+## Stage 27: quotient homomorphisms and congruence
+
+Stage 27 adds agi/structure_descent.py. Given a Stage 26 orbit quotient and named finite total operation tables, it checks whether each operation respects the orbit equivalence independently in every argument. When the congruence condition holds, it constructs the induced quotient operation and verifies the quotient projection's homomorphism identity by exhaustive class-tuple checks. It rejects incomplete or malformed operation tables and emits no quotient operation when congruence fails. See agi/stage-27-structure-descent.md and agi/test_structure_descent.py.
+
+The XOR example on four states descends through the two-class partition induced by XOR with 1. Addition modulo 4 does not. This is finite algebraic structure preservation, not autonomous operation discovery or AGI.
