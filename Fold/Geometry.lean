@@ -194,8 +194,8 @@ theorem swapCoordinates_invol (p : Int × Int) :
 
 /-- Horizontal reflection conjugates to vertical reflection under coordinate exchange. -/
 theorem swap_horizontal_to_vertical (c : Int) (p : Int × Int) :
-    verticalReflectionAt c (swapCoordinates p) =
-      swapCoordinates (horizontalReflectionAt c p) := by
+    (verticalReflectionAt c).f (swapCoordinates p) =
+      swapCoordinates ((horizontalReflectionAt c).f p) := by
   rfl
 
 /-- Coordinate exchange also conjugates the corresponding crease projections. -/
