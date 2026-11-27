@@ -154,6 +154,8 @@ theorem foldTransportFamilyTarget_involutive
 end Fold
 
 
+namespace Fold
+
 /-- Pull a target predicate on Y back to X along a coordinate map e.
     This is the target-side operation paired with mapping states by e. -/
 def coordinateTransportTarget {X Y : Type}
@@ -195,3 +197,5 @@ theorem firstArrival_bijective_coordinate_change
         (fun p t => coordinateTransportTarget e hit (path p t))
         process time := by
   exact firstArrival_coordinate_transport e path hit process time
+
+end Fold
