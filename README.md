@@ -18,6 +18,8 @@ The full statement is in `the-fold-problems.md`, and the engineering instance is
 
 **Prime spiral as memory:** `the-fold-prime-afterimage.md` separates prime labels, spiral positions, ordered memory paths, and afterimage observations. It distinguishes orbit-level traces from representative-sensitive histories and states the exact information needed for reconstruction.
 
+**Stable prime recurrence:** research/the-fold-prime-recurrence-stability.md defines persistence as consecutive later-index matches, distinguishes first return from stable arrival, and keeps a separate fading event memory. The implementation is tools/prime_recurrence_stability.py; this is a finite-sample criterion, not an infinite prime law.
+
 **Prime recurrence chronology:** research/the-fold-prime-recurrence-chronology.md defines per-anchor first returns, simultaneous arrival buckets, and an index-clock fading memory. The executable implementation is tools/prime_recurrence_chronology.py; recurrence remains conditional on the selected spiral and thresholds.
 
 **Synchronized arrival:** `the-fold-synchronization.md` formalizes a shared destination and arrival time for trajectories with distinct discrete rates. It is a model-specific result, not a universal synchronization law.\n\n**Start at the origin:** `the-fold-origin.md` — derives the datum, displacement, scale family, collapse, involution, crease, orbit quotient, optional observer cut, and direction state in dependency order. Then use `the-fold-key.md` as the master key. Give it a value of `k`; it returns the stage,
