@@ -208,3 +208,20 @@ The Lean theorem `chart_reconstructState` proves that either choice maps back to
 For trajectories, the selector may vary with process and time. If it selects the actual representative at every tick, `firstArrival_reconstruction_exact` proves that every state-level first-arrival statement is recovered exactly.
 
 **Information boundary:** the quotient class alone determines chart-level events, but not which representative-specific state occurred. A representative section plus one bit per observation is sufficient for this two-element orbit model. This is a conditional reconstruction theorem, not a claim that every quotient in mathematics needs one bit; fixed points and larger group orbits have different selector requirements.
+
+
+### When is the reconstruction bit necessary?
+
+The two selector values are not always two different states. The formal criterion is exact:
+
+\[
+\operatorname{reconstruct}(q,\mathrm{false})
+=
+\operatorname{reconstruct}(q,\mathrm{true})
+\quad\Longleftrightarrow\quad
+F(s(q))=s(q).
+\]
+
+Thus the selector is redundant on the crease, where the representative and its folded partner coincide. Away from the fixed set, the choices are distinct, and reconstructState_selector_unique_off_crease proves that a reconstructed state determines its Boolean selector uniquely. This refines the earlier existence theorem: one bit is sufficient everywhere, but it carries distinguishing information only off the crease.
+
+The result is specific to a two-element involution orbit. It does not establish a universal one-bit bound for arbitrary quotient spaces or group actions.
