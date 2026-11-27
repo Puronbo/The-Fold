@@ -24,6 +24,7 @@ class RetentionPlan:
     final_features: tuple[str, ...]
     separated_pairs: tuple[tuple[str, str], ...]
     impossible_pairs: tuple[tuple[str, str], ...]
+    lower_bound_pairs: tuple[tuple[str, str], ...] = ()
 
 
 def minimum_retention_features(
@@ -83,6 +84,18 @@ def minimum_retention_features(
     best: tuple[int, ...] | None = None
     visited: set[tuple[int, int]] = set()
 
+    # Checkable packing lower bound: no safe feature covers two packed pairs.
+    coverers = tuple(
+        frozenset(i for i in useful if coverage[i] & (1 << j))
+        for j in range(len(required))
+    )
+    packing: list[int] = []
+    used_coverers: set[int] = set()
+    for j in sorted(range(len(required)), key=lambda k: (len(coverers[k]), k)):
+        if coverers[j] and not (used_coverers & coverers[j]):
+            packing.append(j)
+            used_coverers.update(coverers[j])
+
     def search(chosen_mask: int, covered: int) -> None:
         nonlocal best
         chosen_count = chosen_mask.bit_count()
@@ -137,7 +150,7 @@ def minimum_retention_features(
         final = context.relevant_features + selected
         return RetentionPlan(
             context.name, context.relevant_features, selected, final,
-            separated, (),
+            separated, (), tuple(required[j] for j in packing),
         )
 
     return None
@@ -166,6 +179,69 @@ def verify_retention_plan(
     return True
 
 
+
+def verify_optimality_certificate(
+    instances: Sequence[Instance],
+    context: Context,
+    candidate_features: Sequence[str],
+    must_link_pairs: Sequence[tuple[str, str]],
+    cannot_link_pairs: Sequence[tuple[str, str]],
+    plan: RetentionPlan,
+) -> bool:
+    """Verify a packing lower bound; equality with plan size proves optimality."""
+    by_id = {item.identifier: item for item in instances}
+    if len(by_id) != len(instances):
+        return False
+    try:
+        safe = tuple(
+            feature for feature in candidate_features
+            if all(by_id[a].get(feature) == by_id[b].get(feature)
+                   for a, b in must_link_pairs)
+        )
+        required = {
+            (a, b) for a, b in cannot_link_pairs
+            if equivalent(by_id[a], by_id[b], context)
+        }
+        certificate = plan.lower_bound_pairs
+        if len(set(certificate)) != len(certificate):
+            return False
+        if any(pair not in required for pair in certificate):
+            return False
+        coverers = [
+            {feature for feature in safe
+             if by_id[a].get(feature) != by_id[b].get(feature)}
+            for a, b in certificate
+        ]
+        if any(not group for group in coverers):
+            return False
+        return all(
+            not (left & right)
+            for i, left in enumerate(coverers)
+            for right in coverers[i + 1:]
+        )
+    except (KeyError, ValueError):
+        return False
+
+
+def retention_plan_proves_optimality(
+    instances: Sequence[Instance],
+    context: Context,
+    candidate_features: Sequence[str],
+    must_link_pairs: Sequence[tuple[str, str]],
+    cannot_link_pairs: Sequence[tuple[str, str]],
+    plan: RetentionPlan,
+) -> bool:
+    """A feasible plan plus matching packing bound certifies global minimum."""
+    return (
+        verify_retention_plan(instances, plan, must_link_pairs, cannot_link_pairs)
+        and verify_optimality_certificate(
+            instances, context, candidate_features,
+            must_link_pairs, cannot_link_pairs, plan,
+        )
+        and len(plan.lower_bound_pairs) == len(plan.retained_features)
+    )
+
+
 def _self_test() -> None:
     items = (
         Instance.make("a", {"shape": "round", "colour": "red",
@@ -188,6 +264,10 @@ def _self_test() -> None:
     assert plan is not None
     assert plan.retained_features == ("colour", "material")
     assert verify_retention_plan(items, plan, must, cannot)
+    assert retention_plan_proves_optimality(
+        items, base, ("colour", "material", "weight"), must, cannot, plan
+    )
+    assert len(plan.lower_bound_pairs) == 2
 
     # One feature is insufficient: colour splits a/b but not a/d; material
     # splits a/d but not a/b. The minimum safe set therefore has size two.
@@ -211,7 +291,8 @@ def _self_test() -> None:
     print("PASS  cannot-link collisions are separated")
     print("PASS  unsafe residual feature is rejected")
     print("PASS  already-separated pairs need no extra memory")
-    print("5/5 checks passed")
+    print("PASS  packing certificate proves the two-feature optimum")
+    print("6/6 checks passed")
 
 
 if __name__ == "__main__":
