@@ -177,3 +177,8 @@ A new agi/relation_composition.py embeds Stage 13's proportional, inverse, and a
 Tests in agi/test_relation_composition.py cover affine-after-affine, proportional-after-affine, inverse poles and their pullbacks, exact fractions, constant maps, and rejection of refuted evidence. The CI workflow now runs this suite with the earlier concept tests.
 
 This is algebraic composition of a small declared family, not autonomous discovery of arbitrary programs, causal inference, or evidence of AGI. A composed formula is not empirically validated merely because its component relations fit their supplied observations.
+
+
+## Stage 15: independent validation of composed relations
+
+The new agi/relation_validation.py evaluates fixed composed paths on separate validation observations. It reports endpoint matches separately from intermediate-step matches, records domain failures as refutations, rejects malformed or duplicate validation rows, and never refits relation parameters. Empty validation sets are marked insufficient rather than passed. Tests cover held-out affine chains, hidden intermediate errors despite a matching endpoint, endpoint counterexamples, domain failures, and exact-input restrictions. This is finite held-out testing, not a universal proof or a guarantee of distributional generalization.
