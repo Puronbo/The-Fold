@@ -836,5 +836,6 @@ Poincaré–Hopf index are in `the-fold-signature.md`; the facet classification 
 `the-fold-facets.md`; the universal logarithm and the `1/2` distinction are in
 `the-fold-logarithm.md`; the engineering zone — similitude, crease kinematics, sampling, and the
 false friends — is in `the-fold-engineering.md`; the projection/section diagram and the P vs NP wall
-are in `the-fold-complexity.md`; the closure restriction and the crystallographic `m` are in
+are in `the-fold-complexity.md`; a precisely scoped restricted 3-colourability result is in
+`the-fold-pnp-restricted.md`; the closure restriction and the crystallographic `m` are in
 `the-fold-closure.md`; the lookup is `the-fold-key.md`.
