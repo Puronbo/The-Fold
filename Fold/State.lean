@@ -242,4 +242,49 @@ theorem different_speeds_require_different_distances
       rw [hTime]
       exact b.distance_eq
 
+/--
+A first arrival at natural-number time t means the target is reached at t
+and is not reached at any strictly earlier time.
+-/ 
+def FirstArrival {α : Type} (reaches : α → Nat → Prop)
+    (process : α) (t : Nat) : Prop :=
+  reaches process t ∧ ∀ earlier, earlier < t → ¬ reaches process earlier
+
+/--
+Once a process has a first-arrival time, every time at which it reaches
+the target is at least that time.
+-/
+theorem firstArrival_le_any_arrival
+    {α : Type} (reaches : α → Nat → Prop)
+    (process : α) (first later : Nat)
+    (hFirst : FirstArrival reaches process first)
+    (hLater : reaches process later) :
+    first ≤ later := by
+  by_contra hNotLe
+  have hEarlier : later < first := Nat.lt_of_not_ge hNotLe
+  exact (hFirst.2 later hEarlier) hLater
+
+/--
+A family is synchronized at its first-arrival boundary when every member
+reaches the target there and none reaches it earlier.
+-/
+def SynchronizedFirstArrival
+    {α : Type} (reaches : α → Nat → Prop)
+    (processes : List α) (t : Nat) : Prop :=
+  ∀ process, process ∈ processes → FirstArrival reaches process t
+
+/--
+Synchronization gives a common lower bound: no listed process can reach
+the target before the shared first-arrival time.
+-/
+theorem synchronized_first_arrival_is_common_lower_bound
+    {α : Type} (reaches : α → Nat → Prop)
+    (processes : List α) (first later : Nat)
+    (hSync : SynchronizedFirstArrival reaches processes first)
+    (process : α) (hMember : process ∈ processes)
+    (hLater : reaches process later) :
+    first ≤ later :=
+  firstArrival_le_any_arrival reaches process first later
+    (hSync process hMember) hLater
+
 end Fold
