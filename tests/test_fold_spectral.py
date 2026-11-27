@@ -211,7 +211,7 @@ class FoldSpectralTests(unittest.TestCase):
         )
         self.assertEqual(
             cyclotomic_factorization_with_multiplicity_mod(18, 3),
-            (((1, 1, 1), 6),),
+            (((1, 1), 6),)
         )
         for order in range(1, 31):
             for prime in (2, 3, 5, 7):
