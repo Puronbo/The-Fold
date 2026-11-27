@@ -214,3 +214,6 @@ import Fold.Complexity.Reduction
 #check Fold.firstArrival_preserved_by_fold
 #check Fold.fixedTarget_fold_invariant
 #check Fold.firstArrival_at_crease_preserved
+
+#check Fold.booleanFlip
+#check Fold.noninvariant_target_can_change_first_arrival
