@@ -11,6 +11,7 @@ on:
       - "tools/FoldMemory.py"
       - "tools/FoldMind.py"
       - "tools/FoldHypothesis.py"
+      - "tools/FoldExperiment.py"
       - ".github/workflows/fold-ai-prototypes.yml"
 
 jobs:
