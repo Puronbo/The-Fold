@@ -846,8 +846,11 @@ def verify_cyclotomic_matrix_spectral_profile(order: int, prime: int) -> bool:
     profile = cyclotomic_matrix_spectral_profile(order, prime)
     if not verify_cyclotomic_factorization_profile(order, prime):
         return False
+    # A companion matrix is cyclic: the eigenspace for any one
+    # eigenvalue has dimension at most one. For a listed root it is
+    # nonzero, hence its geometric multiplicity is exactly one.
     for _, algebraic, geometric in profile["eigenvalue_profile"]:
-        if algebraic < 1 or geometric < 1 or geometric > algebraic:
+        if algebraic < 1 or geometric != 1 or geometric > algebraic:
             return False
     return (
         profile["base_field_eigenvalue_count"]
