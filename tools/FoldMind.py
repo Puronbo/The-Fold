@@ -369,8 +369,8 @@ def _self_test() -> None:
         # Select the next supplied experiment that most separates hypotheses.
         h_sun = Hypothesis("h-sun", "weather-play", "weather", "sun",
                            "play", "yes", 2, ("t1", "t2"), (), None, "candidate")
-        h_rain = Hypothesis("h-rain", "weather-play", "weather", "rain",
-                            "play", "yes", 2, ("t3", "t4"), (), None, "candidate")
+        h_rain = Hypothesis("h-rain", "weather-play", "weather", "sun",
+                            "play", "no", 2, ("t3", "t4"), (), None, "candidate")
         experiment_pool = (
             ExperimentCandidate(HypothesisExample.make(
                 "candidate-sun", {"weather": "sun", "play": "yes"}), 1.0),
