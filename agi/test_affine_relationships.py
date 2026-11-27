@@ -29,7 +29,7 @@ class AffineRelationshipTests(unittest.TestCase):
     def test_noncommuting_maps_have_exact_commutator(self):
         result = analyze_affine_pair("f", Law(2, 3), "g", Law(5, 7))
         self.assertFalse(result.commute)
-        self.assertEqual(result.commutator_offset, F(-8))
+        self.assertEqual(result.commutator_offset, F(-5))
         self.assertTrue(result.composition_order_matters)
 
     def test_identical_fixed_point_set_detects_identity(self):
@@ -66,7 +66,7 @@ class AffineRelationshipTests(unittest.TestCase):
             "f", Law(F(1, 2), F(1, 3)),
             "g", Law(F(3, 2), F(-1, 4)),
         )
-        self.assertEqual(result.commutator_offset, F(7, 24))
+        self.assertEqual(result.commutator_offset, F(-1, 24))
 
 
 if __name__ == "__main__":
