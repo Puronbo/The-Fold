@@ -560,7 +560,7 @@ theorem first_threshold_crossing_speed_pos
   | zero =>
       have hReached := hCross.1
       simp at hReached
-      exact False.elim ((Nat.not_lt_of_ge hReached) hTarget)
+      exact False.elim ((Nat.not_lt_of_ge hReached) (by simpa using hTarget))
   | succ n => exact Nat.zero_lt_succ n
 
 /--
