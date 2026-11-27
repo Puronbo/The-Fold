@@ -122,3 +122,5 @@ import Fold.Doubling
 #check Fold.firstArrival_le_any_arrival
 #check Fold.SynchronizedFirstArrival
 #check Fold.synchronized_first_arrival_is_common_lower_bound
+#check Fold.firstArrival_unique
+#check Fold.synchronized_of_common_first_arrival
