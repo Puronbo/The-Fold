@@ -287,10 +287,15 @@ class FoldSpectralTests(unittest.TestCase):
 
         for order in range(1, 31):
             for prime in (2, 3, 5, 7):
+                profile = cyclotomic_matrix_spectral_profile(order, prime)
                 self.assertTrue(
                     verify_cyclotomic_matrix_spectral_profile(order, prime),
                     (order, prime),
                 )
+                self.assertTrue(all(
+                    geometric == 1
+                    for _, _, geometric in profile["eigenvalue_profile"]
+                ))
 
     def test_rejects_zero_vector_and_invalid_modulus(self):
         self.assertFalse(verify_quarter_turn_eigenpair(
