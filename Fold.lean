@@ -134,6 +134,7 @@ import Fold.Doubling
 #check Fold.first_threshold_crossing_iff_boundary
 #check Fold.first_threshold_crossing_interval
 #check Fold.synchronized_threshold_intervals
+#check Fold.synchronized_threshold_intervals_iff
 #check Fold.distinct_speeds_can_synchronize
 #check Fold.distinct_speeds_shared_first_tick
 #check Fold.synchronized_linear_cross_product
