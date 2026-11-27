@@ -417,3 +417,17 @@ python tools/FoldHypothesis.py
 The regression suite checks deterministic candidate generation, prediction, abstention, held-out support, counterexample detection, scoring, untested status, and retention of rejected hypotheses.
 
 This is a meaningful next step beyond grouping: the prototype can propose a small rule, expose a prediction, and preserve a counterexample that defeats it. It still does not autonomously choose meaningful features, discover causal structure, plan experiments, or establish AGI. Its next challenge is to generate more expressive hypotheses while preserving a strict separation between proposal, evidence, and verification.
+
+
+## 19. FoldMind hypothesis cycle
+
+FoldMind now exposes `test_hypotheses`, which connects the candidate-rule engine to the append-only memory ledger. The caller supplies explicit training and held-out observation identifiers. The method rejects duplicate identifiers, unknown identifiers, and any overlap between the two splits before writing an event.
+
+The cycle then:
+1. Builds candidate feature-equality rules from training observations only.
+2. Evaluates those rules against held-out observations.
+3. Counts supported, falsified, and untested candidates separately.
+4. Appends every evaluated candidate—including rejected hypotheses—with provenance and evidence identifiers to FoldMemory.
+5. Returns a report containing split membership, counts, and the resulting memory head.
+
+The train/test split is supplied by the caller; FoldMind does not yet choose statistically sound splits or establish that observations are independent. The current rule grammar remains intentionally narrow. This makes the integration auditable, but not a general scientific discovery system.
