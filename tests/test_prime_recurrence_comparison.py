@@ -20,6 +20,10 @@ class PrimeRecurrenceComparisonTests(unittest.TestCase):
         self.assertTrue(pair["geometric_recurrence"])
         self.assertFalse(pair["gap_recurrence"])
         self.assertTrue(pair["residue_recurrence"])
+        baseline = result["cyclic_shift_baseline"]
+        self.assertEqual(len(baseline["shifts"]), 3)
+        self.assertIn("gap", baseline["mean_geometric_pair_matches"])
+        self.assertIn("not an independent randomization test", baseline["warning"])
 
     def test_spectral_recurrence_is_matrix_relative(self):
         result = compare_spiral_arithmetic_recurrence(
