@@ -447,6 +447,49 @@ theorem synchronized_threshold_intervals
     by simpa [hTime₂, hTime] using hUpper₂⟩
 
 /--
+Two processes share a positive first-crossing tick if and only if there
+is one preceding tick whose progress is below each process's target and
+whose crossing tick reaches both targets. This is an exact certificate
+for synchronization, with no search over all earlier ticks.
+-/
+theorem synchronized_threshold_intervals_iff
+    (speed₁ target₁ speed₂ target₂ time : Nat)
+    (hPositiveTick : ∃ previous, time = previous + 1) :
+    (FirstThresholdCrossing speed₁ target₁ time ∧
+      FirstThresholdCrossing speed₂ target₂ time) ↔
+    ∃ previous, time = previous + 1 ∧
+      speed₁ * previous < target₁ ∧ target₁ ≤ speed₁ * time ∧
+      speed₂ * previous < target₂ ∧ target₂ ≤ speed₂ * time := by
+  constructor
+  · rintro ⟨h₁, h₂⟩
+    exact synchronized_threshold_intervals
+      speed₁ target₁ speed₂ target₂ time hPositiveTick h₁ h₂
+  · rintro ⟨previous, hTime, hLower₁, hUpper₁, hLower₂, hUpper₂⟩
+    constructor
+    · apply (first_threshold_crossing_iff_boundary
+        speed₁ target₁ time).2
+      constructor
+      · exact hUpper₁
+      · intro earlier hEarlier
+        have hEarlierPrev : earlier ≤ previous := by
+          rw [hTime] at hEarlier
+          exact Nat.lt_succ_iff.mp hEarlier
+        have hProgress : speed₁ * earlier ≤ speed₁ * previous :=
+          Nat.mul_le_mul_left speed₁ hEarlierPrev
+        exact Nat.lt_of_le_of_lt hProgress hLower₁
+    · apply (first_threshold_crossing_iff_boundary
+        speed₂ target₂ time).2
+      constructor
+      · exact hUpper₂
+      · intro earlier hEarlier
+        have hEarlierPrev : earlier ≤ previous := by
+          rw [hTime] at hEarlier
+          exact Nat.lt_succ_iff.mp hEarlier
+        have hProgress : speed₂ * earlier ≤ speed₂ * previous :=
+          Nat.mul_le_mul_left speed₂ hEarlierPrev
+        exact Nat.lt_of_le_of_lt hProgress hLower₂
+
+/--
 Concrete synchronized first crossing: rates 2 and 3 both first reach
 target 4 at tick 2, despite moving at different speeds.
 -/
