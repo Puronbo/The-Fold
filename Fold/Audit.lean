@@ -57,3 +57,5 @@ import Fold
 #print axioms Fold.comp_injective_of_injective
 #print axioms Fold.restoreValue_collapse
 #print axioms Fold.collapseWithValue_injective
+#print axioms Fold.retainPair_injective_iff
+#print axioms Fold.retainPair_injective_of_separates_collisions
