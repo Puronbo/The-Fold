@@ -128,4 +128,56 @@ theorem horizontalProjectionAt_idempotent (c : Int) (p : Int × Int) :
       horizontalProjectionAt c p := by
   rfl
 
+
+/-- Reflection across the translated vertical line x = c. -/
+def verticalReflectionAt (c : Int) : Fold (Int × Int) where
+  f := fun p => (2 * c - p.1, p.2)
+  invol := by
+    intro p
+    rcases p with ⟨x, y⟩
+    simp
+    omega
+
+/-- The crease of vertical reflection is exactly x = c. -/
+theorem verticalReflectionAt_fix_iff (c : Int) (p : Int × Int) :
+    Fix (verticalReflectionAt c) p ↔ p.1 = c := by
+  change (2 * c - p.1, p.2) = p ↔ p.1 = c
+  constructor
+  · intro h
+    have hs := congrArg Prod.fst h
+    omega
+  · intro h
+    rcases p with ⟨x, y⟩
+    simp at h
+    subst x
+    simp
+
+/-- Projection onto the translated vertical crease x = c. -/
+def verticalProjectionAt (c : Int) (p : Int × Int) : Int × Int :=
+  (c, p.2)
+
+theorem verticalProjectionAt_fix (c : Int) (p : Int × Int) :
+    Fix (verticalReflectionAt c) (verticalProjectionAt c p) := by
+  apply (verticalReflectionAt_fix_iff c _).2
+  rfl
+
+/-- Every translated vertical crease has its own observer cut. -/
+def verticalCutAt (c : Int) : Cut (verticalReflectionAt c) where
+  p := verticalProjectionAt c
+  image_fix := verticalProjectionAt_fix c
+  fix_eq := by
+    intro p hp
+    rcases p with ⟨x, y⟩
+    have hx : x = c := (verticalReflectionAt_fix_iff c (x, y)).mp hp
+    simp [verticalProjectionAt, hx]
+  orbit_eq := by
+    intro p
+    rcases p with ⟨x, y⟩
+    simp [verticalProjectionAt, verticalReflectionAt]
+
+theorem verticalProjectionAt_idempotent (c : Int) (p : Int × Int) :
+    verticalProjectionAt c (verticalProjectionAt c p) =
+      verticalProjectionAt c p := by
+  rfl
+
 end Fold
