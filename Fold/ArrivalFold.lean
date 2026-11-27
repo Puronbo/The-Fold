@@ -119,8 +119,6 @@ theorem fold_target_transport_round_trip
   foldTransportTarget_involutive F hit
 
 
-namespace Fold
-
 /-- Transport each process's own target backwards through its own
     involution. The family may use different folds and different targets. -/
 def foldTransportFamilyTarget {α X : Type}
@@ -154,7 +152,5 @@ theorem foldTransportFamilyTarget_involutive
   change hit process ((fold process).f ((fold process).f state)) ↔
     hit process state
   rw [(fold process).invol state]
-
-end Fold
 
 end Fold
