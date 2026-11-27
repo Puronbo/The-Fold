@@ -390,6 +390,22 @@ theorem first_threshold_crossing_boundary
     exact Nat.not_le.mp (h.2 earlier hEarlier)
 
 /--
+A first threshold crossing is exactly a boundary hit with every earlier
+tick strictly below the target. This characterization separates the
+current-tick condition from the no-earlier-arrival condition.
+-/
+theorem first_threshold_crossing_iff_boundary
+    (speed target time : Nat) :
+    FirstThresholdCrossing speed target time ↔
+      target ≤ speed * time ∧
+        ∀ earlier, earlier < time → speed * earlier < target := by
+  constructor
+  · exact first_threshold_crossing_boundary speed target time
+  · rintro ⟨hNow, hBefore⟩
+    exact ⟨hNow, fun earlier hEarlier =>
+      Nat.not_le_of_gt (hBefore earlier hEarlier)⟩
+
+/--
 At a positive first-crossing tick, the target lies in the one-tick
 progress interval: progress at the preceding tick is below the target,
 while progress at the crossing tick reaches or exceeds it.
@@ -437,7 +453,23 @@ target 4 at tick 2, despite moving at different speeds.
 theorem distinct_speeds_can_synchronize :
     FirstThresholdCrossing 2 4 2 ∧
       FirstThresholdCrossing 3 4 2 := by
-  decide [FirstThresholdCrossing, FirstArrival, ThresholdReached]
+  constructor
+  · apply (first_threshold_crossing_iff_boundary 2 4 2).2
+    constructor
+    · decide
+    · intro earlier hEarlier
+      have hPrevious : earlier ≤ 1 := Nat.lt_succ_iff.mp hEarlier
+      have hProgress : 2 * earlier ≤ 2 := by
+        simpa using Nat.mul_le_mul_left 2 hPrevious
+      exact Nat.lt_of_le_of_lt hProgress (by decide)
+  · apply (first_threshold_crossing_iff_boundary 3 4 2).2
+    constructor
+    · decide
+    · intro earlier hEarlier
+      have hPrevious : earlier ≤ 1 := Nat.lt_succ_iff.mp hEarlier
+      have hProgress : 3 * earlier ≤ 3 := by
+        simpa using Nat.mul_le_mul_left 3 hPrevious
+      exact Nat.lt_of_le_of_lt hProgress (by decide)
 
 /--
 For this example the first crossing is simultaneous, not merely an
