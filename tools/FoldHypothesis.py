@@ -180,7 +180,7 @@ def _self_test() -> None:
         checks.append(("audit retains rejected candidates",
                        retain_audit(memory, results, "FoldHypothesis") == 1
                        and memory.recall(task="outdoor-play")[0].tags
-                       == ("fold-hypothesis", "falsified")))
+                       == ("falsified", "fold-hypothesis")))
         checks.append(("audit chain verifies", memory.verify()))
     for name, passed in checks:
         print(f"{'PASS' if passed else 'FAIL'}  {name}")
