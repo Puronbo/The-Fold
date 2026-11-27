@@ -1040,3 +1040,6 @@ G-EP140: distinguishes valid invertible coefficient-space shears that change onl
 
 
 **AGI concept-learning prototype (Stages 9–17):** Stage 17 adds a three-way discovery/validation/test protocol. Candidate provenance is tied to discovery keys, model selection uses validation only, and the untouched test set evaluates only the frozen winner. See `agi/three_way_evaluation.py` and `agi/stage-17-three-way-evaluation.md`. This improves evaluation discipline but does not prove generalization or AGI.
+
+
+**AGI concept-learning prototype (Stages 9–18):** Stage 18 adds exact finite active experiment design: given fixed candidate relation paths and a caller-supplied input domain, it selects an input with high pairwise prediction disagreement while reporting domain coverage. This proposes mathematical queries only; it does not execute physical experiments or establish AGI. See `agi/active_experiment.py` and `agi/stage-18-active-experiment-design.md`.
