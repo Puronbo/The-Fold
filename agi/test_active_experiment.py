@@ -16,12 +16,12 @@ class ActiveExperimentTests(unittest.TestCase):
         candidates = (
             RelationCandidate("identity", (affine(1, 0),)),
             RelationCandidate("double", (affine(2, 0),)),
-            RelationCandidate("offset", (affine(1, 3),)),
+            RelationCandidate("triple", (affine(3, 0),)),
         )
         result = design_discriminating_experiment(candidates, (0, 1, 3))
         self.assertEqual(result.status, "input_selected")
         self.assertEqual(result.selected_input, Fraction(3))
-        self.assertEqual(result.selected_option.pairwise_disagreement, Fraction(6))
+        self.assertEqual(result.selected_option.pairwise_disagreement, Fraction(12))
 
     def test_domain_failure_reduces_coverage(self):
         inverse = ComposedRelation((0, 1, 1, 0), (Fraction(0),))
