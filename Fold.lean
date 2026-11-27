@@ -220,3 +220,8 @@ import Fold.Complexity.Reduction
 
 #check Fold.overshootRate_firstArrival
 #check Fold.overshoot_and_return_first_arrival
+
+#check Fold.foldTransportTarget
+#check Fold.foldTransportTarget_involutive
+#check Fold.firstArrival_fold_target_transport
+#check Fold.fold_target_transport_round_trip
