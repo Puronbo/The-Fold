@@ -221,4 +221,42 @@ theorem synchronizedGapArrival_unique
   firstArrival_unique (fun p t => gap p t = 0) process a b
     (ha process hmem) (hb process hmem)
 
+
+/-- Two example nonlinear gap profiles with a common arrival boundary.
+    The Boolean index selects a quadratic profile or a quadratic profile
+    with a different coefficient. -/
+def nonlinearExampleGap (profile : Bool) (arrival t : Nat) : Nat :=
+  let remaining := arrival - t
+  if profile then remaining * remaining else remaining * (remaining + 1)
+
+/-- Both nonlinear profiles vanish at their shared designated time. -/
+theorem nonlinearExampleGap_zero (profile : Bool) (arrival : Nat) :
+    nonlinearExampleGap profile arrival arrival = 0 := by
+  simp [nonlinearExampleGap]
+
+/-- Both nonlinear profiles remain strictly positive before arrival. -/
+theorem nonlinearExampleGap_positive (profile : Bool) (arrival t : Nat)
+    (ht : t < arrival) :
+    0 < nonlinearExampleGap profile arrival t := by
+  have hr : 0 < arrival - t := Nat.sub_pos_of_lt ht
+  cases profile <;> simp [nonlinearExampleGap]
+  · exact Nat.mul_pos hr hr
+  · exact Nat.mul_pos hr (Nat.succ_pos _)
+
+/-- These distinct nonlinear profiles have the same unique first-arrival
+    time, without being constant-rate paths. -/
+theorem nonlinear_examples_synchronize (arrival : Nat) :
+    SynchronizedGapArrival nonlinearExampleGap [true, false] arrival := by
+  intro profile hmem
+  apply firstArrival_of_positive_gap
+  · exact nonlinearExampleGap_zero profile arrival
+  · intro earlier hearlier
+    exact nonlinearExampleGap_positive profile arrival earlier hearlier
+
+/-- One tick before arrival, the two profiles already have different gaps. -/
+theorem nonlinear_profiles_differ_one_tick (arrival : Nat) :
+    nonlinearExampleGap true (arrival + 1) arrival ≠
+      nonlinearExampleGap false (arrival + 1) arrival := by
+  simp [nonlinearExampleGap]
+
 end Fold
