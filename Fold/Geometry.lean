@@ -355,7 +355,7 @@ theorem obliqueReflectionA_fix_iff (a : Int) (p : Int × Int) :
     exact (twice_sub_eq_iff (a * u) v).mp hs
   · intro h
     rw [h]
-    omega
+    simp [two_mul]
 
 /-- Algebraic retraction onto v = a*u. -/
 def obliqueProjectionA (a : Int) (p : Int × Int) : Int × Int :=
@@ -402,7 +402,7 @@ theorem translatedObliqueReflection_fix_iff (a b : Int) (p : Int × Int) :
     exact (twice_sub_eq_iff (a * u + b) v).mp hs
   · intro h
     rw [h]
-    omega
+    simp [two_mul]
 
 def translatedObliqueProjection (a b : Int) (p : Int × Int) : Int × Int :=
   (p.1, a * p.1 + b)
