@@ -60,3 +60,16 @@ For a family (P), simultaneous first arrival at (T) follows if these two conditi
 
 This is a general criterion for discrete trajectories, not a prediction that arbitrary trajectories will satisfy it. The trajectories may have unrelated rates, acceleration patterns, pauses, or nonlinear changes; the theorem only applies when each gap is positive before the common time and zero at that time.
 
+
+
+### Explicit nonlinear example
+
+For remaining time (r=T-t), consider two gap profiles:
+
+\[
+g_1(t)=r^2,\qquad g_2(t)=r(r+1).
+\]
+
+They are different before arrival (one tick before, their gaps are (1) and (2)), but both are zero at (T) and positive at every earlier tick. Thus both have the same unique first-arrival time despite having different, nonlinear gap profiles.
+
+This is an existence example inside the discrete model. It demonstrates that constant-rate motion is not necessary for synchronization; the necessary condition used by the theorem is positivity of each gap before the shared boundary and zero gap at that boundary.
