@@ -187,3 +187,8 @@ The new agi/relation_validation.py evaluates fixed composed paths on separate va
 ## Stage 16: evidence-based comparison of competing relational models
 
 The new agi/relation_selection.py compares caller-supplied composed paths on the same held-out observations. It reports endpoint and intermediate errors separately, counts domain failures, and applies a transparent structural-complexity proxy only after empirical mismatch counts. Exact projectively equivalent composed maps with identical excluded-input sets are grouped without deleting alternative derivations. Empty validation data produces no winner. The ranking is deterministic, not probabilistic, and remains limited to the declared scalar fractional-linear family; caller-managed separation of validation data remains essential.
+
+
+## Stage 17: controlled discovery, selection, and final testing
+
+`agi/three_way_evaluation.py` adds a disjoint three-part protocol. Candidates are declared as originating from discovery rows, compared on validation rows, and only the selected candidate is evaluated on the untouched test partition. Overlapping partition keys, invalid provenance, duplicate candidate IDs, and missing partitions are handled explicitly. Provenance declarations improve auditability but cannot prove that external candidate construction did not leak held-out information. This is a finite-sample evaluation protocol, not a guarantee of generalization.
