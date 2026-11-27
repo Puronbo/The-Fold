@@ -12,6 +12,7 @@ on:
       - "tools/FoldMind.py"
       - "tools/FoldHypothesis.py"
       - "tools/FoldExperiment.py"
+      - "tools/FoldEnvironment.py"
       - ".github/workflows/fold-ai-prototypes.yml"
 
 jobs:
@@ -34,3 +35,5 @@ jobs:
         run: python tools/FoldHypothesis.py
       - name: Test disagreement-based experiment selection
         run: python tools/FoldExperiment.py
+      - name: Test approval-gated environment interaction
+        run: python tools/FoldEnvironment.py
