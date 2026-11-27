@@ -138,4 +138,26 @@ theorem synchronizedBoundary_unique
     a = b :=
   firstArrival_unique reaches process a b (ha process hmem) (hb process hmem)
 
+
+/-- Remaining displacement is proportional to speed with one shared
+    time-to-arrival factor. This cross-multiplied form avoids division,
+    so it remains valid over natural numbers. -/
+theorem remainingDisplacement_cross_scale
+    (a b arrival t : Nat) :
+    remainingDisplacement a arrival t * b =
+      remainingDisplacement b arrival t * a := by
+  simp [remainingDisplacement]
+  ac_rfl
+
+/-- The shared factor in every path's remaining displacement. -/
+def timeToArrival (arrival t : Nat) : Nat := arrival - t
+
+/-- The remaining displacement factors into its individual rate and
+    the family-wide time-to-arrival factor. -/
+theorem remainingDisplacement_factors
+    (speed arrival t : Nat) :
+    remainingDisplacement speed arrival t =
+      speed * timeToArrival arrival t := by
+  rfl
+
 end Fold
