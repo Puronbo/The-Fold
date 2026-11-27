@@ -442,3 +442,24 @@ The selection heuristic is binary disagreement entropy divided by the candidate'
 FoldMind exposes this through `select_experiment` and records the selected candidate, the pool, and the method in FoldMemory. If no supplied candidate separates the hypotheses, the method records that no discriminating candidate was found rather than fabricating a choice.
 
 This is not Bayesian information gain: there are no calibrated hypothesis probabilities, likelihood models, or posterior updates. The component also does not invent candidate experiments or execute real-world actions. It is a transparent active-testing policy over an explicit candidate pool.
+
+
+## 21. FoldEnvironment: approval-gated action and observation
+
+`tools/FoldEnvironment.py` introduces a deliberately bounded simulated environment. It has a one-dimensional position, an orientation, and a monotonically increasing revision. Its only allowlisted actions are:
+- `step`: move one unit in the current direction, unless a world boundary blocks the move;
+- `turn`: reverse direction without changing position.
+
+An action proposal is data-only and includes a stable identifier, action kind, expected state revision, and declared cost. The environment rejects unknown actions, stale revisions, invalid budgets, and corrupted memory. Even a valid proposal is not executed unless the caller explicitly supplies approval and the budget covers its cost.
+
+The audit sequence distinguishes proposal, denial, execution, and observed result. The simulator compares the observed state with the deterministic predicted state and records whether that check passed. Denied actions leave the world unchanged. Boundary-blocked actions are recorded as attempted executions with a blocked outcome.
+
+Run:
+
+```sh
+python tools/FoldEnvironment.py
+```
+
+The regression suite covers approval gating, budget enforcement, forward movement, turning, reverse movement, boundary handling, stale-state rejection, allowlist enforcement, audit retention, and memory-chain integrity.
+
+This closes a small engineering loop from proposal to permitted action to observation. It does not connect to physical devices, external services, or a real-world actuator. Approval is a caller-supplied gate in this simulator, not an authentication or authorization system. The current observation is read from the same deterministic simulator, so it demonstrates the interface and audit discipline—not independent sensing or proof that an external action occurred. A future real adapter must have its own permission model, independent observation channel, failure handling, and human approval policy.
