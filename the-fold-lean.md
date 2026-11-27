@@ -417,4 +417,4 @@ consciousness.**
 
 ### Zero residual and P versus NP
 
-The abstract module `Fold/Complexity/ZeroResidual.lean` proves that, assuming P is contained in NP, equality is equivalent to an empty NP-over-P residual, while inequality is equivalent to a nonempty residual. Its collapse indicator is 0 for equality and 1 for separation. It does not decide which case holds or prove a lower bound. See `the-fold-np-zero.md`.
+The abstract module `Fold/Complexity/ZeroResidual.lean` proves that, assuming P is contained in NP, equality is equivalent to an empty NP-over-P residual, while inequality is equivalent to a nonempty residual. `Fold/Complexity/Completeness.lean` proves that if an NP-complete target is in P, then P = NP, assuming P is closed under the chosen reductions. Neither module proves a lower bound or decides the open problem. See `the-fold-np-zero.md`.
