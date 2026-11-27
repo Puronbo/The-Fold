@@ -472,3 +472,25 @@ When \(\phi(\theta)\ne\theta\), this transition realizes differential rest. The 
 
 
 A further distinction is between the *current* kinematic state and a *prediction* for its next motion. If a prediction law depends on the condition, define \(v_{\mathrm{next}}=L(\theta)\). A condition update can leave current \(x\) and \(v=0\) unchanged while changing the prediction, provided \(L(\phi(\theta))\ne L(\theta)\). The Lean theorem `differentialRest_changes_prediction` proves exactly this conditional statement. The condition change alone does not force a different future motion; the prediction law must actually distinguish the two conditions.
+
+
+## 14. Differential-rate rest
+
+The next layer allows the rate of internal change itself to differ while kinematic rest persists. Augment the state to
+
+\[
+S_t=(x_t,v_t,\theta_t,\rho_t),
+\]
+
+where \(\rho_t\) is the discrete rate assigned to the internal condition. A model step is
+
+\[
+\theta_{t+1}=\theta_t+\rho_t,\qquad
+\rho_{t+1}=G(\rho_t),
+\]
+
+while \(x_{t+1}=x_t\) and \(v_t=v_{t+1}=0\). If \(G(\rho_t)\ne\rho_t\), the condition rate changes even though position and velocity remain at rest. This is **differential-rate rest**.
+
+`Fold/Rest.lean` adds `RateRestState`, `DifferentialRateRest`, and `conditionRateStep`, with proofs that position and zero velocity persist and that a changed rate makes the augmented states distinct. This is a discrete model definition; it does not imply that physical time or every resting system behaves this way.
+
+The hierarchy is now: fixed-state rest; differential rest (condition changes); differential-rate rest (the condition's rate changes). Each layer adds a coordinate and therefore makes explicit which kind of change is being discussed.
