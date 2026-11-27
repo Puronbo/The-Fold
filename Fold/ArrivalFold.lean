@@ -71,9 +71,9 @@ def constantTrueTrajectory (_process : Unit) (_time : Nat) : Bool := true
 /-- Without target invariance, folding can destroy a first hit immediately.
     The original path hits true at tick zero; its folded image does not. -/
 theorem noninvariant_target_can_change_first_arrival :
-    FirstArrival
+    _root_.Fold.FirstArrival
         (fun _ t => constantTrueTrajectory () t = true) () 0 ∧
-      ¬ FirstArrival
+      ¬ _root_.Fold.FirstArrival
         (fun _ t => booleanFlip.f (constantTrueTrajectory () t) = true) () 0 := by
   simp [FirstArrival, constantTrueTrajectory, booleanFlip]
 
