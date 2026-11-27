@@ -467,6 +467,10 @@ def _self_test() -> None:
                        )))
         checks.append(("retention plan is appended to auditable memory",
                        any(e.event_type == "retention-plan" for e in retention_events)))
+        checks.append(("FoldMind records a verifiable optimality certificate",
+                       any(e.event_type == "retention-plan"
+                           and json.loads(e.content).get("optimality_certified") is True
+                           for e in retention_events)))
 
         # Select the next supplied experiment that most separates hypotheses.
         h_sun = Hypothesis("h-sun", "weather-play", "weather", "sun",
