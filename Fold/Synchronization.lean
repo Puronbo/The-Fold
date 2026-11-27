@@ -58,4 +58,41 @@ theorem remainingDisplacement_zero_at_arrival
     remainingDisplacement speed arrival arrival = 0 := by
   simp [remainingDisplacement]
 
+
+/-- A process first reaches its target at t if it reaches it then and
+    never at any earlier natural-number time. -/
+def FirstArrival {α : Type} (reaches : α → Nat → Prop)
+    (process : α) (t : Nat) : Prop :=
+  reaches process t ∧ ∀ earlier, earlier < t → ¬ reaches process earlier
+
+/-- Remaining distance is the target-reach predicate for this model. -/
+def reachesDestination (speed arrival t : Nat) : Prop :=
+  remainingDisplacement speed arrival t = 0
+
+/-- Every positive-speed path has its designated arrival as its first
+    destination-reaching time. -/
+theorem positiveSpeed_firstArrival (speed arrival : Nat)
+    (hspeed : 0 < speed) :
+    FirstArrival (fun v t => reachesDestination v arrival t) speed arrival := by
+  constructor
+  · simp [reachesDestination, remainingDisplacement]
+  · intro earlier hearlier hzero
+    have hpositive :=
+      remainingDisplacement_pos_before_arrival speed arrival earlier hspeed hearlier
+    unfold reachesDestination at hzero
+    omega
+
+/-- A list of positive-speed paths is synchronized at their common first
+    arrival time. -/
+def SynchronizedFirstArrival (arrival : Nat) (speeds : List Nat) : Prop :=
+  ∀ speed, speed ∈ speeds →
+    FirstArrival (fun v t => reachesDestination v arrival t) speed arrival
+
+theorem positive_speeds_synchronized_first_arrival
+    (arrival : Nat) (speeds : List Nat)
+    (hpositive : ∀ speed, speed ∈ speeds → 0 < speed) :
+    SynchronizedFirstArrival arrival speeds := by
+  intro speed hmem
+  exact positiveSpeed_firstArrival speed arrival (hpositive speed hmem)
+
 end Fold
