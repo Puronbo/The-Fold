@@ -96,7 +96,7 @@ theorem horizontalReflectionAt_fix_iff (c : Int) (p : Int × Int) :
     rcases p with ⟨x, y⟩
     simp at h
     subst y
-    simp
+    omega
 
 /-- Projection onto the translated crease y = c. -/
 def horizontalProjectionAt (c : Int) (p : Int × Int) : Int × Int :=
@@ -150,7 +150,7 @@ theorem verticalReflectionAt_fix_iff (c : Int) (p : Int × Int) :
     rcases p with ⟨x, y⟩
     simp at h
     subst x
-    simp
+    omega
 
 /-- Projection onto the translated vertical crease x = c. -/
 def verticalProjectionAt (c : Int) (p : Int × Int) : Int × Int :=
