@@ -460,4 +460,33 @@ theorem signed_firstArrival_translation_invariant
   intro t
   constructor <;> intro h <;> omega
 
+
+/-- A strictly increasing re-indexing of discrete time preserves first
+    arrival at the corresponding sampled time.  Earlier samples remain
+    earlier, so no new pre-arrival hit can appear. -/
+theorem firstArrival_strict_time_reindex
+    {α : Type} (reaches : α → Nat → Prop)
+    (process : α) (clock : Nat → Nat)
+    (hclock : StrictMono clock) (time : Nat) :
+    FirstArrival reaches process (clock time) →
+      FirstArrival (fun p t => reaches p (clock t)) process time := by
+  intro h
+  constructor
+  · exact h.1
+  · intro earlier hearlier hhit
+    exact h.2 (clock earlier) (hclock hearlier) hhit
+
+/-- For a positive integer clock multiplier, scaling discrete time
+    preserves the first-arrival index after translating the target index
+    to the corresponding clock sample. -/
+theorem firstArrival_nat_mul_time_reindex
+    {α : Type} (reaches : α → Nat → Prop)
+    (process : α) (factor time : Nat) (hfactor : 0 < factor) :
+    FirstArrival reaches process (factor * time) →
+      FirstArrival (fun p t => reaches p (factor * t)) process time := by
+  apply firstArrival_strict_time_reindex reaches process
+    (fun t => factor * t) _ time
+  · intro a b hab
+    exact Nat.mul_lt_mul_of_pos_left hab hfactor
+
 end Fold
