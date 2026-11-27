@@ -195,3 +195,8 @@ The new agi/relation_selection.py compares caller-supplied composed paths on the
 
 
 **AGI concept-learning prototype (Stage 18):** Stage 18 adds finite active experiment design for competing composed relations. It ranks caller-supplied exact rational inputs by pairwise prediction separation, reports candidate coverage, and treats undefined predictions as missing coverage rather than agreement. The score is a scale-dependent heuristic; no real-world experiment is executed or presumed safe. See `agi/active_experiment.py` and `agi/stage-18-active-experiment-design.md`. This is a narrow active-learning component, not autonomous science or AGI.
+
+
+## Stage 19: append-only evidence feedback and hypothesis revision
+
+`agi/evidence_revision.py` adds an immutable evidence ledger. Each newly observed exact input/output pair is checked against every supplied candidate; matches are retained, mismatches and domain failures are recorded as refutations, and earlier predictions remain unchanged. The accumulated observations are then passed to the existing exact relational proposer. Newly supported proportional, inverse, or affine hypotheses are returned as unselected candidates, not installed automatically. This is a narrow scalar feedback loop; it does not infer noise, causality, arbitrary programs, or AGI.
