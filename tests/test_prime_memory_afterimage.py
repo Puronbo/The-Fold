@@ -21,6 +21,15 @@ class PrimeMemoryAfterimageTests(unittest.TestCase):
         )
         self.assertFalse(result["spectral_matrix_dependent"])
 
+    def test_gaps_are_between_supplied_entries_not_assumed_consecutive_primes(self):
+        result = prime_sensitive_memory_path([3, 7, 11], [3])
+        self.assertEqual(
+            [r["gap_from_previous"] for r in result["path"]],
+            [None, 4, 4],
+        )
+        # A prime dividing the selected modulus has residue zero.
+        self.assertEqual(result["path"][0]["residues"]["3"], 0)
+
     def test_matrix_dependent_frobenius_channels(self):
         result = prime_sensitive_memory_path(
             [3, 5, 7], [2, 3], matrix=[[0, -1], [1, 0]],
