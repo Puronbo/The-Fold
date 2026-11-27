@@ -69,4 +69,6 @@ import Fold
 #print axioms Fold.synchronized_of_common_first_arrival
 #print axioms Fold.linear_arrivals_synchronize_iff
 #print axioms Fold.different_speeds_give_different_linear_distances
+#print axioms Fold.first_threshold_crossing_unique
+#print axioms Fold.first_threshold_crossing_boundary
 #print axioms Fold.synchronized_linear_cross_product
