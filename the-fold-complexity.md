@@ -219,3 +219,8 @@ one-way horizon and the side-blind crease are in `the-fold-horizon.md` and `the-
 alternating ledger and the unique one are in `the-fold-key.md`; the projection `π_H` is in
 `the-fold-occlusion.md`, and the orbit space and universal constructions are in
 `the-fold-categorical.md`.
+
+
+## The zero-residual notation
+
+The expression `NP = 0` is not meaningful with the standard type of NP, which is a class of languages. Define the residual `R = NP \\ P`. Then `P = NP` iff `R` is empty, and `P != NP` iff `R` is nonempty. The 0/1 collapse indicator is zero for equality and one for separation; it is not NP itself. The abstract equivalences are formalized in `Fold/Complexity/ZeroResidual.lean`. This is a logical characterization only, not a lower bound or a solution to the open problem. See `the-fold-np-zero.md`.
