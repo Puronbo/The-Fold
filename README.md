@@ -1052,3 +1052,6 @@ G-EP140: distinguishes valid invertible coefficient-space shears that change onl
 
 
 **Compositional abstraction (Stage 21):** The prototype now retains ordered affine concept paths, distinguishes structurally identical paths from paths with only the same endpoint function, and transfers each edge across a layer-specific coordinate change. Intermediate commuting identities are tested exactly. See `agi/compositional_abstraction.py` and `agi/stage-21-compositional-abstraction.md`.
+
+
+**Invariant discovery (Stage 22):** The prototype now extracts exact structural invariants of scalar affine self-transformations and verifies them under declared affine conjugacies. It distinguishes invariant properties from covariant coordinates such as the numerical location of a fixed point. See `agi/invariant_discovery.py` and `agi/stage-22-invariant-discovery.md`.
