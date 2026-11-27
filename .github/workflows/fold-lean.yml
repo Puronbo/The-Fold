@@ -23,3 +23,5 @@ jobs:
         with:
           build: true
           test: false
+      - name: Compile axiom audit
+        run: lake env lean Fold/Audit.lean
