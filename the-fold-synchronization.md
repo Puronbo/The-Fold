@@ -97,3 +97,21 @@ For a trajectory `p(t)`, this condition makes the hit predicates of `p(t)` and `
 The crease is a canonical invariant target: for an involution, (F(x)) is fixed exactly when (x) is fixed. The Lean module `Fold/ArrivalFold.lean` formalizes both the general target-invariance theorem and the crease-specific corollary.
 
 **Boundary of the result:** involutivity alone does not preserve a target that is not invariant under the fold. If the target changes under folding, compare against the transformed target (F^{-1}(H)) (which equals (F(H)) for an involution), rather than claiming the original target is unchanged.
+
+
+### Transporting a non-invariant target
+
+There is also an exact theorem when the target is **not** Fold-invariant. Instead of requiring the original path and folded path to hit the same target, transport the target backwards:
+
+\[
+H_F = \{x : F(x)\in H\}.
+\]
+
+Then the folded trajectory hits \(H\) at exactly the same times that the original trajectory hits \(H_F\). Because \(F(F(x))=x\), transporting the target twice recovers \(H\). Thus the correspondence is reversible.
+
+This separates two cases cleanly:
+
+- If \(F^{-1}(H)=H\), the target is invariant and first-arrival time is unchanged with the same target.
+- Otherwise, the first-arrival time is still preserved under the paired transformation of trajectory and target; comparing against the untransformed target would be incorrect.
+
+The Lean module `Fold/ArrivalFold.lean` formalizes target transport, its involutive round trip, and the first-arrival equivalence without assuming target invariance.
