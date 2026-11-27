@@ -42,7 +42,8 @@ theorem flipDirection_injective :
   | mk sv sr sd sh =>
     cases t with
     | mk tv tr td th =>
-      simp [flipDirection] at h ⊢
+      simp [flipDirection] at h
+      exact h
 
 /-- Collapse is not injective: different values can have the same image. -/
 theorem collapse_not_injective :
