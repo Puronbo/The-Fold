@@ -36,6 +36,7 @@ import Fold.Complexity.Reduction
 #check Fold.Cut.fix_iff
 #check Fold.Cut.lift_chart
 #check Fold.Cut.lift_fix
+#check Fold.noCut_of_noFix
 
 #check Fold.datum_fixed
 #check Fold.scale_fix_iff
