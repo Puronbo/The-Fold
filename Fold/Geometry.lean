@@ -277,11 +277,13 @@ theorem shearCoordinates_left (p : Int × Int) :
     shearCoordinatesInv (shearCoordinates p) = p := by
   rcases p with ⟨x, y⟩
   simp [shearCoordinates, shearCoordinatesInv]
+  omega
 
 theorem shearCoordinates_right (p : Int × Int) :
     shearCoordinates (shearCoordinatesInv p) = p := by
   rcases p with ⟨x, y⟩
   simp [shearCoordinates, shearCoordinatesInv]
+  omega
 
 /-- Reflection transported by an integer shear; its crease is v = u. -/
 def obliqueReflection : Fold (Int × Int) :=
@@ -326,6 +328,91 @@ def obliqueCut : Cut obliqueReflection where
 
 theorem obliqueProjection_idempotent (p : Int × Int) :
     obliqueProjection (obliqueProjection p) = obliqueProjection p := by
+  rfl
+
+
+/-- Integer-preserving reflection across every crease v = a*u. -/
+def obliqueReflectionA (a : Int) : Fold (Int × Int) where
+  f := fun p => (p.1, 2 * a * p.1 - p.2)
+  invol := by
+    intro p
+    rcases p with ⟨u, v⟩
+    simp
+    omega
+
+theorem obliqueReflectionA_fix_iff (a : Int) (p : Int × Int) :
+    Fix (obliqueReflectionA a) p ↔ p.2 = a * p.1 := by
+  rcases p with ⟨u, v⟩
+  change (u, 2 * a * u - v) = (u, v) ↔ v = a * u
+  simp
+  omega
+
+/-- Algebraic retraction onto v = a*u. -/
+def obliqueProjectionA (a : Int) (p : Int × Int) : Int × Int :=
+  (p.1, a * p.1)
+
+theorem obliqueProjectionA_fix (a : Int) (p : Int × Int) :
+    Fix (obliqueReflectionA a) (obliqueProjectionA a p) :=
+  (obliqueReflectionA_fix_iff a (obliqueProjectionA a p)).2 rfl
+
+def obliqueCutA (a : Int) : Cut (obliqueReflectionA a) where
+  p := obliqueProjectionA a
+  image_fix := obliqueProjectionA_fix a
+  fix_eq := by
+    intro p hp
+    rcases p with ⟨u, v⟩
+    have h : v = a * u := (obliqueReflectionA_fix_iff a (u, v)).mp hp
+    simp [obliqueProjectionA, h]
+  orbit_eq := by
+    intro p
+    rcases p with ⟨u, v⟩
+    simp [obliqueProjectionA, obliqueReflectionA]
+    omega
+
+theorem obliqueProjectionA_idempotent (a : Int) (p : Int × Int) :
+    obliqueProjectionA a (obliqueProjectionA a p) = obliqueProjectionA a p := by
+  rfl
+
+/-- Translate the oblique crease by b: v = a*u + b. -/
+def translatedObliqueReflection (a b : Int) : Fold (Int × Int) where
+  f := fun p => (p.1, 2 * (a * p.1 + b) - p.2)
+  invol := by
+    intro p
+    rcases p with ⟨u, v⟩
+    simp
+    omega
+
+theorem translatedObliqueReflection_fix_iff (a b : Int) (p : Int × Int) :
+    Fix (translatedObliqueReflection a b) p ↔ p.2 = a * p.1 + b := by
+  rcases p with ⟨u, v⟩
+  change (u, 2 * (a * u + b) - v) = (u, v) ↔ v = a * u + b
+  simp
+  omega
+
+def translatedObliqueProjection (a b : Int) (p : Int × Int) : Int × Int :=
+  (p.1, a * p.1 + b)
+
+theorem translatedObliqueProjection_fix (a b : Int) (p : Int × Int) :
+    Fix (translatedObliqueReflection a b) (translatedObliqueProjection a b p) :=
+  (translatedObliqueReflection_fix_iff a b (translatedObliqueProjection a b p)).2 rfl
+
+def translatedObliqueCut (a b : Int) : Cut (translatedObliqueReflection a b) where
+  p := translatedObliqueProjection a b
+  image_fix := translatedObliqueProjection_fix a b
+  fix_eq := by
+    intro p hp
+    rcases p with ⟨u, v⟩
+    have h : v = a * u + b := (translatedObliqueReflection_fix_iff a b (u, v)).mp hp
+    simp [translatedObliqueProjection, h]
+  orbit_eq := by
+    intro p
+    rcases p with ⟨u, v⟩
+    simp [translatedObliqueProjection, translatedObliqueReflection]
+    omega
+
+theorem translatedObliqueProjection_idempotent (a b : Int) (p : Int × Int) :
+    translatedObliqueProjection a b (translatedObliqueProjection a b p) =
+      translatedObliqueProjection a b p := by
   rfl
 
 end Fold
