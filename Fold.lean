@@ -199,6 +199,11 @@ import Fold.Complexity.Reduction
 #check Fold.synchronized_of_positive_gaps
 #check Fold.synchronizedGapArrival_unique
 
+#check Fold.cumulativeProgress
+#check Fold.variableRateA_firstArrival
+#check Fold.variableRateB_firstArrival
+#check Fold.variable_rates_distinct_but_synchronized
+
 #check Fold.nonlinearExampleGap_zero
 #check Fold.nonlinearExampleGap_positive
 #check Fold.nonlinear_examples_synchronize
