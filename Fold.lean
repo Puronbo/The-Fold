@@ -249,3 +249,6 @@ import Fold.Complexity.Reduction
 #check Fold.descendTarget_chart
 #check Fold.target_descends_iff
 #check Fold.firstArrival_descended_target
+
+#check Fold.firstArrival_chart_path_congr
+#check Fold.firstArrival_orbit_representative_independent
