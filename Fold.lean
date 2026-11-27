@@ -9,6 +9,7 @@ import Fold.Scale
 import Fold.Origin
 import Fold.Geometry
 import Fold.Synchronization
+import Fold.ArrivalFold
 import Fold.Counterexamples
 import Fold.Chi
 import Fold.Arithmetic
@@ -208,3 +209,8 @@ import Fold.Complexity.Reduction
 #check Fold.nonlinearExampleGap_positive
 #check Fold.nonlinear_examples_synchronize
 #check Fold.nonlinear_profiles_differ_one_tick
+
+#check Fold.FoldInvariantTarget
+#check Fold.firstArrival_preserved_by_fold
+#check Fold.fixedTarget_fold_invariant
+#check Fold.firstArrival_at_crease_preserved
