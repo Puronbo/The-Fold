@@ -689,3 +689,46 @@ def verify_cyclotomic_factorization(order: int, prime: int) -> bool:
         inverse = pow(target[-1], -1, prime)
         target = [value * inverse % prime for value in target]
     return product == target
+
+
+def cyclotomic_factorization_with_multiplicity_mod(
+    order: int, prime: int
+) -> tuple[tuple[tuple[int, ...], int], ...]:
+    """Factor Phi_order over F_p, retaining multiplicities in ramified cases.
+
+    If order = p^a * n with p not dividing n, reduction modulo p gives
+    Phi_order(x) = Phi_n(x)^phi(p^a). The squarefree factors of Phi_n
+    therefore each occur with the common multiplicity phi(p^a).
+    """
+    if order < 1:
+        raise ValueError("order must be positive")
+    if not _is_prime(prime):
+        raise ValueError("prime must be prime")
+    reduced_order = order
+    p_power = 1
+    while reduced_order % prime == 0:
+        reduced_order //= prime
+        p_power *= prime
+    multiplicity = _euler_totient(p_power)
+    factors = cyclotomic_factorization_mod(reduced_order, prime)
+    return tuple((factor, multiplicity) for factor in factors)
+
+
+def verify_cyclotomic_factorization_with_multiplicity(
+    order: int, prime: int
+) -> bool:
+    """Verify the multiplicity-aware factorization over F_p."""
+    factorization = cyclotomic_factorization_with_multiplicity_mod(
+        order, prime
+    )
+    product = [1]
+    for factor, multiplicity in factorization:
+        if multiplicity < 1 or not _is_irreducible_mod(list(factor), prime):
+            return False
+        for _ in range(multiplicity):
+            product = _poly_mul_mod(product, list(factor), prime)
+    target = _poly_trim_mod(list(cyclotomic_polynomial(order)), prime)
+    if target[-1] != 1:
+        inverse = pow(target[-1], -1, prime)
+        target = [value * inverse % prime for value in target]
+    return product == target
