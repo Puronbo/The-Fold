@@ -1,10 +1,9 @@
-/-
+/- 
   Fold/State.lean
 
   The state-level Fold invariants: collapse erases the observed value but
-  preserves the retained reference; turning twice restores direction.
-  Distinct references remain distinguishable in the full state even when
-  their collapsed observations coincide.
+  preserves the retained reference, direction, and history.  The retained
+  signature characterizes exactly when two collapsed states are equal.
 -/
 import Init
 
@@ -26,11 +25,18 @@ def turn (s : State) : State :=
 def observe (s : State) : Int :=
   s.value
 
+/-- The metadata that collapse leaves untouched. -/
+def retainedSignature (s : State) : Int × Int × List Int :=
+  (s.reference, s.direction, s.history)
+
 theorem collapse_sets_value_to_zero (s : State) :
     (collapse s).value = 0 := rfl
 
 theorem collapse_preserves_reference (s : State) :
     (collapse s).reference = s.reference := rfl
+
+theorem collapse_preserves_signature (s : State) :
+    retainedSignature (collapse s) = retainedSignature s := rfl
 
 theorem collapse_idempotent (s : State) :
     collapse (collapse s) = collapse s := by
@@ -48,6 +54,11 @@ theorem observation_only_classifier_cannot_recover_reference
     (classifier : Int → Bool) (s t : State) :
     classifier (observe (collapse s)) =
       classifier (observe (collapse t)) := rfl
+
+/-- Two collapsed states are equal exactly when all retained metadata agrees. -/
+theorem collapse_eq_iff_retained_signature_eq (s t : State) :
+    collapse s = collapse t ↔ retainedSignature s = retainedSignature t := by
+  cases s <;> cases t <;> simp [collapse, retainedSignature]
 
 theorem distinct_references_survive_collapse
     (s t : State) (h : s.reference ≠ t.reference) :
