@@ -260,4 +260,68 @@ theorem diagonalProjection_idempotent (p : Int × Int) :
   rcases p with ⟨x, y⟩
   simp [diagonalProjection, diagonalValue]
 
+
+/-- Integer shear sending the horizontal axis to the oblique line v = u. -/
+def shearCoordinates (p : Int × Int) : Int × Int :=
+  (p.1, p.1 + p.2)
+
+/-- Inverse integer shear. -/
+def shearCoordinatesInv (p : Int × Int) : Int × Int :=
+  (p.1, p.2 - p.1)
+
+theorem shearCoordinates_left (p : Int × Int) :
+    shearCoordinatesInv (shearCoordinates p) = p := by
+  rcases p with ⟨x, y⟩
+  simp [shearCoordinates, shearCoordinatesInv]
+
+theorem shearCoordinates_right (p : Int × Int) :
+    shearCoordinates (shearCoordinatesInv p) = p := by
+  rcases p with ⟨x, y⟩
+  simp [shearCoordinates, shearCoordinatesInv]
+
+/-- Reflection transported by an integer shear; its crease is v = u. -/
+def obliqueReflection : Fold (Int × Int) :=
+  conjugate horizontalReflection shearCoordinates shearCoordinatesInv
+    shearCoordinates_left shearCoordinates_right
+
+theorem obliqueReflection_map (p : Int × Int) :
+    obliqueReflection.f p = (p.1, 2 * p.1 - p.2) := by
+  rcases p with ⟨x, y⟩
+  simp [obliqueReflection, conjugate, shearCoordinates, shearCoordinatesInv,
+    horizontalReflection]
+  omega
+
+theorem obliqueReflection_fix_iff (p : Int × Int) :
+    Fix obliqueReflection p ↔ p.2 = p.1 := by
+  rcases p with ⟨x, y⟩
+  change obliqueReflection.f (x, y) = (x, y) ↔ y = x
+  rw [obliqueReflection_map]
+  constructor <;> intro h <;> simp at h ⊢ <;> omega
+
+/-- An integer-valued retraction onto the oblique crease v = u. -/
+def obliqueProjection (p : Int × Int) : Int × Int := (p.1, p.1)
+
+theorem obliqueProjection_fix (p : Int × Int) :
+    Fix obliqueReflection (obliqueProjection p) :=
+  (obliqueReflection_fix_iff (obliqueProjection p)).2 rfl
+
+/-- The oblique retraction is a cut: it is fixed, identity on the crease,
+and constant on the two-point reflection orbits. -/
+def obliqueCut : Cut obliqueReflection where
+  p := obliqueProjection
+  image_fix := obliqueProjection_fix
+  fix_eq := by
+    intro p hp
+    rcases p with ⟨x, y⟩
+    have h : y = x := (obliqueReflection_fix_iff (x, y)).mp hp
+    simp [obliqueProjection, h]
+  orbit_eq := by
+    intro p
+    rw [obliqueReflection_map]
+    rfl
+
+theorem obliqueProjection_idempotent (p : Int × Int) :
+    obliqueProjection (obliqueProjection p) = obliqueProjection p := by
+  rfl
+
 end Fold
