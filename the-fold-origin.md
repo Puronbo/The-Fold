@@ -287,3 +287,19 @@ P(T)=G\\quad\\text{and}\\quad
 \\]
 
 It is not generally equivalent to requiring every earlier position to be below the target: a path may overshoot and return without hitting the target exactly. First arrival is about the first equality with the target, not monotonicity. These examples formalize discrete trajectories only; they do not establish a universal law of physical synchronization.
+
+## 15. Discrete overshoot and return
+
+A signed-rate path can move numerically beyond a target without equaling it
+at a sampled tick, then return and hit the target later. The Lean example
+uses increments `(4, -2, 1)`, giving sampled positions
+`0 → 4 → 2 → 3`. For target `3`, tick 1 is above the target, tick 2
+is below it, and tick 3 is the first exact hit.
+
+This is a statement about a discrete sequence of sampled states. It does
+not imply that a continuous path can pass from 0 to 4 without crossing 3;
+a continuous interpolation would generally cross intermediate values.
+The exact predicate remains: the target is attained at time T and is not
+attained at any earlier sampled time. Numeric overshoot alone does not
+invalidate first arrival.
+
