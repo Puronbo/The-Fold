@@ -161,3 +161,10 @@ Kinds are supplied by the caller rather than learned. This remains a determinist
 The parser deliberately rejects unsupported statistical uncertainty types rather than assuming a probability distribution or coverage factor. It does not estimate calibration bias, propagate covariance, or infer measurement traceability. The implementation and limitations are documented in `agi/stage-12-measurement-uncertainty.md`; regression tests remain in `agi/test_concept_proposer.py`.
 
 This stage adds explicit handling of measurement uncertainty to a narrow symbolic quantity task. It is not full metrology, statistical inference, autonomous scientific discovery, or evidence that AGI has been achieved.
+
+
+## Stage 13: exact relational concept proposals
+
+A separate module, `agi/relation_discovery.py`, now proposes exact proportional (`y = a*x`), inverse (`x*y = k`), and affine (`y = a*x + b`) relationships from paired scalar observations. Parameters use exact rational arithmetic. Each candidate is checked against every supplied observation; supporting keys and counterexamples are retained explicitly. Affine candidates require at least three observations so a two-point interpolation is not presented as evidence of discovery.
+
+This module does not merge equivalence classes and does not claim causal laws. A relation that fits the finite observations is only supported on that dataset. Units, noisy regression, multivariate relationships, conservation laws, and experiment selection remain future work. See `agi/stage-13-relational-concept-discovery.md` and `agi/test_relation_discovery.py`.
