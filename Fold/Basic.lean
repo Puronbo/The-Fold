@@ -215,4 +215,12 @@ theorem lift_fix (C : Cut F) (q : Chart F) : Fix F (C.lift q) := by
 
 end Cut
 
+
+/-- If a fold has no fixed points, no cut onto its fixed set can exist. -/
+theorem noCut_of_noFix (F : Fold X) (x : X)
+    (h : ∀ y : X, ¬ Fix F y) : ¬ Nonempty (Cut F) := by
+  intro hC
+  rcases hC with ⟨C⟩
+  exact h (C.p x) (C.image_fix x)
+
 end Fold
