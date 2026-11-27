@@ -252,8 +252,28 @@ def verify_optimality_certificate(
         ]
         denominator = max(all_coverage, default=0)
         if not required:
-            return not certificate and plan.dual_denominator == 0
-        return packing_valid and denominator > 0 and plan.dual_denominator == denominator
+            return (
+                not certificate and plan.dual_denominator == 0
+                and not plan.dual_weights
+            )
+        if denominator == 0 or plan.dual_denominator != denominator:
+            return False
+        if len(plan.dual_weights) != len(required):
+            return False
+        weights = tuple(Fraction(n, d) for n, d in plan.dual_weights)
+        if any(weight < 0 for weight in weights):
+            return False
+        # Dual feasibility: for each safe feature, the weights of all
+        # collisions it separates sum to at most one.
+        dual_feasible = all(
+            sum(
+                (weights[j] for j, (a, b) in enumerate(required)
+                 if by_id[a].get(feature) != by_id[b].get(feature)),
+                Fraction(0),
+            ) <= 1
+            for feature in safe
+        )
+        return packing_valid and dual_feasible
     except (KeyError, ValueError):
         return False
 
