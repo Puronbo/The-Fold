@@ -433,10 +433,10 @@ theorem reconstructState_selector_unique_off_crease {X : Type}
   cases b₁ <;> cases b₂
   · rfl
   · have hfix := (reconstructState_choices_equal_iff_fixed
-      F representative q).2 (heq.symm)
+      F representative q).1 heq
     exact False.elim (hnotFixed hfix)
   · have hfix := (reconstructState_choices_equal_iff_fixed
-      F representative q).2 heq
+      F representative q).1 heq.symm
     exact False.elim (hnotFixed hfix)
   · rfl
 
