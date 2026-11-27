@@ -231,6 +231,10 @@ theorem diagonalValue_swap (x y : Int) :
   · have hyx : y ≤ x := by omega
     simp [hxy, hyx]
 
+/-- On equal inputs, the selector returns that input. -/
+theorem diagonalValue_self (x : Int) : diagonalValue x x = x := by
+  simp [diagonalValue]
+
 /-- A symmetric integer retraction onto x = y (not Euclidean projection). -/
 def diagonalProjection (p : Int × Int) : Int × Int :=
   (diagonalValue p.1 p.2, diagonalValue p.1 p.2)
@@ -249,7 +253,7 @@ def diagonalCut : Cut diagonalReflection where
     rcases p with ⟨x, y⟩
     have hxy : x = y := (diagonalReflection_fix_iff (x, y)).mp hp
     subst y
-    simp [diagonalProjection, diagonalValue]
+    simp [diagonalProjection, diagonalValue_self]
   orbit_eq := by
     intro p
     rcases p with ⟨x, y⟩
@@ -258,7 +262,7 @@ def diagonalCut : Cut diagonalReflection where
 theorem diagonalProjection_idempotent (p : Int × Int) :
     diagonalProjection (diagonalProjection p) = diagonalProjection p := by
   rcases p with ⟨x, y⟩
-  simp [diagonalProjection, diagonalValue]
+  simp [diagonalProjection, diagonalValue_self]
 
 
 /-- Integer shear sending the horizontal axis to the oblique line v = u. -/
