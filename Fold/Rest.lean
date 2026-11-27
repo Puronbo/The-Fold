@@ -90,14 +90,14 @@ theorem conditionOnlyStep_position
     (update : Int → Int) (s : RestContextState)
     (hrest : ContextAtRest s) :
     (conditionOnlyStep update s).position = s.position := by
-  simp [conditionOnlyStep, hrest]
+  simp [conditionOnlyStep, ContextAtRest, hrest]
 
 /-- The condition-only step preserves zero velocity during rest. -/
 theorem conditionOnlyStep_velocity
     (update : Int → Int) (s : RestContextState)
     (hrest : ContextAtRest s) :
     (conditionOnlyStep update s).velocity = 0 := by
-  simp [conditionOnlyStep, hrest, hrest]
+  simp [conditionOnlyStep, ContextAtRest, hrest]
 
 /-- If the internal condition update differs, differential rest is obtained. -/
 theorem conditionOnlyStep_differentialRest
@@ -105,7 +105,7 @@ theorem conditionOnlyStep_differentialRest
     (hrest : ContextAtRest s)
     (hchange : update s.condition ≠ s.condition) :
     DifferentialRest s (conditionOnlyStep update s) := by
-  simp [DifferentialRest, conditionOnlyStep, hrest, hchange]
+  simp [DifferentialRest, conditionOnlyStep, ContextAtRest, hrest, hchange]
 
 /-- The two states can differ while their position and velocity agree. -/
 theorem differentialRest_states_differ
