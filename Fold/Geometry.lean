@@ -151,7 +151,8 @@ theorem verticalReflectionAt_fix_iff (c : Int) (p : Int × Int) :
     rcases p with ⟨x, y⟩
     simp at h
     subst x
-    change 2 * c - c = c
+    change (2 * c - c, y) = (c, y)
+    congr 1
     omega
 
 /-- Projection onto the translated vertical crease x = c. -/
@@ -180,6 +181,27 @@ def verticalCutAt (c : Int) : Cut (verticalReflectionAt c) where
 theorem verticalProjectionAt_idempotent (c : Int) (p : Int × Int) :
     verticalProjectionAt c (verticalProjectionAt c p) =
       verticalProjectionAt c p := by
+  rfl
+
+
+/-- Coordinate exchange sends the horizontal crease to the vertical crease. -/
+def swapCoordinates (p : Int × Int) : Int × Int := (p.2, p.1)
+
+theorem swapCoordinates_invol (p : Int × Int) :
+    swapCoordinates (swapCoordinates p) = p := by
+  rcases p with ⟨x, y⟩
+  rfl
+
+/-- Horizontal reflection conjugates to vertical reflection under coordinate exchange. -/
+theorem swap_horizontal_to_vertical (c : Int) (p : Int × Int) :
+    verticalReflectionAt c (swapCoordinates p) =
+      swapCoordinates (horizontalReflectionAt c p) := by
+  rfl
+
+/-- Coordinate exchange also conjugates the corresponding crease projections. -/
+theorem swap_horizontal_projection (c : Int) (p : Int × Int) :
+    verticalProjectionAt c (swapCoordinates p) =
+      swapCoordinates (horizontalProjectionAt c p) := by
   rfl
 
 end Fold
