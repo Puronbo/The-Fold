@@ -316,3 +316,49 @@ theorem firstArrival_orbit_representative_independent
 
 
 end Fold
+
+
+namespace Fold
+
+/-- The quotient-chart trajectory induced by a state trajectory. -/
+def chartPath {α X : Type} (F : Fold X) (path : α → Nat → X) :
+    α → Nat → Chart F :=
+  fun process time => chart F (path process time)
+
+/-- Two state trajectories have identical chart histories exactly when
+    their states are orbit-equivalent at every process and every time.
+    This characterizes all representative changes invisible to the chart. -/
+theorem chartPath_eq_iff_pointwise_orbit
+    {α X : Type} (F : Fold X) (path₁ path₂ : α → Nat → X) :
+    chartPath F path₁ = chartPath F path₂ ↔
+      ∀ process time, Orbit F (path₁ process time) (path₂ process time) := by
+  constructor
+  · intro h process time
+    apply (chart_eq_iff F (path₁ process time) (path₂ process time)).1
+    exact congrFun (congrFun h process) time
+  · intro h
+    funext process
+    funext time
+    exact (chart_eq_iff F (path₁ process time) (path₂ process time)).2
+      (h process time)
+
+/-- A trajectory step is invisible in the quotient precisely when its
+    endpoints are representatives of the same Fold-orbit. -/
+theorem chart_step_eq_iff_orbit
+    {X : Type} (F : Fold X) (path : Nat → X) (time : Nat) :
+    chart F (path (time + 1)) = chart F (path time) ↔
+      Orbit F (path (time + 1)) (path time) := by
+  exact chart_eq_iff F (path (time + 1)) (path time)
+
+/-- Any property expressed solely through the chart trajectory is
+    independent of the chosen state representatives. -/
+theorem chartPath_property_representative_independent
+    {α X Y : Type} (F : Fold X) (path₁ path₂ : α → Nat → X)
+    (sameOrbit : ∀ process time,
+      Orbit F (path₁ process time) (path₂ process time))
+    (property : (α → Nat → Chart F) → Prop) :
+    property (chartPath F path₁) ↔ property (chartPath F path₂) := by
+  apply congrArg property
+  exact (chartPath_eq_iff_pointwise_orbit F path₁ path₂).2 sameOrbit
+
+end Fold
