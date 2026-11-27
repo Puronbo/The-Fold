@@ -38,9 +38,7 @@ theorem distinct_rates_same_arrival
     when both paths have the same destination and remaining time. -/
 theorem faster_has_larger_remaining_displacement
     (a b remaining : Nat) (hab : a < b) (hremaining : 0 < remaining) :
-    Int.ofNat a * Int.ofNat remaining <
-      Int.ofNat b * Int.ofNat remaining := by
-  exact Int.mul_lt_mul_of_pos_right (Int.ofNat_lt.mpr hab)
-    (Int.ofNat_pos.mpr hremaining)
+    a * remaining < b * remaining := by
+  exact Nat.mul_lt_mul_of_pos_right hab hremaining
 
 end Fold
