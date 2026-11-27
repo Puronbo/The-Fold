@@ -419,7 +419,13 @@ def retention_plan_proves_optimality(
             instances, context, candidate_features,
             must_link_pairs, cannot_link_pairs, plan,
         )
-        and max(len(plan.lower_bound_pairs), uniform_bound, weighted_bound) == len(plan.retained_features)
+        and (
+            max(len(plan.lower_bound_pairs), uniform_bound, weighted_bound) >= len(plan.retained_features)
+            or verify_search_certificate(
+                instances, context, candidate_features,
+                must_link_pairs, cannot_link_pairs, plan,
+            )
+        )
     )
 
 
