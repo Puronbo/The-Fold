@@ -133,4 +133,65 @@ theorem differentialRest_changes_prediction
   simp [predictedVelocity, conditionOnlyStep, ContextAtRest, hrest,
     hprediction]
 
+
+/-- A rest state whose internal condition has a discrete change rate. -/
+structure RateRestState where
+  position : Int
+  velocity : Int
+  condition : Int
+  conditionRate : Int
+  deriving DecidableEq, Repr
+
+/-- Kinematic rest is independent of the internal condition rate. -/
+def RateContextAtRest (s : RateRestState) : Prop :=
+  s.velocity = 0
+
+/-- Differential-rate rest: position and zero velocity persist,
+    while the internal condition rate changes. -/
+def DifferentialRateRest (before after : RateRestState) : Prop :=
+  before.position = after.position ∧
+  before.velocity = 0 ∧ after.velocity = 0 ∧
+  before.conditionRate ≠ after.conditionRate
+
+/-- Advance the condition by its current rate, then update that rate. -/
+def conditionRateStep (nextRate : Int → Int) (s : RateRestState) :
+    RateRestState :=
+  if h : s.velocity = 0 then
+    { s with
+      condition := s.condition + s.conditionRate
+      conditionRate := nextRate s.conditionRate }
+  else s
+
+/-- Rate evolution during rest does not change position. -/
+theorem conditionRateStep_position
+    (nextRate : Int → Int) (s : RateRestState)
+    (hrest : RateContextAtRest s) :
+    (conditionRateStep nextRate s).position = s.position := by
+  simp [conditionRateStep, RateContextAtRest, hrest]
+
+/-- Rate evolution during rest leaves velocity zero. -/
+theorem conditionRateStep_velocity
+    (nextRate : Int → Int) (s : RateRestState)
+    (hrest : RateContextAtRest s) :
+    (conditionRateStep nextRate s).velocity = 0 := by
+  simp [conditionRateStep, RateContextAtRest, hrest]
+
+/-- If the internal rate changes, the transition is differential-rate rest. -/
+theorem conditionRateStep_differentialRateRest
+    (nextRate : Int → Int) (s : RateRestState)
+    (hrest : RateContextAtRest s)
+    (hrate : nextRate s.conditionRate ≠ s.conditionRate) :
+    DifferentialRateRest s (conditionRateStep nextRate s) := by
+  simp [DifferentialRateRest, conditionRateStep, RateContextAtRest,
+    hrest, hrate]
+
+/-- Differential-rate rest changes the complete augmented state. -/
+theorem differentialRateRest_states_differ
+    (before after : RateRestState)
+    (h : DifferentialRateRest before after) :
+    before ≠ after := by
+  intro heq
+  apply h.2.2.2
+  exact congrArg RateRestState.conditionRate heq
+
 end Fold
