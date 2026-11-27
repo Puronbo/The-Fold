@@ -7,6 +7,7 @@
 import Fold.Basic
 import Fold.Scale
 import Fold.Origin
+import Fold.Geometry
 import Fold.Chi
 import Fold.Arithmetic
 import Fold.Wheel
@@ -124,3 +125,9 @@ import Fold.Complexity.Reduction
 #check Fold.Complexity.PolyManyOneReduction
 #check Fold.Complexity.composePolyManyOne
 #check Fold.Complexity.composed_membership_iff
+
+#check Fold.horizontalReflection_fix_iff
+#check Fold.horizontalCrease_eq_fix
+#check Fold.horizontalProjection_fix
+#check Fold.horizontalProjection_idempotent
+#check Fold.horizontalChart_reflection
