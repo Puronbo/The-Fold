@@ -238,3 +238,9 @@ import Fold.Complexity.Reduction
 #check Fold.firstArrival_coordinate_transport
 #check Fold.coordinateTransportTarget_round_trip
 #check Fold.firstArrival_bijective_coordinate_change
+
+#check Fold.firstArrival_sampled_characterization
+#check Fold.collapsedClock
+#check Fold.original_hit_at_three_first
+#check Fold.collapsed_clock_destroys_later_first_index
+#check Fold.firstArrival_strict_reindex_forward
