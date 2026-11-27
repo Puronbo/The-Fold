@@ -8,13 +8,13 @@ from agi.relation_selection import RelationCandidate, compare_relation_candidate
 class RelationSelectionTests(unittest.TestCase):
     def setUp(self):
         self.rows = (
-            ValidationObservation.create("v1", 1, 3, (2, 3)),
-            ValidationObservation.create("v2", 2, 5, (3, 5)),
-            ValidationObservation.create("v3", 4, 9, (5, 9)),
+            ValidationObservation.create("v1", 1, 3),
+            ValidationObservation.create("v2", 2, 5),
+            ValidationObservation.create("v3", 4, 9),
         )
 
     def test_correct_candidate_ranks_ahead_of_refuted(self):
-        correct = RelationCandidate("correct", (ComposedRelation((F(1), F(1), F(0), F(1))),))
+        correct = RelationCandidate("correct", (ComposedRelation((F(2), F(1), F(0), F(1))),))
         wrong = RelationCandidate("wrong", (ComposedRelation((F(2), F(0), F(0), F(1))),))
         result = compare_relation_candidates((wrong, correct), self.rows)
         self.assertEqual(result.status, "compared_on_independent_observations")
