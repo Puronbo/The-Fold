@@ -1031,3 +1031,6 @@ G-EP140: distinguishes valid invertible coefficient-space shears that change onl
 
 
 **AGI concept-learning prototype (Stages 9–14):** The relational proposer now has an exact composition layer: proportional, inverse, and affine relations are represented as fractional-linear maps and composed by rational matrix multiplication. Intermediate domain exclusions and provenance are retained; refuted hypotheses are rejected. See agi/stage-14-relational-composition.md and agi/relation_composition.py. This is bounded symbolic composition, not general program synthesis or AGI.
+
+
+**AGI concept-learning prototype (Stages 9–15):** Stage 15 adds held-out validation for composed relational paths, separately checking intermediate and endpoint observations without refitting the relations. Domain failures count as refutations; empty validation sets are explicitly insufficient. See agi/stage-15-independent-validation.md and agi/relation_validation.py. This is finite validation, not proof of AGI or universal generalization.
