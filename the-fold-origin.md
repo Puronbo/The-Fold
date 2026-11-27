@@ -247,3 +247,21 @@ R_a(t)\\,b=R_b(t)\\,a.
 This cross-multiplied identity is the division-free form of proportional remaining displacement. It remains meaningful over natural-number arithmetic, including when a rate is zero; positive rates are separately required for strict first arrival. The Lean theorem `remainingDisplacement_cross_scale` formalizes this identity, and `remainingDisplacement_factors` records the shared factorization.
 
 This is a **within-model invariant**, not a claim that arbitrary real-world processes share a clock or obey constant-rate motion. The common terminal time is one property; proportional remaining displacement at every shared observation tick is a stronger property supplied by the constant-rate model.
+
+
+## 13. Variable-rate synchronization
+
+Constant speed is sufficient for synchronized first arrival, but it is not necessary. A discrete trajectory can instead be specified by a rate sequence, with cumulative progress defined recursively:
+
+\\[
+P(0)=0,\\qquad P(n+1)=P(n)+s(n).
+\\]
+
+Two exact examples reach the same target, 3, at tick 2:
+
+- Path A uses rates (1, 2), so its cumulative progress is (0, 1, 3).
+- Path B uses rates (2, 1), so its cumulative progress is (0, 2, 3).
+
+Their rate histories differ at every transition, yet each has first-arrival time 2. The Lean declarations `variableRateA_firstArrival`, `variableRateB_firstArrival`, and `variable_rates_distinct_but_synchronized` check this finite example directly.
+
+This demonstrates a precise separation: **equal arrival time does not require equal instantaneous rates or identical histories**. The general sufficient condition remains that each trajectory is strictly short of its target at every earlier tick and exactly at the target at the shared tick. This is a discrete mathematical model, not evidence that arbitrary physical processes synchronize spontaneously.
