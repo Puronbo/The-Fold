@@ -13,6 +13,7 @@ import Fold.Problems
 import Fold.Pressure
 import Fold.Examples
 import Fold.Doubling
+import Fold.Complexity.ZeroResidual
 
 /-
   Inventory.  `#check` is a compile-time audit: if a name changes or a
@@ -92,3 +93,9 @@ import Fold.Doubling
 #check Fold.double7_orbits
 #check Fold.double7_one_period
 #check Fold.double7_iter_three
+
+#check Fold.Complexity.NPResidual
+#check Fold.Complexity.ResidualZero
+#check Fold.Complexity.class_eq_iff_residual_zero
+#check Fold.Complexity.class_ne_iff_residual_nonempty
+#check Fold.Complexity.CollapseBit
