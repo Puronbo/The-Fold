@@ -65,3 +65,5 @@ import Fold
 #print axioms Fold.different_speeds_require_different_distances
 #print axioms Fold.firstArrival_le_any_arrival
 #print axioms Fold.synchronized_first_arrival_is_common_lower_bound
+#print axioms Fold.firstArrival_unique
+#print axioms Fold.synchronized_of_common_first_arrival
