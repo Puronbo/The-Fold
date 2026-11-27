@@ -412,3 +412,22 @@ and arithmetic alongside.
 **The Lean file proves the skeleton — an involution, its fixed set, its quotient, its cut, and the
 exact arithmetic — and it leaves the flesh to the prose: the analytic closure, the measure, and the
 consciousness.**
+
+
+## Fold state invariants
+
+`Fold/State.lean` formalizes the user's state-level rules in the existing library:
+
+- collapse sets the observable value to zero;
+- collapse preserves the retained reference;
+- collapse is idempotent;
+- two turns restore direction;
+- all collapsed states have the same numeric observation;
+- therefore no classifier receiving only that post-collapse numeric observation can distinguish their references;
+- distinct references still distinguish the complete collapsed states.
+
+The last two results state the information-loss boundary precisely: equality of observations does not imply equality of complete states. The reference must be retained outside the collapsed numeric value.
+
+These are theorems about the explicitly defined model, not claims that all physical or computational systems obey it. The classifier theorem is intentionally narrow: it says a function of the collapsed numeric observation alone cannot recover information that observation no longer contains.
+
+The module is imported by `Fold.lean` and its declarations are included in `Fold/Audit.lean`'s axiom inventory. The Lean CI workflow builds the existing Lake library on pushes and relevant pull requests.
