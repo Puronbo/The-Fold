@@ -227,3 +227,7 @@ import Fold.Complexity.Reduction
 #check Fold.foldTransportTarget_involutive
 #check Fold.firstArrival_fold_target_transport
 #check Fold.fold_target_transport_round_trip
+
+#check Fold.foldTransportFamilyTarget
+#check Fold.synchronizedBoundary_fold_target_transport
+#check Fold.foldTransportFamilyTarget_involutive
