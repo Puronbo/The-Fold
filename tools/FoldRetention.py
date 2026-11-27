@@ -162,6 +162,8 @@ def minimum_retention_features(
         frozenset(i for i in useful if coverage[i] & (1 << j))
         for j in range(len(required))
     )
+    if any(not group for group in coverers):
+        return None
     packing: list[int] = []
     used_coverers: set[int] = set()
     for j in sorted(range(len(required)), key=lambda k: (len(coverers[k]), k)):
