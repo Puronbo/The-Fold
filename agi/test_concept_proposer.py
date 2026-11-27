@@ -7,6 +7,7 @@ from fractions import Fraction
 from agi.concept_learner import ConceptLearner
 from agi.concept_proposer import (
     UnitQuantityProposer,
+    parse_measurement,
     parse_quantity,
     parse_unit_expression,
 )
@@ -132,6 +133,98 @@ class TypedAndAffineQuantityTests(unittest.TestCase):
         UnitQuantityProposer().apply(learner)
         self.assertTrue(learner.equivalent("celsius", "fahrenheit"))
         self.assertTrue(learner.equivalent("fahrenheit", "kelvin"))
+
+
+class MeasurementUncertaintyTests(unittest.TestCase):
+    def test_overlapping_intervals_are_compatible_not_equivalent(self):
+        learner = ConceptLearner("physical quantity equality")
+        learner.add_instance("celsius_range", {
+            "value": 10, "unit": "degC",
+            "uncertainty": {"type": "interval", "lower": 9, "upper": 11},
+        })
+        learner.add_instance("fahrenheit_range", {
+            "value": 50, "unit": "degF",
+            "uncertainty": {"type": "interval", "lower": 49, "upper": 51},
+        })
+        batch = UnitQuantityProposer().apply(learner)
+        self.assertFalse(learner.equivalent("celsius_range", "fahrenheit_range"))
+        self.assertEqual(len(batch.compatibilities), 1)
+        self.assertLessEqual(
+            batch.compatibilities[0].overlap_lower,
+            batch.compatibilities[0].overlap_upper,
+        )
+
+    def test_nonoverlapping_intervals_are_not_compatible(self):
+        learner = ConceptLearner("physical quantity equality")
+        learner.add_instance("low", {
+            "value": 1, "unit": "m",
+            "uncertainty": {"type": "interval", "lower": 0, "upper": 2},
+        })
+        learner.add_instance("high", {
+            "value": 4, "unit": "m",
+            "uncertainty": {"type": "interval", "lower": 3, "upper": 5},
+        })
+        batch = UnitQuantityProposer().propose(learner)
+        self.assertEqual(batch.compatibilities, ())
+        self.assertEqual(batch.equivalences, ())
+
+    def test_exact_observation_can_be_compatible_with_interval(self):
+        learner = ConceptLearner("physical quantity equality")
+        learner.add_instance("exact", {"value": 10, "unit": "m"})
+        learner.add_instance("measured", {
+            "value": 11, "unit": "m",
+            "uncertainty": {"type": "interval", "lower": 9, "upper": 12},
+        })
+        batch = UnitQuantityProposer().propose(learner)
+        self.assertEqual(len(batch.compatibilities), 1)
+        self.assertEqual(batch.equivalences, ())
+
+    def test_calibration_correction_is_applied_before_normalization(self):
+        corrected = parse_measurement({
+            "value": 99, "unit": "cm", "calibration_correction": 1,
+        })
+        one_metre = parse_measurement({"value": 1, "unit": "m"})
+        self.assertEqual(corrected.quantity.base_value, one_metre.quantity.base_value)
+
+    def test_interval_bounds_receive_calibration_correction(self):
+        measured = parse_measurement({
+            "value": 10, "unit": "m", "calibration_correction": 1,
+            "uncertainty": {"type": "interval", "lower": 9, "upper": 11},
+        })
+        self.assertEqual(measured.lower, Fraction(10))
+        self.assertEqual(measured.upper, Fraction(12))
+        self.assertEqual(measured.quantity.base_value, Fraction(11))
+
+    def test_invalid_or_unspecified_probability_models_are_not_inferred(self):
+        for uncertainty in (
+            {"type": "interval", "lower": 2, "upper": 1},
+            {"type": "interval", "lower": 0, "upper": 3},
+            {"type": "standard", "value": 0.1},
+            {"type": "expanded", "value": 2, "coverage_factor": 2},
+        ):
+            payload = {"value": 1, "unit": "m", "uncertainty": uncertainty}
+            self.assertIsNone(parse_measurement(payload))
+
+    def test_absolute_temperature_interval_normalizes_affinely(self):
+        celsius = parse_measurement({
+            "value": 0, "unit": "degC",
+            "uncertainty": {"type": "interval", "lower": -1, "upper": 1},
+        })
+        fahrenheit = parse_measurement({
+            "value": 32, "unit": "degF",
+            "uncertainty": {"type": "interval", "lower": 30.2, "upper": 33.8},
+        })
+        # Floats are deliberately rejected; decimal text is exact.
+        self.assertIsNone(fahrenheit)
+        fahrenheit = parse_measurement({
+            "value": 32, "unit": "degF",
+            "uncertainty": {
+                "type": "interval",
+                "lower": Decimal("30.2"), "upper": Decimal("33.8"),
+            },
+        })
+        self.assertEqual(celsius.lower, fahrenheit.lower)
+        self.assertEqual(celsius.upper, fahrenheit.upper)
 
 
 class StageNineRegressionTests(unittest.TestCase):
