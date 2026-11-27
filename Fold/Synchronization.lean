@@ -351,4 +351,43 @@ theorem pause_preserves_first_arrival :
     pausedRate_firstArrival := by
   exact ⟨by decide, by decide, pausedRate_firstArrival⟩
 
+
+
+/-- Cumulative signed progress permits retreats as well as advances.
+    The increment rate(n) is applied on the transition n to n+1. -/
+def cumulativeSignedProgress (rate : Nat → Int) : Nat → Int
+  | 0 => 0
+  | n + 1 => cumulativeSignedProgress rate n + rate n
+
+/-- A path that advances, retreats, then advances to the target. -/
+def reversalRate (n : Nat) : Int :=
+  if n = 0 then 2 else if n = 1 then -1 else if n = 2 then 2 else 0
+
+/-- Signed trajectory positions are 0, 2, 1, 3: it retreats before
+    reaching the target, but does not hit the target early. -/
+theorem reversalRate_firstArrival :
+    FirstArrival (fun _ t => cumulativeSignedProgress reversalRate t = 3) 0 3 := by
+  change cumulativeSignedProgress reversalRate 3 = 3 ∧
+    ∀ earlier, earlier < 3 →
+      ¬ cumulativeSignedProgress reversalRate earlier = 3
+  constructor
+  · simp [cumulativeSignedProgress, reversalRate]
+  · intro earlier hearlier hreach
+    have hcases : earlier = 0 ∨ earlier = 1 ∨ earlier = 2 := by omega
+    rcases hcases with h0 | h1 | h2
+    · subst earlier
+      simp [cumulativeSignedProgress, reversalRate] at hreach
+    · subst earlier
+      simp [cumulativeSignedProgress, reversalRate] at hreach
+    · subst earlier
+      simp [cumulativeSignedProgress, reversalRate] at hreach
+
+/-- The middle increment is negative, so the path genuinely reverses;
+    nevertheless, its first target hit is exactly tick 3. -/
+theorem reversal_still_has_first_arrival :
+    reversalRate 1 < 0 ∧
+    cumulativeSignedProgress reversalRate 2 = 1 ∧
+    reversalRate_firstArrival := by
+  exact ⟨by decide, by decide, reversalRate_firstArrival⟩
+
 end Fold
