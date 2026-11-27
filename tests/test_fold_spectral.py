@@ -136,6 +136,34 @@ class FoldSpectralTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             cyclotomic_eigenvalue_multiplicities(4, 2)
 
+    def test_explicit_cyclotomic_factorization(self):
+        from tools.FoldSpectral import (
+            cyclotomic_factorization_mod,
+            verify_cyclotomic_factorization,
+        )
+
+        self.assertEqual(cyclotomic_factorization_mod(4, 3), ((1, 0, 1),))
+        self.assertEqual(
+            cyclotomic_factorization_mod(4, 5),
+            ((2, 1), (3, 1)),
+        )
+        self.assertEqual(
+            cyclotomic_factorization_mod(3, 2),
+            ((1, 1, 1),),
+        )
+        self.assertEqual(
+            cyclotomic_factorization_mod(3, 7),
+            ((2, 1), (4, 1)),
+        )
+        self.assertEqual(
+            cyclotomic_factorization_mod(5, 2),
+            ((1, 1, 1, 1), (1, 0, 1, 1)),
+        )
+        for order, prime in ((3, 2), (3, 7), (4, 3), (4, 5), (5, 2), (8, 3), (12, 5)):
+            self.assertTrue(verify_cyclotomic_factorization(order, prime))
+        with self.assertRaises(ValueError):
+            cyclotomic_factorization_mod(4, 2)
+
     def test_rejects_zero_vector_and_invalid_modulus(self):
         self.assertFalse(verify_quarter_turn_eigenpair(
             ModularEigenpair(0, (0, 0)), 5
