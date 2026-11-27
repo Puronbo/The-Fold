@@ -732,3 +732,63 @@ def verify_cyclotomic_factorization_with_multiplicity(
         inverse = pow(target[-1], -1, prime)
         target = [value * inverse % prime for value in target]
     return product == target
+
+
+
+def cyclotomic_factorization_profile(order: int, prime: int) -> dict[str, object]:
+    """Return one degree-and-multiplicity profile for every prime/order pair.
+
+    The order is split as p**a * n with gcd(p, n)=1. Frobenius gives
+    irreducible degree ord_n(p) (defined as 1 for n=1), while every
+    distinct factor occurs with multiplicity phi(p**a).
+    """
+    if order < 1:
+        raise ValueError("order must be positive")
+    if not _is_prime(prime):
+        raise ValueError("prime must be prime")
+
+    reduced_order = order
+    p_power = 1
+    while reduced_order % prime == 0:
+        reduced_order //= prime
+        p_power *= prime
+
+    factorization = cyclotomic_factorization_with_multiplicity_mod(
+        order, prime
+    )
+    factor_degrees = tuple(len(factor) - 1 for factor, _ in factorization)
+    multiplicities = tuple(multiplicity for _, multiplicity in factorization)
+    frobenius_degree = multiplicative_order(prime, reduced_order)
+    expected_factor_count = _euler_totient(reduced_order) // frobenius_degree
+    total_degree = sum(
+        degree * multiplicity
+        for degree, multiplicity in zip(factor_degrees, multiplicities)
+    )
+    return {
+        "dimension": _euler_totient(order),
+        "reduced_order": reduced_order,
+        "p_power": p_power,
+        "frobenius_degree": frobenius_degree,
+        "distinct_factor_count": len(factorization),
+        "expected_factor_count": expected_factor_count,
+        "factor_degrees": factor_degrees,
+        "factor_multiplicities": multiplicities,
+        "total_factor_degree": total_degree,
+        "squarefree": all(value == 1 for value in multiplicities),
+        "factorization": factorization,
+    }
+
+
+def verify_cyclotomic_factorization_profile(order: int, prime: int) -> bool:
+    """Check factorization, Frobenius degrees, multiplicities, and total degree."""
+    profile = cyclotomic_factorization_profile(order, prime)
+    if not verify_cyclotomic_factorization_with_multiplicity(order, prime):
+        return False
+    return (
+        profile["distinct_factor_count"] == profile["expected_factor_count"]
+        and all(
+            degree == profile["frobenius_degree"]
+            for degree in profile["factor_degrees"]
+        )
+        and profile["total_factor_degree"] == profile["dimension"]
+    )
