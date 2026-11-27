@@ -93,6 +93,7 @@ def affineScale (k p0 p : Int) : Int := p0 + k * (p - p0)
 /-- Unit scale leaves every point unchanged. -/
 theorem affineScale_one (p0 p : Int) : affineScale 1 p0 p = p := by
   simp [affineScale]
+  omega
 
 /-- Zero scale collapses every point to the chosen datum. -/
 theorem affineScale_zero (p0 p : Int) : affineScale 0 p0 p = p0 := by
@@ -108,8 +109,10 @@ theorem affineScale_neg_one (p0 p : Int) :
 theorem affineScale_comp (k l p0 p : Int) :
     affineScale k p0 (affineScale l p0 p) =
       affineScale (k * l) p0 p := by
-  simp [affineScale]
-  omega
+  simp only [affineScale]
+  rw [show p0 + l * (p - p0) - p0 = l * (p - p0) by omega]
+  congr 1
+  exact (Int.mul_assoc k l (p - p0)).symm
 
 /-- Point reflection through p₀ is an involution. -/
 def pointReflect (p0 p : Int) : Int := 2 * p0 - p
