@@ -104,4 +104,21 @@ theorem distinct_references_survive_collapse
   have hr := congrArg (fun state : State => state.reference) hc
   exact h (by simpa [collapse] using hr)
 
+/-- Post-processing cannot undo a collision already created by a map. -/
+theorem comp_not_injective_of_not_injective
+    {α β γ : Type} (f : α → β) (g : β → γ)
+    (hf : ¬ Function.Injective f) :
+    ¬ Function.Injective (g ∘ f) := by
+  intro hcomp
+  apply hf
+  intro x y hxy
+  apply hcomp
+  exact congrArg g hxy
+
+/-- No later state transformation can recover injectivity after collapse. -/
+theorem postprocess_cannot_restore_collapse_injectivity
+    (g : State → State) :
+    ¬ Function.Injective (g ∘ collapse) := by
+  exact comp_not_injective_of_not_injective collapse g collapse_not_injective
+
 end Fold
