@@ -285,4 +285,27 @@ theorem synchronized_first_arrival_is_common_lower_bound
   firstArrival_le_any_arrival reaches process first later
     (hSync process hMember) hLater
 
+/-- A process cannot have two different first-arrival times. -/
+theorem firstArrival_unique
+    {α : Type} (reaches : α → Nat → Prop)
+    (process : α) (t u : Nat)
+    (ht : FirstArrival reaches process t)
+    (hu : FirstArrival reaches process u) :
+    t = u := by
+  apply Nat.le_antisymm
+  · exact firstArrival_le_any_arrival reaches process t u ht hu.1
+  · exact firstArrival_le_any_arrival reaches process u t hu ht.1
+
+/--
+If every process in a nonempty family has a first-arrival time and all
+those first-arrival times equal t, then the family is synchronized at t.
+-/
+theorem synchronized_of_common_first_arrival
+    {α : Type} (reaches : α → Nat → Prop)
+    (processes : List α) (t : Nat)
+    (hCommon : ∀ process, process ∈ processes →
+      FirstArrival reaches process t) :
+    SynchronizedFirstArrival reaches processes t :=
+  hCommon
+
 end Fold
