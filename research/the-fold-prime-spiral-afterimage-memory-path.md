@@ -114,3 +114,55 @@ The central formulation is:
 \]
 
 The spiral shows where the sequence has been placed; the memory path preserves order; the afterimage makes prior positions or features continue to influence the present representation.
+
+
+## 7. Arithmetic controls: separate the prime label from the spiral index
+
+A key control is to distinguish the sequence index (n) from the prime value (p_n). In the index spiral above, the angle and radius are functions of (n), while arithmetic information is carried by the label (p_n). Therefore a geometric alignment in the points (z_n) is not, by itself, a congruence statement about the prime values.
+
+For a fixed integer modulus (m\geq2), every prime (p\) not dividing (m) satisfies
+\[
+\gcd(p,m)=1.
+\]
+Equivalently, its residue class lies in the unit group
+\[
+[p]_m\in(\mathbb Z/m\mathbb Z)^\times.
+\]
+The only prime labels excluded from this unit-class statement are prime divisors of (m). This is an exact arithmetic filter, not a prediction of where the points lie geometrically.
+
+A controlled plot should therefore keep two channels separate:
+
+- **geometry channel:** (z_n), determined by the declared spiral map;
+- **arithmetic channel:** (p_n\bmod m), or a feature such as the prime gap (g_n).
+
+Coloring (z_n) by (p_n\bmod m) is a visualization of the arithmetic labels on the index spiral. It does not mean the index (n) itself has that residue, and it does not imply that a visible ray is a prime progression.
+
+If instead the chosen spiral is indexed directly by the integer label (p), then the geometric coordinate map is a different function, say (Z(p)). Any claim about arithmetic progressions must be checked in the label variable (p), not inferred from apparent spacing in the picture.
+
+## 8. What exponential fading preserves exactly
+
+Take the point-supported kernel (K(z)=\mathbf 1_{z=0}) on a state space where the encoded points (z_n) are distinct, and choose weights (w_j=\lambda^j) with (0<\lambda\leq1). Then
+\[
+\mathcal A_N(z)=\sum_{n=1}^{N}\lambda^{N-n}\mathbf 1_{z=z_n}.
+\]
+Every visited point has strictly positive weight, and every unvisited point has weight zero. Hence
+\[
+\operatorname{supp}(\mathcal A_N)=\{z_1,\ldots,z_N\}.
+\]
+Exponential fading changes the amplitudes and recency ordering but does not erase any visited point at exact arithmetic precision. A thresholded display can erase faint older points; finite-precision rendering can also underflow. Those are properties of the observation/display layer, not of the exact weighted sum.
+
+For a non-point-supported kernel, the support may spread beyond the visited set. Thus support preservation is specific to the point kernel (or another kernel with a separately proved support property).
+
+## 9. Baselines before interpreting a pattern
+
+For any apparent alignment or recurrence, compare at least:
+
+1. the same prime labels under a different angular increment or radial scaling;
+2. the same geometry with labels shuffled, to measure how much the visual impression depends on label placement;
+3. arithmetic residue coloring (p_n\bmod m) for several fixed moduli;
+4. a direct plot in the prime-value variable, if the claim concerns arithmetic progressions in (p);
+5. cumulative, exponentially fading, and finite-window memory with the same underlying path.
+
+A feature is **encoding-sensitive** if it changes substantially under a harmless coordinate reparameterization. It is **arithmetic-supported** only if it is independently visible in the prime labels or a stated arithmetic statistic. Even then, an observed finite pattern is evidence for a finite-data statement, not a proof of an infinite prime law.
+
+The resulting discipline is: test geometry as geometry, congruences as arithmetic, and fading as an observation operator. Do not let one channel silently stand in for another.
