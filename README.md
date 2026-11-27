@@ -2,10 +2,7 @@
 
 **Scale, twist, collapse — and what is left at the centre.**
 
-Scaling about a datum is the one-parameter family `g_k(P) = P₀ + k(P − P₀)`. Everything in this
-paper follows from one determinant, `det(g_k) = kⁿ`: heights scale like `k`, areas like `k²`,
-volumes like `k³`. A real `k` changes size, an imaginary one twists, and a twist is the product of
-two folds.
+The starting construction is the affine scale family `g_k(P) = P₀ + k(P − P₀)`: `k = 1` is the identity, `k = 0` collapses to the datum, and `k = −1` is point reflection through it. In finite dimension `n`, its linear part has determinant `kⁿ`. A strict fold is a separate operation: an involution `f` with `f(f(x)) = x`, such as reflection across a hyperplane. The distinction between collapse and involution is foundational.
 
 **The four zones.** Every claim in this corpus is labelled by how it sits against the mathematics:
 
@@ -18,7 +15,7 @@ A rhyme is a place to look, never a proof; a rhyme written as a proof is the one
 The full statement is in `the-fold-problems.md`, and the engineering instance is in
 `the-fold-engineering.md`.
 
-**Start here:** `the-fold-key.md` — the master key. Give it a value of `k`; it returns the stage,
+**Start at the origin:** `the-fold-origin.md` — derives the datum, displacement, scale family, collapse, involution, crease, orbit quotient, optional observer cut, and direction state in dependency order. Then use `the-fold-key.md` as the master key. Give it a value of `k`; it returns the stage,
 the operation, what appears, what survives, and the note that proves it.
 
 **What the corpus found.** Six results survived the zones, and each moved the argument rather than
