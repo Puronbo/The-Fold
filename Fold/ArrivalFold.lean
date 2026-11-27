@@ -40,15 +40,7 @@ theorem firstArrival_preserved_by_fold
 theorem fixedTarget_fold_invariant (F : Fold X) :
     FoldInvariantTarget F (Fix F) := by
   intro x
-  constructor
-  · intro h
-    change F.f (F.f x) = F.f x at h
-    rw [F.invol] at h
-    exact (F.invol x).symm.trans h
-  · intro h
-    change F.f (F.f x) = F.f x
-    rw [F.invol]
-    exact h
+  exact fix_iff F x
 
 /-- A trajectory and its pointwise-folded image have the same first
     arrival at the crease. -/
