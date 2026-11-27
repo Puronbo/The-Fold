@@ -274,7 +274,7 @@ def verify_optimality_certificate(
             for feature in safe
         )
         return packing_valid and dual_feasible
-    except (KeyError, ValueError):
+    except (KeyError, ValueError, ZeroDivisionError):
         return False
 
 
@@ -287,6 +287,8 @@ def retention_plan_proves_optimality(
     plan: RetentionPlan,
 ) -> bool:
     """A feasible plan plus matching packing/dual bounds certifies minimum."""
+    if any(denominator <= 0 for _, denominator in plan.dual_weights):
+        return False
     by_id = {item.identifier: item for item in instances}
     required_count = sum(
         1 for a, b in cannot_link_pairs
@@ -347,6 +349,28 @@ def _self_test() -> None:
     # splits a/d but not a/b. The minimum safe set therefore has size two.
     assert len(plan.retained_features) == 2
 
+    # Nonuniform rational weights improve the dual objective when one
+    # collision has fewer available separating features.
+    weighted_items = (
+        Instance.make("w0", {"shape": "round", "f1": 0, "f2": 0, "f3": 0, "f4": 0}),
+        Instance.make("w1", {"shape": "round", "f1": 1, "f2": 1, "f3": 0, "f4": 0}),
+        Instance.make("w2", {"shape": "round", "f1": 1, "f2": 0, "f3": 1, "f4": 0}),
+        Instance.make("w3", {"shape": "round", "f1": 0, "f2": 0, "f3": 0, "f4": 1}),
+    )
+    weighted_plan = minimum_retention_features(
+        weighted_items, base, ("f1", "f2", "f3", "f4"), (),
+        (("w0", "w1"), ("w0", "w2"), ("w0", "w3")),
+    )
+    assert weighted_plan is not None
+    weighted_objective = sum(
+        (Fraction(n, d) for n, d in weighted_plan.dual_weights), Fraction(0)
+    )
+    assert weighted_objective == 2
+    assert retention_plan_proves_optimality(
+        weighted_items, base, ("f1", "f2", "f3", "f4"), (),
+        (("w0", "w1"), ("w0", "w2"), ("w0", "w3")), weighted_plan
+    )
+
     # A candidate that splits a must-link pair is unsafe and cannot be used.
     impossible = minimum_retention_features(
         items, base, ("colour", "weight"), must, (("a", "b"), ("a", "d"))
@@ -367,7 +391,8 @@ def _self_test() -> None:
     print("PASS  already-separated pairs need no extra memory")
     print("PASS  packing certificate proves the two-feature optimum")
     print("PASS  rational dual bound independently matches the optimum")
-    print("7/7 checks passed")
+    print("PASS  nonuniform rational weights certify a weighted optimum")
+    print("8/8 checks passed")
 
 
 if __name__ == "__main__":
