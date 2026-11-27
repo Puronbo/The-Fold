@@ -560,7 +560,7 @@ theorem first_threshold_crossing_speed_pos
   have hZero : speed = 0 := Nat.eq_zero_of_not_pos hNotPositive
   have hReached := hCross.1
   simp [hZero] at hReached
-  omega
+  exact (Nat.not_lt_of_ge hReached) hTarget
 
 /--
 A positive target cannot have its first crossing at tick zero:
