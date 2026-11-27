@@ -192,3 +192,6 @@ The new agi/relation_selection.py compares caller-supplied composed paths on the
 ## Stage 17: controlled discovery, selection, and final testing
 
 `agi/three_way_evaluation.py` adds a disjoint three-part protocol. Candidates are declared as originating from discovery rows, compared on validation rows, and only the selected candidate is evaluated on the untouched test partition. Overlapping partition keys, invalid provenance, duplicate candidate IDs, and missing partitions are handled explicitly. Provenance declarations improve auditability but cannot prove that external candidate construction did not leak held-out information. This is a finite-sample evaluation protocol, not a guarantee of generalization.
+
+
+**AGI concept-learning prototype (Stage 18):** Stage 18 adds finite active experiment design for competing composed relations. It ranks caller-supplied exact rational inputs by pairwise prediction separation, reports candidate coverage, and treats undefined predictions as missing coverage rather than agreement. The score is a scale-dependent heuristic; no real-world experiment is executed or presumed safe. See `agi/active_experiment.py` and `agi/stage-18-active-experiment-design.md`. This is a narrow active-learning component, not autonomous science or AGI.
