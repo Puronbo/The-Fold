@@ -182,3 +182,8 @@ This is algebraic composition of a small declared family, not autonomous discove
 ## Stage 15: independent validation of composed relations
 
 The new agi/relation_validation.py evaluates fixed composed paths on separate validation observations. It reports endpoint matches separately from intermediate-step matches, records domain failures as refutations, rejects malformed or duplicate validation rows, and never refits relation parameters. Empty validation sets are marked insufficient rather than passed. Tests cover held-out affine chains, hidden intermediate errors despite a matching endpoint, endpoint counterexamples, domain failures, and exact-input restrictions. This is finite held-out testing, not a universal proof or a guarantee of distributional generalization.
+
+
+## Stage 16: evidence-based comparison of competing relational models
+
+The new agi/relation_selection.py compares caller-supplied composed paths on the same held-out observations. It reports endpoint and intermediate errors separately, counts domain failures, and applies a transparent structural-complexity proxy only after empirical mismatch counts. Exact projectively equivalent composed maps with identical excluded-input sets are grouped without deleting alternative derivations. Empty validation data produces no winner. The ranking is deterministic, not probabilistic, and remains limited to the declared scalar fractional-linear family; caller-managed separation of validation data remains essential.
