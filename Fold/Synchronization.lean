@@ -95,4 +95,26 @@ theorem positive_speeds_synchronized_first_arrival
   intro speed hmem
   exact positiveSpeed_firstArrival speed arrival (hpositive speed hmem)
 
+
+/-- A process cannot have two distinct first-arrival times. -/
+theorem firstArrival_unique {α : Type} (reaches : α → Nat → Prop)
+    (process : α) (a b : Nat)
+    (ha : FirstArrival reaches process a)
+    (hb : FirstArrival reaches process b) :
+    a = b := by
+  by_contra hne
+  rcases Nat.lt_or_gt_of_ne hne with hab | hba
+  · exact (ha.2 b hab) hb.1
+  · exact (hb.2 a hba) ha.1
+
+/-- Any member of a family determines the unique synchronized boundary
+    when its reach predicate is independent of that boundary. -/
+theorem common_first_arrival_unique
+    {α : Type} (reaches : α → Nat → Prop)
+    (process : α) (a b : Nat)
+    (ha : FirstArrival reaches process a)
+    (hb : FirstArrival reaches process b) :
+    a = b :=
+  firstArrival_unique reaches process a b ha hb
+
 end Fold
