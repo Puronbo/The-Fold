@@ -168,3 +168,17 @@ If this holds, the state-level predicate descends to a predicate on the quotient
 This identifies exactly which target questions survive forgetting the representative.
 
 **Boundary:** a non-invariant target cannot be a well-defined property of an orbit. One can still ask about it after choosing a representative, or transport the target together with the fold as in the preceding section, but that is not an intrinsic chart-level predicate.
+
+
+## What first-arrival information survives the quotient?
+
+The quotient chart forgets the choice between representatives in the same orbit. The formal result `firstArrival_chart_path_congr` makes the consequence explicit: if two state paths have the same chart image at every tick, then every chart-level target gives them exactly the same first-arrival result.
+
+The stronger orbit formulation, `firstArrival_orbit_representative_independent`, requires only that the two representatives lie in the same Fold-orbit at each tick. The chart equality follows from the quotient's defining relation.
+
+This separates two cases:
+
+- **Recoverable from the quotient:** any event defined by a predicate on chart classes. Its first-arrival behavior is independent of representative.
+- **Not recoverable from the quotient alone:** a representative-specific event that distinguishes two states in the same orbit. Such a predicate is not well-defined on the quotient unless additional representative data is retained.
+
+Thus quotienting does not erase all event timing. It erases exactly the distinctions that the quotient identifies.
