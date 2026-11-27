@@ -172,4 +172,53 @@ theorem remainingDisplacement_factors
       speed * timeToArrival arrival t := by
   rfl
 
+
+/-- A general trajectory is represented by its nonnegative integer gap
+    from a target. It need not have constant rate or a linear path. -/
+def GapFirstArrival {α : Type} (gap : α → Nat → Nat)
+    (process : α) (time : Nat) : Prop :=
+  FirstArrival (fun p t => gap p t = 0) process time
+
+/-- If a trajectory's gap is zero at T and strictly positive at every
+    earlier tick, then T is its unique first-arrival time. -/
+theorem firstArrival_of_positive_gap
+    {α : Type} (gap : α → Nat → Nat) (process : α) (time : Nat)
+    (hat : gap process time = 0)
+    (hbefore : ∀ earlier, earlier < time → 0 < gap process earlier) :
+    GapFirstArrival gap process time := by
+  constructor
+  · exact hat
+  · intro earlier hearlier hzero
+    have hpos := hbefore earlier hearlier
+    omega
+
+/-- A family of arbitrary, potentially nonlinear discrete trajectories
+    synchronizes when each gap vanishes for the first time at the same T. -/
+def SynchronizedGapArrival {α : Type} (gap : α → Nat → Nat)
+    (processes : List α) (time : Nat) : Prop :=
+  ∀ process, process ∈ processes → GapFirstArrival gap process time
+
+/-- Individual positive-gap conditions are sufficient for simultaneous
+    first arrival, without assuming equal speeds or constant rates. -/
+theorem synchronized_of_positive_gaps
+    {α : Type} (gap : α → Nat → Nat) (processes : List α) (time : Nat)
+    (hat : ∀ process, process ∈ processes → gap process time = 0)
+    (hbefore : ∀ process, process ∈ processes →
+      ∀ earlier, earlier < time → 0 < gap process earlier) :
+    SynchronizedGapArrival gap processes time := by
+  intro process hmem
+  exact firstArrival_of_positive_gap gap process time
+    (hat process hmem) (hbefore process hmem)
+
+/-- For a nonempty family, a synchronized first-arrival time is unique,
+    even when trajectories are nonlinear and have unrelated rates. -/
+theorem synchronizedGapArrival_unique
+    {α : Type} (gap : α → Nat → Nat) (processes : List α)
+    (process : α) (a b : Nat) (hmem : process ∈ processes)
+    (ha : SynchronizedGapArrival gap processes a)
+    (hb : SynchronizedGapArrival gap processes b) :
+    a = b :=
+  firstArrival_unique (fun p t => gap p t = 0) process a b
+    (ha process hmem) (hb process hmem)
+
 end Fold
