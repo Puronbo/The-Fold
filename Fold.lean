@@ -39,6 +39,12 @@ import Fold.Complexity.Reduction
 #check Fold.scale_moves
 #check Fold.scale_collapse
 
+#check Fold.affineScale_one
+#check Fold.affineScale_zero
+#check Fold.affineScale_neg_one
+#check Fold.affineScale_comp
+#check Fold.pointReflect_invol
+
 #check Fold.uncap_cap
 #check Fold.fill_puncture
 #check Fold.chi_puncture_cap
