@@ -6,6 +6,8 @@ on:
       - "foldproof/**"
   pull_request:
     paths:
+      - "Fold/**"
+      - "Fold.lean"
       - "lean/**"
       - "lean-toolchain"
       - "lakefile.lean"
