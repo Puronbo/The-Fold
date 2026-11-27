@@ -386,3 +386,21 @@ preserves the entire synchronized-boundary predicate. This is an exact
 logical equivalence, not a claim that physically folding a path leaves
 every destination unchanged. The Lean development is in
 `Fold/ArrivalFold.lean`.
+
+
+## 18. Changing the discrete clock
+
+First arrival is preserved when the time axis is re-indexed by a strictly
+increasing map, provided the comparison is made at the corresponding
+sample. If the original first hit occurs at clock value \\(c(T)\\), then
+the path sampled at \\(c(0),c(1),\\ldots\\) first hits at index \\(T\\).
+The proof uses only order preservation: every earlier index remains an
+earlier original sample.
+
+A concrete corollary is multiplication of the clock by a positive natural
+number, \\(c(t)=mt\\) with \\(m>0\\). This changes the sampling scale,
+not the path's state values or its target. The result is one-way: a
+re-indexed sequence may skip intermediate original samples, so its first
+arrival does not by itself determine what happened at skipped times.
+The Lean declarations are `firstArrival_strict_time_reindex` and
+`firstArrival_nat_mul_time_reindex`.
