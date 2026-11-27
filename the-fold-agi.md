@@ -225,3 +225,8 @@ The new agi/relation_selection.py compares caller-supplied composed paths on the
 ## Stage 24: finite affine transformation groups
 
 `agi/affine_group.py` recognizes whether a finite supplied collection of scalar affine maps is a group under composition. It checks identity, bijectivity, closure, and inverses exactly; associativity is inherited from function composition. The documentation also records the classification that finite subgroups of the real affine group have at most two elements. See `agi/stage-24-affine-groups.md`.
+
+
+## Stage 25: finite symmetry actions
+
+`agi/symmetry_actions.py` analyzes finite permutation-group actions on explicitly supplied states. It verifies identity and closure, derives state orbits and stabilizers, and optionally checks whether every transformation preserves a supplied binary relation. See `agi/stage-25-symmetry-actions.md`.
