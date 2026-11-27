@@ -469,3 +469,6 @@ E(x,v,\theta)=
 When \(\phi(\theta)\ne\theta\), this transition realizes differential rest. The Lean module Fold/Rest.lean defines RestContextState, DifferentialRest, and conditionOnlyStep, and proves position preservation, zero-velocity preservation, and state inequality when the condition update differs.
 
 **Interpretation:** the current kinematic state can be at rest while its next-transition conditions evolve. This gives a precise meaning to “the next state of rest where change differs.” It does not assert that every resting physical system changes internally; the condition update is an explicit model assumption.
+
+
+A further distinction is between the *current* kinematic state and a *prediction* for its next motion. If a prediction law depends on the condition, define \(v_{\mathrm{next}}=L(\theta)\). A condition update can leave current \(x\) and \(v=0\) unchanged while changing the prediction, provided \(L(\phi(\theta))\ne L(\theta)\). The Lean theorem `differentialRest_changes_prediction` proves exactly this conditional statement. The condition change alone does not force a different future motion; the prediction law must actually distinguish the two conditions.
