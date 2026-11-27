@@ -230,3 +230,12 @@ The new agi/relation_selection.py compares caller-supplied composed paths on the
 ## Stage 25: finite symmetry actions
 
 `agi/symmetry_actions.py` analyzes finite permutation-group actions on explicitly supplied states. It verifies identity and closure, derives state orbits and stabilizers, and optionally checks whether every transformation preserves a supplied binary relation. See `agi/stage-25-symmetry-actions.md`.
+
+
+## Stage 26: structural equivalence and quotient spaces
+
+Stage 26 adds \`agi/quotient_spaces.py\`, which constructs the orbit quotient \(X/G\) from a verified finite group action. It retains the full orbit partition, state-to-class map, class sizes, and deterministic representatives. Representative selection follows input order and is explicitly not an intrinsic canonical form.
+
+For supplied binary relations, the implementation separates diagonal group invariance from quotient well-definedness. A relation descends only when membership is constant on every product of two orbits. The equality relation on a two-state swap orbit is a regression counterexample: it is preserved by simultaneous swapping but does not define a relation on the one-class quotient. The stage reports cardinality compression, not an entropy measure or universal information metric. See \`agi/stage-26-quotient-spaces.md\` and \`agi/test_quotient_spaces.py\`.
+
+This is exact finite abstraction machinery; it does not discover task-relevant symmetries from raw data or establish AGI.
