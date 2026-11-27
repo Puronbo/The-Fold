@@ -1080,3 +1080,5 @@ A first restricted decision task is now specified and implemented: 3-colourabili
 
 
 **NP-completeness bridge:** The formal core now captures the standard result that putting any NP-complete target in P collapses P and NP, assuming P is closed under the chosen polynomial-time reductions. See `Fold/Complexity/Completeness.lean` and `the-fold-np-zero.md`.
+
+**Prime spiral as afterimage and memory path:** `research/the-fold-prime-spiral-afterimage-memory-path.md` separates the prime sequence, its chosen spiral embedding, and a weighted afterimage of the visited points. It defines a memory path that can retain prime gaps and optional matrix-dependent prime spectral fingerprints, while distinguishing geometric recurrence from exact return. The spiral is an encoding, not a claimed law of prime distribution; the afterimage is an explicit memory operator, not physical memory.
