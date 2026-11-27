@@ -152,5 +152,8 @@ import Fold.Complexity.Reduction
 #check Fold.diagonalProjection_idempotent
 #check Fold.diagonalCut
 
+#check Fold.conjugate
+#check Fold.conjugate_intertwines
+
 #check Fold.booleanSwap_no_fixed
 #check Fold.booleanSwap_no_cut
