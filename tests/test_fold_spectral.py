@@ -78,6 +78,23 @@ class FoldSpectralTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             cyclotomic_spectral_degree(4, 2)
 
+    def test_exact_cyclotomic_rotation_matrices(self):
+        from tools.FoldSpectral import (
+            cyclotomic_rotation_matrix,
+            verify_cyclotomic_rotation_matrix,
+        )
+
+        self.assertEqual(
+            cyclotomic_rotation_matrix(4),
+            ((0, -1), (1, 0)),
+        )
+        self.assertEqual(
+            cyclotomic_rotation_matrix(3),
+            ((0, -1), (1, -1)),
+        )
+        for order in range(1, 13):
+            self.assertTrue(verify_cyclotomic_rotation_matrix(order))
+
     def test_rejects_zero_vector_and_invalid_modulus(self):
         self.assertFalse(verify_quarter_turn_eigenpair(
             ModularEigenpair(0, (0, 0)), 5
