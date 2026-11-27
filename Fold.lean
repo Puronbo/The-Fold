@@ -112,3 +112,5 @@ import Fold.Doubling
 #check Fold.comp_injective_of_injective
 #check Fold.restoreValue_collapse
 #check Fold.collapseWithValue_injective
+#check Fold.retainPair_injective_iff
+#check Fold.retainPair_injective_of_separates_collisions
