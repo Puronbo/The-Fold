@@ -280,23 +280,9 @@ theorem firstArrival_chart_path_congr
         (fun p t => chartHit (chart F (path₁ p t))) process time ↔
       FirstArrival
         (fun p t => chartHit (chart F (path₂ p t))) process time := by
-  constructor
-  · rintro ⟨hnow, hbefore⟩
-    refine ⟨?_, ?_⟩
-    · rw [sameChart process time]
-      exact hnow
-    · intro earlier hearlier hhit
-      apply hbefore earlier hearlier
-      rw [sameChart process earlier]
-      exact hhit
-  · rintro ⟨hnow, hbefore⟩
-    refine ⟨?_, ?_⟩
-    · rw [sameChart process time]
-      exact hnow
-    · intro earlier hearlier hhit
-      apply hbefore earlier hearlier
-      rw [sameChart process earlier]
-      exact hhit
+  apply firstArrival_congr
+  intro t
+  exact Iff.of_eq (congrArg chartHit (sameChart process t))
 
 /-- Any two representatives of the same orbit yield the same chart
     observation, hence the same first-arrival result for chart targets. -/
@@ -353,12 +339,12 @@ theorem chart_step_eq_iff_orbit
 /-- Any property expressed solely through the chart trajectory is
     independent of the chosen state representatives. -/
 theorem chartPath_property_representative_independent
-    {α X Y : Type} (F : Fold X) (path₁ path₂ : α → Nat → X)
+    {α X : Type} (F : Fold X) (path₁ path₂ : α → Nat → X)
     (sameOrbit : ∀ process time,
       Orbit F (path₁ process time) (path₂ process time))
     (property : (α → Nat → Chart F) → Prop) :
     property (chartPath F path₁) ↔ property (chartPath F path₂) := by
-  apply congrArg property
-  exact (chartPath_eq_iff_pointwise_orbit F path₁ path₂).2 sameOrbit
+  have hpath := (chartPath_eq_iff_pointwise_orbit F path₁ path₂).2 sameOrbit
+  rw [hpath]
 
 end Fold
