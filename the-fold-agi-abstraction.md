@@ -463,3 +463,23 @@ python tools/FoldEnvironment.py
 The regression suite covers approval gating, budget enforcement, forward movement, turning, reverse movement, boundary handling, stale-state rejection, allowlist enforcement, audit retention, and memory-chain integrity.
 
 This closes a small engineering loop from proposal to permitted action to observation. It does not connect to physical devices, external services, or a real-world actuator. Approval is a caller-supplied gate in this simulator, not an authentication or authorization system. The current observation is read from the same deterministic simulator, so it demonstrates the interface and audit discipline—not independent sensing or proof that an external action occurred. A future real adapter must have its own permission model, independent observation channel, failure handling, and human approval policy.
+
+
+## 22. FoldAgent: goal-directed control with mandatory turns
+
+`tools/FoldAgent.py` adds a minimal deterministic controller on top of `FoldEnvironment`. Given a target position, it chooses exactly one action per call:
+- step forward when the current direction points toward the goal;
+- turn when the goal lies behind the current direction;
+- stop when the goal is reached.
+
+The controller does not encode reverse movement as a negative step. This makes the directional rule operational: to move toward a goal behind the agent, the controller must first issue a turn, then a forward step. Each proposed action still passes through the environment's approval gate, budget check, revision precondition, and append-only audit.
+
+Run:
+
+```sh
+python tools/FoldAgent.py
+```
+
+The regression checks cover forward navigation, stopping at the goal, turning before reverse-direction travel, denied approval, exhausted budget, invalid goals, and audit integrity.
+
+This is a one-dimensional deterministic policy with a known goal and known state. It does not learn a world model, infer goals, handle uncertainty, or provide general planning. The user or an upstream model supplies the goal and approval. The next meaningful evaluation is to compare the controller's chosen action with an independent planner across varied worlds and adversarial boundary cases.
