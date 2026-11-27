@@ -98,4 +98,3 @@ import Fold.Complexity.ZeroResidual
 #check Fold.Complexity.ResidualZero
 #check Fold.Complexity.class_eq_iff_residual_zero
 #check Fold.Complexity.class_ne_iff_residual_nonempty
-#check Fold.Complexity.CollapseBit
