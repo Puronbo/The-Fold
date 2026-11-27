@@ -792,3 +792,72 @@ def verify_cyclotomic_factorization_profile(order: int, prime: int) -> bool:
         )
         and profile["total_factor_degree"] == profile["dimension"]
     )
+
+
+def cyclotomic_matrix_spectral_profile(
+    order: int, prime: int
+) -> dict[str, object]:
+    """Combine factor multiplicities with exact F_p eigenspace dimensions.
+
+    Each entry in eigenvalue_profile is
+    (eigenvalue, algebraic_multiplicity, geometric_multiplicity).
+    Only eigenvalues already in the base field F_p are listed.
+    """
+    profile = cyclotomic_factorization_profile(order, prime)
+    factorization = profile["factorization"]
+    matrix = cyclotomic_rotation_matrix_mod(order, prime)
+    size = len(matrix)
+    eigenvalue_profile = []
+    for eigenvalue in cyclotomic_root_residues(order, prime):
+        shifted = tuple(
+            tuple(
+                (matrix[row][column]
+                 - (eigenvalue if row == column else 0)) % prime
+                for column in range(size)
+            )
+            for row in range(size)
+        )
+        geometric_multiplicity = size - _matrix_rank_mod(shifted, prime)
+        linear_factor = ((-eigenvalue) % prime, 1)
+        algebraic_multiplicity = next(
+            (
+                multiplicity
+                for factor, multiplicity in factorization
+                if factor == linear_factor
+            ),
+            0,
+        )
+        eigenvalue_profile.append(
+            (eigenvalue, algebraic_multiplicity, geometric_multiplicity)
+        )
+
+    return {
+        **profile,
+        "base_field_eigenvalue_count": len(eigenvalue_profile),
+        "base_field_eigenspace_dimension_sum": sum(
+            geometric for _, _, geometric in eigenvalue_profile
+        ),
+        "eigenvalue_profile": tuple(eigenvalue_profile),
+    }
+
+
+def verify_cyclotomic_matrix_spectral_profile(order: int, prime: int) -> bool:
+    """Verify the polynomial profile and its matrix eigenspace witnesses."""
+    profile = cyclotomic_matrix_spectral_profile(order, prime)
+    if not verify_cyclotomic_factorization_profile(order, prime):
+        return False
+    for _, algebraic, geometric in profile["eigenvalue_profile"]:
+        if algebraic < 1 or geometric < 1 or geometric > algebraic:
+            return False
+    return (
+        profile["base_field_eigenvalue_count"]
+        == sum(
+            1 for factor, _ in profile["factorization"]
+            if len(factor) == 2
+        )
+        and profile["base_field_eigenspace_dimension_sum"]
+        == sum(
+            geometric
+            for _, _, geometric in profile["eigenvalue_profile"]
+        )
+    )
