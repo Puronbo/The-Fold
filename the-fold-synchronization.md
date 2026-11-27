@@ -84,3 +84,16 @@ The Lean module also constructs two cumulative-progress paths whose per-tick rat
 \]
 
 Both accumulate total progress (3) for the first time at tick (2), although their rate histories differ at each tick. This is a stronger example than the two gap profiles: it builds the paths from distinct, time-varying rates and verifies their common first hit.
+
+
+## Fold-preservation criterion
+
+A Fold does not automatically preserve first arrival at an arbitrary target. The exact sufficient condition is target invariance:
+
+`hit(F(x)) ↔ hit(x)` for every state `x`.
+
+For a trajectory `p(t)`, this condition makes the hit predicates of `p(t)` and `F(p(t))` equivalent at every tick. Therefore one trajectory reaches the target for the first time at (T) if and only if its pointwise-folded trajectory does. The proof checks both the hit at (T) and the absence of every earlier hit.
+
+The crease is a canonical invariant target: for an involution, (F(x)) is fixed exactly when (x) is fixed. The Lean module `Fold/ArrivalFold.lean` formalizes both the general target-invariance theorem and the crease-specific corollary.
+
+**Boundary of the result:** involutivity alone does not preserve a target that is not invariant under the fold. If the target changes under folding, compare against the transformed target (F^{-1}(H)) (which equals (F(H)) for an involution), rather than claiming the original target is unchanged.
