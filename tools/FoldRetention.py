@@ -222,10 +222,10 @@ def verify_optimality_certificate(
             if all(by_id[a].get(feature) == by_id[b].get(feature)
                    for a, b in must_link_pairs)
         )
-        required = {
+        required = tuple(
             (a, b) for a, b in cannot_link_pairs
             if equivalent(by_id[a], by_id[b], context)
-        }
+        )
         certificate = plan.lower_bound_pairs
         if len(set(certificate)) != len(certificate):
             return False
