@@ -301,7 +301,7 @@ theorem firstArrival_orbit_representative_independent
     {α X : Type} (F : Fold X)
     (path₁ path₂ : α → Nat → X)
     (sameOrbit : ∀ process time,
-      OrbitRel F (path₁ process time) (path₂ process time))
+      Orbit F (path₁ process time) (path₂ process time))
     (chartHit : Chart F → Prop) (process : α) (time : Nat) :
     FirstArrival
         (fun p t => chartHit (chart F (path₁ p t))) process time ↔
@@ -309,4 +309,4 @@ theorem firstArrival_orbit_representative_independent
         (fun p t => chartHit (chart F (path₂ p t))) process time := by
   apply firstArrival_chart_path_congr F path₁ path₂
   · intro p t
-    exact chart_eq_of_orbit F (sameOrbit p t)
+    exact (chart_eq_iff F (path₁ p t) (path₂ p t)).2 (sameOrbit p t)
