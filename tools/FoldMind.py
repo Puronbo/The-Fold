@@ -11,6 +11,7 @@ Run:
 from __future__ import annotations
 
 from dataclasses import asdict, dataclass
+from fractions import Fraction
 import json
 from pathlib import Path
 import tempfile
@@ -275,6 +276,10 @@ class FoldMind:
                 tuple(must_link_pairs), tuple(cannot_link_pairs), plan,
             )
         )
+        dual_sum = (
+            sum((Fraction(n, d) for n, d in plan.dual_weights), Fraction(0))
+            if plan else Fraction(0)
+        )
         payload = {
             "base_features": list(base_features),
             "candidate_features": list(candidate_features),
@@ -285,7 +290,12 @@ class FoldMind:
             "lower_bound_pairs": [list(pair) for pair in plan.lower_bound_pairs] if plan else [],
             "packing_lower_bound": len(plan.lower_bound_pairs) if plan else 0,
             "dual_denominator": plan.dual_denominator if plan else 0,
-            "dual_lower_bound": ((len(plan.separated_pairs) + plan.dual_denominator - 1) // plan.dual_denominator if plan and plan.dual_denominator else 0),
+            "dual_weights": [list(weight) for weight in plan.dual_weights] if plan else [],
+            "dual_objective": [dual_sum.numerator, dual_sum.denominator],
+            "dual_lower_bound": (
+                (dual_sum.numerator + dual_sum.denominator - 1) // dual_sum.denominator
+                if dual_sum else 0
+            ),
             "optimality_certified": optimality_certified,
             "status": ("optimality-certified" if optimality_certified else
                        "feasible-only" if verified else "no-safe-plan"),
