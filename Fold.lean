@@ -15,6 +15,7 @@ import Fold.Examples
 import Fold.Doubling
 import Fold.Complexity.ZeroResidual
 import Fold.Complexity.Completeness
+import Fold.Complexity.Reduction
 
 /-
   Inventory.  `#check` is a compile-time audit: if a name changes or a
@@ -104,3 +105,7 @@ import Fold.Complexity.Completeness
 #check Fold.Complexity.np_complete_in_P_implies_class_eq
 #check Fold.Complexity.np_complete_in_P_iff_class_eq
 #check Fold.Complexity.exists_np_complete_in_P_implies_residual_zero
+
+#check Fold.Complexity.PolyManyOneReduction
+#check Fold.Complexity.composePolyManyOne
+#check Fold.Complexity.composed_membership_iff
