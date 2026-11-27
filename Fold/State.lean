@@ -507,14 +507,13 @@ theorem synchronized_threshold_family_iff
     obtain ⟨previous, hTime⟩ := hPositiveTick
     refine ⟨previous, hTime, ?_⟩
     intro process
-    obtain ⟨previous₂, hTime₂, hLower, hUpper⟩ :=
-      first_threshold_crossing_interval
-        (speed process) (target process) time hPositiveTick
-        (hFamily process)
-    have hPrevious : previous₂ = previous :=
-      Nat.add_right_cancel (hTime₂.symm.trans hTime)
-    exact ⟨by simpa [hPrevious] using hLower,
-      by simpa [hTime₂, hTime] using hUpper⟩
+    have hBoundary :=
+      first_threshold_crossing_boundary
+        (speed process) (target process) time (hFamily process)
+    have hPreviousLt : previous < time := by
+      rw [hTime]
+      exact Nat.lt_succ_self previous
+    exact ⟨hBoundary.2 previous hPreviousLt, hBoundary.1⟩
   · rintro ⟨previous, hTime, hBounds⟩ process
     apply (first_threshold_crossing_iff_boundary
       (speed process) (target process) time).2
