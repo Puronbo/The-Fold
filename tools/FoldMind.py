@@ -181,6 +181,54 @@ class FoldMind:
         )
 
 
+
+    def test_hypotheses(
+        self,
+        observations: Sequence[Observation],
+        *,
+        task: str,
+        training_ids: Sequence[str],
+        held_out_ids: Sequence[str],
+    ) -> HypothesisCycleReport:
+        """Generate on training data, falsify on held-out data, and retain every audit."""
+        if not task:
+            raise ValueError("task must be nonempty")
+        by_id = {item.identifier: item for item in observations}
+        if len(by_id) != len(observations):
+            raise ValueError("observation identifiers must be unique")
+        train_ids, test_ids = tuple(training_ids), tuple(held_out_ids)
+        if not train_ids:
+            raise ValueError("at least one training observation is required")
+        if len(set(train_ids)) != len(train_ids) or len(set(test_ids)) != len(test_ids):
+            raise ValueError("split identifiers must be unique")
+        if set(train_ids) & set(test_ids):
+            raise ValueError("training and held-out sets must be disjoint")
+        missing = (set(train_ids) | set(test_ids)) - set(by_id)
+        if missing:
+            raise KeyError(f"unknown observations in split: {sorted(missing)}")
+        if not self.memory.verify():
+            raise ValueError("memory integrity check failed; refusing hypothesis cycle")
+        training = tuple(HypothesisExample.make(
+            key, dict(by_id[key].features), by_id[key].source
+        ) for key in train_ids)
+        held_out = tuple(HypothesisExample.make(
+            key, dict(by_id[key].features), by_id[key].source
+        ) for key in test_ids)
+        candidates = generate(training, task)
+        evaluated = evaluate(candidates, held_out)
+        retained = retain_audit(self.memory, evaluated, "FoldMind/FoldHypothesis")
+        if retained != len(evaluated):
+            raise RuntimeError("not every hypothesis audit was retained")
+        return HypothesisCycleReport(
+            task=task, training_ids=train_ids, held_out_ids=test_ids,
+            candidates=len(evaluated),
+            falsified=sum(item.status == "falsified" for item in evaluated),
+            supported=sum(item.status == "supported-on-held-out" for item in evaluated),
+            untested=sum(item.status == "untested" for item in evaluated),
+            memory_head=self.memory.head,
+        )
+
+
 def _self_test() -> None:
     with tempfile.TemporaryDirectory() as directory:
         memory = FoldMemory(Path(directory) / "mind.jsonl")
