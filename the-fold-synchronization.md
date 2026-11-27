@@ -189,3 +189,22 @@ Thus quotienting does not erase all event timing. It erases exactly the distinct
 A state trajectory induces a chart trajectory by projecting every state to its Fold-orbit. Two state trajectories have exactly the same chart history if and only if their states are orbit-equivalent at every process and time (`chartPath_eq_iff_pointwise_orbit`). This is an exact characterization of the information discarded by the quotient, not an approximation.
 
 Consequently, every property formulated solely in terms of the chart trajectory is independent of the chosen representatives (`chartPath_property_representative_independent`). At a single step, the chart does not change precisely when the next state lies in the same two-point orbit as the current state (`chart_step_eq_iff_orbit`). This does not say the underlying state is stationary: it may have moved from one representative to the other.
+
+
+## Recovering a state from a quotient observation
+
+A Fold-orbit has at most two representatives: a chosen representative \(s(q)\) and its folded partner \(F(s(q))\). Therefore, once a representative section \(s\) is supplied, a single Boolean selector records which representative is intended:
+
+\[
+\operatorname{reconstruct}(q,b)=
+\begin{cases}
+F(s(q)),&b=\text{true},\\
+s(q),&b=\text{false}.
+\end{cases}
+\]
+
+The Lean theorem `chart_reconstructState` proves that either choice maps back to the same quotient class. The theorem `reconstructState_exists_selector` proves that every state in that class can be recovered by one of the two choices. At a fixed point, the two choices may coincide.
+
+For trajectories, the selector may vary with process and time. If it selects the actual representative at every tick, `firstArrival_reconstruction_exact` proves that every state-level first-arrival statement is recovered exactly.
+
+**Information boundary:** the quotient class alone determines chart-level events, but not which representative-specific state occurred. A representative section plus one bit per observation is sufficient for this two-element orbit model. This is a conditional reconstruction theorem, not a claim that every quotient in mathematics needs one bit; fixed points and larger group orbits have different selector requirements.
