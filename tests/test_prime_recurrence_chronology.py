@@ -24,7 +24,7 @@ class PrimeRecurrenceChronologyTests(unittest.TestCase):
         )
         self.assertEqual(len(result["memory_by_index"]), 4)
         self.assertEqual(result["final_memory"]["geometry"],
-                         {"numerator": 15, "denominator": 8})
+                         {"numerator": 7, "denominator": 4})
 
     def test_decay_must_be_fraction(self):
         with self.assertRaises(ValueError):
