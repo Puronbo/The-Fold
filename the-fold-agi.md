@@ -215,3 +215,8 @@ The new agi/relation_selection.py compares caller-supplied composed paths on the
 ## Stage 22: exact invariant discovery
 
 `agi/invariant_discovery.py` extracts the multiplier, identity/nonzero-translation class, and fixed-point structure of scalar affine self-maps. It derives conjugates under invertible affine coordinate changes and verifies exact preservation of the multiplier and covariance of fixed points. The scope is deliberately limited to rational affine maps. See `agi/stage-22-invariant-discovery.md`.
+
+
+## Stage 23: relationships between affine transformations
+
+`agi/affine_relationships.py` compares every unordered pair in a finite supplied collection of scalar affine maps. It derives exact ordered compositions, detects commutation via the intercept difference, and compares fixed-point sets (empty, singleton, or all points). See `agi/stage-23-affine-relationships.md`.
