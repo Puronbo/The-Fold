@@ -846,6 +846,10 @@ def verify_cyclotomic_matrix_spectral_profile(order: int, prime: int) -> bool:
     profile = cyclotomic_matrix_spectral_profile(order, prime)
     if not verify_cyclotomic_factorization_profile(order, prime):
         return False
+    # Check the exact integer companion representation before trusting
+    # its modular reduction as the spectral witness.
+    if not verify_cyclotomic_rotation_matrix(order):
+        return False
     # A companion matrix is cyclic: the eigenspace for any one
     # eigenvalue has dimension at most one. For a listed root it is
     # nonzero, hence its geometric multiplicity is exactly one.
