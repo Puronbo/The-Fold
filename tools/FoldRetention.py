@@ -11,7 +11,10 @@ from dataclasses import dataclass
 from itertools import combinations
 from typing import Sequence
 
-from FoldConcept import Context, Instance, equivalent
+try:  # Support both script execution and package imports.
+    from .FoldConcept import Context, Instance, equivalent
+except ImportError:  # pragma: no cover - exercised by direct script execution
+    from FoldConcept import Context, Instance, equivalent
 
 
 @dataclass(frozen=True)
