@@ -205,3 +205,8 @@ The new agi/relation_selection.py compares caller-supplied composed paths on the
 ## Stage 20: reusable concepts across representations
 
 `agi/representation_transfer.py` adds exact transfer for scalar affine relations under caller-declared invertible affine coordinate maps. It analytically transforms coefficients rather than refitting target examples and verifies that residual zero/nonzero status is preserved. The supported family is deliberately narrow; no general semantic transfer or AGI claim follows. See `agi/stage-20-representation-transfer.md`.
+
+
+## Stage 21: compositional abstraction
+
+`agi/compositional_abstraction.py` represents an affine concept as an immutable ordered path, retains intermediate structure while deriving its endpoint map, distinguishes structural equivalence from endpoint-only equivalence, and transfers every edge through a separate invertible coordinate map for each layer. Each commuting square is checked exactly on supplied inputs. See `agi/stage-21-compositional-abstraction.md`.
