@@ -257,3 +257,8 @@ import Fold.Complexity.Reduction
 #check Fold.chartPath_eq_iff_pointwise_orbit
 #check Fold.chart_step_eq_iff_orbit
 #check Fold.chartPath_property_representative_independent
+
+#check Fold.reconstructState
+#check Fold.chart_reconstructState
+#check Fold.reconstructState_exists_selector
+#check Fold.firstArrival_reconstruction_exact
