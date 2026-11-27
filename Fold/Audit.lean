@@ -43,6 +43,8 @@ import Fold
 #print axioms Fold.double7_iter_three
 
 #print axioms Fold.collapse_preserves_reference
+#print axioms Fold.collapse_preserves_signature
+#print axioms Fold.collapse_eq_iff_retained_signature_eq
 #print axioms Fold.turn_twice_restores_direction
 #print axioms Fold.observation_only_classifier_cannot_recover_reference
 #print axioms Fold.distinct_references_survive_collapse
