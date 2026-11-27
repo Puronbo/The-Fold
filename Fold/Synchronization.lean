@@ -423,4 +423,41 @@ theorem overshoot_and_return_first_arrival :
     FirstArrival (fun _ t => cumulativeSignedProgress overshootRate t = 3) 0 3 := by
   exact ⟨by decide, by decide, overshootRate_firstArrival⟩
 
+
+/-- First arrival depends only on the reach predicate, not on its chosen
+    equivalent representation.  Pointwise logical equivalence preserves
+    both the target hit and every earlier non-hit. -/
+theorem firstArrival_congr
+    {α : Type} (reachesA reachesB : α → Nat → Prop)
+    (process : α) (time : Nat)
+    (hequiv : ∀ t, reachesA process t ↔ reachesB process t) :
+    FirstArrival reachesA process time ↔
+      FirstArrival reachesB process time := by
+  constructor
+  · intro hA
+    constructor
+    · exact (hequiv time).mp hA.1
+    · intro earlier hearlier hB
+      exact hA.2 earlier hearlier ((hequiv earlier).mpr hB)
+  · intro hB
+    constructor
+    · exact (hequiv time).mpr hB.1
+    · intro earlier hearlier hA
+      exact hB.2 earlier hearlier ((hequiv earlier).mp hA)
+
+/-- Translating both a signed trajectory and its target by the same
+    integer datum leaves its first-arrival times unchanged. -/
+theorem signed_firstArrival_translation_invariant
+    (rate : Nat → Int) (target offset : Int)
+    (process : Unit) (time : Nat) :
+    FirstArrival
+      (fun _ t => cumulativeSignedProgress rate t + offset =
+        target + offset) process time ↔
+    FirstArrival
+      (fun _ t => cumulativeSignedProgress rate t = target)
+      process time := by
+  apply firstArrival_congr
+  intro t
+  constructor <;> intro h <;> omega
+
 end Fold
