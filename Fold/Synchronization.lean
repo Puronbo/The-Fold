@@ -387,7 +387,7 @@ theorem reversalRate_firstArrival :
 theorem reversal_still_has_first_arrival :
     reversalRate 1 < 0 ∧
     cumulativeSignedProgress reversalRate 2 = 1 ∧
-    reversalRate_firstArrival := by
+    FirstArrival (fun _ t => cumulativeSignedProgress reversalRate t = 3) 0 3 := by
   exact ⟨by decide, by decide, reversalRate_firstArrival⟩
 
 end Fold
