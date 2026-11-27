@@ -42,6 +42,10 @@ import Fold
 #print axioms Fold.double_zero_fiber_even
 #print axioms Fold.double7_iter_three
 
+#print axioms Fold.flipDirection_involutive
+#print axioms Fold.flipDirection_injective
+#print axioms Fold.collapse_not_injective
+#print axioms Fold.turn_history_length
 #print axioms Fold.collapse_preserves_reference
 #print axioms Fold.collapse_preserves_signature
 #print axioms Fold.collapse_eq_iff_retained_signature_eq
