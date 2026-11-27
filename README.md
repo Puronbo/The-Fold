@@ -1022,3 +1022,6 @@ G-EP140: distinguishes valid invertible coefficient-space shears that change onl
 
 
 **G-EP212 — eventual sign law for every fixed-order temporal difference:** extends `research/the-fold-recursive-degree-temporal-curvature.md`. For each fixed r≥1, the forward difference Δ^r H_k has eventual sign (−1)^(r+1), uniformly for real Q≥2. An explicit threshold K_r is the least k≥2 with 4·3^(k−1) > log₂((32/23)(2^r−1)). The proof bounds every later family term relative to H_k using 23/32 < B_k(Q) < 1. This is a fixed-order theorem; it does not provide one threshold uniform in r.
+
+
+**AGI concept-learning prototype (Stages 9–12):** `agi/concept_proposer.py` now handles exact compound-unit conversions, typed quantities, affine temperatures, and explicit measurement intervals with calibration corrections. Crucially, overlapping uncertainty intervals are reported as *compatible*, not merged as equivalent. Unsupported statistical models are rejected rather than guessed. See `agi/stage-12-measurement-uncertainty.md` and the [AGI roadmap](the-fold-agi.md). This remains a narrow deterministic prototype, not an AGI system.
