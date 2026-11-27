@@ -262,6 +262,36 @@ class FoldSpectralTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             cyclotomic_factorization_profile(12, 9)
 
+
+    def test_matrix_spectral_profile_tracks_algebraic_and_geometric_multiplicity(self):
+        from tools.FoldSpectral import (
+            cyclotomic_matrix_spectral_profile,
+            verify_cyclotomic_matrix_spectral_profile,
+        )
+
+        split = cyclotomic_matrix_spectral_profile(4, 5)
+        self.assertEqual(
+            split["eigenvalue_profile"],
+            ((2, 1, 1), (3, 1, 1)),
+        )
+        self.assertEqual(split["base_field_eigenspace_dimension_sum"], 2)
+
+        ramified = cyclotomic_matrix_spectral_profile(18, 3)
+        self.assertEqual(ramified["eigenvalue_profile"], ((2, 6, 1),))
+        self.assertEqual(ramified["base_field_eigenvalue_count"], 1)
+        self.assertEqual(ramified["base_field_eigenspace_dimension_sum"], 1)
+
+        nonsplit = cyclotomic_matrix_spectral_profile(12, 2)
+        self.assertEqual(nonsplit["eigenvalue_profile"], ())
+        self.assertEqual(nonsplit["base_field_eigenvalue_count"], 0)
+
+        for order in range(1, 31):
+            for prime in (2, 3, 5, 7):
+                self.assertTrue(
+                    verify_cyclotomic_matrix_spectral_profile(order, prime),
+                    (order, prime),
+                )
+
     def test_rejects_zero_vector_and_invalid_modulus(self):
         self.assertFalse(verify_quarter_turn_eigenpair(
             ModularEigenpair(0, (0, 0)), 5
