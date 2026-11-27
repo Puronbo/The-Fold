@@ -206,4 +206,40 @@ theorem retainPair_injective_of_separates_collisions
     Function.Injective (retainPair f r) :=
   retainPair_injective_iff f r |>.2 h
 
+/--
+A process arrival records its rate, elapsed time, and traversed distance.
+The model deliberately leaves the travel law abstract: physical systems may
+use different rate and path metrics.
+-/
+structure SynchronizedArrival
+    (Rate Time Distance : Type)
+    (travelDistance : Rate → Time → Distance) where
+  speed : Rate
+  time : Time
+  distance : Distance
+  distance_eq : distance = travelDistance speed time
+
+/--
+At a shared elapsed time, an injective rate-to-distance law forces distinct
+rates to correspond to distinct path distances.  Thus simultaneous arrival
+does not mean equal speed or equal path length.
+-/
+theorem different_speeds_require_different_distances
+    {Rate Time Distance : Type}
+    (travelDistance : Rate → Time → Distance)
+    (a b : SynchronizedArrival Rate Time Distance travelDistance)
+    (hTime : a.time = b.time)
+    (hInjective : Function.Injective (fun rate => travelDistance rate a.time))
+    (hSpeed : a.speed ≠ b.speed) :
+    a.distance ≠ b.distance := by
+  intro hDistance
+  apply hSpeed
+  apply hInjective
+  calc
+    travelDistance a.speed a.time = a.distance := a.distance_eq.symm
+    _ = b.distance := hDistance
+    _ = travelDistance b.speed a.time := by
+      rw [hTime]
+      exact b.distance_eq
+
 end Fold
