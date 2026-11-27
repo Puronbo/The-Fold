@@ -1,7 +1,11 @@
 import unittest
+from fractions import Fraction
 
 from tools.FoldConcept import Context, Instance
-from tools.FoldRetention import minimum_retention_features, verify_retention_plan
+from tools.FoldRetention import (
+    minimum_retention_features, retention_plan_proves_optimality,
+    verify_retention_plan,
+)
 
 
 class FoldRetentionTests(unittest.TestCase):
@@ -31,6 +35,27 @@ class FoldRetentionTests(unittest.TestCase):
         self.assertEqual(plan.retained_features, ("colour", "material"))
         self.assertTrue(verify_retention_plan(
             self.instances, plan, self.must, self.cannot
+        ))
+
+    def test_nonuniform_rational_dual_certifies_optimum(self):
+        instances = (
+            Instance.make("w0", {"shape": "round", "f1": 0, "f2": 0, "f3": 0, "f4": 0}),
+            Instance.make("w1", {"shape": "round", "f1": 1, "f2": 1, "f3": 0, "f4": 0}),
+            Instance.make("w2", {"shape": "round", "f1": 1, "f2": 0, "f3": 1, "f4": 0}),
+            Instance.make("w3", {"shape": "round", "f1": 0, "f2": 0, "f3": 0, "f4": 1}),
+        )
+        cannot = (("w0", "w1"), ("w0", "w2"), ("w0", "w3"))
+        plan = minimum_retention_features(
+            instances, self.base, ("f1", "f2", "f3", "f4"), (), cannot
+        )
+        self.assertIsNotNone(plan)
+        objective = sum(
+            (Fraction(n, d) for n, d in plan.dual_weights), Fraction(0)
+        )
+        self.assertEqual(objective, Fraction(2, 1))
+        self.assertEqual(len(plan.retained_features), 2)
+        self.assertTrue(retention_plan_proves_optimality(
+            instances, self.base, ("f1", "f2", "f3", "f4"), (), cannot, plan
         ))
 
     def test_returns_none_when_no_safe_feature_set_exists(self):
