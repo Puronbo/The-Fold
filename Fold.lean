@@ -96,8 +96,10 @@ import Fold.Doubling
 
 #check Fold.collapse_sets_value_to_zero
 #check Fold.collapse_preserves_reference
+#check Fold.collapse_preserves_signature
 #check Fold.collapse_idempotent
 #check Fold.turn_twice_restores_direction
 #check Fold.collapsed_observation_independent
+#check Fold.collapse_eq_iff_retained_signature_eq
 #check Fold.observation_only_classifier_cannot_recover_reference
 #check Fold.distinct_references_survive_collapse
