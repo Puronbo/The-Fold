@@ -490,6 +490,47 @@ theorem synchronized_threshold_intervals_iff
         exact Nat.lt_of_le_of_lt hProgress hLower₂
 
 /--
+A possibly infinite indexed family synchronizes at a positive tick exactly
+when one common preceding tick is below every target and the crossing tick
+reaches every target. The family may contain any number of processes.
+-/
+theorem synchronized_threshold_family_iff
+    {α : Type} (speed target : α → Nat) (time : Nat)
+    (hPositiveTick : ∃ previous, time = previous + 1) :
+    (∀ process, FirstThresholdCrossing (speed process) (target process) time) ↔
+      ∃ previous, time = previous + 1 ∧
+        ∀ process,
+          speed process * previous < target process ∧
+            target process ≤ speed process * time := by
+  constructor
+  · intro hFamily
+    obtain ⟨previous, hTime⟩ := hPositiveTick
+    refine ⟨previous, hTime, ?_⟩
+    intro process
+    obtain ⟨previous₂, hTime₂, hLower, hUpper⟩ :=
+      first_threshold_crossing_interval
+        (speed process) (target process) time hPositiveTick
+        (hFamily process)
+    have hPrevious : previous₂ = previous :=
+      Nat.add_right_cancel (hTime₂.symm.trans hTime)
+    exact ⟨by simpa [hPrevious] using hLower,
+      by simpa [hTime₂, hTime] using hUpper⟩
+  · rintro ⟨previous, hTime, hBounds⟩ process
+    apply (first_threshold_crossing_iff_boundary
+      (speed process) (target process) time).2
+    obtain ⟨hLower, hUpper⟩ := hBounds process
+    constructor
+    · exact hUpper
+    · intro earlier hEarlier
+      have hEarlierPrev : earlier ≤ previous := by
+        rw [hTime] at hEarlier
+        exact Nat.lt_succ_iff.mp hEarlier
+      have hProgress :
+          speed process * earlier ≤ speed process * previous :=
+        Nat.mul_le_mul_left (speed process) hEarlierPrev
+      exact Nat.lt_of_le_of_lt hProgress hLower
+
+/--
 Concrete synchronized first crossing: rates 2 and 3 both first reach
 target 4 at tick 2, despite moving at different speeds.
 -/
