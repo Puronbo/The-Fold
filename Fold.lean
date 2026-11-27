@@ -295,3 +295,12 @@ import Fold.Complexity.Reduction
 #check Fold.conditionRateStep_velocity
 #check Fold.conditionRateStep_differentialRateRest
 #check Fold.differentialRateRest_states_differ
+#check Fold.AccelRestState
+#check Fold.AccelContextAtRest
+#check Fold.DifferentialAccelerationRest
+#check Fold.conditionAccelerationStep
+#check Fold.conditionAccelerationStep_position
+#check Fold.conditionAccelerationStep_velocity
+#check Fold.conditionAccelerationStep_differentialAccelerationRest
+#check Fold.differentialAccelerationRest_states_differ
+#check Fold.conditionAccelerationStep_rate_changes
