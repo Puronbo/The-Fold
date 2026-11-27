@@ -15,13 +15,6 @@ structure PolyManyOneReduction
   preserves : ∀ a, acceptA a ↔ acceptB (map a)
   cost : PolyTime map
 
-/-- Membership preservation composes independently of any runtime model. -/
-def composeMaps {A B C : Type u}
-    (RAB : PolyManyOneReduction A B acceptA acceptB PolyTimeAB)
-    (RBC : PolyManyOneReduction B C acceptB acceptC PolyTimeBC) :
-    A → C :=
-  fun a => RBC.map (RAB.map a)
-
 /-- Polynomial-time reductions compose when the chosen runtime predicate
     is closed under function composition. -/
 def composePolyManyOne
