@@ -106,17 +106,33 @@ The residual \(NP\setminus P\) is nonempty exactly when at least one such decisi
 
 ## 5. Lean formalization
 
-The dependency-free Lean module Fold/Complexity/ZeroResidual.lean formalizes the abstract set-theoretic part using predicates over a type of languages:
+The dependency-free Lean module `Fold/Complexity/ZeroResidual.lean` formalizes the abstract set-theoretic part using predicates over a type of languages:
 
 - NPResidual PClass NPClass L means that L is in NP and not in P;
 - ResidualZero means that this residual has no members;
 - class_eq_iff_residual_zero proves equality iff the residual is empty;
 - class_ne_iff_residual_nonempty proves inequality iff a residual witness exists;
-- CollapseBit is a 0/1 indicator, with zero exactly for collapse and one exactly for separation.
+The Lean module does not encode a numeric collapse indicator; the prose-only indicator above is a definition that presupposes knowing whether the residual is empty.
 
 The file assumes P is contained in NP, as standard. It does not define concrete Turing machines, prove a lower bound, or decide which branch is true. The theorem is an exact logical characterization, not a resolution of the open problem.
 
-## 6. Current verdict
+## 6. NP-completeness: a one-problem collapse criterion
+
+Let `Reduces(A,B)` mean that A many-one reduces to B with the intended polynomial-time resource bound. Let `NPComplete(B)` mean that B is in NP and every NP language reduces to B. Since P is closed under polynomial-time many-one reductions,
+
+\\[
+\\boxed{B\\in P\\text{ and }B\\text{ NP-complete}\\implies P=NP.}
+\\]
+
+Conversely, if P = NP, every NP-complete language is in P. Thus, for any NP-complete target B,
+
+\\[
+\\boxed{B\\in P\\iff P=NP.}
+\\]
+
+This gives a sharply focused route: solve one canonical NP-complete problem, such as Boolean satisfiability, in polynomial time to prove collapse; or prove that particular target is not in P to prove separation. The Lean module `Fold/Complexity/Completeness.lean` formalizes the abstract implication and equivalence, assuming reduction-closure of P. It does not construct a reduction for SAT, prove a runtime bound for a solver, or show B is outside P.
+
+## 7. Current verdict
 
 The proposed equation is not valid with standard meanings of the symbols. The mathematically precise alternatives are
 
