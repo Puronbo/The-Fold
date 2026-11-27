@@ -199,3 +199,32 @@ Only after this foundation is stable should applications be derived. The efficie
 5. approach computation and learning only after their required structures are stated independently.
 
 The governing discipline is simple: derive each layer from its stated premises, and never let a resemblance substitute for a missing proof.
+
+
+## 11. Shared first arrival at different speeds
+
+The statement “everything reaches first at the same time at different speeds” can be made precise as a **synchronized first-arrival condition**. It is not a consequence of motion alone; it is a constraint on the trajectories.
+
+Let each process (i\) have a path length (L_i\geq 0\), a constant speed (s_i>0\), and a common target. Its arrival time is
+
+\[
+T_i=\frac{L_i}{s_i}.
+\]
+
+They arrive simultaneously at time (T\) exactly when
+
+\[
+\forall i,\quad L_i=s_iT.
+\]
+
+Thus path lengths and speeds may differ while arrival times agree. For example, over a common duration (T=1\), path lengths (2,5,9\) require speeds (2,5,9\), respectively. None is “faster” in arrival time: each reaches its target at the same instant.
+
+To say they reach **first** at that instant requires one more condition: no process has reached its target at any earlier time. For a progress function (d_i(t)\), define its first-arrival time as the least (t\geq0\) for which (d_i(t)=L_i\), when such a least time exists. Synchronization means these first-arrival times are all the same (T\), not merely that the processes happen to occupy their targets at time (T\).
+
+This gives three distinct claims:
+
+- **Exact conditional statement:** if (L_i=s_iT\) for every process, their constant-speed arrival times coincide at (T\).
+- **First-arrival refinement:** if (T\) is the least target-hitting time for every trajectory, they all arrive first together.
+- **Universal reading (“everything”):** not established by the equations. It is a proposed global principle that would require a defined system boundary, target, clock, and evidence that every included process satisfies the synchronization condition.
+
+In the Origin → Fold development, this is a shared terminal event with distinct rates—not a claim that speeds become equal, that paths are identical, or that the terminal event causes the motion. The common time is an invariant of the synchronized family; each process retains its own rate and path.
