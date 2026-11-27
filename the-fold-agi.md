@@ -168,3 +168,12 @@ This stage adds explicit handling of measurement uncertainty to a narrow symboli
 A separate module, `agi/relation_discovery.py`, now proposes exact proportional (`y = a*x`), inverse (`x*y = k`), and affine (`y = a*x + b`) relationships from paired scalar observations. Parameters use exact rational arithmetic. Each candidate is checked against every supplied observation; supporting keys and counterexamples are retained explicitly. Affine candidates require at least three observations so a two-point interpolation is not presented as evidence of discovery.
 
 This module does not merge equivalence classes and does not claim causal laws. A relation that fits the finite observations is only supported on that dataset. Units, noisy regression, multivariate relationships, conservation laws, and experiment selection remain future work. See `agi/stage-13-relational-concept-discovery.md` and `agi/test_relation_discovery.py`.
+
+
+## Stage 14: exact compositional relational concepts
+
+A new agi/relation_composition.py embeds Stage 13's proportional, inverse, and affine hypotheses into exact fractional-linear maps (ax+b)/(cx+d). Composition uses exact rational matrix multiplication. The implementation canonicalizes projectively equivalent coefficient tuples, retains provenance, and separately tracks excluded inputs so algebraic cancellation cannot make an undefined intermediate step appear valid. Refuted source hypotheses cannot be composed.
+
+Tests in agi/test_relation_composition.py cover affine-after-affine, proportional-after-affine, inverse poles and their pullbacks, exact fractions, constant maps, and rejection of refuted evidence. The CI workflow now runs this suite with the earlier concept tests.
+
+This is algebraic composition of a small declared family, not autonomous discovery of arbitrary programs, causal inference, or evidence of AGI. A composed formula is not empirically validated merely because its component relations fit their supplied observations.
