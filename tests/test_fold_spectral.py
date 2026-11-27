@@ -285,17 +285,37 @@ class FoldSpectralTests(unittest.TestCase):
         self.assertEqual(nonsplit["eigenvalue_profile"], ())
         self.assertEqual(nonsplit["base_field_eigenvalue_count"], 0)
 
-        for order in range(1, 31):
-            for prime in (2, 3, 5, 7):
+        for order in range(1, 61):
+            for prime in (2, 3, 5, 7, 11, 13):
                 profile = cyclotomic_matrix_spectral_profile(order, prime)
                 self.assertTrue(
                     verify_cyclotomic_matrix_spectral_profile(order, prime),
                     (order, prime),
                 )
+                entries = profile["eigenvalue_profile"]
+                # A companion matrix is cyclic: every eigenspace over the
+                # base field has dimension exactly one when that eigenvalue
+                # occurs, independently of its algebraic multiplicity.
                 self.assertTrue(all(
                     geometric == 1
-                    for _, _, geometric in profile["eigenvalue_profile"]
+                    for _, _, geometric in entries
                 ))
+                self.assertEqual(
+                    sum(algebraic for _, algebraic, _ in entries),
+                    sum(
+                        multiplicity
+                        for factor, multiplicity in profile["factorization"]
+                        if len(factor) == 2
+                    ),
+                )
+                self.assertEqual(
+                    profile["base_field_eigenspace_dimension_sum"],
+                    profile["base_field_eigenvalue_count"],
+                )
+                self.assertLessEqual(
+                    profile["base_field_eigenspace_dimension_sum"],
+                    profile["dimension"],
+                )
 
     def test_rejects_zero_vector_and_invalid_modulus(self):
         self.assertFalse(verify_quarter_turn_eigenpair(
