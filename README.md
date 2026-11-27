@@ -1034,3 +1034,6 @@ G-EP140: distinguishes valid invertible coefficient-space shears that change onl
 
 
 **AGI concept-learning prototype (Stages 9–15):** Stage 15 adds held-out validation for composed relational paths, separately checking intermediate and endpoint observations without refitting the relations. Domain failures count as refutations; empty validation sets are explicitly insufficient. See agi/stage-15-independent-validation.md and agi/relation_validation.py. This is finite validation, not proof of AGI or universal generalization.
+
+
+**AGI concept-learning prototype (Stages 9–16):** Stage 16 compares competing composed relation paths on common held-out observations, keeps endpoint and intermediate errors separate, counts domain failures, groups exactly equivalent composed maps, and uses a transparent complexity tie-breaker. It does not refit candidates or claim generalization beyond the evaluation sample. See agi/stage-16-model-comparison.md and agi/relation_selection.py.
