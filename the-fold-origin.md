@@ -364,3 +364,25 @@ H''_a(x)=H_a(f_a(f_a(x)))=H_a(x).
 \\]
 
 The Lean declarations `foldTransportFamilyTarget`, `synchronizedBoundary_fold_target_transport`, and `foldTransportFamilyTarget_involutive` formalize this process-by-process result. The conclusion is exact but conditional: it preserves arrival under a coordinated change of representation, not under an arbitrary fold while holding a non-invariant target fixed.
+
+
+## 17. Folding a path: preserve the target or transport it
+
+An involution does not automatically preserve first arrival at an arbitrary
+fixed target. There are two exact alternatives:
+
+1. **Keep the target fixed.** This preserves first arrival precisely when
+   target membership is invariant under the fold. The crease target
+   \\(Fix(F)\\) satisfies this condition.
+2. **Transport the target.** Instead of folding the path and keeping the
+   old target, replace the target predicate \\(H\\) by
+   \\(H\\circ F\\). Then first arrival is equivalent without any
+   invariance assumption. Applying the target transport twice restores
+   the original target because \\(F^2=I\\).
+
+For a family of processes, each process may have its own involution and
+its own target. Transporting each target through its corresponding fold
+preserves the entire synchronized-boundary predicate. This is an exact
+logical equivalence, not a claim that physically folding a path leaves
+every destination unchanged. The Lean development is in
+`Fold/ArrivalFold.lean`.
