@@ -262,3 +262,6 @@ import Fold.Complexity.Reduction
 #check Fold.chart_reconstructState
 #check Fold.reconstructState_exists_selector
 #check Fold.firstArrival_reconstruction_exact
+
+#check Fold.reconstructState_choices_equal_iff_fixed
+#check Fold.reconstructState_selector_unique_off_crease
