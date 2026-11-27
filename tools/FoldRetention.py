@@ -28,6 +28,7 @@ class RetentionPlan:
     lower_bound_pairs: tuple[tuple[str, str], ...] = ()
     dual_denominator: int = 0
     dual_weights: tuple[tuple[int, int], ...] = ()
+    search_certificate: tuple | None = None
 
 
 
@@ -224,12 +225,65 @@ def minimum_retention_features(
 
     search(0, 0)
     if best is not None:
+        # Exhaustive decision certificate for the claim that best_size - 1
+        # features cannot cover all required collisions.
+        limit = len(best) - 1
+        proof_cache: dict[tuple[int, int], tuple] = {}
+
+        def prove_no_cover(chosen_mask: int, excluded_mask: int) -> tuple:
+            state = (chosen_mask, excluded_mask)
+            if state in proof_cache:
+                return proof_cache[state]
+            covered = 0
+            for i in useful:
+                if chosen_mask & (1 << i):
+                    covered |= coverage[i]
+            if covered == full:
+                raise AssertionError("smaller cover contradicts the computed optimum")
+            if chosen_mask.bit_count() >= limit:
+                node = ("depth",)
+                proof_cache[state] = node
+                return node
+            uncovered = full & ~covered
+            option_groups = []
+            for j in range(len(required)):
+                bit = 1 << j
+                if uncovered & bit:
+                    options = tuple(
+                        i for i in useful
+                        if not (chosen_mask | excluded_mask) & (1 << i)
+                        and coverage[i] & bit
+                    )
+                    if not options:
+                        node = ("dead",)
+                        proof_cache[state] = node
+                        return node
+                    option_groups.append((len(options), j, options))
+            _, pair_index, options = min(option_groups)
+            children = []
+            earlier_exclusions = 0
+            for i in options:
+                child = prove_no_cover(
+                    chosen_mask | (1 << i),
+                    excluded_mask | earlier_exclusions,
+                )
+                children.append(child)
+                earlier_exclusions |= 1 << i
+            node = ("branch", pair_index, options, tuple(children))
+            proof_cache[state] = node
+            return node
+
+        search_certificate = prove_no_cover(0, 0)
+    else:
+        search_certificate = None
+    if best is not None:
         selected = tuple(safe[i] for i in best)
         separated = required
         final = context.relevant_features + selected
         return RetentionPlan(
             context.name, context.relevant_features, selected, final,
             separated, (), tuple(required[j] for j in packing), dual_denominator, dual_weights,
+            search_certificate,
         )
 
     return None
@@ -367,6 +421,85 @@ def retention_plan_proves_optimality(
         )
         and max(len(plan.lower_bound_pairs), uniform_bound, weighted_bound) == len(plan.retained_features)
     )
+
+
+def verify_search_certificate(
+    instances: Sequence[Instance],
+    context: Context,
+    candidate_features: Sequence[str],
+    must_link_pairs: Sequence[tuple[str, str]],
+    cannot_link_pairs: Sequence[tuple[str, str]],
+    plan: RetentionPlan,
+) -> bool:
+    """Check an exhaustive branch partition proving no smaller cover exists."""
+    if plan.search_certificate is None:
+        return False
+    by_id = {item.identifier: item for item in instances}
+    if len(by_id) != len(instances) or len(set(candidate_features)) != len(candidate_features):
+        return False
+    try:
+        safe = tuple(
+            feature for feature in candidate_features
+            if all(by_id[a].get(feature) == by_id[b].get(feature)
+                   for a, b in must_link_pairs)
+        )
+        required = tuple(
+            (a, b) for a, b in cannot_link_pairs
+            if equivalent(by_id[a], by_id[b], context)
+        )
+        if plan.separated_pairs != required:
+            return False
+        coverage = tuple(
+            sum(1 << j for j, (a, b) in enumerate(required)
+                if by_id[a].get(feature) != by_id[b].get(feature))
+            for feature in safe
+        )
+        useful = tuple(i for i, mask in enumerate(coverage) if mask)
+        full = (1 << len(required)) - 1
+        limit = len(plan.retained_features) - 1
+        if limit < 0:
+            return False
+
+        def check(node: tuple, chosen: int, excluded: int) -> bool:
+            covered = 0
+            for i in useful:
+                if chosen & (1 << i):
+                    covered |= coverage[i]
+            if covered == full or not isinstance(node, tuple) or not node:
+                return False
+            if chosen.bit_count() >= limit:
+                return node == ("depth",)
+            uncovered = full & ~covered
+            groups = []
+            for j in range(len(required)):
+                bit = 1 << j
+                if uncovered & bit:
+                    options = tuple(
+                        i for i in useful
+                        if not (chosen | excluded) & (1 << i)
+                        and coverage[i] & bit
+                    )
+                    if not options:
+                        return node == ("dead",)
+                    groups.append((len(options), j, options))
+            if not groups:
+                return False
+            _, pair_index, options = min(groups)
+            if (len(node) != 4 or node[0] != "branch"
+                    or node[1] != pair_index or node[2] != options
+                    or not isinstance(node[3], tuple) or len(node[3]) != len(options)):
+                return False
+            earlier = 0
+            for feature_index, child in zip(options, node[3]):
+                if not check(child, chosen | (1 << feature_index),
+                             excluded | earlier):
+                    return False
+                earlier |= 1 << feature_index
+            return True
+
+        return check(plan.search_certificate, 0, 0)
+    except (KeyError, ValueError, TypeError, IndexError):
+        return False
 
 
 def _self_test() -> None:
