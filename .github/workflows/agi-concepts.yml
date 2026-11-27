@@ -19,7 +19,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-      - name: Test concept learner, quantity proposer, relational discovery, composition, independent validation, model comparison, three-way evaluation, active experiment design, evidence-driven revision, representation transfer, compositional abstraction, and invariant discovery
-        run: python -m unittest agi.test_concept_learner agi.test_concept_proposer agi.test_relation_discovery agi.test_relation_composition agi.test_relation_validation agi.test_relation_selection agi.test_three_way_evaluation agi.test_active_experiment agi.test_evidence_revision agi.test_representation_transfer agi.test_compositional_abstraction agi.test_invariant_discovery -v
+      - name: Test concept learner, quantity proposer, relational discovery, composition, independent validation, model comparison, three-way evaluation, active experiment design, evidence-driven revision, representation transfer, compositional abstraction, invariant discovery, and affine relationship discovery
+        run: python -m unittest agi.test_concept_learner agi.test_concept_proposer agi.test_relation_discovery agi.test_relation_composition agi.test_relation_validation agi.test_relation_selection agi.test_three_way_evaluation agi.test_active_experiment agi.test_evidence_revision agi.test_representation_transfer agi.test_compositional_abstraction agi.test_invariant_discovery agi.test_affine_relationships -v
       - name: Run learner self-test
         run: python agi/concept_learner.py
