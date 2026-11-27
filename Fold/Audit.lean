@@ -59,4 +59,6 @@ import Fold
 #print axioms Fold.restoreValue_collapse
 #print axioms Fold.collapseWithValue_injective
 #print axioms Fold.retainPair_injective_iff
+#print axioms Fold.retainPair_eq_iff
+#print axioms Fold.retainPair_injective_of_primary_injective
 #print axioms Fold.retainPair_injective_of_separates_collisions
