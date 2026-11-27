@@ -323,3 +323,25 @@ Let a family of processes be indexed by a type (A), with a shared natural-number
 No shared rate, monotonicity, or common trajectory shape is required. This is formalized by `SynchronizedBoundary` and `synchronizedBoundary_unique`: if the family is nonempty and every member has first-arrival time (T), then that common time is unique. For nonnegative gap models, `synchronized_of_positive_gaps` gives a sufficient certificate: each gap is zero at (T) and strictly positive at every earlier tick. For signed paths, use exact target equality and the no-earlier-hit condition instead; a positive-gap argument alone does not cover reversals or overshoots.
 
 This is a conditional theorem about a specified family, clock, and event predicate. It does not assert that every process in nature shares a clock or synchronizes.
+
+
+## 16. First arrival is invariant under a change of datum
+
+The first-arrival predicate is preserved by any pointwise equivalent
+description of reaching the target. In particular, translating every
+signed position and the target by the same integer datum does not change
+which tick is first:
+
+\\[
+P(t)=G
+\\quad\\Longleftrightarrow\\quad
+(P(t)+r)=(G+r).
+\\]
+
+The Lean theorem `firstArrival_congr` proves the general logical
+invariance, and `signed_firstArrival_translation_invariant` applies it
+to cumulative signed progress. This is the precise datum-independence
+available here: a common translation preserves equality and therefore
+preserves first arrival. It does not say that arbitrary rescaling,
+non-injective collapse, or a change in the trajectory's increments
+preserves arrival times.
